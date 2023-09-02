@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>热爱学习的未来酱</title>
+  
+  <subtitle>热爱学习</subtitle>
+  <link href="http://example.com/atom.xml" rel="self"/>
+  
+  <link href="http://example.com/"/>
+  <updated>2023-09-02T11:56:18.740Z</updated>
+  <id>http://example.com/</id>
+  
+  <author>
+    <name>John Doe</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>ayer 主题熟悉</title>
+    <link href="http://example.com/2023/09/02/ayer-%E4%B8%BB%E9%A2%98%E7%86%9F%E6%82%89/"/>
+    <id>http://example.com/2023/09/02/ayer-%E4%B8%BB%E9%A2%98%E7%86%9F%E6%82%89/</id>
+    <published>2023-09-02T11:54:05.000Z</published>
+    <updated>2023-09-02T11:56:18.740Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;1-整体介绍&quot;&gt;&lt;a href=&quot;#1-整体介绍&quot; class=&quot;headerlink&quot; title=&quot;1 整体介绍&quot;&gt;&lt;/a&gt;1 整体介绍&lt;/h1&gt;&lt;p&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>c++ 环境搭建</title>
+    <link href="http://example.com/2023/09/02/c-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"/>
+    <id>http://example.com/2023/09/02/c-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</id>
+    <published>2023-09-02T11:27:36.000Z</published>
+    <updated>2023-09-02T11:28:24.975Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;1-课程所需运行环境配置&quot;&gt;&lt;a href=&quot;#1-课程所需运行环境配置&quot; class=&quot;headerlink&quot; title=&quot;1 课程所需运行环境配置&quot;&gt;&lt;/a&gt;1 课程所需运行环境配置&lt;/h1&gt;&lt;p&gt;​		ubuntu + windows双系统 4070ti</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>markdown 语法学习</title>
+    <link href="http://example.com/2023/09/02/markdown-%E8%AF%AD%E6%B3%95%E5%AD%A6%E4%B9%A0/"/>
+    <id>http://example.com/2023/09/02/markdown-%E8%AF%AD%E6%B3%95%E5%AD%A6%E4%B9%A0/</id>
+    <published>2023-09-01T23:12:27.000Z</published>
+    <updated>2023-09-01T23:59:56.440Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;第1节-标题&quot;&gt;&lt;a href=&quot;#第1节-标题&quot; class=&quot;headerlink&quot; title=&quot;第1节 标题&quot;&gt;&lt;/a&gt;第1节 标题&lt;/h1&gt;&lt;p&gt;markdown</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>typora简单使用</title>
+    <link href="http://example.com/2023/09/01/%E4%BB%80%E4%B9%88%E6%98%AFmarkdown/"/>
+    <id>http://example.com/2023/09/01/%E4%BB%80%E4%B9%88%E6%98%AFmarkdown/</id>
+    <published>2023-09-01T15:22:33.000Z</published>
+    <updated>2023-09-01T23:26:47.954Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;MarkDown是什么&lt;br&gt;Markdown 是一种轻量级标记语言，它允许人们使用易读易写的纯文本格式编写文档。&lt;/p&gt;
+&lt;p&gt;Markdown 语言在 2004 由约翰·格鲁伯（英语：John Gruber）创建。&lt;/p&gt;
+&lt;p&gt;Markdown 编写的文档可以导出</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+</feed>
