@@ -160,6 +160,235 @@
     
     
     <article
+  id="post-c-进阶-函数和指针"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/09/03/c-%E8%BF%9B%E9%98%B6-%E5%87%BD%E6%95%B0%E5%92%8C%E6%8C%87%E9%92%88/"
+    >c++ 进阶 函数和指针</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/09/03/c-%E8%BF%9B%E9%98%B6-%E5%87%BD%E6%95%B0%E5%92%8C%E6%8C%87%E9%92%88/" class="article-date">
+  <time datetime="2023-09-03T03:48:33.000Z" itemprop="datePublished">2023-09-03</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/c/">c++</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="1-掌握C-函数基本概念用法"><a href="#1-掌握C-函数基本概念用法" class="headerlink" title="1.掌握C++函数基本概念用法"></a>1.掌握C++函数基本概念用法</h1><h2 id="1-1-函数定义"><a href="#1-1-函数定义" class="headerlink" title="1.1 函数定义"></a>1.1 函数定义</h2><p>什么是函数(function)</p>
+<ul>
+<li><p>C++程序</p>
+</li>
+<li><p>C++标准库(functions和clas;ses)</p>
+</li>
+<li><p>第三方库(functions和class</p>
+</li>
+<li><p>自定义的functions和classes</p>
+</li>
+</ul>
+<p>函数让我们的程序更加模块化</p>
+<ul>
+<li>让代码解耦，分成按业务，</li>
+<li>按逻辑的单元提高代码复用性</li>
+</ul>
+<p>函数名称参数列表</p>
+<ul>
+<li><p>传给函数的变量</p>
+</li>
+<li><p>变量类型需声明</p>
+</li>
+</ul>
+<p>返回值类型</p>
+<ul>
+<li><p>函数体</p>
+</li>
+<li><p>函数被调用执行的部分，花括号{}内部</p>
+<p>示例1：</p>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cmath&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">double</span> PI &#123;<span class="number">3.1415926</span>&#125;; <span class="comment">// 圆周率</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">double</span> <span class="title">calculate_area</span><span class="params">(<span class="type">double</span> radius)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> PI * <span class="built_in">pow</span>(radius, <span class="number">2</span>); <span class="comment">// pow()函数用于计算幂</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">circle_area</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;请输入圆的半径：&quot;</span>;</span><br><span class="line">    <span class="type">double</span> radius &#123;<span class="number">0</span>&#125;;</span><br><span class="line">    cin &gt;&gt; radius;</span><br><span class="line"></span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;圆的面积为：&quot;</span> &lt;&lt; <span class="built_in">calculate_area</span>(radius) &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">circle_area</span>(); <span class="comment">// 调用计算圆的面积的函数</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="1-2-函数原型-prototype"><a href="#1-2-函数原型-prototype" class="headerlink" title="1.2 函数原型(prototype)"></a>1.2 函数原型(prototype)</h2><p>&#x3D;&#x3D;编译器要求:使用函数前必须“见过”这个函数&#x3D;&#x3D;</p>
+<p>先定义函数再调用</p>
+<ul>
+<li>适用于小型程序，不适用于大型项目</li>
+</ul>
+<p>使用函数原型</p>
+<ul>
+<li><p>告诉编译器函数定义必要的信息</p>
+</li>
+<li><p>也称为前向声明(forward declaration)</p>
+</li>
+<li><p>放在程序开始的部分</p>
+</li>
+<li><p>或者放在头文件(header files.h)中</p>
+</li>
+</ul>
+<h2 id="1-3参数"><a href="#1-3参数" class="headerlink" title="1.3参数"></a>1.3参数</h2><ol>
+<li>当我们传递数据给函数时，其实用的是值传递(pass by value)</li>
+<li>数据的拷贝会传给函数</li>
+<li>函数内部的代码不会改变我们传给它的变量</li>
+</ol>
+<p>形参(formal parameters)与实参(actual parameters)<br>形参(formal parameters)</p>
+<ul>
+<li>函数定义语句中的参数</li>
+</ul>
+<p>实参(actual parameters</p>
+<ul>
+<li>调用函数时传递的参数(arguments)</li>
+</ul>
+<h2 id="1-4-重载"><a href="#1-4-重载" class="headerlink" title="1.4 重载"></a>1.4 重载</h2><p>一组函数具有相同函数名，不同参数列表</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 函数原型，函数重载</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">add_numbers</span><span class="params">(<span class="type">int</span>, <span class="type">int</span>)</span></span>; <span class="comment">// 两个 int 类型数字相加</span></span><br><span class="line"><span class="function"><span class="type">double</span> <span class="title">add_numbers</span><span class="params">(<span class="type">double</span>, <span class="type">double</span>)</span></span>; <span class="comment">// 两个 double 类型数字相加</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 主函数</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    cout &lt;&lt; <span class="built_in">add_numbers</span>(<span class="number">5</span>, <span class="number">10</span>) &lt;&lt; endl; <span class="comment">// int 类型</span></span><br><span class="line">    cout &lt;&lt; <span class="built_in">add_numbers</span>(<span class="number">1.23</span>, <span class="number">2.45</span>) &lt;&lt; endl; <span class="comment">// double 类型</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 函数定义</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">add_numbers</span><span class="params">(<span class="type">int</span> num1, <span class="type">int</span> num2)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> num1 + num2;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">double</span> <span class="title">add_numbers</span><span class="params">(<span class="type">double</span> num1, <span class="type">double</span> num2)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> num1 + num2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="1-5-函数传参-数组、引用"><a href="#1-5-函数传参-数组、引用" class="headerlink" title="1.5 函数传参(数组、引用)"></a>1.5 函数传参(数组、引用)</h2><ul>
+<li><p>数组元素并没有复制</p>
+</li>
+<li><p>数组变量名称表示第一个元素在内存中的地址这个地址才被复制了</p>
+</li>
+<li><p>函数内部无法知道数组大小(数组大小需要额外传参)</p>
+<p>·声明参数numbers是常量(只读read-only)</p>
+</li>
+</ul>
+<p>		</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">print_array</span> <span class="params">(<span class="type">const</span> <span class="type">int</span> numbers[ ], <span class="type">size_t</span> size)</span></span></span><br><span class="line"><span class="function">    </span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">swap_num</span><span class="params">(<span class="type">int</span>&amp; a, <span class="type">int</span>&amp; b)</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> temp = a;</span><br><span class="line">    a = b;</span><br><span class="line">    b = temp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 交换两个数字</span></span><br><span class="line">    <span class="type">int</span> x &#123;<span class="number">100</span>&#125;, y &#123;<span class="number">200</span>&#125;;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;x is: &quot;</span> &lt;&lt; x &lt;&lt; <span class="string">&quot; y is: &quot;</span> &lt;&lt; y &lt;&lt; std::endl; <span class="comment">// 100 200</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">swap_num</span>(x, y);</span><br><span class="line"></span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;x is: &quot;</span> &lt;&lt; x &lt;&lt; <span class="string">&quot; y is: &quot;</span> &lt;&lt; y &lt;&lt; std::endl; <span class="comment">// 200 100</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面的是取地址，上面的函数和下面这个函数的作用相同：</p>
+<p>传递地址</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">swap_num</span><span class="params">(<span class="type">int</span> *a, <span class="type">int</span> *b)</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> temp = *a;</span><br><span class="line">    *a = *b;</span><br><span class="line">    *b = temp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 交换两个数字</span></span><br><span class="line">    <span class="type">int</span> x &#123;<span class="number">100</span>&#125;, y &#123;<span class="number">200</span>&#125;;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;x is: &quot;</span> &lt;&lt; x &lt;&lt; <span class="string">&quot; y is: &quot;</span> &lt;&lt; y &lt;&lt; std::endl; <span class="comment">// 100 200</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">swap_num</span>(&amp;x, &amp;y);</span><br><span class="line"></span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;x is: &quot;</span> &lt;&lt; x &lt;&lt; <span class="string">&quot; y is: &quot;</span> &lt;&lt; y &lt;&lt; std::endl; <span class="comment">// 200 100</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>&#x3D;&#x3D;注意&#x3D;&#x3D;</p>
+<p><code>int&amp;</code> 是 C++ 中的引用类型，它是一种特殊的类型，用于给一个已存在的变量起一个别名。可以将其理解为变量的一个别名或者另一个名称，与原变量共享同一块内存空间。</p>
+<p>引用类型与指针类型有所不同。引用在声明时必须初始化，并且一旦初始化后，它就一直引用同一个对象，不能再引用其他对象。而指针可以在声明后重新指向不同的对象。</p>
+<p>使用引用类型的主要目的是提供一种更简洁、更直观的方式来操作变量，同时避免了指针操作的一些繁琐性和潜在的错误。</p>
+<p>在上述修正后的代码中，<code>int&amp;</code> 用于函数参数的声明，表示传递的参数是一个整数的引用。通过引用参数，可以直接修改原变量的值，而无需通过指针进行解引用。在函数内部，通过引用操作修改了 <code>a</code> 和 <code>b</code> 所指向的变量的值。</p>
+<p>其实也就相当于传地址</p>
+<h1 id="2-掌握C-指针基本概念、用法"><a href="#2-掌握C-指针基本概念、用法" class="headerlink" title="2.掌握C++指针基本概念、用法"></a>2.掌握C++指针基本概念、用法</h1><h2 id="2-1-什么是指针"><a href="#2-1-什么是指针" class="headerlink" title="2.1 什么是指针"></a>2.1 什么是指针</h2><p>指针是变量<br>变量的值是一个地址<br>指针的值可以存储哪些地址?</p>
+<p>另一个变量</p>
+<p>函数</p>
+<hr>
+<p>如果指针指向变量或函数，那么为什么不直接用他们?</p>
+<p>可以，但不常用:</p>
+<ul>
+<li><p>函数内部，指针可以访问函数作用域外的数据</p>
+</li>
+<li><p>高效操作数组</p>
+</li>
+<li><p>在堆(heap)上动态分配内存空间</p>
+<p>​      这些空间没有变量名称只能通过指针访问</p>
+</li>
+<li><p>可以获取内存中特殊地址</p>
+</li>
+</ul>
+<p>​              如嵌入式系统、设备驱动等</p>
+<hr>
+<ul>
+<li>&amp;地址操作符</li>
+<li>指针也是一个变量(variable)，所以它的值可以改变</li>
+<li>指针可以为null</li>
+<li>指针可以不初始化</li>
+</ul>
+<h2 id="2-2-动态内存分配-dynami-allocation"><a href="#2-2-动态内存分配-dynami-allocation" class="headerlink" title="2.2 动态内存分配(dynami allocation)"></a>2.2 动态内存分配(dynami allocation)</h2><p>在堆(heap)上程序员自己分配内存空间;<br>数组(array)</p>
+<ul>
+<li>使用数组需要知道数组大小，并且数组大小是固定的;</li>
+<li>Vector容器大小可以动态调整</li>
+</ul>
+<p>使用指针获取堆上刚分配的内存空间</p>
+<hr>
+<p>使用new[]为数组分配内存空间</p>
+<p>使用delete[]释放内存</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span>* array_ptr &#123;<span class="literal">nullptr</span>&#125;;</span><br><span class="line">    <span class="type">int</span> arr_size &#123;<span class="number">0</span>&#125;;</span><br><span class="line"></span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;你需要多少个整数: &quot;</span>;</span><br><span class="line">    std::cin &gt;&gt; arr_size;</span><br><span class="line"></span><br><span class="line">    array_ptr = <span class="keyword">new</span> <span class="type">int</span>[arr_size]; <span class="comment">// 在堆上分配内存</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 使用数组</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">delete</span>[] array_ptr; <span class="comment">// 释放内存</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-3-指针和数组的关系"><a href="#2-3-指针和数组的关系" class="headerlink" title="2.3 指针和数组的关系"></a>2.3 指针和数组的关系</h2><ul>
+<li>数组变量名称的值是数组第一个元素的地址;</li>
+<li>指针变量的的值是一个地址;</li>
+<li>如果指针指向的类型和数组元素的类型一致，那么指针和数组名称几乎是等价的</li>
+</ul>
+<h2 id="2-4-const和指针一一指针本身和被指向的对象都是常量"><a href="#2-4-const和指针一一指针本身和被指向的对象都是常量" class="headerlink" title="2.4 const和指针一一指针本身和被指向的对象都是常量"></a>2.4 const和指针一一指针本身和被指向的对象都是常量</h2><p>指针可以操作:地址及被指向的对象</p>
+<ul>
+<li>被指向的对象是常量(povinters to constants)</li>
+<li>指针本身是常量(constant pointers)</li>
+<li>指针本身和被指向的对象都是常量(constant pointers to constants)</li>
+</ul>
+<p>示例1</p>
+<ul>
+<li>被指向的对象是常量，不可以通过指针改动·</li>
+<li>指针本身可以改变</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> high_temp &#123;<span class="number">40</span>&#125;;</span><br><span class="line">    <span class="type">int</span> low_temp &#123;<span class="number">20</span>&#125;;</span><br><span class="line">    <span class="type">const</span> <span class="type">int</span>* temp_ptr &#123;&amp;high_temp&#125;; <span class="comment">// 被指向的数据是常量</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// *temp_ptr = 100; // 错误，不能通过解引用修改常量的值</span></span><br><span class="line"></span><br><span class="line">    temp_ptr = &amp;low_temp; <span class="comment">// 正确，可以通过指针修改指向的地址</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>示例2</p>
+<ul>
+<li>被指向的对象可以通过指针改动</li>
+<li>指针本身不可以改变</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> high_temp &#123;<span class="number">40</span>&#125;;</span><br><span class="line">    <span class="type">int</span> low_temp &#123;<span class="number">20</span>&#125;;</span><br><span class="line">    <span class="type">int</span>* <span class="type">const</span> temp_ptr &#123;&amp;high_temp&#125;; <span class="comment">// 指针本身是常量，指向 high_temp</span></span><br><span class="line"></span><br><span class="line">    *temp_ptr = <span class="number">100</span>; <span class="comment">// 正确，通过指针解引用修改值</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// temp_ptr = &amp;low_temp; // 错误，不能修改指针的值</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>示例3 </p>
+<ul>
+<li>被指向的对象不可以改动</li>
+<li>指针本身不可以改变</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> high_temp &#123;<span class="number">40</span>&#125;;</span><br><span class="line">    <span class="type">int</span> low_temp &#123;<span class="number">20</span>&#125;;</span><br><span class="line">    <span class="type">const</span> <span class="type">int</span>* <span class="type">const</span> temp_ptr &#123;&amp;high_temp&#125;; <span class="comment">// 指针和被指向对象都是常量</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// *temp_ptr = 100; // 错误，不能修改指针指向的值</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// temp_ptr = &amp;low_temp; // 错误，不能修改指针的值</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-5-函数返回指针"><a href="#2-5-函数返回指针" class="headerlink" title="2.5 函数返回指针"></a>2.5 函数返回指针</h2><p>函数可以返回指针:</p>
+<p> *function( );</p>
+<p>返回哪些指针:</p>
+<ul>
+<li>函数内部动态分配的内存空间传入的数据</li>
+<li>不能返回函数内的局部变量</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span>* <span class="title">create_array</span><span class="params">(<span class="type">size_t</span> size, <span class="type">int</span> initial_value = <span class="number">0</span>)</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span>* new_storage &#123;<span class="literal">nullptr</span>&#125;;</span><br><span class="line">    new_storage = <span class="keyword">new</span> <span class="type">int</span>[size]; <span class="comment">// 分配内存</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">size_t</span> i&#123;<span class="number">0</span>&#125;; i &lt; size; i++) &#123;</span><br><span class="line">        <span class="comment">// 初始化值</span></span><br><span class="line">        *(new_storage + i) = initial_value;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> new_storage;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">size_t</span> size &#123;<span class="number">5</span>&#125;;</span><br><span class="line">    <span class="type">int</span>* array_ptr = <span class="built_in">create_array</span>(size, <span class="number">10</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 打印数组元素</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">size_t</span> i&#123;<span class="number">0</span>&#125;; i &lt; size; i++) &#123;</span><br><span class="line">        std::cout &lt;&lt; *(array_ptr + i) &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    std::cout &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">delete</span>[] array_ptr; <span class="comment">// 释放内存</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/c/" rel="tag">c++</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
   id="post-hexo-进阶"
   class="article article-type-post"
   itemscope

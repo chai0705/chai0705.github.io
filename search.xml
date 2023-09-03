@@ -1,138 +1,184 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>typora简单使用</title>
-    <url>/2023/09/01/%E4%BB%80%E4%B9%88%E6%98%AFmarkdown/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>MarkDown是什么<br>Markdown 是一种轻量级标记语言，它允许人们使用易读易写的纯文本格式编写文档。</p>
-<p>Markdown 语言在 2004 由约翰·格鲁伯（英语：John Gruber）创建。</p>
-<p>Markdown 编写的文档可以导出 HTML 、Word、图像、PDF、Epub 等多种格式的文档。</p>
-<p>Markdown 编写的文档后缀为 .md, .markdown。</p>
-<h1 id="1-如何自动生成目录"><a href="#1-如何自动生成目录" class="headerlink" title="1.如何自动生成目录"></a>1.如何自动生成目录</h1><p>点击【视图】——【大纲】</p>
-<p>说明：但是此步骤生成的目录，并不是折叠的目录，折叠起来会更美观一些</p>
-<p>设置折叠目录</p>
-<p>点击【文件】——【偏好设置】——【外观】——侧边栏选择打钩，此时已经折叠成功</p>
-<h1 id="2-快捷键"><a href="#2-快捷键" class="headerlink" title="2.快捷键"></a>2.快捷键</h1><p> Ctrl+1 ——设置一级标题</p>
-<p>Ctrl+2 ——设置二级标题</p>
-<p>Ctrl+3 ——设置三级标题</p>
-<p>Ctrl+4 ——设置四级标题</p>
-<p>Ctrl+5 ——设置五级标题</p>
-<p>Ctrl+6 ——设置六级标题</p>
-<p>空格 ——引用</p>
-<p>回车、shift + tab ——退出引用</p>
-<p>Ctrl + Shift + ] ——无序列表</p>
-<p>Ctrl + Shift + [ ——有序列</p>
-<p>Ctrl + Shift + ] 、tab——子列表</p>
-<p>Shift + tab ——返回上一级列表、</p>
-<p>Ctrl + B —— 加粗</p>
-<p>Ctrl + T —— 表格</p>
-<p>~ ~ 要删除的内容 ~ ~ ——删除线</p>
-<h1 id="3-创建链接"><a href="#3-创建链接" class="headerlink" title="3.创建链接"></a>3.创建链接</h1><p>格式为[] ()，其中[]内为要展示的内容，()为链接。</p>
-<h1 id="4-图片路径管理"><a href="#4-图片路径管理" class="headerlink" title="4.图片路径管理"></a>4.图片路径管理</h1><p>Typora默认将所有文档的图片都放在一起，但是我们更想每一个文档都有属于自己的一个文件夹，文档中的图片也最好可以自动保存在该文件夹内。解决方法如下：</p>
-<p>点击【文件】——【偏好设置】——【图像】——将该界面内容设置如下:</p>
-<p> 此时，该文档所在文件夹中会自动生成一个img文件，该路径为本文档中的图片路径。</p>
-<p><img src="D:\hexo\blog\source_posts\image-20230902072149501.png"></p>
-<h1 id="5-划重点–高亮"><a href="#5-划重点–高亮" class="headerlink" title="5.划重点–高亮"></a>5.划重点–高亮</h1><p>高亮</p>
-<p>点击【文件】——【偏好设置】——【Markdown】——高亮处打钩</p>
-<p>编辑高亮内容格式如下：</p>
-<p>&#x3D;&#x3D; 内容&#x3D;&#x3D; —— 高亮</p>
-<p>&#x3D;&#x3D; chai&#x3D;&#x3D;</p>
-<p>&#x3D;&#x3D;cccc&#x3D;&#x3D; </p>
-<p>&#x3D;&#x3D; key&#x3D;&#x3D;</p>
-<p> &#x3D;&#x3D;内容&#x3D;&#x3D; </p>
-<p><strong>cha</strong></p>
-<p>重启Typora，此时内容处会变成高亮的效果.</p>
-<h1 id="6-导入代码块"><a href="#6-导入代码块" class="headerlink" title="6.导入代码块"></a>6.导入代码块</h1><p><strong>~~~</strong> ——代码块，点击代码框可选择语言</p>
-<h1 id="7-不使用自动拼写检查"><a href="#7-不使用自动拼写检查" class="headerlink" title="7.不使用自动拼写检查"></a>7.不使用自动拼写检查</h1><p>点击右下角[【Spell Check】勾选【不使用拼写检查】</p>
-<h1 id="8设置自动保存"><a href="#8设置自动保存" class="headerlink" title="8设置自动保存"></a>8设置自动保存</h1><p>其实Typora 对文件修改之后并不能自动保存，解决方法：</p>
-<p>点击【文件】——【偏好设置】——【通用】——自动保存处打钩</p>
-]]></content>
-      <categories>
-        <category>markdown</category>
-      </categories>
-      <tags>
-        <tag>markdown</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>markdown 语法学习</title>
-    <url>/2023/09/02/markdown-%E8%AF%AD%E6%B3%95%E5%AD%A6%E4%B9%A0/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="第1节-标题"><a href="#第1节-标题" class="headerlink" title="第1节 标题"></a>第1节 标题</h1><p>markdown 里面总共有六级标题，可以使用#号的多少来来引用，现在使用的是typora也可以直接使用ctrl+1-6的快捷按键来进行设置</p>
-<h1 id="第2节-列表"><a href="#第2节-列表" class="headerlink" title="第2节 列表"></a>第2节 列表</h1><h2 id="2-1-有序列表"><a href="#2-1-有序列表" class="headerlink" title="2.1 有序列表"></a>2.1 有序列表</h2><p>​	顾名思义，有序列表就是有小标号的列表，同样也是两种方式英⽂输⼊法下，数字后⾯加⼀点，然后空格即可，或者使用快捷按键ctrl + shift + [即可</p>
-<p>1. </p>
-<p>1. </p>
-<h2 id="2-2-无序列表"><a href="#2-2-无序列表" class="headerlink" title="2.2 无序列表"></a>2.2 无序列表</h2><p>​	跟上面的有序列表相反，无序列表就是没有标号，有四种方法、</p>
+    <title>c++ 进阶 函数和指针</title>
+    <url>/2023/09/03/c-%E8%BF%9B%E9%98%B6-%E5%87%BD%E6%95%B0%E5%92%8C%E6%8C%87%E9%92%88/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="1-掌握C-函数基本概念用法"><a href="#1-掌握C-函数基本概念用法" class="headerlink" title="1.掌握C++函数基本概念用法"></a>1.掌握C++函数基本概念用法</h1><h2 id="1-1-函数定义"><a href="#1-1-函数定义" class="headerlink" title="1.1 函数定义"></a>1.1 函数定义</h2><p>什么是函数(function)</p>
 <ul>
-<li>aaa - aaa</li>
-</ul>
-<ul>
-<li>aaa + aaa</li>
-</ul>
-<ul>
-<li>aaa *aaa</li>
-</ul>
-<ul>
-<li>aaa ctrl+shift+]</li>
-</ul>
-<h1 id="第3节-字体标记"><a href="#第3节-字体标记" class="headerlink" title="第3节 字体标记"></a>第3节 字体标记</h1><h2 id="3-1-加粗"><a href="#3-1-加粗" class="headerlink" title="3.1 加粗"></a>3.1 加粗</h2><p><strong>加粗</strong> **   内容**在typora中可以使用ctrl+b</p>
-<h2 id="3-2-删除"><a href="#3-2-删除" class="headerlink" title="3.2 删除"></a>3.2 删除</h2><p><del>删除</del> ~~ 内容~~</p>
-<h2 id="3-3-斜体"><a href="#3-3-斜体" class="headerlink" title="3.3 斜体"></a>3.3 斜体</h2><p><em>斜体</em> * 内容 *</p>
-<h2 id="3-4-高亮"><a href="#3-4-高亮" class="headerlink" title="3.4 高亮"></a>3.4 高亮</h2><p>&#x3D;&#x3D;高亮&#x3D;&#x3D; &#x3D;&#x3D;内容  &#x3D;&#x3D;需要打开pytora的高亮功能之后才行</p>
-<h1 id="第4节-段落相关"><a href="#第4节-段落相关" class="headerlink" title="第4节 段落相关"></a>第4节 段落相关</h1><h2 id="4-1-引用"><a href="#4-1-引用" class="headerlink" title="4.1 引用"></a>4.1 引用</h2><blockquote>
-<p>这是一段引用 &gt; 大于号加内容引用</p>
-</blockquote>
-<h2 id="4-2-分割线"><a href="#4-2-分割线" class="headerlink" title="4.2 分割线"></a>4.2 分割线</h2><hr>
-<p>三个横杠或者更多的横杠表示分割线</p>
-<h1 id="第5节-代码"><a href="#第5节-代码" class="headerlink" title="第5节 代码"></a>第5节 代码</h1><h2 id="5-1-行内代码"><a href="#5-1-行内代码" class="headerlink" title="5.1 行内代码"></a>5.1 行内代码</h2><p><code>这是一个行内代码</code> 1旁边那个特殊按键</p>
-<h2 id="5-2-代码块"><a href="#5-2-代码块" class="headerlink" title="5.2 代码块"></a>5.2 代码块</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;hello world&quot;</span>)</span><br><span class="line">    三个```然后回车即可，然后在右下角的选择框中进行代码的选择</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="第6节-超链接"><a href="#第6节-超链接" class="headerlink" title="第6节 超链接"></a>第6节 超链接</h1><blockquote>
-<p>格式 ：[⽹址标题] [变量01]</p>
-</blockquote>
-<p><a href="www.baidu.com">百度</a></p>
-<ul>
-<li><p>在⽂稿起草阶段，还没确定具体⽹址，但可以先给出⽹址标题</p>
+<li><p>C++程序</p>
 </li>
-<li><p>同⼀篇⽂章需要重复出现同⼀个⽹址时</p>
+<li><p>C++标准库(functions和clas;ses)</p>
+</li>
+<li><p>第三方库(functions和class</p>
+</li>
+<li><p>自定义的functions和classes</p>
 </li>
 </ul>
-<h1 id="第7节-脚注"><a href="#第7节-脚注" class="headerlink" title="第7节 脚注"></a>第7节 脚注</h1><p>这是一个脚注<a href="%E8%BF%99%E4%B8%AA%E6%98%AF%E6%94%BE%E5%9C%A8%E6%96%87%E7%AB%A0%E5%B0%BE%E9%83%A8%E7%9A%84%EF%BC%8C%E7%94%A8%E4%BA%8E%E6%89%BF%E6%8E%A5%E4%B8%8A%E9%9D%A2%E7%9A%84%E8%84%9A%E6%B3%A8">^01</a></p>
-<h1 id="第8节-图片"><a href="#第8节-图片" class="headerlink" title="第8节 图片"></a>第8节 图片</h1><p><img src="/"></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">基本格式：![](图⽚链接)</span><br></pre></td></tr></table></figure>
+<p>函数让我们的程序更加模块化</p>
+<ul>
+<li>让代码解耦，分成按业务，</li>
+<li>按逻辑的单元提高代码复用性</li>
+</ul>
+<p>函数名称参数列表</p>
+<ul>
+<li><p>传给函数的变量</p>
+</li>
+<li><p>变量类型需声明</p>
+</li>
+</ul>
+<p>返回值类型</p>
+<ul>
+<li><p>函数体</p>
+</li>
+<li><p>函数被调用执行的部分，花括号{}内部</p>
+<p>示例1：</p>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cmath&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">double</span> PI &#123;<span class="number">3.1415926</span>&#125;; <span class="comment">// 圆周率</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">double</span> <span class="title">calculate_area</span><span class="params">(<span class="type">double</span> radius)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> PI * <span class="built_in">pow</span>(radius, <span class="number">2</span>); <span class="comment">// pow()函数用于计算幂</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">circle_area</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;请输入圆的半径：&quot;</span>;</span><br><span class="line">    <span class="type">double</span> radius &#123;<span class="number">0</span>&#125;;</span><br><span class="line">    cin &gt;&gt; radius;</span><br><span class="line"></span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;圆的面积为：&quot;</span> &lt;&lt; <span class="built_in">calculate_area</span>(radius) &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">circle_area</span>(); <span class="comment">// 调用计算圆的面积的函数</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><img src="D:\hexo\blog\source_posts\image-20230902075316489.png" alt="image-20230902075316489"></p>
-<p>图⽚链接可以是本地链接，也可以是在线链接</p>
-<p>但这个图片是本地路径，很有问题，所以你可能需要一个图床，用来无视地点，目前先不学呢，具体链接如下所示：</p>
-<p><a href="https://eryinote.com/post/105">图床搭建教程</a></p>
-<h1 id="第9节-表格"><a href="#第9节-表格" class="headerlink" title="第9节 表格"></a>第9节 表格</h1><p>在typora中可以使用快捷按键进行表格的创建  ctrl+t</p>
-<p>通用的语法为</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">| 表头 | 表头 |</span><br><span class="line">| ---- | ---- |</span><br><span class="line">| 单元格 | 单元格 |</span><br><span class="line">| 单元格 | 单元格 |</span><br></pre></td></tr></table></figure>
 
-]]></content>
-      <categories>
-        <category>markdown</category>
-      </categories>
-      <tags>
-        <tag>markdown</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>c++ 环境搭建</title>
-    <url>/2023/09/02/c-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="1-课程所需运行环境配置"><a href="#1-课程所需运行环境配置" class="headerlink" title="1 课程所需运行环境配置"></a>1 课程所需运行环境配置</h1><p>​		ubuntu + windows双系统 4070ti 13900K 32G </p>
-<h1 id="2-VS-Code配置"><a href="#2-VS-Code配置" class="headerlink" title="2 VS Code配置"></a>2 VS Code配置</h1><h2 id="2-1-安装vscode"><a href="#2-1-安装vscode" class="headerlink" title="2.1 安装vscode"></a>2.1 安装vscode</h2><h2 id="2-2-安装插件"><a href="#2-2-安装插件" class="headerlink" title="2.2 安装插件"></a>2.2 安装插件</h2><ol>
-<li>chinese</li>
-<li>remote ssh</li>
-<li>c++</li>
-<li>python</li>
-<li>tabnine  github.copilot</li>
-<li>run</li>
-<li>C&#x2F;C++ Extension Pack</li>
+
+
+
+<h2 id="1-2-函数原型-prototype"><a href="#1-2-函数原型-prototype" class="headerlink" title="1.2 函数原型(prototype)"></a>1.2 函数原型(prototype)</h2><p>&#x3D;&#x3D;编译器要求:使用函数前必须“见过”这个函数&#x3D;&#x3D;</p>
+<p>先定义函数再调用</p>
+<ul>
+<li>适用于小型程序，不适用于大型项目</li>
+</ul>
+<p>使用函数原型</p>
+<ul>
+<li><p>告诉编译器函数定义必要的信息</p>
+</li>
+<li><p>也称为前向声明(forward declaration)</p>
+</li>
+<li><p>放在程序开始的部分</p>
+</li>
+<li><p>或者放在头文件(header files.h)中</p>
+</li>
+</ul>
+<h2 id="1-3参数"><a href="#1-3参数" class="headerlink" title="1.3参数"></a>1.3参数</h2><ol>
+<li>当我们传递数据给函数时，其实用的是值传递(pass by value)</li>
+<li>数据的拷贝会传给函数</li>
+<li>函数内部的代码不会改变我们传给它的变量</li>
 </ol>
-<h1 id="3-下载MinGw编译器"><a href="#3-下载MinGw编译器" class="headerlink" title="3 下载MinGw编译器"></a>3 下载MinGw编译器</h1><p><a href="https://sourceforge.net/projects/mingw-w64/files/mingw-w64/mingw-w64-release/">MinGw官网</a></p>
-<p><a href="https://zhuanlan.zhihu.com/p/545908287">知乎配置教程</a></p>
-<h2 id="4-配置C-C"><a href="#4-配置C-C" class="headerlink" title="4.配置C\C++"></a>4.配置C\C++</h2><p>重启vscode就好了</p>
+<p>形参(formal parameters)与实参(actual parameters)<br>形参(formal parameters)</p>
+<ul>
+<li>函数定义语句中的参数</li>
+</ul>
+<p>实参(actual parameters</p>
+<ul>
+<li>调用函数时传递的参数(arguments)</li>
+</ul>
+<h2 id="1-4-重载"><a href="#1-4-重载" class="headerlink" title="1.4 重载"></a>1.4 重载</h2><p>一组函数具有相同函数名，不同参数列表</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 函数原型，函数重载</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">add_numbers</span><span class="params">(<span class="type">int</span>, <span class="type">int</span>)</span></span>; <span class="comment">// 两个 int 类型数字相加</span></span><br><span class="line"><span class="function"><span class="type">double</span> <span class="title">add_numbers</span><span class="params">(<span class="type">double</span>, <span class="type">double</span>)</span></span>; <span class="comment">// 两个 double 类型数字相加</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 主函数</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    cout &lt;&lt; <span class="built_in">add_numbers</span>(<span class="number">5</span>, <span class="number">10</span>) &lt;&lt; endl; <span class="comment">// int 类型</span></span><br><span class="line">    cout &lt;&lt; <span class="built_in">add_numbers</span>(<span class="number">1.23</span>, <span class="number">2.45</span>) &lt;&lt; endl; <span class="comment">// double 类型</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 函数定义</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">add_numbers</span><span class="params">(<span class="type">int</span> num1, <span class="type">int</span> num2)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> num1 + num2;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">double</span> <span class="title">add_numbers</span><span class="params">(<span class="type">double</span> num1, <span class="type">double</span> num2)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> num1 + num2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="1-5-函数传参-数组、引用"><a href="#1-5-函数传参-数组、引用" class="headerlink" title="1.5 函数传参(数组、引用)"></a>1.5 函数传参(数组、引用)</h2><ul>
+<li><p>数组元素并没有复制</p>
+</li>
+<li><p>数组变量名称表示第一个元素在内存中的地址这个地址才被复制了</p>
+</li>
+<li><p>函数内部无法知道数组大小(数组大小需要额外传参)</p>
+<p>·声明参数numbers是常量(只读read-only)</p>
+</li>
+</ul>
+<p>		</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">print_array</span> <span class="params">(<span class="type">const</span> <span class="type">int</span> numbers[ ], <span class="type">size_t</span> size)</span></span></span><br><span class="line"><span class="function">    </span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">swap_num</span><span class="params">(<span class="type">int</span>&amp; a, <span class="type">int</span>&amp; b)</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> temp = a;</span><br><span class="line">    a = b;</span><br><span class="line">    b = temp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 交换两个数字</span></span><br><span class="line">    <span class="type">int</span> x &#123;<span class="number">100</span>&#125;, y &#123;<span class="number">200</span>&#125;;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;x is: &quot;</span> &lt;&lt; x &lt;&lt; <span class="string">&quot; y is: &quot;</span> &lt;&lt; y &lt;&lt; std::endl; <span class="comment">// 100 200</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">swap_num</span>(x, y);</span><br><span class="line"></span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;x is: &quot;</span> &lt;&lt; x &lt;&lt; <span class="string">&quot; y is: &quot;</span> &lt;&lt; y &lt;&lt; std::endl; <span class="comment">// 200 100</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面的是取地址，上面的函数和下面这个函数的作用相同：</p>
+<p>传递地址</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">swap_num</span><span class="params">(<span class="type">int</span> *a, <span class="type">int</span> *b)</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> temp = *a;</span><br><span class="line">    *a = *b;</span><br><span class="line">    *b = temp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 交换两个数字</span></span><br><span class="line">    <span class="type">int</span> x &#123;<span class="number">100</span>&#125;, y &#123;<span class="number">200</span>&#125;;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;x is: &quot;</span> &lt;&lt; x &lt;&lt; <span class="string">&quot; y is: &quot;</span> &lt;&lt; y &lt;&lt; std::endl; <span class="comment">// 100 200</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">swap_num</span>(&amp;x, &amp;y);</span><br><span class="line"></span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;x is: &quot;</span> &lt;&lt; x &lt;&lt; <span class="string">&quot; y is: &quot;</span> &lt;&lt; y &lt;&lt; std::endl; <span class="comment">// 200 100</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>&#x3D;&#x3D;注意&#x3D;&#x3D;</p>
+<p><code>int&amp;</code> 是 C++ 中的引用类型，它是一种特殊的类型，用于给一个已存在的变量起一个别名。可以将其理解为变量的一个别名或者另一个名称，与原变量共享同一块内存空间。</p>
+<p>引用类型与指针类型有所不同。引用在声明时必须初始化，并且一旦初始化后，它就一直引用同一个对象，不能再引用其他对象。而指针可以在声明后重新指向不同的对象。</p>
+<p>使用引用类型的主要目的是提供一种更简洁、更直观的方式来操作变量，同时避免了指针操作的一些繁琐性和潜在的错误。</p>
+<p>在上述修正后的代码中，<code>int&amp;</code> 用于函数参数的声明，表示传递的参数是一个整数的引用。通过引用参数，可以直接修改原变量的值，而无需通过指针进行解引用。在函数内部，通过引用操作修改了 <code>a</code> 和 <code>b</code> 所指向的变量的值。</p>
+<p>其实也就相当于传地址</p>
+<h1 id="2-掌握C-指针基本概念、用法"><a href="#2-掌握C-指针基本概念、用法" class="headerlink" title="2.掌握C++指针基本概念、用法"></a>2.掌握C++指针基本概念、用法</h1><h2 id="2-1-什么是指针"><a href="#2-1-什么是指针" class="headerlink" title="2.1 什么是指针"></a>2.1 什么是指针</h2><p>指针是变量<br>变量的值是一个地址<br>指针的值可以存储哪些地址?</p>
+<p>另一个变量</p>
+<p>函数</p>
+<hr>
+<p>如果指针指向变量或函数，那么为什么不直接用他们?</p>
+<p>可以，但不常用:</p>
+<ul>
+<li><p>函数内部，指针可以访问函数作用域外的数据</p>
+</li>
+<li><p>高效操作数组</p>
+</li>
+<li><p>在堆(heap)上动态分配内存空间</p>
+<p>​      这些空间没有变量名称只能通过指针访问</p>
+</li>
+<li><p>可以获取内存中特殊地址</p>
+</li>
+</ul>
+<p>​              如嵌入式系统、设备驱动等</p>
+<hr>
+<ul>
+<li>&amp;地址操作符</li>
+<li>指针也是一个变量(variable)，所以它的值可以改变</li>
+<li>指针可以为null</li>
+<li>指针可以不初始化</li>
+</ul>
+<h2 id="2-2-动态内存分配-dynami-allocation"><a href="#2-2-动态内存分配-dynami-allocation" class="headerlink" title="2.2 动态内存分配(dynami allocation)"></a>2.2 动态内存分配(dynami allocation)</h2><p>在堆(heap)上程序员自己分配内存空间;<br>数组(array)</p>
+<ul>
+<li>使用数组需要知道数组大小，并且数组大小是固定的;</li>
+<li>Vector容器大小可以动态调整</li>
+</ul>
+<p>使用指针获取堆上刚分配的内存空间</p>
+<hr>
+<p>使用new[]为数组分配内存空间</p>
+<p>使用delete[]释放内存</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span>* array_ptr &#123;<span class="literal">nullptr</span>&#125;;</span><br><span class="line">    <span class="type">int</span> arr_size &#123;<span class="number">0</span>&#125;;</span><br><span class="line"></span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;你需要多少个整数: &quot;</span>;</span><br><span class="line">    std::cin &gt;&gt; arr_size;</span><br><span class="line"></span><br><span class="line">    array_ptr = <span class="keyword">new</span> <span class="type">int</span>[arr_size]; <span class="comment">// 在堆上分配内存</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 使用数组</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">delete</span>[] array_ptr; <span class="comment">// 释放内存</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-3-指针和数组的关系"><a href="#2-3-指针和数组的关系" class="headerlink" title="2.3 指针和数组的关系"></a>2.3 指针和数组的关系</h2><ul>
+<li>数组变量名称的值是数组第一个元素的地址;</li>
+<li>指针变量的的值是一个地址;</li>
+<li>如果指针指向的类型和数组元素的类型一致，那么指针和数组名称几乎是等价的</li>
+</ul>
+<h2 id="2-4-const和指针一一指针本身和被指向的对象都是常量"><a href="#2-4-const和指针一一指针本身和被指向的对象都是常量" class="headerlink" title="2.4 const和指针一一指针本身和被指向的对象都是常量"></a>2.4 const和指针一一指针本身和被指向的对象都是常量</h2><p>指针可以操作:地址及被指向的对象</p>
+<ul>
+<li>被指向的对象是常量(povinters to constants)</li>
+<li>指针本身是常量(constant pointers)</li>
+<li>指针本身和被指向的对象都是常量(constant pointers to constants)</li>
+</ul>
+<p>示例1</p>
+<ul>
+<li>被指向的对象是常量，不可以通过指针改动·</li>
+<li>指针本身可以改变</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> high_temp &#123;<span class="number">40</span>&#125;;</span><br><span class="line">    <span class="type">int</span> low_temp &#123;<span class="number">20</span>&#125;;</span><br><span class="line">    <span class="type">const</span> <span class="type">int</span>* temp_ptr &#123;&amp;high_temp&#125;; <span class="comment">// 被指向的数据是常量</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// *temp_ptr = 100; // 错误，不能通过解引用修改常量的值</span></span><br><span class="line"></span><br><span class="line">    temp_ptr = &amp;low_temp; <span class="comment">// 正确，可以通过指针修改指向的地址</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>示例2</p>
+<ul>
+<li>被指向的对象可以通过指针改动</li>
+<li>指针本身不可以改变</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> high_temp &#123;<span class="number">40</span>&#125;;</span><br><span class="line">    <span class="type">int</span> low_temp &#123;<span class="number">20</span>&#125;;</span><br><span class="line">    <span class="type">int</span>* <span class="type">const</span> temp_ptr &#123;&amp;high_temp&#125;; <span class="comment">// 指针本身是常量，指向 high_temp</span></span><br><span class="line"></span><br><span class="line">    *temp_ptr = <span class="number">100</span>; <span class="comment">// 正确，通过指针解引用修改值</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// temp_ptr = &amp;low_temp; // 错误，不能修改指针的值</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>示例3 </p>
+<ul>
+<li>被指向的对象不可以改动</li>
+<li>指针本身不可以改变</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> high_temp &#123;<span class="number">40</span>&#125;;</span><br><span class="line">    <span class="type">int</span> low_temp &#123;<span class="number">20</span>&#125;;</span><br><span class="line">    <span class="type">const</span> <span class="type">int</span>* <span class="type">const</span> temp_ptr &#123;&amp;high_temp&#125;; <span class="comment">// 指针和被指向对象都是常量</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// *temp_ptr = 100; // 错误，不能修改指针指向的值</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// temp_ptr = &amp;low_temp; // 错误，不能修改指针的值</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-5-函数返回指针"><a href="#2-5-函数返回指针" class="headerlink" title="2.5 函数返回指针"></a>2.5 函数返回指针</h2><p>函数可以返回指针:</p>
+<p> *function( );</p>
+<p>返回哪些指针:</p>
+<ul>
+<li>函数内部动态分配的内存空间传入的数据</li>
+<li>不能返回函数内的局部变量</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span>* <span class="title">create_array</span><span class="params">(<span class="type">size_t</span> size, <span class="type">int</span> initial_value = <span class="number">0</span>)</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span>* new_storage &#123;<span class="literal">nullptr</span>&#125;;</span><br><span class="line">    new_storage = <span class="keyword">new</span> <span class="type">int</span>[size]; <span class="comment">// 分配内存</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">size_t</span> i&#123;<span class="number">0</span>&#125;; i &lt; size; i++) &#123;</span><br><span class="line">        <span class="comment">// 初始化值</span></span><br><span class="line">        *(new_storage + i) = initial_value;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> new_storage;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">size_t</span> size &#123;<span class="number">5</span>&#125;;</span><br><span class="line">    <span class="type">int</span>* array_ptr = <span class="built_in">create_array</span>(size, <span class="number">10</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 打印数组元素</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">size_t</span> i&#123;<span class="number">0</span>&#125;; i &lt; size; i++) &#123;</span><br><span class="line">        std::cout &lt;&lt; *(array_ptr + i) &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    std::cout &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">delete</span>[] array_ptr; <span class="comment">// 释放内存</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 ]]></content>
       <categories>
         <category>c++</category>
@@ -142,129 +188,17 @@
       </tags>
   </entry>
   <entry>
-    <title>ayer 主题熟悉</title>
-    <url>/2023/09/02/ayer-%E4%B8%BB%E9%A2%98%E7%86%9F%E6%82%89/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="1-整体介绍"><a href="#1-整体介绍" class="headerlink" title="1 整体介绍"></a>1 整体介绍</h1><p><a href="https://github.com/Shen-Yu/hexo-theme-ayer">Ayer</a> 是一个干净且优雅的 Hexo 主题，自带响应式，加载速度很快，该有的功能都有，可配置项很多，非常适合作为你的博客主题，主题内还附送了 6 张精美的高清壁纸。欢迎使用和 Star 支持，如果你在使用过程中有任何疑问或者建议，欢迎联系我！如果你的博客采用了本主题，欢迎在下面评论区留下地址~</p>
-<p><a href="https://github.com/Shen-Yu/hexo-theme-ayer">Ayer</a> 在马来语中是“水”的意思，在西班牙语中是“昨天”的意思。</p>
-<h1 id="2-特性"><a href="#2-特性" class="headerlink" title="2. 特性"></a>2. 特性</h1><ol>
-<li>干净且优雅，文章内容美观易读</li>
-<li>首页封面全屏平铺，扁平化设计，简洁又不失高大上</li>
-<li>响应式设计，博客在桌面端、平板、手机等设备上均能很好的展现</li>
-<li>首页封面和文案可以任意更换，主题内附送 6 张精美高清壁纸</li>
-<li>时间轴式的归档页</li>
-<li>支持 <code>黑夜阅读</code> 模式</li>
-<li>侧边栏可以点击显示或隐藏</li>
-<li>支持文章置顶和文章打赏</li>
-<li>支持文章字数和阅读时长统计</li>
-<li>支持网易云音乐播放</li>
-<li>支持  <code>MathJax</code> 和 <code>Katex</code> 数学公式</li>
-<li>支持 <code>Mermaid</code> 流程图、状态图、时序图、甘特图</li>
-<li><code>TOC</code> 目录在文章页悬浮，跳转更方便</li>
-<li>集成了博客加密访问的功能</li>
-<li>可设置阅读文章时做密码验证<a href="https://github.com/MikeCoder/hexo-blog-encrypt/blob/master/ReadMe.zh.md">hexo-blog-encrypt</a></li>
-<li><a href="https://valine.js.org/">Valine</a>和<a href="https://gitalk.github.io/">Gitalk</a>评论模块（推荐配合<code>leancloud</code>使用  <code>Valine</code>）</li>
-<li>集成了<a href="http://busuanzi.ibruce.info/">不蒜子</a>、百度统计、Google Analytics、CNZZ 等统计功能</li>
-<li>支持 Github Ribbons</li>
-</ol>
-<h1 id="3-主题配置"><a href="#3-主题配置" class="headerlink" title="3.主题配置"></a>3.主题配置</h1><p>以下是 ayer 主题目录下的 <code>_config.yml</code> 文件配置，</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 侧边栏菜单</span><br><span class="line">menu:</span><br><span class="line">  主页: /</span><br><span class="line">  归档: /archives</span><br><span class="line">  分类: /categories</span><br><span class="line">  标签: /tags</span><br><span class="line">  摄影: http://shenyu-vip.lofter.com</span><br><span class="line">  旅行: /tags/旅行/</span><br><span class="line">  关于我: /2019/about</span><br><span class="line"></span><br><span class="line"># 站点次标题和打字动效</span><br><span class="line"># https://github.com/mattboldt/typed.js</span><br><span class="line">subtitle:</span><br><span class="line">  enable: true # 是否开启动效</span><br><span class="line">  text: 面朝大海，春暖花开 # 显示的文字</span><br><span class="line">  text2: 愿你一生努力，一生被爱 # 滚动播放，如果不需要可以留空</span><br><span class="line">  text3: 想要的都拥有，得不到的都释怀 # 最多支持三段文字</span><br><span class="line">  startDelay: 0 # 延迟时间</span><br><span class="line">  typeSpeed: 200 # 打字速度</span><br><span class="line">  loop: true # 是否循环</span><br><span class="line">  backSpeed: 100 # 回退速度</span><br><span class="line">  showCursor: true # 是否显示光标</span><br><span class="line"></span><br><span class="line"># 网站图标和侧边栏logo</span><br><span class="line">favicon: /favicon.ico</span><br><span class="line">logo: /images/ayer-side.svg</span><br><span class="line"></span><br><span class="line"># 封面配置</span><br><span class="line"># enable-是否启用封面；path-封面背景图；logo-封面logo</span><br><span class="line">cover:</span><br><span class="line">  enable: true</span><br><span class="line">  path: /images/cover1.jpg # /source/images目录下附送多张精美壁纸，可任意更换</span><br><span class="line">  logo: /images/ayer.svg # 如果不要直接设置成false</span><br><span class="line"></span><br><span class="line"># 页面顶部进度条</span><br><span class="line">progressBar: true</span><br><span class="line"></span><br><span class="line"># 告示板模块</span><br><span class="line">broadcast:</span><br><span class="line">  enable: true # true开启，false关闭</span><br><span class="line">  type: 2 # 1：自定义输入，2：一言api(https://hitokoto.cn/)</span><br><span class="line">  text: 一个安静优雅的hexo主题，快速且响应式。 # type为1时有效</span><br><span class="line"></span><br><span class="line"># 文章配置</span><br><span class="line"># 文章太长，截断按钮文字(在需要截断的行增加此标记：&lt;!--more--&gt;)</span><br><span class="line">excerpt_link: 阅读更多...</span><br><span class="line"># 如果你嫌每篇文章手动加more标记比较麻烦，又不想在首页全文显示，可以把excerpt_all设置成true，这样首页只会显示文章归档</span><br><span class="line">excerpt_all: false</span><br><span class="line"></span><br><span class="line"># 是否开启代码复制按钮</span><br><span class="line">copy_btn: true</span><br><span class="line"># 是否开启文章分享按钮</span><br><span class="line">share_enable: true</span><br><span class="line"># 国内的社交平台(If you are not in China, maybe you prefer to set:false)</span><br><span class="line">share_china: true</span><br><span class="line"># 文章分享文字</span><br><span class="line">share_text: 分享</span><br><span class="line"></span><br><span class="line"># 分页文字</span><br><span class="line">nav_text:</span><br><span class="line">  page_prev: 上一页</span><br><span class="line">  page_next: 下一页</span><br><span class="line">  post_prev: 上一篇</span><br><span class="line">  post_next: 下一篇</span><br><span class="line"></span><br><span class="line"># 文章页是否显示目录</span><br><span class="line">toc: true</span><br><span class="line"></span><br><span class="line"># 文章中的图片是否支持点击放大</span><br><span class="line">image_viewer: true</span><br><span class="line"></span><br><span class="line"># https://github.com/willin/hexo-wordcount</span><br><span class="line"># 是否开启字数统计(关闭请设置enable为false)</span><br><span class="line"># 也可以单独在md文件里Front-matter设置`no_word_count: true`属性，来自定义关闭字数统计</span><br><span class="line">word_count:</span><br><span class="line">  enable: true</span><br><span class="line">  # 只在文章详情显示(不在首页显示)</span><br><span class="line">  only_article_visit: true</span><br><span class="line"></span><br><span class="line"># 打赏</span><br><span class="line"># 打赏type设定：0-关闭打赏； 1-文章对应的md文件里有reward:true属性，才有打赏； 2-默认开启所有文章均有打赏，如果有些文章你不需要，请在文章对应的md文件里设置no_reward:true</span><br><span class="line">reward_type: 2</span><br><span class="line"># 打赏wording</span><br><span class="line">reward_wording: &quot;请我喝杯咖啡吧~&quot;</span><br><span class="line"># 支付宝二维码图片地址，跟你设置logo的方式一样。比如：/images/alipay.jpg</span><br><span class="line">alipay: /images/alipay.jpg</span><br><span class="line"># 微信二维码图片地址</span><br><span class="line">weixin: /images/wechat.jpg</span><br><span class="line"></span><br><span class="line"># 版权声明</span><br><span class="line"># 版权声明type设定：0-关闭版权声明； 1-文章对应的md文件里有copyright: true属性，才有版权声明； 2-所有文章均有版权声明</span><br><span class="line">copyright_type: 2</span><br><span class="line"></span><br><span class="line"># 是否启用搜索</span><br><span class="line">search: true</span><br><span class="line"></span><br><span class="line"># RSS订阅(先安装hexo-generator-feed插件，再去博客根目录config进行配置)</span><br><span class="line"># 不想显示可以直接留空</span><br><span class="line">rss: /atom.xml</span><br><span class="line"></span><br><span class="line"># 是否启用黑夜模式开关</span><br><span class="line">darkmode: true</span><br><span class="line"></span><br><span class="line"># 动态背景效果: 0-关闭，1-动态线条(跟随鼠标)</span><br><span class="line">canvas_bg: 0</span><br><span class="line"></span><br><span class="line"># 自定义鼠标样式，直接替换/images/mouse.cur文件</span><br><span class="line">mouse:</span><br><span class="line">  enable: false</span><br><span class="line">  path: /images/mouse.cur</span><br><span class="line"></span><br><span class="line"># 鼠标点击效果：0-关闭，1-爱心，2-爆炸烟花，3-粒子烟花</span><br><span class="line">click_effect: 0</span><br><span class="line"></span><br><span class="line"># 页面宽度自定义（不建议修改，可能造成布局混乱），article_width文章宽度，sidebar_width侧边栏宽度</span><br><span class="line">layout:</span><br><span class="line">  article_width: 80rem</span><br><span class="line">  sidebar_width: 8rem</span><br><span class="line"></span><br><span class="line"># GitHub Ribbons-封面右上角的forkme，换样式直接在source/images目录下替换forkme图片</span><br><span class="line">github:</span><br><span class="line">  # (关闭请设置为false)</span><br><span class="line">  enable: true</span><br><span class="line">  url: https://github.com/Shen-Yu/hexo-theme-ayer</span><br><span class="line"></span><br><span class="line"># 网易云音乐插件</span><br><span class="line">music:</span><br><span class="line">  enable: false</span><br><span class="line">  # 播放器尺寸类型(1：小尺寸、2：大尺寸)</span><br><span class="line">  type: 1</span><br><span class="line">  id: 22707008 # 网易云分享的音乐ID(更换音乐请更改此配置项)</span><br><span class="line">  autoPlay: true # 是否开启自动播放</span><br><span class="line"></span><br><span class="line"># 访问量统计(不蒜子)</span><br><span class="line">busuanzi:</span><br><span class="line">  enable: true</span><br><span class="line"></span><br><span class="line"># 友盟cnzz统计(url填js代码src链接)</span><br><span class="line">cnzz:</span><br><span class="line">  enable: true</span><br><span class="line">  url: #</span><br><span class="line"></span><br><span class="line"># Google Analytics</span><br><span class="line">google_analytics: &quot;&quot;</span><br><span class="line"># 百度统计</span><br><span class="line">baidu_analytics: &quot;&quot;</span><br><span class="line"></span><br><span class="line"># Mathjax数学公式</span><br><span class="line">mathjax: true</span><br><span class="line"></span><br><span class="line"># Katex数学公式(allpost设置为false时只有头部设置math:true的文章才开启)</span><br><span class="line"># 需要更换hexo渲染器，npm un hexo-renderer-marked -S &amp;&amp; npm i hexo-renderer-markdown-it-katex -S</span><br><span class="line">katex:</span><br><span class="line">  enable: false # true</span><br><span class="line">  allpost: true</span><br><span class="line">  copy_tex: false</span><br><span class="line"></span><br><span class="line"># mermaid流程图 三个选项缺一不可(https://mermaid-js.github.io/mermaid/#/)</span><br><span class="line">mermaid:</span><br><span class="line">  enable: false</span><br><span class="line">  cdn: https://cdn.jsdelivr.net/npm/mermaid@8.9.2/dist/mermaid.min.js</span><br><span class="line">  theme: forest</span><br><span class="line"></span><br><span class="line"># 网站成立年份(默认为 2019，若填入年份小于当前年份，则显示为 2018-2019 类似的格式)</span><br><span class="line">since: 2019</span><br><span class="line"></span><br><span class="line"># ICP备案信息尾部显示</span><br><span class="line">icp:</span><br><span class="line">  enable: false</span><br><span class="line">  url: &quot;http://www.beian.miit.gov.cn/&quot; # 备案链接</span><br><span class="line">  text: &quot;浙ICP备88888888&quot; # 备案信息</span><br><span class="line"># 公安备案信息尾部显示</span><br><span class="line">gongan:</span><br><span class="line">  enable: true</span><br><span class="line">  img: /images/beian.png #公安备案图片</span><br><span class="line">  url: &quot;http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=01234567890123&quot; #公安备案链接</span><br><span class="line">  text: &quot;浙公网安备01234567890123号&quot; #公安备案信息</span><br><span class="line"></span><br><span class="line"># 友情链接</span><br><span class="line">friends_link:</span><br><span class="line">  Ayer主题: #网站名称</span><br><span class="line">    #网站地址</span><br><span class="line">    url: https://github.com/Shen-Yu/hexo-theme-ayer</span><br><span class="line">    #网站图片(可忽略不写)</span><br><span class="line">    img: /images/ayer.png</span><br><span class="line">  GitHub:</span><br><span class="line">    url: https://github.com/Shen-Yu</span><br><span class="line">    img: https://i.loli.net/2020/09/07/indb4PRYDA98EkN.png</span><br><span class="line">  码云:</span><br><span class="line">    url: https://gitee.com/shen-yu</span><br><span class="line">    img: https://i.loli.net/2020/09/07/K3AqO7h6krQFlRX.png</span><br><span class="line">  Hexo官网:</span><br><span class="line">    url: https://hexo.io</span><br><span class="line">    img: https://i.loli.net/2020/09/07/UYGzjo7h68CRWny.png</span><br><span class="line">  Hexo图表插件:</span><br><span class="line">    url: https://github.com/Shen-Yu/hexo-tag-chart</span><br><span class="line">    img: https://i.loli.net/2020/09/07/GIXBYE5SoylhR1r.png</span><br><span class="line"></span><br><span class="line"># 评论：1、Valine(推荐)；2、Gitalk；3、Twikoo; 4.MiniValine</span><br><span class="line"></span><br><span class="line"># 1、Valine[一款快速、简洁且高效的无后端评论系统](https://github.com/xCss/Valine)</span><br><span class="line"># 启用Valine必须先创建leancloud应用， 获取 id|key 填入即可</span><br><span class="line">leancloud:</span><br><span class="line">  enable: true</span><br><span class="line">  app_id: #</span><br><span class="line">  app_key: #</span><br><span class="line"># Valine配置</span><br><span class="line">valine:</span><br><span class="line">  enable: true # 是否启用</span><br><span class="line">  avatar: monsterid # 头像样式(https://valine.js.org/avatar.html)</span><br><span class="line">  placeholder: 给我的文章加点评论吧~ # placeholder</span><br><span class="line"></span><br><span class="line"># 2、Gitalk(https://github.com/gitalk/gitalk)</span><br><span class="line">gitalk:</span><br><span class="line">  enable: false # true</span><br><span class="line">  clientID: # GitHub Application Client ID</span><br><span class="line">  clientSecret: # Client Secret</span><br><span class="line">  repo: # Repository name</span><br><span class="line">  owner: # GitHub ID</span><br><span class="line">  admin: # GitHub ID</span><br><span class="line"></span><br><span class="line"># 3、Twikoo(https://github.com/imaegoo/twikoo)</span><br><span class="line">twikoo:</span><br><span class="line">  enable: false</span><br><span class="line">  envId: #</span><br><span class="line"></span><br><span class="line"># 4、MiniValine</span><br><span class="line"># See: https://github.com/MiniValine/MiniValine</span><br><span class="line">minivaline:</span><br><span class="line">  enable: false</span><br><span class="line">  serverURL: https://minivaline.your-domain.com</span><br><span class="line"></span><br><span class="line"># 首页广告配置</span><br><span class="line"># 可以根据需要自行增加ad_3，ad_4...，留空则不显示</span><br><span class="line">ads:</span><br><span class="line">  ad_1:</span><br><span class="line">    title: vultr优惠vps</span><br><span class="line">    img: https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/vultr.png</span><br><span class="line">    url: https://www.vultr.com/?ref=8630075</span><br><span class="line">    width: 300</span><br><span class="line">  ad_2:</span><br><span class="line">    title: 云服务器全球购低至2折</span><br><span class="line">    img: https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/ad_2.jpg</span><br><span class="line">    url: https://curl.qcloud.com/kvO7hb43</span><br><span class="line">    width: 300</span><br><span class="line"></span><br><span class="line"># 网站开启加密访问，密码可设置任何字符</span><br><span class="line">lock:</span><br><span class="line">  enable: false</span><br><span class="line">  password: 123456</span><br></pre></td></tr></table></figure>
-
-<h2 id="4-插件-可选"><a href="#4-插件-可选" class="headerlink" title="4 插件(可选)"></a>4 插件(可选)</h2><ul>
-<li><a href="https://github.com/netcan/hexo-generator-index-pin-top">hexo-generator-index-pin-top</a> 用于文章置顶</li>
-<li><a href="https://github.com/MikeCoder/hexo-blog-encrypt/blob/master/ReadMe.zh.md">hexo-blog-encrypt</a> 用于文章加密</li>
-<li><a href="https://github.com/MoePlayer/hexo-tag-aplayer/blob/master/docs/README-zh_cn.md">hexo-tag-aplayer</a> 用于播放音乐</li>
-<li><a href="https://github.com/MoePlayer/hexo-tag-dplayer">hexo-tag-dplayer</a> 用于播放视频</li>
-<li><a href="https://github.com/EYHN/hexo-helper-live2d/blob/master/README.zh-CN.md">hexo-helper-live2d</a> 二次元看板娘</li>
-</ul>
-<h2 id="5-分类"><a href="#5-分类" class="headerlink" title="5.分类"></a>5.分类</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo new page categories</span><br></pre></td></tr></table></figure>
-
-<p>然后将以下复制到 &#x2F;source&#x2F;categories&#x2F;index.md 文件</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: categories</span><br><span class="line">type: &quot;categories&quot;</span><br><span class="line">layout: &quot;categories&quot;</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
-
-<h2 id="6-标签"><a href="#6-标签" class="headerlink" title="6.标签"></a>6.标签</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo new page tags</span><br></pre></td></tr></table></figure>
-
-<p>配置同分类一样</p>
-<h2 id="7-友情链接"><a href="#7-友情链接" class="headerlink" title="7. 友情链接"></a>7. 友情链接</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo new page friends</span><br></pre></td></tr></table></figure>
-
-<p>然后将以下复制到 &#x2F;source&#x2F;friends&#x2F;index.md 文件</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: friends</span><br><span class="line">type: friends</span><br><span class="line">layout: &quot;friends&quot;</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
-
-<p>然后在 ayer 主题目录下的 <code>_config.yml</code> 中自定义 <code>friends_link</code> 配置项即可</p>
-<h2 id="8-相册"><a href="#8-相册" class="headerlink" title="8.相册"></a>8.相册</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo new page photos</span><br></pre></td></tr></table></figure>
-
-<p>然后将以下复制到 &#x2F;source&#x2F;photos&#x2F;index.md 文件，<code>img_url</code> 替换成图片路径，<code>caption</code> 替换成图片名称</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: Gallery</span><br><span class="line"></span><br><span class="line">albums: [[&quot;img_url&quot;, &quot;img_caption&quot;], [&quot;img_url&quot;, &quot;img_caption&quot;]]</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
-
-<h2 id="文章目录"><a href="#文章目录" class="headerlink" title="文章目录"></a>文章目录</h2><p>用 Tocbot 解析文章标题并生成目录</p>
-<ul>
-<li>将以下配置复制到你 ayer 主题目录下的 <code>_config.yml</code> 里：</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Toc</span><br><span class="line">toc: true</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>当然你可能并不想所有文章都生成悬浮目录，你可以在文章顶部的配置中加一行来进行关闭：</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">no_toc: true</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>hexo</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>hexo基本操作命令</title>
-    <url>/2023/09/02/hexo%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><a href="https://so.csdn.net/so/search?q=Hexo&spm=1001.2101.3001.7020">Hexo</a> 约有二十个命令，但普通用户经常使用的大概只有下列几个:</p>
-<h2 id="hexo-s"><a href="#hexo-s" class="headerlink" title="hexo s"></a><strong>hexo s</strong></h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo s</span><br></pre></td></tr></table></figure>
-
-<p>启动本地服务器，用于预览主题。默认地址： <a href="http://localhost:4000/">http://localhost:4000/</a></p>
-<ul>
-<li>hexo s 是 hexo server 的缩写，命令效果一致；</li>
-<li>预览的同时可以修改文章内容或主题代码，保存后刷新页面即可；</li>
-<li>对 Hexo 根目录 _config.yml 的修改，需要重启本地服务器后才能预览效果。</li>
-</ul>
-<h2 id="hexo-new"><a href="#hexo-new" class="headerlink" title="hexo new"></a><strong>hexo new</strong></h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo new &quot;学习笔记  六&quot;</span><br></pre></td></tr></table></figure>
-
-<p>新建一篇标题为 学习笔记 六 的文章，因为标题里有空格，所以加上了引号。</p>
-<ul>
-<li>文章标题可以在对应 md 文件里改，新建时标题可以写的简单些。</li>
-</ul>
-<h2 id="hexo-d"><a href="#hexo-d" class="headerlink" title="hexo d"></a><strong>hexo d</strong></h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo d</span><br></pre></td></tr></table></figure>
-
-<p>自动生成网站静态文件，并部署到设定的仓库。</p>
-<ul>
-<li>hexo d 是 hexo deploy 的缩写，命令效果一致。</li>
-</ul>
-<h2 id="hexo-clean"><a href="#hexo-clean" class="headerlink" title="hexo clean"></a><strong>hexo clean</strong></h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo clean</span><br></pre></td></tr></table></figure>
-
-<p>清除缓存文件 db.json 和已生成的静态文件 public 。</p>
-<ul>
-<li>网站显示异常时可以执行这条命令试试。</li>
-</ul>
-<h2 id="hexo-g"><a href="#hexo-g" class="headerlink" title="hexo g"></a><strong>hexo g</strong></h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo g</span><br></pre></td></tr></table></figure>
-
-<p>生成网站静态文件到默认设置的 public 文件夹。</p>
-<ul>
-<li>便于查看网站生成的静态文件或者手动部署网站；</li>
-<li>如果使用自动部署，不需要先执行该命令；</li>
-<li>hexo g 是 hexo generate 的缩写，命令效果一致。</li>
-</ul>
-<h2 id="hexo-new-page"><a href="#hexo-new-page" class="headerlink" title="hexo new page"></a><strong>hexo new page</strong></h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo new page aboutme</span><br></pre></td></tr></table></figure>
-
-<p>新建一个标题为 aboutme 的页面，默认链接地址为 主页地址&#x2F;aboutme&#x2F;</p>
-<ul>
-<li>标题可以为中文，但一般习惯用英文；</li>
-<li>页面标题和文章一样可以随意修改；</li>
-<li>页面不会出现在首页文章列表和归档中，也不支持设置分类和标签。</li>
-</ul>
-<p>hexo n “我的博客” 等价于 hexo new “我的博客” 还等价于 hexo new post “我的博客” #新建一篇文章<br>hexo p 等价于 hexo publish<br>hexo g 等价于 hexo generate<br>hexo s等价于 hexo server<br>hexo d 等价于 hexo deploy<br>hexo deploy -g 等价于 hexo deploy –generate<br>hexo generate -d等价于hexo generate –deploy</p>
-<p>一般只需要四个命令，</p>
-<p>hexo n 创建一个新的博客</p>
-<p>hexo s 开启一个新的服务</p>
-<p>hexo g 生成一个静态的网页</p>
-<p>hexo d 将生成的静态网页推到服务器github</p>
+    <title>hexo 进阶</title>
+    <url>/2023/09/03/hexo-%E8%BF%9B%E9%98%B6/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="1-文章的分类和标签"><a href="#1-文章的分类和标签" class="headerlink" title="1 文章的分类和标签"></a>1 文章的分类和标签</h1><p>分类的话就是在最上方的状态栏中加入	categories:  属性即可</p>
+<p>标签的话就是在最上方的状态栏中加入	tags:  属性即可</p>
+<h1 id="2图床搭建教程"><a href="#2图床搭建教程" class="headerlink" title="2图床搭建教程"></a>2图床搭建教程</h1><p>根据这个教程来即可</p>
+<p><a href="https://eryinote.com/post/105">图床</a></p>
+<p>踩坑 picgo这个软件双击并不是直接打开，而是到了右下角的小菜单。。。</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/image-20230903113402329.png" alt="image-20230903113402329"></p>
+<p>然后在typora软件中进行简单的设置即可。如下所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/image-20230903114440776.png" alt="image-20230903114440776"></p>
+<p>至此就搞完了，其他目前也没啥需求，继续学习C++</p>
 ]]></content>
       <categories>
         <category>hexo</category>
@@ -433,23 +367,276 @@
       </tags>
   </entry>
   <entry>
-    <title>hexo 进阶</title>
-    <url>/2023/09/03/hexo-%E8%BF%9B%E9%98%B6/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="1-文章的分类和标签"><a href="#1-文章的分类和标签" class="headerlink" title="1 文章的分类和标签"></a>1 文章的分类和标签</h1><p>分类的话就是在最上方的状态栏中加入	categories:  属性即可</p>
-<p>标签的话就是在最上方的状态栏中加入	tags:  属性即可</p>
-<h1 id="2图床搭建教程"><a href="#2图床搭建教程" class="headerlink" title="2图床搭建教程"></a>2图床搭建教程</h1><p>根据这个教程来即可</p>
-<p><a href="https://eryinote.com/post/105">图床</a></p>
-<p>踩坑 picgo这个软件双击并不是直接打开，而是到了右下角的小菜单。。。</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/image-20230903113402329.png" alt="image-20230903113402329"></p>
-<p>然后在typora软件中进行简单的设置即可。如下所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/image-20230903114440776.png" alt="image-20230903114440776"></p>
-<p>至此就搞完了，其他目前也没啥需求，继续学习C++</p>
+    <title>hexo基本操作命令</title>
+    <url>/2023/09/02/hexo%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><a href="https://so.csdn.net/so/search?q=Hexo&spm=1001.2101.3001.7020">Hexo</a> 约有二十个命令，但普通用户经常使用的大概只有下列几个:</p>
+<h2 id="hexo-s"><a href="#hexo-s" class="headerlink" title="hexo s"></a><strong>hexo s</strong></h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo s</span><br></pre></td></tr></table></figure>
+
+<p>启动本地服务器，用于预览主题。默认地址： <a href="http://localhost:4000/">http://localhost:4000/</a></p>
+<ul>
+<li>hexo s 是 hexo server 的缩写，命令效果一致；</li>
+<li>预览的同时可以修改文章内容或主题代码，保存后刷新页面即可；</li>
+<li>对 Hexo 根目录 _config.yml 的修改，需要重启本地服务器后才能预览效果。</li>
+</ul>
+<h2 id="hexo-new"><a href="#hexo-new" class="headerlink" title="hexo new"></a><strong>hexo new</strong></h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo new &quot;学习笔记  六&quot;</span><br></pre></td></tr></table></figure>
+
+<p>新建一篇标题为 学习笔记 六 的文章，因为标题里有空格，所以加上了引号。</p>
+<ul>
+<li>文章标题可以在对应 md 文件里改，新建时标题可以写的简单些。</li>
+</ul>
+<h2 id="hexo-d"><a href="#hexo-d" class="headerlink" title="hexo d"></a><strong>hexo d</strong></h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+
+<p>自动生成网站静态文件，并部署到设定的仓库。</p>
+<ul>
+<li>hexo d 是 hexo deploy 的缩写，命令效果一致。</li>
+</ul>
+<h2 id="hexo-clean"><a href="#hexo-clean" class="headerlink" title="hexo clean"></a><strong>hexo clean</strong></h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo clean</span><br></pre></td></tr></table></figure>
+
+<p>清除缓存文件 db.json 和已生成的静态文件 public 。</p>
+<ul>
+<li>网站显示异常时可以执行这条命令试试。</li>
+</ul>
+<h2 id="hexo-g"><a href="#hexo-g" class="headerlink" title="hexo g"></a><strong>hexo g</strong></h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo g</span><br></pre></td></tr></table></figure>
+
+<p>生成网站静态文件到默认设置的 public 文件夹。</p>
+<ul>
+<li>便于查看网站生成的静态文件或者手动部署网站；</li>
+<li>如果使用自动部署，不需要先执行该命令；</li>
+<li>hexo g 是 hexo generate 的缩写，命令效果一致。</li>
+</ul>
+<h2 id="hexo-new-page"><a href="#hexo-new-page" class="headerlink" title="hexo new page"></a><strong>hexo new page</strong></h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo new page aboutme</span><br></pre></td></tr></table></figure>
+
+<p>新建一个标题为 aboutme 的页面，默认链接地址为 主页地址&#x2F;aboutme&#x2F;</p>
+<ul>
+<li>标题可以为中文，但一般习惯用英文；</li>
+<li>页面标题和文章一样可以随意修改；</li>
+<li>页面不会出现在首页文章列表和归档中，也不支持设置分类和标签。</li>
+</ul>
+<p>hexo n “我的博客” 等价于 hexo new “我的博客” 还等价于 hexo new post “我的博客” #新建一篇文章<br>hexo p 等价于 hexo publish<br>hexo g 等价于 hexo generate<br>hexo s等价于 hexo server<br>hexo d 等价于 hexo deploy<br>hexo deploy -g 等价于 hexo deploy –generate<br>hexo generate -d等价于hexo generate –deploy</p>
+<p>一般只需要四个命令，</p>
+<p>hexo n 创建一个新的博客</p>
+<p>hexo s 开启一个新的服务</p>
+<p>hexo g 生成一个静态的网页</p>
+<p>hexo d 将生成的静态网页推到服务器github</p>
 ]]></content>
       <categories>
         <category>hexo</category>
       </categories>
       <tags>
         <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ayer 主题熟悉</title>
+    <url>/2023/09/02/ayer-%E4%B8%BB%E9%A2%98%E7%86%9F%E6%82%89/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="1-整体介绍"><a href="#1-整体介绍" class="headerlink" title="1 整体介绍"></a>1 整体介绍</h1><p><a href="https://github.com/Shen-Yu/hexo-theme-ayer">Ayer</a> 是一个干净且优雅的 Hexo 主题，自带响应式，加载速度很快，该有的功能都有，可配置项很多，非常适合作为你的博客主题，主题内还附送了 6 张精美的高清壁纸。欢迎使用和 Star 支持，如果你在使用过程中有任何疑问或者建议，欢迎联系我！如果你的博客采用了本主题，欢迎在下面评论区留下地址~</p>
+<p><a href="https://github.com/Shen-Yu/hexo-theme-ayer">Ayer</a> 在马来语中是“水”的意思，在西班牙语中是“昨天”的意思。</p>
+<h1 id="2-特性"><a href="#2-特性" class="headerlink" title="2. 特性"></a>2. 特性</h1><ol>
+<li>干净且优雅，文章内容美观易读</li>
+<li>首页封面全屏平铺，扁平化设计，简洁又不失高大上</li>
+<li>响应式设计，博客在桌面端、平板、手机等设备上均能很好的展现</li>
+<li>首页封面和文案可以任意更换，主题内附送 6 张精美高清壁纸</li>
+<li>时间轴式的归档页</li>
+<li>支持 <code>黑夜阅读</code> 模式</li>
+<li>侧边栏可以点击显示或隐藏</li>
+<li>支持文章置顶和文章打赏</li>
+<li>支持文章字数和阅读时长统计</li>
+<li>支持网易云音乐播放</li>
+<li>支持  <code>MathJax</code> 和 <code>Katex</code> 数学公式</li>
+<li>支持 <code>Mermaid</code> 流程图、状态图、时序图、甘特图</li>
+<li><code>TOC</code> 目录在文章页悬浮，跳转更方便</li>
+<li>集成了博客加密访问的功能</li>
+<li>可设置阅读文章时做密码验证<a href="https://github.com/MikeCoder/hexo-blog-encrypt/blob/master/ReadMe.zh.md">hexo-blog-encrypt</a></li>
+<li><a href="https://valine.js.org/">Valine</a>和<a href="https://gitalk.github.io/">Gitalk</a>评论模块（推荐配合<code>leancloud</code>使用  <code>Valine</code>）</li>
+<li>集成了<a href="http://busuanzi.ibruce.info/">不蒜子</a>、百度统计、Google Analytics、CNZZ 等统计功能</li>
+<li>支持 Github Ribbons</li>
+</ol>
+<h1 id="3-主题配置"><a href="#3-主题配置" class="headerlink" title="3.主题配置"></a>3.主题配置</h1><p>以下是 ayer 主题目录下的 <code>_config.yml</code> 文件配置，</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 侧边栏菜单</span><br><span class="line">menu:</span><br><span class="line">  主页: /</span><br><span class="line">  归档: /archives</span><br><span class="line">  分类: /categories</span><br><span class="line">  标签: /tags</span><br><span class="line">  摄影: http://shenyu-vip.lofter.com</span><br><span class="line">  旅行: /tags/旅行/</span><br><span class="line">  关于我: /2019/about</span><br><span class="line"></span><br><span class="line"># 站点次标题和打字动效</span><br><span class="line"># https://github.com/mattboldt/typed.js</span><br><span class="line">subtitle:</span><br><span class="line">  enable: true # 是否开启动效</span><br><span class="line">  text: 面朝大海，春暖花开 # 显示的文字</span><br><span class="line">  text2: 愿你一生努力，一生被爱 # 滚动播放，如果不需要可以留空</span><br><span class="line">  text3: 想要的都拥有，得不到的都释怀 # 最多支持三段文字</span><br><span class="line">  startDelay: 0 # 延迟时间</span><br><span class="line">  typeSpeed: 200 # 打字速度</span><br><span class="line">  loop: true # 是否循环</span><br><span class="line">  backSpeed: 100 # 回退速度</span><br><span class="line">  showCursor: true # 是否显示光标</span><br><span class="line"></span><br><span class="line"># 网站图标和侧边栏logo</span><br><span class="line">favicon: /favicon.ico</span><br><span class="line">logo: /images/ayer-side.svg</span><br><span class="line"></span><br><span class="line"># 封面配置</span><br><span class="line"># enable-是否启用封面；path-封面背景图；logo-封面logo</span><br><span class="line">cover:</span><br><span class="line">  enable: true</span><br><span class="line">  path: /images/cover1.jpg # /source/images目录下附送多张精美壁纸，可任意更换</span><br><span class="line">  logo: /images/ayer.svg # 如果不要直接设置成false</span><br><span class="line"></span><br><span class="line"># 页面顶部进度条</span><br><span class="line">progressBar: true</span><br><span class="line"></span><br><span class="line"># 告示板模块</span><br><span class="line">broadcast:</span><br><span class="line">  enable: true # true开启，false关闭</span><br><span class="line">  type: 2 # 1：自定义输入，2：一言api(https://hitokoto.cn/)</span><br><span class="line">  text: 一个安静优雅的hexo主题，快速且响应式。 # type为1时有效</span><br><span class="line"></span><br><span class="line"># 文章配置</span><br><span class="line"># 文章太长，截断按钮文字(在需要截断的行增加此标记：&lt;!--more--&gt;)</span><br><span class="line">excerpt_link: 阅读更多...</span><br><span class="line"># 如果你嫌每篇文章手动加more标记比较麻烦，又不想在首页全文显示，可以把excerpt_all设置成true，这样首页只会显示文章归档</span><br><span class="line">excerpt_all: false</span><br><span class="line"></span><br><span class="line"># 是否开启代码复制按钮</span><br><span class="line">copy_btn: true</span><br><span class="line"># 是否开启文章分享按钮</span><br><span class="line">share_enable: true</span><br><span class="line"># 国内的社交平台(If you are not in China, maybe you prefer to set:false)</span><br><span class="line">share_china: true</span><br><span class="line"># 文章分享文字</span><br><span class="line">share_text: 分享</span><br><span class="line"></span><br><span class="line"># 分页文字</span><br><span class="line">nav_text:</span><br><span class="line">  page_prev: 上一页</span><br><span class="line">  page_next: 下一页</span><br><span class="line">  post_prev: 上一篇</span><br><span class="line">  post_next: 下一篇</span><br><span class="line"></span><br><span class="line"># 文章页是否显示目录</span><br><span class="line">toc: true</span><br><span class="line"></span><br><span class="line"># 文章中的图片是否支持点击放大</span><br><span class="line">image_viewer: true</span><br><span class="line"></span><br><span class="line"># https://github.com/willin/hexo-wordcount</span><br><span class="line"># 是否开启字数统计(关闭请设置enable为false)</span><br><span class="line"># 也可以单独在md文件里Front-matter设置`no_word_count: true`属性，来自定义关闭字数统计</span><br><span class="line">word_count:</span><br><span class="line">  enable: true</span><br><span class="line">  # 只在文章详情显示(不在首页显示)</span><br><span class="line">  only_article_visit: true</span><br><span class="line"></span><br><span class="line"># 打赏</span><br><span class="line"># 打赏type设定：0-关闭打赏； 1-文章对应的md文件里有reward:true属性，才有打赏； 2-默认开启所有文章均有打赏，如果有些文章你不需要，请在文章对应的md文件里设置no_reward:true</span><br><span class="line">reward_type: 2</span><br><span class="line"># 打赏wording</span><br><span class="line">reward_wording: &quot;请我喝杯咖啡吧~&quot;</span><br><span class="line"># 支付宝二维码图片地址，跟你设置logo的方式一样。比如：/images/alipay.jpg</span><br><span class="line">alipay: /images/alipay.jpg</span><br><span class="line"># 微信二维码图片地址</span><br><span class="line">weixin: /images/wechat.jpg</span><br><span class="line"></span><br><span class="line"># 版权声明</span><br><span class="line"># 版权声明type设定：0-关闭版权声明； 1-文章对应的md文件里有copyright: true属性，才有版权声明； 2-所有文章均有版权声明</span><br><span class="line">copyright_type: 2</span><br><span class="line"></span><br><span class="line"># 是否启用搜索</span><br><span class="line">search: true</span><br><span class="line"></span><br><span class="line"># RSS订阅(先安装hexo-generator-feed插件，再去博客根目录config进行配置)</span><br><span class="line"># 不想显示可以直接留空</span><br><span class="line">rss: /atom.xml</span><br><span class="line"></span><br><span class="line"># 是否启用黑夜模式开关</span><br><span class="line">darkmode: true</span><br><span class="line"></span><br><span class="line"># 动态背景效果: 0-关闭，1-动态线条(跟随鼠标)</span><br><span class="line">canvas_bg: 0</span><br><span class="line"></span><br><span class="line"># 自定义鼠标样式，直接替换/images/mouse.cur文件</span><br><span class="line">mouse:</span><br><span class="line">  enable: false</span><br><span class="line">  path: /images/mouse.cur</span><br><span class="line"></span><br><span class="line"># 鼠标点击效果：0-关闭，1-爱心，2-爆炸烟花，3-粒子烟花</span><br><span class="line">click_effect: 0</span><br><span class="line"></span><br><span class="line"># 页面宽度自定义（不建议修改，可能造成布局混乱），article_width文章宽度，sidebar_width侧边栏宽度</span><br><span class="line">layout:</span><br><span class="line">  article_width: 80rem</span><br><span class="line">  sidebar_width: 8rem</span><br><span class="line"></span><br><span class="line"># GitHub Ribbons-封面右上角的forkme，换样式直接在source/images目录下替换forkme图片</span><br><span class="line">github:</span><br><span class="line">  # (关闭请设置为false)</span><br><span class="line">  enable: true</span><br><span class="line">  url: https://github.com/Shen-Yu/hexo-theme-ayer</span><br><span class="line"></span><br><span class="line"># 网易云音乐插件</span><br><span class="line">music:</span><br><span class="line">  enable: false</span><br><span class="line">  # 播放器尺寸类型(1：小尺寸、2：大尺寸)</span><br><span class="line">  type: 1</span><br><span class="line">  id: 22707008 # 网易云分享的音乐ID(更换音乐请更改此配置项)</span><br><span class="line">  autoPlay: true # 是否开启自动播放</span><br><span class="line"></span><br><span class="line"># 访问量统计(不蒜子)</span><br><span class="line">busuanzi:</span><br><span class="line">  enable: true</span><br><span class="line"></span><br><span class="line"># 友盟cnzz统计(url填js代码src链接)</span><br><span class="line">cnzz:</span><br><span class="line">  enable: true</span><br><span class="line">  url: #</span><br><span class="line"></span><br><span class="line"># Google Analytics</span><br><span class="line">google_analytics: &quot;&quot;</span><br><span class="line"># 百度统计</span><br><span class="line">baidu_analytics: &quot;&quot;</span><br><span class="line"></span><br><span class="line"># Mathjax数学公式</span><br><span class="line">mathjax: true</span><br><span class="line"></span><br><span class="line"># Katex数学公式(allpost设置为false时只有头部设置math:true的文章才开启)</span><br><span class="line"># 需要更换hexo渲染器，npm un hexo-renderer-marked -S &amp;&amp; npm i hexo-renderer-markdown-it-katex -S</span><br><span class="line">katex:</span><br><span class="line">  enable: false # true</span><br><span class="line">  allpost: true</span><br><span class="line">  copy_tex: false</span><br><span class="line"></span><br><span class="line"># mermaid流程图 三个选项缺一不可(https://mermaid-js.github.io/mermaid/#/)</span><br><span class="line">mermaid:</span><br><span class="line">  enable: false</span><br><span class="line">  cdn: https://cdn.jsdelivr.net/npm/mermaid@8.9.2/dist/mermaid.min.js</span><br><span class="line">  theme: forest</span><br><span class="line"></span><br><span class="line"># 网站成立年份(默认为 2019，若填入年份小于当前年份，则显示为 2018-2019 类似的格式)</span><br><span class="line">since: 2019</span><br><span class="line"></span><br><span class="line"># ICP备案信息尾部显示</span><br><span class="line">icp:</span><br><span class="line">  enable: false</span><br><span class="line">  url: &quot;http://www.beian.miit.gov.cn/&quot; # 备案链接</span><br><span class="line">  text: &quot;浙ICP备88888888&quot; # 备案信息</span><br><span class="line"># 公安备案信息尾部显示</span><br><span class="line">gongan:</span><br><span class="line">  enable: true</span><br><span class="line">  img: /images/beian.png #公安备案图片</span><br><span class="line">  url: &quot;http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=01234567890123&quot; #公安备案链接</span><br><span class="line">  text: &quot;浙公网安备01234567890123号&quot; #公安备案信息</span><br><span class="line"></span><br><span class="line"># 友情链接</span><br><span class="line">friends_link:</span><br><span class="line">  Ayer主题: #网站名称</span><br><span class="line">    #网站地址</span><br><span class="line">    url: https://github.com/Shen-Yu/hexo-theme-ayer</span><br><span class="line">    #网站图片(可忽略不写)</span><br><span class="line">    img: /images/ayer.png</span><br><span class="line">  GitHub:</span><br><span class="line">    url: https://github.com/Shen-Yu</span><br><span class="line">    img: https://i.loli.net/2020/09/07/indb4PRYDA98EkN.png</span><br><span class="line">  码云:</span><br><span class="line">    url: https://gitee.com/shen-yu</span><br><span class="line">    img: https://i.loli.net/2020/09/07/K3AqO7h6krQFlRX.png</span><br><span class="line">  Hexo官网:</span><br><span class="line">    url: https://hexo.io</span><br><span class="line">    img: https://i.loli.net/2020/09/07/UYGzjo7h68CRWny.png</span><br><span class="line">  Hexo图表插件:</span><br><span class="line">    url: https://github.com/Shen-Yu/hexo-tag-chart</span><br><span class="line">    img: https://i.loli.net/2020/09/07/GIXBYE5SoylhR1r.png</span><br><span class="line"></span><br><span class="line"># 评论：1、Valine(推荐)；2、Gitalk；3、Twikoo; 4.MiniValine</span><br><span class="line"></span><br><span class="line"># 1、Valine[一款快速、简洁且高效的无后端评论系统](https://github.com/xCss/Valine)</span><br><span class="line"># 启用Valine必须先创建leancloud应用， 获取 id|key 填入即可</span><br><span class="line">leancloud:</span><br><span class="line">  enable: true</span><br><span class="line">  app_id: #</span><br><span class="line">  app_key: #</span><br><span class="line"># Valine配置</span><br><span class="line">valine:</span><br><span class="line">  enable: true # 是否启用</span><br><span class="line">  avatar: monsterid # 头像样式(https://valine.js.org/avatar.html)</span><br><span class="line">  placeholder: 给我的文章加点评论吧~ # placeholder</span><br><span class="line"></span><br><span class="line"># 2、Gitalk(https://github.com/gitalk/gitalk)</span><br><span class="line">gitalk:</span><br><span class="line">  enable: false # true</span><br><span class="line">  clientID: # GitHub Application Client ID</span><br><span class="line">  clientSecret: # Client Secret</span><br><span class="line">  repo: # Repository name</span><br><span class="line">  owner: # GitHub ID</span><br><span class="line">  admin: # GitHub ID</span><br><span class="line"></span><br><span class="line"># 3、Twikoo(https://github.com/imaegoo/twikoo)</span><br><span class="line">twikoo:</span><br><span class="line">  enable: false</span><br><span class="line">  envId: #</span><br><span class="line"></span><br><span class="line"># 4、MiniValine</span><br><span class="line"># See: https://github.com/MiniValine/MiniValine</span><br><span class="line">minivaline:</span><br><span class="line">  enable: false</span><br><span class="line">  serverURL: https://minivaline.your-domain.com</span><br><span class="line"></span><br><span class="line"># 首页广告配置</span><br><span class="line"># 可以根据需要自行增加ad_3，ad_4...，留空则不显示</span><br><span class="line">ads:</span><br><span class="line">  ad_1:</span><br><span class="line">    title: vultr优惠vps</span><br><span class="line">    img: https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/vultr.png</span><br><span class="line">    url: https://www.vultr.com/?ref=8630075</span><br><span class="line">    width: 300</span><br><span class="line">  ad_2:</span><br><span class="line">    title: 云服务器全球购低至2折</span><br><span class="line">    img: https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/ad_2.jpg</span><br><span class="line">    url: https://curl.qcloud.com/kvO7hb43</span><br><span class="line">    width: 300</span><br><span class="line"></span><br><span class="line"># 网站开启加密访问，密码可设置任何字符</span><br><span class="line">lock:</span><br><span class="line">  enable: false</span><br><span class="line">  password: 123456</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-插件-可选"><a href="#4-插件-可选" class="headerlink" title="4 插件(可选)"></a>4 插件(可选)</h2><ul>
+<li><a href="https://github.com/netcan/hexo-generator-index-pin-top">hexo-generator-index-pin-top</a> 用于文章置顶</li>
+<li><a href="https://github.com/MikeCoder/hexo-blog-encrypt/blob/master/ReadMe.zh.md">hexo-blog-encrypt</a> 用于文章加密</li>
+<li><a href="https://github.com/MoePlayer/hexo-tag-aplayer/blob/master/docs/README-zh_cn.md">hexo-tag-aplayer</a> 用于播放音乐</li>
+<li><a href="https://github.com/MoePlayer/hexo-tag-dplayer">hexo-tag-dplayer</a> 用于播放视频</li>
+<li><a href="https://github.com/EYHN/hexo-helper-live2d/blob/master/README.zh-CN.md">hexo-helper-live2d</a> 二次元看板娘</li>
+</ul>
+<h2 id="5-分类"><a href="#5-分类" class="headerlink" title="5.分类"></a>5.分类</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo new page categories</span><br></pre></td></tr></table></figure>
+
+<p>然后将以下复制到 &#x2F;source&#x2F;categories&#x2F;index.md 文件</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: categories</span><br><span class="line">type: &quot;categories&quot;</span><br><span class="line">layout: &quot;categories&quot;</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+<h2 id="6-标签"><a href="#6-标签" class="headerlink" title="6.标签"></a>6.标签</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo new page tags</span><br></pre></td></tr></table></figure>
+
+<p>配置同分类一样</p>
+<h2 id="7-友情链接"><a href="#7-友情链接" class="headerlink" title="7. 友情链接"></a>7. 友情链接</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo new page friends</span><br></pre></td></tr></table></figure>
+
+<p>然后将以下复制到 &#x2F;source&#x2F;friends&#x2F;index.md 文件</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: friends</span><br><span class="line">type: friends</span><br><span class="line">layout: &quot;friends&quot;</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+<p>然后在 ayer 主题目录下的 <code>_config.yml</code> 中自定义 <code>friends_link</code> 配置项即可</p>
+<h2 id="8-相册"><a href="#8-相册" class="headerlink" title="8.相册"></a>8.相册</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo new page photos</span><br></pre></td></tr></table></figure>
+
+<p>然后将以下复制到 &#x2F;source&#x2F;photos&#x2F;index.md 文件，<code>img_url</code> 替换成图片路径，<code>caption</code> 替换成图片名称</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: Gallery</span><br><span class="line"></span><br><span class="line">albums: [[&quot;img_url&quot;, &quot;img_caption&quot;], [&quot;img_url&quot;, &quot;img_caption&quot;]]</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+<h2 id="文章目录"><a href="#文章目录" class="headerlink" title="文章目录"></a>文章目录</h2><p>用 Tocbot 解析文章标题并生成目录</p>
+<ul>
+<li>将以下配置复制到你 ayer 主题目录下的 <code>_config.yml</code> 里：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Toc</span><br><span class="line">toc: true</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>当然你可能并不想所有文章都生成悬浮目录，你可以在文章顶部的配置中加一行来进行关闭：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">no_toc: true</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>hexo</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>c++ 环境搭建</title>
+    <url>/2023/09/02/c-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="1-课程所需运行环境配置"><a href="#1-课程所需运行环境配置" class="headerlink" title="1 课程所需运行环境配置"></a>1 课程所需运行环境配置</h1><p>​		ubuntu + windows双系统 4070ti 13900K 32G </p>
+<h1 id="2-VS-Code配置"><a href="#2-VS-Code配置" class="headerlink" title="2 VS Code配置"></a>2 VS Code配置</h1><h2 id="2-1-安装vscode"><a href="#2-1-安装vscode" class="headerlink" title="2.1 安装vscode"></a>2.1 安装vscode</h2><h2 id="2-2-安装插件"><a href="#2-2-安装插件" class="headerlink" title="2.2 安装插件"></a>2.2 安装插件</h2><ol>
+<li>chinese</li>
+<li>remote ssh</li>
+<li>c++</li>
+<li>python</li>
+<li>tabnine  github.copilot</li>
+<li>run</li>
+<li>C&#x2F;C++ Extension Pack</li>
+</ol>
+<h1 id="3-下载MinGw编译器"><a href="#3-下载MinGw编译器" class="headerlink" title="3 下载MinGw编译器"></a>3 下载MinGw编译器</h1><p><a href="https://sourceforge.net/projects/mingw-w64/files/mingw-w64/mingw-w64-release/">MinGw官网</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/545908287">知乎配置教程</a></p>
+<h2 id="4-配置C-C"><a href="#4-配置C-C" class="headerlink" title="4.配置C\C++"></a>4.配置C\C++</h2><p>重启vscode就好了</p>
+]]></content>
+      <categories>
+        <category>c++</category>
+      </categories>
+      <tags>
+        <tag>c++</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>markdown 语法学习</title>
+    <url>/2023/09/02/markdown-%E8%AF%AD%E6%B3%95%E5%AD%A6%E4%B9%A0/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="第1节-标题"><a href="#第1节-标题" class="headerlink" title="第1节 标题"></a>第1节 标题</h1><p>markdown 里面总共有六级标题，可以使用#号的多少来来引用，现在使用的是typora也可以直接使用ctrl+1-6的快捷按键来进行设置</p>
+<h1 id="第2节-列表"><a href="#第2节-列表" class="headerlink" title="第2节 列表"></a>第2节 列表</h1><h2 id="2-1-有序列表"><a href="#2-1-有序列表" class="headerlink" title="2.1 有序列表"></a>2.1 有序列表</h2><p>​	顾名思义，有序列表就是有小标号的列表，同样也是两种方式英⽂输⼊法下，数字后⾯加⼀点，然后空格即可，或者使用快捷按键ctrl + shift + [即可</p>
+<p>1. </p>
+<p>1. </p>
+<h2 id="2-2-无序列表"><a href="#2-2-无序列表" class="headerlink" title="2.2 无序列表"></a>2.2 无序列表</h2><p>​	跟上面的有序列表相反，无序列表就是没有标号，有四种方法、</p>
+<ul>
+<li>aaa - aaa</li>
+</ul>
+<ul>
+<li>aaa + aaa</li>
+</ul>
+<ul>
+<li>aaa *aaa</li>
+</ul>
+<ul>
+<li>aaa ctrl+shift+]</li>
+</ul>
+<h1 id="第3节-字体标记"><a href="#第3节-字体标记" class="headerlink" title="第3节 字体标记"></a>第3节 字体标记</h1><h2 id="3-1-加粗"><a href="#3-1-加粗" class="headerlink" title="3.1 加粗"></a>3.1 加粗</h2><p><strong>加粗</strong> **   内容**在typora中可以使用ctrl+b</p>
+<h2 id="3-2-删除"><a href="#3-2-删除" class="headerlink" title="3.2 删除"></a>3.2 删除</h2><p><del>删除</del> ~~ 内容~~</p>
+<h2 id="3-3-斜体"><a href="#3-3-斜体" class="headerlink" title="3.3 斜体"></a>3.3 斜体</h2><p><em>斜体</em> * 内容 *</p>
+<h2 id="3-4-高亮"><a href="#3-4-高亮" class="headerlink" title="3.4 高亮"></a>3.4 高亮</h2><p>&#x3D;&#x3D;高亮&#x3D;&#x3D; &#x3D;&#x3D;内容  &#x3D;&#x3D;需要打开pytora的高亮功能之后才行</p>
+<h1 id="第4节-段落相关"><a href="#第4节-段落相关" class="headerlink" title="第4节 段落相关"></a>第4节 段落相关</h1><h2 id="4-1-引用"><a href="#4-1-引用" class="headerlink" title="4.1 引用"></a>4.1 引用</h2><blockquote>
+<p>这是一段引用 &gt; 大于号加内容引用</p>
+</blockquote>
+<h2 id="4-2-分割线"><a href="#4-2-分割线" class="headerlink" title="4.2 分割线"></a>4.2 分割线</h2><hr>
+<p>三个横杠或者更多的横杠表示分割线</p>
+<h1 id="第5节-代码"><a href="#第5节-代码" class="headerlink" title="第5节 代码"></a>第5节 代码</h1><h2 id="5-1-行内代码"><a href="#5-1-行内代码" class="headerlink" title="5.1 行内代码"></a>5.1 行内代码</h2><p><code>这是一个行内代码</code> 1旁边那个特殊按键</p>
+<h2 id="5-2-代码块"><a href="#5-2-代码块" class="headerlink" title="5.2 代码块"></a>5.2 代码块</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;hello world&quot;</span>)</span><br><span class="line">    三个```然后回车即可，然后在右下角的选择框中进行代码的选择</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="第6节-超链接"><a href="#第6节-超链接" class="headerlink" title="第6节 超链接"></a>第6节 超链接</h1><blockquote>
+<p>格式 ：[⽹址标题] [变量01]</p>
+</blockquote>
+<p><a href="www.baidu.com">百度</a></p>
+<ul>
+<li><p>在⽂稿起草阶段，还没确定具体⽹址，但可以先给出⽹址标题</p>
+</li>
+<li><p>同⼀篇⽂章需要重复出现同⼀个⽹址时</p>
+</li>
+</ul>
+<h1 id="第7节-脚注"><a href="#第7节-脚注" class="headerlink" title="第7节 脚注"></a>第7节 脚注</h1><p>这是一个脚注<a href="%E8%BF%99%E4%B8%AA%E6%98%AF%E6%94%BE%E5%9C%A8%E6%96%87%E7%AB%A0%E5%B0%BE%E9%83%A8%E7%9A%84%EF%BC%8C%E7%94%A8%E4%BA%8E%E6%89%BF%E6%8E%A5%E4%B8%8A%E9%9D%A2%E7%9A%84%E8%84%9A%E6%B3%A8">^01</a></p>
+<h1 id="第8节-图片"><a href="#第8节-图片" class="headerlink" title="第8节 图片"></a>第8节 图片</h1><p><img src="/"></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">基本格式：![](图⽚链接)</span><br></pre></td></tr></table></figure>
+
+<p><img src="D:\hexo\blog\source_posts\image-20230902075316489.png" alt="image-20230902075316489"></p>
+<p>图⽚链接可以是本地链接，也可以是在线链接</p>
+<p>但这个图片是本地路径，很有问题，所以你可能需要一个图床，用来无视地点，目前先不学呢，具体链接如下所示：</p>
+<p><a href="https://eryinote.com/post/105">图床搭建教程</a></p>
+<h1 id="第9节-表格"><a href="#第9节-表格" class="headerlink" title="第9节 表格"></a>第9节 表格</h1><p>在typora中可以使用快捷按键进行表格的创建  ctrl+t</p>
+<p>通用的语法为</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">| 表头 | 表头 |</span><br><span class="line">| ---- | ---- |</span><br><span class="line">| 单元格 | 单元格 |</span><br><span class="line">| 单元格 | 单元格 |</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>markdown</category>
+      </categories>
+      <tags>
+        <tag>markdown</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>typora简单使用</title>
+    <url>/2023/09/01/%E4%BB%80%E4%B9%88%E6%98%AFmarkdown/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>MarkDown是什么<br>Markdown 是一种轻量级标记语言，它允许人们使用易读易写的纯文本格式编写文档。</p>
+<p>Markdown 语言在 2004 由约翰·格鲁伯（英语：John Gruber）创建。</p>
+<p>Markdown 编写的文档可以导出 HTML 、Word、图像、PDF、Epub 等多种格式的文档。</p>
+<p>Markdown 编写的文档后缀为 .md, .markdown。</p>
+<h1 id="1-如何自动生成目录"><a href="#1-如何自动生成目录" class="headerlink" title="1.如何自动生成目录"></a>1.如何自动生成目录</h1><p>点击【视图】——【大纲】</p>
+<p>说明：但是此步骤生成的目录，并不是折叠的目录，折叠起来会更美观一些</p>
+<p>设置折叠目录</p>
+<p>点击【文件】——【偏好设置】——【外观】——侧边栏选择打钩，此时已经折叠成功</p>
+<h1 id="2-快捷键"><a href="#2-快捷键" class="headerlink" title="2.快捷键"></a>2.快捷键</h1><p> Ctrl+1 ——设置一级标题</p>
+<p>Ctrl+2 ——设置二级标题</p>
+<p>Ctrl+3 ——设置三级标题</p>
+<p>Ctrl+4 ——设置四级标题</p>
+<p>Ctrl+5 ——设置五级标题</p>
+<p>Ctrl+6 ——设置六级标题</p>
+<p>空格 ——引用</p>
+<p>回车、shift + tab ——退出引用</p>
+<p>Ctrl + Shift + ] ——无序列表</p>
+<p>Ctrl + Shift + [ ——有序列</p>
+<p>Ctrl + Shift + ] 、tab——子列表</p>
+<p>Shift + tab ——返回上一级列表、</p>
+<p>Ctrl + B —— 加粗</p>
+<p>Ctrl + T —— 表格</p>
+<p>~ ~ 要删除的内容 ~ ~ ——删除线</p>
+<h1 id="3-创建链接"><a href="#3-创建链接" class="headerlink" title="3.创建链接"></a>3.创建链接</h1><p>格式为[] ()，其中[]内为要展示的内容，()为链接。</p>
+<h1 id="4-图片路径管理"><a href="#4-图片路径管理" class="headerlink" title="4.图片路径管理"></a>4.图片路径管理</h1><p>Typora默认将所有文档的图片都放在一起，但是我们更想每一个文档都有属于自己的一个文件夹，文档中的图片也最好可以自动保存在该文件夹内。解决方法如下：</p>
+<p>点击【文件】——【偏好设置】——【图像】——将该界面内容设置如下:</p>
+<p> 此时，该文档所在文件夹中会自动生成一个img文件，该路径为本文档中的图片路径。</p>
+<p><img src="D:\hexo\blog\source_posts\image-20230902072149501.png"></p>
+<h1 id="5-划重点–高亮"><a href="#5-划重点–高亮" class="headerlink" title="5.划重点–高亮"></a>5.划重点–高亮</h1><p>高亮</p>
+<p>点击【文件】——【偏好设置】——【Markdown】——高亮处打钩</p>
+<p>编辑高亮内容格式如下：</p>
+<p>&#x3D;&#x3D; 内容&#x3D;&#x3D; —— 高亮</p>
+<p>&#x3D;&#x3D; chai&#x3D;&#x3D;</p>
+<p>&#x3D;&#x3D;cccc&#x3D;&#x3D; </p>
+<p>&#x3D;&#x3D; key&#x3D;&#x3D;</p>
+<p> &#x3D;&#x3D;内容&#x3D;&#x3D; </p>
+<p><strong>cha</strong></p>
+<p>重启Typora，此时内容处会变成高亮的效果.</p>
+<h1 id="6-导入代码块"><a href="#6-导入代码块" class="headerlink" title="6.导入代码块"></a>6.导入代码块</h1><p><strong>~~~</strong> ——代码块，点击代码框可选择语言</p>
+<h1 id="7-不使用自动拼写检查"><a href="#7-不使用自动拼写检查" class="headerlink" title="7.不使用自动拼写检查"></a>7.不使用自动拼写检查</h1><p>点击右下角[【Spell Check】勾选【不使用拼写检查】</p>
+<h1 id="8设置自动保存"><a href="#8设置自动保存" class="headerlink" title="8设置自动保存"></a>8设置自动保存</h1><p>其实Typora 对文件修改之后并不能自动保存，解决方法：</p>
+<p>点击【文件】——【偏好设置】——【通用】——自动保存处打钩</p>
+]]></content>
+      <categories>
+        <category>markdown</category>
+      </categories>
+      <tags>
+        <tag>markdown</tag>
       </tags>
   </entry>
 </search>
