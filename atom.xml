@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2023-09-03T09:46:31.212Z</updated>
+  <updated>2023-09-03T10:37:37.545Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>cmake 基础课</title>
+    <link href="http://example.com/2023/09/03/cmake-%E5%9F%BA%E7%A1%80%E8%AF%BE/"/>
+    <id>http://example.com/2023/09/03/cmake-%E5%9F%BA%E7%A1%80%E8%AF%BE/</id>
+    <published>2023-09-03T09:50:19.000Z</published>
+    <updated>2023-09-03T10:37:37.545Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;&#92;assets&#92;css&#92;APlayer.min.css&quot;&gt;&lt;script src=&quot;&#92;assets&#92;js&#92;APlayer.min.js&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="cmake" scheme="http://example.com/categories/cmake/"/>
+    
+    
+    <category term="cmake" scheme="http://example.com/tags/cmake/"/>
+    
+  </entry>
   
   <entry>
     <title>c++进阶语法 oop 智能指针 STL</title>
