@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+  
+
+    <head>
+      <meta charset="utf-8" />
+        
+      <meta name="description" content="永远年轻，永远热泪盈眶" />
+      
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>c++进阶语法 oop 智能指针 STL |  热爱学习的未来酱</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      
+<link rel="stylesheet" href="/css/fonts/remixicon.css">
+
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    <link rel="alternate" href="/atom.xml" title="热爱学习的未来酱" type="application/atom+xml">
+</head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+      <canvas width="1777" height="841"
+        style="position: fixed; left: 0px; top: 0px; z-index: 99999; pointer-events: none;"></canvas>
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-c-进阶语法-oop-智能指针-STL"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  c++进阶语法 oop 智能指针 STL
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/09/03/c-%E8%BF%9B%E9%98%B6%E8%AF%AD%E6%B3%95-oop-%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88-STL/" class="article-date">
+  <time datetime="2023-09-03T05:42:43.000Z" itemprop="datePublished">2023-09-03</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/c/">c++</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">4.5k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">17 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="1-OOP面向对象开发"><a href="#1-OOP面向对象开发" class="headerlink" title="1 OOP面向对象开发"></a>1 OOP面向对象开发</h1><h2 id="1-1-类-class-和对象-objects"><a href="#1-1-类-class-和对象-objects" class="headerlink" title="1.1 类(class)和对象(objects)"></a>1.1 类(class)和对象(objects)</h2><pre><code>类(classes)和对象(objects)
+</code></pre>
+<p>C++类(classes)</p>
+<ul>
+<li>创建对象用的蓝图(blueprint)</li>
+<li>用户自定义的数据类型</li>
+<li>有成员属性(data)和成员方法(methods)</li>
+<li>可以隐藏属性和方法(private)</li>
+<li>可以提供公共接口(public)</li>
+<li>示例:Account,Student,std:vector, std:string</li>
+</ul>
+<p>C++对象(objects)</p>
+<ul>
+<li>由类创建而来</li>
+<li>表示类的一个具体的实例(lnstance)</li>
+<li>可以有很多个实例，每个都有独立的身份·每个对象都可以使用类中定义的方法</li>
+</ul>
+<p>Account对象示例</p>
+<ul>
+<li>Jobs、Alice的apunt是Account类的实例</li>
+<li>每个实例都有它的余额、可以提现、存钱</li>
+</ul>
+<p>声明一个类：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Account</span> &#123;</span><br><span class="line">    <span class="comment">// 属性</span></span><br><span class="line">    std::string name;</span><br><span class="line">    <span class="type">double</span> balance;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 方法</span></span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">deposit</span><span class="params">(<span class="type">double</span> amount)</span></span>; <span class="comment">// 存款</span></span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">withdraw</span><span class="params">(<span class="type">double</span> amount)</span></span>; <span class="comment">// 取款</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>创建类的对象：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Account jobs_account;</span><br><span class="line">Account alice_account;</span><br><span class="line">Account* mary_account = <span class="keyword">new</span> <span class="built_in">Account</span>();</span><br><span class="line"></span><br><span class="line"><span class="keyword">delete</span> mary_account;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>示例1：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Account</span> </span><br><span class="line">&#123;</span><br><span class="line">    string name &#123;<span class="string">&quot;None&quot;</span>&#125;;</span><br><span class="line">    <span class="type">double</span> balance &#123;<span class="number">0.0</span>&#125;;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">deposit</span><span class="params">(<span class="type">double</span> amount)</span></span>;</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">withdraw</span><span class="params">(<span class="type">double</span> amount)</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Account a;</span><br><span class="line">    Account b;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<p>获取类的属性或者方法</p>
+<p>使用点操作符</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Account jobs_account;</span><br><span class="line">jobs_account.balance;</span><br><span class="line">jobs_account.<span class="built_in">deposit</span>( <span class="number">10.00</span>);</span><br></pre></td></tr></table></figure>
+
+<p>如果是一个指向对象的指针，可以解引用或者使用箭头操作符</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Account* alice_account = <span class="keyword">new</span> <span class="built_in">Account</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 解引用指针并访问成员</span></span><br><span class="line">(*alice_account).balance; </span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用指针访问成员</span></span><br><span class="line">alice_account-&gt;<span class="built_in">deposit</span>(<span class="number">100.0</span>);</span><br><span class="line">alice_account-&gt;balance;</span><br><span class="line"></span><br><span class="line"><span class="keyword">delete</span> alice_account;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="1-2-public、private、protected访问权限"><a href="#1-2-public、private、protected访问权限" class="headerlink" title="1.2 public、private、protected访问权限"></a>1.2 public、private、protected访问权限</h2><p>public</p>
+<p>可以被任何实体访问   </p>
+<hr>
+<p>private<br>只能被本类的方法访问</p>
+<hr>
+<p>protected</p>
+<p>可以被本类和子类(继承)的方法访问\</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Account</span> &#123;</span><br><span class="line">    <span class="comment">// 属性</span></span><br><span class="line">    std::string name;</span><br><span class="line">    <span class="type">double</span> balance;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 方法</span></span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">deposit</span><span class="params">(<span class="type">double</span> amount)</span></span>; <span class="comment">// 存款</span></span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">withdraw</span><span class="params">(<span class="type">double</span> amount)</span></span>; <span class="comment">// 取款</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>在类中实现完整的成员方法</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Account</span> &#123;</span><br><span class="line">    <span class="comment">// 属性</span></span><br><span class="line">    <span class="type">double</span> balance &#123;<span class="number">0.0</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 方法</span></span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">setBalance</span><span class="params">(<span class="type">double</span> amount)</span> </span>&#123;</span><br><span class="line">        balance = amount;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">double</span> <span class="title">getBalance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> balance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>在类外面实现需要特殊定义：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Account</span> &#123;</span><br><span class="line">    <span class="comment">// 属性</span></span><br><span class="line">    <span class="type">double</span> balance &#123;<span class="number">0.0</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 方法</span></span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">setBalance</span><span class="params">(<span class="type">double</span> amount)</span></span>;</span><br><span class="line">    <span class="function"><span class="type">double</span> <span class="title">getBalance</span><span class="params">()</span></span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">Account::setBalance</span><span class="params">(<span class="type">double</span> amount)</span> </span>&#123;</span><br><span class="line">    balance = amount;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">double</span> <span class="title">Account::getBalance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> balance;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="1-3-构造函数-constructor"><a href="#1-3-构造函数-constructor" class="headerlink" title="1.3 构造函数(constructor)"></a>1.3 构造函数(constructor)</h2><ul>
+<li>特殊的成员方法</li>
+<li>对象创建的时候自动调用</li>
+<li>适用于实例参数初始化</li>
+<li>函数名和类的名称一致</li>
+<li>无需设置返回类型</li>
+<li>可以被重载(overload)</li>
+</ul>
+<h2 id="1-4-析构函数-destructor"><a href="#1-4-析构函数-destructor" class="headerlink" title="1.4 析构函数(destructor)"></a>1.4 析构函数(destructor)</h2><ul>
+<li>特殊的成员方法</li>
+<li>函数名和类的名称一致，前面跟着一个~波浪符号</li>
+<li>对象销毁的时候自动调用</li>
+<li>没有参数，没有返回类型</li>
+<li>只有一个析构函数(不能重载)</li>
+<li>适用于释放内存等资源</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Account</span> &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="comment">// 属性</span></span><br><span class="line">    std::string name&#123;<span class="string">&quot;account&quot;</span>&#125;;</span><br><span class="line">    <span class="type">double</span> balance&#123;<span class="number">0.0</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 构造函数</span></span><br><span class="line">    <span class="built_in">Account</span>() = <span class="keyword">default</span>;</span><br><span class="line">    <span class="built_in">Account</span>(std::string name);</span><br><span class="line">    <span class="built_in">Account</span>(<span class="type">double</span> balance);</span><br><span class="line">    <span class="built_in">Account</span>(std::string name, <span class="type">double</span> balance);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 析构函数</span></span><br><span class="line">    ~<span class="built_in">Account</span>();</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>​		</p>
+<h2 id="1-5-构造函数初始化列表"><a href="#1-5-构造函数初始化列表" class="headerlink" title="1.5 构造函数初始化列表"></a>1.5 构造函数初始化列表</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Account</span> &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="comment">// 属性</span></span><br><span class="line">    std::string name;</span><br><span class="line">    <span class="type">double</span> balance;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 构造函数，使用构造函数内部初始化参数</span></span><br><span class="line">    <span class="built_in">Account</span>(std::string name, <span class="type">double</span> balance) &#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt;name = name;</span><br><span class="line">        <span class="keyword">this</span>-&gt;balance = balance;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 构造函数，使用初始化列表初始化参数</span></span><br><span class="line">    <span class="built_in">Account</span>(std::string name, <span class="type">double</span> balance)</span><br><span class="line">        : name&#123;name&#125;, balance&#123;balance&#125; &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="1-6-代理构造函数"><a href="#1-6-代理构造函数" class="headerlink" title="1.6 代理构造函数"></a>1.6 代理构造函数</h2><ul>
+<li>重载的构造函数很相似·冗余的代码可能会导致错误</li>
+<li>使用代理构造函数</li>
+<li>在一个构造函数初始化列表中调用另一个构造函数</li>
+</ul>
+<h2 id="1-7-拷贝构造函数"><a href="#1-7-拷贝构造函数" class="headerlink" title="1.7 拷贝构造函数"></a>1.7 拷贝构造函数</h2><p>当对象被拷贝时，C++必须从已存在的对象复制出一个新的对象</p>
+<p>何时使用拷贝构造函数?</p>
+<ul>
+<li>以值传递方式传递对象给函数（作参数)</li>
+<li>函数以值方式返回对象</li>
+<li>使用已存在的对象复制新的对象</li>
+</ul>
+<p>如果不提供自己写的copy constructor,编译器会自动生成一个(可能不符合要</p>
+<h2 id="1-9-浅拷贝和深拷贝"><a href="#1-9-浅拷贝和深拷贝" class="headerlink" title="1.9 浅拷贝和深拷贝"></a>1.9 浅拷贝和深拷贝</h2><p>如果不提供自己写的copy constructor.编译器会生成默认的<br>将目标对象的值逐个拷贝过来;<br>如果是指针，拷贝的是值（指向的地址)，而不是指向的对象（浅拷贝)在析构函数中释放内存时，其他对象中的指针可能还在指向被释放的资源</p>
+<h2 id="1-10-在类中使用const"><a href="#1-10-在类中使用const" class="headerlink" title="1.10 在类中使用const"></a>1.10 在类中使用const</h2><p>在类中使用const常函数</p>
+<p>函数名称后加const</p>
+<ul>
+<li>函数体内不可以修改类成员属性。常对象</li>
+</ul>
+<p>声明对象时前面加const</p>
+<ul>
+<li>不可以修改常对象的成员属性仅能调用常函数</li>
+</ul>
+<h2 id="1-11-在类中使用static"><a href="#1-11-在类中使用static" class="headerlink" title="1.11 在类中使用static"></a>1.11 在类中使用static</h2><p>静态成员变量</p>
+<ul>
+<li><p>所有对象共有同一份数据（数据共享)</p>
+</li>
+<li><p>在类中声明，类外初始化</p>
+</li>
+</ul>
+<p>静态成员函数</p>
+<p>所有对象共享同一个函数</p>
+<ul>
+<li>只能访问静态成员变量</li>
+</ul>
+<h2 id="1-12-struct和class区别"><a href="#1-12-struct和class区别" class="headerlink" title="1.12 struct和class区别"></a>1.12 struct和class区别</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Account</span> &#123;</span><br><span class="line">    std::string name&#123;<span class="string">&quot;none&quot;</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 默认私有属性</span></span><br><span class="line"></span><br><span class="line">    <span class="function">std::string <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Student</span> &#123;</span><br><span class="line">    std::string name&#123;<span class="string">&quot;none&quot;</span>&#125;;</span><br><span class="line">    <span class="comment">// 默认公有属性</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Account aa;</span><br><span class="line">    <span class="comment">// aa.name = &quot;bob&quot;; // 报错，无法访问私有成员</span></span><br><span class="line"></span><br><span class="line">    Student ss;</span><br><span class="line">    ss.name = <span class="string">&quot;alice&quot;</span>; <span class="comment">// 可以访问公有成员</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="2-智能指针"><a href="#2-智能指针" class="headerlink" title="2 智能指针"></a>2 智能指针</h1><p>原始指针(raw pointer)的一些问题</p>
+<p>1.c++提供了内存管理的绝对自由度</p>
+<ul>
+<li><p>分配</p>
+</li>
+<li><p>释放</p>
+</li>
+<li><p>声明周期管理</p>
+</li>
+</ul>
+<p>2.一些潜在严重问题</p>
+<ul>
+<li><p>未初始化的指针(wild pointer)</p>
+</li>
+<li><p>内存泄漏(memory leak)</p>
+</li>
+<li><p>悬空指针(dangling pointer</p>
+</li>
+</ul>
+<p>3.所有权(ownership)</p>
+<ul>
+<li>谁拥有指针?</li>
+<li>何时可以删除指针?</li>
+</ul>
+<p>C++智能指针是一种用来管理动态分配的内存的工具，它们遵循RAII（资源获取即初始化）原则，可以自动释放内存，防止内存泄漏。</p>
+<p>以下是几种常见的C++智能指针：</p>
+<ol>
+<li><code>unique_ptr</code>: <code>unique_ptr</code> 是一种独占所有权的智能指针，它指向堆上分配的对象，并负责在其生命周期结束时自动删除对象。每个 <code>unique_ptr</code> 只能拥有一个对象，并且不能进行拷贝，但可以进行移动。</li>
+<li><code>shared_ptr</code>: <code>shared_ptr</code> 是一种共享所有权的智能指针，多个 <code>shared_ptr</code> 可以指向同一个对象。它使用引用计数来跟踪对象的所有者数量，并在最后一个所有者释放内存时删除对象。</li>
+<li><code>weak_ptr</code>: <code>weak_ptr</code> 是一种弱引用指针，它可以与 <code>shared_ptr</code> 一起使用。<code>weak_ptr</code> 不会增加对象的引用计数，它允许对被 <code>shared_ptr</code> 管理的对象进行观测，但不拥有所有权。当 <code>shared_ptr</code> 删除对象后，<code>weak_ptr</code> 会自动失效。</li>
+<li><code>auto_ptr</code>（已弃用）: <code>auto_ptr</code> 是C++98标准引入的智能指针，它类似于 <code>unique_ptr</code>，但具有一些问题和局限性，已被废弃，不推荐使用。</li>
+</ol>
+<p><code>unique_ptr&lt;T&gt;</code> 是一种独占所有权的智能指针，用于指向堆上的类型为 <code>T</code> 的对象。它保证在其生命周期结束时自动释放所指向的对象，确保资源的正确释放，避免内存泄漏。</p>
+<p><code>unique_ptr</code> 的特点如下：</p>
+<ul>
+<li>它是唯一（unique）的，即一个 <code>unique_ptr</code> 对象拥有对应对象的唯一所有权。不能有多个 <code>unique_ptr</code> 指向同一个对象，这样可以避免多次释放同一块内存的问题。</li>
+<li><code>unique_ptr</code> 不能进行复制或赋值，但可以通过移动语义来转移所有权。这意味着可以将所有权从一个 <code>unique_ptr</code> 转移到另一个 <code>unique_ptr</code>，从而实现对象所有权的转移而不进行内存复制。</li>
+<li>当 <code>unique_ptr</code> 使用完毕或超出作用域时，它所指向的对象会自动释放和销毁，无需手动调用 <code>delete</code>。</li>
+</ul>
+<p>&#x3D;&#x3D;目前还没用过，等真正用过的时候再仔细看吧&#x3D;&#x3D;</p>
+<h1 id="3-STL标准模板库"><a href="#3-STL标准模板库" class="headerlink" title="3 STL标准模板库"></a>3 STL标准模板库</h1><h2 id="3-1-STL简介"><a href="#3-1-STL简介" class="headerlink" title="3.1 STL简介"></a>3.1 STL简介</h2><p>一个强大的、可复用的、自适应的泛型类和函数集合</p>
+<p>使用C++模板(templates)实现</p>
+<p>实现了常见的数据结构(data struuctures)和算法(algorithms)</p>
+<p>庞大的类库</p>
+<p>俄裔美籍程序员:Alexander Step:anov 1994年开发</p>
+<p>容器(containers)</p>
+<ul>
+<li>各种对象或原始类型的集合. array、vector、deque、stack、set、map等</li>
+</ul>
+<p>算法(algorithms)</p>
+<ul>
+<li>处理容器元素序列的各种函数find、max、count、accumulate、sort等</li>
+</ul>
+<p>迭代器(iterators)</p>
+<ul>
+<li>从容器中生成元素的序列. forward、reveise、by value、by constant等</li>
+</ul>
+<h2 id="3-2-STL容器的类别"><a href="#3-2-STL容器的类别" class="headerlink" title="3.2 STL容器的类别"></a>3.2 STL容器的类别</h2><p>序列式容器（Sequence Containers）：</p>
+<ol>
+<li><code>vector</code>：动态数组，支持快速随机访问，尾部插入和删除元素效率高，但在中间或头部插入和删除元素效率低。</li>
+<li><code>list</code>：双向链表，支持在任意位置插入和删除元素，但随机访问效率较低。</li>
+<li><code>forward_list</code>：单向链表，与 <code>list</code> 类似，但只支持单向遍历，没有双向遍历的能力。</li>
+<li><code>deque</code>：双端队列，支持在头部和尾部高效地插入和删除元素，同时支持随机访问。</li>
+</ol>
+<p>关联式容器（Associative Containers）：</p>
+<ol>
+<li><code>set</code>：集合，存储唯一的元素，并按升序排序。</li>
+<li><code>multi_set</code>：多重集合，可存储重复的元素，并按升序排序。</li>
+<li><code>map</code>：映射，存储键值对，按键的升序排序。</li>
+<li><code>multi_map</code>：多重映射，可存储重复的键值对，并按键的升序排序。</li>
+</ol>
+<p>容器适配器（Container Adapters）：</p>
+<ol>
+<li><code>stack</code>：栈，以 LIFO（后进先出）的方式存储元素，底层基于序列式容器实现，默认使用 <code>deque</code>。</li>
+<li><code>queue</code>：队列，以 FIFO（先进先出）的方式存储元素，底层基于序列式容器实现，默认使用 <code>deque</code>。</li>
+<li><code>priority_queue</code>：优先队列，按照优先级存储元素，底层基于序列式容器实现，默认使用 <code>vector</code>。</li>
+</ol>
+<h2 id="3-3-STL迭代器的类别"><a href="#3-3-STL迭代器的类别" class="headerlink" title="3.3 STL迭代器的类别"></a>3.3 STL迭代器的类别</h2><p>迭代器是一种用于遍历容器中元素的抽象概念，它提供了对容器中元素的访问和操作方式。C++中定义了多种类型的迭代器，每种迭代器具有不同的特性和功能。</p>
+<ol>
+<li>输入迭代器（Input Iterators）：从容器到程序，对数据进行只读访问。它允许逐个元素地读取容器中的数据，并且只能单向移动，不支持对容器进行修改。</li>
+<li>输出迭代器（Output Iterators）：从程序到容器，对数据进行只写访问。它允许逐个元素地向容器中写入数据，并且只能单向移动，不支持读取容器中的数据。</li>
+<li>前向迭代器（Forward Iterators）：向前推进迭代器，支持对容器进行读写操作。它具有输入迭代器和输出迭代器的所有功能，并且可以在容器中任意位置插入和删除元素，支持双向移动。</li>
+<li>双向迭代器（Bidirectional Iterators）：向前、向后推进迭代器，支持对容器进行读写操作。它具有前向迭代器的所有功能，并且可以反向移动，即向前和向后移动。</li>
+<li>随机访问迭代器（Random Access Iterators）：直接获取容器元素，支持对容器进行读写操作。它具有双向迭代器的所有功能，并且支持随机访问，可以通过偏移量直接访问容器中的任意元素。</li>
+</ol>
+<h2 id="3-4-STL算法的类别"><a href="#3-4-STL算法的类别" class="headerlink" title="3.4 STL算法的类别"></a>3.4 STL算法的类别</h2><p>非质变的算法（Non-modifying Algorithms）：</p>
+<ol>
+<li><code>std::all_of</code>：判断范围内的所有元素是否满足给定条件。</li>
+<li><code>std::any_of</code>：判断范围内是否存在满足给定条件的元素。</li>
+<li><code>std::none_of</code>：判断范围内是否所有元素都不满足给定条件。</li>
+<li><code>std::for_each</code>：对范围内的每个元素执行指定的操作。</li>
+<li><code>std::count</code>：计算范围内满足给定值的元素个数。</li>
+<li><code>std::count_if</code>：计算范围内满足给定条件的元素个数。</li>
+<li><code>std::find</code>：查找范围内第一个等于给定值的元素。</li>
+<li><code>std::find_if</code>：查找范围内第一个满足给定条件的元素。</li>
+<li><code>std::find_if_not</code>：查找范围内第一个不满足给定条件的元素。</li>
+<li><code>std::find_end</code>：在范围内查找最后一次出现子序列的起始位置。</li>
+<li><code>std::find_first_of</code>：在范围内查找第一次出现指定元素之一的位置。</li>
+<li><code>std::adjacent_find</code>：在范围内查找第一对相邻重复元素的位置。</li>
+<li><code>std::search</code>：在范围内查找第一次出现子序列的起始位置。</li>
+<li><code>std::search_n</code>：在范围内查找第一次出现连续多个相等元素的起始位置。</li>
+<li><code>std::equal</code>：判断两个范围内的元素是否相等。</li>
+<li><code>std::mismatch</code>：找到两个范围内第一次不匹配的位置。</li>
+<li><code>std::lexicographical_compare</code>：按字典顺序比较两个范围。</li>
+<li><code>std::is_permutation</code>：判断两个范围内的元素是否是排列关系。</li>
+<li><code>std::min_element</code>：找到范围内的最小元素的位置。</li>
+<li><code>std::max_element</code>：找到范围内的最大元素的位置。</li>
+<li><code>std::minmax_element</code>：同时找到范围内的最小和最大元素的位置。</li>
+<li><code>std::clamp</code>：将给定值限制在指定范围内。</li>
+<li><code>std::is_sorted</code>：判断范围内的元素是否按升序排序。</li>
+<li><code>std::is_partitioned</code>：判断范围内的元素是否满足分区条件。</li>
+<li><code>std::is_heap</code>：判断范围内的元素是否满足堆的条件。</li>
+<li><code>std::is_sorted_until</code>：找到范围内的第一个无序位置。</li>
+<li><code>std::is_partitioned_until</code>：找到范围内的第一个不满足分区条件的位置。</li>
+<li><code>std::is_heap_until</code>：找到范围内的第一个不满足堆条件的位置。</li>
+</ol>
+<p>质变的算法（Modifying Algorithms）：</p>
+<ol>
+<li><code>std::copy</code>：复制范围内的元素到另一个容器。</li>
+<li><code>std::copy_if</code>：复制满足给定条件的元素到另一个容器。</li>
+<li><code>std::copy_n</code>：复制指定数量的元素到另一个容器。</li>
+<li><code>std::copy_backward</code>：反向复制范围内的元素到另一个容器。</li>
+<li><code>std::move</code>：将范围内的元素移动到另一个容器。</li>
+<li><code>std::move_backward</code>：反向移动范围内的元素到另一个容器。</li>
+<li><code>std::fill</code>：用给定值填充容器中的元素。</li>
+<li><code>std::fill_n</code>：用给定值填充指定数量的元素。</li>
+<li><code>std::generate</code>：使用生成器函数生成范围内的元素。</li>
+<li><code>std::generate_n</code>：使用生成器函数生成指定数量的元素。</li>
+<li><code>std::transform</code>：对范围内的元素应用指定的操作，并将结果存储到另一个容器。</li>
+<li><code>std::replace</code>：将范围内的指定值替换为新值。</li>
+<li><code>std::replace_if</code>：根据给定条件将范围内的元素替换为新值。</li>
+<li><code>std::replace_copy</code>：将范围内的元素复制到另一个容器，并将指定值替换为新值。</li>
+<li><code>std::replace_copy_if</code>：将范围内的元素复制到另一个容器，并根据给定条件替换为新值。</li>
+<li><code>std::swap</code>：交换两个对象的值。</li>
+<li><code>std::swap_ranges</code>：交换两个范围的元素。</li>
+<li><code>std::iter_swap</code>：交换两个迭代器所指向的元素。</li>
+<li><code>std::reverse</code>：反转范围内的元素顺序。</li>
+<li><code>std::reverse_copy</code>：将范围内的元素反转后复制到另一个容器。</li>
+<li><code>std::rotate</code>：将范围内的元素循环右移。</li>
+<li><code>std::rotate_copy</code>：将范围内的元素循环右移后复制到另一个容器。</li>
+<li><code>std::shuffle</code>：随机重排范围内的元素。</li>
+<li><code>std::unique</code>：移除范围内的连续重复元素，只保留一个副本。</li>
+<li><code>std::unique_copy</code>：将范围内的连续重复元素复制到另一个容器，只保留一个副本。</li>
+<li><code>std::partition</code>：根据给定条件将范围内的元素分为满足条件和不满足条件的两部分。</li>
+<li><code>std::stable_partition</code>：根据给定条件将范围内的元素稳定地分为满足条件和不满足条件的两部分。</li>
+<li><code>std::sort</code>：对范围内的元素进行排序。</li>
+<li><code>std::stable_sort</code>：对范围内的元素进行稳定排序。</li>
+<li><code>std::partial_sort</code>：部分排序范围内的元素。</li>
+<li><code>std::nth_element</code>：将范围内的第 n 小的元素移动到指定位置。</li>
+<li><code>std::inplace_merge</code>：将两个已排序的范围合并为一个已排序的范围。</li>
+<li><code>std::transform</code>：对范围内的元素应用指定的操作，并将结果存储到另一个容器。</li>
+<li><code>std::generate</code>：使用生成器函数生成范围内的元素。</li>
+<li><code>std::generate_n</code>：使用生成器函数生成指定数量的元素。</li>
+<li><code>std::random_shuffle</code>：随机重排范围内的元素。</li>
+<li><code>std::partition</code>：根据给定条件将范围内的元素分为满足条件和不满足条件的两部分。</li>
+<li><code>std::sort</code>：对范围内的元素进行排序。</li>
+<li><code>std::stable_sort</code>：对范围内的元素进行稳定排序。</li>
+<li><code>std::partial_sort</code>：部分排序范围内的元素。</li>
+<li><code>std::nth_element</code>：将范围内的第 n 小的元素移动到指定位置。</li>
+<li><code>std::inplace_merge</code>：将两个已排序的范围合并为一个已排序的范围。</li>
+<li><code>std::copy_backward</code>：反向复制范围内的元素到另一个容器。</li>
+</ol>
+<h2 id="3-5泛型编程和宏"><a href="#3-5泛型编程和宏" class="headerlink" title="3.5泛型编程和宏"></a>3.5泛型编程和宏</h2><h2 id="3-6函数模板"><a href="#3-6函数模板" class="headerlink" title="3.6函数模板"></a>3.6函数模板</h2><p>函数模板（Function Template）是C++中的一种特殊函数，用于定义通用的函数，可以适用于不同类型的参数。函数模板通过在函数定义中使用类型参数来实现通用性，这些类型参数可以在函数调用时被具体的类型替代。</p>
+<p>以下是两个使用函数模板定义的求最大值函数的示例：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span></span><br><span class="line"><span class="function">T <span class="title">max</span><span class="params">(T a, T b)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a &gt; b ? a : b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span></span><br><span class="line"><span class="function">T <span class="title">max</span><span class="params">(T a, T b)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a &gt; b ? a : b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> a = <span class="number">10</span>, b = <span class="number">20</span>;</span><br><span class="line">    std::cout &lt;&lt; <span class="built_in">max</span>&lt;<span class="type">int</span>&gt;(a, b) &lt;&lt; std::endl;  <span class="comment">// 调用模板函数</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-7类模板"><a href="#3-7类模板" class="headerlink" title="3.7类模板"></a>3.7类模板</h2><p>类模板（Class Template）是C++中的一种特殊类，用于定义通用的类，可以适用于不同类型的成员变量和成员函数。类模板通过在类定义中使用类型参数来实现通用性，这些类型参数可以在类实例化时被具体的类型替代。</p>
+<p>类模板的使用方式类似于函数模板，通过在类定义前面使用 <code>template&lt;typename T&gt;</code> 或 <code>template&lt;class T&gt;</code> 声明一个模板类，其中 <code>T</code> 是一个模板参数，可以在类内部的成员变量和成员函数中使用。</p>
+<p>以下是一个使用类模板定义的通用的容器类的示例：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Container</span> &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    T data;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Container</span>(T value) : <span class="built_in">data</span>(value) &#123;&#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">printData</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;Data: &quot;</span> &lt;&lt; data &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2023/09/03/c-%E8%BF%9B%E9%98%B6%E8%AF%AD%E6%B3%95-oop-%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88-STL/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/c/" rel="tag">c++</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+    
+      <a href="/2023/09/03/c-%E8%BF%9B%E9%98%B6-%E5%87%BD%E6%95%B0%E5%92%8C%E6%8C%87%E9%92%88/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">c++ 进阶 函数和指针</div>
+      </a>
+    
+  </nav>
+
+  
+   
+  
+   
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2015-2023
+        <i class="ri-heart-fill heart_icon"></i> John Doe
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="热爱学习的未来酱"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/2019/about">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+ 
+<script src="/js/clickBoom2.js"></script>
+ 
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+ 
+<script src="/js/dz.js"></script>
+ 
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    
+
+  </div>
+</body>
+
+</html>
