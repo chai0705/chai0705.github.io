@@ -1,6 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>hexo 进阶</title>
+    <url>/2023/09/03/hexo-%E8%BF%9B%E9%98%B6/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="1-文章的分类和标签"><a href="#1-文章的分类和标签" class="headerlink" title="1 文章的分类和标签"></a>1 文章的分类和标签</h1><p>分类的话就是在最上方的状态栏中加入	categories:  属性即可</p>
+<p>标签的话就是在最上方的状态栏中加入	tags:  属性即可</p>
+<h1 id="2图床搭建教程"><a href="#2图床搭建教程" class="headerlink" title="2图床搭建教程"></a>2图床搭建教程</h1><p>根据这个教程来即可</p>
+<p><a href="https://eryinote.com/post/105">图床</a></p>
+<p>踩坑 picgo这个软件双击并不是直接打开，而是到了右下角的小菜单。。。</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/image-20230903113402329.png" alt="image-20230903113402329"></p>
+<p>然后在typora软件中进行简单的设置即可。如下所示：<br><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20230903113601400.png" alt="image-20230903113601400"></p>
+]]></content>
+      <categories>
+        <category>hexo</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>c++基本语法</title>
     <url>/2023/09/02/c-%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="1-C-程序结构"><a href="#1-C-程序结构" class="headerlink" title="1.C++程序结构"></a>1.C++程序结构</h1><h2 id="1-1-C-程序的基本组成部分"><a href="#1-1-C-程序的基本组成部分" class="headerlink" title="1.1 C++程序的基本组成部分"></a>1.1 C++程序的基本组成部分</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> favorites_num;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;请输入0~10中你最喜欢的数字: &quot;</span>;</span><br><span class="line">    std::cin &gt;&gt; favorites_num;</span><br><span class="line">    std::cout &lt;&lt; favorites_num &lt;&lt; <span class="string">&quot;也是我喜欢的数字！&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -152,6 +170,12 @@
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    std::string part1 &#123; <span class="string">&quot;C++&quot;</span> &#125;;</span><br><span class="line">    std::string part2 &#123; <span class="string">&quot;是一门强大的&quot;</span> &#125;;</span><br><span class="line">    std::string sentence;</span><br><span class="line"></span><br><span class="line">    sentence = part1 + <span class="string">&quot; &quot;</span> + part2 + <span class="string">&quot;语言&quot;</span>;</span><br><span class="line">    std::cout &lt;&lt; sentence &lt;&lt; std::endl; <span class="comment">// 输出: C++ 是一门强大的语言</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// sentence = &quot;C+++&quot; 是一门强大的语言&quot;; // 错误，不能将两个C风格字符串字面量相加</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 ]]></content>
+      <categories>
+        <category>c++</category>
+      </categories>
+      <tags>
+        <tag>c++</tag>
+      </tags>
   </entry>
   <entry>
     <title>hexo基本操作命令</title>
@@ -206,6 +230,12 @@
 <p>hexo g 生成一个静态的网页</p>
 <p>hexo d 将生成的静态网页推到服务器github</p>
 ]]></content>
+      <categories>
+        <category>hexo</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
   </entry>
   <entry>
     <title>ayer 主题熟悉</title>
@@ -272,11 +302,17 @@
 </ul>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">no_toc: true</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
 ]]></content>
+      <categories>
+        <category>hexo</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
   </entry>
   <entry>
     <title>c++ 环境搭建</title>
     <url>/2023/09/02/c-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</url>
-    <content><![CDATA[<h1 id="1-课程所需运行环境配置"><a href="#1-课程所需运行环境配置" class="headerlink" title="1 课程所需运行环境配置"></a>1 课程所需运行环境配置</h1><p>​		ubuntu + windows双系统 4070ti 13900K 32G </p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="1-课程所需运行环境配置"><a href="#1-课程所需运行环境配置" class="headerlink" title="1 课程所需运行环境配置"></a>1 课程所需运行环境配置</h1><p>​		ubuntu + windows双系统 4070ti 13900K 32G </p>
 <h1 id="2-VS-Code配置"><a href="#2-VS-Code配置" class="headerlink" title="2 VS Code配置"></a>2 VS Code配置</h1><h2 id="2-1-安装vscode"><a href="#2-1-安装vscode" class="headerlink" title="2.1 安装vscode"></a>2.1 安装vscode</h2><h2 id="2-2-安装插件"><a href="#2-2-安装插件" class="headerlink" title="2.2 安装插件"></a>2.2 安装插件</h2><ol>
 <li>chinese</li>
 <li>remote ssh</li>
@@ -290,11 +326,17 @@
 <p><a href="https://zhuanlan.zhihu.com/p/545908287">知乎配置教程</a></p>
 <h2 id="4-配置C-C"><a href="#4-配置C-C" class="headerlink" title="4.配置C\C++"></a>4.配置C\C++</h2><p>重启vscode就好了</p>
 ]]></content>
+      <categories>
+        <category>c++</category>
+      </categories>
+      <tags>
+        <tag>c++</tag>
+      </tags>
   </entry>
   <entry>
     <title>markdown 语法学习</title>
     <url>/2023/09/02/markdown-%E8%AF%AD%E6%B3%95%E5%AD%A6%E4%B9%A0/</url>
-    <content><![CDATA[<h1 id="第1节-标题"><a href="#第1节-标题" class="headerlink" title="第1节 标题"></a>第1节 标题</h1><p>markdown 里面总共有六级标题，可以使用#号的多少来来引用，现在使用的是typora也可以直接使用ctrl+1-6的快捷按键来进行设置</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="第1节-标题"><a href="#第1节-标题" class="headerlink" title="第1节 标题"></a>第1节 标题</h1><p>markdown 里面总共有六级标题，可以使用#号的多少来来引用，现在使用的是typora也可以直接使用ctrl+1-6的快捷按键来进行设置</p>
 <h1 id="第2节-列表"><a href="#第2节-列表" class="headerlink" title="第2节 列表"></a>第2节 列表</h1><h2 id="2-1-有序列表"><a href="#2-1-有序列表" class="headerlink" title="2.1 有序列表"></a>2.1 有序列表</h2><p>​	顾名思义，有序列表就是有小标号的列表，同样也是两种方式英⽂输⼊法下，数字后⾯加⼀点，然后空格即可，或者使用快捷按键ctrl + shift + [即可</p>
 <p>1. </p>
 <p>1. </p>
@@ -348,11 +390,17 @@
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">| 表头 | 表头 |</span><br><span class="line">| ---- | ---- |</span><br><span class="line">| 单元格 | 单元格 |</span><br><span class="line">| 单元格 | 单元格 |</span><br></pre></td></tr></table></figure>
 
 ]]></content>
+      <categories>
+        <category>markdown</category>
+      </categories>
+      <tags>
+        <tag>markdown</tag>
+      </tags>
   </entry>
   <entry>
     <title>typora简单使用</title>
     <url>/2023/09/01/%E4%BB%80%E4%B9%88%E6%98%AFmarkdown/</url>
-    <content><![CDATA[<p>MarkDown是什么<br>Markdown 是一种轻量级标记语言，它允许人们使用易读易写的纯文本格式编写文档。</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>MarkDown是什么<br>Markdown 是一种轻量级标记语言，它允许人们使用易读易写的纯文本格式编写文档。</p>
 <p>Markdown 语言在 2004 由约翰·格鲁伯（英语：John Gruber）创建。</p>
 <p>Markdown 编写的文档可以导出 HTML 、Word、图像、PDF、Epub 等多种格式的文档。</p>
 <p>Markdown 编写的文档后缀为 .md, .markdown。</p>
@@ -395,5 +443,11 @@
 <h1 id="8设置自动保存"><a href="#8设置自动保存" class="headerlink" title="8设置自动保存"></a>8设置自动保存</h1><p>其实Typora 对文件修改之后并不能自动保存，解决方法：</p>
 <p>点击【文件】——【偏好设置】——【通用】——自动保存处打钩</p>
 ]]></content>
+      <categories>
+        <category>markdown</category>
+      </categories>
+      <tags>
+        <tag>markdown</tag>
+      </tags>
   </entry>
 </search>
