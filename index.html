@@ -160,6 +160,164 @@
     
     
     <article
+  id="post-c高级编程-程序的编译、链接和运行"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/09/04/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B-%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%BC%96%E8%AF%91%E3%80%81%E9%93%BE%E6%8E%A5%E5%92%8C%E8%BF%90%E8%A1%8C/"
+    >c高级编程 程序的编译、链接和运行</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/09/04/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B-%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%BC%96%E8%AF%91%E3%80%81%E9%93%BE%E6%8E%A5%E5%92%8C%E8%BF%90%E8%A1%8C/" class="article-date">
+  <time datetime="2023-09-04T13:19:52.000Z" itemprop="datePublished">2023-09-04</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="3-1-程序的编译与可执行文件"><a href="#3-1-程序的编译与可执行文件" class="headerlink" title="3.1 程序的编译与可执行文件"></a>3.1 程序的编译与可执行文件</h1><h2 id="3-1-1-可执行文件的组装"><a href="#3-1-1-可执行文件的组装" class="headerlink" title="3.1.1 可执行文件的组装"></a>3.1.1 可执行文件的组装</h2><p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309042146452.png" alt="image-20230904214608380"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309042146097.png" alt="image-20230904214623995"></p>
+<p>编译过程的特点可以总结如下：</p>
+<p>非一步到位：编译过程不是一次性完成的，而是分为多个阶段逐步完成的。</p>
+<p>环环相扣：每个阶段的输出作为下一个阶段的输入，各个阶段之间有着紧密的联系和依赖关系。</p>
+<p>分为预编译、编译、汇编、链接阶段：编译过程可以划分为预处理、编译、汇编和链接几个主要阶段。</p>
+<p>调用不同的工具：每个阶段都调用不同的工具或编译器来完成特定的任务。</p>
+<ul>
+<li><p>预处理：在预处理阶段，预处理器将源文件进行处理，如宏展开、头文件包含等，生成处理后的源文件。</p>
+</li>
+<li><p>编译：在编译阶段，编译器将处理后的源文件转换为汇编语言代码，进行语法分析、语义分析、优化等操作。</p>
+</li>
+<li><p>汇编：在汇编阶段，汇编器将生成的汇编语言代码转换为机器语言指令，并生成目标文件。</p>
+</li>
+<li><p>链接：在链接阶段，链接器将多个目标文件和库文件进行链接，解析符号引用，生成可执行目标文件（如ELF格式）。</p>
+</li>
+</ul>
+<p>生成可执行文件是编译过程中的最终目标，但为什么编译过程中不直接生成可执行文件，而是分为多个阶段呢？</p>
+<p>首先是GNU的思想，即”一个工具只干一件事情”。GNU工具链以及许多其他编译工具都遵循这个原则。将编译过程分为多个阶段，每个阶段有专门的工具来处理，可以使得每个工具更加专注于自己的任务。例如，预处理器负责处理宏展开、头文件包含等，编译器负责将源代码转换为汇编代码，汇编器负责将汇编代码转换为机器代码，链接器负责将目标文件链接为可执行文件。这样的分工可以简化每个工具的实现和复杂度，使得工具更加可靠、可维护，并提高了工具的复用性。</p>
+<p>其次是计算机工业思维中的标准接口和分层原则。将编译过程分为多个阶段，每个阶段的输入和输出都有明确定义的接口，使得每个阶段都可以独立进行开发和优化。这样的分层结构可以适配更多的平台、CPU架构和指令集，使得编译器可以在不同的系统上使用相同的前端和中间表示，通过后端进行特定平台的代码生成。这种模块化和分层的设计使得编译器更加灵活、可扩展，并能够适应不断变化的计算机体系结构和需求。</p>
+<h2 id="3-1-2-从源程序到可执行文件"><a href="#3-1-2-从源程序到可执行文件" class="headerlink" title="3.1.2 从源程序到可执行文件"></a>3.1.2 从源程序到可执行文件</h2><p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309042152389.png" alt="image-20230904215208244"></p>
+<ol>
+<li>预处理：源程序中的 <code>#include&lt;stdio.h&gt;</code> 被预处理器处理，将对应的头文件内容插入到源程序中，生成处理后的源程序。</li>
+<li>编译：编译器将处理后的源程序进行语法分析、语义分析、优化等操作，生成目标文件。在目标文件中，包括以下部分：<ul>
+<li>ELF header：ELF（可执行与可链接格式）头部，包含关于文件格式的信息。</li>
+<li>Program header table：程序头表，描述程序的段（段包含代码、数据等）。</li>
+<li>.text 段：包含程序的机器代码。</li>
+<li>.rodata 段：包含只读数据，如字符串常量。</li>
+<li>.data 段：包含已初始化的全局和静态变量。</li>
+<li>.bss 段：包含未初始化的全局和静态变量。</li>
+</ul>
+</li>
+<li>链接：链接器将目标文件进行链接，生成可执行文件。在可执行文件中，包括以下部分：<ul>
+<li>ELF header：与目标文件相同，包含关于文件格式的信息。</li>
+<li>Program header table：与目标文件相同，描述程序的段。</li>
+<li>.text 段：与目标文件相同，包含程序的机器代码。</li>
+<li>.rodata 段：与目标文件相同，包含只读数据。</li>
+<li>.data 段：与目标文件相同，包含已初始化的全局和静态变量。</li>
+<li>.bss 段：与目标文件相同，包含未初始化的全局和静态变量。</li>
+<li>符号表（.symtab）：包含程序中定义的全局和静态符号的信息。</li>
+<li>字符串表（.strtab）：保存符号表中的字符串。</li>
+<li>调试信息（.debug）：包含调试器使用的信息。</li>
+<li>行号信息（.line）：包含源代码的行号信息。</li>
+</ul>
+</li>
+</ol>
+<p>最终生成的可执行文件包含了程序的机器代码、数据、符号表等信息，可以在计算机上执行。编译过程中的中间文件和信息都嵌入到最终的可执行文件中，以便在运行时进行处理和调试。</p>
+<h2 id="3-1-3-目标文件"><a href="#3-1-3-目标文件" class="headerlink" title="3.1.3 目标文件"></a>3.1.3 目标文件</h2><p>目标文件（Object file）是编译器生成的中间文件，它包含了编译后的机器代码、数据和符号信息，用于最终生成可执行文件或共享目标文件。目标文件的类型可以通过命令 <code>file</code> 进行查看。</p>
+<p>常见的目标文件类型包括：</p>
+<ul>
+<li>可重定位目标文件（Relocatable files）：这种类型的目标文件包含了编译后的机器代码、数据和符号信息，但是它们的内部地址是相对于起始地址的偏移量，还没有进行最终的地址分配和链接。可重定位目标文件可以作为其他可重定位目标文件或可执行目标文件的输入，用于生成最终的可执行文件或共享目标文件。</li>
+<li>可执行目标文件（Executable files）：这种类型的目标文件是经过链接的最终可执行文件，包含了所有的机器代码、数据和符号信息，可以直接在操作系统上执行。</li>
+<li>可被共享目标文件（Shared object file）：也被称为动态链接库（Dynamic Linking Library）或共享库（Shared Library）。这种类型的目标文件包含了可被多个可执行文件或其他共享库共享使用的代码和数据，可以在运行时动态加载到内存中，并与其他程序共享使用。</li>
+<li>可执行文件（ELF，Executable and Linkable Format）：这是一种可执行文件的格式，广泛用于类UNIX系统。可执行文件可以直接在操作系统上执行，包含了机器代码、数据和符号信息，以及其他与执行相关的信息（如程序入口点等）。</li>
+</ul>
+<h2 id="3-1-4-ELF可执行文件的结构"><a href="#3-1-4-ELF可执行文件的结构" class="headerlink" title="3.1.4 ELF可执行文件的结构"></a>3.1.4 ELF可执行文件的结构</h2><ol>
+<li>ELF header（ELF 头）：包含了关于文件格式的信息，如文件类型、目标体系结构、入口点地址等。</li>
+<li>Program header table（程序头表）：描述了可执行文件的段（segment）信息，每个段对应一个或多个节（section），包括代码段、只读数据段、可读写数据段等。程序头表记录了每个段的起始地址、大小、访问权限等信息。</li>
+<li>.init 段：包含了可执行文件在加载到内存后需要执行的初始化代码，如全局变量的初始化和动态链接器的初始化等。</li>
+<li>.text、.rodata、.data、.bss 等段：这些段包含了实际的代码和数据。<ul>
+<li>.text 段：包含了可执行代码的机器指令，也就是程序的代码段。</li>
+<li>.rodata 段：包含了只读数据，如字符串常量等。</li>
+<li>.data 段：包含了已初始化的全局和静态变量。</li>
+<li>.bss 段：包含了未初始化的全局和静态变量，这些变量在运行时会被初始化为 0。</li>
+</ul>
+</li>
+<li>符号表（.symtab）：记录了程序中定义和引用的全局和静态符号的信息，如函数和变量。符号表中包含了符号的名称、类型、大小、地址等信息。</li>
+<li>调试信息（.debug）：包含了调试器使用的信息，如源代码的行号信息、变量和函数的调试信息等。</li>
+<li>行号信息（.line）：包含了源代码的行号信息，用于将机器代码映射回源代码的行号。</li>
+<li>字符串表（.strtab）：保存了符号表和调试信息中使用的字符串。</li>
+<li>Section header table（节头表）：描述了各个节的信息，包括名称、类型、偏移量、大小等。</li>
+</ol>
+<p>main.c</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">add</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span>;</span><br><span class="line"><span class="type">int</span> <span class="title function_">sub</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> global_val = <span class="number">1</span>;</span><br><span class="line"><span class="type">int</span> uninit_val;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> a, b;</span><br><span class="line">    <span class="type">static</span> <span class="type">int</span> local_val = <span class="number">2</span>;</span><br><span class="line">    <span class="type">static</span> <span class="type">int</span> uninit_local_val;</span><br><span class="line">    </span><br><span class="line">    a = add(<span class="number">2</span>, <span class="number">3</span>);</span><br><span class="line">    b = sub(<span class="number">5</span>, <span class="number">4</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;a = %d\n&quot;</span>, a);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;b = %d\n&quot;</span>, b);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>sub.c</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">add</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">sub</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> a - b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">mul</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> a * b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">div</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> a / b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用以下命令编译成目标文件，但是不进行链接</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -c main.c sub.c</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309042209197.png" alt="image-20230904220907171"></p>
+<p>使用以下命令读取ELF header</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">readelf -h main.o</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309042211626.png" alt="image-20230904221103590"></p>
+<p>然后使用以下命令查看节头表（section heads）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">readelf -S main.o</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309042213386.png" alt="image-20230904221310333"></p>
+<p>最后使用以下命令进行链接,生成可执行文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc main.o sub.o</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309042215351.png" alt="image-20230904221504326"></p>
+<p>重新读取elf头和section heads</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br></pre></td><td class="code"><pre><span class="line">topeet@ubuntu:~/demo$ readelf -h a.out </span><br><span class="line">ELF 头：</span><br><span class="line">  Magic：   7f 45 4c 46 02 01 01 00 00 00 00 00 00 00 00 00 </span><br><span class="line">  类别:                              ELF64</span><br><span class="line">  数据:                              2 补码，小端序 (little endian)</span><br><span class="line">  Version:                           1 (current)</span><br><span class="line">  OS/ABI:                            UNIX - System V</span><br><span class="line">  ABI 版本:                          0</span><br><span class="line">  类型:                              DYN (共享目标文件)</span><br><span class="line">  系统架构:                          Advanced Micro Devices X86-64</span><br><span class="line">  版本:                              0x1</span><br><span class="line">  入口点地址：               0x1060</span><br><span class="line">  程序头起点：          64 (bytes into file)</span><br><span class="line">  Start of section headers:          15016 (bytes into file)</span><br><span class="line">  标志：             0x0</span><br><span class="line">  Size of this header:               64 (bytes)</span><br><span class="line">  Size of program headers:           56 (bytes)</span><br><span class="line">  Number of program headers:         13</span><br><span class="line">  Size of section headers:           64 (bytes)</span><br><span class="line">  Number of section headers:         31</span><br><span class="line">  Section header string table index: 30</span><br><span class="line">topeet@ubuntu:~/demo$ read</span><br><span class="line">read         readarray    readelf      readlink     readonly     readprofile  </span><br><span class="line">topeet@ubuntu:~/demo$ readelf -S a.out </span><br><span class="line">There are 31 section headers, starting at offset 0x3aa8:</span><br><span class="line"></span><br><span class="line">节头：</span><br><span class="line">  [号] 名称              类型             地址              偏移量</span><br><span class="line">       大小              全体大小          旗标   链接   信息   对齐</span><br><span class="line">  [ 0]                   NULL             0000000000000000  00000000</span><br><span class="line">       0000000000000000  0000000000000000           0     0     0</span><br><span class="line">  [ 1] .interp           PROGBITS         0000000000000318  00000318</span><br><span class="line">       000000000000001c  0000000000000000   A       0     0     1</span><br><span class="line">  [ 2] .note.gnu.propert NOTE             0000000000000338  00000338</span><br><span class="line">       0000000000000020  0000000000000000   A       0     0     8</span><br><span class="line">  [ 3] .note.gnu.build-i NOTE             0000000000000358  00000358</span><br><span class="line">       0000000000000024  0000000000000000   A       0     0     4</span><br><span class="line">  [ 4] .note.ABI-tag     NOTE             000000000000037c  0000037c</span><br><span class="line">       0000000000000020  0000000000000000   A       0     0     4</span><br><span class="line">  [ 5] .gnu.hash         GNU_HASH         00000000000003a0  000003a0</span><br><span class="line">       0000000000000028  0000000000000000   A       6     0     8</span><br><span class="line">  [ 6] .dynsym           DYNSYM           00000000000003c8  000003c8</span><br><span class="line">       00000000000000c0  0000000000000018   A       7     1     8</span><br><span class="line">  [ 7] .dynstr           STRTAB           0000000000000488  00000488</span><br><span class="line">       0000000000000088  0000000000000000   A       0     0     1</span><br><span class="line">  [ 8] .gnu.version      VERSYM           0000000000000510  00000510</span><br><span class="line">       0000000000000010  0000000000000002   A       6     0     2</span><br><span class="line">  [ 9] .gnu.version_r    VERNEED          0000000000000520  00000520</span><br><span class="line">       0000000000000020  0000000000000000   A       7     1     8</span><br><span class="line">  [10] .rela.dyn         RELA             0000000000000540  00000540</span><br><span class="line">       00000000000000c0  0000000000000018   A       6     0     8</span><br><span class="line">  [11] .rela.plt         RELA             0000000000000600  00000600</span><br><span class="line">       0000000000000018  0000000000000018  AI       6    24     8</span><br><span class="line">  [12] .init             PROGBITS         0000000000001000  00001000</span><br><span class="line">       000000000000001b  0000000000000000  AX       0     0     4</span><br><span class="line">  [13] .plt              PROGBITS         0000000000001020  00001020</span><br><span class="line">       0000000000000020  0000000000000010  AX       0     0     16</span><br><span class="line">  [14] .plt.got          PROGBITS         0000000000001040  00001040</span><br><span class="line">       0000000000000010  0000000000000010  AX       0     0     16</span><br><span class="line">  [15] .plt.sec          PROGBITS         0000000000001050  00001050</span><br><span class="line">       0000000000000010  0000000000000010  AX       0     0     16</span><br><span class="line">  [16] .text             PROGBITS         0000000000001060  00001060</span><br><span class="line">       0000000000000225  0000000000000000  AX       0     0     16</span><br><span class="line">  [17] .fini             PROGBITS         0000000000001288  00001288</span><br><span class="line">       000000000000000d  0000000000000000  AX       0     0     4</span><br><span class="line">  [18] .rodata           PROGBITS         0000000000002000  00002000</span><br><span class="line">       0000000000000014  0000000000000000   A       0     0     4</span><br><span class="line">  [19] .eh_frame_hdr     PROGBITS         0000000000002014  00002014</span><br><span class="line">       0000000000000064  0000000000000000   A       0     0     4</span><br><span class="line">  [20] .eh_frame         PROGBITS         0000000000002078  00002078</span><br><span class="line">       0000000000000188  0000000000000000   A       0     0     8</span><br><span class="line">  [21] .init_array       INIT_ARRAY       0000000000003db8  00002db8</span><br><span class="line">       0000000000000008  0000000000000008  WA       0     0     8</span><br><span class="line">  [22] .fini_array       FINI_ARRAY       0000000000003dc0  00002dc0</span><br><span class="line">       0000000000000008  0000000000000008  WA       0     0     8</span><br><span class="line">  [23] .dynamic          DYNAMIC          0000000000003dc8  00002dc8</span><br><span class="line">       00000000000001f0  0000000000000010  WA       7     0     8</span><br><span class="line">  [24] .got              PROGBITS         0000000000003fb8  00002fb8</span><br><span class="line">       0000000000000048  0000000000000008  WA       0     0     8</span><br><span class="line">  [25] .data             PROGBITS         0000000000004000  00003000</span><br><span class="line">       0000000000000018  0000000000000000  WA       0     0     8</span><br><span class="line">  [26] .bss              NOBITS           0000000000004018  00003018</span><br><span class="line">       0000000000000010  0000000000000000  WA       0     0     4</span><br><span class="line">  [27] .comment          PROGBITS         0000000000000000  00003018</span><br><span class="line">       000000000000002b  0000000000000001  MS       0     0     1</span><br><span class="line">  [28] .symtab           SYMTAB           0000000000000000  00003048</span><br><span class="line">       00000000000006f0  0000000000000018          29    49     8</span><br><span class="line">  [29] .strtab           STRTAB           0000000000000000  00003738</span><br><span class="line">       0000000000000255  0000000000000000           0     0     1</span><br><span class="line">  [30] .shstrtab         STRTAB           0000000000000000  0000398d</span><br><span class="line">       000000000000011a  0000000000000000           0     0     1</span><br><span class="line">Key to Flags:</span><br><span class="line">  W (write), A (alloc), X (execute), M (merge), S (strings), I (info),</span><br><span class="line">  L (link order), O (extra OS processing required), G (group), T (TLS),</span><br><span class="line">  C (compressed), x (unknown), o (OS specific), E (exclude),</span><br><span class="line">  l (large), p (processor specific)</span><br><span class="line">topeet@ubuntu:~/demo$ </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="3-1-5-动态库和静态库的生成"><a href="#3-1-5-动态库和静态库的生成" class="headerlink" title="3.1.5 动态库和静态库的生成"></a>3.1.5 动态库和静态库的生成</h2><p>使用以下命令可以生成静态库</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ar rcs libsub.a sub.o</span><br></pre></td></tr></table></figure>
+
+<p>其中库的名字必须以lib开头，使用readelf重新读取以下该库的elf头，如下所示：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309042226316.png" alt="image-20230904222640273"></p>
+<p>使用以下命令生成动态库</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -shared -fPIC -o libsub.so sub.c</span><br></pre></td></tr></table></figure>
+
+<p>然后使用readelf 读取elf头如下所示：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309042227936.png" alt="image-20230904222725900"></p>
+<h1 id="3-2-GCC命令参数"><a href="#3-2-GCC命令参数" class="headerlink" title="3.2 GCC命令参数"></a>3.2 GCC命令参数</h1><h1 id="3-3-预处理过程"><a href="#3-3-预处理过程" class="headerlink" title="3.3 预处理过程"></a>3.3 预处理过程</h1><h1 id="3-4-编译过程-1-：从源程序到汇编文件"><a href="#3-4-编译过程-1-：从源程序到汇编文件" class="headerlink" title="3.4 编译过程(1)：从源程序到汇编文件"></a>3.4 编译过程(1)：从源程序到汇编文件</h1><h1 id="3-5-编译过程-2-：汇编过程"><a href="#3-5-编译过程-2-：汇编过程" class="headerlink" title="3.5 编译过程(2)：汇编过程"></a>3.5 编译过程(2)：汇编过程</h1><h1 id="3-6-编译过程-3-：符号表"><a href="#3-6-编译过程-3-：符号表" class="headerlink" title="3.6 编译过程(3)：符号表"></a>3.6 编译过程(3)：符号表</h1><h1 id="3-7-链接过程-1-：地址空间分配与链接脚本"><a href="#3-7-链接过程-1-：地址空间分配与链接脚本" class="headerlink" title="3.7 链接过程(1)：地址空间分配与链接脚本"></a>3.7 链接过程(1)：地址空间分配与链接脚本</h1><h1 id="3-8-链接过程-2-：符号解析-强符号与弱符号"><a href="#3-8-链接过程-2-：符号解析-强符号与弱符号" class="headerlink" title="3.8 链接过程(2)：符号解析-强符号与弱符号"></a>3.8 链接过程(2)：符号解析-强符号与弱符号</h1><h1 id="3-9-链接过程-3-：重定位"><a href="#3-9-链接过程-3-：重定位" class="headerlink" title="3.9 链接过程(3)：重定位"></a>3.9 链接过程(3)：重定位</h1><h1 id="3-10-程序的运行"><a href="#3-10-程序的运行" class="headerlink" title="3.10 程序的运行"></a>3.10 程序的运行</h1><h1 id="3-11-BSS段的处理"><a href="#3-11-BSS段的处理" class="headerlink" title="3.11 BSS段的处理"></a>3.11 BSS段的处理</h1><h1 id="3-12-main函数入口分析"><a href="#3-12-main函数入口分析" class="headerlink" title="3.12 main函数入口分析"></a>3.12 main函数入口分析</h1><h1 id="3-13-链接静态库"><a href="#3-13-链接静态库" class="headerlink" title="3.13 链接静态库"></a>3.13 链接静态库</h1><h1 id="3-14-动态链接-1-：与位置无关的代码"><a href="#3-14-动态链接-1-：与位置无关的代码" class="headerlink" title="3.14 动态链接(1)：与位置无关的代码"></a>3.14 动态链接(1)：与位置无关的代码</h1><h1 id="3-15-动态链接-2-：全局符号表GOT"><a href="#3-15-动态链接-2-：全局符号表GOT" class="headerlink" title="3.15 动态链接(2)：全局符号表GOT"></a>3.15 动态链接(2)：全局符号表GOT</h1><h1 id="3-16-动态链接-3-：共享库"><a href="#3-16-动态链接-3-：共享库" class="headerlink" title="3.16 动态链接(3)：共享库"></a>3.16 动态链接(3)：共享库</h1><h1 id="3-17-开发一个插件"><a href="#3-17-开发一个插件" class="headerlink" title="3.17 开发一个插件"></a>3.17 开发一个插件</h1><h1 id="3-18-内核模块加载机制"><a href="#3-18-内核模块加载机制" class="headerlink" title="3.18 内核模块加载机制"></a>3.18 内核模块加载机制</h1><h1 id="3-19-binutils工具集"><a href="#3-19-binutils工具集" class="headerlink" title="3.19 binutils工具集"></a>3.19 binutils工具集</h1><h1 id="3-20-linux内核加载实验"><a href="#3-20-linux内核加载实验" class="headerlink" title="3.20 linux内核加载实验"></a>3.20 linux内核加载实验</h1><h1 id="3-21-u-boot重定位分析-上"><a href="#3-21-u-boot重定位分析-上" class="headerlink" title="3.21 u-boot重定位分析(上)"></a>3.21 u-boot重定位分析(上)</h1><h1 id="3-22-u-boot重定位分析-下"><a href="#3-22-u-boot重定位分析-下" class="headerlink" title="3.22 u-boot重定位分析(下)"></a>3.22 u-boot重定位分析(下)</h1> 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%BC%96%E8%AF%91%E3%80%81%E9%93%BE%E6%8E%A5%E5%92%8C%E8%BF%90%E8%A1%8C/" rel="tag">程序的编译、链接和运行</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
   id="post-rk3568-驱动开发第一篇-驱动基础-1"
   class="article article-type-post"
   itemscope
@@ -6337,406 +6495,6 @@
     <footer class="article-footer">
        
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8F%8D%E6%80%9D/" rel="tag">反思</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-cmake-基础课"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/09/03/cmake-%E5%9F%BA%E7%A1%80%E8%AF%BE/"
-    >cmake 基础课</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/09/03/cmake-%E5%9F%BA%E7%A1%80%E8%AF%BE/" class="article-date">
-  <time datetime="2023-09-03T09:50:19.000Z" itemprop="datePublished">2023-09-03</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/cmake/">cmake</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h1 id="一、准备知识"><a href="#一、准备知识" class="headerlink" title="一、准备知识"></a>一、准备知识</h1><h2 id="1-1-C-的编译过程"><a href="#1-1-C-的编译过程" class="headerlink" title="1.1 C++的编译过程"></a>1.1 C++的编译过程</h2><ul>
-<li>-E 仅预处理；不编译、汇编或链接。</li>
-<li>-S 仅编译；不汇编或链接。</li>
-<li>-c 编译和汇编，但不链接。</li>
-<li>-o <file> 将输出放入<file>中。</li>
-</ul>
-<p><strong>C++源代码的编译过程</strong></p>
-<ol>
-<li><p><strong>预处理</strong>：在预处理阶段，C++源代码中的预处理指令会被处理，包括宏展开和条件编译等。在此阶段，需要添加所有头文件的引用路径。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">将xx.cpp源文件预处理为xx.i文件（文本文件）</span></span><br><span class="line">g++ -E main.cpp -o main.i</span><br><span class="line">```</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>编译</strong>：编译阶段会对预处理后的代码进行语法检查和编译，将代码翻译为汇编语言文件。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">将xx.i文件编译为xx.s的汇编文件（文本文件）</span></span><br><span class="line">g++ -S main.i -o main.s</span><br><span class="line">```</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>汇编</strong>：汇编阶段将汇编语言文件转换为二进制格式的目标文件。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">将xx.s文件汇编为xx.o的二进制目标文件</span></span><br><span class="line">g++ -c main.s -o main.o</span><br><span class="line">```</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>链接</strong>：链接阶段将目标文件与所依赖的库文件进行关联或组装，生成可执行文件。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">将目标文件进行链接，生成可执行程序</span></span><br><span class="line">g++ main.o -o main</span><br><span class="line">```</span><br></pre></td></tr></table></figure></li>
-</ol>
-<h2 id="1-2-静态链接库和动态链接库"><a href="#1-2-静态链接库和动态链接库" class="headerlink" title="1.2 静态链接库和动态链接库"></a>1.2 静态链接库和动态链接库</h2><p>静态链接库和动态链接库的区别在于链接的阶段不同。</p>
-<p><strong>静态链接库</strong>的名称通常以<code>.a</code>结尾（表示archive library），它在编译阶段进行链接。如果一个工程依赖于静态链接库，那么生成的可执行文件或库会将静态链接库<code>.a</code>打包到输出文件中，因此生成的文件比较大。在运行时，不再需要单独的库文件。</p>
-<p><strong>动态链接库</strong>的链接发生在程序的执行过程中，它在编译阶段仅进行链接检查，而不进行真正的链接过程。动态链接库的后缀名通常为<code>.so</code>（表示shared object，在Linux上）或<code>.dylib</code>（在macOS上）。动态链接库在加载后，在内存中只保存一份拷贝。多个程序依赖于它时，不会重复加载和拷贝，节省了内存空间。</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/image-20230903175645024.png" alt="image-20230903175645024"></p>
-<h2 id="1-3-为什么需要CMake"><a href="#1-3-为什么需要CMake" class="headerlink" title="1.3 为什么需要CMake"></a>1.3 为什么需要CMake</h2><h3 id="1-3-1-g-命令行编译"><a href="#1-3-1-g-命令行编译" class="headerlink" title="1.3.1 g++命令行编译"></a>1.3.1 g++命令行编译</h3><p>当编译hello_world.cpp&#96;文件时，可以使用以下命令进行编译和运行：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">g++ main.cpp -o main</span><br></pre></td></tr></table></figure>
-
-<p>如果需要引入外部库可以使用以下方法进行编译：</p>
-<p>方法一：使用<code>-lgflags</code>参数进行链接**</p>
-<p>首先，需要安装<code>gflags</code>库：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install libgflags-dev libgflags2.2</span><br><span class="line">```</span><br><span class="line"></span><br><span class="line">然后，使用以下命令进行编译：</span><br><span class="line"></span><br><span class="line">````bash</span><br><span class="line">g++ main.cpp -lgflags -o main</span><br><span class="line">```</span><br></pre></td></tr></table></figure>
-
-<p>方法二：使用<code>pkg-config</code>进行库文件和头文件路径查找**</p>
-<p>首先，需要安装<code>pkg-config</code>工具：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install pkg-config</span><br><span class="line">```</span><br><span class="line"></span><br><span class="line">然后，使用以下命令进行编译：</span><br><span class="line"></span><br><span class="line">````bash</span><br><span class="line">g++ main.cpp `pkg-config --cflags --libs gflags` -o main</span><br><span class="line">```</span><br><span class="line"></span><br><span class="line">这里，`pkg-config --cflags --libs gflags`命令用于查找`gflags`库的头文件和库文件路径。</span><br></pre></td></tr></table></figure>
-
-<p>编译完成后，可以使用以下命令运行可执行文件：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./main --age 31 --name alice</span><br></pre></td></tr></table></figure>
-
-<p>有时候，在编译时不需要手动添加头文件或链接库路径，因为<code>g++</code>可以在默认的查询路径中找到这些库。然而，当项目文件和引入的外部库变得较多时，使用命令行编译会变得冗长且不便于调试和编辑。通常，在测试单个文件时可以使用命令行编译，但不推荐在实际项目中使用命令行编译方式。</p>
-<h3 id="1-3-2-CMake简介"><a href="#1-3-2-CMake简介" class="headerlink" title="1.3.2 CMake简介"></a>1.3.2 CMake简介</h3><p>在实际工作中，推荐使用CMake来构建C++项目。CMake是一个开源的跨平台工具，用于构建、测试和软件打包。</p>
-<p>CMake具有以下特性：</p>
-<ul>
-<li><strong>自动搜索依赖项</strong>：CMake具有自动搜索可能需要的程序、库和头文件的能力，可以简化依赖项的配置过程。</li>
-<li><strong>独立的构建目录</strong>：CMake支持使用独立的构建目录（例如<code>build</code>目录），这样可以安全地清理构建产生的中间文件和输出文件，不会污染源代码目录。</li>
-<li><strong>自定义命令</strong>：CMake支持定义复杂的自定义命令，例如下载文件、生成各种文件等，可以满足项目构建过程中的特定需求。</li>
-<li><strong>自定义配置</strong>：CMake支持根据需求进行自定义配置，可以选择性地启用或禁用特定的组件或功能。</li>
-<li><strong>文本文件生成工作区和项目</strong>：CMake使用简单的文本文件（<code>CMakeLists.txt</code>）来描述项目的配置和构建规则，可以根据这些文件自动生成工作区和项目。</li>
-<li><strong>文件依赖项自动生成和并行构建</strong>：CMake可以在主流平台上自动生成文件之间的依赖关系，从而使构建过程更高效。同时，CMake支持并行构建，可以加快构建速度。</li>
-<li><strong>支持多种IDE</strong>：CMake几乎支持所有主流的集成开发环境（IDE），包括Visual Studio、Xcode、Eclipse等，可以方便地在不同的开发环境中进行项目开发和调试。</li>
-</ul>
-<h1 id="二、CMake基础知识"><a href="#二、CMake基础知识" class="headerlink" title="二、CMake基础知识"></a>二、CMake基础知识</h1><h2 id="2-1-安装"><a href="#2-1-安装" class="headerlink" title="2.1 安装"></a>2.1 安装</h2><p>在Ubuntu上安装CMake可以使用以下命令：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install cmake -y</span><br></pre></td></tr></table></figure>
-
-<p>这将使用apt包管理器自动安装CMake。</p>
-<p>如果你想编译安装特定版本的CMake，可以按照以下步骤操作：</p>
-<p>克隆CMake的源代码库：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git clone -b v3.25.1 https://github.com/Kitware/CMake.git</span><br><span class="line">cd CMake</span><br><span class="line"></span><br><span class="line">这里以安装版本3.25.1为例，你可以将`v3.25.1`替换为你想要安装的特定版本。</span><br></pre></td></tr></table></figure>
-
-<p>配置和编译CMake：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">./bootstrap --prefix=&lt;安装路径&gt;</span><br><span class="line">make</span><br><span class="line"></span><br><span class="line">你可以使用`--prefix`选项来指定安装路径，或者省略`--prefix`以安装到默认路径。</span><br></pre></td></tr></table></figure>
-
-<p>安装CMake：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo make install</span><br><span class="line"></span><br><span class="line">这将以管理员权限安装CMake到系统中。</span><br></pre></td></tr></table></figure>
-
-<p>安装完成后，你可以验证CMake的安装版本：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cmake --version</span><br></pre></td></tr></table></figure>
-
-<p>该命令将显示CMake的版本信息，确认安装成功与否。</p>
-<h2 id="2-2-第一个CMake例子"><a href="#2-2-第一个CMake例子" class="headerlink" title="2.2 第一个CMake例子"></a>2.2 第一个CMake例子</h2><p><strong>配置：</strong> 使用<code>cmake</code>命令进行配置，其中<code>-S</code>选项指定源码目录，<code>-B</code>选项指定构建目录。在终端中执行以下命令：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cmake -S . -B build</span><br><span class="line"></span><br><span class="line">这将在当前目录下执行CMake配置，并将生成的构建系统文件放在名为`build`的目录中。</span><br></pre></td></tr></table></figure>
-
-<p><strong>生成：</strong> 使用<code>cmake --build</code>命令进行生成，其中<code>--build</code>选项指定构建目录。在终端中执行以下命令：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cmake --build build</span><br><span class="line"></span><br><span class="line">这将在`build`目录中执行构建步骤，生成可执行文件。</span><br></pre></td></tr></table></figure>
-
-<p><strong>运行：</strong> 使用以下命令运行生成的可执行文件：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">./build/first_cmake</span><br><span class="line"></span><br><span class="line">这将执行生成的可执行文件。</span><br></pre></td></tr></table></figure>
-
-<h2 id="2-3-语法基础"><a href="#2-3-语法基础" class="headerlink" title="2.3 语法基础"></a>2.3 语法基础</h2><h3 id="2-3-1-指定版本"><a href="#2-3-1-指定版本" class="headerlink" title="2.3.1 指定版本"></a>2.3.1 指定版本</h3><p>在CMake中，可以使用<code>cmake_minimum_required</code>命令指定当前项目所需的最低CMake版本。它的语法如下：</p>
-<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cmake_minimum_required</span>(VERSION &lt;version_number&gt;)</span><br></pre></td></tr></table></figure>
-
-<p>其中，<code>&lt;version_number&gt;</code>是所需的最低CMake版本号。在这个命令之后，CMake将会检查系统中安装的CMake版本是否满足这个要求，如果不满足则会产生错误。</p>
-<p>例如，如果要指定最低的CMake版本为3.10，可以在CMakeLists.txt文件中添加以下命令：</p>
-<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cmake_minimum_required</span>(VERSION <span class="number">3.10</span>)</span><br></pre></td></tr></table></figure>
-
-<p>这样，CMake将会检查系统中的CMake版本是否大于等于3.10。</p>
-<p>除了<code>cmake_minimum_required</code>命令，CMake中还有其他类似的命令，它们不区分大小写，并且有许多关键字来引导命令的参数输入，类似于函数的参数传递。这些命令使用的关键字在CMake中是不区分大小写的。</p>
-<h3 id="2-3-2-设置项目"><a href="#2-3-2-设置项目" class="headerlink" title="2.3.2 设置项目"></a>2.3.2 设置项目</h3><p>在CMakeLists.txt文件的开头，通常会使用<code>project</code>命令来指定项目的名称、版本、描述和所使用的语言。<code>project</code>命令的语法如下：</p>
-<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">project</span>(ProjectName</span><br><span class="line">    [VERSION &lt;version_number&gt;]</span><br><span class="line">    [DESCRIPTION <span class="string">&quot;project_description&quot;</span>]</span><br><span class="line">    [LANGUAGES &lt;language&gt;]</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-
-<p>其中，<code>ProjectName</code>是项目的名称，在例子中使用的是”first_cmake”。<code>VERSION</code>关键字后面是项目的版本号，可以是任意格式的版本号，例如”1.0.0”。<code>DESCRIPTION</code>关键字后面是项目的描述，可以是一个字符串。<code>LANGUAGES</code>关键字后面是项目所使用的语言，这里使用的是”Cxx”，表示C++。</p>
-<p>示例中的<code>project</code>命令：</p>
-<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">project</span>(first_cmake</span><br><span class="line">    VERSION <span class="number">1.0</span>.<span class="number">0</span></span><br><span class="line">    DESCRIPTION <span class="string">&quot;项目描述&quot;</span></span><br><span class="line">    LANGUAGES Cxx</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-
-<p>这样，通过<code>project</code>命令，可以在CMakeLists.txt中指定项目的基本信息，方便管理和描述项目。</p>
-<h3 id="2-3-3-添加可执行文件目标"><a href="#2-3-3-添加可执行文件目标" class="headerlink" title="2.3.3 添加可执行文件目标"></a>2.3.3 添加可执行文件目标</h3><p>使用了<code>add_executable</code>命令来定义一个可执行文件。该命令的语法如下：</p>
-<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">add_executable</span>(&lt;target_name&gt; &lt;source_files&gt;)</span><br></pre></td></tr></table></figure>
-
-<p>其中，<code>&lt;target_name&gt;</code>是最终生成的可执行文件名，也是在CMake中定义的目标（Target）名。<code>&lt;source_files&gt;</code>是编译目标所使用的源文件。</p>
-<p>在你提供的例子中，使用了<code>add_executable</code>命令来定义一个名为<code>first_cmake</code>的目标，并指定了一个源文件<code>main.cpp</code>。这意味着在编译时，会将<code>main.cpp</code>编译为一个可执行文件，该文件的名称将是<code>first_cmake</code>。</p>
-<p>示例中的<code>add_executable</code>命令：</p>
-<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">add_executable</span>(first_cmake main.cpp)</span><br></pre></td></tr></table></figure>
-
-<p>通过<code>add_executable</code>命令，可以在CMakeLists.txt中定义编译目标，并指定相应的源文件。这样，CMake将会根据这些定义生成相应的构建规则和编译指令。</p>
-<h3 id="2-3-4-生成静态库并链接"><a href="#2-3-4-生成静态库并链接" class="headerlink" title="2.3.4 生成静态库并链接"></a>2.3.4 生成静态库并链接</h3><p>A. 生成静态库：</p>
-<p>在<code>account_dir/CMakeLists.txt</code>中，使用<code>add_library</code>命令来生成静态库。该命令的语法如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">add_library(&lt;library_name&gt; &lt;library_type&gt; &lt;source_files&gt;)</span><br></pre></td></tr></table></figure>
-
-<p>其中，<code>&lt;library_name&gt;</code>是最终生成的库文件名，例如在Linux下会生成<code>libAccount.a</code>。</p>
-<p><code>&lt;library_type&gt;</code>用于指定链接库的类型，可以是动态链接库（<code>SHARED</code>）或静态链接库（<code>STATIC</code>）。</p>
-<p><code>&lt;source_files&gt;</code>是需要用到的源文件。</p>
-<p>例如，在<code>account_dir/CMakeLists.txt</code>中，使用<code>add_library</code>命令生成一个名为<code>Account</code>的静态库，其包含了<code>Account.cpp</code>和<code>Account.h</code>两个源文件。示例命令如下：</p>
-<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">add_library</span>(Account STATIC Account.cpp Account.h)</span><br></pre></td></tr></table></figure>
-
-<p>这将生成一个静态库文件<code>libAccount.a</code>。</p>
-<p>B. 链接：</p>
-<p>在<code>test_account/CMakeLists.txt</code>中，可以通过<code>target_link_libraries</code>命令将生成的静态库链接到目标可执行文件中。该命令的语法如下：</p>
-<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">target_link_libraries</span>(&lt;target_name&gt; &lt;library_name&gt;)</span><br></pre></td></tr></table></figure>
-
-<p>其中，<code>&lt;target_name&gt;</code>是目标可执行文件的名称，<code>&lt;library_name&gt;</code>是要链接的库文件名。</p>
-<p>例如，在<code>test_account/CMakeLists.txt</code>中，假设有一个目标可执行文件名为<code>test_account</code>，需要链接生成的静态库<code>Account</code>。示例命令如下：</p>
-<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">target_link_libraries</span>(test_account Account)</span><br></pre></td></tr></table></figure>
-
-<p>这样，生成的可执行文件<code>test_account</code>将会链接静态库<code>Account</code>。</p>
-<h3 id="2-3-5-生成动态库并连接"><a href="#2-3-5-生成动态库并连接" class="headerlink" title="2.3.5 生成动态库并连接"></a>2.3.5 生成动态库并连接</h3><p>A. 生成动态库：</p>
-<p>在<code>account_dir/CMakeLists.txt</code>中，使用<code>add_library</code>命令来生成动态库。与生成静态库不同的是，需要将<code>&lt;library_type&gt;</code>参数设置为<code>SHARED</code>，表示生成动态链接库。</p>
-<p>示例命令如下：</p>
-<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">add_library</span>(Account SHARED Account.cpp Account.h)</span><br></pre></td></tr></table></figure>
-
-<p>这将生成一个动态库文件<code>libAccount.so</code>。</p>
-<p>B. 链接：</p>
-<p>链接过程与生成静态库时的操作相同，使用<code>target_link_libraries</code>命令将动态库链接到目标可执行文件中。</p>
-<p>示例命令如下：</p>
-<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">target_link_libraries</span>(test_account Account)</span><br></pre></td></tr></table></figure>
-
-<p>这样，生成的可执行文件<code>test_account</code>将会链接动态库<code>Account</code>。</p>
-<h3 id="2-3-6-CMake中的PUBLIC、PRIVATE、INTERFACE"><a href="#2-3-6-CMake中的PUBLIC、PRIVATE、INTERFACE" class="headerlink" title="2.3.6 CMake中的PUBLIC、PRIVATE、INTERFACE"></a>2.3.6 CMake中的PUBLIC、PRIVATE、INTERFACE</h3><p>在CMake中，可以使用<code>target_...()</code>系列命令来操作目标（Target）。这些命令通常支持通过<code>PUBLIC</code>、<code>PRIVATE</code>、<code>INTERFACE</code>关键字来控制属性的传播。</p>
-<p>以<code>target_link_libraries(A B)</code>为例，下面是对这些关键字的理解：</p>
-<ul>
-<li><code>PRIVATE</code>：依赖项B仅链接到目标A。如果有目标C链接了目标A，目标C不会链接目标B。</li>
-<li><code>INTERFACE</code>：依赖项B并不链接到目标A。如果有目标C链接了目标A，目标C会链接目标B。</li>
-<li><code>PUBLIC</code>：依赖项B链接到目标A。如果有目标C链接了目标A，目标C也会链接目标B。</li>
-</ul>
-<p>可以将其类比为一个散烟的比方：</p>
-<ul>
-<li><code>PRIVATE</code>：就是自己抽烟，不给别人抽。</li>
-<li><code>INTERFACE</code>：就是自己不抽烟，给别人抽。</li>
-<li><code>PUBLIC</code>：就是自己抽烟，也给别人抽。</li>
-</ul>
-<p>从使用的角度来看，假设有目标C链接了目标A：</p>
-<ul>
-<li>如果目标B仅用于目标A的实现，并且不在头文件中提供给目标C使用，可以使用<code>PRIVATE</code>。</li>
-<li>如果目标B不用于目标A的实现，仅在头文件中作为接口给目标C使用，可以使用<code>INTERFACE</code>。</li>
-<li>如果目标B既用于目标A的实现，也在头文件中提供给目标C使用，可以使用<code>PUBLIC</code>。</li>
-</ul>
-<p>以下是一个示例：</p>
-<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建库</span></span><br><span class="line"><span class="keyword">add_library</span>(c c.cpp)</span><br><span class="line"><span class="keyword">add_library</span>(D d.cpp)</span><br><span class="line"><span class="keyword">add_library</span>(B b.cpp)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用target_link_libraries命令进行链接</span></span><br><span class="line"><span class="keyword">target_link_libraries</span>(A PRIVATE B)</span><br><span class="line"><span class="keyword">target_link_libraries</span>(A INTERFACE C)</span><br><span class="line"><span class="keyword">target_link_libraries</span>(A PUBLIC D)</span><br></pre></td></tr></table></figure>
-
-<p>在上述示例中，目标<code>A</code>通过<code>target_link_libraries</code>命令链接了目标<code>B</code>、<code>C</code>和<code>D</code>，使用了不同的传播属性。具体属性的选择取决于目标之间的关系和使用需求。</p>
-<h3 id="2-3-7-变量"><a href="#2-3-7-变量" class="headerlink" title="2.3.7 变量"></a>2.3.7 变量</h3><p>在CMake中，你可以使用<code>message</code>命令输出消息并进行变量的操作和设置。</p>
-<p>以下是一些常见的用法：</p>
-<p>1.输出消息：使用<code>message</code>命令可以输出消息到CMake的输出。</p>
-<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">message</span>(<span class="string">&quot;输出消息&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-<p>2.消息拼接：使用<code>message</code>命令可以将多个消息进行拼接输出。</p>
-<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">message</span>(<span class="string">&quot;输出1&quot;</span> <span class="string">&quot;输出2&quot;</span> <span class="string">&quot;输出3&quot;</span>)  <span class="comment"># 会进行拼接输出</span></span><br></pre></td></tr></table></figure>
-
-<p>3.设置变量：使用<code>set</code>命令可以设置变量的值。</p>
-<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span>(VAR1 <span class="string">&quot;变量1&quot;</span>)</span><br><span class="line"><span class="keyword">message</span>(<span class="string">&quot;VAR1=&quot;</span> <span class="variable">$&#123;VAR1&#125;</span>)  <span class="comment"># 外部访问</span></span><br><span class="line"><span class="keyword">message</span>(<span class="string">&quot;输出变量VAR1:$&#123;VAR1&#125;&quot;</span>)  <span class="comment"># 内部拼接</span></span><br><span class="line"><span class="keyword">message</span>(<span class="string">&quot;\$&#123;VAR1&#125;=$&#123;VAR1&#125;&quot;</span>)  <span class="comment"># 使用\转义</span></span><br></pre></td></tr></table></figure>
-
-<p>4.删除变量：使用<code>unset</code>命令可以删除变量。</p>
-<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">unset</span>(VAR1)  <span class="comment"># 删除变量</span></span><br><span class="line"><span class="keyword">message</span>(<span class="string">&quot;\$&#123;VAR1&#125;=$&#123;VAR1&#125;&quot;</span>)  <span class="comment"># 删除变量后，输出为空</span></span><br></pre></td></tr></table></figure>
-
-<p>5.设置变量缓存：使用<code>set</code>命令的<code>CACHE</code>选项可以设置一个变量的缓存，可以通过命令行的<code>-D</code>参数来修改该变量的值。</p>
-<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span>(CACHE_VARIABLE_TEST <span class="string">&quot;原始值&quot;</span> CACHE <span class="keyword">STRING</span> <span class="string">&quot;变量缓存的描述&quot;</span>)</span><br><span class="line"><span class="keyword">message</span>(<span class="string">&quot;变量缓存的值:$&#123;CACHE_VARIABLE_TEST&#125;&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-<p>6.常见的内置变量：CMake提供了一些内置的变量，用于获取构建系统的信息和配置</p>
-<p>第一类: 提供信息的变量</p>
-<ul>
-<li><code>PROJECT_NAME</code>：项目名称，表示当前CMake项目的名称。</li>
-</ul>
-<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">message</span>(<span class="string">&quot;$&#123;PROJECT_NAME&#125;&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><code>CMAKE_SOURCE_DIR</code>：源码目录，表示当前CMake项目的根源码目录。</li>
-</ul>
-<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">message</span>(<span class="string">&quot;$&#123;CMAKE_SOURCE_DIR&#125;&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><code>CMAKE_BINARY_DIR</code>：编译目录，表示当前CMake项目的编译输出目录。</li>
-</ul>
-<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">message</span>(<span class="string">&quot;$&#123;CMAKE_BINARY_DIR&#125;&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><code>CMAKE_CURRENT_LIST_FILE</code>：当前CMakeLists.txt文件路径，表示当前正在处理的CMakeLists.txt文件的完整路径。</li>
-</ul>
-<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">message</span>(<span class="string">&quot;$&#123;CMAKE_CURRENT_LIST_FILE&#125;&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-<p>这些变量提供了与项目、目录结构和文件相关的信息。</p>
-<hr>
-<p>第二类: 控制CMake运行的变量</p>
-<p>CMake中的变量通常是根据构建选项进行命名的，例如<code>BUILD_SHARED_LIBS</code>。这些变量用于控制CMake的运行和构建过程。</p>
-<hr>
-<p>第三类: 描述系统的变量</p>
-<ul>
-<li><code>WIN32</code>：表示当前操作系统是否为Windows。</li>
-</ul>
-<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">message</span>(<span class="string">&quot;是否是Windows系统: $&#123;WIN32&#125;&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><code>UNIX</code>：表示当前操作系统是否为类Unix（包括Linux、macOS等）。</li>
-</ul>
-<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">message</span>(<span class="string">&quot;是否是Unix系统: $&#123;UNIX&#125;&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><code>CMAKE_SYSTEM_NAME</code>：系统名称，表示当前操作系统的名称。</li>
-</ul>
-<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">message</span>(<span class="string">&quot;系统名称: $&#123;CMAKE_SYSTEM_NAME&#125;&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-<p>这些变量用于描述当前操作系统的一些信息，以便在构建过程中进行条件判断和配置。</p>
-<h3 id="2-3-8-include引入其他代码"><a href="#2-3-8-include引入其他代码" class="headerlink" title="2.3.8 include引入其他代码"></a>2.3.8 include引入其他代码</h3><h3 id="2-3-9-条件控制"><a href="#2-3-9-条件控制" class="headerlink" title="2.3.9 条件控制"></a>2.3.9 条件控制</h3><p>CMake提供了条件控制的语法和关键词，使得你可以根据条件来控制构建过程中的行为。以下是一些常用的条件控制关键词和语法：</p>
-<ul>
-<li><code>if (variable)</code>：当变量的值为真时，执行相应的代码块。</li>
-</ul>
-<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (MY_VARIABLE)</span><br><span class="line">    <span class="comment"># 当MY_VARIABLE为真时执行的代码块</span></span><br><span class="line"><span class="keyword">endif</span>()</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><code>else()</code>：在if条件为假时执行的代码块。</li>
-</ul>
-<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (MY_VARIABLE)</span><br><span class="line">    <span class="comment"># 当MY_VARIABLE为真时执行的代码块</span></span><br><span class="line"><span class="keyword">else</span>()</span><br><span class="line">    <span class="comment"># 当MY_VARIABLE为假时执行的代码块</span></span><br><span class="line"><span class="keyword">endif</span>()</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>真值常量：<code>ON</code>、<code>YES</code>、<code>TRUE</code>、<code>Y</code>、<code>1</code>、非零数字等。</li>
-</ul>
-<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (MY_VARIABLE <span class="keyword">STREQUAL</span> <span class="string">&quot;ON&quot;</span>)</span><br><span class="line">    <span class="comment"># 当MY_VARIABLE的值为真时执行的代码块</span></span><br><span class="line"><span class="keyword">endif</span>()</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>假值常量：<code>OFF</code>、<code>NO</code>、<code>FALSE</code>、<code>N</code>、<code>0</code>、空字符串、<code>NOTFOUND</code>等。</li>
-</ul>
-<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (MY_VARIABLE <span class="keyword">STREQUAL</span> <span class="string">&quot;OFF&quot;</span>)</span><br><span class="line">    <span class="comment"># 当MY_VARIABLE的值为假时执行的代码块</span></span><br><span class="line"><span class="keyword">endif</span>()</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>关键词：<code>NOT</code>、<code>TARGET</code>、<code>EXISTS (file)</code>、<code>DEFINED</code>等，可以与条件一起使用。</li>
-</ul>
-<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="keyword">NOT</span> <span class="keyword">TARGET</span> MyTarget)</span><br><span class="line">    <span class="comment"># 当MyTarget不存在时执行的代码块</span></span><br><span class="line"><span class="keyword">endif</span>()</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>逻辑运算符：<code>AND</code>、<code>OR</code>用于组合多个条件。</li>
-</ul>
-<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (CONDITION1 <span class="keyword">AND</span> CONDITION2)</span><br><span class="line">    <span class="comment"># 当CONDITION1和CONDITION2同时为真时执行的代码块</span></span><br><span class="line"><span class="keyword">endif</span>()</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (CONDITION1 <span class="keyword">OR</span> CONDITION2)</span><br><span class="line">    <span class="comment"># 当CONDITION1或CONDITION2至少一个为真时执行的代码块</span></span><br><span class="line"><span class="keyword">endif</span>()</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><code>MATCHES (regular expression)</code>：使用正则表达式进行匹配。</li>
-</ul>
-<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (MY_VARIABLE <span class="keyword">MATCHES</span> <span class="string">&quot;^prefix.*&quot;</span>)</span><br><span class="line">    <span class="comment"># 当MY_VARIABLE以&quot;prefix&quot;开头时执行的代码块</span></span><br><span class="line"><span class="keyword">endif</span>()</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><code>VERSION LESS</code>、<code>VERSION LESS_EQUAL</code>：用于比较版本号。</li>
-</ul>
-<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (MY_VERSION VERSION <span class="keyword">LESS</span> <span class="number">2.0</span>)</span><br><span class="line">    <span class="comment"># 当MY_VERSION小于2.0时执行的代码块</span></span><br><span class="line"><span class="keyword">endif</span>()</span><br></pre></td></tr></table></figure>
-
-<p>通过这些条件控制关键词和语法，你可以根据不同的条件来执行不同的代码块，从而实现更灵活和可配置的构建过程。你可以根据具体的需求选择适当的条件控制方式，并结合变量、关键词和运算符来编写CMake脚本。</p>
-<h3 id="2-3-10-CMake分步编译"><a href="#2-3-10-CMake分步编译" class="headerlink" title="2.3.10 CMake分步编译"></a>2.3.10 CMake分步编译</h3><p>首先，你使用以下命令查看所有的目标：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cmake --build . --target help</span><br></pre></td></tr></table></figure>
-
-<p>这将列出项目中可用的目标列表，包括默认目标”all”、”clean”、”depend”、”rebuild_cache”、”edit_cache”以及其他一些目标。</p>
-<p>接下来，你执行以下命令进行预处理：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cmake --build . --target main.i</span><br></pre></td></tr></table></figure>
-
-<p>这将对”main.cpp”源文件进行预处理，并将预处理结果保存在”CMakeFiles&#x2F;steps_demo.dir&#x2F;main.cpp.i”文件中。</p>
-<p>然后，你执行以下命令进行编译：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cmake --build . --target main.sI</span><br></pre></td></tr></table></figure>
-
-<p>这将将”main.cpp”源文件编译为汇编代码，并将汇编代码保存在”CMakeFiles&#x2F;steps_demo.dir&#x2F;main.cpp.s”文件中。</p>
-<p>接着，你执行以下命令进行汇编：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cmake --build . --target main.o</span><br></pre></td></tr></table></figure>
-
-<p>这将将汇编代码编译为目标文件，并将目标文件保存为”CMakeFiles&#x2F;steps_demo.dir&#x2F;main.cpp.o”。</p>
-<p>最后，你执行以下命令进行链接：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cmake --build .</span><br></pre></td></tr></table></figure>
-
-<p>这将扫描依赖项并链接生成最终的可执行文件”steps_demo”。</p>
-<p>最后，你执行以下命令运行可执行文件：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./steps_demo</span><br></pre></td></tr></table></figure>
-
-<p>这将运行生成的可执行文件。</p>
-<h3 id="2-3-11-生成器表达式"><a href="#2-3-11-生成器表达式" class="headerlink" title="2.3.11 生成器表达式"></a>2.3.11 生成器表达式</h3><p>生成器表达式是CMake中一种用于在生成构建系统时根据不同配置动态生成特定内容的表达式。它可以让代码更加精简和灵活。下面是几种常用的生成器表达式类型：</p>
-<p>条件表达式：<code>$&lt;condition:true_string&gt;</code>。当条件为真时，返回<code>true_string</code>，否则返回空字符串。</p>
-<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$&lt;<span class="number">0</span>:<span class="keyword">TEST</span>&gt;           <span class="comment"># 返回空字符串</span></span><br><span class="line">$&lt;<span class="number">1</span>:<span class="keyword">TEST</span>&gt;           <span class="comment"># 返回&quot;TEST&quot;</span></span><br><span class="line">$&lt;$&lt;BOOL:<span class="keyword">TRUE</span>&gt;:<span class="keyword">TEST</span>&gt;  <span class="comment"># 返回&quot;TEST&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>变量查询（Variable-Query）：通过查询变量来获取动态的值。</p>
-<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$&lt;TARGET_EXISTS:<span class="keyword">target</span>&gt;             <span class="comment"># 判断目标是否存在</span></span><br><span class="line">$&lt;CONFIG:Debug&gt;                     <span class="comment"># 判断当前构建类型是否为Debug</span></span><br></pre></td></tr></table></figure>
-
-<p>目标查询（Target-Query）：通过查询目标来获取相关的信息。</p>
-<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$&lt;TARGET_FILE:<span class="keyword">target</span>&gt;               <span class="comment"># 获取目标的文件路径</span></span><br><span class="line">$&lt;TARGET_FILE_NAME:<span class="keyword">target</span>&gt;          <span class="comment"># 获取目标的文件名</span></span><br></pre></td></tr></table></figure>
-
-<p>输出相关表达式：用于在不同的构建环节使用不同的参数。比如，在<code>install</code>和<code>build</code>阶段使用不同的参数。</p>
-<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">add_library</span>(Foo ...)</span><br><span class="line"><span class="keyword">target_include_directories</span>(Foo</span><br><span class="line">    PUBLIC</span><br><span class="line">        $&lt;$&lt;CONFIG:Debug&gt;:<span class="variable">$&#123;DEBUG_INCLUDES&#125;</span>&gt;</span><br><span class="line">        $&lt;$&lt;CONFIG:Release&gt;:<span class="variable">$&#123;RELEASE_INCLUDES&#125;</span>&gt;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-
-<p>在上述示例中，根据不同的构建配置（Debug或Release），生成器表达式选择性地包含不同的头文件路径。</p>
-<p>需要注意的是，生成器表达式在生成构建系统时被展开，因此无法通过<code>message</code>命令直接打印。你可以使用类似<code>file(GENERATE OUTPUT &quot;./generator_test.txt&quot; CONTENT &quot;$&lt;$&lt;BOOL:TRUE&gt;:TEST&gt;&quot;)</code>的方式将生成器表达式的结果写入文件，以间接测试生成器表达式的值。</p>
-<h3 id="2-3-12-函数和宏"><a href="#2-3-12-函数和宏" class="headerlink" title="2.3.12 函数和宏"></a>2.3.12 函数和宏</h3><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定义一个宏</span></span><br><span class="line"><span class="keyword">macro</span>(my_macro)</span><br><span class="line">    <span class="keyword">message</span>(<span class="string">&quot;宏内部的信息&quot;</span>)</span><br><span class="line">    <span class="keyword">set</span>(macro_var <span class="string">&quot;宏内部变量test&quot;</span>)</span><br><span class="line"><span class="keyword">endmacro</span>()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义一个函数</span></span><br><span class="line"><span class="keyword">function</span>(second_func arg1 arg2)</span><br><span class="line">    <span class="keyword">message</span>(<span class="string">&quot;第一个参数: $&#123;arg1&#125;，第二个参数: $&#123;arg2&#125;&quot;</span>)</span><br><span class="line"><span class="keyword">endfunction</span>()</span><br></pre></td></tr></table></figure>
-
-<p>在这个示例中，<code>my_macro</code>是一个没有参数的宏，它在宏内部输出一条信息，并设置了一个变量<code>macro_var</code>的值。</p>
-<p><code>second_func</code>是一个函数，它有两个参数<code>arg1</code>和<code>arg2</code>。在函数内部，它输出了两个参数的值。</p>
-<p>你可以在CMakeLists.txt文件中使用这些宏和函数，例如：</p>
-<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 调用宏</span></span><br><span class="line">my_macro()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 调用函数</span></span><br><span class="line">second_func(<span class="string">&quot;Hello&quot;</span> <span class="string">&quot;World&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-<p>当你运行CMake生成构建系统时，你将看到宏内部的信息输出，并且可以访问在宏或函数内部定义的变量。函数将输出参数的值。</p>
-<p>请注意，宏和函数的定义需要在CMakeLists.txt文件的适当位置进行，并且在调用它们之前必须先定义它们。</p>
-<h3 id="2-3-13-设置安装"><a href="#2-3-13-设置安装" class="headerlink" title="2.3.13 设置安装"></a>2.3.13 设置安装</h3><p><code>install</code>命令用于设置安装规则，将目标文件和文件夹安装到指定的位置。下面是你提供的代码的解释：</p>
-<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">install</span>(TARGETS instal_demo slib dlib</span><br><span class="line">    RUNTIME DESTINATION bin     <span class="comment"># 可执行文件安装路径</span></span><br><span class="line">    LIBRARY DESTINATION lib     <span class="comment"># 动态库安装路径</span></span><br><span class="line">    ARCHIVE DESTINATION lib     <span class="comment"># 静态库安装路径</span></span><br><span class="line">    PUBLIC_HEADER DESTINATION <span class="keyword">include</span>   <span class="comment"># 公共头文件安装路径</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-
-<p>在上述代码中，<code>install</code>命令指定了要安装的目标文件列表，其中包括<code>instal_demo</code>、<code>slib</code>和<code>dlib</code>。</p>
-<p>接下来，通过指定不同的<code>DESTINATION</code>参数，定义了目标文件在安装过程中的安装路径：</p>
-<ul>
-<li><code>RUNTIME DESTINATION bin</code>：指定可执行文件的安装路径为<code>bin</code>目录。</li>
-<li><code>LIBRARY DESTINATION lib</code>：指定动态库的安装路径为<code>lib</code>目录。</li>
-<li><code>ARCHIVE DESTINATION lib</code>：指定静态库的安装路径为<code>lib</code>目录。</li>
-<li><code>PUBLIC_HEADER DESTINATION include</code>：指定公共头文件的安装路径为<code>include</code>目录。</li>
-</ul>
-<p>根据你的需求，这些目标文件将被安装到指定的目录中。</p>
-<p>请注意，安装路径是相对于安装目录的，因此你需要确保安装目录在运行<code>make install</code>时正确设置。</p>
-<p>要解决在安装后无法找到动态库的问题，可以使用<code>set(CMAKE_BUILD_WITH_INSTALL_RPATH TRUE)</code>和<code>set(CMAKE_INSTALL_RPATH &quot;$&#123;CMAKE_INSTALL_PREFIX&#125;/lib&quot;)</code>来设置RPATH。</p>
-<p>下面是相应的代码：</p>
-<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span>(CMAKE_BUILD_WITH_INSTALL_RPATH <span class="keyword">TRUE</span>)</span><br><span class="line"><span class="keyword">set</span>(CMAKE_INSTALL_RPATH <span class="string">&quot;$&#123;CMAKE_INSTALL_PREFIX&#125;/lib&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-<p><code>set(CMAKE_BUILD_WITH_INSTALL_RPATH TRUE)</code>指示在构建过程中使用与安装RPATH相同的RPATH。这样，在构建时就可以正确地查找和链接动态库。</p>
-<p><code>set(CMAKE_INSTALL_RPATH &quot;$&#123;CMAKE_INSTALL_PREFIX&#125;/lib&quot;)</code>将安装RPATH设置为<code>$&#123;CMAKE_INSTALL_PREFIX&#125;/lib</code>，其中<code>$&#123;CMAKE_INSTALL_PREFIX&#125;</code>是安装目录的路径。这将导致在安装时设置RPATH，使得安装后的可执行文件可以在<code>$&#123;CMAKE_INSTALL_PREFIX&#125;/lib</code>目录中正确地查找和加载动态库。</p>
-<p>通过使用这两个设置，你可以解决在安装后无法找到动态库的问题。确保将其放置在CMakeLists.txt文件中的合适位置，并根据实际情况调整<code>$&#123;CMAKE_INSTALL_PREFIX&#125;/lib</code>路径，以匹配你的安装目录结构。</p>
-<h3 id="2-3-14-寻找依赖find-package"><a href="#2-3-14-寻找依赖find-package" class="headerlink" title="2.3.14 寻找依赖find_package"></a>2.3.14 寻找依赖find_package</h3><p>对于大多数支持CMake的项目来说，可以使用<code>find_package</code>命令来查找对应的依赖库。通常情况下，如果找到了库，会设置以下变量（这些变量由库的作者设置）：</p>
-<ul>
-<li><code>&lt;LibaryName&gt;_FOUND</code>：表示是否找到库。</li>
-<li><code>&lt;LibaryName&gt;_INCLUDE_DIR</code>：表示库的头文件目录。</li>
-<li><code>&lt;LibaryName&gt;_LIBRARIES</code>：表示库的库文件目录。</li>
-</ul>
-<p>如果你编写了一个新的函数库，并希望其他项目可以通过<code>find_package</code>引用它，你可以使用以下两种方法：</p>
-<ol>
-<li><p>编写一个<code>Find&lt;LibraryName&gt;.cmake</code>文件：适用于导入非CMake安装的项目。</p>
-<p>你可以编写一个名为<code>Find&lt;LibraryName&gt;.cmake</code>的文件，并将其放置在CMake的<code>Modules</code>目录或项目的特定目录中。该文件应包含查找和设置相关变量的逻辑。其他项目可以通过<code>find_package</code>命令来引用这个自定义的查找文件，从而找到并使用你的库。</p>
-<p>附件: 15.custom_find</p>
-</li>
-<li><p>使用<code>install</code>安装并生成<code>&lt;LibraryName&gt;Config.cmake</code>文件：适用于导入你自己开发的CMake项目。</p>
-<p>在你的库项目中，可以使用<code>install</code>命令将库文件安装到指定位置，并生成<code>&lt;LibraryName&gt;Config.cmake</code>文件。该文件应包含设置变量和导出目标的逻辑。其他项目可以通过<code>find_package</code>命令找到并使用你的库。</p>
-</li>
-</ol>
-<p>&#x3D;&#x3D;现在只是简单的写了一下学习的内容，但是对于很多内容还并不是很熟悉，一切都要等到最后实战的时候&#x3D;&#x3D;</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cmake/" rel="tag">cmake</a></li></ul>
 
     </footer>
   </div>
