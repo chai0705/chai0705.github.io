@@ -59,7 +59,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-rk3568-驱动开发第一篇-驱动基础"
+  id="post-rk3568-驱动开发第一篇-驱动基础-1"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -78,8 +78,8 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2023/09/04/rk3568-%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E7%AC%AC%E4%B8%80%E7%AF%87-%E9%A9%B1%E5%8A%A8%E5%9F%BA%E7%A1%80/" class="article-date">
-  <time datetime="2023-09-04T12:55:09.000Z" itemprop="datePublished">2023-09-04</time>
+      <a href="/2023/09/04/rk3568-%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E7%AC%AC%E4%B8%80%E7%AF%87-%E9%A9%B1%E5%8A%A8%E5%9F%BA%E7%A1%80-1/" class="article-date">
+  <time datetime="2023-09-04T13:15:13.000Z" itemprop="datePublished">2023-09-04</time>
 </a> 
   <div class="article-category">
     <a class="article-category-link" href="/categories/rk3568-%E9%A9%B1%E5%8A%A8/">rk3568 驱动</a>
@@ -130,23 +130,21 @@
 <p>第六，驱动最后必然要落实到相应的硬件上，所以肯定要对底层电路有所了解，以驱动LED灯为例，必然要了解其控制电路，找到相应的控制引脚，要能读懂简单的硬件原理图。</p>
 <h1 id="第2章-你好！内核源码"><a href="#第2章-你好！内核源码" class="headerlink" title="第2章 你好！内核源码"></a>第2章 你好！内核源码</h1><p>本章我们来认识Linux内核源码，开始真正进入到驱动的世界里面，不知道各位小伙伴们有没有做好准备呢？ </p>
 <h2 id="2-1-初识内核源码"><a href="#2-1-初识内核源码" class="headerlink" title="2.1 初识内核源码"></a>2.1 初识内核源码</h2><p>Linux内核源码的官方网站为<a target="_blank" rel="noopener" href="https://www.kernel.org/%EF%BC%8C%E5%8F%AF%E4%BB%A5%E5%9C%A8%E8%AF%A5%E7%BD%91%E7%AB%99%E4%B8%8B%E8%BD%BD%E6%9C%80%E6%96%B0%E7%9A%84Linux%E5%86%85%E6%A0%B8%E6%BA%90%E7%A0%81%E3%80%82%E8%BF%9B%E5%85%A5%E8%AF%A5%E7%BD%91%E7%AB%99%E4%B9%8B%E5%90%8E%E5%A6%82%E4%B8%8B%E5%9B%BE%EF%BC%88%E5%9B%BE2-1%EF%BC%89%E6%89%80%E7%A4%BA%EF%BC%9A">https://www.kernel.org/，可以在该网站下载最新的Linux内核源码。进入该网站之后如下图（图2-1）所示：</a></p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/20230904094433.png"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309042115782.png"></p>
 <p>图 2-1</p>
 <p>从上图（图1）可以看到多个版本的内核分支，分别为主线版本（mainline）、稳定版本（stable）和长期支持版本（longterm）。以上各个支线和主线是由linus torvalds（Linux之父）所领导。半导体厂商和一些内核爱好者会在官网下载相应版本的内核源码，对该源码进行打补丁等操作。以此让官网的内核源码可以在半导体厂家设计的主控（CPU）上跑起来，所以在开发和学习的过程中，我们并不会直接去Linux内核官网下去下载源码，而且是使用半导体厂家提供的源码包。</p>
-<p>但是不论是Linux官网的内核源码还是半导体厂家提供的内核源码不影响我们来看它的庐山真面目！作者下载了Linux官方网站的4.19.262分支源码，下载好的源码存放在“iTOP-RK3568开发板【底板V1.7版本】\03_【iTOP-RK3568开发板】指南教程\02_Linux驱动配套资料\01_Linux内核官方源码”如下图（图2-2）所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/wps2.jpg" alt="img"> </p>
-<p>图 2-2</p>
+<p>但是不论是Linux官网的内核源码还是半导体厂家提供的内核源码不影响我们来看它的庐山真面目！作者下载了Linux官方网站的4.19.262分支源码，下载好的源码存放在“iTOP-RK3568开发板【底板V1.7版本】\03_【iTOP-RK3568开发板】指南教程\02_Linux驱动配套资料\01_Linux内核官方源码”如下图（图2-2）所示： </p>
 <p>将Linux内核官方源码拷贝到虚拟机ubuntu上如下图（图2-3）所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/wps3.jpg" alt="img"> </p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309042115757.jpeg" alt="img"> </p>
 <p>图 2-3</p>
 <p>使用以下命令对内核官方源码进行解压，解压完成如下图（图2-4）所示：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo tar -vxf linux-4.19.262.tar.xz </span><br></pre></td></tr></table></figure>
 
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/wps4.jpg" alt="img"> </p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309042115774.jpeg" alt="img"> </p>
 <p>图 2-4</p>
 <p>解压完成后我们会看到非常多的文件夹，这些文件夹放的就是Linux内核源码，在下一小节中作者来介绍Linux内核源码的结构和每个目录的作用。</p>
 <h2 id="2-2-内核源码结构"><a href="#2-2-内核源码结构" class="headerlink" title="2.2 内核源码结构"></a>2.2 内核源码结构</h2><p>上一小节解压的目录下的内核源码目录都是用来做什么的呢？如下图（图2-5）所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/wps5.jpg" alt="img"> </p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309042115788.jpeg" alt="img"> </p>
 <p>图 2-5</p>
 <p>目录的内容如下表（表2-6）所示：</p>
 <table>
@@ -244,21 +242,21 @@
 <p>表 2-6</p>
 <h2 id="2-3-编译内核源码"><a href="#2-3-编译内核源码" class="headerlink" title="2.3 编译内核源码"></a>2.3 编译内核源码</h2><p>本小节使用的内核源码是半导体厂家提供的内核源码，是我们学习和开发要使用的内核源码。在进行驱动学习之前需要将此内核源码编译成功。</p>
 <p>内核源码存放路径为“iTOP-RK3568开发板【底板V1.7版本】\03_【iTOP-RK3568开发板】指南教程\02_Linux驱动配套资料\02_Linux_SDK源码”，将对应目录下的内核源码拷贝到虚拟机ubuntu目录下，如下图（图2-7）所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/wps6.jpg" alt="img"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309042115736.jpeg" alt="img"></p>
 <p>图 2-7</p>
 <p>注：编译环境使用的是迅为搭建好的编译环境，迅为的环境经过测试在不进行修改的前提下，可以直接将内核源码编译通过。</p>
 <p>使用以下命令对内核源码的进行解压，解压完成如下图（图2-8）所示：</p>
 <p>tar -vxf linux_sdk.tar.gz</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/wps7.jpg" alt="img"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309042115720.jpeg" alt="img"></p>
 <p>图 2-8</p>
 <p>使用“cd linux_sdk”命令进入内核源码目录，如下图（图2-9）所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/wps8.jpg" alt="img"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309042115085.jpeg" alt="img"></p>
 <p>图 2-9</p>
 <p>使用命令“.&#x2F;build.sh kernel”进行内核源码的编译，编译过程如下图（图2-10）所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/wps9.jpg" alt="img"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309042115089.jpeg" alt="img"></p>
 <p>图 2-10</p>
 <p>编译时间和电脑虚拟机配置相关，编译完成如下图（图2-11）所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/wps10.jpg" alt="img"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309042115144.jpeg" alt="img"></p>
 <p>图 2-11</p>
 <p>通过对内核源码官网的探索，内核源码的目录结构讲解以及内核源码的编译。我相信大家对Linux内核源码应该有了一个初步的认识了。下一章我们来学习第一个驱动helloworld。</p>
 <h1 id="第3章-helloworld-驱动实验"><a href="#第3章-helloworld-驱动实验" class="headerlink" title="第3章 helloworld 驱动实验"></a>第3章 helloworld 驱动实验</h1><p>在学习C语言或者其他语言的时候，我们通常是打印一句“helloworld”来开启编程世界的大门。学习驱动程序编程亦可以如此，使用helloworld作为我们的第一个驱动程序。</p>
@@ -301,20 +299,20 @@
 <p>通过上面的分析，helloworld驱动是不是包含了驱动框架的所有必要的部分呢。因此helloworld驱动我们可以看作是驱动代码的模板。任何一个驱动代码都用它作为基础来编写实现。同学们要将他记忆下来！</p>
 <h1 id="第4章-内核模块实验"><a href="#第4章-内核模块实验" class="headerlink" title="第4章 内核模块实验"></a>第4章 内核模块实验</h1><p>在上一章节我们编写了最简单的helloworld驱动程序。有了驱动程序以后，要如何编译并使用驱动呢。编译驱动有俩种方法，分别是将驱动编译成内核和将驱动编译成内核模块。我们先来学习如何将驱动编译成内核模块、</p>
 <h2 id="4-1-设置交叉编译器"><a href="#4-1-设置交叉编译器" class="headerlink" title="4.1 设置交叉编译器"></a>4.1 设置交叉编译器</h2><p>1 下载网盘资料下的交叉编译器，网盘路径为：“XXX”，将下载的交叉编译器拷贝到Ubuntu的&#x2F;usr&#x2F;local目录下，如下图（图4-1）所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/wps11.jpg" alt="img"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309042115189.jpeg" alt="img"></p>
 <p>图 4-1</p>
 <p>2 输入以下命令，解压交叉编译编译器压缩包，解压完毕会生成“gcc-linaro-6.3.1-2017.05-x86_64_aarch64-linux-gnu”文件夹，这是实验需要的交叉编译工具，如下图（图4-2）所示：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -vxf gcc-linaro-6.3.1-2017.05-x86_64_aarch64-linux-gnu.tar.gz</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/wps12.jpg" alt="img"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309042115207.jpeg" alt="img"></p>
 <p>图 4-2</p>
 <p>3 在终端输入“sudo vi &#x2F;etc&#x2F;profile”命令，在文件最后输入以下命令修改环境变量。</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export PATH=$PATH:/usr/local/gcc-linaro-6.3.1-2017.05-x86_64_aarch64-linux-gnu/bin</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/wps13.jpg" alt="img"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309042115170.jpeg" alt="img"></p>
 <p>图 4-3</p>
 <p>4 保存退出，在终端输入“reboot”命令重新启动Ubuntu系统，使交叉编译环境生效。Ubuntu系统重新启动之后，登录到系统后，打开终端，输入命令“aarch64-linux-gnu-gcc -v”，如果终端有如下图（图4-4）所示的打印信息，说明交叉编译环境搭建成功。如果没有出现如下图（图4-4）的打印信息，需要检查上一步骤是否设置正确。</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/wps14.jpg" alt="img"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309042115469.jpeg" alt="img"></p>
 <p>图 4-4</p>
 <h2 id="4-2-编写Makefile"><a href="#4-2-编写Makefile" class="headerlink" title="4.2 编写Makefile"></a>4.2 编写Makefile</h2><p>编译驱动程序还需要使用Makefile文件。我们为helloworld.c编写一个简单的Makefile，Makefile文件和源文件helloworld.c位于同一级目录，代码如下（图4-5）所示：</p>
 <figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> ARCH=arm64  </span><br><span class="line"><span class="keyword">export</span> CROSS_COMPILE=aarch64-linux-gnu-  </span><br><span class="line">obj-m += helloworld.o    <span class="comment">#helloworld.c对应.o文件的名称。名称要保持一致。</span></span><br><span class="line">KDIR :=/home/topeet/Linux/linux_sdk/kernel    <span class="comment">#内核源码所在虚拟机ubuntu的实际路径</span></span><br><span class="line">PWD ?= <span class="variable">$(<span class="built_in">shell</span> pwd)</span></span><br><span class="line"><span class="section">all:</span></span><br><span class="line">    make -C <span class="variable">$(KDIR)</span> M=<span class="variable">$(PWD)</span> modules    <span class="comment">#make操作</span></span><br><span class="line"><span class="section">clean:</span></span><br><span class="line">make -C <span class="variable">$(KDIR)</span> M=<span class="variable">$(PWD)</span> clean    <span class="comment">#make clean操作</span></span><br></pre></td></tr></table></figure>
@@ -329,23 +327,23 @@
 <p>第7行是编译make操作，会进入内核源码的路径，然后把当前路径下的代码编译成模块。</p>
 <p>第9行是清除编译文件</p>
 <p>编写完成如下图（图4-6）所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/wps15.jpg" alt="img"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309042115551.jpeg" alt="img"></p>
 <p>图 4-6</p>
 <h2 id="4-3-编译模块"><a href="#4-3-编译模块" class="headerlink" title="4.3 编译模块"></a>4.3 编译模块</h2><p>有了Makefile以后，输入“make”命令就可以编译helloworld驱动模块，如下图（图4-7）所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/wps16.jpg" alt="img"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309042115536.jpeg" alt="img"></p>
 <p>图 4-7</p>
 <p>编译完生成helloworld.ko目标文件就是我们需要的内核模块。内核模块是以ko为后缀名，如下图（图4-8）所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/wps17.jpg" alt="img"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309042115548.jpeg" alt="img"></p>
 <p>图 4-8</p>
 <p>输入“make clean”命令清除编译文件，如下图（图4-9）所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/wps18.jpg" alt="img"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309042115544.jpeg" alt="img"></p>
 <p>图 4-9</p>
 <h2 id="4-4-模块加载与卸载"><a href="#4-4-模块加载与卸载" class="headerlink" title="4.4 模块加载与卸载"></a>4.4 模块加载与卸载</h2><p>有了内核模块以后，我们要如何使用呢？编译驱动有俩种方式，那Linux驱动的运行方式也肯定有俩种。一种就是将驱动编译进内核，这样Linux系统启动后会自动运行程序。第二种就是将驱动编译成模块，在Linux系统启动以后使用“insmod”命令加载驱动模块。</p>
 <p>在上个小节中编译了驱动模块helloworld.ko，在RK3568开发板上通过“insmod helloworld.ko”命令可以加载驱动，在加载驱动模块的时候会执行驱动入口的函数，也就是helloworld程序中的helloworld_init函数，所以可以看到打印出来的字符串信息“helloworld_init”。如下图（图4-10）所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/wps19.jpg" alt="img"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309042115579.jpeg" alt="img"></p>
 <p>图 4-10</p>
 <p>如果要卸载helloworld内核模块，可以通过“rmmod helloworld”命令来卸载驱动模块，同理在卸载驱动模块的时候会执行驱动出口的函数，所以可以看到驱动出口函数打印出来的字符串信息“helloworld_exit”，如下图（图4-11）所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/wps20.jpg" alt="img"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309042115931.jpeg" alt="img"></p>
 <p>图 4-11</p>
 <p>加载驱动模块也可以使用modprobe命令，它比insmod命令更强大，modprobe命令在加载驱动模块的时候，会同时加载该模块依赖的其他模块。比如helloworld.ko依赖before.ko，使用insmod加载的时候，就必须先加载before.ko，然后在加载helloworld.ko才可以加载成功从。但是使用modprobe加载的时候，他会自动分析模块的依赖关系，然后将所有的依赖的模块都加载到内核当中。比较“聪明”。</p>
 <p>同样，在卸载驱动模块的时候，如果模块存在依赖关系，如果使用insmod命令，需要手动卸载依赖的内核模块，但是使用modprobe命令可以自动卸载驱动模块所依赖的其他模块。</p>
@@ -353,7 +351,7 @@
 <p>但是使用modprobe卸载存在一个问题，如果所依赖的模块被其他模块所使用，比如刚才例子中的before.ko还被其他的模块使用，这时候就不能使用modprobe卸载。所以还是推荐使用rmmod命令来卸载。</p>
 <h2 id="4-5查看模块信息"><a href="#4-5查看模块信息" class="headerlink" title="4.5查看模块信息"></a>4.5查看模块信息</h2><p>在驱动模块加载之后，使用“modinfo helloworld.ko”命令可以获得模块的信息，包括模块作者，模块说明，模块支持的参数等等。</p>
 <p>lsmod 命令可以列出已经载入Linux内核模块，在helloworld驱动加载之后，查看内核中加载的模块，如下（图4-12）所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/wps21.jpg" alt="img"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309042115860.jpeg" alt="img"></p>
 <p>图 4-12</p>
 <h1 id="第5章-驱动模块传参实验"><a href="#第5章-驱动模块传参实验" class="headerlink" title="第5章 驱动模块传参实验"></a>第5章 驱动模块传参实验</h1><p>经过前两章实验的实战操作，我们已经完成最简单的helloworld驱动实验和模块驱动实验，加载模块可以使用“insmod”函数，使用“insmod”函数进行模块加载时也能进行参数的传递。运用得当可以极大提升内核测试速度。本节就来学习一下如何进行驱动模块的传参。</p>
 <h2 id="5-1-驱动模块传参简介"><a href="#5-1-驱动模块传参简介" class="headerlink" title="5.1 驱动模块传参简介"></a>5.1 驱动模块传参简介</h2><p> 驱动模块传参是一种可以随时向内核模块传递、修改参数的方法。例如可以传递串口驱动的波特率、数据位数、校验位、停止位等参数，进行功能的设置，以此节省编译模块的时间，大大提高调试速度。</p>
@@ -402,24 +400,24 @@
 
 <p>图5-4</p>
 <p>对于Makefile的内容注释已在上图添加，保存退出之后，来到存放parameter.c和Makefile文件目录下，如下图（图5-5）所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/wps22.jpg" alt="img"> </p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309042115943.jpeg" alt="img"> </p>
 <p>图5-5</p>
 <p>然后使用命令“make”进行驱动的编译，编译完成如下图（图5-6）所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/wps23.jpg" alt="img"> </p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309042115870.jpeg" alt="img"> </p>
 <p>图5-6</p>
 <p>编译完生成 parameter.ko目标文件，如下图（图5-7）所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/wps24.jpg" alt="img"> </p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309042115920.jpeg" alt="img"> </p>
 <p>图5-7</p>
 <p>至此我们的驱动模块就编译成功了，下面进行驱动的运行测试。</p>
 <h3 id="5-3-2-运行测试"><a href="#5-3-2-运行测试" class="headerlink" title="5.3.2 运行测试"></a>5.3.2 运行测试</h3><p>在上一章节中已经学习了使用insmod命令加载模块，而驱动模块传参的命令格式为</p>
 <p>insmod 对应的模块 参数</p>
 <p>parameter.ko 驱动加载可以传递3个参数，分别为int类型的参数number，char类型的参数name和int数组类型的参数para。使用以下命令进行驱动的加载，加载完成之后的打印信息如下图（图5-8）所示：</p>
 <p>insmod parameter.ko number&#x3D;100 name&#x3D;”topeet” para&#x3D;0,1,2,3,4,5,6,7 str&#x3D;”itop”</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/wps25.jpg" alt="img"> </p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309042115895.jpeg" alt="img"> </p>
 <p>图5-8</p>
 <p>可以看到传递的参数都分别打印了出来。最后可以输入以下命令进行驱动的卸载，如下图（图5-9）所示：</p>
 <p>rmmod parameter.ko</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/wps26.jpg" alt="img"> </p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309042115187.jpeg" alt="img"> </p>
 <p>图5-9</p>
 <h1 id="第6章-内核模块符号导出实验"><a href="#第6章-内核模块符号导出实验" class="headerlink" title="第6章 内核模块符号导出实验"></a>第6章 内核模块符号导出实验</h1><p>在上一小节中，给大家讲解了驱动模块传参实验，使用insmod命令加载驱动时可以进行参数的传递，但是每一个内核模块之间是相互独立的，那模块间的符号传递要怎样进行呢，让我们带着疑问来进行本章节的学习吧！</p>
 <h2 id="6-1-内核模块符号导出简介"><a href="#6-1-内核模块符号导出简介" class="headerlink" title="6.1 内核模块符号导出简介"></a>6.1 内核模块符号导出简介</h2><p>驱动程序编译生成的ko文件是相互独立的，即模块之间变量或者函数在正常情况下无法进行互相访问。而一些复杂的驱动模块需要分层进行设计，这时候就需要用到内核模块符号导出。</p>
@@ -447,25 +445,25 @@
 
 <p>图6-4</p>
 <p>对于Makefile的内容注释已在上图进行添加，这里要注意的是在hello.c代码中使用了mathmodule.c所导出的符号，所以mathmodule.c要在hello.c之前进行编译，即第3行和第4行顺序不能交换。保存退出之后，来到相应的文件目录下，如下图（图6-5）所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/wps27.jpg" alt="img"> </p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309042115183.jpeg" alt="img"> </p>
 <p>图6-5</p>
 <p>然后使用命令“make”进行驱动的编译，编译完成如下图（图6-6）所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/wps28.jpg" alt="img"> </p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309042115229.jpeg" alt="img"> </p>
 <p>图6-6</p>
 <p>编译完后会生成hello.ko和mathmodule.ko目标文件，如下图（图6-7）所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/wps29.jpg" alt="img"> </p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309042115254.jpeg" alt="img"> </p>
 <p>图6-7</p>
 <p>至此我们的驱动模块就编译成功了，下面进行驱动的加载运行测试。</p>
 <h3 id="6-3-2-运行测试"><a href="#6-3-2-运行测试" class="headerlink" title="6.3.2 运行测试"></a>6.3.2 运行测试</h3><p>这里要注意的是，由于 hello.ko依赖于mathmodule.ko，所以mathmodule.ko需要先加载，分别使用以下命令进行模块的加载（加载顺序不能变），如下（图6-8）所示：</p>
 <p>insmod mathmodule.ko</p>
 <p>insmod  hello.ko</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/wps30.jpg" alt="img"> </p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309042115250.jpeg" alt="img"> </p>
 <p>图6-8</p>
 <p>可以看到 hello.ko驱动加载的时候，mathmodule.ko模块中定义的num参数值和调用sum()函数的后正确的返回值都被打印了出来。至此内核模块符号导出实验就完成了。</p>
 <p>最后可以输入以下命令进行驱动的卸载，如下图（图6-9）所示：</p>
 <p>rmmod  hello.ko</p>
 <p>rmmod mathmodule.ko</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/wps31.jpg" alt="img"> </p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309042115362.jpeg" alt="img"> </p>
 <p>图6-9</p>
 <p>注意：由于hello.ko文件使用了mathmodule.ko导出的符号，所以要先卸载hello.ko，卸载完成之后再卸载mathmodule.ko。</p>
  
@@ -520,7 +518,7 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2023/09/04/rk3568-%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E7%AC%AC%E4%B8%80%E7%AF%87-%E9%A9%B1%E5%8A%A8%E5%9F%BA%E7%A1%80/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2023/09/04/rk3568-%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E7%AC%AC%E4%B8%80%E7%AF%87-%E9%A9%B1%E5%8A%A8%E5%9F%BA%E7%A1%80-1/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -533,19 +531,10 @@
    
   <nav class="article-nav">
     
-      <a href="/2023/09/04/rk3568-%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E7%AC%AC%E4%BA%8C%E7%AF%87-%E5%AD%97%E7%AC%A6%E8%AE%BE%E5%A4%87%E5%9F%BA%E7%A1%80/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            rk3568 驱动开发第二篇 字符设备基础
-          
-        </div>
-      </a>
     
-    
-      <a href="/2023/09/04/2023-0904-%E8%AF%BB%E4%B9%A6/" class="article-nav-link">
+      <a href="/2023/09/04/rk3568-%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E7%AC%AC%E4%B8%83%E7%AF%87-%E8%AE%BE%E5%A4%87%E6%A0%91/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">2023 0904 读书</div>
+        <div class="article-nav-title">rk3568 驱动开发第七篇 设备树</div>
       </a>
     
   </nav>
