@@ -13,7 +13,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
-      <title>c高级编程 程序的编译、链接和运行 |  热爱学习的未来酱</title>
+      <title>程序的编译与可执行文件 |  热爱学习的未来酱</title>
   <meta name="generator" content="hexo-theme-ayer">
       
       <link rel="shortcut icon" href="/favicon.ico" />
@@ -59,7 +59,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-c高级编程-程序的编译、链接和运行"
+  id="post-3-1-程序的编译与可执行文件"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -70,7 +70,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  c高级编程 程序的编译、链接和运行
+  程序的编译与可执行文件
 </h1>
  
 
@@ -78,7 +78,7 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2023/09/04/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B-%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%BC%96%E8%AF%91%E3%80%81%E9%93%BE%E6%8E%A5%E5%92%8C%E8%BF%90%E8%A1%8C/" class="article-date">
+      <a href="/2023/09/04/3-1-%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%BC%96%E8%AF%91%E4%B8%8E%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6/" class="article-date">
   <time datetime="2023-09-04T13:19:52.000Z" itemprop="datePublished">2023-09-04</time>
 </a> 
   <div class="article-category">
@@ -90,7 +90,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">3.2k</span>
+            <span class="post-count">3k</span>
         </span>
     </span>
 
@@ -99,7 +99,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">13 分钟</span>
+            <span class="post-count">12 分钟</span>
         </span>
     </span>
 </div>
@@ -219,7 +219,7 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -shared -fPIC -o libsub.so sub.c</span><br></pre></td></tr></table></figure>
 
 <p>然后使用readelf 读取elf头如下所示：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309042227936.png" alt="image-20230904222725900"></p>
-<h1 id="3-2-GCC命令参数"><a href="#3-2-GCC命令参数" class="headerlink" title="3.2 GCC命令参数"></a>3.2 GCC命令参数</h1><h1 id="3-3-预处理过程"><a href="#3-3-预处理过程" class="headerlink" title="3.3 预处理过程"></a>3.3 预处理过程</h1><h1 id="3-4-编译过程-1-：从源程序到汇编文件"><a href="#3-4-编译过程-1-：从源程序到汇编文件" class="headerlink" title="3.4 编译过程(1)：从源程序到汇编文件"></a>3.4 编译过程(1)：从源程序到汇编文件</h1><h1 id="3-5-编译过程-2-：汇编过程"><a href="#3-5-编译过程-2-：汇编过程" class="headerlink" title="3.5 编译过程(2)：汇编过程"></a>3.5 编译过程(2)：汇编过程</h1><h1 id="3-6-编译过程-3-：符号表"><a href="#3-6-编译过程-3-：符号表" class="headerlink" title="3.6 编译过程(3)：符号表"></a>3.6 编译过程(3)：符号表</h1><h1 id="3-7-链接过程-1-：地址空间分配与链接脚本"><a href="#3-7-链接过程-1-：地址空间分配与链接脚本" class="headerlink" title="3.7 链接过程(1)：地址空间分配与链接脚本"></a>3.7 链接过程(1)：地址空间分配与链接脚本</h1><h1 id="3-8-链接过程-2-：符号解析-强符号与弱符号"><a href="#3-8-链接过程-2-：符号解析-强符号与弱符号" class="headerlink" title="3.8 链接过程(2)：符号解析-强符号与弱符号"></a>3.8 链接过程(2)：符号解析-强符号与弱符号</h1><h1 id="3-9-链接过程-3-：重定位"><a href="#3-9-链接过程-3-：重定位" class="headerlink" title="3.9 链接过程(3)：重定位"></a>3.9 链接过程(3)：重定位</h1><h1 id="3-10-程序的运行"><a href="#3-10-程序的运行" class="headerlink" title="3.10 程序的运行"></a>3.10 程序的运行</h1><h1 id="3-11-BSS段的处理"><a href="#3-11-BSS段的处理" class="headerlink" title="3.11 BSS段的处理"></a>3.11 BSS段的处理</h1><h1 id="3-12-main函数入口分析"><a href="#3-12-main函数入口分析" class="headerlink" title="3.12 main函数入口分析"></a>3.12 main函数入口分析</h1><h1 id="3-13-链接静态库"><a href="#3-13-链接静态库" class="headerlink" title="3.13 链接静态库"></a>3.13 链接静态库</h1><h1 id="3-14-动态链接-1-：与位置无关的代码"><a href="#3-14-动态链接-1-：与位置无关的代码" class="headerlink" title="3.14 动态链接(1)：与位置无关的代码"></a>3.14 动态链接(1)：与位置无关的代码</h1><h1 id="3-15-动态链接-2-：全局符号表GOT"><a href="#3-15-动态链接-2-：全局符号表GOT" class="headerlink" title="3.15 动态链接(2)：全局符号表GOT"></a>3.15 动态链接(2)：全局符号表GOT</h1><h1 id="3-16-动态链接-3-：共享库"><a href="#3-16-动态链接-3-：共享库" class="headerlink" title="3.16 动态链接(3)：共享库"></a>3.16 动态链接(3)：共享库</h1><h1 id="3-17-开发一个插件"><a href="#3-17-开发一个插件" class="headerlink" title="3.17 开发一个插件"></a>3.17 开发一个插件</h1><h1 id="3-18-内核模块加载机制"><a href="#3-18-内核模块加载机制" class="headerlink" title="3.18 内核模块加载机制"></a>3.18 内核模块加载机制</h1><h1 id="3-19-binutils工具集"><a href="#3-19-binutils工具集" class="headerlink" title="3.19 binutils工具集"></a>3.19 binutils工具集</h1><h1 id="3-20-linux内核加载实验"><a href="#3-20-linux内核加载实验" class="headerlink" title="3.20 linux内核加载实验"></a>3.20 linux内核加载实验</h1><h1 id="3-21-u-boot重定位分析-上"><a href="#3-21-u-boot重定位分析-上" class="headerlink" title="3.21 u-boot重定位分析(上)"></a>3.21 u-boot重定位分析(上)</h1><h1 id="3-22-u-boot重定位分析-下"><a href="#3-22-u-boot重定位分析-下" class="headerlink" title="3.22 u-boot重定位分析(下)"></a>3.22 u-boot重定位分析(下)</h1> 
+<h1 id=""><a href="#" class="headerlink" title=""></a></h1> 
       <!-- reward -->
       
     </div>
@@ -271,7 +271,7 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2023/09/04/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B-%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%BC%96%E8%AF%91%E3%80%81%E9%93%BE%E6%8E%A5%E5%92%8C%E8%BF%90%E8%A1%8C/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2023/09/04/3-1-%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%BC%96%E8%AF%91%E4%B8%8E%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -283,6 +283,15 @@
 
    
   <nav class="article-nav">
+    
+      <a href="/2023/09/05/2023-0905-%E5%8F%8D%E6%80%9D/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            2023 0905 反思
+          
+        </div>
+      </a>
     
     
       <a href="/2023/09/04/rk3568-%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E7%AC%AC%E4%B8%80%E7%AF%87-%E9%A9%B1%E5%8A%A8%E5%9F%BA%E7%A1%80-1/" class="article-nav-link">
