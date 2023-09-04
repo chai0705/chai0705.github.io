@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2023-09-04T00:17:36.738Z</updated>
+  <updated>2023-09-04T13:00:56.660Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,181 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>rk3568 驱动开发第七篇 设备树</title>
+    <link href="http://example.com/2023/09/04/rk3568-%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E7%AC%AC%E4%B8%83%E7%AF%87-%E8%AE%BE%E5%A4%87%E6%A0%91/"/>
+    <id>http://example.com/2023/09/04/rk3568-%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E7%AC%AC%E4%B8%83%E7%AF%87-%E8%AE%BE%E5%A4%87%E6%A0%91/</id>
+    <published>2023-09-04T12:56:21.000Z</published>
+    <updated>2023-09-04T13:00:56.660Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;&#92;assets&#92;css&#92;APlayer.min.css&quot;&gt;&lt;script src=&quot;&#92;assets&#92;js&#92;APlayer.min.js&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="rk3568 驱动" scheme="http://example.com/categories/rk3568-%E9%A9%B1%E5%8A%A8/"/>
+    
+    
+    <category term="设备树" scheme="http://example.com/tags/%E8%AE%BE%E5%A4%87%E6%A0%91/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>rk3568 驱动开发第六篇 平台总线</title>
+    <link href="http://example.com/2023/09/04/rk3568-%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E7%AC%AC%E5%85%AD%E7%AF%87-%E5%B9%B3%E5%8F%B0%E6%80%BB%E7%BA%BF/"/>
+    <id>http://example.com/2023/09/04/rk3568-%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E7%AC%AC%E5%85%AD%E7%AF%87-%E5%B9%B3%E5%8F%B0%E6%80%BB%E7%BA%BF/</id>
+    <published>2023-09-04T12:56:12.000Z</published>
+    <updated>2023-09-04T13:00:38.676Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;&#92;assets&#92;css&#92;APlayer.min.css&quot;&gt;&lt;script src=&quot;&#92;assets&#92;js&#92;APlayer.min.js&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="rk3568 驱动" scheme="http://example.com/categories/rk3568-%E9%A9%B1%E5%8A%A8/"/>
+    
+    
+    <category term="平台总线" scheme="http://example.com/tags/%E5%B9%B3%E5%8F%B0%E6%80%BB%E7%BA%BF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>rk3568 驱动开发第五篇 中断</title>
+    <link href="http://example.com/2023/09/04/rk3568-%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E7%AC%AC%E4%BA%94%E7%AF%87-%E4%B8%AD%E6%96%AD/"/>
+    <id>http://example.com/2023/09/04/rk3568-%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E7%AC%AC%E4%BA%94%E7%AF%87-%E4%B8%AD%E6%96%AD/</id>
+    <published>2023-09-04T12:55:48.000Z</published>
+    <updated>2023-09-04T13:00:26.068Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;&#92;assets&#92;css&#92;APlayer.min.css&quot;&gt;&lt;script src=&quot;&#92;assets&#92;js&#92;APlayer.min.js&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="rk3568 驱动" scheme="http://example.com/categories/rk3568-%E9%A9%B1%E5%8A%A8/"/>
+    
+    
+    <category term="中断" scheme="http://example.com/tags/%E4%B8%AD%E6%96%AD/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>rk3568 驱动开发第四篇 高级字符设备进阶</title>
+    <link href="http://example.com/2023/09/04/rk3568-%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E7%AC%AC%E5%9B%9B%E7%AF%87-%E9%AB%98%E7%BA%A7%E5%AD%97%E7%AC%A6%E8%AE%BE%E5%A4%87%E8%BF%9B%E9%98%B6/"/>
+    <id>http://example.com/2023/09/04/rk3568-%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E7%AC%AC%E5%9B%9B%E7%AF%87-%E9%AB%98%E7%BA%A7%E5%AD%97%E7%AC%A6%E8%AE%BE%E5%A4%87%E8%BF%9B%E9%98%B6/</id>
+    <published>2023-09-04T12:55:36.000Z</published>
+    <updated>2023-09-04T13:00:12.469Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;&#92;assets&#92;css&#92;APlayer.min.css&quot;&gt;&lt;script src=&quot;&#92;assets&#92;js&#92;APlayer.min.js&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="rk3568 驱动" scheme="http://example.com/categories/rk3568-%E9%A9%B1%E5%8A%A8/"/>
+    
+    
+    <category term="高级字符设备进阶" scheme="http://example.com/tags/%E9%AB%98%E7%BA%A7%E5%AD%97%E7%AC%A6%E8%AE%BE%E5%A4%87%E8%BF%9B%E9%98%B6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>rk3568 驱动开发第三篇 并发与竞争</title>
+    <link href="http://example.com/2023/09/04/rk3568-%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E7%AC%AC%E4%B8%89%E7%AF%87-%E5%B9%B6%E5%8F%91%E4%B8%8E%E7%AB%9E%E4%BA%89/"/>
+    <id>http://example.com/2023/09/04/rk3568-%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E7%AC%AC%E4%B8%89%E7%AF%87-%E5%B9%B6%E5%8F%91%E4%B8%8E%E7%AB%9E%E4%BA%89/</id>
+    <published>2023-09-04T12:55:28.000Z</published>
+    <updated>2023-09-04T12:59:50.765Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;&#92;assets&#92;css&#92;APlayer.min.css&quot;&gt;&lt;script src=&quot;&#92;assets&#92;js&#92;APlayer.min.js&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="rk3568 驱动" scheme="http://example.com/categories/rk3568-%E9%A9%B1%E5%8A%A8/"/>
+    
+    
+    <category term="并发与竞争" scheme="http://example.com/tags/%E5%B9%B6%E5%8F%91%E4%B8%8E%E7%AB%9E%E4%BA%89/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>rk3568 驱动开发第二篇 字符设备基础</title>
+    <link href="http://example.com/2023/09/04/rk3568-%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E7%AC%AC%E4%BA%8C%E7%AF%87-%E5%AD%97%E7%AC%A6%E8%AE%BE%E5%A4%87%E5%9F%BA%E7%A1%80/"/>
+    <id>http://example.com/2023/09/04/rk3568-%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E7%AC%AC%E4%BA%8C%E7%AF%87-%E5%AD%97%E7%AC%A6%E8%AE%BE%E5%A4%87%E5%9F%BA%E7%A1%80/</id>
+    <published>2023-09-04T12:55:19.000Z</published>
+    <updated>2023-09-04T12:59:22.147Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;&#92;assets&#92;css&#92;APlayer.min.css&quot;&gt;&lt;script src=&quot;&#92;assets&#92;js&#92;APlayer.min.js&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="rk3568 驱动" scheme="http://example.com/categories/rk3568-%E9%A9%B1%E5%8A%A8/"/>
+    
+    
+    <category term="字符设备基础" scheme="http://example.com/tags/%E5%AD%97%E7%AC%A6%E8%AE%BE%E5%A4%87%E5%9F%BA%E7%A1%80/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>rk3568 驱动开发第一篇 驱动基础</title>
+    <link href="http://example.com/2023/09/04/rk3568-%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E7%AC%AC%E4%B8%80%E7%AF%87-%E9%A9%B1%E5%8A%A8%E5%9F%BA%E7%A1%80/"/>
+    <id>http://example.com/2023/09/04/rk3568-%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E7%AC%AC%E4%B8%80%E7%AF%87-%E9%A9%B1%E5%8A%A8%E5%9F%BA%E7%A1%80/</id>
+    <published>2023-09-04T12:55:09.000Z</published>
+    <updated>2023-09-04T12:58:44.590Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;&#92;assets&#92;css&#92;APlayer.min.css&quot;&gt;&lt;script src=&quot;&#92;assets&#92;js&#92;APlayer.min.js&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="rk3568 驱动" scheme="http://example.com/categories/rk3568-%E9%A9%B1%E5%8A%A8/"/>
+    
+    
+    <category term="驱动基础" scheme="http://example.com/tags/%E9%A9%B1%E5%8A%A8%E5%9F%BA%E7%A1%80/"/>
+    
+  </entry>
   
   <entry>
     <title>2023 0904 读书</title>

@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+  
+
+    <head>
+      <meta charset="utf-8" />
+        
+      <meta name="description" content="永远年轻，永远热泪盈眶" />
+      
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>rk3568 驱动开发第六篇 平台总线 |  热爱学习的未来酱</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      
+<link rel="stylesheet" href="/css/fonts/remixicon.css">
+
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    <link rel="alternate" href="/atom.xml" title="热爱学习的未来酱" type="application/atom+xml">
+</head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+      <canvas width="1777" height="841"
+        style="position: fixed; left: 0px; top: 0px; z-index: 99999; pointer-events: none;"></canvas>
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-rk3568-驱动开发第六篇-平台总线"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  rk3568 驱动开发第六篇 平台总线
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/09/04/rk3568-%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E7%AC%AC%E5%85%AD%E7%AF%87-%E5%B9%B3%E5%8F%B0%E6%80%BB%E7%BA%BF/" class="article-date">
+  <time datetime="2023-09-04T12:56:12.000Z" itemprop="datePublished">2023-09-04</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/rk3568-%E9%A9%B1%E5%8A%A8/">rk3568 驱动</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">12.2k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">48 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="第50章-平台总线模型介绍"><a href="#第50章-平台总线模型介绍" class="headerlink" title="**** ****第50章 平台总线模型介绍"></a>**** ****第50章 平台总线模型介绍</h1><p>在前面所有章节中，无论要完成何种需求，我们都编写了一个独立的驱动程序，但这样编写出来的驱动程序在重用性和可移植性上是很低的，无论之后要编写一个同类型的驱动还是将该驱动更换一个平台，都要花费时间重新修改驱动代码，而驱动的分离和分层这一软件思路的提出（即本章节要讲解的平台总线模型），就是为了解决这个问题，下面让我们一起进入平台总线模型的学习吧。</p>
+<h2 id="50-1-什么是平台总线？"><a href="#50-1-什么是平台总线？" class="headerlink" title="50.1 什么是平台总线？"></a>50.1 什么是平台总线？</h2><p>平台总线（Platform bus）是Linux内核中提供的一种虚拟总线，用于管理和组织与特定硬件平台相关的设备和驱动。它充当了平台设备（platform device）和平台驱动（platform driver）之间的桥梁，负责将它们进行匹配和绑定。</p>
+<p>当系统注册一个平台设备时，平台总线会寻找与之匹配的平台驱动。它会遍历已注册的平台驱动列表，尝试与每个平台驱动进行匹配，直到找到与平台设备匹配的驱动为止。一旦找到匹配的驱动，平台总线会将平台设备与平台驱动进行绑定，使得设备可以被正确地初始化和操作。</p>
+<p>同样地，当系统注册一个平台驱动时，平台总线会寻找与之匹配的平台设备。它会遍历已注册的平台设备列表，尝试与每个平台设备进行匹配，直到找到与平台驱动匹配的设备为止。一旦找到匹配的设备，平台总线会将平台设备与平台驱动进行绑定，使得驱动可以管理和控制与该设备相关的操作。</p>
+<p>设备、平台总线、驱动的关系如下图（图 50-1）所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/wps1.jpg" alt="img"> </p>
+<p>图 50-1</p>
+<p>通过引入平台总线，Linux内核提供了一种通用的机制来管理和组织与特定硬件平台相关的设备和驱动。它使得设备和驱动之间的匹配过程更加自动化和灵活，同时也提高了嵌入式系统的可移植性和可扩展性。</p>
+<h2 id="50-2-平台总线的优势"><a href="#50-2-平台总线的优势" class="headerlink" title="50.2 平台总线的优势"></a>50.2 平台总线的优势</h2><p>在前面的章节中，我们编写的驱动程序将驱动和设备相关的内容放在一起，但是当涉及到多个相同类型的设备时，这种方法会引发一系列问题。举个例子，假设我们有一个硬件平台，该硬件平台上存在了500个模块，这些模块都使用了LED灯。如果我们使用杂项设备来编写驱动，虽然相比字符设备，杂项设备的代码量较少，但我们仍旧需要编写500份类似的代码，从而生成相应的设备节点，以供上层应用在不同模块上控制LED灯。</p>
+<p>编写500份重复的代码会带来两个问题。首先，会造成大量重复劳动。其次，代码的重用性较差。如果我们需要将这些驱动从一个平台移植到另一个平台，就需要逐个修改驱动代码，尽管只需修改与硬件相关的部分，但仍旧是一个很大的工作量</p>
+<p>而在引入了平台总线模型后，这些问题就得到了很好地解决。通过使用平台总线模型，将设备驱动和平台设备进行了分离。这样一来，我们只需编写一份通用的驱动代码即可，然后针对不同的平台设备进行配置，这就大大减少了重复编写代码的工作量，并提高了驱动代码的重用性。当我们需要将驱动移植到不同的平台时，只需对硬件相关的部分进行适配即可，其他部分可以保持不变。</p>
+<p>整理出来的平台总线优势如下所示：</p>
+<p><em><strong>*（*</strong></em><em><strong>*1*</strong></em><em><strong>*）*</strong></em>****设备与驱动的分离：****传统的设备驱动模型将设备和驱动代码合并在同一个文件中，导致代码冗余和可维护性差。而平台总线模型将设备代码和驱动代码分离，设备代码放在device.c文件中，驱动代码放在driver.c文件中。这种分离使得设备和驱动的职责更加清晰，提高了代码的可读性和可维护性。</p>
+<p><em><strong>*（*</strong></em><em><strong>*2*</strong></em><em><strong>*）*</strong></em>****提高代码的重用性：****平台总线模型使得相同类型的设备可以共享相同的驱动代码。例如，在一个硬件平台上存在多个相同类型的设备，传统的驱动模型需要为每个设备编写独立的驱动代码。而使用平台总线模型，只需编写一个通用的驱动代码，然后为每个设备创建相应的device.c文件，将设备特定的代码放在其中。这样可以减少代码的重复性，提高了代码的重用性和可维护性。</p>
+<p><em><strong>*（*</strong></em><em><strong>*3*</strong></em><em><strong>*）*</strong></em>****减少重复性代码：****在传统的设备驱动模型中，如果有多个相同类型的设备存在，就需要为每个设备编写独立的驱动代码。而使用平台总线模型，只需编写一个通用的驱动代码，然后为每个设备创建相应的device.c文件，将设备特定的代码放在其中。这样可以避免大量的重复性代码，简化了驱动开发过程。</p>
+<p><em><strong>*（*</strong></em><em><strong>*4*</strong></em><em><strong>*）*</strong></em>****提高可移植性：****平台总线模型可以提高驱动的可移植性。开发者可以编写适应平台总线的平台驱动程序，从而支持特定的外设，而无需依赖于特定的标准总线。这使得驱动可以更容易地在不同的硬件平台之间进行移植和重用。</p>
+<h1 id="第51章-注册platform设备实验"><a href="#第51章-注册platform设备实验" class="headerlink" title="**** ****第51章 注册platform设备实验"></a>**** ****第51章 注册platform设备实验</h1><h2 id="51-1-注册platform设备"><a href="#51-1-注册platform设备" class="headerlink" title="51.1 注册platform设备"></a>51.1 注册platform设备</h2><h3 id="51-1-1-platform-device-register-函数"><a href="#51-1-1-platform-device-register-函数" class="headerlink" title="51.1.1 platform_device_register 函数"></a>51.1.1 platform_device_register 函数</h3><p>platform_device_register函数用于将platform_device结构体描述的平台设备注册到内核中。下面是对platform_device_register函数的详细介绍：</p>
+<p><em><strong>*函数原型：*</strong></em></p>
+<p>int platform_device_register(struct platform_device *pdev);</p>
+<p><em><strong>*头文件：*</strong></em></p>
+<p>#include &lt;linux&#x2F;platform_device.h&gt;</p>
+<p><em><strong>*函数作用：*</strong></em><br>    platform_device_register函数用于将platform_device结构体描述的平台设备注册到内核中，使其能够参与设备的资源分配和驱动的匹配。</p>
+<p><em><strong>*参数含义：*</strong></em></p>
+<p>pdev：指向platform_device结构体的指针，描述要注册的平台设备的信息。</p>
+<p><em><strong>*返回值：*</strong></em></p>
+<p>成功：返回0，表示设备注册成功。</p>
+<p>失败：返回负数，表示设备注册失败，返回的负数值表示错误代码。</p>
+<p>pdev参数是一个指向platform_device结构体的指针，其中包含了描述平台设备的各种属性和信息。platform_device结构体包含了设备名称、设备资源、设备ID等信息，用于描述和标识平台设备，会在接下来的小节对该结构体进行详细的介绍。</p>
+<p>该函数在内核源码目录下的“&#x2F;include&#x2F;linux&#x2F;platform_device.h”文件中，具体内容如下所示：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">extern int platform_device_register(struct platform_device *);</span><br></pre></td></tr></table></figure>
+
+<p>函数声明中的extern关键字表示该函数在其他地方定义，而不是在当前文件中实现。这样的声明通常出现在头文件中，用于告诉编译器该函数的定义存在于其他源文件中，以便在编译时能够正确引用该函数。</p>
+<p>而platform_device_register实际定义在“&#x2F;drivers&#x2F;base&#x2F;platform.c”文件中，相关定义如下所示：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">int platform_device_register(struct platform_device *pdev)</span><br><span class="line">&#123;</span><br><span class="line">	device_initialize(&amp;pdev-&gt;dev);</span><br><span class="line">	arch_setup_pdev_archdata(pdev);</span><br><span class="line">	return platform_device_add(pdev);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>函数内部有三个主要的操作。</p>
+<p>第3行：调用了device_initialize函数，用于对pdev-&gt;dev进行初始化。pdev-&gt;dev是struct platform_device结构体中的一个成员，它表示平台设备对应的struct device结构体。通过调用device_initialize函数，对pdev-&gt;dev进行一些基本的初始化工作，例如设置设备的引用计数、设备的类型等。</p>
+<p>第4行：调用了arch_setup_pdev_archdata函数，用于根据平台设备的架构数据来设置pdev的架构相关数据。这个函数的具体实现可能与具体的架构相关，它主要用于在不同的架构下对平台设备进行特定的设置。</p>
+<p>第5行：调用了platform_device_add函数，将平台设备pdev添加到内核中。platform_device_add函数会完成平台设备的添加操作，包括将设备添加到设备层级结构中、添加设备的资源等。它会返回一个int类型的结果，表示设备添加的结果。</p>
+<p>platform_device_register函数的主要作用是将platform_device结构体描述的平台设备注册到内核中，包括设备的初始化、添加到platform总线和设备层级结构、添加设备资源等操作。通过该函数，平台设备被注册后，就能够参与设备的资源分配和驱动的匹配过程。函数的返回值可以用于判断设备注册是否成功。</p>
+<h3 id="51-1-2-platform-device-unregister-函数"><a href="#51-1-2-platform-device-unregister-函数" class="headerlink" title="51.1.2 platform_device_unregister 函数"></a>51.1.2 platform_device_unregister 函数</h3><p>platform_device_unregister函数用于取消注册已经注册的平台设备，即从内核中移除设备。在设备不再需要时，调用该函数可以进行设备的清理和释放操作。</p>
+<p><em><strong>*函数原型：*</strong></em></p>
+<p>void platform_device_unregister(struct platform_device *pdev);</p>
+<p><em><strong>*头文件：*</strong></em></p>
+<p>#include &lt;linux&#x2F;platform_device.h&gt;</p>
+<p><em><strong>*函数作用：*</strong></em><br>    platform_device_unregister函数用于取消注册已经注册的平台设备，从内核中移除设备。</p>
+<p>参数含义：</p>
+<p>pdev：指向要取消注册的平台设备的platform_device结构体指针。</p>
+<p>返回值：<br>无返回值。</p>
+<p>该函数在内核源码目录下的“&#x2F;include&#x2F;linux&#x2F;platform_device.h”文件中，具体内容如下所示：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">extern</span> <span class="type">int</span> <span class="title function_">platform_device_unregister</span><span class="params">(<span class="keyword">struct</span> platform_device *)</span>;</span><br></pre></td></tr></table></figure>
+
+<p>函数声明中的extern关键字表示该函数在其他地方定义，而不是在当前文件中实现。这样的声明通常出现在头文件中，用于告诉编译器该函数的定义存在于其他源文件中，以便在编译时能够正确引用该函数。</p>
+<p>而platform_device_unregister实际定义在“&#x2F;drivers&#x2F;base&#x2F;platform.c”文件中，相关定义如下所示：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">platform_device_unregister</span><span class="params">(<span class="keyword">struct</span> platform_device *pdev)</span></span><br><span class="line">&#123;</span><br><span class="line">	platform_device_del(pdev);</span><br><span class="line">	platform_device_put(pdev);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>函数内部有两个主要的操作：</p>
+<p>第3行：调用了platform_device_del函数，用于将设备从platform总线的设备列表中移除。它会将设备从设备层级结构中移除，停止设备的资源分配和驱动的匹配。</p>
+<p>第4行：这一步调用了platform_device_put函数，用于减少对设备的引用计数。这个函数会检查设备的引用计数，如果引用计数减为零，则会释放设备结构体和相关资源。通过减少引用计数，可以确保设备在不再被使用时能够被释放。</p>
+<p>platform_device_unregister函数的作用是取消注册已经注册的平台设备，从内核中移除设备。它先调用platform_device_del函数将设备从设备层级结构中移除，然后调用platform_device_put函数减少设备的引用计数，确保设备在不再被使用时能够被释放。</p>
+<h3 id="51-1-3-platform-device结构体"><a href="#51-1-3-platform-device结构体" class="headerlink" title="51.1.3 platform_device结构体"></a>51.1.3 platform_device结构体</h3><p>platform_device结构体是用于描述平台设备的数据结构。它包含了平台设备的各种属性和信息，用于在内核中表示和管理平台设备。该结构体定义在内核的“&#x2F;include&#x2F;linux&#x2F;platform_device.h”文件中，具体内容如下所示：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">struct platform_device &#123;</span><br><span class="line">	const char *name;  // 设备的名称，用于唯一标识设备</span><br><span class="line">	int	id;        // 设备的ID，可以用于区分同一种设备的不同实例</span><br><span class="line">	bool	 id_auto;  // 表示设备的ID是否自动生成</span><br><span class="line">	struct device dev;  // 表示平台设备对应的 struct device 结构体，用于设备的基本管理和操作</span><br><span class="line">	u32	num_resources;   // 设备资源的数量</span><br><span class="line">	struct resource	*resource;   // 指向设备资源的指针</span><br><span class="line"></span><br><span class="line">	const struct platform_device_id *id_entry; // 指向设备的ID表项的指针，用于匹配设备和驱动</span><br><span class="line">	char *driver_override; // 强制设备与指定驱动匹配的驱动名称</span><br><span class="line"></span><br><span class="line">	/* MFD cell pointer */</span><br><span class="line">	struct mfd_cell *mfd_cell;   // 指向多功能设备（MFD）单元的指针，用于多功能设备的描述</span><br><span class="line"></span><br><span class="line">	/* arch specific additions */</span><br><span class="line">	struct pdev_archdata	archdata;    // 用于存储特定于架构的设备数据</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>下面对于几个重要的参数和结构体进行讲解</p>
+<p>const char *name：设备的名称，用于唯一标识设备。必须提供一个唯一的名称，以便内核能够正确识别和管理该设备。</p>
+<p>int id：设备的ID，可以用于区分同一种设备的不同实例。这个参数是可选的，如果不需要使用ID进行区分，可以将其设置为-1，</p>
+<p>struct device dev：表示平台设备对应的struct device结构体，用于设备的基本管理和操作。必须为该参数提供一个有效的struct device对象，该结构体的release方法必须要实现，否则在编译的时候会报错。</p>
+<p>u32 num_resources：设备资源的数量。如果设备具有资源（如内存区域、中断等），则需要提供资源的数量。</p>
+<p>struct resource *resource：指向设备资源的指针。如果设备具有资源，需要提供一个指向资源数组的指针，会在下个小节对该结构体进行详细的讲解。</p>
+<h3 id="51-1-4-resource结构体"><a href="#51-1-4-resource结构体" class="headerlink" title="51.1.4 resource结构体"></a>51.1.4 resource结构体</h3><p>struct resource结构体用于描述系统中的设备资源，包括内存区域、I&#x2F;O 端口、中断等，该结构体定义在内核的“&#x2F;include&#x2F;linux&#x2F;ioport.h”文件中，具体内容如下所示：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">resource</span> &#123;</span></span><br><span class="line">    <span class="type">resource_size_t</span> start;          <span class="comment">/* 资源的起始地址 */</span></span><br><span class="line">    <span class="type">resource_size_t</span> end;            <span class="comment">/* 资源的结束地址 */</span></span><br><span class="line">    <span class="type">const</span> <span class="type">char</span> *name;               <span class="comment">/* 资源的名称 */</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">long</span> flags;            <span class="comment">/* 资源的标志位 */</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">long</span> desc;             <span class="comment">/* 资源的描述信息 */</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">resource</span> *<span class="title">parent</span>;</span>        <span class="comment">/* 指向父资源的指针 */</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">resource</span> *<span class="title">sibling</span>;</span>       <span class="comment">/* 指向同级兄弟资源的指针 */</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">resource</span> *<span class="title">child</span>;</span>         <span class="comment">/* 指向子资源的指针 */</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/* 以下宏定义用于保留未使用的字段 */</span></span><br><span class="line">    ANDROID_KABI_RESERVE(<span class="number">1</span>);</span><br><span class="line">    ANDROID_KABI_RESERVE(<span class="number">2</span>);</span><br><span class="line">    ANDROID_KABI_RESERVE(<span class="number">3</span>);</span><br><span class="line">    ANDROID_KABI_RESERVE(<span class="number">4</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>其中最重要的是前四个参数，每个参数的具体介绍如下所示：</p>
+<p>（1）resource_size_t start：资源的起始地址。它表示资源的起始位置或者起始寄存器的地址。</p>
+<p>（2）resource_size_t end：资源的结束地址。它表示资源的结束位置或者结束寄存器的地址。</p>
+<p>（3）const char *name：资源的名称。它是一个字符串，用于标识和描述资源。</p>
+<p>（4）unsigned long flags：资源的标志位。它包含了一些特定的标志，用于表示资源的属性或者特征。例如，可以用标志位来指示资源的可用性、共享性、缓存属性等。flags参数的具体取值和含义可以根据系统和驱动的需求进行定义和解释，但通常情况下，它用于表示资源的属性、特征或配置选项。下面是一些常见的标志位及其可能的含义：</p>
+<p><em><strong>*1. 资源类型相关标志位：*</strong></em></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">IORESOURCE_IO：表示资源是I/O端口资源。</span><br><span class="line">IORESOURCE_MEM：表示资源是内存资源。</span><br><span class="line">IORESOURCE_REG：表示资源是寄存器偏移量。</span><br><span class="line">IORESOURCE_IRQ：表示资源是中断资源。</span><br><span class="line">IORESOURCE_DMA：表示资源是DMA（直接内存访问）资源。</span><br></pre></td></tr></table></figure>
+
+<p><em><strong>*2. 资源属性和特征相关标志位：*</strong></em></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">IORESOURCE_PREFETCH：表示资源是无副作用的预取资源。</span><br><span class="line">IORESOURCE_READONLY：表示资源是只读的。</span><br><span class="line">IORESOURCE_CACHEABLE：表示资源支持缓存。</span><br><span class="line">IORESOURCE_RANGELENGTH：表示资源的范围长度。</span><br><span class="line">IORESOURCE_SHADOWABLE：表示资源可以被影子资源替代。</span><br><span class="line">IORESOURCE_SIZEALIGN：表示资源的大小表示对齐。</span><br><span class="line">IORESOURCE_STARTALIGN：表示起始字段是对齐的。</span><br><span class="line">IORESOURCE_MEM_64：表示资源是64位内存资源。</span><br><span class="line">IORESOURCE_WINDOW：表示资源由桥接器转发。</span><br><span class="line">IORESOURCE_MUXED：表示资源是软件复用的。</span><br><span class="line">IORESOURCE_SYSRAM：表示资源是系统RAM（修饰符）。</span><br></pre></td></tr></table></figure>
+
+<p><strong>3.</strong> <em><strong>*其他状态和控制标志位：*</strong></em></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">IORESOURCE_EXCLUSIVE：表示用户空间无法映射此资源。</span><br><span class="line">IORESOURCE_DISABLED：表示资源当前被禁用。</span><br><span class="line">IORESOURCE_UNSET：表示尚未分配地址给资源。</span><br><span class="line">IORESOURCE_AUTO：表示地址由系统自动分配。</span><br><span class="line">IORESOURCE_BUSY：表示驱动程序将此资源标记为繁忙。</span><br></pre></td></tr></table></figure>
+
+<h2 id="51-2-实验程序的编写"><a href="#51-2-实验程序的编写" class="headerlink" title="51.2 实验程序的编写"></a>51.2 实验程序的编写</h2><p>本实验对应的网盘路径为：iTOP-RK3568开发板【底板V1.7版本】\03_【iTOP-RK3568开发板】指南教程\02_Linux驱动配套资料\04_Linux驱动例程\40_platform_device\。</p>
+<p>本实验将注册一个名为 “my_platform_device” 的平台设备，当注册平台设备时，该驱动程序提供了两个资源：一个内存资源和一个中断资源。这些资源被定义在名为 my_resources 的结构体数组中,具体内容如下：</p>
+<p><em><strong>*内存资源：*</strong></em></p>
+<p>起始地址：MEM_START_ADDR（0xFDD60000）</p>
+<p>结束地址：MEM_END_ADDR（0xFDD60004）</p>
+<p>标记：IORESOURCE_MEM</p>
+<p><em><strong>*中断资源：*</strong></em></p>
+<p>中断资源号：IRQ_NUMBER（101）</p>
+<p>标记：IORESOURCE_IRQ</p>
+<p>编写完成的platform_device.c代码如下所示：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;linux/module.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;linux/platform_device.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;linux/ioport.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MEM_START_ADDR 0xFDD60000</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MEM_END_ADDR   0xFDD60004</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> IRQ_NUMBER     101</span></span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="class"><span class="keyword">struct</span> <span class="title">resource</span> <span class="title">my_resources</span>[] =</span> &#123;</span><br><span class="line">    &#123;</span><br><span class="line">        .start = MEM_START_ADDR,    <span class="comment">// 内存资源起始地址</span></span><br><span class="line">        .end = MEM_END_ADDR,        <span class="comment">// 内存资源结束地址</span></span><br><span class="line">        .flags = IORESOURCE_MEM,    <span class="comment">// 标记为内存资源</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        .start = IRQ_NUMBER,        <span class="comment">// 中断资源号</span></span><br><span class="line">        .end = IRQ_NUMBER,          <span class="comment">// 中断资源号</span></span><br><span class="line">        .flags = IORESOURCE_IRQ,    <span class="comment">// 标记为中断资源</span></span><br><span class="line">    &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="type">void</span> <span class="title function_">my_platform_device_release</span><span class="params">(<span class="keyword">struct</span> device *dev)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 释放资源的回调函数</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="class"><span class="keyword">struct</span> <span class="title">platform_device</span> <span class="title">my_platform_device</span> =</span> &#123;</span><br><span class="line">    .name = <span class="string">&quot;my_platform_device&quot;</span>,                  <span class="comment">// 设备名称</span></span><br><span class="line">    .id = <span class="number">-1</span>,                                      <span class="comment">// 设备ID</span></span><br><span class="line">    .num_resources = ARRAY_SIZE(my_resources),     <span class="comment">// 资源数量</span></span><br><span class="line">    .resource = my_resources,                      <span class="comment">// 资源数组</span></span><br><span class="line">    .dev.release = my_platform_device_release,     <span class="comment">// 释放资源的回调函数</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="type">int</span> __init <span class="title function_">my_platform_device_init</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> ret;</span><br><span class="line"></span><br><span class="line">    ret = platform_device_register(&amp;my_platform_device);   <span class="comment">// 注册平台设备</span></span><br><span class="line">    <span class="keyword">if</span> (ret) &#123;</span><br><span class="line">        printk(KERN_ERR <span class="string">&quot;Failed to register platform device\n&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    printk(KERN_INFO <span class="string">&quot;Platform device registered\n&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="type">void</span> __exit <span class="title function_">my_platform_device_exit</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    platform_device_unregister(&amp;my_platform_device);   <span class="comment">// 注销平台设备</span></span><br><span class="line">    printk(KERN_INFO <span class="string">&quot;Platform device unregistered\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">module_init(my_platform_device_init);</span><br><span class="line">module_exit(my_platform_device_exit);</span><br><span class="line"></span><br><span class="line">MODULE_LICENSE(<span class="string">&quot;GPL&quot;</span>);</span><br><span class="line">MODULE_AUTHOR(<span class="string">&quot;topeet&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="51-3-运行测试"><a href="#51-3-运行测试" class="headerlink" title="51.3 运行测试"></a>51.3 运行测试</h2><h3 id="51-3-1-编译驱动程序"><a href="#51-3-1-编译驱动程序" class="headerlink" title="51.3.1 编译驱动程序"></a>51.3.1 编译驱动程序</h3><p>在上一小节中的platform_device.c代码同一目录下创建 Makefile 文件，Makefile 文件内容如下所示：</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> ARCH=arm64<span class="comment">#设置平台架构</span></span><br><span class="line"><span class="keyword">export</span> CROSS_COMPILE=aarch64-linux-gnu-<span class="comment">#交叉编译器前缀</span></span><br><span class="line">obj-m += platform_device.o    <span class="comment">#此处要和你的驱动源文件同名</span></span><br><span class="line">KDIR :=/home/topeet/Linux/linux_sdk/kernel    <span class="comment">#这里是你的内核目录                                                                                                                            </span></span><br><span class="line">PWD ?= <span class="variable">$(<span class="built_in">shell</span> pwd)</span></span><br><span class="line"><span class="section">all:</span></span><br><span class="line">    make -C <span class="variable">$(KDIR)</span> M=<span class="variable">$(PWD)</span> modules    <span class="comment">#make操作</span></span><br><span class="line"><span class="section">clean:</span></span><br><span class="line">    make -C <span class="variable">$(KDIR)</span> M=<span class="variable">$(PWD)</span> clean    <span class="comment">#make clean操作</span></span><br></pre></td></tr></table></figure>
+
+<p>对于Makefile的内容注释已在上图添加，保存退出之后，来到存放platform_device.c和Makefile文件目录下，如下图（图51-5）所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/wps2.jpg" alt="img"> </p>
+<p>图 51-5</p>
+<p>然后使用命令“make”进行驱动的编译，编译完成如下图（图51-2）所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/wps3.jpg" alt="img"> </p>
+<p>图 51-2</p>
+<p>编译完生成platform_device.ko目标文件，如下图（图51-3）所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/wps4.jpg" alt="img"> </p>
+<p>图 51-3</p>
+<p>至此驱动模块就编译成功了。</p>
+<h3 id="51-3-2-运行测试"><a href="#51-3-2-运行测试" class="headerlink" title="51.3.2 运行测试"></a>51.3.2 运行测试</h3><p>开发板启动之后，使用以下命令进行驱动模块的加载，如下图（图51-4）所示：</p>
+<p>insmod platform_device.ko</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/wps5.jpg" alt="img"> </p>
+<p>图 51-4</p>
+<p>然后来到&#x2F;sys&#x2F;bus&#x2F;platform&#x2F;devices目录下，可以看到我们创建的my_platform_device设备文件夹就成功生成了。</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/wps6.jpg" alt="img"> </p>
+<p>图 51-5</p>
+<p>然后使用以下命令进行驱动模块的卸载，如下图（图51-6）所示：</p>
+<p>rmmod platform_device.ko</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/wps7.jpg" alt="img"> </p>
+<p>图 51-6</p>
+<p>至此，注册platform设备实验就完成了。</p>
+<h1 id="第52章-注册platform驱动实验"><a href="#第52章-注册platform驱动实验" class="headerlink" title="第52章 注册platform驱动实验"></a>第52章 注册platform驱动实验</h1><p>在上个章节我们学习了如何注册platform设备，而本章节就要学习如何注册platform驱动了。</p>
+<h2 id="52-1注册platform驱动"><a href="#52-1注册platform驱动" class="headerlink" title="52.1注册platform驱动"></a>52.1注册platform驱动</h2><h3 id="52-1-1-platform-driver-register-函数"><a href="#52-1-1-platform-driver-register-函数" class="headerlink" title="52.1.1 platform_driver_register 函数"></a>52.1.1 platform_driver_register 函数</h3><p>platform_driver_register 函数用于在 Linux 内核中注册一个平台驱动程序。下面是对该函数的详细介绍：</p>
+<p><em><strong>*函数原型：*</strong></em></p>
+<p>int platform_driver_register(struct platform_driver *driver);</p>
+<p><em><strong>*头文件：*</strong></em></p>
+<p>#include &lt;linux&#x2F;platform_device.h&gt;</p>
+<p><em><strong>*函数作用*</strong></em><em><strong>*：*</strong></em></p>
+<p>platform_driver_register 函数用于将一个平台驱动程序注册到内核中。通过注册平台驱动程序，内核可以识别并与特定的平台设备进行匹配，并在需要时调用相应的回调函数。</p>
+<p><em><strong>*参数含义：*</strong></em></p>
+<p>driver：指向 struct platform_driver 结构体的指针，描述了要注册的平台驱动程序的属性和回调函数（会在下面的小节对该结构体进行详细的讲解）。</p>
+<p>****返回值****：</p>
+<p>返回一个整数值，表示函数的执行状态。如果注册成功，返回 0；如果注册失败，返回一个负数错误码。</p>
+<p>该函数在内核源码目录下的“&#x2F;include&#x2F;linux&#x2F;platform_device.h”文件中，具体内容如下所示：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> platform_driver_register(drv) \</span></span><br><span class="line"><span class="meta">	__platform_driver_register(drv, THIS_MODULE)</span></span><br><span class="line"><span class="keyword">extern</span> <span class="type">int</span> __platform_driver_register(<span class="keyword">struct</span> platform_driver *,					<span class="keyword">struct</span> module *);</span><br></pre></td></tr></table></figure>
+
+<p>这个宏用于简化平台驱动程序的注册过程。它将实际的注册函数 __platform_driver_register 与当前模块（驱动程序）关联起来。宏的参数 drv 是一个指向 struct platform_driver 结构体的指针，描述了要注册的平台驱动程序的属性和回调函数。THIS_MODULE 是一个宏，用于获取当前模块的指针。</p>
+<p>而__platform_driver_register实际定义在“&#x2F;drivers&#x2F;base&#x2F;platform.c”文件中，相关定义如下所示：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> __platform_driver_register(<span class="keyword">struct</span> platform_driver *drv, <span class="keyword">struct</span> module *owner)</span><br><span class="line">&#123;</span><br><span class="line">    drv-&gt;driver.owner = owner;                   <span class="comment">// 将平台驱动程序的所有权设置为当前模块</span></span><br><span class="line">    drv-&gt;driver.bus = &amp;platform_bus_type;    <span class="comment">// 将平台驱动程序的总线类型设置为平台总线</span></span><br><span class="line">    drv-&gt;driver.probe = platform_drv_probe;      <span class="comment">// 设置平台驱动程序的探测函数</span></span><br><span class="line">    drv-&gt;driver.remove = platform_drv_remove;    <span class="comment">// 设置平台驱动程序的移除函数</span></span><br><span class="line">    drv-&gt;driver.shutdown = platform_drv_shutdown;<span class="comment">// 设置平台驱动程序的关机函数</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> driver_register(&amp;drv-&gt;driver);        <span class="comment">// 将平台驱动程序注册到内核</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>第3行：将指向当前模块的指针 owner 赋值给平台驱动程序的 owner 成员。这样做是为了将当前模块与平台驱动程序关联起来，以确保模块的生命周期和驱动程序的注册和注销相关联。</p>
+<p>第4行：将指向平台总线类型的指针 &amp;platform_bus_type 赋值给平台驱动程序的 bus 成员。这样做是为了指定该驱动程序所属的总线类型为平台总线，以便内核能够将平台设备与正确的驱动程序进行匹配。</p>
+<p>第5行：将指向平台驱动程序探测函数 platform_drv_probe 的指针赋值给平台驱动程序的 probe 成员。这样做是为了指定当内核发现与驱动程序匹配的平台设备时，要调用的驱动程序探测函数。</p>
+<p>第6行：将指向平台驱动程序移除函数 platform_drv_remove 的指针赋值给平台驱动程序的 remove 成员。这样做是为了指定当内核需要从系统中移除与驱动程序匹配的平台设备时，要调用的驱动程序移除函数。</p>
+<p>第7行 &#x3D; platform_drv_shutdown;：将指向平台驱动程序关机函数 platform_drv_shutdown 的指针赋值给平台驱动程序的 shutdown 成员。这样做是为了指定当系统关机时，要调用的驱动程序关机函数。</p>
+<p>第9行：调用 driver_register 函数，将平台驱动程序的 driver 成员注册到内核中。该函数负责将驱动程序注册到相应的总线上，并在注册成功时返回 0，注册失败时返回一个负数错误码。</p>
+<p>通过这些操作，__platform_driver_register 函数将平台驱动程序与内核关联起来，并确保内核能够正确识别和调用驱动程序的各种回调函数，以实现与平台设备的交互和管理。函数的返回值表示注册过程的执行状态，以便在需要时进行错误处理。</p>
+<h3 id="52-1-2-platform-device-unregister-函数"><a href="#52-1-2-platform-device-unregister-函数" class="headerlink" title="52.1.2 platform_device_unregister 函数"></a>52.1.2 platform_device_unregister 函数</h3><p>platform_device_unregister函数用于取消注册已经注册的平台设备，即从内核中移除设备。在设备不再需要时，调用该函数可以进行设备的清理和释放操作。</p>
+<p><em><strong>*函数原型：*</strong></em></p>
+<p>void platform_device_unregister(struct platform_device *pdev);</p>
+<p><em><strong>*头文件：*</strong></em></p>
+<p>#include &lt;linux&#x2F;platform_device.h&gt;</p>
+<p><em><strong>*函数作用：*</strong></em><br>    platform_device_unregister 函数用于从内核中注销平台设备。通过调用该函数，可以将指定的平台设备从系统中移除。</p>
+<p>****参数含义****：</p>
+<p>pdev：指向要注销的平台设备的指针。</p>
+<p><em><strong>*返回值：*</strong></em><br>    无返回值。</p>
+<p>该函数在内核源码目录下的“&#x2F;include&#x2F;linux&#x2F;platform_device.h”文件中，具体内容如下所示：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">extern</span> <span class="type">void</span> <span class="title function_">platform_driver_unregister</span><span class="params">(<span class="keyword">struct</span> platform_driver *)</span>;</span><br></pre></td></tr></table></figure>
+
+<p>函数声明中的extern关键字表示该函数在其他地方定义，而不是在当前文件中实现。这样的声明通常出现在头文件中，用于告诉编译器该函数的定义存在于其他源文件中，以便在编译时能够正确引用该函数。</p>
+<p>而platform_driver_unregister实际定义在“&#x2F;drivers&#x2F;base&#x2F;platform.c”文件中，相关定义如下所示：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">platform_driver_unregister</span><span class="params">(<span class="keyword">struct</span> platform_driver *drv)</span></span><br><span class="line">&#123;</span><br><span class="line">	driver_unregister(&amp;drv-&gt;driver);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>该函数又调用了driver_unregister函数进行嵌套，追踪之后找到定义在“&#x2F;drivers&#x2F;base&#x2F;driver.c”目录下的driver_unregister函数，具体内容如下所示：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">driver_unregister</span><span class="params">(<span class="keyword">struct</span> device_driver *drv)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 检查传入的设备驱动程序指针和 p 成员是否有效</span></span><br><span class="line">    <span class="keyword">if</span> (!drv || !drv-&gt;p) &#123;</span><br><span class="line">        WARN(<span class="number">1</span>, <span class="string">&quot;Unexpected driver unregister!\n&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    driver_remove_groups(drv, drv-&gt;groups); <span class="comment">// 移除与设备驱动程序关联的属性组</span></span><br><span class="line">    bus_remove_driver(drv);    <span class="comment">// 从总线中移除设备驱动程序</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>函数内部有三个主要的操作：</p>
+<p>第4-7行：检查传入的设备驱动程序指针 drv 是否为空，或者驱动程序的 p 成员是否为空。如果其中任何一个条件为真，表示传入的参数无效，会发出警告并返回。</p>
+<p>第9行：调用 driver_remove_groups 函数，用于从内核中移除与设备驱动程序关联的属性组。drv-&gt;groups 是指向属性组的指针，指定了要移除的属性组列表。</p>
+<p>第10行：调用 bus_remove_driver 函数，用于从总线中移除设备驱动程序。该函数会执行以下操作：</p>
+<p>（1）从总线驱动程序列表中移除指定的设备驱动程序。</p>
+<p>（2）调用与设备驱动程序关联的 remove 回调函数（如果有定义）。</p>
+<p>（3）释放设备驱动程序所占用的资源和内存。</p>
+<p>（4）最终销毁设备驱动程序的数据结构。</p>
+<p>通过调用 driver_unregister 函数，可以正确地注销设备驱动程序，并在注销过程中进行必要的清理工作。这样可以避免资源泄漏和其他问题。在调用该函数后，应避免继续使用已注销的设备驱动程序指针，因为该驱动程序已不再存在于内核中。</p>
+<h3 id="52-1-3-platform-driver结构体"><a href="#52-1-3-platform-driver结构体" class="headerlink" title="52.1.3 platform_driver结构体"></a>52.1.3 platform_driver结构体</h3><p>platform_driver 结构体是Linux内核中用于编写平台设备驱动程序的重要数据结构。它提供了与平台设备驱动相关的函数和数据成员，以便与平台设备进行交互和管理。该结构体定义在内核的“&#x2F;include&#x2F;linux&#x2F;platform_device.h”文件中，具体内容如下所示：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">platform_driver</span> &#123;</span></span><br><span class="line">	<span class="type">int</span> (*probe)(<span class="keyword">struct</span> platform_device *); <span class="comment">/* 平台设备的探测函数指针 */</span></span><br><span class="line">	<span class="type">int</span> (*remove)(<span class="keyword">struct</span> platform_device *); <span class="comment">/* 平台设备的移除函数指针 */</span></span><br><span class="line">	<span class="type">void</span> (*shutdown)(<span class="keyword">struct</span> platform_device *);<span class="comment">/* 平台设备的关闭函数指针 */</span></span><br><span class="line">	<span class="type">int</span> (*suspend)(<span class="keyword">struct</span> platform_device *, <span class="type">pm_message_t</span> state);<span class="comment">/* 平台设备的挂起函数指针 */</span></span><br><span class="line">	<span class="type">int</span> (*resume)(<span class="keyword">struct</span> platform_device *);<span class="comment">/* 平台设备的恢复函数指针 */</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">device_driver</span> <span class="title">driver</span>;</span><span class="comment">/* 设备驱动程序的通用数据 */</span></span><br><span class="line">	<span class="type">const</span> <span class="class"><span class="keyword">struct</span> <span class="title">platform_device_id</span> *<span class="title">id_table</span>;</span><span class="comment">/* 平台设备与驱动程序的关联关系表 */</span></span><br><span class="line">	<span class="type">bool</span> prevent_deferred_probe; <span class="comment">/* 是否阻止延迟探测 */</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>probe：平台设备的探测函数指针。当系统检测到一个平台设备与该驱动程序匹配时，该函数将被调用以初始化和配置设备。</p>
+<p>remove：平台设备的移除函数指针。当平台设备从系统中移除时，该函数将被调用以执行清理和释放资源的操作。</p>
+<p>shutdown：平台设备的关闭函数指针。当系统关闭时，该函数将被调用以执行与平台设备相关的关闭操作。</p>
+<p>suspend：平台设备的挂起函数指针。当系统进入挂起状态时，该函数将被调用以执行与平台设备相关的挂起操作。</p>
+<p>resume：平台设备的恢复函数指针。当系统从挂起状态恢复时，该函数将被调用以执行与平台设备相关的恢复操作。</p>
+<p>driver：包含了与设备驱动程序相关的通用数据，它是 struct device_driver 类型的实例。其中包括驱动程序的名称、总线类型、模块拥有者、属性组数组指针等信息，该结构体的name参数需要与上个章节的platform_device的.name参数相同才能匹配成功，从而进入probe函数。</p>
+<p>id_table：指向 struct platform_device_id 结构体数组的指针，用于匹配平台设备和驱动程序之间的关联关系。通过该关联关系，可以确定哪个平台设备与该驱动程序匹配，和.driver.name起到相同的作用，但是优先级高于.driver.name。</p>
+<p>prevent_deferred_probe：一个布尔值，用于确定是否阻止延迟探测。如果设置为 true，则延迟探测将被禁用。</p>
+<p>使用 struct platform_driver 结构体，开发人员可以定义平台设备驱动程序，并将其注册到内核中。当系统检测到与该驱动程序匹配的平台设备时，内核将调用相应的函数来执行设备的初始化、配置、操作和管理。驱动程序可以利用提供的函数指针和通用数据与平台设备进行交互，并提供必要的功能和服务。</p>
+<p>需要注意的是，struct platform_driver 结构体继承了 struct device_driver 结构体，因此可以直接访问 struct device_driver 中定义的成员。这使得平台驱动程序可以利用通用的驱动程序机制，并与其他类型的设备驱动程序共享代码和功能。</p>
+<h2 id="52-2-实验程序的编写"><a href="#52-2-实验程序的编写" class="headerlink" title="52.2 实验程序的编写"></a>52.2 实验程序的编写</h2><p>本实验对应的网盘路径为：iTOP-RK3568开发板【底板V1.7版本】\03_【iTOP-RK3568开发板】指南教程\02_Linux驱动配套资料\04_Linux驱动例程\41。</p>
+<p>本小节的实验只是编写一个platform驱动的一个大体框架，在下一个章节中再讲解platform设备和platform驱动的匹配</p>
+<p>编写完成的platform_driver.c代码如下所示：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;linux/module.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;linux/platform_device.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 平台设备的探测函数</span></span><br><span class="line"><span class="type">static</span> <span class="type">int</span> <span class="title function_">my_platform_probe</span><span class="params">(<span class="keyword">struct</span> platform_device *pdev)</span></span><br><span class="line">&#123;</span><br><span class="line">    printk(KERN_INFO <span class="string">&quot;my_platform_probe: Probing platform device\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 添加设备特定的操作</span></span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 平台设备的移除函数</span></span><br><span class="line"><span class="type">static</span> <span class="type">int</span> <span class="title function_">my_platform_remove</span><span class="params">(<span class="keyword">struct</span> platform_device *pdev)</span></span><br><span class="line">&#123;</span><br><span class="line">    printk(KERN_INFO <span class="string">&quot;my_platform_remove: Removing platform device\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 清理设备特定的操作</span></span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义平台驱动结构体</span></span><br><span class="line"><span class="type">static</span> <span class="class"><span class="keyword">struct</span> <span class="title">platform_driver</span> <span class="title">my_platform_driver</span> =</span> &#123;</span><br><span class="line">    .probe = my_platform_probe,</span><br><span class="line">    .remove = my_platform_remove,</span><br><span class="line">    .driver = &#123;</span><br><span class="line">        .name = <span class="string">&quot;my_platform_device&quot;</span>,</span><br><span class="line">        .owner = THIS_MODULE,</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 模块初始化函数</span></span><br><span class="line"><span class="type">static</span> <span class="type">int</span> __init <span class="title function_">my_platform_driver_init</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> ret;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 注册平台驱动</span></span><br><span class="line">    ret = platform_driver_register(&amp;my_platform_driver);</span><br><span class="line">    <span class="keyword">if</span> (ret) &#123;</span><br><span class="line">        printk(KERN_ERR <span class="string">&quot;Failed to register platform driver\n&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    printk(KERN_INFO <span class="string">&quot;my_platform_driver: Platform driver initialized\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 模块退出函数</span></span><br><span class="line"><span class="type">static</span> <span class="type">void</span> __exit <span class="title function_">my_platform_driver_exit</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 注销平台驱动</span></span><br><span class="line">    platform_driver_unregister(&amp;my_platform_driver);</span><br><span class="line"></span><br><span class="line">    printk(KERN_INFO <span class="string">&quot;my_platform_driver: Platform driver exited\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">module_init(my_platform_driver_init);</span><br><span class="line">module_exit(my_platform_driver_exit);</span><br><span class="line"></span><br><span class="line">MODULE_LICENSE(<span class="string">&quot;GPL&quot;</span>);</span><br><span class="line">MODULE_AUTHOR(<span class="string">&quot;topeet&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="52-3-运行测试"><a href="#52-3-运行测试" class="headerlink" title="52.3 运行测试"></a>52.3 运行测试</h2><h3 id="52-3-1-编译驱动程序"><a href="#52-3-1-编译驱动程序" class="headerlink" title="52.3.1 编译驱动程序"></a>52.3.1 编译驱动程序</h3><p>在上一小节中的platform_driver.c代码同一目录下创建 Makefile 文件，Makefile 文件内容如下所示：</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> ARCH=arm64<span class="comment">#设置平台架构</span></span><br><span class="line"><span class="keyword">export</span> CROSS_COMPILE=aarch64-linux-gnu-<span class="comment">#交叉编译器前缀</span></span><br><span class="line">obj-m += platform_driver.o    <span class="comment">#此处要和你的驱动源文件同名</span></span><br><span class="line">KDIR :=/home/topeet/Linux/linux_sdk/kernel    <span class="comment">#这里是你的内核目录                                                                                                                            </span></span><br><span class="line">PWD ?= <span class="variable">$(<span class="built_in">shell</span> pwd)</span></span><br><span class="line"><span class="section">all:</span></span><br><span class="line">    make -C <span class="variable">$(KDIR)</span> M=<span class="variable">$(PWD)</span> modules    <span class="comment">#make操作</span></span><br><span class="line"><span class="section">clean:</span></span><br><span class="line">    make -C <span class="variable">$(KDIR)</span> M=<span class="variable">$(PWD)</span> clean    <span class="comment">#make clean操作</span></span><br></pre></td></tr></table></figure>
+
+<p>对于Makefile的内容注释已在上图添加，保存退出之后，来到存放platform_driver.c和Makefile文件目录下，如下图（图52-1）所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/wps8.jpg" alt="img"> </p>
+<p>图 52-1</p>
+<p>然后使用命令“make”进行驱动的编译，编译完成如下图（图52-2）所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/wps9.jpg" alt="img"> </p>
+<p>图 51-2</p>
+<p>编译完生成platform_driver.ko目标文件，如下图（图52-3）所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/wps10.jpg" alt="img"> </p>
+<p>图 52-3</p>
+<p>至此驱动模块就编译成功了。</p>
+<h3 id="52-3-2-运行测试"><a href="#52-3-2-运行测试" class="headerlink" title="52.3.2 运行测试"></a>52.3.2 运行测试</h3><p>本小节的测试需要用到两个驱动ko文件，即上一章节的注册platform设备ko文件和本章节的注册platform驱动ko文件。</p>
+<p>开发板启动之后，使用以下命令进行驱动模块的加载，如下图（图21-7）所示：</p>
+<p>insmod platform_driver.ko</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/wps11.jpg" alt="img"> </p>
+<p>然后来到&#x2F;sys&#x2F;bus&#x2F;platform&#x2F;drivers目录下，可以看到我们创建的my_platform_driver驱动文件夹就成功生成了。</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/wps12.jpg" alt="img"> </p>
+<p>然后使用以下命令加载注册platform设备ko文件，加载成功之后如下图所示：</p>
+<p> insmod platform_device.ko</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/wps13.jpg" alt="img"> </p>
+<p>可以看到匹配成功之后就会进入probe函数，显示出了相应的打印（加载上述两个ko文件不分先后顺序）。然后使用以下命令进行驱动模块的卸载，如下图（图21-7）所示：</p>
+<p>rmmod platform_driver.ko</p>
+<p>rmmod platform_device.ko</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/wps14.jpg" alt="img"> </p>
+<p>至此，注册platform驱动实验就完成了。</p>
+<h1 id="第53章-probe函数编写实验"><a href="#第53章-probe函数编写实验" class="headerlink" title="第53章 probe函数编写实验"></a>第53章 probe函数编写实验</h1><p>在上面的两个章节中分别注册了platform设备和platform驱动，匹配成功之后会进入在注册platform驱动程序中编写的probe函数，在上个章节只是为了验证是否匹配成功，所以只是在probe中加入了一句相关打印，而驱动是要控制硬件的，但是平台总线模型对硬件的描述写在了platform_device.c中,platform设备和platform驱动匹配成功之后，那我们如何在驱动platform_driver.c的probe函数中，得到platform_device.c中编写的硬件资源呢。下面开始本节课程的学习吧。</p>
+<h2 id="53-1-获取device资源"><a href="#53-1-获取device资源" class="headerlink" title="53.1 获取device资源"></a>53.1 获取device资源</h2><p><em><strong>*方法*</strong></em><em><strong>*1*</strong></em><em><strong>*：直接访问 platform_device 结构体的资源数组*</strong></em></p>
+<p>在上一章节的讲解中提到：struct platform_driver 结构体继承了 struct device_driver 结构体，因此可以直接访问 struct device_driver 中定义的成员。实例代码如下所示：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">if (pdev-&gt;num_resources &gt;= 2) &#123;</span><br><span class="line">      struct resource *res_mem = &amp;pdev-&gt;resource[0];</span><br><span class="line">      struct resource *res_irq = &amp;pdev-&gt;resource[1];</span><br><span class="line"></span><br><span class="line">      // 使用获取到的硬件资源进行处理</span><br><span class="line">      printk(&quot;Method 1: Memory Resource: start = 0x%lld, end = 0x%lld\n&quot;,</span><br><span class="line">              res_mem-&gt;start, res_mem-&gt;end);</span><br><span class="line">      printk(&quot;Method 1: IRQ Resource: number = %lld\n&quot;, res_irq-&gt;start);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>在这种方法中，直接访问platform_device结构体的资源数组来获取硬件资源。pdev-&gt;resource是一个资源数组，其中存储了设备的硬件资源信息。通过访问数组的不同索引，可以获取到特定的资源。</p>
+<p>在这个示例中，假设资源数组的第一个元素是内存资源，第二个元素是中断资源。所以我们将第一个元素的指针赋值给res_mem，第二个元素的指针赋值给res_irq。</p>
+<p><em><strong>*方法*</strong></em><em><strong>*2*</strong></em><em><strong>*：使用 platform_get_resource() 获取硬件资源*</strong></em></p>
+<p>platform_get_resource()函数用于获取设备的资源信息。它的声明位于&lt;linux&#x2F;platform_device.h&gt;头文件中，与平台设备（platform_device）相关。</p>
+<p><em><strong>*函数原型：*</strong></em></p>
+<p>struct resource *platform_get_resource(struct platform_device *pdev,                    unsigned int type, unsigned int num);</p>
+<p><em><strong>*参数说明：*</strong></em></p>
+<p>pdev：指向要获取资源的平台设备（platform_device）结构体的指针。</p>
+<p>type：指定资源的类型，可以是以下值之一：</p>
+<p>IORESOURCE_MEM：表示内存资源。</p>
+<p>IORESOURCE_IO：表示I&#x2F;O资源。</p>
+<p>IORESOURCE_IRQ：表示中断资源。</p>
+<p>其他资源类型的宏定义可在&lt;linux&#x2F;ioport.h&gt;和&lt;linux&#x2F;irq.h&gt;头文件中找到。</p>
+<p>num：指定要获取的资源的索引。在一个设备中可能存在多个相同类型的资源，通过索引可以选择获取特定的资源。</p>
+<p><em><strong>*返回值：*</strong></em></p>
+<p>如果成功获取资源，则返回指向资源（struct resource）的指针。</p>
+<p>如果获取资源失败，或者指定的资源不存在，则返回NULL。</p>
+<p>platform_get_resource()函数用于从平台设备的资源数组中获取指定类型和索引的资源。在平台设备的资源数组中，每个元素都是一个struct resource结构体，描述了一个资源的信息，如起始地址、结束地址、中断号等。</p>
+<p>示例用法：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">platform_device</span> *<span class="title">pdev</span>;</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">resource</span> *<span class="title">res</span>;</span></span><br><span class="line"></span><br><span class="line">res = platform_get_resource(pdev, IORESOURCE_MEM, <span class="number">0</span>);</span><br><span class="line"><span class="keyword">if</span> (!res) &#123;</span><br><span class="line">    <span class="comment">// 处理获取内存资源失败的情况</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用获取到的内存资源进行处理</span></span><br><span class="line"><span class="type">unsigned</span> <span class="type">long</span> start = res-&gt;start;</span><br><span class="line"><span class="type">unsigned</span> <span class="type">long</span> end = res-&gt;end;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>在上述示例中，首先通过platform_get_resource()函数获取平台设备的第一个内存资源（索引为0）。如果获取资源失败（返回NULL），则可以根据实际情况进行错误处理。如果获取资源成功，则可以使用返回的资源指针来访问资源的信息，如起始地址和结束地址。</p>
+<p>通过platform_get_resource()函数，可以方便地在驱动程序中获取平台设备的资源信息，并根据这些信息进行后续的操作和配置。</p>
+<h2 id="53-2-实验程序的编写"><a href="#53-2-实验程序的编写" class="headerlink" title="53.2 实验程序的编写"></a>53.2 实验程序的编写</h2><p>本实验对应的网盘路径为：iTOP-RK3568开发板【底板V1.7版本】\03_【iTOP-RK3568开发板】指南教程\02_Linux驱动配套资料\04_Linux驱动例程\42_probe。</p>
+<p>在上一章程序的基础上，添加第一小节两种获取设备资源的方式并打印出来。</p>
+<p>编写完成的probe.c代码如下所示。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;linux/module.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;linux/platform_device.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;linux/ioport.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="type">int</span> <span class="title function_">my_platform_driver_probe</span><span class="params">(<span class="keyword">struct</span> platform_device *pdev)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">resource</span> *<span class="title">res_mem</span>, *<span class="title">res_irq</span>;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 方法1：直接访问 platform_device 结构体的资源数组</span></span><br><span class="line">    <span class="keyword">if</span> (pdev-&gt;num_resources &gt;= <span class="number">2</span>) &#123;</span><br><span class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">resource</span> *<span class="title">res_mem</span> =</span> &amp;pdev-&gt;resource[<span class="number">0</span>];</span><br><span class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">resource</span> *<span class="title">res_irq</span> =</span> &amp;pdev-&gt;resource[<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 使用获取到的硬件资源进行处理</span></span><br><span class="line">        printk(<span class="string">&quot;Method 1: Memory Resource: start = 0x%llx, end = 0x%llx\n&quot;</span>,</span><br><span class="line">                res_mem-&gt;start, res_mem-&gt;end);</span><br><span class="line">        printk(<span class="string">&quot;Method 1: IRQ Resource: number = %lld\n&quot;</span>, res_irq-&gt;start);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 方法2：使用 platform_get_resource() 获取硬件资源</span></span><br><span class="line">    res_mem = platform_get_resource(pdev, IORESOURCE_MEM, <span class="number">0</span>);</span><br><span class="line">    <span class="keyword">if</span> (!res_mem) &#123;</span><br><span class="line">        dev_err(&amp;pdev-&gt;dev, <span class="string">&quot;Failed to get memory resource\n&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> -ENODEV;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    res_irq = platform_get_resource(pdev, IORESOURCE_IRQ, <span class="number">0</span>);</span><br><span class="line">    <span class="keyword">if</span> (!res_irq) &#123;</span><br><span class="line">        dev_err(&amp;pdev-&gt;dev, <span class="string">&quot;Failed to get IRQ resource\n&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> -ENODEV;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 使用获取到的硬件资源进行处理</span></span><br><span class="line">    printk(<span class="string">&quot;Method 2: Memory Resource: start = 0x%llx, end = 0x%llx\n&quot;</span>,</span><br><span class="line">            res_mem-&gt;start, res_mem-&gt;end);</span><br><span class="line">    printk(<span class="string">&quot;Method 2: IRQ Resource: number = %lld\n&quot;</span>, res_irq-&gt;start);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="type">int</span> <span class="title function_">my_platform_driver_remove</span><span class="params">(<span class="keyword">struct</span> platform_device *pdev)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 设备移除操作</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="class"><span class="keyword">struct</span> <span class="title">platform_driver</span> <span class="title">my_platform_driver</span> =</span> &#123;</span><br><span class="line">    .driver = &#123;</span><br><span class="line">        .name = <span class="string">&quot;my_platform_device&quot;</span>, <span class="comment">// 与 platform_device.c 中的设备名称匹配</span></span><br><span class="line">        .owner = THIS_MODULE,</span><br><span class="line">    &#125;,</span><br><span class="line">    .probe = my_platform_driver_probe,</span><br><span class="line">    .remove = my_platform_driver_remove,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="type">int</span> __init <span class="title function_">my_platform_driver_init</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> ret;</span><br><span class="line"></span><br><span class="line">    ret = platform_driver_register(&amp;my_platform_driver); <span class="comment">// 注册平台驱动</span></span><br><span class="line">    <span class="keyword">if</span> (ret) &#123;</span><br><span class="line">        printk(<span class="string">&quot;Failed to register platform driver\n&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    printk(<span class="string">&quot;Platform driver registered\n&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="type">void</span> __exit <span class="title function_">my_platform_driver_exit</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    platform_driver_unregister(&amp;my_platform_driver); <span class="comment">// 注销平台驱动</span></span><br><span class="line">    printk(<span class="string">&quot;Platform driver unregistered\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">module_init(my_platform_driver_init);</span><br><span class="line">module_exit(my_platform_driver_exit);</span><br><span class="line"></span><br><span class="line">MODULE_LICENSE(<span class="string">&quot;GPL&quot;</span>);</span><br><span class="line">MODULE_AUTHOR(<span class="string">&quot;topeet&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="53-3-运行测试"><a href="#53-3-运行测试" class="headerlink" title="53.3 运行测试"></a>53.3 运行测试</h2><h3 id="53-3-1-编译驱动程序"><a href="#53-3-1-编译驱动程序" class="headerlink" title="53.3.1 编译驱动程序"></a>53.3.1 编译驱动程序</h3><p>在上一小节中的probe.c代码同一目录下创建 Makefile 文件，Makefile 文件内容如下所示：</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> ARCH=arm64<span class="comment">#设置平台架构</span></span><br><span class="line"><span class="keyword">export</span> CROSS_COMPILE=aarch64-linux-gnu-<span class="comment">#交叉编译器前缀</span></span><br><span class="line">obj-m += probe.o    <span class="comment">#此处要和你的驱动源文件同名</span></span><br><span class="line">KDIR :=/home/topeet/Linux/linux_sdk/kernel    <span class="comment">#这里是你的内核目录                                                                                                                            </span></span><br><span class="line">PWD ?= <span class="variable">$(<span class="built_in">shell</span> pwd)</span></span><br><span class="line"><span class="section">all:</span></span><br><span class="line">    make -C <span class="variable">$(KDIR)</span> M=<span class="variable">$(PWD)</span> modules    <span class="comment">#make操作</span></span><br><span class="line"><span class="section">clean:</span></span><br><span class="line">    make -C <span class="variable">$(KDIR)</span> M=<span class="variable">$(PWD)</span> clean    <span class="comment">#make clean操作</span></span><br></pre></td></tr></table></figure>
+
+<p>对于Makefile的内容注释已在上图添加，保存退出之后，来到存放probe.c和Makefile文件目录下，如下图（图53-1）所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/wps15.jpg" alt="img"> </p>
+<p>图 53-1</p>
+<p>然后使用命令“make”进行驱动的编译，编译完成如下图（图53-2）所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/wps16.jpg" alt="img"> </p>
+<p>图 53-2</p>
+<p>编译完生成probe.ko目标文件，如下图（图53-3）所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/wps17.jpg" alt="img"> </p>
+<p>图 53-3</p>
+<p>至此驱动模块就编译成功了。</p>
+<h3 id="53-3-2-运行测试"><a href="#53-3-2-运行测试" class="headerlink" title="53.3.2 运行测试"></a>53.3.2 运行测试</h3><p>本小节的测试要使用两个ko文件，第一个ko文件为第53章编译出来的platform_device.ko驱动，第二个ko文件为在上一小节编译出的probe.ko驱动文件。</p>
+<p>开发板启动之后，首先使用以下命令进行platform设备的注册，如下图（图53-4）所示：</p>
+<p>insmod platform_device.ko</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/wps18.jpg" alt="img"> </p>
+<p>图 53-4</p>
+<p>然后继续使用以下命令加载probe.ko驱动，打印如下图（53-5）所示：</p>
+<p>insmod probe.ko</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/wps19.jpg" alt="img"> </p>
+<p>图 53-5</p>
+<p>在上图中，打印了两种方式下获取得到的内存信息和中断信息，最后可以使用以下命令进行驱动的卸载，如下图（图53-6）所示：</p>
+<p>rmmod  probe.ko</p>
+<p>rmmod platform_device.ko</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/wps20.jpg" alt="img"> </p>
+<p>图 53-6</p>
+<h1 id="第54章-点亮LED灯实验（平台总线）"><a href="#第54章-点亮LED灯实验（平台总线）" class="headerlink" title="第54章 点亮LED灯实验（平台总线）"></a>第54章 点亮LED灯实验（平台总线）</h1><p>在上个章节中，我们成功在platform驱动程序中读取到了设备资源信息，在本章节将进行具体的项目实践，要求在上节platform驱动程序的基础上，加入控制LED灯相关的代码（这部分代码可以参考“第18章 点亮LED灯实验”）。</p>
+<h2 id="54-1-实验程序的编写"><a href="#54-1-实验程序的编写" class="headerlink" title="54.1 实验程序的编写"></a>54.1 实验程序的编写</h2><h3 id="54-1-1-驱动程序编写"><a href="#54-1-1-驱动程序编写" class="headerlink" title="54.1.1 驱动程序编写"></a>54.1.1 驱动程序编写</h3><p>本实验对应的网盘路径为：iTOP-RK3568开发板【底板V1.7版本】\03_【iTOP-RK3568开发板】指南教程\02_Linux驱动配套资料\04_Linux驱动例程\43_platform_led\module。</p>
+<p>编写完成的platform_led.c代码如下所示，添加的代码已加粗表示。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;linux/module.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;linux/platform_device.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;linux/ioport.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;linux/kdev_t.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;linux/fs.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;linux/cdev.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;linux/uaccess.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;linux/io.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">device_test</span>&#123;</span></span><br><span class="line"></span><br><span class="line">    <span class="type">dev_t</span> dev_num;  <span class="comment">//设备号</span></span><br><span class="line">     <span class="type">int</span> major ;  <span class="comment">//主设备号</span></span><br><span class="line">    <span class="type">int</span> minor ;  <span class="comment">//次设备号</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">cdev</span> <span class="title">cdev_test</span>;</span> <span class="comment">// cdev</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="keyword">class</span> *<span class="keyword">class</span>;</span>   <span class="comment">//类</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">device</span> *<span class="title">device</span>;</span> <span class="comment">//设备</span></span><br><span class="line">    <span class="type">char</span> kbuf[<span class="number">32</span>];</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span> *vir_gpio_dr;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span>  <span class="title">device_test</span> <span class="title">dev1</span>;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/*打开设备函数*/</span></span><br><span class="line"><span class="type">static</span> <span class="type">int</span> <span class="title function_">cdev_test_open</span><span class="params">(<span class="keyword">struct</span> inode *inode, <span class="keyword">struct</span> file *file)</span></span><br><span class="line">&#123;</span><br><span class="line">    file-&gt;private_data=&amp;dev1;<span class="comment">//设置私有数据</span></span><br><span class="line">    printk(<span class="string">&quot;This is cdev_test_open\r\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*向设备写入数据函数*/</span></span><br><span class="line"><span class="type">static</span> <span class="type">ssize_t</span> <span class="title function_">cdev_test_write</span><span class="params">(<span class="keyword">struct</span> file *file, <span class="type">const</span> <span class="type">char</span> __user *buf, <span class="type">size_t</span> size, <span class="type">loff_t</span> *off)</span></span><br><span class="line">&#123;</span><br><span class="line">     <span class="class"><span class="keyword">struct</span> <span class="title">device_test</span> *<span class="title">test_dev</span>=</span>(<span class="keyword">struct</span> device_test *)file-&gt;private_data;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (copy_from_user(test_dev-&gt;kbuf, buf, size) != <span class="number">0</span>) <span class="comment">// copy_from_user:用户空间向内核空间传数据</span></span><br><span class="line">    &#123;</span><br><span class="line">        printk(<span class="string">&quot;copy_from_user error\r\n&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(test_dev-&gt;kbuf[<span class="number">0</span>]==<span class="number">1</span>)&#123;   <span class="comment">//如果应用层传入的数据是1，则打开灯</span></span><br><span class="line">            *(test_dev-&gt;vir_gpio_dr) = <span class="number">0x8000c040</span>;   <span class="comment">//设置数据寄存器的地址</span></span><br><span class="line">              printk(<span class="string">&quot;test_dev-&gt;kbuf [0]  is %d\n&quot;</span>,test_dev-&gt;kbuf[<span class="number">0</span>]);  <span class="comment">//打印传入的数据</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(test_dev-&gt;kbuf[<span class="number">0</span>]==<span class="number">0</span>)  <span class="comment">//如果应用层传入的数据是0，则关闭灯</span></span><br><span class="line">    &#123;</span><br><span class="line">            *(test_dev-&gt;vir_gpio_dr) = <span class="number">0x80004040</span>; <span class="comment">//设置数据寄存器的地址</span></span><br><span class="line">            printk(<span class="string">&quot;test_dev-&gt;kbuf [0]  is %d\n&quot;</span>,test_dev-&gt;kbuf[<span class="number">0</span>]); <span class="comment">//打印传入的数据</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/**从设备读取数据*/</span></span><br><span class="line"><span class="type">static</span> <span class="type">ssize_t</span> <span class="title function_">cdev_test_read</span><span class="params">(<span class="keyword">struct</span> file *file, <span class="type">char</span> __user *buf, <span class="type">size_t</span> size, <span class="type">loff_t</span> *off)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">device_test</span> *<span class="title">test_dev</span>=</span>(<span class="keyword">struct</span> device_test *)file-&gt;private_data;</span><br><span class="line">    <span class="keyword">if</span> (copy_to_user(buf, test_dev-&gt;kbuf, <span class="built_in">strlen</span>( test_dev-&gt;kbuf)) != <span class="number">0</span>) <span class="comment">// copy_to_user:内核空间向用户空间传数据</span></span><br><span class="line">    &#123;</span><br><span class="line">        printk(<span class="string">&quot;copy_to_user error\r\n&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    printk(<span class="string">&quot;This is cdev_test_read\r\n&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="type">int</span> <span class="title function_">cdev_test_release</span><span class="params">(<span class="keyword">struct</span> inode *inode, <span class="keyword">struct</span> file *file)</span></span><br><span class="line">&#123;</span><br><span class="line">    printk(<span class="string">&quot;This is cdev_test_release\r\n&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*设备操作函数*/</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">file_operations</span> <span class="title">cdev_test_fops</span> =</span> &#123;</span><br><span class="line">    .owner = THIS_MODULE, <span class="comment">//将owner字段指向本模块，可以避免在模块的操作正在被使用时卸载该模块</span></span><br><span class="line">    .open = cdev_test_open, <span class="comment">//将open字段指向chrdev_open(...)函数</span></span><br><span class="line">    .read = cdev_test_read, <span class="comment">//将open字段指向chrdev_read(...)函数</span></span><br><span class="line">    .write = cdev_test_write, <span class="comment">//将open字段指向chrdev_write(...)函数</span></span><br><span class="line">    .release = cdev_test_release, <span class="comment">//将open字段指向chrdev_release(...)函数</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="type">int</span> <span class="title function_">my_platform_driver_probe</span><span class="params">(<span class="keyword">struct</span> platform_device *pdev)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">resource</span> *<span class="title">res_mem</span>;</span></span><br><span class="line">	<span class="type">int</span> ret;</span><br><span class="line">	res_mem = platform_get_resource(pdev, IORESOURCE_MEM, <span class="number">0</span>);</span><br><span class="line">    <span class="keyword">if</span> (!res_mem) &#123;</span><br><span class="line">        dev_err(&amp;pdev-&gt;dev, <span class="string">&quot;Failed to get memory resource\n&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> -ENODEV;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/*注册字符设备驱动*/</span></span><br><span class="line">    <span class="comment">/*1 创建设备号*/</span></span><br><span class="line">    ret = alloc_chrdev_region(&amp;dev1.dev_num, <span class="number">0</span>, <span class="number">1</span>, <span class="string">&quot;alloc_name&quot;</span>); <span class="comment">//动态分配设备号</span></span><br><span class="line">    <span class="keyword">if</span> (ret &lt; <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">       <span class="keyword">goto</span> err_chrdev;</span><br><span class="line">    &#125;</span><br><span class="line">    printk(<span class="string">&quot;alloc_chrdev_region is ok\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">    dev1.major = MAJOR(dev1.dev_num); <span class="comment">//获取主设备号</span></span><br><span class="line">   dev1.minor = MINOR(dev1.dev_num); <span class="comment">//获取次设备号</span></span><br><span class="line"></span><br><span class="line">    printk(<span class="string">&quot;major is %d \r\n&quot;</span>, dev1.major); <span class="comment">//打印主设备号</span></span><br><span class="line">    printk(<span class="string">&quot;minor is %d \r\n&quot;</span>, dev1.minor); <span class="comment">//打印次设备号</span></span><br><span class="line">     <span class="comment">/*2 初始化cdev*/</span></span><br><span class="line">    dev1.cdev_test.owner = THIS_MODULE;</span><br><span class="line">    cdev_init(&amp;dev1.cdev_test, &amp;cdev_test_fops);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*3 添加一个cdev,完成字符设备注册到内核*/</span></span><br><span class="line">   ret =  cdev_add(&amp;dev1.cdev_test, dev1.dev_num, <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">if</span>(ret&lt;<span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">goto</span>  err_chr_add;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/*4 创建类*/</span></span><br><span class="line">  dev1. <span class="class"><span class="keyword">class</span> =</span> class_create(THIS_MODULE, <span class="string">&quot;test&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span>(IS_ERR(dev1.class))</span><br><span class="line">    &#123;</span><br><span class="line">        ret=PTR_ERR(dev1.class);</span><br><span class="line">        <span class="keyword">goto</span> err_class_create;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/*5  创建设备*/</span></span><br><span class="line">  dev1.device = device_create(dev1.class, <span class="literal">NULL</span>, dev1.dev_num, <span class="literal">NULL</span>, <span class="string">&quot;test&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span>(IS_ERR(dev1.device))</span><br><span class="line">    &#123;</span><br><span class="line">        ret=PTR_ERR(dev1.device);</span><br><span class="line">        <span class="keyword">goto</span> err_device_create;</span><br><span class="line">    &#125;</span><br><span class="line">    dev1.vir_gpio_dr=ioremap(res_mem-&gt;start,<span class="number">4</span>);  <span class="comment">//将物理地址转化为虚拟地址</span></span><br><span class="line">    <span class="keyword">if</span>(IS_ERR(dev1.vir_gpio_dr))</span><br><span class="line">    &#123;</span><br><span class="line">        ret=PTR_ERR(dev1.vir_gpio_dr);  <span class="comment">//PTR_ERR()来返回错误代码</span></span><br><span class="line">        <span class="keyword">goto</span> err_ioremap;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">err_ioremap:</span><br><span class="line">        iounmap(dev1.vir_gpio_dr);</span><br><span class="line"></span><br><span class="line"> err_device_create:</span><br><span class="line">        class_destroy(dev1.class);                 <span class="comment">//删除类</span></span><br><span class="line"></span><br><span class="line">err_class_create:</span><br><span class="line">       cdev_del(&amp;dev1.cdev_test);                 <span class="comment">//删除cdev</span></span><br><span class="line"></span><br><span class="line">err_chr_add:</span><br><span class="line">        unregister_chrdev_region(dev1.dev_num, <span class="number">1</span>); <span class="comment">//注销设备号</span></span><br><span class="line"></span><br><span class="line">err_chrdev:</span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="type">int</span> <span class="title function_">my_platform_driver_remove</span><span class="params">(<span class="keyword">struct</span> platform_device *pdev)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 设备移除操作</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="class"><span class="keyword">struct</span> <span class="title">platform_driver</span> <span class="title">my_platform_driver</span> =</span> &#123;</span><br><span class="line">    .driver = &#123;</span><br><span class="line">        .name = <span class="string">&quot;my_platform_device&quot;</span>, <span class="comment">// 与 platform_device.c 中的设备名称匹配</span></span><br><span class="line">        .owner = THIS_MODULE,</span><br><span class="line">    &#125;,</span><br><span class="line">    .probe = my_platform_driver_probe,</span><br><span class="line">    .remove = my_platform_driver_remove,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="type">int</span> __init <span class="title function_">my_platform_driver_init</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> ret;</span><br><span class="line"></span><br><span class="line">    ret = platform_driver_register(&amp;my_platform_driver); <span class="comment">// 注册平台驱动</span></span><br><span class="line">    <span class="keyword">if</span> (ret) &#123;</span><br><span class="line">        printk(<span class="string">&quot;Failed to register platform driver\n&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    printk(<span class="string">&quot;Platform driver registered\n&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="type">void</span> __exit <span class="title function_">my_platform_driver_exit</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">        <span class="comment">/*注销字符设备*/</span></span><br><span class="line">    unregister_chrdev_region(dev1.dev_num, <span class="number">1</span>); <span class="comment">//注销设备号</span></span><br><span class="line">    cdev_del(&amp;dev1.cdev_test);                 <span class="comment">//删除cdev</span></span><br><span class="line">    device_destroy(dev1.class, dev1.dev_num);       <span class="comment">//删除设备</span></span><br><span class="line">    class_destroy(dev1.class);                 <span class="comment">//删除类</span></span><br><span class="line">	platform_driver_unregister(&amp;my_platform_driver); <span class="comment">// 注销平台驱动</span></span><br><span class="line">    printk(<span class="string">&quot;Platform driver unregistered\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">module_init(my_platform_driver_init);</span><br><span class="line">module_exit(my_platform_driver_exit);</span><br><span class="line"></span><br><span class="line">MODULE_LICENSE(<span class="string">&quot;GPL&quot;</span>);</span><br><span class="line">MODULE_AUTHOR(<span class="string">&quot;topeet&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="54-1-2-编写测试-APP"><a href="#54-1-2-编写测试-APP" class="headerlink" title="54.1.2 编写测试 APP"></a>54.1.2 编写测试 APP</h3><p>本应用程序对应的网盘路径为：iTOP-RK3568开发板【底板V1.7版本】\03_【iTOP-RK3568开发板】指南教程\02_Linux驱动配套资料\04_Linux驱动例程\43_platform_led\app。</p>
+<p>编写测试app,led驱动加载成功之后会生成&#x2F;dev&#x2F;test节点，应用程序APP通过操作&#x2F;dev&#x2F;test文件来完成对LED设备的控制。向&#x2F;dev&#x2F;test文件写入0表示关闭LED灯，写入1表示打开LED灯。编写完成的应用程序app.c代码如下所示：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/stat.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;fcntl.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> *argv[])</span>  </span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> fd;</span><br><span class="line">    <span class="type">char</span> buf[<span class="number">32</span>] = &#123;<span class="number">0</span>&#125;;   </span><br><span class="line">    fd = open(<span class="string">&quot;/dev/test&quot;</span>, O_RDWR);  <span class="comment">//打开led驱动</span></span><br><span class="line">    <span class="keyword">if</span> (fd &lt; <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        perror(<span class="string">&quot;open error \n&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> fd;</span><br><span class="line">&#125;</span><br><span class="line"> <span class="comment">// atoi()将字符串转为整型，这里将第一个参数转化为整型后，存放在 buf[0]中</span></span><br><span class="line">buf[<span class="number">0</span>] =atoi(argv[<span class="number">1</span>]);  </span><br><span class="line">write(fd,buf,<span class="keyword">sizeof</span>(buf));  <span class="comment">//向/dev/test文件写入数据</span></span><br><span class="line">    close(fd);     <span class="comment">//关闭文件</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="54-2-运行测试"><a href="#54-2-运行测试" class="headerlink" title="54.2 运行测试"></a>54.2 运行测试</h2><h3 id="54-2-1-编译驱动程序"><a href="#54-2-1-编译驱动程序" class="headerlink" title="54.2.1 编译驱动程序"></a>54.2.1 编译驱动程序</h3><p>在上一小节中的platform_led.c代码同一目录下创建 Makefile 文件，Makefile 文件内容如下所示：</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> ARCH=arm64<span class="comment">#设置平台架构</span></span><br><span class="line"><span class="keyword">export</span> CROSS_COMPILE=aarch64-linux-gnu-<span class="comment">#交叉编译器前缀</span></span><br><span class="line">obj-m += platform_led.o    <span class="comment">#此处要和你的驱动源文件同名</span></span><br><span class="line">KDIR :=/home/topeet/Linux/linux_sdk/kernel    <span class="comment">#这里是你的内核目录                                                                                                                            </span></span><br><span class="line">PWD ?= <span class="variable">$(<span class="built_in">shell</span> pwd)</span></span><br><span class="line"><span class="section">all:</span></span><br><span class="line">    make -C <span class="variable">$(KDIR)</span> M=<span class="variable">$(PWD)</span> modules    <span class="comment">#make操作</span></span><br><span class="line"><span class="section">clean:</span></span><br><span class="line">    make -C <span class="variable">$(KDIR)</span> M=<span class="variable">$(PWD)</span> clean    <span class="comment">#make clean操作</span></span><br></pre></td></tr></table></figure>
+
+<p>对于Makefile的内容注释已在上图添加，保存退出之后，来到存放platform_led.c和Makefile文件目录下，如下图（图54-1）所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/wps21.jpg" alt="img"> </p>
+<p>图 54-1</p>
+<p>然后使用命令“make”进行驱动的编译，编译完成如下图（图54-2）所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/wps22.jpg" alt="img"> </p>
+<p>图 54-2</p>
+<p>编译完生成platform_led.ko目标文件，如下图（图54-3）所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/wps23.jpg" alt="img"> </p>
+<p>图 54-3</p>
+<p>至此驱动模块就编译成功了。</p>
+<h3 id="54-2-2-编译应用程序"><a href="#54-2-2-编译应用程序" class="headerlink" title="54.2.2 编译应用程序"></a>54.2.2 编译应用程序</h3><p>下面进行应用程序编译，因为测试APP是要在开发板上运行的，所以需要aarch64-linux-gnu-gcc来编译，输入以下命令，编译完成以后会生成一个app的可执行程序，如下图（图54-4）所示：</p>
+<p>aarch64-linux-gnu-gcc app.c -o app</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/wps24.jpg" alt="img"> </p>
+<p>图 54-4</p>
+<p>下面进行驱动程序的测试。</p>
+<h3 id="54-2-3-运行测试"><a href="#54-2-3-运行测试" class="headerlink" title="54.2.3 运行测试"></a>54.2.3 运行测试</h3><p>本小节的测试要使用两个ko文件和一个测试应用程序，第一个ko文件为第53章编译出来的platform_device.ko驱动，第二个ko文件为在上一小节编译出的probe.ko驱动文件，应用程序为上一小节编译出来的app。</p>
+<p>开发板启动之后，首先使用以下命令进行platform设备的注册，如下图（图54-5）所示：</p>
+<p>insmod platform_device.ko</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/wps25.jpg" alt="img"> </p>
+<p>图 54-5</p>
+<p>然后继续使用以下命令加载platform_led.ko驱动，打印如下图（54-6）所示：</p>
+<p>insmod platform_led.ko</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/wps26.jpg" alt="img"> </p>
+<p>图 54-6</p>
+<p>可以看到led字符设备成功注册了，主设备号为236，次设备号为0，相应的test节点也成功创建了，如下图（54-7）所示：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/wps27.jpg" alt="img"></p>
+<p>图 54-7</p>
+<p>默认情况下led灯的状态为常亮，然后输入“.&#x2F;app 0”命令LED灯熄灭，如下图（图 54-8）所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/wps28.jpg" alt="img"> </p>
+<p>图 54-8</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/wps29.jpg" alt="img"> </p>
+<p>图 54-9</p>
+<p>然后输入“.&#x2F;app 0”，LED灯点亮，如下图（图 54-10）所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/wps30.jpg" alt="img"> </p>
+<p>图 54-10</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/wps31.jpg" alt="img"> </p>
+<p>图 54-11</p>
+<p>最后可以使用以下命令进行驱动的卸载，如下图（图54-12）所示：</p>
+<p>rmmod platform_led.ko</p>
+<p>rmmod platform_device.ko</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/wps32.jpg" alt="img"> </p>
+<p>图 54-12</p>
+<p>至此，使用平台总线的点亮LCD灯实验就完成了。</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2023/09/04/rk3568-%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E7%AC%AC%E5%85%AD%E7%AF%87-%E5%B9%B3%E5%8F%B0%E6%80%BB%E7%BA%BF/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%B9%B3%E5%8F%B0%E6%80%BB%E7%BA%BF/" rel="tag">平台总线</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2023/09/04/rk3568-%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E7%AC%AC%E4%B8%83%E7%AF%87-%E8%AE%BE%E5%A4%87%E6%A0%91/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            rk3568 驱动开发第七篇 设备树
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2023/09/04/rk3568-%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E7%AC%AC%E4%BA%94%E7%AF%87-%E4%B8%AD%E6%96%AD/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">rk3568 驱动开发第五篇 中断</div>
+      </a>
+    
+  </nav>
+
+  
+   
+  
+   
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2015-2023
+        <i class="ri-heart-fill heart_icon"></i> John Doe
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="热爱学习的未来酱"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/2019/about">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+ 
+<script src="/js/clickBoom2.js"></script>
+ 
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+ 
+<script src="/js/dz.js"></script>
+ 
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    
+
+  </div>
+</body>
+
+</html>
