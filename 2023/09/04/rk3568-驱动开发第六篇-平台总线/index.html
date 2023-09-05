@@ -114,7 +114,7 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h1 id="第50章-平台总线模型介绍"><a href="#第50章-平台总线模型介绍" class="headerlink" title="**** ****第50章 平台总线模型介绍"></a>**** ****第50章 平台总线模型介绍</h1><p>在前面所有章节中，无论要完成何种需求，我们都编写了一个独立的驱动程序，但这样编写出来的驱动程序在重用性和可移植性上是很低的，无论之后要编写一个同类型的驱动还是将该驱动更换一个平台，都要花费时间重新修改驱动代码，而驱动的分离和分层这一软件思路的提出（即本章节要讲解的平台总线模型），就是为了解决这个问题，下面让我们一起进入平台总线模型的学习吧。</p>
+  <h1 id="第50章-平台总线模型介绍"><a href="#第50章-平台总线模型介绍" class="headerlink" title="第50章 平台总线模型介绍"></a>第50章 平台总线模型介绍</h1><p>在前面所有章节中，无论要完成何种需求，我们都编写了一个独立的驱动程序，但这样编写出来的驱动程序在重用性和可移植性上是很低的，无论之后要编写一个同类型的驱动还是将该驱动更换一个平台，都要花费时间重新修改驱动代码，而驱动的分离和分层这一软件思路的提出（即本章节要讲解的平台总线模型），就是为了解决这个问题，下面让我们一起进入平台总线模型的学习吧。</p>
 <h2 id="50-1-什么是平台总线？"><a href="#50-1-什么是平台总线？" class="headerlink" title="50.1 什么是平台总线？"></a>50.1 什么是平台总线？</h2><p>平台总线（Platform bus）是Linux内核中提供的一种虚拟总线，用于管理和组织与特定硬件平台相关的设备和驱动。它充当了平台设备（platform device）和平台驱动（platform driver）之间的桥梁，负责将它们进行匹配和绑定。</p>
 <p>当系统注册一个平台设备时，平台总线会寻找与之匹配的平台驱动。它会遍历已注册的平台驱动列表，尝试与每个平台驱动进行匹配，直到找到与平台设备匹配的驱动为止。一旦找到匹配的驱动，平台总线会将平台设备与平台驱动进行绑定，使得设备可以被正确地初始化和操作。</p>
 <p>同样地，当系统注册一个平台驱动时，平台总线会寻找与之匹配的平台设备。它会遍历已注册的平台设备列表，尝试与每个平台设备进行匹配，直到找到与平台驱动匹配的设备为止。一旦找到匹配的设备，平台总线会将平台设备与平台驱动进行绑定，使得驱动可以管理和控制与该设备相关的操作。</p>
@@ -130,7 +130,7 @@
 <p><em><strong>*（*</strong></em><em><strong>*2*</strong></em><em><strong>*）*</strong></em>****提高代码的重用性：****平台总线模型使得相同类型的设备可以共享相同的驱动代码。例如，在一个硬件平台上存在多个相同类型的设备，传统的驱动模型需要为每个设备编写独立的驱动代码。而使用平台总线模型，只需编写一个通用的驱动代码，然后为每个设备创建相应的device.c文件，将设备特定的代码放在其中。这样可以减少代码的重复性，提高了代码的重用性和可维护性。</p>
 <p><em><strong>*（*</strong></em><em><strong>*3*</strong></em><em><strong>*）*</strong></em>****减少重复性代码：****在传统的设备驱动模型中，如果有多个相同类型的设备存在，就需要为每个设备编写独立的驱动代码。而使用平台总线模型，只需编写一个通用的驱动代码，然后为每个设备创建相应的device.c文件，将设备特定的代码放在其中。这样可以避免大量的重复性代码，简化了驱动开发过程。</p>
 <p><em><strong>*（*</strong></em><em><strong>*4*</strong></em><em><strong>*）*</strong></em>****提高可移植性：****平台总线模型可以提高驱动的可移植性。开发者可以编写适应平台总线的平台驱动程序，从而支持特定的外设，而无需依赖于特定的标准总线。这使得驱动可以更容易地在不同的硬件平台之间进行移植和重用。</p>
-<h1 id="第51章-注册platform设备实验"><a href="#第51章-注册platform设备实验" class="headerlink" title="**** ****第51章 注册platform设备实验"></a>**** ****第51章 注册platform设备实验</h1><h2 id="51-1-注册platform设备"><a href="#51-1-注册platform设备" class="headerlink" title="51.1 注册platform设备"></a>51.1 注册platform设备</h2><h3 id="51-1-1-platform-device-register-函数"><a href="#51-1-1-platform-device-register-函数" class="headerlink" title="51.1.1 platform_device_register 函数"></a>51.1.1 platform_device_register 函数</h3><p>platform_device_register函数用于将platform_device结构体描述的平台设备注册到内核中。下面是对platform_device_register函数的详细介绍：</p>
+<h1 id="第51章-注册platform设备实验"><a href="#第51章-注册platform设备实验" class="headerlink" title="第51章 注册platform设备实验"></a>第51章 注册platform设备实验</h1><h2 id="51-1-注册platform设备"><a href="#51-1-注册platform设备" class="headerlink" title="51.1 注册platform设备"></a>51.1 注册platform设备</h2><h3 id="51-1-1-platform-device-register-函数"><a href="#51-1-1-platform-device-register-函数" class="headerlink" title="51.1.1 platform_device_register 函数"></a>51.1.1 platform_device_register 函数</h3><p>platform_device_register函数用于将platform_device结构体描述的平台设备注册到内核中。下面是对platform_device_register函数的详细介绍：</p>
 <p><em><strong>*函数原型：*</strong></em></p>
 <p>int platform_device_register(struct platform_device *pdev);</p>
 <p><em><strong>*头文件：*</strong></em></p>

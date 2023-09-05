@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2023-09-04T23:49:29.116Z</updated>
+  <updated>2023-09-05T00:03:19.575Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>3.22-u-boot重定位分析(下)</title>
-    <link href="http://example.com/2023/09/05/3-22-u-boot%E9%87%8D%E5%AE%9A%E4%BD%8D%E5%88%86%E6%9E%90-%E4%B8%8B/"/>
-    <id>http://example.com/2023/09/05/3-22-u-boot%E9%87%8D%E5%AE%9A%E4%BD%8D%E5%88%86%E6%9E%90-%E4%B8%8B/</id>
-    <published>2023-09-04T23:47:24.000Z</published>
-    <updated>2023-09-04T23:49:29.116Z</updated>
+    <title>1-2-你好内核源码</title>
+    <link href="http://example.com/2023/09/05/1-2-%E4%BD%A0%E5%A5%BD%E5%86%85%E6%A0%B8%E6%BA%90%E7%A0%81/"/>
+    <id>http://example.com/2023/09/05/1-2-%E4%BD%A0%E5%A5%BD%E5%86%85%E6%A0%B8%E6%BA%90%E7%A0%81/</id>
+    <published>2023-09-05T00:03:05.000Z</published>
+    <updated>2023-09-05T00:03:19.575Z</updated>
     
     
       
@@ -34,19 +34,19 @@
     
     
     
-    <category term="c高级编程" scheme="http://example.com/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/"/>
+    <category term="rk3568 驱动" scheme="http://example.com/categories/rk3568-%E9%A9%B1%E5%8A%A8/"/>
     
     
-    <category term="程序的编译、链接和运行" scheme="http://example.com/tags/%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%BC%96%E8%AF%91%E3%80%81%E9%93%BE%E6%8E%A5%E5%92%8C%E8%BF%90%E8%A1%8C/"/>
+    <category term="rk3568 驱动" scheme="http://example.com/tags/rk3568-%E9%A9%B1%E5%8A%A8/"/>
     
   </entry>
   
   <entry>
-    <title>3.21-u-boot重定位分析(上)</title>
-    <link href="http://example.com/2023/09/05/3-21-u-boot%E9%87%8D%E5%AE%9A%E4%BD%8D%E5%88%86%E6%9E%90-%E4%B8%8A/"/>
-    <id>http://example.com/2023/09/05/3-21-u-boot%E9%87%8D%E5%AE%9A%E4%BD%8D%E5%88%86%E6%9E%90-%E4%B8%8A/</id>
-    <published>2023-09-04T23:47:23.000Z</published>
-    <updated>2023-09-04T23:49:25.869Z</updated>
+    <title>1-71-讨论:为什么学不会设备树</title>
+    <link href="http://example.com/2023/09/05/1-71-%E8%AE%A8%E8%AE%BA-%E4%B8%BA%E4%BB%80%E4%B9%88%E5%AD%A6%E4%B8%8D%E4%BC%9A%E8%AE%BE%E5%A4%87%E6%A0%91/"/>
+    <id>http://example.com/2023/09/05/1-71-%E8%AE%A8%E8%AE%BA-%E4%B8%BA%E4%BB%80%E4%B9%88%E5%AD%A6%E4%B8%8D%E4%BC%9A%E8%AE%BE%E5%A4%87%E6%A0%91/</id>
+    <published>2023-09-05T00:01:46.000Z</published>
+    <updated>2023-09-05T00:06:04.667Z</updated>
     
     
       
@@ -59,19 +59,19 @@
     
     
     
-    <category term="c高级编程" scheme="http://example.com/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/"/>
+    <category term="rk3568 驱动" scheme="http://example.com/categories/rk3568-%E9%A9%B1%E5%8A%A8/"/>
     
     
-    <category term="程序的编译、链接和运行" scheme="http://example.com/tags/%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%BC%96%E8%AF%91%E3%80%81%E9%93%BE%E6%8E%A5%E5%92%8C%E8%BF%90%E8%A1%8C/"/>
+    <category term="rk3568 驱动" scheme="http://example.com/tags/rk3568-%E9%A9%B1%E5%8A%A8/"/>
     
   </entry>
   
   <entry>
-    <title>3.20-linux内核加载实验</title>
-    <link href="http://example.com/2023/09/05/3-20-linux%E5%86%85%E6%A0%B8%E5%8A%A0%E8%BD%BD%E5%AE%9E%E9%AA%8C/"/>
-    <id>http://example.com/2023/09/05/3-20-linux%E5%86%85%E6%A0%B8%E5%8A%A0%E8%BD%BD%E5%AE%9E%E9%AA%8C/</id>
-    <published>2023-09-04T23:47:21.000Z</published>
-    <updated>2023-09-04T23:49:23.108Z</updated>
+    <title>1-70-参考文档:设备树bindings</title>
+    <link href="http://example.com/2023/09/05/1-70-%E5%8F%82%E8%80%83%E6%96%87%E6%A1%A3-%E8%AE%BE%E5%A4%87%E6%A0%91bindings/"/>
+    <id>http://example.com/2023/09/05/1-70-%E5%8F%82%E8%80%83%E6%96%87%E6%A1%A3-%E8%AE%BE%E5%A4%87%E6%A0%91bindings/</id>
+    <published>2023-09-05T00:01:45.000Z</published>
+    <updated>2023-09-05T00:06:01.529Z</updated>
     
     
       
@@ -84,19 +84,19 @@
     
     
     
-    <category term="c高级编程" scheme="http://example.com/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/"/>
+    <category term="rk3568 驱动" scheme="http://example.com/categories/rk3568-%E9%A9%B1%E5%8A%A8/"/>
     
     
-    <category term="程序的编译、链接和运行" scheme="http://example.com/tags/%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%BC%96%E8%AF%91%E3%80%81%E9%93%BE%E6%8E%A5%E5%92%8C%E8%BF%90%E8%A1%8C/"/>
+    <category term="rk3568 驱动" scheme="http://example.com/tags/rk3568-%E9%A9%B1%E5%8A%A8/"/>
     
   </entry>
   
   <entry>
-    <title>3.19-binutils工具集</title>
-    <link href="http://example.com/2023/09/05/3-19-binutils%E5%B7%A5%E5%85%B7%E9%9B%86/"/>
-    <id>http://example.com/2023/09/05/3-19-binutils%E5%B7%A5%E5%85%B7%E9%9B%86/</id>
-    <published>2023-09-04T23:47:20.000Z</published>
-    <updated>2023-09-04T23:49:19.709Z</updated>
+    <title>1-69-of操作函数实验:获取中断资源</title>
+    <link href="http://example.com/2023/09/05/1-69-of%E6%93%8D%E4%BD%9C%E5%87%BD%E6%95%B0%E5%AE%9E%E9%AA%8C-%E8%8E%B7%E5%8F%96%E4%B8%AD%E6%96%AD%E8%B5%84%E6%BA%90/"/>
+    <id>http://example.com/2023/09/05/1-69-of%E6%93%8D%E4%BD%9C%E5%87%BD%E6%95%B0%E5%AE%9E%E9%AA%8C-%E8%8E%B7%E5%8F%96%E4%B8%AD%E6%96%AD%E8%B5%84%E6%BA%90/</id>
+    <published>2023-09-05T00:01:43.000Z</published>
+    <updated>2023-09-05T00:05:59.273Z</updated>
     
     
       
@@ -109,19 +109,19 @@
     
     
     
-    <category term="c高级编程" scheme="http://example.com/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/"/>
+    <category term="rk3568 驱动" scheme="http://example.com/categories/rk3568-%E9%A9%B1%E5%8A%A8/"/>
     
     
-    <category term="程序的编译、链接和运行" scheme="http://example.com/tags/%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%BC%96%E8%AF%91%E3%80%81%E9%93%BE%E6%8E%A5%E5%92%8C%E8%BF%90%E8%A1%8C/"/>
+    <category term="rk3568 驱动" scheme="http://example.com/tags/rk3568-%E9%A9%B1%E5%8A%A8/"/>
     
   </entry>
   
   <entry>
-    <title>3.18-内核模块加载机制</title>
-    <link href="http://example.com/2023/09/05/3-18-%E5%86%85%E6%A0%B8%E6%A8%A1%E5%9D%97%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6/"/>
-    <id>http://example.com/2023/09/05/3-18-%E5%86%85%E6%A0%B8%E6%A8%A1%E5%9D%97%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6/</id>
-    <published>2023-09-04T23:47:18.000Z</published>
-    <updated>2023-09-04T23:49:17.126Z</updated>
+    <title>1-68-ranges属性实验</title>
+    <link href="http://example.com/2023/09/05/1-68-ranges%E5%B1%9E%E6%80%A7%E5%AE%9E%E9%AA%8C/"/>
+    <id>http://example.com/2023/09/05/1-68-ranges%E5%B1%9E%E6%80%A7%E5%AE%9E%E9%AA%8C/</id>
+    <published>2023-09-05T00:01:42.000Z</published>
+    <updated>2023-09-05T00:05:57.323Z</updated>
     
     
       
@@ -134,19 +134,19 @@
     
     
     
-    <category term="c高级编程" scheme="http://example.com/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/"/>
+    <category term="rk3568 驱动" scheme="http://example.com/categories/rk3568-%E9%A9%B1%E5%8A%A8/"/>
     
     
-    <category term="程序的编译、链接和运行" scheme="http://example.com/tags/%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%BC%96%E8%AF%91%E3%80%81%E9%93%BE%E6%8E%A5%E5%92%8C%E8%BF%90%E8%A1%8C/"/>
+    <category term="rk3568 驱动" scheme="http://example.com/tags/rk3568-%E9%A9%B1%E5%8A%A8/"/>
     
   </entry>
   
   <entry>
-    <title>3.17-开发一个插件</title>
-    <link href="http://example.com/2023/09/05/3-17-%E5%BC%80%E5%8F%91%E4%B8%80%E4%B8%AA%E6%8F%92%E4%BB%B6/"/>
-    <id>http://example.com/2023/09/05/3-17-%E5%BC%80%E5%8F%91%E4%B8%80%E4%B8%AA%E6%8F%92%E4%BB%B6/</id>
-    <published>2023-09-04T23:47:17.000Z</published>
-    <updated>2023-09-04T23:49:13.590Z</updated>
+    <title>1-67-of操作函数实验:获取属性</title>
+    <link href="http://example.com/2023/09/05/1-67-of%E6%93%8D%E4%BD%9C%E5%87%BD%E6%95%B0%E5%AE%9E%E9%AA%8C-%E8%8E%B7%E5%8F%96%E5%B1%9E%E6%80%A7/"/>
+    <id>http://example.com/2023/09/05/1-67-of%E6%93%8D%E4%BD%9C%E5%87%BD%E6%95%B0%E5%AE%9E%E9%AA%8C-%E8%8E%B7%E5%8F%96%E5%B1%9E%E6%80%A7/</id>
+    <published>2023-09-05T00:01:40.000Z</published>
+    <updated>2023-09-05T00:05:55.095Z</updated>
     
     
       
@@ -159,19 +159,19 @@
     
     
     
-    <category term="c高级编程" scheme="http://example.com/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/"/>
+    <category term="rk3568 驱动" scheme="http://example.com/categories/rk3568-%E9%A9%B1%E5%8A%A8/"/>
     
     
-    <category term="程序的编译、链接和运行" scheme="http://example.com/tags/%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%BC%96%E8%AF%91%E3%80%81%E9%93%BE%E6%8E%A5%E5%92%8C%E8%BF%90%E8%A1%8C/"/>
+    <category term="rk3568 驱动" scheme="http://example.com/tags/rk3568-%E9%A9%B1%E5%8A%A8/"/>
     
   </entry>
   
   <entry>
-    <title>3.16-动态链接(3)-共享库</title>
-    <link href="http://example.com/2023/09/05/3-16-%E5%8A%A8%E6%80%81%E9%93%BE%E6%8E%A5-3-%E5%85%B1%E4%BA%AB%E5%BA%93/"/>
-    <id>http://example.com/2023/09/05/3-16-%E5%8A%A8%E6%80%81%E9%93%BE%E6%8E%A5-3-%E5%85%B1%E4%BA%AB%E5%BA%93/</id>
-    <published>2023-09-04T23:47:15.000Z</published>
-    <updated>2023-09-04T23:49:10.896Z</updated>
+    <title>1-66-of操作函数实验:获取设备树节点</title>
+    <link href="http://example.com/2023/09/05/1-66-of%E6%93%8D%E4%BD%9C%E5%87%BD%E6%95%B0%E5%AE%9E%E9%AA%8C-%E8%8E%B7%E5%8F%96%E8%AE%BE%E5%A4%87%E6%A0%91%E8%8A%82%E7%82%B9/"/>
+    <id>http://example.com/2023/09/05/1-66-of%E6%93%8D%E4%BD%9C%E5%87%BD%E6%95%B0%E5%AE%9E%E9%AA%8C-%E8%8E%B7%E5%8F%96%E8%AE%BE%E5%A4%87%E6%A0%91%E8%8A%82%E7%82%B9/</id>
+    <published>2023-09-05T00:01:39.000Z</published>
+    <updated>2023-09-05T00:05:52.495Z</updated>
     
     
       
@@ -184,19 +184,19 @@
     
     
     
-    <category term="c高级编程" scheme="http://example.com/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/"/>
+    <category term="rk3568 驱动" scheme="http://example.com/categories/rk3568-%E9%A9%B1%E5%8A%A8/"/>
     
     
-    <category term="程序的编译、链接和运行" scheme="http://example.com/tags/%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%BC%96%E8%AF%91%E3%80%81%E9%93%BE%E6%8E%A5%E5%92%8C%E8%BF%90%E8%A1%8C/"/>
+    <category term="rk3568 驱动" scheme="http://example.com/tags/rk3568-%E9%A9%B1%E5%8A%A8/"/>
     
   </entry>
   
   <entry>
-    <title>3.15-动态链接(2)-全局符号表GOT</title>
-    <link href="http://example.com/2023/09/05/3-15-%E5%8A%A8%E6%80%81%E9%93%BE%E6%8E%A5-2-%E5%85%A8%E5%B1%80%E7%AC%A6%E5%8F%B7%E8%A1%A8GOT/"/>
-    <id>http://example.com/2023/09/05/3-15-%E5%8A%A8%E6%80%81%E9%93%BE%E6%8E%A5-2-%E5%85%A8%E5%B1%80%E7%AC%A6%E5%8F%B7%E8%A1%A8GOT/</id>
-    <published>2023-09-04T23:47:13.000Z</published>
-    <updated>2023-09-04T23:49:08.226Z</updated>
+    <title>1-65-设备树下platform_device和platform_driver匹配实验</title>
+    <link href="http://example.com/2023/09/05/1-65-%E8%AE%BE%E5%A4%87%E6%A0%91%E4%B8%8Bplatform-device%E5%92%8Cplatform-driver%E5%8C%B9%E9%85%8D%E5%AE%9E%E9%AA%8C/"/>
+    <id>http://example.com/2023/09/05/1-65-%E8%AE%BE%E5%A4%87%E6%A0%91%E4%B8%8Bplatform-device%E5%92%8Cplatform-driver%E5%8C%B9%E9%85%8D%E5%AE%9E%E9%AA%8C/</id>
+    <published>2023-09-05T00:01:37.000Z</published>
+    <updated>2023-09-05T00:05:50.233Z</updated>
     
     
       
@@ -209,19 +209,19 @@
     
     
     
-    <category term="c高级编程" scheme="http://example.com/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/"/>
+    <category term="rk3568 驱动" scheme="http://example.com/categories/rk3568-%E9%A9%B1%E5%8A%A8/"/>
     
     
-    <category term="程序的编译、链接和运行" scheme="http://example.com/tags/%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%BC%96%E8%AF%91%E3%80%81%E9%93%BE%E6%8E%A5%E5%92%8C%E8%BF%90%E8%A1%8C/"/>
+    <category term="rk3568 驱动" scheme="http://example.com/tags/rk3568-%E9%A9%B1%E5%8A%A8/"/>
     
   </entry>
   
   <entry>
-    <title>3.14-动态链接(1)-与位置无关的代码</title>
-    <link href="http://example.com/2023/09/05/3-14-%E5%8A%A8%E6%80%81%E9%93%BE%E6%8E%A5-1-%E4%B8%8E%E4%BD%8D%E7%BD%AE%E6%97%A0%E5%85%B3%E7%9A%84%E4%BB%A3%E7%A0%81/"/>
-    <id>http://example.com/2023/09/05/3-14-%E5%8A%A8%E6%80%81%E9%93%BE%E6%8E%A5-1-%E4%B8%8E%E4%BD%8D%E7%BD%AE%E6%97%A0%E5%85%B3%E7%9A%84%E4%BB%A3%E7%A0%81/</id>
-    <published>2023-09-04T23:47:12.000Z</published>
-    <updated>2023-09-04T23:49:05.275Z</updated>
+    <title>1-64-device node转换成platform device实验</title>
+    <link href="http://example.com/2023/09/05/1-64-device-node%E8%BD%AC%E6%8D%A2%E6%88%90platform-device%E5%AE%9E%E9%AA%8C/"/>
+    <id>http://example.com/2023/09/05/1-64-device-node%E8%BD%AC%E6%8D%A2%E6%88%90platform-device%E5%AE%9E%E9%AA%8C/</id>
+    <published>2023-09-05T00:01:35.000Z</published>
+    <updated>2023-09-05T00:05:48.087Z</updated>
     
     
       
@@ -234,19 +234,19 @@
     
     
     
-    <category term="c高级编程" scheme="http://example.com/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/"/>
+    <category term="rk3568 驱动" scheme="http://example.com/categories/rk3568-%E9%A9%B1%E5%8A%A8/"/>
     
     
-    <category term="程序的编译、链接和运行" scheme="http://example.com/tags/%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%BC%96%E8%AF%91%E3%80%81%E9%93%BE%E6%8E%A5%E5%92%8C%E8%BF%90%E8%A1%8C/"/>
+    <category term="rk3568 驱动" scheme="http://example.com/tags/rk3568-%E9%A9%B1%E5%8A%A8/"/>
     
   </entry>
   
   <entry>
-    <title>3.13-链接静态库</title>
-    <link href="http://example.com/2023/09/05/3-13-%E9%93%BE%E6%8E%A5%E9%9D%99%E6%80%81%E5%BA%93/"/>
-    <id>http://example.com/2023/09/05/3-13-%E9%93%BE%E6%8E%A5%E9%9D%99%E6%80%81%E5%BA%93/</id>
-    <published>2023-09-04T23:47:10.000Z</published>
-    <updated>2023-09-04T23:49:02.599Z</updated>
+    <title>1-63-dtb展开成device_node实验</title>
+    <link href="http://example.com/2023/09/05/1-63-dtb%E5%B1%95%E5%BC%80%E6%88%90device-node%E5%AE%9E%E9%AA%8C/"/>
+    <id>http://example.com/2023/09/05/1-63-dtb%E5%B1%95%E5%BC%80%E6%88%90device-node%E5%AE%9E%E9%AA%8C/</id>
+    <published>2023-09-05T00:01:34.000Z</published>
+    <updated>2023-09-05T00:05:46.131Z</updated>
     
     
       
@@ -259,19 +259,19 @@
     
     
     
-    <category term="c高级编程" scheme="http://example.com/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/"/>
+    <category term="rk3568 驱动" scheme="http://example.com/categories/rk3568-%E9%A9%B1%E5%8A%A8/"/>
     
     
-    <category term="程序的编译、链接和运行" scheme="http://example.com/tags/%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%BC%96%E8%AF%91%E3%80%81%E9%93%BE%E6%8E%A5%E5%92%8C%E8%BF%90%E8%A1%8C/"/>
+    <category term="rk3568 驱动" scheme="http://example.com/tags/rk3568-%E9%A9%B1%E5%8A%A8/"/>
     
   </entry>
   
   <entry>
-    <title>3.12-main函数入口分析</title>
-    <link href="http://example.com/2023/09/05/3-12-main%E5%87%BD%E6%95%B0%E5%85%A5%E5%8F%A3%E5%88%86%E6%9E%90/"/>
-    <id>http://example.com/2023/09/05/3-12-main%E5%87%BD%E6%95%B0%E5%85%A5%E5%8F%A3%E5%88%86%E6%9E%90/</id>
-    <published>2023-09-04T23:47:09.000Z</published>
-    <updated>2023-09-04T23:48:59.886Z</updated>
+    <title>1-62-dtb文件格式讲解</title>
+    <link href="http://example.com/2023/09/05/1-62-dtb%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F%E8%AE%B2%E8%A7%A3/"/>
+    <id>http://example.com/2023/09/05/1-62-dtb%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F%E8%AE%B2%E8%A7%A3/</id>
+    <published>2023-09-05T00:01:32.000Z</published>
+    <updated>2023-09-05T00:05:43.980Z</updated>
     
     
       
@@ -284,19 +284,19 @@
     
     
     
-    <category term="c高级编程" scheme="http://example.com/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/"/>
+    <category term="rk3568 驱动" scheme="http://example.com/categories/rk3568-%E9%A9%B1%E5%8A%A8/"/>
     
     
-    <category term="程序的编译、链接和运行" scheme="http://example.com/tags/%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%BC%96%E8%AF%91%E3%80%81%E9%93%BE%E6%8E%A5%E5%92%8C%E8%BF%90%E8%A1%8C/"/>
+    <category term="rk3568 驱动" scheme="http://example.com/tags/rk3568-%E9%A9%B1%E5%8A%A8/"/>
     
   </entry>
   
   <entry>
-    <title>3.11-BSS段的处理</title>
-    <link href="http://example.com/2023/09/05/3-11-BSS%E6%AE%B5%E7%9A%84%E5%A4%84%E7%90%86/"/>
-    <id>http://example.com/2023/09/05/3-11-BSS%E6%AE%B5%E7%9A%84%E5%A4%84%E7%90%86/</id>
-    <published>2023-09-04T23:47:07.000Z</published>
-    <updated>2023-09-04T23:48:57.209Z</updated>
+    <title>1-61-实例分析: pinctrl</title>
+    <link href="http://example.com/2023/09/05/1-61-%E5%AE%9E%E4%BE%8B%E5%88%86%E6%9E%90-pinctrl/"/>
+    <id>http://example.com/2023/09/05/1-61-%E5%AE%9E%E4%BE%8B%E5%88%86%E6%9E%90-pinctrl/</id>
+    <published>2023-09-05T00:01:31.000Z</published>
+    <updated>2023-09-05T00:05:41.851Z</updated>
     
     
       
@@ -309,19 +309,19 @@
     
     
     
-    <category term="c高级编程" scheme="http://example.com/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/"/>
+    <category term="rk3568 驱动" scheme="http://example.com/categories/rk3568-%E9%A9%B1%E5%8A%A8/"/>
     
     
-    <category term="程序的编译、链接和运行" scheme="http://example.com/tags/%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%BC%96%E8%AF%91%E3%80%81%E9%93%BE%E6%8E%A5%E5%92%8C%E8%BF%90%E8%A1%8C/"/>
+    <category term="rk3568 驱动" scheme="http://example.com/tags/rk3568-%E9%A9%B1%E5%8A%A8/"/>
     
   </entry>
   
   <entry>
-    <title>3.10-程序的运行</title>
-    <link href="http://example.com/2023/09/05/3-10-%E7%A8%8B%E5%BA%8F%E7%9A%84%E8%BF%90%E8%A1%8C/"/>
-    <id>http://example.com/2023/09/05/3-10-%E7%A8%8B%E5%BA%8F%E7%9A%84%E8%BF%90%E8%A1%8C/</id>
-    <published>2023-09-04T23:47:06.000Z</published>
-    <updated>2023-09-04T23:48:54.898Z</updated>
+    <title>1-60-实例分析:GPIO</title>
+    <link href="http://example.com/2023/09/05/1-60-%E5%AE%9E%E4%BE%8B%E5%88%86%E6%9E%90-GPIO/"/>
+    <id>http://example.com/2023/09/05/1-60-%E5%AE%9E%E4%BE%8B%E5%88%86%E6%9E%90-GPIO/</id>
+    <published>2023-09-05T00:01:29.000Z</published>
+    <updated>2023-09-05T00:05:39.673Z</updated>
     
     
       
@@ -334,19 +334,19 @@
     
     
     
-    <category term="c高级编程" scheme="http://example.com/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/"/>
+    <category term="rk3568 驱动" scheme="http://example.com/categories/rk3568-%E9%A9%B1%E5%8A%A8/"/>
     
     
-    <category term="程序的编译、链接和运行" scheme="http://example.com/tags/%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%BC%96%E8%AF%91%E3%80%81%E9%93%BE%E6%8E%A5%E5%92%8C%E8%BF%90%E8%A1%8C/"/>
+    <category term="rk3568 驱动" scheme="http://example.com/tags/rk3568-%E9%A9%B1%E5%8A%A8/"/>
     
   </entry>
   
   <entry>
-    <title>3.9-链接过程(3)-重定位</title>
-    <link href="http://example.com/2023/09/05/3-9-%E9%93%BE%E6%8E%A5%E8%BF%87%E7%A8%8B-3-%E9%87%8D%E5%AE%9A%E4%BD%8D/"/>
-    <id>http://example.com/2023/09/05/3-9-%E9%93%BE%E6%8E%A5%E8%BF%87%E7%A8%8B-3-%E9%87%8D%E5%AE%9A%E4%BD%8D/</id>
-    <published>2023-09-04T23:47:04.000Z</published>
-    <updated>2023-09-04T23:48:52.809Z</updated>
+    <title>1-59-实例分析:CPU</title>
+    <link href="http://example.com/2023/09/05/1-59-%E5%AE%9E%E4%BE%8B%E5%88%86%E6%9E%90-CPU/"/>
+    <id>http://example.com/2023/09/05/1-59-%E5%AE%9E%E4%BE%8B%E5%88%86%E6%9E%90-CPU/</id>
+    <published>2023-09-05T00:01:28.000Z</published>
+    <updated>2023-09-05T00:05:37.367Z</updated>
     
     
       
@@ -359,19 +359,19 @@
     
     
     
-    <category term="c高级编程" scheme="http://example.com/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/"/>
+    <category term="rk3568 驱动" scheme="http://example.com/categories/rk3568-%E9%A9%B1%E5%8A%A8/"/>
     
     
-    <category term="程序的编译、链接和运行" scheme="http://example.com/tags/%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%BC%96%E8%AF%91%E3%80%81%E9%93%BE%E6%8E%A5%E5%92%8C%E8%BF%90%E8%A1%8C/"/>
+    <category term="rk3568 驱动" scheme="http://example.com/tags/rk3568-%E9%A9%B1%E5%8A%A8/"/>
     
   </entry>
   
   <entry>
-    <title>3.8-链接过程(2)-符号解析-强符号与弱符号</title>
-    <link href="http://example.com/2023/09/05/3-8-%E9%93%BE%E6%8E%A5%E8%BF%87%E7%A8%8B-2-%E7%AC%A6%E5%8F%B7%E8%A7%A3%E6%9E%90-%E5%BC%BA%E7%AC%A6%E5%8F%B7%E4%B8%8E%E5%BC%B1%E7%AC%A6%E5%8F%B7/"/>
-    <id>http://example.com/2023/09/05/3-8-%E9%93%BE%E6%8E%A5%E8%BF%87%E7%A8%8B-2-%E7%AC%A6%E5%8F%B7%E8%A7%A3%E6%9E%90-%E5%BC%BA%E7%AC%A6%E5%8F%B7%E4%B8%8E%E5%BC%B1%E7%AC%A6%E5%8F%B7/</id>
-    <published>2023-09-04T23:47:02.000Z</published>
-    <updated>2023-09-04T23:48:49.886Z</updated>
+    <title>1-58-实例分析:时钟</title>
+    <link href="http://example.com/2023/09/05/1-58-%E5%AE%9E%E4%BE%8B%E5%88%86%E6%9E%90-%E6%97%B6%E9%92%9F/"/>
+    <id>http://example.com/2023/09/05/1-58-%E5%AE%9E%E4%BE%8B%E5%88%86%E6%9E%90-%E6%97%B6%E9%92%9F/</id>
+    <published>2023-09-05T00:01:26.000Z</published>
+    <updated>2023-09-05T00:05:34.635Z</updated>
     
     
       
@@ -384,19 +384,19 @@
     
     
     
-    <category term="c高级编程" scheme="http://example.com/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/"/>
+    <category term="rk3568 驱动" scheme="http://example.com/categories/rk3568-%E9%A9%B1%E5%8A%A8/"/>
     
     
-    <category term="程序的编译、链接和运行" scheme="http://example.com/tags/%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%BC%96%E8%AF%91%E3%80%81%E9%93%BE%E6%8E%A5%E5%92%8C%E8%BF%90%E8%A1%8C/"/>
+    <category term="rk3568 驱动" scheme="http://example.com/tags/rk3568-%E9%A9%B1%E5%8A%A8/"/>
     
   </entry>
   
   <entry>
-    <title>3.7-链接过程(1)-地址空间分配与链接脚本</title>
-    <link href="http://example.com/2023/09/05/3-7-%E9%93%BE%E6%8E%A5%E8%BF%87%E7%A8%8B-1-%E5%9C%B0%E5%9D%80%E7%A9%BA%E9%97%B4%E5%88%86%E9%85%8D%E4%B8%8E%E9%93%BE%E6%8E%A5%E8%84%9A%E6%9C%AC/"/>
-    <id>http://example.com/2023/09/05/3-7-%E9%93%BE%E6%8E%A5%E8%BF%87%E7%A8%8B-1-%E5%9C%B0%E5%9D%80%E7%A9%BA%E9%97%B4%E5%88%86%E9%85%8D%E4%B8%8E%E9%93%BE%E6%8E%A5%E8%84%9A%E6%9C%AC/</id>
-    <published>2023-09-04T23:47:01.000Z</published>
-    <updated>2023-09-04T23:48:47.770Z</updated>
+    <title>1-57-实例分析:中断</title>
+    <link href="http://example.com/2023/09/05/1-57-%E5%AE%9E%E4%BE%8B%E5%88%86%E6%9E%90-%E4%B8%AD%E6%96%AD/"/>
+    <id>http://example.com/2023/09/05/1-57-%E5%AE%9E%E4%BE%8B%E5%88%86%E6%9E%90-%E4%B8%AD%E6%96%AD/</id>
+    <published>2023-09-05T00:01:24.000Z</published>
+    <updated>2023-09-05T00:05:32.464Z</updated>
     
     
       
@@ -409,19 +409,19 @@
     
     
     
-    <category term="c高级编程" scheme="http://example.com/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/"/>
+    <category term="rk3568 驱动" scheme="http://example.com/categories/rk3568-%E9%A9%B1%E5%8A%A8/"/>
     
     
-    <category term="程序的编译、链接和运行" scheme="http://example.com/tags/%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%BC%96%E8%AF%91%E3%80%81%E9%93%BE%E6%8E%A5%E5%92%8C%E8%BF%90%E8%A1%8C/"/>
+    <category term="rk3568 驱动" scheme="http://example.com/tags/rk3568-%E9%A9%B1%E5%8A%A8/"/>
     
   </entry>
   
   <entry>
-    <title>3.6-编译过程(3)-符号表</title>
-    <link href="http://example.com/2023/09/05/3-6-%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B-3-%E7%AC%A6%E5%8F%B7%E8%A1%A8/"/>
-    <id>http://example.com/2023/09/05/3-6-%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B-3-%E7%AC%A6%E5%8F%B7%E8%A1%A8/</id>
-    <published>2023-09-04T23:46:59.000Z</published>
-    <updated>2023-09-04T23:48:45.547Z</updated>
+    <title>1-56-设备树基本语法</title>
+    <link href="http://example.com/2023/09/05/1-56-%E8%AE%BE%E5%A4%87%E6%A0%91%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/"/>
+    <id>http://example.com/2023/09/05/1-56-%E8%AE%BE%E5%A4%87%E6%A0%91%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/</id>
+    <published>2023-09-05T00:01:23.000Z</published>
+    <updated>2023-09-05T00:05:30.464Z</updated>
     
     
       
@@ -434,19 +434,19 @@
     
     
     
-    <category term="c高级编程" scheme="http://example.com/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/"/>
+    <category term="rk3568 驱动" scheme="http://example.com/categories/rk3568-%E9%A9%B1%E5%8A%A8/"/>
     
     
-    <category term="程序的编译、链接和运行" scheme="http://example.com/tags/%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%BC%96%E8%AF%91%E3%80%81%E9%93%BE%E6%8E%A5%E5%92%8C%E8%BF%90%E8%A1%8C/"/>
+    <category term="rk3568 驱动" scheme="http://example.com/tags/rk3568-%E9%A9%B1%E5%8A%A8/"/>
     
   </entry>
   
   <entry>
-    <title>3.5-编译过程(2)-汇编过程</title>
-    <link href="http://example.com/2023/09/05/3-5-%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B-2-%E6%B1%87%E7%BC%96%E8%BF%87%E7%A8%8B/"/>
-    <id>http://example.com/2023/09/05/3-5-%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B-2-%E6%B1%87%E7%BC%96%E8%BF%87%E7%A8%8B/</id>
-    <published>2023-09-04T23:46:58.000Z</published>
-    <updated>2023-09-04T23:46:58.290Z</updated>
+    <title>1-55-初识设备树</title>
+    <link href="http://example.com/2023/09/05/1-55-%E5%88%9D%E8%AF%86%E8%AE%BE%E5%A4%87%E6%A0%91/"/>
+    <id>http://example.com/2023/09/05/1-55-%E5%88%9D%E8%AF%86%E8%AE%BE%E5%A4%87%E6%A0%91/</id>
+    <published>2023-09-05T00:01:21.000Z</published>
+    <updated>2023-09-05T00:05:28.260Z</updated>
     
     
       
@@ -459,15 +459,19 @@
     
     
     
+    <category term="rk3568 驱动" scheme="http://example.com/categories/rk3568-%E9%A9%B1%E5%8A%A8/"/>
+    
+    
+    <category term="rk3568 驱动" scheme="http://example.com/tags/rk3568-%E9%A9%B1%E5%8A%A8/"/>
     
   </entry>
   
   <entry>
-    <title>3.4-编译过程(1)-从源程序到汇编文件</title>
-    <link href="http://example.com/2023/09/05/3-4-%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B-1-%E4%BB%8E%E6%BA%90%E7%A8%8B%E5%BA%8F%E5%88%B0%E6%B1%87%E7%BC%96%E6%96%87%E4%BB%B6/"/>
-    <id>http://example.com/2023/09/05/3-4-%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B-1-%E4%BB%8E%E6%BA%90%E7%A8%8B%E5%BA%8F%E5%88%B0%E6%B1%87%E7%BC%96%E6%96%87%E4%BB%B6/</id>
-    <published>2023-09-04T23:46:56.000Z</published>
-    <updated>2023-09-04T23:48:43.250Z</updated>
+    <title>1-54-点亮LED灯实验（平台总线)</title>
+    <link href="http://example.com/2023/09/05/1-54-%E7%82%B9%E4%BA%AELED%E7%81%AF%E5%AE%9E%E9%AA%8C%EF%BC%88%E5%B9%B3%E5%8F%B0%E6%80%BB%E7%BA%BF/"/>
+    <id>http://example.com/2023/09/05/1-54-%E7%82%B9%E4%BA%AELED%E7%81%AF%E5%AE%9E%E9%AA%8C%EF%BC%88%E5%B9%B3%E5%8F%B0%E6%80%BB%E7%BA%BF/</id>
+    <published>2023-09-05T00:01:20.000Z</published>
+    <updated>2023-09-05T00:05:26.291Z</updated>
     
     
       
@@ -480,19 +484,19 @@
     
     
     
-    <category term="c高级编程" scheme="http://example.com/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/"/>
+    <category term="rk3568 驱动" scheme="http://example.com/categories/rk3568-%E9%A9%B1%E5%8A%A8/"/>
     
     
-    <category term="程序的编译、链接和运行" scheme="http://example.com/tags/%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%BC%96%E8%AF%91%E3%80%81%E9%93%BE%E6%8E%A5%E5%92%8C%E8%BF%90%E8%A1%8C/"/>
+    <category term="rk3568 驱动" scheme="http://example.com/tags/rk3568-%E9%A9%B1%E5%8A%A8/"/>
     
   </entry>
   
   <entry>
-    <title>3.3-预处理过程</title>
-    <link href="http://example.com/2023/09/05/3-3-%E9%A2%84%E5%A4%84%E7%90%86%E8%BF%87%E7%A8%8B/"/>
-    <id>http://example.com/2023/09/05/3-3-%E9%A2%84%E5%A4%84%E7%90%86%E8%BF%87%E7%A8%8B/</id>
-    <published>2023-09-04T23:46:55.000Z</published>
-    <updated>2023-09-04T23:48:40.454Z</updated>
+    <title>1-53-probe函数编写实验</title>
+    <link href="http://example.com/2023/09/05/1-53-probe%E5%87%BD%E6%95%B0%E7%BC%96%E5%86%99%E5%AE%9E%E9%AA%8C/"/>
+    <id>http://example.com/2023/09/05/1-53-probe%E5%87%BD%E6%95%B0%E7%BC%96%E5%86%99%E5%AE%9E%E9%AA%8C/</id>
+    <published>2023-09-05T00:01:18.000Z</published>
+    <updated>2023-09-05T00:05:24.096Z</updated>
     
     
       
@@ -505,10 +509,10 @@
     
     
     
-    <category term="c高级编程" scheme="http://example.com/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/"/>
+    <category term="rk3568 驱动" scheme="http://example.com/categories/rk3568-%E9%A9%B1%E5%8A%A8/"/>
     
     
-    <category term="程序的编译、链接和运行" scheme="http://example.com/tags/%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%BC%96%E8%AF%91%E3%80%81%E9%93%BE%E6%8E%A5%E5%92%8C%E8%BF%90%E8%A1%8C/"/>
+    <category term="rk3568 驱动" scheme="http://example.com/tags/rk3568-%E9%A9%B1%E5%8A%A8/"/>
     
   </entry>
   

@@ -1,6 +1,776 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>1-2-你好内核源码</title>
+    <url>/2023/09/05/1-2-%E4%BD%A0%E5%A5%BD%E5%86%85%E6%A0%B8%E6%BA%90%E7%A0%81/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>rk3568 驱动</category>
+      </categories>
+      <tags>
+        <tag>rk3568 驱动</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1-71-讨论:为什么学不会设备树</title>
+    <url>/2023/09/05/1-71-%E8%AE%A8%E8%AE%BA-%E4%B8%BA%E4%BB%80%E4%B9%88%E5%AD%A6%E4%B8%8D%E4%BC%9A%E8%AE%BE%E5%A4%87%E6%A0%91/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>rk3568 驱动</category>
+      </categories>
+      <tags>
+        <tag>rk3568 驱动</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1-70-参考文档:设备树bindings</title>
+    <url>/2023/09/05/1-70-%E5%8F%82%E8%80%83%E6%96%87%E6%A1%A3-%E8%AE%BE%E5%A4%87%E6%A0%91bindings/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>rk3568 驱动</category>
+      </categories>
+      <tags>
+        <tag>rk3568 驱动</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1-69-of操作函数实验:获取中断资源</title>
+    <url>/2023/09/05/1-69-of%E6%93%8D%E4%BD%9C%E5%87%BD%E6%95%B0%E5%AE%9E%E9%AA%8C-%E8%8E%B7%E5%8F%96%E4%B8%AD%E6%96%AD%E8%B5%84%E6%BA%90/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>rk3568 驱动</category>
+      </categories>
+      <tags>
+        <tag>rk3568 驱动</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1-68-ranges属性实验</title>
+    <url>/2023/09/05/1-68-ranges%E5%B1%9E%E6%80%A7%E5%AE%9E%E9%AA%8C/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>rk3568 驱动</category>
+      </categories>
+      <tags>
+        <tag>rk3568 驱动</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1-67-of操作函数实验:获取属性</title>
+    <url>/2023/09/05/1-67-of%E6%93%8D%E4%BD%9C%E5%87%BD%E6%95%B0%E5%AE%9E%E9%AA%8C-%E8%8E%B7%E5%8F%96%E5%B1%9E%E6%80%A7/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>rk3568 驱动</category>
+      </categories>
+      <tags>
+        <tag>rk3568 驱动</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1-66-of操作函数实验:获取设备树节点</title>
+    <url>/2023/09/05/1-66-of%E6%93%8D%E4%BD%9C%E5%87%BD%E6%95%B0%E5%AE%9E%E9%AA%8C-%E8%8E%B7%E5%8F%96%E8%AE%BE%E5%A4%87%E6%A0%91%E8%8A%82%E7%82%B9/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>rk3568 驱动</category>
+      </categories>
+      <tags>
+        <tag>rk3568 驱动</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1-65-设备树下platform_device和platform_driver匹配实验</title>
+    <url>/2023/09/05/1-65-%E8%AE%BE%E5%A4%87%E6%A0%91%E4%B8%8Bplatform-device%E5%92%8Cplatform-driver%E5%8C%B9%E9%85%8D%E5%AE%9E%E9%AA%8C/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>rk3568 驱动</category>
+      </categories>
+      <tags>
+        <tag>rk3568 驱动</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1-64-device node转换成platform device实验</title>
+    <url>/2023/09/05/1-64-device-node%E8%BD%AC%E6%8D%A2%E6%88%90platform-device%E5%AE%9E%E9%AA%8C/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>rk3568 驱动</category>
+      </categories>
+      <tags>
+        <tag>rk3568 驱动</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1-63-dtb展开成device_node实验</title>
+    <url>/2023/09/05/1-63-dtb%E5%B1%95%E5%BC%80%E6%88%90device-node%E5%AE%9E%E9%AA%8C/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>rk3568 驱动</category>
+      </categories>
+      <tags>
+        <tag>rk3568 驱动</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1-62-dtb文件格式讲解</title>
+    <url>/2023/09/05/1-62-dtb%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F%E8%AE%B2%E8%A7%A3/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>rk3568 驱动</category>
+      </categories>
+      <tags>
+        <tag>rk3568 驱动</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1-61-实例分析: pinctrl</title>
+    <url>/2023/09/05/1-61-%E5%AE%9E%E4%BE%8B%E5%88%86%E6%9E%90-pinctrl/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>rk3568 驱动</category>
+      </categories>
+      <tags>
+        <tag>rk3568 驱动</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1-60-实例分析:GPIO</title>
+    <url>/2023/09/05/1-60-%E5%AE%9E%E4%BE%8B%E5%88%86%E6%9E%90-GPIO/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>rk3568 驱动</category>
+      </categories>
+      <tags>
+        <tag>rk3568 驱动</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1-59-实例分析:CPU</title>
+    <url>/2023/09/05/1-59-%E5%AE%9E%E4%BE%8B%E5%88%86%E6%9E%90-CPU/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>rk3568 驱动</category>
+      </categories>
+      <tags>
+        <tag>rk3568 驱动</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1-58-实例分析:时钟</title>
+    <url>/2023/09/05/1-58-%E5%AE%9E%E4%BE%8B%E5%88%86%E6%9E%90-%E6%97%B6%E9%92%9F/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>rk3568 驱动</category>
+      </categories>
+      <tags>
+        <tag>rk3568 驱动</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1-57-实例分析:中断</title>
+    <url>/2023/09/05/1-57-%E5%AE%9E%E4%BE%8B%E5%88%86%E6%9E%90-%E4%B8%AD%E6%96%AD/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>rk3568 驱动</category>
+      </categories>
+      <tags>
+        <tag>rk3568 驱动</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1-56-设备树基本语法</title>
+    <url>/2023/09/05/1-56-%E8%AE%BE%E5%A4%87%E6%A0%91%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>rk3568 驱动</category>
+      </categories>
+      <tags>
+        <tag>rk3568 驱动</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1-55-初识设备树</title>
+    <url>/2023/09/05/1-55-%E5%88%9D%E8%AF%86%E8%AE%BE%E5%A4%87%E6%A0%91/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>rk3568 驱动</category>
+      </categories>
+      <tags>
+        <tag>rk3568 驱动</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1-54-点亮LED灯实验（平台总线)</title>
+    <url>/2023/09/05/1-54-%E7%82%B9%E4%BA%AELED%E7%81%AF%E5%AE%9E%E9%AA%8C%EF%BC%88%E5%B9%B3%E5%8F%B0%E6%80%BB%E7%BA%BF/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>rk3568 驱动</category>
+      </categories>
+      <tags>
+        <tag>rk3568 驱动</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1-53-probe函数编写实验</title>
+    <url>/2023/09/05/1-53-probe%E5%87%BD%E6%95%B0%E7%BC%96%E5%86%99%E5%AE%9E%E9%AA%8C/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>rk3568 驱动</category>
+      </categories>
+      <tags>
+        <tag>rk3568 驱动</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1-52-注册platform驱动实验</title>
+    <url>/2023/09/05/1-52-%E6%B3%A8%E5%86%8Cplatform%E9%A9%B1%E5%8A%A8%E5%AE%9E%E9%AA%8C/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>rk3568 驱动</category>
+      </categories>
+      <tags>
+        <tag>rk3568 驱动</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1-51-注册platform设备实验</title>
+    <url>/2023/09/05/1-51-%E6%B3%A8%E5%86%8Cplatform%E8%AE%BE%E5%A4%87%E5%AE%9E%E9%AA%8C/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>rk3568 驱动</category>
+      </categories>
+      <tags>
+        <tag>rk3568 驱动</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1-50-平台总线模型介绍</title>
+    <url>/2023/09/05/1-50-%E5%B9%B3%E5%8F%B0%E6%80%BB%E7%BA%BF%E6%A8%A1%E5%9E%8B%E4%BB%8B%E7%BB%8D/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>rk3568 驱动</category>
+      </categories>
+      <tags>
+        <tag>rk3568 驱动</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1-49-中断线程化实验</title>
+    <url>/2023/09/05/1-49-%E4%B8%AD%E6%96%AD%E7%BA%BF%E7%A8%8B%E5%8C%96%E5%AE%9E%E9%AA%8C/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>rk3568 驱动</category>
+      </categories>
+      <tags>
+        <tag>rk3568 驱动</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1-48-并发管理工作队列实验</title>
+    <url>/2023/09/05/1-48-%E5%B9%B6%E5%8F%91%E7%AE%A1%E7%90%86%E5%B7%A5%E4%BD%9C%E9%98%9F%E5%88%97%E5%AE%9E%E9%AA%8C/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>rk3568 驱动</category>
+      </categories>
+      <tags>
+        <tag>rk3568 驱动</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1-47-工作队列传参实验</title>
+    <url>/2023/09/05/1-47-%E5%B7%A5%E4%BD%9C%E9%98%9F%E5%88%97%E4%BC%A0%E5%8F%82%E5%AE%9E%E9%AA%8C/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>rk3568 驱动</category>
+      </categories>
+      <tags>
+        <tag>rk3568 驱动</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1-46-延迟工作实验</title>
+    <url>/2023/09/05/1-46-%E5%BB%B6%E8%BF%9F%E5%B7%A5%E4%BD%9C%E5%AE%9E%E9%AA%8C/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>rk3568 驱动</category>
+      </categories>
+      <tags>
+        <tag>rk3568 驱动</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1-45-自定义工作队列实验</title>
+    <url>/2023/09/05/1-45-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%B7%A5%E4%BD%9C%E9%98%9F%E5%88%97%E5%AE%9E%E9%AA%8C/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>rk3568 驱动</category>
+      </categories>
+      <tags>
+        <tag>rk3568 驱动</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1-44-共享工作队列实验</title>
+    <url>/2023/09/05/1-44-%E5%85%B1%E4%BA%AB%E5%B7%A5%E4%BD%9C%E9%98%9F%E5%88%97%E5%AE%9E%E9%AA%8C/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>rk3568 驱动</category>
+      </categories>
+      <tags>
+        <tag>rk3568 驱动</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1-43-特殊的软中断tasklet分析实验</title>
+    <url>/2023/09/05/1-43-%E7%89%B9%E6%AE%8A%E7%9A%84%E8%BD%AF%E4%B8%AD%E6%96%ADtasklet%E5%88%86%E6%9E%90%E5%AE%9E%E9%AA%8C/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>rk3568 驱动</category>
+      </categories>
+      <tags>
+        <tag>rk3568 驱动</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1-42-软中断实验</title>
+    <url>/2023/09/05/1-42-%E8%BD%AF%E4%B8%AD%E6%96%AD%E5%AE%9E%E9%AA%8C/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>rk3568 驱动</category>
+      </categories>
+      <tags>
+        <tag>rk3568 驱动</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1-41-中断下文tasklet实验</title>
+    <url>/2023/09/05/1-41-%E4%B8%AD%E6%96%AD%E4%B8%8B%E6%96%87tasklet%E5%AE%9E%E9%AA%8C/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>rk3568 驱动</category>
+      </categories>
+      <tags>
+        <tag>rk3568 驱动</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1-40-中断申请流程</title>
+    <url>/2023/09/05/1-40-%E4%B8%AD%E6%96%AD%E7%94%B3%E8%AF%B7%E6%B5%81%E7%A8%8B/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>rk3568 驱动</category>
+      </categories>
+      <tags>
+        <tag>rk3568 驱动</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1-39-中断实验</title>
+    <url>/2023/09/05/1-39-%E4%B8%AD%E6%96%AD%E5%AE%9E%E9%AA%8C/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>rk3568 驱动</category>
+      </categories>
+      <tags>
+        <tag>rk3568 驱动</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1-38-驱动调试方法实验</title>
+    <url>/2023/09/05/1-38-%E9%A9%B1%E5%8A%A8%E8%B0%83%E8%AF%95%E6%96%B9%E6%B3%95%E5%AE%9E%E9%AA%8C/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>rk3568 驱动</category>
+      </categories>
+      <tags>
+        <tag>rk3568 驱动</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1-37-优化驱动稳定性和效率实验</title>
+    <url>/2023/09/05/1-37-%E4%BC%98%E5%8C%96%E9%A9%B1%E5%8A%A8%E7%A8%B3%E5%AE%9A%E6%80%A7%E5%92%8C%E6%95%88%E7%8E%87%E5%AE%9E%E9%AA%8C/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>rk3568 驱动</category>
+      </categories>
+      <tags>
+        <tag>rk3568 驱动</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1-36-封装驱动API接口实验</title>
+    <url>/2023/09/05/1-36-%E5%B0%81%E8%A3%85%E9%A9%B1%E5%8A%A8API%E6%8E%A5%E5%8F%A3%E5%AE%9E%E9%AA%8C/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>rk3568 驱动</category>
+      </categories>
+      <tags>
+        <tag>rk3568 驱动</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1-35-IOCTL地址传参实验</title>
+    <url>/2023/09/05/1-35-IOCTL%E5%9C%B0%E5%9D%80%E4%BC%A0%E5%8F%82%E5%AE%9E%E9%AA%8C/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>rk3568 驱动</category>
+      </categories>
+      <tags>
+        <tag>rk3568 驱动</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1-34-IOCTL驱动传参实验</title>
+    <url>/2023/09/05/1-34-IOCTL%E9%A9%B1%E5%8A%A8%E4%BC%A0%E5%8F%82%E5%AE%9E%E9%AA%8C/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>rk3568 驱动</category>
+      </categories>
+      <tags>
+        <tag>rk3568 驱动</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1-33-llseek定位设备驱动实验</title>
+    <url>/2023/09/05/1-33-llseek%E5%AE%9A%E4%BD%8D%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E5%AE%9E%E9%AA%8C/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>rk3568 驱动</category>
+      </categories>
+      <tags>
+        <tag>rk3568 驱动</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1-31-秒字符设备驱动实验</title>
+    <url>/2023/09/05/1-31-%E7%A7%92%E5%AD%97%E7%AC%A6%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E5%AE%9E%E9%AA%8C/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>rk3568 驱动</category>
+      </categories>
+      <tags>
+        <tag>rk3568 驱动</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1-30-定时器实验</title>
+    <url>/2023/09/05/1-30-%E5%AE%9A%E6%97%B6%E5%99%A8%E5%AE%9E%E9%AA%8C/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>rk3568 驱动</category>
+      </categories>
+      <tags>
+        <tag>rk3568 驱动</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1-29-信号驱动IO实验</title>
+    <url>/2023/09/05/1-29-%E4%BF%A1%E5%8F%B7%E9%A9%B1%E5%8A%A8IO%E5%AE%9E%E9%AA%8C/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>rk3568 驱动</category>
+      </categories>
+      <tags>
+        <tag>rk3568 驱动</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1-28-IO多路复用实验</title>
+    <url>/2023/09/05/1-28-IO%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8%E5%AE%9E%E9%AA%8C/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>rk3568 驱动</category>
+      </categories>
+      <tags>
+        <tag>rk3568 驱动</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1-27-非阻塞IO实验</title>
+    <url>/2023/09/05/1-27-%E9%9D%9E%E9%98%BB%E5%A1%9EIO%E5%AE%9E%E9%AA%8C/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>rk3568 驱动</category>
+      </categories>
+      <tags>
+        <tag>rk3568 驱动</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1-26-阻塞IO实验</title>
+    <url>/2023/09/05/1-26-%E9%98%BB%E5%A1%9EIO%E5%AE%9E%E9%AA%8C/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>rk3568 驱动</category>
+      </categories>
+      <tags>
+        <tag>rk3568 驱动</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1-25-IO模型引入实验</title>
+    <url>/2023/09/05/1-25-IO%E6%A8%A1%E5%9E%8B%E5%BC%95%E5%85%A5%E5%AE%9E%E9%AA%8C/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>rk3568 驱动</category>
+      </categories>
+      <tags>
+        <tag>rk3568 驱动</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1-24-互斥锁实验</title>
+    <url>/2023/09/05/1-24-%E4%BA%92%E6%96%A5%E9%94%81%E5%AE%9E%E9%AA%8C/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>rk3568 驱动</category>
+      </categories>
+      <tags>
+        <tag>rk3568 驱动</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1-23-信号量实验</title>
+    <url>/2023/09/05/1-23-%E4%BF%A1%E5%8F%B7%E9%87%8F%E5%AE%9E%E9%AA%8C/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>rk3568 驱动</category>
+      </categories>
+      <tags>
+        <tag>rk3568 驱动</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1-22-自旋锁死锁实验</title>
+    <url>/2023/09/05/1-22-%E8%87%AA%E6%97%8B%E9%94%81%E6%AD%BB%E9%94%81%E5%AE%9E%E9%AA%8C/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>rk3568 驱动</category>
+      </categories>
+      <tags>
+        <tag>rk3568 驱动</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1-21-自旋锁实验</title>
+    <url>/2023/09/05/1-21-%E8%87%AA%E6%97%8B%E9%94%81%E5%AE%9E%E9%AA%8C/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>rk3568 驱动</category>
+      </categories>
+      <tags>
+        <tag>rk3568 驱动</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1-20-原子操作实验</title>
+    <url>/2023/09/05/1-20-%E5%8E%9F%E5%AD%90%E6%93%8D%E4%BD%9C%E5%AE%9E%E9%AA%8C/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>rk3568 驱动</category>
+      </categories>
+      <tags>
+        <tag>rk3568 驱动</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1-19-并发与竞争实验</title>
+    <url>/2023/09/05/1-19-%E5%B9%B6%E5%8F%91%E4%B8%8E%E7%AB%9E%E4%BA%89%E5%AE%9E%E9%AA%8C/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>rk3568 驱动</category>
+      </categories>
+      <tags>
+        <tag>rk3568 驱动</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1-1-前言</title>
+    <url>/2023/09/05/1-1-%E5%89%8D%E8%A8%80/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>rk3568 驱动</category>
+      </categories>
+      <tags>
+        <tag>rk3568 驱动</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1-18-点亮LED灯实验</title>
+    <url>/2023/09/05/1-18-%E7%82%B9%E4%BA%AELED%E7%81%AF%E5%AE%9E%E9%AA%8C/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>rk3568 驱动</category>
+      </categories>
+      <tags>
+        <tag>rk3568 驱动</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1-17-Linux错误处理实验</title>
+    <url>/2023/09/05/1-17-Linux%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86%E5%AE%9E%E9%AA%8C/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>rk3568 驱动</category>
+      </categories>
+      <tags>
+        <tag>rk3568 驱动</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1-16-一个驱动兼容不同设备实验</title>
+    <url>/2023/09/05/1-16-%E4%B8%80%E4%B8%AA%E9%A9%B1%E5%8A%A8%E5%85%BC%E5%AE%B9%E4%B8%8D%E5%90%8C%E8%AE%BE%E5%A4%87%E5%AE%9E%E9%AA%8C/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>rk3568 驱动</category>
+      </categories>
+      <tags>
+        <tag>rk3568 驱动</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1-15-文件私有数据实验</title>
+    <url>/2023/09/05/1-15-%E6%96%87%E4%BB%B6%E7%A7%81%E6%9C%89%E6%95%B0%E6%8D%AE%E5%AE%9E%E9%AA%8C/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>rk3568 驱动</category>
+      </categories>
+      <tags>
+        <tag>rk3568 驱动</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1-14-内核空间与用户空间数据交互实验</title>
+    <url>/2023/09/05/1-14-%E5%86%85%E6%A0%B8%E7%A9%BA%E9%97%B4%E4%B8%8E%E7%94%A8%E6%88%B7%E7%A9%BA%E9%97%B4%E6%95%B0%E6%8D%AE%E4%BA%A4%E4%BA%92%E5%AE%9E%E9%AA%8C/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>rk3568 驱动</category>
+      </categories>
+      <tags>
+        <tag>rk3568 驱动</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1-13-杂项设备驱动实验</title>
+    <url>/2023/09/05/1-13-%E6%9D%82%E9%A1%B9%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E5%AE%9E%E9%AA%8C/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>rk3568 驱动</category>
+      </categories>
+      <tags>
+        <tag>rk3568 驱动</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1-12-字符设备驱动框架实验</title>
+    <url>/2023/09/05/1-12-%E5%AD%97%E7%AC%A6%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E6%A1%86%E6%9E%B6%E5%AE%9E%E9%AA%8C/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>rk3568 驱动</category>
+      </categories>
+      <tags>
+        <tag>rk3568 驱动</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1-11-创建设备节点实验</title>
+    <url>/2023/09/05/1-11-%E5%88%9B%E5%BB%BA%E8%AE%BE%E5%A4%87%E8%8A%82%E7%82%B9%E5%AE%9E%E9%AA%8C/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>rk3568 驱动</category>
+      </categories>
+      <tags>
+        <tag>rk3568 驱动</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1-10-注册字符设备实验</title>
+    <url>/2023/09/05/1-10-%E6%B3%A8%E5%86%8C%E5%AD%97%E7%AC%A6%E8%AE%BE%E5%A4%87%E5%AE%9E%E9%AA%8C/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>rk3568 驱动</category>
+      </categories>
+      <tags>
+        <tag>rk3568 驱动</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1-9-申请字符设备号实验</title>
+    <url>/2023/09/05/1-9-%E7%94%B3%E8%AF%B7%E5%AD%97%E7%AC%A6%E8%AE%BE%E5%A4%87%E5%8F%B7%E5%AE%9E%E9%AA%8C/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>rk3568 驱动</category>
+      </categories>
+      <tags>
+        <tag>rk3568 驱动</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1-8-驱动模块编译进内核实验</title>
+    <url>/2023/09/05/1-8-%E9%A9%B1%E5%8A%A8%E6%A8%A1%E5%9D%97%E7%BC%96%E8%AF%91%E8%BF%9B%E5%86%85%E6%A0%B8%E5%AE%9E%E9%AA%8C/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>rk3568 驱动</category>
+      </categories>
+      <tags>
+        <tag>rk3568 驱动</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1-7-menuconfig图形化配置实验</title>
+    <url>/2023/09/05/1-7-menuconfig%E5%9B%BE%E5%BD%A2%E5%8C%96%E9%85%8D%E7%BD%AE%E5%AE%9E%E9%AA%8C/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>rk3568 驱动</category>
+      </categories>
+      <tags>
+        <tag>rk3568 驱动</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1-6-内核模块符号导出实验</title>
+    <url>/2023/09/05/1-6-%E5%86%85%E6%A0%B8%E6%A8%A1%E5%9D%97%E7%AC%A6%E5%8F%B7%E5%AF%BC%E5%87%BA%E5%AE%9E%E9%AA%8C/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>rk3568 驱动</category>
+      </categories>
+      <tags>
+        <tag>rk3568 驱动</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1-5-驱动模块传参实验</title>
+    <url>/2023/09/05/1-5-%E9%A9%B1%E5%8A%A8%E6%A8%A1%E5%9D%97%E4%BC%A0%E5%8F%82%E5%AE%9E%E9%AA%8C/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>rk3568 驱动</category>
+      </categories>
+      <tags>
+        <tag>rk3568 驱动</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1-4-内核模块实验</title>
+    <url>/2023/09/05/1-4-%E5%86%85%E6%A0%B8%E6%A8%A1%E5%9D%97%E5%AE%9E%E9%AA%8C/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>rk3568 驱动</category>
+      </categories>
+      <tags>
+        <tag>rk3568 驱动</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1-3-helloworld 驱动实验</title>
+    <url>/2023/09/05/1-3-helloworld-%E9%A9%B1%E5%8A%A8%E5%AE%9E%E9%AA%8C/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>rk3568 驱动</category>
+      </categories>
+      <tags>
+        <tag>rk3568 驱动</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>3.22-u-boot重定位分析(下)</title>
     <url>/2023/09/05/3-22-u-boot%E9%87%8D%E5%AE%9A%E4%BD%8D%E5%88%86%E6%9E%90-%E4%B8%8B/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
@@ -1933,7 +2703,7 @@
   <entry>
     <title>rk3568 驱动开发第六篇 平台总线</title>
     <url>/2023/09/04/rk3568-%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E7%AC%AC%E5%85%AD%E7%AF%87-%E5%B9%B3%E5%8F%B0%E6%80%BB%E7%BA%BF/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="第50章-平台总线模型介绍"><a href="#第50章-平台总线模型介绍" class="headerlink" title="**** ****第50章 平台总线模型介绍"></a>**** ****第50章 平台总线模型介绍</h1><p>在前面所有章节中，无论要完成何种需求，我们都编写了一个独立的驱动程序，但这样编写出来的驱动程序在重用性和可移植性上是很低的，无论之后要编写一个同类型的驱动还是将该驱动更换一个平台，都要花费时间重新修改驱动代码，而驱动的分离和分层这一软件思路的提出（即本章节要讲解的平台总线模型），就是为了解决这个问题，下面让我们一起进入平台总线模型的学习吧。</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="第50章-平台总线模型介绍"><a href="#第50章-平台总线模型介绍" class="headerlink" title="第50章 平台总线模型介绍"></a>第50章 平台总线模型介绍</h1><p>在前面所有章节中，无论要完成何种需求，我们都编写了一个独立的驱动程序，但这样编写出来的驱动程序在重用性和可移植性上是很低的，无论之后要编写一个同类型的驱动还是将该驱动更换一个平台，都要花费时间重新修改驱动代码，而驱动的分离和分层这一软件思路的提出（即本章节要讲解的平台总线模型），就是为了解决这个问题，下面让我们一起进入平台总线模型的学习吧。</p>
 <h2 id="50-1-什么是平台总线？"><a href="#50-1-什么是平台总线？" class="headerlink" title="50.1 什么是平台总线？"></a>50.1 什么是平台总线？</h2><p>平台总线（Platform bus）是Linux内核中提供的一种虚拟总线，用于管理和组织与特定硬件平台相关的设备和驱动。它充当了平台设备（platform device）和平台驱动（platform driver）之间的桥梁，负责将它们进行匹配和绑定。</p>
 <p>当系统注册一个平台设备时，平台总线会寻找与之匹配的平台驱动。它会遍历已注册的平台驱动列表，尝试与每个平台驱动进行匹配，直到找到与平台设备匹配的驱动为止。一旦找到匹配的驱动，平台总线会将平台设备与平台驱动进行绑定，使得设备可以被正确地初始化和操作。</p>
 <p>同样地，当系统注册一个平台驱动时，平台总线会寻找与之匹配的平台设备。它会遍历已注册的平台设备列表，尝试与每个平台设备进行匹配，直到找到与平台驱动匹配的设备为止。一旦找到匹配的设备，平台总线会将平台设备与平台驱动进行绑定，使得驱动可以管理和控制与该设备相关的操作。</p>
@@ -1949,7 +2719,7 @@
 <p><em><strong>*（*</strong></em><em><strong>*2*</strong></em><em><strong>*）*</strong></em>****提高代码的重用性：****平台总线模型使得相同类型的设备可以共享相同的驱动代码。例如，在一个硬件平台上存在多个相同类型的设备，传统的驱动模型需要为每个设备编写独立的驱动代码。而使用平台总线模型，只需编写一个通用的驱动代码，然后为每个设备创建相应的device.c文件，将设备特定的代码放在其中。这样可以减少代码的重复性，提高了代码的重用性和可维护性。</p>
 <p><em><strong>*（*</strong></em><em><strong>*3*</strong></em><em><strong>*）*</strong></em>****减少重复性代码：****在传统的设备驱动模型中，如果有多个相同类型的设备存在，就需要为每个设备编写独立的驱动代码。而使用平台总线模型，只需编写一个通用的驱动代码，然后为每个设备创建相应的device.c文件，将设备特定的代码放在其中。这样可以避免大量的重复性代码，简化了驱动开发过程。</p>
 <p><em><strong>*（*</strong></em><em><strong>*4*</strong></em><em><strong>*）*</strong></em>****提高可移植性：****平台总线模型可以提高驱动的可移植性。开发者可以编写适应平台总线的平台驱动程序，从而支持特定的外设，而无需依赖于特定的标准总线。这使得驱动可以更容易地在不同的硬件平台之间进行移植和重用。</p>
-<h1 id="第51章-注册platform设备实验"><a href="#第51章-注册platform设备实验" class="headerlink" title="**** ****第51章 注册platform设备实验"></a>**** ****第51章 注册platform设备实验</h1><h2 id="51-1-注册platform设备"><a href="#51-1-注册platform设备" class="headerlink" title="51.1 注册platform设备"></a>51.1 注册platform设备</h2><h3 id="51-1-1-platform-device-register-函数"><a href="#51-1-1-platform-device-register-函数" class="headerlink" title="51.1.1 platform_device_register 函数"></a>51.1.1 platform_device_register 函数</h3><p>platform_device_register函数用于将platform_device结构体描述的平台设备注册到内核中。下面是对platform_device_register函数的详细介绍：</p>
+<h1 id="第51章-注册platform设备实验"><a href="#第51章-注册platform设备实验" class="headerlink" title="第51章 注册platform设备实验"></a>第51章 注册platform设备实验</h1><h2 id="51-1-注册platform设备"><a href="#51-1-注册platform设备" class="headerlink" title="51.1 注册platform设备"></a>51.1 注册platform设备</h2><h3 id="51-1-1-platform-device-register-函数"><a href="#51-1-1-platform-device-register-函数" class="headerlink" title="51.1.1 platform_device_register 函数"></a>51.1.1 platform_device_register 函数</h3><p>platform_device_register函数用于将platform_device结构体描述的平台设备注册到内核中。下面是对platform_device_register函数的详细介绍：</p>
 <p><em><strong>*函数原型：*</strong></em></p>
 <p>int platform_device_register(struct platform_device *pdev);</p>
 <p><em><strong>*头文件：*</strong></em></p>
@@ -3015,7 +3785,7 @@
 <p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/wps75.jpg" alt="img"></p>
 <p>图 45-7</p>
 <p>至此，自定义工作队列实验就完成了。</p>
-<h1 id="第46章-延迟工作实验"><a href="#第46章-延迟工作实验" class="headerlink" title="第46章 延迟工作实验 * *"></a>第46章 延迟工作实验 <em><strong>* *</strong></em></h1><p>在之前的章节中，我们学习了共享工作队列和自定义工作队列，为了更形象地理解学习，将流水线比作工作队列，流水线上一个个等待处理的物料比作一个个工作。机器比作内核线程或进程。本章节我们即将学习的延迟工作，可以类比为将物料延迟一定时间，再放到生产线上加工。延迟工作不仅可以在自定义工作队列中实现 也可以在共享工作队列上实现。现在，我们对延迟工作有了一个感性的认识，接下来详细的学习下延迟工作吧。</p>
+<h1 id="第46章-延迟工作实验"><a href="#第46章-延迟工作实验" class="headerlink" title="第46章 延迟工作实验"></a>第46章 延迟工作实验</h1><p>在之前的章节中，我们学习了共享工作队列和自定义工作队列，为了更形象地理解学习，将流水线比作工作队列，流水线上一个个等待处理的物料比作一个个工作。机器比作内核线程或进程。本章节我们即将学习的延迟工作，可以类比为将物料延迟一定时间，再放到生产线上加工。延迟工作不仅可以在自定义工作队列中实现 也可以在共享工作队列上实现。现在，我们对延迟工作有了一个感性的认识，接下来详细的学习下延迟工作吧。</p>
 <h2 id="46-1-什么是延迟工作"><a href="#46-1-什么是延迟工作" class="headerlink" title="46.1 什么是延迟工作"></a>46.1 什么是延迟工作</h2><p>延迟工作是一种将工作的执行延迟到稍后时间点进行处理的技术。通常情况下，当某个任务需要花费较长时间，不需要立即执行或需要按时执行时，延迟工作就会派上用场。</p>
 <p>延迟工作的基本思想是将任务放入一个队列中，然后由后台的工作进程会任务调度程序来处理队列中的任务。任务可以在指定的延迟时间后执行，也可以根据优先级，任务类型或者其他条件进行排序和处理。</p>
 <p>延迟工作在许多应用场景中都非常有用，尤其是在需要处理大量任务，提供系统性能和可靠性的情况下。以下是一些常用的应用场景：</p>
@@ -3100,7 +3870,7 @@
 <p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/wps84.jpg" alt="img"></p>
 <p>图 46-9</p>
 <p>至此，延迟工作实验就完成了。</p>
-<h1 id="第47章-工作队列传参实验"><a href="#第47章-工作队列传参实验" class="headerlink" title="**** ****第47章 工作队列传参实验"></a>**** ****第47章 工作队列传参实验</h1><p>在41章节中，我们使用tasklet来实现中断下文，并使用tasklet给中断下文传参，如果我们使用工作队列来实现中断的下半部分，那么如何用工作队列给中断下文传参呢？本章节我们来一探究竟！</p>
+<h1 id="第47章-工作队列传参实验"><a href="#第47章-工作队列传参实验" class="headerlink" title="第47章 工作队列传参实验"></a>第47章 工作队列传参实验</h1><p>在41章节中，我们使用tasklet来实现中断下文，并使用tasklet给中断下文传参，如果我们使用工作队列来实现中断的下半部分，那么如何用工作队列给中断下文传参呢？本章节我们来一探究竟！</p>
 <h2 id="47-1-工作队列传参"><a href="#47-1-工作队列传参" class="headerlink" title="47.1 工作队列传参"></a>47.1 工作队列传参</h2><p>在Linux内核的工作队列中，可以通过使用工作项的方式向工作队列传递参数。工作项是一个抽象的结构，可以用于封装需要执行的工作及其相关的参数。</p>
 <p>首先我们定义工作项结构，如下所示，在结构体struct work_data中定义了需要传递给工作项处理函数的参数a和b，然后定义一个类型为struct work_data 的变量test_workqueue_work。</p>
 <p>struct work_data {</p>
@@ -3499,7 +4269,7 @@
 <p>在使用可执行程序write向缓冲区写入数据时，read可执行程序读取到了缓冲区的数据并打印。</p>
 <p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/wps192.jpg" alt="img"></p>
 <p>图 26-8</p>
-<h1 id="第27章-非阻塞IO实验"><a href="#第27章-非阻塞IO实验" class="headerlink" title="**** ****第27章 非阻塞IO实验"></a>**** ****第27章 非阻塞IO实验</h1><p>上个章节中我们学习了阻塞IO，阻塞IO是通过等待队列来实现的，那么如何让驱动实现非阻塞呢？带着疑问，让我们开始本章节非阻塞IO的学习吧！</p>
+<h1 id="第27章-非阻塞IO实验"><a href="#第27章-非阻塞IO实验" class="headerlink" title="第27章 非阻塞IO实验"></a>第27章 非阻塞IO实验</h1><p>上个章节中我们学习了阻塞IO，阻塞IO是通过等待队列来实现的，那么如何让驱动实现非阻塞呢？带着疑问，让我们开始本章节非阻塞IO的学习吧！</p>
 <h2 id="27-1-非阻塞IO简介"><a href="#27-1-非阻塞IO简介" class="headerlink" title="27.1 非阻塞IO简介"></a>27.1 非阻塞IO简介</h2><p>应用程序可以使用如下所示示例代码来实现阻塞访问：</p>
 <p>int fd;</p>
 <p>int data &#x3D; 0;</p>
@@ -3558,7 +4328,7 @@
 <p>在使用可执行程序write向缓冲区写入数据时，read可执行程序读取到了缓冲区的数据并打印。</p>
 <p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/wps200.jpg" alt="img"></p>
 <p>图 27-8</p>
-<h1 id="第28章-IO多路复用实验"><a href="#第28章-IO多路复用实验" class="headerlink" title="**** ****第28章 IO多路复用实验"></a>**** ****第28章 IO多路复用实验</h1><p>在上俩个章节中，我们对阻塞IO和非阻塞IO进行了学习，本章节将学习第三种IO模型-多路复用IO。</p>
+<h1 id="第28章-IO多路复用实验"><a href="#第28章-IO多路复用实验" class="headerlink" title="第28章 IO多路复用实验"></a>第28章 IO多路复用实验</h1><p>在上俩个章节中，我们对阻塞IO和非阻塞IO进行了学习，本章节将学习第三种IO模型-多路复用IO。</p>
 <h2 id="28-1-IO多路复用简介"><a href="#28-1-IO多路复用简介" class="headerlink" title="28.1 IO多路复用简介"></a>28.1 IO多路复用简介</h2><p>IO多路复用是一种同步的IO模型。IO多路复用可以实现一个进程监视多个文件描述符。一旦某个文件描述符准备就绪，就通知应用程序进行相应的读写操作。没有文件描述符就绪时就会阻塞应用程序，从而释放出CPU资源。</p>
 <p>在第25章中，我们以钓鱼为例，对IO多路复用有了一个简单的认识。下面对钓鱼例子进行回顾：小李同时放置了十个鱼竿，并把十个鱼竿连在了一个铃铛上。这样小李就不必在岸边等待。当铃铛响了就表示有鱼上钩，再回来挨个检查到底是哪个鱼竿有鱼上钩即可。接着进一步体会IO多路复用。</p>
 <p>在应用层Linux提供了三种实现IO多路复用的模型，分别是select、poll 和 epoll。在本驱动手册中主要偏重于对驱动的讲解，所以应用层中select、poll 和 epoll函数的使用在这里不做重点讲解。</p>
@@ -4176,7 +4946,7 @@
 <p>rmmod ioctl.ko</p>
 <p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/wps255.jpg" alt="img"> </p>
 <p>图 34-9</p>
-<h1 id="第35章-IOCTL地址传参实验"><a href="#第35章-IOCTL地址传参实验" class="headerlink" title="**** ****第35章 IOCTL地址传参实验"></a>**** ****第35章 IOCTL地址传参实验</h1><p>在上一章节中对ioctl基础知识进行了学习，并通过ioctl进行了驱动传参实验，在本章节将以传递结构体为例，进行地址传参实验，从而加深大家对ioctl的认识。</p>
+<h1 id="第35章-IOCTL地址传参实验"><a href="#第35章-IOCTL地址传参实验" class="headerlink" title="第35章 IOCTL地址传参实验"></a>第35章 IOCTL地址传参实验</h1><p>在上一章节中对ioctl基础知识进行了学习，并通过ioctl进行了驱动传参实验，在本章节将以传递结构体为例，进行地址传参实验，从而加深大家对ioctl的认识。</p>
 <h2 id="35-1-实验程序编写"><a href="#35-1-实验程序编写" class="headerlink" title="35.1 实验程序编写"></a>35.1 实验程序编写</h2><h3 id="35-1-1-编写测试-APP"><a href="#35-1-1-编写测试-APP" class="headerlink" title="35.1.1 编写测试 APP"></a>35.1.1 编写测试 APP</h3><p>本实验对应的应用程序网盘路径为：iTOP-RK3568开发板【底板V1.7版本】\03_【iTOP-RK3568开发板】指南教程\02_Linux驱动配套资料\04_Linux驱动例程\28\app。</p>
 <p>首先编写应用程序ioctl.c，用来向设备文件写入数据，编写好的应用程序如下所示：</p>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/stat.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;fcntl.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/ioctl.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> CMD_TEST0 _IOW(<span class="string">&#x27;L&#x27;</span>,0,int)</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">args</span>&#123;</span><span class="comment">//定义要传递的结构体</span></span><br><span class="line">	<span class="type">int</span> a;</span><br><span class="line"><span class="type">int</span> b;</span><br><span class="line">	<span class="type">int</span> c;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc,<span class="type">char</span> *argv[])</span>&#123;</span><br><span class="line">	<span class="type">int</span> fd;<span class="comment">//定义int类型文件描述符</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">args</span> <span class="title">test</span>;</span><span class="comment">//定义args类型的结构体变量test</span></span><br><span class="line">	test.a = <span class="number">1</span>;</span><br><span class="line">	test.b = <span class="number">2</span>;</span><br><span class="line">	test.c = <span class="number">3</span>;</span><br><span class="line">	fd = open(<span class="string">&quot;/dev/test&quot;</span>,O_RDWR,<span class="number">0777</span>);<span class="comment">//打开/dev/test设备</span></span><br><span class="line">	<span class="keyword">if</span>(fd &lt; <span class="number">0</span>)&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;file open error \n&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	ioctl(fd,CMD_TEST0,&amp;test);<span class="comment">//使用ioctl函数传递结构体变量test地址</span></span><br><span class="line">	close(fd);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -4216,7 +4986,7 @@
 <p>可以看到结构体类型变量test已经成功传递到了内核空间，a、b、c的值都被正确打印了出来，我们的ioctl地址传参实验就完成了。</p>
 <p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/wps262.jpg" alt="img"> </p>
 <p>图 35-7</p>
-<h1 id="第36章-封装驱动API接口实验"><a href="#第36章-封装驱动API接口实验" class="headerlink" title="**** ****第36章 封装驱动API接口实验"></a>**** ****第36章 封装驱动API接口实验</h1><p>相信经过前面两个章节的学习已经能够熟练的使用ioctl函数了，在本章节会进行两个实验，每个实验的要完成的任务如下所示：</p>
+<h1 id="第36章-封装驱动API接口实验"><a href="#第36章-封装驱动API接口实验" class="headerlink" title="第36章 封装驱动API接口实验"></a>第36章 封装驱动API接口实验</h1><p>相信经过前面两个章节的学习已经能够熟练的使用ioctl函数了，在本章节会进行两个实验，每个实验的要完成的任务如下所示：</p>
 <p>实验一：通过ioctl对定时器进行控制，分别实现打开定时器、关闭定时器和设置定时时间的功能。</p>
 <p>实验二：对实验一的应用程序进行封装，从而让应用编程人员更好的对设备进行编程。</p>
 <h2 id="36-1-ioctl控制定时器实验"><a href="#36-1-ioctl控制定时器实验" class="headerlink" title="36.1 ioctl控制定时器实验"></a>36.1 ioctl控制定时器实验</h2><p>首先进行ioctl控制定时器实验，通过该实验可以综合ioctl函数和定时器相关知识，从而进一步加深对ioctl的理解。</p>
@@ -4402,8 +5172,7 @@
   <entry>
     <title>rk3568 驱动开发第三篇 并发与竞争</title>
     <url>/2023/09/04/rk3568-%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E7%AC%AC%E4%B8%89%E7%AF%87-%E5%B9%B6%E5%8F%91%E4%B8%8E%E7%AB%9E%E4%BA%89/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>第19章 并发与竞争实验</p>
-<p>在前面章节的学习中，相信大家已经对用户空间与内核空间数据传递进行了实验，假如要传递的数据被存放在了全局变量，该数据就可以作为共享资源被多个任务共同读写，从而造成数据的错误传输，多个程序同时访问一个共享资源产生的问题就叫做竞争。竞争产生的根本原因就是Linux系统的并发访问。</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="第19章-并发与竞争实验"><a href="#第19章-并发与竞争实验" class="headerlink" title="第19章 并发与竞争实验"></a>第19章 并发与竞争实验</h1><p>在前面章节的学习中，相信大家已经对用户空间与内核空间数据传递进行了实验，假如要传递的数据被存放在了全局变量，该数据就可以作为共享资源被多个任务共同读写，从而造成数据的错误传输，多个程序同时访问一个共享资源产生的问题就叫做竞争。竞争产生的根本原因就是Linux系统的并发访问。</p>
 <p>在本章节中首先会对并发与并行的概念进行讲解，随后对竞争产生的原因进行总结，最后以一个实际的竞争实验加深大家的理解。下面就让我们开始本章节的学习吧。</p>
 <h2 id="19-1-并发与竞争"><a href="#19-1-并发与竞争" class="headerlink" title="19.1 并发与竞争"></a>19.1 并发与竞争</h2><h3 id="19-1-1并发"><a href="#19-1-1并发" class="headerlink" title="19.1.1并发"></a>19.1.1并发</h3><p>早期计算机大多只有一个CPU核心，一个CPU在同一时间只能执行一个任务，当系统中有多个任务等待执行时，CPU只能执行完一个再执行下一个。而计算机的很多指令会涉及I&#x2F;O操作，执行速度远远低于CPU内高速存储器的存取速度，这就导致CPU经常处于空闲状态，只能等待I&#x2F;O操作完成后才能继续执行后面的指令。为了提高CPU利用率，减少等待时间，提出了CPU并发工作理论。</p>
 <p>所谓并发，就是通过算法将CPU资源合理地分配给多个任务，当一个任务执行 I&#x2F;O 操作时，CPU可以转而执行其它的任务，等到 I&#x2F;O 操作完成以后，或者新的任务遇到 I&#x2F;O 操作时，CPU再回到原来的任务继续执行。</p>
@@ -4762,7 +5531,7 @@
 <p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/wps141.jpg" alt="img"> </p>
 <p>图 21-11</p>
 <p>至此，自旋锁实验就完成了。</p>
-<h1 id="第22章-自旋锁死锁实验"><a href="#第22章-自旋锁死锁实验" class="headerlink" title="**** ****第22章 自旋锁死锁实验"></a>**** ****第22章 自旋锁死锁实验</h1><p>在上一小节中，学习了内核中自旋锁的使用，而自旋锁若是使用不当就会产生死锁，在本章将会对自旋锁的特殊情况-死锁进行讲解。</p>
+<h1 id="第22章-自旋锁死锁实验"><a href="#第22章-自旋锁死锁实验" class="headerlink" title="第22章 自旋锁死锁实验"></a>第22章 自旋锁死锁实验</h1><p>在上一小节中，学习了内核中自旋锁的使用，而自旋锁若是使用不当就会产生死锁，在本章将会对自旋锁的特殊情况-死锁进行讲解。</p>
 <h2 id="22-1-自旋锁死锁"><a href="#22-1-自旋锁死锁" class="headerlink" title="22.1 自旋锁死锁"></a>22.1 自旋锁死锁</h2><p>死锁是指两个或多个事物在同一资源上相互占用，并请求锁定对方的资源，从而导致恶性循环的现象。当多个进程因竞争资源而造成的一种僵局（互相等待），若无外力作用，这些进程都将无法向前推进，这种情况就是死锁。</p>
 <p>自旋锁死锁发生存在两种情况：</p>
 <p>（1）第一种情况是拥有自旋锁的进程A在内核态阻塞了，内核调度B进程，碰巧B进程也要获得自旋锁，此时B只能自旋转。而此时抢占已经关闭(在单核条件下)不会调度A进程了，B永远自旋，产生死锁，如下图（图 22-1）所示：</p>
