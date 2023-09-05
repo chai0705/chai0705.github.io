@@ -238,7 +238,82 @@
       
     <div class="article-entry" itemprop="articleBody">
        
-   
+  <h1 id="3-2-1-什么是GCC"><a href="#3-2-1-什么是GCC" class="headerlink" title="3.2.1 什么是GCC ?"></a>3.2.1 什么是GCC ?</h1><p>GCC指的是GNU编译器套件（GNU Compiler Collection），它是一个开源的编译器集合。GCC包括预处理器、编译器、汇编器和链接器等工具，它能够将源代码转换为可执行文件。GCC支持多种编程语言，如C、C++、Objective-C、Fortran、Ada等，并且可在多个操作系统上使用，包括Linux、Unix、Windows等。</p>
+<p>除了编译器本身，GCC还提供了一些文件处理工具，如objdump、objcopy、nm、readelf和strip等，用于处理目标文件、库文件和可执行文件。此外，GCC也提供了一套标准的库文件和头文件，供开发者在编译程序时使用。</p>
+<h1 id="3-2-2-gcc-参数"><a href="#3-2-2-gcc-参数" class="headerlink" title="3.2.2 gcc 参数"></a>3.2.2 gcc 参数</h1><p>通过在GCC命令行中使用不同的参数，可以调用GCC工具集中的不同工具。以下是一些常用的参数和对应的工具：</p>
+<ul>
+<li><code>-E</code>：预处理，调用cpp预处理器，将源代码中的宏定义展开、包含头文件等操作。</li>
+<li><code>-S</code>：生成汇编文件，GCC将合并预处理后的代码，并将其转换为汇编语言。</li>
+<li><code>-c</code>：生成目标文件，调用汇编器as，将汇编代码转换为机器代码，但不进行链接操作。</li>
+<li><code>-o &lt;output&gt;</code>：指定输出文件的名称，可以用于指定生成的目标文件或可执行文件的名称。</li>
+<li><code>--verbose</code>：显示详细的编译信息，包括调用的工具和执行的步骤。</li>
+</ul>
+<p>gcc -E main.c<br>该命令会直接将预处理的内容打印到终端并不会生成一个文件，所以需要指定一下输出文件，重定向，如下所示：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309050822386.png" alt="image-20230905082213343"></p>
+<p>同样的gcc -S main.c 也是如此</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309050822178.png" alt="image-20230905082250151"></p>
+<p>更多参数的详细介绍</p>
+<ol>
+<li><p><strong>控制编译过程的参数</strong>：</p>
+<ul>
+<li><code>-c</code>：只编译源文件，生成目标文件而不进行链接。</li>
+<li><code>-S</code>：生成汇编代码文件，不进行编译和链接。</li>
+<li><code>-E</code>：只进行预处理，生成预处理后的源代码。</li>
+<li><code>-o &lt;output&gt;</code>：指定输出文件的名称。</li>
+<li><code>-I &lt;dir&gt;</code>：指定头文件搜索路径。</li>
+<li><code>-L &lt;dir&gt;</code>：指定库文件搜索路径。</li>
+<li><code>-M</code>：生成文件依赖关系。使用该选项时，GCC会分析源文件中的<code>#include</code>指令，输出每个源文件及其所包含的头文件之间的依赖关系。输出结果通常以makefile规则的格式呈现。</li>
+<li><code>-MD</code>：与<code>-M</code>相同，但是将输出导入到<code>.d</code>文件中。生成的<code>.d</code>文件通常包含了源文件及其所包含的头文件之间的依赖关系，可以在makefile中引用这些<code>.d</code>文件来自动化编译过程。</li>
+<li><code>-MM</code>：与<code>-M</code>相似，但忽略<code>#include &lt;file.h&gt;</code>产生的依赖关系。这意味着只生成自定义头文件（使用双引号<code>#include &quot;file.h&quot;</code>）的依赖关系，而不包括系统头文件（使用尖括号<code>#include &lt;file.h&gt;</code>）。</li>
+<li></li>
+</ul>
+</li>
+<li><p><strong>编译选项的设置</strong>：</p>
+<ul>
+<li><p><code>-std=&lt;standard&gt;</code>：指定使用的语言标准，如<code>-std=c11</code>表示使用C11标准。</p>
+</li>
+<li><p><code>-Wall</code>：开启所有警告信息。</p>
+</li>
+<li><p><code>-Werror</code>：将警告视为错误，编译过程中遇到警告将中止。</p>
+</li>
+<li><p><code>-Wextra</code>：开启额外的警告选项。</p>
+</li>
+<li><p><code>-pedantic</code>：严格遵循语言标准，显示更多警告信息。</p>
+</li>
+<li><p><code>-g</code>：在编译过程中生成调试信息，用于调试程序。这些调试信息可以被调试器（如GDB）使用。</p>
+</li>
+<li><p><code>-static</code>：禁止使用动态库，强制链接静态库。这意味着编译后的可执行文件将不依赖于系统上已安装的动态库，而是包含了所有必要的库的副本。</p>
+</li>
+<li><p><code>-shared</code>：生成共享目标文件，也称为共享库或动态库。共享库可以在运行时被不同的程序加载和使用。</p>
+</li>
+<li><p><code>-L&lt;dir&gt;</code>：指定库搜索路径。使用该选项可以告诉编译器在指定的目录中搜索库文件。</p>
+</li>
+<li><p><code>-l&lt;libname&gt;</code>：指定编译时使用的库。例如，<code>-lmath</code>将链接数学库。编译器会在标准库搜索路径和使用<code>-L</code>选项指定的路径中查找库文件。</p>
+</li>
+<li><p><code>-I&lt;dir&gt;</code>：指定头文件搜索路径。使用该选项可以告诉编译器在指定的目录中搜索头文件。</p>
+</li>
+<li><p><code>-w</code>：禁止生成任何警告信息。编译器将不会显示任何警告。</p>
+</li>
+<li><p><code>-std=c99</code>：指定使用C99标准进行编译。GCC默认采用GNU C标准。</p>
+</li>
+</ul>
+</li>
+<li><p><strong>编译器优化选项</strong>：</p>
+<ul>
+<li><code>-O0</code>、<code>-O1</code>、<code>-O2</code>、<code>-O3</code>：控制编译器的优化级别，从无优化到高级优化。</li>
+<li><code>-Os</code>：优化代码大小。</li>
+<li><code>-Ofast</code>：最大程度地优化代码执行速度，可能牺牲一些标准的符合性。</li>
+<li><code>-march=&lt;arch&gt;</code>：指定目标处理器架构，优化代码以适应特定处理器。</li>
+</ul>
+</li>
+</ol>
+<h1 id="3-2-3-交叉编译"><a href="#3-2-3-交叉编译" class="headerlink" title="3.2.3 交叉编译"></a>3.2.3 交叉编译</h1><p>交叉编译是指在一种平台上进行编译，生成能够在另一种不同平台上运行的可执行文件或镜像。在交叉编译中，编译器和工具链被配置为目标平台的编译器和工具，以便生成与目标平台兼容的代码和可执行文件。</p>
+<p>例如，如果你正在运行的是 x86 架构的电脑，但你想要编译一个在 ARM 架构的嵌入式设备上运行的程序，就需要进行交叉编译。在这种情况下，你需要使用针对 ARM 架构的交叉编译器和工具链，例如 <code>arm-linux-gnueabi-gcc</code>。</p>
+<p>安装交叉编译器和工具链时，你可以使用适合你的发行版的包管理器。在这个例子中，你可以使用 <code>apt</code> 包管理器来安装 ARM 架构的交叉编译器和工具链，命令如下：</p>
+<p>Copy</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt install gcc-arm-linux-gnueabi</span><br></pre></td></tr></table></figure>
+
+<p>安装完成后，你就可以使用 <code>arm-linux-gnueabi-gcc</code> 命令来进行 ARM 架构的交叉编译了。这样你就能够生成适用于 ARM 架构设备的可执行文件或镜像。</p>
+ 
       <!-- reward -->
       
     </div>
@@ -456,7 +531,7 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -shared -fPIC -o libsub.so sub.c</span><br></pre></td></tr></table></figure>
 
 <p>然后使用readelf 读取elf头如下所示：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309042227936.png" alt="image-20230904222725900"></p>
-<h1 id=""><a href="#" class="headerlink" title=""></a></h1> 
+ 
       <!-- reward -->
       
     </div>

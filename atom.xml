@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2023-09-05T00:03:19.575Z</updated>
+  <updated>2023-09-05T00:06:04.667Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,31 +15,6 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>1-2-你好内核源码</title>
-    <link href="http://example.com/2023/09/05/1-2-%E4%BD%A0%E5%A5%BD%E5%86%85%E6%A0%B8%E6%BA%90%E7%A0%81/"/>
-    <id>http://example.com/2023/09/05/1-2-%E4%BD%A0%E5%A5%BD%E5%86%85%E6%A0%B8%E6%BA%90%E7%A0%81/</id>
-    <published>2023-09-05T00:03:05.000Z</published>
-    <updated>2023-09-05T00:03:19.575Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;&#92;assets&#92;css&#92;APlayer.min.css&quot;&gt;&lt;script src=&quot;&#92;assets&#92;js&#92;APlayer.min.js&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="rk3568 驱动" scheme="http://example.com/categories/rk3568-%E9%A9%B1%E5%8A%A8/"/>
-    
-    
-    <category term="rk3568 驱动" scheme="http://example.com/tags/rk3568-%E9%A9%B1%E5%8A%A8/"/>
-    
-  </entry>
   
   <entry>
     <title>1-71-讨论:为什么学不会设备树</title>
@@ -497,6 +472,31 @@
     <id>http://example.com/2023/09/05/1-53-probe%E5%87%BD%E6%95%B0%E7%BC%96%E5%86%99%E5%AE%9E%E9%AA%8C/</id>
     <published>2023-09-05T00:01:18.000Z</published>
     <updated>2023-09-05T00:05:24.096Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;&#92;assets&#92;css&#92;APlayer.min.css&quot;&gt;&lt;script src=&quot;&#92;assets&#92;js&#92;APlayer.min.js&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="rk3568 驱动" scheme="http://example.com/categories/rk3568-%E9%A9%B1%E5%8A%A8/"/>
+    
+    
+    <category term="rk3568 驱动" scheme="http://example.com/tags/rk3568-%E9%A9%B1%E5%8A%A8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>1-52-注册platform驱动实验</title>
+    <link href="http://example.com/2023/09/05/1-52-%E6%B3%A8%E5%86%8Cplatform%E9%A9%B1%E5%8A%A8%E5%AE%9E%E9%AA%8C/"/>
+    <id>http://example.com/2023/09/05/1-52-%E6%B3%A8%E5%86%8Cplatform%E9%A9%B1%E5%8A%A8%E5%AE%9E%E9%AA%8C/</id>
+    <published>2023-09-05T00:01:17.000Z</published>
+    <updated>2023-09-05T00:05:21.930Z</updated>
     
     
       
