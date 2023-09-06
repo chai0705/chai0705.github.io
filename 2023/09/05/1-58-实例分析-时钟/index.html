@@ -90,7 +90,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">0</span>
+            <span class="post-count">1.5k</span>
         </span>
     </span>
 
@@ -99,20 +99,62 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">1 分钟</span>
+            <span class="post-count">6 分钟</span>
         </span>
     </span>
 </div>
  
     </div>
       
+    <div class="tocbot"></div>
+
 
 
 
   
     <div class="article-entry" itemprop="articleBody">
        
-   
+  <h1 id="第58章-实例分析：时钟"><a href="#第58章-实例分析：时钟" class="headerlink" title="第58章 实例分析：时钟"></a>第58章 实例分析：时钟</h1><p>时钟（Clock）用于描述硬件设备和系统中的时钟源以及时钟相关的配置和连接关系。时钟在计算机系统中起着至关重要的作用，用于同步和定时各种硬件设备的操作。时钟可以分为两个主要角色：时钟生产者（clock provider）和时钟消费者（clock consumer）。</p>
+<p><strong>时钟生产者</strong></p>
+<p>定义：时钟生产者是负责生成和提供时钟信号的硬件或软件模块。它可以是时钟控制器、PLL、时钟发生器等。</p>
+<p>设备树节点：时钟生产者在设备树中以时钟节点的形式表示。</p>
+<p>时钟节点属性：</p>
+<p><strong>（1）clock-cells：</strong>该属性用于指定时钟编号的位数。它是一个整数值，表示时钟编号的位数。通常情况下，当 clock-cells 为 0 时表示一个时钟，为 1 表示多个时钟。具体示例如下所示：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">示例<span class="number">1</span>：单个时钟</span><br><span class="line">osc24m: osc24m &#123;</span><br><span class="line">    compatible = <span class="string">&quot;clock&quot;</span>;</span><br><span class="line">    clock-frequency = &lt;<span class="number">24000000</span>&gt;;</span><br><span class="line">    clock-output-names = <span class="string">&quot;osc24m&quot;</span>;</span><br><span class="line">    <span class="meta">#clock-cells = <span class="string">&lt;O&gt;</span>;</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">示例<span class="number">2</span>：多个时钟</span><br><span class="line">clock: clock &#123;</span><br><span class="line">    <span class="meta">#clock-cells = <span class="string">&lt;1&gt;</span>;</span></span><br><span class="line">    clock-output-names = <span class="string">&quot;clock1&quot;</span>, <span class="string">&quot;clock2&quot;</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><strong>（2）clock-frequency：</strong>属性是设备树中用于指定时钟频率的属性。它用于描述时钟节点所提供的时钟信号的频率，使用 Hertz (Hz) 作为单位。对于时钟生产者节点，clock-frequency 属性表示该节点生成的时钟信号的频率。它用于描述时钟控制器、晶振、PLL 等产生时钟信号的硬件或软件模块的输出频率，例如指定时钟频率为24000000的具体示例如下所示：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">osc24m: osc24m &#123;</span><br><span class="line">    compatible = <span class="string">&quot;clock&quot;</span>;</span><br><span class="line">    clock-frequency = &lt;<span class="number">24000000</span>&gt;;</span><br><span class="line">    clock-output-names = <span class="string">&quot;osc24m&quot;</span>;</span><br><span class="line">    <span class="meta">#clock-cells = <span class="string">&lt;O&gt;</span>;</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><strong>（3）assigned-clocks 和 assigned-clock-rates ：</strong>是设备树中用于描述多路时钟的属性，通常一起使用。</p>
+<p>assigned-clocks 属性用于标识时钟消费者节点所使用的时钟源。它是一个整数数组，每个元素对应一个时钟编号。时钟编号是指时钟生产者节点（如时钟控制器）所提供的时钟源的编号。通过在时钟消费者节点中使用 assigned-clocks 属性，可以指定该节点所需的时钟源。</p>
+<p>assigned-clock-rates 属性用于指定每个时钟源的时钟频率。它是一个整数数组，每个元素对应一个时钟源的频率。时钟频率以 Hz (赫兹) 为单位表示。assigned-clock-rates 属性的元素数量和顺序应与 assigned-clocks 属性中的时钟编号相对应。</p>
+<p>关于assigned-clocks 和 assigned-clock-rates 属性的一个具体示例如下所示：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cru: clock-controller@fdd20000 &#123;</span><br><span class="line">    #clock-cells = &lt;1&gt;;</span><br><span class="line">    assigned-clocks = &lt;&amp;pmucru CLK_RTC_32K&gt;, &lt;&amp;cru ACLK_RKVDEC_PRE&gt;;</span><br><span class="line">    assigned-clock-rates = &lt;32768&gt;, &lt;300000000&gt;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><strong>（4）clock-indices：</strong>clock-indices 属性用于指定时钟消费者节点所使用的时钟源的索引值。它是一个整数数组，每个元素对应一个时钟源的索引。</p>
+<p>时钟索引是指时钟生产者节点（如时钟控制器）所提供的时钟源的编号。通过在时钟消费者节点中使用 clock-indices 属性，可以明确指定该节点所需的时钟源，并按照特定的顺序进行匹配。一个clock-indices示例如下所示：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">scpi_dvfs: clocks<span class="number">-0</span> &#123;</span><br><span class="line">    <span class="meta">#clock-cells = <span class="string">&lt;1&gt;</span>;</span></span><br><span class="line">    clock-indices = &lt;<span class="number">0</span>&gt;, &lt;<span class="number">1</span>&gt;, &lt;<span class="number">2</span>&gt;;</span><br><span class="line">    clock-output-names = <span class="string">&quot;atlclk&quot;</span>, <span class="string">&quot;aplclk&quot;</span>, <span class="string">&quot;gpuclk&quot;</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">scpi_clk: clocks<span class="number">-1</span> &#123;</span><br><span class="line">    <span class="meta">#clock-cells = <span class="string">&lt;1&gt;</span>;</span></span><br><span class="line">    clock-indices = &lt;<span class="number">3</span>&gt;;</span><br><span class="line">    clock-output-names = <span class="string">&quot;pxlclk&quot;</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>在第一个节点中”atlclk”, “aplclk”, “gpuclk”三个时钟源的索引就分别被设置为了0、1、2，在第二个节点中”pxlclk”时钟源的索引值被设置为了3.</p>
+<p><strong>（5）assigned-clock-parents</strong> 属性用于指定时钟消费者节点所使用的时钟源的父时钟源。它是一个时钟源引用的数组，每个元素对应一个父时钟源的引用。在时钟的层次结构中，某些时钟源可能是其他时钟源的父时钟源，即它们提供时钟信号给其他时钟源作为输入。通过在时钟消费者节点中使用 assigned-clock-parents 属性，可以明确指定该节点所需的父时钟源，并按照特定的顺序进行匹配。一个实际的 assigned-clock-parents 属性例子如下所示：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">clock: clock &#123;</span><br><span class="line">    assigned-clocks = &lt;&amp;clkcon 0&gt;, &lt;&amp;pll 2&gt;;</span><br><span class="line">    assigned-clock-parents = &lt;&amp;pll 2&gt;;</span><br><span class="line">    assigned-clock-rates = &lt;115200&gt;, &lt;9600&gt;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>上述设备树表示了一个名为 clock 的时钟消费者节点，具有以下属性：</p>
+<p>assigned-clocks 属性指定了该节点使用的时钟源，引用了两个时钟源节点：clkcon 0 和 pll 2。</p>
+<p>assigned-clock-parents 属性指定了这些时钟源的父时钟源，引用了 pll 2 时钟源节点。</p>
+<p>assigned-clock-rates 属性指定了每个时钟源的时钟频率，分别是 115200 和 9600。</p>
+<p><strong>时钟消费者（Clock Consumer）：</strong></p>
+<p>定义：时钟消费者是依赖时钟信号的硬件设备或模块。它们通过引用时钟生产者节点提供的时钟源来获取时钟信号。</p>
+<p>设备树节点：时钟消费者在设备树中的节点中使用属性来引用时钟生产者的时钟源。</p>
+<p>时钟消费者属性：</p>
+<p>（1）clocks：该属性用于指定时钟消费者节点所需的时钟源。它是一个整数数组，每个元素是一个时钟编号，表示时钟消费者需要的一个时钟源。</p>
+<p>（2）clock-names：可选属性，用于指定时钟消费者节点所需时钟源的名称。它是一个字符串数组，与 clocks 数组一一对应，用于提供时钟源的描述性名称。</p>
+<p>一个时钟消费者示例如下所示：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">clock: clock &#123;</span><br><span class="line">    clocks = &lt;&amp;cru CLK_VOP&gt;;</span><br><span class="line">    clock-names = <span class="string">&quot;clk_vop&quot;</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>clocks 属性指定了该节点使用的时钟源，引用了 cru 节点中的 CLK_VOP 时钟源。</p>
+<p>clock-names 属性指定了时钟源的名称，这里是 “clk_vop”。</p>
+ 
       <!-- reward -->
       
     </div>

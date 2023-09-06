@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2023-09-05T00:06:04.667Z</updated>
+  <updated>2023-09-06T12:25:58.730Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -17,36 +17,11 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>1-71-讨论:为什么学不会设备树</title>
-    <link href="http://example.com/2023/09/05/1-71-%E8%AE%A8%E8%AE%BA-%E4%B8%BA%E4%BB%80%E4%B9%88%E5%AD%A6%E4%B8%8D%E4%BC%9A%E8%AE%BE%E5%A4%87%E6%A0%91/"/>
-    <id>http://example.com/2023/09/05/1-71-%E8%AE%A8%E8%AE%BA-%E4%B8%BA%E4%BB%80%E4%B9%88%E5%AD%A6%E4%B8%8D%E4%BC%9A%E8%AE%BE%E5%A4%87%E6%A0%91/</id>
-    <published>2023-09-05T00:01:46.000Z</published>
-    <updated>2023-09-05T00:06:04.667Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;&#92;assets&#92;css&#92;APlayer.min.css&quot;&gt;&lt;script src=&quot;&#92;assets&#92;js&#92;APlayer.min.js&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="rk3568 驱动" scheme="http://example.com/categories/rk3568-%E9%A9%B1%E5%8A%A8/"/>
-    
-    
-    <category term="rk3568 驱动" scheme="http://example.com/tags/rk3568-%E9%A9%B1%E5%8A%A8/"/>
-    
-  </entry>
-  
-  <entry>
     <title>1-70-参考文档:设备树bindings</title>
     <link href="http://example.com/2023/09/05/1-70-%E5%8F%82%E8%80%83%E6%96%87%E6%A1%A3-%E8%AE%BE%E5%A4%87%E6%A0%91bindings/"/>
     <id>http://example.com/2023/09/05/1-70-%E5%8F%82%E8%80%83%E6%96%87%E6%A1%A3-%E8%AE%BE%E5%A4%87%E6%A0%91bindings/</id>
     <published>2023-09-05T00:01:45.000Z</published>
-    <updated>2023-09-05T00:06:01.529Z</updated>
+    <updated>2023-09-06T12:25:58.730Z</updated>
     
     
       
@@ -71,7 +46,7 @@
     <link href="http://example.com/2023/09/05/1-69-of%E6%93%8D%E4%BD%9C%E5%87%BD%E6%95%B0%E5%AE%9E%E9%AA%8C-%E8%8E%B7%E5%8F%96%E4%B8%AD%E6%96%AD%E8%B5%84%E6%BA%90/"/>
     <id>http://example.com/2023/09/05/1-69-of%E6%93%8D%E4%BD%9C%E5%87%BD%E6%95%B0%E5%AE%9E%E9%AA%8C-%E8%8E%B7%E5%8F%96%E4%B8%AD%E6%96%AD%E8%B5%84%E6%BA%90/</id>
     <published>2023-09-05T00:01:43.000Z</published>
-    <updated>2023-09-05T00:05:59.273Z</updated>
+    <updated>2023-09-06T12:25:52.618Z</updated>
     
     
       
@@ -96,7 +71,7 @@
     <link href="http://example.com/2023/09/05/1-68-ranges%E5%B1%9E%E6%80%A7%E5%AE%9E%E9%AA%8C/"/>
     <id>http://example.com/2023/09/05/1-68-ranges%E5%B1%9E%E6%80%A7%E5%AE%9E%E9%AA%8C/</id>
     <published>2023-09-05T00:01:42.000Z</published>
-    <updated>2023-09-05T00:05:57.323Z</updated>
+    <updated>2023-09-06T12:25:48.406Z</updated>
     
     
       
@@ -121,7 +96,7 @@
     <link href="http://example.com/2023/09/05/1-67-of%E6%93%8D%E4%BD%9C%E5%87%BD%E6%95%B0%E5%AE%9E%E9%AA%8C-%E8%8E%B7%E5%8F%96%E5%B1%9E%E6%80%A7/"/>
     <id>http://example.com/2023/09/05/1-67-of%E6%93%8D%E4%BD%9C%E5%87%BD%E6%95%B0%E5%AE%9E%E9%AA%8C-%E8%8E%B7%E5%8F%96%E5%B1%9E%E6%80%A7/</id>
     <published>2023-09-05T00:01:40.000Z</published>
-    <updated>2023-09-05T00:05:55.095Z</updated>
+    <updated>2023-09-06T12:24:38.677Z</updated>
     
     
       
@@ -142,11 +117,11 @@
   </entry>
   
   <entry>
-    <title>1-66-of操作函数实验:获取设备树节点</title>
+    <title>1-62-dtb文件格式讲解</title>
     <link href="http://example.com/2023/09/05/1-66-of%E6%93%8D%E4%BD%9C%E5%87%BD%E6%95%B0%E5%AE%9E%E9%AA%8C-%E8%8E%B7%E5%8F%96%E8%AE%BE%E5%A4%87%E6%A0%91%E8%8A%82%E7%82%B9/"/>
     <id>http://example.com/2023/09/05/1-66-of%E6%93%8D%E4%BD%9C%E5%87%BD%E6%95%B0%E5%AE%9E%E9%AA%8C-%E8%8E%B7%E5%8F%96%E8%AE%BE%E5%A4%87%E6%A0%91%E8%8A%82%E7%82%B9/</id>
-    <published>2023-09-05T00:01:39.000Z</published>
-    <updated>2023-09-05T00:05:52.495Z</updated>
+    <published>2023-09-05T00:01:36.000Z</published>
+    <updated>2023-09-06T12:25:36.746Z</updated>
     
     
       
@@ -167,11 +142,11 @@
   </entry>
   
   <entry>
-    <title>1-65-设备树下platform_device和platform_driver匹配实验</title>
+    <title>1-62-dtb文件格式讲解</title>
     <link href="http://example.com/2023/09/05/1-65-%E8%AE%BE%E5%A4%87%E6%A0%91%E4%B8%8Bplatform-device%E5%92%8Cplatform-driver%E5%8C%B9%E9%85%8D%E5%AE%9E%E9%AA%8C/"/>
     <id>http://example.com/2023/09/05/1-65-%E8%AE%BE%E5%A4%87%E6%A0%91%E4%B8%8Bplatform-device%E5%92%8Cplatform-driver%E5%8C%B9%E9%85%8D%E5%AE%9E%E9%AA%8C/</id>
-    <published>2023-09-05T00:01:37.000Z</published>
-    <updated>2023-09-05T00:05:50.233Z</updated>
+    <published>2023-09-05T00:01:35.000Z</published>
+    <updated>2023-09-06T12:25:30.414Z</updated>
     
     
       
@@ -192,11 +167,11 @@
   </entry>
   
   <entry>
-    <title>1-64-device node转换成platform device实验</title>
+    <title>1-62-dtb文件格式讲解</title>
     <link href="http://example.com/2023/09/05/1-64-device-node%E8%BD%AC%E6%8D%A2%E6%88%90platform-device%E5%AE%9E%E9%AA%8C/"/>
     <id>http://example.com/2023/09/05/1-64-device-node%E8%BD%AC%E6%8D%A2%E6%88%90platform-device%E5%AE%9E%E9%AA%8C/</id>
-    <published>2023-09-05T00:01:35.000Z</published>
-    <updated>2023-09-05T00:05:48.087Z</updated>
+    <published>2023-09-05T00:01:34.000Z</published>
+    <updated>2023-09-06T12:25:22.598Z</updated>
     
     
       
@@ -217,11 +192,11 @@
   </entry>
   
   <entry>
-    <title>1-63-dtb展开成device_node实验</title>
+    <title>1-62-dtb文件格式讲解</title>
     <link href="http://example.com/2023/09/05/1-63-dtb%E5%B1%95%E5%BC%80%E6%88%90device-node%E5%AE%9E%E9%AA%8C/"/>
     <id>http://example.com/2023/09/05/1-63-dtb%E5%B1%95%E5%BC%80%E6%88%90device-node%E5%AE%9E%E9%AA%8C/</id>
-    <published>2023-09-05T00:01:34.000Z</published>
-    <updated>2023-09-05T00:05:46.131Z</updated>
+    <published>2023-09-05T00:01:33.000Z</published>
+    <updated>2023-09-06T12:25:13.134Z</updated>
     
     
       
@@ -246,7 +221,7 @@
     <link href="http://example.com/2023/09/05/1-62-dtb%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F%E8%AE%B2%E8%A7%A3/"/>
     <id>http://example.com/2023/09/05/1-62-dtb%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F%E8%AE%B2%E8%A7%A3/</id>
     <published>2023-09-05T00:01:32.000Z</published>
-    <updated>2023-09-05T00:05:43.980Z</updated>
+    <updated>2023-09-06T12:22:38.399Z</updated>
     
     
       
@@ -271,7 +246,7 @@
     <link href="http://example.com/2023/09/05/1-61-%E5%AE%9E%E4%BE%8B%E5%88%86%E6%9E%90-pinctrl/"/>
     <id>http://example.com/2023/09/05/1-61-%E5%AE%9E%E4%BE%8B%E5%88%86%E6%9E%90-pinctrl/</id>
     <published>2023-09-05T00:01:31.000Z</published>
-    <updated>2023-09-05T00:05:41.851Z</updated>
+    <updated>2023-09-06T12:22:33.841Z</updated>
     
     
       
@@ -296,7 +271,7 @@
     <link href="http://example.com/2023/09/05/1-60-%E5%AE%9E%E4%BE%8B%E5%88%86%E6%9E%90-GPIO/"/>
     <id>http://example.com/2023/09/05/1-60-%E5%AE%9E%E4%BE%8B%E5%88%86%E6%9E%90-GPIO/</id>
     <published>2023-09-05T00:01:29.000Z</published>
-    <updated>2023-09-05T00:05:39.673Z</updated>
+    <updated>2023-09-06T12:22:29.167Z</updated>
     
     
       
@@ -321,7 +296,7 @@
     <link href="http://example.com/2023/09/05/1-59-%E5%AE%9E%E4%BE%8B%E5%88%86%E6%9E%90-CPU/"/>
     <id>http://example.com/2023/09/05/1-59-%E5%AE%9E%E4%BE%8B%E5%88%86%E6%9E%90-CPU/</id>
     <published>2023-09-05T00:01:28.000Z</published>
-    <updated>2023-09-05T00:05:37.367Z</updated>
+    <updated>2023-09-06T12:22:20.395Z</updated>
     
     
       
@@ -346,7 +321,7 @@
     <link href="http://example.com/2023/09/05/1-58-%E5%AE%9E%E4%BE%8B%E5%88%86%E6%9E%90-%E6%97%B6%E9%92%9F/"/>
     <id>http://example.com/2023/09/05/1-58-%E5%AE%9E%E4%BE%8B%E5%88%86%E6%9E%90-%E6%97%B6%E9%92%9F/</id>
     <published>2023-09-05T00:01:26.000Z</published>
-    <updated>2023-09-05T00:05:34.635Z</updated>
+    <updated>2023-09-06T12:22:15.386Z</updated>
     
     
       
@@ -371,7 +346,7 @@
     <link href="http://example.com/2023/09/05/1-57-%E5%AE%9E%E4%BE%8B%E5%88%86%E6%9E%90-%E4%B8%AD%E6%96%AD/"/>
     <id>http://example.com/2023/09/05/1-57-%E5%AE%9E%E4%BE%8B%E5%88%86%E6%9E%90-%E4%B8%AD%E6%96%AD/</id>
     <published>2023-09-05T00:01:24.000Z</published>
-    <updated>2023-09-05T00:05:32.464Z</updated>
+    <updated>2023-09-06T12:22:10.473Z</updated>
     
     
       
@@ -396,7 +371,7 @@
     <link href="http://example.com/2023/09/05/1-56-%E8%AE%BE%E5%A4%87%E6%A0%91%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/"/>
     <id>http://example.com/2023/09/05/1-56-%E8%AE%BE%E5%A4%87%E6%A0%91%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/</id>
     <published>2023-09-05T00:01:23.000Z</published>
-    <updated>2023-09-05T00:05:30.464Z</updated>
+    <updated>2023-09-06T12:22:04.177Z</updated>
     
     
       
@@ -421,7 +396,7 @@
     <link href="http://example.com/2023/09/05/1-55-%E5%88%9D%E8%AF%86%E8%AE%BE%E5%A4%87%E6%A0%91/"/>
     <id>http://example.com/2023/09/05/1-55-%E5%88%9D%E8%AF%86%E8%AE%BE%E5%A4%87%E6%A0%91/</id>
     <published>2023-09-05T00:01:21.000Z</published>
-    <updated>2023-09-05T00:05:28.260Z</updated>
+    <updated>2023-09-06T12:21:50.089Z</updated>
     
     
       
@@ -497,6 +472,31 @@
     <id>http://example.com/2023/09/05/1-52-%E6%B3%A8%E5%86%8Cplatform%E9%A9%B1%E5%8A%A8%E5%AE%9E%E9%AA%8C/</id>
     <published>2023-09-05T00:01:17.000Z</published>
     <updated>2023-09-05T00:05:21.930Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;&#92;assets&#92;css&#92;APlayer.min.css&quot;&gt;&lt;script src=&quot;&#92;assets&#92;js&#92;APlayer.min.js&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="rk3568 驱动" scheme="http://example.com/categories/rk3568-%E9%A9%B1%E5%8A%A8/"/>
+    
+    
+    <category term="rk3568 驱动" scheme="http://example.com/tags/rk3568-%E9%A9%B1%E5%8A%A8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>1-51-注册platform设备实验</title>
+    <link href="http://example.com/2023/09/05/1-51-%E6%B3%A8%E5%86%8Cplatform%E8%AE%BE%E5%A4%87%E5%AE%9E%E9%AA%8C/"/>
+    <id>http://example.com/2023/09/05/1-51-%E6%B3%A8%E5%86%8Cplatform%E8%AE%BE%E5%A4%87%E5%AE%9E%E9%AA%8C/</id>
+    <published>2023-09-05T00:01:15.000Z</published>
+    <updated>2023-09-05T00:05:19.776Z</updated>
     
     
       

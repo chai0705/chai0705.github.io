@@ -90,7 +90,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">0</span>
+            <span class="post-count">752</span>
         </span>
     </span>
 
@@ -99,20 +99,42 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">1 分钟</span>
+            <span class="post-count">2 分钟</span>
         </span>
     </span>
 </div>
  
     </div>
       
+    <div class="tocbot"></div>
+
 
 
 
   
     <div class="article-entry" itemprop="articleBody">
        
-   
+  <h1 id="第70章-参考文档：设备树bindings"><a href="#第70章-参考文档：设备树bindings" class="headerlink" title="第70章 参考文档：设备树bindings"></a>第70章 参考文档：设备树bindings</h1><p>在前面的章节中，我们已经介绍了许多设备树编写相关的知识，当然上面我们讲解的都是标准属性，但当我们遇到非标准属性或无法理解的属性时，要如何处理呢？这时候就不得不提到bindings文档了。</p>
+<p>Documentation&#x2F;devicetree&#x2F;bindings目录是Linux内核源码中的一个重要目录，用于存储设备树（Device Tree）的bindings文档。设备树是一种描述硬件平台和设备配置的数据结构，它以一种可移植和独立于具体硬件的方式描述了设备的属性、寄存器配置、中断信息等。</p>
+<p>bindings目录中的文档提供了有关设备树的各种设备和驱动程序的详细说明和用法示例。这些文档对于开发人员来说非常重要，因为它们提供了在设备树中描述硬件和配置驱动程序所需的属性和约定。bindings目录截图如下所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309062025637.jpeg" alt="img"> </p>
+<p>接下来对Documentation&#x2F;devicetree&#x2F;bindings目录的一些常见子目录和其内容的概述：</p>
+<p>arm：包含与ARM体系结构相关的设备和驱动程序的bindings文档。</p>
+<p>clock：包含与时钟设备和时钟控制器相关的bindings文档。</p>
+<p>dma：包含与直接内存访问（DMA）控制器和设备相关的bindings文档。</p>
+<p>gpio：包含与通用输入输出（GPIO）控制器和设备相关的bindings文档。</p>
+<p>i2c：包含与I2C总线和设备相关的bindings文档。</p>
+<p>interrupt-controller：包含与中断控制器相关的bindings文档。</p>
+<p>media：包含与多媒体设备和驱动程序相关的bindings文档。</p>
+<p>mfd：包含与多功能设备（MFD）子系统和设备相关的bindings文档。</p>
+<p>networking：包含与网络设备和驱动程序相关的bindings文档。</p>
+<p>power：包含与电源管理子系统和设备相关的bindings文档。</p>
+<p>spi：包含与SPI总线和设备相关的bindings文档。</p>
+<p>usb：包含与USB控制器和设备相关的bindings文档。</p>
+<p>video：包含与视频设备和驱动程序相关的bindings文档。</p>
+<p>每个子目录中的文档通常以.txt或.yaml的扩展名保存，使用文本或YAML格式编写。这些文档提供了有关设备树中属性的详细说明、属性的语法、可选值和用法示例。它们还描述了设备树的约定和最佳实践，以帮助开发人员正确地配置和描述硬件设备和驱动程序。</p>
+<p>通过阅读Documentation&#x2F;devicetree&#x2F;bindings目录中的文档，开发人员可以了解各种设备和驱动程序的设备树属性的含义和用法，以便正确地配置和描述硬件平台和设备。这有助于实现硬件与软件之间的正确匹配和交互，使系统能够正确识别和使用硬件设备。</p>
+ 
       <!-- reward -->
       
     </div>
@@ -176,15 +198,6 @@
 
    
   <nav class="article-nav">
-    
-      <a href="/2023/09/05/1-71-%E8%AE%A8%E8%AE%BA-%E4%B8%BA%E4%BB%80%E4%B9%88%E5%AD%A6%E4%B8%8D%E4%BC%9A%E8%AE%BE%E5%A4%87%E6%A0%91/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            1-71-讨论:为什么学不会设备树
-          
-        </div>
-      </a>
     
     
       <a href="/2023/09/05/1-69-of%E6%93%8D%E4%BD%9C%E5%87%BD%E6%95%B0%E5%AE%9E%E9%AA%8C-%E8%8E%B7%E5%8F%96%E4%B8%AD%E6%96%AD%E8%B5%84%E6%BA%90/" class="article-nav-link">

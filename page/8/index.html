@@ -160,59 +160,6 @@
     
     
     <article
-  id="post-3-22-u-boot重定位分析-下"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/09/05/3-22-u-boot%E9%87%8D%E5%AE%9A%E4%BD%8D%E5%88%86%E6%9E%90-%E4%B8%8B/"
-    >3.22-u-boot重定位分析(下)</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/09/05/3-22-u-boot%E9%87%8D%E5%AE%9A%E4%BD%8D%E5%88%86%E6%9E%90-%E4%B8%8B/" class="article-date">
-  <time datetime="2023-09-04T23:47:24.000Z" itemprop="datePublished">2023-09-05</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-   
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%BC%96%E8%AF%91%E3%80%81%E9%93%BE%E6%8E%A5%E5%92%8C%E8%BF%90%E8%A1%8C/" rel="tag">程序的编译、链接和运行</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
   id="post-3-21-u-boot重定位分析-上"
   class="article article-type-post"
   itemscope
@@ -770,6 +717,79 @@
 
 <p>这样，只有主程序中实际引用的函数会被链接到最终的可执行文件中，减小了可执行文件的体积。</p>
 <p>Glibc（GNU C Library）就是使用类似的方法实现的。它将每个函数的实现放在单独的源文件中，然后将这些源文件编译成对应的目标文件，并将目标文件归档到一个静态库中。这样，在链接时只会将程序实际使用的函数链接到最终的可执行文件中，提高了程序的效率和可维护性。</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%BC%96%E8%AF%91%E3%80%81%E9%93%BE%E6%8E%A5%E5%92%8C%E8%BF%90%E8%A1%8C/" rel="tag">程序的编译、链接和运行</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-3-12-main函数入口分析"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/09/05/3-12-main%E5%87%BD%E6%95%B0%E5%85%A5%E5%8F%A3%E5%88%86%E6%9E%90/"
+    >3.12-main函数入口分析</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/09/05/3-12-main%E5%87%BD%E6%95%B0%E5%85%A5%E5%8F%A3%E5%88%86%E6%9E%90/" class="article-date">
+  <time datetime="2023-09-04T23:47:09.000Z" itemprop="datePublished">2023-09-05</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="7-12-1-main函数入口"><a href="#7-12-1-main函数入口" class="headerlink" title="7.12.1 main函数入口"></a>7.12.1 main函数入口</h1><p>编译器对程序入口有以下规定：</p>
+<ol>
+<li>缺省程序入口：编译器默认的程序入口是<code>_start</code>符号，而不是<code>main</code>函数。<code>_start</code>符号是由编译器生成的一个特殊符号，它标识程序的入口点。在程序启动时，操作系统会将控制权转移到<code>_start</code>符号所代表的代码位置。</li>
+<li><code>main</code>函数作为入口点：<code>main</code>函数是一个被C标准库调用的符号，用来告诉编译器在一个项目中哪里是程序的入口点。程序员需要遵守这个约定，将程序的逻辑代码放在<code>main</code>函数中，在执行<code>main</code>函数之前进行一些准备工作。</li>
+</ol>
+<p>在程序启动时，编译器会进行以下操作：</p>
+<ul>
+<li>设置堆栈指针：编译器会设置栈指针，以确保函数调用和局部变量的正确处理。</li>
+<li>初始化静态变量和全局变量：编译器会初始化静态变量和全局变量，即将它们所占用的数据段（data segment）中的内容赋初值。</li>
+<li>BSS段赋初值：BSS段中的变量会被初始化为默认值。例如，<code>int</code>类型的变量会被初始化为0，<code>bool</code>类型会被初始化为<code>FALSE</code>，指针会被初始化为<code>NULL</code>。</li>
+<li>传递参数给<code>main</code>函数：编译器会将命令行参数（<code>argc</code>、<code>argv</code>等）传递给<code>main</code>函数，并开始执行<code>main</code>函数中的代码。</li>
+</ul>
+<h1 id="7-12-2-CRT运行库"><a href="#7-12-2-CRT运行库" class="headerlink" title="7.12.2 CRT运行库"></a>7.12.2 CRT运行库</h1><p>CRT是C Runtime（运行时）的缩写，也称为C运行库。它是一组库函数和运行时环境，用于支持和管理C语言程序的执行。</p>
+<p>CRT的主要功能包括：</p>
+<ol>
+<li>实现C标准库函数：CRT实现了C标准库中定义的各种函数，例如输入输出函数（如printf、scanf）、字符串处理函数（如strcpy、strlen）、内存管理函数（如malloc、free）等。这些函数提供了常用的操作和功能，方便程序员开发C语言程序。</li>
+<li>执行初始化操作：CRT负责在程序执行之前进行一系列的初始化操作。这包括设置基本的堆栈环境和进程环境，准备动态库的加载和释放，进行动态库的初始化和清理等工作。</li>
+<li>调用main函数：CRT负责给main函数传递参数，并调用main函数开始执行程序的主要逻辑。它将命令行参数（如argc、argv）传递给main函数，以便程序可以根据需要进行处理。</li>
+<li>处理程序退出：在main函数执行完成后，CRT会调用exit函数，用于处理程序的退出。exit函数会执行一些清理操作，例如关闭文件、释放资源等，并将控制权返回给操作系统。</li>
+</ol>
  
       <!-- reward -->
       

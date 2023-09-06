@@ -90,7 +90,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">0</span>
+            <span class="post-count">2.2k</span>
         </span>
     </span>
 
@@ -99,20 +99,80 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">1 分钟</span>
+            <span class="post-count">8 分钟</span>
         </span>
     </span>
 </div>
  
     </div>
       
+    <div class="tocbot"></div>
+
 
 
 
   
     <div class="article-entry" itemprop="articleBody">
        
-   
+  <h1 id="第55章-初识设备树"><a href="#第55章-初识设备树" class="headerlink" title="第55章 初识设备树"></a>第55章 初识设备树</h1><h2 id="55-1-设备树的由来"><a href="#55-1-设备树的由来" class="headerlink" title="55.1 设备树的由来"></a>55.1 设备树的由来</h2><p>设备树（Device Tree）是一种硬件描述机制，用于在嵌入式系统和操作系统中描述硬件设备的特性、连接关系和配置信息。它提供了一种与平台无关的方式来描述硬件，使得内核与硬件之间的耦合度降低，提高了系统的可移植性和可维护性。</p>
+<p>在上一篇平台总线内容的学习中，我们使用platform_device结构体来对硬件设备进行描述，这是一种传统的平台总线设备描述方式。每个platform_device结构表示一个特定的硬件设备，并通过注册到平台总线上来使得内核能够与该设备进行通信和交互。该结构包含设备的名称、资源（如内存地址、中断号等）、设备驱动程序等信息。</p>
+<p>然而，随着时间的推移，Linux内核中的ARM部分存在着大量的平台相关配置代码，这些代码通常是杂乱而重复的，导致了维护的困难和工作量的增加。在2011年3月17日，Linux的创始人Linus Torvalds在ARM Linux邮件列表中发表了一封帖子，他表达了对ARM架构配置方式的不满，并宣称”Gaah. Guys, this whole ARM thing is a f*cking pain in the ass”。这引起了广泛的讨论和反思。ARM社区中的开发者们开始认识到，传统的平台相关配置方式已经变得不可持续，需要一种更加先进和可扩展的方法来解决这个问题。</p>
+<p>为了应对这一挑战，ARM社区开始探索新的硬件描述机制，并逐渐形成了设备树的概念。设备树提供了一种更加灵活和可移植的描述硬件的机制，将设备的描述信息转移到设备树中。设备树使用一种结构化的数据格式，通过描述设备节点、属性和连接关系等信息，使得硬件的描述与具体的平台无关，同时允许多个平台共享相同的设备树描述。</p>
+<p>设备树的引入为ARM架构上的Linux内核带来了革命性的变化。它提供了一种统一的硬件描述方式，使得不同芯片和板级的支持更加简单和灵活。此外，设备树还提供了硬件配置的可视化和可读性，方便开发者理解和调试硬件。</p>
+<p>随着时间的推移，设备树逐渐成为了嵌入式系统和Linux内核中描述硬件的标准方式。它不仅在ARM架构上得到了广泛应用，也被扩展到其他架构和平台上。</p>
+<h2 id="55-2-设备树基础知识"><a href="#55-2-设备树基础知识" class="headerlink" title="55.2 设备树基础知识"></a>55.2 设备树基础知识</h2><p>当描述设备树（Device Tree）时，通常会涉及到以下几个关键术语：DTS、DTSI、DTB和DTC。下面来对每个术语进行介绍。</p>
+<p>DTS（Device Tree Source）：DTS是设备树的源文件，采用一种类似于文本的语法来描述硬件设备的结构、属性和连接关系。DTS文件以.dts为扩展名，通常由开发人员编写。它是人类可读的形式，用于描述设备树的层次结构和属性信息。</p>
+<p>DTSI（Device Tree Source Include）：DTSI文件是设备树源文件的包含文件。它扩展了DTS文件的功能，用于定义可重用的设备树片段。DTSI文件以.dtsi为扩展名，可以在多个DTS文件中包含和共享。通过使用DTSI，可以提高设备树的可重用性和可维护性（和C语言中头文件的作用相同）。</p>
+<p>DTB（Device Tree Blob）：DTB是设备树的二进制表示形式。DTB文件是通过将DTS或DTSI文件编译而成的二进制文件，以.dtb为扩展名。DTB文件包含了设备树的结构、属性和连接信息，被操作系统加载和解析。在运行时，操作系统使用DTB文件来动态识别和管理硬件设备。</p>
+<p>DTC（Device Tree Compiler）：DTC是设备树的编译器。它是一个命令行工具，用于将DTS和DTSI文件编译成DTB文件。DTC将文本格式的设备树源代码转换为二进制的设备树表示形式，以便操作系统能够加载和解析。DTC是设备树开发中一个重要的工具。</p>
+<p><strong>DTS、DTSI、DTB和DTC之间的关系：</strong></p>
+<p>（1）开发人员使用文本编辑器编写DTS和DTSI文件，描述硬件设备的层次结构、属性和连接关系。</p>
+<p>（2）DTSI文件可以在多个DTS文件中包含和共享，以提高设备树的可重用性和可维护性。</p>
+<p>（3）使用DTC编译器，开发人员将DTS和DTSI文件编译成二进制的DTB文件，如下图所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309062021519.jpeg" alt="img"> </p>
+<p>操作系统在启动过程中加载和解析DTB文件，以识别和管理硬件设备。</p>
+<p>设备树文件存放路径：</p>
+<p>ARM体系结构：</p>
+<p>ARM体系结构下的设备树源文件通常存放在arch&#x2F;arm&#x2F;boot&#x2F;dts&#x2F;目录中。该目录是设备树源文件的根目录。如下图所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309062021539.jpeg" alt="img"> </p>
+<p>ARM64体系结构：</p>
+<p>设备树源文件路径：ARM64体系结构下的设备树源文件通常存放在arch&#x2F;arm64&#x2F;boot&#x2F;dts&#x2F;目录及其子目录中。该目录也是设备树源文件的根目录，并包含了针对不同ARM64平台和设备的子目录，如下图所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309062021441.jpeg" alt="img"> </p>
+<p>子目录结构：在ARM64的子目录中，同样会按照硬件平台、设备类型或制造商进行组织和分类。这些子目录的命名可能与特定芯片厂商（如Qualcomm、NVIDIA、Samsung）有关，由于我们本手册使用的soc是瑞芯微的rk3568，所以匹配的设备树目录为arch&#x2F;arm64&#x2F;boot&#x2F;dts&#x2F;rockchip。每个子目录中可能包含多个设备树文件，用于描述不同的硬件配置和设备类型，这里以rockchip目录内容如下图所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309062021532.jpeg" alt="img"></p>
+<h2 id="55-3-设备树的编译"><a href="#55-3-设备树的编译" class="headerlink" title="55.3 设备树的编译"></a>55.3 设备树的编译</h2><p>设备树的编译是将设备树源文件（如上述的.dts文件）转换为二进制的设备树表示形式（.dtb文件）的过程。编译器通常被称为DTC（Device Tree Compiler）。</p>
+<p>在Linux内核源码中，DTC（Device Tree Compiler）的源代码和相关工具通常存放在scripts&#x2F;dtc&#x2F;目录中，如下图所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309062021475.jpeg" alt="img"> </p>
+<p>在编译完源码之后dtc设备树编译器会默认生成，如果没有生成相应的dtc可执行文件，可以查看在内核默认配置文件中CONFIG_DTC是否使能。</p>
+<p><strong>设备树的编译</strong>：</p>
+<p>在Linux环境中，可以使用以下命令将设备树源文件编译为二进制设备树文件：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dtc -I dts -O dtb -o output.dtb input.dts</span><br></pre></td></tr></table></figure>
+
+<p>其中，<code>input.dts</code>是输入的设备树源文件，<code>output.dtb</code>是编译后的二进制设备树文件。</p>
+<p>编译器会验证设备树源文件的语法和语义，生成与硬件描述相对应的设备树表示形式。</p>
+<p><strong>设备树的反编译：</strong></p>
+<p>​	设备树的反编译是将二进制设备树文件转换回设备树源文件的过程，以便进行查看、编辑或修改。反编译器通常也是DTC。</p>
+<p>在Linux环境中，可以使用以下命令将二进制设备树文件反编译为设备树源文件：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dtc -I dtb -O dts -o output.dts input.dtb</span><br></pre></td></tr></table></figure>
+
+<p>其中，input.dtb是输入的二进制设备树文件，output.dts是反编译后的设备树源文件。</p>
+<p>反编译器会将二进制设备树文件解析并还原为文本形式的设备树源文件，使其可读性更好。</p>
+<p>下面来进行一下实际的设备树编译和反编译的演示，首先创建一个名为test.dts的设备树文件，文件内容如下所示：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/dts-v1/;</span><br><span class="line">/ &#123;</span><br><span class="line">	</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>创建完成如下图所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309062021504.jpeg" alt="img"> </p>
+<p>这个设备树很简单，只包含了根节点&#x2F;，而根节点中没有任何子节点或属性。这个示例并没有描述任何具体的硬件设备或连接关系，它只是一个最基本的设备树框架，在本小节只是为了测试设备树的编译和反编译。</p>
+<p>然后使用以下命令进行设备树的编译，编译完成如下图所示：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/home/topeet/Linux/linux_sdk/kernel/scripts/dtc/dtc -I dts -O dtb -o test.dtb test.dts</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309062021796.jpeg" alt="img"> </p>
+<p>可以看到test.dtb就生成了，然后继续使用以下命令对test.dtb进行反编译，反编译完成如下图所示：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/home/topeet/Linux/linux_sdk/kernel/scripts/dtc/dtc -I dtb -O dts -o 1.dts test.dtb </span><br></pre></td></tr></table></figure>
+
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309062021902.jpeg" alt="img"> </p>
+<p>可以看到反编译出的1.dts跟之前的test.dts内容相同。</p>
+ 
       <!-- reward -->
       
     </div>
