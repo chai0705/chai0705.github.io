@@ -90,7 +90,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">2.8k</span>
+            <span class="post-count">3.4k</span>
         </span>
     </span>
 
@@ -99,7 +99,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">9 分钟</span>
+            <span class="post-count">11 分钟</span>
         </span>
     </span>
 </div>
@@ -176,7 +176,21 @@
 <li>使用相对寻址和间接寻址：地址无关代码使用相对寻址和间接寻址来访问数据和需要修改的指令。相对寻址是指使用相对于当前指令的偏移量来访问数据，而不是使用绝对地址。间接寻址则是通过间接引用来访问数据，而不是直接使用数据的地址。</li>
 </ol>
 <p>通过以上的实现方式，地址无关代码可以实现在不同的地址空间中加载和执行，而无需进行重定位操作。这使得地址无关代码可以被多个进程共享，并且具有较高的灵活性和可移植性。</p>
-<p>22：00</p>
+<h1 id="3-14-5-模块内部相对寻址"><a href="#3-14-5-模块内部相对寻址" class="headerlink" title="3.14.5 模块内部相对寻址"></a>3.14.5 模块内部相对寻址</h1><p>ARM相对寻址是一种使用PC作为基址，并将指令中的地址码段作为偏移量的寻址方式。通过将PC和偏移量相加，可以得到操作数的有效地址。这种寻址方式常见于ARM汇编语言中的B&#x2F;BL和ADR&#x2F;ADRL指令。</p>
+<p>例如，考虑以下示例代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">B LOOP</span><br><span class="line">.LOOP MOV R0, #1</span><br><span class="line">MOV R1, R0</span><br></pre></td></tr></table></figure>
+
+<p>在这个例子中，B LOOP指令会跳转到标签LOOP处执行。相当于使用相对寻址方式进行跳转。</p>
+<p>相对寻址的等效手动指令是：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ADD PC, PC, #OFFSET</span><br></pre></td></tr></table></figure>
+
+<p>其中OFFSET是B LOOP指令地址与LOOP标签地址之间的偏移量。B指令的前后跳转范围是[0, 32M]。</p>
+<p>通过这种相对寻址方式，可以将跳转目标限制在指令附近的相对范围内，而不是使用绝对地址。这样可以增加代码的灵活性和可移植性。</p>
+<h1 id="3-14-6-模块外部GOT表"><a href="#3-14-6-模块外部GOT表" class="headerlink" title="3.14.6 模块外部GOT表"></a>3.14.6 模块外部GOT表</h1><p>动态链接的核心GOT表问题是如何处理引用外部模块的符号地址无关。当一个模块需要引用其他模块中定义的符号（函数、变量等）时，如何确保在运行时能够正确找到这些符号的地址是一个关键问题。</p>
+<p>动态链接的核心思想是使用全局偏移表（Global Offset Table，GOT）来解决这个问题。在链接时，被引用的外部模块的符号地址被存储在GOT中。</p>
+<p>具体而言，当一个模块需要引用外部模块的符号时，它并不直接使用符号的地址，而是通过查找GOT表来间接获取符号的地址。GOT表中的每个表项对应一个被引用的符号，存储了该符号的地址或者加载该符号地址的指令。</p>
+<p>在链接时，GOT表的位置已经确定，因此在运行时可以通过GOT表来获取外部符号的地址，而不需要硬编码具体的地址。</p>
+<p>使用GOT表的好处是，它使得模块间的符号引用变得独立于具体的内存布局，从而增加了模块的可移植性和灵活性。当外部模块的地址发生变化时，只需要更新GOT表中对应的表项即可，而不需要修改引用该符号的模</p>
  
       <!-- reward -->
       

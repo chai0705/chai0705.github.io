@@ -90,7 +90,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">0</span>
+            <span class="post-count">1.9k</span>
         </span>
     </span>
 
@@ -99,20 +99,93 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">1 分钟</span>
+            <span class="post-count">7 分钟</span>
         </span>
     </span>
 </div>
  
     </div>
       
+    <div class="tocbot"></div>
+
 
 
 
   
     <div class="article-entry" itemprop="articleBody">
        
-   
+  <h1 id="3-20-1-Linux内核启动"><a href="#3-20-1-Linux内核启动" class="headerlink" title="3.20.1 Linux内核启动"></a>3.20.1 Linux内核启动</h1><p>U-Boot（Universal Bootloader）是一种常用的开源引导加载程序，用于启动嵌入式系统。它提供了多种启动方式和引导镜像格式支持。下面是关于U-Boot启动过程的一些说明：</p>
+<ol>
+<li>Linux内核启动：<br>U-Boot负责加载和启动Linux内核。它可以通过不同的启动方式加载内核，包括TFTP（通过网络下载）、NAND（闪存）、NOR（闪存）、SD卡等。具体的启动方式取决于硬件平台和配置。</li>
+<li>U-Boot使用bootm引导uImage：<br>U-Boot通常使用bootm命令来引导uImage格式的内核镜像。uImage是一种特定的内核镜像格式，它包含了内核映像以及内核启动参数（如命令行参数、设备树等）。</li>
+<li>使用bootz引导zImage：<br>另一种常见的内核镜像格式是zImage。与uImage不同，zImage是一种压缩的内核镜像格式。U-Boot可以使用bootz命令来引导zImage格式的内核镜像。bootz命令会在引导之前对zImage进行解压缩，并提供内核启动参数。</li>
+</ol>
+<p>总结来说，U-Boot作为引导加载程序，负责启动嵌入式系统。它支持多种启动方式（如TFTP、NAND、NOR、SD卡）和不同的内核镜像格式（如uImage、zImage），以适应不同的硬件平台和需求。在启动过程中，U-Boot加载内核镜像并提供必要的参数，然后将控制权转交给Linux内核，完成系统的启动。</p>
+<h1 id="3-20-2-内核镜像编译"><a href="#3-20-2-内核镜像编译" class="headerlink" title="3.20.2 内核镜像编译"></a>3.20.2 内核镜像编译</h1><p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309062209558.png" alt="image-20230906220939457"></p>
+<p>编译内核镜像的过程通常包括以下步骤：</p>
+<ol>
+<li><p>ELF文件（vmlinux）：<br>内核源代码编译生成的主要输出是一个名为vmlinux的ELF文件。这个文件包含了内核的所有代码和符号，并且链接地址通常设置为0x80008000。</p>
+</li>
+<li><p>objcopy：<br>使用objcopy工具，可以将vmlinux文件转换为其他格式的镜像。在这个过程中，可以使用参数-l指定链接地址（load address），例如：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">objcopy -O binary -R .note -R .comment -S vmlinux vmlinux.bin</span></span><br><span class="line">```</span><br><span class="line">这个命令将vmlinux文件转换为原始的二进制内核镜像（vmlinux.bin），同时删除了.note和.comment节（section）。</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>gzip压缩：<br>为了减小内核镜像的大小，通常会对二进制内核镜像进行压缩。使用gzip工具可以对vmlinux.bin进行压缩，生成压缩的二进制内核镜像。例如：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">gzip -9 -c vmlinux.bin &gt; vmlinux.gz</span></span><br><span class="line">```</span><br><span class="line">这个命令将vmlinux.bin压缩为vmlinux.gz。</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>自解压运行：<br>压缩的二进制内核镜像（vmlinux.gz）需要进行自解压运行。这涉及到一些特定的代码和链接过程。</p>
+<ul>
+<li><p>head.o、misc.o、decompress.o和piggz.gzip.o是与自解压相关的一些目标文件，它们包含了自解压运行所需的代码。</p>
+</li>
+<li><p>链接过程将这些目标文件与原始的vmlinux文件链接在一起，生成一个新的ELF文件（vmlinux）。</p>
+</li>
+<li><p>使用objcopy工具，将这个新的vmlinux文件转换为raw binary格式的镜像。例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ objcopy -O binary -R .note -R .comment -S vmlinux vmlinux.raw</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>mkimage：<br>使用mkimage工具，可以将raw binary格式的镜像（vmlinux.raw）转换为uImage格式的镜像（uImage）。这个过程包括添加头部信息、校验和等操作。具体使用方法可以根据所使用的工具和平台进行调整。</p>
+</li>
+</ol>
+<p>总结来说，内核镜像的编译过程包括将ELF文件转换为原始二进制内核镜像，压缩内核镜像，进行自解压运行的链接和处理，最后生成uImage格式的镜像。这样的过程可以根据具体的平台和需求进行调整和扩展。</p>
+<h1 id="3-20-3-内核编译的几个关键地址"><a href="#3-20-3-内核编译的几个关键地址" class="headerlink" title="3.20.3 内核编译的几个关键地址"></a>3.20.3 内核编译的几个关键地址</h1><ol>
+<li>LOADADDR（ulmage指定加载地址）：<br>LOADADDR是用于指定uImage格式的内核镜像在内存RAM中的加载地址。在U-Boot中，uImage会被加载到指定的LOADADDR地址处。</li>
+<li>PHYS_OFFSET（RAM物理内存起始地址）：<br>PHYS_OFFSET是指内核在物理内存中的起始地址。它表示RAM的物理内存的起始位置。</li>
+<li>PAGE_OFFSET（内核虚拟内存空间起始地址）：<br>PAGE_OFFSET是指内核在虚拟内存中的起始地址。它决定了内核虚拟地址空间的起始位置。通常情况下，它被设置为0xC0000000（3GB用户空间+1GB内核空间）。在某些平台（如vexpress开发板）上，PAGE_OFFSET可能被设置为0x80000000。</li>
+<li>TEXT_OFFSET（内核起始地址相对于RAM地址的偏移）：<br>TEXT_OFFSET是指内核代码在RAM地址中的偏移量。它表示内核代码相对于物理内存的偏移。在arm架构中，一般将TEXT_OFFSET设置为0x8000。这个值在arch&#x2F;arm&#x2F;Makefile中定义。</li>
+<li>TEXTADDR（内核镜像启动的虚拟地址）：<br>TEXTADDR是内核编译时使用的链接地址。在运行时，内核镜像会被加载到PAGE_OFFSET+TEXT_OFFSET的地址处执行。</li>
+<li>ZRELADDR（内核镜像启动的物理地址）：<br>ZRELADDR是指zImage格式的内核镜像的启动物理地址。zImage启动时，真正的内核代码会被解压到ZRELADDR地址，并从该地址处开始执行。</li>
+<li>ZTEXTADDR（zImage运行物理地址）：<br>ZTEXTADDR是指zImage格式的内核镜像运行的物理地址。如果LOADADDR没有定义，U-Boot会将uImage加载到ZTEXTADDR地址处。这个地址空间可以是RAM或NOR FLASH的地址空间。</li>
+</ol>
+<h1 id="3-20-4-ulmage制作"><a href="#3-20-4-ulmage制作" class="headerlink" title="3.20.4 ulmage制作"></a>3.20.4 ulmage制作</h1><p>制作ulmage（uImage格式的内核镜像）可以使用mkimage工具，该工具位于U-Boot源码的tools目录下。下面是使用mkimage命令制作ulmage的示例：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">mkimage -A arm -O linux -T kernel -C none -a 0x60003000 -e 0x60003000 -d zlmage ulmage</span></span><br></pre></td></tr></table></figure>
+
+<p>这个命令的参数说明如下：</p>
+<ul>
+<li><code>-A arm</code>：指定CPU类型为ARM，根据实际情况选择正确的CPU类型。</li>
+<li><code>-O linux</code>：指定操作系统为Linux。</li>
+<li><code>-T kernel</code>：指定镜像类型为内核。</li>
+<li><code>-C none</code>：指定压缩方式为无压缩。</li>
+<li><code>-a 0x60003000</code>：指定内核加载地址（LOADADDR）。</li>
+<li><code>-e 0x60003000</code>：指定内核入口地址（ENTRYADDR）。</li>
+<li><code>-d zlmage</code>：指定输入的zImage格式的内核镜像文件。</li>
+<li><code>ulmage</code>：指定输出的uImage格式的内核镜像文件。</li>
+</ul>
+<p>这样，mkimage工具会在当前目录下生成ulmage文件，该文件是uImage格式的内核镜像，包含了一个40字节的数据头记录了加载地址、入口地址、文件大小、CPU架构等信息。</p>
+<h1 id="3-20-5-运行zlmage"><a href="#3-20-5-运行zlmage" class="headerlink" title="3.20.5 运行zlmage"></a>3.20.5 运行zlmage</h1><p>要运行zlmage（zImage格式的内核镜像），需要以下目标文件的支持：piggz.gzip.o、decompress.o、misc.o和head.o。</p>
+<p>这些目标文件涉及到自解压过程，其中piggz.gzip.o用于gzip解压算法，decompress.o用于通用的解压算法，misc.o和head.o包含了与自解压相关的代码。</p>
+<p>在运行zlmage之前，需要将这些目标文件与zlmage链接在一起，生成一个新的ELF文件。然后，将这个新的ELF文件转换为raw binary格式的镜像，以便在运行时执行。</p>
+<p>具体的步骤如下：</p>
+<ol>
+<li><p>将zlmage与目标文件链接：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">ld -Ttext 0x80008000 -o vmlinux.elf zlmage piggz.gzip.o decompress.o misc.o head.o</span></span><br><span class="line">```</span><br><span class="line">这个命令将zlmage与目标文件链接在一起，生成一个名为vmlinux.elf的新的ELF文件。</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>将vmlinux.elf转换为raw binary格式的镜像：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">objcopy -O binary -R .note -R .comment -S vmlinux.elf vmlinux.raw</span></span><br><span class="line">```</span><br><span class="line">这个命令将vmlinux.elf转换为raw binary格式的镜像，即vmlinux.raw。</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>将vmlinux.raw加载到合适的地址并执行：<br>将vmlinux.raw加载到目标平台的合适地址（如ZRELADDR）处，并跳转到该地址开始执行内核代码。</p>
+</li>
+</ol>
+<p>需要注意的是，具体的地址和步骤可能因平台和配置而有所不同。请根据实际情况进行相应的调整和适配。</p>
+ 
       <!-- reward -->
       
     </div>
