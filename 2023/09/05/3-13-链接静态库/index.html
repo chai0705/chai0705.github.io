@@ -90,7 +90,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">0</span>
+            <span class="post-count">1.2k</span>
         </span>
     </span>
 
@@ -99,20 +99,61 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">1 分钟</span>
+            <span class="post-count">4 分钟</span>
         </span>
     </span>
 </div>
  
     </div>
       
+    <div class="tocbot"></div>
+
 
 
 
   
     <div class="article-entry" itemprop="articleBody">
        
-   
+  <h1 id="3-13-1-静态库"><a href="#3-13-1-静态库" class="headerlink" title="3.13.1 静态库"></a>3.13.1 静态库</h1><p>静态库是一种包含预编译目标文件的归档文件，它可以被多个程序共享和链接。归档文件通常具有<code>.a</code>的文件扩展名，例如<code>libtest.a</code>。</p>
+<h1 id="3-13-2-静态库制作的步骤"><a href="#3-13-2-静态库制作的步骤" class="headerlink" title="3.13.2 静态库制作的步骤"></a>3.13.2 静态库制作的步骤</h1><p>制作静态库的步骤如下：</p>
+<ol>
+<li>编译源代码生成目标文件：首先，将源代码编译成目标文件（<code>.o</code>文件）。例如，<code>x.c</code>和<code>xx.c</code>分别编译成<code>x.o</code>和<code>xx.o</code>。</li>
+<li>创建归档文件：使用<code>ar</code>工具创建归档文件。命令格式为<code>ar rcs &lt;库文件名&gt; &lt;目标文件1&gt; &lt;目标文件2&gt; ...</code>。例如，使用命令<code>ar rcs libtest.a x.o xx.o</code>将<code>x.o</code>和<code>xx.o</code>归档到<code>libtest.a</code>文件中。</li>
+</ol>
+<h1 id="3-13-3-静态库链接的步骤"><a href="#3-13-3-静态库链接的步骤" class="headerlink" title="3.13.3 静态库链接的步骤"></a>3.13.3 静态库链接的步骤</h1><p>链接静态库的步骤如下：</p>
+<ol>
+<li>编写主程序：创建一个包含主程序逻辑的源文件，例如<code>main.c</code>。</li>
+<li>指定头文件路径和库文件路径：使用编译器选项指定头文件和库文件的搜索路径。例如，使用选项<code>-I./include</code>指定头文件搜索路径为<code>./include</code>，使用选项<code>-L./lib</code>指定库文件搜索路径为<code>./lib</code>。</li>
+<li>链接静态库：使用编译器选项<code>-l&lt;库名&gt;</code>指定要链接的静态库。例如，使用选项<code>-ltest</code>将<code>libtest.a</code>静态库链接到主程序中。</li>
+</ol>
+<p>完整的链接命令为<code>gcc main.c -I./include -L./lib -ltest</code>。该命令会将<code>main.c</code>编译成目标文件，并链接<code>libtest.a</code>静态库生成可执行文件。</p>
+<p>通过制作和链接静态库，可以将常用的函数和模块封装为可重用的代码库，提高代码的复用性和可维护性。</p>
+<h1 id="3-13-4-静态库的问题"><a href="#3-13-4-静态库的问题" class="headerlink" title="3.13.4 静态库的问题"></a>3.13.4 静态库的问题</h1><p>链接静态库可能会带来以下问题：</p>
+<ol>
+<li>可执行体积增大：当链接静态库时，所有库中的函数都会被组装到最终的可执行文件中，无论是否使用到这些函数。这会导致可执行文件的体积增大，尤其是当静态库包含大量函数时。</li>
+<li>冗余代码：由于静态库中的所有函数都会被链接到可执行文件中，可能会包含一些未使用的函数，从而造成代码的冗余。这会增加可执行文件的大小，并且在一些资源受限的环境中可能会浪费存储空间。</li>
+<li>更新困难：如果静态库中的函数发生变化，需要重新编译和链接整个程序才能更新。这会增加代码维护的复杂性，并且在多个项目中使用同一静态库时，每个项目都需要进行重新编译和链接。</li>
+</ol>
+<p>解决上述问题的一种方法是将每个函数的实现放在单独的源文件中，然后将这些源文件编译成对应的目标文件，最后将所有的目标文件归档到静态库中。这样做可以避免将未使用的函数链接到最终的可执行文件中，减小可执行文件的体积并提高代码的可维护性。</p>
+<p>这种方法的基本原理是，编译器的基本单位是文件，而链接器的基本单位是目标文件。当引用一个目标文件中的符号时，链接器会将整个目标文件进行链接，将引用的符号和相关的代码组装到最终的可执行文件中。</p>
+<p>举例来说，假设有以下几个源文件：</p>
+<ul>
+<li><code>func1.c</code>：包含函数<code>func1</code>的实现</li>
+<li><code>func2.c</code>：包含函数<code>func2</code>的实现</li>
+<li><code>main.c</code>：包含程序的主函数</li>
+</ul>
+<p>首先，分别将<code>func1.c</code>、<code>func2.c</code>和<code>main.c</code>编译成对应的目标文件：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">gcc -c func1.c -o func1.o</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">gcc -c func2.c -o func2.o</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">gcc -c main.c -o main.o</span></span><br></pre></td></tr></table></figure>
+
+<p>然后，将这些目标文件归档到静态库中：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">ar rcs libtest.a func1.o func2.o</span></span><br></pre></td></tr></table></figure>
+
+<p>最后，链接主程序并使用静态库：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">gcc main.o -L. -ltest -o executable</span></span><br></pre></td></tr></table></figure>
+
+<p>这样，只有主程序中实际引用的函数会被链接到最终的可执行文件中，减小了可执行文件的体积。</p>
+<p>Glibc（GNU C Library）就是使用类似的方法实现的。它将每个函数的实现放在单独的源文件中，然后将这些源文件编译成对应的目标文件，并将目标文件归档到一个静态库中。这样，在链接时只会将程序实际使用的函数链接到最终的可执行文件中，提高了程序的效率和可维护性。</p>
+ 
       <!-- reward -->
       
     </div>

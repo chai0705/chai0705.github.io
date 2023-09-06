@@ -90,7 +90,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">0</span>
+            <span class="post-count">790</span>
         </span>
     </span>
 
@@ -99,20 +99,34 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">1 分钟</span>
+            <span class="post-count">2 分钟</span>
         </span>
     </span>
 </div>
  
     </div>
       
+    <div class="tocbot"></div>
+
 
 
 
   
     <div class="article-entry" itemprop="articleBody">
        
-   
+  <h1 id="3-11-1-bss段"><a href="#3-11-1-bss段" class="headerlink" title="3.11.1 bss段"></a>3.11.1 bss段</h1><p>BSS（Block Started by Symbol）段是可执行文件或目标文件中的一个段（section），用于存储未初始化的全局变量和静态局部变量。BSS段具有以下特点：</p>
+<ol>
+<li>存储未初始化的变量：BSS段用于存储未显式初始化的全局变量和静态局部变量。这些变量在编译时没有赋予初始值，因此它们的存储空间可以在程序运行时动态地分配和初始化。</li>
+<li>不占目标文件空间：在目标文件中，BSS段不占用实际的空间。这是因为BSS段中的变量在编译时并没有实际的数值，所以在目标文件中只需记录BSS段的大小和位置信息。</li>
+<li>运行时分配空间：当可执行文件被加载到内存中运行时，操作系统会为BSS段分配实际的内存空间。这时，BSS段中的变量将被初始化为默认值（通常是0），以确保它们的初始状态是可预测的。</li>
+<li>节省存储资源：BSS段的设计初衷是为了节省存储资源。在早期计算机系统中，存储资源非常昂贵，因此将未初始化的变量放在BSS段中可以减少目标文件的大小，节省磁盘空间。</li>
+<li>记录BSS段信息：BSS段的总大小通常会在节头表（Section Header Table）中进行记录。节头表是目标文件格式中的一部分，它包含了关于各个段的信息，包括大小、位置等。此外，在符号表（Symbol Table）中也会记录每个变量的大小和地址等信息。</li>
+</ol>
+<h1 id="3-11-2-数据段和BSS段"><a href="#3-11-2-数据段和BSS段" class="headerlink" title="3.11.2 数据段和BSS段"></a>3.11.2 数据段和BSS段</h1><p>数据段和BSS段是可执行文件或目标文件中用于存储变量数据的段。它们在编译系统中的处理流程是相同的，但有一些差异。</p>
+<p>数据段用于存储已经初始化的全局变量和静态局部变量，这些变量在编译时已经赋予了初始值。数据段在可执行文件中占据实际的存储空间，并在程序运行时保持其初始值。</p>
+<p>BSS段设计的初衷是为了减少文件体积和节省磁盘资源。它用于存储未初始化的全局变量和静态局部变量，这些变量在编译时没有初始值。在目标文件中，BSS段不占用实际的存储空间，只记录其大小和位置信息。当可执行文件被加载到内存中运行时，操作系统会为BSS段分配实际的存储空间，并将其中的变量初始化为默认值。</p>
+<p>总的来说，数据段和BSS段都是用于存储变量数据的段。数据段存储已初始化的变量，占据实际的存储空间，而BSS段存储未初始化的变量，不占用实际的存储空间。它们在编译系统中的处理流程相同，但在可执行文件中的表现有所不同。</p>
+ 
       <!-- reward -->
       
     </div>

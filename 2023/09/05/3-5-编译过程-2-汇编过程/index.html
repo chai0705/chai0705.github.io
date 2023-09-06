@@ -80,13 +80,17 @@
     <div class="article-meta">
       <a href="/2023/09/05/3-5-%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B-2-%E6%B1%87%E7%BC%96%E8%BF%87%E7%A8%8B/" class="article-date">
   <time datetime="2023-09-04T23:46:58.000Z" itemprop="datePublished">2023-09-05</time>
-</a>   
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
+  </div>
+  
 <div class="word_count">
     <span class="post-time">
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">0</span>
+            <span class="post-count">1.5k</span>
         </span>
     </span>
 
@@ -95,20 +99,63 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">1 分钟</span>
+            <span class="post-count">5 分钟</span>
         </span>
     </span>
 </div>
  
     </div>
       
+    <div class="tocbot"></div>
+
 
 
 
   
     <div class="article-entry" itemprop="articleBody">
        
-   
+  <h1 id="3-5-1-汇编过程"><a href="#3-5-1-汇编过程" class="headerlink" title="3.5.1 汇编过程"></a>3.5.1 汇编过程</h1><p>汇编过程的基本流程如下：</p>
+<ol>
+<li>词法分析：在这个阶段，汇编器将输入的源文件（通常以.s为后缀，如main.s）进行词法分析。词法分析器将源代码分解为一个个的词法单元，如指令、寄存器、标识符等，并生成词法单元流。</li>
+<li>语法分析：在语法分析阶段，汇编器使用词法单元流进行语法分析。语法分析器根据语法规则将词法单元流解析为语法结构，并构建相应的语法树。语法分析过程中还会生成符号表，用于记录和管理标识符、变量和常量等信息。</li>
+<li>组装：在组装阶段，汇编器将语法树转换为可执行的目标文件。这个过程包括将汇编指令转换为机器指令、填充符号表、生成重定位表等。组装器的主要任务是将汇编代码转换为机器代码，并生成可执行目标文件。</li>
+<li>代码生成：在代码生成阶段，汇编器根据语法树和符号表生成目标文件的指令。这个阶段涉及指令的翻译和生成各种表信息，如重定位表、赋值信息等。指令的翻译过程将汇编指令转化为目标机器的机器指令，生成的表信息用于链接和重定位等操作。</li>
+<li>主要工作：汇编过程的主要工作包括词法分析、语法分析、组装、代码生成和生成各种表信息。这些工作协同完成，最终生成可重定位目标文件（通常以.o为后缀，如main.o）。</li>
+</ol>
+<h1 id="3-5-2-符号表（Symbol-Table）"><a href="#3-5-2-符号表（Symbol-Table）" class="headerlink" title="3.5.2 符号表（Symbol Table）"></a>3.5.2 符号表（Symbol Table）</h1><p>​	符号表（Symbol Table）是编译器和链接器中存储程序中符号信息的数据结构。它记录了源代码中定义和引用的变量、函数、类、常量等标识符的相关信息，如名称、类型、内存地址等。符号表在编译和链接过程中起着重要的作用，用于解析符号引用、符号重定位和符号解析等任务。</p>
+<p>符号表通常包含以下信息：</p>
+<ol>
+<li>符号名称（Symbol Name）：记录标识符的名称，如变量名、函数名等。</li>
+<li>符号类型（Symbol Type）：指示标识符的类型，如整型、浮点型、函数等。</li>
+<li>符号属性（Symbol Attributes）：记录标识符的属性，如是否为全局变量、局部变量、静态变量等。</li>
+<li>内存地址（Memory Address）：记录标识符在内存中的地址或偏移量。</li>
+<li>作用域（Scope）：指示标识符的作用域范围，如全局作用域、局部作用域等。</li>
+<li>定义位置（Definition Location）：记录标识符的定义位置，用于解析符号引用。</li>
+<li>引用位置（Reference Locations）：记录标识符的引用位置，用于解析符号引用。</li>
+</ol>
+<p>符号表在编译过程中起着重要的作用：</p>
+<ol>
+<li>语法分析：在语法分析阶段，编译器将标识符添加到符号表中，并记录其名称、类型和定义位置等信息。</li>
+<li>符号解析：在编译器的符号解析阶段，通过符号表来解析标识符的引用。编译器会检查符号表，找到标识符的定义位置，并进行类型检查和语义分析。</li>
+<li>重复定义检查：符号表可以检查是否存在重复定义的标识符，如重复的变量名或函数名。</li>
+<li>作用域管理：符号表中的作用域信息可以帮助编译器正确处理局部变量和全局变量的作用域范围。</li>
+<li>符号重定位：在链接过程中，符号表用于解析符号引用和进行符号重定位。链接器会根据符号表中的地址信息，将各个目标文件中的符号引用链接到正确的地址上。</li>
+</ol>
+<h1 id="3-5-3-重定位表（Relocation-Table）"><a href="#3-5-3-重定位表（Relocation-Table）" class="headerlink" title="3.5.3 重定位表（Relocation Table）"></a>3.5.3 重定位表（Relocation Table）</h1><p>​	重定位表（Relocation Table）是链接器生成的一种表格，用于记录需要进行符号重定位的位置和相关信息。在目标文件中，由于代码和数据的位置是相对于起始地址的偏移量，因此在链接时需要对这些位置进行调整，以确保最终生成的可执行文件能够正确地访问和使用这些代码和数据。</p>
+<p>重定位表通常包含以下信息：</p>
+<ol>
+<li>符号名称（Symbol Name）：记录需要进行重定位的符号的名称。</li>
+<li>重定位类型（Relocation Type）：指示需要进行的重定位类型，如绝对重定位、相对重定位等。</li>
+<li>位置（Location）：记录需要进行重定位的位置或偏移量。</li>
+<li>目标地址（Target Address）：记录需要重定位到的目标地址。</li>
+</ol>
+<p>重定位表在链接过程中起着重要的作用：</p>
+<ol>
+<li>符号解析与重定位：链接器通过重定位表中的信息，对目标文件中的符号引用进行解析和重定位。它会根据目标文件的符号表和重定位表，将符号引用链接到正确的地址上。</li>
+<li>位置调整：重定位表中记录了需要进行重定位的位置和目标地址，链接器根据这些信息对目标文件中的代码和数据位置进行调整，使其能够正确地访问和使用。</li>
+<li>符号冲突解决：如果存在多个目标文件中相同名称的符号，重定位表可以帮助链接器解决符号冲突的问题。通过重定位表中的符号名称和目标地址，链接器可以确定每个符号应该链接到的具体地址，从而避免冲突。</li>
+</ol>
+ 
       <!-- reward -->
       
     </div>
@@ -165,6 +212,8 @@
 </div>
 
 <div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%BC%96%E8%AF%91%E3%80%81%E9%93%BE%E6%8E%A5%E5%92%8C%E8%BF%90%E8%A1%8C/" rel="tag">程序的编译、链接和运行</a></li></ul>
+
     </footer>
   </div>
 

@@ -90,7 +90,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">0</span>
+            <span class="post-count">1.4k</span>
         </span>
     </span>
 
@@ -99,20 +99,90 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">1 分钟</span>
+            <span class="post-count">4 分钟</span>
         </span>
     </span>
 </div>
  
     </div>
       
+    <div class="tocbot"></div>
+
 
 
 
   
     <div class="article-entry" itemprop="articleBody">
        
-   
+  <h1 id="3-9-1-重定位"><a href="#3-9-1-重定位" class="headerlink" title="3.9.1 重定位"></a>3.9.1 重定位</h1><p>重定位是链接过程中的核心步骤之一，它的主要目的是修正指令中的符号地址，使得程序可以正确地访问和调用其他模块或库中的函数和变量。</p>
+<p>在链接过程中，重定位完成以下任务：</p>
+<ol>
+<li>地址空间分配：<ul>
+<li>在链接过程中，编译器和链接器会为程序分配地址空间，包括代码段、数据段、堆、栈等。</li>
+<li>重定位阶段负责将各个模块的代码段和数据段中的地址修正为最终的实际地址，确保模块之间的地址空间不发生冲突。</li>
+</ul>
+</li>
+<li>符号解析：<ul>
+<li>在链接过程中，各个模块之间可能存在对函数和变量的引用或调用。</li>
+<li>重定位阶段负责解析这些引用，找到对应的函数或变量的实际地址，并将其填充到引用的位置，以便程序在执行时可以正确访问和调用。</li>
+</ul>
+</li>
+</ol>
+<h1 id="3-9-2-重定位过程1"><a href="#3-9-2-重定位过程1" class="headerlink" title="3.9.2 重定位过程1"></a>3.9.2 重定位过程1</h1><p>重定位过程是在链接过程中完成的，它涉及多个步骤和数据结构：</p>
+<ol>
+<li>汇编阶段：<ul>
+<li>在汇编阶段，汇编器会将源代码转换为机器代码，并生成目标模块。</li>
+<li>当汇编器遇到未定义的符号（外部定义的函数、变量、库函数引用等），它会认为这些符号在其他地方定义，不会报错。</li>
+<li>汇编器会收集这些未定义符号，并生成一个重定位表（relocation table），用于告诉链接器这些符号不在当前模块中定义，可能在其他文件或库中定义，需要在链接时进行解析。</li>
+</ul>
+</li>
+<li>段与重定位表：<ul>
+<li>目标模块通常被划分为多个段，如代码段、数据段等。</li>
+<li>在每个段中，可能存在对其他文件或库中定义的函数或变量的引用。</li>
+<li>汇编器会为每个段生成相应的重定位表，记录需要重定位的符号及其对应的位置信息。</li>
+</ul>
+</li>
+<li>重定位表的生成：<ul>
+<li>重定位表是一个数据结构，用于记录需要进行重定位的各种符号。</li>
+<li>对于每个需要重定位的符号，重定位表会记录符号的类型（函数或变量）、位置信息（段偏移量或地址）等。</li>
+<li>链接器在链接过程中会根据重定位表的信息，解析和修正这些符号的地址，使得它们指向正确的位置。</li>
+</ul>
+</li>
+</ol>
+<h1 id="3-9-3-重定位过程2"><a href="#3-9-3-重定位过程2" class="headerlink" title="3.9.3 重定位过程2"></a>3.9.3 重定位过程2</h1><p>重定位表是在ELF文件中用于记录需要进行重定位的符号及其相关信息的数据结构。在一个可重定位的ELF文件中，每个需要重定位的段都会有一个对应的重定位表，例如<code>.rel.text</code>和<code>.rel.data</code>。</p>
+<p>重定位表本身也是一个段，因此也被称为重定位段。通过查看重定位表，我们可以了解在链接过程中需要进行重定位的符号以及它们在代码中的偏移位置。</p>
+<p>重定位表的构成如下所示（对于32位ELF文件）：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Elf32_Rel</span> &#123;</span></span><br><span class="line">    Elf32_Addr r_offset;  <span class="comment">// 需要重定位的项在代码中的偏移位置</span></span><br><span class="line">    Elf32_Word r_info;    <span class="comment">// 重定位类型和符号索引</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>其中，<code>r_offset</code>字段指定了需要重定位的项在代码中的偏移位置，<code>r_info</code>字段包含了重定位类型和符号索引。</p>
+<p>通过解析重定位表中的信息，链接器可以根据符号索引找到对应的符号表项，并根据重定位类型进行相应的修正，使得符号的地址指向正确的位置。</p>
+<p>要查看一个ELF文件的重定位表，可以使用工具如<code>arm-linux-gnueabi-objdump</code>或<code>arm-linux-gnueabi-readelf</code>，并指定相应的选项来打印出重定位表的内容和相关信息。</p>
+<h1 id="3-9-4-重定位过程3"><a href="#3-9-4-重定位过程3" class="headerlink" title="3.9.4 重定位过程3"></a>3.9.4 重定位过程3</h1><p>在链接过程中，重定位过程涉及修改符号地址，通过读取各个目标文件中的重定位信息（重定位表）来进行符号重定位，即修改指令中的符号地址。</p>
+<p>具体步骤如下：</p>
+<ol>
+<li>读取重定位信息：<ul>
+<li>链接器会读取每个目标文件中的各个段的重定位信息，通常是通过读取重定位表来获取这些信息。</li>
+<li>重定位表记录了需要进行重定位的符号在代码中的位置以及相关的重定位类型和符号索引。</li>
+</ul>
+</li>
+<li>符号重定位：<ul>
+<li>链接器根据重定位表中的信息，确定各个重定位符号的新地址。</li>
+<li>这些新地址的计算通常涉及到基址的概念，即新的段基址加上段内的偏移量来得到重定位地址。</li>
+<li>重定位地址计算公式为：重定位地址 &#x3D; 新段基址 + 段内偏移。</li>
+</ul>
+</li>
+<li>修改指令中的符号地址：<ul>
+<li>链接器对目标文件中的指令进行扫描，在指令中定位到需要进行重定位的符号地址的位置。</li>
+<li>然后，链接器会将指令中的符号地址修改为相应的重定位地址，以完成符号的重定位。</li>
+</ul>
+</li>
+<li>形成新的符号表：<ul>
+<li>在重定位过程中，链接器会根据符号索引和重定位信息，确定每个重定位符号的新地址。</li>
+<li>链接器会将这些新地址形成一个新的符号表，用于在最终的可执行文件或共享库中进行符号解析和访问。</li>
+</ul>
+</li>
+</ol>
+ 
       <!-- reward -->
       
     </div>

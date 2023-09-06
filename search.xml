@@ -861,7 +861,70 @@
   <entry>
     <title>3.14-动态链接(1)-与位置无关的代码</title>
     <url>/2023/09/05/3-14-%E5%8A%A8%E6%80%81%E9%93%BE%E6%8E%A5-1-%E4%B8%8E%E4%BD%8D%E7%BD%AE%E6%97%A0%E5%85%B3%E7%9A%84%E4%BB%A3%E7%A0%81/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="3-14-1-静态链接的缺点"><a href="#3-14-1-静态链接的缺点" class="headerlink" title="3.14.1 静态链接的缺点"></a>3.14.1 静态链接的缺点</h1><p>静态链接的确存在一些缺点，包括：</p>
+<ol>
+<li>可执行文件体积较大：由于静态链接将所有需要的代码和库函数都包含在可执行文件中，导致可执行文件的体积较大。如果多个程序都使用相同的静态库，会造成冗余的存储空间浪费。</li>
+<li>内存占用较大：静态链接的可执行文件在运行时需要将所有的代码和数据加载到内存中。这意味着即使程序只用到了部分功能，也需要将整个程序加载到内存中，增加了内存占用的开销。</li>
+<li>内存配置限制：对于内存配置较小的系统，静态链接的可执行文件可能会占用过多的内存，导致无法正常加载和运行。这是由于静态链接将所有代码和数据都打包在可执行文件中，无法根据系统的实际内存情况进行动态调整。</li>
+<li>更新困难：当静态库或依赖的库发生更新时，需要重新编译和链接整个程序才能应用更新。这增加了更新和维护的复杂性，特别是在大型项目或多个项目共享同一静态库时。</li>
+</ol>
+<p>考虑到上述缺点，有些情况下可以选择使用动态链接库（共享库）。动态链接库在运行时被动态加载，可多个程序共享，减小了可执行文件的体积和内存占用。动态链接库的更新和维护也更加灵活，可以在不重新编译和链接整个程序的情况下进行库的更新。</p>
+<h1 id="3-14-2-动态链接"><a href="#3-14-2-动态链接" class="headerlink" title="3.14.2 动态链接"></a>3.14.2 动态链接</h1><p>动态链接与静态链接不同，它推迟到程序运行时进行，而不是在链接过程中完成。在动态链接中，目标文件被编译成动态链接库（也称为共享库），而不是静态库。这些动态链接库在程序运行时被加载到内存中，并进行重定位。</p>
+<p>动态链接的好处包括：</p>
+<ol>
+<li>节省内存：由于动态链接库是在运行时加载的，多个程序可以共享同一个动态链接库，避免了静态链接中的代码冗余和存储空间浪费。这样可以节省内存，并允许运行更大规模的程序。</li>
+<li>简化升级：由于动态链接库是独立于可执行文件的，当库需要升级时，只需替换动态链接库文件，而不需要重新编译和链接整个程序。这使得库的升级更加方便和灵活，减少了对程序的影响。</li>
+<li>提供更好的可维护性：动态链接库可以被多个程序共享，这意味着库的更新和维护只需在一个地方进行。这样有助于提高代码的可维护性，减少了重复的工作和潜在的错误。</li>
+</ol>
+<h1 id="3-14-3-程序执行过程"><a href="#3-14-3-程序执行过程" class="headerlink" title="3.14.3 程序执行过程"></a>3.14.3 程序执行过程</h1><p>在Linux命令行下运行一个程序的基本过程如下：</p>
+<ol>
+<li>操作系统给程序开启一个进程：当您在命令行中执行程序时，操作系统会为该程序创建一个新的进程，该进程将作为程序的执行环境。</li>
+<li>动态链接器被映射到程序地址空间：动态链接器（通常是ld.so或ld-linux.so）是负责动态链接的系统组件。在程序启动时，操作系统将动态链接器映射到程序的地址空间中。</li>
+<li>操作系统将控制权交给动态链接器：操作系统将控制权传递给动态链接器，使其可以开始执行动态链接的任务。</li>
+<li>动态链接器解析未确定符号和动态库链接：动态链接器首先会解析可执行文件中的未确定符号，这些符号是指在编译时无法确定其地址的符号（如函数或变量）。动态链接器会查找并加载包含这些符号定义的动态库。</li>
+<li>加载动态库并进行重定位：动态链接器会加载需要链接的动态库，并对这些库进行重定位操作。重定位是将动态库中的符号引用与实际的符号定义进行匹配，以确保程序能够正确地访问所需的函数和数据。</li>
+<li>动态链接器将控制权交给可执行程序：一旦动态链接器完成了解析和重定位的工作，它将控制权交还给可执行程序。此时，可执行程序中的所有符号引用都已经解析完毕，并且程序可以开始运行。</li>
+<li>可执行程序开始执行：控制权回到可执行程序，它会按照程序的逻辑开始执行，调用所需的函数和访问数据。</li>
+</ol>
+<p>在静态编译的情况下，可执行文件中包含了所有需要的代码和库函数，因此它是独立的、自包含的。以下是关于静态编译可执行文件和动态链接库的一些说明：</p>
+<ol>
+<li>可执行文件的加载和运行地址：<ul>
+<li>静态编译的可执行文件在加载到进程地址空间时，通常会被加载到一个固定的运行地址。这是因为在编译和链接时，所有的符号引用已经被解析并确定了其最终的地址。</li>
+<li>链接地址和运行地址是相同的，因此可执行文件在运行时可以直接通过固定的地址访问到所需的函数和数据。</li>
+</ul>
+</li>
+<li>动态链接库的加载和运行地址：<ul>
+<li>动态链接库（共享库）在加载到内存中时，其加载地址是由操作系统动态分配的。加载器根据当前进程的地址空间空闲情况，选择一个适当的地址来加载动态库。</li>
+<li>动态库被装载到内存中的地址可以是任意的，并不需要与其他库或可执行文件的地址相同。这是因为动态库的地址信息会被动态链接器处理和重定位，以确保库中的符号引用与实际的符号定义相匹配。</li>
+</ul>
+</li>
+</ol>
+<p>动态链接库被装载到内存中的地址可变的主要原因是为了避免不同进程之间的冲突。由于多个进程可以同时运行，每个进程都有自己的地址空间，因此需要动态分配适当的地址来加载动态库，以避免地址冲突和重复使用相同的地址。</p>
+<h1 id="3-14-4-装载时重定位"><a href="#3-14-4-装载时重定位" class="headerlink" title="3.14.4 装载时重定位"></a>3.14.4 装载时重定位</h1><p>装载时重定位是动态链接过程中的一项关键任务，它的基本思想是将对绝对地址的引用推迟到运行时进行解析和重定位。以下是装载时重定位的基本原理：</p>
+<ol>
+<li>推迟地址解析和重定位：在可执行文件中，对于动态库中的函数或变量的引用通常是使用绝对地址进行表示的。而在静态链接时，这些绝对地址是无法确定的，因为动态库的加载地址是在运行时动态分配的。因此，装载时重定位的基本思想是将对绝对地址的引用推迟到运行时去解析和重定位。</li>
+<li>动态库加载和地址确定：当动态库被加载到内存中时，操作系统会为其分配一段合适的地址空间，并将库中的函数和变量映射到该地址空间中。此时，动态库中的每个符号都有了确定的地址。</li>
+<li>可执行文件的重定位操作：一旦动态库的地址确定，装载时重定位会将可执行文件中对动态库中函数或变量的绝对地址引用进行重定位操作。具体而言，它会将绝对地址替换为实际的动态库中的地址，以确保可执行文件能够正确地访问所需的函数和变量。</li>
+</ol>
+<p>实现装载时重定位的方法有多种，编译器如GCC在生成共享动态链接库时可以使用<code>--shared</code>参数。这样生成的库在运行时会由动态链接器进行加载，并进行相应的地址解析和重定位操作。</p>
+<p>通过推迟地址解析和重定位到运行时，装载时重定位实现了动态链接的灵活性和可扩展性。它允许不同的进程在加载同一个动态库时，根据其实际地址空间的情况进行地址分配和重定位，确保了符号的正确链接和访问。</p>
+<h1 id="3-14-5-命令"><a href="#3-14-5-命令" class="headerlink" title="3.14.5 命令"></a>3.14.5 命令</h1><p>使用ldd命令可以查看一个可执行文件所需要的动态链接库</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309060823892.png" alt="image-20230906082331845"></p>
+<h1 id="3-14-6-与地址无关的代码"><a href="#3-14-6-与地址无关的代码" class="headerlink" title="3.14.6 与地址无关的代码"></a>3.14.6 与地址无关的代码</h1><p>地址无关代码（Position-Independent Code，PIC）是一种技术，它使得代码可以在不进行重定位的情况下在不同的地址空间中执行。以下是地址无关代码的一些特点和实现方式：</p>
+<p>特点：</p>
+<ol>
+<li>可以在任意地址加载和执行：地址无关代码可以在内存中的任意地址加载，并且无需进行重定位操作，就可以正确地执行。</li>
+<li>与地址无关的指令：地址无关代码将需要修改的部分指令与数据分离，数据可以与需要修改的指令放在一起，而其余指令则不依赖于具体的地址，实现了与地址无关的特性。</li>
+<li>被多个进程共享：地址无关代码可以被多个进程共享，每个进程都有自己的数据和需要修改的指令的副本，互不影响。</li>
+</ol>
+<p>实现方式：</p>
+<ol>
+<li>编译时生成位置无关代码：在编译阶段，可以使用编译器的参数来生成位置无关代码。对于GCC编译器，可以使用<code>-fPIC</code>参数来生成位置无关代码的目标文件。例如，使用命令<code>gcc -fPIC -c main.c</code>可以生成一个位置无关的目标文件。</li>
+<li>使用相对寻址和间接寻址：地址无关代码使用相对寻址和间接寻址来访问数据和需要修改的指令。相对寻址是指使用相对于当前指令的偏移量来访问数据，而不是使用绝对地址。间接寻址则是通过间接引用来访问数据，而不是直接使用数据的地址。</li>
+</ol>
+<p>通过以上的实现方式，地址无关代码可以实现在不同的地址空间中加载和执行，而无需进行重定位操作。这使得地址无关代码可以被多个进程共享，并且具有较高的灵活性和可移植性。</p>
+<p>22：00</p>
+]]></content>
       <categories>
         <category>c高级编程</category>
       </categories>
@@ -872,7 +935,46 @@
   <entry>
     <title>3.13-链接静态库</title>
     <url>/2023/09/05/3-13-%E9%93%BE%E6%8E%A5%E9%9D%99%E6%80%81%E5%BA%93/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="3-13-1-静态库"><a href="#3-13-1-静态库" class="headerlink" title="3.13.1 静态库"></a>3.13.1 静态库</h1><p>静态库是一种包含预编译目标文件的归档文件，它可以被多个程序共享和链接。归档文件通常具有<code>.a</code>的文件扩展名，例如<code>libtest.a</code>。</p>
+<h1 id="3-13-2-静态库制作的步骤"><a href="#3-13-2-静态库制作的步骤" class="headerlink" title="3.13.2 静态库制作的步骤"></a>3.13.2 静态库制作的步骤</h1><p>制作静态库的步骤如下：</p>
+<ol>
+<li>编译源代码生成目标文件：首先，将源代码编译成目标文件（<code>.o</code>文件）。例如，<code>x.c</code>和<code>xx.c</code>分别编译成<code>x.o</code>和<code>xx.o</code>。</li>
+<li>创建归档文件：使用<code>ar</code>工具创建归档文件。命令格式为<code>ar rcs &lt;库文件名&gt; &lt;目标文件1&gt; &lt;目标文件2&gt; ...</code>。例如，使用命令<code>ar rcs libtest.a x.o xx.o</code>将<code>x.o</code>和<code>xx.o</code>归档到<code>libtest.a</code>文件中。</li>
+</ol>
+<h1 id="3-13-3-静态库链接的步骤"><a href="#3-13-3-静态库链接的步骤" class="headerlink" title="3.13.3 静态库链接的步骤"></a>3.13.3 静态库链接的步骤</h1><p>链接静态库的步骤如下：</p>
+<ol>
+<li>编写主程序：创建一个包含主程序逻辑的源文件，例如<code>main.c</code>。</li>
+<li>指定头文件路径和库文件路径：使用编译器选项指定头文件和库文件的搜索路径。例如，使用选项<code>-I./include</code>指定头文件搜索路径为<code>./include</code>，使用选项<code>-L./lib</code>指定库文件搜索路径为<code>./lib</code>。</li>
+<li>链接静态库：使用编译器选项<code>-l&lt;库名&gt;</code>指定要链接的静态库。例如，使用选项<code>-ltest</code>将<code>libtest.a</code>静态库链接到主程序中。</li>
+</ol>
+<p>完整的链接命令为<code>gcc main.c -I./include -L./lib -ltest</code>。该命令会将<code>main.c</code>编译成目标文件，并链接<code>libtest.a</code>静态库生成可执行文件。</p>
+<p>通过制作和链接静态库，可以将常用的函数和模块封装为可重用的代码库，提高代码的复用性和可维护性。</p>
+<h1 id="3-13-4-静态库的问题"><a href="#3-13-4-静态库的问题" class="headerlink" title="3.13.4 静态库的问题"></a>3.13.4 静态库的问题</h1><p>链接静态库可能会带来以下问题：</p>
+<ol>
+<li>可执行体积增大：当链接静态库时，所有库中的函数都会被组装到最终的可执行文件中，无论是否使用到这些函数。这会导致可执行文件的体积增大，尤其是当静态库包含大量函数时。</li>
+<li>冗余代码：由于静态库中的所有函数都会被链接到可执行文件中，可能会包含一些未使用的函数，从而造成代码的冗余。这会增加可执行文件的大小，并且在一些资源受限的环境中可能会浪费存储空间。</li>
+<li>更新困难：如果静态库中的函数发生变化，需要重新编译和链接整个程序才能更新。这会增加代码维护的复杂性，并且在多个项目中使用同一静态库时，每个项目都需要进行重新编译和链接。</li>
+</ol>
+<p>解决上述问题的一种方法是将每个函数的实现放在单独的源文件中，然后将这些源文件编译成对应的目标文件，最后将所有的目标文件归档到静态库中。这样做可以避免将未使用的函数链接到最终的可执行文件中，减小可执行文件的体积并提高代码的可维护性。</p>
+<p>这种方法的基本原理是，编译器的基本单位是文件，而链接器的基本单位是目标文件。当引用一个目标文件中的符号时，链接器会将整个目标文件进行链接，将引用的符号和相关的代码组装到最终的可执行文件中。</p>
+<p>举例来说，假设有以下几个源文件：</p>
+<ul>
+<li><code>func1.c</code>：包含函数<code>func1</code>的实现</li>
+<li><code>func2.c</code>：包含函数<code>func2</code>的实现</li>
+<li><code>main.c</code>：包含程序的主函数</li>
+</ul>
+<p>首先，分别将<code>func1.c</code>、<code>func2.c</code>和<code>main.c</code>编译成对应的目标文件：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">gcc -c func1.c -o func1.o</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">gcc -c func2.c -o func2.o</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">gcc -c main.c -o main.o</span></span><br></pre></td></tr></table></figure>
+
+<p>然后，将这些目标文件归档到静态库中：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">ar rcs libtest.a func1.o func2.o</span></span><br></pre></td></tr></table></figure>
+
+<p>最后，链接主程序并使用静态库：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">gcc main.o -L. -ltest -o executable</span></span><br></pre></td></tr></table></figure>
+
+<p>这样，只有主程序中实际引用的函数会被链接到最终的可执行文件中，减小了可执行文件的体积。</p>
+<p>Glibc（GNU C Library）就是使用类似的方法实现的。它将每个函数的实现放在单独的源文件中，然后将这些源文件编译成对应的目标文件，并将目标文件归档到一个静态库中。这样，在链接时只会将程序实际使用的函数链接到最终的可执行文件中，提高了程序的效率和可维护性。</p>
+]]></content>
       <categories>
         <category>c高级编程</category>
       </categories>
@@ -883,7 +985,27 @@
   <entry>
     <title>3.12-main函数入口分析</title>
     <url>/2023/09/05/3-12-main%E5%87%BD%E6%95%B0%E5%85%A5%E5%8F%A3%E5%88%86%E6%9E%90/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="7-12-1-main函数入口"><a href="#7-12-1-main函数入口" class="headerlink" title="7.12.1 main函数入口"></a>7.12.1 main函数入口</h1><p>编译器对程序入口有以下规定：</p>
+<ol>
+<li>缺省程序入口：编译器默认的程序入口是<code>_start</code>符号，而不是<code>main</code>函数。<code>_start</code>符号是由编译器生成的一个特殊符号，它标识程序的入口点。在程序启动时，操作系统会将控制权转移到<code>_start</code>符号所代表的代码位置。</li>
+<li><code>main</code>函数作为入口点：<code>main</code>函数是一个被C标准库调用的符号，用来告诉编译器在一个项目中哪里是程序的入口点。程序员需要遵守这个约定，将程序的逻辑代码放在<code>main</code>函数中，在执行<code>main</code>函数之前进行一些准备工作。</li>
+</ol>
+<p>在程序启动时，编译器会进行以下操作：</p>
+<ul>
+<li>设置堆栈指针：编译器会设置栈指针，以确保函数调用和局部变量的正确处理。</li>
+<li>初始化静态变量和全局变量：编译器会初始化静态变量和全局变量，即将它们所占用的数据段（data segment）中的内容赋初值。</li>
+<li>BSS段赋初值：BSS段中的变量会被初始化为默认值。例如，<code>int</code>类型的变量会被初始化为0，<code>bool</code>类型会被初始化为<code>FALSE</code>，指针会被初始化为<code>NULL</code>。</li>
+<li>传递参数给<code>main</code>函数：编译器会将命令行参数（<code>argc</code>、<code>argv</code>等）传递给<code>main</code>函数，并开始执行<code>main</code>函数中的代码。</li>
+</ul>
+<h1 id="7-12-2-CRT运行库"><a href="#7-12-2-CRT运行库" class="headerlink" title="7.12.2 CRT运行库"></a>7.12.2 CRT运行库</h1><p>CRT是C Runtime（运行时）的缩写，也称为C运行库。它是一组库函数和运行时环境，用于支持和管理C语言程序的执行。</p>
+<p>CRT的主要功能包括：</p>
+<ol>
+<li>实现C标准库函数：CRT实现了C标准库中定义的各种函数，例如输入输出函数（如printf、scanf）、字符串处理函数（如strcpy、strlen）、内存管理函数（如malloc、free）等。这些函数提供了常用的操作和功能，方便程序员开发C语言程序。</li>
+<li>执行初始化操作：CRT负责在程序执行之前进行一系列的初始化操作。这包括设置基本的堆栈环境和进程环境，准备动态库的加载和释放，进行动态库的初始化和清理等工作。</li>
+<li>调用main函数：CRT负责给main函数传递参数，并调用main函数开始执行程序的主要逻辑。它将命令行参数（如argc、argv）传递给main函数，以便程序可以根据需要进行处理。</li>
+<li>处理程序退出：在main函数执行完成后，CRT会调用exit函数，用于处理程序的退出。exit函数会执行一些清理操作，例如关闭文件、释放资源等，并将控制权返回给操作系统。</li>
+</ol>
+]]></content>
       <categories>
         <category>c高级编程</category>
       </categories>
@@ -894,7 +1016,19 @@
   <entry>
     <title>3.11-BSS段的处理</title>
     <url>/2023/09/05/3-11-BSS%E6%AE%B5%E7%9A%84%E5%A4%84%E7%90%86/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="3-11-1-bss段"><a href="#3-11-1-bss段" class="headerlink" title="3.11.1 bss段"></a>3.11.1 bss段</h1><p>BSS（Block Started by Symbol）段是可执行文件或目标文件中的一个段（section），用于存储未初始化的全局变量和静态局部变量。BSS段具有以下特点：</p>
+<ol>
+<li>存储未初始化的变量：BSS段用于存储未显式初始化的全局变量和静态局部变量。这些变量在编译时没有赋予初始值，因此它们的存储空间可以在程序运行时动态地分配和初始化。</li>
+<li>不占目标文件空间：在目标文件中，BSS段不占用实际的空间。这是因为BSS段中的变量在编译时并没有实际的数值，所以在目标文件中只需记录BSS段的大小和位置信息。</li>
+<li>运行时分配空间：当可执行文件被加载到内存中运行时，操作系统会为BSS段分配实际的内存空间。这时，BSS段中的变量将被初始化为默认值（通常是0），以确保它们的初始状态是可预测的。</li>
+<li>节省存储资源：BSS段的设计初衷是为了节省存储资源。在早期计算机系统中，存储资源非常昂贵，因此将未初始化的变量放在BSS段中可以减少目标文件的大小，节省磁盘空间。</li>
+<li>记录BSS段信息：BSS段的总大小通常会在节头表（Section Header Table）中进行记录。节头表是目标文件格式中的一部分，它包含了关于各个段的信息，包括大小、位置等。此外，在符号表（Symbol Table）中也会记录每个变量的大小和地址等信息。</li>
+</ol>
+<h1 id="3-11-2-数据段和BSS段"><a href="#3-11-2-数据段和BSS段" class="headerlink" title="3.11.2 数据段和BSS段"></a>3.11.2 数据段和BSS段</h1><p>数据段和BSS段是可执行文件或目标文件中用于存储变量数据的段。它们在编译系统中的处理流程是相同的，但有一些差异。</p>
+<p>数据段用于存储已经初始化的全局变量和静态局部变量，这些变量在编译时已经赋予了初始值。数据段在可执行文件中占据实际的存储空间，并在程序运行时保持其初始值。</p>
+<p>BSS段设计的初衷是为了减少文件体积和节省磁盘资源。它用于存储未初始化的全局变量和静态局部变量，这些变量在编译时没有初始值。在目标文件中，BSS段不占用实际的存储空间，只记录其大小和位置信息。当可执行文件被加载到内存中运行时，操作系统会为BSS段分配实际的存储空间，并将其中的变量初始化为默认值。</p>
+<p>总的来说，数据段和BSS段都是用于存储变量数据的段。数据段存储已初始化的变量，占据实际的存储空间，而BSS段存储未初始化的变量，不占用实际的存储空间。它们在编译系统中的处理流程相同，但在可执行文件中的表现有所不同。</p>
+]]></content>
       <categories>
         <category>c高级编程</category>
       </categories>
@@ -905,7 +1039,76 @@
   <entry>
     <title>3.10-程序的运行</title>
     <url>/2023/09/05/3-10-%E7%A8%8B%E5%BA%8F%E7%9A%84%E8%BF%90%E8%A1%8C/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="3-10-1-程序的运行"><a href="#3-10-1-程序的运行" class="headerlink" title="3.10.1 程序的运行"></a>3.10.1 程序的运行</h1><p>在操作系统环境下，可执行文件通常是以ELF（Executable and Linkable Format）格式存储的。ELF文件是一种可执行文件格式，包含了程序的机器代码、数据、符号表以及其他与程序执行相关的信息。运行可执行ELF文件需要依赖操作系统提供的执行环境和系统调用。</p>
+<p>在裸机环境下，即没有操作系统的情况下，常见的可执行文件格式是BIN（Binary）或HEX（Intel Hexadecimal）文件。这些文件包含了程序的机器代码，通常是一系列的二进制指令。</p>
+<p>运行BIN或HEX文件需要将其加载到裸机环境中执行，这通常涉及以下步骤：</p>
+<ol>
+<li>将BIN&#x2F;HEX文件加载到目标设备：<ul>
+<li>将BIN文件直接复制到目标设备的存储介质上，或者通过特定的通信方式将HEX文件发送到目标设备。</li>
+</ul>
+</li>
+<li>配置目标设备的执行环境：<ul>
+<li>在裸机环境中，没有操作系统提供的运行时环境，因此需要手动配置目标设备的执行环境。</li>
+<li>这包括设置适当的启动地址、堆栈地址、中断向量表等。</li>
+</ul>
+</li>
+<li>执行加载的程序：<ul>
+<li>在裸机环境中，程序的执行通常是从特定的启动地址开始。</li>
+<li>目标设备会按照启动地址开始执行加载的程序，即执行BIN&#x2F;HEX文件中的机器代码指令。</li>
+</ul>
+</li>
+</ol>
+<h2 id="3-10-2-可执行ELF文件"><a href="#3-10-2-可执行ELF文件" class="headerlink" title="3.10.2 可执行ELF文件"></a>3.10.2 可执行ELF文件</h2><p>可执行的ELF文件在操作系统环境下执行时，会经过加载器的处理。加载器负责将可执行文件加载到内存中，并进行相关的操作，最后跳转到程序入口处运行该程序。</p>
+<p>以下是与可执行ELF文件加载相关的一些概念和信息：</p>
+<ol>
+<li>镜像加载地址：<ul>
+<li>可执行ELF文件在内存中的加载地址，也称为镜像加载地址或基址。</li>
+<li>加载器将可执行文件的代码段、数据段等内容加载到内存时，会指定一个合适的地址作为加载地址，将文件映射到该地址开始的内存空间。</li>
+</ul>
+</li>
+<li>程序头表：<ul>
+<li>可执行ELF文件中包含一个程序头表（Program Header Table），记录了不同段的信息和在内存中的加载位置。</li>
+<li>程序头表指定了可执行文件镜像加载到内存中的地址。</li>
+<li>每个程序头表项描述了一个段（如代码段、数据段等），包括段的类型、文件偏移、在文件中的大小、在内存中的虚拟地址等信息。</li>
+</ul>
+</li>
+<li>ELF文件头基本信息：<ul>
+<li>ELF文件的开头是一个ELF文件头（ELF Header），包含了关于该可执行文件的基本信息。</li>
+<li>ELF文件头中的一些重要字段包括文件类型、运行平台（操作系统和处理器架构）、程序入口地址等。</li>
+<li>文件类型字段指示该文件是可执行文件、共享库还是目标文件。</li>
+<li>运行平台字段标识了目标操作系统和处理器架构。</li>
+<li>程序入口地址指示了程序在执行时的起始执行点，加载器会跳转到该地址开始执行程序。</li>
+</ul>
+</li>
+</ol>
+<h1 id="3-10-3-Linux内存映像"><a href="#3-10-3-Linux内存映像" class="headerlink" title="3.10.3 Linux内存映像"></a>3.10.3 Linux内存映像</h1><p>在Linux环境下，运行可执行文件涉及到创建进程和建立虚拟地址空间与可执行文件的映射关系。下面是在Linux环境下运行可执行文件的主要步骤：</p>
+<ol>
+<li>创建一个独立的虚拟地址空间：<ul>
+<li>当调用<code>execve</code>函数启动加载器时，操作系统会为新进程创建一个独立的虚拟地址空间。</li>
+<li>虚拟地址空间是进程独立使用的内存空间，包括代码段、数据段、堆、栈等区域。</li>
+</ul>
+</li>
+<li>读取可执行文件头，建立映射关系：<ul>
+<li>加载器会读取可执行文件的文件头，其中包含了关于该文件的一些基本信息，例如入口地址、段的大小等。</li>
+<li>加载器将可执行文件的不同段（如代码段、数据段）映射到进程的虚拟地址空间中的相应区域。</li>
+<li>这样，进程的虚拟地址空间中的某些区域就与可执行文件的对应部分建立了映射关系。</li>
+</ul>
+</li>
+<li>设置PC指针为可执行文件的入口地址，启动运行：<ul>
+<li>在建立好虚拟地址空间与可执行文件的映射关系之后，加载器会将程序计数器（PC）指针设置为可执行文件的入口地址。</li>
+<li>入口地址指示了程序在执行时的起始执行点。</li>
+<li>加载器启动运行，让进程从可执行文件的入口地址开始执行。</li>
+</ul>
+</li>
+</ol>
+<h1 id="3-10-4-MMU"><a href="#3-10-4-MMU" class="headerlink" title="3.10.4 MMU"></a>3.10.4 MMU</h1><p>MMU（Memory Management Unit，内存管理单元）是计算机系统中的一个硬件组件，负责虚拟地址与物理地址之间的转换。它是操作系统实现虚拟内存的关键部分。</p>
+<p>在CPU管脚的地址信号中，传递的是物理地址，即直接对应到计算机系统中的物理内存地址。但当启用MMU后，操作系统运行在虚拟地址空间上，这就涉及到虚拟地址与物理地址的转换。</p>
+<p>MMU的主要用途包括：</p>
+<ol>
+<li>虚拟内存：MMU负责将进程使用的虚拟地址映射到物理内存中的实际地址。通过虚拟内存技术，操作系统可以将部分进程的数据和代码存储在辅助存储设备（如硬盘）上，只在需要时加载到物理内存中。这样，操作系统可以运行比实际物理内存大的程序，提高系统的可用性和性能。</li>
+<li>内存保护：MMU允许操作系统为不同的内存块设置不同的读写权限。通过在虚拟地址空间和物理地址空间之间建立映射关系，并设置相应的访问权限，可以实现对内存的保护，防止进程越界访问或修改其他进程的内存数据。</li>
+</ol>
+]]></content>
       <categories>
         <category>c高级编程</category>
       </categories>
@@ -916,7 +1119,75 @@
   <entry>
     <title>3.9-链接过程(3)-重定位</title>
     <url>/2023/09/05/3-9-%E9%93%BE%E6%8E%A5%E8%BF%87%E7%A8%8B-3-%E9%87%8D%E5%AE%9A%E4%BD%8D/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="3-9-1-重定位"><a href="#3-9-1-重定位" class="headerlink" title="3.9.1 重定位"></a>3.9.1 重定位</h1><p>重定位是链接过程中的核心步骤之一，它的主要目的是修正指令中的符号地址，使得程序可以正确地访问和调用其他模块或库中的函数和变量。</p>
+<p>在链接过程中，重定位完成以下任务：</p>
+<ol>
+<li>地址空间分配：<ul>
+<li>在链接过程中，编译器和链接器会为程序分配地址空间，包括代码段、数据段、堆、栈等。</li>
+<li>重定位阶段负责将各个模块的代码段和数据段中的地址修正为最终的实际地址，确保模块之间的地址空间不发生冲突。</li>
+</ul>
+</li>
+<li>符号解析：<ul>
+<li>在链接过程中，各个模块之间可能存在对函数和变量的引用或调用。</li>
+<li>重定位阶段负责解析这些引用，找到对应的函数或变量的实际地址，并将其填充到引用的位置，以便程序在执行时可以正确访问和调用。</li>
+</ul>
+</li>
+</ol>
+<h1 id="3-9-2-重定位过程1"><a href="#3-9-2-重定位过程1" class="headerlink" title="3.9.2 重定位过程1"></a>3.9.2 重定位过程1</h1><p>重定位过程是在链接过程中完成的，它涉及多个步骤和数据结构：</p>
+<ol>
+<li>汇编阶段：<ul>
+<li>在汇编阶段，汇编器会将源代码转换为机器代码，并生成目标模块。</li>
+<li>当汇编器遇到未定义的符号（外部定义的函数、变量、库函数引用等），它会认为这些符号在其他地方定义，不会报错。</li>
+<li>汇编器会收集这些未定义符号，并生成一个重定位表（relocation table），用于告诉链接器这些符号不在当前模块中定义，可能在其他文件或库中定义，需要在链接时进行解析。</li>
+</ul>
+</li>
+<li>段与重定位表：<ul>
+<li>目标模块通常被划分为多个段，如代码段、数据段等。</li>
+<li>在每个段中，可能存在对其他文件或库中定义的函数或变量的引用。</li>
+<li>汇编器会为每个段生成相应的重定位表，记录需要重定位的符号及其对应的位置信息。</li>
+</ul>
+</li>
+<li>重定位表的生成：<ul>
+<li>重定位表是一个数据结构，用于记录需要进行重定位的各种符号。</li>
+<li>对于每个需要重定位的符号，重定位表会记录符号的类型（函数或变量）、位置信息（段偏移量或地址）等。</li>
+<li>链接器在链接过程中会根据重定位表的信息，解析和修正这些符号的地址，使得它们指向正确的位置。</li>
+</ul>
+</li>
+</ol>
+<h1 id="3-9-3-重定位过程2"><a href="#3-9-3-重定位过程2" class="headerlink" title="3.9.3 重定位过程2"></a>3.9.3 重定位过程2</h1><p>重定位表是在ELF文件中用于记录需要进行重定位的符号及其相关信息的数据结构。在一个可重定位的ELF文件中，每个需要重定位的段都会有一个对应的重定位表，例如<code>.rel.text</code>和<code>.rel.data</code>。</p>
+<p>重定位表本身也是一个段，因此也被称为重定位段。通过查看重定位表，我们可以了解在链接过程中需要进行重定位的符号以及它们在代码中的偏移位置。</p>
+<p>重定位表的构成如下所示（对于32位ELF文件）：</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Elf32_Rel</span> &#123;</span></span><br><span class="line">    Elf32_Addr r_offset;  <span class="comment">// 需要重定位的项在代码中的偏移位置</span></span><br><span class="line">    Elf32_Word r_info;    <span class="comment">// 重定位类型和符号索引</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>其中，<code>r_offset</code>字段指定了需要重定位的项在代码中的偏移位置，<code>r_info</code>字段包含了重定位类型和符号索引。</p>
+<p>通过解析重定位表中的信息，链接器可以根据符号索引找到对应的符号表项，并根据重定位类型进行相应的修正，使得符号的地址指向正确的位置。</p>
+<p>要查看一个ELF文件的重定位表，可以使用工具如<code>arm-linux-gnueabi-objdump</code>或<code>arm-linux-gnueabi-readelf</code>，并指定相应的选项来打印出重定位表的内容和相关信息。</p>
+<h1 id="3-9-4-重定位过程3"><a href="#3-9-4-重定位过程3" class="headerlink" title="3.9.4 重定位过程3"></a>3.9.4 重定位过程3</h1><p>在链接过程中，重定位过程涉及修改符号地址，通过读取各个目标文件中的重定位信息（重定位表）来进行符号重定位，即修改指令中的符号地址。</p>
+<p>具体步骤如下：</p>
+<ol>
+<li>读取重定位信息：<ul>
+<li>链接器会读取每个目标文件中的各个段的重定位信息，通常是通过读取重定位表来获取这些信息。</li>
+<li>重定位表记录了需要进行重定位的符号在代码中的位置以及相关的重定位类型和符号索引。</li>
+</ul>
+</li>
+<li>符号重定位：<ul>
+<li>链接器根据重定位表中的信息，确定各个重定位符号的新地址。</li>
+<li>这些新地址的计算通常涉及到基址的概念，即新的段基址加上段内的偏移量来得到重定位地址。</li>
+<li>重定位地址计算公式为：重定位地址 &#x3D; 新段基址 + 段内偏移。</li>
+</ul>
+</li>
+<li>修改指令中的符号地址：<ul>
+<li>链接器对目标文件中的指令进行扫描，在指令中定位到需要进行重定位的符号地址的位置。</li>
+<li>然后，链接器会将指令中的符号地址修改为相应的重定位地址，以完成符号的重定位。</li>
+</ul>
+</li>
+<li>形成新的符号表：<ul>
+<li>在重定位过程中，链接器会根据符号索引和重定位信息，确定每个重定位符号的新地址。</li>
+<li>链接器会将这些新地址形成一个新的符号表，用于在最终的可执行文件或共享库中进行符号解析和访问。</li>
+</ul>
+</li>
+</ol>
+]]></content>
       <categories>
         <category>c高级编程</category>
       </categories>
@@ -927,7 +1198,91 @@
   <entry>
     <title>3.8-链接过程(2)-符号解析-强符号与弱符号</title>
     <url>/2023/09/05/3-8-%E9%93%BE%E6%8E%A5%E8%BF%87%E7%A8%8B-2-%E7%AC%A6%E5%8F%B7%E8%A7%A3%E6%9E%90-%E5%BC%BA%E7%AC%A6%E5%8F%B7%E4%B8%8E%E5%BC%B1%E7%AC%A6%E5%8F%B7/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="3-8-1-编译器对符号的处理规则"><a href="#3-8-1-编译器对符号的处理规则" class="headerlink" title="3.8.1 编译器对符号的处理规则"></a>3.8.1 编译器对符号的处理规则</h1><p>符号（Symbol）是在程序中引用或定义的标识符，通常是函数名、全局变量名或其他标识符。符号具有以下几种不同的概念：</p>
+<ul>
+<li><p>强符号（Strong Symbol）：强符号是指在程序中只有一个定义的符号。当多个目标文件中存在同名的强符号时，链接器会产生冲突并报错。通常，全局变量</p>
+<p>和初始化的全局变量是强符号。每个强符号在整个程序中只能有一个定义。</p>
+</li>
+</ul>
+<p>函数名：函数名是程序中表示函数的符号。函数名通常是强符号，因为每个函数在整个程序中只能有一个定义。</p>
+<p>初始化的全局变量：初始化的全局变量是指在程序中定义并显式初始化的全局变量。它们通常是强符号，因为每个初始化的全局变量在整个程序中只能有一个定义。</p>
+<ul>
+<li><p>弱符号（Weak Symbol）：弱符号是指在程序中可以存在多个定义的符号。当多个目标文件中存在同名的弱符号时，链接器通常会选择其中一个定义，而其他</p>
+<p>的定义会被忽略。弱符号通常用于具有默认实现或可选实现的函数或变量。未初始化的全局变量也是弱符号</p>
+</li>
+</ul>
+<p>​	未初始化的全局变量：未初始化的全局变量是指在程序中定义但没有显式初始化的全局变量。它们通常是弱符号，因为多个目标文件中可以存在同名的未初始化全局变量，链接器会在运行时将它们合并为一个共享的内存区域。</p>
+<p>编译器对符号的处理规则如下：</p>
+<ol>
+<li>强符号：<ul>
+<li>强符号不允许多次定义，每个强符号在整个程序中只能有一个定义。</li>
+<li>强符号和弱符号可以共存，即在程序中可以同时存在强符号和弱符号。</li>
+<li>当强符号和弱符号共存时，强符号会覆盖弱符号。在链接时，如果存在多个同名符号，链接器会选择强符号作为最终的定义。</li>
+</ul>
+</li>
+<li>弱符号：<ul>
+<li>编译器允许多个弱符号在程序中存在。</li>
+<li>在编译期间，编译器并不知道弱符号所占用的空间大小。为了解决这个问题，编译器会使用一个未定义的COMMON符号来代替弱符号的定义。COMMON符号表示一个未初始化的全局变量或未分配内存的占位符。</li>
+<li>在链接期间，链接器会比较多个文件中的弱符号，并选择占用空间最大的弱符号作为最终的定义。这意味着在多个目标文件中存在同名弱符号时，链接器会选择占用空间最大的弱符号来作为最终的定义。</li>
+</ul>
+</li>
+</ol>
+<h1 id="3-8-2-弱符号与BSS段"><a href="#3-8-2-弱符号与BSS段" class="headerlink" title="3.8.2 弱符号与BSS段"></a>3.8.2 弱符号与BSS段</h1><p>弱符号和BSS段在编译和链接过程中的关系如下：</p>
+<ol>
+<li>不同目标文件中的BSS段：<ul>
+<li>BSS段是用于存储未初始化的全局变量和静态变量的内存段。</li>
+<li>在编译阶段，编译器将未初始化的全局变量和静态变量标记为BSS段，并分配了对应的空间。但是，BSS段中的变量并没有实际的初始化值。</li>
+<li>在链接阶段，多个目标文件中的BSS段会被合并到一个统一的BSS段中，以便在最终的可执行文件中分配内存。</li>
+</ul>
+</li>
+<li>可重定位目标文件的链接：<ul>
+<li>在可重定位目标文件的链接过程中，链接器不会确定弱符号的最终定义。因此，未初始化的全局变量和弱符号不会放在BSS段中，而是放在临时的COMMON块中。</li>
+<li>COMMON块是一个临时的内存区域，用于存放未初始化的全局变量和弱符号。在链接器最终确定了弱符号的定义后，它们将被分配到最终的BSS段中。</li>
+</ul>
+</li>
+<li>可执行目标文件的链接：<ul>
+<li>在可执行目标文件的链接过程中，链接器已经确定了弱符号的最终定义。</li>
+<li>弱符号被分配了一个最大的空间，并放置在BSS段中。这是因为在链接过程中，链接器选择了占用空间最大的弱符号作为最终的定义，并为其分配了足够的内存空间。</li>
+</ul>
+</li>
+</ol>
+<h1 id="3-8-3-强引用与弱引用"><a href="#3-8-3-强引用与弱引用" class="headerlink" title="3.8.3 强引用与弱引用"></a>3.8.3 强引用与弱引用</h1><p>强引用和弱引用是指对符号的引用的特性，而符号本身代表一个地址，可以是函数或变量的名称。</p>
+<p>在一个文件内，当我们定义一个函数或变量时，其函数名或变量名就是一个符号。在另一个文件中，如果我们通过函数名或变量名来调用该函数或引用该变量，就称为对符号的引用。引用的本质是使用符号的地址。</p>
+<p>特点如下：</p>
+<ol>
+<li>强引用：<ul>
+<li>当一个符号引用被标记为强引用时，如果在链接时找不到该符号的定义，链接过程将会报错。</li>
+<li>强引用表示对符号的依赖性较高，如果缺少了符号的定义，程序无法正常链接和执行。</li>
+</ul>
+</li>
+<li>弱引用：<ul>
+<li>当一个符号引用被标记为弱引用时，如果这个符号没有定义，链接过程不会报错，而是在运行时可能会导致错误。</li>
+<li>弱引用表示对符号的依赖性较低，如果缺少了符号的定义，链接过程仍然可以继续，但在运行时可能会遇到未定义符号的错误。</li>
+</ul>
+</li>
+</ol>
+<p>根据符号引用是否为0（即空指针或空引用），我们可以在程序中判断是否执行某个函数。如果符号引用为0，表示符号没有定义，可以根据这个判断来避免执行相应的函数。</p>
+<h1 id="3-8-4-弱引用的应用"><a href="#3-8-4-弱引用的应用" class="headerlink" title="3.8.4 弱引用的应用"></a>3.8.4 弱引用的应用</h1><p>弱引用在以下场景中常被应用：</p>
+<ol>
+<li>库：<ul>
+<li>在使用库时，可以将库中的函数定义为弱引用。</li>
+<li>这样，在链接时，如果存在相同名称的函数定义，链接器会选择强引用的函数定义，但如果找不到强引用的函数定义，就会选择弱引用的函数定义。</li>
+<li>这使得我们可以自定义函数来覆盖库中的函数，使用自定义版本的库函数。</li>
+</ul>
+</li>
+<li>扩展功能模块：<ul>
+<li>当程序依赖于某些可选的扩展功能模块时，可以将这些模块的引用定义为弱引用。</li>
+<li>这样，在链接时，如果这些模块不存在或被删除，程序仍然可以正常链接和运行，因为对这些模块的引用是弱引用，链接器不会报错。</li>
+</ul>
+</li>
+<li>多线程：<ul>
+<li>在多线程编程中，有时需要根据运行时环境的不同来决定是否开启多线程模式。</li>
+<li>例如，在Linux下，可以将<code>pthread_create</code>函数定义为弱引用。</li>
+<li>运行时，程序可以判断链接的是单线程版本的glibc库还是多线程版本的glibc库，从而决定是否启用多线程模式。</li>
+</ul>
+</li>
+</ol>
+]]></content>
       <categories>
         <category>c高级编程</category>
       </categories>
@@ -938,7 +1293,49 @@
   <entry>
     <title>3.7-链接过程(1)-地址空间分配与链接脚本</title>
     <url>/2023/09/05/3-7-%E9%93%BE%E6%8E%A5%E8%BF%87%E7%A8%8B-1-%E5%9C%B0%E5%9D%80%E7%A9%BA%E9%97%B4%E5%88%86%E9%85%8D%E4%B8%8E%E9%93%BE%E6%8E%A5%E8%84%9A%E6%9C%AC/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="3-7-1-链接的重要性"><a href="#3-7-1-链接的重要性" class="headerlink" title="3.7.1 链接的重要性"></a>3.7.1 链接的重要性</h1><p>链接（Linking）是将多个可重定位目标文件合并、组装成可执行目标文件或共享库的过程。链接器（Linker）是执行链接操作的工具或程序。</p>
+<p>链接的主要目的是解决多个目标文件之间的符号引用和地址重定位问题，使得程序能够正确地执行。</p>
+<p>链接过程包括以下主要步骤：</p>
+<ol>
+<li>地址空间分配：链接器将可执行目标文件加载到内存中的适当地址空间中。这涉及到分配代码段、数据段、堆栈等内存区域，并为每个目标文件分配适当的地址范围。</li>
+<li>符号解析：在链接过程中，符号解析是一个重要的步骤。符号解析的目的是解决符号的引用关系，将符号引用与符号定义进行匹配。在符号解析阶段，链接器会根据符号的绑定属性（如全局、局部、弱符号）来确定符号的可见性和重复定义规则。<ul>
+<li>强符号（Strong Symbols）：具有全局绑定属性的符号，优先级高于弱符号。如果存在多个强符号同名定义，链接器会报错。</li>
+<li>弱符号（Weak Symbols）：具有弱绑定属性的符号，允许在多个目标文件中重复定义。如果存在多个弱符号同名定义，并且没有对应的强符号，链接器会选择其中一个定义。</li>
+</ul>
+</li>
+<li>重定位（Relocation）：重定位是将目标文件中的地址引用转换为最终可执行文件中的实际地址的过程。在链接过程中，由于目标文件中的地址是相对于各自的节（Section）的起始地址的偏移量，因此需要进行重定位操作，将这些相对地址转换为绝对地址。重定位过程涉及到修正目标文件中的跳转、调用和数据访问等指令，使得它们指向正确的地址。</li>
+</ol>
+<h1 id="3-7-2-地址空间分配"><a href="#3-7-2-地址空间分配" class="headerlink" title="3.7.2 地址空间分配"></a>3.7.2 地址空间分配</h1><p>地址空间分配是链接过程中的一项重要任务，它确定了各个目标文件中不同段（如代码段、数据段、bss段）在最终可执行目标文件中的位置和大小。</p>
+<p>以下是地址空间分配的一般步骤：</p>
+<ol>
+<li>扫描所有目标文件：链接器会逐个扫描所有目标文件，包括主程序文件和库文件。对于每个目标文件，链接器会读取其文件头部和段表等信息。</li>
+<li>获取段信息：链接器从各个目标文件的段表中获取各个段的信息，包括段的类型（如代码段、数据段、bss段）、大小和对齐等属性。每个目标文件中的段表记录了该文件中各个段的位置和长度。</li>
+<li>确定链接地址：链接器会指定一个链接地址（linkaddr）作为起始地址，用于存放最终可执行目标文件的各个段。</li>
+<li>合并同类型段：链接器按照段的类型（代码段、数据段、bss段）顺序，将各个目标文件中相同类型的段进行合并。对于代码段和数据段，链接器会根据链接地址和各个段的偏移量（offset）计算出最终的段地址。</li>
+<li>重新计算段长度和位置：合并后，链接器会重新计算各个段的长度和位置。对于代码段和数据段，它们的长度是各个段的长度之和；而对于bss段，它的长度通常为0，因为bss段存放的是未初始化的全局变量和静态变量。</li>
+<li>处理库文件：链接器还会处理库文件，将库文件中的目标模块合并到最终的可执行目标文件中。这涉及到符号解析、重定位和符号表的更新等操作。</li>
+</ol>
+<h1 id="3-7-3-创建全局符号表"><a href="#3-7-3-创建全局符号表" class="headerlink" title="3.7.3 创建全局符号表"></a>3.7.3 创建全局符号表</h1><p>创建全局符号表是链接过程的一项关键任务，它的目的是将各个目标文件中的符号收集起来，并统一保存在一个全局符号表中。</p>
+<p>以下是创建全局符号表的一般步骤：</p>
+<ol>
+<li>扫描所有目标文件：链接器会逐个扫描所有目标文件，包括主程序文件和库文件。对于每个目标文件，链接器会读取其符号表信息。</li>
+<li>收集符号：链接器从每个目标文件的符号表中收集符号信息。符号表中包含了各个目标文件中定义和引用的符号的名称、属性和地址等信息。</li>
+<li>统一放入全局符号表：链接器将从各个目标文件中收集到的符号统一放入一个全局符号表中。全局符号表是链接器维护的一个数据结构，用于保存所有目标文件中的符号信息。</li>
+<li>相对零地址偏移：在创建全局符号表时，符号的地址仍然是相对于零地址的偏移量。这是因为在链接过程的后续阶段，还需要进行重定位操作，将符号的地址转换为最终可执行目标文件中的实际地址。</li>
+</ol>
+<h1 id="3-7-4-链接脚本"><a href="#3-7-4-链接脚本" class="headerlink" title="3.7.4 链接脚本"></a>3.7.4 链接脚本</h1><p>不同的代码段在链接过程中的组装是由链接脚本（Linker Script）来规定的。链接脚本是一个文本文件，其中包含了链接器的指令和规则，用于指导链接器如何组装各个代码段。</p>
+<p>链接脚本通常包含以下信息：</p>
+<ol>
+<li>组装顺序：链接脚本规定了各个代码段的组装顺序。根据链接脚本的指定顺序，链接器会按照代码段的顺序将它们组装到最终可执行目标文件中。</li>
+<li>起始地址：链接脚本指定了各个代码段在最终可执行目标文件中的起始地址。链接器会根据链接脚本中的地址规定，将各个代码段放置到相应的地址位置。</li>
+<li>位置对齐：链接脚本还规定了代码段的位置对齐要求。根据链接脚本中指定的对齐规则，链接器会确保代码段在最终可执行目标文件中按照规定的对齐边界进行放置。</li>
+<li>输出格式和运行平台：链接脚本可以指定输出可执行文件的格式和运行平台。这些信息对于生成符合特定格式和平台要求的可执行目标文件非常重要。</li>
+<li>入口地址：链接脚本可以指定可执行目标文件的入口地址。入口地址是程序执行的起始点，在加载和执行可执行文件时，操作系统会将控制权转移到指定的入口地址处开始执行程序。</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">oUTPUT_FORMAT( <span class="string">&quot;elf32-littlearm”</span></span><br><span class="line"><span class="string">&quot;</span>elf32-bigarm”</span><br><span class="line"><span class="string">&quot;elf32-littlearm”)</span></span><br><span class="line"><span class="string">;输出ELF麻件格式</span></span><br><span class="line"><span class="string">OUTPUT_ARCH( “arm”)</span></span><br><span class="line"><span class="string">;输出可执行文件的运行平台为arm</span></span><br><span class="line"><span class="string">ENTRY(_start)</span></span><br><span class="line"><span class="string">;程序入口地址</span></span><br><span class="line"><span class="string">SECTIONS</span></span><br><span class="line"><span class="string">;各段描述</span></span><br><span class="line"><span class="string">&#123;</span></span><br><span class="line"><span class="string">.= Ox60000000;</span></span><br><span class="line"><span class="string">;代码段起始地址</span></span><br><span class="line"><span class="string">.text:&#123;*(.text)&#125;</span></span><br><span class="line"><span class="string">;代码段描述:所有.o文件的. text</span></span><br><span class="line"><span class="string">.= Ox60200000;</span></span><br><span class="line"><span class="string">;数据段的起始地址</span></span><br><span class="line"><span class="string">.data: &#123;*(. data)&#125;</span></span><br><span class="line"><span class="string">;数据段描述</span></span><br><span class="line"><span class="string">.bss :&#123;*(. bss)&#125;</span></span><br><span class="line"><span class="string">; BSS段描述</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string"></span></span><br></pre></td></tr></table></figure>
+
+<p>在SECTIONS部分，代码段的起始地址为0x60000000，紧接着是代码段的描述；数据段的起始地址为0x60200000，后面是数据段的描述；最后是BSS段的描述。</p>
+]]></content>
       <categories>
         <category>c高级编程</category>
       </categories>
@@ -949,7 +1346,60 @@
   <entry>
     <title>3.6-编译过程(3)-符号表</title>
     <url>/2023/09/05/3-6-%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B-3-%E7%AC%A6%E5%8F%B7%E8%A1%A8/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="3-6-1-符号表"><a href="#3-6-1-符号表" class="headerlink" title="3.6.1 符号表"></a>3.6.1 符号表</h1><p>符号表在编译过程中起到了重要的作用，主要用来保存源程序中各种符号（如变量、函数、类、常量等）的相关信息，如地址值、类型、占用空间的大小等。</p>
+<p>符号表的主要作用如下：</p>
+<ol>
+<li>辅助语义检查：符号表可以用于辅助编译器进行语义检查。编译器通过符号表来验证标识符的合法性、类型匹配等语义规则，以确保源程序的语义正确性。例如，编译器在进行类型检查时可以通过符号表中记录的类型信息来判断赋值操作是否合法。</li>
+<li>辅助代码生成：符号表在代码生成阶段发挥重要作用。编译器通过符号表来进行地址和空间的分配，以确定变量和函数在内存中的位置。符号表中记录的地址信息可以用于生成汇编代码或机器代码时的地址计算。例如，编译器可以根据符号表中的地址信息为变量分配栈空间或静态数据区空间。</li>
+<li>符号决议：符号表用于解析标识符的引用，即在程序中使用某个标识符时，找到该标识符的定义位置。编译器通过符号表中记录的定义位置信息来处理标识符的引用，以确保标识符在使用前已经被定义。符号决议阶段还包括解决标识符的作用域和命名空间等问题。</li>
+<li>重定位：符号表用于链接器进行符号重定位。在多个目标文件进行链接时，链接器需要解析和处理目标文件中的符号引用。链接器通过符号表中记录的地址信息，将符号引用链接到正确的地址上，以确保最终生成的可执行文件能够正确地访问和使用各个目标文件中的符号。</li>
+</ol>
+<h1 id="3-6-2-elf文件和bin文件"><a href="#3-6-2-elf文件和bin文件" class="headerlink" title="3.6.2 elf文件和bin文件"></a>3.6.2 elf文件和bin文件</h1><p>ELF文件和BIN文件是两种不同的可执行文件格式。</p>
+<p>BIN文件是一种纯粹的二进制文件，只包含机器码，没有附加的元数据信息。它通常被称为raw binary文件或镜像文件。BIN文件中的机器码是直接按照内存中的布局排列的，没有分节或分段的概念。常见的BIN文件格式还包括HEX文件，它以十六进制形式表示机器码。</p>
+<p>而ELF文件（Executable and Linkable Format）是一种更为复杂的可执行文件格式。除了包含机器码之外，ELF文件还包含了一些额外的元数据信息，用于描述程序的结构、加载地址、运行地址等。ELF文件具有分节（Section）和分段（Segment）的概念，不同的节和段存储了不同的信息，如代码段、数据段、符号表、重定位表等。</p>
+<p>ELF文件的结构包括以下几个重要的部分：</p>
+<ol>
+<li>ELF头（ELF Header）：位于文件的开头，包含了对整个ELF文件的描述信息，如文件类型、目标体系结构、入口地址等。</li>
+<li>节表（Section Table）：记录了ELF文件中各个节的信息。每个节存储了特定类型的数据，例如代码、数据、符号表、重定位表等。节表中的每个表项描述了一个节的名称、大小、偏移量等信息。</li>
+<li>段表（Segment Table）：记录了ELF文件中各个段的信息。段是逻辑上一组相关的节的集合，用于定义程序的内存布局。段表中的每个表项描述了一个段的类型、虚拟地址、文件偏移量等信息。</li>
+<li>符号表（Symbol Table）：记录了程序中定义和引用的符号（如变量、函数、类等）的信息。符号表中的每个表项描述了一个符号的名称、类型、地址等信息。符号表在链接过程中用于解析符号引用和进行符号重定位。</li>
+<li>重定位表（Relocation Table）：记录了需要进行符号重定位的位置和相关信息。重定位表在链接过程中用于调整代码和数据的位置，确保程序能够正确访问和使用符号。</li>
+</ol>
+<h1 id="3-6-3-readelf-s-和readelf-S-的区别"><a href="#3-6-3-readelf-s-和readelf-S-的区别" class="headerlink" title="3.6.3 readelf -s 和readelf -S 的区别"></a>3.6.3 readelf -s 和readelf -S 的区别</h1><p><code>readelf -s</code>和<code>readelf -S</code>是<code>readelf</code>命令的两个不同的选项，它们用于显示ELF文件中的不同部分信息。</p>
+<ol>
+<li><code>readelf -s</code>：该选项用于显示ELF文件的符号表（Symbol Table）。符号表记录了程序中定义和引用的符号（如变量、函数、类等）的信息。使用<code>readelf -s</code>命令可以列出符号表中的所有符号，包括符号的名称、类型、绑定属性、地址等信息。这对于进行符号分析、调试和动态链接等操作非常有用。</li>
+<li><code>readelf -S</code>：该选项用于显示ELF文件的节表（Section Table）。节表记录了ELF文件中各个节的信息，每个节存储了特定类型的数据，如代码、数据、符号表、重定位表等。使用<code>readelf -S</code>命令可以列出节表中的所有节，包括节的名称、类型、大小、偏移量、虚拟地址等信息。这对于了解程序的内存布局、代码和数据段的大小以及节之间的关系非常有帮助。</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">root@ubuntu:/home/topeet/demo# readelf -s sub.o </span><br><span class="line"></span><br><span class="line">Symbol table &#x27;.symtab&#x27; contains 13 entries:</span><br><span class="line">   Num:    Value          Size Type    Bind   Vis      Ndx Name</span><br><span class="line">     0: 0000000000000000     0 NOTYPE  LOCAL  DEFAULT  UND </span><br><span class="line">     1: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS sub.c</span><br><span class="line">     2: 0000000000000000     0 SECTION LOCAL  DEFAULT    1 </span><br><span class="line">     3: 0000000000000000     0 SECTION LOCAL  DEFAULT    2 </span><br><span class="line">     4: 0000000000000000     0 SECTION LOCAL  DEFAULT    3 </span><br><span class="line">     5: 0000000000000000     0 SECTION LOCAL  DEFAULT    5 </span><br><span class="line">     6: 0000000000000000     0 SECTION LOCAL  DEFAULT    6 </span><br><span class="line">     7: 0000000000000000     0 SECTION LOCAL  DEFAULT    7 </span><br><span class="line">     8: 0000000000000000     0 SECTION LOCAL  DEFAULT    4 </span><br><span class="line">     9: 0000000000000000    24 FUNC    GLOBAL DEFAULT    1 add</span><br><span class="line">    10: 0000000000000018    22 FUNC    GLOBAL DEFAULT    1 sub</span><br><span class="line">    11: 000000000000002e    23 FUNC    GLOBAL DEFAULT    1 mul</span><br><span class="line">    12: 0000000000000045    23 FUNC    GLOBAL DEFAULT    1 div</span><br><span class="line">root@ubuntu:/home/topeet/demo# readelf -S sub.o </span><br><span class="line">There are 12 section headers, starting at offset 0x398:</span><br><span class="line"></span><br><span class="line">节头：</span><br><span class="line">  [号] 名称              类型             地址              偏移量</span><br><span class="line">       大小              全体大小          旗标   链接   信息   对齐</span><br><span class="line">  [ 0]                   NULL             0000000000000000  00000000</span><br><span class="line">       0000000000000000  0000000000000000           0     0     0</span><br><span class="line">  [ 1] .text             PROGBITS         0000000000000000  00000040</span><br><span class="line">       000000000000005c  0000000000000000  AX       0     0     1</span><br><span class="line">  [ 2] .data             PROGBITS         0000000000000000  0000009c</span><br><span class="line">       0000000000000000  0000000000000000  WA       0     0     1</span><br><span class="line">  [ 3] .bss              NOBITS           0000000000000000  0000009c</span><br><span class="line">       0000000000000000  0000000000000000  WA       0     0     1</span><br><span class="line">  [ 4] .comment          PROGBITS         0000000000000000  0000009c</span><br><span class="line">       000000000000002c  0000000000000001  MS       0     0     1</span><br><span class="line">  [ 5] .note.GNU-stack   PROGBITS         0000000000000000  000000c8</span><br><span class="line">       0000000000000000  0000000000000000           0     0     1</span><br><span class="line">  [ 6] .note.gnu.propert NOTE             0000000000000000  000000c8</span><br><span class="line">       0000000000000020  0000000000000000   A       0     0     8</span><br><span class="line">  [ 7] .eh_frame         PROGBITS         0000000000000000  000000e8</span><br><span class="line">       0000000000000098  0000000000000000   A       0     0     8</span><br><span class="line">  [ 8] .rela.eh_frame    RELA             0000000000000000  000002d0</span><br><span class="line">       0000000000000060  0000000000000018   I       9     7     8</span><br><span class="line">  [ 9] .symtab           SYMTAB           0000000000000000  00000180</span><br><span class="line">       0000000000000138  0000000000000018          10     9     8</span><br><span class="line">  [10] .strtab           STRTAB           0000000000000000  000002b8</span><br><span class="line">       0000000000000017  0000000000000000           0     0     1</span><br><span class="line">  [11] .shstrtab         STRTAB           0000000000000000  00000330</span><br><span class="line">       0000000000000067  0000000000000000           0     0     1</span><br><span class="line">Key to Flags:</span><br><span class="line">  W (write), A (alloc), X (execute), M (merge), S (strings), I (info),</span><br><span class="line">  L (link order), O (extra OS processing required), G (group), T (TLS),</span><br><span class="line">  C (compressed), x (unknown), o (OS specific), E (exclude),</span><br><span class="line">  l (large), p (processor specific)</span><br><span class="line">root@ubuntu:/home/topeet/demo# </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="3-6-3-符号类型和绑定属性"><a href="#3-6-3-符号类型和绑定属性" class="headerlink" title="3.6.3 符号类型和绑定属性"></a>3.6.3 符号类型和绑定属性</h1><p>符号类型和绑定属性是符号表中的两个重要概念，用于描述符号的特性和可见性。</p>
+<ol>
+<li>符号类型（Symbol Type）：符号类型描述了符号关联的实体类型，即符号表示的是什么。在符号表中常见的符号类型包括：</li>
+</ol>
+<ul>
+<li>OBJECT（对象）：符号关联的是一个数据对象，如变量、数组或指针。</li>
+<li>FUNC（函数）：符号关联到一个函数或过程。</li>
+<li>SECTION（节）：符号关联到一个节的名字。</li>
+<li>FILE（文件）：符号关联一个文件名。</li>
+<li>NOTYPE（未指定类型）：符号的类型未指定，它常用于未定义的引用。</li>
+</ul>
+<p>2.绑定属性（Binding Attribute）：绑定属性描述了符号的可见性和重复定义的规则。在符号表中常见的绑定属性包括：</p>
+<ul>
+<li>LOCAL（局部）：局部符号只在目标文件内可见，多个目标文件可以有相同的局部符号名而不会冲突。</li>
+<li>GLOBAL（全局）：全局符号在目标文件内部可见，也可以被其他文件引用。全局符号在整个程序中是可见的，但是不同文件中的全局符号名称不能重复。</li>
+<li>WEAK（弱）：弱符号是一种特殊的全局符号，它可以在多个文件中重复定义。即使弱符号未定义，链接过程也不会报错，而是将其符号值设置为0。弱符号可以被强符号覆盖。</li>
+</ul>
+<h1 id="3-6-4-节索引"><a href="#3-6-4-节索引" class="headerlink" title="3.6.4 节索引"></a>3.6.4 节索引</h1><p>节索引（Section Index）是在符号表中使用的一个索引值，用于指示每个符号所在的节（Section）。</p>
+<p>在目标文件中，包含了多个节（如代码节、数据节、符号表节等），用于存储不同类型的数据和信息。而符号表（Symbol Table）中保存了所有节的符号信息。</p>
+<p>为了确定每个符号所在的具体节，符号表中的每个符号都使用一个节索引来表示其所在的节。节索引是一个非负整数，它对应着目标文件中节头表（Section Header Table）中的表项序号。</p>
+<p>节头表是目标文件中的一部分，用于描述每个节的属性和位置等信息。每个节头表的表项都包含了该节的名称、类型、大小、偏移量等信息。通过符号表中的节索引，可以找到符号所属的具体节，并将该符号绑定到该节上。</p>
+<p>在符号表中，还有几个特殊的节索引值：</p>
+<ul>
+<li>ABS：表示符号的绝对值，不需要进行重定位，即该符号的地址是绝对的。</li>
+<li>UNDEF：表示未定义符号，即在当前模块中引用了该符号，但在其他地方定义。</li>
+<li>COMMON：表示尚未分配位置的未初始化数据，通常用于全局未初始化的变量。</li>
+</ul>
+]]></content>
       <categories>
         <category>c高级编程</category>
       </categories>
@@ -960,12 +1410,128 @@
   <entry>
     <title>3.5-编译过程(2)-汇编过程</title>
     <url>/2023/09/05/3-5-%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B-2-%E6%B1%87%E7%BC%96%E8%BF%87%E7%A8%8B/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="3-5-1-汇编过程"><a href="#3-5-1-汇编过程" class="headerlink" title="3.5.1 汇编过程"></a>3.5.1 汇编过程</h1><p>汇编过程的基本流程如下：</p>
+<ol>
+<li>词法分析：在这个阶段，汇编器将输入的源文件（通常以.s为后缀，如main.s）进行词法分析。词法分析器将源代码分解为一个个的词法单元，如指令、寄存器、标识符等，并生成词法单元流。</li>
+<li>语法分析：在语法分析阶段，汇编器使用词法单元流进行语法分析。语法分析器根据语法规则将词法单元流解析为语法结构，并构建相应的语法树。语法分析过程中还会生成符号表，用于记录和管理标识符、变量和常量等信息。</li>
+<li>组装：在组装阶段，汇编器将语法树转换为可执行的目标文件。这个过程包括将汇编指令转换为机器指令、填充符号表、生成重定位表等。组装器的主要任务是将汇编代码转换为机器代码，并生成可执行目标文件。</li>
+<li>代码生成：在代码生成阶段，汇编器根据语法树和符号表生成目标文件的指令。这个阶段涉及指令的翻译和生成各种表信息，如重定位表、赋值信息等。指令的翻译过程将汇编指令转化为目标机器的机器指令，生成的表信息用于链接和重定位等操作。</li>
+<li>主要工作：汇编过程的主要工作包括词法分析、语法分析、组装、代码生成和生成各种表信息。这些工作协同完成，最终生成可重定位目标文件（通常以.o为后缀，如main.o）。</li>
+</ol>
+<h1 id="3-5-2-符号表（Symbol-Table）"><a href="#3-5-2-符号表（Symbol-Table）" class="headerlink" title="3.5.2 符号表（Symbol Table）"></a>3.5.2 符号表（Symbol Table）</h1><p>​	符号表（Symbol Table）是编译器和链接器中存储程序中符号信息的数据结构。它记录了源代码中定义和引用的变量、函数、类、常量等标识符的相关信息，如名称、类型、内存地址等。符号表在编译和链接过程中起着重要的作用，用于解析符号引用、符号重定位和符号解析等任务。</p>
+<p>符号表通常包含以下信息：</p>
+<ol>
+<li>符号名称（Symbol Name）：记录标识符的名称，如变量名、函数名等。</li>
+<li>符号类型（Symbol Type）：指示标识符的类型，如整型、浮点型、函数等。</li>
+<li>符号属性（Symbol Attributes）：记录标识符的属性，如是否为全局变量、局部变量、静态变量等。</li>
+<li>内存地址（Memory Address）：记录标识符在内存中的地址或偏移量。</li>
+<li>作用域（Scope）：指示标识符的作用域范围，如全局作用域、局部作用域等。</li>
+<li>定义位置（Definition Location）：记录标识符的定义位置，用于解析符号引用。</li>
+<li>引用位置（Reference Locations）：记录标识符的引用位置，用于解析符号引用。</li>
+</ol>
+<p>符号表在编译过程中起着重要的作用：</p>
+<ol>
+<li>语法分析：在语法分析阶段，编译器将标识符添加到符号表中，并记录其名称、类型和定义位置等信息。</li>
+<li>符号解析：在编译器的符号解析阶段，通过符号表来解析标识符的引用。编译器会检查符号表，找到标识符的定义位置，并进行类型检查和语义分析。</li>
+<li>重复定义检查：符号表可以检查是否存在重复定义的标识符，如重复的变量名或函数名。</li>
+<li>作用域管理：符号表中的作用域信息可以帮助编译器正确处理局部变量和全局变量的作用域范围。</li>
+<li>符号重定位：在链接过程中，符号表用于解析符号引用和进行符号重定位。链接器会根据符号表中的地址信息，将各个目标文件中的符号引用链接到正确的地址上。</li>
+</ol>
+<h1 id="3-5-3-重定位表（Relocation-Table）"><a href="#3-5-3-重定位表（Relocation-Table）" class="headerlink" title="3.5.3 重定位表（Relocation Table）"></a>3.5.3 重定位表（Relocation Table）</h1><p>​	重定位表（Relocation Table）是链接器生成的一种表格，用于记录需要进行符号重定位的位置和相关信息。在目标文件中，由于代码和数据的位置是相对于起始地址的偏移量，因此在链接时需要对这些位置进行调整，以确保最终生成的可执行文件能够正确地访问和使用这些代码和数据。</p>
+<p>重定位表通常包含以下信息：</p>
+<ol>
+<li>符号名称（Symbol Name）：记录需要进行重定位的符号的名称。</li>
+<li>重定位类型（Relocation Type）：指示需要进行的重定位类型，如绝对重定位、相对重定位等。</li>
+<li>位置（Location）：记录需要进行重定位的位置或偏移量。</li>
+<li>目标地址（Target Address）：记录需要重定位到的目标地址。</li>
+</ol>
+<p>重定位表在链接过程中起着重要的作用：</p>
+<ol>
+<li>符号解析与重定位：链接器通过重定位表中的信息，对目标文件中的符号引用进行解析和重定位。它会根据目标文件的符号表和重定位表，将符号引用链接到正确的地址上。</li>
+<li>位置调整：重定位表中记录了需要进行重定位的位置和目标地址，链接器根据这些信息对目标文件中的代码和数据位置进行调整，使其能够正确地访问和使用。</li>
+<li>符号冲突解决：如果存在多个目标文件中相同名称的符号，重定位表可以帮助链接器解决符号冲突的问题。通过重定位表中的符号名称和目标地址，链接器可以确定每个符号应该链接到的具体地址，从而避免冲突。</li>
+</ol>
+]]></content>
+      <categories>
+        <category>c高级编程</category>
+      </categories>
+      <tags>
+        <tag>程序的编译、链接和运行</tag>
+      </tags>
   </entry>
   <entry>
     <title>3.4-编译过程(1)-从源程序到汇编文件</title>
     <url>/2023/09/05/3-4-%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B-1-%E4%BB%8E%E6%BA%90%E7%A8%8B%E5%BA%8F%E5%88%B0%E6%B1%87%E7%BC%96%E6%96%87%E4%BB%B6/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="3-4-1-编译输入输出"><a href="#3-4-1-编译输入输出" class="headerlink" title="3.4.1 编译输入输出"></a>3.4.1 编译输入输出</h1><p>编译过程主要是将高级语言（如C语言）的源代码转换为低级语言（如汇编语言或机器语言），以便计算机可以理解和执行。</p>
+<p>在编译过程中，主要的步骤包括：</p>
+<ol>
+<li>词法分析（Lexical Analysis）：将源代码划分为词法单元（tokens），例如关键字、标识符、运算符和常量等。词法分析器（也称为扫描器）会扫描源代码，并生成词法单元流。</li>
+<li>语法分析（Syntax Analysis）：根据语法规则，将词法单元流组织成语法树（Parse Tree）或抽象语法树（Abstract Syntax Tree，AST）。语法分析器（也称为解析器）会检查语法的正确性，并生成语法树或AST。</li>
+<li>语义分析（Semantic Analysis）：对语法树或AST进行语义检查，包括类型检查、语义规则验证等。语义分析器会确保程序在语义上是合法的，并生成相应的符号表（Symbol Table）来记录变量、函数等的信息。</li>
+<li>中间代码生成（Intermediate Code Generation）：将语法树或AST转换为中间表示形式，通常是一种类似于三地址码的中间代码。中间代码是一种抽象的表示形式，它更接近于底层的机器语言，但仍保留了高级语言的结构特点。</li>
+<li>代码优化（Code Optimization）：对中间代码进行优化，以改善程序的性能、减少代码的执行时间或空间占用。代码优化技术包括常量传播、循环展开、公共子表达式消除等，旨在生成更高效的目标代码。</li>
+<li>目标代码生成（Code Generation）：将优化后的中间代码转换为目标机器的机器代码或汇编代码。目标代码生成器会根据目标机器的体系结构和指令集生成对应的机器代码或汇编代码。</li>
+<li>链接（Linking）：如果程序包含多个源文件或库文件，链接器会将它们合并为一个可执行文件。链接过程包括符号解析、重定位等步骤，以确保程序中引用的函数和变量正确地连接到对应的定义。</li>
+</ol>
+<h1 id="3-4-2-词法分析"><a href="#3-4-2-词法分析" class="headerlink" title="3.4.2 词法分析"></a>3.4.2 词法分析</h1><p>词法分析是编译过程中的一项关键任务，它将源代码作为输入，并将其划分为一系列记号（tokens）。</p>
+<p>在词法分析过程中，主要的步骤包括：</p>
+<ol>
+<li>从左到右读取源程序：词法分析器按顺序逐个字符地读取源代码，从左到右进行扫描。</li>
+<li>扫描和分解记号：词法分析器根据语言的词法规则，将源程序的字符流分解成一系列记号。记号可以是关键字、标识符、字面量（数字、字符串等）、特殊字符（运算符等）和分界符（分号、逗号等）等。</li>
+<li>构建记号流：词法分析器将分解出的记号按顺序构建记号流，以便后续的语法分析和语义分析等阶段使用。</li>
+<li>符号表：在词法分析过程中，识别到的标识符（如函数名、变量名、标号等）会被记录在符号表中。符号表是编译器维护的一张表格，用于存储标识符的属性信息（如类型、作用域等）。</li>
+<li>字符串表：识别到的数字、字符串等字面量会被存放在字符串表中。字符串表是一个存储字符串字面量的表格，编译器可以使用索引来引用字符串表中的内容，以减少内存占用和提高效率。</li>
+</ol>
+<h1 id="3-4-3-语法分析"><a href="#3-4-3-语法分析" class="headerlink" title="3.4.3 语法分析"></a>3.4.3 语法分析</h1><p>语法分析是编译过程中的一个重要阶段，它根据语法规则检查词法分析器生成的记号流，以确定是否构成一个语法上正确的程序，并将其分解为语法短语（如程序、语句、表达式等）。语法分析器将记号流转化为语法树（Parse Tree），它是一种树形结构，表示了程序的语法结构。</p>
+<p>在语法分析过程中，主要的步骤包括：</p>
+<ol>
+<li>语法规则：语法分析器使用预定义的语法规则来判断记号流是否符合语法要求。语法规则描述了语言的语法结构，包括语句的组成、表达式的形式等。</li>
+<li>语法树构建：语法分析器根据语法规则，将记号流转化为语法树。语法树是一种树形结构，它以记号为节点，将程序的语法结构表示为树的分支和叶子节点。</li>
+<li>语法分析工具：为了简化语法分析的实现，可以使用专门的语法分析工具，如Yacc（Yet Another Compiler Compiler）。这些工具提供了一种形式化的方式来描述语法规则，并自动生成语法分析器的代码。</li>
+<li>通用性：由于语法规则是与编程语言相关的，不同的编程语言具有不同的语法规则。但幸运的是，对于常见的编程语言，不需要为每个编译器编写一个新的语法分析器。相同的语法分析技术和工具可以用于不同的编程语言，只需要提供相应的语法规则。</li>
+<li>语法错误：如果记号流不能按照语法规则进行正确的匹配，就会发生语法错误（syntax error）。语法分析器会检测这些错误并生成相应的错误信息，指示程序中存在哪些语法错误以及其位置。</li>
+</ol>
+<h1 id="3-4-4-语义分析"><a href="#3-4-4-语义分析" class="headerlink" title="3.4.4 语义分析"></a>3.4.4 语义分析</h1><p>语义分析是编译过程中的一个关键阶段，它在语法分析的基础上对语句、程序、表达式等进行进一步检查，以确定其语义是否正确。语义分析器会检查静态语义和动态语义，并对整个语法树的表达式进行类型标注。</p>
+<p>在语义分析过程中，主要的任务包括：</p>
+<ol>
+<li>静态语义：静态语义分析在编译期间进行，它关注的是在编译期能够确定的语义。静态语义包括函数实参与形参的类型匹配和转换、变量的声明和使用、类型检查等。例如，语义分析器会检查函数调用时实参与形参的类型是否匹配，是否存在未声明的变量等。</li>
+<li>动态语义：动态语义分析在运行期间进行，它关注的是在运行时才能确定的语义。动态语义包括除数为零、数组越界访问等。例如，语义分析器会检查除法表达式中除数是否为零，以避免发生运行时错误。</li>
+<li>类型标注：语义分析器会对整个语法树的表达式进行类型标注，即为每个表达式确定其类型信息。这可以帮助后续的代码生成和优化阶段进行类型检查和优化操作。</li>
+<li>语义分析器：语义分析器是执行语义分析的工具或组件。它接收语法分析器生成的语法树作为输入，并根据语义规则进行分析和检查。语义分析器会发现并报告语义错误，如类型不匹配、未声明的变量等。</li>
+</ol>
+<h1 id="3-4-5-第四阶段"><a href="#3-4-5-第四阶段" class="headerlink" title="3.4.5 第四阶段"></a>3.4.5 第四阶段</h1><p>第四阶段是编译器的中间代码生成阶段。在这个阶段，编译器将语法树转换为中间代码，以便进行后续的优化和目标代码生成。</p>
+<p>中间代码是一种抽象的表示形式，它通常比源代码更接近于目标代码，但仍具有较高的可移植性和可理解性。中间代码使得编译器可以对程序进行统一的优化处理，而不受目标机器的限制。</p>
+<p>现代编译器的构造通常包括以下三个主要组成部分：</p>
+<ol>
+<li>前端：前端负责词法分析、语法分析和语义分析等任务。它将源代码转换为中间表示形式（如语法树或中间代码），并进行基本的语法和语义检查。前端确保源代码在语法和语义上是正确的，并为后续的优化和代码生成阶段提供准确的输入。</li>
+<li>优化器：优化器是编译器的重要组成部分，它对中间代码进行优化。优化器通过分析和重写中间代码，以提高程序的执行效率、减少代码大小或改进其他性能指标。优化器使用各种技术，如常量传播、循环优化、数据流分析等，来改进程序的质量和性能。</li>
+<li>后端：后端负责将优化后的中间代码转换为目标机器的汇编代码或机器代码。后端包括指令选择（将中间代码转换为适合目标机器的指令序列）、寄存器分配（为变量选择寄存器）、代码布局、代码生成等任务。后端将优化后的中间代码转化为目标机器能够执行的代码。</li>
+</ol>
+<p>中间代码是一维线性序列，更容易生成和处理。它可以在后续的优化和代码生成阶段中进行处理和转换。</p>
+<p>生成中间代码的过程通常在语义分析阶段之后，在优化器之前。语义分析器将源代码转换为语法树，然后通过对语法树进行遍历和转换，生成中间代码表示。这个过程包括将每个语法结构转换为相应的中间代码指令，并保留必要的信息来保证后续的优化和代码生成。</p>
+<p>中间代码具有一些特点，如：</p>
+<ol>
+<li>接近目标代码：中间代码的表示形式类似于目标代码，它更接近于实际的机器指令。这使得后续的代码生成阶段更容易进行，因为中间代码已经具有了一定的目标机器相关性。</li>
+<li>容易生成和转换：中间代码的生成过程相对简单，通常是基于语法树的遍历和转换。中间代码的线性结构使得对其进行处理和转换更加方便，例如进行优化和目标代码生成。</li>
+</ol>
+<h1 id="3-4-6-为什么需要中间代码"><a href="#3-4-6-为什么需要中间代码" class="headerlink" title="3.4.6 为什么需要中间代码"></a>3.4.6 为什么需要中间代码</h1><p>使用中间代码有以下几个主要原因：</p>
+<ol>
+<li>可移植性：中间代码是一种与具体目标机器无关的表示形式。通过生成中间代码，编译器可以将源代码与目标机器解耦，使得编译器更加可移植。中间代码可以在不同的目标平台上进行后续的优化和代码生成，从而实现源代码在不同平台上的跨平台执行。</li>
+<li>优化：中间代码提供了一个高层次的表示形式，使得编译器可以在这个层次上进行各种优化操作。编译器可以利用中间代码的结构和语义信息，进行常量传播、死代码消除、循环优化、内联函数等优化操作，以提高程序的执行效率和性能。</li>
+<li>简化代码生成：中间代码更接近于目标代码的表示形式，因此在后续的代码生成阶段，可以更轻松地将中间代码转换为目标机器的汇编代码或机器代码。中间代码的生成和转换过程相对简单，可以通过一系列的规则和转换操作来实现。</li>
+<li>可读性和可理解性：中间代码通常使用一种高级语言或伪代码的形式表示，相对于目标机器的汇编代码来说，更容易阅读和理解。中间代码使得编译器的工作更加透明和可追踪，同时也有助于开发人员理解编译器的工作过程。</li>
+</ol>
+<h2 id="3-4-6从中间代码到汇编"><a href="#3-4-6从中间代码到汇编" class="headerlink" title="3.4.6从中间代码到汇编"></a>3.4.6从中间代码到汇编</h2><p>编译器的第五阶段是生成汇编代码，该阶段将中间代码翻译为汇编文件，并最终生成目标文件。这个阶段涉及到指令选择、控制流分析、数据流分析、寄存器分配等过程。</p>
+<p>以下是生成汇编代码的一般过程：</p>
+<ol>
+<li>指令选择：在这个过程中，编译器将中间代码转换为汇编语言指令。指令选择的目标是选择合适的汇编指令，使得它们能够实现中间代码所描述的操作。这个过程通常会根据目标机器的架构和指令集来进行，以生成与目标机器兼容的汇编代码。</li>
+<li>控制流分析：控制流分析用于确定程序中的基本块和控制流图。基本块是一段连续的指令序列，没有分支或跳转。控制流图记录了程序中的基本块之间的控制流关系，包括条件分支、循环等。控制流分析是进行优化和寻找代码转换机会的基础。</li>
+<li>数据流分析：数据流分析用于分析程序中的数据依赖关系。它可以确定变量的定义和使用位置，以及数据传递和转换的路径。数据流分析对于进行寄存器分配和优化非常重要，因为它提供了变量的生命周期和使用信息。</li>
+<li>寄存器分配：寄存器分配是将变量和临时值映射到物理寄存器的过程。寄存器分配可以基于静态或动态策略进行。静态寄存器分配在编译时确定寄存器的分配方案，而动态寄存器分配在运行时根据需要进行寄存器分配。寄存器分配的目标是最大程度地利用寄存器，减少内存访问。</li>
+<li>汇编语言生成：在这个过程中，编译器将经过指令选择、控制流分析、数据流分析和寄存器分配的中间代码转换为汇编语言。汇编语言是一种与目标机器相关的低级表示形式，它使用特定的汇编指令和寄存器来描述程序的操作和数据。生成的汇编代码将被进一步处理以生成目标文件。</li>
+<li>汇编器：汇编器是一个独立工具，它将汇编语言代码转换为可执行的目标文件。汇编器接受汇编语言作为输入，根据目标机器的指令集和格式，将汇编语言翻译为机器代码，并生成目标文件。</li>
+</ol>
+]]></content>
       <categories>
         <category>c高级编程</category>
       </categories>
@@ -976,7 +1542,26 @@
   <entry>
     <title>3.3-预处理过程</title>
     <url>/2023/09/05/3-3-%E9%A2%84%E5%A4%84%E7%90%86%E8%BF%87%E7%A8%8B/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="3-3-1-预处理的过程"><a href="#3-3-1-预处理的过程" class="headerlink" title="3.3.1 预处理的过程"></a>3.3.1 预处理的过程</h1><p>预处理是编译过程中的第一步，它对源代码进行一系列的处理，包括头文件展开、宏展开、条件编译、删除注释、添加行号和文件名标识等。下面是预处理过程的主要步骤：</p>
+<ol>
+<li>头文件展开：将所有<code>#include</code>指令包含的文件插入到指令所在的位置。这样可以将头文件的内容插入到源代码中，使得源代码中可以使用头文件中定义的函数、变量和宏等。</li>
+<li>宏展开：对所有的宏定义进行展开，并删除<code>#define</code>指令。预处理器会查找源代码中使用的宏，并将其替换为宏定义中的内容。这样可以将宏定义的代码在预处理阶段进行替换，减少了函数调用的开销。</li>
+<li>条件编译：处理所有的条件预编译指令，例如<code>#if</code>、<code>#ifdef</code>、<code>#else</code>等。根据条件的真假，选择性地编译或排除部分代码。这样可以根据不同的条件编译选项，编译不同的代码分支。</li>
+<li>删除注释：去除源代码中的注释部分。注释对于程序的理解和阅读很重要，但在编译过程中并不需要注释，因此预处理阶段会将注释删除，减少后续编译的工作量。</li>
+<li>添加行号和文件名标识：为了方便编译调试和错误定位，预处理阶段会为每一行源代码添加行号和文件名标识。这样在编译出错时，可以准确地定位错误所在的行和文件。</li>
+<li>保留#pragma命令：预处理阶段会保留<code>#pragma</code>指令。<code>#pragma</code>指令是编译器提供的一些特定功能的扩展，用于控制编译器的行为或实现特定的功能。</li>
+<li>宏命令展开和文本替换：预处理阶段最后一步是对源代码进行宏命令展开和文本替换。在宏展开过程中，预处理器会查找源代码中使用的宏，并将其展开为宏定义中的内容。同时，还会进行一些文本替换的操作，例如替换宏参数、替换宏函数调用等。</li>
+</ol>
+<h1 id="3-3-2-为什么要进行预处理"><a href="#3-3-2-为什么要进行预处理" class="headerlink" title="3.3.2 为什么要进行预处理"></a>3.3.2 为什么要进行预处理</h1><p>预处理过程在编译过程中起着重要的作用，原因如下：</p>
+<ol>
+<li>宏定义：预处理阶段允许使用宏定义，宏可以将一段代码或表达式替换为预定义的文本。通过使用宏定义，可以简化代码编写，提高代码的可读性和可维护性。</li>
+<li>方便条件编译：条件编译指令（如<code>#if</code>、<code>#ifdef</code>、<code>#else</code>）允许根据不同的编译条件选择性地编译或排除代码块。这对于实现跨平台兼容性或针对不同的编译配置进行调试和优化非常有用。</li>
+<li>兼容各个平台和处理器架构：预处理过程可以根据不同的平台和处理器架构进行编译选项的设置。通过使用条件编译指令，可以编写适用于不同平台和处理器的代码，提高代码的可移植性和兼容性。</li>
+<li>最大程度复用公用代码：通过使用头文件，可以将公用的函数、结构体和宏等定义保存在独立的文件中，并在需要的地方进行引用。这样可以实现代码的模块化和复用，减少代码的冗余和重复编写。</li>
+<li>头文件包含：预处理过程中的头文件展开允许将其他文件中的代码插入到源文件中。这样可以将相关的代码组织在一起，提高代码的可读性和可维护性，并减少代码中的重复内容。</li>
+<li>模块化编程：预处理过程可以通过定义和使用宏来实现模块化编程。模块化编程将代码划分为独立的功能模块，使代码更易于理解、测试和维护。</li>
+</ol>
+]]></content>
       <categories>
         <category>c高级编程</category>
       </categories>
@@ -1073,24 +1658,6 @@
       </categories>
       <tags>
         <tag>程序的编译、链接和运行</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>2023 0905 反思</title>
-    <url>/2023/09/05/2023-0905-%E5%8F%8D%E6%80%9D/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>日期：9月5日<br>星期：星期二<br>时间：6:51</p>
-<p>时间过得真快啊，在这段往昔时光中，我们又将前往何方呢？</p>
-<p>刚刚想到了是不是应该考个研究生的问题，研究生可以让我再次接触到新的知识、拓宽视野，但现在的生活还有很多要提升的地方，学习的方法，对于自己的控制力量等等，</p>
-<p>在目前的生活中，我其实并无所追求，工资多少也并不重要，生活差不多就足够了。吃的东西不难吃，不饿就可以，有时甚至想着干净的平平凡凡的过一生就够了。</p>
-<p>然后回到现实，现在就认真的完成一天的工作，看看书，提升自己就可以了，以后有机会把握住才好呀，你说对吗。</p>
-<p>再回到现在的博客中，问题有点大，就像昨天整理的那个驱动一样，一部分一个markdown是不太好的。如果有机会的话，还是需要将每一章作为一个整体，这不仅仅是分开的问题，毕竟谁愿意看太多的字呢？</p>
-<p>好了，新的一天已经开始了，请继续加油！</p>
-]]></content>
-      <categories>
-        <category>反思</category>
-      </categories>
-      <tags>
-        <tag>反思</tag>
       </tags>
   </entry>
   <entry>
@@ -6960,62 +7527,6 @@
       </categories>
       <tags>
         <tag>字符设备基础</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>2023 0904 读书</title>
-    <url>/2023/09/04/2023-0904-%E8%AF%BB%E4%B9%A6/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>读书是一种很好的提升自控力的方式。我正在阅读的《自控力》是一本关于意志力的书籍。</p>
-<p>第一章讲述了意志力的重要性，并提出了一周的自我观察方法，帮助我们了解自己是如何屈服于冲动的。我们甚至不需要设定具体的自控目标，只需要观察自己是否意识到自己在做什么时容易冲动，以及什么样的想法、感受和情况最容易让我们放弃冲动。</p>
-<p>在平常的一天中，我会经历许多冲动，既有积极的冲动，也有消极的冲动。比如早晨6点起床的冲动，写反思日记的冲动，读书提升自己的冲动等等。同时，也会有一些消极的冲动，比如看手机的冲动，回复消息的冲动，学习时刷哔哩哔哩的冲动，晚上回家后看小说的冲动等等。目前我能想到的就这么多，那么如何克制这些冲动呢？冥想！！！</p>
-<p>冥想训练主要包括以下几个步骤：</p>
-<ol>
-<li>找到一个安静舒适的地方：选择一个安静、无干扰的环境，可以是你家中的一间房间或其他让你感到放松的地方。</li>
-<li>坐下来，放松身体：找一个舒适的坐姿，可以是盘腿坐或坐在椅子上，放松肩部、颈部和脸部的肌肉。</li>
-<li>关注呼吸：将注意力集中在呼吸上，感受每一次的呼吸进出。可以留意呼气时的身体松弛感和吸气时的充实感。</li>
-<li>观察思绪：当你的思绪开始游离时，不要强行压制或判断，只是观察并让它们自然地流过。将注意力重新回到呼吸上。</li>
-<li>培养耐心和坚持：冥想是一项需要持续练习的技能，刚开始可能会感到困难或不适应，但坚持下来会逐渐体验到好处。</li>
-</ol>
-<p>在《自控力》这本书中，作者提出了一周的自我观察方法，以帮助读者了解自己是如何屈服于冲动的。这种观察方法可以帮助我们认识到自己在什么情况下容易失去自控，从而更好地应对冲动。</p>
-<p>其中，书中列举了一个女性的案例，她是一个不停查看邮件的人。这个案例描述了她在一周中的自我观察情况，具体包括以下几个方面：</p>
-<ol>
-<li>冲动的触发：女性在一周中遇到了多种触发冲动的情况，比如接收到新邮件的提示、感到无聊或焦虑时等。</li>
-<li>冲动的表现：她在面对这些冲动时，表现为立即检查电子邮件，无法抑制自己的冲动，经常中断正在进行的任务。</li>
-<li>冲动的后果：女性认识到这种冲动行为带来了一系列的后果，比如分散注意力、延迟完成任务、减少工作效率等。</li>
-</ol>
-<p>通过这个案例，读者可以看到自己在类似情况下的反应，并从中了解到自己容易屈服于冲动的原因和模式。这种自我观察的方法可以帮助我们更好地认识自己的行为模式和冲动的来源，从而有针对性地制定控制策略和改善方法。</p>
-<p>当我们意识到自己容易屈服于冲动时，可以尝试一些应对措施，比如设定专门的时间段查看邮件、使用提醒工具来控制查看频率、设定目标和奖励机制等，以提升自我控制力和应对冲动的能力。</p>
-]]></content>
-      <categories>
-        <category>读书</category>
-      </categories>
-      <tags>
-        <tag>读书</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>2023 0904 反思</title>
-    <url>/2023/09/04/2023-0904-%E5%8F%8D%E6%80%9D/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>日期：2023年9月4日<br>星期一</p>
-<p>今天我想总结一下最近两天的反思和经验。</p>
-<p>首先，我认识到搭建自己的博客真的非常重要。这是一件有趣的事情，目前给我带来了很多正向的收益。与之前只在笔记本上记录的方式相比，现在搭建博客让我能够对比自己的学习进展。以前的手写记录方式有一个最大的问题，就是我很少会去第二次看自己的笔记。这样一来，我就无法确认自己是否真正理解了学习的内容。现在，我意识到重要的是多次复习和总结，不管学习的内容是难是易，只有通过不断地学习才能真正掌握知识。</p>
-<p>另外，当面对技术支持时，我想知道如何保持内心的宁静。客户可能会提出许多问题，而这时候我可能会感到心烦意乱。最好的办法是设定一个固定的时间段，比如15分钟，专注于学习而不去处理技术支持问题。在这15分钟内努力学习，不被打扰。然后，在这段时间结束后，给自己5分钟的自由时间，用来回答客户的问题。我之前试过这种方法，效果还不错。</p>
-<p>今天一天的安排如下：</p>
-<ol>
-<li>进行反思和总结。</li>
-<li>继续阅读一本书。</li>
-<li>打扫卫生</li>
-<li>将驱动手册整理为Markdown格式。</li>
-<li>继续阅读并写驱动手册的后面部分。</li>
-<li>晚上将整理好的Markdown文件上传。</li>
-<li>晚上继续学习C语言的深入知识。</li>
-</ol>
-]]></content>
-      <categories>
-        <category>反思</category>
-      </categories>
-      <tags>
-        <tag>反思</tag>
       </tags>
   </entry>
   <entry>

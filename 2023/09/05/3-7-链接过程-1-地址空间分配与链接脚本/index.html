@@ -90,7 +90,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">0</span>
+            <span class="post-count">1.9k</span>
         </span>
     </span>
 
@@ -99,20 +99,64 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">1 分钟</span>
+            <span class="post-count">6 分钟</span>
         </span>
     </span>
 </div>
  
     </div>
       
+    <div class="tocbot"></div>
+
 
 
 
   
     <div class="article-entry" itemprop="articleBody">
        
-   
+  <h1 id="3-7-1-链接的重要性"><a href="#3-7-1-链接的重要性" class="headerlink" title="3.7.1 链接的重要性"></a>3.7.1 链接的重要性</h1><p>链接（Linking）是将多个可重定位目标文件合并、组装成可执行目标文件或共享库的过程。链接器（Linker）是执行链接操作的工具或程序。</p>
+<p>链接的主要目的是解决多个目标文件之间的符号引用和地址重定位问题，使得程序能够正确地执行。</p>
+<p>链接过程包括以下主要步骤：</p>
+<ol>
+<li>地址空间分配：链接器将可执行目标文件加载到内存中的适当地址空间中。这涉及到分配代码段、数据段、堆栈等内存区域，并为每个目标文件分配适当的地址范围。</li>
+<li>符号解析：在链接过程中，符号解析是一个重要的步骤。符号解析的目的是解决符号的引用关系，将符号引用与符号定义进行匹配。在符号解析阶段，链接器会根据符号的绑定属性（如全局、局部、弱符号）来确定符号的可见性和重复定义规则。<ul>
+<li>强符号（Strong Symbols）：具有全局绑定属性的符号，优先级高于弱符号。如果存在多个强符号同名定义，链接器会报错。</li>
+<li>弱符号（Weak Symbols）：具有弱绑定属性的符号，允许在多个目标文件中重复定义。如果存在多个弱符号同名定义，并且没有对应的强符号，链接器会选择其中一个定义。</li>
+</ul>
+</li>
+<li>重定位（Relocation）：重定位是将目标文件中的地址引用转换为最终可执行文件中的实际地址的过程。在链接过程中，由于目标文件中的地址是相对于各自的节（Section）的起始地址的偏移量，因此需要进行重定位操作，将这些相对地址转换为绝对地址。重定位过程涉及到修正目标文件中的跳转、调用和数据访问等指令，使得它们指向正确的地址。</li>
+</ol>
+<h1 id="3-7-2-地址空间分配"><a href="#3-7-2-地址空间分配" class="headerlink" title="3.7.2 地址空间分配"></a>3.7.2 地址空间分配</h1><p>地址空间分配是链接过程中的一项重要任务，它确定了各个目标文件中不同段（如代码段、数据段、bss段）在最终可执行目标文件中的位置和大小。</p>
+<p>以下是地址空间分配的一般步骤：</p>
+<ol>
+<li>扫描所有目标文件：链接器会逐个扫描所有目标文件，包括主程序文件和库文件。对于每个目标文件，链接器会读取其文件头部和段表等信息。</li>
+<li>获取段信息：链接器从各个目标文件的段表中获取各个段的信息，包括段的类型（如代码段、数据段、bss段）、大小和对齐等属性。每个目标文件中的段表记录了该文件中各个段的位置和长度。</li>
+<li>确定链接地址：链接器会指定一个链接地址（linkaddr）作为起始地址，用于存放最终可执行目标文件的各个段。</li>
+<li>合并同类型段：链接器按照段的类型（代码段、数据段、bss段）顺序，将各个目标文件中相同类型的段进行合并。对于代码段和数据段，链接器会根据链接地址和各个段的偏移量（offset）计算出最终的段地址。</li>
+<li>重新计算段长度和位置：合并后，链接器会重新计算各个段的长度和位置。对于代码段和数据段，它们的长度是各个段的长度之和；而对于bss段，它的长度通常为0，因为bss段存放的是未初始化的全局变量和静态变量。</li>
+<li>处理库文件：链接器还会处理库文件，将库文件中的目标模块合并到最终的可执行目标文件中。这涉及到符号解析、重定位和符号表的更新等操作。</li>
+</ol>
+<h1 id="3-7-3-创建全局符号表"><a href="#3-7-3-创建全局符号表" class="headerlink" title="3.7.3 创建全局符号表"></a>3.7.3 创建全局符号表</h1><p>创建全局符号表是链接过程的一项关键任务，它的目的是将各个目标文件中的符号收集起来，并统一保存在一个全局符号表中。</p>
+<p>以下是创建全局符号表的一般步骤：</p>
+<ol>
+<li>扫描所有目标文件：链接器会逐个扫描所有目标文件，包括主程序文件和库文件。对于每个目标文件，链接器会读取其符号表信息。</li>
+<li>收集符号：链接器从每个目标文件的符号表中收集符号信息。符号表中包含了各个目标文件中定义和引用的符号的名称、属性和地址等信息。</li>
+<li>统一放入全局符号表：链接器将从各个目标文件中收集到的符号统一放入一个全局符号表中。全局符号表是链接器维护的一个数据结构，用于保存所有目标文件中的符号信息。</li>
+<li>相对零地址偏移：在创建全局符号表时，符号的地址仍然是相对于零地址的偏移量。这是因为在链接过程的后续阶段，还需要进行重定位操作，将符号的地址转换为最终可执行目标文件中的实际地址。</li>
+</ol>
+<h1 id="3-7-4-链接脚本"><a href="#3-7-4-链接脚本" class="headerlink" title="3.7.4 链接脚本"></a>3.7.4 链接脚本</h1><p>不同的代码段在链接过程中的组装是由链接脚本（Linker Script）来规定的。链接脚本是一个文本文件，其中包含了链接器的指令和规则，用于指导链接器如何组装各个代码段。</p>
+<p>链接脚本通常包含以下信息：</p>
+<ol>
+<li>组装顺序：链接脚本规定了各个代码段的组装顺序。根据链接脚本的指定顺序，链接器会按照代码段的顺序将它们组装到最终可执行目标文件中。</li>
+<li>起始地址：链接脚本指定了各个代码段在最终可执行目标文件中的起始地址。链接器会根据链接脚本中的地址规定，将各个代码段放置到相应的地址位置。</li>
+<li>位置对齐：链接脚本还规定了代码段的位置对齐要求。根据链接脚本中指定的对齐规则，链接器会确保代码段在最终可执行目标文件中按照规定的对齐边界进行放置。</li>
+<li>输出格式和运行平台：链接脚本可以指定输出可执行文件的格式和运行平台。这些信息对于生成符合特定格式和平台要求的可执行目标文件非常重要。</li>
+<li>入口地址：链接脚本可以指定可执行目标文件的入口地址。入口地址是程序执行的起始点，在加载和执行可执行文件时，操作系统会将控制权转移到指定的入口地址处开始执行程序。</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">oUTPUT_FORMAT( <span class="string">&quot;elf32-littlearm”</span></span><br><span class="line"><span class="string">&quot;</span>elf32-bigarm”</span><br><span class="line"><span class="string">&quot;elf32-littlearm”)</span></span><br><span class="line"><span class="string">;输出ELF麻件格式</span></span><br><span class="line"><span class="string">OUTPUT_ARCH( “arm”)</span></span><br><span class="line"><span class="string">;输出可执行文件的运行平台为arm</span></span><br><span class="line"><span class="string">ENTRY(_start)</span></span><br><span class="line"><span class="string">;程序入口地址</span></span><br><span class="line"><span class="string">SECTIONS</span></span><br><span class="line"><span class="string">;各段描述</span></span><br><span class="line"><span class="string">&#123;</span></span><br><span class="line"><span class="string">.= Ox60000000;</span></span><br><span class="line"><span class="string">;代码段起始地址</span></span><br><span class="line"><span class="string">.text:&#123;*(.text)&#125;</span></span><br><span class="line"><span class="string">;代码段描述:所有.o文件的. text</span></span><br><span class="line"><span class="string">.= Ox60200000;</span></span><br><span class="line"><span class="string">;数据段的起始地址</span></span><br><span class="line"><span class="string">.data: &#123;*(. data)&#125;</span></span><br><span class="line"><span class="string">;数据段描述</span></span><br><span class="line"><span class="string">.bss :&#123;*(. bss)&#125;</span></span><br><span class="line"><span class="string">; BSS段描述</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string"></span></span><br></pre></td></tr></table></figure>
+
+<p>在SECTIONS部分，代码段的起始地址为0x60000000，紧接着是代码段的描述；数据段的起始地址为0x60200000，后面是数据段的描述；最后是BSS段的描述。</p>
+ 
       <!-- reward -->
       
     </div>
