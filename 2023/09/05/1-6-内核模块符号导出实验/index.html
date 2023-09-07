@@ -90,7 +90,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">0</span>
+            <span class="post-count">1.6k</span>
         </span>
     </span>
 
@@ -99,20 +99,76 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">1 分钟</span>
+            <span class="post-count">6 分钟</span>
         </span>
     </span>
 </div>
  
     </div>
       
+    <div class="tocbot"></div>
+
 
 
 
   
     <div class="article-entry" itemprop="articleBody">
        
-   
+  <p>在上一小节中，给大家讲解了驱动模块传参实验，使用insmod命令加载驱动时可以进行参数的传递，但是每一个内核模块之间是相互独立的，那模块间的符号传递要怎样进行呢，让我们带着疑问来进行本章节的学习吧！</p>
+<h2 id="6-1-内核模块符号导出简介"><a href="#6-1-内核模块符号导出简介" class="headerlink" title="6.1 内核模块符号导出简介"></a>6.1 内核模块符号导出简介</h2><p>驱动程序编译生成的ko文件是相互独立的，即模块之间变量或者函数在正常情况下无法进行互相访问。而一些复杂的驱动模块需要分层进行设计，这时候就需要用到内核模块符号导出。</p>
+<p>内核符号导出指的是在内核模块中导出相应的函数和变量，在加载模块时被记录在公共内核符号表中，以供其他模块调用。符号导出所使用的宏为EXPORT_SYMBOL(sym)和EXPORT_SYMBOL_GPL(sym)。它们定义在 “内核源码&#x2F;include&#x2F;linux&#x2F;export.h”文件中（在module.h文件中已经对export.h进行引用，所以不需要单独引用export.h文件）,详细定义如下（图6-1）所示：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> EXPORT_SYMBOL(sym)                  \</span></span><br><span class="line"><span class="meta">__EXPORT_SYMBOL(sym, <span class="string">&quot;&quot;</span>)</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> EXPORT_SYMBOL_GPL(sym)                  \</span></span><br><span class="line"><span class="meta">    __EXPORT_SYMBOL(sym, <span class="string">&quot;_gpl&quot;</span>)</span></span><br></pre></td></tr></table></figure>
+
+<p>EXPORT_SYMBOL(sym)和EXPORT_SYMBOL_GPL(sym)两个宏使用方法相同，而EXPORT_SYMBOL_GPL(sym)导出的模块只能被 GPL 许可的模块使用，所以绝大多数的情况都使用EXPORT_SYMBOL(sym)进行符号导出。sym为函数的唯一参数，表示要导出的函数或变量名称。</p>
+<p>至此，关于内核模块符号导出函数就讲解完成了，在下一小节中将会编写两个驱动代码来进行内核模块符号导出实验。</p>
+<h2 id="6-2-实验程序的编写"><a href="#6-2-实验程序的编写" class="headerlink" title="6.2 实验程序的编写"></a>6.2 实验程序的编写</h2><p>本实验对应的网盘路径为：iTOP-RK3568开发板【底板V1.7版本】\03_【iTOP-RK3568开发板】指南教程\02_Linux驱动配套资料\04_Linux驱动例程\03。</p>
+<p>本章实验将编写Linux下的内核模块符号导出实例代码，总共有两个驱动程序，第一个驱动文件名为mathmodule.c，用来定义参数num和函数add(a,b)，第二个驱动文件名为hello.c,会引用mathmodule.c驱动程序中的参数num和数学函数add(a,b)，并将相应的参数值和函数返回值打印到串口终端上。</p>
+<p>编写完成的mathmodule.c代码如下（图6-2）所示</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;linux/init.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;linux/module.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> num = <span class="number">10</span>;<span class="comment">//定义参数num</span></span><br><span class="line">EXPORT_SYMBOL(num);<span class="comment">//导出参数num</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">add</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span><span class="comment">//定义数学函数add()，用来实现加法</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br><span class="line">EXPORT_SYMBOL(add);<span class="comment">//导出数学函数add()</span></span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="type">int</span> __init <span class="title function_">math_init</span><span class="params">(<span class="type">void</span>)</span><span class="comment">//驱动入口函数</span></span><br><span class="line">&#123;</span><br><span class="line">    printk(<span class="string">&quot;math_moudle init\n&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="type">void</span> __exit <span class="title function_">math_exit</span><span class="params">(<span class="type">void</span>)</span><span class="comment">//驱动出口函数</span></span><br><span class="line">&#123;</span><br><span class="line">    printk(<span class="string">&quot;math_module exit\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">module_init(math_init);<span class="comment">//注册入口函数</span></span><br><span class="line">module_exit(math_exit);<span class="comment">//注册出口函数</span></span><br><span class="line"></span><br><span class="line">MODULE_LICENSE(<span class="string">&quot;GPL&quot;</span>);<span class="comment">//同意GPL开源协议</span></span><br><span class="line">MODULE_AUTHOR(<span class="string">&quot;topeet&quot;</span>);<span class="comment">//作者信息</span></span><br></pre></td></tr></table></figure>
+
+<p>图6-2</p>
+<p>以上代码定义了一个int类型的num变量和add()数学函数，并使用EXPORT_SYMBOL宏进行导出。</p>
+<p>编写完成的hello.c代码如下（图6-3）所示：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;linux/init.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;linux/module.h&gt;</span></span></span><br><span class="line"><span class="keyword">extern</span> <span class="type">int</span> num;<span class="comment">//导入int类型变量num</span></span><br><span class="line"><span class="keyword">extern</span> <span class="type">int</span> <span class="title function_">add</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span>;<span class="comment">//导入函数add</span></span><br><span class="line"><span class="type">static</span> <span class="type">int</span> __init <span class="title function_">hello_init</span><span class="params">(<span class="type">void</span>)</span><span class="comment">//驱动入口函数</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">static</span> <span class="type">int</span> sum;</span><br><span class="line">    printk(<span class="string">&quot;num = %d\n&quot;</span>, num);<span class="comment">//打印num值</span></span><br><span class="line">    sum = add(<span class="number">3</span>, <span class="number">4</span>);<span class="comment">//使用add函数进行3+4的运算                                                                                                                                                                          </span></span><br><span class="line">    printk(<span class="string">&quot;sum = %d\n&quot;</span>, sum);<span class="comment">//打印add函数的运算值</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="type">void</span> __exit <span class="title function_">hello_exit</span><span class="params">(<span class="type">void</span>)</span><span class="comment">//驱动出口函数</span></span><br><span class="line">&#123;</span><br><span class="line">    printk(<span class="string">&quot;Goodbye hello module\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">module_init(hello_init);<span class="comment">//注册入口函数</span></span><br><span class="line">module_exit(hello_exit);<span class="comment">//注册出口函数</span></span><br><span class="line"></span><br><span class="line">MODULE_LICENSE(<span class="string">&quot;GPL&quot;</span>);<span class="comment">//同意GPL开源协议</span></span><br><span class="line">MODULE_AUTHOR(<span class="string">&quot;topeet&quot;</span>);<span class="comment">//作者信息</span></span><br></pre></td></tr></table></figure>
+
+<p>图6-3</p>
+<p>程序导入了int类型的变量num和add()函数，并在驱动入口函数中打印相应了num的参数值并对add()函数进行了调用。</p>
+<p>至此两个驱动代码就编写完成了，代码较为简单，实现了内核模块符号的导出和导出符号的使用，具体的驱动加载运行测试会在下个小节进行。</p>
+<h2 id="6-3-运行测试"><a href="#6-3-运行测试" class="headerlink" title="6.3 运行测试"></a>6.3 运行测试</h2><h3 id="6-3-1-编译驱动程序"><a href="#6-3-1-编译驱动程序" class="headerlink" title="6.3.1 编译驱动程序"></a>6.3.1 编译驱动程序</h3><p>在mathmodule.c和hello.c的同一目录下创建Makefile文件，Makefile文件内容如下（图6-4）所示：</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> ARCH=arm64<span class="comment">#设置平台架构</span></span><br><span class="line"><span class="keyword">export</span> CROSS_COMPILE=aarch64-linux-gnu-<span class="comment">#交叉编译器前缀</span></span><br><span class="line">obj-m := mathmodule.o</span><br><span class="line">obj-m += hello.o</span><br><span class="line"></span><br><span class="line">KDIR :=/home/topeet/Linux/linux_sdk/kernel    <span class="comment">#这里是你的内核目录                                                                                                                            </span></span><br><span class="line">PWD ?= <span class="variable">$(<span class="built_in">shell</span> pwd)</span></span><br><span class="line"><span class="section">all:</span></span><br><span class="line">    make -C <span class="variable">$(KDIR)</span> M=<span class="variable">$(PWD)</span> modules    <span class="comment">#make操作</span></span><br><span class="line"><span class="section">clean:</span></span><br><span class="line">    make -C <span class="variable">$(KDIR)</span> M=<span class="variable">$(PWD)</span> clean    <span class="comment">#make clean操作</span></span><br></pre></td></tr></table></figure>
+
+<p>图6-4</p>
+<p>对于Makefile的内容注释已在上图进行添加，这里要注意的是在hello.c代码中使用了mathmodule.c所导出的符号，所以mathmodule.c要在hello.c之前进行编译，即第3行和第4行顺序不能交换。保存退出之后，来到相应的文件目录下，如下图（图6-5）所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309072017830.jpeg" alt="img"> </p>
+<p>图6-5</p>
+<p>然后使用命令“make”进行驱动的编译，编译完成如下图（图6-6）所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309072017874.jpeg" alt="img"> </p>
+<p>图6-6</p>
+<p>编译完后会生成hello.ko和mathmodule.ko目标文件，如下图（图6-7）所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309072017866.jpeg" alt="img"> </p>
+<p>图6-7</p>
+<p>至此我们的驱动模块就编译成功了，下面进行驱动的加载运行测试。</p>
+<h3 id="6-3-2-运行测试"><a href="#6-3-2-运行测试" class="headerlink" title="6.3.2 运行测试"></a>6.3.2 运行测试</h3><p>这里要注意的是，由于 hello.ko依赖于mathmodule.ko，所以mathmodule.ko需要先加载，分别使用以下命令进行模块的加载（加载顺序不能变），如下（图6-8）所示：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">insmod mathmodule.ko</span><br><span class="line"></span><br><span class="line">insmod  hello.ko</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309072017870.jpeg" alt="img"> </p>
+<p>图6-8</p>
+<p>可以看到 hello.ko驱动加载的时候，mathmodule.ko模块中定义的num参数值和调用sum()函数的后正确的返回值都被打印了出来。至此内核模块符号导出实验就完成了。</p>
+<p>最后可以输入以下命令进行驱动的卸载，如下图（图6-9）所示：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rmmod  hello.ko</span><br><span class="line"></span><br><span class="line">rmmod mathmodule.ko</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309072017791.jpeg" alt="img"> </p>
+<p>图6-9</p>
+<p>注意：由于hello.ko文件使用了mathmodule.ko导出的符号，所以要先卸载hello.ko，卸载完成之后再卸载mathmodule.ko。</p>
+<p>【最新驱动资料（文档+例程）】</p>
+<p>链接 <a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1M4smUG2vw_hnn0Hye-tkog">https://pan.baidu.com/s/1M4smUG2vw_hnn0Hye-tkog</a></p>
+<p>提取码：hbh6</p>
+<p>【B 站配套视频】</p>
+<p><a target="_blank" rel="noopener" href="https://b23.tv/XqYa6Hm">https://b23.tv/XqYa6Hm</a></p>
+<p>【RK3568 购买链接】</p>
+<p><a target="_blank" rel="noopener" href="https://item.taobao.com/item.htm?spm=a1z10.5-c-s.w4002-2245">https://item.taobao.com/item.htm?spm=a1z10.5-c-s.w4002-2245</a></p>
+<p>2452613.11.2fec74a6elWNeA&amp;id&#x3D;669939423234</p>
+ 
       <!-- reward -->
       
     </div>

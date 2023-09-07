@@ -1,0 +1,1848 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+  
+
+    <head>
+      <meta charset="utf-8" />
+        
+      <meta name="description" content="永远年轻，永远热泪盈眶" />
+      
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title> 热爱学习的未来酱</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      
+<link rel="stylesheet" href="/css/fonts/remixicon.css">
+
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    <link rel="alternate" href="/atom.xml" title="热爱学习的未来酱" type="application/atom+xml">
+</head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+      <canvas width="1777" height="841"
+        style="position: fixed; left: 0px; top: 0px; z-index: 99999; pointer-events: none;"></canvas>
+      
+    <main class="content on">
+      
+<section class="cover">
+    
+      
+      <a class="forkMe" href="https://github.com/Shen-Yu/hexo-theme-ayer"
+        target="_blank"><img width="149" height="149" src="/images/forkme.png"
+          class="attachment-full size-full" alt="Fork me on GitHub" data-recalc-dims="1"></a>
+    
+  <div class="cover-frame">
+    <div class="bg-box">
+      <img src="/images/cover3.jpg" alt="image frame" />
+    </div>
+    <div class="cover-inner text-center text-white">
+      <h1><a href="/">热爱学习的未来酱</a></h1>
+      <div id="subtitle-box">
+        
+        <span id="subtitle"></span>
+        
+      </div>
+      <div>
+        
+      </div>
+    </div>
+  </div>
+  <div class="cover-learn-more">
+    <a href="javascript:void(0)" class="anchor"><i class="ri-arrow-down-line"></i></a>
+  </div>
+</section>
+
+
+
+<script src="https://cdn.staticfile.org/typed.js/2.0.12/typed.min.js"></script>
+
+
+<!-- Subtitle -->
+
+  <script>
+    try {
+      var typed = new Typed("#subtitle", {
+        strings: ['面朝大海，春暖花开', '向上的路，并不拥挤。拥挤是因为，大部分人选择了安逸', '想要的都拥有，得不到的都释怀'],
+        startDelay: 0,
+        typeSpeed: 200,
+        loop: true,
+        backSpeed: 100,
+        showCursor: true
+      });
+    } catch (err) {
+      console.log(err)
+    }
+  </script>
+  
+<div id="main">
+  <section class="outer">
+  
+  
+  
+
+<div class="notice" style="margin-top:50px">
+    <i class="ri-heart-fill"></i>
+    <div class="notice-content" id="broad"></div>
+</div>
+<script type="text/javascript">
+    fetch('https://v1.hitokoto.cn')
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById("broad").innerHTML = data.hitokoto;
+        })
+        .catch(console.error)
+</script>
+
+<style>
+    .notice {
+        padding: 20px;
+        border: 1px dashed #e6e6e6;
+        color: #969696;
+        position: relative;
+        display: inline-block;
+        width: 100%;
+        background: #fbfbfb50;
+        border-radius: 10px;
+    }
+
+    .notice i {
+        float: left;
+        color: #999;
+        font-size: 16px;
+        padding-right: 10px;
+        vertical-align: middle;
+        margin-top: -2px;
+    }
+
+    .notice-content {
+        display: initial;
+        vertical-align: middle;
+    }
+</style>
+  
+  <article class="articles">
+    
+    
+    
+    
+    <article
+  id="post-c-进阶语法-oop-智能指针-STL"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/09/03/c-%E8%BF%9B%E9%98%B6%E8%AF%AD%E6%B3%95-oop-%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88-STL/"
+    >c++进阶语法 oop 智能指针 STL</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/09/03/c-%E8%BF%9B%E9%98%B6%E8%AF%AD%E6%B3%95-oop-%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88-STL/" class="article-date">
+  <time datetime="2023-09-03T05:42:43.000Z" itemprop="datePublished">2023-09-03</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/c/">c++</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="1-OOP面向对象开发"><a href="#1-OOP面向对象开发" class="headerlink" title="1 OOP面向对象开发"></a>1 OOP面向对象开发</h1><h2 id="1-1-类-class-和对象-objects"><a href="#1-1-类-class-和对象-objects" class="headerlink" title="1.1 类(class)和对象(objects)"></a>1.1 类(class)和对象(objects)</h2><pre><code>类(classes)和对象(objects)
+</code></pre>
+<p>C++类(classes)</p>
+<ul>
+<li>创建对象用的蓝图(blueprint)</li>
+<li>用户自定义的数据类型</li>
+<li>有成员属性(data)和成员方法(methods)</li>
+<li>可以隐藏属性和方法(private)</li>
+<li>可以提供公共接口(public)</li>
+<li>示例:Account,Student,std:vector, std:string</li>
+</ul>
+<p>C++对象(objects)</p>
+<ul>
+<li>由类创建而来</li>
+<li>表示类的一个具体的实例(lnstance)</li>
+<li>可以有很多个实例，每个都有独立的身份·每个对象都可以使用类中定义的方法</li>
+</ul>
+<p>Account对象示例</p>
+<ul>
+<li>Jobs、Alice的apunt是Account类的实例</li>
+<li>每个实例都有它的余额、可以提现、存钱</li>
+</ul>
+<p>声明一个类：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Account</span> &#123;</span><br><span class="line">    <span class="comment">// 属性</span></span><br><span class="line">    std::string name;</span><br><span class="line">    <span class="type">double</span> balance;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 方法</span></span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">deposit</span><span class="params">(<span class="type">double</span> amount)</span></span>; <span class="comment">// 存款</span></span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">withdraw</span><span class="params">(<span class="type">double</span> amount)</span></span>; <span class="comment">// 取款</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>创建类的对象：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Account jobs_account;</span><br><span class="line">Account alice_account;</span><br><span class="line">Account* mary_account = <span class="keyword">new</span> <span class="built_in">Account</span>();</span><br><span class="line"></span><br><span class="line"><span class="keyword">delete</span> mary_account;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>示例1：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Account</span> </span><br><span class="line">&#123;</span><br><span class="line">    string name &#123;<span class="string">&quot;None&quot;</span>&#125;;</span><br><span class="line">    <span class="type">double</span> balance &#123;<span class="number">0.0</span>&#125;;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">deposit</span><span class="params">(<span class="type">double</span> amount)</span></span>;</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">withdraw</span><span class="params">(<span class="type">double</span> amount)</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Account a;</span><br><span class="line">    Account b;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<p>获取类的属性或者方法</p>
+<p>使用点操作符</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Account jobs_account;</span><br><span class="line">jobs_account.balance;</span><br><span class="line">jobs_account.<span class="built_in">deposit</span>( <span class="number">10.00</span>);</span><br></pre></td></tr></table></figure>
+
+<p>如果是一个指向对象的指针，可以解引用或者使用箭头操作符</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Account* alice_account = <span class="keyword">new</span> <span class="built_in">Account</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 解引用指针并访问成员</span></span><br><span class="line">(*alice_account).balance; </span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用指针访问成员</span></span><br><span class="line">alice_account-&gt;<span class="built_in">deposit</span>(<span class="number">100.0</span>);</span><br><span class="line">alice_account-&gt;balance;</span><br><span class="line"></span><br><span class="line"><span class="keyword">delete</span> alice_account;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="1-2-public、private、protected访问权限"><a href="#1-2-public、private、protected访问权限" class="headerlink" title="1.2 public、private、protected访问权限"></a>1.2 public、private、protected访问权限</h2><p>public</p>
+<p>可以被任何实体访问   </p>
+<hr>
+<p>private<br>只能被本类的方法访问</p>
+<hr>
+<p>protected</p>
+<p>可以被本类和子类(继承)的方法访问\</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Account</span> &#123;</span><br><span class="line">    <span class="comment">// 属性</span></span><br><span class="line">    std::string name;</span><br><span class="line">    <span class="type">double</span> balance;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 方法</span></span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">deposit</span><span class="params">(<span class="type">double</span> amount)</span></span>; <span class="comment">// 存款</span></span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">withdraw</span><span class="params">(<span class="type">double</span> amount)</span></span>; <span class="comment">// 取款</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>在类中实现完整的成员方法</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Account</span> &#123;</span><br><span class="line">    <span class="comment">// 属性</span></span><br><span class="line">    <span class="type">double</span> balance &#123;<span class="number">0.0</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 方法</span></span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">setBalance</span><span class="params">(<span class="type">double</span> amount)</span> </span>&#123;</span><br><span class="line">        balance = amount;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">double</span> <span class="title">getBalance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> balance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>在类外面实现需要特殊定义：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Account</span> &#123;</span><br><span class="line">    <span class="comment">// 属性</span></span><br><span class="line">    <span class="type">double</span> balance &#123;<span class="number">0.0</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 方法</span></span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">setBalance</span><span class="params">(<span class="type">double</span> amount)</span></span>;</span><br><span class="line">    <span class="function"><span class="type">double</span> <span class="title">getBalance</span><span class="params">()</span></span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">Account::setBalance</span><span class="params">(<span class="type">double</span> amount)</span> </span>&#123;</span><br><span class="line">    balance = amount;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">double</span> <span class="title">Account::getBalance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> balance;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="1-3-构造函数-constructor"><a href="#1-3-构造函数-constructor" class="headerlink" title="1.3 构造函数(constructor)"></a>1.3 构造函数(constructor)</h2><ul>
+<li>特殊的成员方法</li>
+<li>对象创建的时候自动调用</li>
+<li>适用于实例参数初始化</li>
+<li>函数名和类的名称一致</li>
+<li>无需设置返回类型</li>
+<li>可以被重载(overload)</li>
+</ul>
+<h2 id="1-4-析构函数-destructor"><a href="#1-4-析构函数-destructor" class="headerlink" title="1.4 析构函数(destructor)"></a>1.4 析构函数(destructor)</h2><ul>
+<li>特殊的成员方法</li>
+<li>函数名和类的名称一致，前面跟着一个~波浪符号</li>
+<li>对象销毁的时候自动调用</li>
+<li>没有参数，没有返回类型</li>
+<li>只有一个析构函数(不能重载)</li>
+<li>适用于释放内存等资源</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Account</span> &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="comment">// 属性</span></span><br><span class="line">    std::string name&#123;<span class="string">&quot;account&quot;</span>&#125;;</span><br><span class="line">    <span class="type">double</span> balance&#123;<span class="number">0.0</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 构造函数</span></span><br><span class="line">    <span class="built_in">Account</span>() = <span class="keyword">default</span>;</span><br><span class="line">    <span class="built_in">Account</span>(std::string name);</span><br><span class="line">    <span class="built_in">Account</span>(<span class="type">double</span> balance);</span><br><span class="line">    <span class="built_in">Account</span>(std::string name, <span class="type">double</span> balance);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 析构函数</span></span><br><span class="line">    ~<span class="built_in">Account</span>();</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>​		</p>
+<h2 id="1-5-构造函数初始化列表"><a href="#1-5-构造函数初始化列表" class="headerlink" title="1.5 构造函数初始化列表"></a>1.5 构造函数初始化列表</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Account</span> &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="comment">// 属性</span></span><br><span class="line">    std::string name;</span><br><span class="line">    <span class="type">double</span> balance;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 构造函数，使用构造函数内部初始化参数</span></span><br><span class="line">    <span class="built_in">Account</span>(std::string name, <span class="type">double</span> balance) &#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt;name = name;</span><br><span class="line">        <span class="keyword">this</span>-&gt;balance = balance;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 构造函数，使用初始化列表初始化参数</span></span><br><span class="line">    <span class="built_in">Account</span>(std::string name, <span class="type">double</span> balance)</span><br><span class="line">        : name&#123;name&#125;, balance&#123;balance&#125; &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="1-6-代理构造函数"><a href="#1-6-代理构造函数" class="headerlink" title="1.6 代理构造函数"></a>1.6 代理构造函数</h2><ul>
+<li>重载的构造函数很相似·冗余的代码可能会导致错误</li>
+<li>使用代理构造函数</li>
+<li>在一个构造函数初始化列表中调用另一个构造函数</li>
+</ul>
+<h2 id="1-7-拷贝构造函数"><a href="#1-7-拷贝构造函数" class="headerlink" title="1.7 拷贝构造函数"></a>1.7 拷贝构造函数</h2><p>当对象被拷贝时，C++必须从已存在的对象复制出一个新的对象</p>
+<p>何时使用拷贝构造函数?</p>
+<ul>
+<li>以值传递方式传递对象给函数（作参数)</li>
+<li>函数以值方式返回对象</li>
+<li>使用已存在的对象复制新的对象</li>
+</ul>
+<p>如果不提供自己写的copy constructor,编译器会自动生成一个(可能不符合要</p>
+<h2 id="1-9-浅拷贝和深拷贝"><a href="#1-9-浅拷贝和深拷贝" class="headerlink" title="1.9 浅拷贝和深拷贝"></a>1.9 浅拷贝和深拷贝</h2><p>如果不提供自己写的copy constructor.编译器会生成默认的<br>将目标对象的值逐个拷贝过来;<br>如果是指针，拷贝的是值（指向的地址)，而不是指向的对象（浅拷贝)在析构函数中释放内存时，其他对象中的指针可能还在指向被释放的资源</p>
+<h2 id="1-10-在类中使用const"><a href="#1-10-在类中使用const" class="headerlink" title="1.10 在类中使用const"></a>1.10 在类中使用const</h2><p>在类中使用const常函数</p>
+<p>函数名称后加const</p>
+<ul>
+<li>函数体内不可以修改类成员属性。常对象</li>
+</ul>
+<p>声明对象时前面加const</p>
+<ul>
+<li>不可以修改常对象的成员属性仅能调用常函数</li>
+</ul>
+<h2 id="1-11-在类中使用static"><a href="#1-11-在类中使用static" class="headerlink" title="1.11 在类中使用static"></a>1.11 在类中使用static</h2><p>静态成员变量</p>
+<ul>
+<li><p>所有对象共有同一份数据（数据共享)</p>
+</li>
+<li><p>在类中声明，类外初始化</p>
+</li>
+</ul>
+<p>静态成员函数</p>
+<p>所有对象共享同一个函数</p>
+<ul>
+<li>只能访问静态成员变量</li>
+</ul>
+<h2 id="1-12-struct和class区别"><a href="#1-12-struct和class区别" class="headerlink" title="1.12 struct和class区别"></a>1.12 struct和class区别</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Account</span> &#123;</span><br><span class="line">    std::string name&#123;<span class="string">&quot;none&quot;</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 默认私有属性</span></span><br><span class="line"></span><br><span class="line">    <span class="function">std::string <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Student</span> &#123;</span><br><span class="line">    std::string name&#123;<span class="string">&quot;none&quot;</span>&#125;;</span><br><span class="line">    <span class="comment">// 默认公有属性</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Account aa;</span><br><span class="line">    <span class="comment">// aa.name = &quot;bob&quot;; // 报错，无法访问私有成员</span></span><br><span class="line"></span><br><span class="line">    Student ss;</span><br><span class="line">    ss.name = <span class="string">&quot;alice&quot;</span>; <span class="comment">// 可以访问公有成员</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="2-智能指针"><a href="#2-智能指针" class="headerlink" title="2 智能指针"></a>2 智能指针</h1><p>原始指针(raw pointer)的一些问题</p>
+<p>1.c++提供了内存管理的绝对自由度</p>
+<ul>
+<li><p>分配</p>
+</li>
+<li><p>释放</p>
+</li>
+<li><p>声明周期管理</p>
+</li>
+</ul>
+<p>2.一些潜在严重问题</p>
+<ul>
+<li><p>未初始化的指针(wild pointer)</p>
+</li>
+<li><p>内存泄漏(memory leak)</p>
+</li>
+<li><p>悬空指针(dangling pointer</p>
+</li>
+</ul>
+<p>3.所有权(ownership)</p>
+<ul>
+<li>谁拥有指针?</li>
+<li>何时可以删除指针?</li>
+</ul>
+<p>C++智能指针是一种用来管理动态分配的内存的工具，它们遵循RAII（资源获取即初始化）原则，可以自动释放内存，防止内存泄漏。</p>
+<p>以下是几种常见的C++智能指针：</p>
+<ol>
+<li><code>unique_ptr</code>: <code>unique_ptr</code> 是一种独占所有权的智能指针，它指向堆上分配的对象，并负责在其生命周期结束时自动删除对象。每个 <code>unique_ptr</code> 只能拥有一个对象，并且不能进行拷贝，但可以进行移动。</li>
+<li><code>shared_ptr</code>: <code>shared_ptr</code> 是一种共享所有权的智能指针，多个 <code>shared_ptr</code> 可以指向同一个对象。它使用引用计数来跟踪对象的所有者数量，并在最后一个所有者释放内存时删除对象。</li>
+<li><code>weak_ptr</code>: <code>weak_ptr</code> 是一种弱引用指针，它可以与 <code>shared_ptr</code> 一起使用。<code>weak_ptr</code> 不会增加对象的引用计数，它允许对被 <code>shared_ptr</code> 管理的对象进行观测，但不拥有所有权。当 <code>shared_ptr</code> 删除对象后，<code>weak_ptr</code> 会自动失效。</li>
+<li><code>auto_ptr</code>（已弃用）: <code>auto_ptr</code> 是C++98标准引入的智能指针，它类似于 <code>unique_ptr</code>，但具有一些问题和局限性，已被废弃，不推荐使用。</li>
+</ol>
+<p><code>unique_ptr&lt;T&gt;</code> 是一种独占所有权的智能指针，用于指向堆上的类型为 <code>T</code> 的对象。它保证在其生命周期结束时自动释放所指向的对象，确保资源的正确释放，避免内存泄漏。</p>
+<p><code>unique_ptr</code> 的特点如下：</p>
+<ul>
+<li>它是唯一（unique）的，即一个 <code>unique_ptr</code> 对象拥有对应对象的唯一所有权。不能有多个 <code>unique_ptr</code> 指向同一个对象，这样可以避免多次释放同一块内存的问题。</li>
+<li><code>unique_ptr</code> 不能进行复制或赋值，但可以通过移动语义来转移所有权。这意味着可以将所有权从一个 <code>unique_ptr</code> 转移到另一个 <code>unique_ptr</code>，从而实现对象所有权的转移而不进行内存复制。</li>
+<li>当 <code>unique_ptr</code> 使用完毕或超出作用域时，它所指向的对象会自动释放和销毁，无需手动调用 <code>delete</code>。</li>
+</ul>
+<p>&#x3D;&#x3D;目前还没用过，等真正用过的时候再仔细看吧&#x3D;&#x3D;</p>
+<h1 id="3-STL标准模板库"><a href="#3-STL标准模板库" class="headerlink" title="3 STL标准模板库"></a>3 STL标准模板库</h1><h2 id="3-1-STL简介"><a href="#3-1-STL简介" class="headerlink" title="3.1 STL简介"></a>3.1 STL简介</h2><p>一个强大的、可复用的、自适应的泛型类和函数集合</p>
+<p>使用C++模板(templates)实现</p>
+<p>实现了常见的数据结构(data struuctures)和算法(algorithms)</p>
+<p>庞大的类库</p>
+<p>俄裔美籍程序员:Alexander Step:anov 1994年开发</p>
+<p>容器(containers)</p>
+<ul>
+<li>各种对象或原始类型的集合. array、vector、deque、stack、set、map等</li>
+</ul>
+<p>算法(algorithms)</p>
+<ul>
+<li>处理容器元素序列的各种函数find、max、count、accumulate、sort等</li>
+</ul>
+<p>迭代器(iterators)</p>
+<ul>
+<li>从容器中生成元素的序列. forward、reveise、by value、by constant等</li>
+</ul>
+<h2 id="3-2-STL容器的类别"><a href="#3-2-STL容器的类别" class="headerlink" title="3.2 STL容器的类别"></a>3.2 STL容器的类别</h2><p>序列式容器（Sequence Containers）：</p>
+<ol>
+<li><code>vector</code>：动态数组，支持快速随机访问，尾部插入和删除元素效率高，但在中间或头部插入和删除元素效率低。</li>
+<li><code>list</code>：双向链表，支持在任意位置插入和删除元素，但随机访问效率较低。</li>
+<li><code>forward_list</code>：单向链表，与 <code>list</code> 类似，但只支持单向遍历，没有双向遍历的能力。</li>
+<li><code>deque</code>：双端队列，支持在头部和尾部高效地插入和删除元素，同时支持随机访问。</li>
+</ol>
+<p>关联式容器（Associative Containers）：</p>
+<ol>
+<li><code>set</code>：集合，存储唯一的元素，并按升序排序。</li>
+<li><code>multi_set</code>：多重集合，可存储重复的元素，并按升序排序。</li>
+<li><code>map</code>：映射，存储键值对，按键的升序排序。</li>
+<li><code>multi_map</code>：多重映射，可存储重复的键值对，并按键的升序排序。</li>
+</ol>
+<p>容器适配器（Container Adapters）：</p>
+<ol>
+<li><code>stack</code>：栈，以 LIFO（后进先出）的方式存储元素，底层基于序列式容器实现，默认使用 <code>deque</code>。</li>
+<li><code>queue</code>：队列，以 FIFO（先进先出）的方式存储元素，底层基于序列式容器实现，默认使用 <code>deque</code>。</li>
+<li><code>priority_queue</code>：优先队列，按照优先级存储元素，底层基于序列式容器实现，默认使用 <code>vector</code>。</li>
+</ol>
+<h2 id="3-3-STL迭代器的类别"><a href="#3-3-STL迭代器的类别" class="headerlink" title="3.3 STL迭代器的类别"></a>3.3 STL迭代器的类别</h2><p>迭代器是一种用于遍历容器中元素的抽象概念，它提供了对容器中元素的访问和操作方式。C++中定义了多种类型的迭代器，每种迭代器具有不同的特性和功能。</p>
+<ol>
+<li>输入迭代器（Input Iterators）：从容器到程序，对数据进行只读访问。它允许逐个元素地读取容器中的数据，并且只能单向移动，不支持对容器进行修改。</li>
+<li>输出迭代器（Output Iterators）：从程序到容器，对数据进行只写访问。它允许逐个元素地向容器中写入数据，并且只能单向移动，不支持读取容器中的数据。</li>
+<li>前向迭代器（Forward Iterators）：向前推进迭代器，支持对容器进行读写操作。它具有输入迭代器和输出迭代器的所有功能，并且可以在容器中任意位置插入和删除元素，支持双向移动。</li>
+<li>双向迭代器（Bidirectional Iterators）：向前、向后推进迭代器，支持对容器进行读写操作。它具有前向迭代器的所有功能，并且可以反向移动，即向前和向后移动。</li>
+<li>随机访问迭代器（Random Access Iterators）：直接获取容器元素，支持对容器进行读写操作。它具有双向迭代器的所有功能，并且支持随机访问，可以通过偏移量直接访问容器中的任意元素。</li>
+</ol>
+<h2 id="3-4-STL算法的类别"><a href="#3-4-STL算法的类别" class="headerlink" title="3.4 STL算法的类别"></a>3.4 STL算法的类别</h2><p>非质变的算法（Non-modifying Algorithms）：</p>
+<ol>
+<li><code>std::all_of</code>：判断范围内的所有元素是否满足给定条件。</li>
+<li><code>std::any_of</code>：判断范围内是否存在满足给定条件的元素。</li>
+<li><code>std::none_of</code>：判断范围内是否所有元素都不满足给定条件。</li>
+<li><code>std::for_each</code>：对范围内的每个元素执行指定的操作。</li>
+<li><code>std::count</code>：计算范围内满足给定值的元素个数。</li>
+<li><code>std::count_if</code>：计算范围内满足给定条件的元素个数。</li>
+<li><code>std::find</code>：查找范围内第一个等于给定值的元素。</li>
+<li><code>std::find_if</code>：查找范围内第一个满足给定条件的元素。</li>
+<li><code>std::find_if_not</code>：查找范围内第一个不满足给定条件的元素。</li>
+<li><code>std::find_end</code>：在范围内查找最后一次出现子序列的起始位置。</li>
+<li><code>std::find_first_of</code>：在范围内查找第一次出现指定元素之一的位置。</li>
+<li><code>std::adjacent_find</code>：在范围内查找第一对相邻重复元素的位置。</li>
+<li><code>std::search</code>：在范围内查找第一次出现子序列的起始位置。</li>
+<li><code>std::search_n</code>：在范围内查找第一次出现连续多个相等元素的起始位置。</li>
+<li><code>std::equal</code>：判断两个范围内的元素是否相等。</li>
+<li><code>std::mismatch</code>：找到两个范围内第一次不匹配的位置。</li>
+<li><code>std::lexicographical_compare</code>：按字典顺序比较两个范围。</li>
+<li><code>std::is_permutation</code>：判断两个范围内的元素是否是排列关系。</li>
+<li><code>std::min_element</code>：找到范围内的最小元素的位置。</li>
+<li><code>std::max_element</code>：找到范围内的最大元素的位置。</li>
+<li><code>std::minmax_element</code>：同时找到范围内的最小和最大元素的位置。</li>
+<li><code>std::clamp</code>：将给定值限制在指定范围内。</li>
+<li><code>std::is_sorted</code>：判断范围内的元素是否按升序排序。</li>
+<li><code>std::is_partitioned</code>：判断范围内的元素是否满足分区条件。</li>
+<li><code>std::is_heap</code>：判断范围内的元素是否满足堆的条件。</li>
+<li><code>std::is_sorted_until</code>：找到范围内的第一个无序位置。</li>
+<li><code>std::is_partitioned_until</code>：找到范围内的第一个不满足分区条件的位置。</li>
+<li><code>std::is_heap_until</code>：找到范围内的第一个不满足堆条件的位置。</li>
+</ol>
+<p>质变的算法（Modifying Algorithms）：</p>
+<ol>
+<li><code>std::copy</code>：复制范围内的元素到另一个容器。</li>
+<li><code>std::copy_if</code>：复制满足给定条件的元素到另一个容器。</li>
+<li><code>std::copy_n</code>：复制指定数量的元素到另一个容器。</li>
+<li><code>std::copy_backward</code>：反向复制范围内的元素到另一个容器。</li>
+<li><code>std::move</code>：将范围内的元素移动到另一个容器。</li>
+<li><code>std::move_backward</code>：反向移动范围内的元素到另一个容器。</li>
+<li><code>std::fill</code>：用给定值填充容器中的元素。</li>
+<li><code>std::fill_n</code>：用给定值填充指定数量的元素。</li>
+<li><code>std::generate</code>：使用生成器函数生成范围内的元素。</li>
+<li><code>std::generate_n</code>：使用生成器函数生成指定数量的元素。</li>
+<li><code>std::transform</code>：对范围内的元素应用指定的操作，并将结果存储到另一个容器。</li>
+<li><code>std::replace</code>：将范围内的指定值替换为新值。</li>
+<li><code>std::replace_if</code>：根据给定条件将范围内的元素替换为新值。</li>
+<li><code>std::replace_copy</code>：将范围内的元素复制到另一个容器，并将指定值替换为新值。</li>
+<li><code>std::replace_copy_if</code>：将范围内的元素复制到另一个容器，并根据给定条件替换为新值。</li>
+<li><code>std::swap</code>：交换两个对象的值。</li>
+<li><code>std::swap_ranges</code>：交换两个范围的元素。</li>
+<li><code>std::iter_swap</code>：交换两个迭代器所指向的元素。</li>
+<li><code>std::reverse</code>：反转范围内的元素顺序。</li>
+<li><code>std::reverse_copy</code>：将范围内的元素反转后复制到另一个容器。</li>
+<li><code>std::rotate</code>：将范围内的元素循环右移。</li>
+<li><code>std::rotate_copy</code>：将范围内的元素循环右移后复制到另一个容器。</li>
+<li><code>std::shuffle</code>：随机重排范围内的元素。</li>
+<li><code>std::unique</code>：移除范围内的连续重复元素，只保留一个副本。</li>
+<li><code>std::unique_copy</code>：将范围内的连续重复元素复制到另一个容器，只保留一个副本。</li>
+<li><code>std::partition</code>：根据给定条件将范围内的元素分为满足条件和不满足条件的两部分。</li>
+<li><code>std::stable_partition</code>：根据给定条件将范围内的元素稳定地分为满足条件和不满足条件的两部分。</li>
+<li><code>std::sort</code>：对范围内的元素进行排序。</li>
+<li><code>std::stable_sort</code>：对范围内的元素进行稳定排序。</li>
+<li><code>std::partial_sort</code>：部分排序范围内的元素。</li>
+<li><code>std::nth_element</code>：将范围内的第 n 小的元素移动到指定位置。</li>
+<li><code>std::inplace_merge</code>：将两个已排序的范围合并为一个已排序的范围。</li>
+<li><code>std::transform</code>：对范围内的元素应用指定的操作，并将结果存储到另一个容器。</li>
+<li><code>std::generate</code>：使用生成器函数生成范围内的元素。</li>
+<li><code>std::generate_n</code>：使用生成器函数生成指定数量的元素。</li>
+<li><code>std::random_shuffle</code>：随机重排范围内的元素。</li>
+<li><code>std::partition</code>：根据给定条件将范围内的元素分为满足条件和不满足条件的两部分。</li>
+<li><code>std::sort</code>：对范围内的元素进行排序。</li>
+<li><code>std::stable_sort</code>：对范围内的元素进行稳定排序。</li>
+<li><code>std::partial_sort</code>：部分排序范围内的元素。</li>
+<li><code>std::nth_element</code>：将范围内的第 n 小的元素移动到指定位置。</li>
+<li><code>std::inplace_merge</code>：将两个已排序的范围合并为一个已排序的范围。</li>
+<li><code>std::copy_backward</code>：反向复制范围内的元素到另一个容器。</li>
+</ol>
+<h2 id="3-5泛型编程和宏"><a href="#3-5泛型编程和宏" class="headerlink" title="3.5泛型编程和宏"></a>3.5泛型编程和宏</h2><h2 id="3-6函数模板"><a href="#3-6函数模板" class="headerlink" title="3.6函数模板"></a>3.6函数模板</h2><p>函数模板（Function Template）是C++中的一种特殊函数，用于定义通用的函数，可以适用于不同类型的参数。函数模板通过在函数定义中使用类型参数来实现通用性，这些类型参数可以在函数调用时被具体的类型替代。</p>
+<p>以下是两个使用函数模板定义的求最大值函数的示例：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span></span><br><span class="line"><span class="function">T <span class="title">max</span><span class="params">(T a, T b)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a &gt; b ? a : b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span></span><br><span class="line"><span class="function">T <span class="title">max</span><span class="params">(T a, T b)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a &gt; b ? a : b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> a = <span class="number">10</span>, b = <span class="number">20</span>;</span><br><span class="line">    std::cout &lt;&lt; <span class="built_in">max</span>&lt;<span class="type">int</span>&gt;(a, b) &lt;&lt; std::endl;  <span class="comment">// 调用模板函数</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-7类模板"><a href="#3-7类模板" class="headerlink" title="3.7类模板"></a>3.7类模板</h2><p>类模板（Class Template）是C++中的一种特殊类，用于定义通用的类，可以适用于不同类型的成员变量和成员函数。类模板通过在类定义中使用类型参数来实现通用性，这些类型参数可以在类实例化时被具体的类型替代。</p>
+<p>类模板的使用方式类似于函数模板，通过在类定义前面使用 <code>template&lt;typename T&gt;</code> 或 <code>template&lt;class T&gt;</code> 声明一个模板类，其中 <code>T</code> 是一个模板参数，可以在类内部的成员变量和成员函数中使用。</p>
+<p>以下是一个使用类模板定义的通用的容器类的示例：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Container</span> &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    T data;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Container</span>(T value) : <span class="built_in">data</span>(value) &#123;&#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">printData</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;Data: &quot;</span> &lt;&lt; data &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/c/" rel="tag">c++</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-c-进阶-函数和指针"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/09/03/c-%E8%BF%9B%E9%98%B6-%E5%87%BD%E6%95%B0%E5%92%8C%E6%8C%87%E9%92%88/"
+    >c++ 进阶 函数和指针</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/09/03/c-%E8%BF%9B%E9%98%B6-%E5%87%BD%E6%95%B0%E5%92%8C%E6%8C%87%E9%92%88/" class="article-date">
+  <time datetime="2023-09-03T03:48:33.000Z" itemprop="datePublished">2023-09-03</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/c/">c++</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="1-掌握C-函数基本概念用法"><a href="#1-掌握C-函数基本概念用法" class="headerlink" title="1.掌握C++函数基本概念用法"></a>1.掌握C++函数基本概念用法</h1><h2 id="1-1-函数定义"><a href="#1-1-函数定义" class="headerlink" title="1.1 函数定义"></a>1.1 函数定义</h2><p>什么是函数(function)</p>
+<ul>
+<li><p>C++程序</p>
+</li>
+<li><p>C++标准库(functions和clas;ses)</p>
+</li>
+<li><p>第三方库(functions和class</p>
+</li>
+<li><p>自定义的functions和classes</p>
+</li>
+</ul>
+<p>函数让我们的程序更加模块化</p>
+<ul>
+<li>让代码解耦，分成按业务，</li>
+<li>按逻辑的单元提高代码复用性</li>
+</ul>
+<p>函数名称参数列表</p>
+<ul>
+<li><p>传给函数的变量</p>
+</li>
+<li><p>变量类型需声明</p>
+</li>
+</ul>
+<p>返回值类型</p>
+<ul>
+<li><p>函数体</p>
+</li>
+<li><p>函数被调用执行的部分，花括号{}内部</p>
+<p>示例1：</p>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cmath&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">double</span> PI &#123;<span class="number">3.1415926</span>&#125;; <span class="comment">// 圆周率</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">double</span> <span class="title">calculate_area</span><span class="params">(<span class="type">double</span> radius)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> PI * <span class="built_in">pow</span>(radius, <span class="number">2</span>); <span class="comment">// pow()函数用于计算幂</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">circle_area</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;请输入圆的半径：&quot;</span>;</span><br><span class="line">    <span class="type">double</span> radius &#123;<span class="number">0</span>&#125;;</span><br><span class="line">    cin &gt;&gt; radius;</span><br><span class="line"></span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;圆的面积为：&quot;</span> &lt;&lt; <span class="built_in">calculate_area</span>(radius) &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">circle_area</span>(); <span class="comment">// 调用计算圆的面积的函数</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="1-2-函数原型-prototype"><a href="#1-2-函数原型-prototype" class="headerlink" title="1.2 函数原型(prototype)"></a>1.2 函数原型(prototype)</h2><p>&#x3D;&#x3D;编译器要求:使用函数前必须“见过”这个函数&#x3D;&#x3D;</p>
+<p>先定义函数再调用</p>
+<ul>
+<li>适用于小型程序，不适用于大型项目</li>
+</ul>
+<p>使用函数原型</p>
+<ul>
+<li><p>告诉编译器函数定义必要的信息</p>
+</li>
+<li><p>也称为前向声明(forward declaration)</p>
+</li>
+<li><p>放在程序开始的部分</p>
+</li>
+<li><p>或者放在头文件(header files.h)中</p>
+</li>
+</ul>
+<h2 id="1-3参数"><a href="#1-3参数" class="headerlink" title="1.3参数"></a>1.3参数</h2><ol>
+<li>当我们传递数据给函数时，其实用的是值传递(pass by value)</li>
+<li>数据的拷贝会传给函数</li>
+<li>函数内部的代码不会改变我们传给它的变量</li>
+</ol>
+<p>形参(formal parameters)与实参(actual parameters)<br>形参(formal parameters)</p>
+<ul>
+<li>函数定义语句中的参数</li>
+</ul>
+<p>实参(actual parameters</p>
+<ul>
+<li>调用函数时传递的参数(arguments)</li>
+</ul>
+<h2 id="1-4-重载"><a href="#1-4-重载" class="headerlink" title="1.4 重载"></a>1.4 重载</h2><p>一组函数具有相同函数名，不同参数列表</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 函数原型，函数重载</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">add_numbers</span><span class="params">(<span class="type">int</span>, <span class="type">int</span>)</span></span>; <span class="comment">// 两个 int 类型数字相加</span></span><br><span class="line"><span class="function"><span class="type">double</span> <span class="title">add_numbers</span><span class="params">(<span class="type">double</span>, <span class="type">double</span>)</span></span>; <span class="comment">// 两个 double 类型数字相加</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 主函数</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    cout &lt;&lt; <span class="built_in">add_numbers</span>(<span class="number">5</span>, <span class="number">10</span>) &lt;&lt; endl; <span class="comment">// int 类型</span></span><br><span class="line">    cout &lt;&lt; <span class="built_in">add_numbers</span>(<span class="number">1.23</span>, <span class="number">2.45</span>) &lt;&lt; endl; <span class="comment">// double 类型</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 函数定义</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">add_numbers</span><span class="params">(<span class="type">int</span> num1, <span class="type">int</span> num2)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> num1 + num2;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">double</span> <span class="title">add_numbers</span><span class="params">(<span class="type">double</span> num1, <span class="type">double</span> num2)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> num1 + num2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="1-5-函数传参-数组、引用"><a href="#1-5-函数传参-数组、引用" class="headerlink" title="1.5 函数传参(数组、引用)"></a>1.5 函数传参(数组、引用)</h2><ul>
+<li><p>数组元素并没有复制</p>
+</li>
+<li><p>数组变量名称表示第一个元素在内存中的地址这个地址才被复制了</p>
+</li>
+<li><p>函数内部无法知道数组大小(数组大小需要额外传参)</p>
+<p>·声明参数numbers是常量(只读read-only)</p>
+</li>
+</ul>
+<p>		</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">print_array</span> <span class="params">(<span class="type">const</span> <span class="type">int</span> numbers[ ], <span class="type">size_t</span> size)</span></span></span><br><span class="line"><span class="function">    </span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">swap_num</span><span class="params">(<span class="type">int</span>&amp; a, <span class="type">int</span>&amp; b)</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> temp = a;</span><br><span class="line">    a = b;</span><br><span class="line">    b = temp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 交换两个数字</span></span><br><span class="line">    <span class="type">int</span> x &#123;<span class="number">100</span>&#125;, y &#123;<span class="number">200</span>&#125;;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;x is: &quot;</span> &lt;&lt; x &lt;&lt; <span class="string">&quot; y is: &quot;</span> &lt;&lt; y &lt;&lt; std::endl; <span class="comment">// 100 200</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">swap_num</span>(x, y);</span><br><span class="line"></span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;x is: &quot;</span> &lt;&lt; x &lt;&lt; <span class="string">&quot; y is: &quot;</span> &lt;&lt; y &lt;&lt; std::endl; <span class="comment">// 200 100</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面的是取地址，上面的函数和下面这个函数的作用相同：</p>
+<p>传递地址</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">swap_num</span><span class="params">(<span class="type">int</span> *a, <span class="type">int</span> *b)</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> temp = *a;</span><br><span class="line">    *a = *b;</span><br><span class="line">    *b = temp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 交换两个数字</span></span><br><span class="line">    <span class="type">int</span> x &#123;<span class="number">100</span>&#125;, y &#123;<span class="number">200</span>&#125;;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;x is: &quot;</span> &lt;&lt; x &lt;&lt; <span class="string">&quot; y is: &quot;</span> &lt;&lt; y &lt;&lt; std::endl; <span class="comment">// 100 200</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">swap_num</span>(&amp;x, &amp;y);</span><br><span class="line"></span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;x is: &quot;</span> &lt;&lt; x &lt;&lt; <span class="string">&quot; y is: &quot;</span> &lt;&lt; y &lt;&lt; std::endl; <span class="comment">// 200 100</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>&#x3D;&#x3D;注意&#x3D;&#x3D;</p>
+<p><code>int&amp;</code> 是 C++ 中的引用类型，它是一种特殊的类型，用于给一个已存在的变量起一个别名。可以将其理解为变量的一个别名或者另一个名称，与原变量共享同一块内存空间。</p>
+<p>引用类型与指针类型有所不同。引用在声明时必须初始化，并且一旦初始化后，它就一直引用同一个对象，不能再引用其他对象。而指针可以在声明后重新指向不同的对象。</p>
+<p>使用引用类型的主要目的是提供一种更简洁、更直观的方式来操作变量，同时避免了指针操作的一些繁琐性和潜在的错误。</p>
+<p>在上述修正后的代码中，<code>int&amp;</code> 用于函数参数的声明，表示传递的参数是一个整数的引用。通过引用参数，可以直接修改原变量的值，而无需通过指针进行解引用。在函数内部，通过引用操作修改了 <code>a</code> 和 <code>b</code> 所指向的变量的值。</p>
+<p>其实也就相当于传地址</p>
+<h1 id="2-掌握C-指针基本概念、用法"><a href="#2-掌握C-指针基本概念、用法" class="headerlink" title="2.掌握C++指针基本概念、用法"></a>2.掌握C++指针基本概念、用法</h1><h2 id="2-1-什么是指针"><a href="#2-1-什么是指针" class="headerlink" title="2.1 什么是指针"></a>2.1 什么是指针</h2><p>指针是变量<br>变量的值是一个地址<br>指针的值可以存储哪些地址?</p>
+<p>另一个变量</p>
+<p>函数</p>
+<hr>
+<p>如果指针指向变量或函数，那么为什么不直接用他们?</p>
+<p>可以，但不常用:</p>
+<ul>
+<li><p>函数内部，指针可以访问函数作用域外的数据</p>
+</li>
+<li><p>高效操作数组</p>
+</li>
+<li><p>在堆(heap)上动态分配内存空间</p>
+<p>​      这些空间没有变量名称只能通过指针访问</p>
+</li>
+<li><p>可以获取内存中特殊地址</p>
+</li>
+</ul>
+<p>​              如嵌入式系统、设备驱动等</p>
+<hr>
+<ul>
+<li>&amp;地址操作符</li>
+<li>指针也是一个变量(variable)，所以它的值可以改变</li>
+<li>指针可以为null</li>
+<li>指针可以不初始化</li>
+</ul>
+<h2 id="2-2-动态内存分配-dynami-allocation"><a href="#2-2-动态内存分配-dynami-allocation" class="headerlink" title="2.2 动态内存分配(dynami allocation)"></a>2.2 动态内存分配(dynami allocation)</h2><p>在堆(heap)上程序员自己分配内存空间;<br>数组(array)</p>
+<ul>
+<li>使用数组需要知道数组大小，并且数组大小是固定的;</li>
+<li>Vector容器大小可以动态调整</li>
+</ul>
+<p>使用指针获取堆上刚分配的内存空间</p>
+<hr>
+<p>使用new[]为数组分配内存空间</p>
+<p>使用delete[]释放内存</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span>* array_ptr &#123;<span class="literal">nullptr</span>&#125;;</span><br><span class="line">    <span class="type">int</span> arr_size &#123;<span class="number">0</span>&#125;;</span><br><span class="line"></span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;你需要多少个整数: &quot;</span>;</span><br><span class="line">    std::cin &gt;&gt; arr_size;</span><br><span class="line"></span><br><span class="line">    array_ptr = <span class="keyword">new</span> <span class="type">int</span>[arr_size]; <span class="comment">// 在堆上分配内存</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 使用数组</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">delete</span>[] array_ptr; <span class="comment">// 释放内存</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-3-指针和数组的关系"><a href="#2-3-指针和数组的关系" class="headerlink" title="2.3 指针和数组的关系"></a>2.3 指针和数组的关系</h2><ul>
+<li>数组变量名称的值是数组第一个元素的地址;</li>
+<li>指针变量的的值是一个地址;</li>
+<li>如果指针指向的类型和数组元素的类型一致，那么指针和数组名称几乎是等价的</li>
+</ul>
+<h2 id="2-4-const和指针一一指针本身和被指向的对象都是常量"><a href="#2-4-const和指针一一指针本身和被指向的对象都是常量" class="headerlink" title="2.4 const和指针一一指针本身和被指向的对象都是常量"></a>2.4 const和指针一一指针本身和被指向的对象都是常量</h2><p>指针可以操作:地址及被指向的对象</p>
+<ul>
+<li>被指向的对象是常量(povinters to constants)</li>
+<li>指针本身是常量(constant pointers)</li>
+<li>指针本身和被指向的对象都是常量(constant pointers to constants)</li>
+</ul>
+<p>示例1</p>
+<ul>
+<li>被指向的对象是常量，不可以通过指针改动·</li>
+<li>指针本身可以改变</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> high_temp &#123;<span class="number">40</span>&#125;;</span><br><span class="line">    <span class="type">int</span> low_temp &#123;<span class="number">20</span>&#125;;</span><br><span class="line">    <span class="type">const</span> <span class="type">int</span>* temp_ptr &#123;&amp;high_temp&#125;; <span class="comment">// 被指向的数据是常量</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// *temp_ptr = 100; // 错误，不能通过解引用修改常量的值</span></span><br><span class="line"></span><br><span class="line">    temp_ptr = &amp;low_temp; <span class="comment">// 正确，可以通过指针修改指向的地址</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>示例2</p>
+<ul>
+<li>被指向的对象可以通过指针改动</li>
+<li>指针本身不可以改变</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> high_temp &#123;<span class="number">40</span>&#125;;</span><br><span class="line">    <span class="type">int</span> low_temp &#123;<span class="number">20</span>&#125;;</span><br><span class="line">    <span class="type">int</span>* <span class="type">const</span> temp_ptr &#123;&amp;high_temp&#125;; <span class="comment">// 指针本身是常量，指向 high_temp</span></span><br><span class="line"></span><br><span class="line">    *temp_ptr = <span class="number">100</span>; <span class="comment">// 正确，通过指针解引用修改值</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// temp_ptr = &amp;low_temp; // 错误，不能修改指针的值</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>示例3 </p>
+<ul>
+<li>被指向的对象不可以改动</li>
+<li>指针本身不可以改变</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> high_temp &#123;<span class="number">40</span>&#125;;</span><br><span class="line">    <span class="type">int</span> low_temp &#123;<span class="number">20</span>&#125;;</span><br><span class="line">    <span class="type">const</span> <span class="type">int</span>* <span class="type">const</span> temp_ptr &#123;&amp;high_temp&#125;; <span class="comment">// 指针和被指向对象都是常量</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// *temp_ptr = 100; // 错误，不能修改指针指向的值</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// temp_ptr = &amp;low_temp; // 错误，不能修改指针的值</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-5-函数返回指针"><a href="#2-5-函数返回指针" class="headerlink" title="2.5 函数返回指针"></a>2.5 函数返回指针</h2><p>函数可以返回指针:</p>
+<p> *function( );</p>
+<p>返回哪些指针:</p>
+<ul>
+<li>函数内部动态分配的内存空间传入的数据</li>
+<li>不能返回函数内的局部变量</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span>* <span class="title">create_array</span><span class="params">(<span class="type">size_t</span> size, <span class="type">int</span> initial_value = <span class="number">0</span>)</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span>* new_storage &#123;<span class="literal">nullptr</span>&#125;;</span><br><span class="line">    new_storage = <span class="keyword">new</span> <span class="type">int</span>[size]; <span class="comment">// 分配内存</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">size_t</span> i&#123;<span class="number">0</span>&#125;; i &lt; size; i++) &#123;</span><br><span class="line">        <span class="comment">// 初始化值</span></span><br><span class="line">        *(new_storage + i) = initial_value;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> new_storage;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">size_t</span> size &#123;<span class="number">5</span>&#125;;</span><br><span class="line">    <span class="type">int</span>* array_ptr = <span class="built_in">create_array</span>(size, <span class="number">10</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 打印数组元素</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">size_t</span> i&#123;<span class="number">0</span>&#125;; i &lt; size; i++) &#123;</span><br><span class="line">        std::cout &lt;&lt; *(array_ptr + i) &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    std::cout &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">delete</span>[] array_ptr; <span class="comment">// 释放内存</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/c/" rel="tag">c++</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-hexo-进阶"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/09/03/hexo-%E8%BF%9B%E9%98%B6/"
+    >hexo 进阶</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/09/03/hexo-%E8%BF%9B%E9%98%B6/" class="article-date">
+  <time datetime="2023-09-03T01:55:17.000Z" itemprop="datePublished">2023-09-03</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/hexo/">hexo</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="1-文章的分类和标签"><a href="#1-文章的分类和标签" class="headerlink" title="1 文章的分类和标签"></a>1 文章的分类和标签</h1><p>分类的话就是在最上方的状态栏中加入	categories:  属性即可</p>
+<p>标签的话就是在最上方的状态栏中加入	tags:  属性即可</p>
+<h1 id="2图床搭建教程"><a href="#2图床搭建教程" class="headerlink" title="2图床搭建教程"></a>2图床搭建教程</h1><p>根据这个教程来即可</p>
+<p><a target="_blank" rel="noopener" href="https://eryinote.com/post/105">图床</a></p>
+<p>踩坑 picgo这个软件双击并不是直接打开，而是到了右下角的小菜单。。。</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/image-20230903113402329.png" alt="image-20230903113402329"></p>
+<p>然后在typora软件中进行简单的设置即可。如下所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/image-20230903114440776.png" alt="image-20230903114440776"></p>
+<p>至此就搞完了，其他目前也没啥需求，继续学习C++</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-c-基本语法"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/09/02/c-%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/"
+    >c++基本语法</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/09/02/c-%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/" class="article-date">
+  <time datetime="2023-09-02T13:41:01.000Z" itemprop="datePublished">2023-09-02</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/c/">c++</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="1-C-程序结构"><a href="#1-C-程序结构" class="headerlink" title="1.C++程序结构"></a>1.C++程序结构</h1><h2 id="1-1-C-程序的基本组成部分"><a href="#1-1-C-程序的基本组成部分" class="headerlink" title="1.1 C++程序的基本组成部分"></a>1.1 C++程序的基本组成部分</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> favorites_num;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;请输入0~10中你最喜欢的数字: &quot;</span>;</span><br><span class="line">    std::cin &gt;&gt; favorites_num;</span><br><span class="line">    std::cout &lt;&lt; favorites_num &lt;&lt; <span class="string">&quot;也是我喜欢的数字！&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>标识符(identifiers)：</p>
+<p>​	main favorites_num  cout cin</p>
+<p>操作符(operators)：</p>
+<p>​	&lt;&lt;    &gt;&gt; </p>
+<p>标点(punctuation：</p>
+<p>​	；}</p>
+<h2 id="1-2-预处理指令-Preprocessor-Directives"><a href="#1-2-预处理指令-Preprocessor-Directives" class="headerlink" title="1.2 预处理指令(Preprocessor Directives)"></a>1.2 预处理指令(Preprocessor Directives)</h2><ul>
+<li>它指示编译器在实际编译开始之前预处理信息·以#开头，不以分号(;)结尾</li>
+<li>并不理解C++语法</li>
+</ul>
+<h2 id="1-3-注释"><a href="#1-3-注释" class="headerlink" title="1.3 注释"></a>1.3 注释</h2><p>​	跟C相同，双斜杠的单行注释和、&#x2F;**&#x2F;多行注释</p>
+<h2 id="1-4-main函数"><a href="#1-4-main函数" class="headerlink" title="1.4 main函数"></a>1.4 main函数</h2><p>​	例程1：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;hello world&quot;</span> &lt;&lt; endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><code>#include &lt;iostream&gt;</code>：这是一个预处理指令，用于包含输入输出流库（iostream），以便在程序中使用输入输出功能。</li>
+<li><code>using namespace std;</code>：这是一个命名空间的声明，使用了<code>std</code>命名空间。命名空间<code>std</code>包含了C++标准库的函数和对象，使我们可以直接使用其中的成员，而无需在每个标识符前添加<code>std::</code>前缀。</li>
+<li><code>int main()</code>：这是程序的主函数，也是程序的入口点。在C++中，每个程序都必须有一个<code>main</code>函数作为程序的起点。</li>
+<li><code>&#123;</code> 和 <code>&#125;</code>：这对花括号之间的代码块是<code>main</code>函数的主体，包含了程序要执行的代码。</li>
+<li><code>cout &lt;&lt; &quot;hello world&quot; &lt;&lt; endl;</code>：这是一个输出语句，使用了<code>cout</code>对象，它是标准输出流。<code>&lt;&lt;</code>是输出运算符，用于将字符串常量”hello world”输出到控制台。<code>endl</code>是一个特殊的输出控制符，表示换行。</li>
+</ol>
+<p>例程2：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">//argc表示参数数量，argc表示输入的参数</span></span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;参数数量&quot;</span> &lt;&lt; argc &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; argc; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;参数名称&quot;</span> &lt;&lt; argv &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line"> 	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​	 </p>
+<h2 id="1-5-命名空间namespace"><a href="#1-5-命名空间namespace" class="headerlink" title="1.5 命名空间namespace"></a>1.5 命名空间namespace</h2><p>在C++中，命名空间是一种用来组织程序中的标识符（例如变量名、函数名、类名等）的机制。命名空间可以避免标识符之间的名称冲突，使得不同库、模块或代码段中的标识符可以拥有相同的名称而不会发生冲突。</p>
+<p><code>std</code> 是C++标准库中的命名空间，包含了大量的标准函数和类型定义。例如，<code>std::cout</code> 是用于标准输出的对象，<code>std::cin</code> 是用于标准输入的对象，<code>std::string</code> 是用于处理字符串的类，<code>std::vector</code> 是用于动态数组的类等等。这些标准库的功能都封装在 <code>std</code> 命名空间中。</p>
+<p>使用 <code>using namespace std;</code> 声明后，就可以在代码中直接使用 <code>std</code> 命名空间中的成员，而无需在每个标识符前添加 <code>std::</code> 前缀。例如，可以直接使用 <code>cout</code> 来表示 <code>std::cout</code>，使用 <code>endl</code> 来表示 <code>std::endl</code>，以及使用 <code>string</code> 来表示 <code>std::string</code> 等等。</p>
+<p>需要注意的是，尽管 <code>using namespace std;</code> 可以简化代码，但也可能引发命名冲突问题。如果程序中使用了不同命名空间中具有相同名称的标识符，可能会导致编译错误或意想不到的行为。因此，在大型项目中或与其他库进行交互时，最好明确指定使用的命名空间，而不是使用 <code>using namespace</code> 全局声明。</p>
+<h1 id="2-C-变量和常量"><a href="#2-C-变量和常量" class="headerlink" title="2. C++变量和常量"></a>2. C++变量和常量</h1><h2 id="2-1-变量-variable"><a href="#2-1-变量-variable" class="headerlink" title="2.1 变量(variable)"></a>2.1 变量(variable)</h2><p>变量是内存地址的抽象变量有2个重要的属性:<br>Type:变量类型( integer、real nurber、string、Student)<br>Value:变量值(1,3.14,”computer”)</p>
+<h2 id="2-2-基本类型-primitive-types"><a href="#2-2-基本类型-primitive-types" class="headerlink" title="2.2 基本类型(primitive types)"></a>2.2 基本类型(primitive types)</h2><p>示例3：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> a;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;参数a=&quot;</span> &lt;&lt; a &lt;&lt; endl;	  </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​	上述示例运行打印为 a&#x3D;0，最好设置初值</p>
+<p>示例4：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> width = <span class="number">0</span>;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;请输入房间宽度&quot;</span>;	  </span><br><span class="line">    cin &gt;&gt; width;</span><br><span class="line">    </span><br><span class="line">    <span class="type">int</span> length = <span class="number">0</span>;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;请输入房间长度&quot;</span>;	  </span><br><span class="line">    cin &gt;&gt; length;</span><br><span class="line">    </span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;房间的面积为&quot;</span> &lt;&lt; endl;</span><br><span class="line">    cout &lt;&lt; width * length &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="字符型-character-char"><a href="#字符型-character-char" class="headerlink" title="字符型(character) : char"></a>字符型(character) : char</h3><p>作用︰用于表示单个字符，如I@’,’a’,’X’<br>只占用1个字节<br>语法:char c &#x3D;(a;<br>&#x3D;&#x3D;注意&#x3D;&#x3D;:<br>需要和字符串区分开，用单引号不是双引号<br>存储的是字符的ASCIl编码，而不是字符本身</p>
+<h3 id="整型-integer-short、int、long、long-long"><a href="#整型-integer-short、int、long、long-long" class="headerlink" title="整型(integer) : short、int、long、long long"></a>整型(integer) : short、int、long、long long</h3><h3 id="浮点型-floating-point-float、double"><a href="#浮点型-floating-point-float、double" class="headerlink" title="浮点型(floating point) : float、double"></a>浮点型(floating point) : float、double</h3><h3 id="布尔型-Boolean-bool"><a href="#布尔型-Boolean-bool" class="headerlink" title="布尔型(Boolean) : bool"></a>布尔型(Boolean) : bool</h3><p>示例5</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">char</span> a = &#123;<span class="string">&#x27;j&#x27;</span>&#125;;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;字符型参数a的值=&quot;</span> &lt;&lt; a &lt;&lt; endl;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;字符型参数a的ascll=&quot;</span> &lt;&lt; <span class="built_in">int</span>(a) &lt;&lt; endl;</span><br><span class="line">    <span class="comment">// short取值范围和溢出</span></span><br><span class="line">    <span class="type">short</span> overflow_num_1 = <span class="number">32768</span>;    <span class="comment">// 不会报错，但是值会溢出</span></span><br><span class="line">    <span class="type">short</span> overflow_num_2 &#123;<span class="number">32768</span>&#125;;    <span class="comment">// 会报错</span></span><br><span class="line"></span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;短整型溢出：&quot;</span> &lt;&lt; overflow_num_1 &lt;&lt; std::endl;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;短整型溢出：&quot;</span> &lt;&lt; overflow_num_2 &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​	&#x3D;&#x3D;注意&#x3D;&#x3D;:一般人们都是使用等于号进行赋值，但是对于一些超出范围的情况，编译器并不会报错，但是使用{}花括号的情况就会报错，所以建议大家之后使用花括号进行赋值.</p>
+<h2 id="2-3-sizeof和climits"><a href="#2-3-sizeof和climits" class="headerlink" title="2.3 sizeof和climits"></a>2.3 sizeof和climits</h2><p>sizeof(int), &#x2F;&#x2F;确定int占用空间<br>sizeof(double), &#x2F;&#x2F;确定double占用空间<br>sizeof(变量名), &#x2F;&#x2F;确定具体某个变量占用空间<br>sizeof 变量名, &#x2F;&#x2F;不用括号</p>
+<p>示例6：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">char</span> a = &#123;<span class="string">&#x27;a&#x27;</span>&#125;;</span><br><span class="line">    <span class="type">int</span> b = &#123;<span class="number">1</span>&#125;;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;字符型变量a的大小为&quot;</span> &lt;&lt; <span class="built_in">sizeof</span>(a) &lt;&lt; endl;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;整形变量b的大小为&quot;</span> &lt;&lt; <span class="built_in">sizeof</span>(b) &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-4-常量-constant"><a href="#2-4-常量-constant" class="headerlink" title="2.4 常量(constant)"></a>2.4 常量(constant)</h2><p>作用:记录不可更改的数据，防止变量误修改</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 预处理器定义</span></span><br><span class="line"><span class="comment">// 在老版本的C++中常用，现在不建议使用（预处理器不认识C++代码，不会做类型检查等工作)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> pi 3.1415926</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// const修饰方法</span></span><br><span class="line"><span class="type">const</span> <span class="type">double</span> pi = <span class="number">3.1415926</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> months = <span class="number">12</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// pi = 3.5; 常量不可以再变更值，否则编译器会报错</span></span><br></pre></td></tr></table></figure>
+
+<p>示例7：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">const</span> <span class="type">double</span> PI &#123;<span class="number">3.14159</span>&#125;;</span><br><span class="line">    <span class="type">int</span> length &#123;<span class="number">10</span>&#125;;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;圆的面积为&quot;</span> &lt;&lt; length * length * PI &lt;&lt;endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="3-C-数组和容器"><a href="#3-C-数组和容器" class="headerlink" title="3. C++数组和容器"></a>3. C++数组和容器</h1><h2 id="3-1-数组"><a href="#3-1-数组" class="headerlink" title="3.1 数组"></a>3.1 数组</h2><p>·数组所有元素都是同一个数据类型。每个元素可以单独读取。</p>
+<p>数组的特点：</p>
+<ul>
+<li>长度大小固定，且不可以再修改</li>
+<li>所有元素是同一类型</li>
+<li>元素在内存中是连续存储的</li>
+<li>声明array时，内存中会分配一块区域来存储</li>
+<li>可以使用存储的索引位置来获取元素（从0开始，最后一个元素索引为size -1)</li>
+<li>不检查是否超出区域（超出长度获取元素可能会报错)</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">int student_scores[5] = &#123;92, 78, 100, 86, 65&#125;;  // 所有元素初始化</span><br><span class="line">int ages[10] = &#123;19, 23&#125;;                      // 前两个元素初始化对应值，其他元素为0</span><br><span class="line">const int days_in_year = 365;</span><br><span class="line">double hi_temperatures[days_in_year] = &#123;0&#125;;   // 所有元素初始化为0</span><br><span class="line">int another_array[] = &#123;1, 2, 3, 4, 5, 6&#125;;      // 数组大小自动计算</span><br></pre></td></tr></table></figure>
+
+<p>​	数组如果只是定义，他是没有初值的最好在创建的过程中就加入初值。、只有加入一个初值，其他没赋予的值也会有，只是为0 </p>
+<p>示例8：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">char</span> a[] &#123;<span class="string">&#x27;h&#x27;</span>,<span class="string">&#x27;e&#x27;</span>,<span class="string">&#x27;l&#x27;</span>,<span class="string">&#x27;l&#x27;</span>,<span class="string">&#x27;o&#x27;</span>,<span class="string">&#x27;w&#x27;</span>,<span class="string">&#x27;o&#x27;</span>,<span class="string">&#x27;r&#x27;</span>,<span class="string">&#x27;l&#x27;</span>,<span class="string">&#x27;d&#x27;</span>&#125;;</span><br><span class="line">    <span class="type">int</span> b[] &#123;<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>&#125;;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;a数组的第五个值为&quot;</span> &lt;&lt; a[<span class="number">4</span>] &lt;&lt; endl;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;b数组名打印&quot;</span> &lt;&lt; b &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-2-容器"><a href="#3-2-容器" class="headerlink" title="3.2 容器"></a>3.2 容器</h2><p>假设需要存储整个学校所有学生的考试成绩无法知道具体的学生数量<br>解决办法:</p>
+<ul>
+<li><p>使用数组，数组大小设置的足够大</p>
+</li>
+<li><p>使用vector动态数组</p>
+</li>
+</ul>
+<p>&#x3D;&#x3D;容器的特点&#x3D;&#x3D;：</p>
+<ul>
+<li><p>C++标准模板库STL中的容器(container)</p>
+</li>
+<li><p>长度大小可以随时缩放</p>
+</li>
+<li><p>和数组类似的语法用法</p>
+</li>
+<li><p>高性能越界检查</p>
+</li>
+<li><p>很多有用的函数:sort, reverrse, find等</p>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function">std::vector&lt;<span class="type">char</span>&gt; <span class="title">vowels</span><span class="params">(<span class="number">5</span>)</span></span>;             <span class="comment">// 构造函数初始化方法，需要五个位置</span></span><br><span class="line"><span class="function">std::vector&lt;<span class="type">int</span>&gt; <span class="title">student_scores</span><span class="params">(<span class="number">10</span>)</span></span>;     <span class="comment">// 大小为10，这10个数字会自动初始化为0</span></span><br></pre></td></tr></table></figure>
+
+<p>赋予初值：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"></span><br><span class="line">std::vector&lt;<span class="type">char</span>&gt; vowels &#123;<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;e&#x27;</span>, <span class="string">&#x27;i&#x27;</span>, <span class="string">&#x27;o&#x27;</span>, <span class="string">&#x27;u&#x27;</span>&#125;;</span><br><span class="line">std::vector&lt;<span class="type">int</span>&gt; student_scores &#123;<span class="number">100</span>, <span class="number">99</span>, <span class="number">98</span>, <span class="number">97</span>, <span class="number">96</span>&#125;;</span><br><span class="line"><span class="function">std::vector&lt;<span class="type">double</span>&gt; <span class="title">hi_temperatures</span><span class="params">(<span class="number">365</span>, <span class="number">37.0</span>)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>​	这里有些区别，第一个使用的是花括号进行的初值赋予，第二个跟第一个相同，但是第三个使用的是圆括号来进行的，第一个参数为365表示将会有365个元素，第二个参数为初始值，表示这365个元素都会被初始化为37.0</p>
+<p>​	.at获取</p>
+<p>​	.pushback进行追加</p>
+<p>示例 9：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    vector&lt;<span class="type">char</span>&gt; vowel &#123;<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;e&#x27;</span>,<span class="string">&#x27;i&#x27;</span>,<span class="string">&#x27;o&#x27;</span>,<span class="string">&#x27;u&#x27;</span>&#125;;</span><br><span class="line">    cout &lt;&lt; vowel.<span class="built_in">at</span>(<span class="number">1</span>) &lt;&lt;endl;</span><br><span class="line">    vowel.<span class="built_in">push_back</span>(<span class="string">&#x27;a&#x27;</span>);</span><br><span class="line">    cout &lt;&lt; vowel.<span class="built_in">at</span>(<span class="number">5</span>) &lt;&lt;endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​	需要注意的是上面的vector和&lt;类型&gt;必须连在一起，否则会报错。</p>
+<p>​	容器的获取方式跟数组的获取方式相同，但也可以有更多的方式</p>
+<h1 id="4-C-程序流程"><a href="#4-C-程序流程" class="headerlink" title="4. C++程序流程"></a>4. C++程序流程</h1><h2 id="4-1-if"><a href="#4-1-if" class="headerlink" title="4.1 if"></a>4.1 if</h2><p>示例 10：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> lower_limit &#123;<span class="number">10</span>&#125;;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> upper_limit &#123;<span class="number">100</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> input_num;</span><br><span class="line"></span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;请输入一个介于&quot;</span> &lt;&lt; lower_limit &lt;&lt; <span class="string">&quot;和&quot;</span> &lt;&lt; upper_limit &lt;&lt; <span class="string">&quot;之间的整数：&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    std::cin &gt;&gt; input_num;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (input_num &gt;= lower_limit) &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;===条件一满足===&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">        std::cout &lt;&lt; input_num &lt;&lt; <span class="string">&quot;大于等于&quot;</span> &lt;&lt; lower_limit &lt;&lt; std::endl;</span><br><span class="line">        std::cout &lt;&lt; input_num &lt;&lt; <span class="string">&quot;比&quot;</span> &lt;&lt; lower_limit &lt;&lt; <span class="string">&quot;大&quot;</span> &lt;&lt; (input_num - lower_limit) &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (input_num &lt;= upper_limit) &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;===条件二满足===&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">        std::cout &lt;&lt; input_num &lt;&lt; <span class="string">&quot;小于等于&quot;</span> &lt;&lt; upper_limit &lt;&lt; std::endl;</span><br><span class="line">        std::cout &lt;&lt; input_num &lt;&lt; <span class="string">&quot;比&quot;</span> &lt;&lt; upper_limit &lt;&lt; <span class="string">&quot;小&quot;</span> &lt;&lt; (upper_limit - input_num) &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (input_num &gt; lower_limit &amp;&amp; input_num &lt; upper_limit) &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;===条件三满足===&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">        std::cout &lt;&lt; input_num &lt;&lt; <span class="string">&quot;介于&quot;</span> &lt;&lt; lower_limit &lt;&lt; <span class="string">&quot;和&quot;</span> &lt;&lt; upper_limit &lt;&lt; <span class="string">&quot;之间&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-2-switch"><a href="#4-2-switch" class="headerlink" title="4.2 switch"></a>4.2 switch</h2><p>示例 11：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    char input_grade = &#x27;0&#x27;;</span><br><span class="line"></span><br><span class="line">    std::cout &lt;&lt; &quot;请输入你的成绩：&quot;;</span><br><span class="line">    std::cin &gt;&gt; input_grade;</span><br><span class="line"></span><br><span class="line">    switch (input_grade)</span><br><span class="line">    &#123;</span><br><span class="line">        case &#x27;a&#x27;:</span><br><span class="line">        case &#x27;A&#x27;:</span><br><span class="line">            std::cout &lt;&lt; &quot;优秀&quot; &lt;&lt; std::endl;</span><br><span class="line">            break;</span><br><span class="line">        case &#x27;b&#x27;:</span><br><span class="line">        case &#x27;B&#x27;:</span><br><span class="line">            std::cout &lt;&lt; &quot;良好&quot; &lt;&lt; std::endl;</span><br><span class="line">            break;</span><br><span class="line">        case &#x27;c&#x27;:</span><br><span class="line">        case &#x27;C&#x27;:</span><br><span class="line">            std::cout &lt;&lt; &quot;中等&quot; &lt;&lt; std::endl;</span><br><span class="line">            break;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="4-3循环-for、while、do-while"><a href="#4-3循环-for、while、do-while" class="headerlink" title="4.3循环: for、while、do-while"></a>4.3循环: for、while、do-while</h2><p>示例 11：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 简单的 for 循环</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">        std::cout &lt;&lt; i &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 每次 i 增加 2</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i += <span class="number">2</span>) &#123;</span><br><span class="line">        std::cout &lt;&lt; i &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>除了上面这种最简单的方式，for也支持基于范围的循环，类似于python：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> scores [ ] &#123;<span class="number">100</span>,<span class="number">99</span>,<span class="number">98</span>&#125; ;</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> score: scores)</span><br><span class="line">	cout&lt;&lt; score &lt;&lt; endl;</span><br></pre></td></tr></table></figure>
+
+<p>有时确定范围比较困难，所以可以使用auto这个类型，可以帮我们自动确认类型</p>
+<p>while和do while就不重复了，还是很简单的</p>
+<h1 id="5-C-字符和字符串"><a href="#5-C-字符和字符串" class="headerlink" title="5. C++字符和字符串"></a>5. C++字符和字符串</h1><h2 id="5-1C风格字符串"><a href="#5-1C风格字符串" class="headerlink" title="5.1C风格字符串"></a>5.1C风格字符串</h2><p>示例 12：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">char</span> first_name[<span class="number">20</span>] &#123;&#125;;</span><br><span class="line">    <span class="type">char</span> last_name[<span class="number">20</span>] &#123;&#125;;</span><br><span class="line">    <span class="type">char</span> full_name[<span class="number">50</span>] &#123;<span class="string">&#x27;\0&#x27;</span>&#125;;</span><br><span class="line">    <span class="type">char</span> temp[<span class="number">50</span>] &#123;<span class="number">0</span>&#125;;</span><br><span class="line"></span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;请输入你的姓：&quot;</span>;</span><br><span class="line">    std::cin &gt;&gt; first_name;</span><br><span class="line"></span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;请输入你的名：&quot;</span>;</span><br><span class="line">    std::cin &gt;&gt; last_name;</span><br><span class="line"></span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;===============&quot;</span> &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;您的姓：&quot;</span> &lt;&lt; first_name &lt;&lt; <span class="string">&quot;，一共有&quot;</span> &lt;&lt; <span class="built_in">strlen</span>(first_name) &lt;&lt; <span class="string">&quot;个字符&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;您的名：&quot;</span> &lt;&lt; last_name &lt;&lt; <span class="string">&quot;，一共有&quot;</span> &lt;&lt; <span class="built_in">strlen</span>(last_name) &lt;&lt; <span class="string">&quot;个字符&quot;</span> &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="5-2-C-风格字符串"><a href="#5-2-C-风格字符串" class="headerlink" title="5.2 C++风格字符串"></a>5.2 C++风格字符串</h2><ul>
+<li><p>STL中一个类</p>
+</li>
+<li><p>使用前必须要导入#include <string></p>
+</li>
+<li><p>std namespace</p>
+</li>
+<li><p>内存中连续，动态大小</p>
+</li>
+<li><p>可转c-style字符串相互转化</p>
+</li>
+<li><p>更安全</p>
+<p>示例 13：</p>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    std::string sl; <span class="comment">// 全部初始化为空</span></span><br><span class="line">    std::string s2 &#123; <span class="string">&quot;hello&quot;</span> &#125;; <span class="comment">// 初始化为 &quot;hello&quot;</span></span><br><span class="line">    std::string s3 &#123; s2 &#125;; <span class="comment">// 拷贝 s2</span></span><br><span class="line">    std::string s4 &#123; s3, <span class="number">0</span>, <span class="number">4</span> &#125;; <span class="comment">// 拷贝 s3 的前4个字符：&quot;hell&quot;</span></span><br><span class="line">    std::string s5 &#123; <span class="string">&quot;hello&quot;</span>, <span class="number">3</span> &#125;; <span class="comment">// 拷贝 &quot;hello&quot; 的前3个字符：&quot;hel&quot;</span></span><br><span class="line">    <span class="function">std::string <span class="title">s6</span><span class="params">(<span class="number">5</span>, <span class="string">&#x27;x&#x27;</span>)</span></span>; <span class="comment">// 5个 &#x27;x&#x27;：&quot;xxxxx&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​	c++字符串可以直接赋值，根据他的参数的数量可以划分不同的重定向函数</p>
+<p>拼接</p>
+<p>示例 14：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    std::string part1 &#123; <span class="string">&quot;C++&quot;</span> &#125;;</span><br><span class="line">    std::string part2 &#123; <span class="string">&quot;是一门强大的&quot;</span> &#125;;</span><br><span class="line">    std::string sentence;</span><br><span class="line"></span><br><span class="line">    sentence = part1 + <span class="string">&quot; &quot;</span> + part2 + <span class="string">&quot;语言&quot;</span>;</span><br><span class="line">    std::cout &lt;&lt; sentence &lt;&lt; std::endl; <span class="comment">// 输出: C++ 是一门强大的语言</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// sentence = &quot;C+++&quot; 是一门强大的语言&quot;; // 错误，不能将两个C风格字符串字面量相加</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/c/" rel="tag">c++</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-hexo基本操作命令"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/09/02/hexo%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4/"
+    >hexo基本操作命令</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/09/02/hexo%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4/" class="article-date">
+  <time datetime="2023-09-02T12:37:14.000Z" itemprop="datePublished">2023-09-02</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/hexo/">hexo</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p><a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=Hexo&spm=1001.2101.3001.7020">Hexo</a> 约有二十个命令，但普通用户经常使用的大概只有下列几个:</p>
+<h2 id="hexo-s"><a href="#hexo-s" class="headerlink" title="hexo s"></a><strong>hexo s</strong></h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo s</span><br></pre></td></tr></table></figure>
+
+<p>启动本地服务器，用于预览主题。默认地址： <a target="_blank" rel="noopener" href="http://localhost:4000/">http://localhost:4000/</a></p>
+<ul>
+<li>hexo s 是 hexo server 的缩写，命令效果一致；</li>
+<li>预览的同时可以修改文章内容或主题代码，保存后刷新页面即可；</li>
+<li>对 Hexo 根目录 _config.yml 的修改，需要重启本地服务器后才能预览效果。</li>
+</ul>
+<h2 id="hexo-new"><a href="#hexo-new" class="headerlink" title="hexo new"></a><strong>hexo new</strong></h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new &quot;学习笔记  六&quot;</span><br></pre></td></tr></table></figure>
+
+<p>新建一篇标题为 学习笔记 六 的文章，因为标题里有空格，所以加上了引号。</p>
+<ul>
+<li>文章标题可以在对应 md 文件里改，新建时标题可以写的简单些。</li>
+</ul>
+<h2 id="hexo-d"><a href="#hexo-d" class="headerlink" title="hexo d"></a><strong>hexo d</strong></h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+
+<p>自动生成网站静态文件，并部署到设定的仓库。</p>
+<ul>
+<li>hexo d 是 hexo deploy 的缩写，命令效果一致。</li>
+</ul>
+<h2 id="hexo-clean"><a href="#hexo-clean" class="headerlink" title="hexo clean"></a><strong>hexo clean</strong></h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br></pre></td></tr></table></figure>
+
+<p>清除缓存文件 db.json 和已生成的静态文件 public 。</p>
+<ul>
+<li>网站显示异常时可以执行这条命令试试。</li>
+</ul>
+<h2 id="hexo-g"><a href="#hexo-g" class="headerlink" title="hexo g"></a><strong>hexo g</strong></h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br></pre></td></tr></table></figure>
+
+<p>生成网站静态文件到默认设置的 public 文件夹。</p>
+<ul>
+<li>便于查看网站生成的静态文件或者手动部署网站；</li>
+<li>如果使用自动部署，不需要先执行该命令；</li>
+<li>hexo g 是 hexo generate 的缩写，命令效果一致。</li>
+</ul>
+<h2 id="hexo-new-page"><a href="#hexo-new-page" class="headerlink" title="hexo new page"></a><strong>hexo new page</strong></h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new page aboutme</span><br></pre></td></tr></table></figure>
+
+<p>新建一个标题为 aboutme 的页面，默认链接地址为 主页地址&#x2F;aboutme&#x2F;</p>
+<ul>
+<li>标题可以为中文，但一般习惯用英文；</li>
+<li>页面标题和文章一样可以随意修改；</li>
+<li>页面不会出现在首页文章列表和归档中，也不支持设置分类和标签。</li>
+</ul>
+<p>hexo n “我的博客” 等价于 hexo new “我的博客” 还等价于 hexo new post “我的博客” #新建一篇文章<br>hexo p 等价于 hexo publish<br>hexo g 等价于 hexo generate<br>hexo s等价于 hexo server<br>hexo d 等价于 hexo deploy<br>hexo deploy -g 等价于 hexo deploy –generate<br>hexo generate -d等价于hexo generate –deploy</p>
+<p>一般只需要四个命令，</p>
+<p>hexo n 创建一个新的博客</p>
+<p>hexo s 开启一个新的服务</p>
+<p>hexo g 生成一个静态的网页</p>
+<p>hexo d 将生成的静态网页推到服务器github</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-ayer-主题熟悉"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/09/02/ayer-%E4%B8%BB%E9%A2%98%E7%86%9F%E6%82%89/"
+    >ayer 主题熟悉</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/09/02/ayer-%E4%B8%BB%E9%A2%98%E7%86%9F%E6%82%89/" class="article-date">
+  <time datetime="2023-09-02T11:54:05.000Z" itemprop="datePublished">2023-09-02</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/hexo/">hexo</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="1-整体介绍"><a href="#1-整体介绍" class="headerlink" title="1 整体介绍"></a>1 整体介绍</h1><p><a target="_blank" rel="noopener" href="https://github.com/Shen-Yu/hexo-theme-ayer">Ayer</a> 是一个干净且优雅的 Hexo 主题，自带响应式，加载速度很快，该有的功能都有，可配置项很多，非常适合作为你的博客主题，主题内还附送了 6 张精美的高清壁纸。欢迎使用和 Star 支持，如果你在使用过程中有任何疑问或者建议，欢迎联系我！如果你的博客采用了本主题，欢迎在下面评论区留下地址~</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/Shen-Yu/hexo-theme-ayer">Ayer</a> 在马来语中是“水”的意思，在西班牙语中是“昨天”的意思。</p>
+<h1 id="2-特性"><a href="#2-特性" class="headerlink" title="2. 特性"></a>2. 特性</h1><ol>
+<li>干净且优雅，文章内容美观易读</li>
+<li>首页封面全屏平铺，扁平化设计，简洁又不失高大上</li>
+<li>响应式设计，博客在桌面端、平板、手机等设备上均能很好的展现</li>
+<li>首页封面和文案可以任意更换，主题内附送 6 张精美高清壁纸</li>
+<li>时间轴式的归档页</li>
+<li>支持 <code>黑夜阅读</code> 模式</li>
+<li>侧边栏可以点击显示或隐藏</li>
+<li>支持文章置顶和文章打赏</li>
+<li>支持文章字数和阅读时长统计</li>
+<li>支持网易云音乐播放</li>
+<li>支持  <code>MathJax</code> 和 <code>Katex</code> 数学公式</li>
+<li>支持 <code>Mermaid</code> 流程图、状态图、时序图、甘特图</li>
+<li><code>TOC</code> 目录在文章页悬浮，跳转更方便</li>
+<li>集成了博客加密访问的功能</li>
+<li>可设置阅读文章时做密码验证<a target="_blank" rel="noopener" href="https://github.com/MikeCoder/hexo-blog-encrypt/blob/master/ReadMe.zh.md">hexo-blog-encrypt</a></li>
+<li><a target="_blank" rel="noopener" href="https://valine.js.org/">Valine</a>和<a target="_blank" rel="noopener" href="https://gitalk.github.io/">Gitalk</a>评论模块（推荐配合<code>leancloud</code>使用  <code>Valine</code>）</li>
+<li>集成了<a target="_blank" rel="noopener" href="http://busuanzi.ibruce.info/">不蒜子</a>、百度统计、Google Analytics、CNZZ 等统计功能</li>
+<li>支持 Github Ribbons</li>
+</ol>
+<h1 id="3-主题配置"><a href="#3-主题配置" class="headerlink" title="3.主题配置"></a>3.主题配置</h1><p>以下是 ayer 主题目录下的 <code>_config.yml</code> 文件配置，</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br></pre></td><td class="code"><pre><span class="line"># 侧边栏菜单</span><br><span class="line">menu:</span><br><span class="line">  主页: /</span><br><span class="line">  归档: /archives</span><br><span class="line">  分类: /categories</span><br><span class="line">  标签: /tags</span><br><span class="line">  摄影: http://shenyu-vip.lofter.com</span><br><span class="line">  旅行: /tags/旅行/</span><br><span class="line">  关于我: /2019/about</span><br><span class="line"></span><br><span class="line"># 站点次标题和打字动效</span><br><span class="line"># https://github.com/mattboldt/typed.js</span><br><span class="line">subtitle:</span><br><span class="line">  enable: true # 是否开启动效</span><br><span class="line">  text: 面朝大海，春暖花开 # 显示的文字</span><br><span class="line">  text2: 愿你一生努力，一生被爱 # 滚动播放，如果不需要可以留空</span><br><span class="line">  text3: 想要的都拥有，得不到的都释怀 # 最多支持三段文字</span><br><span class="line">  startDelay: 0 # 延迟时间</span><br><span class="line">  typeSpeed: 200 # 打字速度</span><br><span class="line">  loop: true # 是否循环</span><br><span class="line">  backSpeed: 100 # 回退速度</span><br><span class="line">  showCursor: true # 是否显示光标</span><br><span class="line"></span><br><span class="line"># 网站图标和侧边栏logo</span><br><span class="line">favicon: /favicon.ico</span><br><span class="line">logo: /images/ayer-side.svg</span><br><span class="line"></span><br><span class="line"># 封面配置</span><br><span class="line"># enable-是否启用封面；path-封面背景图；logo-封面logo</span><br><span class="line">cover:</span><br><span class="line">  enable: true</span><br><span class="line">  path: /images/cover1.jpg # /source/images目录下附送多张精美壁纸，可任意更换</span><br><span class="line">  logo: /images/ayer.svg # 如果不要直接设置成false</span><br><span class="line"></span><br><span class="line"># 页面顶部进度条</span><br><span class="line">progressBar: true</span><br><span class="line"></span><br><span class="line"># 告示板模块</span><br><span class="line">broadcast:</span><br><span class="line">  enable: true # true开启，false关闭</span><br><span class="line">  type: 2 # 1：自定义输入，2：一言api(https://hitokoto.cn/)</span><br><span class="line">  text: 一个安静优雅的hexo主题，快速且响应式。 # type为1时有效</span><br><span class="line"></span><br><span class="line"># 文章配置</span><br><span class="line"># 文章太长，截断按钮文字(在需要截断的行增加此标记：&lt;!--more--&gt;)</span><br><span class="line">excerpt_link: 阅读更多...</span><br><span class="line"># 如果你嫌每篇文章手动加more标记比较麻烦，又不想在首页全文显示，可以把excerpt_all设置成true，这样首页只会显示文章归档</span><br><span class="line">excerpt_all: false</span><br><span class="line"></span><br><span class="line"># 是否开启代码复制按钮</span><br><span class="line">copy_btn: true</span><br><span class="line"># 是否开启文章分享按钮</span><br><span class="line">share_enable: true</span><br><span class="line"># 国内的社交平台(If you are not in China, maybe you prefer to set:false)</span><br><span class="line">share_china: true</span><br><span class="line"># 文章分享文字</span><br><span class="line">share_text: 分享</span><br><span class="line"></span><br><span class="line"># 分页文字</span><br><span class="line">nav_text:</span><br><span class="line">  page_prev: 上一页</span><br><span class="line">  page_next: 下一页</span><br><span class="line">  post_prev: 上一篇</span><br><span class="line">  post_next: 下一篇</span><br><span class="line"></span><br><span class="line"># 文章页是否显示目录</span><br><span class="line">toc: true</span><br><span class="line"></span><br><span class="line"># 文章中的图片是否支持点击放大</span><br><span class="line">image_viewer: true</span><br><span class="line"></span><br><span class="line"># https://github.com/willin/hexo-wordcount</span><br><span class="line"># 是否开启字数统计(关闭请设置enable为false)</span><br><span class="line"># 也可以单独在md文件里Front-matter设置`no_word_count: true`属性，来自定义关闭字数统计</span><br><span class="line">word_count:</span><br><span class="line">  enable: true</span><br><span class="line">  # 只在文章详情显示(不在首页显示)</span><br><span class="line">  only_article_visit: true</span><br><span class="line"></span><br><span class="line"># 打赏</span><br><span class="line"># 打赏type设定：0-关闭打赏； 1-文章对应的md文件里有reward:true属性，才有打赏； 2-默认开启所有文章均有打赏，如果有些文章你不需要，请在文章对应的md文件里设置no_reward:true</span><br><span class="line">reward_type: 2</span><br><span class="line"># 打赏wording</span><br><span class="line">reward_wording: &quot;请我喝杯咖啡吧~&quot;</span><br><span class="line"># 支付宝二维码图片地址，跟你设置logo的方式一样。比如：/images/alipay.jpg</span><br><span class="line">alipay: /images/alipay.jpg</span><br><span class="line"># 微信二维码图片地址</span><br><span class="line">weixin: /images/wechat.jpg</span><br><span class="line"></span><br><span class="line"># 版权声明</span><br><span class="line"># 版权声明type设定：0-关闭版权声明； 1-文章对应的md文件里有copyright: true属性，才有版权声明； 2-所有文章均有版权声明</span><br><span class="line">copyright_type: 2</span><br><span class="line"></span><br><span class="line"># 是否启用搜索</span><br><span class="line">search: true</span><br><span class="line"></span><br><span class="line"># RSS订阅(先安装hexo-generator-feed插件，再去博客根目录config进行配置)</span><br><span class="line"># 不想显示可以直接留空</span><br><span class="line">rss: /atom.xml</span><br><span class="line"></span><br><span class="line"># 是否启用黑夜模式开关</span><br><span class="line">darkmode: true</span><br><span class="line"></span><br><span class="line"># 动态背景效果: 0-关闭，1-动态线条(跟随鼠标)</span><br><span class="line">canvas_bg: 0</span><br><span class="line"></span><br><span class="line"># 自定义鼠标样式，直接替换/images/mouse.cur文件</span><br><span class="line">mouse:</span><br><span class="line">  enable: false</span><br><span class="line">  path: /images/mouse.cur</span><br><span class="line"></span><br><span class="line"># 鼠标点击效果：0-关闭，1-爱心，2-爆炸烟花，3-粒子烟花</span><br><span class="line">click_effect: 0</span><br><span class="line"></span><br><span class="line"># 页面宽度自定义（不建议修改，可能造成布局混乱），article_width文章宽度，sidebar_width侧边栏宽度</span><br><span class="line">layout:</span><br><span class="line">  article_width: 80rem</span><br><span class="line">  sidebar_width: 8rem</span><br><span class="line"></span><br><span class="line"># GitHub Ribbons-封面右上角的forkme，换样式直接在source/images目录下替换forkme图片</span><br><span class="line">github:</span><br><span class="line">  # (关闭请设置为false)</span><br><span class="line">  enable: true</span><br><span class="line">  url: https://github.com/Shen-Yu/hexo-theme-ayer</span><br><span class="line"></span><br><span class="line"># 网易云音乐插件</span><br><span class="line">music:</span><br><span class="line">  enable: false</span><br><span class="line">  # 播放器尺寸类型(1：小尺寸、2：大尺寸)</span><br><span class="line">  type: 1</span><br><span class="line">  id: 22707008 # 网易云分享的音乐ID(更换音乐请更改此配置项)</span><br><span class="line">  autoPlay: true # 是否开启自动播放</span><br><span class="line"></span><br><span class="line"># 访问量统计(不蒜子)</span><br><span class="line">busuanzi:</span><br><span class="line">  enable: true</span><br><span class="line"></span><br><span class="line"># 友盟cnzz统计(url填js代码src链接)</span><br><span class="line">cnzz:</span><br><span class="line">  enable: true</span><br><span class="line">  url: #</span><br><span class="line"></span><br><span class="line"># Google Analytics</span><br><span class="line">google_analytics: &quot;&quot;</span><br><span class="line"># 百度统计</span><br><span class="line">baidu_analytics: &quot;&quot;</span><br><span class="line"></span><br><span class="line"># Mathjax数学公式</span><br><span class="line">mathjax: true</span><br><span class="line"></span><br><span class="line"># Katex数学公式(allpost设置为false时只有头部设置math:true的文章才开启)</span><br><span class="line"># 需要更换hexo渲染器，npm un hexo-renderer-marked -S &amp;&amp; npm i hexo-renderer-markdown-it-katex -S</span><br><span class="line">katex:</span><br><span class="line">  enable: false # true</span><br><span class="line">  allpost: true</span><br><span class="line">  copy_tex: false</span><br><span class="line"></span><br><span class="line"># mermaid流程图 三个选项缺一不可(https://mermaid-js.github.io/mermaid/#/)</span><br><span class="line">mermaid:</span><br><span class="line">  enable: false</span><br><span class="line">  cdn: https://cdn.jsdelivr.net/npm/mermaid@8.9.2/dist/mermaid.min.js</span><br><span class="line">  theme: forest</span><br><span class="line"></span><br><span class="line"># 网站成立年份(默认为 2019，若填入年份小于当前年份，则显示为 2018-2019 类似的格式)</span><br><span class="line">since: 2019</span><br><span class="line"></span><br><span class="line"># ICP备案信息尾部显示</span><br><span class="line">icp:</span><br><span class="line">  enable: false</span><br><span class="line">  url: &quot;http://www.beian.miit.gov.cn/&quot; # 备案链接</span><br><span class="line">  text: &quot;浙ICP备88888888&quot; # 备案信息</span><br><span class="line"># 公安备案信息尾部显示</span><br><span class="line">gongan:</span><br><span class="line">  enable: true</span><br><span class="line">  img: /images/beian.png #公安备案图片</span><br><span class="line">  url: &quot;http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=01234567890123&quot; #公安备案链接</span><br><span class="line">  text: &quot;浙公网安备01234567890123号&quot; #公安备案信息</span><br><span class="line"></span><br><span class="line"># 友情链接</span><br><span class="line">friends_link:</span><br><span class="line">  Ayer主题: #网站名称</span><br><span class="line">    #网站地址</span><br><span class="line">    url: https://github.com/Shen-Yu/hexo-theme-ayer</span><br><span class="line">    #网站图片(可忽略不写)</span><br><span class="line">    img: /images/ayer.png</span><br><span class="line">  GitHub:</span><br><span class="line">    url: https://github.com/Shen-Yu</span><br><span class="line">    img: https://i.loli.net/2020/09/07/indb4PRYDA98EkN.png</span><br><span class="line">  码云:</span><br><span class="line">    url: https://gitee.com/shen-yu</span><br><span class="line">    img: https://i.loli.net/2020/09/07/K3AqO7h6krQFlRX.png</span><br><span class="line">  Hexo官网:</span><br><span class="line">    url: https://hexo.io</span><br><span class="line">    img: https://i.loli.net/2020/09/07/UYGzjo7h68CRWny.png</span><br><span class="line">  Hexo图表插件:</span><br><span class="line">    url: https://github.com/Shen-Yu/hexo-tag-chart</span><br><span class="line">    img: https://i.loli.net/2020/09/07/GIXBYE5SoylhR1r.png</span><br><span class="line"></span><br><span class="line"># 评论：1、Valine(推荐)；2、Gitalk；3、Twikoo; 4.MiniValine</span><br><span class="line"></span><br><span class="line"># 1、Valine[一款快速、简洁且高效的无后端评论系统](https://github.com/xCss/Valine)</span><br><span class="line"># 启用Valine必须先创建leancloud应用， 获取 id|key 填入即可</span><br><span class="line">leancloud:</span><br><span class="line">  enable: true</span><br><span class="line">  app_id: #</span><br><span class="line">  app_key: #</span><br><span class="line"># Valine配置</span><br><span class="line">valine:</span><br><span class="line">  enable: true # 是否启用</span><br><span class="line">  avatar: monsterid # 头像样式(https://valine.js.org/avatar.html)</span><br><span class="line">  placeholder: 给我的文章加点评论吧~ # placeholder</span><br><span class="line"></span><br><span class="line"># 2、Gitalk(https://github.com/gitalk/gitalk)</span><br><span class="line">gitalk:</span><br><span class="line">  enable: false # true</span><br><span class="line">  clientID: # GitHub Application Client ID</span><br><span class="line">  clientSecret: # Client Secret</span><br><span class="line">  repo: # Repository name</span><br><span class="line">  owner: # GitHub ID</span><br><span class="line">  admin: # GitHub ID</span><br><span class="line"></span><br><span class="line"># 3、Twikoo(https://github.com/imaegoo/twikoo)</span><br><span class="line">twikoo:</span><br><span class="line">  enable: false</span><br><span class="line">  envId: #</span><br><span class="line"></span><br><span class="line"># 4、MiniValine</span><br><span class="line"># See: https://github.com/MiniValine/MiniValine</span><br><span class="line">minivaline:</span><br><span class="line">  enable: false</span><br><span class="line">  serverURL: https://minivaline.your-domain.com</span><br><span class="line"></span><br><span class="line"># 首页广告配置</span><br><span class="line"># 可以根据需要自行增加ad_3，ad_4...，留空则不显示</span><br><span class="line">ads:</span><br><span class="line">  ad_1:</span><br><span class="line">    title: vultr优惠vps</span><br><span class="line">    img: https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/vultr.png</span><br><span class="line">    url: https://www.vultr.com/?ref=8630075</span><br><span class="line">    width: 300</span><br><span class="line">  ad_2:</span><br><span class="line">    title: 云服务器全球购低至2折</span><br><span class="line">    img: https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/ad_2.jpg</span><br><span class="line">    url: https://curl.qcloud.com/kvO7hb43</span><br><span class="line">    width: 300</span><br><span class="line"></span><br><span class="line"># 网站开启加密访问，密码可设置任何字符</span><br><span class="line">lock:</span><br><span class="line">  enable: false</span><br><span class="line">  password: 123456</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-插件-可选"><a href="#4-插件-可选" class="headerlink" title="4 插件(可选)"></a>4 插件(可选)</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/netcan/hexo-generator-index-pin-top">hexo-generator-index-pin-top</a> 用于文章置顶</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/MikeCoder/hexo-blog-encrypt/blob/master/ReadMe.zh.md">hexo-blog-encrypt</a> 用于文章加密</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/MoePlayer/hexo-tag-aplayer/blob/master/docs/README-zh_cn.md">hexo-tag-aplayer</a> 用于播放音乐</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/MoePlayer/hexo-tag-dplayer">hexo-tag-dplayer</a> 用于播放视频</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/EYHN/hexo-helper-live2d/blob/master/README.zh-CN.md">hexo-helper-live2d</a> 二次元看板娘</li>
+</ul>
+<h2 id="5-分类"><a href="#5-分类" class="headerlink" title="5.分类"></a>5.分类</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new page categories</span><br></pre></td></tr></table></figure>
+
+<p>然后将以下复制到 &#x2F;source&#x2F;categories&#x2F;index.md 文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: categories</span><br><span class="line">type: &quot;categories&quot;</span><br><span class="line">layout: &quot;categories&quot;</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+<h2 id="6-标签"><a href="#6-标签" class="headerlink" title="6.标签"></a>6.标签</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new page tags</span><br></pre></td></tr></table></figure>
+
+<p>配置同分类一样</p>
+<h2 id="7-友情链接"><a href="#7-友情链接" class="headerlink" title="7. 友情链接"></a>7. 友情链接</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new page friends</span><br></pre></td></tr></table></figure>
+
+<p>然后将以下复制到 &#x2F;source&#x2F;friends&#x2F;index.md 文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: friends</span><br><span class="line">type: friends</span><br><span class="line">layout: &quot;friends&quot;</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+<p>然后在 ayer 主题目录下的 <code>_config.yml</code> 中自定义 <code>friends_link</code> 配置项即可</p>
+<h2 id="8-相册"><a href="#8-相册" class="headerlink" title="8.相册"></a>8.相册</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new page photos</span><br></pre></td></tr></table></figure>
+
+<p>然后将以下复制到 &#x2F;source&#x2F;photos&#x2F;index.md 文件，<code>img_url</code> 替换成图片路径，<code>caption</code> 替换成图片名称</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: Gallery</span><br><span class="line"></span><br><span class="line">albums: [[&quot;img_url&quot;, &quot;img_caption&quot;], [&quot;img_url&quot;, &quot;img_caption&quot;]]</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+<h2 id="文章目录"><a href="#文章目录" class="headerlink" title="文章目录"></a>文章目录</h2><p>用 Tocbot 解析文章标题并生成目录</p>
+<ul>
+<li>将以下配置复制到你 ayer 主题目录下的 <code>_config.yml</code> 里：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># Toc</span><br><span class="line">toc: true</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>当然你可能并不想所有文章都生成悬浮目录，你可以在文章顶部的配置中加一行来进行关闭：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">no_toc: true</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-c-环境搭建"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/09/02/c-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"
+    >c++ 环境搭建</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/09/02/c-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" class="article-date">
+  <time datetime="2023-09-02T11:27:36.000Z" itemprop="datePublished">2023-09-02</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/c/">c++</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="1-课程所需运行环境配置"><a href="#1-课程所需运行环境配置" class="headerlink" title="1 课程所需运行环境配置"></a>1 课程所需运行环境配置</h1><p>​		ubuntu + windows双系统 4070ti 13900K 32G </p>
+<h1 id="2-VS-Code配置"><a href="#2-VS-Code配置" class="headerlink" title="2 VS Code配置"></a>2 VS Code配置</h1><h2 id="2-1-安装vscode"><a href="#2-1-安装vscode" class="headerlink" title="2.1 安装vscode"></a>2.1 安装vscode</h2><h2 id="2-2-安装插件"><a href="#2-2-安装插件" class="headerlink" title="2.2 安装插件"></a>2.2 安装插件</h2><ol>
+<li>chinese</li>
+<li>remote ssh</li>
+<li>c++</li>
+<li>python</li>
+<li>tabnine  github.copilot</li>
+<li>run</li>
+<li>C&#x2F;C++ Extension Pack</li>
+</ol>
+<h1 id="3-下载MinGw编译器"><a href="#3-下载MinGw编译器" class="headerlink" title="3 下载MinGw编译器"></a>3 下载MinGw编译器</h1><p><a target="_blank" rel="noopener" href="https://sourceforge.net/projects/mingw-w64/files/mingw-w64/mingw-w64-release/">MinGw官网</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/545908287">知乎配置教程</a></p>
+<h2 id="4-配置C-C"><a href="#4-配置C-C" class="headerlink" title="4.配置C\C++"></a>4.配置C\C++</h2><p>重启vscode就好了</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/c/" rel="tag">c++</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-markdown-语法学习"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/09/02/markdown-%E8%AF%AD%E6%B3%95%E5%AD%A6%E4%B9%A0/"
+    >markdown 语法学习</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/09/02/markdown-%E8%AF%AD%E6%B3%95%E5%AD%A6%E4%B9%A0/" class="article-date">
+  <time datetime="2023-09-01T23:12:27.000Z" itemprop="datePublished">2023-09-02</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/markdown/">markdown</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="第1节-标题"><a href="#第1节-标题" class="headerlink" title="第1节 标题"></a>第1节 标题</h1><p>markdown 里面总共有六级标题，可以使用#号的多少来来引用，现在使用的是typora也可以直接使用ctrl+1-6的快捷按键来进行设置</p>
+<h1 id="第2节-列表"><a href="#第2节-列表" class="headerlink" title="第2节 列表"></a>第2节 列表</h1><h2 id="2-1-有序列表"><a href="#2-1-有序列表" class="headerlink" title="2.1 有序列表"></a>2.1 有序列表</h2><p>​	顾名思义，有序列表就是有小标号的列表，同样也是两种方式英⽂输⼊法下，数字后⾯加⼀点，然后空格即可，或者使用快捷按键ctrl + shift + [即可</p>
+<p>1. </p>
+<p>1. </p>
+<h2 id="2-2-无序列表"><a href="#2-2-无序列表" class="headerlink" title="2.2 无序列表"></a>2.2 无序列表</h2><p>​	跟上面的有序列表相反，无序列表就是没有标号，有四种方法、</p>
+<ul>
+<li>aaa - aaa</li>
+</ul>
+<ul>
+<li>aaa + aaa</li>
+</ul>
+<ul>
+<li>aaa *aaa</li>
+</ul>
+<ul>
+<li>aaa ctrl+shift+]</li>
+</ul>
+<h1 id="第3节-字体标记"><a href="#第3节-字体标记" class="headerlink" title="第3节 字体标记"></a>第3节 字体标记</h1><h2 id="3-1-加粗"><a href="#3-1-加粗" class="headerlink" title="3.1 加粗"></a>3.1 加粗</h2><p><strong>加粗</strong> **   内容**在typora中可以使用ctrl+b</p>
+<h2 id="3-2-删除"><a href="#3-2-删除" class="headerlink" title="3.2 删除"></a>3.2 删除</h2><p><del>删除</del> ~~ 内容~~</p>
+<h2 id="3-3-斜体"><a href="#3-3-斜体" class="headerlink" title="3.3 斜体"></a>3.3 斜体</h2><p><em>斜体</em> * 内容 *</p>
+<h2 id="3-4-高亮"><a href="#3-4-高亮" class="headerlink" title="3.4 高亮"></a>3.4 高亮</h2><p>&#x3D;&#x3D;高亮&#x3D;&#x3D; &#x3D;&#x3D;内容  &#x3D;&#x3D;需要打开pytora的高亮功能之后才行</p>
+<h1 id="第4节-段落相关"><a href="#第4节-段落相关" class="headerlink" title="第4节 段落相关"></a>第4节 段落相关</h1><h2 id="4-1-引用"><a href="#4-1-引用" class="headerlink" title="4.1 引用"></a>4.1 引用</h2><blockquote>
+<p>这是一段引用 &gt; 大于号加内容引用</p>
+</blockquote>
+<h2 id="4-2-分割线"><a href="#4-2-分割线" class="headerlink" title="4.2 分割线"></a>4.2 分割线</h2><hr>
+<p>三个横杠或者更多的横杠表示分割线</p>
+<h1 id="第5节-代码"><a href="#第5节-代码" class="headerlink" title="第5节 代码"></a>第5节 代码</h1><h2 id="5-1-行内代码"><a href="#5-1-行内代码" class="headerlink" title="5.1 行内代码"></a>5.1 行内代码</h2><p><code>这是一个行内代码</code> 1旁边那个特殊按键</p>
+<h2 id="5-2-代码块"><a href="#5-2-代码块" class="headerlink" title="5.2 代码块"></a>5.2 代码块</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;hello world&quot;</span>)</span><br><span class="line">    三个```然后回车即可，然后在右下角的选择框中进行代码的选择</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="第6节-超链接"><a href="#第6节-超链接" class="headerlink" title="第6节 超链接"></a>第6节 超链接</h1><blockquote>
+<p>格式 ：[⽹址标题] [变量01]</p>
+</blockquote>
+<p><a href="www.baidu.com">百度</a></p>
+<ul>
+<li><p>在⽂稿起草阶段，还没确定具体⽹址，但可以先给出⽹址标题</p>
+</li>
+<li><p>同⼀篇⽂章需要重复出现同⼀个⽹址时</p>
+</li>
+</ul>
+<h1 id="第7节-脚注"><a href="#第7节-脚注" class="headerlink" title="第7节 脚注"></a>第7节 脚注</h1><p>这是一个脚注<a href="%E8%BF%99%E4%B8%AA%E6%98%AF%E6%94%BE%E5%9C%A8%E6%96%87%E7%AB%A0%E5%B0%BE%E9%83%A8%E7%9A%84%EF%BC%8C%E7%94%A8%E4%BA%8E%E6%89%BF%E6%8E%A5%E4%B8%8A%E9%9D%A2%E7%9A%84%E8%84%9A%E6%B3%A8">^01</a></p>
+<h1 id="第8节-图片"><a href="#第8节-图片" class="headerlink" title="第8节 图片"></a>第8节 图片</h1><p><img src="/"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">基本格式：![](图⽚链接)</span><br></pre></td></tr></table></figure>
+
+<p><img src="D:\hexo\blog\source_posts\image-20230902075316489.png" alt="image-20230902075316489"></p>
+<p>图⽚链接可以是本地链接，也可以是在线链接</p>
+<p>但这个图片是本地路径，很有问题，所以你可能需要一个图床，用来无视地点，目前先不学呢，具体链接如下所示：</p>
+<p><a target="_blank" rel="noopener" href="https://eryinote.com/post/105">图床搭建教程</a></p>
+<h1 id="第9节-表格"><a href="#第9节-表格" class="headerlink" title="第9节 表格"></a>第9节 表格</h1><p>在typora中可以使用快捷按键进行表格的创建  ctrl+t</p>
+<p>通用的语法为</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">| 表头 | 表头 |</span><br><span class="line">| ---- | ---- |</span><br><span class="line">| 单元格 | 单元格 |</span><br><span class="line">| 单元格 | 单元格 |</span><br></pre></td></tr></table></figure>
+
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/markdown/" rel="tag">markdown</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-什么是markdown"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/09/01/%E4%BB%80%E4%B9%88%E6%98%AFmarkdown/"
+    >typora简单使用</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/09/01/%E4%BB%80%E4%B9%88%E6%98%AFmarkdown/" class="article-date">
+  <time datetime="2023-09-01T15:22:33.000Z" itemprop="datePublished">2023-09-01</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/markdown/">markdown</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>MarkDown是什么<br>Markdown 是一种轻量级标记语言，它允许人们使用易读易写的纯文本格式编写文档。</p>
+<p>Markdown 语言在 2004 由约翰·格鲁伯（英语：John Gruber）创建。</p>
+<p>Markdown 编写的文档可以导出 HTML 、Word、图像、PDF、Epub 等多种格式的文档。</p>
+<p>Markdown 编写的文档后缀为 .md, .markdown。</p>
+<h1 id="1-如何自动生成目录"><a href="#1-如何自动生成目录" class="headerlink" title="1.如何自动生成目录"></a>1.如何自动生成目录</h1><p>点击【视图】——【大纲】</p>
+<p>说明：但是此步骤生成的目录，并不是折叠的目录，折叠起来会更美观一些</p>
+<p>设置折叠目录</p>
+<p>点击【文件】——【偏好设置】——【外观】——侧边栏选择打钩，此时已经折叠成功</p>
+<h1 id="2-快捷键"><a href="#2-快捷键" class="headerlink" title="2.快捷键"></a>2.快捷键</h1><p> Ctrl+1 ——设置一级标题</p>
+<p>Ctrl+2 ——设置二级标题</p>
+<p>Ctrl+3 ——设置三级标题</p>
+<p>Ctrl+4 ——设置四级标题</p>
+<p>Ctrl+5 ——设置五级标题</p>
+<p>Ctrl+6 ——设置六级标题</p>
+<p>空格 ——引用</p>
+<p>回车、shift + tab ——退出引用</p>
+<p>Ctrl + Shift + ] ——无序列表</p>
+<p>Ctrl + Shift + [ ——有序列</p>
+<p>Ctrl + Shift + ] 、tab——子列表</p>
+<p>Shift + tab ——返回上一级列表、</p>
+<p>Ctrl + B —— 加粗</p>
+<p>Ctrl + T —— 表格</p>
+<p>~ ~ 要删除的内容 ~ ~ ——删除线</p>
+<h1 id="3-创建链接"><a href="#3-创建链接" class="headerlink" title="3.创建链接"></a>3.创建链接</h1><p>格式为[] ()，其中[]内为要展示的内容，()为链接。</p>
+<h1 id="4-图片路径管理"><a href="#4-图片路径管理" class="headerlink" title="4.图片路径管理"></a>4.图片路径管理</h1><p>Typora默认将所有文档的图片都放在一起，但是我们更想每一个文档都有属于自己的一个文件夹，文档中的图片也最好可以自动保存在该文件夹内。解决方法如下：</p>
+<p>点击【文件】——【偏好设置】——【图像】——将该界面内容设置如下:</p>
+<p> 此时，该文档所在文件夹中会自动生成一个img文件，该路径为本文档中的图片路径。</p>
+<p><img src="D:\hexo\blog\source_posts\image-20230902072149501.png"></p>
+<h1 id="5-划重点–高亮"><a href="#5-划重点–高亮" class="headerlink" title="5.划重点–高亮"></a>5.划重点–高亮</h1><p>高亮</p>
+<p>点击【文件】——【偏好设置】——【Markdown】——高亮处打钩</p>
+<p>编辑高亮内容格式如下：</p>
+<p>&#x3D;&#x3D; 内容&#x3D;&#x3D; —— 高亮</p>
+<p>&#x3D;&#x3D; chai&#x3D;&#x3D;</p>
+<p>&#x3D;&#x3D;cccc&#x3D;&#x3D; </p>
+<p>&#x3D;&#x3D; key&#x3D;&#x3D;</p>
+<p> &#x3D;&#x3D;内容&#x3D;&#x3D; </p>
+<p><strong>cha</strong></p>
+<p>重启Typora，此时内容处会变成高亮的效果.</p>
+<h1 id="6-导入代码块"><a href="#6-导入代码块" class="headerlink" title="6.导入代码块"></a>6.导入代码块</h1><p><strong>~~~</strong> ——代码块，点击代码框可选择语言</p>
+<h1 id="7-不使用自动拼写检查"><a href="#7-不使用自动拼写检查" class="headerlink" title="7.不使用自动拼写检查"></a>7.不使用自动拼写检查</h1><p>点击右下角[【Spell Check】勾选【不使用拼写检查】</p>
+<h1 id="8设置自动保存"><a href="#8设置自动保存" class="headerlink" title="8设置自动保存"></a>8设置自动保存</h1><p>其实Typora 对文件修改之后并不能自动保存，解决方法：</p>
+<p>点击【文件】——【偏好设置】——【通用】——自动保存处打钩</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/markdown/" rel="tag">markdown</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+  </article>
+  
+
+  
+  <nav class="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/page/14/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span>
+  </nav>
+  
+</section>
+</div>
+
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2015-2023
+        <i class="ri-heart-fill heart_icon"></i> John Doe
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="热爱学习的未来酱"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/2019/about">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+
+<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+ 
+<script src="/js/clickBoom2.js"></script>
+ 
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+ 
+<script src="/js/dz.js"></script>
+ 
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    
+
+  </div>
+</body>
+
+</html>

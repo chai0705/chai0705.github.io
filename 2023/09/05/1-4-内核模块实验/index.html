@@ -90,7 +90,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">0</span>
+            <span class="post-count">1.5k</span>
         </span>
     </span>
 
@@ -99,20 +99,89 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">1 分钟</span>
+            <span class="post-count">5 分钟</span>
         </span>
     </span>
 </div>
  
     </div>
       
+    <div class="tocbot"></div>
+
 
 
 
   
     <div class="article-entry" itemprop="articleBody">
        
-   
+  <p>在上一章节我们编写了最简单的helloworld驱动程序。有了驱动程序以后，要如何编译并使用驱动呢。编译驱动有俩种方法，分别是将驱动编译成内核和将驱动编译成内核模块。我们先来学习如何将驱动编译成内核模块、</p>
+<h1 id="4-1-设置交叉编译器"><a href="#4-1-设置交叉编译器" class="headerlink" title="4.1 设置交叉编译器"></a>4.1 设置交叉编译器</h1><p>1 下载网盘资料下的交叉编译器，网盘路径为：“XXX”，将下载的交叉编译器拷贝到Ubuntu的&#x2F;usr&#x2F;local目录下，如下图（图4-1）所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309072016495.jpeg" alt="img"></p>
+<p>图 4-1</p>
+<p>2 输入以下命令，解压交叉编译编译器压缩包，解压完毕会生成“gcc-linaro-6.3.1-2017.05-x86_64_aarch64-linux-gnu”文件夹，这是实验需要的交叉编译工具，如下图（图4-2）所示：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -vxf gcc-linaro-6.3.1-2017.05-x86_64_aarch64-linux-gnu.tar.gz</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309072016536.jpeg" alt="img"></p>
+<p>图 4-2</p>
+<p>3 在终端输入“sudo vi &#x2F;etc&#x2F;profile”命令，在文件最后输入以下命令修改环境变量。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export PATH=$PATH:/usr/local/gcc-linaro-6.3.1-2017.05-x86_64_aarch64-linux-gnu/bin</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309072016558.jpeg" alt="img"></p>
+<p>图 4-3</p>
+<p>4 保存退出，在终端输入“reboot”命令重新启动Ubuntu系统，使交叉编译环境生效。Ubuntu系统重新启动之后，登录到系统后，打开终端，输入命令“aarch64-linux-gnu-gcc -v”，如果终端有如下图（图4-4）所示的打印信息，说明交叉编译环境搭建成功。如果没有出现如下图（图4-4）的打印信息，需要检查上一步骤是否设置正确。</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309072016623.jpeg" alt="img"></p>
+<p>图 4-4</p>
+<h1 id="4-2-编写Makefile"><a href="#4-2-编写Makefile" class="headerlink" title="4.2 编写Makefile"></a>4.2 编写Makefile</h1><p>编译驱动程序还需要使用Makefile文件。我们为helloworld.c编写一个简单的Makefile，Makefile文件和源文件helloworld.c位于同一级目录，代码如下（图4-5）所示：</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> ARCH=arm64  </span><br><span class="line"><span class="keyword">export</span> CROSS_COMPILE=aarch64-linux-gnu-  </span><br><span class="line">obj-m += helloworld.o    <span class="comment">#helloworld.c对应.o文件的名称。名称要保持一致。</span></span><br><span class="line">KDIR :=/home/topeet/Linux/linux_sdk/kernel    <span class="comment">#内核源码所在虚拟机ubuntu的实际路径</span></span><br><span class="line">PWD ?= <span class="variable">$(<span class="built_in">shell</span> pwd)</span></span><br><span class="line"><span class="section">all:</span></span><br><span class="line">    make -C <span class="variable">$(KDIR)</span> M=<span class="variable">$(PWD)</span> modules    <span class="comment">#make操作</span></span><br><span class="line"><span class="section">clean:</span></span><br><span class="line">    make -C <span class="variable">$(KDIR)</span> M=<span class="variable">$(PWD)</span> clean    <span class="comment">#make clean操作</span></span><br></pre></td></tr></table></figure>
+
+<p>图 4-5</p>
+<p>代码解释如下：</p>
+<ul>
+<li>第1行设置ARCH变量为arm64</li>
+<li>第2行设置交叉编译器前缀为aarch64-linux-gnu-</li>
+<li>第3行obj-m +&#x3D; &lt;文件&gt;：将指定的文件（需要是以.o结尾）设为编译时以模块形式编译</li>
+<li>第4行是设备树内核的源码路径，请大家根据实际内核路径进行修改。</li>
+<li>第5行是获取当前目录的变量</li>
+<li>第7行是编译make操作，会进入内核源码的路径，然后把当前路径下的代码编译成模块。</li>
+<li>第9行是清除编译文件</li>
+</ul>
+<p>编写完成如下图（图4-6）所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309072016516.jpeg" alt="img"></p>
+<p>图 4-6</p>
+<p>4.3 编译模块</p>
+<p>有了Makefile以后，输入“make”命令就可以编译helloworld驱动模块，如下图（图4-7）所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309072016524.jpeg" alt="img"></p>
+<p>图 4-7</p>
+<p>编译完生成helloworld.ko目标文件就是我们需要的内核模块。内核模块是以ko为后缀名，如下图（图4-8）所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309072016931.jpeg" alt="img"></p>
+<p>图 4-8</p>
+<p>输入“make clean”命令清除编译文件，如下图（图4-9）所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309072016990.jpeg" alt="img"></p>
+<p>图 4-9</p>
+<h1 id="4-4-模块加载与卸载"><a href="#4-4-模块加载与卸载" class="headerlink" title="4.4 模块加载与卸载"></a>4.4 模块加载与卸载</h1><p>有了内核模块以后，我们要如何使用呢？编译驱动有俩种方式，那Linux驱动的运行方式也肯定有俩种。一种就是将驱动编译进内核，这样Linux系统启动后会自动运行程序。第二种就是将驱动编译成模块，在Linux系统启动以后使用“insmod”命令加载驱动模块。</p>
+<p>在上个小节中编译了驱动模块helloworld.ko，在RK3568开发板上通过“insmod helloworld.ko”命令可以加载驱动，在加载驱动模块的时候会执行驱动入口的函数，也就是helloworld程序中的helloworld_init函数，所以可以看到打印出来的字符串信息“helloworld_init”。如下图（图4-10）所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309072016987.jpeg" alt="img"></p>
+<p>图 4-10</p>
+<p>如果要卸载helloworld内核模块，可以通过“rmmod helloworld”命令来卸载驱动模块，同理在卸载驱动模块的时候会执行驱动出口的函数，所以可以看到驱动出口函数打印出来的字符串信息“helloworld_exit”，如下图（图4-11）所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309072016982.jpeg" alt="img"></p>
+<p>图 4-11</p>
+<p>加载驱动模块也可以使用modprobe命令，它比insmod命令更强大，modprobe命令在加载驱动模块的时候，会同时加载该模块依赖的其他模块。比如helloworld.ko依赖before.ko，使用insmod加载的时候，就必须先加载before.ko，然后在加载helloworld.ko才可以加载成功从。但是使用modprobe加载的时候，他会自动分析模块的依赖关系，然后将所有的依赖的模块都加载到内核当中。比较“聪明”。</p>
+<p>同样，在卸载驱动模块的时候，如果模块存在依赖关系，如果使用insmod命令，需要手动卸载依赖的内核模块，但是使用modprobe命令可以自动卸载驱动模块所依赖的其他模块。</p>
+<p>所以，如果驱动模块是以“modprobe helloworld.ko”命令加载的，卸载的时候使用“modprobe -r helloworld.ko”命令卸载。</p>
+<p>但是使用modprobe卸载存在一个问题，如果所依赖的模块被其他模块所使用，比如刚才例子中的before.ko还被其他的模块使用，这时候就不能使用modprobe卸载。所以还是推荐使用rmmod命令来卸载。</p>
+<h1 id="4-5查看模块信息"><a href="#4-5查看模块信息" class="headerlink" title="4.5查看模块信息"></a>4.5查看模块信息</h1><p>在驱动模块加载之后，使用“modinfo helloworld.ko”命令可以获得模块的信息，包括模块作者，模块说明，模块支持的参数等等。</p>
+<p>lsmod 命令可以列出已经载入Linux内核模块，在helloworld驱动加载之后，查看内核中加载的模块，如下（图4-12）所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309072016996.jpeg" alt="img"></p>
+<p>图 4-12</p>
+<p>【最新驱动资料（文档+例程）】</p>
+<p>链接 <a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1M4smUG2vw_hnn0Hye-tkog">https://pan.baidu.com/s/1M4smUG2vw_hnn0Hye-tkog</a></p>
+<p>提取码：hbh6</p>
+<p>【B 站配套视频】</p>
+<p><a target="_blank" rel="noopener" href="https://b23.tv/XqYa6Hm">https://b23.tv/XqYa6Hm</a></p>
+<p>【RK3568 购买链接】</p>
+<p><a target="_blank" rel="noopener" href="https://item.taobao.com/item.htm?spm=a1z10.5-c-s.w4002-2245">https://item.taobao.com/item.htm?spm=a1z10.5-c-s.w4002-2245</a></p>
+<p>2452613.11.2fec74a6elWNeA&amp;id&#x3D;669939423234</p>
+ 
       <!-- reward -->
       
     </div>

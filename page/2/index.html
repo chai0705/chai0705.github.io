@@ -160,7 +160,7 @@
     
     
     <article
-  id="post-4-6-栈与作用域"
+  id="post-5-14-属性声明：mode"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -171,8 +171,8 @@
     <header class="article-header">
        
 <h2 itemprop="name">
-  <a class="article-title" href="/2023/09/07/4-6-%E6%A0%88%E4%B8%8E%E4%BD%9C%E7%94%A8%E5%9F%9F/"
-    >4-6-栈与作用域</a> 
+  <a class="article-title" href="/2023/09/07/5-14-%E5%B1%9E%E6%80%A7%E5%A3%B0%E6%98%8E%EF%BC%9Amode/"
+    >5.14 属性声明：mode</a> 
 </h2>
  
 
@@ -180,8 +180,8 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2023/09/07/4-6-%E6%A0%88%E4%B8%8E%E4%BD%9C%E7%94%A8%E5%9F%9F/" class="article-date">
-  <time datetime="2023-09-06T23:40:16.000Z" itemprop="datePublished">2023-09-07</time>
+      <a href="/2023/09/07/5-14-%E5%B1%9E%E6%80%A7%E5%A3%B0%E6%98%8E%EF%BC%9Amode/" class="article-date">
+  <time datetime="2023-09-07T13:14:24.000Z" itemprop="datePublished">2023-09-07</time>
 </a> 
   <div class="article-category">
     <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
@@ -191,7 +191,14 @@
       
     <div class="article-entry" itemprop="articleBody">
        
-   
+  <p>属性声明中的 <code>mode</code> 是一个功能强大的GNU C扩展，它用于指定类型的位宽和有符号&#x2F;无符号属性。通过 <code>mode</code> 属性，可以定义自定义的位宽类型，以及相应的有符号和无符号变体。</p>
+<p>在给定的示例中，使用了 <code>mode(QI)</code> 属性来声明两个类型别名：</p>
+<ol>
+<li><code>typedef int s8 __attribute__((mode(QI)));</code><br>这个声明将 <code>s8</code> 定义为一个有符号整数类型，位宽为1字节（8位），即一个字节的宽度。<code>mode(QI)</code> 表示 “QI” 模式，其中 “Q” 表示 “Quad”，表示4个位，而 “I” 表示 “Integer”，表示整数类型。</li>
+<li><code>typedef unsigned int us8 __attribute__((mode(QI)));</code><br>这个声明将 <code>us8</code> 定义为一个无符号整数类型，位宽也为1字节（8位）。同样使用了 <code>mode(QI)</code> 属性来指定位宽和有符号&#x2F;无符号属性。</li>
+</ol>
+<p>通过使用 <code>mode</code> 属性，可以根据需要定义特定位宽的整数类型，并根据需要选择有符号或无符号的变体。这在某些特定的嵌入式系统编程或底层编程中可能会有用，因为它可以更精确地控制数据类型的大小和属性。</p>
+ 
       <!-- reward -->
       
     </div>
@@ -201,7 +208,7 @@
     
     <footer class="article-footer">
        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A0%86%E6%A0%88%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" rel="tag">堆栈内存管理</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gun%E6%89%A9%E5%B1%95%E8%AF%AD%E6%B3%95/" rel="tag">gun扩展语法</a></li></ul>
 
     </footer>
   </div>
@@ -213,7 +220,7 @@
 
     
     <article
-  id="post-4-5-形参与实参"
+  id="post-5-13-属性声明：noinline-always-inline"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -224,8 +231,8 @@
     <header class="article-header">
        
 <h2 itemprop="name">
-  <a class="article-title" href="/2023/09/07/4-5-%E5%BD%A2%E5%8F%82%E4%B8%8E%E5%AE%9E%E5%8F%82/"
-    >4-5-形参与实参</a> 
+  <a class="article-title" href="/2023/09/07/5-13-%E5%B1%9E%E6%80%A7%E5%A3%B0%E6%98%8E%EF%BC%9Anoinline-always-inline/"
+    >5.13 属性声明：noinline &amp; always_inline</a> 
 </h2>
  
 
@@ -233,8 +240,8 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2023/09/07/4-5-%E5%BD%A2%E5%8F%82%E4%B8%8E%E5%AE%9E%E5%8F%82/" class="article-date">
-  <time datetime="2023-09-06T23:40:15.000Z" itemprop="datePublished">2023-09-07</time>
+      <a href="/2023/09/07/5-13-%E5%B1%9E%E6%80%A7%E5%A3%B0%E6%98%8E%EF%BC%9Anoinline-always-inline/" class="article-date">
+  <time datetime="2023-09-07T13:14:22.000Z" itemprop="datePublished">2023-09-07</time>
 </a> 
   <div class="article-category">
     <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
@@ -244,366 +251,41 @@
       
     <div class="article-entry" itemprop="articleBody">
        
-   
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A0%86%E6%A0%88%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" rel="tag">堆栈内存管理</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-4-4-栈的管理：参数传递"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/09/07/4-4-%E6%A0%88%E7%9A%84%E7%AE%A1%E7%90%86%EF%BC%9A%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92/"
-    >4-4-栈的管理：参数传递</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/09/07/4-4-%E6%A0%88%E7%9A%84%E7%AE%A1%E7%90%86%EF%BC%9A%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92/" class="article-date">
-  <time datetime="2023-09-06T23:40:13.000Z" itemprop="datePublished">2023-09-07</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h1 id="4-4-1-参数传递和栈管理的常见规则"><a href="#4-4-1-参数传递和栈管理的常见规则" class="headerlink" title="4.4.1 参数传递和栈管理的常见规则"></a>4.4.1 参数传递和栈管理的常见规则</h1><p>对于栈的管理和参数传递，ARM架构遵循了ATPCS（ARM调用惯例）规则。以下是一些关于参数传递和栈管理的常见规则：</p>
+  <p><code>inline</code>、<code>noinline</code> 和 <code>always_inline</code> 都是函数属性，用于指定函数的内联行为。它们可以通过 <code>__attribute__</code> 语法与函数结合使用。下面是使用示例：</p>
 <ol>
-<li>参数传递：<ul>
-<li>小于4个参数：使用寄存器RO~R3传递参数。参数依次存储在RO、R1、R2和R3寄存器中。</li>
-<li>大于4个参数：剩余的参数按照从右到左的顺序压入栈中。首先将第5个参数压栈，然后是第6个参数，依此类推。</li>
-</ul>
-</li>
-<li>返回值：<ul>
-<li>函数的返回值通常存储在RO寄存器中。如果返回值是64位的，那么RO和R1两个寄存器一起存储返回值。</li>
-</ul>
-</li>
-<li>函数参数入栈：<ul>
-<li>被调用函数将寄存器RO~R3传递来的参数压栈保存。这样做是为了在被调用函数内部能够正确访问函数参数。</li>
-</ul>
-</li>
-</ol>
-<p>这些规则确保了参数的正确传递和函数调用的一致性。小于4个参数的情况下，参数直接传递到寄存器中，避免了频繁的内存访问。而大于4个参数的情况下，额外的参数通过栈进行传递。被调用函数将寄存器中的参数入栈保存，以便在函数内部能够访问和使用这些参数。</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A0%86%E6%A0%88%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" rel="tag">堆栈内存管理</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-4-3-栈的管理：函数调用"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/09/07/4-3-%E6%A0%88%E7%9A%84%E7%AE%A1%E7%90%86%EF%BC%9A%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8/"
-    >4-3-栈的管理：函数调用</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/09/07/4-3-%E6%A0%88%E7%9A%84%E7%AE%A1%E7%90%86%EF%BC%9A%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8/" class="article-date">
-  <time datetime="2023-09-06T23:40:11.000Z" itemprop="datePublished">2023-09-07</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h1 id="4-3-1-栈的作用"><a href="#4-3-1-栈的作用" class="headerlink" title="4.3.1 栈的作用"></a>4.3.1 栈的作用</h1><ol>
-<li>保存函数上下文：<br>当一个函数被调用时，当前函数的执行状态需要保存下来，以便在函数执行完毕后能够正确返回到调用者处继续执行。栈用于保存函数的上下文信息，包括调用者栈帧地址（Frame Pointer，FP）和返回地址（Link Register，LR）。FP指向调用者函数的栈帧，而LR保存了函数返回后应继续执行的地址。</li>
-<li>保存局部变量：<br>函数中声明的局部变量通常存储在栈中。每当一个函数被调用时，栈会为该函数分配一块新的栈帧空间，用于存储函数的局部变量。这样可以确保每个函数都有自己独立的内存空间来保存局部变量，避免不同函数之间的变量冲突。</li>
-<li>传递函数的参数：<br>函数调用时，参数值会被传递给被调用函数。在栈的帮助下，这些参数可以被正确地传递给被调用函数并被保存在适当的位置。通常，函数参数通过栈中的一定偏移量来进行传递和访问。</li>
-<li>保存函数的参数：<br>在函数调用时，除了传递参数给被调用函数外，栈还负责保存函数的参数。这是因为函数的参数通常需要在函数执行过程中被访问和使用。栈的帮助下，函数可以在需要时方便地访问到其参数。</li>
-</ol>
-<h1 id="4-3-2-栈帧"><a href="#4-3-2-栈帧" class="headerlink" title="4.3.2 栈帧"></a>4.3.2 栈帧</h1><p>栈帧（Stack Frame）是在函数调用期间在栈上分配的一块连续内存区域，用于存储函数的局部变量、函数参数、返回地址等信息。每个函数调用都会创建一个新的栈帧，形成多个栈帧构成的调用栈。</p>
-<p>栈帧由以下几个主要部分组成：</p>
-<ol>
-<li>Frame Pointer（FP）：也称为帧指针，是一个特殊的寄存器（在某些体系结构中为R11），用于指向上一层函数的栈帧的栈底。通过FP，可以在函数执行过程中轻松地访问上一级函数的局部变量和函数参数。</li>
-<li>局部变量：栈帧中的一部分用于存储函数的局部变量。这些局部变量是在函数内部声明的变量，在函数执行期间可以被访问和修改。</li>
-<li>函数参数：函数调用时传递给函数的参数值也存储在栈帧中。这些参数值通过栈帧进行传递和访问。</li>
-<li>返回地址：在函数调用过程中，当函数执行完毕后需要返回到调用者处继续执行。返回地址用于保存函数返回后应继续执行的地址，通常保存在栈帧中。</li>
-<li>临时存储区：栈帧还可以包含其他临时存储区，用于保存临时数据、寄存器的备份等。</li>
-</ol>
-<p>通过多个栈帧的连接，构成了某个进程的调用栈。每次函数调用时，当前函数的栈帧被创建并添加到调用栈的顶部，函数执行完毕后，栈帧被销毁，控制权返回到上一层函数。</p>
-<p>栈帧的存在使得函数调用和返回过程能够正确执行，并且提供了函数内部数据的存储和访问机制，保证了函数的独立性和数据的正确性。</p>
-<h1 id="4-3-3-ARM汇编指令"><a href="#4-3-3-ARM汇编指令" class="headerlink" title="4.3.3 ARM汇编指令"></a>4.3.3 ARM汇编指令</h1><ol>
-<li>寄存器间接寻址：<ul>
-<li><code>LDR RO, [R1,#4]</code>：将存储在地址<code>R1+4</code>处的数据加载到寄存器RO中。</li>
-<li><code>LDR RO, [R1,#4]!</code>：将存储在地址<code>R1+4</code>处的数据加载到寄存器RO中，并将<code>R1</code>的值增加4。</li>
-<li><code>LDR RO, [R1], #4</code>：将存储在地址<code>R1</code>处的数据加载到寄存器RO中，并将<code>R1</code>的值增加4。</li>
-<li><code>LDR RO, [R1,R2]</code>：将存储在地址<code>R1+R2</code>处的数据加载到寄存器RO中。</li>
-</ul>
-</li>
-<li>入栈出栈：<ul>
-<li><code>PUSH &#123;FP,LR&#125;</code>：将FP（帧指针）和LR（链接寄存器）的值压入栈中。这通常用于保存函数的上下文信息。</li>
-<li><code>POP &#123;FP,PC&#125;</code>：从栈中弹出值，将其赋给FP（帧指针）和PC（程序计数器）。这通常用于恢复函数的上下文信息并返回到调用者处。</li>
-</ul>
-</li>
-</ol>
-<p>在这些示例中，R1、R2、RO、FP和LR是ARM架构中的寄存器，SP代表栈指针。这些指令用于实现寄存器间接寻址和栈操作，以便在汇编语言中实现数据的加载和存储，以及函数的调用和返回。请注意，这只是一些常见的示例，ARM汇编指令非常丰富，具体的使用和语法可能因特定的应用场景和编译器而有所不同。</p>
-<h1 id="4-3-4-栈举例-函数调用"><a href="#4-3-4-栈举例-函数调用" class="headerlink" title="4.3.4 栈举例:函数调用"></a>4.3.4 栈举例:函数调用</h1><p>以下是一个简单的函数调用的示例，展示了在函数调用过程中栈的使用情况：</p>
-<p>假设有两个函数，函数A调用函数B。</p>
-<ol>
-<li>函数A的栈帧：<ul>
-<li>FP（帧指针）指向上一层函数的栈帧的栈底。</li>
-<li>LR（返回地址）保存着函数A调用完函数B后应继续执行的地址。</li>
-<li>局部变量和函数参数存储在栈帧中。</li>
-<li>临时存储区用于保存临时数据。</li>
-</ul>
-</li>
-<li>函数B的栈帧：<ul>
-<li>FP指向函数A的栈帧的栈底。</li>
-<li>LR保存着函数B调用完后应继续执行的地址。</li>
-<li>局部变量和函数参数存储在栈帧中。</li>
-<li>临时存储区用于保存临时数据。</li>
-</ul>
-</li>
-</ol>
-<p>函数调用过程示例：</p>
-<ol>
-<li>函数A开始执行：<ul>
-<li>函数A的栈帧被创建并压入栈中，包括FP、LR、局部变量和函数参数。</li>
-<li>函数A执行过程中可能对局部变量进行读写操作。</li>
-</ul>
-</li>
-<li>函数A调用函数B：<ul>
-<li>函数A将函数参数传递给函数B，参数存储在函数B的栈帧中。</li>
-<li>函数A将LR的值设置为调用函数B后应继续执行的地址。</li>
-<li>函数A跳转到函数B的入口地址开始执行。</li>
-</ul>
-</li>
-<li>函数B开始执行：<ul>
-<li>函数B的栈帧被创建并压入栈中，包括FP、LR、局部变量和函数参数。</li>
-<li>函数B执行过程中可能对局部变量进行读写操作。</li>
-</ul>
-</li>
-<li>函数B执行完毕：<ul>
-<li>函数B将返回值存储在指定的寄存器中（例如R0）。</li>
-<li>函数B将LR的值设置为返回地址，即函数A调用函数B的下一条指令地址。</li>
-<li>函数B将栈帧释放，即出栈。</li>
-</ul>
-</li>
-<li>函数A继续执行：<ul>
-<li>函数A根据函数B的返回值进行下一步操作。</li>
-<li>函数A将栈帧释放，即出栈。</li>
-</ul>
-</li>
-</ol>
-<p>在函数调用过程中，栈的使用和管理确保了函数的正确执行、局部变量的隔离和数据的传递。栈帧的创建和释放，以及栈指针的维护，保证了函数调用的顺序和返回的正确性。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">f</span><span class="params">(<span class="type">void</span>)</span> &#123;</span><br><span class="line">    <span class="type">int</span> l = <span class="number">20</span>;</span><br><span class="line">    <span class="type">int</span> m = <span class="number">30</span>;</span><br><span class="line">    <span class="type">int</span> n = <span class="number">40</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">50</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span> &#123;</span><br><span class="line">    <span class="type">int</span> i = <span class="number">2</span>;</span><br><span class="line">    <span class="type">int</span> j = <span class="number">3</span>;</span><br><span class="line">    <span class="type">int</span> k = <span class="number">4</span>;</span><br><span class="line">    f();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A0%86%E6%A0%88%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" rel="tag">堆栈内存管理</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-4-2-栈的初始化及大小"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/09/07/4-2-%E6%A0%88%E7%9A%84%E5%88%9D%E5%A7%8B%E5%8C%96%E5%8F%8A%E5%A4%A7%E5%B0%8F/"
-    >4-2-栈的初始化及大小</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/09/07/4-2-%E6%A0%88%E7%9A%84%E5%88%9D%E5%A7%8B%E5%8C%96%E5%8F%8A%E5%A4%A7%E5%B0%8F/" class="article-date">
-  <time datetime="2023-09-06T23:40:10.000Z" itemprop="datePublished">2023-09-07</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h1 id="4-2-1-什么是栈"><a href="#4-2-1-什么是栈" class="headerlink" title="4.2.1 什么是栈"></a>4.2.1 什么是栈</h1><p>栈（Stack）是一种常见的数据结构，它遵循先进后出（FILO，First In Last Out）的原则。栈可以通过两个基本操作来操作元素：入栈（Push）和出栈（Pop）。</p>
-<ol>
-<li><p>入栈（Push）操作：</p>
+<li><p><code>static inline __attribute__((noinline)) int func();</code><br>这个示例定义了一个静态内联函数 <code>func</code>，并使用了 <code>noinline</code> 属性。</p>
 <ul>
-<li>入栈将一个元素添加到栈的顶部（也称为栈顶）。</li>
-<li>入栈操作会将元素压入栈中，栈的大小增加。</li>
-<li>入栈的元素成为新的栈顶。</li>
+<li><code>inline</code> 属性用于指定函数可以进行内联展开，即将函数的代码插入调用处，以减少函数调用的开销。</li>
+<li><code>static</code> 关键字用于将函数声明为静态函数，限定函数的作用域在当前源文件中。</li>
+<li><code>__attribute__((noinline))</code> 用于禁止对函数进行内联展开，即不将函数的代码插入调用处。</li>
 </ul>
+<p>这意味着 <code>func</code> 函数将被声明为内联函数，但编译器不会强制将其内联展开，而是根据编译器的优化策略决定是否内联展开。</p>
 </li>
-<li><p>出栈（Pop）操作：</p>
+<li><p><code>static inline __attribute__((always_inline)) int func();</code><br>这个示例定义了一个静态内联函数 <code>func</code>，并使用了 <code>always_inline</code> 属性。</p>
 <ul>
-<li><p>出栈将栈顶的元素移除，并返回该元素。</p>
-</li>
-<li><p>出栈操作会将栈顶元素弹出，栈的大小减少。</p>
-</li>
-<li><p>出栈的元素是最近入栈的元素，即最后一个添加到栈中的元素。</p>
-</li>
+<li><code>__attribute__((always_inline))</code> 用于强制编译器始终内联展开函数，不考虑编译器的优化策略。</li>
 </ul>
-<p>栈的操作可以用以下伪代码表示：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Push(<span class="built_in">stack</span>, element):</span><br><span class="line">    将元素添加到栈的顶部</span><br><span class="line">    栈的大小增加</span><br><span class="line">    新的栈顶指向添加的元素</span><br><span class="line"></span><br><span class="line">Pop(<span class="built_in">stack</span>):</span><br><span class="line">    如果栈为空，则抛出异常或返回特定值（取决于实现）</span><br><span class="line">    保存栈顶元素的值</span><br><span class="line">    将栈顶元素移除</span><br><span class="line">    栈的大小减少</span><br><span class="line">    返回保存的栈顶元素的值</span><br></pre></td></tr></table></figure>
+<p>这意味着 <code>func</code> 函数将始终被内联展开，无论编译器如何优化。</p>
+</li>
+</ol>
+<p>使用内联函数可以提高函数调用的效率，减少函数调用带来的开销。然而，过度使用内联函数可能会导致代码膨胀和代码重复，增加可执行文件的大小。</p>
+<p>内联函数是一种编译器优化技术，它将函数的代码插入到调用处，而不是通过函数调用的方式进行执行。内联函数的目的是减少函数调用的开销，包括保存当前函数现场、跳转到调用函数执行和恢复当前函数现场的开销。</p>
+<p>当一个函数被声明为内联函数时，编译器会尽量将函数的代码直接插入到调用处，类似于宏展开的方式。这样可以避免函数调用的开销，包括压栈保存现场、跳转执行和恢复现场的操作。相比于函数调用，内联函数可以更快地执行，并且可以消除函数调用带来的额外开销。</p>
+<p>然而，内联函数的使用应慎重考虑。由于内联函数的代码会被复制到每个调用处，这可能会导致代码膨胀，增加可执行文件的大小。过度使用内联函数可能会导致代码重复，降低可维护性。因此，应在性能和代码大小之间进行权衡，并根据具体情况决定是否使用内联函数。</p>
+<p>在 C&#x2F;C++ 中，可以使用 <code>inline</code> 关键字将函数声明为内联函数。例如：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">inline</span> <span class="type">int</span> <span class="title function_">add</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>栈在计算机科学中有广泛的应用，例如函数调用栈、表达式求值、深度优先搜索等。由于栈的先进后出的特性，它可以提供简单有效的数据存储和访问方式。</p>
-</li>
-</ol>
-<h1 id="4-2-2-线的作用"><a href="#4-2-2-线的作用" class="headerlink" title="4.2.2 线的作用"></a>4.2.2 线的作用</h1><ol>
-<li><h2 id="函数调用："><a href="#函数调用：" class="headerlink" title="函数调用："></a>函数调用：</h2><ul>
-<li>栈被广泛用于函数调用过程中的参数传递、局部变量和函数返回值的存储。</li>
-<li>当一个函数被调用时，函数的参数会被压入栈中，然后函数的局部变量也会被分配在栈上。</li>
-<li>函数执行完毕后，栈会按照相反的顺序弹出参数和局部变量，返回值也会通过栈传递回调用函数。</li>
-</ul>
-</li>
-<li><h2 id="编译器生成的临时变量："><a href="#编译器生成的临时变量：" class="headerlink" title="编译器生成的临时变量："></a>编译器生成的临时变量：</h2><ul>
-<li>编译器在编译过程中会生成一些临时变量，用于存储中间计算结果或其他需要临时存储的数据。</li>
-<li>这些临时变量通常会被存储在栈上，随着程序的执行进入和离开作用域而动态地压入和弹出栈。</li>
-</ul>
-</li>
-<li><h2 id="内存管理："><a href="#内存管理：" class="headerlink" title="内存管理："></a>内存管理：</h2><ul>
-<li>栈的一部分常用于存储程序的调用栈，用于跟踪函数调用和返回的地址。</li>
-<li>操作系统还使用栈来管理进程的堆栈空间，为每个线程和进程分配一块私有的栈空间。</li>
-</ul>
-</li>
-<li><h2 id="表达式求值："><a href="#表达式求值：" class="headerlink" title="表达式求值："></a>表达式求值：</h2><ul>
-<li>在编译器或解释器中，栈常用于表达式求值的过程中，用于存储运算符和操作数。</li>
-<li>通过栈的先进后出的特性，可以按照正确的优先级和顺序对表达式进行求值。</li>
-</ul>
-</li>
-</ol>
-<h1 id="4-2-3-栈初始化"><a href="#4-2-3-栈初始化" class="headerlink" title="4.2.3 栈初始化"></a>4.2.3 栈初始化</h1><p>栈的初始化是在程序执行之前进行的，它涉及到栈指针的设置和栈空间的分配。具体的栈初始化过程可能因处理器架构和操作系统而有所差异。</p>
-<p>下面是一些常见的栈初始化方式和相关的寄存器：</p>
+<p>在上述示例中，<code>add</code> 函数被声明为内联函数。当调用 <code>add</code> 函数时，编译器会尝试将其代码直接插入到调用处，而不是进行函数调用。</p>
+<p>需要注意的是，将函数声明为内联函数只是对编译器的建议，编译器可以选择是否内联展开函数。此外，内联函数的定义通常应放在头文件中，以便在每个调用处进行展开。</p>
+<p>编译器对内联函数的处理可以分为两个阶段：编译阶段和链接阶段。</p>
+<p>在编译阶段，当编译器遇到内联函数的调用时，它会尝试将函数的代码插入到调用处，类似于宏展开。这样可以避免函数调用的开销，并提高执行效率。编译器通常会对内联函数进行一些优化，如常量折叠、循环展开等。</p>
+<p>在链接阶段，编译器会将每个内联函数的定义保留在目标文件中。当链接器将多个目标文件组合成可执行文件时，它会根据需要选择性地将内联函数的定义插入到调用处。</p>
+<p>然而，内联函数也有一些不足之处：</p>
 <ol>
-<li>ARM 架构：<ul>
-<li>栈指针寄存器（Stack Pointer Register）：ARM 架构中的栈指针寄存器是 SP（R13）。</li>
-<li>初始化栈指针：在启动时，操作系统或引导加载程序会设置 SP 寄存器的值，指向栈的初始位置。</li>
-<li>帧指针寄存器（Frame Pointer Register）：ARM 架构中的帧指针寄存器是 FP（R11），用于访问函数的局部变量和参数。</li>
-<li>在函数调用过程中，栈指针 SP 会动态地进行调整，而帧指针 FP 则用于指向当前函数的栈帧。</li>
-</ul>
-</li>
-<li>x86 架构：<ul>
-<li>栈指针寄存器（Stack Pointer Register）：x86 架构中的栈指针寄存器是 ESP（栈顶指针）和 EBP（栈底指针）。</li>
-<li>初始化栈指针：在启动时，操作系统或引导加载程序会设置 ESP 寄存器的值，指向栈的初始位置。</li>
-<li>在函数调用过程中，ESP 会动态地进行调整，用于栈帧的分配和释放。</li>
-<li>基址指针寄存器（Base Pointer Register）：x86 架构中的基址指针寄存器是 EBP，用于在函数中访问局部变量和参数。</li>
-</ul>
-</li>
+<li>增大代码的体积：由于内联函数的代码会被复制到每个调用处，这可能导致代码膨胀，增加可执行文件的大小。特别是当内联函数的代码较长时，代码体积的增大可能会对缓存命中率和指令缓存的效率产生负面影响。</li>
+<li>降低缓存命中率和取指效率：内联函数的代码增大可能导致缓存命中率降低，因为较多的代码需要从内存加载到缓存中。此外，取指令时，由于内联函数的代码较多，可能会导致取指令的效率降低，从而影响程序的执行速度。</li>
+<li>可能降低执行效率：尽管内联函数可以减少函数调用的开销，但在某些情况下，内联函数的执行效率可能会降低。这是因为内联函数的代码被复制到多个调用处，增加了指令的数量和缓存的压力。此外，如果内联函数的代码较长，可能会导致指令缓存的冲突，从而影响执行速度。</li>
 </ol>
-<h1 id="4-2-4-栈的起始地址"><a href="#4-2-4-栈的起始地址" class="headerlink" title="4.2.4 栈的起始地址"></a>4.2.4 栈的起始地址</h1><p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309070809175.png" alt="image-20230907080956110"></p>
-<p>栈的起始地址是根据操作系统和编译器的实现而定的。栈通常位于内存的高地址区域，并在程序执行前被初始化。</p>
-<p>下面是一些常见的栈起始地址情况：</p>
-<ol>
-<li>用户空间：<ul>
-<li>在用户空间的程序中，栈通常从高地址向低地址增长。</li>
-<li>栈的起始地址可以是固定的，也可以在每次程序执行时动态分配。</li>
-<li>在某些操作系统中，栈的起始地址可以通过随机偏移（Random Offset）来增加安全性，防止缓冲区溢出攻击。</li>
-</ul>
-</li>
-<li>内核空间：<ul>
-<li>在内核空间中，栈的起始地址通常是固定的，由操作系统内核决定。</li>
-<li>内核栈用于处理中断、异常和系统调用等内核级别的任务。</li>
-<li>内核栈的起始地址可能与用户空间的栈起始地址不同，且通常位于内核空间的高地址区域。</li>
-</ul>
-</li>
-</ol>
-<p>在一些特殊情况下，也可能使用其他内存区域作为栈的起始地址，例如堆（heap）或通过内存映射（mmap）分配的内存区域。但是，栈通常独立于堆和内存映射区域。</p>
-<p>栈的英文是stack</p>
-<h1 id="4-2-5-栈的大小"><a href="#4-2-5-栈的大小" class="headerlink" title="4.2.5 栈的大小"></a>4.2.5 栈的大小</h1><p>栈的大小是指栈所占用的内存空间大小。栈的大小在不同的操作系统和编译器中有所不同。</p>
-<p>对于 Linux 操作系统的进程栈大小，可以使用 ulimit 命令来查看和设置。下面是相关命令的说明：</p>
-<ul>
-<li>查看堆栈大小：使用命令 <code>ulimit -s</code> 可以查看当前进程的堆栈大小限制。</li>
-<li>设置堆栈大小：使用命令 <code>ulimit -s size</code> 可以设置当前进程的堆栈大小限制，其中 size 是以 KB 为单位的大小值。</li>
-</ul>
-<p>需要注意的是，增加堆栈容量会增加内存开销和启动时间。因此，需要合理配置堆栈大小，以满足程序的需求，同时避免浪费资源。</p>
-<p>栈溢出（Stack Overflow）是指当栈空间不足以容纳新的栈帧时，导致栈指针超出了栈的边界。这通常发生在递归函数调用层次过深或者局部变量占用过多栈空间的情况下。当发生栈溢出时，会导致段错误（Segmentation Fault）或程序异常退出。</p>
-<p>在最大堆栈大小的限制内，栈可以动态增长，即在需要时自动分配更多的栈空间。但是，若超过了最大堆栈大小限制，就会发生栈溢出。</p>
-<p>栈溢出的实例可以是一个递归函数调用层次过深，或者一个函数中声明了大量的局部变量导致栈空间不足的情况。当栈溢出发生时，程序无法正确地管理栈帧，导致异常行为或崩溃。</p>
-<p>为了避免栈溢出，应该合理控制递归深度、减少局部变量的使用或者使用动态内存管理（如堆）来存储大量数据。</p>
-<p>总结：栈的大小在不同的操作系统和编译器中有所不同。在 Linux 操作系统中，可以使用 ulimit 命令来查看和设置进程的堆栈大小。增加堆栈容量会增加内存开销和启动时间，而栈溢出会导致段错误或程序异常退出。栈在最大堆栈大小内可以动态增长，但超过最大值会导致栈溢出。为了避免栈溢出，应合理控制递归深度、减少局部变量的使用或使用动态内存管理。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">char</span> a[<span class="number">8</span> * <span class="number">1024</span> * <span class="number">1024</span>];</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;hello world!\n&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在<code>main</code>函数中声明了一个名为<code>a</code>的字符数组，其大小为8MB（8<em>1024</em>1024字节）。然后，你使用<code>printf</code>函数打印了一条”hello world!”的消息，并通过<code>return 0</code>语句结束了<code>main</code>函数。</p>
-<p>需要注意的是，你在栈上声明了一个非常大的数组（8MB），这可能会导致栈溢出。栈的大小是有限的，并且在不同的操作系统和编译器中有所不同。默认情况下，大多数操作系统都有一个较小的栈大小限制。因此，声明过大的局部数组可能会导致栈溢出，导致程序崩溃。</p>
-<p>如果你需要使用大量内存，建议使用堆分配（例如使用<code>malloc</code>函数）来动态分配内存空间，而不是在栈上声明大型数组。这样可以避免栈溢出的风险。</p>
  
       <!-- reward -->
       
@@ -614,7 +296,7 @@
     
     <footer class="article-footer">
        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A0%86%E6%A0%88%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" rel="tag">堆栈内存管理</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gun%E6%89%A9%E5%B1%95%E8%AF%AD%E6%B3%95/" rel="tag">gun扩展语法</a></li></ul>
 
     </footer>
   </div>
@@ -626,7 +308,7 @@
 
     
     <article
-  id="post-4-1-程序与内存的关系"
+  id="post-5-12-属性声明：constructor-destructor"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -637,8 +319,8 @@
     <header class="article-header">
        
 <h2 itemprop="name">
-  <a class="article-title" href="/2023/09/07/4-1-%E7%A8%8B%E5%BA%8F%E4%B8%8E%E5%86%85%E5%AD%98%E7%9A%84%E5%85%B3%E7%B3%BB/"
-    >4-1-程序与内存的关系</a> 
+  <a class="article-title" href="/2023/09/07/5-12-%E5%B1%9E%E6%80%A7%E5%A3%B0%E6%98%8E%EF%BC%9Aconstructor-destructor/"
+    >5.12 属性声明：constructor &amp; destructor</a> 
 </h2>
  
 
@@ -646,8 +328,8 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2023/09/07/4-1-%E7%A8%8B%E5%BA%8F%E4%B8%8E%E5%86%85%E5%AD%98%E7%9A%84%E5%85%B3%E7%B3%BB/" class="article-date">
-  <time datetime="2023-09-06T23:40:08.000Z" itemprop="datePublished">2023-09-07</time>
+      <a href="/2023/09/07/5-12-%E5%B1%9E%E6%80%A7%E5%A3%B0%E6%98%8E%EF%BC%9Aconstructor-destructor/" class="article-date">
+  <time datetime="2023-09-07T13:14:20.000Z" itemprop="datePublished">2023-09-07</time>
 </a> 
   <div class="article-category">
     <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
@@ -657,79 +339,18 @@
       
     <div class="article-entry" itemprop="articleBody">
        
-  <h1 id="4-1-1-虚拟地址空间"><a href="#4-1-1-虚拟地址空间" class="headerlink" title="4.1.1 虚拟地址空间"></a>4.1.1 虚拟地址空间</h1><p>Linux进程的内存映像包括虚拟地址空间、可执行文件的不同部分加载到内存的方式、内存管理以及内核空间。</p>
-<ol>
-<li>虚拟地址空间：每个Linux进程都有自己的虚拟地址空间，它是一个由连续虚拟地址组成的范围。虚拟地址空间将进程的内存分为不同的区域，包括代码段、数据段、堆、栈和映射区等。</li>
-<li>所有程序的编译链接起始地址相同：在Linux中，所有程序的编译链接起始地址通常是相同的，默认为0x08048000。这是由于可执行文件的加载器将可执行文件的代码段加载到这个地址开始的内存区域。</li>
-<li>可执行文件中的不同的section加载到读写权限不同的内存：可执行文件通常包含不同的部分，如代码段、数据段、BSS段等。这些不同的段在加载到内存时可能具有不同的读写权限。例如，代码段通常被设置为只读，数据段和BSS段可以被写入。</li>
-<li>Linux通过MMU和页表来管理内存：Linux使用内存管理单元（Memory Management Unit，MMU）和页表来实现虚拟地址到物理地址的映射以及内存权限的管理。MMU将进程的虚拟地址转换为物理地址，并根据页表中的权限信息来管理内存的读写和执行权限。</li>
-<li>内核空间：除了每个进程的虚拟地址空间之外，Linux还有一个特殊的内核空间，用于操作系统内核及其相关数据结构。内核空间的地址范围通常是高于用户进程的地址范围，进程无法直接访问或修改内核空间的内容，需要通过系统调用来与内核进行交互。</li>
-</ol>
-<h1 id="4-1-2-内核空间与用户空间"><a href="#4-1-2-内核空间与用户空间" class="headerlink" title="4.1.2 内核空间与用户空间"></a>4.1.2 内核空间与用户空间</h1><p>内核空间和用户空间是计算机操作系统中的两个重要概念，用于区分操作系统内核和用户应用程序的内存空间。</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309070753828.png" alt="image-20230907075313755"></p>
-<ol>
-<li>内核空间：<ul>
-<li>所有进程的内核空间都映射到相同的物理内存区域。</li>
-<li>内核空间包含操作系统内核及其相关数据结构，例如设备驱动程序、调度器、文件系统等。</li>
-<li>进程无法直接访问或修改内核空间的内容，需要通过系统调用接口与内核进行交互。</li>
-<li>内核空间通常位于高地址范围，例如在x86架构中，内核空间通常从0x80000000开始。</li>
+  <p><code>constructor</code> 和 <code>destructor</code> 是函数属性，用于指定在程序运行时自动执行的初始化函数和清理函数。它们可以通过 <code>__attribute__</code> 语法与 <code>constructor</code> 和 <code>destructor</code> 属性结合使用。具体的使用方法如下所示：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">__attribute__((constructor)) <span class="type">int</span> <span class="title function_">init_func</span><span class="params">(<span class="type">void</span>)</span>;</span><br><span class="line">__attribute__((destructor)) <span class="type">int</span> <span class="title function_">exit_func</span><span class="params">(<span class="type">void</span>)</span>;</span><br></pre></td></tr></table></figure>
+
+<p>在这个例子中，<code>init_func</code> 是一个初始化函数，<code>exit_func</code> 是一个清理函数。</p>
+<p>解释如下：</p>
+<ul>
+<li><code>__attribute__((constructor))</code> 用于指定函数为初始化函数。这意味着在程序启动时，该函数会自动被调用进行初始化操作。</li>
+<li><code>__attribute__((destructor))</code> 用于指定函数为清理函数。这意味着在程序退出时，该函数会自动被调用进行清理操作。</li>
 </ul>
-</li>
-<li>用户空间：<ul>
-<li>每个进程都有自己独立的用户空间，与其他进程的用户空间相互隔离。</li>
-<li>每个用户空间分别映射到不同的物理内存区域。</li>
-<li>用户空间包含应用程序的代码、数据、堆、栈等。</li>
-<li>用户空间的应用程序可以直接访问和操作其自身的用户空间内存。</li>
-</ul>
-</li>
-</ol>
-<p>应用程序访问内核空间的方式主要有两种：</p>
-<ol>
-<li>系统调用：应用程序通过系统调用接口向内核发出请求，请求执行特权操作或获取内核提供的服务。系统调用将应用程序的执行切换到内核空间，内核在接收到系统调用请求后执行相应的操作，并将结果返回给应用程序。</li>
-<li>中断：应用程序可以通过触发中断事件来请求内核的处理。例如，硬件设备发生中断时，会引发中断请求，内核会在中断处理程序中对中断进行处理，并执行相应的操作。</li>
-</ol>
-<h1 id="4-1-3-地址映射"><a href="#4-1-3-地址映射" class="headerlink" title="4.1.3 地址映射"></a>4.1.3 地址映射</h1><p>地址映射是指将进程的虚拟地址映射到物理内存的过程。在操作系统中，地址映射是通过页表（Page Table）或者快速缓存翻译（Translation Lookaside Buffer，TLB）来实现的。</p>
-<ol>
-<li>虚拟地址通过页表&#x2F;TLB映射到物理内存：<ul>
-<li>当进程访问虚拟地址时，操作系统将通过页表或者TLB进行地址转换，将虚拟地址映射到物理内存地址。</li>
-<li>页表是操作系统维护的数据结构，记录了虚拟地址到物理地址的映射关系。每个进程都有自己的页表。</li>
-<li>TLB是一个高速缓存，存储最近使用的页表项，以提高地址转换的速度。TLB中的页表项是虚拟地址到物理地址的映射。</li>
-</ul>
-</li>
-<li>页表由操作系统维护，记录虚拟地址到物理地址的映射关系：<ul>
-<li>操作系统负责创建和管理页表，其中包括建立和更新页表项。</li>
-<li>当进程切换时，操作系统会切换对应的页表，以确保不同进程之间的地址映射独立和安全。</li>
-</ul>
-</li>
-<li>通过页表还设置内存权限：读、写、可执行：<ul>
-<li>页表不仅用于地址映射，还可以设置内存的访问权限。每个页表项可以指定对应虚拟页的读、写、执行权限。</li>
-<li>当进程访问虚拟地址时，操作系统会检查页表项中设置的权限，以确定是否允许对物理内存的读取、写入或执行操作。</li>
-</ul>
-</li>
-</ol>
-<h1 id="4-1-4-为什么使用虚拟内存"><a href="#4-1-4-为什么使用虚拟内存" class="headerlink" title="4.1.4 为什么使用虚拟内存"></a>4.1.4 为什么使用虚拟内存</h1><p>使用虚拟内存的目的是为了解决物理内存的限制并提供更好的内存管理和系统安全性。以下是一些使用虚拟内存的主要原因：</p>
-<ol>
-<li>避免使用物理内存带来的弊端：<ul>
-<li>物理内存是有限的资源，虚拟内存允许操作系统将物理内存和磁盘空间组合使用，从而扩展可用的内存空间。</li>
-<li>虚拟内存允许将不常用的数据从物理内存转移到磁盘上的交换空间，以释放物理内存供其他进程使用。</li>
-</ul>
-</li>
-<li>为每个进程提供一个独立的、私有的地址空间：<ul>
-<li>每个进程都拥有自己独立的虚拟地址空间，使得进程之间的内存地址互相隔离，每个进程都可以认为自己在独占整个内存空间。</li>
-<li>这样可以使得每个进程在运行时无需关心其他进程的内存布局和地址冲突问题，简化了进程间的通信和协作。</li>
-</ul>
-</li>
-<li>保护每个进程的空间不被其他进程破坏：<ul>
-<li>虚拟内存通过地址隔离，防止一个进程访问或修改其他进程的内存数据，提供了进程间的安全隔离。</li>
-<li>如果一个进程尝试访问其它进程的地址空间，操作系统会通过内存保护机制触发异常，并终止非法操作，从而保护系统的稳定性和安全性。</li>
-</ul>
-</li>
-<li>内存读写权限管理，保障系统的安全运行：<ul>
-<li>虚拟内存管理机制允许操作系统对每个进程的内存区域设置读、写、执行等权限，以实现细粒度的内存保护。</li>
-<li>操作系统可以通过页表或者段表等数据结构，对虚拟地址与物理地址的映射进行权限控制，防止恶意进程修改或访问非法内存区域。</li>
-</ul>
-</li>
-</ol>
+<p>使用 <code>constructor</code> 和 <code>destructor</code> 属性的函数在程序运行期间的执行顺序是由编译器和链接器决定的。通常情况下，初始化函数会在 <code>main</code> 函数之前被调用，而清理函数会在程序退出时被调用。</p>
+<p>这些函数属性可以用于在程序开始和结束时执行一些必要的初始化和清理操作，例如初始化全局变量、打开和关闭文件、申请和释放资源等。</p>
+<p>需要注意的是，函数属性的使用方法可能因编译器而异，具体的语法和支持程度可能有所差异。因此，在使用时应查阅相关编译器文档以了解具体的使用方法和限制。</p>
  
       <!-- reward -->
       
@@ -740,7 +361,7 @@
     
     <footer class="article-footer">
        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A0%86%E6%A0%88%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" rel="tag">堆栈内存管理</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gun%E6%89%A9%E5%B1%95%E8%AF%AD%E6%B3%95/" rel="tag">gun扩展语法</a></li></ul>
 
     </footer>
   </div>
@@ -752,7 +373,7 @@
 
     
     <article
-  id="post-1-70-参考文档-设备树bindings"
+  id="post-5-11-属性声明：weak-alias"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -763,8 +384,8 @@
     <header class="article-header">
        
 <h2 itemprop="name">
-  <a class="article-title" href="/2023/09/05/1-70-%E5%8F%82%E8%80%83%E6%96%87%E6%A1%A3-%E8%AE%BE%E5%A4%87%E6%A0%91bindings/"
-    >1-70-参考文档:设备树bindings</a> 
+  <a class="article-title" href="/2023/09/07/5-11-%E5%B1%9E%E6%80%A7%E5%A3%B0%E6%98%8E%EF%BC%9Aweak-alias/"
+    >5.11 属性声明：weak &amp; alias</a> 
 </h2>
  
 
@@ -772,37 +393,70 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2023/09/05/1-70-%E5%8F%82%E8%80%83%E6%96%87%E6%A1%A3-%E8%AE%BE%E5%A4%87%E6%A0%91bindings/" class="article-date">
-  <time datetime="2023-09-05T00:01:45.000Z" itemprop="datePublished">2023-09-05</time>
+      <a href="/2023/09/07/5-11-%E5%B1%9E%E6%80%A7%E5%A3%B0%E6%98%8E%EF%BC%9Aweak-alias/" class="article-date">
+  <time datetime="2023-09-07T13:14:19.000Z" itemprop="datePublished">2023-09-07</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/rk3568-%E9%A9%B1%E5%8A%A8/">rk3568 驱动</a>
+    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
   </div>
    
     </div>
       
     <div class="article-entry" itemprop="articleBody">
        
-  <h1 id="第70章-参考文档：设备树bindings"><a href="#第70章-参考文档：设备树bindings" class="headerlink" title="第70章 参考文档：设备树bindings"></a>第70章 参考文档：设备树bindings</h1><p>在前面的章节中，我们已经介绍了许多设备树编写相关的知识，当然上面我们讲解的都是标准属性，但当我们遇到非标准属性或无法理解的属性时，要如何处理呢？这时候就不得不提到bindings文档了。</p>
-<p>Documentation&#x2F;devicetree&#x2F;bindings目录是Linux内核源码中的一个重要目录，用于存储设备树（Device Tree）的bindings文档。设备树是一种描述硬件平台和设备配置的数据结构，它以一种可移植和独立于具体硬件的方式描述了设备的属性、寄存器配置、中断信息等。</p>
-<p>bindings目录中的文档提供了有关设备树的各种设备和驱动程序的详细说明和用法示例。这些文档对于开发人员来说非常重要，因为它们提供了在设备树中描述硬件和配置驱动程序所需的属性和约定。bindings目录截图如下所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309062025637.jpeg" alt="img"> </p>
-<p>接下来对Documentation&#x2F;devicetree&#x2F;bindings目录的一些常见子目录和其内容的概述：</p>
-<p>arm：包含与ARM体系结构相关的设备和驱动程序的bindings文档。</p>
-<p>clock：包含与时钟设备和时钟控制器相关的bindings文档。</p>
-<p>dma：包含与直接内存访问（DMA）控制器和设备相关的bindings文档。</p>
-<p>gpio：包含与通用输入输出（GPIO）控制器和设备相关的bindings文档。</p>
-<p>i2c：包含与I2C总线和设备相关的bindings文档。</p>
-<p>interrupt-controller：包含与中断控制器相关的bindings文档。</p>
-<p>media：包含与多媒体设备和驱动程序相关的bindings文档。</p>
-<p>mfd：包含与多功能设备（MFD）子系统和设备相关的bindings文档。</p>
-<p>networking：包含与网络设备和驱动程序相关的bindings文档。</p>
-<p>power：包含与电源管理子系统和设备相关的bindings文档。</p>
-<p>spi：包含与SPI总线和设备相关的bindings文档。</p>
-<p>usb：包含与USB控制器和设备相关的bindings文档。</p>
-<p>video：包含与视频设备和驱动程序相关的bindings文档。</p>
-<p>每个子目录中的文档通常以.txt或.yaml的扩展名保存，使用文本或YAML格式编写。这些文档提供了有关设备树中属性的详细说明、属性的语法、可选值和用法示例。它们还描述了设备树的约定和最佳实践，以帮助开发人员正确地配置和描述硬件设备和驱动程序。</p>
-<p>通过阅读Documentation&#x2F;devicetree&#x2F;bindings目录中的文档，开发人员可以了解各种设备和驱动程序的设备树属性的含义和用法，以便正确地配置和描述硬件平台和设备。这有助于实现硬件与软件之间的正确匹配和交互，使系统能够正确识别和使用硬件设备。</p>
+  <p>在 C 语言中，符号（Symbol）是指变量、函数、常量等在编译过程中生成的标识符。符号具有不同的属性，其中包括强符号（Strong Symbol）和弱符号（Weak Symbol）。</p>
+<ol>
+<li>强符号（Strong Symbol）：<ul>
+<li>强符号是指在编译过程中具有高优先级的符号。</li>
+<li>当存在多个强符号的定义时，链接器会选择其中一个作为最终的定义，并且会忽略其他的定义。</li>
+<li>通常情况下，全局变量和初始化的静态变量都被视为强符号。</li>
+<li>在不同的源文件中定义同名的强符号会引发链接错误。</li>
+</ul>
+</li>
+<li>弱符号（Weak Symbol）：<ul>
+<li>弱符号是指在编译过程中具有低优先级的符号。</li>
+<li>当存在多个弱符号的定义时，链接器会选择其中一个作为最终的定义，但如果没有找到强符号的定义，链接器会接受弱符号的定义。</li>
+<li>通常情况下，未初始化的静态变量和函数都被视为弱符号。</li>
+<li>在不同的源文件中定义同名的弱符号不会引发链接错误。</li>
+</ul>
+</li>
+</ol>
+<p>根据您提供的示例代码，可以进行如下解释：</p>
+<ul>
+<li><code>int a;</code> 和 <code>int b;</code> 是两个未初始化的静态变量，它们被视为弱符号。</li>
+<li><code>int a = 1;</code> 是对变量 <code>a</code> 的初始化，它被视为强符号，因为它是一个具有初始值的全局变量。</li>
+<li><code>int b = 2;</code> 是对变量 <code>b</code> 的初始化，它也被视为强符号，因为它是一个具有初始值的全局变量。</li>
+<li><code>void func()</code> 和 <code>-void func()</code> 是函数 <code>func</code> 的声明和定义，它们都被视为强符号。</li>
+</ul>
+<p>在链接过程中，如果存在多个对同一符号的定义，链接器将根据符号的强度规则来选择最终的定义。在您的示例中，如果在 <code>main.c</code> 和 <code>func.c</code> 中都包含了同名的变量或函数定义，链接器将会选择其中一个作为最终的定义，并且会忽略其他的定义（对于强符号）或接受其中一个定义（对于弱符号）。</p>
+<p>在链接过程中，符号决议（Symbol Resolution）是指解决多个源文件中对同一符号的定义或引用的过程。根据符号的强度和规则，可以发生以下三种场景：</p>
+<ol>
+<li>强符号与强符号：<ul>
+<li>如果存在多个源文件中对同一符号的强符号定义，链接器将发生冲突，并且会报告链接错误。这是因为强符号具有高优先级，只能有一个最终的定义。</li>
+</ul>
+</li>
+<li>强符号与弱符号、弱符号与弱符号：<ul>
+<li>如果存在强符号与弱符号或者多个弱符号的定义，根据一般规则，强符号和弱符号可以共存。</li>
+<li>在这种情况下，强符号将覆盖弱符号，并成为最终的定义。体积更大的符号通常被视为强符号，因此它将胜出。</li>
+</ul>
+</li>
+</ol>
+<p>需要注意的是，具体的符号决议规则和行为可能因编译器、操作系统和链接器的不同而有所差异。上述规则是一般情况下的基本规律，但在特定的环境中可能会有特殊的规则适用。</p>
+<p>在实际开发中，为了避免符号冲突和不确定的行为，应遵循以下原则：</p>
+<ul>
+<li>避免在不同的源文件中定义具有相同名称的强符号。</li>
+<li>在需要共享符号的情况下，使用弱符号进行定义，并确保在链接时只有一个强符号的定义。这可以通过将符号定义放在一个源文件中，或者使用特定的链接器选项来实现。</li>
+</ul>
+<p><code>alias</code> 是一个用于创建符号别名的关键字。在 C 语言中，<code>alias</code> 关键字可以与 <code>__attribute__</code> 结合使用来为函数或变量创建别名。具体使用方法如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> _f();</span><br><span class="line"><span class="type">void</span> <span class="title function_">f</span><span class="params">()</span> __<span class="title function_">attribute__</span><span class="params">((weak, alias(<span class="string">&quot;_f&quot;</span>)))</span>;</span><br></pre></td></tr></table></figure>
+
+<p>在这个例子中，通过 <code>alias</code> 关键字，<code>f</code> 函数被创建为 <code>_f</code> 函数的别名。</p>
+<p>解释如下：</p>
+<ul>
+<li><code>void _f();</code> 是 <code>_f</code> 函数的原始声明或定义。</li>
+<li><code>void f() __attribute__((weak, alias(&quot;_f&quot;)));</code> 创建了一个名为 <code>f</code> 的函数，它是 <code>_f</code> 函数的别名。使用 <code>weak</code> 属性来指定 <code>f</code> 为弱符号，表示它可以与其他同名函数共存。</li>
+</ul>
+<p>通过使用 <code>alias</code> 关键字，我们可以在代码中创建函数或变量的别名，使其可以通过不同的名称进行访问。这对于一些特定的编程需求和代码重用非常有用。</p>
  
       <!-- reward -->
       
@@ -813,7 +467,7 @@
     
     <footer class="article-footer">
        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rk3568-%E9%A9%B1%E5%8A%A8/" rel="tag">rk3568 驱动</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gun%E6%89%A9%E5%B1%95%E8%AF%AD%E6%B3%95/" rel="tag">gun扩展语法</a></li></ul>
 
     </footer>
   </div>
@@ -825,7 +479,7 @@
 
     
     <article
-  id="post-1-69-of操作函数实验-获取中断资源"
+  id="post-5-10-属性声明：const"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -836,8 +490,8 @@
     <header class="article-header">
        
 <h2 itemprop="name">
-  <a class="article-title" href="/2023/09/05/1-69-of%E6%93%8D%E4%BD%9C%E5%87%BD%E6%95%B0%E5%AE%9E%E9%AA%8C-%E8%8E%B7%E5%8F%96%E4%B8%AD%E6%96%AD%E8%B5%84%E6%BA%90/"
-    >1-69-of操作函数实验:获取中断资源</a> 
+  <a class="article-title" href="/2023/09/07/5-10-%E5%B1%9E%E6%80%A7%E5%A3%B0%E6%98%8E%EF%BC%9Aconst/"
+    >5.10 属性声明：const</a> 
 </h2>
  
 
@@ -845,116 +499,24 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2023/09/05/1-69-of%E6%93%8D%E4%BD%9C%E5%87%BD%E6%95%B0%E5%AE%9E%E9%AA%8C-%E8%8E%B7%E5%8F%96%E4%B8%AD%E6%96%AD%E8%B5%84%E6%BA%90/" class="article-date">
-  <time datetime="2023-09-05T00:01:43.000Z" itemprop="datePublished">2023-09-05</time>
+      <a href="/2023/09/07/5-10-%E5%B1%9E%E6%80%A7%E5%A3%B0%E6%98%8E%EF%BC%9Aconst/" class="article-date">
+  <time datetime="2023-09-07T13:14:17.000Z" itemprop="datePublished">2023-09-07</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/rk3568-%E9%A9%B1%E5%8A%A8/">rk3568 驱动</a>
+    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
   </div>
    
     </div>
       
     <div class="article-entry" itemprop="articleBody">
        
-  <h1 id="第69章-of操作函数实验：获取中断资源"><a href="#第69章-of操作函数实验：获取中断资源" class="headerlink" title="第69章 of操作函数实验：获取中断资源"></a>第69章 of操作函数实验：获取中断资源</h1><h2 id="69-1-of操作：获取中断资源"><a href="#69-1-of操作：获取中断资源" class="headerlink" title="69.1 of操作：获取中断资源"></a>69.1 of操作：获取中断资源</h2><h3 id="69-1-1-irq-of-parse-and-map"><a href="#69-1-1-irq-of-parse-and-map" class="headerlink" title="69.1.1 irq_of_parse_and_map"></a>69.1.1 irq_of_parse_and_map</h3><p>该函数的主要功能是解析设备节点的”interrupts”属性，并将对应的中断号映射到系统的中断号。”interrupts”属性通常以一种特定的格式表示，可以包含一个或多个中断号。通过提供索引号，可以获取对应的中断号。</p>
-<p><strong>函数原型：</strong></p>
-<p>​	unsigned int irq_of_parse_and_map(struct device_node *dev, int index);</p>
-<p><strong>头文件：</strong></p>
-<p>\	#include &lt;linux&#x2F;of_irq.h&gt;</p>
-<p><strong>函数作用：</strong><br>        从设备节点的”interrupts”属性中解析和映射对应的中断号</p>
-<p><strong>参数说明：</strong></p>
-<p>​	dev：设备节点，表示要解析的设备节点。</p>
-<p>​	index：索引号，表示从”interrupts”属性中获取第几个中断号。</p>
-<p><strong>返回值：</strong></p>
-<p>​	是一个无符号整数，表示成功解析和映射的中断号。</p>
-<h3 id="69-1-2-irq-get-trigger-type"><a href="#69-1-2-irq-get-trigger-type" class="headerlink" title="69.1.2 irq_get_trigger_type"></a>69.1.2 irq_get_trigger_type</h3><p>该函数的主要功能是从给定的中断数据结构中提取中断触发类型。中断触发类型描述了中断信号的触发条件，例如边沿触发（edge-triggered）或电平触发（level-triggered）等。</p>
-<p><strong>函数原型：</strong></p>
-<p>​	u32 irqd_get_trigger_type(struct irq_data *d);</p>
-<p><strong>头文件：</strong></p>
-<p>\	#include &lt;linux&#x2F;irq.h&gt;</p>
-<p><strong>函数作用：</strong></p>
-<p>​	从中断数据结构（irq_data）中获取对应的中断触发类型。</p>
-<p><strong>参数说明</strong>：</p>
-<p>​	d：中断数据结构（irq_data），表示要获取中断触发类型的中断。</p>
-<p><strong>返回值：</strong></p>
-<p>​	是一个无符号32位整数，表示成功获取的中断触发类型。</p>
-<h3 id="69-1-3-irq-get-irq-data"><a href="#69-1-3-irq-get-irq-data" class="headerlink" title="69.1.3 irq_get_irq_data"></a>69.1.3 irq_get_irq_data</h3><p>函数irq_get_irq_data的作用是根据中断号获取对应的中断数据结构（irq_data）。</p>
-<p><strong>函数原型：</strong></p>
-<p>​	struct irq_data *irq_get_irq_data(unsigned int irq);</p>
-<p><strong>头文件：</strong><br>    #include &lt;linux&#x2F;irq.h&gt;</p>
-<p><strong>函数作用：</strong><br>    根据中断号获取对应的中断数据结构。</p>
-<p><strong>参数说明：</strong></p>
-<p>​	irq：中断号，表示要获取中断数据结构的中断号。</p>
-<p><strong>返回值</strong>：</p>
-<p>​	指向irq_data结构体的指针，表示成功获取的中断数据结构。</p>
-<h3 id="69-1-4-gpio-to-irq"><a href="#69-1-4-gpio-to-irq" class="headerlink" title="69.1.4 gpio_to_irq"></a>69.1.4 gpio_to_irq</h3><p>该函数的主要功能是将给定的GPIO编号转换为对应的中断号。在某些系统中，GPIO可以配置为中断引脚，当特定事件发生时触发中断。通过该函数，可以根据GPIO编号获取与之关联的中断号，以便进行中断处理等操作。</p>
-<p><strong>函数原型：</strong></p>
-<p>​	int gpio_to_irq(unsigned int gpio);</p>
-<p><strong>头文件：</strong><br>        #include &lt;linux&#x2F;gpio.h&gt;</p>
-<p><strong>函数作用：</strong></p>
-<p>​	根据GPIO编号获取对应的中断号。</p>
-<p><strong>参数说明：</strong></p>
-<p>​	gpio：GPIO编号，表示要获取中断号的GPIO。</p>
-<p><strong>返回值：</strong></p>
-<p>​	是一个整数，表示成功获取的中断号。</p>
-<h3 id="69-1-5-of-irq-get"><a href="#69-1-5-of-irq-get" class="headerlink" title="69.1.5 of_irq_get"></a>69.1.5 of_irq_get</h3><p>该函数的主要功能是从给定的设备节点的”interrupts”属性中解析并获取对应的中断号。”interrupts”属性通常以一种特定的格式表示，可以包含一个或多个中断号。通过提供索引号，可以获取对应的中断号</p>
-<p><strong>函数原型：</strong></p>
-<p>​	int of_irq_get(struct device_node *dev, int index);</p>
-<p><strong>头文件：</strong><br>    #include &lt;linux&#x2F;of_irq.h&gt;</p>
-<p><strong>函数作用：</strong></p>
-<p>​	是从设备节点的”interrupts”属性中获取对应的中断号。</p>
-<p><strong>参数说明：</strong></p>
-<p>​	dev：设备节点，表示要获取中断号的设备节点。</p>
-<p>​	index：索引号，表示从”interrupts”属性中获取第几个中断号。</p>
-<p>返回值：</p>
-<p>​	是一个整数，表示成功获取的中断号。</p>
-<h3 id="69-1-6-irq-of-parse-and-map"><a href="#69-1-6-irq-of-parse-and-map" class="headerlink" title="69.1.6 irq_of_parse_and_map"></a>69.1.6 irq_of_parse_and_map</h3><p>irq_of_parse_and_map函数的主要功能是根据给定的平台设备和索引号获取对应的中断号。平台设备是指与特定硬件平台相关的设备。在某些情况下，平台设备可能具有多个中断号，通过提供索引号，可以获取对应的中断号。</p>
-<p><strong>函数原型：</strong></p>
-<p>​	int platform_get_irq(struct platform_device *dev, unsigned int num);</p>
-<p><strong>函数作用：</strong><br>    根据平台设备和索引号获取对应的中断号。</p>
-<p><strong>头文件：</strong><br>    linux&#x2F;platform_device.h</p>
-<p><strong>参数说明</strong>：</p>
-<p>​	dev：平台设备，表示要获取中断号的平台设备。</p>
-<p>​	num：索引号，表示从中获取第几个中断号。</p>
-<p><strong>返回值：</strong></p>
-<p>​	是一个整数，表示成功获取的中断号。</p>
-<h2 id="69-2-实验程序编写"><a href="#69-2-实验程序编写" class="headerlink" title="69.2 实验程序编写"></a>69.2 实验程序编写</h2><h3 id="69-2-1-设备树的修改"><a href="#69-2-1-设备树的修改" class="headerlink" title="69.2.1 设备树的修改"></a>69.2.1 设备树的修改</h3><p>本实验修改完成的设备树和编译完成的boot.img对应的网盘路径为：iTOP-RK3568开发板【底板V1.7版本】\03_【iTOP-RK3568开发板】指南教程\02_Linux驱动配套资料\04_Linux驱动例程\57_of_03\dts。</p>
-<p>由于本章节要获取的是中断相关的资源，所以需要在设备树中添加有关中断的设备节点，在第57章节的学习中，我们已经对中断实例进行了讲解，所以这里直接对rk3568-evb1-ddr4-v10-linux.dts设备树进行中断节点的添加，添加的内容如下所示：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">myirq &#123;</span><br><span class="line">	compatible = &quot;my_devicetree_irq&quot;;</span><br><span class="line">	interrupt-parent = &lt;&amp;gpio3&gt;;</span><br><span class="line">	interrupts = &lt;RK_PA5 IRQ_TYPE_LEVEL_LOW&gt;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+  <p>属性声明 <code>const</code> 用于指定函数的返回值为常量（不可修改）。它的使用方法如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int func(int a) __attribute__((const));</span><br></pre></td></tr></table></figure>
 
-<p>添加完成如下图所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309062025704.jpeg" alt="img"> </p>
-<p>保存退出之后，重新编译内核源码，得到boot.img内核镜像之后烧写到开发板即可。</p>
-<h3 id="69-2-2-实验程序的编写"><a href="#69-2-2-实验程序的编写" class="headerlink" title="69.2.2 实验程序的编写"></a>69.2.2 实验程序的编写</h3><p>本实验驱动对应的网盘路径为：iTOP-RK3568开发板【底板V1.7版本】\03_【iTOP-RK3568开发板】指南教程\02_Linux驱动配套资料\04_Linux驱动例程\57_of_03。</p>
-<p>本小节驱动程序是由65章驱动程序修改而来，由于本章节获取中断属性的函数需要在查找到设备树节点的前提下使用，所以在下面的程序中，先在probe函数中查找设备树节点，然后添加了本章节学习的of操作相关代码和其他一些相关的函数，用来获取设备树节点中断资源。</p>
-<p>编写完成的platform_driver.c代码如下所示：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;linux/module.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;linux/platform_device.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;linux/mod_devicetable.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;linux/of.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;linux/of_irq.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;linux/gpio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> num;</span><br><span class="line"><span class="type">int</span> irq;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">irq_data</span> *<span class="title">my_irq_data</span>;</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">device_node</span> *<span class="title">mydevice_node</span>;</span></span><br><span class="line">u32 trigger_type;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 平台设备的初始化函数</span></span><br><span class="line"><span class="type">static</span> <span class="type">int</span> <span class="title function_">my_platform_probe</span><span class="params">(<span class="keyword">struct</span> platform_device *pdev)</span></span><br><span class="line">&#123;</span><br><span class="line">    printk(KERN_INFO <span class="string">&quot;my_platform_probe: Probing platform device\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 查找设备节点</span></span><br><span class="line">    mydevice_node = of_find_node_by_name(<span class="literal">NULL</span>, <span class="string">&quot;myirq&quot;</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 解析和映射中断</span></span><br><span class="line">    irq = irq_of_parse_and_map(mydevice_node, <span class="number">0</span>);</span><br><span class="line">    printk(<span class="string">&quot;irq is %d\n&quot;</span>, irq);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 获取中断数据结构</span></span><br><span class="line">    my_irq_data = irq_get_irq_data(irq);</span><br><span class="line">    <span class="comment">// 获取中断触发类型</span></span><br><span class="line">    trigger_type = irqd_get_trigger_type(my_irq_data);</span><br><span class="line">    printk(<span class="string">&quot;trigger type is 0x%x\n&quot;</span>, trigger_type);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 将GPIO转换为中断号</span></span><br><span class="line">    irq = gpio_to_irq(<span class="number">101</span>);</span><br><span class="line">    printk(<span class="string">&quot;irq is %d\n&quot;</span>, irq);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 从设备节点获取中断号</span></span><br><span class="line">    irq = of_irq_get(mydevice_node, <span class="number">0</span>);</span><br><span class="line">    printk(<span class="string">&quot;irq is %d\n&quot;</span>, irq);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 获取平台设备的中断号</span></span><br><span class="line">    irq = platform_get_irq(pdev, <span class="number">0</span>);</span><br><span class="line">    printk(<span class="string">&quot;irq is %d\n&quot;</span>, irq);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 平台设备的移除函数</span></span><br><span class="line"><span class="type">static</span> <span class="type">int</span> <span class="title function_">my_platform_remove</span><span class="params">(<span class="keyword">struct</span> platform_device *pdev)</span></span><br><span class="line">&#123;</span><br><span class="line">    printk(KERN_INFO <span class="string">&quot;my_platform_remove: Removing platform device\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 清理设备特定的操作</span></span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="class"><span class="keyword">struct</span> <span class="title">of_device_id</span> <span class="title">of_match_table_id</span>[]  =</span> &#123;</span><br><span class="line">	&#123;.compatible=<span class="string">&quot;my_devicetree_irq&quot;</span>&#125;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义平台驱动结构体</span></span><br><span class="line"><span class="type">static</span> <span class="class"><span class="keyword">struct</span> <span class="title">platform_driver</span> <span class="title">my_platform_driver</span> =</span> &#123;</span><br><span class="line">    .probe = my_platform_probe,</span><br><span class="line">    .remove = my_platform_remove,</span><br><span class="line">    .driver = &#123;</span><br><span class="line">        .name = <span class="string">&quot;my_platform_device&quot;</span>,</span><br><span class="line">        .owner = THIS_MODULE,</span><br><span class="line">		.of_match_table =  of_match_table_id,</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 模块初始化函数</span></span><br><span class="line"><span class="type">static</span> <span class="type">int</span> __init <span class="title function_">my_platform_driver_init</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> ret;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 注册平台驱动</span></span><br><span class="line">    ret = platform_driver_register(&amp;my_platform_driver);</span><br><span class="line">    <span class="keyword">if</span> (ret) &#123;</span><br><span class="line">        printk(KERN_ERR <span class="string">&quot;Failed to register platform driver\n&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    printk(KERN_INFO <span class="string">&quot;my_platform_driver: Platform driver initialized\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 模块退出函数</span></span><br><span class="line"><span class="type">static</span> <span class="type">void</span> __exit <span class="title function_">my_platform_driver_exit</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 注销平台驱动</span></span><br><span class="line">    platform_driver_unregister(&amp;my_platform_driver);</span><br><span class="line"></span><br><span class="line">    printk(KERN_INFO <span class="string">&quot;my_platform_driver: Platform driver exited\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">module_init(my_platform_driver_init);</span><br><span class="line">module_exit(my_platform_driver_exit);</span><br><span class="line"></span><br><span class="line">MODULE_LICENSE(<span class="string">&quot;GPL&quot;</span>);</span><br><span class="line">MODULE_AUTHOR(<span class="string">&quot;topeet&quot;</span>);</span><br></pre></td></tr></table></figure>
-
-<h2 id="69-3-运行测试"><a href="#69-3-运行测试" class="headerlink" title="69.3 运行测试"></a>69.3 运行测试</h2><h3 id="69-3-1-编译驱动程序"><a href="#69-3-1-编译驱动程序" class="headerlink" title="69.3.1 编译驱动程序"></a>69.3.1 编译驱动程序</h3><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> ARCH=arm64<span class="comment">#设置平台架构</span></span><br><span class="line"><span class="keyword">export</span> CROSS_COMPILE=aarch64-linux-gnu-<span class="comment">#交叉编译器前缀</span></span><br><span class="line">obj-m += platform_driver.o    <span class="comment">#此处要和你的驱动源文件同名</span></span><br><span class="line">KDIR :=/home/topeet/Linux/linux_sdk/kernel    <span class="comment">#这里是你的内核目录                                                                                                                            </span></span><br><span class="line">PWD ?= <span class="variable">$(<span class="built_in">shell</span> pwd)</span></span><br><span class="line"><span class="section">all:</span></span><br><span class="line">    make -C <span class="variable">$(KDIR)</span> M=<span class="variable">$(PWD)</span> modules    <span class="comment">#make操作</span></span><br><span class="line"><span class="section">clean:</span></span><br><span class="line">    make -C <span class="variable">$(KDIR)</span> M=<span class="variable">$(PWD)</span> clean    <span class="comment">#make clean操作</span></span><br></pre></td></tr></table></figure>
-
-<p>对于Makefile的内容注释已在上图添加，保存退出之后，来到存放platform_driver.c和Makefile文件目录下，如下图（图69-1）所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309062025721.jpeg" alt="img"> </p>
-<p>图 69-1</p>
-<p>然后使用命令“make”进行驱动的编译，编译完成如下图（图69-2）所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309062025678.jpeg" alt="img"> </p>
-<p>图 69-2</p>
-<p>编译完生成platform_driver.ko目标文件，如下图（图69-3）所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309062025669.jpeg" alt="img"> </p>
-<p>图 69-3</p>
-<p>至此驱动模块就编译成功了。</p>
-<h3 id="69-3-2-运行测试"><a href="#69-3-2-运行测试" class="headerlink" title="69.3.2 运行测试"></a>69.3.2 运行测试</h3><p>在进行实验之前，首先要确保开发板烧写的是我们在69.2.1小节中编译出来的boot.img，开发板启动之后，使用以下命令进行驱动模块的加载，如下图（图69-4）所示：</p>
-<p>insmod platform_driver.ko</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309062025673.jpeg" alt="img"> </p>
-<p>图 69-4</p>
-<p>可以看到总共有5个打印，第1、3、4、5个打印都是获取的中断号为113，第2个打印的是中断的类型，即IRQ_TYPE_LEVEL_LOW，该触发类型的宏定义在内核源码“include&#x2F;dt-bindings&#x2F;interrupt-controller&#x2F;irq.h”目录下，具体内容如下所示：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> IRQ_TYPE_NONE           0   <span class="comment">// 无中断触发类型</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> IRQ_TYPE_EDGE_RISING    1   <span class="comment">// 上升沿触发</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> IRQ_TYPE_EDGE_FALLING   2   <span class="comment">// 下降沿触发</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> IRQ_TYPE_EDGE_BOTH    (IRQ_TYPE_EDGE_FALLING | IRQ_TYPE_EDGE_RISING)<span class="comment">// 双边沿触发</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> IRQ_TYPE_LEVEL_HIGH     4   <span class="comment">// 高电平触发</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> IRQ_TYPE_LEVEL_LOW      8   <span class="comment">// 低电平触发</span></span></span><br></pre></td></tr></table></figure>
-
-<p>可以看到IRQ_TYPE_LEVEL_LOW的宏定义为8，证明上面的打印正确。</p>
-<p>然后使用以下命令进行驱动模块的卸载，如下图（图69-5）所示：</p>
-<p>rmmod platform_driver.ko</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309062025753.png" alt="img"></p>
-<p>图 69-5</p>
-<p>至此，使用of操作函数获取中断资源实验就完成了。</p>
+<p>在这个例子中，<code>const</code> 属性应用于函数 <code>func</code>，用于指定函数的返回值为常量。</p>
+<p>具体来说，<code>const</code> 属性表示函数的返回值不依赖于除了函数参数之外的任何外部状态。也就是说，对于相同的输入，函数始终返回相同的结果，并且不会修改任何全局变量或静态变量。这种属性可以帮助编译器进行一些优化，例如函数结果的缓存或重复计算的消除。</p>
+<p>使用 <code>const</code> 属性有助于提高代码的可读性和可靠性，因为它明确了函数的行为，并更容易推断出函数是否会产生副作用。</p>
+<p>需要注意的是，使用 <code>const</code> 属性并不会强制确保函数的实现不会产生副作用或修改全局状态。它只是一种提示或约定，应该由开发者遵循。</p>
  
       <!-- reward -->
       
@@ -965,7 +527,7 @@
     
     <footer class="article-footer">
        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rk3568-%E9%A9%B1%E5%8A%A8/" rel="tag">rk3568 驱动</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gun%E6%89%A9%E5%B1%95%E8%AF%AD%E6%B3%95/" rel="tag">gun扩展语法</a></li></ul>
 
     </footer>
   </div>
@@ -977,7 +539,7 @@
 
     
     <article
-  id="post-1-68-ranges属性实验"
+  id="post-5-9-属性声明：format"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -988,8 +550,8 @@
     <header class="article-header">
        
 <h2 itemprop="name">
-  <a class="article-title" href="/2023/09/05/1-68-ranges%E5%B1%9E%E6%80%A7%E5%AE%9E%E9%AA%8C/"
-    >1-68-ranges属性实验</a> 
+  <a class="article-title" href="/2023/09/07/5-9-%E5%B1%9E%E6%80%A7%E5%A3%B0%E6%98%8E%EF%BC%9Aformat/"
+    >5.9 属性声明：format</a> 
 </h2>
  
 
@@ -997,108 +559,32 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2023/09/05/1-68-ranges%E5%B1%9E%E6%80%A7%E5%AE%9E%E9%AA%8C/" class="article-date">
-  <time datetime="2023-09-05T00:01:42.000Z" itemprop="datePublished">2023-09-05</time>
+      <a href="/2023/09/07/5-9-%E5%B1%9E%E6%80%A7%E5%A3%B0%E6%98%8E%EF%BC%9Aformat/" class="article-date">
+  <time datetime="2023-09-07T13:14:16.000Z" itemprop="datePublished">2023-09-07</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/rk3568-%E9%A9%B1%E5%8A%A8/">rk3568 驱动</a>
+    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
   </div>
    
     </div>
       
     <div class="article-entry" itemprop="articleBody">
        
-  <h1 id="第68章-ranges属性实验"><a href="#第68章-ranges属性实验" class="headerlink" title="第68章 ranges属性实验"></a>第68章 ranges属性实验</h1><h1 id="68-1-platform-get-resource获取设备树资源"><a href="#68-1-platform-get-resource获取设备树资源" class="headerlink" title="68.1 platform_get_resource获取设备树资源"></a>68.1 platform_get_resource获取设备树资源</h1><p>在上个章节中讲解了使用of操作函数来获取设备树的属性，由于设备树在系统启动的时候都会转化为platform设备，那我们能不能直接在驱动中使用在53.1小节中讲解的platform_get_resource函数直接获取platform_device资源呢？</p>
-<h3 id="68-1-1-驱动程序编写"><a href="#68-1-1-驱动程序编写" class="headerlink" title="68.1.1 驱动程序编写"></a>68.1.1 驱动程序编写</h3><p>带着疑惑我们这里仍旧以65章的驱动程序为原型，在probe函数中加入使用platform_get_resource函数获取reg资源的函数，添加完成的驱动程序内容如下所示：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;linux/module.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;linux/platform_device.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;linux/mod_devicetable.h&gt;</span></span></span><br><span class="line"><span class="comment">// 平台设备的初始化函数</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">resource</span> *<span class="title">myresources</span>;</span></span><br><span class="line"><span class="type">static</span> <span class="type">int</span> <span class="title function_">my_platform_probe</span><span class="params">(<span class="keyword">struct</span> platform_device *pdev)</span></span><br><span class="line">&#123;</span><br><span class="line">    printk(KERN_INFO <span class="string">&quot;my_platform_probe: Probing platform device\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 获取平台设备的资源</span></span><br><span class="line">    myresources = platform_get_resource(pdev, IORESOURCE_MEM, <span class="number">0</span>);</span><br><span class="line">    <span class="keyword">if</span> (myresources == <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="comment">// 如果获取资源失败，打印value_compatible的值</span></span><br><span class="line">        printk(<span class="string">&quot;platform_get_resource is error\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line">printk(<span class="string">&quot;reg valus is %llx\n&quot;</span> , myresources-&gt;start); </span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 平台设备的移除函数</span></span><br><span class="line"><span class="type">static</span> <span class="type">int</span> <span class="title function_">my_platform_remove</span><span class="params">(<span class="keyword">struct</span> platform_device *pdev)</span></span><br><span class="line">&#123;</span><br><span class="line">    printk(KERN_INFO <span class="string">&quot;my_platform_remove: Removing platform device\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 清理设备特定的操作</span></span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="class"><span class="keyword">struct</span> <span class="title">of_device_id</span> <span class="title">of_match_table_id</span>[]  =</span> &#123;</span><br><span class="line">	&#123;.compatible=<span class="string">&quot;my devicetree&quot;</span>&#125;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义平台驱动结构体</span></span><br><span class="line"><span class="type">static</span> <span class="class"><span class="keyword">struct</span> <span class="title">platform_driver</span> <span class="title">my_platform_driver</span> =</span> &#123;</span><br><span class="line">    .probe = my_platform_probe,</span><br><span class="line">    .remove = my_platform_remove,</span><br><span class="line">    .driver = &#123;</span><br><span class="line">        .name = <span class="string">&quot;my_platform_device&quot;</span>,</span><br><span class="line">        .owner = THIS_MODULE,</span><br><span class="line">		.of_match_table =  of_match_table_id,</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 模块初始化函数</span></span><br><span class="line"><span class="type">static</span> <span class="type">int</span> __init <span class="title function_">my_platform_driver_init</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> ret;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 注册平台驱动</span></span><br><span class="line">    ret = platform_driver_register(&amp;my_platform_driver);</span><br><span class="line">    <span class="keyword">if</span> (ret) &#123;</span><br><span class="line">        printk(KERN_ERR <span class="string">&quot;Failed to register platform driver\n&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    printk(KERN_INFO <span class="string">&quot;my_platform_driver: Platform driver initialized\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 模块退出函数</span></span><br><span class="line"><span class="type">static</span> <span class="type">void</span> __exit <span class="title function_">my_platform_driver_exit</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 注销平台驱动</span></span><br><span class="line">    platform_driver_unregister(&amp;my_platform_driver);</span><br><span class="line"></span><br><span class="line">    printk(KERN_INFO <span class="string">&quot;my_platform_driver: Platform driver exited\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">module_init(my_platform_driver_init);</span><br><span class="line">module_exit(my_platform_driver_exit);</span><br><span class="line"></span><br><span class="line">MODULE_LICENSE(<span class="string">&quot;GPL&quot;</span>);</span><br><span class="line">MODULE_AUTHOR(<span class="string">&quot;topeet&quot;</span>);</span><br></pre></td></tr></table></figure>
+  <p>属性 <code>format</code> 用于指定函数参数的格式化字符串检查，以帮助编译器检测格式化字符串与实际参数之间的匹配错误。它的使用方法如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">__attribute__((format(archetype, string-index, first-to-check)))</span><br></pre></td></tr></table></figure>
 
-<p>编译成模块之后，放到开发板上进行加载，打印信息如下所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309062025476.jpeg" alt="img"> </p>
-<p>可以看到使用platform_get_resource函数获取reg资源的函数失败了，在下一个小节中将分析获取资源失败的原因。</p>
-<h3 id="68-1-2-分析获取资源失败"><a href="#68-1-2-分析获取资源失败" class="headerlink" title="68.1.2 分析获取资源失败"></a>68.1.2 分析获取资源失败</h3><p>platform_get_resource定义在内核源码目录下的”&#x2F;drivers&#x2F;base&#x2F;platform.c”目录下，具体内容如下所示：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> resource *<span class="title function_">platform_get_resource</span><span class="params">(<span class="keyword">struct</span> platform_device *dev,</span></span><br><span class="line"><span class="params">				       <span class="type">unsigned</span> <span class="type">int</span> type, <span class="type">unsigned</span> <span class="type">int</span> num)</span></span><br><span class="line">&#123;</span><br><span class="line">	u32 i;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; dev-&gt;num_resources; i++) &#123;</span><br><span class="line">		<span class="class"><span class="keyword">struct</span> <span class="title">resource</span> *<span class="title">r</span> =</span> &amp;dev-&gt;resource[i];</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (type == resource_type(r) &amp;&amp; num-- == <span class="number">0</span>)</span><br><span class="line">			<span class="keyword">return</span> r;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其中：</p>
+<ul>
+<li><code>archetype</code> 是一个字符串常量，用于指定格式化字符串的类型。常见的类型有 <code>&quot;printf&quot;</code> 和 <code>&quot;scanf&quot;</code>，分别用于格式化输出和格式化输入。</li>
+<li><code>string-index</code> 是一个整数常量，表示格式化字符串在函数参数列表中的索引。索引从 1 开始，0 表示函数本身。</li>
+<li><code>first-to-check</code> 是一个整数常量，表示从参数列表的第几个参数开始进行检查。一般情况下，这个值与 <code>string-index</code> 相同。</li>
+</ul>
+<p>例如，以下示例展示了如何使用 <code>format</code> 属性：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">__attribute__((format(printf, 1, 2)))</span><br><span class="line">void LoG(const char *fmt, ...) &#123;</span><br><span class="line">    // 函数体</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>该函数返回NULL符合第一小节中的情况，返回NULL的情况有两种可能性，一种是没进入上面的for循环直接返回了NULL，另外一种是进入了for循环，但是类型匹配不正确，跳出for循环之后再返回NULL。这里的类型一定是匹配的，所以我们就来寻找为什么没有进入for循环，这里只有一种可能，也就是dev-&gt;num_resources为0。</p>
-<p>所以现在的目标来到了寻找dev-&gt;num_resources是在哪里进行的赋值，前面已经讲解过了由设备树转换为platform的过程，而且在系统启动后，在对应目录下也有了相应的节点： <img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309062025423.png"></p>
-<p>​	证明转换是没问题的，所以继续寻找中间转换过程中有关资源数量的相关函数，定位到了of_platform_device_create_pdata函数，该函数定义在内核源码目录下的“drivers&#x2F;of&#x2F;platform.c”文件中，具体内容如下所示：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">static</span> <span class="keyword">struct</span> platform_device *<span class="title function_">of_platform_device_create_pdata</span><span class="params">(</span></span><br><span class="line"><span class="params">					<span class="keyword">struct</span> device_node *np,</span></span><br><span class="line"><span class="params">					<span class="type">const</span> <span class="type">char</span> *bus_id,</span></span><br><span class="line"><span class="params">					<span class="type">void</span> *platform_data,</span></span><br><span class="line"><span class="params">					<span class="keyword">struct</span> device *parent)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">platform_device</span> *<span class="title">dev</span>;</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">/* 检查设备节点是否可用或已填充 */</span></span><br><span class="line">	<span class="keyword">if</span> (!of_device_is_available(np) ||</span><br><span class="line">	    of_node_test_and_set_flag(np, OF_POPULATED))</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* 分配平台设备结构体 */</span></span><br><span class="line">	dev = of_device_alloc(np, bus_id, parent);</span><br><span class="line">	<span class="keyword">if</span> (!dev)</span><br><span class="line">		<span class="keyword">goto</span> err_clear_flag;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* 设置平台设备的一些属性 */</span></span><br><span class="line">	dev-&gt;dev.coherent_dma_mask = DMA_BIT_MASK(<span class="number">32</span>);</span><br><span class="line">	<span class="keyword">if</span> (!dev-&gt;dev.dma_mask)</span><br><span class="line">		dev-&gt;dev.dma_mask = &amp;dev-&gt;dev.coherent_dma_mask;</span><br><span class="line">	dev-&gt;dev.bus = &amp;platform_bus_type;</span><br><span class="line">	dev-&gt;dev.platform_data = platform_data;</span><br><span class="line">	of_msi_configure(&amp;dev-&gt;dev, dev-&gt;dev.of_node);</span><br><span class="line">	of_reserved_mem_device_init_by_idx(&amp;dev-&gt;dev, dev-&gt;dev.of_node, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* 将平台设备添加到设备模型中 */</span></span><br><span class="line">	<span class="keyword">if</span> (of_device_add(dev) != <span class="number">0</span>) &#123;</span><br><span class="line">		platform_device_put(dev);</span><br><span class="line">		<span class="keyword">goto</span> err_clear_flag;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> dev;</span><br><span class="line"></span><br><span class="line">err_clear_flag:</span><br><span class="line">	<span class="comment">/* 清除设备节点的已填充标志 */</span></span><br><span class="line">	of_node_clear_flag(np, OF_POPULATED);</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">NULL</span>;</span><br></pre></td></tr></table></figure>
-
-<p>​	第15行：函数调用 of_device_alloc 分配一个平台设备结构体，并将设备节点指针、设备标识符和父设备指针传递给它，正是该函数决定的resource.num,然后找到该函数的定义，如下所示：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> platform_device *<span class="title function_">of_device_alloc</span><span class="params">(<span class="keyword">struct</span> device_node *np,</span></span><br><span class="line"><span class="params">				  <span class="type">const</span> <span class="type">char</span> *bus_id,</span></span><br><span class="line"><span class="params">				  <span class="keyword">struct</span> device *parent)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">platform_device</span> *<span class="title">dev</span>;</span></span><br><span class="line">	<span class="type">int</span> rc, i, num_reg = <span class="number">0</span>, num_irq;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">resource</span> *<span class="title">res</span>, <span class="title">temp_res</span>;</span></span><br><span class="line"></span><br><span class="line">	dev = platform_device_alloc(<span class="string">&quot;&quot;</span>, PLATFORM_DEVID_NONE);</span><br><span class="line">	<span class="keyword">if</span> (!dev)</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* count the io and irq resources */</span></span><br><span class="line">	<span class="keyword">while</span> (of_address_to_resource(np, num_reg, &amp;temp_res) == <span class="number">0</span>)</span><br><span class="line">		num_reg++;</span><br><span class="line">	num_irq = of_irq_count(np);</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* Populate the resource table */</span></span><br><span class="line">	<span class="keyword">if</span> (num_irq || num_reg) &#123;</span><br><span class="line">		res = kcalloc(num_irq + num_reg, <span class="keyword">sizeof</span>(*res), GFP_KERNEL);</span><br><span class="line">		<span class="keyword">if</span> (!res) &#123;</span><br><span class="line">			platform_device_put(dev);</span><br><span class="line">			<span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		dev-&gt;num_resources = num_reg + num_irq;</span><br><span class="line">		dev-&gt;resource = res;</span><br><span class="line">		<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; num_reg; i++, res++) &#123;</span><br><span class="line">			rc = of_address_to_resource(np, i, res);</span><br><span class="line">			WARN_ON(rc);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (of_irq_to_resource_table(np, res, num_irq) != num_irq)</span><br><span class="line">			pr_debug(<span class="string">&quot;not all legacy IRQ resources mapped for %pOFn\n&quot;</span>,</span><br><span class="line">				 np);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	dev-&gt;dev.of_node = of_node_get(np);</span><br><span class="line">	dev-&gt;dev.fwnode = &amp;np-&gt;fwnode;</span><br><span class="line">	dev-&gt;dev.parent = parent ? : &amp;platform_bus;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (bus_id)</span><br><span class="line">		dev_set_name(&amp;dev-&gt;dev, <span class="string">&quot;%s&quot;</span>, bus_id);</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		of_device_make_bus_id(&amp;dev-&gt;dev);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> dev;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在第26行出现了for循环的dev-&gt;num_resources &#x3D; num_reg + num_irq;reg的number和irq的number，由于在设备树中并没有添加中断相关的属性num_irq为0，那这里的num_reg是哪里确定的呢。</p>
-<p>我们向上找到14、15行，具体内容如下所示：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">while (of_address_to_resource(np, num_reg, &amp;temp_res) == 0)</span><br><span class="line">	num_reg++;</span><br></pre></td></tr></table></figure>
-
-<p>然后跳转到while循环中的of_address_to_resource函数，该函数定义在内核源码目录的drivers&#x2F;of&#x2F;address.c文件中，具体内容如下所示：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">of_address_to_resource</span><span class="params">(<span class="keyword">struct</span> device_node *dev, <span class="type">int</span> index,</span></span><br><span class="line"><span class="params">			   <span class="keyword">struct</span> resource *r)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">const</span> __be32	*addrp;</span><br><span class="line">	u64		size;</span><br><span class="line">	<span class="type">unsigned</span> <span class="type">int</span>	flags;</span><br><span class="line">	<span class="type">const</span> <span class="type">char</span>	*name = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">	addrp = of_get_address(dev, index, &amp;size, &amp;flags);</span><br><span class="line">	<span class="keyword">if</span> (addrp == <span class="literal">NULL</span>)</span><br><span class="line">		<span class="keyword">return</span> -EINVAL;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* Get optional &quot;reg-names&quot; property to add a name to a resource */</span></span><br><span class="line">	of_property_read_string_index(dev, <span class="string">&quot;reg-names&quot;</span>,	index, &amp;name);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> __of_address_to_resource(dev, addrp, size, flags, name, r);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>​	第9行，获取reg属性的地址、大小和类型，在设备树中reg属性已经存在了，所以这里会正确返回。</p>
-<p>第14行，读取reg-names属性，由于设备树中没有定义这个属性，所以该函数不会有影响。</p>
-<p>最后具有决定性作用的函数就是返回的__of_address_to_resource函数了，跳转到该函数的定义如下所示：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">static</span> <span class="type">int</span> __of_address_to_resource(<span class="keyword">struct</span> device_node *dev,</span><br><span class="line">		<span class="type">const</span> __be32 *addrp, u64 size, <span class="type">unsigned</span> <span class="type">int</span> flags,</span><br><span class="line">		<span class="type">const</span> <span class="type">char</span> *name, <span class="keyword">struct</span> resource *r)</span><br><span class="line">&#123;</span><br><span class="line">	u64 taddr;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (flags &amp; IORESOURCE_MEM)</span><br><span class="line">		taddr = of_translate_address(dev, addrp);</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span> (flags &amp; IORESOURCE_IO)</span><br><span class="line">		taddr = of_translate_ioport(dev, addrp, size);</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		<span class="keyword">return</span> -EINVAL;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (taddr == OF_BAD_ADDR)</span><br><span class="line">		<span class="keyword">return</span> -EINVAL;</span><br><span class="line">	<span class="built_in">memset</span>(r, <span class="number">0</span>, <span class="keyword">sizeof</span>(<span class="keyword">struct</span> resource));</span><br><span class="line"></span><br><span class="line">	r-&gt;start = taddr;</span><br><span class="line">	r-&gt;end = taddr + size - <span class="number">1</span>;</span><br><span class="line">	r-&gt;flags = flags;</span><br><span class="line">	r-&gt;name = name ? name : dev-&gt;full_name;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>​	reg属性的flags为IORESOURCE_MEM，所以又会执行第9行的of_translate_address函数，跳转到该函数，该函数的定义如下所示：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">u64 <span class="title function_">of_translate_address</span><span class="params">(<span class="keyword">struct</span> device_node *dev, <span class="type">const</span> __be32 *in_addr)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">device_node</span> *<span class="title">host</span>;</span></span><br><span class="line">	u64 ret;</span><br><span class="line"></span><br><span class="line">	ret = __of_translate_address(dev, in_addr, <span class="string">&quot;ranges&quot;</span>, &amp;host);</span><br><span class="line">	<span class="keyword">if</span> (host) &#123;</span><br><span class="line">		of_node_put(host);</span><br><span class="line">		<span class="keyword">return</span> OF_BAD_ADDR;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>​	该函数的重点在第6行，上述函数实际上是__of_translate_address函数的封装，其中传入的第三个参数“ranges”是我们要关注的重点，继续跳转到该函数的定义，具体内容如下所示：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">static</span> u64 __of_translate_address(<span class="keyword">struct</span> device_node *dev,</span><br><span class="line">				  <span class="type">const</span> __be32 *in_addr, <span class="type">const</span> <span class="type">char</span> *rprop,</span><br><span class="line">				  <span class="keyword">struct</span> device_node **host)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">device_node</span> *<span class="title">parent</span> =</span> <span class="literal">NULL</span>;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">of_bus</span> *<span class="title">bus</span>, *<span class="title">pbus</span>;</span></span><br><span class="line">	__be32 addr[OF_MAX_ADDR_CELLS];</span><br><span class="line">	<span class="type">int</span> na, ns, pna, pns;</span><br><span class="line">	u64 result = OF_BAD_ADDR;</span><br><span class="line"></span><br><span class="line">	pr_debug(<span class="string">&quot;** translation for device %pOF **\n&quot;</span>, dev);</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* Increase refcount at current level */</span></span><br><span class="line">	of_node_get(dev);</span><br><span class="line"></span><br><span class="line">	*host = <span class="literal">NULL</span>;</span><br><span class="line">	<span class="comment">/* Get parent &amp; match bus type */</span></span><br><span class="line">	parent = of_get_parent(dev);</span><br><span class="line">	<span class="keyword">if</span> (parent == <span class="literal">NULL</span>)</span><br><span class="line">		<span class="keyword">goto</span> bail;</span><br><span class="line">	bus = of_match_bus(parent);</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* Count address cells &amp; copy address locally */</span></span><br><span class="line">	bus-&gt;count_cells(dev, &amp;na, &amp;ns);</span><br><span class="line">	<span class="keyword">if</span> (!OF_CHECK_COUNTS(na, ns)) &#123;</span><br><span class="line">		pr_debug(<span class="string">&quot;Bad cell count for %pOF\n&quot;</span>, dev);</span><br><span class="line">		<span class="keyword">goto</span> bail;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">memcpy</span>(addr, in_addr, na * <span class="number">4</span>);</span><br><span class="line"></span><br><span class="line">	pr_debug(<span class="string">&quot;bus is %s (na=%d, ns=%d) on %pOF\n&quot;</span>,</span><br><span class="line">	    bus-&gt;name, na, ns, parent);</span><br><span class="line">	of_dump_addr(<span class="string">&quot;translating address:&quot;</span>, addr, na);</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* Translate */</span></span><br><span class="line">	<span class="keyword">for</span> (;;) &#123;</span><br><span class="line">		<span class="class"><span class="keyword">struct</span> <span class="title">logic_pio_hwaddr</span> *<span class="title">iorange</span>;</span></span><br><span class="line"></span><br><span class="line">		<span class="comment">/* Switch to parent bus */</span></span><br><span class="line">		of_node_put(dev);</span><br><span class="line">		dev = parent;</span><br><span class="line">		parent = of_get_parent(dev);</span><br><span class="line"></span><br><span class="line">		<span class="comment">/* If root, we have finished */</span></span><br><span class="line">		<span class="keyword">if</span> (parent == <span class="literal">NULL</span>) &#123;</span><br><span class="line">			pr_debug(<span class="string">&quot;reached root node\n&quot;</span>);</span><br><span class="line">			result = of_read_number(addr, na);</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">/*</span></span><br><span class="line"><span class="comment">		 * For indirectIO device which has no ranges property, get</span></span><br><span class="line"><span class="comment">		 * the address from reg directly.</span></span><br><span class="line"><span class="comment">		 */</span></span><br><span class="line">		iorange = find_io_range_by_fwnode(&amp;dev-&gt;fwnode);</span><br><span class="line">		<span class="keyword">if</span> (iorange &amp;&amp; (iorange-&gt;flags != LOGIC_PIO_CPU_MMIO)) &#123;</span><br><span class="line">			result = of_read_number(addr + <span class="number">1</span>, na - <span class="number">1</span>);</span><br><span class="line">			pr_debug(<span class="string">&quot;indirectIO matched(%pOF) 0x%llx\n&quot;</span>,</span><br><span class="line">				 dev, result);</span><br><span class="line">			*host = of_node_get(dev);</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">/* Get new parent bus and counts */</span></span><br><span class="line">		pbus = of_match_bus(parent);</span><br><span class="line">		pbus-&gt;count_cells(dev, &amp;pna, &amp;pns);</span><br><span class="line">		<span class="keyword">if</span> (!OF_CHECK_COUNTS(pna, pns)) &#123;</span><br><span class="line">			pr_err(<span class="string">&quot;Bad cell count for %pOF\n&quot;</span>, dev);</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		pr_debug(<span class="string">&quot;parent bus is %s (na=%d, ns=%d) on %pOF\n&quot;</span>,</span><br><span class="line">		    pbus-&gt;name, pna, pns, parent);</span><br><span class="line"></span><br><span class="line">		<span class="comment">/* Apply bus translation */</span></span><br><span class="line">		<span class="keyword">if</span> (of_translate_one(dev, bus, pbus, addr, na, ns, pna, rprop))</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">		<span class="comment">/* Complete the move up one level */</span></span><br><span class="line">		na = pna;</span><br><span class="line">		ns = pns;</span><br><span class="line">		bus = pbus;</span><br><span class="line"></span><br><span class="line">		of_dump_addr(<span class="string">&quot;one level translation:&quot;</span>, addr, na);</span><br><span class="line">	&#125;</span><br><span class="line"> bail:</span><br><span class="line">	of_node_put(parent);</span><br><span class="line">	of_node_put(dev);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>​	第18行，获取父节点和匹配的总线类型</p>
-<p>第24行，获取address-cell和size-cells</p>
-<p>然后是一个for循环，在76行使用of_translate_one函数进行转换，其中rprop参数表示要转换的资源属性，该参数的值为传入的“ranges”，然后我们继续跳转到该函数，该函数的具体内容如下所示：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">static</span> <span class="type">int</span> <span class="title function_">of_translate_one</span><span class="params">(<span class="keyword">struct</span> device_node *parent, <span class="keyword">struct</span> of_bus *bus,</span></span><br><span class="line"><span class="params">			    <span class="keyword">struct</span> of_bus *pbus, __be32 *addr,</span></span><br><span class="line"><span class="params">			    <span class="type">int</span> na, <span class="type">int</span> ns, <span class="type">int</span> pna, <span class="type">const</span> <span class="type">char</span> *rprop)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">const</span> __be32 *ranges;</span><br><span class="line">	<span class="type">unsigned</span> <span class="type">int</span> rlen;</span><br><span class="line">	<span class="type">int</span> rone;</span><br><span class="line">	u64 offset = OF_BAD_ADDR;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * Normally, an absence of a &quot;ranges&quot; property means we are</span></span><br><span class="line"><span class="comment">	 * crossing a non-translatable boundary, and thus the addresses</span></span><br><span class="line"><span class="comment">	 * below the current cannot be converted to CPU physical ones.</span></span><br><span class="line"><span class="comment">	 * Unfortunately, while this is very clear in the spec, it&#x27;s not</span></span><br><span class="line"><span class="comment">	 * what Apple understood, and they do have things like /uni-n or</span></span><br><span class="line"><span class="comment">	 * /ht nodes with no &quot;ranges&quot; property and a lot of perfectly</span></span><br><span class="line"><span class="comment">	 * useable mapped devices below them. Thus we treat the absence of</span></span><br><span class="line"><span class="comment">	 * &quot;ranges&quot; as equivalent to an empty &quot;ranges&quot; property which means</span></span><br><span class="line"><span class="comment">	 * a 1:1 translation at that level. It&#x27;s up to the caller not to try</span></span><br><span class="line"><span class="comment">	 * to translate addresses that aren&#x27;t supposed to be translated in</span></span><br><span class="line"><span class="comment">	 * the first place. --BenH.</span></span><br><span class="line"><span class="comment">	 *</span></span><br><span class="line"><span class="comment">	 * As far as we know, this damage only exists on Apple machines, so</span></span><br><span class="line"><span class="comment">	 * This code is only enabled on powerpc. --gcl</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	ranges = of_get_property(parent, rprop, &amp;rlen);</span><br><span class="line">	<span class="keyword">if</span> (ranges == <span class="literal">NULL</span> &amp;&amp; !of_empty_ranges_quirk(parent)) &#123;</span><br><span class="line">		pr_debug(<span class="string">&quot;no ranges; cannot translate\n&quot;</span>);</span><br><span class="line">		<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> (ranges == <span class="literal">NULL</span> || rlen == <span class="number">0</span>) &#123;</span><br><span class="line">		offset = of_read_number(addr, na);</span><br><span class="line">		<span class="built_in">memset</span>(addr, <span class="number">0</span>, pna * <span class="number">4</span>);</span><br><span class="line">		pr_debug(<span class="string">&quot;empty ranges; 1:1 translation\n&quot;</span>);</span><br><span class="line">		<span class="keyword">goto</span> finish;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	pr_debug(<span class="string">&quot;walking ranges...\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* Now walk through the ranges */</span></span><br><span class="line">	rlen /= <span class="number">4</span>;</span><br><span class="line">	rone = na + pna + ns;</span><br><span class="line">	<span class="keyword">for</span> (; rlen &gt;= rone; rlen -= rone, ranges += rone) &#123;</span><br><span class="line">		offset = bus-&gt;<span class="built_in">map</span>(addr, ranges, na, ns, pna);</span><br><span class="line">		<span class="keyword">if</span> (offset != OF_BAD_ADDR)</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> (offset == OF_BAD_ADDR) &#123;</span><br><span class="line">		pr_debug(<span class="string">&quot;not found !\n&quot;</span>);</span><br><span class="line">		<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">memcpy</span>(addr, ranges + na, <span class="number">4</span> * pna);</span><br><span class="line"></span><br><span class="line"> finish:</span><br><span class="line">	of_dump_addr(<span class="string">&quot;parent translation for:&quot;</span>, addr, pna);</span><br><span class="line">	pr_debug(<span class="string">&quot;with offset: %llx\n&quot;</span>, (<span class="type">unsigned</span> <span class="type">long</span> <span class="type">long</span>)offset);</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* Translate it into parent bus space */</span></span><br><span class="line">	<span class="keyword">return</span> pbus-&gt;translate(addr, offset, pna);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在该函数的第26行使用of_get_property函数获取“ranges”属性，但由于在我们添加的设备树节点中并没有该属性，所以这里的ranges值就为NULL，第27行的条件判断成立，也就会返回1。</p>
-<p>接下来再根据这个返回值继续分析上级函数:</p>
-<p>of_translate_one函数返回1之后，上一级的_of_translate_address的返回值就为OF BAD ADDR，再上一级的of_translate_address返回值也是OF BAD <em>ADDR，继续向上查找_of_address_to_resource函数会返回EINVAL，of address</em> to resource 返回EINVAL，所以num_reg 为0;到这里关于为什么platform_get_resource函数获取资源失败的问题就找到了，只是因为在设备树中并没有这个名为ranges这个属性，所以只需要对设备树进行ranges属性的添加即可，要修改的设备树为arch&#x2F;arm64&#x2F;boot&#x2F;dts&#x2F;rockchip&#x2F;rk3568-evb1-ddr4-v10-linux.dts，修改完成如下所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309062025548.jpeg" alt="img"> </p>
-<p>然后重新编译内核，将编译生成的boot.img烧写进开发板之后重新加载上面编写的驱动程序，可以看到之前获取失败的打印就消失了，而且成功打印出了reg属性的第一个值，如下图所示：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309062025507.jpeg" alt="img"></p>
-<p>虽然这里的问题解决了，但引起的思考并没有结束，那我们在这里添加的ranges属性的作用是啥呢，带着疑问，开始下一小节的学习吧。</p>
-<h1 id="68-2-ranges-属性"><a href="#68-2-ranges-属性" class="headerlink" title="68.2 ranges 属性"></a>68.2 ranges 属性</h1><h3 id="68-2-1-ranges属性介绍"><a href="#68-2-1-ranges属性介绍" class="headerlink" title="68.2.1 ranges属性介绍"></a>68.2.1 ranges属性介绍</h3><p>ranges 属性是一种用于描述设备之间地址映射关系的属性。它在设备树（Device Tree）中使用，用于描述子设备地址空间如何映射到父设备地址空间。设备树是一种硬件描述语言，用于描述嵌入式系统中的硬件组件和它们之间的连接关系。</p>
-<p>设备树中的每个设备节点都可以具有 ranges 属性，其中包含了地址映射的信息。下面是一个常见的格式：</p>
-<p>ranges &#x3D; <child-bus-address parent-bus-address length>;</p>
-<p>或者</p>
-<p>ranges;</p>
-<p>然后对上述格式中每个部分进行解释：</p>
-<p>child-bus-address：子设备地址空间的起始地址。它指定了子设备在父设备地址空间中的位置。具体的字长由 ranges 所在节点的 #address-cells 属性决定。</p>
-<p>parent-bus-address：父设备地址空间的起始地址。它指定了父设备中用于映射子设备的地址范围。具体的字长由 ranges 的父节点的 #address-cells 属性决定。</p>
-<p>length：映射的大小。它指定了子设备地址空间在父设备地址空间中的长度。具体的字长由 ranges 的父节点的 #size-cells 属性决定。</p>
-<p>当 ranges 属性的值为空时，表示子设备地址空间和父设备地址空间具有完全相同的映射，即1:1映射。这通常用于描述内存区域，其中子设备和父设备具有相同的地址范围。</p>
-<p>当 ranges 属性的值不为空时，按照指定的映射规则将子设备地址空间映射到父设备地址空间。具体的映射规则取决于设备树的结构和设备的特定要求。</p>
-<p>然后以下面的设备树为例进行ranges属性的讲解，设备树内容如下所示：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">/dts-v1/;</span><br><span class="line"></span><br><span class="line">/ &#123;</span><br><span class="line">  compatible = <span class="string">&quot;acme,coyotes-revenge&quot;</span>;</span><br><span class="line">  <span class="meta">#address-cells = <span class="string">&lt;1&gt;</span>;</span></span><br><span class="line">  <span class="meta">#size-cells = <span class="string">&lt;1&gt;</span>;</span></span><br><span class="line">  ....</span><br><span class="line">  external-bus &#123;</span><br><span class="line">    <span class="meta">#address-cells = <span class="string">&lt;2&gt;</span>;</span></span><br><span class="line">    <span class="meta">#size-cells = <span class="string">&lt;1&gt;</span>;</span></span><br><span class="line">    ranges = &lt;<span class="number">0</span> <span class="number">0</span> <span class="number">0x10100000</span> <span class="number">0x10000</span></span><br><span class="line">              <span class="number">1</span> <span class="number">0</span> <span class="number">0x10160000</span> <span class="number">0x10000</span></span><br><span class="line">              <span class="number">2</span> <span class="number">0</span> <span class="number">0x30000000</span> <span class="number">0x30000000</span>&gt;;</span><br><span class="line">    <span class="comment">// Chipselect 1, Ethernet</span></span><br><span class="line">    <span class="comment">// Chipselect 2, i2c controller</span></span><br><span class="line">    <span class="comment">// Chipselect 3, NOR Flash</span></span><br><span class="line">.......</span><br></pre></td></tr></table></figure>
-
-<p>这里以ranges的第一个属性值为例进行具体解释如下：</p>
-<p>在 external-bus 节点中#address-cells 属性值为2表示child-bus-address由两个值表示，也就是0和0，父节点的 #address-cells 属性值和#size-cells 属性值为1，表示parent-bus-address和length都由一个表示，也就是0x10100000和0x10000，该ranges值表示将子地址空间（0x0-0xFFFF）映射到父地址空间0x10100000 - 0x1010FFFF，这里的例子为带参数ranges属性映射，不带参数的ranges属性为1：1映射，较为简单，这里不再进行举例。</p>
-<p>在嵌入式系统中，不同的设备可能连接到相同的总线或总线控制器上，它们需要在物理地址空间中进行正确的映射，以便进行数据交换和通信。例如，一个设备可能通过总线连接到主处理器或其他设备，而这些设备的物理地址范围可能不同。ranges 属性就是用来描述这种地址映射关系的。</p>
-<h3 id="68-2-2设备分类"><a href="#68-2-2设备分类" class="headerlink" title="68.2.2设备分类"></a>68.2.2设备分类</h3><p>根据上面讲解的映射关系可以将设备分为两类：内存映射型设备和非内存映射型设备。</p>
-<p><strong>内存映射型设备：</strong><br>    内存映射型设备是指可以通过内存地址进行直接访问的设备。这类设备在物理地址空间中的一部分被映射到系统的内存地址空间中，使得CPU可以通过读写内存地址的方式与设备进行通信和控制。</p>
-<p>特点：</p>
-<p>（1）直接访问：内存映射型设备可以被CPU直接访问，类似于访问内存中的数据。这种直接访问方式提供了高速的数据传输和低延迟的设备操作。</p>
-<p>（2）内存映射：设备的寄存器、缓冲区等资源被映射到系统的内存地址空间中，使用读写内存的方式与设备进行通信。</p>
-<p>（3）读写操作：CPU可以通过读取和写入映射的内存地址来与设备进行数据交换和控制操作。</p>
-<p>在设备树中，内存映射型设备的设备树举例如下所示：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">/dts-v1/;</span><br><span class="line">/ &#123;</span><br><span class="line">    <span class="meta">#address-cells = <span class="string">&lt;1&gt;</span>;</span></span><br><span class="line">    <span class="meta">#size-cells = <span class="string">&lt;1&gt;</span>;</span></span><br><span class="line">    ranges;</span><br><span class="line"></span><br><span class="line">    serial@<span class="number">101f</span>0000 &#123;</span><br><span class="line">        compatible = <span class="string">&quot;arm,pl011&quot;</span>;</span><br><span class="line">        reg = &lt;<span class="number">0x101f0000</span> <span class="number">0x1000</span>&gt;;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    gpio@<span class="number">101f</span>3000 &#123;</span><br><span class="line">        compatible = <span class="string">&quot;arm,pl061&quot;</span>;</span><br><span class="line">        reg = &lt;<span class="number">0x101f3000</span> <span class="number">0x1000</span></span><br><span class="line">                <span class="number">0x101f4000</span> <span class="number">0x10</span>&gt;;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    spi@<span class="number">10115000</span> &#123;</span><br><span class="line">        compatible = <span class="string">&quot;arm,pl022&quot;</span>;</span><br><span class="line">        reg = &lt;<span class="number">0x10115000</span> <span class="number">0x1000</span>&gt;;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>第5行的ranges属性表示该设备树中会进行1：1的地址范围映射。</p>
-<p>非内存映射型设备：<br>    非内存映射型设备是指不能通过内存地址直接访问的设备。这类设备可能采用其他方式与CPU进行通信，例如通过I&#x2F;O端口、专用总线或特定的通信协议。</p>
-<p>特点：</p>
-<p>（1）非内存访问：非内存映射型设备不能像内存映射型设备那样直接通过内存地址进行访问。它们可能使用独立的I&#x2F;O端口或专用总线进行通信。</p>
-<p>（2）特定接口：设备通常使用特定的接口和协议与CPU进行通信和控制，例如SPI、I2C、UART等。</p>
-<p>（3）驱动程序：非内存映射型设备通常需要特定的设备驱动程序来实现与CPU的通信和控制。</p>
-<p>在设备树中，非内存映射型设备的设备树举例如下所示：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">/dts-v1/;</span><br><span class="line"></span><br><span class="line">/ &#123;</span><br><span class="line">  compatible = <span class="string">&quot;acme,coyotes-revenge&quot;</span>;</span><br><span class="line">  <span class="meta">#address-cells = <span class="string">&lt;1&gt;</span>;</span></span><br><span class="line">  <span class="meta">#size-cells = <span class="string">&lt;1&gt;</span>;</span></span><br><span class="line">  ....</span><br><span class="line">  external-bus &#123;</span><br><span class="line">    <span class="meta">#address-cells = <span class="string">&lt;2&gt;</span>;</span></span><br><span class="line">    <span class="meta">#size-cells = <span class="string">&lt;1&gt;</span>;</span></span><br><span class="line">    ranges = &lt;<span class="number">0</span> <span class="number">0</span> <span class="number">0x10100000</span> <span class="number">0x10000</span></span><br><span class="line">              <span class="number">1</span> <span class="number">0</span> <span class="number">0x10160000</span> <span class="number">0x10000</span></span><br><span class="line">              <span class="number">2</span> <span class="number">0</span> <span class="number">0x30000000</span> <span class="number">0x30000000</span>&gt;;</span><br><span class="line">    <span class="comment">// Chipselect 1, Ethernet</span></span><br><span class="line">    <span class="comment">// Chipselect 2, i2c controller</span></span><br><span class="line">    <span class="comment">// Chipselect 3, NOR Flash</span></span><br><span class="line"></span><br><span class="line">    ethernet@<span class="number">0</span>,<span class="number">0</span> &#123;</span><br><span class="line">      compatible = <span class="string">&quot;smc,smc91c111&quot;</span>;</span><br><span class="line">      reg = &lt;<span class="number">0</span> <span class="number">0</span> <span class="number">0x1000</span>&gt;;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    i2c@<span class="number">1</span>,<span class="number">0</span> &#123;</span><br><span class="line">      compatible = <span class="string">&quot;acme,a1234-i2c-bus&quot;</span>;</span><br><span class="line">      <span class="meta">#address-cells = <span class="string">&lt;1&gt;</span>;</span></span><br><span class="line">      <span class="meta">#size-cells = <span class="string">&lt;0&gt;</span>;</span></span><br><span class="line">      reg = &lt;<span class="number">1</span> <span class="number">0</span> <span class="number">0x1000</span>&gt;;</span><br><span class="line"></span><br><span class="line">      rtc@<span class="number">58</span> &#123;</span><br><span class="line">        compatible = <span class="string">&quot;maxim,ds1338&quot;</span>;</span><br><span class="line">        reg = &lt;<span class="number">0x58</span>&gt;;</span><br><span class="line">      &#125;;</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125; ;</span><br><span class="line">&#125;; </span><br></pre></td></tr></table></figure>
-
-<h3 id="68-2-3-映射地址计算"><a href="#68-2-3-映射地址计算" class="headerlink" title="68.2.3 映射地址计算"></a>68.2.3 映射地址计算</h3><p>接下来以上面列举的非内存映射型设备的设备树中的ethernet@0节点为例，计算该网卡设备的映射地址。</p>
-<p>首先，找到ethernet@0所在的节点，并查看其reg属性。在给定的设备树片段中，ethernet@0的reg属性为&lt;0 0 0x1000&gt;。在根节点中，#address-cells的值为1，表示地址由一个单元格组成。</p>
-<p>接下来，根据ranges属性进行地址映射计算。在external-bus节点的ranges属性中，有三个映射条目：</p>
-<p>第一个映射条目为“0 0 0x10100000 0x10000”，表示外部总线的地址范围为0x10100000到0x1010FFFF。该映射条目的第一个值为0，表示与external-bus节点的第一个子节点（ethernet@0,0）相关联。</p>
-<p>第二个映射条目：“1 0 0x10160000 0x10000”，表示外部总线的地址范围为0x10160000到0x1016FFFF。该映射条目的第一个值为1，表示与external-bus节点的第二个子节点（i2c@1,0）相关联。</p>
-<p>第三个映射条目：“2 0 0x30000000 0x30000000”，表示外部总线的地址范围为0x30000000到0x5FFFFFFF。该映射条目的第一个值为2，表示与external-bus节点的第三个子节点相关联。</p>
-<p>由于ethernet@0与external-bus的第一个子节点相关联，并且它的reg属性为&lt;0 0 0x1000&gt;，我们可以进行以下计算：</p>
-<p>ethernet@0的物理地址 &#x3D; 外部总线地址起始值 + ethernet@0的reg属性的第二个值<br>&#x3D; 0x10100000 + 0x1000<br>&#x3D; 0x10101000</p>
-<p>因此，ethernet@0的物理起始地址为0x10101000，又根据0x1000的地址范围可以确定ethernet@0的结束起始地址为0x10101FFF，至此，关于映射地址的计算就讲解完成了，大家可以根据同样的方法计算i2c@1的物理地址。</p>
+<p>在这个例子中，<code>format(printf, 1, 2)</code> 属性应用于 <code>LoG</code> 函数。它告诉编译器检查函数的第一个参数（格式化字符串）与后续变参参数的匹配情况，以确保格式化字符串中的占位符与实际参数的类型相符。</p>
+<p>这样，在调用 <code>LoG</code> 函数时，如果格式化字符串与实际参数不匹配，编译器会发出警告或错误信息，提醒开发者修正问题。</p>
+<p>需要注意的是，<code>format</code> 属性对于编译器来说是一种提示，不会强制执行检查。因此，开发者仍需注意确保格式化字符串与实际参数的正确匹配，以避免潜在的错误。</p>
  
       <!-- reward -->
       
@@ -1109,7 +595,7 @@
     
     <footer class="article-footer">
        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rk3568-%E9%A9%B1%E5%8A%A8/" rel="tag">rk3568 驱动</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gun%E6%89%A9%E5%B1%95%E8%AF%AD%E6%B3%95/" rel="tag">gun扩展语法</a></li></ul>
 
     </footer>
   </div>
@@ -1121,7 +607,7 @@
 
     
     <article
-  id="post-1-67-of操作函数实验-获取属性"
+  id="post-5-8-属性声明：aligned-packed"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -1132,8 +618,8 @@
     <header class="article-header">
        
 <h2 itemprop="name">
-  <a class="article-title" href="/2023/09/05/1-67-of%E6%93%8D%E4%BD%9C%E5%87%BD%E6%95%B0%E5%AE%9E%E9%AA%8C-%E8%8E%B7%E5%8F%96%E5%B1%9E%E6%80%A7/"
-    >1-67-of操作函数实验:获取属性</a> 
+  <a class="article-title" href="/2023/09/07/5-8-%E5%B1%9E%E6%80%A7%E5%A3%B0%E6%98%8E%EF%BC%9Aaligned-packed/"
+    >5.8 属性声明：aligned &amp; packed</a> 
 </h2>
  
 
@@ -1141,137 +627,28 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2023/09/05/1-67-of%E6%93%8D%E4%BD%9C%E5%87%BD%E6%95%B0%E5%AE%9E%E9%AA%8C-%E8%8E%B7%E5%8F%96%E5%B1%9E%E6%80%A7/" class="article-date">
-  <time datetime="2023-09-05T00:01:40.000Z" itemprop="datePublished">2023-09-05</time>
+      <a href="/2023/09/07/5-8-%E5%B1%9E%E6%80%A7%E5%A3%B0%E6%98%8E%EF%BC%9Aaligned-packed/" class="article-date">
+  <time datetime="2023-09-07T13:14:14.000Z" itemprop="datePublished">2023-09-07</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/rk3568-%E9%A9%B1%E5%8A%A8/">rk3568 驱动</a>
+    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
   </div>
    
     </div>
       
     <div class="article-entry" itemprop="articleBody">
        
-  <h1 id="第67章-of操作函数实验：获取属性"><a href="#第67章-of操作函数实验：获取属性" class="headerlink" title="第67章 of操作函数实验：获取属性"></a>第67章 of操作函数实验：获取属性</h1><h2 id="67-1-of操作：获取属性"><a href="#67-1-of操作：获取属性" class="headerlink" title="67.1 of操作：获取属性"></a>67.1 of操作：获取属性</h2><h3 id="67-1-1-of-find-property"><a href="#67-1-1-of-find-property" class="headerlink" title="67.1.1 of_find_property"></a>67.1.1 of_find_property</h3><p>of_find_property函数用于在设备树中查找节点 下具有指定名称的属性。如果找到了该属性，可以通过返回的属性结构体指针进行进一步的操作，比如获取属性值、属性长度等。</p>
-<p><strong>函数原型:</strong></p>
-<p>​	struct property *of_find_property(const struct device_node *np, const char *name, int *lenp)</p>
-<p><strong>头文件：</strong></p>
-<p>​	#include &lt;linux&#x2F;of.h&gt;</p>
-<p><strong>函数作用</strong>:</p>
-<p>​	该函数用于在节点 np 下查找指定名称 name 的属性。</p>
-<p><strong>函数参数</strong>:</p>
-<p>​	np: 要查找的节点。</p>
-<p>​	name: 要查找的属性的属性名。</p>
-<p>​	lenp: 一个指向整数的指针，用于接收属性值的字节数。</p>
-<p><strong>返回值</strong>:</p>
-<p>​	如果成功找到了指定名称的属性，则返回对应的属性结构体指针 struct property *；如果未找到，则返回 NULL。</p>
-<h3 id="67-1-2-of-property-count-elems-of-size"><a href="#67-1-2-of-property-count-elems-of-size" class="headerlink" title="67.1.2 of_property_count_elems_of_size"></a>67.1.2 of_property_count_elems_of_size</h3><p>该函数在设备树中的设备节点下查找指定名称的属性，并获取该属性中元素的数量。调用该函数可以用于获取设备树属性中某个属性的元素数量，比如一个字符串列表的元素数量或一个整数数组的元素数量等。 </p>
-<p><strong>函数原型:</strong></p>
-<p>​	int of_property_count_elems_of_size(const struct device_node *np, const char *propname, int elem_size)</p>
-<p><strong>头文件</strong>：</p>
-<p>\	#include &lt;linux&#x2F;of.h&gt;</p>
-<p><strong>函数作用</strong></p>
-<p>​	该函数用于获取属性中指定元素的数量。</p>
-<p><strong>函数参数</strong>:</p>
-<p>​	np: 设备节点。</p>
-<p>​	propname: 需要获取元素数量的属性名。</p>
-<p>​	elem_size: 单个元素的尺寸。</p>
-<p><strong>返回值</strong>:</p>
-<p>如果成功获取了指定属性中元素的数量，则返回该数量；如果未找到属性或属性中没有元素，则返回 0。</p>
-<h3 id="67-1-3-of-property-read-u32-index"><a href="#67-1-3-of-property-read-u32-index" class="headerlink" title="67.1.3 of_property_read_u32_index"></a>67.1.3 of_property_read_u32_index</h3><p>该函数在设备树中的设备节点下查找指定名称的属性，并获取该属性在给定索引位置处的 u32 类型的数据值。</p>
-<p>这个函数通常用于从设备树属性中读取特定索引位置的整数值。通过指定属性名和索引，可以获取属性中指定位置的具体数值。</p>
-<p><strong>函数原型</strong>:</p>
-<p>​	int of_property_read_u32_index(const struct device_node *np, const char *propname, u32 index, u32 *out_value)</p>
-<p><strong>头文件</strong>：</p>
-<p>\	#include &lt;linux&#x2F;of.h&gt;</p>
-<p><strong>函数作用</strong>:</p>
-<p>​	该函数用于从指定属性中获取指定索引位置的 u32 类型的数据值。</p>
-<p><strong>函数参数</strong>:</p>
-<p>​	np: 设备节点。</p>
-<p>​	propname: 要读取的属性名。</p>
-<p>​	index: 要读取的属性值在属性中的索引，索引从 0 开始。</p>
-<p>​	out_value: 用于存储读取到的值的指针。</p>
-<p><strong>返回值</strong>: </p>
-<p>​	如果成功读取到了指定属性指定索引位置的 u32 类型的数据值，则返回 0；如果未找到属性或读取失败，则返回相应的错误码。</p>
-<h3 id="67-1-4-of-property-read-u64-index"><a href="#67-1-4-of-property-read-u64-index" class="headerlink" title="67.1.4 of_property_read_u64_index"></a>67.1.4 of_property_read_u64_index</h3><p>该函数在设备树中的设备节点下查找指定名称的属性，并获取该属性在给定索引位置处的 u64 类型的数据值。</p>
-<p>这个函数通常用于从设备树属性中读取特定索引位置的 64 位整数值。通过指定属性名和索引，可以获取属性中指定位置的具体数值。</p>
-<p><strong>函数原型</strong>: </p>
-<p>​	static inline int of_property_read_u64_index(const struct device_node *np, const char *propname, u32 index, u64 *out_value)</p>
-<p><strong>头文件</strong>：</p>
-<p>\	#include &lt;linux&#x2F;of.h&gt;</p>
-<p><strong>函数作用</strong>:</p>
-<p>​	该函数用于从指定属性中获取指定索引位置的 u64 类型的数据值。</p>
-<p><strong>函数参数和返回值</strong>:</p>
-<p>​	np: 设备节点。</p>
-<p>​	propname: 要读取的属性名。</p>
-<p>​	index: 要读取的属性值在属性中的索引，索引从 0 开始。</p>
-<p>​	out_value: 用于存储读取到的值的指针。</p>
-<p><strong>返回值</strong>:</p>
-<p>​	如果成功读取到了指定属性指定索引位置的 u64 类型的数据值，则返回 0；如果未找到属性或读取失败，则返回相应的错误码。</p>
-<h3 id="67-1-5-of-property-read-variable-u32-array"><a href="#67-1-5-of-property-read-variable-u32-array" class="headerlink" title="67.1.5 of_property_read_variable_u32_array"></a>67.1.5 of_property_read_variable_u32_array</h3><p>该函数用于从设备树中读取指定属性名的变长数组。通过提供设备节点、属性名和输出数组的指针，可以将设备树中的数组数据读取到指定的内存区域中。同时，还需要指定数组的最小大小和最大大小，以确保读取到的数组符合预期的大小范围。</p>
-<p><strong>函数原型</strong>：</p>
-<p>​	int of_property_read_variable_u32_array(const struct device_node *np, const char *propname, u32 *out_values, size_t SZ_min, size_t SZ_max)</p>
-<p><strong>函数作用</strong>: </p>
-<p>​	从指定属性中读取变长的 u32 数组。</p>
-<p><strong>函数参数</strong>:</p>
-<p>​	np: 设备节点。</p>
-<p>​	propname: 要读取的属性名。</p>
-<p>​	out_values: 用于存储读取到的 u8 数组的指针。</p>
-<p>​	SZ_min: 数组的最小大小。</p>
-<p>​	SZ_max: 数组的最大大小。</p>
-<p><strong>返回值</strong>：</p>
-<p>如果成功读取到了指定属性的 u8 数组，则返回数组的大小。如果未找到属性或读取失败，则返回相应的错误码。</p>
-<p>上面介绍的函数用于从指定属性中读取变长的 u32 数组，下面是另外三个读取其他数组大小的函数：</p>
-<p>这里给出了四个函数，用于从设备树中读取数组类型的属性值：</p>
-<p>从指定属性中读取变长的 u8 数组：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int of_property_read_variable_u8_array(const struct device_node *np, const char *propname, u8 *out_values, size_t SZ_min, size_t SZ_max)</span><br></pre></td></tr></table></figure>
-
-<p>从指定属性中读取变长的 u16 数组：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int of_property_read_variable_u16_array(const struct device_node *np, const char *propname, u16 *out_values, size_t SZ_min, size_t SZ_max)</span><br></pre></td></tr></table></figure>
-
-<p>从指定属性中读取变长的 u64 数组：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int of_property_read_variable_u64_array(const struct device_node *np, const char *propname, u64 *out_values, size_t SZ_min, size_t SZ_max)</span><br></pre></td></tr></table></figure>
-
-<h3 id="67-1-6-of-property-read-string"><a href="#67-1-6-of-property-read-string" class="headerlink" title="67.1.6 of_property_read_string"></a>67.1.6 of_property_read_string</h3><p>该函数在设备树中的设备节点下查找指定名称的属性，并获取该属性的字符串值，最后返回读取到的字符串的指针，通常用于从设备树属性中读取字符串值。通过指定属性名，可以获取属性中的字符串数据。</p>
-<p><strong>函数原型</strong>:</p>
-<p>​	static inline int of_property_read_string(const struct device_node *np, const char *propname, const char **out_string)</p>
-<p><strong>头文件</strong>：</p>
-<p>\	#include &lt;linux&#x2F;of.h&gt;</p>
-<p><strong>函数作用</strong>:</p>
-<p>​	该函数用于从指定属性中读取字符串。</p>
-<p><strong>函数参数</strong>:</p>
-<p>​	np: 设备节点。</p>
-<p>​	propname: 要读取的属性名。</p>
-<p>​	out_string: 用于存储读取到的字符串的指针。</p>
-<p><strong>返回值</strong>:</p>
-<p>​	如果成功读取到了指定属性的字符串，则返回 0；如果未找到属性或读取失败，则返回相应的错误码。</p>
-<h2 id="67-2-实验程序编写"><a href="#67-2-实验程序编写" class="headerlink" title="67.2 实验程序编写"></a>67.2 实验程序编写</h2><p>本实验驱动对应的网盘路径为：iTOP-RK3568开发板【底板V1.7版本】\03_【iTOP-RK3568开发板】指南教程\02_Linux驱动配套资料\04_Linux驱动例程\56_of_02。</p>
-<p>本小节驱动程序是由65章驱动程序修改而来，由于本章节获取设备树属性的函数需要在查找到设备树节点的前提下使用，所以在下面的程序中，先在probe函数中添加查获取设备树节点，然后添加了本章节学习的of操作相关代码，用来获取设备树节点相关属性。</p>
-<p>编写完成的platform_driver.c代码如下所示：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;linux/module.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;linux/platform_device.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;linux/mod_devicetable.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;linux/of.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">device_node</span> *<span class="title">mydevice_node</span>;</span>      </span><br><span class="line"><span class="type">int</span> num;</span><br><span class="line">u32 value_u32;</span><br><span class="line">u64 value_u64;</span><br><span class="line">u32 out_value[<span class="number">2</span>];</span><br><span class="line"><span class="type">const</span> <span class="type">char</span> *value_compatible;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">property</span> *<span class="title">my_property</span>;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 平台设备的探测函数</span></span><br><span class="line"><span class="type">static</span> <span class="type">int</span> <span class="title function_">my_platform_probe</span><span class="params">(<span class="keyword">struct</span> platform_device *pdev)</span></span><br><span class="line">&#123;</span><br><span class="line">    printk(KERN_INFO <span class="string">&quot;my_platform_probe: Probing platform device\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 通过节点名称查找设备树节点</span></span><br><span class="line">    mydevice_node = of_find_node_by_name(<span class="literal">NULL</span>, <span class="string">&quot;myLed&quot;</span>);</span><br><span class="line">    printk(<span class="string">&quot;mydevice node is %s\n&quot;</span>, mydevice_node-&gt;name);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 查找compatible属性</span></span><br><span class="line">    my_property = of_find_property(mydevice_node, <span class="string">&quot;compatible&quot;</span>, <span class="literal">NULL</span>);</span><br><span class="line">    printk(<span class="string">&quot;my_property name is %s\n&quot;</span>, my_property-&gt;name);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 获取reg属性的元素数量</span></span><br><span class="line">    num = of_property_count_elems_of_size(mydevice_node, <span class="string">&quot;reg&quot;</span>, <span class="number">4</span>);</span><br><span class="line">    printk(<span class="string">&quot;reg num is %d\n&quot;</span>, num);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 读取reg属性的值</span></span><br><span class="line">    of_property_read_u32_index(mydevice_node, <span class="string">&quot;reg&quot;</span>, <span class="number">0</span>, &amp;value_u32);</span><br><span class="line">    of_property_read_u64_index(mydevice_node, <span class="string">&quot;reg&quot;</span>, <span class="number">0</span>, &amp;value_u64);</span><br><span class="line">    printk(<span class="string">&quot;value u32 is 0x%X\n&quot;</span>, value_u32);</span><br><span class="line">    printk(<span class="string">&quot;value u64 is 0x%llx\n&quot;</span>, value_u64);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 读取reg属性的变长数组</span></span><br><span class="line">    of_property_read_variable_u32_array(mydevice_node, <span class="string">&quot;reg&quot;</span>, out_value, <span class="number">1</span>, <span class="number">2</span>);</span><br><span class="line">    printk(<span class="string">&quot;out_value[0] is 0x%X\n&quot;</span>, out_value[<span class="number">0</span>]);</span><br><span class="line">    printk(<span class="string">&quot;out_value[1] is 0x%X\n&quot;</span>, out_value[<span class="number">1</span>]);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 读取compatible属性的字符串值</span></span><br><span class="line">    of_property_read_string(mydevice_node, <span class="string">&quot;compatible&quot;</span>, &amp;value_compatible);</span><br><span class="line">    printk(<span class="string">&quot;compatible value is %s\n&quot;</span>, value_compatible);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 平台设备的移除函数</span></span><br><span class="line"><span class="type">static</span> <span class="type">int</span> <span class="title function_">my_platform_remove</span><span class="params">(<span class="keyword">struct</span> platform_device *pdev)</span></span><br><span class="line">&#123;</span><br><span class="line">    printk(KERN_INFO <span class="string">&quot;my_platform_remove: Removing platform device\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 清理设备特定的操作</span></span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="class"><span class="keyword">struct</span> <span class="title">of_device_id</span> <span class="title">of_match_table_id</span>[]  =</span> &#123;</span><br><span class="line">	&#123;.compatible=<span class="string">&quot;my devicetree&quot;</span>&#125;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义平台驱动结构体</span></span><br><span class="line"><span class="type">static</span> <span class="class"><span class="keyword">struct</span> <span class="title">platform_driver</span> <span class="title">my_platform_driver</span> =</span> &#123;</span><br><span class="line">    .probe = my_platform_probe,</span><br><span class="line">    .remove = my_platform_remove,</span><br><span class="line">    .driver = &#123;</span><br><span class="line">        .name = <span class="string">&quot;my_platform_device&quot;</span>,</span><br><span class="line">        .owner = THIS_MODULE,</span><br><span class="line">		.of_match_table =  of_match_table_id,</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 模块初始化函数</span></span><br><span class="line"><span class="type">static</span> <span class="type">int</span> __init <span class="title function_">my_platform_driver_init</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> ret;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 注册平台驱动</span></span><br><span class="line">    ret = platform_driver_register(&amp;my_platform_driver);</span><br><span class="line">    <span class="keyword">if</span> (ret) &#123;</span><br><span class="line">        printk(KERN_ERR <span class="string">&quot;Failed to register platform driver\n&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    printk(KERN_INFO <span class="string">&quot;my_platform_driver: Platform driver initialized\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 模块退出函数</span></span><br><span class="line"><span class="type">static</span> <span class="type">void</span> __exit <span class="title function_">my_platform_driver_exit</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 注销平台驱动</span></span><br><span class="line">    platform_driver_unregister(&amp;my_platform_driver);</span><br><span class="line"></span><br><span class="line">    printk(KERN_INFO <span class="string">&quot;my_platform_driver: Platform driver exited\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">module_init(my_platform_driver_init);</span><br><span class="line">module_exit(my_platform_driver_exit);</span><br><span class="line"></span><br><span class="line">MODULE_LICENSE(<span class="string">&quot;GPL&quot;</span>);</span><br><span class="line">MODULE_AUTHOR(<span class="string">&quot;topeet&quot;</span>);</span><br></pre></td></tr></table></figure>
-
-<h2 id="67-3-运行测试"><a href="#67-3-运行测试" class="headerlink" title="67.3 运行测试"></a>67.3 运行测试</h2><h3 id="67-3-1-编译驱动程序"><a href="#67-3-1-编译驱动程序" class="headerlink" title="67.3.1 编译驱动程序"></a>67.3.1 编译驱动程序</h3><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> ARCH=arm64<span class="comment">#设置平台架构</span></span><br><span class="line"><span class="keyword">export</span> CROSS_COMPILE=aarch64-linux-gnu-<span class="comment">#交叉编译器前缀</span></span><br><span class="line">obj-m += platform_driver.o    <span class="comment">#此处要和你的驱动源文件同名</span></span><br><span class="line">KDIR :=/home/topeet/Linux/linux_sdk/kernel    <span class="comment">#这里是你的内核目录                                                                                                                            </span></span><br><span class="line">PWD ?= <span class="variable">$(<span class="built_in">shell</span> pwd)</span></span><br><span class="line"><span class="section">all:</span></span><br><span class="line">    make -C <span class="variable">$(KDIR)</span> M=<span class="variable">$(PWD)</span> modules    <span class="comment">#make操作</span></span><br><span class="line"><span class="section">clean:</span></span><br><span class="line">    make -C <span class="variable">$(KDIR)</span> M=<span class="variable">$(PWD)</span> clean    <span class="comment">#make clean操作</span></span><br></pre></td></tr></table></figure>
-
-<p>对于Makefile的内容注释已在上图添加，保存退出之后，来到存放platform_driver.c和Makefile文件目录下，如下图（图67-1）所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309062024437.png" alt="img"></p>
-<p>图 67-1</p>
-<p>然后使用命令“make”进行驱动的编译，编译完成如下图（图67-2）所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309062024375.jpeg" alt="img"></p>
-<p>图 67-2</p>
-<p>编译完生成platform_driver.ko目标文件，如下图（图67-3）所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309062024393.jpeg" alt="img"> </p>
-<p>图 67-3</p>
-<p>至此驱动模块就编译成功了。</p>
-<h3 id="67-3-2-运行测试"><a href="#67-3-2-运行测试" class="headerlink" title="67.3.2 运行测试"></a>67.3.2 运行测试</h3><p>在进行实验之前，首先要确保开发板烧写的是我们在65.2.1小节中编译出来的boot.img，开发板启动之后，使用以下命令进行驱动模块的加载，如下图（图67-4）所示：</p>
-<p>insmod platform_driver.ko</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309062024402.jpeg" alt="img"> </p>
-<p>图 67-4</p>
-<p>可以看到总共有8个打印，第一个打印表示查找到的节点为myLed,接下来的打印都是使用该节点进行的属性查找。第二个打印表示查找的属性名为“compatible”，第三个打印表示查找的reg属性数量为2，第四个和第五个分别表示读取到的32位和64位的reg属性值，第6个和第7个打印表示reg的第一个属性值和第二个属性值，第8个打印表示compatite属性值为“my devicetree”。</p>
-<p>然后使用以下命令进行驱动模块的卸载，如下图（图66-5）所示：</p>
-<p>rmmod platform_driver.ko</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309062024444.png" alt="img"></p>
-<p>图 67-5</p>
-<p>至此，使用of操作函数获取设备树节点实验就完成了。</p>
+  <p>属性声明 <code>aligned</code> 和 <code>packed</code> 是用于控制结构体或变量的对齐方式的特殊属性。</p>
+<ol>
+<li><p><code>aligned</code> 属性：<code>aligned</code> 属性用于指定结构体或变量的对齐方式。对齐方式是指变量在内存中的起始地址必须是某个特定值的倍数。这个特定值称为对齐边界。通过使用 <code>aligned</code> 属性，可以强制指定变量的对齐边界。</p>
+<p>例如，以下示例将一个结构体 <code>my_struct</code> 按照 16 字节对齐：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">my_struct</span> &#123;</span></span><br><span class="line">    <span class="type">int</span> a;</span><br><span class="line">    <span class="type">char</span> b;</span><br><span class="line">    <span class="type">short</span> c;</span><br><span class="line">&#125; __attribute__((aligned(<span class="number">16</span>)));</span><br><span class="line">```</span><br><span class="line"></span><br><span class="line">在这个例子中，`aligned(<span class="number">16</span>)` 属性将结构体 `my_struct` 的对齐边界设置为 <span class="number">16</span> 字节。这意味着结构体的起始地址必须是 <span class="number">16</span> 的倍数。</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>packed</code> 属性：<code>packed</code> 属性用于指定结构体或变量的紧凑布局，即取消对齐。默认情况下，结构体的成员按照其自然对齐边界进行对齐，以提高内存访问效率。但有时，我们需要取消对齐，以减小结构体的大小或与其他系统进行数据交互。</p>
+<p>例如，以下示例将一个结构体 <code>my_struct</code> 设置为紧凑布局：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">my_struct</span> &#123;</span></span><br><span class="line">    <span class="type">int</span> a;</span><br><span class="line">    <span class="type">char</span> b;</span><br><span class="line">    <span class="type">short</span> c;</span><br><span class="line">&#125; __attribute__((packed));</span><br><span class="line">```</span><br><span class="line"></span><br><span class="line">在这个例子中，`packed` 属性将结构体 `my_struct` 设置为紧凑布局，取消了成员的对齐。这意味着结构体的大小可能会减小，但访问成员时可能会带来性能开销。</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>需要注意的是，使用 <code>aligned</code> 和 <code>packed</code> 属性可能会对内存访问效率和可移植性产生影响。对齐和紧凑布局的选择应根据具体的需求和平台要求进行权衡。此外，这些属性的语法可能因编译器而异，应查阅相应的文档以确保正确使用。</p>
  
       <!-- reward -->
       
@@ -1282,7 +659,210 @@
     
     <footer class="article-footer">
        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rk3568-%E9%A9%B1%E5%8A%A8/" rel="tag">rk3568 驱动</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gun%E6%89%A9%E5%B1%95%E8%AF%AD%E6%B3%95/" rel="tag">gun扩展语法</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-5-7-属性声明：section"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/09/07/5-7-%E5%B1%9E%E6%80%A7%E5%A3%B0%E6%98%8E%EF%BC%9Asection/"
+    >5.7 属性声明：section</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/09/07/5-7-%E5%B1%9E%E6%80%A7%E5%A3%B0%E6%98%8E%EF%BC%9Asection/" class="article-date">
+  <time datetime="2023-09-07T13:14:13.000Z" itemprop="datePublished">2023-09-07</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>属性（Attributes）是一种在C语言中使用的特殊语法，用于声明变量或函数的特殊属性，以指导编译器进行特定方面的优化或代码检查。</p>
+<p>在C语言中，可以使用 <code>__attribute__</code> 关键字来声明属性。属性可以在变量或函数的声明后面使用，通过 <code>__attribute__((ATTRIBUTE))</code> 的语法进行指定。</p>
+<p>例如，假设有以下代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int global_val __attribute__((section(&quot;.data&quot;)));</span><br></pre></td></tr></table></figure>
+
+<p>在这个例子中，<code>global_val</code> 是一个整型变量，通过 <code>__attribute__((section(&quot;.data&quot;)))</code> 指定了它的属性。</p>
+<p>这里使用的属性是 <code>section</code>，它的作用是将 <code>global_val</code> 变量放置在指定的内存段（section）中。具体地，<code>section(&quot;.data&quot;)</code> 表示将 <code>global_val</code> 放置在名为 “.data” 的内存段中。</p>
+<p>属性的主要用途包括但不限于以下几个方面：</p>
+<ol>
+<li>优化：通过属性，可以告知编译器一些额外的信息，以便进行特定的优化。例如，可以指定变量的对齐方式、内联函数等，以优化程序的执行效率。</li>
+<li>警告检查：属性还可以用于启用或禁用编译器的警告检查。通过指定特定的属性，可以控制编译器在编译过程中产生的警告信息。</li>
+<li>内存布局：属性可以用于控制变量或函数在内存中的位置。可以指定变量存放在特定的内存段中，或者指定函数使用特定的调用约定。</li>
+</ol>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gun%E6%89%A9%E5%B1%95%E8%AF%AD%E6%B3%95/" rel="tag">gun扩展语法</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-5-6-零长度数组"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/09/07/5-6-%E9%9B%B6%E9%95%BF%E5%BA%A6%E6%95%B0%E7%BB%84/"
+    >5.6 零长度数组</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/09/07/5-6-%E9%9B%B6%E9%95%BF%E5%BA%A6%E6%95%B0%E7%BB%84/" class="article-date">
+  <time datetime="2023-09-07T13:14:11.000Z" itemprop="datePublished">2023-09-07</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>这个例子展示了C语言中的零长度数组的用法。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">buffer</span> &#123;</span></span><br><span class="line">    <span class="type">int</span> len;</span><br><span class="line">    <span class="type">char</span> a[<span class="number">0</span>];</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span> &#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">buffer</span> *<span class="title">buf</span>;</span></span><br><span class="line">    buf = (<span class="keyword">struct</span> buffer*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">struct</span> buffer) + <span class="number">20</span>);</span><br><span class="line">    buf-&gt;len = <span class="number">20</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;size: %d\n&quot;</span>, <span class="keyword">sizeof</span>(buf));</span><br><span class="line">    <span class="built_in">strcpy</span>(buf-&gt;a, <span class="string">&quot;hello world&quot;</span>);</span><br><span class="line">    <span class="built_in">puts</span>(buf-&gt;a);</span><br><span class="line">    <span class="built_in">free</span>(buf);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在这个例子中，定义了一个结构体 <code>buffer</code>，它包含一个整型变量 <code>len</code> 和一个零长度数组 <code>a</code>。</p>
+<p>零长度数组是C语言中的一种特殊用法，它的长度为0，也就是没有元素。它通常用于结构体的最后一个成员，用于实现动态大小的数组。</p>
+<p>在 <code>main</code> 函数中，首先通过调用 <code>malloc</code> 动态分配了一块内存，大小为 <code>sizeof(struct buffer) + 20</code>。这里的 <code>20</code> 表示额外的数据空间，用于存储字符串 “hello world”。</p>
+<p>然后，将分配的内存地址强制转换为 <code>struct buffer*</code> 类型，并将其赋给指针变量 <code>buf</code>。</p>
+<p>接下来，通过 <code>buf-&gt;len = 20</code>，将结构体成员 <code>len</code> 的值设置为 <code>20</code>。</p>
+<p>然后，通过 <code>printf</code> 打印了指针变量 <code>buf</code> 的大小，即 <code>sizeof(buf)</code>。请注意，这里打印的是指针变量 <code>buf</code> 的大小，而不是结构体 <code>buffer</code> 的大小。因为指针变量的大小在不同的系统上是固定的，一般为 4 或 8 字节，不会随着结构体的大小而变化。</p>
+<p>随后，通过 <code>strcpy</code> 将字符串 “hello world” 复制到结构体成员 <code>a</code> 中。</p>
+<p>最后，通过 <code>puts</code> 打印结构体成员 <code>a</code> 中的字符串。</p>
+<p>最后，通过 <code>free</code> 释放了之前动态分配的内存。</p>
+<p>这个例子展示了零长度数组的一种使用方式，它允许在结构体中动态存储变长数据。需要注意的是，零长度数组只是一种技巧，并不是C语言标准中的定义。因此，使用零长度数组时需要注意编译器的兼容性和可移植性。</p>
+<p>ShareLikeDislike</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gun%E6%89%A9%E5%B1%95%E8%AF%AD%E6%B3%95/" rel="tag">gun扩展语法</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-5-5-container-of"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/09/07/5-5-container-of/"
+    >5.5 container_of</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/09/07/5-5-container-of/" class="article-date">
+  <time datetime="2023-09-07T13:14:10.000Z" itemprop="datePublished">2023-09-07</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p><code>container_of</code> 是一个在内核开发中常用的宏，用于根据结构体成员的地址获取整个结构体的首地址。</p>
+<p>它的一般语法格式如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">container_of(ptr, type, member)</span><br></pre></td></tr></table></figure>
+
+<p>其中：</p>
+<ul>
+<li><code>ptr</code> 是一个指向结构体成员的指针。</li>
+<li><code>type</code> 是结构体的类型。</li>
+<li><code>member</code> 是结构体中的成员名称。</li>
+</ul>
+<p><code>container_of</code> 宏会根据给定的结构体成员的地址 <code>ptr</code>，计算出整个结构体的首地址，并返回该地址。</p>
+<p>在您提供的示例中：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">struct student &#123;</span><br><span class="line">    int age;</span><br><span class="line">    int num;</span><br><span class="line">    int math;</span><br><span class="line">&#125; stu;</span><br><span class="line"></span><br><span class="line">p = container_of(&amp;stu.num, struct student, num);</span><br></pre></td></tr></table></figure>
+
+<p>这段代码的目的是根据 <code>stu.num</code> 的地址获取整个 <code>struct student</code> 结构体的首地址，并将该地址赋给变量 <code>p</code>。</p>
+<p>假设 <code>stu.num</code> 的地址为 <code>0x1000</code>，那么 <code>container_of</code> 宏会计算出 <code>stu</code> 的首地址为 <code>0x1000 - offset</code>，其中 <code>offset</code> 是 <code>num</code> 成员在 <code>struct student</code> 结构体中的偏移量。然后，将该地址赋给变量 <code>p</code>。</p>
+<p>请注意，<code>container_of</code> 宏是在内核开发中使用的，不是标准的C语言库函数。它依赖于结构体成员在结构体中的布局和字节对齐方式。因此，在普通的应用程序开发中，一般不会使用 <code>container_of</code> 宏。</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gun%E6%89%A9%E5%B1%95%E8%AF%AD%E6%B3%95/" rel="tag">gun扩展语法</a></li></ul>
 
     </footer>
   </div>
@@ -1299,7 +879,7 @@
   
   <nav class="page-nav">
     
-    <a class="extend prev" rel="prev" href="/">上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/3/">下一页</a>
+    <a class="extend prev" rel="prev" href="/">上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/3/">下一页</a>
   </nav>
   
 </section>

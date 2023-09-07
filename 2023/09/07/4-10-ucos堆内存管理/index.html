@@ -90,7 +90,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">0</span>
+            <span class="post-count">298</span>
         </span>
     </span>
 
@@ -112,7 +112,26 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-   
+  <p>在使用uC&#x2F;OS（Microcontroller Operating System）时，可以采用以下基本策略来进行内存管理：</p>
+<ol>
+<li>将堆内存分成若干区：<ul>
+<li>首先，将可用的堆内存划分为若干个区域。每个区域可以有不同的大小和属性，以满足不同的内存需求。</li>
+</ul>
+</li>
+<li>每个区分为若干大小相等的内存块：<ul>
+<li>在每个区域内，将可用的内存划分为若干大小相等的内存块。这些内存块具有相同的大小，可以根据需要进行申请和释放。</li>
+</ul>
+</li>
+<li>程序以内存块为单位对内存进行申请&#x2F;释放：<ul>
+<li>程序在运行时以内存块为单位来申请和释放内存。通过使用特定的函数（如malloc和free），可以从内存块池中获取一个可用的内存块，并在不再需要时将其释放。</li>
+</ul>
+</li>
+<li>指向下一个内存块：<ul>
+<li>在内存块的数据结构中，可以包含一个指针字段，用于指向下一个可用的内存块。这样，在申请内存时，可以遍历内存块链表，找到合适大小的内存块并返回给程序。</li>
+</ul>
+</li>
+</ol>
+ 
       <!-- reward -->
       
     </div>

@@ -90,7 +90,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">349</span>
+            <span class="post-count">713</span>
         </span>
     </span>
 
@@ -99,7 +99,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">1 分钟</span>
+            <span class="post-count">2 分钟</span>
         </span>
     </span>
 </div>
@@ -131,6 +131,34 @@
 </li>
 </ol>
 <p>这些规则确保了参数的正确传递和函数调用的一致性。小于4个参数的情况下，参数直接传递到寄存器中，避免了频繁的内存访问。而大于4个参数的情况下，额外的参数通过栈进行传递。被调用函数将寄存器中的参数入栈保存，以便在函数内部能够访问和使用这些参数。</p>
+<h1 id="4-4-2-调用惯例"><a href="#4-4-2-调用惯例" class="headerlink" title="4.4.2 调用惯例"></a>4.4.2 调用惯例</h1><p>函数调用的约定是编程语言或操作系统规定的一种规则，用于定义函数调用时参数传递、返回值处理以及栈的清理方式。下面是一般情况下的函数调用约定：</p>
+<ol>
+<li>函数调用双方的约定：<ul>
+<li>函数调用者（caller）：调用函数的代码。</li>
+<li>函数被调用者（callee）：被调用的函数。</li>
+</ul>
+</li>
+<li>参数压栈方式：<ul>
+<li>参数通常按照从右至左的顺序依次压入栈中，即最右边的参数先被压入栈。</li>
+</ul>
+</li>
+<li>栈清理：<ul>
+<li>调用者负责清理栈上的参数。这意味着在函数调用完成后，调用者会从栈上移除传递给被调用函数的参数。</li>
+</ul>
+</li>
+<li>默认的调用惯例：<ul>
+<li>在C语言中，默认的调用惯例是 cdecl（C declaration），也被称为标准调用约定。</li>
+<li>参数传递：按照从右至左的顺序将参数压入栈中。</li>
+<li>栈清理：由调用者负责清理栈上的参数。</li>
+<li>返回值：通常通过寄存器进行返回，如整数类型的返回值使用 EAX 寄存器，浮点类型的返回值使用 ST0 寄存器。</li>
+</ul>
+</li>
+</ol>
+<p>好处：</p>
+<ul>
+<li>预先知道参数和返回值的大小，可以在函数调用前提前分配好栈空间或寄存器。</li>
+<li>支持变参函数的调用，例如 <code>printf</code> 函数，它可以接受不定数量的参数。</li>
+</ul>
  
       <!-- reward -->
       

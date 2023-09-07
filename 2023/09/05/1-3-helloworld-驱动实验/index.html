@@ -90,7 +90,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">0</span>
+            <span class="post-count">866</span>
         </span>
     </span>
 
@@ -99,20 +99,57 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">1 分钟</span>
+            <span class="post-count">3 分钟</span>
         </span>
     </span>
 </div>
  
     </div>
       
+    <div class="tocbot"></div>
+
 
 
 
   
     <div class="article-entry" itemprop="articleBody">
        
-   
+  <p>在学习C语言或者其他语言的时候，我们通常是打印一句“helloworld”来开启编程世界的大门。学习驱动程序编程亦可以如此，使用helloworld作为我们的第一个驱动程序。</p>
+<p>接下来开始编写第一个驱动程序—helloworld。</p>
+<h1 id="3-1-驱动编写"><a href="#3-1-驱动编写" class="headerlink" title="3.1 驱动编写"></a>3.1 驱动编写</h1><p>本小节来编写一个最简单的驱动——helloworld驱动。helloworld.c如下（图3-1）所示代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;linux/module.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;linux/kernel.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="type">int</span> __init <span class="title function_">helloworld_init</span><span class="params">(<span class="type">void</span>)</span>    <span class="comment">//驱动入口函数</span></span><br><span class="line">&#123;</span><br><span class="line">    printk(KERN_EMERG <span class="string">&quot;helloworld_init\r\n&quot;</span>);<span class="comment">//注意：内核打印用printk而不是printf</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="type">void</span> __exit <span class="title function_">helloworld_exit</span><span class="params">(<span class="type">void</span>)</span>    <span class="comment">//驱动出口函数</span></span><br><span class="line">&#123;</span><br><span class="line">    printk(KERN_EMERG <span class="string">&quot;helloworld_exit\r\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">module_init(helloworld_init);    <span class="comment">//注册入口函数</span></span><br><span class="line">module_exit(helloworld_exit);    <span class="comment">//注册出口函数</span></span><br><span class="line">MODULE_LICENSE(<span class="string">&quot;GPL v2&quot;</span>);    <span class="comment">//同意GPL开源协议</span></span><br><span class="line">MODULE_AUTHOR(<span class="string">&quot;topeet&quot;</span>);    <span class="comment">//作者信息</span></span><br></pre></td></tr></table></figure>
+
+<p>看似非常简单的helloworld驱动代码，却五脏俱全。一个简单的helloworld驱动包含驱动的基本框架。我们继续往下看。</p>
+<h1 id="3-2-驱动的基本框架"><a href="#3-2-驱动的基本框架" class="headerlink" title="3.2 驱动的基本框架"></a>3.2 驱动的基本框架</h1><p>Linux驱动的基本框架主要由模块加载函数，模块卸载函数，模块许可证声明，模块参数，模块导出符号，模块作者信息等几部分组成，其中模块参数，模块导出符号，模块作者信息是可选的部分，也就是可要可不要。剩余部分是必须有的。我们来看一下这几个部分的作用：</p>
+<p>1 模块加载函数</p>
+<p>​	当使用加载驱动模块时，内核会执行模块加载函数，完成模块加载函数中的初始化工作。</p>
+<p>2 模块卸载函数</p>
+<p>​	当卸载某模块时，内核会执行模块卸载函数，完成模块卸载函数中的退出工作。</p>
+<p>3 模块许可证声明</p>
+<p>​	许可证声明描述了内核模块的许可权限，如果不声明模块许可，模块在加载的时候，会收到“内核被污染（kernel tainted）”的警告。可接受的内核模块声明许可包括“GPL”“GPL v2”。</p>
+<p>4 模块参数（可选择）</p>
+<p>​	模块参数是模块被加载的时候可以传递给它的值。</p>
+<p>5 模块导出符号（可选择）</p>
+<p>​	内核模块可以导出的符号，如果导出，其他模块可以使用本模块中的变量或函数。</p>
+<p>6 模块作者信息等说明（可选择）</p>
+<p>上一小节我们说，helloworld驱动麻雀虽小五脏俱全，我们来分析helloworld驱动。通过helloworld代码再来看驱动框架。</p>
+<p>（1）模块加载函数：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">static</span> <span class="type">int</span> __init <span class="title function_">helloworld_init</span><span class="params">(<span class="type">void</span>)</span>    <span class="comment">//驱动入口函数</span></span><br><span class="line">&#123;</span><br><span class="line">    printk(KERN_EMERG <span class="string">&quot;helloworld_init\r\n&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line">module_init(helloworld_init);    <span class="comment">//注册入口函数</span></span><br></pre></td></tr></table></figure>
+
+<p>（2）模块卸载函数：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">static</span> <span class="type">void</span> __exit <span class="title function_">helloworld_exit</span><span class="params">(<span class="type">void</span>)</span>    <span class="comment">//驱动出口函数</span></span><br><span class="line">&#123;</span><br><span class="line">    printk(KERN_EMERG <span class="string">&quot;helloworld_exit\r\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line">module_exit(helloworld_exit);    <span class="comment">//注册出口函数</span></span><br></pre></td></tr></table></figure>
+
+<p>（3）模块许可证声明</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MODULE_LICENSE(<span class="string">&quot;GPL v2&quot;</span>);    <span class="comment">//同意GPL开源协议</span></span><br></pre></td></tr></table></figure>
+
+<p>（4）模块作者信息</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MODULE_AUTHOR(<span class="string">&quot;topeet&quot;</span>);    <span class="comment">//作者信息</span></span><br></pre></td></tr></table></figure>
+
+<p>（5）头文件</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;linux/module.h&gt;</span> <span class="comment">//模块加载函数和卸载函数需要的头文件</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;linux/kernel.h&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<p>通过上面的分析，helloworld驱动是不是包含了驱动框架的所有必要的部分呢。因此helloworld驱动我们可以看作是驱动代码的模板。任何一个驱动代码都用它作为基础来编写实现。同学们要将他记忆下来！</p>
+ 
       <!-- reward -->
       
     </div>
