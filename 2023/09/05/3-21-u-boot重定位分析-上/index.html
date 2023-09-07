@@ -90,7 +90,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">0</span>
+            <span class="post-count">1.4k</span>
         </span>
     </span>
 
@@ -99,20 +99,82 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">1 分钟</span>
+            <span class="post-count">5 分钟</span>
         </span>
     </span>
 </div>
  
     </div>
       
+    <div class="tocbot"></div>
+
 
 
 
   
     <div class="article-entry" itemprop="articleBody">
        
-   
+  <h1 id="3-20-1-U-Boot-启动方式"><a href="#3-20-1-U-Boot-启动方式" class="headerlink" title="3.20.1 U-Boot 启动方式"></a>3.20.1 U-Boot 启动方式</h1><p>下面是关于 U-Boot 启动方式的解释：</p>
+<p>U-Boot 是一种开源的引导加载程序，用于在嵌入式系统上启动操作系统。它具有广泛的硬件支持和灵活的配置选项。U-Boot 可以从多种存储介质启动，包括 NAND、NOR、SD 卡和 SDRAM。</p>
+<ol>
+<li>NAND 启动：<br>NAND 闪存是一种非易失性存储介质，常用于嵌入式系统中。当 U-Boot 从 NAND 启动时，它会从 NAND 闪存芯片读取引导程序（bootloader）并执行。</li>
+<li>NOR 启动：<br>NOR 闪存是另一种常见的非易失性存储介质，通常用于存储 U-Boot。在 NOR 启动方式下，U-Boot 位于 NOR 闪存中，并且系统会直接从 NOR 闪存中加载和执行 U-Boot。</li>
+<li>SD 卡启动：<br>SD 卡是一种可移动存储介质，常用于嵌入式系统中。当 U-Boot 从 SD 卡启动时，它会从 SD 卡中读取引导程序并执行。</li>
+<li>SDRAM 启动：<br>SDRAM 是系统内存，U-Boot 可以从 SDRAM 启动。在 SDRAM 启动方式下，U-Boot 首先加载到 SDRAM 中，然后执行。</li>
+</ol>
+<p>在启动过程中，U-Boot 需要知道引导程序的存储位置和大小。根据您提供的信息，我理解以下是相关的地址范围和存储介质：</p>
+<ul>
+<li>NAND：存储介质为 NAND 闪存。</li>
+<li>NOR：存储介质为 NOR 闪存。</li>
+<li>SD 卡：存储介质为 SD 卡。</li>
+<li>SDRAM：存储介质为系统内存。</li>
+</ul>
+<h1 id="3-20-2-U-Boot生成文件的一般过程："><a href="#3-20-2-U-Boot生成文件的一般过程：" class="headerlink" title="3.20.2 U-Boot生成文件的一般过程："></a>3.20.2 U-Boot生成文件的一般过程：</h1><p>在 U-Boot 的编译过程中，会生成不同的文件，其中包括以下常见的文件格式：</p>
+<ul>
+<li>ELF 格式：U-Boot 的主要可执行文件通常以 ELF（Executable and Linkable Format）格式存储。ELF 文件包含了可执行代码、数据和符号表等信息，可用于调试和符号解析。</li>
+<li>BIN 格式：U-Boot 还可以使用 objcopy 工具将 ELF 格式的可执行文件转换为 BIN（Binary）格式。BIN 格式是一种简化的二进制文件格式，它只包含可执行代码，没有调试信息和符号表。</li>
+<li>Symbol 文件：U-Boot 生成的符号文件（例如 u-boot.sym）包含了代码中定义的符号信息，这对于调试和符号解析非常有用。符号文件通常与 ELF 格式文件一起使用。</li>
+<li>System.map 文件：U-Boot 在编译过程中还会生成 System.map 文件，它包含了 U-Boot 的符号表和地址映射信息。</li>
+</ul>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309070727839.png" alt="image-20230907072726729"></p>
+<h1 id="3-20-3-uboot镜像依赖关系"><a href="#3-20-3-uboot镜像依赖关系" class="headerlink" title="3.20.3 uboot镜像依赖关系"></a>3.20.3 uboot镜像依赖关系</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">u-boot-init -&gt; start.o -&gt; u-boot-main -&gt; built-in.o -&gt; u-boot.lds</span><br></pre></td></tr></table></figure>
+
+<p>解释如下：</p>
+<ol>
+<li><code>u-boot-init</code>：这是一个初始文件或函数，可能包含一些启动代码或初始化代码。</li>
+<li><code>start.o</code>：这是一个目标文件，位于 <code>arch/arm/cpul/armv7</code> 目录中。它可能包含与 ARMv7 架构相关的启动代码。</li>
+<li><code>u-boot-main</code>：这是一个主要的 U-Boot 文件或函数，可能包含 U-Boot 的核心功能。</li>
+<li><code>built-in.o</code>：这是一个目标文件，位于 <code>xx/xxx</code> 目录中。它可能包含 U-Boot 中的一些功能模块或驱动程序。</li>
+<li><code>u-boot.lds</code>：这是 U-Boot 的链接脚本文件，用于指定链接器如何将目标文件组合成最终的可执行镜像。</li>
+</ol>
+<h1 id="3-20-4-uboot启动流程"><a href="#3-20-4-uboot启动流程" class="headerlink" title="3.20.4 uboot启动流程"></a>3.20.4 uboot启动流程</h1><p>U-Boot 的启动流程可以大致描述如下：</p>
+<ol>
+<li>硬件上电或复位后，处理器会跳转到预定义的启动地址，通常是 SoC 内部的 ROM 或 Flash 存储器中的特定位置。</li>
+<li>启动地址处的代码通常是一段汇编代码，用于设置处理器的初始状态和寄存器，然后跳转到 U-Boot 的入口点。</li>
+<li>在 U-Boot 的入口点，首先执行的是 <code>arch/arm/lib/vectors.S</code> 文件中的 <code>reset</code> 函数。该函数主要完成一些处理器和中断控制器的初始化工作。</li>
+<li><code>reset</code> 函数会调用 <code>arch/arm/cpu/armv7/start.S</code> 文件中的 <code>mair_init</code> 函数。<code>mair_init</code> 主要用于设置内存访问控制和缓存配置等相关设置。</li>
+<li>接下来，<code>mair_init</code> 函数会调用 <code>arch/arm/lib/crt0.S</code> 文件中的 <code>relocate_code</code> 函数。<code>relocate_code</code> 函数负责将 U-Boot 的代码从其加载地址（通常是 Flash 存储器）复制到 RAM 中，并更新相关的地址。</li>
+<li>在 <code>relocate_code</code> 函数执行完毕后，控制权将转移到 U-Boot 的入口函数（通常是 <code>board_init_f</code> 或 <code>main_loop</code> 函数），从而开始执行 U-Boot 的主要功能。</li>
+</ol>
+<h1 id="3-20-5-重定位之前准备工作"><a href="#3-20-5-重定位之前准备工作" class="headerlink" title="3.20.5 重定位之前准备工作"></a>3.20.5 重定位之前准备工作</h1><p>在 U-Boot 的重定位之前，通常会进行一些准备工作。根据您提供的信息，这些准备工作可能包括以下内容：</p>
+<p>在 <code>start.S</code> 文件中：</p>
+<ul>
+<li>设置 CPU 为 SVC（Supervisor）模式。</li>
+<li>关闭缓存和关闭 MMU（Memory Management Unit）。</li>
+<li>设置关门狗（Watchdog）、屏蔽中断、设置时钟等初始化操作。</li>
+<li>初始化 SDRAM（同步动态随机存取存储器）。</li>
+</ul>
+<p>在 <code>crt0.S</code> 文件中：</p>
+<ul>
+<li>初始化 C 语言运行环境，包括堆栈设置等。</li>
+<li>进行板级各种初始化操作，例如初始化 NAND、SDRAM 等外设。</li>
+<li>初始化全局结构体变量 GD（Global Data），并在 GD 中保存 U-Boot 的实际加载地址。</li>
+<li>调用 <code>relocate_code</code> 函数，将 U-Boot 镜像从 Flash 拷贝到内存中。</li>
+<li>从 Flash 跳转到 RAM 空间，继续执行 U-Boot 程序。</li>
+<li>清零 BSS 段（未初始化的全局变量）、进行板级初始化操作。</li>
+<li>最后进入 <code>bootcmd</code> 或 <code>main_loop</code> 循环，执行 U-Boot 的主要功能。</li>
+</ul>
+ 
       <!-- reward -->
       
     </div>

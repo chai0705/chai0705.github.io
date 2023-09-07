@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+  
+
+    <head>
+      <meta charset="utf-8" />
+        
+      <meta name="description" content="永远年轻，永远热泪盈眶" />
+      
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title> 热爱学习的未来酱</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      
+<link rel="stylesheet" href="/css/fonts/remixicon.css">
+
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    <link rel="alternate" href="/atom.xml" title="热爱学习的未来酱" type="application/atom+xml">
+</head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+      <canvas width="1777" height="841"
+        style="position: fixed; left: 0px; top: 0px; z-index: 99999; pointer-events: none;"></canvas>
+      
+    <main class="content on">
+      
+<section class="cover">
+    
+      
+      <a class="forkMe" href="https://github.com/Shen-Yu/hexo-theme-ayer"
+        target="_blank"><img width="149" height="149" src="/images/forkme.png"
+          class="attachment-full size-full" alt="Fork me on GitHub" data-recalc-dims="1"></a>
+    
+  <div class="cover-frame">
+    <div class="bg-box">
+      <img src="/images/cover3.jpg" alt="image frame" />
+    </div>
+    <div class="cover-inner text-center text-white">
+      <h1><a href="/">热爱学习的未来酱</a></h1>
+      <div id="subtitle-box">
+        
+        <span id="subtitle"></span>
+        
+      </div>
+      <div>
+        
+      </div>
+    </div>
+  </div>
+  <div class="cover-learn-more">
+    <a href="javascript:void(0)" class="anchor"><i class="ri-arrow-down-line"></i></a>
+  </div>
+</section>
+
+
+
+<script src="https://cdn.staticfile.org/typed.js/2.0.12/typed.min.js"></script>
+
+
+<!-- Subtitle -->
+
+  <script>
+    try {
+      var typed = new Typed("#subtitle", {
+        strings: ['面朝大海，春暖花开', '向上的路，并不拥挤。拥挤是因为，大部分人选择了安逸', '想要的都拥有，得不到的都释怀'],
+        startDelay: 0,
+        typeSpeed: 200,
+        loop: true,
+        backSpeed: 100,
+        showCursor: true
+      });
+    } catch (err) {
+      console.log(err)
+    }
+  </script>
+  
+<div id="main">
+  <section class="outer">
+  
+  
+  
+
+<div class="notice" style="margin-top:50px">
+    <i class="ri-heart-fill"></i>
+    <div class="notice-content" id="broad"></div>
+</div>
+<script type="text/javascript">
+    fetch('https://v1.hitokoto.cn')
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById("broad").innerHTML = data.hitokoto;
+        })
+        .catch(console.error)
+</script>
+
+<style>
+    .notice {
+        padding: 20px;
+        border: 1px dashed #e6e6e6;
+        color: #969696;
+        position: relative;
+        display: inline-block;
+        width: 100%;
+        background: #fbfbfb50;
+        border-radius: 10px;
+    }
+
+    .notice i {
+        float: left;
+        color: #999;
+        font-size: 16px;
+        padding-right: 10px;
+        vertical-align: middle;
+        margin-top: -2px;
+    }
+
+    .notice-content {
+        display: initial;
+        vertical-align: middle;
+    }
+</style>
+  
+  <article class="articles">
+    
+    
+    
+    
+    <article
+  id="post-hexo基本操作命令"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/09/02/hexo%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4/"
+    >hexo基本操作命令</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/09/02/hexo%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4/" class="article-date">
+  <time datetime="2023-09-02T12:37:14.000Z" itemprop="datePublished">2023-09-02</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/hexo/">hexo</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p><a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=Hexo&spm=1001.2101.3001.7020">Hexo</a> 约有二十个命令，但普通用户经常使用的大概只有下列几个:</p>
+<h2 id="hexo-s"><a href="#hexo-s" class="headerlink" title="hexo s"></a><strong>hexo s</strong></h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo s</span><br></pre></td></tr></table></figure>
+
+<p>启动本地服务器，用于预览主题。默认地址： <a target="_blank" rel="noopener" href="http://localhost:4000/">http://localhost:4000/</a></p>
+<ul>
+<li>hexo s 是 hexo server 的缩写，命令效果一致；</li>
+<li>预览的同时可以修改文章内容或主题代码，保存后刷新页面即可；</li>
+<li>对 Hexo 根目录 _config.yml 的修改，需要重启本地服务器后才能预览效果。</li>
+</ul>
+<h2 id="hexo-new"><a href="#hexo-new" class="headerlink" title="hexo new"></a><strong>hexo new</strong></h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new &quot;学习笔记  六&quot;</span><br></pre></td></tr></table></figure>
+
+<p>新建一篇标题为 学习笔记 六 的文章，因为标题里有空格，所以加上了引号。</p>
+<ul>
+<li>文章标题可以在对应 md 文件里改，新建时标题可以写的简单些。</li>
+</ul>
+<h2 id="hexo-d"><a href="#hexo-d" class="headerlink" title="hexo d"></a><strong>hexo d</strong></h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+
+<p>自动生成网站静态文件，并部署到设定的仓库。</p>
+<ul>
+<li>hexo d 是 hexo deploy 的缩写，命令效果一致。</li>
+</ul>
+<h2 id="hexo-clean"><a href="#hexo-clean" class="headerlink" title="hexo clean"></a><strong>hexo clean</strong></h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br></pre></td></tr></table></figure>
+
+<p>清除缓存文件 db.json 和已生成的静态文件 public 。</p>
+<ul>
+<li>网站显示异常时可以执行这条命令试试。</li>
+</ul>
+<h2 id="hexo-g"><a href="#hexo-g" class="headerlink" title="hexo g"></a><strong>hexo g</strong></h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br></pre></td></tr></table></figure>
+
+<p>生成网站静态文件到默认设置的 public 文件夹。</p>
+<ul>
+<li>便于查看网站生成的静态文件或者手动部署网站；</li>
+<li>如果使用自动部署，不需要先执行该命令；</li>
+<li>hexo g 是 hexo generate 的缩写，命令效果一致。</li>
+</ul>
+<h2 id="hexo-new-page"><a href="#hexo-new-page" class="headerlink" title="hexo new page"></a><strong>hexo new page</strong></h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new page aboutme</span><br></pre></td></tr></table></figure>
+
+<p>新建一个标题为 aboutme 的页面，默认链接地址为 主页地址&#x2F;aboutme&#x2F;</p>
+<ul>
+<li>标题可以为中文，但一般习惯用英文；</li>
+<li>页面标题和文章一样可以随意修改；</li>
+<li>页面不会出现在首页文章列表和归档中，也不支持设置分类和标签。</li>
+</ul>
+<p>hexo n “我的博客” 等价于 hexo new “我的博客” 还等价于 hexo new post “我的博客” #新建一篇文章<br>hexo p 等价于 hexo publish<br>hexo g 等价于 hexo generate<br>hexo s等价于 hexo server<br>hexo d 等价于 hexo deploy<br>hexo deploy -g 等价于 hexo deploy –generate<br>hexo generate -d等价于hexo generate –deploy</p>
+<p>一般只需要四个命令，</p>
+<p>hexo n 创建一个新的博客</p>
+<p>hexo s 开启一个新的服务</p>
+<p>hexo g 生成一个静态的网页</p>
+<p>hexo d 将生成的静态网页推到服务器github</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-ayer-主题熟悉"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/09/02/ayer-%E4%B8%BB%E9%A2%98%E7%86%9F%E6%82%89/"
+    >ayer 主题熟悉</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/09/02/ayer-%E4%B8%BB%E9%A2%98%E7%86%9F%E6%82%89/" class="article-date">
+  <time datetime="2023-09-02T11:54:05.000Z" itemprop="datePublished">2023-09-02</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/hexo/">hexo</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="1-整体介绍"><a href="#1-整体介绍" class="headerlink" title="1 整体介绍"></a>1 整体介绍</h1><p><a target="_blank" rel="noopener" href="https://github.com/Shen-Yu/hexo-theme-ayer">Ayer</a> 是一个干净且优雅的 Hexo 主题，自带响应式，加载速度很快，该有的功能都有，可配置项很多，非常适合作为你的博客主题，主题内还附送了 6 张精美的高清壁纸。欢迎使用和 Star 支持，如果你在使用过程中有任何疑问或者建议，欢迎联系我！如果你的博客采用了本主题，欢迎在下面评论区留下地址~</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/Shen-Yu/hexo-theme-ayer">Ayer</a> 在马来语中是“水”的意思，在西班牙语中是“昨天”的意思。</p>
+<h1 id="2-特性"><a href="#2-特性" class="headerlink" title="2. 特性"></a>2. 特性</h1><ol>
+<li>干净且优雅，文章内容美观易读</li>
+<li>首页封面全屏平铺，扁平化设计，简洁又不失高大上</li>
+<li>响应式设计，博客在桌面端、平板、手机等设备上均能很好的展现</li>
+<li>首页封面和文案可以任意更换，主题内附送 6 张精美高清壁纸</li>
+<li>时间轴式的归档页</li>
+<li>支持 <code>黑夜阅读</code> 模式</li>
+<li>侧边栏可以点击显示或隐藏</li>
+<li>支持文章置顶和文章打赏</li>
+<li>支持文章字数和阅读时长统计</li>
+<li>支持网易云音乐播放</li>
+<li>支持  <code>MathJax</code> 和 <code>Katex</code> 数学公式</li>
+<li>支持 <code>Mermaid</code> 流程图、状态图、时序图、甘特图</li>
+<li><code>TOC</code> 目录在文章页悬浮，跳转更方便</li>
+<li>集成了博客加密访问的功能</li>
+<li>可设置阅读文章时做密码验证<a target="_blank" rel="noopener" href="https://github.com/MikeCoder/hexo-blog-encrypt/blob/master/ReadMe.zh.md">hexo-blog-encrypt</a></li>
+<li><a target="_blank" rel="noopener" href="https://valine.js.org/">Valine</a>和<a target="_blank" rel="noopener" href="https://gitalk.github.io/">Gitalk</a>评论模块（推荐配合<code>leancloud</code>使用  <code>Valine</code>）</li>
+<li>集成了<a target="_blank" rel="noopener" href="http://busuanzi.ibruce.info/">不蒜子</a>、百度统计、Google Analytics、CNZZ 等统计功能</li>
+<li>支持 Github Ribbons</li>
+</ol>
+<h1 id="3-主题配置"><a href="#3-主题配置" class="headerlink" title="3.主题配置"></a>3.主题配置</h1><p>以下是 ayer 主题目录下的 <code>_config.yml</code> 文件配置，</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br></pre></td><td class="code"><pre><span class="line"># 侧边栏菜单</span><br><span class="line">menu:</span><br><span class="line">  主页: /</span><br><span class="line">  归档: /archives</span><br><span class="line">  分类: /categories</span><br><span class="line">  标签: /tags</span><br><span class="line">  摄影: http://shenyu-vip.lofter.com</span><br><span class="line">  旅行: /tags/旅行/</span><br><span class="line">  关于我: /2019/about</span><br><span class="line"></span><br><span class="line"># 站点次标题和打字动效</span><br><span class="line"># https://github.com/mattboldt/typed.js</span><br><span class="line">subtitle:</span><br><span class="line">  enable: true # 是否开启动效</span><br><span class="line">  text: 面朝大海，春暖花开 # 显示的文字</span><br><span class="line">  text2: 愿你一生努力，一生被爱 # 滚动播放，如果不需要可以留空</span><br><span class="line">  text3: 想要的都拥有，得不到的都释怀 # 最多支持三段文字</span><br><span class="line">  startDelay: 0 # 延迟时间</span><br><span class="line">  typeSpeed: 200 # 打字速度</span><br><span class="line">  loop: true # 是否循环</span><br><span class="line">  backSpeed: 100 # 回退速度</span><br><span class="line">  showCursor: true # 是否显示光标</span><br><span class="line"></span><br><span class="line"># 网站图标和侧边栏logo</span><br><span class="line">favicon: /favicon.ico</span><br><span class="line">logo: /images/ayer-side.svg</span><br><span class="line"></span><br><span class="line"># 封面配置</span><br><span class="line"># enable-是否启用封面；path-封面背景图；logo-封面logo</span><br><span class="line">cover:</span><br><span class="line">  enable: true</span><br><span class="line">  path: /images/cover1.jpg # /source/images目录下附送多张精美壁纸，可任意更换</span><br><span class="line">  logo: /images/ayer.svg # 如果不要直接设置成false</span><br><span class="line"></span><br><span class="line"># 页面顶部进度条</span><br><span class="line">progressBar: true</span><br><span class="line"></span><br><span class="line"># 告示板模块</span><br><span class="line">broadcast:</span><br><span class="line">  enable: true # true开启，false关闭</span><br><span class="line">  type: 2 # 1：自定义输入，2：一言api(https://hitokoto.cn/)</span><br><span class="line">  text: 一个安静优雅的hexo主题，快速且响应式。 # type为1时有效</span><br><span class="line"></span><br><span class="line"># 文章配置</span><br><span class="line"># 文章太长，截断按钮文字(在需要截断的行增加此标记：&lt;!--more--&gt;)</span><br><span class="line">excerpt_link: 阅读更多...</span><br><span class="line"># 如果你嫌每篇文章手动加more标记比较麻烦，又不想在首页全文显示，可以把excerpt_all设置成true，这样首页只会显示文章归档</span><br><span class="line">excerpt_all: false</span><br><span class="line"></span><br><span class="line"># 是否开启代码复制按钮</span><br><span class="line">copy_btn: true</span><br><span class="line"># 是否开启文章分享按钮</span><br><span class="line">share_enable: true</span><br><span class="line"># 国内的社交平台(If you are not in China, maybe you prefer to set:false)</span><br><span class="line">share_china: true</span><br><span class="line"># 文章分享文字</span><br><span class="line">share_text: 分享</span><br><span class="line"></span><br><span class="line"># 分页文字</span><br><span class="line">nav_text:</span><br><span class="line">  page_prev: 上一页</span><br><span class="line">  page_next: 下一页</span><br><span class="line">  post_prev: 上一篇</span><br><span class="line">  post_next: 下一篇</span><br><span class="line"></span><br><span class="line"># 文章页是否显示目录</span><br><span class="line">toc: true</span><br><span class="line"></span><br><span class="line"># 文章中的图片是否支持点击放大</span><br><span class="line">image_viewer: true</span><br><span class="line"></span><br><span class="line"># https://github.com/willin/hexo-wordcount</span><br><span class="line"># 是否开启字数统计(关闭请设置enable为false)</span><br><span class="line"># 也可以单独在md文件里Front-matter设置`no_word_count: true`属性，来自定义关闭字数统计</span><br><span class="line">word_count:</span><br><span class="line">  enable: true</span><br><span class="line">  # 只在文章详情显示(不在首页显示)</span><br><span class="line">  only_article_visit: true</span><br><span class="line"></span><br><span class="line"># 打赏</span><br><span class="line"># 打赏type设定：0-关闭打赏； 1-文章对应的md文件里有reward:true属性，才有打赏； 2-默认开启所有文章均有打赏，如果有些文章你不需要，请在文章对应的md文件里设置no_reward:true</span><br><span class="line">reward_type: 2</span><br><span class="line"># 打赏wording</span><br><span class="line">reward_wording: &quot;请我喝杯咖啡吧~&quot;</span><br><span class="line"># 支付宝二维码图片地址，跟你设置logo的方式一样。比如：/images/alipay.jpg</span><br><span class="line">alipay: /images/alipay.jpg</span><br><span class="line"># 微信二维码图片地址</span><br><span class="line">weixin: /images/wechat.jpg</span><br><span class="line"></span><br><span class="line"># 版权声明</span><br><span class="line"># 版权声明type设定：0-关闭版权声明； 1-文章对应的md文件里有copyright: true属性，才有版权声明； 2-所有文章均有版权声明</span><br><span class="line">copyright_type: 2</span><br><span class="line"></span><br><span class="line"># 是否启用搜索</span><br><span class="line">search: true</span><br><span class="line"></span><br><span class="line"># RSS订阅(先安装hexo-generator-feed插件，再去博客根目录config进行配置)</span><br><span class="line"># 不想显示可以直接留空</span><br><span class="line">rss: /atom.xml</span><br><span class="line"></span><br><span class="line"># 是否启用黑夜模式开关</span><br><span class="line">darkmode: true</span><br><span class="line"></span><br><span class="line"># 动态背景效果: 0-关闭，1-动态线条(跟随鼠标)</span><br><span class="line">canvas_bg: 0</span><br><span class="line"></span><br><span class="line"># 自定义鼠标样式，直接替换/images/mouse.cur文件</span><br><span class="line">mouse:</span><br><span class="line">  enable: false</span><br><span class="line">  path: /images/mouse.cur</span><br><span class="line"></span><br><span class="line"># 鼠标点击效果：0-关闭，1-爱心，2-爆炸烟花，3-粒子烟花</span><br><span class="line">click_effect: 0</span><br><span class="line"></span><br><span class="line"># 页面宽度自定义（不建议修改，可能造成布局混乱），article_width文章宽度，sidebar_width侧边栏宽度</span><br><span class="line">layout:</span><br><span class="line">  article_width: 80rem</span><br><span class="line">  sidebar_width: 8rem</span><br><span class="line"></span><br><span class="line"># GitHub Ribbons-封面右上角的forkme，换样式直接在source/images目录下替换forkme图片</span><br><span class="line">github:</span><br><span class="line">  # (关闭请设置为false)</span><br><span class="line">  enable: true</span><br><span class="line">  url: https://github.com/Shen-Yu/hexo-theme-ayer</span><br><span class="line"></span><br><span class="line"># 网易云音乐插件</span><br><span class="line">music:</span><br><span class="line">  enable: false</span><br><span class="line">  # 播放器尺寸类型(1：小尺寸、2：大尺寸)</span><br><span class="line">  type: 1</span><br><span class="line">  id: 22707008 # 网易云分享的音乐ID(更换音乐请更改此配置项)</span><br><span class="line">  autoPlay: true # 是否开启自动播放</span><br><span class="line"></span><br><span class="line"># 访问量统计(不蒜子)</span><br><span class="line">busuanzi:</span><br><span class="line">  enable: true</span><br><span class="line"></span><br><span class="line"># 友盟cnzz统计(url填js代码src链接)</span><br><span class="line">cnzz:</span><br><span class="line">  enable: true</span><br><span class="line">  url: #</span><br><span class="line"></span><br><span class="line"># Google Analytics</span><br><span class="line">google_analytics: &quot;&quot;</span><br><span class="line"># 百度统计</span><br><span class="line">baidu_analytics: &quot;&quot;</span><br><span class="line"></span><br><span class="line"># Mathjax数学公式</span><br><span class="line">mathjax: true</span><br><span class="line"></span><br><span class="line"># Katex数学公式(allpost设置为false时只有头部设置math:true的文章才开启)</span><br><span class="line"># 需要更换hexo渲染器，npm un hexo-renderer-marked -S &amp;&amp; npm i hexo-renderer-markdown-it-katex -S</span><br><span class="line">katex:</span><br><span class="line">  enable: false # true</span><br><span class="line">  allpost: true</span><br><span class="line">  copy_tex: false</span><br><span class="line"></span><br><span class="line"># mermaid流程图 三个选项缺一不可(https://mermaid-js.github.io/mermaid/#/)</span><br><span class="line">mermaid:</span><br><span class="line">  enable: false</span><br><span class="line">  cdn: https://cdn.jsdelivr.net/npm/mermaid@8.9.2/dist/mermaid.min.js</span><br><span class="line">  theme: forest</span><br><span class="line"></span><br><span class="line"># 网站成立年份(默认为 2019，若填入年份小于当前年份，则显示为 2018-2019 类似的格式)</span><br><span class="line">since: 2019</span><br><span class="line"></span><br><span class="line"># ICP备案信息尾部显示</span><br><span class="line">icp:</span><br><span class="line">  enable: false</span><br><span class="line">  url: &quot;http://www.beian.miit.gov.cn/&quot; # 备案链接</span><br><span class="line">  text: &quot;浙ICP备88888888&quot; # 备案信息</span><br><span class="line"># 公安备案信息尾部显示</span><br><span class="line">gongan:</span><br><span class="line">  enable: true</span><br><span class="line">  img: /images/beian.png #公安备案图片</span><br><span class="line">  url: &quot;http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=01234567890123&quot; #公安备案链接</span><br><span class="line">  text: &quot;浙公网安备01234567890123号&quot; #公安备案信息</span><br><span class="line"></span><br><span class="line"># 友情链接</span><br><span class="line">friends_link:</span><br><span class="line">  Ayer主题: #网站名称</span><br><span class="line">    #网站地址</span><br><span class="line">    url: https://github.com/Shen-Yu/hexo-theme-ayer</span><br><span class="line">    #网站图片(可忽略不写)</span><br><span class="line">    img: /images/ayer.png</span><br><span class="line">  GitHub:</span><br><span class="line">    url: https://github.com/Shen-Yu</span><br><span class="line">    img: https://i.loli.net/2020/09/07/indb4PRYDA98EkN.png</span><br><span class="line">  码云:</span><br><span class="line">    url: https://gitee.com/shen-yu</span><br><span class="line">    img: https://i.loli.net/2020/09/07/K3AqO7h6krQFlRX.png</span><br><span class="line">  Hexo官网:</span><br><span class="line">    url: https://hexo.io</span><br><span class="line">    img: https://i.loli.net/2020/09/07/UYGzjo7h68CRWny.png</span><br><span class="line">  Hexo图表插件:</span><br><span class="line">    url: https://github.com/Shen-Yu/hexo-tag-chart</span><br><span class="line">    img: https://i.loli.net/2020/09/07/GIXBYE5SoylhR1r.png</span><br><span class="line"></span><br><span class="line"># 评论：1、Valine(推荐)；2、Gitalk；3、Twikoo; 4.MiniValine</span><br><span class="line"></span><br><span class="line"># 1、Valine[一款快速、简洁且高效的无后端评论系统](https://github.com/xCss/Valine)</span><br><span class="line"># 启用Valine必须先创建leancloud应用， 获取 id|key 填入即可</span><br><span class="line">leancloud:</span><br><span class="line">  enable: true</span><br><span class="line">  app_id: #</span><br><span class="line">  app_key: #</span><br><span class="line"># Valine配置</span><br><span class="line">valine:</span><br><span class="line">  enable: true # 是否启用</span><br><span class="line">  avatar: monsterid # 头像样式(https://valine.js.org/avatar.html)</span><br><span class="line">  placeholder: 给我的文章加点评论吧~ # placeholder</span><br><span class="line"></span><br><span class="line"># 2、Gitalk(https://github.com/gitalk/gitalk)</span><br><span class="line">gitalk:</span><br><span class="line">  enable: false # true</span><br><span class="line">  clientID: # GitHub Application Client ID</span><br><span class="line">  clientSecret: # Client Secret</span><br><span class="line">  repo: # Repository name</span><br><span class="line">  owner: # GitHub ID</span><br><span class="line">  admin: # GitHub ID</span><br><span class="line"></span><br><span class="line"># 3、Twikoo(https://github.com/imaegoo/twikoo)</span><br><span class="line">twikoo:</span><br><span class="line">  enable: false</span><br><span class="line">  envId: #</span><br><span class="line"></span><br><span class="line"># 4、MiniValine</span><br><span class="line"># See: https://github.com/MiniValine/MiniValine</span><br><span class="line">minivaline:</span><br><span class="line">  enable: false</span><br><span class="line">  serverURL: https://minivaline.your-domain.com</span><br><span class="line"></span><br><span class="line"># 首页广告配置</span><br><span class="line"># 可以根据需要自行增加ad_3，ad_4...，留空则不显示</span><br><span class="line">ads:</span><br><span class="line">  ad_1:</span><br><span class="line">    title: vultr优惠vps</span><br><span class="line">    img: https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/vultr.png</span><br><span class="line">    url: https://www.vultr.com/?ref=8630075</span><br><span class="line">    width: 300</span><br><span class="line">  ad_2:</span><br><span class="line">    title: 云服务器全球购低至2折</span><br><span class="line">    img: https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/ad_2.jpg</span><br><span class="line">    url: https://curl.qcloud.com/kvO7hb43</span><br><span class="line">    width: 300</span><br><span class="line"></span><br><span class="line"># 网站开启加密访问，密码可设置任何字符</span><br><span class="line">lock:</span><br><span class="line">  enable: false</span><br><span class="line">  password: 123456</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-插件-可选"><a href="#4-插件-可选" class="headerlink" title="4 插件(可选)"></a>4 插件(可选)</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/netcan/hexo-generator-index-pin-top">hexo-generator-index-pin-top</a> 用于文章置顶</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/MikeCoder/hexo-blog-encrypt/blob/master/ReadMe.zh.md">hexo-blog-encrypt</a> 用于文章加密</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/MoePlayer/hexo-tag-aplayer/blob/master/docs/README-zh_cn.md">hexo-tag-aplayer</a> 用于播放音乐</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/MoePlayer/hexo-tag-dplayer">hexo-tag-dplayer</a> 用于播放视频</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/EYHN/hexo-helper-live2d/blob/master/README.zh-CN.md">hexo-helper-live2d</a> 二次元看板娘</li>
+</ul>
+<h2 id="5-分类"><a href="#5-分类" class="headerlink" title="5.分类"></a>5.分类</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new page categories</span><br></pre></td></tr></table></figure>
+
+<p>然后将以下复制到 &#x2F;source&#x2F;categories&#x2F;index.md 文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: categories</span><br><span class="line">type: &quot;categories&quot;</span><br><span class="line">layout: &quot;categories&quot;</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+<h2 id="6-标签"><a href="#6-标签" class="headerlink" title="6.标签"></a>6.标签</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new page tags</span><br></pre></td></tr></table></figure>
+
+<p>配置同分类一样</p>
+<h2 id="7-友情链接"><a href="#7-友情链接" class="headerlink" title="7. 友情链接"></a>7. 友情链接</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new page friends</span><br></pre></td></tr></table></figure>
+
+<p>然后将以下复制到 &#x2F;source&#x2F;friends&#x2F;index.md 文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: friends</span><br><span class="line">type: friends</span><br><span class="line">layout: &quot;friends&quot;</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+<p>然后在 ayer 主题目录下的 <code>_config.yml</code> 中自定义 <code>friends_link</code> 配置项即可</p>
+<h2 id="8-相册"><a href="#8-相册" class="headerlink" title="8.相册"></a>8.相册</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new page photos</span><br></pre></td></tr></table></figure>
+
+<p>然后将以下复制到 &#x2F;source&#x2F;photos&#x2F;index.md 文件，<code>img_url</code> 替换成图片路径，<code>caption</code> 替换成图片名称</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: Gallery</span><br><span class="line"></span><br><span class="line">albums: [[&quot;img_url&quot;, &quot;img_caption&quot;], [&quot;img_url&quot;, &quot;img_caption&quot;]]</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+<h2 id="文章目录"><a href="#文章目录" class="headerlink" title="文章目录"></a>文章目录</h2><p>用 Tocbot 解析文章标题并生成目录</p>
+<ul>
+<li>将以下配置复制到你 ayer 主题目录下的 <code>_config.yml</code> 里：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># Toc</span><br><span class="line">toc: true</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>当然你可能并不想所有文章都生成悬浮目录，你可以在文章顶部的配置中加一行来进行关闭：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">no_toc: true</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-c-环境搭建"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/09/02/c-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"
+    >c++ 环境搭建</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/09/02/c-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" class="article-date">
+  <time datetime="2023-09-02T11:27:36.000Z" itemprop="datePublished">2023-09-02</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/c/">c++</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="1-课程所需运行环境配置"><a href="#1-课程所需运行环境配置" class="headerlink" title="1 课程所需运行环境配置"></a>1 课程所需运行环境配置</h1><p>​		ubuntu + windows双系统 4070ti 13900K 32G </p>
+<h1 id="2-VS-Code配置"><a href="#2-VS-Code配置" class="headerlink" title="2 VS Code配置"></a>2 VS Code配置</h1><h2 id="2-1-安装vscode"><a href="#2-1-安装vscode" class="headerlink" title="2.1 安装vscode"></a>2.1 安装vscode</h2><h2 id="2-2-安装插件"><a href="#2-2-安装插件" class="headerlink" title="2.2 安装插件"></a>2.2 安装插件</h2><ol>
+<li>chinese</li>
+<li>remote ssh</li>
+<li>c++</li>
+<li>python</li>
+<li>tabnine  github.copilot</li>
+<li>run</li>
+<li>C&#x2F;C++ Extension Pack</li>
+</ol>
+<h1 id="3-下载MinGw编译器"><a href="#3-下载MinGw编译器" class="headerlink" title="3 下载MinGw编译器"></a>3 下载MinGw编译器</h1><p><a target="_blank" rel="noopener" href="https://sourceforge.net/projects/mingw-w64/files/mingw-w64/mingw-w64-release/">MinGw官网</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/545908287">知乎配置教程</a></p>
+<h2 id="4-配置C-C"><a href="#4-配置C-C" class="headerlink" title="4.配置C\C++"></a>4.配置C\C++</h2><p>重启vscode就好了</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/c/" rel="tag">c++</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-markdown-语法学习"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/09/02/markdown-%E8%AF%AD%E6%B3%95%E5%AD%A6%E4%B9%A0/"
+    >markdown 语法学习</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/09/02/markdown-%E8%AF%AD%E6%B3%95%E5%AD%A6%E4%B9%A0/" class="article-date">
+  <time datetime="2023-09-01T23:12:27.000Z" itemprop="datePublished">2023-09-02</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/markdown/">markdown</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="第1节-标题"><a href="#第1节-标题" class="headerlink" title="第1节 标题"></a>第1节 标题</h1><p>markdown 里面总共有六级标题，可以使用#号的多少来来引用，现在使用的是typora也可以直接使用ctrl+1-6的快捷按键来进行设置</p>
+<h1 id="第2节-列表"><a href="#第2节-列表" class="headerlink" title="第2节 列表"></a>第2节 列表</h1><h2 id="2-1-有序列表"><a href="#2-1-有序列表" class="headerlink" title="2.1 有序列表"></a>2.1 有序列表</h2><p>​	顾名思义，有序列表就是有小标号的列表，同样也是两种方式英⽂输⼊法下，数字后⾯加⼀点，然后空格即可，或者使用快捷按键ctrl + shift + [即可</p>
+<p>1. </p>
+<p>1. </p>
+<h2 id="2-2-无序列表"><a href="#2-2-无序列表" class="headerlink" title="2.2 无序列表"></a>2.2 无序列表</h2><p>​	跟上面的有序列表相反，无序列表就是没有标号，有四种方法、</p>
+<ul>
+<li>aaa - aaa</li>
+</ul>
+<ul>
+<li>aaa + aaa</li>
+</ul>
+<ul>
+<li>aaa *aaa</li>
+</ul>
+<ul>
+<li>aaa ctrl+shift+]</li>
+</ul>
+<h1 id="第3节-字体标记"><a href="#第3节-字体标记" class="headerlink" title="第3节 字体标记"></a>第3节 字体标记</h1><h2 id="3-1-加粗"><a href="#3-1-加粗" class="headerlink" title="3.1 加粗"></a>3.1 加粗</h2><p><strong>加粗</strong> **   内容**在typora中可以使用ctrl+b</p>
+<h2 id="3-2-删除"><a href="#3-2-删除" class="headerlink" title="3.2 删除"></a>3.2 删除</h2><p><del>删除</del> ~~ 内容~~</p>
+<h2 id="3-3-斜体"><a href="#3-3-斜体" class="headerlink" title="3.3 斜体"></a>3.3 斜体</h2><p><em>斜体</em> * 内容 *</p>
+<h2 id="3-4-高亮"><a href="#3-4-高亮" class="headerlink" title="3.4 高亮"></a>3.4 高亮</h2><p>&#x3D;&#x3D;高亮&#x3D;&#x3D; &#x3D;&#x3D;内容  &#x3D;&#x3D;需要打开pytora的高亮功能之后才行</p>
+<h1 id="第4节-段落相关"><a href="#第4节-段落相关" class="headerlink" title="第4节 段落相关"></a>第4节 段落相关</h1><h2 id="4-1-引用"><a href="#4-1-引用" class="headerlink" title="4.1 引用"></a>4.1 引用</h2><blockquote>
+<p>这是一段引用 &gt; 大于号加内容引用</p>
+</blockquote>
+<h2 id="4-2-分割线"><a href="#4-2-分割线" class="headerlink" title="4.2 分割线"></a>4.2 分割线</h2><hr>
+<p>三个横杠或者更多的横杠表示分割线</p>
+<h1 id="第5节-代码"><a href="#第5节-代码" class="headerlink" title="第5节 代码"></a>第5节 代码</h1><h2 id="5-1-行内代码"><a href="#5-1-行内代码" class="headerlink" title="5.1 行内代码"></a>5.1 行内代码</h2><p><code>这是一个行内代码</code> 1旁边那个特殊按键</p>
+<h2 id="5-2-代码块"><a href="#5-2-代码块" class="headerlink" title="5.2 代码块"></a>5.2 代码块</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;hello world&quot;</span>)</span><br><span class="line">    三个```然后回车即可，然后在右下角的选择框中进行代码的选择</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="第6节-超链接"><a href="#第6节-超链接" class="headerlink" title="第6节 超链接"></a>第6节 超链接</h1><blockquote>
+<p>格式 ：[⽹址标题] [变量01]</p>
+</blockquote>
+<p><a href="www.baidu.com">百度</a></p>
+<ul>
+<li><p>在⽂稿起草阶段，还没确定具体⽹址，但可以先给出⽹址标题</p>
+</li>
+<li><p>同⼀篇⽂章需要重复出现同⼀个⽹址时</p>
+</li>
+</ul>
+<h1 id="第7节-脚注"><a href="#第7节-脚注" class="headerlink" title="第7节 脚注"></a>第7节 脚注</h1><p>这是一个脚注<a href="%E8%BF%99%E4%B8%AA%E6%98%AF%E6%94%BE%E5%9C%A8%E6%96%87%E7%AB%A0%E5%B0%BE%E9%83%A8%E7%9A%84%EF%BC%8C%E7%94%A8%E4%BA%8E%E6%89%BF%E6%8E%A5%E4%B8%8A%E9%9D%A2%E7%9A%84%E8%84%9A%E6%B3%A8">^01</a></p>
+<h1 id="第8节-图片"><a href="#第8节-图片" class="headerlink" title="第8节 图片"></a>第8节 图片</h1><p><img src="/"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">基本格式：![](图⽚链接)</span><br></pre></td></tr></table></figure>
+
+<p><img src="D:\hexo\blog\source_posts\image-20230902075316489.png" alt="image-20230902075316489"></p>
+<p>图⽚链接可以是本地链接，也可以是在线链接</p>
+<p>但这个图片是本地路径，很有问题，所以你可能需要一个图床，用来无视地点，目前先不学呢，具体链接如下所示：</p>
+<p><a target="_blank" rel="noopener" href="https://eryinote.com/post/105">图床搭建教程</a></p>
+<h1 id="第9节-表格"><a href="#第9节-表格" class="headerlink" title="第9节 表格"></a>第9节 表格</h1><p>在typora中可以使用快捷按键进行表格的创建  ctrl+t</p>
+<p>通用的语法为</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">| 表头 | 表头 |</span><br><span class="line">| ---- | ---- |</span><br><span class="line">| 单元格 | 单元格 |</span><br><span class="line">| 单元格 | 单元格 |</span><br></pre></td></tr></table></figure>
+
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/markdown/" rel="tag">markdown</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-什么是markdown"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/09/01/%E4%BB%80%E4%B9%88%E6%98%AFmarkdown/"
+    >typora简单使用</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/09/01/%E4%BB%80%E4%B9%88%E6%98%AFmarkdown/" class="article-date">
+  <time datetime="2023-09-01T15:22:33.000Z" itemprop="datePublished">2023-09-01</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/markdown/">markdown</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>MarkDown是什么<br>Markdown 是一种轻量级标记语言，它允许人们使用易读易写的纯文本格式编写文档。</p>
+<p>Markdown 语言在 2004 由约翰·格鲁伯（英语：John Gruber）创建。</p>
+<p>Markdown 编写的文档可以导出 HTML 、Word、图像、PDF、Epub 等多种格式的文档。</p>
+<p>Markdown 编写的文档后缀为 .md, .markdown。</p>
+<h1 id="1-如何自动生成目录"><a href="#1-如何自动生成目录" class="headerlink" title="1.如何自动生成目录"></a>1.如何自动生成目录</h1><p>点击【视图】——【大纲】</p>
+<p>说明：但是此步骤生成的目录，并不是折叠的目录，折叠起来会更美观一些</p>
+<p>设置折叠目录</p>
+<p>点击【文件】——【偏好设置】——【外观】——侧边栏选择打钩，此时已经折叠成功</p>
+<h1 id="2-快捷键"><a href="#2-快捷键" class="headerlink" title="2.快捷键"></a>2.快捷键</h1><p> Ctrl+1 ——设置一级标题</p>
+<p>Ctrl+2 ——设置二级标题</p>
+<p>Ctrl+3 ——设置三级标题</p>
+<p>Ctrl+4 ——设置四级标题</p>
+<p>Ctrl+5 ——设置五级标题</p>
+<p>Ctrl+6 ——设置六级标题</p>
+<p>空格 ——引用</p>
+<p>回车、shift + tab ——退出引用</p>
+<p>Ctrl + Shift + ] ——无序列表</p>
+<p>Ctrl + Shift + [ ——有序列</p>
+<p>Ctrl + Shift + ] 、tab——子列表</p>
+<p>Shift + tab ——返回上一级列表、</p>
+<p>Ctrl + B —— 加粗</p>
+<p>Ctrl + T —— 表格</p>
+<p>~ ~ 要删除的内容 ~ ~ ——删除线</p>
+<h1 id="3-创建链接"><a href="#3-创建链接" class="headerlink" title="3.创建链接"></a>3.创建链接</h1><p>格式为[] ()，其中[]内为要展示的内容，()为链接。</p>
+<h1 id="4-图片路径管理"><a href="#4-图片路径管理" class="headerlink" title="4.图片路径管理"></a>4.图片路径管理</h1><p>Typora默认将所有文档的图片都放在一起，但是我们更想每一个文档都有属于自己的一个文件夹，文档中的图片也最好可以自动保存在该文件夹内。解决方法如下：</p>
+<p>点击【文件】——【偏好设置】——【图像】——将该界面内容设置如下:</p>
+<p> 此时，该文档所在文件夹中会自动生成一个img文件，该路径为本文档中的图片路径。</p>
+<p><img src="D:\hexo\blog\source_posts\image-20230902072149501.png"></p>
+<h1 id="5-划重点–高亮"><a href="#5-划重点–高亮" class="headerlink" title="5.划重点–高亮"></a>5.划重点–高亮</h1><p>高亮</p>
+<p>点击【文件】——【偏好设置】——【Markdown】——高亮处打钩</p>
+<p>编辑高亮内容格式如下：</p>
+<p>&#x3D;&#x3D; 内容&#x3D;&#x3D; —— 高亮</p>
+<p>&#x3D;&#x3D; chai&#x3D;&#x3D;</p>
+<p>&#x3D;&#x3D;cccc&#x3D;&#x3D; </p>
+<p>&#x3D;&#x3D; key&#x3D;&#x3D;</p>
+<p> &#x3D;&#x3D;内容&#x3D;&#x3D; </p>
+<p><strong>cha</strong></p>
+<p>重启Typora，此时内容处会变成高亮的效果.</p>
+<h1 id="6-导入代码块"><a href="#6-导入代码块" class="headerlink" title="6.导入代码块"></a>6.导入代码块</h1><p><strong>~~~</strong> ——代码块，点击代码框可选择语言</p>
+<h1 id="7-不使用自动拼写检查"><a href="#7-不使用自动拼写检查" class="headerlink" title="7.不使用自动拼写检查"></a>7.不使用自动拼写检查</h1><p>点击右下角[【Spell Check】勾选【不使用拼写检查】</p>
+<h1 id="8设置自动保存"><a href="#8设置自动保存" class="headerlink" title="8设置自动保存"></a>8设置自动保存</h1><p>其实Typora 对文件修改之后并不能自动保存，解决方法：</p>
+<p>点击【文件】——【偏好设置】——【通用】——自动保存处打钩</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/markdown/" rel="tag">markdown</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+  </article>
+  
+
+  
+  <nav class="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/page/12/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="page-number" href="/page/12/">12</a><span class="page-number current">13</span>
+  </nav>
+  
+</section>
+</div>
+
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2015-2023
+        <i class="ri-heart-fill heart_icon"></i> John Doe
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="热爱学习的未来酱"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/2019/about">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+
+<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+ 
+<script src="/js/clickBoom2.js"></script>
+ 
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+ 
+<script src="/js/dz.js"></script>
+ 
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    
+
+  </div>
+</body>
+
+</html>

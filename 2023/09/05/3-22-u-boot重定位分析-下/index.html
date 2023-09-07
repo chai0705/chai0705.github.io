@@ -90,7 +90,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">0</span>
+            <span class="post-count">911</span>
         </span>
     </span>
 
@@ -99,20 +99,37 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">1 分钟</span>
+            <span class="post-count">3 分钟</span>
         </span>
     </span>
 </div>
  
     </div>
       
+    <div class="tocbot"></div>
+
 
 
 
   
     <div class="article-entry" itemprop="articleBody">
        
-   
+  <h1 id="3-22-1-U-boot启动前期为什么可以直接在0x0起始地址运行"><a href="#3-22-1-U-boot启动前期为什么可以直接在0x0起始地址运行" class="headerlink" title="3.22.1 U-boot启动前期为什么可以直接在0x0起始地址运行?"></a>3.22.1 U-boot启动前期为什么可以直接在0x0起始地址运行?</h1><p>在某些系统中，U-Boot 可以直接从地址 0x0 处执行的原因是由于处理器的启动过程和内存映射的特殊性。</p>
+<p>在处理器上电或复位后，处理器会跳转到一个预定义的启动地址开始执行代码。对于某些处理器架构，例如 ARM 架构中的 Cortex-M 系列处理器，其启动地址通常是固定的，即地址 0x0。</p>
+<p>此时，处理器处于特权模式（例如 SVC 模式），并且还没有启用内存管理单元（MMU）和缓存。因此，此阶段的代码执行在物理地址上，可以直接访问系统的内存和外设。</p>
+<p>U-Boot 在启动前期的代码中，主要是进行一些基本的初始化工作，例如设置中断向量表、关闭缓存、关闭 MMU、初始化时钟和外设等。这些操作并不依赖于虚拟地址空间或完整的操作系统环境。</p>
+<p>在 U-Boot 启动过程的后期，会进行重定位操作，将 U-Boot 的代码从 Flash 或其他存储器中复制到 RAM 中，并更新相关的地址。此时，处理器会启用 MMU，并将代码和数据映射到虚拟地址空间中。</p>
+<p>因此，U-Boot 可以在启动前期直接从地址 0x0 处执行，而不会产生内存访问冲突或其他问题。这种设计可以简化启动流程，并避免在启动早期的阶段涉及复杂的内存映射和地址转换操作。</p>
+<h1 id="3-22-2-动态链接"><a href="#3-22-2-动态链接" class="headerlink" title="3.22.2 动态链接"></a>3.22.2 动态链接</h1><p>动态链接是一种在程序运行时进行的链接方式，它允许程序在加载和执行时动态地解析和链接外部的共享库（或动态链接库）。在 U-Boot 中采用的动态链接方式可能与传统操作系统中的动态链接有所不同，这取决于具体的实现和目标平台。</p>
+<p>以下是一些与 U-Boot 中动态链接相关的概念和技术：</p>
+<ol>
+<li>位置无关代码（Position Independent Code，PIC）：这是一种编译方式，生成的代码可以在内存中的任意位置加载和执行，而不依赖于固定的地址。位置无关代码通常使用相对寻址方式，以便在重定位时能够适应不同的加载地址。</li>
+<li>全局偏移表（Global Offset Table，GOT）：GOT 是一个数据结构，存储了程序中使用的全局符号（如函数或变量）的地址。在 U-Boot 中，GOT 可能放置在数据段中，并使用相对寻址方式进行访问。</li>
+<li>文字池（Literal Pool）：文字池是一个存储常量数据的区域，通常包括字符串字面量、常量表达式等。文字池可以用于存储需要重定位的常量数据，并在运行时进行访问。</li>
+<li>符号表（Symbol Table）和重定位符号表（Relocation Symbol Table）：这些表记录了程序中使用的符号和对应的重定位信息。在动态链接过程中，符号表和重定位符号表被用于解析和重定位外部共享库中的符号。</li>
+<li>基址重置（R_ARM_RELATIVE）：基址重置是一种重定位方式，用于将位置无关代码中的相对地址转换为绝对地址。在 U-Boot 中，基址重置可能是一种常见的重定位方式，用于修正位置无关代码中的相对地址。</li>
+</ol>
+ 
       <!-- reward -->
       
     </div>
