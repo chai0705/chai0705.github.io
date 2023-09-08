@@ -160,7 +160,7 @@
     
     
     <article
-  id="post-5-24-标号元素"
+  id="post-6-22-重新认识void"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -171,8 +171,8 @@
     <header class="article-header">
        
 <h2 itemprop="name">
-  <a class="article-title" href="/2023/09/07/5-24-%E6%A0%87%E5%8F%B7%E5%85%83%E7%B4%A0/"
-    >5.24 标号元素</a> 
+  <a class="article-title" href="/2023/09/08/6-22-%E9%87%8D%E6%96%B0%E8%AE%A4%E8%AF%86void/"
+    >6.22 重新认识void</a> 
 </h2>
  
 
@@ -180,8 +180,8 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2023/09/07/5-24-%E6%A0%87%E5%8F%B7%E5%85%83%E7%B4%A0/" class="article-date">
-  <time datetime="2023-09-07T13:14:39.000Z" itemprop="datePublished">2023-09-07</time>
+      <a href="/2023/09/08/6-22-%E9%87%8D%E6%96%B0%E8%AE%A4%E8%AF%86void/" class="article-date">
+  <time datetime="2023-09-07T23:39:32.000Z" itemprop="datePublished">2023-09-08</time>
 </a> 
   <div class="article-category">
     <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
@@ -191,23 +191,7 @@
       
     <div class="article-entry" itemprop="articleBody">
        
-  <p>标记元素是C语言中用于初始化数组和结构体的特性之一。它允许您以任意顺序指定要初始化的元素，并且可以通过数组索引或结构体的结构域名直接给它们赋值。</p>
-<p>使用标记元素可以使初始化代码更加灵活和易读，尤其在需要初始化大型数组或结构体时，可以避免冗长的初始化代码。</p>
-<p>以下是使用标记元素进行数组和结构体初始化的示例：</p>
-<ol>
-<li>数组初始化：</li>
-</ol>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> myArray[<span class="number">5</span>] = &#123; [<span class="number">2</span>] = <span class="number">42</span>, [<span class="number">4</span>] = <span class="number">99</span>, [<span class="number">1</span>] = <span class="number">7</span> &#125;;</span><br></pre></td></tr></table></figure>
-
-<p>在这个示例中，通过索引（标记）指定了要初始化的数组元素以及它们的值。数组的长度为5，但只有索引为2、4和1的元素被初始化，其他元素将被默认初始化为0。</p>
-<ol>
-<li>结构体初始化：</li>
-</ol>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Point</span> &#123;</span></span><br><span class="line">    <span class="type">int</span> x;</span><br><span class="line">    <span class="type">int</span> y;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Point</span> <span class="title">myPoint</span> =</span> &#123; .y = <span class="number">10</span>, .x = <span class="number">5</span> &#125;;</span><br></pre></td></tr></table></figure>
-
-<p>在这个示例中，通过结构体的结构域名（标记）指定了要初始化的结构体成员以及它们的值。结构体<code>Point</code>具有<code>x</code>和<code>y</code>两个成员，通过结构域名指定了它们的初始化值。</p>
-<p>通过使用标记元素，您可以以更自由的方式初始化数组和结构体，无需按照默认顺序或位置进行初始化。这提供了更大的灵活性，并使代码更易读和维护。</p>
- 
+   
       <!-- reward -->
       
     </div>
@@ -217,7 +201,7 @@
     
     <footer class="article-footer">
        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gun%E6%89%A9%E5%B1%95%E8%AF%AD%E6%B3%95/" rel="tag">gun扩展语法</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E5%92%8C%E6%8C%87%E9%92%88/" rel="tag">数据存储和指针</a></li></ul>
 
     </footer>
   </div>
@@ -229,7 +213,7 @@
 
     
     <article
-  id="post-5-23-局部标签"
+  id="post-6-21-指针函数与函数指针"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -240,8 +224,8 @@
     <header class="article-header">
        
 <h2 itemprop="name">
-  <a class="article-title" href="/2023/09/07/5-23-%E5%B1%80%E9%83%A8%E6%A0%87%E7%AD%BE/"
-    >5.23 局部标签</a> 
+  <a class="article-title" href="/2023/09/08/6-21-%E6%8C%87%E9%92%88%E5%87%BD%E6%95%B0%E4%B8%8E%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88/"
+    >6.21 指针函数与函数指针</a> 
 </h2>
  
 
@@ -249,8 +233,8 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2023/09/07/5-23-%E5%B1%80%E9%83%A8%E6%A0%87%E7%AD%BE/" class="article-date">
-  <time datetime="2023-09-07T13:14:38.000Z" itemprop="datePublished">2023-09-07</time>
+      <a href="/2023/09/08/6-21-%E6%8C%87%E9%92%88%E5%87%BD%E6%95%B0%E4%B8%8E%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88/" class="article-date">
+  <time datetime="2023-09-07T23:39:30.000Z" itemprop="datePublished">2023-09-08</time>
 </a> 
   <div class="article-category">
     <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
@@ -260,13 +244,7 @@
       
     <div class="article-entry" itemprop="articleBody">
        
-  <p>在C和C++编程语言中，局部标签（Local Labels）是指在函数或代码块内部定义的标签。与全局标签（Global Labels）不同，局部标签的作用范围仅限于所在的函数或代码块内部。</p>
-<p>局部标签的语法形式为一个冒号（:）后跟标识符，例如：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">myFunction</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// Code block with local label</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">        <span class="keyword">goto</span> myLabel; <span class="comment">// Jump to local label</span></span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Local label definition</span></span><br><span class="line">    myLabel:</span><br><span class="line">        <span class="comment">// Label code</span></span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在上述示例中，<code>myLabel</code> 是一个局部标签，它被定义在内部代码块中。在代码块中，可以使用 <code>goto</code> 语句跳转到该局部标签处，执行与标签关联的代码。</p>
-<p>局部标签主要用于在函数或代码块内部实现一些局部的控制流跳转，例如在某个条件满足时跳转到特定的代码位置。与全局标签相比，局部标签的作用范围较小，更易于控制和理解。</p>
- 
+   
       <!-- reward -->
       
     </div>
@@ -276,7 +254,7 @@
     
     <footer class="article-footer">
        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gun%E6%89%A9%E5%B1%95%E8%AF%AD%E6%B3%95/" rel="tag">gun扩展语法</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E5%92%8C%E6%8C%87%E9%92%88/" rel="tag">数据存储和指针</a></li></ul>
 
     </footer>
   </div>
@@ -288,7 +266,7 @@
 
     
     <article
-  id="post-5-22-可变参数宏"
+  id="post-6-20-二级指针：二维数组"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -299,8 +277,8 @@
     <header class="article-header">
        
 <h2 itemprop="name">
-  <a class="article-title" href="/2023/09/07/5-22-%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0%E5%AE%8F/"
-    >5.22 可变参数宏</a> 
+  <a class="article-title" href="/2023/09/08/6-20-%E4%BA%8C%E7%BA%A7%E6%8C%87%E9%92%88%EF%BC%9A%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84/"
+    >6.20 二级指针：二维数组</a> 
 </h2>
  
 
@@ -308,8 +286,8 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2023/09/07/5-22-%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0%E5%AE%8F/" class="article-date">
-  <time datetime="2023-09-07T13:14:36.000Z" itemprop="datePublished">2023-09-07</time>
+      <a href="/2023/09/08/6-20-%E4%BA%8C%E7%BA%A7%E6%8C%87%E9%92%88%EF%BC%9A%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84/" class="article-date">
+  <time datetime="2023-09-07T23:39:29.000Z" itemprop="datePublished">2023-09-08</time>
 </a> 
   <div class="article-category">
     <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
@@ -319,22 +297,7 @@
       
     <div class="article-entry" itemprop="articleBody">
        
-  <p>可变参数宏是一种宏定义的特殊形式，允许在宏中使用可变数量的参数。以下是几个示例定义可变参数宏的示例：</p>
-<p>使用 <code>__VA_ARGS__</code>：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#define debug(fmt, ...) printf(fmt, __VA_ARGS__)</span><br></pre></td></tr></table></figure>
-
-<p>在这个示例中，<code>debug</code> 是一个宏，它接受一个格式字符串 <code>fmt</code> 和可变数量的参数。宏展开时，<code>__VA_ARGS__</code> 将被替换为传递给宏的实际参数，然后被传递给 <code>printf</code> 函数。</p>
-<p>使用 <code>args...</code>：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#define debug2(fmt, args...) printf(fmt, args)</span><br></pre></td></tr></table></figure>
-
-<p>这个示例与第一个示例类似，只是使用了不同的语法。<code>args...</code> 表示可变数量的参数，然后被传递给 <code>printf</code> 函数。</p>
-<p>使用 <code>##_VA_ARGS__</code>：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#define debug(fmt, ...) printf(fmt, ##__VA_ARGS__)</span><br></pre></td></tr></table></figure>
-
-<p>这个示例中，<code>##</code> 是一个预处理运算符，用于处理可变参数为空的情况。如果可变参数为空，<code>##</code> 将删除前面的逗号，以避免编译错误。</p>
-<p>这些示例都是定义可变参数宏的常见方式。它们允许在宏中使用不定数量的参数，并将它们传递给其他函数或语句。在实际使用中，可以根据具体需求选择适合的定义方式。需要注意的是，在使用可变参数宏时，应谨慎处理参数的类型和数量，以避免潜在的错误和问题。</p>
-<p>ShareLikeDislike</p>
- 
+   
       <!-- reward -->
       
     </div>
@@ -344,7 +307,7 @@
     
     <footer class="article-footer">
        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gun%E6%89%A9%E5%B1%95%E8%AF%AD%E6%B3%95/" rel="tag">gun扩展语法</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E5%92%8C%E6%8C%87%E9%92%88/" rel="tag">数据存储和指针</a></li></ul>
 
     </footer>
   </div>
@@ -356,7 +319,7 @@
 
     
     <article
-  id="post-5-21-do-while-0"
+  id="post-6-19-二级指针：指针数组传参"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -367,8 +330,8 @@
     <header class="article-header">
        
 <h2 itemprop="name">
-  <a class="article-title" href="/2023/09/07/5-21-do-while-0/"
-    >5.21 do{}while(0)</a> 
+  <a class="article-title" href="/2023/09/08/6-19-%E4%BA%8C%E7%BA%A7%E6%8C%87%E9%92%88%EF%BC%9A%E6%8C%87%E9%92%88%E6%95%B0%E7%BB%84%E4%BC%A0%E5%8F%82/"
+    >6.19 二级指针：指针数组传参</a> 
 </h2>
  
 
@@ -376,31 +339,14 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2023/09/07/5-21-do-while-0/" class="article-date">
-  <time datetime="2023-09-07T13:14:35.000Z" itemprop="datePublished">2023-09-07</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
-  </div>
-   
+      <a href="/2023/09/08/6-19-%E4%BA%8C%E7%BA%A7%E6%8C%87%E9%92%88%EF%BC%9A%E6%8C%87%E9%92%88%E6%95%B0%E7%BB%84%E4%BC%A0%E5%8F%82/" class="article-date">
+  <time datetime="2023-09-07T23:39:27.000Z" itemprop="datePublished">2023-09-08</time>
+</a>    
     </div>
       
     <div class="article-entry" itemprop="articleBody">
        
-  <p>这是一个 do-while 循环的示例，它的语法结构如下：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">do</span> &#123;</span><br><span class="line">    <span class="comment">// code;</span></span><br><span class="line">    <span class="comment">// code;</span></span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125; <span class="keyword">while</span> (O);</span><br></pre></td></tr></table></figure>
-
-<p>在这个示例中，循环体内的代码会被执行一次，然后根据条件 <code>O</code> 的值判断是否继续执行循环。如果条件为真，则继续执行循环体；如果条件为假，则退出循环。</p>
-<p>其中，<code>code</code> 表示需要执行的代码，可以是任意合法的语句或语句块。在循环体内可以包含一条或多条代码，用分号分隔。</p>
-<p><code>O</code> 是循环条件，它可以是一个表达式、变量或常量。如果条件为真（非零值），则循环继续执行；如果条件为假（零值），则循环结束。</p>
-<p>do-while 循环与 while 循环的区别在于，do-while 循环保证循环体至少执行一次，即使条件初始时就为假。而 while 循环在执行循环体之前先判断条件，如果条件初始时就为假，则循环体不会执行。</p>
-<p>这种定义方式可能是为了实现复杂的宏定义，并且在条件语句中使用这些宏定义。</p>
-<p>宏定义允许在代码中进行文本替换，可以用来定义函数式宏（function-like macros）和复合语句宏（compound statement macros）。函数式宏可以像函数一样接受参数并返回结果，复合语句宏可以包含多个语句。</p>
-<p>使用宏定义可以在编译时进行代码替换，从而在一定程度上提高代码的执行效率。此外，宏定义还可以实现一些编程技巧，如条件编译、代码重用等。</p>
-<p>在条件语句中使用复杂的宏定义可以使代码更加简洁和可读。通过将复杂的逻辑封装在宏定义中，可以提高代码的可维护性和可重用性。</p>
-<p>另外，使用局部变量可以在宏定义中引入临时变量，以便在宏展开过程中进行计算或临时存储值。这可以增加宏定义的灵活性和功能性。</p>
-<p>总的来说，这种定义方式可能是为了实现复杂的宏定义，提高代码的可读性、可维护性和重用性，同时在条件语句中使用这些宏定义可以简化代码结构并提高可读性。然而，需要注意的是，过度复杂的宏定义可能会导致代码难以理解和调试，因此在使用时需要权衡使用宏定义的利弊，并根据实际情况进行选择。</p>
- 
+   
       <!-- reward -->
       
     </div>
@@ -410,7 +356,105 @@
     
     <footer class="article-footer">
        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gun%E6%89%A9%E5%B1%95%E8%AF%AD%E6%B3%95/" rel="tag">gun扩展语法</a></li></ul>
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-6-18-二级指针：修改指针变量"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/09/08/6-18-%E4%BA%8C%E7%BA%A7%E6%8C%87%E9%92%88%EF%BC%9A%E4%BF%AE%E6%94%B9%E6%8C%87%E9%92%88%E5%8F%98%E9%87%8F/"
+    >6.18 二级指针：修改指针变量</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/09/08/6-18-%E4%BA%8C%E7%BA%A7%E6%8C%87%E9%92%88%EF%BC%9A%E4%BF%AE%E6%94%B9%E6%8C%87%E9%92%88%E5%8F%98%E9%87%8F/" class="article-date">
+  <time datetime="2023-09-07T23:39:26.000Z" itemprop="datePublished">2023-09-08</time>
+</a>    
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+   
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-6-17-指针与结构体"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/09/08/6-17-%E6%8C%87%E9%92%88%E4%B8%8E%E7%BB%93%E6%9E%84%E4%BD%93/"
+    >6.17 指针与结构体</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/09/08/6-17-%E6%8C%87%E9%92%88%E4%B8%8E%E7%BB%93%E6%9E%84%E4%BD%93/" class="article-date">
+  <time datetime="2023-09-07T23:39:24.000Z" itemprop="datePublished">2023-09-08</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+   
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E5%92%8C%E6%8C%87%E9%92%88/" rel="tag">数据存储和指针</a></li></ul>
 
     </footer>
   </div>
@@ -422,7 +466,7 @@
 
     
     <article
-  id="post-5-20-case范围扩展"
+  id="post-6-16-指针与数组的暧昧：数值指针与指针数组"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -433,8 +477,8 @@
     <header class="article-header">
        
 <h2 itemprop="name">
-  <a class="article-title" href="/2023/09/07/5-20-case%E8%8C%83%E5%9B%B4%E6%89%A9%E5%B1%95/"
-    >5.20 case范围扩展</a> 
+  <a class="article-title" href="/2023/09/08/6-16-%E6%8C%87%E9%92%88%E4%B8%8E%E6%95%B0%E7%BB%84%E7%9A%84%E6%9A%A7%E6%98%A7%EF%BC%9A%E6%95%B0%E5%80%BC%E6%8C%87%E9%92%88%E4%B8%8E%E6%8C%87%E9%92%88%E6%95%B0%E7%BB%84/"
+    >6.16 指针与数组的暧昧：数值指针与指针数组</a> 
 </h2>
  
 
@@ -442,24 +486,14 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2023/09/07/5-20-case%E8%8C%83%E5%9B%B4%E6%89%A9%E5%B1%95/" class="article-date">
-  <time datetime="2023-09-07T13:14:33.000Z" itemprop="datePublished">2023-09-07</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
-  </div>
-   
+      <a href="/2023/09/08/6-16-%E6%8C%87%E9%92%88%E4%B8%8E%E6%95%B0%E7%BB%84%E7%9A%84%E6%9A%A7%E6%98%A7%EF%BC%9A%E6%95%B0%E5%80%BC%E6%8C%87%E9%92%88%E4%B8%8E%E6%8C%87%E9%92%88%E6%95%B0%E7%BB%84/" class="article-date">
+  <time datetime="2023-09-07T23:39:23.000Z" itemprop="datePublished">2023-09-08</time>
+</a>    
     </div>
       
     <div class="article-entry" itemprop="articleBody">
        
-  <p>在使用 <code>case</code> 语句时，值的顺序可以影响程序的性能。以下是一些注意事项：</p>
-<ol>
-<li>比较链 vs. 树 vs. 跳转表：<code>case</code> 语句可以使用比较链、树或跳转表来实现。比较链是按照 <code>case</code> 值的顺序逐个比较的方式，树是使用二叉树或多路查找树的方式，而跳转表是使用跳转指令进行快速查找。根据具体的编译器和目标平台，编译器可能会选择不同的实现方式。通常情况下，跳转表是最高效的实现方式，而比较链是最低效的实现方式。</li>
-<li>大概率值放前面：由于 <code>case</code> 语句是按照顺序逐个比较的，因此将大概率命中的值放在前面可以提高性能。这是因为如果大多数情况下的值在前面，可以减少比较的次数，从而提高执行效率。</li>
-<li>使用连续整数：如果 <code>case</code> 语句的值是连续的整数，可以考虑使用更高效的实现方式，如跳转表。这样可以将复杂度从线性降低为常数级别，提高执行效率。</li>
-</ol>
- 
+   
       <!-- reward -->
       
     </div>
@@ -469,7 +503,58 @@
     
     <footer class="article-footer">
        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gun%E6%89%A9%E5%B1%95%E8%AF%AD%E6%B3%95/" rel="tag">gun扩展语法</a></li></ul>
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-6-15-指针与数组的暧昧：数组名"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/09/08/6-15-%E6%8C%87%E9%92%88%E4%B8%8E%E6%95%B0%E7%BB%84%E7%9A%84%E6%9A%A7%E6%98%A7%EF%BC%9A%E6%95%B0%E7%BB%84%E5%90%8D/"
+    >6.15 指针与数组的暧昧：数组名</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/09/08/6-15-%E6%8C%87%E9%92%88%E4%B8%8E%E6%95%B0%E7%BB%84%E7%9A%84%E6%9A%A7%E6%98%A7%EF%BC%9A%E6%95%B0%E7%BB%84%E5%90%8D/" class="article-date">
+  <time datetime="2023-09-07T23:39:21.000Z" itemprop="datePublished">2023-09-08</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+   
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E5%92%8C%E6%8C%87%E9%92%88/" rel="tag">数据存储和指针</a></li></ul>
 
     </footer>
   </div>
@@ -481,7 +566,7 @@
 
     
     <article
-  id="post-5-19-内建函数：-builtin-expect"
+  id="post-6-14-指针与数组的暧昧：下标运算"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -492,8 +577,8 @@
     <header class="article-header">
        
 <h2 itemprop="name">
-  <a class="article-title" href="/2023/09/07/5-19-%E5%86%85%E5%BB%BA%E5%87%BD%E6%95%B0%EF%BC%9A-builtin-expect/"
-    >5.19 内建函数：__builtin_expect</a> 
+  <a class="article-title" href="/2023/09/08/6-14-%E6%8C%87%E9%92%88%E4%B8%8E%E6%95%B0%E7%BB%84%E7%9A%84%E6%9A%A7%E6%98%A7%EF%BC%9A%E4%B8%8B%E6%A0%87%E8%BF%90%E7%AE%97/"
+    >6.14 指针与数组的暧昧：下标运算</a> 
 </h2>
  
 
@@ -501,8 +586,8 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2023/09/07/5-19-%E5%86%85%E5%BB%BA%E5%87%BD%E6%95%B0%EF%BC%9A-builtin-expect/" class="article-date">
-  <time datetime="2023-09-07T13:14:31.000Z" itemprop="datePublished">2023-09-07</time>
+      <a href="/2023/09/08/6-14-%E6%8C%87%E9%92%88%E4%B8%8E%E6%95%B0%E7%BB%84%E7%9A%84%E6%9A%A7%E6%98%A7%EF%BC%9A%E4%B8%8B%E6%A0%87%E8%BF%90%E7%AE%97/" class="article-date">
+  <time datetime="2023-09-07T23:39:19.000Z" itemprop="datePublished">2023-09-08</time>
 </a> 
   <div class="article-category">
     <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
@@ -512,17 +597,7 @@
       
     <div class="article-entry" itemprop="articleBody">
        
-  <p><code>__builtin_expect</code> 是一个内建函数，用于提示编译器表达式的预期结果。它的使用方法如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">__builtin_expect (exp, c)</span><br></pre></td></tr></table></figure>
-
-<p>其中，<code>exp</code> 是一个表达式，<code>c</code> 是一个常量。该函数返回 <code>exp</code> 的值，并表示 <code>exp</code> 的结果为 <code>c</code> 的概率很大。</p>
-<p>以下是 <code>__builtin_expect</code> 的示例：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line">int max(int a, int b) &#123;</span><br><span class="line">    return (a &gt; b) ? a : b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    int x = 10;</span><br><span class="line">    int y = 5;</span><br><span class="line"></span><br><span class="line">    int result = max(x, y);</span><br><span class="line">    if (__builtin_expect(result == x, 1)) &#123;</span><br><span class="line">        printf(&quot;Result is likely to be x\n&quot;);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        printf(&quot;Result is likely not to be x\n&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在上述示例中，<code>__builtin_expect</code> 用于提示编译器 <code>result == x</code> 的结果很可能为真。如果 <code>result == x</code>，将输出 “Result is likely to be x”；否则，将输出 “Result is likely not to be x”。</p>
-<p>通过使用 <code>__builtin_expect</code>，可以提供编译器有关表达式预期结果的提示信息。这对于一些性能敏感的代码段，如分支预测优化，可以帮助编译器生成更优化的机器代码。</p>
-<p>需要注意的是，<code>__builtin_expect</code> 的提示只是一种提示，具体如何优化由编译器决定。此外，它在实际应用中的效果可能因编译器和目标平台的不同而有所差异。因此，在使用时需要进行测试和验证，并在实际性能分析中评估其效果。</p>
- 
+   
       <!-- reward -->
       
     </div>
@@ -532,7 +607,7 @@
     
     <footer class="article-footer">
        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gun%E6%89%A9%E5%B1%95%E8%AF%AD%E6%B3%95/" rel="tag">gun扩展语法</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E5%92%8C%E6%8C%87%E9%92%88/" rel="tag">数据存储和指针</a></li></ul>
 
     </footer>
   </div>
@@ -544,7 +619,7 @@
 
     
     <article
-  id="post-5-18-内建函数：-builtin-constant-p"
+  id="post-6-13-指针类型与运算"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -555,8 +630,8 @@
     <header class="article-header">
        
 <h2 itemprop="name">
-  <a class="article-title" href="/2023/09/07/5-18-%E5%86%85%E5%BB%BA%E5%87%BD%E6%95%B0%EF%BC%9A-builtin-constant-p/"
-    >5.18 内建函数：__builtin_constant_p</a> 
+  <a class="article-title" href="/2023/09/08/6-13-%E6%8C%87%E9%92%88%E7%B1%BB%E5%9E%8B%E4%B8%8E%E8%BF%90%E7%AE%97/"
+    >6.13 指针类型与运算</a> 
 </h2>
  
 
@@ -564,8 +639,8 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2023/09/07/5-18-%E5%86%85%E5%BB%BA%E5%87%BD%E6%95%B0%EF%BC%9A-builtin-constant-p/" class="article-date">
-  <time datetime="2023-09-07T13:14:30.000Z" itemprop="datePublished">2023-09-07</time>
+      <a href="/2023/09/08/6-13-%E6%8C%87%E9%92%88%E7%B1%BB%E5%9E%8B%E4%B8%8E%E8%BF%90%E7%AE%97/" class="article-date">
+  <time datetime="2023-09-07T23:39:18.000Z" itemprop="datePublished">2023-09-08</time>
 </a> 
   <div class="article-category">
     <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
@@ -575,13 +650,7 @@
       
     <div class="article-entry" itemprop="articleBody">
        
-  <p><code>__builtin_constant_p</code> 是一个内建函数，用于判断表达式是否为编译时常量。它在编译时进行求值，并返回一个整数常量，表示表达式是否为常量。</p>
-<p>以下是 <code>__builtin_constant_p</code> 的使用示例：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAX_SIZE 100</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">foo</span><span class="params">(<span class="type">int</span> size)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (__builtin_constant_p(size)) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;size is a compile-time constant\n&quot;</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;size is not a compile-time constant\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    foo(<span class="number">10</span>);        <span class="comment">// size is a compile-time constant</span></span><br><span class="line">    foo(MAX_SIZE);  <span class="comment">// size is not a compile-time constant</span></span><br><span class="line">    <span class="type">int</span> x = <span class="number">5</span>;</span><br><span class="line">    foo(x);         <span class="comment">// size is not a compile-time constant</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在上述示例中，<code>foo</code> 函数使用了 <code>__builtin_constant_p</code> 来判断 <code>size</code> 参数是否为编译时常量。如果 <code>size</code> 是编译时常量，将输出 “size is a compile-time constant”；否则，将输出 “size is not a compile-time constant”。</p>
-<p>通过使用 <code>__builtin_constant_p</code>，可以根据表达式是否为编译时常量来进行条件编译或优化。这对于在编译时进行静态优化或决策非常有用。</p>
- 
+   
       <!-- reward -->
       
     </div>
@@ -591,205 +660,7 @@
     
     <footer class="article-footer">
        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gun%E6%89%A9%E5%B1%95%E8%AF%AD%E6%B3%95/" rel="tag">gun扩展语法</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-5-17-内建函数"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/09/07/5-17-%E5%86%85%E5%BB%BA%E5%87%BD%E6%95%B0/"
-    >5.17 内建函数</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/09/07/5-17-%E5%86%85%E5%BB%BA%E5%87%BD%E6%95%B0/" class="article-date">
-  <time datetime="2023-09-07T13:14:28.000Z" itemprop="datePublished">2023-09-07</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <p>内建函数（Built-in functions）是编译器提供的一组特殊函数，其实现直接内置在编译器中。它们通常具有与普通函数相同的语法和调用方式，但在执行时具有特殊的行为和性能优化。</p>
-<p>内建函数的特点如下：</p>
-<ol>
-<li>编译器内部实现：内建函数是编译器的一部分，其实现直接嵌入在编译器中。这使得编译器可以对这些函数进行特定的优化和内部处理。</li>
-<li>直接使用：与关键字类似，内建函数可以直接使用，无需包含头文件或外部库的引用。它们是编译器的一部分，因此可以直接在代码中使用。</li>
-<li>命名：内建函数的命名通常以 <code>_builtin</code> 开头，如 <code>_builtin_strlen</code>。这样的命名约定有助于与普通函数进行区分。</li>
-<li>主要用于性能优化：内建函数的设计目的通常是为了性能优化。它们可以针对特定的操作或算法提供更高效的实现，以提高程序的执行速度。</li>
-<li>部分是 C 标准库函数的内建版本：一些内建函数是对 C 标准库函数的内建版本，提供了更高效的实现。例如，<code>_builtin_strlen</code> 可能是对标准库函数 <code>strlen</code> 的内建优化版本。</li>
-<li>没有文档且变动频繁：与标准库函数相比，内建函数通常没有官方文档，并且其行为和实现可能在不同的编译器版本中有所变化。这使得内建函数的使用相对不稳定，一般不建议在通用代码中频繁使用。</li>
-</ol>
-<p><code>__builtin_return_address(LEVEL)</code> 是一个内建函数，用于返回当前函数或调用者的返回地址。它接受一个整数参数 <code>LEVEL</code>，用于指定返回地址的级别。</p>
-<ul>
-<li>当 <code>LEVEL</code> 为0时，表示返回当前函数的返回地址。</li>
-<li>当 <code>LEVEL</code> 为1时，表示返回当前函数的调用者的返回地址。</li>
-</ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">func1</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">void</span>* return_addr = __builtin_return_address(<span class="number">0</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Return address of func1: %p\n&quot;</span>, return_addr);</span><br><span class="line">    </span><br><span class="line">    return_addr = __builtin_return_address(<span class="number">1</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Return address of func1&#x27;s caller: %p\n&quot;</span>, return_addr);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">func2</span><span class="params">()</span> &#123;</span><br><span class="line">    func1();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    func2();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在上述示例中，<code>func1</code> 调用了 <code>__builtin_return_address</code> 来获取返回地址。当 <code>LEVEL</code> 为0时，它返回的是 <code>func1</code> 的返回地址；当 <code>LEVEL</code> 为1时，它返回的是 <code>func1</code> 的调用者（即 <code>func2</code>）的返回地址。</p>
-<p>类似地，<code>__builtin_frame_address(LEVEL)</code> 是另一个内建函数，用于返回函数的栈帧地址。它的使用方式类似于 <code>__builtin_return_address</code>，也接受一个整数参数 <code>LEVEL</code>。</p>
-<ul>
-<li>当 <code>LEVEL</code> 为0时，表示返回当前函数的栈帧地址。</li>
-<li>当 <code>LEVEL</code> 为1时，表示返回当前函数的调用者的栈帧地址。</li>
-</ul>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gun%E6%89%A9%E5%B1%95%E8%AF%AD%E6%B3%95/" rel="tag">gun扩展语法</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-5-16-属性声明：used-unused"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/09/07/5-16-%E5%B1%9E%E6%80%A7%E5%A3%B0%E6%98%8E%EF%BC%9Aused-unused/"
-    >5.16 属性声明：used &amp; unused</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/09/07/5-16-%E5%B1%9E%E6%80%A7%E5%A3%B0%E6%98%8E%EF%BC%9Aused-unused/" class="article-date">
-  <time datetime="2023-09-07T13:14:27.000Z" itemprop="datePublished">2023-09-07</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <p>在给定的示例中，使用了 <code>used</code> 和 <code>unused</code> 属性来声明变量和函数的使用情况。</p>
-<ol>
-<li><code>.register int reg asm(&quot;r0&quot;) __attribute__((used));</code><br>这个声明将 <code>reg</code> 定义为一个寄存器变量，并使用 <code>used</code> 属性来指示编译器该变量会被使用。这可以防止编译器优化掉该变量，确保其在代码中的存在。</li>
-<li><code>static void func(void) __attribute__((used, section(&quot;.text&quot;)));</code><br>这个声明定义了一个静态函数 <code>func</code>，并使用 <code>used</code> 属性来指示编译器该函数会被使用。此外，通过 <code>section(&quot;.text&quot;)</code> 属性，将该函数放置在 <code>.text</code> 段中。</li>
-<li><code>static __attribute__((unused)) int a;</code><br>这个声明定义了一个静态变量 <code>a</code>，并使用 <code>unused</code> 属性来指示编识器该变量未被使用。这可以让编译器忽略该变量的存在，避免产生未使用变量的警告。</li>
-<li><code>static int func(void) __attribute__((unused));</code><br>这个声明定义了一个静态函数 <code>func</code>，并使用 <code>unused</code> 属性来指示编译器该函数未被使用。类似于上述的静态变量，这可以让编译器忽略该函数的存在。</li>
-<li><code>int fun(__attribute__((unused)) int a, int b);</code><br>这个声明定义了一个函数 <code>fun</code>，并使用 <code>unused</code> 属性来指示编译器函数中的参数 <code>a</code> 未被使用。这可以避免产生未使用参数的警告。</li>
-</ol>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gun%E6%89%A9%E5%B1%95%E8%AF%AD%E6%B3%95/" rel="tag">gun扩展语法</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-5-15-属性声明：noreturn"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/09/07/5-15-%E5%B1%9E%E6%80%A7%E5%A3%B0%E6%98%8E%EF%BC%9Anoreturn/"
-    >5.15 属性声明：noreturn</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/09/07/5-15-%E5%B1%9E%E6%80%A7%E5%A3%B0%E6%98%8E%EF%BC%9Anoreturn/" class="article-date">
-  <time datetime="2023-09-07T13:14:25.000Z" itemprop="datePublished">2023-09-07</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <p>属性声明 <code>noreturn</code> 是一个特殊的函数属性，它告诉编译器函数不会返回到调用者。这个属性可以用于告知编译器在函数执行完毕后不会返回到调用点，因此编译器可以进行一些优化，例如消除一些后续的代码或者警告未使用的返回值。</p>
-<p>下面是一个使用 <code>noreturn</code> 属性声明的示例：</p>
-<p>c</p>
-<p>Copy</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdnoreturn.h&gt;</span><br><span class="line"></span><br><span class="line">noreturn void exit_program(int exit_code) &#123;</span><br><span class="line">    // 执行一些清理操作</span><br><span class="line">    // ...</span><br><span class="line"></span><br><span class="line">    // 退出程序</span><br><span class="line">    exit(exit_code);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在上述示例中，<code>exit_program</code> 函数被声明为 <code>noreturn</code> 类型，它表示该函数在执行完毕后不会返回到调用点。在函数体内，执行了一些清理操作后，调用了 <code>exit</code> 函数来终止程序的执行。</p>
-<p>使用 <code>noreturn</code> 属性可以帮助编译器优化代码，并提供更好的代码可读性。它可以用于标记一些特殊函数，如退出程序的函数、抛出异常的函数等。</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gun%E6%89%A9%E5%B1%95%E8%AF%AD%E6%B3%95/" rel="tag">gun扩展语法</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E5%92%8C%E6%8C%87%E9%92%88/" rel="tag">数据存储和指针</a></li></ul>
 
     </footer>
   </div>
@@ -806,7 +677,7 @@
   
   <nav class="page-nav">
     
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
   </nav>
   
 </section>

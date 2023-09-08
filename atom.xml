@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2023-09-07T13:50:46.714Z</updated>
+  <updated>2023-09-07T23:40:13.303Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>5.24 标号元素</title>
-    <link href="http://example.com/2023/09/07/5-24-%E6%A0%87%E5%8F%B7%E5%85%83%E7%B4%A0/"/>
-    <id>http://example.com/2023/09/07/5-24-%E6%A0%87%E5%8F%B7%E5%85%83%E7%B4%A0/</id>
-    <published>2023-09-07T13:14:39.000Z</published>
-    <updated>2023-09-07T13:50:46.714Z</updated>
+    <title>6.22 重新认识void</title>
+    <link href="http://example.com/2023/09/08/6-22-%E9%87%8D%E6%96%B0%E8%AE%A4%E8%AF%86void/"/>
+    <id>http://example.com/2023/09/08/6-22-%E9%87%8D%E6%96%B0%E8%AE%A4%E8%AF%86void/</id>
+    <published>2023-09-07T23:39:32.000Z</published>
+    <updated>2023-09-07T23:40:13.303Z</updated>
     
     
       
@@ -37,16 +37,16 @@
     <category term="c高级编程" scheme="http://example.com/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/"/>
     
     
-    <category term="gun扩展语法" scheme="http://example.com/tags/gun%E6%89%A9%E5%B1%95%E8%AF%AD%E6%B3%95/"/>
+    <category term="数据存储和指针" scheme="http://example.com/tags/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E5%92%8C%E6%8C%87%E9%92%88/"/>
     
   </entry>
   
   <entry>
-    <title>5.23 局部标签</title>
-    <link href="http://example.com/2023/09/07/5-23-%E5%B1%80%E9%83%A8%E6%A0%87%E7%AD%BE/"/>
-    <id>http://example.com/2023/09/07/5-23-%E5%B1%80%E9%83%A8%E6%A0%87%E7%AD%BE/</id>
-    <published>2023-09-07T13:14:38.000Z</published>
-    <updated>2023-09-07T13:50:01.579Z</updated>
+    <title>6.21 指针函数与函数指针</title>
+    <link href="http://example.com/2023/09/08/6-21-%E6%8C%87%E9%92%88%E5%87%BD%E6%95%B0%E4%B8%8E%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88/"/>
+    <id>http://example.com/2023/09/08/6-21-%E6%8C%87%E9%92%88%E5%87%BD%E6%95%B0%E4%B8%8E%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88/</id>
+    <published>2023-09-07T23:39:30.000Z</published>
+    <updated>2023-09-07T23:40:11.427Z</updated>
     
     
       
@@ -62,16 +62,16 @@
     <category term="c高级编程" scheme="http://example.com/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/"/>
     
     
-    <category term="gun扩展语法" scheme="http://example.com/tags/gun%E6%89%A9%E5%B1%95%E8%AF%AD%E6%B3%95/"/>
+    <category term="数据存储和指针" scheme="http://example.com/tags/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E5%92%8C%E6%8C%87%E9%92%88/"/>
     
   </entry>
   
   <entry>
-    <title>5.22 可变参数宏</title>
-    <link href="http://example.com/2023/09/07/5-22-%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0%E5%AE%8F/"/>
-    <id>http://example.com/2023/09/07/5-22-%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0%E5%AE%8F/</id>
-    <published>2023-09-07T13:14:36.000Z</published>
-    <updated>2023-09-07T13:49:13.901Z</updated>
+    <title>6.20 二级指针：二维数组</title>
+    <link href="http://example.com/2023/09/08/6-20-%E4%BA%8C%E7%BA%A7%E6%8C%87%E9%92%88%EF%BC%9A%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84/"/>
+    <id>http://example.com/2023/09/08/6-20-%E4%BA%8C%E7%BA%A7%E6%8C%87%E9%92%88%EF%BC%9A%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84/</id>
+    <published>2023-09-07T23:39:29.000Z</published>
+    <updated>2023-09-07T23:40:09.012Z</updated>
     
     
       
@@ -87,16 +87,16 @@
     <category term="c高级编程" scheme="http://example.com/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/"/>
     
     
-    <category term="gun扩展语法" scheme="http://example.com/tags/gun%E6%89%A9%E5%B1%95%E8%AF%AD%E6%B3%95/"/>
+    <category term="数据存储和指针" scheme="http://example.com/tags/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E5%92%8C%E6%8C%87%E9%92%88/"/>
     
   </entry>
   
   <entry>
-    <title>5.21 do{}while(0)</title>
-    <link href="http://example.com/2023/09/07/5-21-do-while-0/"/>
-    <id>http://example.com/2023/09/07/5-21-do-while-0/</id>
-    <published>2023-09-07T13:14:35.000Z</published>
-    <updated>2023-09-07T13:48:53.915Z</updated>
+    <title>6.19 二级指针：指针数组传参</title>
+    <link href="http://example.com/2023/09/08/6-19-%E4%BA%8C%E7%BA%A7%E6%8C%87%E9%92%88%EF%BC%9A%E6%8C%87%E9%92%88%E6%95%B0%E7%BB%84%E4%BC%A0%E5%8F%82/"/>
+    <id>http://example.com/2023/09/08/6-19-%E4%BA%8C%E7%BA%A7%E6%8C%87%E9%92%88%EF%BC%9A%E6%8C%87%E9%92%88%E6%95%B0%E7%BB%84%E4%BC%A0%E5%8F%82/</id>
+    <published>2023-09-07T23:39:27.000Z</published>
+    <updated>2023-09-07T23:39:27.728Z</updated>
     
     
       
@@ -109,19 +109,15 @@
     
     
     
-    <category term="c高级编程" scheme="http://example.com/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/"/>
-    
-    
-    <category term="gun扩展语法" scheme="http://example.com/tags/gun%E6%89%A9%E5%B1%95%E8%AF%AD%E6%B3%95/"/>
     
   </entry>
   
   <entry>
-    <title>5.20 case范围扩展</title>
-    <link href="http://example.com/2023/09/07/5-20-case%E8%8C%83%E5%9B%B4%E6%89%A9%E5%B1%95/"/>
-    <id>http://example.com/2023/09/07/5-20-case%E8%8C%83%E5%9B%B4%E6%89%A9%E5%B1%95/</id>
-    <published>2023-09-07T13:14:33.000Z</published>
-    <updated>2023-09-07T13:47:28.532Z</updated>
+    <title>6.18 二级指针：修改指针变量</title>
+    <link href="http://example.com/2023/09/08/6-18-%E4%BA%8C%E7%BA%A7%E6%8C%87%E9%92%88%EF%BC%9A%E4%BF%AE%E6%94%B9%E6%8C%87%E9%92%88%E5%8F%98%E9%87%8F/"/>
+    <id>http://example.com/2023/09/08/6-18-%E4%BA%8C%E7%BA%A7%E6%8C%87%E9%92%88%EF%BC%9A%E4%BF%AE%E6%94%B9%E6%8C%87%E9%92%88%E5%8F%98%E9%87%8F/</id>
+    <published>2023-09-07T23:39:26.000Z</published>
+    <updated>2023-09-07T23:39:26.176Z</updated>
     
     
       
@@ -134,19 +130,15 @@
     
     
     
-    <category term="c高级编程" scheme="http://example.com/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/"/>
-    
-    
-    <category term="gun扩展语法" scheme="http://example.com/tags/gun%E6%89%A9%E5%B1%95%E8%AF%AD%E6%B3%95/"/>
     
   </entry>
   
   <entry>
-    <title>5.19 内建函数：__builtin_expect</title>
-    <link href="http://example.com/2023/09/07/5-19-%E5%86%85%E5%BB%BA%E5%87%BD%E6%95%B0%EF%BC%9A-builtin-expect/"/>
-    <id>http://example.com/2023/09/07/5-19-%E5%86%85%E5%BB%BA%E5%87%BD%E6%95%B0%EF%BC%9A-builtin-expect/</id>
-    <published>2023-09-07T13:14:31.000Z</published>
-    <updated>2023-09-07T13:46:03.782Z</updated>
+    <title>6.17 指针与结构体</title>
+    <link href="http://example.com/2023/09/08/6-17-%E6%8C%87%E9%92%88%E4%B8%8E%E7%BB%93%E6%9E%84%E4%BD%93/"/>
+    <id>http://example.com/2023/09/08/6-17-%E6%8C%87%E9%92%88%E4%B8%8E%E7%BB%93%E6%9E%84%E4%BD%93/</id>
+    <published>2023-09-07T23:39:24.000Z</published>
+    <updated>2023-09-07T23:40:06.825Z</updated>
     
     
       
@@ -162,16 +154,16 @@
     <category term="c高级编程" scheme="http://example.com/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/"/>
     
     
-    <category term="gun扩展语法" scheme="http://example.com/tags/gun%E6%89%A9%E5%B1%95%E8%AF%AD%E6%B3%95/"/>
+    <category term="数据存储和指针" scheme="http://example.com/tags/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E5%92%8C%E6%8C%87%E9%92%88/"/>
     
   </entry>
   
   <entry>
-    <title>5.18 内建函数：__builtin_constant_p</title>
-    <link href="http://example.com/2023/09/07/5-18-%E5%86%85%E5%BB%BA%E5%87%BD%E6%95%B0%EF%BC%9A-builtin-constant-p/"/>
-    <id>http://example.com/2023/09/07/5-18-%E5%86%85%E5%BB%BA%E5%87%BD%E6%95%B0%EF%BC%9A-builtin-constant-p/</id>
-    <published>2023-09-07T13:14:30.000Z</published>
-    <updated>2023-09-07T13:45:18.011Z</updated>
+    <title>6.16 指针与数组的暧昧：数值指针与指针数组</title>
+    <link href="http://example.com/2023/09/08/6-16-%E6%8C%87%E9%92%88%E4%B8%8E%E6%95%B0%E7%BB%84%E7%9A%84%E6%9A%A7%E6%98%A7%EF%BC%9A%E6%95%B0%E5%80%BC%E6%8C%87%E9%92%88%E4%B8%8E%E6%8C%87%E9%92%88%E6%95%B0%E7%BB%84/"/>
+    <id>http://example.com/2023/09/08/6-16-%E6%8C%87%E9%92%88%E4%B8%8E%E6%95%B0%E7%BB%84%E7%9A%84%E6%9A%A7%E6%98%A7%EF%BC%9A%E6%95%B0%E5%80%BC%E6%8C%87%E9%92%88%E4%B8%8E%E6%8C%87%E9%92%88%E6%95%B0%E7%BB%84/</id>
+    <published>2023-09-07T23:39:23.000Z</published>
+    <updated>2023-09-07T23:39:23.081Z</updated>
     
     
       
@@ -184,19 +176,15 @@
     
     
     
-    <category term="c高级编程" scheme="http://example.com/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/"/>
-    
-    
-    <category term="gun扩展语法" scheme="http://example.com/tags/gun%E6%89%A9%E5%B1%95%E8%AF%AD%E6%B3%95/"/>
     
   </entry>
   
   <entry>
-    <title>5.17 内建函数</title>
-    <link href="http://example.com/2023/09/07/5-17-%E5%86%85%E5%BB%BA%E5%87%BD%E6%95%B0/"/>
-    <id>http://example.com/2023/09/07/5-17-%E5%86%85%E5%BB%BA%E5%87%BD%E6%95%B0/</id>
-    <published>2023-09-07T13:14:28.000Z</published>
-    <updated>2023-09-07T13:44:27.665Z</updated>
+    <title>6.15 指针与数组的暧昧：数组名</title>
+    <link href="http://example.com/2023/09/08/6-15-%E6%8C%87%E9%92%88%E4%B8%8E%E6%95%B0%E7%BB%84%E7%9A%84%E6%9A%A7%E6%98%A7%EF%BC%9A%E6%95%B0%E7%BB%84%E5%90%8D/"/>
+    <id>http://example.com/2023/09/08/6-15-%E6%8C%87%E9%92%88%E4%B8%8E%E6%95%B0%E7%BB%84%E7%9A%84%E6%9A%A7%E6%98%A7%EF%BC%9A%E6%95%B0%E7%BB%84%E5%90%8D/</id>
+    <published>2023-09-07T23:39:21.000Z</published>
+    <updated>2023-09-07T23:40:04.887Z</updated>
     
     
       
@@ -212,16 +200,16 @@
     <category term="c高级编程" scheme="http://example.com/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/"/>
     
     
-    <category term="gun扩展语法" scheme="http://example.com/tags/gun%E6%89%A9%E5%B1%95%E8%AF%AD%E6%B3%95/"/>
+    <category term="数据存储和指针" scheme="http://example.com/tags/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E5%92%8C%E6%8C%87%E9%92%88/"/>
     
   </entry>
   
   <entry>
-    <title>5.16 属性声明：used &amp; unused</title>
-    <link href="http://example.com/2023/09/07/5-16-%E5%B1%9E%E6%80%A7%E5%A3%B0%E6%98%8E%EF%BC%9Aused-unused/"/>
-    <id>http://example.com/2023/09/07/5-16-%E5%B1%9E%E6%80%A7%E5%A3%B0%E6%98%8E%EF%BC%9Aused-unused/</id>
-    <published>2023-09-07T13:14:27.000Z</published>
-    <updated>2023-09-07T13:42:13.003Z</updated>
+    <title>6.14 指针与数组的暧昧：下标运算</title>
+    <link href="http://example.com/2023/09/08/6-14-%E6%8C%87%E9%92%88%E4%B8%8E%E6%95%B0%E7%BB%84%E7%9A%84%E6%9A%A7%E6%98%A7%EF%BC%9A%E4%B8%8B%E6%A0%87%E8%BF%90%E7%AE%97/"/>
+    <id>http://example.com/2023/09/08/6-14-%E6%8C%87%E9%92%88%E4%B8%8E%E6%95%B0%E7%BB%84%E7%9A%84%E6%9A%A7%E6%98%A7%EF%BC%9A%E4%B8%8B%E6%A0%87%E8%BF%90%E7%AE%97/</id>
+    <published>2023-09-07T23:39:19.000Z</published>
+    <updated>2023-09-07T23:40:03.097Z</updated>
     
     
       
@@ -237,16 +225,16 @@
     <category term="c高级编程" scheme="http://example.com/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/"/>
     
     
-    <category term="gun扩展语法" scheme="http://example.com/tags/gun%E6%89%A9%E5%B1%95%E8%AF%AD%E6%B3%95/"/>
+    <category term="数据存储和指针" scheme="http://example.com/tags/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E5%92%8C%E6%8C%87%E9%92%88/"/>
     
   </entry>
   
   <entry>
-    <title>5.15 属性声明：noreturn</title>
-    <link href="http://example.com/2023/09/07/5-15-%E5%B1%9E%E6%80%A7%E5%A3%B0%E6%98%8E%EF%BC%9Anoreturn/"/>
-    <id>http://example.com/2023/09/07/5-15-%E5%B1%9E%E6%80%A7%E5%A3%B0%E6%98%8E%EF%BC%9Anoreturn/</id>
-    <published>2023-09-07T13:14:25.000Z</published>
-    <updated>2023-09-07T13:41:29.229Z</updated>
+    <title>6.13 指针类型与运算</title>
+    <link href="http://example.com/2023/09/08/6-13-%E6%8C%87%E9%92%88%E7%B1%BB%E5%9E%8B%E4%B8%8E%E8%BF%90%E7%AE%97/"/>
+    <id>http://example.com/2023/09/08/6-13-%E6%8C%87%E9%92%88%E7%B1%BB%E5%9E%8B%E4%B8%8E%E8%BF%90%E7%AE%97/</id>
+    <published>2023-09-07T23:39:18.000Z</published>
+    <updated>2023-09-07T23:40:01.371Z</updated>
     
     
       
@@ -262,16 +250,16 @@
     <category term="c高级编程" scheme="http://example.com/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/"/>
     
     
-    <category term="gun扩展语法" scheme="http://example.com/tags/gun%E6%89%A9%E5%B1%95%E8%AF%AD%E6%B3%95/"/>
+    <category term="数据存储和指针" scheme="http://example.com/tags/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E5%92%8C%E6%8C%87%E9%92%88/"/>
     
   </entry>
   
   <entry>
-    <title>5.14 属性声明：mode</title>
-    <link href="http://example.com/2023/09/07/5-14-%E5%B1%9E%E6%80%A7%E5%A3%B0%E6%98%8E%EF%BC%9Amode/"/>
-    <id>http://example.com/2023/09/07/5-14-%E5%B1%9E%E6%80%A7%E5%A3%B0%E6%98%8E%EF%BC%9Amode/</id>
-    <published>2023-09-07T13:14:24.000Z</published>
-    <updated>2023-09-07T13:40:31.578Z</updated>
+    <title>6.12 一些复杂的指针声明</title>
+    <link href="http://example.com/2023/09/08/6-12-%E4%B8%80%E4%BA%9B%E5%A4%8D%E6%9D%82%E7%9A%84%E6%8C%87%E9%92%88%E5%A3%B0%E6%98%8E/"/>
+    <id>http://example.com/2023/09/08/6-12-%E4%B8%80%E4%BA%9B%E5%A4%8D%E6%9D%82%E7%9A%84%E6%8C%87%E9%92%88%E5%A3%B0%E6%98%8E/</id>
+    <published>2023-09-07T23:39:16.000Z</published>
+    <updated>2023-09-07T23:39:59.590Z</updated>
     
     
       
@@ -287,16 +275,16 @@
     <category term="c高级编程" scheme="http://example.com/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/"/>
     
     
-    <category term="gun扩展语法" scheme="http://example.com/tags/gun%E6%89%A9%E5%B1%95%E8%AF%AD%E6%B3%95/"/>
+    <category term="数据存储和指针" scheme="http://example.com/tags/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E5%92%8C%E6%8C%87%E9%92%88/"/>
     
   </entry>
   
   <entry>
-    <title>5.13 属性声明：noinline &amp; always_inline</title>
-    <link href="http://example.com/2023/09/07/5-13-%E5%B1%9E%E6%80%A7%E5%A3%B0%E6%98%8E%EF%BC%9Anoinline-always-inline/"/>
-    <id>http://example.com/2023/09/07/5-13-%E5%B1%9E%E6%80%A7%E5%A3%B0%E6%98%8E%EF%BC%9Anoinline-always-inline/</id>
-    <published>2023-09-07T13:14:22.000Z</published>
-    <updated>2023-09-07T13:37:02.753Z</updated>
+    <title>6.11 从变量到指针</title>
+    <link href="http://example.com/2023/09/08/6-11-%E4%BB%8E%E5%8F%98%E9%87%8F%E5%88%B0%E6%8C%87%E9%92%88/"/>
+    <id>http://example.com/2023/09/08/6-11-%E4%BB%8E%E5%8F%98%E9%87%8F%E5%88%B0%E6%8C%87%E9%92%88/</id>
+    <published>2023-09-07T23:39:15.000Z</published>
+    <updated>2023-09-07T23:39:57.363Z</updated>
     
     
       
@@ -312,16 +300,16 @@
     <category term="c高级编程" scheme="http://example.com/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/"/>
     
     
-    <category term="gun扩展语法" scheme="http://example.com/tags/gun%E6%89%A9%E5%B1%95%E8%AF%AD%E6%B3%95/"/>
+    <category term="数据存储和指针" scheme="http://example.com/tags/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E5%92%8C%E6%8C%87%E9%92%88/"/>
     
   </entry>
   
   <entry>
-    <title>5.12 属性声明：constructor &amp; destructor</title>
-    <link href="http://example.com/2023/09/07/5-12-%E5%B1%9E%E6%80%A7%E5%A3%B0%E6%98%8E%EF%BC%9Aconstructor-destructor/"/>
-    <id>http://example.com/2023/09/07/5-12-%E5%B1%9E%E6%80%A7%E5%A3%B0%E6%98%8E%EF%BC%9Aconstructor-destructor/</id>
-    <published>2023-09-07T13:14:20.000Z</published>
-    <updated>2023-09-07T13:34:46.258Z</updated>
+    <title>6.10 常量存储</title>
+    <link href="http://example.com/2023/09/08/6-10-%E5%B8%B8%E9%87%8F%E5%AD%98%E5%82%A8/"/>
+    <id>http://example.com/2023/09/08/6-10-%E5%B8%B8%E9%87%8F%E5%AD%98%E5%82%A8/</id>
+    <published>2023-09-07T23:39:13.000Z</published>
+    <updated>2023-09-07T23:39:54.848Z</updated>
     
     
       
@@ -337,16 +325,16 @@
     <category term="c高级编程" scheme="http://example.com/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/"/>
     
     
-    <category term="gun扩展语法" scheme="http://example.com/tags/gun%E6%89%A9%E5%B1%95%E8%AF%AD%E6%B3%95/"/>
+    <category term="数据存储和指针" scheme="http://example.com/tags/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E5%92%8C%E6%8C%87%E9%92%88/"/>
     
   </entry>
   
   <entry>
-    <title>5.11 属性声明：weak &amp; alias</title>
-    <link href="http://example.com/2023/09/07/5-11-%E5%B1%9E%E6%80%A7%E5%A3%B0%E6%98%8E%EF%BC%9Aweak-alias/"/>
-    <id>http://example.com/2023/09/07/5-11-%E5%B1%9E%E6%80%A7%E5%A3%B0%E6%98%8E%EF%BC%9Aweak-alias/</id>
-    <published>2023-09-07T13:14:19.000Z</published>
-    <updated>2023-09-07T13:33:57.527Z</updated>
+    <title>6.9 变量的本质</title>
+    <link href="http://example.com/2023/09/08/6-9-%E5%8F%98%E9%87%8F%E7%9A%84%E6%9C%AC%E8%B4%A8/"/>
+    <id>http://example.com/2023/09/08/6-9-%E5%8F%98%E9%87%8F%E7%9A%84%E6%9C%AC%E8%B4%A8/</id>
+    <published>2023-09-07T23:39:12.000Z</published>
+    <updated>2023-09-07T23:39:51.815Z</updated>
     
     
       
@@ -362,16 +350,16 @@
     <category term="c高级编程" scheme="http://example.com/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/"/>
     
     
-    <category term="gun扩展语法" scheme="http://example.com/tags/gun%E6%89%A9%E5%B1%95%E8%AF%AD%E6%B3%95/"/>
+    <category term="数据存储和指针" scheme="http://example.com/tags/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E5%92%8C%E6%8C%87%E9%92%88/"/>
     
   </entry>
   
   <entry>
-    <title>5.10 属性声明：const</title>
-    <link href="http://example.com/2023/09/07/5-10-%E5%B1%9E%E6%80%A7%E5%A3%B0%E6%98%8E%EF%BC%9Aconst/"/>
-    <id>http://example.com/2023/09/07/5-10-%E5%B1%9E%E6%80%A7%E5%A3%B0%E6%98%8E%EF%BC%9Aconst/</id>
-    <published>2023-09-07T13:14:17.000Z</published>
-    <updated>2023-09-07T13:31:39.705Z</updated>
+    <title>6.8 内核中的size_t数据类型</title>
+    <link href="http://example.com/2023/09/08/6-8-%E5%86%85%E6%A0%B8%E4%B8%AD%E7%9A%84size-t%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/"/>
+    <id>http://example.com/2023/09/08/6-8-%E5%86%85%E6%A0%B8%E4%B8%AD%E7%9A%84size-t%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</id>
+    <published>2023-09-07T23:39:10.000Z</published>
+    <updated>2023-09-07T23:39:49.532Z</updated>
     
     
       
@@ -387,16 +375,16 @@
     <category term="c高级编程" scheme="http://example.com/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/"/>
     
     
-    <category term="gun扩展语法" scheme="http://example.com/tags/gun%E6%89%A9%E5%B1%95%E8%AF%AD%E6%B3%95/"/>
+    <category term="数据存储和指针" scheme="http://example.com/tags/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E5%92%8C%E6%8C%87%E9%92%88/"/>
     
   </entry>
   
   <entry>
-    <title>5.9 属性声明：format</title>
-    <link href="http://example.com/2023/09/07/5-9-%E5%B1%9E%E6%80%A7%E5%A3%B0%E6%98%8E%EF%BC%9Aformat/"/>
-    <id>http://example.com/2023/09/07/5-9-%E5%B1%9E%E6%80%A7%E5%A3%B0%E6%98%8E%EF%BC%9Aformat/</id>
-    <published>2023-09-07T13:14:16.000Z</published>
-    <updated>2023-09-07T13:30:39.548Z</updated>
+    <title>6.7 数据的可移植性</title>
+    <link href="http://example.com/2023/09/08/6-7-%E6%95%B0%E6%8D%AE%E7%9A%84%E5%8F%AF%E7%A7%BB%E6%A4%8D%E6%80%A7/"/>
+    <id>http://example.com/2023/09/08/6-7-%E6%95%B0%E6%8D%AE%E7%9A%84%E5%8F%AF%E7%A7%BB%E6%A4%8D%E6%80%A7/</id>
+    <published>2023-09-07T23:39:08.000Z</published>
+    <updated>2023-09-07T23:39:46.784Z</updated>
     
     
       
@@ -412,16 +400,16 @@
     <category term="c高级编程" scheme="http://example.com/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/"/>
     
     
-    <category term="gun扩展语法" scheme="http://example.com/tags/gun%E6%89%A9%E5%B1%95%E8%AF%AD%E6%B3%95/"/>
+    <category term="数据存储和指针" scheme="http://example.com/tags/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E5%92%8C%E6%8C%87%E9%92%88/"/>
     
   </entry>
   
   <entry>
-    <title>5.8 属性声明：aligned &amp; packed</title>
-    <link href="http://example.com/2023/09/07/5-8-%E5%B1%9E%E6%80%A7%E5%A3%B0%E6%98%8E%EF%BC%9Aaligned-packed/"/>
-    <id>http://example.com/2023/09/07/5-8-%E5%B1%9E%E6%80%A7%E5%A3%B0%E6%98%8E%EF%BC%9Aaligned-packed/</id>
-    <published>2023-09-07T13:14:14.000Z</published>
-    <updated>2023-09-07T13:29:39.706Z</updated>
+    <title>6.6 数据类型转换</title>
+    <link href="http://example.com/2023/09/08/6-6-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/"/>
+    <id>http://example.com/2023/09/08/6-6-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/</id>
+    <published>2023-09-07T23:39:07.000Z</published>
+    <updated>2023-09-07T23:39:42.519Z</updated>
     
     
       
@@ -437,16 +425,16 @@
     <category term="c高级编程" scheme="http://example.com/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/"/>
     
     
-    <category term="gun扩展语法" scheme="http://example.com/tags/gun%E6%89%A9%E5%B1%95%E8%AF%AD%E6%B3%95/"/>
+    <category term="数据存储和指针" scheme="http://example.com/tags/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E5%92%8C%E6%8C%87%E9%92%88/"/>
     
   </entry>
   
   <entry>
-    <title>5.7 属性声明：section</title>
-    <link href="http://example.com/2023/09/07/5-7-%E5%B1%9E%E6%80%A7%E5%A3%B0%E6%98%8E%EF%BC%9Asection/"/>
-    <id>http://example.com/2023/09/07/5-7-%E5%B1%9E%E6%80%A7%E5%A3%B0%E6%98%8E%EF%BC%9Asection/</id>
-    <published>2023-09-07T13:14:13.000Z</published>
-    <updated>2023-09-07T13:29:30.588Z</updated>
+    <title>6.5 数据对齐</title>
+    <link href="http://example.com/2023/09/08/6-5-%E6%95%B0%E6%8D%AE%E5%AF%B9%E9%BD%90/"/>
+    <id>http://example.com/2023/09/08/6-5-%E6%95%B0%E6%8D%AE%E5%AF%B9%E9%BD%90/</id>
+    <published>2023-09-07T23:39:05.000Z</published>
+    <updated>2023-09-08T00:26:53.381Z</updated>
     
     
       
@@ -462,16 +450,16 @@
     <category term="c高级编程" scheme="http://example.com/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/"/>
     
     
-    <category term="gun扩展语法" scheme="http://example.com/tags/gun%E6%89%A9%E5%B1%95%E8%AF%AD%E6%B3%95/"/>
+    <category term="数据存储和指针" scheme="http://example.com/tags/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E5%92%8C%E6%8C%87%E9%92%88/"/>
     
   </entry>
   
   <entry>
-    <title>5.6 零长度数组</title>
-    <link href="http://example.com/2023/09/07/5-6-%E9%9B%B6%E9%95%BF%E5%BA%A6%E6%95%B0%E7%BB%84/"/>
-    <id>http://example.com/2023/09/07/5-6-%E9%9B%B6%E9%95%BF%E5%BA%A6%E6%95%B0%E7%BB%84/</id>
-    <published>2023-09-07T13:14:11.000Z</published>
-    <updated>2023-09-07T13:26:13.855Z</updated>
+    <title>6.4 数据溢出</title>
+    <link href="http://example.com/2023/09/08/6-4-%E6%95%B0%E6%8D%AE%E6%BA%A2%E5%87%BA/"/>
+    <id>http://example.com/2023/09/08/6-4-%E6%95%B0%E6%8D%AE%E6%BA%A2%E5%87%BA/</id>
+    <published>2023-09-07T23:39:04.000Z</published>
+    <updated>2023-09-08T00:09:04.710Z</updated>
     
     
       
@@ -487,16 +475,16 @@
     <category term="c高级编程" scheme="http://example.com/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/"/>
     
     
-    <category term="gun扩展语法" scheme="http://example.com/tags/gun%E6%89%A9%E5%B1%95%E8%AF%AD%E6%B3%95/"/>
+    <category term="数据存储和指针" scheme="http://example.com/tags/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E5%92%8C%E6%8C%87%E9%92%88/"/>
     
   </entry>
   
   <entry>
-    <title>5.5 container_of</title>
-    <link href="http://example.com/2023/09/07/5-5-container-of/"/>
-    <id>http://example.com/2023/09/07/5-5-container-of/</id>
-    <published>2023-09-07T13:14:10.000Z</published>
-    <updated>2023-09-07T13:23:52.664Z</updated>
+    <title>6.3 有符号数和无符号数</title>
+    <link href="http://example.com/2023/09/08/6-3-%E6%9C%89%E7%AC%A6%E5%8F%B7%E6%95%B0%E5%92%8C%E6%97%A0%E7%AC%A6%E5%8F%B7%E6%95%B0/"/>
+    <id>http://example.com/2023/09/08/6-3-%E6%9C%89%E7%AC%A6%E5%8F%B7%E6%95%B0%E5%92%8C%E6%97%A0%E7%AC%A6%E5%8F%B7%E6%95%B0/</id>
+    <published>2023-09-07T23:39:02.000Z</published>
+    <updated>2023-09-08T00:03:14.100Z</updated>
     
     
       
@@ -512,7 +500,7 @@
     <category term="c高级编程" scheme="http://example.com/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/"/>
     
     
-    <category term="gun扩展语法" scheme="http://example.com/tags/gun%E6%89%A9%E5%B1%95%E8%AF%AD%E6%B3%95/"/>
+    <category term="数据存储和指针" scheme="http://example.com/tags/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E5%92%8C%E6%8C%87%E9%92%88/"/>
     
   </entry>
   

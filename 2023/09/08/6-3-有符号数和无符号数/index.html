@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+  
+
+    <head>
+      <meta charset="utf-8" />
+        
+      <meta name="description" content="永远年轻，永远热泪盈眶" />
+      
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>6.3 有符号数和无符号数 |  热爱学习的未来酱</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      
+<link rel="stylesheet" href="/css/fonts/remixicon.css">
+
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    <link rel="alternate" href="/atom.xml" title="热爱学习的未来酱" type="application/atom+xml">
+</head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+      <canvas width="1777" height="841"
+        style="position: fixed; left: 0px; top: 0px; z-index: 99999; pointer-events: none;"></canvas>
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-6-3-有符号数和无符号数"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  6.3 有符号数和无符号数
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/09/08/6-3-%E6%9C%89%E7%AC%A6%E5%8F%B7%E6%95%B0%E5%92%8C%E6%97%A0%E7%AC%A6%E5%8F%B7%E6%95%B0/" class="article-date">
+  <time datetime="2023-09-07T23:39:02.000Z" itemprop="datePublished">2023-09-08</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">2.6k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">9 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="6-3-1-有符号数和无符号数"><a href="#6-3-1-有符号数和无符号数" class="headerlink" title="6.3.1 有符号数和无符号数"></a>6.3.1 有符号数和无符号数</h1><p>关键字 “signed” 和 “unsigned” 在C语言中用于声明整数类型的有符号性质。</p>
+<ol>
+<li>“signed” 关键字：它用于声明有符号整数类型，表示该类型的变量可以表示正数、负数和零。在C语言中，如果没有指定类型的有符号性，默认情况下整数类型是有符号的。例如，<code>int</code> 是有符号整数类型。</li>
+<li>“unsigned” 关键字：它用于声明无符号整数类型，表示该类型的变量只能表示非负数（正数和零），不包括负数。使用无符号整数类型可以扩展整数的表示范围。例如，<code>unsigned int</code> 是无符号整数类型。</li>
+</ol>
+<p>默认情况下，整数类型是有符号的，即省略了 “signed” 关键字，所声明的整数类型都是有符号的。例如，<code>int</code> 和 <code>signed int</code> 是等价的。</p>
+<p>在打印数据时，可以使用不同的格式说明符来表示有符号数和无符号数：</p>
+<ul>
+<li><code>%d</code>：用于打印有符号整数，表示十进制输出。</li>
+<li><code>%u</code>：用于打印无符号整数，同样表示十进制输出。</li>
+</ul>
+<p>对于有符号整数，其范围取决于具体的数据类型。常见的有符号整数类型及其范围如下：</p>
+<ul>
+<li><code>char</code> 类型（通常为有符号）：范围是 [-128, 127]。</li>
+<li><code>signed char</code> 类型：范围是 [-128, 127]。</li>
+<li><code>short</code> 类型（也称为 <code>short int</code>）：范围是 [-32,768, 32,767]。</li>
+<li><code>int</code> 类型（也称为 <code>signed int</code>）：范围取决于具体的实现，但至少为 [-32,768, 32,767]。</li>
+<li><code>long</code> 类型（也称为 <code>long int</code>）：范围取决于具体的实现，但至少为 [-2,147,483,648, 2,147,483,647]。</li>
+</ul>
+<p>对于无符号整数，其范围为 [0, 最大值]，最大值取决于具体的数据类型。例如，<code>unsigned char</code> 范围为 [0, 255]。</p>
+<h1 id="6-3-2-原码、反码和补码"><a href="#6-3-2-原码、反码和补码" class="headerlink" title="6.3.2 原码、反码和补码"></a>6.3.2 原码、反码和补码</h1><p>以有符号8位整数为例，对于数值-3，以下是原码、反码和补码的示例：</p>
+<ol>
+<li><p>原码（Sign-Magnitude）：将数值的绝对值转换为二进制表示，并在最高位添加符号位。对于-3，其原码表示为：</p>
+<p>原码: 1000 0011</p>
+<p>最高位的1表示负数，其余位表示数值的绝对值。</p>
+</li>
+<li><p>反码（Ones’ Complement）：对于负数，反码是将其原码中除符号位外的每一位取反（0变为1，1变为0）。对于-3，其反码表示为：</p>
+<p>反码: 1111 1100</p>
+<p>原码中除符号位外的每一位取反得到反码。</p>
+</li>
+<li><p>补码（Two’s Complement）：对于负数，补码是在反码的基础上加1。对于-3，其补码表示为：</p>
+<p>补码: 1111 1101</p>
+<p>反码加1得到补码。</p>
+</li>
+</ol>
+<p>需要注意的是，原码、反码和补码是用于表示负数的一种编码方式。在计算机中，负数一般以补码的形式存储和运算。补码具有以下特点：对于正数，其原码、反码和补码是相同的；而对于负数，其补码与其绝对值的二进制表示相差1。</p>
+<h1 id="6-3-3-数据的存储"><a href="#6-3-3-数据的存储" class="headerlink" title="6.3.3 数据的存储"></a>6.3.3 数据的存储</h1><p>在计算机中，无符号数和有符号数的存储方式有所不同。</p>
+<ol>
+<li>无符号数的存储：无符号数直接将其真值（即数值的绝对值）转换为二进制表示，没有原码和补码之分。无符号数的存储方式只考虑数值的表示范围，将数值转换为二进制形式存储在相应的数据类型中。例如，对于无符号8位整数类型，数值范围为0到255，直接将数值转换为二进制表示存储即可。</li>
+<li>有符号数的存储：有符号数采用补码的形式进行存储。补码是一种表示负数的编码方式，它可以将负数的表示范围扩展到与正数相同的位数上。<ul>
+<li>正数的补码：对于正数，补码等于其原码，即正数的补码与其原码相同。这是因为正数的最高位为0，其原码、反码和补码都相同。</li>
+<li>负数的补码：对于负数，补码等于其反码加1。反码是将负数的原码中除符号位外的每一位取反得到的结果。</li>
+</ul>
+</li>
+</ol>
+<p>使用补码的存储方式有以下优点：</p>
+<ul>
+<li>补码可以统一处理正数和负数的运算，简化了运算器的设计。</li>
+<li>补码中只有一个零表示，避免了正零和负零的区分。</li>
+<li>补码的表示范围与无符号数相同，可以利用同样的位数表示更大的数值范围。</li>
+</ul>
+<p>总结：</p>
+<ul>
+<li>无符号数直接将数值转换为二进制表示进行存储。</li>
+<li>有符号数采用补码的形式进行存储，正数的补码等于其原码，负数的补码等于其反码加1。补码的存储方式统一了正数和负数的表示和运算。</li>
+</ul>
+<h1 id="6-3-4-为什么使用补码？"><a href="#6-3-4-为什么使用补码？" class="headerlink" title="6.3.4 为什么使用补码？"></a>6.3.4 为什么使用补码？</h1><p>在补码表示中，对于有符号整数类型，存在正零和负零的编码。以下是+0和-0的编码示例，假设使用8位有符号整数类型：</p>
+<ul>
+<li>+0 的编码：+0 在补码表示中与正数的编码相同，即直接将数值 0 转换为二进制表示即可。<br>+0 的补码表示为：[0000 0000]</li>
+<li>-0 的编码：在补码表示中，-0 的补码与最小负数的补码表示相同，即将最小负数的绝对值取反得到 -0 的补码。<br>-0 的补码表示为：[1000 0000]</li>
+</ul>
+<p>需要注意的是，在实际计算机中，对于有符号整数类型，通常使用补码表示来处理正数、负数和零。正数的补码等于其原码，负数的补码等于其反码加 1。补码的形式可以解决零的编码问题，即只有一个零的表示，同时还可以多保存一个最小值，例如对于有符号的 8 位整数类型 (signed char)，可以多保存一个最小值 -128（补码为 [1000 0000]），而没有原码和反码的表示。</p>
+<p>补码的使用有以下好处：</p>
+<ul>
+<li>统一了正数、负数和零的表示，简化了运算器和逻辑电路的设计。</li>
+<li>解决了零的编码问题，只有一个零的表示。</li>
+<li>可以多保存一个最小值，扩展了数值范围。</li>
+<li>补码的运算规则与无符号数的运算规则相同，简化了运算的实现。</li>
+</ul>
+<p>计算机使用补码来存储数据有以下原因：</p>
+<ol>
+<li>解决零的编码问题：使用补码表示可以消除正零和负零的区别，只有一个零的表示。这简化了数值的表示和运算，并且避免了正负零之间的混淆。</li>
+<li>简化减法运算：通过使用补码，减法运算可以转换为加法运算，从而省去了硬件上复杂的减法电路。减法可以通过将减数取反并与被减数相加的方式来实现，这使得计算机的运算器只需要具备加法器和求补电路，提高了硬件的简洁性和效率。</li>
+<li>统一处理符号位：补码的运算规则与无符号数的运算规则相同，这样可以使符号位也参与运算，并且与其他位一起进行统一处理。当补码表示的数相加时，最高位（符号位）有进位时，进位被舍弃，从而实现了符号位的正确处理。</li>
+</ol>
+<p>对于示例中的3 + 7，以下是二进制表示和补码运算的示例：</p>
+<ol>
+<li><p>将3和7转换为二进制表示：</p>
+<ul>
+<li>3的二进制表示为：0000 0011</li>
+<li>7的二进制表示为：0000 0111</li>
+</ul>
+</li>
+<li><p>进行补码加法运算：<br>补码加法：0000 0011 + 0000 0111</p>
+<p>asciidoc</p>
+<p>Copy</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">  0000 0011  (3 的补码)</span><br><span class="line">+ 0000 0111  (7 的补码)</span><br><span class="line">------------</span><br><span class="line">  0000 1010  (结果的补码)</span><br><span class="line">```</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>补码运算结果为0000 1010，表示为有符号整数的补码形式。由于最高位是0，表示正数，其余位表示数值的绝对值。</p>
+</li>
+<li><p>将补码结果转换为原码表示：</p>
+<ul>
+<li>补码结果的绝对值部分：0000 1010</li>
+<li>最高位为0，表示正数，原码与补码相同：0000 1010</li>
+</ul>
+</li>
+</ol>
+<p>因此，3 + 7 的结果为10。</p>
+<p>对于示例中的3 - 7，可以转换为 3 + (-7) 的形式，其中-7的补码表示为1111 1001。将其与3的补码 0000 0011 进行补码加法运算，得到补码结果 1111 1100。将补码结果转换为原码表示，得到 -4。因此，3 - 7 的结果为 -4。</p>
+<h1 id="6-3-5-补码为什么采用了反码加1的形式"><a href="#6-3-5-补码为什么采用了反码加1的形式" class="headerlink" title="6.3.5 补码为什么采用了反码加1的形式"></a>6.3.5 补码为什么采用了反码加1的形式</h1><p>补码的设计采用了反码加1的形式，主要是为了解决负数的表示和运算中的一些问题，并提供了一种简便的方式来处理负数。</p>
+<p>以下是设计补码采用反码加1的原因：</p>
+<ol>
+<li>统一了正数和负数的表示：使用补码可以将正数和负数的表示方式统一起来，无需额外的规则来区分正数和负数。这简化了数字的表示和运算。</li>
+<li>简化了运算器的设计：通过使用补码，减法运算可以转换为加法运算，这避免了在运算器中需要额外的减法电路。运算器只需具备加法器和求补电路，简化了硬件设计。</li>
+<li>解决了零的编码问题：使用补码可以解决零的编码问题，只有一个零的表示，而无需区分正零和负零。</li>
+<li>实现了符号位的参与运算：补码的设计使符号位（最高位）也能参与运算，并与其他位一起进行统一处理。这样，符号位也可以像其他位一样参与加法和减法运算，简化了运算的处理逻辑。</li>
+</ol>
+<p>总的来说，补码采用反码加1的设计方式，使得负数可以用与正数相同的方式进行表示和运算，同时解决了零的编码问题。这种设计简化了硬件设计和运算逻辑，并提供了一种统一的方式来处理正数、负数和零。</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2023/09/08/6-3-%E6%9C%89%E7%AC%A6%E5%8F%B7%E6%95%B0%E5%92%8C%E6%97%A0%E7%AC%A6%E5%8F%B7%E6%95%B0/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E5%92%8C%E6%8C%87%E9%92%88/" rel="tag">数据存储和指针</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2023/09/08/6-4-%E6%95%B0%E6%8D%AE%E6%BA%A2%E5%87%BA/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            6.4 数据溢出
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2023/09/08/6-2-%E5%AD%98%E5%82%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">6.2 存储的基本概念</div>
+      </a>
+    
+  </nav>
+
+  
+   
+  
+   
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2015-2023
+        <i class="ri-heart-fill heart_icon"></i> John Doe
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="热爱学习的未来酱"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/2019/about">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+ 
+<script src="/js/clickBoom2.js"></script>
+ 
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+ 
+<script src="/js/dz.js"></script>
+ 
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    
+
+  </div>
+</body>
+
+</html>
