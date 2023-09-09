@@ -160,7 +160,7 @@
     
     
     <article
-  id="post-5-2-C标准发展过程及新增特性"
+  id="post-5-21-do-while-0"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -171,8 +171,8 @@
     <header class="article-header">
        
 <h2 itemprop="name">
-  <a class="article-title" href="/2023/09/07/5-2-C%E6%A0%87%E5%87%86%E5%8F%91%E5%B1%95%E8%BF%87%E7%A8%8B%E5%8F%8A%E6%96%B0%E5%A2%9E%E7%89%B9%E6%80%A7/"
-    >5.2 C标准发展过程及新增特性</a> 
+  <a class="article-title" href="/2023/09/07/5-21-do-while-0/"
+    >5.21 do{}while(0)</a> 
 </h2>
  
 
@@ -180,8 +180,8 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2023/09/07/5-2-C%E6%A0%87%E5%87%86%E5%8F%91%E5%B1%95%E8%BF%87%E7%A8%8B%E5%8F%8A%E6%96%B0%E5%A2%9E%E7%89%B9%E6%80%A7/" class="article-date">
-  <time datetime="2023-09-07T13:14:05.000Z" itemprop="datePublished">2023-09-07</time>
+      <a href="/2023/09/07/5-21-do-while-0/" class="article-date">
+  <time datetime="2023-09-07T13:14:35.000Z" itemprop="datePublished">2023-09-07</time>
 </a> 
   <div class="article-category">
     <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
@@ -191,17 +191,77 @@
       
     <div class="article-entry" itemprop="articleBody">
        
-  <h1 id="5-2-1-预定义标识符"><a href="#5-2-1-预定义标识符" class="headerlink" title="5.2.1 预定义标识符"></a>5.2.1 预定义标识符</h1><ol>
-<li><code>__DATE__</code>：该标识符表示当前源文件被编译时的日期，以字符串形式表示，格式为”MMM DD YYYY”。</li>
-<li><code>__TIME__</code>：该标识符表示当前源文件被编译时的时间，以字符串形式表示，格式为”HH:MM:SS”。</li>
-<li><code>__FILE__</code>：该标识符表示当前源文件的文件名，以字符串形式表示。</li>
-<li><code>__func__</code>：该标识符表示当前函数的名称，以字符串形式表示。该标识符在C99标准中引入。</li>
-<li><code>__FUNCTION__</code>：与<code>__func__</code>类似，也表示当前函数的名称，但在某些编译器中使用。</li>
-<li><code>__LINE__</code>：该标识符表示当前代码行的行号，以整数形式表示。</li>
-<li><code>include</code>：这不是一个预定义标识符，而是一个预处理指令，用于包含头文件。</li>
-<li><code>define</code>：也是一个预处理指令，用于定义宏。</li>
-<li><code>_STDC_</code>：该标识符用于指示编译器是否遵循ANSI C标准。如果编译器遵循ANSI C标准，则该标识符被定义为整数常量1。</li>
-<li><code>printf</code>&#x2F;<code>scanf</code>：这些是C语言中的标准库函数，用于格式化输入和输出。</li>
+  <p>这是一个 do-while 循环的示例，它的语法结构如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">do</span> &#123;</span><br><span class="line">    <span class="comment">// code;</span></span><br><span class="line">    <span class="comment">// code;</span></span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125; <span class="keyword">while</span> (O);</span><br></pre></td></tr></table></figure>
+
+<p>在这个示例中，循环体内的代码会被执行一次，然后根据条件 <code>O</code> 的值判断是否继续执行循环。如果条件为真，则继续执行循环体；如果条件为假，则退出循环。</p>
+<p>其中，<code>code</code> 表示需要执行的代码，可以是任意合法的语句或语句块。在循环体内可以包含一条或多条代码，用分号分隔。</p>
+<p><code>O</code> 是循环条件，它可以是一个表达式、变量或常量。如果条件为真（非零值），则循环继续执行；如果条件为假（零值），则循环结束。</p>
+<p>do-while 循环与 while 循环的区别在于，do-while 循环保证循环体至少执行一次，即使条件初始时就为假。而 while 循环在执行循环体之前先判断条件，如果条件初始时就为假，则循环体不会执行。</p>
+<p>这种定义方式可能是为了实现复杂的宏定义，并且在条件语句中使用这些宏定义。</p>
+<p>宏定义允许在代码中进行文本替换，可以用来定义函数式宏（function-like macros）和复合语句宏（compound statement macros）。函数式宏可以像函数一样接受参数并返回结果，复合语句宏可以包含多个语句。</p>
+<p>使用宏定义可以在编译时进行代码替换，从而在一定程度上提高代码的执行效率。此外，宏定义还可以实现一些编程技巧，如条件编译、代码重用等。</p>
+<p>在条件语句中使用复杂的宏定义可以使代码更加简洁和可读。通过将复杂的逻辑封装在宏定义中，可以提高代码的可维护性和可重用性。</p>
+<p>另外，使用局部变量可以在宏定义中引入临时变量，以便在宏展开过程中进行计算或临时存储值。这可以增加宏定义的灵活性和功能性。</p>
+<p>总的来说，这种定义方式可能是为了实现复杂的宏定义，提高代码的可读性、可维护性和重用性，同时在条件语句中使用这些宏定义可以简化代码结构并提高可读性。然而，需要注意的是，过度复杂的宏定义可能会导致代码难以理解和调试，因此在使用时需要权衡使用宏定义的利弊，并根据实际情况进行选择。</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gun%E6%89%A9%E5%B1%95%E8%AF%AD%E6%B3%95/" rel="tag">gun扩展语法</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-5-20-case范围扩展"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/09/07/5-20-case%E8%8C%83%E5%9B%B4%E6%89%A9%E5%B1%95/"
+    >5.20 case范围扩展</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/09/07/5-20-case%E8%8C%83%E5%9B%B4%E6%89%A9%E5%B1%95/" class="article-date">
+  <time datetime="2023-09-07T13:14:33.000Z" itemprop="datePublished">2023-09-07</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>在使用 <code>case</code> 语句时，值的顺序可以影响程序的性能。以下是一些注意事项：</p>
+<ol>
+<li>比较链 vs. 树 vs. 跳转表：<code>case</code> 语句可以使用比较链、树或跳转表来实现。比较链是按照 <code>case</code> 值的顺序逐个比较的方式，树是使用二叉树或多路查找树的方式，而跳转表是使用跳转指令进行快速查找。根据具体的编译器和目标平台，编译器可能会选择不同的实现方式。通常情况下，跳转表是最高效的实现方式，而比较链是最低效的实现方式。</li>
+<li>大概率值放前面：由于 <code>case</code> 语句是按照顺序逐个比较的，因此将大概率命中的值放在前面可以提高性能。这是因为如果大多数情况下的值在前面，可以减少比较的次数，从而提高执行效率。</li>
+<li>使用连续整数：如果 <code>case</code> 语句的值是连续的整数，可以考虑使用更高效的实现方式，如跳转表。这样可以将复杂度从线性降低为常数级别，提高执行效率。</li>
 </ol>
  
       <!-- reward -->
@@ -225,7 +285,7 @@
 
     
     <article
-  id="post-5-1-什么是C语言标准？"
+  id="post-5-19-内建函数：-builtin-expect"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -236,8 +296,8 @@
     <header class="article-header">
        
 <h2 itemprop="name">
-  <a class="article-title" href="/2023/09/07/5-1-%E4%BB%80%E4%B9%88%E6%98%AFC%E8%AF%AD%E8%A8%80%E6%A0%87%E5%87%86%EF%BC%9F/"
-    >5.1 什么是C语言标准？</a> 
+  <a class="article-title" href="/2023/09/07/5-19-%E5%86%85%E5%BB%BA%E5%87%BD%E6%95%B0%EF%BC%9A-builtin-expect/"
+    >5.19 内建函数：__builtin_expect</a> 
 </h2>
  
 
@@ -245,8 +305,8 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2023/09/07/5-1-%E4%BB%80%E4%B9%88%E6%98%AFC%E8%AF%AD%E8%A8%80%E6%A0%87%E5%87%86%EF%BC%9F/" class="article-date">
-  <time datetime="2023-09-07T13:14:03.000Z" itemprop="datePublished">2023-09-07</time>
+      <a href="/2023/09/07/5-19-%E5%86%85%E5%BB%BA%E5%87%BD%E6%95%B0%EF%BC%9A-builtin-expect/" class="article-date">
+  <time datetime="2023-09-07T13:14:31.000Z" itemprop="datePublished">2023-09-07</time>
 </a> 
   <div class="article-category">
     <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
@@ -256,18 +316,16 @@
       
     <div class="article-entry" itemprop="articleBody">
        
-  <h1 id="5-1-C语言的标准"><a href="#5-1-C语言的标准" class="headerlink" title="5.1 C语言的标准"></a>5.1 C语言的标准</h1><p>C语言的标准版本主要有以下几个：</p>
-<ol>
-<li>K&amp;R C：指的是《The C Programming Language》一书中描述的C语言，由Brian Kernighan和Dennis Ritchie编写。这本书是C语言开发的里程碑，但它不是正式的标准。</li>
-<li>ANSI C：也称为C89或C90，是由美国国家标准学会（ANSI）于1989年采纳的C语言标准。它是第一个被广泛接受的C语言标准，并且成为后续标准的基础。</li>
-<li>C99：它是于1999年采纳的C语言标准，也称为C89的修订版。该标准引入了一些新特性，如新的数据类型（比如布尔类型和复数类型）、变长数组、单行注释等。</li>
-<li>C11：于2011年采纳的C语言标准，它是C语言的最新标准。C11引入了一些新特性，如泛型选择表达式、多线程支持、原子操作和_Static_assert等。</li>
-</ol>
-<h1 id="5-2-C标准和编译器"><a href="#5-2-C标准和编译器" class="headerlink" title="5.2 C标准和编译器"></a>5.2 C标准和编译器</h1><p>不同的编译器对C标准的支持程度可能会有所差异。以下是一些常见的编译器以及它们对C标准的支持情况的概述：</p>
-<p>GCC编译器：<br>GCC（GNU Compiler Collection）是一个开源的编译器套件，支持多种编程语言，包括C语言。GCC对C标准的支持相对较好，可以支持多个C标准版本，如C89、C99和C11。您可以使用命令行选项来指定所需的C标准版本，例如使用”-std&#x3D;c89”来编译符合C89标准的代码。</p>
-<p>ARM编译器：<br>ARM公司提供了针对ARM架构的编译器套件，其中包括ARM Compiler和GNU ARM Embedded Toolchain。这些编译器通常也支持多个C标准版本，具体取决于所使用的工具链版本和配置。</p>
-<p>C51编译器：<br>C51是由Keil Software提供的针对8051系列微控制器的编译器。C51编译器主要支持ANSI C标准，即C89标准，但并不支持后续的C99或C11标准。</p>
-<p>VC系列编译器：<br>VC（Visual C++）系列编译器是Microsoft Visual Studio提供的编译器套件。VC编译器对C标准的支持程度在不同版本中可能有所差异。早期版本的VC编译器主要支持C89标准，而较新的版本逐渐增加了对C99和部分C11特性的支持。</p>
+  <p><code>__builtin_expect</code> 是一个内建函数，用于提示编译器表达式的预期结果。它的使用方法如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">__builtin_expect (exp, c)</span><br></pre></td></tr></table></figure>
+
+<p>其中，<code>exp</code> 是一个表达式，<code>c</code> 是一个常量。该函数返回 <code>exp</code> 的值，并表示 <code>exp</code> 的结果为 <code>c</code> 的概率很大。</p>
+<p>以下是 <code>__builtin_expect</code> 的示例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line">int max(int a, int b) &#123;</span><br><span class="line">    return (a &gt; b) ? a : b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    int x = 10;</span><br><span class="line">    int y = 5;</span><br><span class="line"></span><br><span class="line">    int result = max(x, y);</span><br><span class="line">    if (__builtin_expect(result == x, 1)) &#123;</span><br><span class="line">        printf(&quot;Result is likely to be x\n&quot;);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        printf(&quot;Result is likely not to be x\n&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在上述示例中，<code>__builtin_expect</code> 用于提示编译器 <code>result == x</code> 的结果很可能为真。如果 <code>result == x</code>，将输出 “Result is likely to be x”；否则，将输出 “Result is likely not to be x”。</p>
+<p>通过使用 <code>__builtin_expect</code>，可以提供编译器有关表达式预期结果的提示信息。这对于一些性能敏感的代码段，如分支预测优化，可以帮助编译器生成更优化的机器代码。</p>
+<p>需要注意的是，<code>__builtin_expect</code> 的提示只是一种提示，具体如何优化由编译器决定。此外，它在实际应用中的效果可能因编译器和目标平台的不同而有所差异。因此，在使用时需要进行测试和验证，并在实际性能分析中评估其效果。</p>
  
       <!-- reward -->
       
@@ -290,7 +348,7 @@
 
     
     <article
-  id="post-4-16-实战-作业：实现自己的堆管理器"
+  id="post-5-18-内建函数：-builtin-constant-p"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -301,8 +359,8 @@
     <header class="article-header">
        
 <h2 itemprop="name">
-  <a class="article-title" href="/2023/09/07/4-16-%E5%AE%9E%E6%88%98-%E4%BD%9C%E4%B8%9A%EF%BC%9A%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%B7%B1%E7%9A%84%E5%A0%86%E7%AE%A1%E7%90%86%E5%99%A8/"
-    >4-16-实战&amp;作业：实现自己的堆管理器</a> 
+  <a class="article-title" href="/2023/09/07/5-18-%E5%86%85%E5%BB%BA%E5%87%BD%E6%95%B0%EF%BC%9A-builtin-constant-p/"
+    >5.18 内建函数：__builtin_constant_p</a> 
 </h2>
  
 
@@ -310,8 +368,8 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2023/09/07/4-16-%E5%AE%9E%E6%88%98-%E4%BD%9C%E4%B8%9A%EF%BC%9A%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%B7%B1%E7%9A%84%E5%A0%86%E7%AE%A1%E7%90%86%E5%99%A8/" class="article-date">
-  <time datetime="2023-09-06T23:40:34.000Z" itemprop="datePublished">2023-09-07</time>
+      <a href="/2023/09/07/5-18-%E5%86%85%E5%BB%BA%E5%87%BD%E6%95%B0%EF%BC%9A-builtin-constant-p/" class="article-date">
+  <time datetime="2023-09-07T13:14:30.000Z" itemprop="datePublished">2023-09-07</time>
 </a> 
   <div class="article-category">
     <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
@@ -321,7 +379,13 @@
       
     <div class="article-entry" itemprop="articleBody">
        
-   
+  <p><code>__builtin_constant_p</code> 是一个内建函数，用于判断表达式是否为编译时常量。它在编译时进行求值，并返回一个整数常量，表示表达式是否为常量。</p>
+<p>以下是 <code>__builtin_constant_p</code> 的使用示例：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAX_SIZE 100</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">foo</span><span class="params">(<span class="type">int</span> size)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (__builtin_constant_p(size)) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;size is a compile-time constant\n&quot;</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;size is not a compile-time constant\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    foo(<span class="number">10</span>);        <span class="comment">// size is a compile-time constant</span></span><br><span class="line">    foo(MAX_SIZE);  <span class="comment">// size is not a compile-time constant</span></span><br><span class="line">    <span class="type">int</span> x = <span class="number">5</span>;</span><br><span class="line">    foo(x);         <span class="comment">// size is not a compile-time constant</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在上述示例中，<code>foo</code> 函数使用了 <code>__builtin_constant_p</code> 来判断 <code>size</code> 参数是否为编译时常量。如果 <code>size</code> 是编译时常量，将输出 “size is a compile-time constant”；否则，将输出 “size is not a compile-time constant”。</p>
+<p>通过使用 <code>__builtin_constant_p</code>，可以根据表达式是否为编译时常量来进行条件编译或优化。这对于在编译时进行静态优化或决策非常有用。</p>
+ 
       <!-- reward -->
       
     </div>
@@ -331,7 +395,7 @@
     
     <footer class="article-footer">
        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A0%86%E6%A0%88%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" rel="tag">堆栈内存管理</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gun%E6%89%A9%E5%B1%95%E8%AF%AD%E6%B3%95/" rel="tag">gun扩展语法</a></li></ul>
 
     </footer>
   </div>
@@ -343,7 +407,7 @@
 
     
     <article
-  id="post-4-15-常见内存错误及检测"
+  id="post-5-17-内建函数"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -354,8 +418,8 @@
     <header class="article-header">
        
 <h2 itemprop="name">
-  <a class="article-title" href="/2023/09/07/4-15-%E5%B8%B8%E8%A7%81%E5%86%85%E5%AD%98%E9%94%99%E8%AF%AF%E5%8F%8A%E6%A3%80%E6%B5%8B/"
-    >4-15-常见内存错误及检测</a> 
+  <a class="article-title" href="/2023/09/07/5-17-%E5%86%85%E5%BB%BA%E5%87%BD%E6%95%B0/"
+    >5.17 内建函数</a> 
 </h2>
  
 
@@ -363,8 +427,8 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2023/09/07/4-15-%E5%B8%B8%E8%A7%81%E5%86%85%E5%AD%98%E9%94%99%E8%AF%AF%E5%8F%8A%E6%A3%80%E6%B5%8B/" class="article-date">
-  <time datetime="2023-09-06T23:40:32.000Z" itemprop="datePublished">2023-09-07</time>
+      <a href="/2023/09/07/5-17-%E5%86%85%E5%BB%BA%E5%87%BD%E6%95%B0/" class="article-date">
+  <time datetime="2023-09-07T13:14:28.000Z" itemprop="datePublished">2023-09-07</time>
 </a> 
   <div class="article-category">
     <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
@@ -374,484 +438,89 @@
       
     <div class="article-entry" itemprop="articleBody">
        
-   
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A0%86%E6%A0%88%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" rel="tag">堆栈内存管理</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-4-14-内存泄露与防范"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/09/07/4-14-%E5%86%85%E5%AD%98%E6%B3%84%E9%9C%B2%E4%B8%8E%E9%98%B2%E8%8C%83/"
-    >4-14-内存泄露与防范</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/09/07/4-14-%E5%86%85%E5%AD%98%E6%B3%84%E9%9C%B2%E4%B8%8E%E9%98%B2%E8%8C%83/" class="article-date">
-  <time datetime="2023-09-06T23:40:30.000Z" itemprop="datePublished">2023-09-07</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-   
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A0%86%E6%A0%88%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" rel="tag">堆栈内存管理</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-4-13-Linux堆内存管理-3-：内存申请释放示例"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/09/07/4-13-Linux%E5%A0%86%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86-3-%EF%BC%9A%E5%86%85%E5%AD%98%E7%94%B3%E8%AF%B7%E9%87%8A%E6%94%BE%E7%A4%BA%E4%BE%8B/"
-    >4-13-Linux堆内存管理(3)：内存申请释放示例</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/09/07/4-13-Linux%E5%A0%86%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86-3-%EF%BC%9A%E5%86%85%E5%AD%98%E7%94%B3%E8%AF%B7%E9%87%8A%E6%94%BE%E7%A4%BA%E4%BE%8B/" class="article-date">
-  <time datetime="2023-09-06T23:40:28.000Z" itemprop="datePublished">2023-09-07</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-   
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A0%86%E6%A0%88%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" rel="tag">堆栈内存管理</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-4-12-linux堆内存管理-2-：内存申请与释放"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/09/07/4-12-linux%E5%A0%86%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86-2-%EF%BC%9A%E5%86%85%E5%AD%98%E7%94%B3%E8%AF%B7%E4%B8%8E%E9%87%8A%E6%94%BE/"
-    >4-12-linux堆内存管理(2)：内存申请与释放</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/09/07/4-12-linux%E5%A0%86%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86-2-%EF%BC%9A%E5%86%85%E5%AD%98%E7%94%B3%E8%AF%B7%E4%B8%8E%E9%87%8A%E6%94%BE/" class="article-date">
-  <time datetime="2023-09-06T23:40:27.000Z" itemprop="datePublished">2023-09-07</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-   
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A0%86%E6%A0%88%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" rel="tag">堆栈内存管理</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-4-11-Linux堆内存管理-1-：内存分配器"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/09/07/4-11-Linux%E5%A0%86%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86-1-%EF%BC%9A%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E5%99%A8/"
-    >4-11-Linux堆内存管理(1)：内存分配器</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/09/07/4-11-Linux%E5%A0%86%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86-1-%EF%BC%9A%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E5%99%A8/" class="article-date">
-  <time datetime="2023-09-06T23:40:25.000Z" itemprop="datePublished">2023-09-07</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h1 id="4-11-1-Linux系统的堆"><a href="#4-11-1-Linux系统的堆" class="headerlink" title="4.11.1 Linux系统的堆"></a>4.11.1 Linux系统的堆</h1><p>在Linux系统中，堆地址空间通常位于用户空间，其大小受到多种因素的影响。以下是一些相关概念和信息：</p>
+  <p>内建函数（Built-in functions）是编译器提供的一组特殊函数，其实现直接内置在编译器中。它们通常具有与普通函数相同的语法和调用方式，但在执行时具有特殊的行为和性能优化。</p>
+<p>内建函数的特点如下：</p>
 <ol>
-<li>堆的空间分配：<ul>
-<li>在Linux 2.4及之前的版本中，堆的起始地址通常是0x40000000。共享库被分配在该地址空间中，程序会被加载到这个地址空间中。</li>
-<li>在Linux 2.6及之后的版本中，共享库的地址被移动到栈的附近（大约是0xBFxxxxxx附近），而堆的大小则有更多的灵活性。</li>
-</ul>
-</li>
-<li>理论上的堆空间大小：<ul>
-<li>在Linux系统中，用户空间的虚拟地址空间大小通常是2.9GB。这意味着理论上堆可以占据整个用户空间的一部分。</li>
-</ul>
-</li>
-<li>brk和堆顶（SP）：<ul>
-<li>在Linux系统中，使用<code>brk</code>系统调用来扩展或收缩堆的大小。<code>brk</code>系统调用将堆的顶部（堆顶）移动到指定的地址处。</li>
-<li>堆顶（SP）是指当前堆的顶部地址，它指示了堆的结束位置。</li>
-</ul>
-</li>
-<li>内核空间和用户空间：<ul>
-<li>在Linux系统中，虚拟地址空间被分为内核空间和用户空间。内核空间是操作系统内核的专用区域，用户空间是供用户程序执行的区域。</li>
-<li>堆地址空间位于用户空间，而内核空间用于操作系统内核和驱动程序。</li>
-</ul>
-</li>
+<li>编译器内部实现：内建函数是编译器的一部分，其实现直接嵌入在编译器中。这使得编译器可以对这些函数进行特定的优化和内部处理。</li>
+<li>直接使用：与关键字类似，内建函数可以直接使用，无需包含头文件或外部库的引用。它们是编译器的一部分，因此可以直接在代码中使用。</li>
+<li>命名：内建函数的命名通常以 <code>_builtin</code> 开头，如 <code>_builtin_strlen</code>。这样的命名约定有助于与普通函数进行区分。</li>
+<li>主要用于性能优化：内建函数的设计目的通常是为了性能优化。它们可以针对特定的操作或算法提供更高效的实现，以提高程序的执行速度。</li>
+<li>部分是 C 标准库函数的内建版本：一些内建函数是对 C 标准库函数的内建版本，提供了更高效的实现。例如，<code>_builtin_strlen</code> 可能是对标准库函数 <code>strlen</code> 的内建优化版本。</li>
+<li>没有文档且变动频繁：与标准库函数相比，内建函数通常没有官方文档，并且其行为和实现可能在不同的编译器版本中有所变化。这使得内建函数的使用相对不稳定，一般不建议在通用代码中频繁使用。</li>
 </ol>
-<h1 id="4-11-2-堆管理策略"><a href="#4-11-2-堆管理策略" class="headerlink" title="4.11.2 堆管理策略"></a>4.11.2 堆管理策略</h1><p>在堆的管理策略方面，以下是一些常见的方法：</p>
-<ol>
-<li>系统调用：<ul>
-<li>在Linux系统中，内核负责管理整个虚拟地址空间的权限和地址转换。malloc和free等内存管理函数的底层实现通常通过系统调用来向内核申请和释放内存。</li>
-<li>当程序调用malloc时，底层实现会使用系统调用（如brk或mmap）向内核请求一块适当大小的内存块。类似地，当调用free时，底层实现会通过系统调用将内存块返回给内核。</li>
-</ul>
-</li>
-<li>内存管理器：<ul>
-<li>内存管理器是一个软件模块，负责在应用程序中管理动态分配的内存。它可以包含一系列算法和数据结构，用于分配、回收和管理内存块。</li>
-<li>内存管理器可以实现不同的策略，如内存池、分配器、垃圾回收等。这些策略可以根据应用程序的需求来优化内存使用效率和性能。</li>
-</ul>
-</li>
-</ol>
-<p>在具体实现中，系统调用和内存管理器可以结合使用。系统调用提供了与内核交互的底层接口，而内存管理器则在应用程序层面上提供更高级的内存管理功能。</p>
-<p>关于地址空间布局，您提到的堆、栈和内核空间的位置是一种典型的布局。堆通常处于低地址空间，栈位于高地址空间，而内核空间则是供操作系统内核和驱动程序使用的区域。具体的地址空间布局可能会因操作系统和配置而有所差异。</p>
-<h1 id="4-11-3-Glibc堆内存管理"><a href="#4-11-3-Glibc堆内存管理" class="headerlink" title="4.11.3 Glibc堆内存管理"></a>4.11.3 Glibc堆内存管理</h1><p>在Glibc中，使用ptmalloc2作为默认的堆内存分配器，用于管理动态分配的内存。下面是关于Glibc堆内存管理的一些要点：</p>
-<ol>
-<li>内存分配器：<ul>
-<li>Glibc使用ptmalloc2作为默认的内存分配器，它是一个基于二叉树的分配器。它负责管理堆内存，并提供malloc、free等API供用户程序使用。</li>
-</ul>
-</li>
-<li>系统调用：<ul>
-<li>Glibc通过系统调用（如brk和mmap）向内核请求内存。brk系统调用用于调整堆的大小，mmap系统调用用于在堆外部映射更大的内存块。</li>
-<li>brk系统调用可以按需增加或减小堆的大小，而mmap系统调用可以获取更大的内存区域。</li>
-</ul>
-</li>
-<li>内存管理：<ul>
-<li>Glibc的内存分配器会管理用户程序释放的空闲内存，以便在以后的内存分配中重用。这有助于减少频繁进行系统调用的开销，提高内存分配的性能。</li>
-</ul>
-</li>
-</ol>
-<p>关于地址空间布局，您提到的堆、栈和内核空间的位置是一种典型的布局。堆通常位于低地址空间，栈位于高地址空间，而内核空间则是操作系统内核和驱动程序的使用区域。具体的地址空间布局可能会因操作系统和配置而有所不同。</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A0%86%E6%A0%88%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" rel="tag">堆栈内存管理</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-4-10-ucos堆内存管理"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/09/07/4-10-ucos%E5%A0%86%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/"
-    >4-10-ucos堆内存管理</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/09/07/4-10-ucos%E5%A0%86%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" class="article-date">
-  <time datetime="2023-09-06T23:40:23.000Z" itemprop="datePublished">2023-09-07</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <p>在使用uC&#x2F;OS（Microcontroller Operating System）时，可以采用以下基本策略来进行内存管理：</p>
-<ol>
-<li>将堆内存分成若干区：<ul>
-<li>首先，将可用的堆内存划分为若干个区域。每个区域可以有不同的大小和属性，以满足不同的内存需求。</li>
-</ul>
-</li>
-<li>每个区分为若干大小相等的内存块：<ul>
-<li>在每个区域内，将可用的内存划分为若干大小相等的内存块。这些内存块具有相同的大小，可以根据需要进行申请和释放。</li>
-</ul>
-</li>
-<li>程序以内存块为单位对内存进行申请&#x2F;释放：<ul>
-<li>程序在运行时以内存块为单位来申请和释放内存。通过使用特定的函数（如malloc和free），可以从内存块池中获取一个可用的内存块，并在不再需要时将其释放。</li>
-</ul>
-</li>
-<li>指向下一个内存块：<ul>
-<li>在内存块的数据结构中，可以包含一个指针字段，用于指向下一个可用的内存块。这样，在申请内存时，可以遍历内存块链表，找到合适大小的内存块并返回给程序。</li>
-</ul>
-</li>
-</ol>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A0%86%E6%A0%88%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" rel="tag">堆栈内存管理</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-4-9-堆内存管理：内存申请与释放"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/09/07/4-9-%E5%A0%86%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%EF%BC%9A%E5%86%85%E5%AD%98%E7%94%B3%E8%AF%B7%E4%B8%8E%E9%87%8A%E6%94%BE/"
-    >4-9-堆内存管理：内存申请与释放</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/09/07/4-9-%E5%A0%86%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%EF%BC%9A%E5%86%85%E5%AD%98%E7%94%B3%E8%AF%B7%E4%B8%8E%E9%87%8A%E6%94%BE/" class="article-date">
-  <time datetime="2023-09-06T23:40:22.000Z" itemprop="datePublished">2023-09-07</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h1 id="4-9-1-什么是堆"><a href="#4-9-1-什么是堆" class="headerlink" title="4.9.1 什么是堆"></a>4.9.1 什么是堆</h1><p>堆是程序运行时动态分配内存的一种区域。下面是对堆的说明：</p>
-<ol>
-<li>动态分配内存：<ul>
-<li>堆是通过使用动态内存分配函数（如malloc、calloc等）从操作系统中获取的内存区域。</li>
-<li>程序员可以根据需要在堆上动态分配内存，以存储变量、数据结构、对象等。</li>
-<li>堆内存的大小可以根据实际需求进行动态扩展或缩减。</li>
-</ul>
-</li>
-<li>内存管理：<ul>
-<li>程序员负责在堆上申请所需的内存空间，并在不再需要时显式地释放内存，以避免内存泄漏。</li>
-<li>堆内存的申请和释放通常是通过调用相应的内存管理函数（如malloc和free）来完成的。</li>
-</ul>
-</li>
-</ol>
-<p>堆与栈的区别：</p>
-<ol>
-<li>访问方式：<ul>
-<li>堆内存中的内容是匿名的，没有直接的名称或标识符，无法按名字直接访问。程序员通过指针间接访问堆内存中的数据。</li>
-<li>栈上的数据和变量可以通过其名称直接访问。</li>
-</ul>
-</li>
-<li>生命周期：<ul>
-<li>堆内存的生命周期由程序员自行管理。在动态分配内存后，程序员需要负责在适当的时候显式释放堆内存，以防止内存泄漏。</li>
-<li>栈上的数据和变量的生命周期与其所在的函数相关。当函数返回时，栈上的数据会被自动释放，无法继续使用。</li>
-</ul>
-</li>
-</ol>
-<p>需要注意的是，如果程序员在堆上分配了内存但没有显式释放，这部分内存会一直存在，直到程序结束才会被操作系统回收。这可能导致内存泄漏，造成系统资源的浪费。</p>
-<p>堆的动态分配和释放机制为程序提供了更大的灵活性和动态性，允许动态地管理内存，并根据需要进行内存的分配和释放。然而，这也需要程序员负责正确地管理堆内存，以避免内存泄漏和其他内存相关的问题。</p>
-<h1 id="4-9-2-嵌入式裸机环境堆管理"><a href="#4-9-2-嵌入式裸机环境堆管理" class="headerlink" title="4.9.2 嵌入式裸机环境堆管理"></a>4.9.2 嵌入式裸机环境堆管理</h1><p>在嵌入式裸机环境中，堆的管理通常依赖于C库函数和启动文件的设置。以下是一般的嵌入式裸机环境中堆的管理方式：</p>
-<ol>
-<li>使用C库函数 malloc&#x2F;free：<ul>
-<li>嵌入式系统通常会提供C库函数（如stdlib.h中的malloc和free函数），用于动态分配和释放堆内存。</li>
-<li>程序员可以使用这些函数来在堆上动态分配所需的内存块，并在不再需要时释放内存。</li>
-</ul>
-</li>
-<li>堆的大小及初始化：<ul>
-<li>在嵌入式系统中，堆的大小和初始化通常由启动文件（如start_xx.s）来处理。</li>
-<li>启动文件负责初始化系统的各个部分，其中包括堆的初始化。</li>
-<li>启动文件会根据设定的堆大小，在适当的位置分配堆空间，并进行必要的初始化。</li>
-</ul>
-</li>
-<li>设置堆的大小：<ul>
-<li>堆的大小可以通过在启动文件中的_main函数中使用_user_initial_stackheap来获取堆栈地址。</li>
-<li>_user_initial_stackheap函数会返回堆栈地址，在_main函数中可以使用这个地址来设置堆的大小。</li>
-</ul>
-</li>
-<li>堆空间地址设置：<ul>
-<li>堆空间的地址可以由编译器默认获取，通常会将堆地址设置在ZI（Zero Initialized）区域的后面。</li>
-<li>或者，堆空间的地址可以通过scatter文件进行设置，在汇编启动代码中对这段堆空间进行初始化。</li>
-</ul>
-</li>
-</ol>
-<h1 id="4-9-3-内存碎片"><a href="#4-9-3-内存碎片" class="headerlink" title="4.9.3 内存碎片"></a>4.9.3 内存碎片</h1><p>内存碎片是指在内存中存在的一些零散的未被利用的内存空间。以下是关于内存碎片的产生以及相应的编程建议：</p>
-<ol>
-<li><p>内存碎片的产生：</p>
+<p><code>__builtin_return_address(LEVEL)</code> 是一个内建函数，用于返回当前函数或调用者的返回地址。它接受一个整数参数 <code>LEVEL</code>，用于指定返回地址的级别。</p>
 <ul>
-<li>内存碎片通常是由于频繁地申请和释放内存导致的。当程序频繁地进行内存分配和释放操作时，会导致内存中出现大量的零散空闲区域，这些零散的空闲区域无法满足大块内存的需求。</li>
-<li>内存碎片的产生也可能是由于内存分配算法的问题，如使用不合理的内存分配策略或算法，导致内存空间被分割成多个不连续的小块。</li>
+<li>当 <code>LEVEL</code> 为0时，表示返回当前函数的返回地址。</li>
+<li>当 <code>LEVEL</code> 为1时，表示返回当前函数的调用者的返回地址。</li>
 </ul>
-</li>
-<li><p>编程建议：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">func1</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">void</span>* return_addr = __builtin_return_address(<span class="number">0</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Return address of func1: %p\n&quot;</span>, return_addr);</span><br><span class="line">    </span><br><span class="line">    return_addr = __builtin_return_address(<span class="number">1</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Return address of func1&#x27;s caller: %p\n&quot;</span>, return_addr);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">func2</span><span class="params">()</span> &#123;</span><br><span class="line">    func1();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    func2();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在上述示例中，<code>func1</code> 调用了 <code>__builtin_return_address</code> 来获取返回地址。当 <code>LEVEL</code> 为0时，它返回的是 <code>func1</code> 的返回地址；当 <code>LEVEL</code> 为1时，它返回的是 <code>func1</code> 的调用者（即 <code>func2</code>）的返回地址。</p>
+<p>类似地，<code>__builtin_frame_address(LEVEL)</code> 是另一个内建函数，用于返回函数的栈帧地址。它的使用方式类似于 <code>__builtin_return_address</code>，也接受一个整数参数 <code>LEVEL</code>。</p>
 <ul>
-<li>在裸机环境中尽量避免频繁使用malloc和free函数进行动态内存分配和释放。由于裸机环境资源有限，内存碎片可能会更加严重，频繁的内存分配和释放操作可能导致系统性能下降、内存耗尽或系统崩溃等问题。</li>
-<li>尽量使用静态数组代替频繁的内存分配和释放操作。静态数组在编译时就被分配在固定的内存位置上，避免了动态分配和释放带来的内存碎片问题。</li>
-<li>针对需要动态管理数据结构的情况，可以预先分配一块足够大的内存池，并手动管理内存的分配和释放。内存池可以是一个静态数组，程序员可以通过索引或指针来管理内存的使用，避免了频繁的内存分配和释放操作。</li>
+<li>当 <code>LEVEL</code> 为0时，表示返回当前函数的栈帧地址。</li>
+<li>当 <code>LEVEL</code> 为1时，表示返回当前函数的调用者的栈帧地址。</li>
 </ul>
-<h1 id="4-9-4-解决之道"><a href="#4-9-4-解决之道" class="headerlink" title="4.9.4 解决之道"></a>4.9.4 解决之道</h1></li>
-</ol>
-<p>解决内存碎片问题可以根据需求采取以下方法：</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gun%E6%89%A9%E5%B1%95%E8%AF%AD%E6%B3%95/" rel="tag">gun扩展语法</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-5-16-属性声明：used-unused"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/09/07/5-16-%E5%B1%9E%E6%80%A7%E5%A3%B0%E6%98%8E%EF%BC%9Aused-unused/"
+    >5.16 属性声明：used &amp; unused</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/09/07/5-16-%E5%B1%9E%E6%80%A7%E5%A3%B0%E6%98%8E%EF%BC%9Aused-unused/" class="article-date">
+  <time datetime="2023-09-07T13:14:27.000Z" itemprop="datePublished">2023-09-07</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>在给定的示例中，使用了 <code>used</code> 和 <code>unused</code> 属性来声明变量和函数的使用情况。</p>
 <ol>
-<li>内存池：<ul>
-<li>内存池是一种固定大小的缓冲区，预先分配一定数量的内存块，然后根据需要从内存池中分配和释放内存。</li>
-<li>内存池可以避免内存碎片问题，因为它使用固定大小的内存块，不会产生零散的内存碎片。</li>
-<li>程序员可以根据需求，预先分配适当大小的内存池，通过索引或指针来管理内存的分配和释放。</li>
-</ul>
-</li>
-<li>堆分配：<ul>
-<li>在一些情况下，需要申请不同大小的内存缓冲区。可以使用堆分配（如malloc和free）来动态地申请和释放内存。</li>
-<li>在使用堆分配时，可以考虑使用内存池的方式来管理堆内存，以避免频繁的内存碎片问题。</li>
-</ul>
-</li>
-<li>不同系统平台的解决方案：<ul>
-<li>在裸机平台上，没有操作系统的支持，程序员需要自己实现内存管理方案。可以根据需求选择合适的内存管理策略，如内存池或其他自定义的管理方式。</li>
-<li>在操作系统平台上，可以让操作系统介入内存管理。操作系统提供了内存管理功能，可以动态分配和释放内存，并且通常有更高级的内存管理算法来优化内存的使用。</li>
-</ul>
-</li>
+<li><code>.register int reg asm(&quot;r0&quot;) __attribute__((used));</code><br>这个声明将 <code>reg</code> 定义为一个寄存器变量，并使用 <code>used</code> 属性来指示编译器该变量会被使用。这可以防止编译器优化掉该变量，确保其在代码中的存在。</li>
+<li><code>static void func(void) __attribute__((used, section(&quot;.text&quot;)));</code><br>这个声明定义了一个静态函数 <code>func</code>，并使用 <code>used</code> 属性来指示编译器该函数会被使用。此外，通过 <code>section(&quot;.text&quot;)</code> 属性，将该函数放置在 <code>.text</code> 段中。</li>
+<li><code>static __attribute__((unused)) int a;</code><br>这个声明定义了一个静态变量 <code>a</code>，并使用 <code>unused</code> 属性来指示编识器该变量未被使用。这可以让编译器忽略该变量的存在，避免产生未使用变量的警告。</li>
+<li><code>static int func(void) __attribute__((unused));</code><br>这个声明定义了一个静态函数 <code>func</code>，并使用 <code>unused</code> 属性来指示编译器该函数未被使用。类似于上述的静态变量，这可以让编译器忽略该函数的存在。</li>
+<li><code>int fun(__attribute__((unused)) int a, int b);</code><br>这个声明定义了一个函数 <code>fun</code>，并使用 <code>unused</code> 属性来指示编译器函数中的参数 <code>a</code> 未被使用。这可以避免产生未使用参数的警告。</li>
 </ol>
  
       <!-- reward -->
@@ -863,7 +532,281 @@
     
     <footer class="article-footer">
        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A0%86%E6%A0%88%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" rel="tag">堆栈内存管理</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gun%E6%89%A9%E5%B1%95%E8%AF%AD%E6%B3%95/" rel="tag">gun扩展语法</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-5-15-属性声明：noreturn"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/09/07/5-15-%E5%B1%9E%E6%80%A7%E5%A3%B0%E6%98%8E%EF%BC%9Anoreturn/"
+    >5.15 属性声明：noreturn</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/09/07/5-15-%E5%B1%9E%E6%80%A7%E5%A3%B0%E6%98%8E%EF%BC%9Anoreturn/" class="article-date">
+  <time datetime="2023-09-07T13:14:25.000Z" itemprop="datePublished">2023-09-07</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>属性声明 <code>noreturn</code> 是一个特殊的函数属性，它告诉编译器函数不会返回到调用者。这个属性可以用于告知编译器在函数执行完毕后不会返回到调用点，因此编译器可以进行一些优化，例如消除一些后续的代码或者警告未使用的返回值。</p>
+<p>下面是一个使用 <code>noreturn</code> 属性声明的示例：</p>
+<p>c</p>
+<p>Copy</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdnoreturn.h&gt;</span><br><span class="line"></span><br><span class="line">noreturn void exit_program(int exit_code) &#123;</span><br><span class="line">    // 执行一些清理操作</span><br><span class="line">    // ...</span><br><span class="line"></span><br><span class="line">    // 退出程序</span><br><span class="line">    exit(exit_code);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在上述示例中，<code>exit_program</code> 函数被声明为 <code>noreturn</code> 类型，它表示该函数在执行完毕后不会返回到调用点。在函数体内，执行了一些清理操作后，调用了 <code>exit</code> 函数来终止程序的执行。</p>
+<p>使用 <code>noreturn</code> 属性可以帮助编译器优化代码，并提供更好的代码可读性。它可以用于标记一些特殊函数，如退出程序的函数、抛出异常的函数等。</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gun%E6%89%A9%E5%B1%95%E8%AF%AD%E6%B3%95/" rel="tag">gun扩展语法</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-5-14-属性声明：mode"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/09/07/5-14-%E5%B1%9E%E6%80%A7%E5%A3%B0%E6%98%8E%EF%BC%9Amode/"
+    >5.14 属性声明：mode</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/09/07/5-14-%E5%B1%9E%E6%80%A7%E5%A3%B0%E6%98%8E%EF%BC%9Amode/" class="article-date">
+  <time datetime="2023-09-07T13:14:24.000Z" itemprop="datePublished">2023-09-07</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>属性声明中的 <code>mode</code> 是一个功能强大的GNU C扩展，它用于指定类型的位宽和有符号&#x2F;无符号属性。通过 <code>mode</code> 属性，可以定义自定义的位宽类型，以及相应的有符号和无符号变体。</p>
+<p>在给定的示例中，使用了 <code>mode(QI)</code> 属性来声明两个类型别名：</p>
+<ol>
+<li><code>typedef int s8 __attribute__((mode(QI)));</code><br>这个声明将 <code>s8</code> 定义为一个有符号整数类型，位宽为1字节（8位），即一个字节的宽度。<code>mode(QI)</code> 表示 “QI” 模式，其中 “Q” 表示 “Quad”，表示4个位，而 “I” 表示 “Integer”，表示整数类型。</li>
+<li><code>typedef unsigned int us8 __attribute__((mode(QI)));</code><br>这个声明将 <code>us8</code> 定义为一个无符号整数类型，位宽也为1字节（8位）。同样使用了 <code>mode(QI)</code> 属性来指定位宽和有符号&#x2F;无符号属性。</li>
+</ol>
+<p>通过使用 <code>mode</code> 属性，可以根据需要定义特定位宽的整数类型，并根据需要选择有符号或无符号的变体。这在某些特定的嵌入式系统编程或底层编程中可能会有用，因为它可以更精确地控制数据类型的大小和属性。</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gun%E6%89%A9%E5%B1%95%E8%AF%AD%E6%B3%95/" rel="tag">gun扩展语法</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-5-13-属性声明：noinline-always-inline"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/09/07/5-13-%E5%B1%9E%E6%80%A7%E5%A3%B0%E6%98%8E%EF%BC%9Anoinline-always-inline/"
+    >5.13 属性声明：noinline &amp; always_inline</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/09/07/5-13-%E5%B1%9E%E6%80%A7%E5%A3%B0%E6%98%8E%EF%BC%9Anoinline-always-inline/" class="article-date">
+  <time datetime="2023-09-07T13:14:22.000Z" itemprop="datePublished">2023-09-07</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p><code>inline</code>、<code>noinline</code> 和 <code>always_inline</code> 都是函数属性，用于指定函数的内联行为。它们可以通过 <code>__attribute__</code> 语法与函数结合使用。下面是使用示例：</p>
+<ol>
+<li><p><code>static inline __attribute__((noinline)) int func();</code><br>这个示例定义了一个静态内联函数 <code>func</code>，并使用了 <code>noinline</code> 属性。</p>
+<ul>
+<li><code>inline</code> 属性用于指定函数可以进行内联展开，即将函数的代码插入调用处，以减少函数调用的开销。</li>
+<li><code>static</code> 关键字用于将函数声明为静态函数，限定函数的作用域在当前源文件中。</li>
+<li><code>__attribute__((noinline))</code> 用于禁止对函数进行内联展开，即不将函数的代码插入调用处。</li>
+</ul>
+<p>这意味着 <code>func</code> 函数将被声明为内联函数，但编译器不会强制将其内联展开，而是根据编译器的优化策略决定是否内联展开。</p>
+</li>
+<li><p><code>static inline __attribute__((always_inline)) int func();</code><br>这个示例定义了一个静态内联函数 <code>func</code>，并使用了 <code>always_inline</code> 属性。</p>
+<ul>
+<li><code>__attribute__((always_inline))</code> 用于强制编译器始终内联展开函数，不考虑编译器的优化策略。</li>
+</ul>
+<p>这意味着 <code>func</code> 函数将始终被内联展开，无论编译器如何优化。</p>
+</li>
+</ol>
+<p>使用内联函数可以提高函数调用的效率，减少函数调用带来的开销。然而，过度使用内联函数可能会导致代码膨胀和代码重复，增加可执行文件的大小。</p>
+<p>内联函数是一种编译器优化技术，它将函数的代码插入到调用处，而不是通过函数调用的方式进行执行。内联函数的目的是减少函数调用的开销，包括保存当前函数现场、跳转到调用函数执行和恢复当前函数现场的开销。</p>
+<p>当一个函数被声明为内联函数时，编译器会尽量将函数的代码直接插入到调用处，类似于宏展开的方式。这样可以避免函数调用的开销，包括压栈保存现场、跳转执行和恢复现场的操作。相比于函数调用，内联函数可以更快地执行，并且可以消除函数调用带来的额外开销。</p>
+<p>然而，内联函数的使用应慎重考虑。由于内联函数的代码会被复制到每个调用处，这可能会导致代码膨胀，增加可执行文件的大小。过度使用内联函数可能会导致代码重复，降低可维护性。因此，应在性能和代码大小之间进行权衡，并根据具体情况决定是否使用内联函数。</p>
+<p>在 C&#x2F;C++ 中，可以使用 <code>inline</code> 关键字将函数声明为内联函数。例如：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">inline</span> <span class="type">int</span> <span class="title function_">add</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在上述示例中，<code>add</code> 函数被声明为内联函数。当调用 <code>add</code> 函数时，编译器会尝试将其代码直接插入到调用处，而不是进行函数调用。</p>
+<p>需要注意的是，将函数声明为内联函数只是对编译器的建议，编译器可以选择是否内联展开函数。此外，内联函数的定义通常应放在头文件中，以便在每个调用处进行展开。</p>
+<p>编译器对内联函数的处理可以分为两个阶段：编译阶段和链接阶段。</p>
+<p>在编译阶段，当编译器遇到内联函数的调用时，它会尝试将函数的代码插入到调用处，类似于宏展开。这样可以避免函数调用的开销，并提高执行效率。编译器通常会对内联函数进行一些优化，如常量折叠、循环展开等。</p>
+<p>在链接阶段，编译器会将每个内联函数的定义保留在目标文件中。当链接器将多个目标文件组合成可执行文件时，它会根据需要选择性地将内联函数的定义插入到调用处。</p>
+<p>然而，内联函数也有一些不足之处：</p>
+<ol>
+<li>增大代码的体积：由于内联函数的代码会被复制到每个调用处，这可能导致代码膨胀，增加可执行文件的大小。特别是当内联函数的代码较长时，代码体积的增大可能会对缓存命中率和指令缓存的效率产生负面影响。</li>
+<li>降低缓存命中率和取指效率：内联函数的代码增大可能导致缓存命中率降低，因为较多的代码需要从内存加载到缓存中。此外，取指令时，由于内联函数的代码较多，可能会导致取指令的效率降低，从而影响程序的执行速度。</li>
+<li>可能降低执行效率：尽管内联函数可以减少函数调用的开销，但在某些情况下，内联函数的执行效率可能会降低。这是因为内联函数的代码被复制到多个调用处，增加了指令的数量和缓存的压力。此外，如果内联函数的代码较长，可能会导致指令缓存的冲突，从而影响执行速度。</li>
+</ol>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gun%E6%89%A9%E5%B1%95%E8%AF%AD%E6%B3%95/" rel="tag">gun扩展语法</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-5-12-属性声明：constructor-destructor"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/09/07/5-12-%E5%B1%9E%E6%80%A7%E5%A3%B0%E6%98%8E%EF%BC%9Aconstructor-destructor/"
+    >5.12 属性声明：constructor &amp; destructor</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/09/07/5-12-%E5%B1%9E%E6%80%A7%E5%A3%B0%E6%98%8E%EF%BC%9Aconstructor-destructor/" class="article-date">
+  <time datetime="2023-09-07T13:14:20.000Z" itemprop="datePublished">2023-09-07</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p><code>constructor</code> 和 <code>destructor</code> 是函数属性，用于指定在程序运行时自动执行的初始化函数和清理函数。它们可以通过 <code>__attribute__</code> 语法与 <code>constructor</code> 和 <code>destructor</code> 属性结合使用。具体的使用方法如下所示：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">__attribute__((constructor)) <span class="type">int</span> <span class="title function_">init_func</span><span class="params">(<span class="type">void</span>)</span>;</span><br><span class="line">__attribute__((destructor)) <span class="type">int</span> <span class="title function_">exit_func</span><span class="params">(<span class="type">void</span>)</span>;</span><br></pre></td></tr></table></figure>
+
+<p>在这个例子中，<code>init_func</code> 是一个初始化函数，<code>exit_func</code> 是一个清理函数。</p>
+<p>解释如下：</p>
+<ul>
+<li><code>__attribute__((constructor))</code> 用于指定函数为初始化函数。这意味着在程序启动时，该函数会自动被调用进行初始化操作。</li>
+<li><code>__attribute__((destructor))</code> 用于指定函数为清理函数。这意味着在程序退出时，该函数会自动被调用进行清理操作。</li>
+</ul>
+<p>使用 <code>constructor</code> 和 <code>destructor</code> 属性的函数在程序运行期间的执行顺序是由编译器和链接器决定的。通常情况下，初始化函数会在 <code>main</code> 函数之前被调用，而清理函数会在程序退出时被调用。</p>
+<p>这些函数属性可以用于在程序开始和结束时执行一些必要的初始化和清理操作，例如初始化全局变量、打开和关闭文件、申请和释放资源等。</p>
+<p>需要注意的是，函数属性的使用方法可能因编译器而异，具体的语法和支持程度可能有所差异。因此，在使用时应查阅相关编译器文档以了解具体的使用方法和限制。</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gun%E6%89%A9%E5%B1%95%E8%AF%AD%E6%B3%95/" rel="tag">gun扩展语法</a></li></ul>
 
     </footer>
   </div>
@@ -880,7 +823,7 @@
   
   <nav class="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/4/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/6/">下一页</a>
+    <a class="extend prev" rel="prev" href="/page/4/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><a class="extend next" rel="next" href="/page/6/">下一页</a>
   </nav>
   
 </section>
