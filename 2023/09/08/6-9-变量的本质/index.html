@@ -90,7 +90,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">0</span>
+            <span class="post-count">481</span>
         </span>
     </span>
 
@@ -106,13 +106,40 @@
  
     </div>
       
+    <div class="tocbot"></div>
+
 
 
 
   
     <div class="article-entry" itemprop="articleBody">
        
-   
+  <h1 id="9-1-变量名"><a href="#9-1-变量名" class="headerlink" title="9.1 变量名"></a>9.1 变量名</h1><p>通过数据类型定义变量时，您需要指定变量的名称、数据类型和初始值（可选）。下面是变量定义的一般格式：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;数据类型&gt; &lt;变量名&gt; = &lt;初始值&gt;;</span><br></pre></td></tr></table></figure>
+
+<p>其中：</p>
+<ul>
+<li><code>&lt;数据类型&gt;</code> 是变量的数据类型，例如 <code>int</code>、<code>float</code>、<code>char</code> 等。</li>
+<li><code>&lt;变量名&gt;</code> 是您给变量起的名称，遵循命名规则和约定。</li>
+<li><code>&lt;初始值&gt;</code> 是可选项，表示变量的初始值。对于某些数据类型，您可以选择提供初始值。</li>
+</ul>
+<p>以下是一个示例，定义了不同类型的变量：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">int i = 10;</span><br><span class="line">float f = 3.14;</span><br><span class="line">char c = &#x27;A&#x27;;</span><br></pre></td></tr></table></figure>
+
+<p>在存储方面，变量在内存中占据一定的空间来存储其值。每个变量都有一个唯一的内存地址，用于标识其在内存中的位置。这个地址可以通过取变量的地址运算符 <code>&amp;</code> 来获取。</p>
+<p>变量的存储方式可以分为两个方面：</p>
+<ol>
+<li>变量名：变量名是您在代码中使用的标识符，用于引用变量的值。它在代码中作为变量的别名，可以用于读取和修改变量的值。</li>
+<li>地址：变量在内存中的存储位置由其地址确定。变量的地址是一个唯一的标识符，可以使用 <code>&amp;</code> 运算符获取。例如，<code>&amp;i</code> 表示变量 <code>i</code> 的地址。</li>
+</ol>
+<p>.</p>
+<h1 id="9-2-总结"><a href="#9-2-总结" class="headerlink" title="9.2 总结"></a>9.2 总结</h1><ul>
+<li>定义变量的目标是为了方便在内存中进行数据的读写操作。</li>
+<li>编译器通过变量类型来确定为变量分配合适的存储空间和地址。</li>
+<li>变量名本质上是内存中一段存储空间的别名，通过变量名可以对这段内存空间进行读写操作。</li>
+<li>变量修饰符可以改变变量的存储方式和作用域。</li>
+</ul>
+ 
       <!-- reward -->
       
     </div>
@@ -177,11 +204,11 @@
    
   <nav class="article-nav">
     
-      <a href="/2023/09/08/6-10-%E5%B8%B8%E9%87%8F%E5%AD%98%E5%82%A8/" class="article-nav-link">
+      <a href="/2023/09/08/6-11-%E4%BB%8E%E5%8F%98%E9%87%8F%E5%88%B0%E6%8C%87%E9%92%88/" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            6.10 常量存储
+            6.11 从变量到指针
           
         </div>
       </a>

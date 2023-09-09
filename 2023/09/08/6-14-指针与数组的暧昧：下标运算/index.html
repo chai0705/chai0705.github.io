@@ -90,7 +90,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">0</span>
+            <span class="post-count">1.2k</span>
         </span>
     </span>
 
@@ -99,20 +99,77 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">1 分钟</span>
+            <span class="post-count">4 分钟</span>
         </span>
     </span>
 </div>
  
     </div>
       
+    <div class="tocbot"></div>
+
 
 
 
   
     <div class="article-entry" itemprop="articleBody">
        
-   
+  <h1 id="14-1-指针和数组之间的主要区别"><a href="#14-1-指针和数组之间的主要区别" class="headerlink" title="14.1 指针和数组之间的主要区别"></a>14.1 指针和数组之间的主要区别</h1><p>指针和数组在C语言中有密切的关系，并且它们之间有一些区别。以下是指针和数组之间的主要区别和关系：</p>
+<ol>
+<li>指针与数组的暧昧关系：<ul>
+<li>在C语言中，数组名可以被视为指向数组第一个元素的指针。因此，数组名可以用作指针来访问数组元素。</li>
+<li>例如，如果有一个整数数组<code>int arr[5]</code>，则<code>arr</code>可以被视为指向<code>arr[0]</code>的指针。</li>
+</ul>
+</li>
+<li>数组与指针的区别：<ul>
+<li>数组是一组固定长度的相同类型元素的集合，它们在内存中是连续存储的。</li>
+<li>指针是一个变量，存储了一个内存地址，它可以指向任意类型的数据。</li>
+<li>数组在创建后，其大小是固定的，不可更改；而指针可以根据需要指向不同的内存地址。</li>
+</ul>
+</li>
+<li>间接访问与直接访问：<ul>
+<li>通过指针间接访问数据，意味着使用指针来获取或修改指向的内存中的值。通过解引用操作符<code>*</code>来实现间接访问。</li>
+<li>通过数组直接访问数据，意味着使用数组名和索引来直接访问数组中的元素。</li>
+</ul>
+</li>
+<li>用途：<ul>
+<li>指针通常用于动态内存分配，例如在堆上分配内存，以及在数据结构中使用指针来创建链表、树等数据结构。</li>
+<li>数组用于存储一组固定长度的相同类型元素，可以方便地访问和处理这些元素。数组在编程中经常用于存储和处理数据集合，例如存储学生成绩、字母表等。</li>
+</ul>
+</li>
+</ol>
+<h1 id="14-2-引用方式"><a href="#14-2-引用方式" class="headerlink" title="14.2 引用方式"></a>14.2 引用方式</h1><p>指针可以使用间接访问（解引用操作符<code>*</code>）来访问数组元素，而数组可以使用索引操作符<code>[]</code>来访问数组元素。下面解释了为什么可以这样做：</p>
+<ol>
+<li><p>指针使用间接访问访问数组元素：</p>
+<ul>
+<li>指针是一个变量，存储了一个内存地址。当指针指向数组的首个元素时，可以使用指针进行间接访问来获取或修改数组元素的值。</li>
+<li>解引用操作符<code>*</code>用于间接访问指针所指向的内存地址中的值。当将指针与解引用操作符<code>*</code>结合使用时，可以获取或修改指针指向的数组元素的值。</li>
+</ul>
+<p>例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">int arr[] = &#123;1, 2, 3, 4, 5&#125;;</span><br><span class="line">int *ptr = arr;  // 将指针指向数组的首个元素</span><br><span class="line">int value = *ptr;  // 通过指针间接访问数组元素</span><br><span class="line">```</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>数组使用索引访问数组元素：</p>
+<ul>
+<li>数组是一组连续存储的相同类型元素。数组名代表了数组的首个元素的地址。可以使用索引操作符<code>[]</code>来访问数组中的元素。</li>
+<li>索引操作符<code>[]</code>接受一个整数索引，用于指定要访问的数组元素的位置。通过使用数组名和索引，可以直接访问数组元素的值。</li>
+</ul>
+<p>例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">int arr[] = &#123;1, 2, 3, 4, 5&#125;;</span><br><span class="line">int value = arr[2];  // 直接访问数组元素</span><br><span class="line">```</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h1 id="14-3-重要"><a href="#14-3-重要" class="headerlink" title="14.3 重要"></a>14.3 重要</h1><p>在C语言中，表达式<code>E1[E2]</code>等价于<code>*(E1 + E2)</code>。这是因为在C语言中，指针算术运算定义了指针与整数之间的操作。</p>
+<p>具体解释如下：</p>
+<ol>
+<li><code>E1</code>是一个指针，<code>E2</code>是一个整数。</li>
+<li><code>E1[E2]</code>表示对指针<code>E1</code>进行偏移，偏移量为<code>E2</code>个元素的大小。</li>
+<li>当对指针<code>E1</code>进行偏移时，首先将<code>E1</code>与<code>E2</code>相加，得到一个新的指针，该指针指向<code>E1</code>所指向的内存地址加上<code>E2</code>个元素的大小的位置。</li>
+<li>最后，使用解引用操作符<code>*</code>对新的指针进行间接访问，获取该位置上的值。</li>
+</ol>
+<p>举个例子来说明：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">int arr[] = &#123;1, 2, 3, 4, 5&#125;;</span><br><span class="line">int* ptr = arr;  // 指针指向数组的首个元素</span><br><span class="line"></span><br><span class="line">int value1 = arr[2];      // 直接访问数组元素，等价于 *(arr + 2)</span><br><span class="line">int value2 = 2[arr];      // 使用 E1[E2] 访问数组元素，等价于 *(arr + 2)</span><br><span class="line"></span><br><span class="line">printf(&quot;%d\n&quot;, value1);  // 输出：3</span><br><span class="line">printf(&quot;%d\n&quot;, value2);  // 输出：3</span><br></pre></td></tr></table></figure>
+
+<p>在上面的例子中，<code>arr[2]</code>和<code>2[arr]</code>都是访问数组<code>arr</code>中的第3个元素，它们的结果都是3。这是因为它们等价于<code>*(arr + 2)</code>，即指针<code>arr</code>加上偏移量2，然后通过解引用操作符<code>*</code>来访问对应的内存位置。</p>
+<p>这种等价关系允许我们使用<code>E1[E2]</code>的形式来访问数组元素，尽管它的语法看起来有些奇怪，但在逻辑上是等价的，并且在某些特定的情况下可以增加代码的可读性。</p>
+ 
       <!-- reward -->
       
     </div>

@@ -160,606 +160,6 @@
     
     
     <article
-  id="post-1-62-dtb文件格式讲解"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/09/05/1-62-dtb%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F%E8%AE%B2%E8%A7%A3/"
-    >1-62-dtb文件格式讲解</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/09/05/1-62-dtb%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F%E8%AE%B2%E8%A7%A3/" class="article-date">
-  <time datetime="2023-09-05T00:01:32.000Z" itemprop="datePublished">2023-09-05</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/rk3568-%E9%A9%B1%E5%8A%A8/">rk3568 驱动</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h1 id="第62章-dtb文件格式讲解"><a href="#第62章-dtb文件格式讲解" class="headerlink" title="第62章 dtb文件格式讲解"></a>第62章 dtb文件格式讲解</h1><p>设备树 Blob (DTB) 格式是设备树数据的平面二进制编码。它用于在软件程序之间交换设备树数据。例如，在启动操作系统时，固件会将 DTB 传递给操作系统内核。</p>
-<p>DTB 格式在单个、线性、无指针数据结构中对设备树数据进行编码。它由一个小头部和三个可变大小的部分组成：内存保留块、结构块和字符串块。这些应该以该顺序出现在展平的设备树中。因此，设备树结构作为一个整体，当加载到内存地址时，将类似于下图所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309062022286.jpeg" alt="img"> </p>
-<p>本节课将以下面的设备树为例对设备树的二进制文件格式进行讲解：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">/dts-v1/;</span><br><span class="line"></span><br><span class="line">/ &#123;</span><br><span class="line">    model = <span class="string">&quot;This is my devicetree!&quot;</span>;</span><br><span class="line">    <span class="meta">#address-cells = <span class="string">&lt;1&gt;</span>;</span></span><br><span class="line">    <span class="meta">#size-cells = <span class="string">&lt;1&gt;</span>;</span></span><br><span class="line"></span><br><span class="line">    chosen &#123;</span><br><span class="line">        bootargs = <span class="string">&quot;root=/dev/nfs rw nfsroot=192.168.1.1 console=ttyS0, 115200&quot;</span>;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    cpu1: cpu@<span class="number">1</span> &#123;</span><br><span class="line">        device_type = <span class="string">&quot;cpu&quot;</span>;</span><br><span class="line">        compatible = <span class="string">&quot;arm,cortex-a35&quot;</span>, <span class="string">&quot;arm,armv8&quot;</span>;</span><br><span class="line">        reg = &lt;<span class="number">0x0</span> <span class="number">0x1</span>&gt;;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    aliases &#123;</span><br><span class="line">        led1 = <span class="string">&quot;/gpio@22020101&quot;</span>;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    node1 &#123;</span><br><span class="line">        <span class="meta">#address-cells = <span class="string">&lt;1&gt;</span>;</span></span><br><span class="line">        <span class="meta">#size-cells = <span class="string">&lt;1&gt;</span>;</span></span><br><span class="line"></span><br><span class="line">        gpio@<span class="number">22020102</span> &#123;</span><br><span class="line">            reg = &lt;<span class="number">0x20220102</span> <span class="number">0x40</span>&gt;;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    node2 &#123;</span><br><span class="line">        node1-child &#123;</span><br><span class="line">            pinnum = &lt;<span class="number">01234</span>&gt;;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    gpio@<span class="number">22020101</span> &#123;</span><br><span class="line">        compatible = <span class="string">&quot;led&quot;</span>;</span><br><span class="line">        reg = &lt;<span class="number">0x20220101</span> <span class="number">0x40</span>&gt;;</span><br><span class="line">        status = <span class="string">&quot;okay&quot;</span>;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>而我们之后要分析的是二进制的dtb文件，所以需要使用dtc工具将上面的dts文件编译成dtb文件，具体命令如下所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309062022423.jpeg" alt="img"> </p>
-<p>为了方便用户学习，已经将本章节要讲解的设备树dts文件和dtb文件放在了对应的网盘路径下，同时也将pxBinaryViewerSetup二进制分析软件放在了同一目录下，iTOP-RK3568开发板【底板V1.7版本】\03_【iTOP-RK3568开发板】指南教程\02_Linux驱动配套资料\04_Linux驱动例程\49_dt_format，如下图所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309062022265.jpeg" alt="img"> </p>
-<p>使用二进制分析软件打开deb文件并设置大端模式之后如下所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309062022400.jpeg" alt="img"></p>
-<p>在接下来的小节中将会对读取出的设备树二进制内容进行讲解。</p>
-<h2 id="62-1-Header"><a href="#62-1-Header" class="headerlink" title="62.1 Header"></a>62.1 Header</h2><p>devicetree 的头布局由以下 C 结构定义。所有的头字段都是 32 位整数，以大端格式存储。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">struct fdt_header &#123;</span><br><span class="line">    uint32_t magic;                 // 设备树头部的魔数</span><br><span class="line">    uint32_t totalsize;             // 设备树文件的总大小</span><br><span class="line">    uint32_t off_dt_struct;         // 设备树结构体（节点数据）相对于文件开头的偏移量</span><br><span class="line">    uint32_t off_dt_strings;        // 设备树字符串表相对于文件开头的偏移量</span><br><span class="line">    uint32_t off_mem_rsvmap;        // 内存保留映射表相对于文件开头的偏移量</span><br><span class="line">    uint32_t version;               // 设备树版本号</span><br><span class="line">    uint32_t last_comp_version;     // 最后一个兼容版本号</span><br><span class="line">    uint32_t boot_cpuid_phys;       // 启动 CPU 的物理 ID</span><br><span class="line">    uint32_t size_dt_strings;       // 设备树字符串表的大小</span><br><span class="line">    uint32_t size_dt_struct;        // 设备树结构体（节点数据）的大小</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>每个字段的描述如下所示：</p>
-<table>
-<thead>
-<tr>
-<th>字段</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>magic</td>
-<td>该字段为固定值 0xd00dfeed（大端）。</td>
-</tr>
-<tr>
-<td>totalsize</td>
-<td>该字段包含设备树数据结构的总大小（以字节为单位）。此大小应包含结构的所有部分：标题、内存保留块、结构块和字符串块，以及块之间或最后一个块之后的任何空闲空间间隙。</td>
-</tr>
-<tr>
-<td>off_dt_struct</td>
-<td>该字段包含结构块从头开始的以字节为单位的偏移量。</td>
-</tr>
-<tr>
-<td>off_dt_strings</td>
-<td>该字段包含字符串块从头开始的以字节为单位的偏移量。</td>
-</tr>
-<tr>
-<td>off_mem_rsvmap</td>
-<td>该字段包含从头开始的内存保留块的字节偏移量。</td>
-</tr>
-<tr>
-<td>version</td>
-<td>该字段包含设备树数据结构的版本。</td>
-</tr>
-<tr>
-<td>last_comp_version</td>
-<td>向后兼容的设备树数据结构的最低版本。</td>
-</tr>
-<tr>
-<td>boot_cpuid_phys</td>
-<td>与设备树CPU 节点的reg属性对应</td>
-</tr>
-<tr>
-<td>size_dt_strings</td>
-<td>设备树字符串块部分的字节长度。</td>
-</tr>
-<tr>
-<td>size_dt_struct</td>
-<td>设备树结构块部分的字节长度。</td>
-</tr>
-</tbody></table>
-<p>然后来查看二进制文件，其中4个字节表示一个单位，前十个单位分别代表上述的十个字段如下图所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309062022323.jpeg" alt="img"> </p>
-<table>
-<thead>
-<tr>
-<th>字段</th>
-<th>十六进制数值</th>
-<th>代表含义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>magic</td>
-<td>D00DFEED</td>
-<td>固定值</td>
-</tr>
-<tr>
-<td>totalsize</td>
-<td>000002A4</td>
-<td>转换为十进制之后为676，表示该文件大小为676字节</td>
-</tr>
-<tr>
-<td>off_dt_struct</td>
-<td>00000038</td>
-<td>表示结构块从00000038这个地址开始，和后面的size_dt_struct结构块大小参数一起可以确定结构块的存储范围</td>
-</tr>
-<tr>
-<td>off_dt_strings</td>
-<td>0000024C</td>
-<td>表示字符串块从0000024C这个地址开始，和后面的size_dt_strings字符串块大小参数一起可以确定字符串块的存储范围</td>
-</tr>
-<tr>
-<td>off_mem_rsvmap</td>
-<td>00000028</td>
-<td>表示内存保留块的偏移为00000028， header之后结构快之前都是属于内存保留块。</td>
-</tr>
-<tr>
-<td>version</td>
-<td>00000011</td>
-<td>11转换为十进制之后为17，表示当前设备树结构版本为17</td>
-</tr>
-<tr>
-<td>last_comp_version</td>
-<td>00000010</td>
-<td>10转换为十进制之后为16，表示向前兼容的设备树结构版本为16</td>
-</tr>
-<tr>
-<td>boot_cpuid_phys</td>
-<td>00000000</td>
-<td>表示设备树的teg属性为0</td>
-</tr>
-<tr>
-<td>size_dt_strings</td>
-<td>00000058</td>
-<td>表示字符串块的大小为00000058 ，和前面的off_dt_strings字符串块偏移值一起可以确定字符串块的范围</td>
-</tr>
-<tr>
-<td>size_dt_struct</td>
-<td>00000214</td>
-<td>表示结构块的大小为00000214，和前面的off_dt_struct结构块偏移值一起可以确定结构块的范围</td>
-</tr>
-</tbody></table>
-<p>在接下来的小节中将会对header提到的内存保留块、结构块和字符串块进行更详细的讲解。</p>
-<h2 id="62-2-内存保留块"><a href="#62-2-内存保留块" class="headerlink" title="62.2 内存保留块"></a>62.2 内存保留块</h2><p>内存保留块（Memory Reserved Block）是用于客户端程序的保护和保留物理内存区域的列表。这些保留区域不应被用于一般的内存分配，而是用于保护重要数据结构，以防止客户端程序覆盖这些数据。内存保留块的目的是确保特定的内存区域在客户端程序运行时不被修改或使用。由于在示例设备树中没有设置内存保留块，所以相应的区域都为0，如下所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309062022259.jpeg" alt="img"> </p>
-<p><strong>保留区域列表：</strong> 内存保留块是一个由一组 64 位大端整数对构成的列表。每对整数对应一个保留内存区域，其中包含物理地址和区域的大小（以字节为单位）。这些保留区域应该彼此不重叠。</p>
-<p><strong>保留区域的用途：</strong>客户端程序不应访问内存保留块中的保留区域，除非引导程序提供的其他信息明确指示可以访问。引导程序可以使用特定的方式来指示客户端程序可以访问保留内存的部分内容。引导程序可能会在文档、可选的扩展或特定于平台的文档中说明保留内存的特定用途。</p>
-<p><strong>格式：</strong>内存保留块中的每个保留区域由一个64位大端整数对表示。每对由以下 C 结构表示：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">struct fdt_reserve_entry &#123; </span><br><span class="line">	uint64_t address; </span><br><span class="line">	uint64_t size;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>其中的第一个整数表示保留区域的物理地址，第二个整数表示保留区域的大小（以字节为单位）。每个整数都以 64 位的形式表示，即使在32位架构上也是如此。在32位CPU上，整数的高 32 位将被忽略。</p>
-<p>内存保留块为设备树提供了保护和保留物理内存区域的功能。它确保了特定的内存区域在客户端程序运行时不被修改或使用。这样可以确保引导程序和其他关键组件在需要的情况下能够访问保留内存的特定部分，并保护关键数据结构免受意外修改。</p>
-<h2 id="62-3-结构快"><a href="#62-3-结构快" class="headerlink" title="62.3 结构快"></a>62.3 结构快</h2><p>结构块是设备树中描述设备树本身结构和内容的部分。它由一系列带有数据的令牌序列组成，这些令牌按照线性树结构进行组织。</p>
-<p><strong>（1）令牌类型</strong></p>
-<p> 结构块中的令牌分为五种类型，每种类型用于不同的目的。</p>
-<p>a. FDT_BEGIN_NODE (0x00000001): FDT_BEGIN_NODE 标记表示一个节点的开始。它后面跟着节点的单元名称作为额外数据。节点名称以以空字符结尾的字符串形式存储，并且可以包括单元地址。节点名称后可能需要填充零字节以对齐，然后是下一个标记，可以是除了 FDT_END 之外的任何标记。</p>
-<p>b. FDT_END_NODE (0x00000002): FDT_END_NODE 标记表示一个节点的结束。该标记没有额外的数据，紧随其后的是下一个标记，可以是除了 FDT_PROP 之外的任何标记。</p>
-<p>c. FDT_PROP (0x00000003): FDT_PROP 标记表示设备树中属性的开始。它后面跟着描述属性的额外数据，该数据首先由属性的长度和名称组成，表示为以下 C 结构</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">struct &#123;</span><br><span class="line">	uint32_t len; </span><br><span class="line">	uint32_t nameoff;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>长度表示属性值的字节长度，名称偏移量指向字符串块中存储属性名称的位置。在这个结构之后，属性的值作为字节字符串给出。属性值后可能需要填充零字节以对齐，然后是下一个令牌，可以是除了 FDT_END 之外的任何标记。</p>
-<p>d. FDT_NOP (0x00000004): FDT_NOP 令牌可以被解析设备树的程序忽略。该令牌没有额外的数据，紧随其后的是下一个令牌，可以是任何有效的令牌。使用 FDT_NOP 令牌可以覆盖树中的属性或节点定义，从而将其从树中删除，而无需移动设备树 blob 中的其他部分。</p>
-<p>e. FDT_END (0x00000009): FDT_END 标记表示结构块的结束。应该只有一个 FDT_END 标记，并且应该是结构块中的最后一个标记。该标记没有额外的数据，紧随其后的字节应该位于结构块的开头偏移处，该偏移等于设备树 blob 标头中的 size_dt_struct 字段的值。</p>
-<p><strong>（2）树状结构：</strong></p>
-<p>设备树的结构以线性树的形式表示。每个节点由 FDT_BEGIN_NODE 标记开始，由 FDT_END_NODE 标记结束。节点的属性和子节点在 FDT_END_NODE 之前表示，因此子节点的 FDT_BEGIN_NODE 和 FDT_END_NODE 令牌嵌套在父节点的令牌中。</p>
-<p><strong>（3）结构块的结束</strong></p>
-<p>结构块以单个 FDT_END 标记结束。该标记没有额外的数据，它位于结构块的末尾，并且是结构块中的最后一个标记。FDT_END 标记之后的字节应位于结构块的开头偏移处，该偏移等于设备树 blob 标头中的 size_dt_struct 字段的值。</p>
-<p>最后对结构块开头的部分内容进行讲解，具体内容如下所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309062022678.jpeg" alt="img"> </p>
-<table>
-<thead>
-<tr>
-<th>十六进制数值</th>
-<th>代表含义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>00000001</td>
-<td>根节点的开始</td>
-</tr>
-<tr>
-<td>00000000</td>
-<td>根节点没有节点名，所以这里名字为0</td>
-</tr>
-<tr>
-<td>00000003</td>
-<td>设备树中属性的开始</td>
-</tr>
-<tr>
-<td>00000017</td>
-<td>代表该属性的大小，换算成十进制为23，也就是”This is my devicetree!”这一字符串的长度</td>
-</tr>
-<tr>
-<td>00000000</td>
-<td>代表该属性在字符串块的偏移量，这里为0，表示无偏移</td>
-</tr>
-<tr>
-<td>54686973-65210000</td>
-<td>model的具体值</td>
-</tr>
-</tbody></table>
-<p>通过使用结构块，设备树可以以一种层次化的方式组织和描述系统中的设备和资源。每个节点可以包含属性和子节点，从而实现更加灵活和可扩展的设备树表示。</p>
-<h2 id="62-4-字符串块"><a href="#62-4-字符串块" class="headerlink" title="62.4 字符串块"></a>62.4 字符串块</h2><p>字符串块用于存储设备树中使用的所有属性名称。它由一系列以空字符结尾的字符串组成，这些字符串在字符串块中简单地连接在一起，具体示例如下所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309062022711.jpeg" alt="img"> </p>
-<p><strong>（1）字符串连接：</strong></p>
-<p> 字符串块中的字符串以空字符（\0）作为终止符来连接。这意味着每个字符串都以空字符结尾，并且下一个字符串紧跟在上一个字符串的末尾。这种连接方式使得字符串块中的所有字符串形成一个连续的字符序列。</p>
-<p><strong>（2）偏移量引用：</strong></p>
-<p>在结构块中，属性的名称是通过偏移量来引用字符串块中的相应字符串的。偏移量是一个无符号整数值，它表示字符串在字符串块中的位置。通过使用偏移量引用，设备树可以节省空间，并且在属性名称发生变化时也更加灵活，因为只需要更新偏移量，而不需要修改结构块中的属性引用。</p>
-<p><strong>（3）对齐约束：</strong></p>
-<p>字符串块没有对齐约束，这意味着它可以出现在设备树 blob 的任何偏移处。这使得字符串块的位置在设备树 blob 中是灵活的，并且可以根据需要进行调整，而不会对设备树的解析和处理造成影响。</p>
-<p>字符串块是设备树中用于存储属性名称的部分。它由字符串连接而成，并通过偏移量在结构块中进行引用。字符串块的灵活位置使得设备树的表示更加紧凑和可扩展。</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rk3568-%E9%A9%B1%E5%8A%A8/" rel="tag">rk3568 驱动</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-1-61-实例分析-pinctrl"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/09/05/1-61-%E5%AE%9E%E4%BE%8B%E5%88%86%E6%9E%90-pinctrl/"
-    >1-61-实例分析: pinctrl</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/09/05/1-61-%E5%AE%9E%E4%BE%8B%E5%88%86%E6%9E%90-pinctrl/" class="article-date">
-  <time datetime="2023-09-05T00:01:31.000Z" itemprop="datePublished">2023-09-05</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/rk3568-%E9%A9%B1%E5%8A%A8/">rk3568 驱动</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h1 id="第61章-实例分析：pinctrl"><a href="#第61章-实例分析：pinctrl" class="headerlink" title="第61章 实例分析：pinctrl"></a>第61章 实例分析：pinctrl</h1><h2 id="61-1-pinmux-介绍"><a href="#61-1-pinmux-介绍" class="headerlink" title="61.1 pinmux 介绍"></a>61.1 pinmux 介绍</h2><p>Pinmux（引脚复用）是指在系统中配置和管理引脚功能的过程。在许多现代集成电路中，单个引脚可以具有多个功能，例如作为 GPIO、UART、SPI 或 I2C 等。通过使用引脚复用功能，可以在这些不同的功能之间切换。</p>
-<p>引脚复用通过硬件和软件的方式实现。硬件层面，芯片设计会为每个引脚提供多个功能的选择。这些功能通常由芯片厂商在芯片规格文档中定义。通过编程设置寄存器或开关，可以选择某个功能来连接引脚。这种硬件层面的配置通常是由引脚控制器（Pin Controller）或引脚复用控制器（Pin Mux Controller）负责管理。</p>
-<p>软件层面，操作系统或设备驱动程序需要了解和配置引脚的功能。它们使用设备树（Device Tree）或设备树绑定（Device Tree Bindings）来描述和配置引脚的功能。在设备树中，可以指定引脚的复用功能，将其连接到特定的硬件接口或功能。操作系统或设备驱动程序在启动过程中解析设备树，并根据配置对引脚进行初始化和设置。</p>
-<p>那我们要怎样知晓每一个管脚都可以复用成什么功能呢，一般在核心板原理图都会标注出每个管脚的复用功能，如下图所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309062022792.jpeg" alt="img"> </p>
-<p>从上图可以看到UART4_RX_M1对应的引脚可以复用为以下6个功能LCDC_D16、VOP_BT1120_D7、GMAC1_RXD0_M0、UART4_RX_M1、PWM8_M0、GPIO3_B1_d，对应的BGA引脚标号为AG1,那这里的AG1是如何定位的呢。</p>
-<p>在 BGA（Ball Grid Array，球栅阵列）封装中，引脚标号是用于唯一标识每个引脚的标识符。这些标号通常由芯片制造商定义，并在芯片的规格文档或数据手册中提供。</p>
-<p>BGA 芯片的引脚标号通常由字母和数字的组合构成。它们用于在芯片的封装底部的焊盘上进行标记。每个引脚标号都与芯片内部的功能或信号相对应，以便正确连接到印刷电路板（PCB）上的目标位置。RK3568的引脚标号图如下所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309062022868.jpeg" alt="img"> </p>
-<p>可以看到纵向为A-AH的28个字母类型标号，横向为1-28的28个字母类型标号，瑞芯微也在对应的3568数据手册中加入了根据BGA位置制作的复用功能图，部分内容如下图所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309062022855.jpeg" alt="img"> </p>
-<p>其中黑色框代表被保留的引脚，其他有颜色的框一般为电源和地，白色的框代表有具体复用功能的引脚。</p>
-<p>脚复用提高了芯片的灵活性和可重用性，通过允许同一个引脚在不同的功能之间切换，可以减少硬件设计的复杂性和成本。此外，引脚复用还使得在使用相同芯片的不同应用中可以更加灵活地配置和定制引脚功能。</p>
-<p>会在下一个小节中讲解如何使用pinctrl在设备树中配置引脚的复用。</p>
-<h2 id="61-2-使用pinctrl设置复用关系"><a href="#61-2-使用pinctrl设置复用关系" class="headerlink" title="61.2 使用pinctrl设置复用关系"></a>61.2 使用pinctrl设置复用关系</h2><p>pinctrl（引脚控制）用于描述和配置硬件设备上的引脚功能和连接方式。它是设备树的一部分，用于在启动过程中传递引脚配置信息给操作系统和设备驱动程序，以便正确地初始化和控制引脚。</p>
-<p>在设备树中，pinctrl（引脚控制）使用了客户端和服务端的概念来描述引脚控制的关系和配置。</p>
-<h3 id="61-2-1-客户端-Client"><a href="#61-2-1-客户端-Client" class="headerlink" title="61.2.1 客户端(Client)"></a>61.2.1 客户端(Client)</h3><p>接下来将使用三个例子对客户端要用到的属性进行讲解。</p>
-<p>例1：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">node &#123;</span><br><span class="line">    pinctrl-names = &quot;default&quot;;</span><br><span class="line">    pinctrl-0 = &lt;&amp;pinctrl_hog_1&gt;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在例1中，pinctrl-names 属性定义了一个状态名称：default。</p>
-<p>pinctrl-0 属性指定了第一个状态 default 对应的引脚配置。</p>
-<p>&lt;&amp;pinctrl_hog_1&gt; 是一个引脚描述符，它引用了一个名为 pinctrl_hog_1 的引脚控制器节点。这表示在 default 状态下，设备的引脚配置将使用 pinctrl_hog_1 节点中定义的配置。</p>
-<p>例2：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">node &#123;</span><br><span class="line">    pinctrl-names = <span class="string">&quot;default&quot;</span>, <span class="string">&quot;wake up&quot;</span>;</span><br><span class="line">    pinctrl<span class="number">-0</span> = &lt;&amp;pinctrl_hog_1&gt;;</span><br><span class="line">    pinctrl<span class="number">-1</span> = &lt;&amp;pinctrl_hog_2&gt;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在例2中，pinctrl-names 属性定义了两个状态名称：default 和 wake up。</p>
-<p>pinctrl-0 属性指定了第一个状态 default 对应的引脚配置，引用了 pinctrl_hog_1 节点。</p>
-<p>pinctrl-1 属性指定了第二个状态 wake up 对应的引脚配置，引用了 pinctrl_hog_2 节点。</p>
-<p>这意味着设备可以处于两个不同的状态之一，每个状态分别使用不同的引脚配置。</p>
-<p>例3：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">node &#123;</span><br><span class="line">    pinctrl-names = &quot;default&quot;;</span><br><span class="line">    pinctrl-0 = &lt;&amp;pinctrl_hog_1 &amp;pinctrl_hog_2&gt;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在这个例子中，pinctrl-names 属性仍然定义了一个状态名称：default。</p>
-<p>pinctrl-0 属性指定了第一个状态 default 对应的引脚配置，但与之前的例子不同的是，它引用了两个引脚描述符：pinctrl_hog_1 和 pinctrl_hog_2。</p>
-<p>这表示在 default 状态下，设备的引脚配置将使用 pinctrl_hog_1 和 pinctrl_hog_2 两个节点中定义的配置。这种方式可以将多个引脚控制器的配置组合在一起，以满足特定状态下的引脚需求。</p>
-<p>至此关于客户端的内容就讲解完成了，低于客户端的内容，不同厂家的编写格式是相同的，而服务端每个厂家就有区别了，在下一个小节将以rk3568的pinctrl服务端为例进行讲解。</p>
-<h3 id="61-2-2-服务端-Server"><a href="#61-2-2-服务端-Server" class="headerlink" title="61.2.2 服务端(Server)"></a>61.2.2 服务端(Server)</h3><p>服务端是设备树中定义引脚配置的部分。它包含引脚组和引脚描述符，为客户端提供引脚配置选择。服务端在设备树中定义了 pinctrl 节点，其中包含引脚组和引脚描述符的定义。</p>
-<p>这里以瑞芯微的RK3568为例进行pinctrl服务端的讲解，瑞芯微原厂BSP工程师为了方便用户通过pinctrl设置管脚的复用关系，将包含所有复用关系的配置写在了内核目录下的“arch&#x2F;arm64&#x2F;boot&#x2F;dts&#x2F;rockchip&#x2F;rk3568-pinctrl.dtsi”设备树中，具体内容如下所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309062022825.jpeg" alt="img"> </p>
-<p>在pinctrl节点中就是每个节点的复用功能，然后我们以uart4的引脚复用为例进行讲解，uart4的pinctrl服务端内容如下所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309062022736.jpeg" alt="img"> </p>
-<p>其中&lt;3 RK_PB1 4 &amp;pcfg_pull_up&gt;和&lt;3 RK_PB2 4 &amp;pcfg_pull_up&gt;分别表示将GPIO3的PB1引脚设置为功能4，将GPIO3的PB2也设置为功能4，且电器属性都会设置为上拉。通过查找原理图可以得到两个引脚在BGA封装位置分别为AG1和AF2，如下图所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309062022803.jpeg" alt="img"> </p>
-<p>然后在rk3568的数据手册中找到引脚复用表对应的位置，具体内容如下图所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309062022099.jpeg" alt="img"><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309062022123.jpeg" alt="img"> </p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309062022214.jpeg" alt="img"> </p>
-<p>可以看到功能4对应串口4的发送端和接收端，pinctrl服务端的配置和数据手册中的引脚复用功能是一一对应，那如果要将RK_PB1和RK_PB2设置为GPIO功能要如何设置呢，从上图可以看到GPIO对应功能0，所以可以通过以下pinctrl内容将设置RK_PB1和RK_PB2设置为GPIO功能（事实上如果不对该管脚进行功能复用该引脚默认就会设置为GPIO功能）：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="number">3</span> RK_PB1 <span class="number">0</span> &amp;pcfg_pull_up&gt;,                                                                                                                                                                                           </span><br><span class="line">&lt;<span class="number">3</span> RK_PB2 <span class="number">0</span> &amp;pcfg_pull_up&gt;;</span><br></pre></td></tr></table></figure>
-
-<p>最后来看客户端对uart4服务端的引用，具体内容在内核源码目录“arch&#x2F;arm64&#x2F;boot&#x2F;dts&#x2F;rockchip&#x2F;rk3568-evb1-ddr4-v10-linux.dts”：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309062022165.jpeg" alt="img"> </p>
-<p>通过在客户端中引用服务端的引脚描述符，设备树可以将客户端和服务端的引脚配置关联起来。这样，在设备树被解析和处理时，操作系统和设备驱动程序可以根据客户端的需求，查找并应用适当的引脚配置。</p>
-<h2 id="61-3-pinctrl实例编写"><a href="#61-3-pinctrl实例编写" class="headerlink" title="61.3 pinctrl实例编写"></a>61.3 pinctrl实例编写</h2><p>本小节将通过上面学到的pinctrl相关知识，将led的控制引脚复用为GPIO模式。</p>
-<p>首先来对rk3568的设备树结构进行以下介绍，根据sdk源码目录下的“device&#x2F;rockchip&#x2F;rk356x&#x2F;BoardConfig-rk3568-evb1-ddr4-v10.mk”默认配置文件可以了解到编译的设备树为rk3568-evb1-ddr4-v10-linux.dts,整理好的设备树之间包含关系列表如下所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309062022266.png" alt="image-20230906164406935"></p>
-<p>Led在rk3568-evb.dtsi设备树中已经被正常配置了，如下图所示：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309062022394.jpeg" alt="img"></p>
-<p>这时候可能大家就有问题了，这里也并没有配置pinctrl呀，那为什么led最后能正常使用呢，这个原因在上节课中其实我们已经提到了，当一个引脚没有被复用为任何功能时，默认就是GPIO功能，所以这里没有pinctrl led功能也可以正常使用。</p>
-<p>但这里我们仍旧使用pinctrl对led进行配置，从而熟练pinctrl，首先注释掉leds节点，注释完成如下所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309062022446.jpeg" alt="img"> </p>
-<p>保存退出之后，然后进入到rk3568-evb1-ddr4-v10.dtsi设备树中，找到rk_485_ctl节点，如下图所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309062022525.jpeg" alt="img"> </p>
-<p>这是根节点的最后一个节点，而且也是用来控制一个GPIO的，我们完全可以仿照该节点，在该节点下方编写led控制节点，仿写完成的设备树内容如下所示：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">my_led: led &#123;</span><br><span class="line">   compatible = <span class="string">&quot;topeet,led&quot;</span>;</span><br><span class="line">   gpios = &lt;&amp;gpio0 RK_PB7 GPIO_ACTIVE_HIGH&gt;;</span><br><span class="line">   pinctrl-names = <span class="string">&quot;default&quot;</span>;</span><br><span class="line">   pinctrl<span class="number">-0</span> = &lt;&amp;rk_led_gpio&gt;;</span><br><span class="line">   &#125;;  </span><br></pre></td></tr></table></figure>
-
-<p>第1行：节点名称为 led，标签名为my_led。</p>
-<p>第2行：compatible 属性指定了设备的兼容性标识，即设备与驱动程序之间的匹配规则。在这里，设备标识为 “topeet,led”，表示该 LED 设备与名为 “topeet,led” 的驱动程序兼容。</p>
-<p>第3行：gpios 属性指定了与LED相关的GPIO（通用输入&#x2F;输出）引脚配置。</p>
-<p>第4行：pinctrl-names 属性指定了与引脚控制相关的命名。default表示状态 0</p>
-<p>第5行：pinctrl-0 属性指定了与 pinctrl-names 属性中命名的引脚控制相关联的实际引脚控制器配置。&lt;&amp;rk_led_gpio&gt; 表示引用了名为 rk_led_gpio 的引脚控制器配置。</p>
-<p>添加完成如下图所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309062022540.jpeg" alt="img"> </p>
-<p>然后继续找到在同一设备树文件的485 pinctrl服务端节点，具体内容如下所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309062022591.jpeg" alt="img"> </p>
-<p>然后在该节点下方仿写led控制引脚pinctrl服务端节点，仿写完成的节点内容如下所示：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">rk_led&#123;</span><br><span class="line">		rk_led_gpio:rk-led-gpio &#123;</span><br><span class="line">			rockchip,pins = &lt;0 RK_PB7 RK_FUNC_GPIO &amp;pcfg_pull_none&gt;;</span><br><span class="line">		&#125;;</span><br><span class="line">	&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>添加完成之后如下图所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309062022594.jpeg" alt="img"> </p>
-<p>至此，led的控制引脚就通过pinctrl被复用为了GPIO功能，保存退出之后，重新编译内核，没有报错就证明我们的实验完成了。</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rk3568-%E9%A9%B1%E5%8A%A8/" rel="tag">rk3568 驱动</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-1-60-实例分析-GPIO"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/09/05/1-60-%E5%AE%9E%E4%BE%8B%E5%88%86%E6%9E%90-GPIO/"
-    >1-60-实例分析:GPIO</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/09/05/1-60-%E5%AE%9E%E4%BE%8B%E5%88%86%E6%9E%90-GPIO/" class="article-date">
-  <time datetime="2023-09-05T00:01:29.000Z" itemprop="datePublished">2023-09-05</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/rk3568-%E9%A9%B1%E5%8A%A8/">rk3568 驱动</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h1 id="第60章-实例分析：GPIO"><a href="#第60章-实例分析：GPIO" class="headerlink" title="第60章 实例分析：GPIO"></a>第60章 实例分析：GPIO</h1><h2 id="60-1-GPIO相关属性"><a href="#60-1-GPIO相关属性" class="headerlink" title="60.1 GPIO相关属性"></a>60.1 GPIO相关属性</h2><h3 id="60-1-1-RK-ft5x06设备树节点"><a href="#60-1-1-RK-ft5x06设备树节点" class="headerlink" title="60.1.1 RK ft5x06设备树节点"></a>60.1.1 RK ft5x06设备树节点</h3><p>下面展示的是iTOP-RK3568开发板SDK源码中的ft5x06设备树，其中蓝色字体部分就是关于gpio相关的描述，包括了interrupts、 interrupt-controller、#interrupt-cells、interrupt-parent四种常见属性：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">gpio0: gpio@fdd60000 &#123;</span><br><span class="line">    compatible = <span class="string">&quot;rockchip,gpio-bank&quot;</span>;</span><br><span class="line">    reg = &lt;<span class="number">0x0</span> <span class="number">0xfdd60000</span> <span class="number">0x0</span> <span class="number">0x100</span>&gt;;</span><br><span class="line">    interrupts = &lt;GIC_SPI <span class="number">33</span> IRQ_TYPE_LEVEL_HIGH&gt;;</span><br><span class="line">    clocks = &lt;&amp;pmucru PCLK_GPI00&gt;, &lt;&amp;pmucru DBCLK_GPI00&gt;;</span><br><span class="line">    gpio-controller;</span><br><span class="line">    <span class="meta">#gpio-cells = <span class="string">&lt;2&gt;</span>;</span></span><br><span class="line">    gpio-ranges = &lt;&amp;pinctrl <span class="number">0</span> <span class="number">0</span> <span class="number">32</span>&gt;;</span><br><span class="line">    interrupt-controller;</span><br><span class="line">    <span class="meta">#interrupt-cells = <span class="string">&lt;2&gt;</span>;</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">ft5x06: ft5x06@<span class="number">38</span> &#123; </span><br><span class="line">    status = <span class="string">&quot;disabled&quot;</span>;</span><br><span class="line">    compatible = <span class="string">&quot;edt,edt-ft5306&quot;</span>;</span><br><span class="line">    reg = &lt;<span class="number">0x38</span>&gt;;</span><br><span class="line">    touch-gpio = &lt;&amp;gpio0 RK_PB5 IRQ_TYPE_EDGE_RISING&gt;;</span><br><span class="line">    interrupt-parent = &lt;&amp;gpio0&gt;;</span><br><span class="line">    interrupts = &lt;RK_PB5 IRQ_TYPE_LEVEL_LOW&gt;;</span><br><span class="line">    reset-gpios = &lt;&amp;gpio0 RK_PB6 GPIO_ACTIVE_LOW&gt;;</span><br><span class="line">    touchscreen-size-x = &lt;<span class="number">800</span>&gt;;</span><br><span class="line">    touchscreen-size-y = &lt;<span class="number">1280</span>&gt;;</span><br><span class="line">    touch_type = &lt;<span class="number">1</span>&gt;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>其中gpio0节点是在内核源码的“&#x2F;arch&#x2F;arm64&#x2F;boot&#x2F;dts&#x2F;rockchip&#x2F;rk3568.dtsi”设备树的3549-3560行定义的，而ft5x06: ft5x06@38触摸芯片节点是在内核源码的“&#x2F;arch&#x2F;arm64&#x2F;boot&#x2F;dts&#x2F;rockchip&#x2F;topeet_rk3568_lcds.dtsi”设备树的301-313行定义的。接下来将会对设备树常见的四个gpio属性进行介绍。</p>
-<h3 id="60-1-2-gpio-controller"><a href="#60-1-2-gpio-controller" class="headerlink" title="60.1.2 gpio-controller"></a>60.1.2 gpio-controller</h3><p>gpio-controller属性用于标识一个设备节点作为GPIO控制器。GPIO控制器是负责管理和控制GPIO引脚的硬件模块或驱动程序。</p>
-<p>gpio-controller属性通常作为设备节点的一个属性出现，位于设备节点的属性列表中。</p>
-<p>当一个设备节点被标识为GPIO控制器时，它通常会定义一组GPIO引脚，并提供相关的GPIO控制和配置功能。其他设备节点可以使用该GPIO控制器来控制和管理其GPIO引脚。</p>
-<p>通过使用gpio-controller属性，设备树可以明确标识出GPIO控制器设备节点，使系统可以正确识别和管理GPIO引脚的配置和控制。</p>
-<h3 id="60-1-3-gpio-cells"><a href="#60-1-3-gpio-cells" class="headerlink" title="60.1.3 #gpio-cells"></a>60.1.3 #gpio-cells</h3><p>#gpio-cells属性用于指定GPIO引脚描述符的编码方式。GPIO引脚描述符是用于标识和配置GPIO引脚的一组值，例如引脚编号、引脚属性等。</p>
-<p>#gpio-cells属性的属性值是一个整数，表示用于编码GPIO引脚描述符的单元数。通常，这个值为2。</p>
-<p>在第一小节的示例中有1个gpio引脚描述属性,由于#gpio-cells属性被设置为了2，所以每个引脚描述属性中会有两个整数，具体内容如下所示：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ft5x06: ft5x06@<span class="number">38</span> &#123; </span><br><span class="line">    .....</span><br><span class="line">    reset-gpios = &lt;&amp;gpio0 RK_PB6 GPIO_ACTIVE_LOW&gt;;</span><br><span class="line">    .....</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>RK_PB6、GPIO_ACTIVE_LOW都属于恒定义，会在下面的小节进行讲解。</p>
-<p>通过使用#gpio-cells属性，设备树可以指定GPIO引脚描述符的编码方式，使系统能够正确识别和解析GPIO引脚的配置和控制。</p>
-<h3 id="60-1-4-gpio-ranges"><a href="#60-1-4-gpio-ranges" class="headerlink" title="60.1.4 gpio-ranges"></a>60.1.4 gpio-ranges</h3><p>gpio-ranges属性是设备树中一个用于描述GPIO范围映射的属性。它通常用于描述具有大量GPIO引脚的GPIO控制器，以简化GPIO引脚的编码和访问。</p>
-<p>在设备树中，GPIO控制器的每个引脚都有一个本地编号，用于在控制器内部进行引脚寻址。然而，这些本地编号并不一定与外部引脚的物理编号或其他系统中使用的编号一致。为了解决这个问题，可以使用gpio-ranges属性将本地编号映射到实际的引脚编号。</p>
-<p>gpio-ranges属性是一个包含一系列整数值的列表，每个整数值对应于设备树中的一个GPIO控制器。列表中的每个整数值按照特定的顺序提供以下信息：</p>
-<p>（1）外部引脚编号的起始值。	</p>
-<p>（2）GPIO控制器内部本地编号的起始值。</p>
-<p>（3）引脚范围的大小（引脚数量）。</p>
-<p>在第一小节的示例中gpio-ranges属性的值为&lt;&amp;pinctrl 0 0 32&gt;，其中&lt;&amp;pinctrl&gt;表示引用了名为pinctrl的引脚控制器节点，0 0 32表示外部引脚从0开始，控制器本地编号从0开始，共映射了32个引脚。</p>
-<p>这样，gpio-ranges属性将GPIO控制器的本地编号直接映射到外部引脚编号，使得GPIO引脚的编码和访问更加简洁和直观。</p>
-<h3 id="60-1-5-gpio引脚描述属性"><a href="#60-1-5-gpio引脚描述属性" class="headerlink" title="60.1.5 gpio引脚描述属性"></a>60.1.5 gpio引脚描述属性</h3><p>第一小节的设备树中关于gpio引脚描述属性相关内容如下所示：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ft5x06: ft5x06@<span class="number">38</span> &#123; </span><br><span class="line">    .....</span><br><span class="line">    reset-gpios = &lt;&amp;gpio0 RK_PB6 GPIO_ACTIVE_LOW&gt;;</span><br><span class="line">    .....</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>gpio引脚描述属性个数由#gpio-cells所决定，因为gpio0节点中的#gpio-cells属性设置为了2，所以上面设备树gpio引脚描述属性个数也为2。</p>
-<p>其中RK_PB6 定义在内核源码目录下的“include&#x2F;dt-bindings&#x2F;pinctrl&#x2F;rockchip.h”头文件中，定义了RK引脚名和gpio编号的宏定义，如下图所示：<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309062022930.jpeg" alt="img"> </p>
-<p>GPIO_ACTIVE_LOW定义在源码目录下的“include&#x2F;dt-bindings&#x2F;gpio&#x2F;gpio.h”中，表示设置为低电平，同理GPIO_ACTIVE_HIGH就表示将这个GPIO设置为高电平，但这里只是对设备的描述，具体的设置还是要跟驱动相匹配。</p>
-<h3 id="60-1-6-其他属性"><a href="#60-1-6-其他属性" class="headerlink" title="60.1.6 其他属性"></a>60.1.6 其他属性</h3><p>本小节将根据下面的设备树示例讲解一下gpio的其他重要属性，设备树具体内容如下所示：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">gpio-controller@00000000 &#123;</span><br><span class="line">    compatible = &quot;foo&quot;;</span><br><span class="line">    reg = &lt;0x00000000 0x1000&gt;;</span><br><span class="line">    gpio-controller;</span><br><span class="line">    #gpio-cells = &lt;2&gt;;</span><br><span class="line">    ngpios = &lt;18&gt;;</span><br><span class="line">    gpio-reserved-ranges = &lt;0 4&gt;, &lt;12 2&gt;;</span><br><span class="line">    gpio-line-names = &quot;MMC-CD&quot;, &quot;MMC-WP&quot;,</span><br><span class="line">                      &quot;voD eth&quot;, &quot;RST eth&quot;, &quot;LED R&quot;,</span><br><span class="line">                      &quot;LED G&quot;, &quot;LED B&quot;, &quot;col A&quot;,</span><br><span class="line">                      &quot;col B&quot;, &quot;col C&quot;, &quot;col D&quot;,</span><br><span class="line">                      &quot;NMI button&quot;, &quot;Row A&quot;, &quot;Row B&quot;,</span><br><span class="line">                      &quot;Row C&quot;, &quot;Row D&quot;, &quot;poweroff&quot;,</span><br><span class="line">                      &quot;reset&quot;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>第6行的ngpios 属性指定了 GPIO 控制器所支持的 GPIO 引脚数量。它表示该设备上可用的 GPIO 引脚的总数。在这个例子中，ngpios&#96; 的值为 18，意味着该 GPIO 控制器支持 18 个 GPIO 引脚。</p>
-<p>第7行的gpio-reserved-ranges属性定义了保留的GPIO范围。每个范围由两个整数值表示，用尖括号括起来。保留的GPIO范围意味着这些GPIO引脚不可用或已被其他设备或功能保留。在这个例子中，有两个保留范围：&lt;0 4&gt;和&lt;12 2&gt;。&lt;0 4&gt;表示从第0个引脚开始的连续4个引脚被保留，而&lt;12 2&gt;表示从第12个引脚开始的连续2个引脚被保留。<br>    第8行的gpio-line-names 属性定义了GPIO引脚的名称，以逗号分隔。每个名称对应一个 GPIO 引脚。这些名称用于标识和识别每个GPIO引脚的作用或连接的设备。在这个例子中，gpio-line-names属性列出了多个GPIO引脚的名称，如 “MMC-CD”、”MMC-WP”、”voD eth” 等等。通过这些名称，可以清楚地了解每个GPIO引脚的功能或用途。</p>
-<h2 id="60-2-中断实例编写"><a href="#60-2-中断实例编写" class="headerlink" title="60.2 中断实例编写"></a>60.2 中断实例编写</h2><p>在上一个小节中对设备树中断要用到的属性进行了讲解，而在本小节将会编写一个在RK3568上LED灯的中断设备树。</p>
-<p>首先确定LED的引脚编号，LED原理图如下图所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309062022878.jpeg" alt="img"> </p>
-<p>从上面的原理图可以得到LED灯的引脚网络标号为Working_LEDEN_H_GPIO0_B7，对应的引脚为GPIO0_B7。</p>
-<p>然后来查看内核源码目录下的“drivers&#x2F;drivers&#x2F;leds&#x2F;leds-gpio.c”文件，这是led的驱动文件，然后找到compatible匹配值相关的部分，如下所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309062022895.jpeg" alt="img"> </p>
-<p>可以看到compatible匹配值为gpio-leds。</p>
-<p>最后在内核源码目录下的“include&#x2F;dt-bindings&#x2F;pinctrl&#x2F;rockchip.h”头文件中，定义了RK引脚名和gpio编号的宏定义，如下图所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309062022857.jpeg" alt="img"> </p>
-<p>在源码目录下的“include&#x2F;dt-bindings&#x2F;gpio&#x2F;gpio.h”文件中定义了引脚极性设置宏定义，如下图所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309062022886.jpeg" alt="img"> </p>
-<p>其中GPIO_ACTIVE_HIGH表示将该引脚设置为高电平，GPIO_ACTIVE_LOW表示将该引脚设置为低电平。</p>
-<p>至此，我们关于编写LED设备树的前置内容就查找完成了，接下来进行设备树的编写。</p>
-<p>  编写完成的设备树如下所示：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">/dts-v1/;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;dt-bindings/pinctrl/rockchip.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;dt-bindings/gpio/gpio.h&quot;</span></span></span><br><span class="line">/&#123;</span><br><span class="line">	model = <span class="string">&quot;This is my devicetree!&quot;</span>;</span><br><span class="line"></span><br><span class="line">	led led@<span class="number">1</span> &#123;</span><br><span class="line">		compatible = <span class="string">&quot;gpio-leds&quot;</span>;</span><br><span class="line">		gpios = &lt;&amp;gpio0 RK_PB7 GPIO_ACTIVE_HIGH&gt;</span><br><span class="line">	&#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>第1行: 设备树文件的头部，指定了使用的设备树语法版本。</p>
-<p>第3行：用于定义 Rockchip 平台的引脚控制器相关的绑定。</p>
-<p>第4行：用于定义中断控制器相关的绑定。</p>
-<p>第5行：表示设备树的根节点开始。</p>
-<p>第6行：指定了设备树的模型名称，描述为 “This is my devicetree!”。</p>
-<p>第9行：指定了设备节点的兼容性字符串，表示该设备与 “gpio-leds” 兼容。</p>
-<p>第10行：指定了该 LED 设备所使用的 GPIO 引脚。&amp;gpio0 是引脚控制器的引用，RK_PB7 是引脚的编号或标识，GPIO_ACTIVE_HIGH 表示该 GPIO 引脚的活动电平是高电平。</p>
-<p>至此，关于led的设备树就讲解完成了。</p>
-<h2 id="60-3-其他SOC设备树对比"><a href="#60-3-其他SOC设备树对比" class="headerlink" title="60.3 其他SOC设备树对比"></a>60.3 其他SOC设备树对比</h2><p>而无论使用的是瑞芯微SOC还是恩智浦、三星的SOC，在设备树关于gpio相关的描述都是类似的，关于在恩智浦和三星源码中的ft5x06设备树如下所示：</p>
-<p>恩智浦：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">gpio1: gpio@<span class="number">0209</span>c000 &#123;</span><br><span class="line">    compatible = <span class="string">&quot;fsl,inx6ul-gpio&quot;</span>, <span class="string">&quot;fsl,imx35-gpio&quot;</span>;</span><br><span class="line">    reg = &lt;<span class="number">0x0209c000</span> <span class="number">0x4000</span>&gt;;</span><br><span class="line">    interrupts = &lt;GIC_SPI <span class="number">66</span> IRQ_TYPE_LEVEL_HIGH&gt;, &lt;GIC_SPI <span class="number">67</span> IRQ_TYPE_LEVEL_HIGH&gt;;</span><br><span class="line">    gpio-controller;</span><br><span class="line">    <span class="meta">#gpio-cells = <span class="string">&lt;2&gt;</span>;</span></span><br><span class="line">    interrupt-controller;</span><br><span class="line">    <span class="meta">#interrupt-cells = <span class="string">&lt;2&gt;</span>;</span></span><br><span class="line"></span><br><span class="line">    edt-ft5x06@<span class="number">38</span> &#123;</span><br><span class="line">        compatible = <span class="string">&quot;edt,edt-ft5306&quot;</span>, <span class="string">&quot;edt,edt-ft5x06&quot;</span>, <span class="string">&quot;edt,edt-ft5406&quot;</span>;</span><br><span class="line">        pinctrl-names = <span class="string">&quot;default&quot;</span>;</span><br><span class="line">        pinctrl<span class="number">-0</span> = &lt;&amp;ts_int_pin &amp;ts_reset_pin&gt;;</span><br><span class="line">        reg = &lt;<span class="number">0x38</span>&gt;;</span><br><span class="line">        interrupt-parent = &lt;&amp;gpio1&gt;;</span><br><span class="line">        interrupts = &lt;<span class="number">9</span> <span class="number">0</span>&gt;;</span><br><span class="line">        reset-gpios = &lt;&amp;gpio5 <span class="number">9</span> GPIO_ACTIVE_LOW&gt;;</span><br><span class="line">        irq-gpios = &lt;&amp;gpio1 <span class="number">9</span> GPIO_ACTIVE_LOW&gt;;</span><br><span class="line">        status = <span class="string">&quot;disabled&quot;</span>;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p><strong>三星：</strong></p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">gpio_c: gpioc &#123;</span><br><span class="line">    compatible = <span class="string">&quot;gpio-controller&quot;</span>;</span><br><span class="line">    <span class="meta">#gpio-cells = <span class="string">&lt;2&gt;</span>;</span></span><br><span class="line">    interrupt-controller;</span><br><span class="line">    <span class="meta">#interrupt-cells = <span class="string">&lt;2&gt;</span>;</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">ft5x06: ft5x06038 &#123;</span><br><span class="line">    compatible = <span class="string">&quot;edt,edt-ft5406&quot;</span>;</span><br><span class="line">    reg = &lt;<span class="number">0x38</span>&gt;;</span><br><span class="line">    pinctrl-names = <span class="string">&quot;default&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">#<span class="keyword">if</span> defined(RGB_1024x600) || defined(RGB_800x480)</span></span><br><span class="line">    pinctrl<span class="number">-0</span> = &lt;&amp;tsc2007_irq&gt;;</span><br><span class="line">    interrupt-parent = &lt;&amp;gpio_c&gt;;</span><br><span class="line">    interrupts = &lt;<span class="number">26</span> IRQ_TYPE_EDGE_FALLING&gt;;</span><br><span class="line">    <span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"></span><br><span class="line">    <span class="meta">#<span class="keyword">if</span> defined(LvDs_800×1280) || defined(LvDS_1024x768)</span></span><br><span class="line">    pinctrl<span class="number">-0</span> = &lt;&amp;gt911_irq&gt;;</span><br><span class="line">    interrupt-parent = &lt;&amp;gpio_b&gt;;</span><br><span class="line">    interrupts = &lt;<span class="number">29</span> IRQ_TYPE_EDGE_FALLING&gt;;</span><br><span class="line">    <span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"> reset-gpios = &lt;&amp;gpio_e <span class="number">30</span> <span class="number">0</span>&gt;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>对比之后会发现，不同厂商对于gpio的配置都是类似的，只是里面的参数有些许区别，如果大家在之后遇到了其他平台，只需要稍加区分即可</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rk3568-%E9%A9%B1%E5%8A%A8/" rel="tag">rk3568 驱动</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-1-59-实例分析-CPU"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/09/05/1-59-%E5%AE%9E%E4%BE%8B%E5%88%86%E6%9E%90-CPU/"
-    >1-59-实例分析:CPU</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/09/05/1-59-%E5%AE%9E%E4%BE%8B%E5%88%86%E6%9E%90-CPU/" class="article-date">
-  <time datetime="2023-09-05T00:01:28.000Z" itemprop="datePublished">2023-09-05</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/rk3568-%E9%A9%B1%E5%8A%A8/">rk3568 驱动</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h1 id="第59章-实例分析：CPU"><a href="#第59章-实例分析：CPU" class="headerlink" title="第59章 实例分析：CPU"></a>第59章 实例分析：CPU</h1><h2 id="59-1-cpus节点"><a href="#59-1-cpus节点" class="headerlink" title="59.1 cpus节点"></a>59.1 cpus节点</h2><p>设备树的 cpus 节点是用于描述系统中的处理器的一个重要节点。它是处理器拓扑结构的顶层节点，包含了所有处理器相关的信息。下面将详细介绍设备树的 cpus 节点的各个方面。</p>
-<p><strong>节点结构：</strong></p>
-<p>cpus 节点是一个容器节点，其下包含了系统中每个处理器的子节点。每个子节点的名称通常为 cpu@X，其中 X 是处理器的索引号。每个子节点都包含了与处理器相关的属性，例如时钟频率、缓存大小等。</p>
-<p><strong>处理器属性：</strong></p>
-<p>cpu@X 子节点中的属性可以包括以下信息：</p>
-<p>（1）device_type：指示设备类型为处理器（”cpu”）。</p>
-<p>（2）reg：指定处理器的地址范围，通常是物理地址或寄存器地址。</p>
-<p>（3）compatible：指定处理器的兼容性信息，用于匹配相应的设备驱动程序。</p>
-<p>（4）clock-frequency：指定处理器的时钟频率。</p>
-<p>（5）cache-size：指定处理器的缓存大小。</p>
-<p><strong>处理器拓扑关系：</strong></p>
-<p>除了处理器的基本属性，cpus 节点还可以包含其他用于描述处理器拓扑关系的节点，以提供更详细的处理器拓扑信息。这些节点可以帮助操作系统和软件了解处理器之间的连接关系、组织结构和特性。</p>
-<p>cpu-map 节点：描述处理器的映射关系，通常在多核处理器系统中使用。</p>
-<p>socket 节点：描述多处理器系统中的物理插槽或芯片组。</p>
-<p>cluster 节点：描述处理器集群，即将多个处理器组织在一起形成的逻辑组。</p>
-<p>core 节点：描述处理器核心，即一个物理处理器内的独立执行单元。</p>
-<p>thread 节点：描述处理器线程，即一个物理处理器核心内的线程。</p>
-<p>这些节点的嵌套关系可以在 cpus 节点下形成一个层次结构，反映了处理器的拓扑结构。上述这些节点会在后面的小节进行介绍。一个单核CPU设备树和一个四核CPU设备树示例如下所示：</p>
-<p>单核CPU示例：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">cpus &#123;</span><br><span class="line">    <span class="meta">#address-cells = <span class="string">&lt;1&gt;</span>;</span></span><br><span class="line">    <span class="meta">#size-cells = <span class="string">&lt;0&gt;</span>;</span></span><br><span class="line"></span><br><span class="line">    cpu0: cpu@<span class="number">0</span> &#123;</span><br><span class="line">        compatible = <span class="string">&quot;arm,cortex-a7&quot;</span>;</span><br><span class="line">        device_type = <span class="string">&quot;cpu&quot;</span>;</span><br><span class="line">        <span class="comment">// 其他属性...</span></span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>多核CPU示例：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">cpus &#123;</span><br><span class="line">    #address-cells = &lt;1&gt;;</span><br><span class="line">    #size-cells = &lt;0&gt;;</span><br><span class="line"></span><br><span class="line">    cpu0: cpu@0 &#123;</span><br><span class="line">        device_type = &quot;cpu&quot;;</span><br><span class="line">        compatible = &quot;arm,cortex-a9&quot;;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    cpu1: cpu@1 &#123;</span><br><span class="line">        device_type = &quot;cpu&quot;;</span><br><span class="line">        compatible = &quot;arm,cortex-a9&quot;;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    cpu2: cpu@2 &#123;</span><br><span class="line">        device_type = &quot;cpu&quot;;</span><br><span class="line">        compatible = &quot;arm,cortex-a9&quot;;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    cpu3: cpu@3 &#123;</span><br><span class="line">        device_type = &quot;cpu&quot;;</span><br><span class="line">        compatible = &quot;arm,cortex-a9&quot;;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>cpus 节点是一个容器节点，包含了 cpu0 子节点。该节点使用了 #address-cells 和 #size-cells 属性来指定地址和大小的单元数量。</p>
-<p>cpu0 子节点代表第一个处理器，具有以下属性：</p>
-<p>compatible 属性指定了处理器的兼容性信息</p>
-<p>device_type 属性指示设备类型为处理器。</p>
-<p>你可以在此基础上继续添加其他属性来描述处理器的特性，如时钟频率、缓存大小等。</p>
-<h2 id="59-2-cpu-map、socket、cluster节点"><a href="#59-2-cpu-map、socket、cluster节点" class="headerlink" title="59.2 cpu-map、socket、cluster节点"></a>59.2 cpu-map、socket、cluster节点</h2><p>cpu-map 节点是设备树中用于描述大小核架构处理器的映射关系的节点之一。它的父节点必须是 cpus 节点，而子节点可以是一个或多个 cluster 和 socket 节点。通过 cpu-map 节点，可以定义不同核心和集群之间的连接和组织结构。</p>
-<p>socket 节点用于描述处理器插槽（socket）之间的映射关系。每个 socket 子节点表示一个处理器插槽，可以使用 cpu-map-mask 属性来指定该插槽使用的核心。通过为每个 socket 子节点指定适当的 cpu-map-mask，可以定义不同插槽中使用的核心。这样，操作系统和软件可以了解到不同插槽之间的核心分配情况。</p>
-<p>cluster 节点用于描述核心（cluster）之间的映射关系。每个 cluster 子节点表示一个核心集群，可以使用 cpu-map-mask 属性来指定该集群使用的核心。通过为每个 cluster 子节点指定适当的 cpu-map-mask，可以定义每个集群中使用的核心。这样，操作系统和软件可以了解到不同集群之间的核心分配情况。</p>
-<p>通过在 cpu-map 节点中定义 socket 和 cluster 子节点，并为它们指定适当的 cpu-map-mask，可以提供处理器的拓扑结构信息。这对于操作系统和软件来说非常有用，因为它们可以根据这些信息进行任务调度和资源分配的优化，以充分利用大小核架构处理器的性能和能效特性。</p>
-<p>一个大小核架构的具体示例如下所示：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">cpus &#123;</span><br><span class="line">    <span class="meta">#address-cells = <span class="string">&lt;2&gt;</span>;</span></span><br><span class="line">    <span class="meta">#size-cells = <span class="string">&lt;0&gt;</span>;</span></span><br><span class="line">    cpu-<span class="built_in">map</span> &#123;</span><br><span class="line">        cluster0 &#123;</span><br><span class="line">            core0 &#123;</span><br><span class="line">                cpu = &lt;&amp;cpu_l0&gt;;</span><br><span class="line">            &#125;;</span><br><span class="line">            core1 &#123;</span><br><span class="line">                cpu = &lt;&amp;cpu_l1&gt;;</span><br><span class="line">            &#125;;</span><br><span class="line">            core2 &#123;</span><br><span class="line">                cpu = &lt;&amp;cpu_l2&gt;;</span><br><span class="line">            &#125;;</span><br><span class="line">            core3 &#123;</span><br><span class="line">                cpu = &lt;&amp;cpu_l3&gt;;</span><br><span class="line">            &#125;;</span><br><span class="line">        &#125;;</span><br><span class="line">        cluster1 &#123;</span><br><span class="line">            core0 &#123;</span><br><span class="line">                cpu = &lt;&amp;cpu_b0&gt;;</span><br><span class="line">            &#125;;</span><br><span class="line">            core1 &#123;</span><br><span class="line">                cpu = &lt;&amp;cpu_b1&gt;;</span><br><span class="line">            &#125;;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">	cpu_l0: cpu@<span class="number">0</span> &#123;</span><br><span class="line">		device_type = <span class="string">&quot;cpu&quot;</span>;</span><br><span class="line">		compatible = <span class="string">&quot;arm,cortex-a53&quot;</span>, <span class="string">&quot;arm,armv8&quot;</span>;</span><br><span class="line">	&#125;;</span><br><span class="line"></span><br><span class="line">	cpu_l1: cpu@<span class="number">1</span> &#123;</span><br><span class="line">		device_type = <span class="string">&quot;cpu&quot;</span>;</span><br><span class="line">		compatible = <span class="string">&quot;arm,cortex-a53&quot;</span>, <span class="string">&quot;arm,armv8&quot;</span>;</span><br><span class="line">	&#125;;</span><br><span class="line"></span><br><span class="line">	cpu_l2: cpu@<span class="number">2</span> &#123;</span><br><span class="line">		device_type = <span class="string">&quot;cpu&quot;</span>;</span><br><span class="line">		compatible = <span class="string">&quot;arm,cortex-a53&quot;</span>, <span class="string">&quot;arm,armv8&quot;</span>;</span><br><span class="line">	&#125;;</span><br><span class="line"></span><br><span class="line">	cpu_l3: cpu@<span class="number">3</span> &#123;</span><br><span class="line">		device_type = <span class="string">&quot;cpu&quot;</span>;</span><br><span class="line">		compatible = <span class="string">&quot;arm,cortex-a53&quot;</span>, <span class="string">&quot;arm,armv8&quot;</span>;</span><br><span class="line">	&#125;;</span><br><span class="line"></span><br><span class="line">	cpu_b0: cpu@<span class="number">100</span> &#123;</span><br><span class="line">		device_type = <span class="string">&quot;cpu&quot;</span>;</span><br><span class="line">		compatible = <span class="string">&quot;arm,cortex-a72&quot;</span>, <span class="string">&quot;arm,armv8&quot;</span>;</span><br><span class="line">	&#125;;</span><br><span class="line"></span><br><span class="line">	cpu_b1: cpu@<span class="number">101</span> &#123;</span><br><span class="line">		device_type = <span class="string">&quot;cpu&quot;</span>;</span><br><span class="line">		compatible = <span class="string">&quot;arm,cortex-a72&quot;</span>, <span class="string">&quot;arm,armv8&quot;</span>;</span><br><span class="line">	&#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>这个设备树描述了一个具有多个 CPU 核心的系统，包括四个 Cortex-A53 核心和两个 Cortex-A72 核心。下面是对设备树中各个部分的简要介绍：</p>
-<p>#address-cells &#x3D; &lt;2&gt;; 和 #size-cells &#x3D; &lt;0&gt;;：这些属性指定了设备树中地址和大小的编码方式。</p>
-<p>cpu-map：这个节点定义了 CPU 的映射关系。它包含了两个簇（clusters）：cluster0 和 cluster1。cluster0 包含了四个核心：core0、core1、core2 和 core3，分别对应 cpu_l0、cpu_l1、cpu_l2 和 cpu_l3。cluster1 包含了两个核心：core0 和 core1，分别对应 cpu_b0 和 cpu_b1。</p>
-<p>cpu_l0、cpu_l1、cpu_l2 和 cpu_l3：这些节点描述了 Cortex-A53 核心。它们具有相同的设备类型 cpu 和兼容性属性 “arm,cortex-a53”, “arm,armv8”。</p>
-<p>cpu_b0 和 cpu_b1：这些节点描述了 Cortex-A72 核心。它们具有相同的设备类型 cpu 和兼容性属性 “arm,cortex-a72”, “arm,armv8”。</p>
-<h2 id="59-3-core、thread节点"><a href="#59-3-core、thread节点" class="headerlink" title="59.3 core、thread节点"></a>59.3 core、thread节点</h2><p>“core” 和 “thread” 节点通常用于描述处理器核心和线程的配置。下面是对这两个节点的详细介绍：</p>
-<p>Core 节点用于描述处理器的核心。一个处理器通常由多个核心组成，每个核心可以独立执行指令和任务。</p>
-<p>Thread 节点用于描述处理器的线程。线程是在处理器核心上执行的基本执行单元，每个核心可以支持多个线程。</p>
-<p>通过使用 Core 和 Thread 节点，设备树可以准确描述处理器的核心和线程的配置，例如可以使用设备树来描述一个具有16个核心的CPU，一个物理插槽，每个集群中有两个核心，每个核心有两个线程的设备树示例，具体设备树如下所示：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line">cpus &#123;</span><br><span class="line">    <span class="meta">#address-cells = <span class="string">&lt;2&gt;</span>;</span></span><br><span class="line">    cpu-<span class="built_in">map</span> &#123;</span><br><span class="line">        socket0 &#123;</span><br><span class="line">            cluster0 &#123;</span><br><span class="line">                core0 &#123;</span><br><span class="line">                    thread0 &#123;</span><br><span class="line">                        cpu = &lt;&amp;CPU0&gt;;</span><br><span class="line">                    &#125;;</span><br><span class="line">                    thread1 &#123;</span><br><span class="line">                        cpu = &lt;&amp;CPU1&gt;;</span><br><span class="line">                    &#125;;</span><br><span class="line">                &#125;;</span><br><span class="line">                core1 &#123;</span><br><span class="line">                    thread0 &#123;</span><br><span class="line">                        cpu = &lt;&amp;CPU2&gt;;</span><br><span class="line">                    &#125;;</span><br><span class="line">                    thread1 &#123;</span><br><span class="line">                        cpu = &lt;&amp;CPU3&gt;;</span><br><span class="line">                    &#125;;</span><br><span class="line">                &#125;;</span><br><span class="line">            &#125;;</span><br><span class="line">            cluster1 &#123;</span><br><span class="line">                core0 &#123;</span><br><span class="line">                    thread0 &#123;</span><br><span class="line">                        cpu = &lt;&amp;CPU4&gt;;</span><br><span class="line">                    &#125;;</span><br><span class="line">                    thread1 &#123;</span><br><span class="line">                        cpu = &lt;&amp;CPU5&gt;;</span><br><span class="line">                    &#125;;</span><br><span class="line">                &#125;;</span><br><span class="line">                core1 &#123;</span><br><span class="line">                    thread0 &#123;</span><br><span class="line">                        cpu = &lt;&amp;CPU6&gt;;</span><br><span class="line">                    &#125;;</span><br><span class="line">                    thread1 &#123;</span><br><span class="line">                        cpu = &lt;&amp;CPU7&gt;;</span><br><span class="line">                    &#125;;</span><br><span class="line">                &#125;;</span><br><span class="line">            &#125;;</span><br><span class="line">        &#125;;</span><br><span class="line">        socket1 &#123;</span><br><span class="line">			cluster0 &#123;</span><br><span class="line">				core0 &#123;</span><br><span class="line">					thread0 &#123;</span><br><span class="line">						cpu = &lt;&amp;CPU8&gt;;</span><br><span class="line">					&#125;;</span><br><span class="line">					thread1 &#123;</span><br><span class="line">						cpu = &lt;&amp;CPU9&gt;;</span><br><span class="line">					&#125;;</span><br><span class="line">				&#125;;</span><br><span class="line">				core1 &#123;</span><br><span class="line">					thread0 &#123;</span><br><span class="line">						cpu = &lt;&amp;CPU10&gt;;</span><br><span class="line">					&#125;;</span><br><span class="line">					thread1 &#123;</span><br><span class="line">						cpu = &lt;&amp;CPU11&gt;;</span><br><span class="line">					&#125;;</span><br><span class="line">				&#125;;</span><br><span class="line">			&#125;;</span><br><span class="line">			cluster1 &#123;</span><br><span class="line">				core0 &#123;</span><br><span class="line">					thread0 &#123;</span><br><span class="line">						cpu = &lt;&amp;CPU12&gt;;</span><br><span class="line">					&#125;;</span><br><span class="line">					thread1 &#123;</span><br><span class="line">						cpu = &lt;&amp;CPU13&gt;;</span><br><span class="line">					&#125;;</span><br><span class="line">				&#125;;</span><br><span class="line">				core1 &#123;</span><br><span class="line">					thread0 &#123;</span><br><span class="line">						cpu = &lt;&amp;CPU14&gt;;</span><br><span class="line">					&#125;;</span><br><span class="line">					thread1 &#123;</span><br><span class="line">						cpu = &lt;&amp;CPU15&gt;;</span><br><span class="line">					&#125;;</span><br><span class="line">				&#125;;</span><br><span class="line">			&#125;;</span><br><span class="line">		&#125;;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rk3568-%E9%A9%B1%E5%8A%A8/" rel="tag">rk3568 驱动</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
   id="post-1-58-实例分析-时钟"
   class="article article-type-post"
   itemscope
@@ -1381,13 +781,225 @@
 </article>
 
     
+    <article
+  id="post-1-52-注册platform驱动实验"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/09/05/1-52-%E6%B3%A8%E5%86%8Cplatform%E9%A9%B1%E5%8A%A8%E5%AE%9E%E9%AA%8C/"
+    >1-52-注册platform驱动实验</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/09/05/1-52-%E6%B3%A8%E5%86%8Cplatform%E9%A9%B1%E5%8A%A8%E5%AE%9E%E9%AA%8C/" class="article-date">
+  <time datetime="2023-09-05T00:01:17.000Z" itemprop="datePublished">2023-09-05</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/rk3568-%E9%A9%B1%E5%8A%A8/">rk3568 驱动</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+   
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rk3568-%E9%A9%B1%E5%8A%A8/" rel="tag">rk3568 驱动</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-1-51-注册platform设备实验"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/09/05/1-51-%E6%B3%A8%E5%86%8Cplatform%E8%AE%BE%E5%A4%87%E5%AE%9E%E9%AA%8C/"
+    >1-51-注册platform设备实验</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/09/05/1-51-%E6%B3%A8%E5%86%8Cplatform%E8%AE%BE%E5%A4%87%E5%AE%9E%E9%AA%8C/" class="article-date">
+  <time datetime="2023-09-05T00:01:15.000Z" itemprop="datePublished">2023-09-05</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/rk3568-%E9%A9%B1%E5%8A%A8/">rk3568 驱动</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+   
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rk3568-%E9%A9%B1%E5%8A%A8/" rel="tag">rk3568 驱动</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-1-50-平台总线模型介绍"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/09/05/1-50-%E5%B9%B3%E5%8F%B0%E6%80%BB%E7%BA%BF%E6%A8%A1%E5%9E%8B%E4%BB%8B%E7%BB%8D/"
+    >1-50-平台总线模型介绍</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/09/05/1-50-%E5%B9%B3%E5%8F%B0%E6%80%BB%E7%BA%BF%E6%A8%A1%E5%9E%8B%E4%BB%8B%E7%BB%8D/" class="article-date">
+  <time datetime="2023-09-05T00:01:14.000Z" itemprop="datePublished">2023-09-05</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/rk3568-%E9%A9%B1%E5%8A%A8/">rk3568 驱动</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+   
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rk3568-%E9%A9%B1%E5%8A%A8/" rel="tag">rk3568 驱动</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-1-49-中断线程化实验"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/09/05/1-49-%E4%B8%AD%E6%96%AD%E7%BA%BF%E7%A8%8B%E5%8C%96%E5%AE%9E%E9%AA%8C/"
+    >1-49-中断线程化实验</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/09/05/1-49-%E4%B8%AD%E6%96%AD%E7%BA%BF%E7%A8%8B%E5%8C%96%E5%AE%9E%E9%AA%8C/" class="article-date">
+  <time datetime="2023-09-05T00:01:12.000Z" itemprop="datePublished">2023-09-05</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/rk3568-%E9%A9%B1%E5%8A%A8/">rk3568 驱动</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+   
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rk3568-%E9%A9%B1%E5%8A%A8/" rel="tag">rk3568 驱动</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
   </article>
   
 
   
   <nav class="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/7/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><a class="extend next" rel="next" href="/page/9/">下一页</a>
+    <a class="extend prev" rel="prev" href="/page/7/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/9/">下一页</a>
   </nav>
   
 </section>

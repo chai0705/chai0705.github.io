@@ -90,7 +90,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">0</span>
+            <span class="post-count">1.2k</span>
         </span>
     </span>
 
@@ -99,20 +99,151 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">1 分钟</span>
+            <span class="post-count">4 分钟</span>
         </span>
     </span>
 </div>
  
     </div>
       
+    <div class="tocbot"></div>
+
 
 
 
   
     <div class="article-entry" itemprop="articleBody">
        
-   
+  <h1 id="12-1-与指针相关的运算符和操作"><a href="#12-1-与指针相关的运算符和操作" class="headerlink" title="12.1 与指针相关的运算符和操作"></a>12.1 与指针相关的运算符和操作</h1><ol>
+<li><p>指针声明：</p>
+<ul>
+<li><code>*</code>：用于声明指针变量。例如，<code>int* ptr;</code>声明了一个名为<code>ptr</code>的指向<code>int</code>类型的指针变量。</li>
+</ul>
+</li>
+<li><p>地址运算符：</p>
+<ul>
+<li><code>&amp;</code>：用于获取变量的地址。例如，<code>int a = 10; int* ptr = &amp;a;</code>将变量<code>a</code>的地址赋给指针<code>ptr</code>。</li>
+</ul>
+</li>
+<li><p>间接访问运算符：</p>
+<ul>
+<li><code>*</code>：用于访问指针所指向的内存位置的值。也称为解引用操作符。例如，<code>int a = *ptr;</code>将指针<code>ptr</code>所指向的内存位置的值赋给变量<code>a</code>。</li>
+</ul>
+</li>
+<li><p>后置自增自减运算符：</p>
+<ul>
+<li><code>++</code>：后置自增运算符，将指针的值增加1。</li>
+<li><code>--</code>：后置自减运算符，将指针的值减少1。</li>
+<li>例如，<code>ptr++;</code>将指针<code>ptr</code>的值增加1。</li>
+</ul>
+</li>
+<li><p>成员选择运算符：</p>
+<ul>
+<li><code>.</code>：用于访问结构体或联合体类型的成员。例如，<code>struct Person &#123; char name[20]; int age; &#125;; Person p; p.age = 25;</code></li>
+<li><code>-&gt;</code>：用于通过指针访问结构体或联合体类型的成员。例如，<code>Person* ptr = &amp;p; ptr-&gt;age = 30;</code></li>
+</ul>
+<h1 id="12-2-运算符优先级："><a href="#12-2-运算符优先级：" class="headerlink" title="12.2 运算符优先级："></a>12.2 运算符优先级：</h1><ul>
+<li><ul>
+<li><p>1级（从高到低）：</p>
+<ul>
+<li><code>(</code>：函数调用、表达式分组</li>
+<li><code>.</code>：成员选择运算符</li>
+<li><code>-&gt;</code>：成员选择运算符（用于指针）</li>
+<li><code>++</code>：后置自增运算符</li>
+<li><code>--</code>：后置自减运算符</li>
+<li><code>+</code>：一元正号运算符</li>
+</ul>
+<p>2级（从高到低）：</p>
+<ul>
+<li><code>++</code>：前置自增运算符</li>
+<li><code>--</code>：前置自减运算符</li>
+<li><code>*</code>：指针解引用运算符</li>
+<li><code>&amp;</code>：地址运算符</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p>SHE-&gt;卢星宇</p>
+<h1 id="12-3-混淆定义"><a href="#12-3-混淆定义" class="headerlink" title="12.3 混淆定义"></a>12.3 混淆定义</h1><p>以下是与指针相关的一些定义的解释：</p>
+<ol>
+<li><code>*p++;</code>：<ul>
+<li>这是一个表达式，其中<code>p</code>是一个指针变量。</li>
+<li><code>*p</code>表示对指针<code>p</code>所指向的内存位置进行解引用，获取该位置的值。</li>
+<li><code>p++</code>表示对指针<code>p</code>进行后置自增操作，将指针向后移动到下一个内存位置。</li>
+</ul>
+</li>
+<li><code>&amp;p++;</code>：<ul>
+<li>这是一个无效的表达式。</li>
+<li><code>&amp;</code>是地址运算符，用于获取变量的地址。</li>
+<li>但是，<code>p++</code>是一个指针的后置自增操作，返回的是指针的值而不是地址，所以不能对其应用地址运算符。</li>
+</ul>
+</li>
+<li><code>&amp;stu.a</code>：<ul>
+<li>这是一个表达式，其中<code>stu</code>是一个结构体变量，<code>a</code>是结构体<code>stu</code>的成员。</li>
+<li><code>&amp;</code>是地址运算符，用于获取变量的地址。</li>
+<li><code>&amp;stu.a</code>表示获取结构体<code>stu</code>中成员<code>a</code>的地址。</li>
+</ul>
+</li>
+<li><code>int *a[10];</code>：<ul>
+<li>这是一个声明语句，定义了一个数组<code>a</code>，其中每个元素都是指向<code>int</code>类型的指针。</li>
+<li><code>int *a[10]</code>声明了一个包含10个元素的指针数组。</li>
+</ul>
+</li>
+<li><code>int (*a)[80];</code>：<ul>
+<li>这是一个声明语句，定义了一个指针<code>a</code>，它指向一个包含80个<code>int</code>类型元素的数组。</li>
+<li><code>int (*a)[80]</code>声明了一个指针<code>a</code>，它指向一个包含80个<code>int</code>类型元素的数组。</li>
+</ul>
+</li>
+<li><code>int *f(int);</code>：<ul>
+<li>这是一个函数声明，定义了一个名为<code>f</code>的函数，该函数接受一个<code>int</code>类型的参数，并返回一个<code>int</code>类型的指针。</li>
+</ul>
+</li>
+<li><code>int (*f)(int);</code>：<ul>
+<li>这是一个声明语句，定义了一个指针<code>f</code>，它指向一个接受一个<code>int</code>类型参数并返回<code>int</code>类型的函数。</li>
+</ul>
+</li>
+<li><code>*(*f)(int);</code>：<ul>
+<li>这是一个声明语句，定义了一个指针<code>f</code>，它指向一个函数，该函数接受一个<code>int</code>类型的参数，并返回一个指针。</li>
+<li><code>*(*f)(int)</code>声明了一个指针<code>f</code>，它指向一个函数，该函数接受一个<code>int</code>类型的参数，并返回一个指针。</li>
+</ul>
+</li>
+<li><code>int *(*(*f)(int))[101];</code>：<ul>
+<li>这是一个声明语句，定义了一个指针<code>f</code>，它指向一个函数，该函数接受一个<code>int</code>类型的参数，并返回一个指向指针的指针。</li>
+<li><code>int *(*(*f)(int))[101]</code>声明了一个指针<code>f</code>，它指向一个函数，该函数接受一个<code>int</code>类型的参数，并返回一个指向指针的指针。</li>
+</ul>
+</li>
+<li><code>int*(*T)[10];</code>：<ul>
+<li>这是一个声明语句，定义了一个指针<code>T</code>，它指向一个包含10个<code>int</code>类型指针的数组。</li>
+<li><code>int*(*T)[10]</code>声明了一个指针<code>T</code>，它指向一个包含10个<code>int</code>类型指针的数组。</li>
+</ul>
+</li>
+</ol>
+<h1 id="12-4-右左法则"><a href="#12-4-右左法则" class="headerlink" title="12.4 右左法则"></a>12.4 右左法则</h1><p>右左法则（Right-Left Rule）是用于解析复杂声明的方法。根据右左法则，我们从最内层的括号开始阅读声明，并向右移动，然后向左移动。每当遇到括号时，我们需要改变阅读方向。一旦解析完括号内的内容，我们跳出括号，继续解析剩余的声明，直到整个声明解析完毕。</p>
+<p>以下是使用右左法则解析声明的示例步骤：</p>
+<ol>
+<li>从最内层的括号开始：<ul>
+<li><code>( )</code>：未定义标识符</li>
+</ul>
+</li>
+<li>向右移动：<ul>
+<li><code>*</code>：指针</li>
+<li><code>(*f)</code>：<code>f</code>是一个指针</li>
+</ul>
+</li>
+<li>向左移动：<ul>
+<li><code>(*f)(int)</code>：<code>f</code>是一个接受一个<code>int</code>参数的函数</li>
+</ul>
+</li>
+<li>继续解析：<ul>
+<li><code>int (*f)(int)</code>：<code>f</code>是一个接受一个<code>int</code>参数的函数，返回<code>int</code></li>
+</ul>
+</li>
+</ol>
+<p>根据右左法则，我们成功解析了声明<code>int (*f)(int)</code>。</p>
+ 
       <!-- reward -->
       
     </div>

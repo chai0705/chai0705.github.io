@@ -90,7 +90,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">0</span>
+            <span class="post-count">1.2k</span>
         </span>
     </span>
 
@@ -99,20 +99,63 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">1 分钟</span>
+            <span class="post-count">4 分钟</span>
         </span>
     </span>
 </div>
  
     </div>
       
+    <div class="tocbot"></div>
+
 
 
 
   
     <div class="article-entry" itemprop="articleBody">
        
-   
+  <h1 id="15-1-数组名是一个常量指针吗"><a href="#15-1-数组名是一个常量指针吗" class="headerlink" title="15.1 数组名是一个常量指针吗?"></a>15.1 数组名是一个常量指针吗?</h1><p>数组名在C语言中被解释为一个常量指针（const pointer）。</p>
+<p>具体解释如下：</p>
+<ol>
+<li>数组名表示数组的首个元素的地址。它是一个指针常量，即指针的值（即内存地址）不能被修改。</li>
+<li>数组名的值是一个常量，不允许对其进行赋值操作。</li>
+<li>数组名可以进行自增（<code>++</code>）和自减（<code>--</code>）操作，但这实际上是对指针进行操作，将指针移动到下一个或上一个元素的位置。</li>
+<li>数组名可以被用于解引用操作符<code>*</code>，例如<code>*arr</code>，它等效于<code>arr[0]</code>，表示获取数组的首个元素的值。</li>
+</ol>
+<p>需要注意的是，虽然数组名被解释为一个常量指针，但数组中的元素可以被修改。例如，对于<code>int arr[] = &#123;1, 2, 3&#125;;</code>，可以通过<code>arr[0] = 10;</code>来修改数组的元素。</p>
+<h1 id="15-2-数组名的隐式转换"><a href="#15-2-数组名的隐式转换" class="headerlink" title="15.2 数组名的隐式转换"></a>15.2 数组名的隐式转换</h1><p>数组名在许多情况下会发生隐式转换，具体取决于上下文。下面是关于数组名的一些常见情况和行为：</p>
+<ol>
+<li><p>数组类型：数组名表示整个数组的类型。例如，对于声明 <code>int arr[5];</code>，数组名 <code>arr</code> 的类型是 <code>int[5]</code>。</p>
+</li>
+<li><p>声明：在变量声明中，数组名用于指定变量名并指示其类型为数组类型。例如，<code>int arr[5];</code> 声明了一个名为 <code>arr</code> 的数组变量。</p>
+</li>
+<li><p>使用 <code>sizeof</code>：对数组名应用 <code>sizeof</code> 运算符将返回整个数组所占用的内存大小。例如，<code>sizeof(arr)</code> 返回整个数组 <code>arr</code> 所占用的字节数。</p>
+</li>
+<li><p>取址运算符 <code>&amp;</code>：对数组名应用取址运算符 <code>&amp;</code> 将返回数组的首个元素的地址。例如，<code>&amp;arr[0]</code> 或 <code>&amp;arr</code> 都可以获得数组 <code>arr</code> 的首个元素的地址。</p>
+</li>
+<li><p>右值：在大多数情况下，数组名被视为右值，即它代表了数组的首个元素的地址，而不是可以进行赋值的左值。因此，不能对数组名进行赋值操作。</p>
+</li>
+<li><p>间接访问运算符 <code>*</code>：通过对数组名应用间接访问运算符 <code>*</code>，可以获取数组的首个元素的值。例如，<code>*arr</code> 等效于 <code>arr[0]</code>，表示获取数组 <code>arr</code> 的首个元素的值。这样的表达式可以作为左值使用，允许对其进行赋值操作。</p>
+</li>
+<li><p>为什么不能对数组直接赋值？<br>在C语言中，数组是一组连续存储的元素，其大小在编译时就已经确定。因此，数组在内存中占据了一块固定大小的连续空间。由于数组名被解释为指向数组首元素的常量指针，它本身不是一个可修改的左值。</p>
+</li>
+</ol>
+<p>当我们使用数组名进行赋值操作时，实际上是试图将一个指针（数组名）赋值给另一个指针，这是不允许的。赋值操作需要一个左值作为目标，而数组名并不是一个左值。</p>
+<p>例如，以下代码是不合法的：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">int arr[5];</span><br><span class="line">int arr2[5];</span><br><span class="line">arr = arr2;  // 错误！试图对数组名进行赋值操作</span><br></pre></td></tr></table></figure>
+
+<p>如果我们想要将一个数组的值复制到另一个数组，可以使用循环或者库函数（如<code>memcpy</code>）来逐个复制数组元素。</p>
+<ol>
+<li>为什么只有在初始化的时候赋值？<br>在C语言中，数组的初始化是在定义数组时将一组初始值赋给数组元素的过程。数组的初始化只能在定义数组时进行，之后就不能再对整个数组进行赋值操作。</li>
+</ol>
+<p>这是因为数组在定义时需要分配一块内存空间来存储元素，并且在编译时就确定了数组的大小。编译器会根据初始化时提供的初始值来确定数组的元素个数，并在内存中为数组分配足够的空间。</p>
+<p>一旦数组初始化完成，数组的大小和元素个数就被固定下来了。因此，无法再通过直接的赋值操作来改变整个数组的值。我们只能通过访问和修改数组的单个元素来改变数组的内容。</p>
+<p>例如，以下代码是合法的：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int arr[5] = &#123;1, 2, 3, 4, 5&#125;;  // 定义数组并初始化</span><br><span class="line">arr[0] = 10;                   // 修改数组的第一个元素的值</span><br></pre></td></tr></table></figure>
+
+<p>在这个例子中，我们可以在定义数组时使用初始化列表来初始化数组的元素。然后，我们可以通过索引访问数组的单个元素，并对其进行赋值操作来修改数组的值。但是无法对整个数组进行直接的赋值操作。</p>
+<p>指针与数组的暧昧天系:指针数组与数组指针</p>
+ 
       <!-- reward -->
       
     </div>

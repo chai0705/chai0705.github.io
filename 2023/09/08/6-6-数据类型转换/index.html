@@ -90,7 +90,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">0</span>
+            <span class="post-count">1.8k</span>
         </span>
     </span>
 
@@ -99,20 +99,56 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">1 分钟</span>
+            <span class="post-count">6 分钟</span>
         </span>
     </span>
 </div>
  
     </div>
       
+    <div class="tocbot"></div>
+
 
 
 
   
     <div class="article-entry" itemprop="articleBody">
        
-   
+  <h1 id="6-1-数据类型转换示例"><a href="#6-1-数据类型转换示例" class="headerlink" title="6.1 数据类型转换示例"></a>6.1 数据类型转换示例</h1><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span> &#123;</span><br><span class="line">    <span class="type">signed</span> <span class="type">char</span> a = <span class="number">-10</span>;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span> b = <span class="number">2</span>;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span> c;</span><br><span class="line">    </span><br><span class="line">    c = a + b;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (c &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;c &gt; 0\n&quot;</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;c &lt; 0\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span> &#123;</span><br><span class="line">    <span class="type">int</span> a = <span class="number">-2</span>;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span> b = <span class="number">3</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (a &lt; b) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;a &lt; b\n&quot;</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;a &gt; b\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="6-2-为什么要类型转换"><a href="#6-2-为什么要类型转换" class="headerlink" title="6.2 为什么要类型转换"></a>6.2 为什么要类型转换</h1><p>类型转换在计算机编程中是常见的操作，它的目的是将一个数据从一种类型转换为另一种类型。下面是一些常见的情况和原因：</p>
+<ol>
+<li>硬件要求：计算机的CPU在执行运算时有特定的硬件要求，要求操作数的类型、大小和存储方式相同。如果操作数的类型不匹配，就需要进行类型转换以满足硬件要求。</li>
+<li>隐式类型转换：在某些情况下，编程语言会自动进行隐式类型转换。例如，当执行不同类型的操作数之间的运算时，编程语言会自动将其中一个操作数转换为另一个操作数的类型，以便执行运算。</li>
+<li>强制类型转换：有时，我们需要显式地将一个数据转换为特定的类型。这可以通过强制类型转换操作符来实现。强制类型转换可以用于将一个数据转换为更大或更小的整数类型，或者将一个浮点数类型转换为整数类型等。</li>
+</ol>
+<p>类型转换的目的是确保数据在运算和操作过程中的一致性和正确性。它可以帮助我们处理不同类型的数据，并使其适应特定的需求和要求。但需要注意的是，类型转换可能会导致数据精度损失或溢出等问题，因此在进行类型转换时需要谨慎处理，确保数据的准确性和安全性。</p>
+<h1 id="6-3-转换情况"><a href="#6-3-转换情况" class="headerlink" title="6.3 转换情况"></a>6.3 转换情况</h1><ol>
+<li>算术表达式中的自动转换：当进行算术运算时，如果操作数的类型不一致，编程语言会自动将其中一个操作数转换为另一个操作数的类型，以便执行运算。例如，将一个整数和一个浮点数相加，编程语言会将整数自动转换为浮点数，然后执行相加操作。</li>
+<li>逻辑表达式中的自动转换：在逻辑运算中，如果操作数的类型不匹配，编程语言会自动进行类型转换以使其类型一致。例如，在一个逻辑表达式中，将一个整数和一个布尔值进行比较，编程语言会将整数自动转换为布尔值的类型，然后执行比较操作。</li>
+<li>赋值表达式中的自动转换：当将一个值赋给不同类型的变量时，编程语言会自动进行类型转换以使其类型匹配。例如，将一个整数赋值给一个浮点数类型的变量，编程语言会将整数自动转换为浮点数类型，然后进行赋值操作。</li>
+<li>函数形参与实参类型不匹配：当调用函数时，如果函数的形参类型与传递给函数的实参类型不匹配，编程语言会进行自动类型转换。例如，如果函数期望接收一个整数参数，但传递给函数的是一个浮点数，编程语言会将浮点数自动转换为整数类型，然后调用函数。</li>
+<li>函数返回值类型与函数类型不匹配：在函数定义时，需要指定函数的返回值类型。如果函数的返回值类型与函数的实际返回值类型不匹配，编程语言会进行自动类型转换。例如，如果函数定义为返回整数类型，但函数内部的计算结果是浮点数，编程语言会将浮点数自动转换为整数类型，然后返回结果。</li>
+</ol>
+<h1 id="6-4-转换规则"><a href="#6-4-转换规则" class="headerlink" title="6.4 转换规则"></a>6.4 转换规则</h1><ol>
+<li>低精度到高精度的隐式转换：当将一个低精度的数据转换为高精度的数据时，通常会发生隐式类型转换。例如，将一个char类型的变量转换为int类型的变量，或将一个float类型的变量转换为double类型的变量。</li>
+<li>有符号到无符号的转换：在有符号类型和无符号类型之间进行转换时，编程语言通常会将有符号类型转换为无符号类型。例如，将一个signed int类型的变量转换为unsigned int类型的变量。</li>
+<li>整数类型之间的转换：在整数类型之间进行转换时，通常会根据类型的大小和范围进行转换。转换规则是：char -&gt; short -&gt; int -&gt; long -&gt; long long。即，较小的整数类型可以自动转换为较大的整数类型。</li>
+<li>浮点类型之间的转换：在浮点类型之间进行转换时，通常会根据类型的精度和范围进行转换。转换规则是：float -&gt; double -&gt; long double。即，较小精度的浮点类型可以自动转换为较大精度的浮点类型。</li>
+</ol>
+<h1 id="6-5-强制类型转换"><a href="#6-5-强制类型转换" class="headerlink" title="6.5 强制类型转换"></a>6.5 强制类型转换</h1><p>在强制类型转换中，我们可以使用显式的类型转换操作符来将一个类型转换为另一个类型。下面是一些重点关注的强制类型转换情况：</p>
+<ol>
+<li>char到int的转换：当将一个char类型的值转换为int类型时，值不会改变，但存储格式会发生变化。char类型通常占用一个字节，而int类型通常占用多个字节。将char类型的值转换为int类型时，编程语言会将char的值复制到int类型所占用的字节中，同时进行必要的位扩展来保持符号位的正确性。</li>
+<li>int到char的转换：当将一个int类型的值转换为char类型时，可能会发生截断。由于char类型通常只占用一个字节，而int类型占用多个字节，将int类型的值转换为char类型时，编程语言会将int的值截断为char类型所能表示的范围内。如果int的值超出了char类型的表示范围，截断将导致数据的丢失。</li>
+<li>signed到unsigned的转换：当将一个有符号类型（如signed int）的值转换为无符号类型（如unsigned int）时，值会发生改变，但存储格式不会发生变化。有符号类型和无符号类型在内存中的存储方式是相同的，只是解释方式不同。将有符号类型的值转换为无符号类型时，编程语言会根据规定的转换规则改变值的解释方式，可能导致符号位的改变和数值的变化。</li>
+</ol>
+ 
       <!-- reward -->
       
     </div>
@@ -177,11 +213,11 @@
    
   <nav class="article-nav">
     
-      <a href="/2023/09/08/6-7-%E6%95%B0%E6%8D%AE%E7%9A%84%E5%8F%AF%E7%A7%BB%E6%A4%8D%E6%80%A7/" class="article-nav-link">
+      <a href="/2023/09/08/6-8-%E5%86%85%E6%A0%B8%E4%B8%AD%E7%9A%84size-t%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            6.7 数据的可移植性
+            6.8 内核中的size_t数据类型
           
         </div>
       </a>

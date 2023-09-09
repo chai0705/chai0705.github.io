@@ -160,358 +160,6 @@
     
     
     <article
-  id="post-3-13-链接静态库"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/09/05/3-13-%E9%93%BE%E6%8E%A5%E9%9D%99%E6%80%81%E5%BA%93/"
-    >3.13-链接静态库</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/09/05/3-13-%E9%93%BE%E6%8E%A5%E9%9D%99%E6%80%81%E5%BA%93/" class="article-date">
-  <time datetime="2023-09-04T23:47:10.000Z" itemprop="datePublished">2023-09-05</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h1 id="3-13-1-静态库"><a href="#3-13-1-静态库" class="headerlink" title="3.13.1 静态库"></a>3.13.1 静态库</h1><p>静态库是一种包含预编译目标文件的归档文件，它可以被多个程序共享和链接。归档文件通常具有<code>.a</code>的文件扩展名，例如<code>libtest.a</code>。</p>
-<h1 id="3-13-2-静态库制作的步骤"><a href="#3-13-2-静态库制作的步骤" class="headerlink" title="3.13.2 静态库制作的步骤"></a>3.13.2 静态库制作的步骤</h1><p>制作静态库的步骤如下：</p>
-<ol>
-<li>编译源代码生成目标文件：首先，将源代码编译成目标文件（<code>.o</code>文件）。例如，<code>x.c</code>和<code>xx.c</code>分别编译成<code>x.o</code>和<code>xx.o</code>。</li>
-<li>创建归档文件：使用<code>ar</code>工具创建归档文件。命令格式为<code>ar rcs &lt;库文件名&gt; &lt;目标文件1&gt; &lt;目标文件2&gt; ...</code>。例如，使用命令<code>ar rcs libtest.a x.o xx.o</code>将<code>x.o</code>和<code>xx.o</code>归档到<code>libtest.a</code>文件中。</li>
-</ol>
-<h1 id="3-13-3-静态库链接的步骤"><a href="#3-13-3-静态库链接的步骤" class="headerlink" title="3.13.3 静态库链接的步骤"></a>3.13.3 静态库链接的步骤</h1><p>链接静态库的步骤如下：</p>
-<ol>
-<li>编写主程序：创建一个包含主程序逻辑的源文件，例如<code>main.c</code>。</li>
-<li>指定头文件路径和库文件路径：使用编译器选项指定头文件和库文件的搜索路径。例如，使用选项<code>-I./include</code>指定头文件搜索路径为<code>./include</code>，使用选项<code>-L./lib</code>指定库文件搜索路径为<code>./lib</code>。</li>
-<li>链接静态库：使用编译器选项<code>-l&lt;库名&gt;</code>指定要链接的静态库。例如，使用选项<code>-ltest</code>将<code>libtest.a</code>静态库链接到主程序中。</li>
-</ol>
-<p>完整的链接命令为<code>gcc main.c -I./include -L./lib -ltest</code>。该命令会将<code>main.c</code>编译成目标文件，并链接<code>libtest.a</code>静态库生成可执行文件。</p>
-<p>通过制作和链接静态库，可以将常用的函数和模块封装为可重用的代码库，提高代码的复用性和可维护性。</p>
-<h1 id="3-13-4-静态库的问题"><a href="#3-13-4-静态库的问题" class="headerlink" title="3.13.4 静态库的问题"></a>3.13.4 静态库的问题</h1><p>链接静态库可能会带来以下问题：</p>
-<ol>
-<li>可执行体积增大：当链接静态库时，所有库中的函数都会被组装到最终的可执行文件中，无论是否使用到这些函数。这会导致可执行文件的体积增大，尤其是当静态库包含大量函数时。</li>
-<li>冗余代码：由于静态库中的所有函数都会被链接到可执行文件中，可能会包含一些未使用的函数，从而造成代码的冗余。这会增加可执行文件的大小，并且在一些资源受限的环境中可能会浪费存储空间。</li>
-<li>更新困难：如果静态库中的函数发生变化，需要重新编译和链接整个程序才能更新。这会增加代码维护的复杂性，并且在多个项目中使用同一静态库时，每个项目都需要进行重新编译和链接。</li>
-</ol>
-<p>解决上述问题的一种方法是将每个函数的实现放在单独的源文件中，然后将这些源文件编译成对应的目标文件，最后将所有的目标文件归档到静态库中。这样做可以避免将未使用的函数链接到最终的可执行文件中，减小可执行文件的体积并提高代码的可维护性。</p>
-<p>这种方法的基本原理是，编译器的基本单位是文件，而链接器的基本单位是目标文件。当引用一个目标文件中的符号时，链接器会将整个目标文件进行链接，将引用的符号和相关的代码组装到最终的可执行文件中。</p>
-<p>举例来说，假设有以下几个源文件：</p>
-<ul>
-<li><code>func1.c</code>：包含函数<code>func1</code>的实现</li>
-<li><code>func2.c</code>：包含函数<code>func2</code>的实现</li>
-<li><code>main.c</code>：包含程序的主函数</li>
-</ul>
-<p>首先，分别将<code>func1.c</code>、<code>func2.c</code>和<code>main.c</code>编译成对应的目标文件：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">gcc -c func1.c -o func1.o</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">gcc -c func2.c -o func2.o</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">gcc -c main.c -o main.o</span></span><br></pre></td></tr></table></figure>
-
-<p>然后，将这些目标文件归档到静态库中：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">ar rcs libtest.a func1.o func2.o</span></span><br></pre></td></tr></table></figure>
-
-<p>最后，链接主程序并使用静态库：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">gcc main.o -L. -ltest -o executable</span></span><br></pre></td></tr></table></figure>
-
-<p>这样，只有主程序中实际引用的函数会被链接到最终的可执行文件中，减小了可执行文件的体积。</p>
-<p>Glibc（GNU C Library）就是使用类似的方法实现的。它将每个函数的实现放在单独的源文件中，然后将这些源文件编译成对应的目标文件，并将目标文件归档到一个静态库中。这样，在链接时只会将程序实际使用的函数链接到最终的可执行文件中，提高了程序的效率和可维护性。</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%BC%96%E8%AF%91%E3%80%81%E9%93%BE%E6%8E%A5%E5%92%8C%E8%BF%90%E8%A1%8C/" rel="tag">程序的编译、链接和运行</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-3-12-main函数入口分析"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/09/05/3-12-main%E5%87%BD%E6%95%B0%E5%85%A5%E5%8F%A3%E5%88%86%E6%9E%90/"
-    >3.12-main函数入口分析</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/09/05/3-12-main%E5%87%BD%E6%95%B0%E5%85%A5%E5%8F%A3%E5%88%86%E6%9E%90/" class="article-date">
-  <time datetime="2023-09-04T23:47:09.000Z" itemprop="datePublished">2023-09-05</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h1 id="7-12-1-main函数入口"><a href="#7-12-1-main函数入口" class="headerlink" title="7.12.1 main函数入口"></a>7.12.1 main函数入口</h1><p>编译器对程序入口有以下规定：</p>
-<ol>
-<li>缺省程序入口：编译器默认的程序入口是<code>_start</code>符号，而不是<code>main</code>函数。<code>_start</code>符号是由编译器生成的一个特殊符号，它标识程序的入口点。在程序启动时，操作系统会将控制权转移到<code>_start</code>符号所代表的代码位置。</li>
-<li><code>main</code>函数作为入口点：<code>main</code>函数是一个被C标准库调用的符号，用来告诉编译器在一个项目中哪里是程序的入口点。程序员需要遵守这个约定，将程序的逻辑代码放在<code>main</code>函数中，在执行<code>main</code>函数之前进行一些准备工作。</li>
-</ol>
-<p>在程序启动时，编译器会进行以下操作：</p>
-<ul>
-<li>设置堆栈指针：编译器会设置栈指针，以确保函数调用和局部变量的正确处理。</li>
-<li>初始化静态变量和全局变量：编译器会初始化静态变量和全局变量，即将它们所占用的数据段（data segment）中的内容赋初值。</li>
-<li>BSS段赋初值：BSS段中的变量会被初始化为默认值。例如，<code>int</code>类型的变量会被初始化为0，<code>bool</code>类型会被初始化为<code>FALSE</code>，指针会被初始化为<code>NULL</code>。</li>
-<li>传递参数给<code>main</code>函数：编译器会将命令行参数（<code>argc</code>、<code>argv</code>等）传递给<code>main</code>函数，并开始执行<code>main</code>函数中的代码。</li>
-</ul>
-<h1 id="7-12-2-CRT运行库"><a href="#7-12-2-CRT运行库" class="headerlink" title="7.12.2 CRT运行库"></a>7.12.2 CRT运行库</h1><p>CRT是C Runtime（运行时）的缩写，也称为C运行库。它是一组库函数和运行时环境，用于支持和管理C语言程序的执行。</p>
-<p>CRT的主要功能包括：</p>
-<ol>
-<li>实现C标准库函数：CRT实现了C标准库中定义的各种函数，例如输入输出函数（如printf、scanf）、字符串处理函数（如strcpy、strlen）、内存管理函数（如malloc、free）等。这些函数提供了常用的操作和功能，方便程序员开发C语言程序。</li>
-<li>执行初始化操作：CRT负责在程序执行之前进行一系列的初始化操作。这包括设置基本的堆栈环境和进程环境，准备动态库的加载和释放，进行动态库的初始化和清理等工作。</li>
-<li>调用main函数：CRT负责给main函数传递参数，并调用main函数开始执行程序的主要逻辑。它将命令行参数（如argc、argv）传递给main函数，以便程序可以根据需要进行处理。</li>
-<li>处理程序退出：在main函数执行完成后，CRT会调用exit函数，用于处理程序的退出。exit函数会执行一些清理操作，例如关闭文件、释放资源等，并将控制权返回给操作系统。</li>
-</ol>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%BC%96%E8%AF%91%E3%80%81%E9%93%BE%E6%8E%A5%E5%92%8C%E8%BF%90%E8%A1%8C/" rel="tag">程序的编译、链接和运行</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-3-11-BSS段的处理"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/09/05/3-11-BSS%E6%AE%B5%E7%9A%84%E5%A4%84%E7%90%86/"
-    >3.11-BSS段的处理</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/09/05/3-11-BSS%E6%AE%B5%E7%9A%84%E5%A4%84%E7%90%86/" class="article-date">
-  <time datetime="2023-09-04T23:47:07.000Z" itemprop="datePublished">2023-09-05</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h1 id="3-11-1-bss段"><a href="#3-11-1-bss段" class="headerlink" title="3.11.1 bss段"></a>3.11.1 bss段</h1><p>BSS（Block Started by Symbol）段是可执行文件或目标文件中的一个段（section），用于存储未初始化的全局变量和静态局部变量。BSS段具有以下特点：</p>
-<ol>
-<li>存储未初始化的变量：BSS段用于存储未显式初始化的全局变量和静态局部变量。这些变量在编译时没有赋予初始值，因此它们的存储空间可以在程序运行时动态地分配和初始化。</li>
-<li>不占目标文件空间：在目标文件中，BSS段不占用实际的空间。这是因为BSS段中的变量在编译时并没有实际的数值，所以在目标文件中只需记录BSS段的大小和位置信息。</li>
-<li>运行时分配空间：当可执行文件被加载到内存中运行时，操作系统会为BSS段分配实际的内存空间。这时，BSS段中的变量将被初始化为默认值（通常是0），以确保它们的初始状态是可预测的。</li>
-<li>节省存储资源：BSS段的设计初衷是为了节省存储资源。在早期计算机系统中，存储资源非常昂贵，因此将未初始化的变量放在BSS段中可以减少目标文件的大小，节省磁盘空间。</li>
-<li>记录BSS段信息：BSS段的总大小通常会在节头表（Section Header Table）中进行记录。节头表是目标文件格式中的一部分，它包含了关于各个段的信息，包括大小、位置等。此外，在符号表（Symbol Table）中也会记录每个变量的大小和地址等信息。</li>
-</ol>
-<h1 id="3-11-2-数据段和BSS段"><a href="#3-11-2-数据段和BSS段" class="headerlink" title="3.11.2 数据段和BSS段"></a>3.11.2 数据段和BSS段</h1><p>数据段和BSS段是可执行文件或目标文件中用于存储变量数据的段。它们在编译系统中的处理流程是相同的，但有一些差异。</p>
-<p>数据段用于存储已经初始化的全局变量和静态局部变量，这些变量在编译时已经赋予了初始值。数据段在可执行文件中占据实际的存储空间，并在程序运行时保持其初始值。</p>
-<p>BSS段设计的初衷是为了减少文件体积和节省磁盘资源。它用于存储未初始化的全局变量和静态局部变量，这些变量在编译时没有初始值。在目标文件中，BSS段不占用实际的存储空间，只记录其大小和位置信息。当可执行文件被加载到内存中运行时，操作系统会为BSS段分配实际的存储空间，并将其中的变量初始化为默认值。</p>
-<p>总的来说，数据段和BSS段都是用于存储变量数据的段。数据段存储已初始化的变量，占据实际的存储空间，而BSS段存储未初始化的变量，不占用实际的存储空间。它们在编译系统中的处理流程相同，但在可执行文件中的表现有所不同。</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%BC%96%E8%AF%91%E3%80%81%E9%93%BE%E6%8E%A5%E5%92%8C%E8%BF%90%E8%A1%8C/" rel="tag">程序的编译、链接和运行</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-3-10-程序的运行"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/09/05/3-10-%E7%A8%8B%E5%BA%8F%E7%9A%84%E8%BF%90%E8%A1%8C/"
-    >3.10-程序的运行</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/09/05/3-10-%E7%A8%8B%E5%BA%8F%E7%9A%84%E8%BF%90%E8%A1%8C/" class="article-date">
-  <time datetime="2023-09-04T23:47:06.000Z" itemprop="datePublished">2023-09-05</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h1 id="3-10-1-程序的运行"><a href="#3-10-1-程序的运行" class="headerlink" title="3.10.1 程序的运行"></a>3.10.1 程序的运行</h1><p>在操作系统环境下，可执行文件通常是以ELF（Executable and Linkable Format）格式存储的。ELF文件是一种可执行文件格式，包含了程序的机器代码、数据、符号表以及其他与程序执行相关的信息。运行可执行ELF文件需要依赖操作系统提供的执行环境和系统调用。</p>
-<p>在裸机环境下，即没有操作系统的情况下，常见的可执行文件格式是BIN（Binary）或HEX（Intel Hexadecimal）文件。这些文件包含了程序的机器代码，通常是一系列的二进制指令。</p>
-<p>运行BIN或HEX文件需要将其加载到裸机环境中执行，这通常涉及以下步骤：</p>
-<ol>
-<li>将BIN&#x2F;HEX文件加载到目标设备：<ul>
-<li>将BIN文件直接复制到目标设备的存储介质上，或者通过特定的通信方式将HEX文件发送到目标设备。</li>
-</ul>
-</li>
-<li>配置目标设备的执行环境：<ul>
-<li>在裸机环境中，没有操作系统提供的运行时环境，因此需要手动配置目标设备的执行环境。</li>
-<li>这包括设置适当的启动地址、堆栈地址、中断向量表等。</li>
-</ul>
-</li>
-<li>执行加载的程序：<ul>
-<li>在裸机环境中，程序的执行通常是从特定的启动地址开始。</li>
-<li>目标设备会按照启动地址开始执行加载的程序，即执行BIN&#x2F;HEX文件中的机器代码指令。</li>
-</ul>
-</li>
-</ol>
-<h2 id="3-10-2-可执行ELF文件"><a href="#3-10-2-可执行ELF文件" class="headerlink" title="3.10.2 可执行ELF文件"></a>3.10.2 可执行ELF文件</h2><p>可执行的ELF文件在操作系统环境下执行时，会经过加载器的处理。加载器负责将可执行文件加载到内存中，并进行相关的操作，最后跳转到程序入口处运行该程序。</p>
-<p>以下是与可执行ELF文件加载相关的一些概念和信息：</p>
-<ol>
-<li>镜像加载地址：<ul>
-<li>可执行ELF文件在内存中的加载地址，也称为镜像加载地址或基址。</li>
-<li>加载器将可执行文件的代码段、数据段等内容加载到内存时，会指定一个合适的地址作为加载地址，将文件映射到该地址开始的内存空间。</li>
-</ul>
-</li>
-<li>程序头表：<ul>
-<li>可执行ELF文件中包含一个程序头表（Program Header Table），记录了不同段的信息和在内存中的加载位置。</li>
-<li>程序头表指定了可执行文件镜像加载到内存中的地址。</li>
-<li>每个程序头表项描述了一个段（如代码段、数据段等），包括段的类型、文件偏移、在文件中的大小、在内存中的虚拟地址等信息。</li>
-</ul>
-</li>
-<li>ELF文件头基本信息：<ul>
-<li>ELF文件的开头是一个ELF文件头（ELF Header），包含了关于该可执行文件的基本信息。</li>
-<li>ELF文件头中的一些重要字段包括文件类型、运行平台（操作系统和处理器架构）、程序入口地址等。</li>
-<li>文件类型字段指示该文件是可执行文件、共享库还是目标文件。</li>
-<li>运行平台字段标识了目标操作系统和处理器架构。</li>
-<li>程序入口地址指示了程序在执行时的起始执行点，加载器会跳转到该地址开始执行程序。</li>
-</ul>
-</li>
-</ol>
-<h1 id="3-10-3-Linux内存映像"><a href="#3-10-3-Linux内存映像" class="headerlink" title="3.10.3 Linux内存映像"></a>3.10.3 Linux内存映像</h1><p>在Linux环境下，运行可执行文件涉及到创建进程和建立虚拟地址空间与可执行文件的映射关系。下面是在Linux环境下运行可执行文件的主要步骤：</p>
-<ol>
-<li>创建一个独立的虚拟地址空间：<ul>
-<li>当调用<code>execve</code>函数启动加载器时，操作系统会为新进程创建一个独立的虚拟地址空间。</li>
-<li>虚拟地址空间是进程独立使用的内存空间，包括代码段、数据段、堆、栈等区域。</li>
-</ul>
-</li>
-<li>读取可执行文件头，建立映射关系：<ul>
-<li>加载器会读取可执行文件的文件头，其中包含了关于该文件的一些基本信息，例如入口地址、段的大小等。</li>
-<li>加载器将可执行文件的不同段（如代码段、数据段）映射到进程的虚拟地址空间中的相应区域。</li>
-<li>这样，进程的虚拟地址空间中的某些区域就与可执行文件的对应部分建立了映射关系。</li>
-</ul>
-</li>
-<li>设置PC指针为可执行文件的入口地址，启动运行：<ul>
-<li>在建立好虚拟地址空间与可执行文件的映射关系之后，加载器会将程序计数器（PC）指针设置为可执行文件的入口地址。</li>
-<li>入口地址指示了程序在执行时的起始执行点。</li>
-<li>加载器启动运行，让进程从可执行文件的入口地址开始执行。</li>
-</ul>
-</li>
-</ol>
-<h1 id="3-10-4-MMU"><a href="#3-10-4-MMU" class="headerlink" title="3.10.4 MMU"></a>3.10.4 MMU</h1><p>MMU（Memory Management Unit，内存管理单元）是计算机系统中的一个硬件组件，负责虚拟地址与物理地址之间的转换。它是操作系统实现虚拟内存的关键部分。</p>
-<p>在CPU管脚的地址信号中，传递的是物理地址，即直接对应到计算机系统中的物理内存地址。但当启用MMU后，操作系统运行在虚拟地址空间上，这就涉及到虚拟地址与物理地址的转换。</p>
-<p>MMU的主要用途包括：</p>
-<ol>
-<li>虚拟内存：MMU负责将进程使用的虚拟地址映射到物理内存中的实际地址。通过虚拟内存技术，操作系统可以将部分进程的数据和代码存储在辅助存储设备（如硬盘）上，只在需要时加载到物理内存中。这样，操作系统可以运行比实际物理内存大的程序，提高系统的可用性和性能。</li>
-<li>内存保护：MMU允许操作系统为不同的内存块设置不同的读写权限。通过在虚拟地址空间和物理地址空间之间建立映射关系，并设置相应的访问权限，可以实现对内存的保护，防止进程越界访问或修改其他进程的内存数据。</li>
-</ol>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%BC%96%E8%AF%91%E3%80%81%E9%93%BE%E6%8E%A5%E5%92%8C%E8%BF%90%E8%A1%8C/" rel="tag">程序的编译、链接和运行</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
   id="post-3-9-链接过程-3-重定位"
   class="article article-type-post"
   itemscope
@@ -1186,13 +834,418 @@
 </article>
 
     
+    <article
+  id="post-3-3-预处理过程"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/09/05/3-3-%E9%A2%84%E5%A4%84%E7%90%86%E8%BF%87%E7%A8%8B/"
+    >3.3-预处理过程</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/09/05/3-3-%E9%A2%84%E5%A4%84%E7%90%86%E8%BF%87%E7%A8%8B/" class="article-date">
+  <time datetime="2023-09-04T23:46:55.000Z" itemprop="datePublished">2023-09-05</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="3-3-1-预处理的过程"><a href="#3-3-1-预处理的过程" class="headerlink" title="3.3.1 预处理的过程"></a>3.3.1 预处理的过程</h1><p>预处理是编译过程中的第一步，它对源代码进行一系列的处理，包括头文件展开、宏展开、条件编译、删除注释、添加行号和文件名标识等。下面是预处理过程的主要步骤：</p>
+<ol>
+<li>头文件展开：将所有<code>#include</code>指令包含的文件插入到指令所在的位置。这样可以将头文件的内容插入到源代码中，使得源代码中可以使用头文件中定义的函数、变量和宏等。</li>
+<li>宏展开：对所有的宏定义进行展开，并删除<code>#define</code>指令。预处理器会查找源代码中使用的宏，并将其替换为宏定义中的内容。这样可以将宏定义的代码在预处理阶段进行替换，减少了函数调用的开销。</li>
+<li>条件编译：处理所有的条件预编译指令，例如<code>#if</code>、<code>#ifdef</code>、<code>#else</code>等。根据条件的真假，选择性地编译或排除部分代码。这样可以根据不同的条件编译选项，编译不同的代码分支。</li>
+<li>删除注释：去除源代码中的注释部分。注释对于程序的理解和阅读很重要，但在编译过程中并不需要注释，因此预处理阶段会将注释删除，减少后续编译的工作量。</li>
+<li>添加行号和文件名标识：为了方便编译调试和错误定位，预处理阶段会为每一行源代码添加行号和文件名标识。这样在编译出错时，可以准确地定位错误所在的行和文件。</li>
+<li>保留#pragma命令：预处理阶段会保留<code>#pragma</code>指令。<code>#pragma</code>指令是编译器提供的一些特定功能的扩展，用于控制编译器的行为或实现特定的功能。</li>
+<li>宏命令展开和文本替换：预处理阶段最后一步是对源代码进行宏命令展开和文本替换。在宏展开过程中，预处理器会查找源代码中使用的宏，并将其展开为宏定义中的内容。同时，还会进行一些文本替换的操作，例如替换宏参数、替换宏函数调用等。</li>
+</ol>
+<h1 id="3-3-2-为什么要进行预处理"><a href="#3-3-2-为什么要进行预处理" class="headerlink" title="3.3.2 为什么要进行预处理"></a>3.3.2 为什么要进行预处理</h1><p>预处理过程在编译过程中起着重要的作用，原因如下：</p>
+<ol>
+<li>宏定义：预处理阶段允许使用宏定义，宏可以将一段代码或表达式替换为预定义的文本。通过使用宏定义，可以简化代码编写，提高代码的可读性和可维护性。</li>
+<li>方便条件编译：条件编译指令（如<code>#if</code>、<code>#ifdef</code>、<code>#else</code>）允许根据不同的编译条件选择性地编译或排除代码块。这对于实现跨平台兼容性或针对不同的编译配置进行调试和优化非常有用。</li>
+<li>兼容各个平台和处理器架构：预处理过程可以根据不同的平台和处理器架构进行编译选项的设置。通过使用条件编译指令，可以编写适用于不同平台和处理器的代码，提高代码的可移植性和兼容性。</li>
+<li>最大程度复用公用代码：通过使用头文件，可以将公用的函数、结构体和宏等定义保存在独立的文件中，并在需要的地方进行引用。这样可以实现代码的模块化和复用，减少代码的冗余和重复编写。</li>
+<li>头文件包含：预处理过程中的头文件展开允许将其他文件中的代码插入到源文件中。这样可以将相关的代码组织在一起，提高代码的可读性和可维护性，并减少代码中的重复内容。</li>
+<li>模块化编程：预处理过程可以通过定义和使用宏来实现模块化编程。模块化编程将代码划分为独立的功能模块，使代码更易于理解、测试和维护。</li>
+</ol>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%BC%96%E8%AF%91%E3%80%81%E9%93%BE%E6%8E%A5%E5%92%8C%E8%BF%90%E8%A1%8C/" rel="tag">程序的编译、链接和运行</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-预处理过程"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/09/05/%E9%A2%84%E5%A4%84%E7%90%86%E8%BF%87%E7%A8%8B/"
+    >预处理过程</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/09/05/%E9%A2%84%E5%A4%84%E7%90%86%E8%BF%87%E7%A8%8B/" class="article-date">
+  <time datetime="2023-09-04T23:45:08.000Z" itemprop="datePublished">2023-09-05</time>
+</a>    
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+   
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-3-2-GCC命令参数"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/09/05/3-2-GCC%E5%91%BD%E4%BB%A4%E5%8F%82%E6%95%B0/"
+    >3.2 GCC命令参数</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/09/05/3-2-GCC%E5%91%BD%E4%BB%A4%E5%8F%82%E6%95%B0/" class="article-date">
+  <time datetime="2023-09-04T23:44:56.000Z" itemprop="datePublished">2023-09-05</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="3-2-1-什么是GCC"><a href="#3-2-1-什么是GCC" class="headerlink" title="3.2.1 什么是GCC ?"></a>3.2.1 什么是GCC ?</h1><p>GCC指的是GNU编译器套件（GNU Compiler Collection），它是一个开源的编译器集合。GCC包括预处理器、编译器、汇编器和链接器等工具，它能够将源代码转换为可执行文件。GCC支持多种编程语言，如C、C++、Objective-C、Fortran、Ada等，并且可在多个操作系统上使用，包括Linux、Unix、Windows等。</p>
+<p>除了编译器本身，GCC还提供了一些文件处理工具，如objdump、objcopy、nm、readelf和strip等，用于处理目标文件、库文件和可执行文件。此外，GCC也提供了一套标准的库文件和头文件，供开发者在编译程序时使用。</p>
+<h1 id="3-2-2-gcc-参数"><a href="#3-2-2-gcc-参数" class="headerlink" title="3.2.2 gcc 参数"></a>3.2.2 gcc 参数</h1><p>通过在GCC命令行中使用不同的参数，可以调用GCC工具集中的不同工具。以下是一些常用的参数和对应的工具：</p>
+<ul>
+<li><code>-E</code>：预处理，调用cpp预处理器，将源代码中的宏定义展开、包含头文件等操作。</li>
+<li><code>-S</code>：生成汇编文件，GCC将合并预处理后的代码，并将其转换为汇编语言。</li>
+<li><code>-c</code>：生成目标文件，调用汇编器as，将汇编代码转换为机器代码，但不进行链接操作。</li>
+<li><code>-o &lt;output&gt;</code>：指定输出文件的名称，可以用于指定生成的目标文件或可执行文件的名称。</li>
+<li><code>--verbose</code>：显示详细的编译信息，包括调用的工具和执行的步骤。</li>
+</ul>
+<p>gcc -E main.c<br>该命令会直接将预处理的内容打印到终端并不会生成一个文件，所以需要指定一下输出文件，重定向，如下所示：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309050822386.png" alt="image-20230905082213343"></p>
+<p>同样的gcc -S main.c 也是如此</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309050822178.png" alt="image-20230905082250151"></p>
+<p>更多参数的详细介绍</p>
+<ol>
+<li><p><strong>控制编译过程的参数</strong>：</p>
+<ul>
+<li><code>-c</code>：只编译源文件，生成目标文件而不进行链接。</li>
+<li><code>-S</code>：生成汇编代码文件，不进行编译和链接。</li>
+<li><code>-E</code>：只进行预处理，生成预处理后的源代码。</li>
+<li><code>-o &lt;output&gt;</code>：指定输出文件的名称。</li>
+<li><code>-I &lt;dir&gt;</code>：指定头文件搜索路径。</li>
+<li><code>-L &lt;dir&gt;</code>：指定库文件搜索路径。</li>
+<li><code>-M</code>：生成文件依赖关系。使用该选项时，GCC会分析源文件中的<code>#include</code>指令，输出每个源文件及其所包含的头文件之间的依赖关系。输出结果通常以makefile规则的格式呈现。</li>
+<li><code>-MD</code>：与<code>-M</code>相同，但是将输出导入到<code>.d</code>文件中。生成的<code>.d</code>文件通常包含了源文件及其所包含的头文件之间的依赖关系，可以在makefile中引用这些<code>.d</code>文件来自动化编译过程。</li>
+<li><code>-MM</code>：与<code>-M</code>相似，但忽略<code>#include &lt;file.h&gt;</code>产生的依赖关系。这意味着只生成自定义头文件（使用双引号<code>#include &quot;file.h&quot;</code>）的依赖关系，而不包括系统头文件（使用尖括号<code>#include &lt;file.h&gt;</code>）。</li>
+<li></li>
+</ul>
+</li>
+<li><p><strong>编译选项的设置</strong>：</p>
+<ul>
+<li><p><code>-std=&lt;standard&gt;</code>：指定使用的语言标准，如<code>-std=c11</code>表示使用C11标准。</p>
+</li>
+<li><p><code>-Wall</code>：开启所有警告信息。</p>
+</li>
+<li><p><code>-Werror</code>：将警告视为错误，编译过程中遇到警告将中止。</p>
+</li>
+<li><p><code>-Wextra</code>：开启额外的警告选项。</p>
+</li>
+<li><p><code>-pedantic</code>：严格遵循语言标准，显示更多警告信息。</p>
+</li>
+<li><p><code>-g</code>：在编译过程中生成调试信息，用于调试程序。这些调试信息可以被调试器（如GDB）使用。</p>
+</li>
+<li><p><code>-static</code>：禁止使用动态库，强制链接静态库。这意味着编译后的可执行文件将不依赖于系统上已安装的动态库，而是包含了所有必要的库的副本。</p>
+</li>
+<li><p><code>-shared</code>：生成共享目标文件，也称为共享库或动态库。共享库可以在运行时被不同的程序加载和使用。</p>
+</li>
+<li><p><code>-L&lt;dir&gt;</code>：指定库搜索路径。使用该选项可以告诉编译器在指定的目录中搜索库文件。</p>
+</li>
+<li><p><code>-l&lt;libname&gt;</code>：指定编译时使用的库。例如，<code>-lmath</code>将链接数学库。编译器会在标准库搜索路径和使用<code>-L</code>选项指定的路径中查找库文件。</p>
+</li>
+<li><p><code>-I&lt;dir&gt;</code>：指定头文件搜索路径。使用该选项可以告诉编译器在指定的目录中搜索头文件。</p>
+</li>
+<li><p><code>-w</code>：禁止生成任何警告信息。编译器将不会显示任何警告。</p>
+</li>
+<li><p><code>-std=c99</code>：指定使用C99标准进行编译。GCC默认采用GNU C标准。</p>
+</li>
+</ul>
+</li>
+<li><p><strong>编译器优化选项</strong>：</p>
+<ul>
+<li><code>-O0</code>、<code>-O1</code>、<code>-O2</code>、<code>-O3</code>：控制编译器的优化级别，从无优化到高级优化。</li>
+<li><code>-Os</code>：优化代码大小。</li>
+<li><code>-Ofast</code>：最大程度地优化代码执行速度，可能牺牲一些标准的符合性。</li>
+<li><code>-march=&lt;arch&gt;</code>：指定目标处理器架构，优化代码以适应特定处理器。</li>
+</ul>
+</li>
+</ol>
+<h1 id="3-2-3-交叉编译"><a href="#3-2-3-交叉编译" class="headerlink" title="3.2.3 交叉编译"></a>3.2.3 交叉编译</h1><p>交叉编译是指在一种平台上进行编译，生成能够在另一种不同平台上运行的可执行文件或镜像。在交叉编译中，编译器和工具链被配置为目标平台的编译器和工具，以便生成与目标平台兼容的代码和可执行文件。</p>
+<p>例如，如果你正在运行的是 x86 架构的电脑，但你想要编译一个在 ARM 架构的嵌入式设备上运行的程序，就需要进行交叉编译。在这种情况下，你需要使用针对 ARM 架构的交叉编译器和工具链，例如 <code>arm-linux-gnueabi-gcc</code>。</p>
+<p>安装交叉编译器和工具链时，你可以使用适合你的发行版的包管理器。在这个例子中，你可以使用 <code>apt</code> 包管理器来安装 ARM 架构的交叉编译器和工具链，命令如下：</p>
+<p>Copy</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt install gcc-arm-linux-gnueabi</span><br></pre></td></tr></table></figure>
+
+<p>安装完成后，你就可以使用 <code>arm-linux-gnueabi-gcc</code> 命令来进行 ARM 架构的交叉编译了。这样你就能够生成适用于 ARM 架构设备的可执行文件或镜像。</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%BC%96%E8%AF%91%E3%80%81%E9%93%BE%E6%8E%A5%E5%92%8C%E8%BF%90%E8%A1%8C/" rel="tag">程序的编译、链接和运行</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-3-1-程序的编译与可执行文件"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/09/04/3-1-%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%BC%96%E8%AF%91%E4%B8%8E%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6/"
+    >程序的编译与可执行文件</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/09/04/3-1-%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%BC%96%E8%AF%91%E4%B8%8E%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6/" class="article-date">
+  <time datetime="2023-09-04T13:19:52.000Z" itemprop="datePublished">2023-09-04</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="3-1-程序的编译与可执行文件"><a href="#3-1-程序的编译与可执行文件" class="headerlink" title="3.1 程序的编译与可执行文件"></a>3.1 程序的编译与可执行文件</h1><h2 id="3-1-1-可执行文件的组装"><a href="#3-1-1-可执行文件的组装" class="headerlink" title="3.1.1 可执行文件的组装"></a>3.1.1 可执行文件的组装</h2><p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309042146452.png" alt="image-20230904214608380"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309042146097.png" alt="image-20230904214623995"></p>
+<p>编译过程的特点可以总结如下：</p>
+<p>非一步到位：编译过程不是一次性完成的，而是分为多个阶段逐步完成的。</p>
+<p>环环相扣：每个阶段的输出作为下一个阶段的输入，各个阶段之间有着紧密的联系和依赖关系。</p>
+<p>分为预编译、编译、汇编、链接阶段：编译过程可以划分为预处理、编译、汇编和链接几个主要阶段。</p>
+<p>调用不同的工具：每个阶段都调用不同的工具或编译器来完成特定的任务。</p>
+<ul>
+<li><p>预处理：在预处理阶段，预处理器将源文件进行处理，如宏展开、头文件包含等，生成处理后的源文件。</p>
+</li>
+<li><p>编译：在编译阶段，编译器将处理后的源文件转换为汇编语言代码，进行语法分析、语义分析、优化等操作。</p>
+</li>
+<li><p>汇编：在汇编阶段，汇编器将生成的汇编语言代码转换为机器语言指令，并生成目标文件。</p>
+</li>
+<li><p>链接：在链接阶段，链接器将多个目标文件和库文件进行链接，解析符号引用，生成可执行目标文件（如ELF格式）。</p>
+</li>
+</ul>
+<p>生成可执行文件是编译过程中的最终目标，但为什么编译过程中不直接生成可执行文件，而是分为多个阶段呢？</p>
+<p>首先是GNU的思想，即”一个工具只干一件事情”。GNU工具链以及许多其他编译工具都遵循这个原则。将编译过程分为多个阶段，每个阶段有专门的工具来处理，可以使得每个工具更加专注于自己的任务。例如，预处理器负责处理宏展开、头文件包含等，编译器负责将源代码转换为汇编代码，汇编器负责将汇编代码转换为机器代码，链接器负责将目标文件链接为可执行文件。这样的分工可以简化每个工具的实现和复杂度，使得工具更加可靠、可维护，并提高了工具的复用性。</p>
+<p>其次是计算机工业思维中的标准接口和分层原则。将编译过程分为多个阶段，每个阶段的输入和输出都有明确定义的接口，使得每个阶段都可以独立进行开发和优化。这样的分层结构可以适配更多的平台、CPU架构和指令集，使得编译器可以在不同的系统上使用相同的前端和中间表示，通过后端进行特定平台的代码生成。这种模块化和分层的设计使得编译器更加灵活、可扩展，并能够适应不断变化的计算机体系结构和需求。</p>
+<h2 id="3-1-2-从源程序到可执行文件"><a href="#3-1-2-从源程序到可执行文件" class="headerlink" title="3.1.2 从源程序到可执行文件"></a>3.1.2 从源程序到可执行文件</h2><p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309042152389.png" alt="image-20230904215208244"></p>
+<ol>
+<li>预处理：源程序中的 <code>#include&lt;stdio.h&gt;</code> 被预处理器处理，将对应的头文件内容插入到源程序中，生成处理后的源程序。</li>
+<li>编译：编译器将处理后的源程序进行语法分析、语义分析、优化等操作，生成目标文件。在目标文件中，包括以下部分：<ul>
+<li>ELF header：ELF（可执行与可链接格式）头部，包含关于文件格式的信息。</li>
+<li>Program header table：程序头表，描述程序的段（段包含代码、数据等）。</li>
+<li>.text 段：包含程序的机器代码。</li>
+<li>.rodata 段：包含只读数据，如字符串常量。</li>
+<li>.data 段：包含已初始化的全局和静态变量。</li>
+<li>.bss 段：包含未初始化的全局和静态变量。</li>
+</ul>
+</li>
+<li>链接：链接器将目标文件进行链接，生成可执行文件。在可执行文件中，包括以下部分：<ul>
+<li>ELF header：与目标文件相同，包含关于文件格式的信息。</li>
+<li>Program header table：与目标文件相同，描述程序的段。</li>
+<li>.text 段：与目标文件相同，包含程序的机器代码。</li>
+<li>.rodata 段：与目标文件相同，包含只读数据。</li>
+<li>.data 段：与目标文件相同，包含已初始化的全局和静态变量。</li>
+<li>.bss 段：与目标文件相同，包含未初始化的全局和静态变量。</li>
+<li>符号表（.symtab）：包含程序中定义的全局和静态符号的信息。</li>
+<li>字符串表（.strtab）：保存符号表中的字符串。</li>
+<li>调试信息（.debug）：包含调试器使用的信息。</li>
+<li>行号信息（.line）：包含源代码的行号信息。</li>
+</ul>
+</li>
+</ol>
+<p>最终生成的可执行文件包含了程序的机器代码、数据、符号表等信息，可以在计算机上执行。编译过程中的中间文件和信息都嵌入到最终的可执行文件中，以便在运行时进行处理和调试。</p>
+<h2 id="3-1-3-目标文件"><a href="#3-1-3-目标文件" class="headerlink" title="3.1.3 目标文件"></a>3.1.3 目标文件</h2><p>目标文件（Object file）是编译器生成的中间文件，它包含了编译后的机器代码、数据和符号信息，用于最终生成可执行文件或共享目标文件。目标文件的类型可以通过命令 <code>file</code> 进行查看。</p>
+<p>常见的目标文件类型包括：</p>
+<ul>
+<li>可重定位目标文件（Relocatable files）：这种类型的目标文件包含了编译后的机器代码、数据和符号信息，但是它们的内部地址是相对于起始地址的偏移量，还没有进行最终的地址分配和链接。可重定位目标文件可以作为其他可重定位目标文件或可执行目标文件的输入，用于生成最终的可执行文件或共享目标文件。</li>
+<li>可执行目标文件（Executable files）：这种类型的目标文件是经过链接的最终可执行文件，包含了所有的机器代码、数据和符号信息，可以直接在操作系统上执行。</li>
+<li>可被共享目标文件（Shared object file）：也被称为动态链接库（Dynamic Linking Library）或共享库（Shared Library）。这种类型的目标文件包含了可被多个可执行文件或其他共享库共享使用的代码和数据，可以在运行时动态加载到内存中，并与其他程序共享使用。</li>
+<li>可执行文件（ELF，Executable and Linkable Format）：这是一种可执行文件的格式，广泛用于类UNIX系统。可执行文件可以直接在操作系统上执行，包含了机器代码、数据和符号信息，以及其他与执行相关的信息（如程序入口点等）。</li>
+</ul>
+<h2 id="3-1-4-ELF可执行文件的结构"><a href="#3-1-4-ELF可执行文件的结构" class="headerlink" title="3.1.4 ELF可执行文件的结构"></a>3.1.4 ELF可执行文件的结构</h2><ol>
+<li>ELF header（ELF 头）：包含了关于文件格式的信息，如文件类型、目标体系结构、入口点地址等。</li>
+<li>Program header table（程序头表）：描述了可执行文件的段（segment）信息，每个段对应一个或多个节（section），包括代码段、只读数据段、可读写数据段等。程序头表记录了每个段的起始地址、大小、访问权限等信息。</li>
+<li>.init 段：包含了可执行文件在加载到内存后需要执行的初始化代码，如全局变量的初始化和动态链接器的初始化等。</li>
+<li>.text、.rodata、.data、.bss 等段：这些段包含了实际的代码和数据。<ul>
+<li>.text 段：包含了可执行代码的机器指令，也就是程序的代码段。</li>
+<li>.rodata 段：包含了只读数据，如字符串常量等。</li>
+<li>.data 段：包含了已初始化的全局和静态变量。</li>
+<li>.bss 段：包含了未初始化的全局和静态变量，这些变量在运行时会被初始化为 0。</li>
+</ul>
+</li>
+<li>符号表（.symtab）：记录了程序中定义和引用的全局和静态符号的信息，如函数和变量。符号表中包含了符号的名称、类型、大小、地址等信息。</li>
+<li>调试信息（.debug）：包含了调试器使用的信息，如源代码的行号信息、变量和函数的调试信息等。</li>
+<li>行号信息（.line）：包含了源代码的行号信息，用于将机器代码映射回源代码的行号。</li>
+<li>字符串表（.strtab）：保存了符号表和调试信息中使用的字符串。</li>
+<li>Section header table（节头表）：描述了各个节的信息，包括名称、类型、偏移量、大小等。</li>
+</ol>
+<p>main.c</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">add</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span>;</span><br><span class="line"><span class="type">int</span> <span class="title function_">sub</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> global_val = <span class="number">1</span>;</span><br><span class="line"><span class="type">int</span> uninit_val;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> a, b;</span><br><span class="line">    <span class="type">static</span> <span class="type">int</span> local_val = <span class="number">2</span>;</span><br><span class="line">    <span class="type">static</span> <span class="type">int</span> uninit_local_val;</span><br><span class="line">    </span><br><span class="line">    a = add(<span class="number">2</span>, <span class="number">3</span>);</span><br><span class="line">    b = sub(<span class="number">5</span>, <span class="number">4</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;a = %d\n&quot;</span>, a);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;b = %d\n&quot;</span>, b);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>sub.c</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">add</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">sub</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> a - b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">mul</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> a * b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">div</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> a / b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用以下命令编译成目标文件，但是不进行链接</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -c main.c sub.c</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309042209197.png" alt="image-20230904220907171"></p>
+<p>使用以下命令读取ELF header</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">readelf -h main.o</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309042211626.png" alt="image-20230904221103590"></p>
+<p>然后使用以下命令查看节头表（section heads）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">readelf -S main.o</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309042213386.png" alt="image-20230904221310333"></p>
+<p>最后使用以下命令进行链接,生成可执行文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc main.o sub.o</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309042215351.png" alt="image-20230904221504326"></p>
+<p>重新读取elf头和section heads</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br></pre></td><td class="code"><pre><span class="line">topeet@ubuntu:~/demo$ readelf -h a.out </span><br><span class="line">ELF 头：</span><br><span class="line">  Magic：   7f 45 4c 46 02 01 01 00 00 00 00 00 00 00 00 00 </span><br><span class="line">  类别:                              ELF64</span><br><span class="line">  数据:                              2 补码，小端序 (little endian)</span><br><span class="line">  Version:                           1 (current)</span><br><span class="line">  OS/ABI:                            UNIX - System V</span><br><span class="line">  ABI 版本:                          0</span><br><span class="line">  类型:                              DYN (共享目标文件)</span><br><span class="line">  系统架构:                          Advanced Micro Devices X86-64</span><br><span class="line">  版本:                              0x1</span><br><span class="line">  入口点地址：               0x1060</span><br><span class="line">  程序头起点：          64 (bytes into file)</span><br><span class="line">  Start of section headers:          15016 (bytes into file)</span><br><span class="line">  标志：             0x0</span><br><span class="line">  Size of this header:               64 (bytes)</span><br><span class="line">  Size of program headers:           56 (bytes)</span><br><span class="line">  Number of program headers:         13</span><br><span class="line">  Size of section headers:           64 (bytes)</span><br><span class="line">  Number of section headers:         31</span><br><span class="line">  Section header string table index: 30</span><br><span class="line">topeet@ubuntu:~/demo$ read</span><br><span class="line">read         readarray    readelf      readlink     readonly     readprofile  </span><br><span class="line">topeet@ubuntu:~/demo$ readelf -S a.out </span><br><span class="line">There are 31 section headers, starting at offset 0x3aa8:</span><br><span class="line"></span><br><span class="line">节头：</span><br><span class="line">  [号] 名称              类型             地址              偏移量</span><br><span class="line">       大小              全体大小          旗标   链接   信息   对齐</span><br><span class="line">  [ 0]                   NULL             0000000000000000  00000000</span><br><span class="line">       0000000000000000  0000000000000000           0     0     0</span><br><span class="line">  [ 1] .interp           PROGBITS         0000000000000318  00000318</span><br><span class="line">       000000000000001c  0000000000000000   A       0     0     1</span><br><span class="line">  [ 2] .note.gnu.propert NOTE             0000000000000338  00000338</span><br><span class="line">       0000000000000020  0000000000000000   A       0     0     8</span><br><span class="line">  [ 3] .note.gnu.build-i NOTE             0000000000000358  00000358</span><br><span class="line">       0000000000000024  0000000000000000   A       0     0     4</span><br><span class="line">  [ 4] .note.ABI-tag     NOTE             000000000000037c  0000037c</span><br><span class="line">       0000000000000020  0000000000000000   A       0     0     4</span><br><span class="line">  [ 5] .gnu.hash         GNU_HASH         00000000000003a0  000003a0</span><br><span class="line">       0000000000000028  0000000000000000   A       6     0     8</span><br><span class="line">  [ 6] .dynsym           DYNSYM           00000000000003c8  000003c8</span><br><span class="line">       00000000000000c0  0000000000000018   A       7     1     8</span><br><span class="line">  [ 7] .dynstr           STRTAB           0000000000000488  00000488</span><br><span class="line">       0000000000000088  0000000000000000   A       0     0     1</span><br><span class="line">  [ 8] .gnu.version      VERSYM           0000000000000510  00000510</span><br><span class="line">       0000000000000010  0000000000000002   A       6     0     2</span><br><span class="line">  [ 9] .gnu.version_r    VERNEED          0000000000000520  00000520</span><br><span class="line">       0000000000000020  0000000000000000   A       7     1     8</span><br><span class="line">  [10] .rela.dyn         RELA             0000000000000540  00000540</span><br><span class="line">       00000000000000c0  0000000000000018   A       6     0     8</span><br><span class="line">  [11] .rela.plt         RELA             0000000000000600  00000600</span><br><span class="line">       0000000000000018  0000000000000018  AI       6    24     8</span><br><span class="line">  [12] .init             PROGBITS         0000000000001000  00001000</span><br><span class="line">       000000000000001b  0000000000000000  AX       0     0     4</span><br><span class="line">  [13] .plt              PROGBITS         0000000000001020  00001020</span><br><span class="line">       0000000000000020  0000000000000010  AX       0     0     16</span><br><span class="line">  [14] .plt.got          PROGBITS         0000000000001040  00001040</span><br><span class="line">       0000000000000010  0000000000000010  AX       0     0     16</span><br><span class="line">  [15] .plt.sec          PROGBITS         0000000000001050  00001050</span><br><span class="line">       0000000000000010  0000000000000010  AX       0     0     16</span><br><span class="line">  [16] .text             PROGBITS         0000000000001060  00001060</span><br><span class="line">       0000000000000225  0000000000000000  AX       0     0     16</span><br><span class="line">  [17] .fini             PROGBITS         0000000000001288  00001288</span><br><span class="line">       000000000000000d  0000000000000000  AX       0     0     4</span><br><span class="line">  [18] .rodata           PROGBITS         0000000000002000  00002000</span><br><span class="line">       0000000000000014  0000000000000000   A       0     0     4</span><br><span class="line">  [19] .eh_frame_hdr     PROGBITS         0000000000002014  00002014</span><br><span class="line">       0000000000000064  0000000000000000   A       0     0     4</span><br><span class="line">  [20] .eh_frame         PROGBITS         0000000000002078  00002078</span><br><span class="line">       0000000000000188  0000000000000000   A       0     0     8</span><br><span class="line">  [21] .init_array       INIT_ARRAY       0000000000003db8  00002db8</span><br><span class="line">       0000000000000008  0000000000000008  WA       0     0     8</span><br><span class="line">  [22] .fini_array       FINI_ARRAY       0000000000003dc0  00002dc0</span><br><span class="line">       0000000000000008  0000000000000008  WA       0     0     8</span><br><span class="line">  [23] .dynamic          DYNAMIC          0000000000003dc8  00002dc8</span><br><span class="line">       00000000000001f0  0000000000000010  WA       7     0     8</span><br><span class="line">  [24] .got              PROGBITS         0000000000003fb8  00002fb8</span><br><span class="line">       0000000000000048  0000000000000008  WA       0     0     8</span><br><span class="line">  [25] .data             PROGBITS         0000000000004000  00003000</span><br><span class="line">       0000000000000018  0000000000000000  WA       0     0     8</span><br><span class="line">  [26] .bss              NOBITS           0000000000004018  00003018</span><br><span class="line">       0000000000000010  0000000000000000  WA       0     0     4</span><br><span class="line">  [27] .comment          PROGBITS         0000000000000000  00003018</span><br><span class="line">       000000000000002b  0000000000000001  MS       0     0     1</span><br><span class="line">  [28] .symtab           SYMTAB           0000000000000000  00003048</span><br><span class="line">       00000000000006f0  0000000000000018          29    49     8</span><br><span class="line">  [29] .strtab           STRTAB           0000000000000000  00003738</span><br><span class="line">       0000000000000255  0000000000000000           0     0     1</span><br><span class="line">  [30] .shstrtab         STRTAB           0000000000000000  0000398d</span><br><span class="line">       000000000000011a  0000000000000000           0     0     1</span><br><span class="line">Key to Flags:</span><br><span class="line">  W (write), A (alloc), X (execute), M (merge), S (strings), I (info),</span><br><span class="line">  L (link order), O (extra OS processing required), G (group), T (TLS),</span><br><span class="line">  C (compressed), x (unknown), o (OS specific), E (exclude),</span><br><span class="line">  l (large), p (processor specific)</span><br><span class="line">topeet@ubuntu:~/demo$ </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="3-1-5-动态库和静态库的生成"><a href="#3-1-5-动态库和静态库的生成" class="headerlink" title="3.1.5 动态库和静态库的生成"></a>3.1.5 动态库和静态库的生成</h2><p>使用以下命令可以生成静态库</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ar rcs libsub.a sub.o</span><br></pre></td></tr></table></figure>
+
+<p>其中库的名字必须以lib开头，使用readelf重新读取以下该库的elf头，如下所示：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309042226316.png" alt="image-20230904222640273"></p>
+<p>使用以下命令生成动态库</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -shared -fPIC -o libsub.so sub.c</span><br></pre></td></tr></table></figure>
+
+<p>然后使用readelf 读取elf头如下所示：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309042227936.png" alt="image-20230904222725900"></p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%BC%96%E8%AF%91%E3%80%81%E9%93%BE%E6%8E%A5%E5%92%8C%E8%BF%90%E8%A1%8C/" rel="tag">程序的编译、链接和运行</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
   </article>
   
 
   
   <nav class="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/14/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/page/16/">16</a><a class="page-number" href="/page/17/">17</a><a class="page-number" href="/page/18/">18</a><a class="extend next" rel="next" href="/page/16/">下一页</a>
+    <a class="extend prev" rel="prev" href="/page/14/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/page/16/">16</a><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/16/">下一页</a>
   </nav>
   
 </section>

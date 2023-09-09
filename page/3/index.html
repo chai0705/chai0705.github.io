@@ -160,280 +160,6 @@
     
     
     <article
-  id="post-6-2-存储的基本概念"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/09/08/6-2-%E5%AD%98%E5%82%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/"
-    >6.2 存储的基本概念</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/09/08/6-2-%E5%AD%98%E5%82%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/" class="article-date">
-  <time datetime="2023-09-07T23:39:01.000Z" itemprop="datePublished">2023-09-08</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h1 id="6-2-1-存储单元"><a href="#6-2-1-存储单元" class="headerlink" title="6.2.1 存储单元"></a>6.2.1 存储单元</h1><p>存储单元是计算机中用于存储数据的最小单位。以下是几个常见的存储单元：</p>
-<ul>
-<li>位（Bit）：位是存储单元的最小单位，它只能表示0或1两种状态。计算机中的所有数据都以位的形式存储和处理。</li>
-<li>字节（Byte）：字节是计算机中常用的存储单位，它由8个连续的位组成。字节是计算机内存中数据传输和存储的基本单位，通常用于表示字符、整数等数据。</li>
-<li>字（Word）：字是开发者常用的存储单位，它表示计算机在一次操作中能够处理的固定大小的数据。字的大小取决于计算机的架构和操作系统，可以是8位、16位、32位或64位等。</li>
-</ul>
-<h1 id="6-2-2存储模式"><a href="#6-2-2存储模式" class="headerlink" title="6.2.2存储模式"></a>6.2.2存储模式</h1><p>存储模式指的是计算机在内存中存储多字节数据时，字节的顺序排列方式。关于存储模式，有两个相关的概念：位序（Bit Order）和字节序（Byte Order）。</p>
-<ol>
-<li><p>位序（Bit Order）：位序是指在一个字节（8位）中，比特位（bit）的排列顺序。在计算机中，有两种常见的位序方式：</p>
-<ul>
-<li>大端序（Big-Endian）：在大端序中，高位字节存储在低位地址，低位字节存储在高位地址。换句话说，数据的高位字节排在内存的低地址处，低位字节排在内存的高地址处。</li>
-<li>小端序（Little-Endian）：在小端序中，低位字节存储在低位地址，高位字节存储在高位地址。换句话说，数据的低位字节排在内存的低地址处，高位字节排在内存的高地址处。</li>
-</ul>
-<p>位序的选择会直接影响多字节数据的存储和解析方式。不同的计算机体系结构和操作系统有不同的位序规定，例如，x86架构和Windows操作系统使用小端序，而PowerPC架构和大多数UNIX系统使用大端序。</p>
-</li>
-<li><p>字节序（Byte Order）：字节序是指在多字节数据（例如16位、32位或64位）中，字节的排列顺序。与位序类似，字节序也有两种常见的方式：</p>
-<ul>
-<li>大端序（Big-Endian）：在大端序中，高位字节存储在内存的低地址，低位字节存储在内存的高地址。换句话说，多字节数据的高位字节排在内存的低地址处，低位字节排在内存的高地址处。</li>
-<li>小端序（Little-Endian）：在小端序中，低位字节存储在内存的低地址，高位字节存储在内存的高地址。换句话说，多字节数据的低位字节排在内存的低地址处，高位字节排在内存的高地址处。</li>
-</ul>
-<p>字节序的选择同样会影响多字节数据在不同计算机和操作系统之间的互通性。为了确保数据的正确解析和传输，程序员需要在跨平台的情况下正确处理字节序。</p>
-</li>
-</ol>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span> &#123;</span><br><span class="line">    <span class="type">int</span> a = <span class="number">0x11223344</span>;</span><br><span class="line">    <span class="type">char</span> b;</span><br><span class="line"></span><br><span class="line">    b = a;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (b == <span class="number">0x44</span>)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Little endian!\n&quot;</span>);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Big endian!\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>大小端之分源自于不同的设计和处理方式，主要原因如下：</p>
-<ol>
-<li>硬件设计：在硬件层面，计算机内存是以字节为单位进行寻址和存储的。对于多字节数据，如整数或浮点数，需要将其存储在内存中的连续字节中。在设计计算机体系结构时，可以选择将多字节数据的最低有效字节存储在最低地址（小端序）或最高地址（大端序）。</li>
-<li>处理习惯：小端模式与人类的思维习惯更为一致。我们在书写数字时，通常先写低位，后写高位。小端模式将最低有效字节存储在最低地址，与我们的书写习惯一致。这样可以使得值的表示更加直观和易于理解。</li>
-<li>计算机处理习惯：大端模式在某些计算操作中更加方便。在大端模式下，可以直接按照字节顺序从左到右读写多字节数据，不需要考虑字节的对应关系。这对于某些操作，如整数加法、乘法等，可以简化处理逻辑，提高效率。</li>
-</ol>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E5%92%8C%E6%8C%87%E9%92%88/" rel="tag">数据存储和指针</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-6-1-存储才是C语言的精髓"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/09/08/6-1-%E5%AD%98%E5%82%A8%E6%89%8D%E6%98%AFC%E8%AF%AD%E8%A8%80%E7%9A%84%E7%B2%BE%E9%AB%93/"
-    >6.1 存储才是C语言的精髓</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/09/08/6-1-%E5%AD%98%E5%82%A8%E6%89%8D%E6%98%AFC%E8%AF%AD%E8%A8%80%E7%9A%84%E7%B2%BE%E9%AB%93/" class="article-date">
-  <time datetime="2023-09-07T23:38:59.000Z" itemprop="datePublished">2023-09-08</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <p>数据存储在计算机中是非常重要的概念，对于理解计算机编程和问题求解至关重要。以下是对您提到的几个相关概念的简要说明：</p>
-<ul>
-<li>变量：变量是用来存储和表示数据的一种命名方式。通过变量，我们可以在程序中保存和操作数据。变量通常具有特定的数据类型（例如整数、浮点数、字符串等），并且可以在程序中进行赋值和修改。</li>
-<li>指针：指针是用来存储内存地址的变量。它们可以指向其他变量或数据结构在内存中的位置。通过指针，我们可以直接访问和操作内存中的数据，而不是通过变量名来访问。</li>
-<li>堆栈：堆栈是一种内存结构，用于管理程序的函数调用和局部变量。在函数调用时，相关的信息（例如函数参数、返回地址等）会被压入堆栈中，以便在函数执行完毕后能够返回到正确的位置。局部变量也存储在堆栈中，并在函数执行期间进行分配和释放。</li>
-<li>链表：链表是一种数据结构，由一系列节点组成，每个节点包含数据和指向下一个节点的指针。链表可以动态地分配内存来存储数据，并且可以在运行时进行插入、删除和修改操作。链表的灵活性使其在许多算法和数据结构中发挥重要作用。</li>
-</ul>
-<p>关于编译器留给程序员的接口，关键字是编程语言中的特殊单词，具有预定义的含义和用途。编译器根据关键字来解析和理解源代码，并相应地执行特定的操作。程序员可以使用关键字来定义变量、控制程序流程、声明函数等。不同编程语言具有不同的关键字集合，而关键字的选择和用法直接影响着程序的行为和功能。</p>
-<p>理解数据存储以及编译器提供的关键字接口，对于开发高效、可靠的软件系统至关重要。这些概念和工具帮助程序员管理和操作数据，解决各种计算机编程中的问题。</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E5%92%8C%E6%8C%87%E9%92%88/" rel="tag">数据存储和指针</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-5-24-标号元素"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/09/07/5-24-%E6%A0%87%E5%8F%B7%E5%85%83%E7%B4%A0/"
-    >5.24 标号元素</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/09/07/5-24-%E6%A0%87%E5%8F%B7%E5%85%83%E7%B4%A0/" class="article-date">
-  <time datetime="2023-09-07T13:14:39.000Z" itemprop="datePublished">2023-09-07</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <p>标记元素是C语言中用于初始化数组和结构体的特性之一。它允许您以任意顺序指定要初始化的元素，并且可以通过数组索引或结构体的结构域名直接给它们赋值。</p>
-<p>使用标记元素可以使初始化代码更加灵活和易读，尤其在需要初始化大型数组或结构体时，可以避免冗长的初始化代码。</p>
-<p>以下是使用标记元素进行数组和结构体初始化的示例：</p>
-<ol>
-<li>数组初始化：</li>
-</ol>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> myArray[<span class="number">5</span>] = &#123; [<span class="number">2</span>] = <span class="number">42</span>, [<span class="number">4</span>] = <span class="number">99</span>, [<span class="number">1</span>] = <span class="number">7</span> &#125;;</span><br></pre></td></tr></table></figure>
-
-<p>在这个示例中，通过索引（标记）指定了要初始化的数组元素以及它们的值。数组的长度为5，但只有索引为2、4和1的元素被初始化，其他元素将被默认初始化为0。</p>
-<ol>
-<li>结构体初始化：</li>
-</ol>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Point</span> &#123;</span></span><br><span class="line">    <span class="type">int</span> x;</span><br><span class="line">    <span class="type">int</span> y;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Point</span> <span class="title">myPoint</span> =</span> &#123; .y = <span class="number">10</span>, .x = <span class="number">5</span> &#125;;</span><br></pre></td></tr></table></figure>
-
-<p>在这个示例中，通过结构体的结构域名（标记）指定了要初始化的结构体成员以及它们的值。结构体<code>Point</code>具有<code>x</code>和<code>y</code>两个成员，通过结构域名指定了它们的初始化值。</p>
-<p>通过使用标记元素，您可以以更自由的方式初始化数组和结构体，无需按照默认顺序或位置进行初始化。这提供了更大的灵活性，并使代码更易读和维护。</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gun%E6%89%A9%E5%B1%95%E8%AF%AD%E6%B3%95/" rel="tag">gun扩展语法</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-5-23-局部标签"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/09/07/5-23-%E5%B1%80%E9%83%A8%E6%A0%87%E7%AD%BE/"
-    >5.23 局部标签</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/09/07/5-23-%E5%B1%80%E9%83%A8%E6%A0%87%E7%AD%BE/" class="article-date">
-  <time datetime="2023-09-07T13:14:38.000Z" itemprop="datePublished">2023-09-07</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <p>在C和C++编程语言中，局部标签（Local Labels）是指在函数或代码块内部定义的标签。与全局标签（Global Labels）不同，局部标签的作用范围仅限于所在的函数或代码块内部。</p>
-<p>局部标签的语法形式为一个冒号（:）后跟标识符，例如：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">myFunction</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// Code block with local label</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">        <span class="keyword">goto</span> myLabel; <span class="comment">// Jump to local label</span></span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Local label definition</span></span><br><span class="line">    myLabel:</span><br><span class="line">        <span class="comment">// Label code</span></span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在上述示例中，<code>myLabel</code> 是一个局部标签，它被定义在内部代码块中。在代码块中，可以使用 <code>goto</code> 语句跳转到该局部标签处，执行与标签关联的代码。</p>
-<p>局部标签主要用于在函数或代码块内部实现一些局部的控制流跳转，例如在某个条件满足时跳转到特定的代码位置。与全局标签相比，局部标签的作用范围较小，更易于控制和理解。</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gun%E6%89%A9%E5%B1%95%E8%AF%AD%E6%B3%95/" rel="tag">gun扩展语法</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
   id="post-5-22-可变参数宏"
   class="article article-type-post"
   itemscope
@@ -824,13 +550,283 @@
 </article>
 
     
+    <article
+  id="post-5-16-属性声明：used-unused"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/09/07/5-16-%E5%B1%9E%E6%80%A7%E5%A3%B0%E6%98%8E%EF%BC%9Aused-unused/"
+    >5.16 属性声明：used &amp; unused</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/09/07/5-16-%E5%B1%9E%E6%80%A7%E5%A3%B0%E6%98%8E%EF%BC%9Aused-unused/" class="article-date">
+  <time datetime="2023-09-07T13:14:27.000Z" itemprop="datePublished">2023-09-07</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>在给定的示例中，使用了 <code>used</code> 和 <code>unused</code> 属性来声明变量和函数的使用情况。</p>
+<ol>
+<li><code>.register int reg asm(&quot;r0&quot;) __attribute__((used));</code><br>这个声明将 <code>reg</code> 定义为一个寄存器变量，并使用 <code>used</code> 属性来指示编译器该变量会被使用。这可以防止编译器优化掉该变量，确保其在代码中的存在。</li>
+<li><code>static void func(void) __attribute__((used, section(&quot;.text&quot;)));</code><br>这个声明定义了一个静态函数 <code>func</code>，并使用 <code>used</code> 属性来指示编译器该函数会被使用。此外，通过 <code>section(&quot;.text&quot;)</code> 属性，将该函数放置在 <code>.text</code> 段中。</li>
+<li><code>static __attribute__((unused)) int a;</code><br>这个声明定义了一个静态变量 <code>a</code>，并使用 <code>unused</code> 属性来指示编识器该变量未被使用。这可以让编译器忽略该变量的存在，避免产生未使用变量的警告。</li>
+<li><code>static int func(void) __attribute__((unused));</code><br>这个声明定义了一个静态函数 <code>func</code>，并使用 <code>unused</code> 属性来指示编译器该函数未被使用。类似于上述的静态变量，这可以让编译器忽略该函数的存在。</li>
+<li><code>int fun(__attribute__((unused)) int a, int b);</code><br>这个声明定义了一个函数 <code>fun</code>，并使用 <code>unused</code> 属性来指示编译器函数中的参数 <code>a</code> 未被使用。这可以避免产生未使用参数的警告。</li>
+</ol>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gun%E6%89%A9%E5%B1%95%E8%AF%AD%E6%B3%95/" rel="tag">gun扩展语法</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-5-15-属性声明：noreturn"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/09/07/5-15-%E5%B1%9E%E6%80%A7%E5%A3%B0%E6%98%8E%EF%BC%9Anoreturn/"
+    >5.15 属性声明：noreturn</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/09/07/5-15-%E5%B1%9E%E6%80%A7%E5%A3%B0%E6%98%8E%EF%BC%9Anoreturn/" class="article-date">
+  <time datetime="2023-09-07T13:14:25.000Z" itemprop="datePublished">2023-09-07</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>属性声明 <code>noreturn</code> 是一个特殊的函数属性，它告诉编译器函数不会返回到调用者。这个属性可以用于告知编译器在函数执行完毕后不会返回到调用点，因此编译器可以进行一些优化，例如消除一些后续的代码或者警告未使用的返回值。</p>
+<p>下面是一个使用 <code>noreturn</code> 属性声明的示例：</p>
+<p>c</p>
+<p>Copy</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdnoreturn.h&gt;</span><br><span class="line"></span><br><span class="line">noreturn void exit_program(int exit_code) &#123;</span><br><span class="line">    // 执行一些清理操作</span><br><span class="line">    // ...</span><br><span class="line"></span><br><span class="line">    // 退出程序</span><br><span class="line">    exit(exit_code);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在上述示例中，<code>exit_program</code> 函数被声明为 <code>noreturn</code> 类型，它表示该函数在执行完毕后不会返回到调用点。在函数体内，执行了一些清理操作后，调用了 <code>exit</code> 函数来终止程序的执行。</p>
+<p>使用 <code>noreturn</code> 属性可以帮助编译器优化代码，并提供更好的代码可读性。它可以用于标记一些特殊函数，如退出程序的函数、抛出异常的函数等。</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gun%E6%89%A9%E5%B1%95%E8%AF%AD%E6%B3%95/" rel="tag">gun扩展语法</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-5-14-属性声明：mode"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/09/07/5-14-%E5%B1%9E%E6%80%A7%E5%A3%B0%E6%98%8E%EF%BC%9Amode/"
+    >5.14 属性声明：mode</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/09/07/5-14-%E5%B1%9E%E6%80%A7%E5%A3%B0%E6%98%8E%EF%BC%9Amode/" class="article-date">
+  <time datetime="2023-09-07T13:14:24.000Z" itemprop="datePublished">2023-09-07</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>属性声明中的 <code>mode</code> 是一个功能强大的GNU C扩展，它用于指定类型的位宽和有符号&#x2F;无符号属性。通过 <code>mode</code> 属性，可以定义自定义的位宽类型，以及相应的有符号和无符号变体。</p>
+<p>在给定的示例中，使用了 <code>mode(QI)</code> 属性来声明两个类型别名：</p>
+<ol>
+<li><code>typedef int s8 __attribute__((mode(QI)));</code><br>这个声明将 <code>s8</code> 定义为一个有符号整数类型，位宽为1字节（8位），即一个字节的宽度。<code>mode(QI)</code> 表示 “QI” 模式，其中 “Q” 表示 “Quad”，表示4个位，而 “I” 表示 “Integer”，表示整数类型。</li>
+<li><code>typedef unsigned int us8 __attribute__((mode(QI)));</code><br>这个声明将 <code>us8</code> 定义为一个无符号整数类型，位宽也为1字节（8位）。同样使用了 <code>mode(QI)</code> 属性来指定位宽和有符号&#x2F;无符号属性。</li>
+</ol>
+<p>通过使用 <code>mode</code> 属性，可以根据需要定义特定位宽的整数类型，并根据需要选择有符号或无符号的变体。这在某些特定的嵌入式系统编程或底层编程中可能会有用，因为它可以更精确地控制数据类型的大小和属性。</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gun%E6%89%A9%E5%B1%95%E8%AF%AD%E6%B3%95/" rel="tag">gun扩展语法</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-5-13-属性声明：noinline-always-inline"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/09/07/5-13-%E5%B1%9E%E6%80%A7%E5%A3%B0%E6%98%8E%EF%BC%9Anoinline-always-inline/"
+    >5.13 属性声明：noinline &amp; always_inline</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/09/07/5-13-%E5%B1%9E%E6%80%A7%E5%A3%B0%E6%98%8E%EF%BC%9Anoinline-always-inline/" class="article-date">
+  <time datetime="2023-09-07T13:14:22.000Z" itemprop="datePublished">2023-09-07</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p><code>inline</code>、<code>noinline</code> 和 <code>always_inline</code> 都是函数属性，用于指定函数的内联行为。它们可以通过 <code>__attribute__</code> 语法与函数结合使用。下面是使用示例：</p>
+<ol>
+<li><p><code>static inline __attribute__((noinline)) int func();</code><br>这个示例定义了一个静态内联函数 <code>func</code>，并使用了 <code>noinline</code> 属性。</p>
+<ul>
+<li><code>inline</code> 属性用于指定函数可以进行内联展开，即将函数的代码插入调用处，以减少函数调用的开销。</li>
+<li><code>static</code> 关键字用于将函数声明为静态函数，限定函数的作用域在当前源文件中。</li>
+<li><code>__attribute__((noinline))</code> 用于禁止对函数进行内联展开，即不将函数的代码插入调用处。</li>
+</ul>
+<p>这意味着 <code>func</code> 函数将被声明为内联函数，但编译器不会强制将其内联展开，而是根据编译器的优化策略决定是否内联展开。</p>
+</li>
+<li><p><code>static inline __attribute__((always_inline)) int func();</code><br>这个示例定义了一个静态内联函数 <code>func</code>，并使用了 <code>always_inline</code> 属性。</p>
+<ul>
+<li><code>__attribute__((always_inline))</code> 用于强制编译器始终内联展开函数，不考虑编译器的优化策略。</li>
+</ul>
+<p>这意味着 <code>func</code> 函数将始终被内联展开，无论编译器如何优化。</p>
+</li>
+</ol>
+<p>使用内联函数可以提高函数调用的效率，减少函数调用带来的开销。然而，过度使用内联函数可能会导致代码膨胀和代码重复，增加可执行文件的大小。</p>
+<p>内联函数是一种编译器优化技术，它将函数的代码插入到调用处，而不是通过函数调用的方式进行执行。内联函数的目的是减少函数调用的开销，包括保存当前函数现场、跳转到调用函数执行和恢复当前函数现场的开销。</p>
+<p>当一个函数被声明为内联函数时，编译器会尽量将函数的代码直接插入到调用处，类似于宏展开的方式。这样可以避免函数调用的开销，包括压栈保存现场、跳转执行和恢复现场的操作。相比于函数调用，内联函数可以更快地执行，并且可以消除函数调用带来的额外开销。</p>
+<p>然而，内联函数的使用应慎重考虑。由于内联函数的代码会被复制到每个调用处，这可能会导致代码膨胀，增加可执行文件的大小。过度使用内联函数可能会导致代码重复，降低可维护性。因此，应在性能和代码大小之间进行权衡，并根据具体情况决定是否使用内联函数。</p>
+<p>在 C&#x2F;C++ 中，可以使用 <code>inline</code> 关键字将函数声明为内联函数。例如：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">inline</span> <span class="type">int</span> <span class="title function_">add</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在上述示例中，<code>add</code> 函数被声明为内联函数。当调用 <code>add</code> 函数时，编译器会尝试将其代码直接插入到调用处，而不是进行函数调用。</p>
+<p>需要注意的是，将函数声明为内联函数只是对编译器的建议，编译器可以选择是否内联展开函数。此外，内联函数的定义通常应放在头文件中，以便在每个调用处进行展开。</p>
+<p>编译器对内联函数的处理可以分为两个阶段：编译阶段和链接阶段。</p>
+<p>在编译阶段，当编译器遇到内联函数的调用时，它会尝试将函数的代码插入到调用处，类似于宏展开。这样可以避免函数调用的开销，并提高执行效率。编译器通常会对内联函数进行一些优化，如常量折叠、循环展开等。</p>
+<p>在链接阶段，编译器会将每个内联函数的定义保留在目标文件中。当链接器将多个目标文件组合成可执行文件时，它会根据需要选择性地将内联函数的定义插入到调用处。</p>
+<p>然而，内联函数也有一些不足之处：</p>
+<ol>
+<li>增大代码的体积：由于内联函数的代码会被复制到每个调用处，这可能导致代码膨胀，增加可执行文件的大小。特别是当内联函数的代码较长时，代码体积的增大可能会对缓存命中率和指令缓存的效率产生负面影响。</li>
+<li>降低缓存命中率和取指效率：内联函数的代码增大可能导致缓存命中率降低，因为较多的代码需要从内存加载到缓存中。此外，取指令时，由于内联函数的代码较多，可能会导致取指令的效率降低，从而影响程序的执行速度。</li>
+<li>可能降低执行效率：尽管内联函数可以减少函数调用的开销，但在某些情况下，内联函数的执行效率可能会降低。这是因为内联函数的代码被复制到多个调用处，增加了指令的数量和缓存的压力。此外，如果内联函数的代码较长，可能会导致指令缓存的冲突，从而影响执行速度。</li>
+</ol>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gun%E6%89%A9%E5%B1%95%E8%AF%AD%E6%B3%95/" rel="tag">gun扩展语法</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
   </article>
   
 
   
   <nav class="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/2/">上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><a class="extend next" rel="next" href="/page/4/">下一页</a>
+    <a class="extend prev" rel="prev" href="/page/2/">上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/4/">下一页</a>
   </nav>
   
 </section>

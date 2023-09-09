@@ -90,7 +90,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">0</span>
+            <span class="post-count">1.1k</span>
         </span>
     </span>
 
@@ -99,20 +99,79 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">1 分钟</span>
+            <span class="post-count">3 分钟</span>
         </span>
     </span>
 </div>
  
     </div>
       
+    <div class="tocbot"></div>
+
 
 
 
   
     <div class="article-entry" itemprop="articleBody">
        
-   
+  <h1 id="13-1-什么是类型"><a href="#13-1-什么是类型" class="headerlink" title="13.1 什么是类型"></a>13.1 什么是类型</h1><p>类型（Type）是指编程语言中用于定义数据的属性和操作的概念。它描述了数据的特征、存储方式和允许的操作。每个类型都有一组特定的值和相应的操作，用于处理这些值。</p>
+<p>在编程中，类型可以分为多种，包括整数类型、浮点数类型、字符类型、布尔类型、指针类型等。每种类型都有其特定的值范围和可用的操作。</p>
+<p>以整数类型为例，它可以表示一定范围内的整数值，并支持基本的算术运算（加、减、乘、除）和比较运算（大小比较等）。不同的整数类型可能具有不同的值范围和所占的存储空间。</p>
+<p>另外，您提到了字符类型（char）。在许多编程语言中，字符类型表示单个字符，例如字母、数字或特殊字符。对于字符类型，您可以执行类似整数类型的加减乘除运算，以及比较大小等操作。</p>
+<p>指针类型是一种特殊的类型，用于存储内存地址。指针可以指向其他数据类型的变量，允许我们通过间接访问来操作和修改存储在内存中的数据。</p>
+<h1 id="13-2-指针分类"><a href="#13-2-指针分类" class="headerlink" title="13.2 指针分类"></a>13.2 指针分类</h1><p>指针可以根据指向的内容的类型进行分类。以下是一些常见的指针类型分类：</p>
+<ol>
+<li>函数指针（Function Pointers）：<ul>
+<li>函数指针是指向函数的指针变量。</li>
+<li>它们可以用于存储和调用函数的地址。</li>
+<li>函数指针的类型与所指向的函数的返回类型和参数类型相匹配。</li>
+</ul>
+</li>
+<li>对象指针（Object Pointers）：<ul>
+<li>对象指针是指向对象或数据结构的指针变量。</li>
+<li>它们用于访问和操作堆上分配的对象或数据结构。</li>
+<li>对象指针的类型与所指向的对象或数据结构的类型相匹配。</li>
+</ul>
+</li>
+<li>基本类型指针（Primitive Type Pointers）：<ul>
+<li>基本类型指针是指向基本数据类型（如char、int、long等）的指针变量。</li>
+<li>它们用于访问和操作所指向的基本类型的值。</li>
+</ul>
+</li>
+<li>结构体指针（Struct Pointers）：<ul>
+<li>结构体指针是指向结构体的指针变量。</li>
+<li>它们用于访问和操作所指向结构体的成员。</li>
+</ul>
+</li>
+<li>数组指针（Array Pointers）：<ul>
+<li>数组指针是指向数组的指针变量。</li>
+<li>它们用于访问和操作所指向的数组的元素。</li>
+</ul>
+</li>
+<li>二级指针（Double Pointers）：<ul>
+<li>二级指针是指向指针的指针变量。</li>
+<li>它们用于操作和传递指针的地址。</li>
+</ul>
+</li>
+<li>Void指针（Void Pointers）：<ul>
+<li>Void指针是一种通用指针，可以指向任意类型的数据。</li>
+<li>它们用于在不知道具体类型的情况下操作内存。</li>
+</ul>
+</li>
+</ol>
+<h1 id="13-3-指针运算"><a href="#13-3-指针运算" class="headerlink" title="13.3 指针运算"></a>13.3 指针运算</h1><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span> &#123;</span><br><span class="line">    <span class="type">char</span> *p = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="type">short</span> *q = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="type">int</span> *r = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%p\n&quot;</span>, p);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%p\n&quot;</span>, p + <span class="number">1</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%p\n&quot;</span>, q);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%p\n&quot;</span>, q + <span class="number">1</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%p\n&quot;</span>, r);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%p\n&quot;</span>, r + <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="13-4-指针相减"><a href="#13-4-指针相减" class="headerlink" title="13.4 指针相减"></a>13.4 指针相减</h1><p>指针与指针相减可以用来计算它们在内存中的距离。以下是关于指针相减的一些重要点：</p>
+<ol>
+<li>类型要一致：在进行指针相减操作时，两个指针必须具有相同的类型。这是因为指针的类型确定了它们在内存中所指向的数据单元的大小。</li>
+<li>相减操作：指针相减的结果是一个整数值，表示两个指针之间的偏移量。它表示以数据类型的长度（使用<code>sizeof</code>运算符获取）为单位的距离。</li>
+<li>表示内存距离：指针相减的结果表示两个指针之间的内存距离。这个距离的单位取决于所使用的数据类型。通常，它以字节或数组元素为单位，取决于所涉及的具体情况。<ul>
+<li>以字节为单位：如果两个指针指向相同类型的单个字节（如<code>char</code>类型），则指针相减的结果表示两个指针之间的字节偏移量。</li>
+<li>以数组元素为单位：如果两个指针指向同一数组中的元素（如<code>int</code>类型），则指针相减的结果表示两个元素之间的偏移量。</li>
+</ul>
+</li>
+</ol>
+ 
       <!-- reward -->
       
     </div>
