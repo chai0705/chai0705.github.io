@@ -160,7 +160,7 @@
     
     
     <article
-  id="post-3-18-内核模块加载机制"
+  id="post-1-20-原子操作实验"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -171,8 +171,8 @@
     <header class="article-header">
        
 <h2 itemprop="name">
-  <a class="article-title" href="/2023/09/05/3-18-%E5%86%85%E6%A0%B8%E6%A8%A1%E5%9D%97%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6/"
-    >3.18-内核模块加载机制</a> 
+  <a class="article-title" href="/2023/09/05/1-20-%E5%8E%9F%E5%AD%90%E6%93%8D%E4%BD%9C%E5%AE%9E%E9%AA%8C/"
+    >1-20-原子操作实验</a> 
 </h2>
  
 
@@ -180,41 +180,18 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2023/09/05/3-18-%E5%86%85%E6%A0%B8%E6%A8%A1%E5%9D%97%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6/" class="article-date">
-  <time datetime="2023-09-04T23:47:18.000Z" itemprop="datePublished">2023-09-05</time>
+      <a href="/2023/09/05/1-20-%E5%8E%9F%E5%AD%90%E6%93%8D%E4%BD%9C%E5%AE%9E%E9%AA%8C/" class="article-date">
+  <time datetime="2023-09-05T00:00:28.000Z" itemprop="datePublished">2023-09-05</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
+    <a class="article-category-link" href="/categories/rk3568-%E9%A9%B1%E5%8A%A8/">rk3568 驱动</a>
   </div>
    
     </div>
       
     <div class="article-entry" itemprop="articleBody">
        
-  <h1 id="3-18-1-内核的加载"><a href="#3-18-1-内核的加载" class="headerlink" title="3.18.1 内核的加载"></a><strong>3.18.1 内核的加载</strong></h1><p>在Linux内核中，动态加载和初始化模块是通过系统调用<code>init_module</code>来完成的。这个系统调用位于<code>kernel/module.c</code>文件中。</p>
-<p>下面是<code>init_module</code>系统调用的主要步骤：</p>
-<ol>
-<li>拷贝到内核（copy_module_from_user）：首先，内核从用户空间复制模块的代码和数据到内核空间。这样做是为了确保模块在内核中的存储是可访问和可执行的。</li>
-<li>地址空间分配（layout_and_allocate）：内核为模块分配内存空间，并为模块的代码、数据和符号表等分配适当的地址空间。</li>
-<li>符号解析（simplify_symbols）：内核对模块的符号进行解析，将符号与对应的地址进行关联。这包括模块内部的符号以及与其他模块或内核的符号之间的关联。</li>
-<li>重定位（apply_relocations）：内核对模块进行重定位，将模块中的绝对地址修正为正确的运行时地址。这是为了确保模块可以正确地在内核中执行。</li>
-<li>执行（complete_formation）：最后，模块的初始化过程完成，模块的入口点函数被调用，开始执行模块的功能。</li>
-</ol>
-<p>通过这些步骤，内核可以将模块加载到内核空间，并使其在内核中可用。加载和初始化模块使得内核能够动态地添加新的功能、驱动程序或文件系统，而无需重新编译整个内核。这提供了更大的灵活性和可扩展性，使得系统可以根据需要加载和卸载模块。</p>
-<h1 id="3-18-2-内核模块和插件的异同"><a href="#3-18-2-内核模块和插件的异同" class="headerlink" title="3.18.2 内核模块和插件的异同"></a>3.18.2 内核模块和插件的异同</h1><p>内核模块和插件具有一些相同点，同时也有一些异同点。</p>
-<p>相同点：</p>
-<ol>
-<li>动态链接：内核模块和插件都采用动态链接的方式，可以在运行时加载到内存中。这使得它们能够以模块化的方式扩展软件功能，而无需重新编译整个软件或内核。</li>
-<li>空间分配、符号解析、重定位：内核模块和插件都需要进行空间分配、符号解析和重定位等步骤，以确保代码、数据和符号在加载后能够正确地运行和访问。</li>
-</ol>
-<p>异同点：</p>
-<ol>
-<li>运行环境：内核模块运行在内核空间，而插件运行在用户空间。内核空间是操作系统核心的一部分，具有更高的特权级别和更多的系统资源访问权限。用户空间是应用程序运行的环境。</li>
-<li>依赖关系：内核模块不依赖于C库（如libc），因此在链接和重定位过程中，它们需要自行处理相关的操作。而应用程序的插件通常会依赖于C库，并通过C标准库的ld链接器来完成动态库的链接和重定位。</li>
-<li>访问权限：内核模块可以直接访问和操作内核的数据结构和功能，因为它们运行在内核空间。而插件运行在用户空间，对于一些受限的系统资源和特权操作可能没有直接访问权限。</li>
-</ol>
-<p>总体而言，内核模块和插件都是利用动态链接的机制来扩展软件的功能。它们在加载、符号解析和重定位等方面有类似的工作原理，但由于运行环境和依赖关系的不同，它们在实现和使用上存在一些区别。</p>
- 
+   
       <!-- reward -->
       
     </div>
@@ -224,7 +201,7 @@
     
     <footer class="article-footer">
        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%BC%96%E8%AF%91%E3%80%81%E9%93%BE%E6%8E%A5%E5%92%8C%E8%BF%90%E8%A1%8C/" rel="tag">程序的编译、链接和运行</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rk3568-%E9%A9%B1%E5%8A%A8/" rel="tag">rk3568 驱动</a></li></ul>
 
     </footer>
   </div>
@@ -236,7 +213,7 @@
 
     
     <article
-  id="post-3-17-开发一个插件"
+  id="post-1-19-并发与竞争实验"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -247,8 +224,8 @@
     <header class="article-header">
        
 <h2 itemprop="name">
-  <a class="article-title" href="/2023/09/05/3-17-%E5%BC%80%E5%8F%91%E4%B8%80%E4%B8%AA%E6%8F%92%E4%BB%B6/"
-    >3.17-开发一个插件</a> 
+  <a class="article-title" href="/2023/09/05/1-19-%E5%B9%B6%E5%8F%91%E4%B8%8E%E7%AB%9E%E4%BA%89%E5%AE%9E%E9%AA%8C/"
+    >1-19-并发与竞争实验</a> 
 </h2>
  
 
@@ -256,53 +233,18 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2023/09/05/3-17-%E5%BC%80%E5%8F%91%E4%B8%80%E4%B8%AA%E6%8F%92%E4%BB%B6/" class="article-date">
-  <time datetime="2023-09-04T23:47:17.000Z" itemprop="datePublished">2023-09-05</time>
+      <a href="/2023/09/05/1-19-%E5%B9%B6%E5%8F%91%E4%B8%8E%E7%AB%9E%E4%BA%89%E5%AE%9E%E9%AA%8C/" class="article-date">
+  <time datetime="2023-09-05T00:00:27.000Z" itemprop="datePublished">2023-09-05</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
+    <a class="article-category-link" href="/categories/rk3568-%E9%A9%B1%E5%8A%A8/">rk3568 驱动</a>
   </div>
    
     </div>
       
     <div class="article-entry" itemprop="articleBody">
        
-  <h1 id="7-17-1-插件的工作原理"><a href="#7-17-1-插件的工作原理" class="headerlink" title="7.17.1 插件的工作原理"></a>7.17.1 插件的工作原理</h1><p>插件是一种用于软件扩展的机制，允许在不修改主程序逻辑框架的情况下，通过加载外部的动态链接库（共享库）来添加新的功能或增强软件的功能。</p>
-<p>插件的本质就是共享库，它们以一种特定的组装形式存在，以便主程序能够动态加载和使用它们。一旦插件被加载，主程序可以通过调用插件中定义的函数或使用插件提供的接口来访问插件的功能。</p>
-<p>插件的工作原理如下：</p>
-<ol>
-<li>主程序框架引用外部模块符号：主程序在编译时会引用插件可能提供的函数、接口或符号。这些符号在主程序中作为占位符存在，实际的实现在插件中。</li>
-<li>动态加载和重定位：主程序在运行时使用系统调用（例如在Linux中使用dlopen函数）来显式加载插件的动态链接库。加载过程中，操作系统会进行动态链接和重定位，将插件的代码和数据映射到主程序的内存空间中。</li>
-<li>访问插件功能：一旦插件被加载，主程序就可以通过调用插件中的函数或使用插件提供的接口来访问插件的功能。主程序可以根据需要动态加载、卸载或替换插件，从而实现软件的灵活扩展和功能更新。</li>
-</ol>
-<p>通过插件机制，软件的功能可以以模块化的方式组织和管理，实现更高的可扩展性和灵活性。同时，插件的使用也可以使软件的功能增值更加便捷，而无需重新编译和发布整个软件。</p>
-<h1 id="7-17-2-显式加载动态库"><a href="#7-17-2-显式加载动态库" class="headerlink" title="7.17.2 显式加载动态库"></a>7.17.2 显式加载动态库</h1><p>在显式加载动态库时，可以使用dlopen函数打开动态链接库，该函数的原型如下：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> *<span class="title function_">dlopen</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *filename, <span class="type">int</span> flag)</span>;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><code>filename</code>参数是动态库文件的路径，可以是相对路径或绝对路径。</li>
-<li>flag参数指定了加载动态库的行为和属性。常用的标志包括：<ul>
-<li><code>RTLD_LAZY</code>：表示在解析动态库时，遇到未定义的符号不会导致程序退出，而是继续进行使用。</li>
-<li><code>RTLD_NOW</code>：表示在解析动态库时，如果遇到未定义的符号，会立即退出。</li>
-<li><code>RTLD_GLOBAL</code>：表示允许导出的符号可以被其他动态库引用。</li>
-</ul>
-</li>
-</ul>
-<p>dlopen函数返回一个操作句柄（<code>void *Handle</code>），可以用于后续对动态库的操作。</p>
-<p>要获取动态对象（函数或变量）的地址，可以使用dlsym函数，该函数的原型如下：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> *<span class="title function_">dlsym</span><span class="params">(<span class="type">void</span> *handle, <span class="type">const</span> <span class="type">char</span> *symbol)</span>;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><code>handle</code>参数是通过dlopen函数返回的动态库句柄。</li>
-<li><code>symbol</code>参数是要获取地址的符号名称。</li>
-</ul>
-<p>dlsym函数会根据动态库句柄和符号名称返回符号对应的地址。一般情况下，我们需要定义一个符号类型的指针，将dlsym函数返回的地址赋值给该指针，以便后续使用。</p>
-<p>以下是一个示例代码片段，演示了显式加载动态库并获取函数地址的过程：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;dlfcn.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 打开动态链接库</span></span><br><span class="line"><span class="type">void</span> *Handle = dlopen(<span class="string">&quot;./libct.so&quot;</span>, RTLD_LAZY);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 取动态对象地址</span></span><br><span class="line"><span class="type">void</span> (*funcp)(<span class="type">int</span>, <span class="type">int</span>);</span><br><span class="line">funcp = (<span class="type">void</span> (*)(<span class="type">int</span>, <span class="type">int</span>))dlsym(Handle, <span class="string">&quot;myfunc&quot;</span>);</span><br></pre></td></tr></table></figure>
-
-<p>在上述示例中，假设libct.so是动态库文件，myfunc是动态库中的函数名。通过dlopen函数打开动态库，然后使用dlsym函数获取myfunc函数的地址，并将其赋值给funcp指针，以便后续调用该函数。</p>
-<p>需要注意的是，示例中的类型转换是为了将dlsym返回的地址转换为函数指针类型，以便正确调用函数。根据实际情况，类型转换的方式可能会有所不同。</p>
- 
+   
       <!-- reward -->
       
     </div>
@@ -312,7 +254,7 @@
     
     <footer class="article-footer">
        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%BC%96%E8%AF%91%E3%80%81%E9%93%BE%E6%8E%A5%E5%92%8C%E8%BF%90%E8%A1%8C/" rel="tag">程序的编译、链接和运行</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rk3568-%E9%A9%B1%E5%8A%A8/" rel="tag">rk3568 驱动</a></li></ul>
 
     </footer>
   </div>
@@ -324,7 +266,7 @@
 
     
     <article
-  id="post-3-16-动态链接-3-共享库"
+  id="post-1-1-前言"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -335,8 +277,8 @@
     <header class="article-header">
        
 <h2 itemprop="name">
-  <a class="article-title" href="/2023/09/05/3-16-%E5%8A%A8%E6%80%81%E9%93%BE%E6%8E%A5-3-%E5%85%B1%E4%BA%AB%E5%BA%93/"
-    >3.16-动态链接(3)-共享库</a> 
+  <a class="article-title" href="/2023/09/05/1-1-%E5%89%8D%E8%A8%80/"
+    >1-1-前言</a> 
 </h2>
  
 
@@ -344,61 +286,39 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2023/09/05/3-16-%E5%8A%A8%E6%80%81%E9%93%BE%E6%8E%A5-3-%E5%85%B1%E4%BA%AB%E5%BA%93/" class="article-date">
-  <time datetime="2023-09-04T23:47:15.000Z" itemprop="datePublished">2023-09-05</time>
+      <a href="/2023/09/05/1-1-%E5%89%8D%E8%A8%80/" class="article-date">
+  <time datetime="2023-09-05T00:00:20.000Z" itemprop="datePublished">2023-09-05</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
+    <a class="article-category-link" href="/categories/rk3568-%E9%A9%B1%E5%8A%A8/">rk3568 驱动</a>
   </div>
    
     </div>
       
     <div class="article-entry" itemprop="articleBody">
        
-  <h1 id="3-15-1-共享库的命名"><a href="#3-15-1-共享库的命名" class="headerlink" title="3.15.1 共享库的命名"></a>3.15.1 共享库的命名</h1><p>在Linux环境下，共享库的命名方式通常遵循以下格式：libname.so.X.Z。</p>
-<ul>
-<li>libname：表示库的名称，通常由开发者指定。</li>
-<li>X：主版本号，表示库的重大升级。当主版本号发生变化时，表示库的接口发生了不兼容的变化，可能需要重新编译依赖该库的程序才能正常运行。</li>
-<li>Z：发布版本号，表示库的发布版本。当发布版本号发生变化时，通常表示进行了错误修正、性能改进等，但没有增加新的接口，原有接口保持不变。</li>
-</ul>
-<p>例如，假设有一个名为libexample.so的共享库，其版本号为1.2.3，则库文件的命名可能是libexample.so.1.2.3。</p>
-<p>次版本号（Y）在库的命名中没有直接体现，它通常用于表示库的增量升级，即增加一些新的接口符号，而原有的接口符号保持不变。次版本号的变化通常不会破坏与之前版本的兼容性，因此使用高版本的库通常可以向后兼容低版本的库。</p>
-<h1 id="3-15-2-共享库软链接"><a href="#3-15-2-共享库软链接" class="headerlink" title="3.15.2 共享库软链接"></a>3.15.2 共享库软链接</h1><p>软链接（Symbolic link）是一个特殊类型的文件，它是一个指向另一个文件或目录的引用。在Linux系统中，软链接可以用来记录共享库的依赖关系，并且通常用于共享库的SO-NAME命名机制。</p>
-<p>SO-NAME是共享库的一个命名约定，用于标识共享库的接口。它通常通过去除共享库文件名中的次版本号和发布版本号来得到。例如，如果一个共享库文件的名称是libexample.so.1.2.3，那么它的SO-NAME可能是libexample.so.1。</p>
-<p>系统会在共享库文件所在的目录下创建一个与SO-NAME同名的软链接，该软链接指向具有相同主版本号的共享库文件中最新的次版本号和发布版本号。这样，依赖某个共享库的模块可以使用SO-NAME来引用该共享库，而不需要指定具体的版本号。这种方式有助于系统升级，因为只要保证新版本的共享库兼容旧版本的接口，依赖该库的模块就可以继续正常工作，无需修改代码。</p>
-<p>使用SO-NAME和软链接的好处是，它提供了一种稳定的共享库接口，并简化了依赖管理。通过使用SO-NAME作为共享库的标识，系统可以方便地管理共享库的版本，并且可以在不破坏接口兼容性的情况下进行升级和替换。同时，依赖该共享库的模块可以通过引用SO-NAME来保持与共享库的连接，而不需要关注具体的版本号，从而提高了系统的灵活性和可维护性。</p>
-<h1 id="3-15-3-共享库的路径"><a href="#3-15-3-共享库的路径" class="headerlink" title="3.15.3 共享库的路径"></a>3.15.3 共享库的路径</h1><p>在Linux系统中，共享库通常存放在以下三个主要路径：</p>
-<ol>
-<li>&#x2F;lib：该目录存放系统最关键和基础的共享库，例如动态链接器、C库、数学库等。这些库主要是用于&#x2F;bin、&#x2F;sbin下的程序运行以及系统启动所需要的库。这些共享库对于系统的正常运行非常重要。</li>
-<li>&#x2F;usr&#x2F;lib：该目录存放非系统运行所需要的关键性共享库。这些库通常是开发过程中使用的一些共享库，包括开发工具链、编译器等。这些库一般不会被用户的程序或者Shell脚本直接使用，而是被开发工具链和编译器等系统工具所使用。</li>
-<li>&#x2F;usr&#x2F;local&#x2F;lib：该目录主要存放第三方应用程序所需要的一些库。当用户安装自己编译或安装的软件时，这些软件通常会将其依赖的共享库安装到&#x2F;usr&#x2F;local&#x2F;lib目录下。这样做的好处是，可以将用户自定义的库与系统自带的库分开管理，避免冲突。</li>
-</ol>
-<h1 id="3-15-4-库的查找过程"><a href="#3-15-4-库的查找过程" class="headerlink" title="3.15.4 库的查找过程"></a>3.15.4 库的查找过程</h1><p>在Linux系统中，库的查找过程由动态链接器（dynamic linker）负责。以下是库的查找过程的基本步骤：</p>
-<ol>
-<li><p>ELF文件加载：当一个可执行的ELF文件被执行时，动态链接器（一般是&#x2F;lib&#x2F;ld-linux.so.x）会被加载并启动。</p>
-</li>
-<li><p>依赖关系查找：动态链接器会解析ELF文件的.dynamic段，查找该文件所依赖的共享库。</p>
-</li>
-<li><p>路径解析：根据共享库的路径信息，动态链接器会按照一定的顺序进行路径解析，以找到共享库文件。解析顺序如下：</p>
-<ul>
-<li>若路径是绝对路径，则直接到该绝对路径下查找共享库文件。</li>
-<li>若路径是相对路径，则按照一定的顺序在以下目录中查找共享库文件：<ul>
-<li>&#x2F;lib</li>
-<li>&#x2F;usr&#x2F;lib</li>
-<li>根据&#x2F;etc&#x2F;ld.so.conf配置文件中指定的目录</li>
-</ul>
-</li>
-</ul>
-<p>库目录缓存：为了加快库的查找速度，避免每次都进行路径解析，系统可以使用ldconfig命令生成一个缓存文件&#x2F;etc&#x2F;ld.so.cache。该缓存文件记录了系统中可用的共享库路径及其对应的共享库文件。动态链接器在查找库时会首先检查该缓存文件，并根据其中的路径信息进行查找。</p>
-<ul>
-<li>当新增、删除或更新共享库路径时，需要更新缓存文件，可以使用ldconfig命令进行更新。</li>
-</ul>
-</li>
-</ol>
-<h1 id="3-15-5-LD-LIBRARY-PATH"><a href="#3-15-5-LD-LIBRARY-PATH" class="headerlink" title="3.15.5 LD_LIBRARY_PATH"></a>3.15.5 LD_LIBRARY_PATH</h1><p>LD_LIBRARY_PATH是一个环境变量，它由若干个路径组成，每个路径之间用冒号”:”进行分隔。该环境变量用于临时改变程序运行时的共享库查找路径。</p>
-<p>当一个程序在运行过程中需要加载共享库时，系统会按照一定的规则进行共享库的查找。这些规则包括默认的系统库路径、配置文件中指定的路径等。然而，通过设置LD_LIBRARY_PATH环境变量，可以临时修改共享库的查找路径，优先使用LD_LIBRARY_PATH中指定的路径。</p>
-<p>当LD_LIBRARY_PATH环境变量被设置后，程序在加载共享库时会首先在LD_LIBRARY_PATH指定的路径中查找共享库文件，而不是按照默认的规则进行查找。如果找到了匹配的共享库文件，程序会使用该路径下的共享库进行链接和加载。</p>
-<p>这个特性可以用于临时改变程序依赖的共享库查找路径，而不影响系统中的其他应用程序。一旦程序运行结束或者LD_LIBRARY_PATH环境变量被重置，系统将恢复到默认的共享库查找路径。</p>
+  <p>磨刀不误砍柴工！在学习驱动之前先和同学们交流下学习方法和学习态度。</p>
+<h1 id="1-1-学习方法"><a href="#1-1-学习方法" class="headerlink" title="1.1 学习方法"></a>1.1 学习方法</h1><p>在学习驱动的过程中，同学们难免会遇到很多问题，例如编译环境的问题造成内核编译不通过、交叉编译器或者架构类型没有设置导致驱动编译失败、内核版本和驱动版本不统一造成驱动加载不成功等多种问题。</p>
+<p>在遇到问题的时候，同学们一定不要灰心，要敢于去尝试用自己的思路去解决问题。机遇与挑战往往是并存的。当同学们解决一个问题以后，自然就会前进一步。水滴石穿，才可以真正掌握linux驱动。</p>
+<p> 所以一定要养成独立思考的好习惯！遇到问题之后，同学们可以先自己根据问题的具体表现，来找到问题的源头，仔细分析问题产生的原因和解决的方法，自主思考无果之后可以尝试去谷歌、百度、CSDN等各大检索网站上寻求帮助，Linux已经发展了很多年，前辈们在之前进行了无数的探索，总有许多类似的经验，能解决绝大多数的问题。</p>
+<p>并且在学习过程中千万不要好高骛远，比如对于一些有基础的同学来说，学习过相似的知识点就一目十行甚至直接跳过，这种行为是不可取的，学习一遍和学习两遍的知识点，在认知和运用程度上是完全不一样的。读书要从薄到厚,再厚到薄，学习亦是如此。</p>
+<p>端正学习态度后还要有一个好的学习方法，迅为公司在多年培训和产品开发中总结出来了一套适合初学者的学习方式，具体含义解释为框架化学习，快速原型。运用到嵌入式Linux驱动学习上就是从一开始先看到Linux驱动知识领域的外貌，然后逐渐深入！以了解北京这座城市为例，如果在胡同里转来转去，可能几年都搞不清楚这个城市是什么情况，但是如果先通过北京地图学习一下，了解天安门在什么地方，鸟巢在什么地方，香山八达岭在哪里，然后到这些地方看一看，可能很快就能掌握这座城市的全貌。所以运用框架学习法，在对不同层次的框架进行学习过程中，逐渐了解和掌握整个系统。 如果不注意方法，每天在胡同里面来回转悠，肯定是事倍功半，很长时间将不得要领。</p>
+<p>需要注意的是，即便有了地图，也需要一些基础，比如知道什么是天安门，知道鸟巢的来历，明白八达岭是怎么回事，实际上这些就是基础知识。也就是说在学习系统框架之前要具备一定的基础，否则这张地图也是看不懂的。学习驱动知识也是需要一定的基础的，所以驱动学习是有门槛的！</p>
+<p>对于学习方法和学习态度就先说这样多，关于基础方面，下一节会专门讨论。 </p>
+<h1 id="1-2-基础准备"><a href="#1-2-基础准备" class="headerlink" title="1.2 基础准备"></a>1.2 基础准备</h1><p>首先，不要脱离硬件。就好比用仿真软件学习51单片机是永远掌握不了单片机的精髓的。所以有一块硬件开发板是学习驱动的前提。</p>
+<p>第二，有了开发板之后，要掌握开发板的基本操作。如开发板的启动，烧写镜像等操作。</p>
+<p>第三，能够成功编译开发板的系统源码。在驱动的学习过程中，是避免不了的要对内核的某些功能进行使能、修改设备树添加对应的设备，这些操作都需要进行源码编译。</p>
+<p>第四，掌握C语言。驱动程序是由C语言编写的，而且内核源码中绝大多数的代码也都是由C语言编写的，在学习驱动的过程中，或多或少的要对源码进行阅读。所以C语言基础是学习驱动的必要条件之一。</p>
+<p>第五，掌握Linux环境搭建以及shell命令的使用。</p>
+<p>第六，驱动最后必然要落实到相应的硬件上，所以肯定要对底层电路有所了解，以驱动LED灯为例，必然要了解其控制电路，找到相应的控制引脚，要能读懂简单的硬件原理图。</p>
+<p>【最新驱动资料（文档+例程）】</p>
+<p>链接 <a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1M4smUG2vw_hnn0Hye-tkog">https://pan.baidu.com/s/1M4smUG2vw_hnn0Hye-tkog</a></p>
+<p>提取码：hbh6</p>
+<p>【B 站配套视频】</p>
+<p><a target="_blank" rel="noopener" href="https://b23.tv/XqYa6Hm">https://b23.tv/XqYa6Hm</a></p>
+<p>【RK3568 购买链接】</p>
+<p><a target="_blank" rel="noopener" href="https://item.taobao.com/item.htm?spm=a1z10.5-c-s.w4002-2245">https://item.taobao.com/item.htm?spm=a1z10.5-c-s.w4002-2245</a></p>
+<p>2452613.11.2fec74a6elWNeA&amp;id&#x3D;669939423234</p>
  
       <!-- reward -->
       
@@ -409,7 +329,7 @@
     
     <footer class="article-footer">
        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%BC%96%E8%AF%91%E3%80%81%E9%93%BE%E6%8E%A5%E5%92%8C%E8%BF%90%E8%A1%8C/" rel="tag">程序的编译、链接和运行</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rk3568-%E9%A9%B1%E5%8A%A8/" rel="tag">rk3568 驱动</a></li></ul>
 
     </footer>
   </div>
@@ -421,7 +341,7 @@
 
     
     <article
-  id="post-3-15-动态链接-2-全局符号表GOT"
+  id="post-1-18-点亮LED灯实验"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -432,8 +352,8 @@
     <header class="article-header">
        
 <h2 itemprop="name">
-  <a class="article-title" href="/2023/09/05/3-15-%E5%8A%A8%E6%80%81%E9%93%BE%E6%8E%A5-2-%E5%85%A8%E5%B1%80%E7%AC%A6%E5%8F%B7%E8%A1%A8GOT/"
-    >3.15-动态链接(2)-全局符号表GOT</a> 
+  <a class="article-title" href="/2023/09/05/1-18-%E7%82%B9%E4%BA%AELED%E7%81%AF%E5%AE%9E%E9%AA%8C/"
+    >1-18-点亮LED灯实验</a> 
 </h2>
  
 
@@ -441,47 +361,18 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2023/09/05/3-15-%E5%8A%A8%E6%80%81%E9%93%BE%E6%8E%A5-2-%E5%85%A8%E5%B1%80%E7%AC%A6%E5%8F%B7%E8%A1%A8GOT/" class="article-date">
-  <time datetime="2023-09-04T23:47:13.000Z" itemprop="datePublished">2023-09-05</time>
+      <a href="/2023/09/05/1-18-%E7%82%B9%E4%BA%AELED%E7%81%AF%E5%AE%9E%E9%AA%8C/" class="article-date">
+  <time datetime="2023-09-05T00:00:07.000Z" itemprop="datePublished">2023-09-05</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
+    <a class="article-category-link" href="/categories/rk3568-%E9%A9%B1%E5%8A%A8/">rk3568 驱动</a>
   </div>
    
     </div>
       
     <div class="article-entry" itemprop="articleBody">
        
-  <h1 id="3-15-1-表和结构"><a href="#3-15-1-表和结构" class="headerlink" title="3.15.1 表和结构"></a>3.15.1 表和结构</h1><p>下面是这些表和结构的简要介绍：</p>
-<ol>
-<li>.dynamic段：.dynamic段是一个特殊的段，它包含了动态链接器所需的信息。这些信息包括动态链接库的依赖关系、重定位表的位置、初始化函数等。动态链接器在加载可执行文件时会解析.dynamic段以获取这些信息。</li>
-<li>动态符号表 (.dynsym)：动态符号表是一个表格，它记录了可执行文件或共享库中定义的所有动态符号。每个动态符号都有一个唯一的符号索引，可以用来在运行时进行符号解析和链接。动态符号表中的每个条目包含了符号名称、符号类型和符号值等信息。</li>
-<li>动态链接重定位表 (PLT)：动态链接重定位表是一个重要的数据结构，用于处理在运行时动态链接的符号重定位。它包含了跳转指令和符号解析逻辑，用于在首次调用某个符号时进行符号解析和重定位。PLT中的每个条目包含了一个跳转指令和一个GOT表项的索引。</li>
-<li>全局偏移表 (GOT)：全局偏移表是一个表格，用于存储全局符号的地址。GOT表的每个条目对应一个全局符号，它可以被动态链接器用来解析外部模块中的符号地址。GOT表的条目可能最初包含一个间接跳转指令，当符号地址被解析后，会被更新为具体的地址。</li>
-</ol>
-<h1 id="3-15-2-动态链接器"><a href="#3-15-2-动态链接器" class="headerlink" title="3.15.2 动态链接器"></a>3.15.2 动态链接器</h1><p>.interp：.interp是一个特殊的段，它包含了动态链接器的路径。当可执行文件被加载时，操作系统会使用.interp段中指定的路径来找到并加载动态链接器。这样可执行文件就能够正确地进行动态链接。</p>
-<p>动态链接器是负责在程序运行时加载和链接共享库的系统组件。它负责解析程序的依赖关系，加载所需的共享库，并将其链接到程序的地址空间中。</p>
-<p>.interp段是可执行文件中的一个特殊段，用于存放动态链接器的路径。该段中存储了一个字符串，指明了动态链接器的路径。当可执行文件被加载时，操作系统会根据.interp段中指定的路径找到并加载相应的动态链接器。</p>
-<p>要查看.interp段的内容，可以使用命令 <code>readelf -p .interp a.out</code>（其中 <code>a.out</code> 是可执行文件的名称）。该命令会显示.interp段的内容，即动态链接器的路径。</p>
-<p>动态链接器本质上也是一个共享库，它在程序运行之前首先需要进行自举（bootstrap），即对自身进行重定位。动态链接器通常由操作系统提供，并且在C标准库中实现，是GNU C库（Glibc）的一部分。Glibc是一个常用的C标准库实现，它包含了对动态链接器的实现。</p>
-<p>通过动态链接器的工作，程序能够在运行时动态地加载和链接共享库，实现了模块化、可扩展和灵活的程序设计。动态链接器的存在使得共享库的使用更加方便，并提供了许多动态链接相关的功能，如符号解析、重定位和依赖管理。</p>
-<h1 id="3-15-3-dynamic段"><a href="#3-15-3-dynamic段" class="headerlink" title="3.15.3 dynamic段"></a>3.15.3 dynamic段</h1><p>.dynamic段是可执行文件或共享库中的一个特殊段，它保存了动态链接器在加载和链接时所需的基本信息。这些信息包括：</p>
-<ul>
-<li>依赖的共享库：.dynamic段记录了程序或共享库所依赖的其他共享库的名称，使得动态链接器可以在加载时确定这些依赖关系，并加载相应的共享库。</li>
-<li>动态链接符号表位置：.dynamic段指示了动态链接符号表的位置，该符号表包含了程序或共享库中定义的所有动态符号。动态链接器在加载时使用这个符号表来进行符号解析和链接。</li>
-<li>动态链接字符串表的位置：.dynamic段也记录了动态链接字符串表的位置，这个字符串表包含了与动态链接相关的字符串，例如符号名称、共享库名称等。动态链接器使用这个字符串表来解析和处理动态链接相关的字符串。</li>
-<li>动态链接重定位表位置：.dynamic段指定了动态链接重定位表的位置，这个重定位表用于在运行时进行动态链接的符号重定位。它包含了需要进行重定位的符号及其相关信息，使得动态链接器可以在加载时进行符号重定位操作。</li>
-<li>共享库初始化代码位置：.dynamic段还包含了共享库初始化代码的位置信息，这些代码在共享库加载时被执行，用于执行一些初始化操作。</li>
-</ul>
-<p>.dynamic段的内容由多个结构体组成，这些结构体的定义可以在 <code>/usr/include/elf.h</code> 中找到。通过使用命令 <code>readelf -d xx.so</code>（其中 <code>xx.so</code> 是共享库文件的名称），可以查看.dynamic段的内容。这个命令会显示.dynamic段中的结构体信息，包括依赖的共享库、符号表位置、字符串表位置、重定位表位置等相关信息。</p>
-<h1 id="3-15-4-动态链接符号表"><a href="#3-15-4-动态链接符号表" class="headerlink" title="3.15.4 动态链接符号表"></a>3.15.4 动态链接符号表</h1><p>动态链接符号表是在动态链接过程中使用的符号表，它与静态链接符号表有一些区别。下面是关于动态链接符号表的一些说明：</p>
-<ul>
-<li>动态链接符号表（.dynsym）：动态链接符号表是一个特殊的符号表，它只保存了与动态链接相关的符号信息，而不保存所有的符号定义和引用。它包含了程序或共享库中定义的所有动态符号，如函数、变量等。每个符号表条目包含了符号的名称、地址、大小、绑定属性等信息。</li>
-<li>动态链接字符串表（.dynstr）：动态链接字符串表是动态链接符号表的辅助表，用于存储符号的名称。静态链接的符号表中的符号名称通常直接存储在符号表本身，但动态链接符号表中的符号名称存储在动态链接字符串表中。符号表（.dynsym）中的每个条目通过索引与字符串表（.dynstr）中的对应字符串关联起来。</li>
-<li>符号哈希表：符号哈希表是动态链接文件中的一个段，用于提高程序在运行时查找符号的速度。它通过哈希算法将符号的名称映射到符号表中的条目，从而加快符号查找的效率。符号哈希表在动态链接过程中起到加速符号解析和查找的作用。</li>
-</ul>
-<p>要查看动态链接符号表和字符串表的内容，可以使用命令 <code>readelf -s a.out</code>（对于可执行文件）或 <code>readelf -sD xx.so</code>（对于共享库）来查看。这些命令会显示符号表中的条目，包括符号的名称、地址、大小、绑定属性等信息。通过对比符号表（.dynsym）和字符串表（.dynstr）中的索引，可以关联符号的名称和其他属性。</p>
- 
+   
       <!-- reward -->
       
     </div>
@@ -491,7 +382,7 @@
     
     <footer class="article-footer">
        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%BC%96%E8%AF%91%E3%80%81%E9%93%BE%E6%8E%A5%E5%92%8C%E8%BF%90%E8%A1%8C/" rel="tag">程序的编译、链接和运行</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rk3568-%E9%A9%B1%E5%8A%A8/" rel="tag">rk3568 驱动</a></li></ul>
 
     </footer>
   </div>
@@ -503,7 +394,7 @@
 
     
     <article
-  id="post-3-14-动态链接-1-与位置无关的代码"
+  id="post-1-17-Linux错误处理实验"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -514,8 +405,8 @@
     <header class="article-header">
        
 <h2 itemprop="name">
-  <a class="article-title" href="/2023/09/05/3-14-%E5%8A%A8%E6%80%81%E9%93%BE%E6%8E%A5-1-%E4%B8%8E%E4%BD%8D%E7%BD%AE%E6%97%A0%E5%85%B3%E7%9A%84%E4%BB%A3%E7%A0%81/"
-    >3.14-动态链接(1)-与位置无关的代码</a> 
+  <a class="article-title" href="/2023/09/05/1-17-Linux%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86%E5%AE%9E%E9%AA%8C/"
+    >1-17-Linux错误处理实验</a> 
 </h2>
  
 
@@ -523,95 +414,18 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2023/09/05/3-14-%E5%8A%A8%E6%80%81%E9%93%BE%E6%8E%A5-1-%E4%B8%8E%E4%BD%8D%E7%BD%AE%E6%97%A0%E5%85%B3%E7%9A%84%E4%BB%A3%E7%A0%81/" class="article-date">
-  <time datetime="2023-09-04T23:47:12.000Z" itemprop="datePublished">2023-09-05</time>
+      <a href="/2023/09/05/1-17-Linux%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86%E5%AE%9E%E9%AA%8C/" class="article-date">
+  <time datetime="2023-09-05T00:00:06.000Z" itemprop="datePublished">2023-09-05</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
+    <a class="article-category-link" href="/categories/rk3568-%E9%A9%B1%E5%8A%A8/">rk3568 驱动</a>
   </div>
    
     </div>
       
     <div class="article-entry" itemprop="articleBody">
        
-  <h1 id="3-14-1-静态链接的缺点"><a href="#3-14-1-静态链接的缺点" class="headerlink" title="3.14.1 静态链接的缺点"></a>3.14.1 静态链接的缺点</h1><p>静态链接的确存在一些缺点，包括：</p>
-<ol>
-<li>可执行文件体积较大：由于静态链接将所有需要的代码和库函数都包含在可执行文件中，导致可执行文件的体积较大。如果多个程序都使用相同的静态库，会造成冗余的存储空间浪费。</li>
-<li>内存占用较大：静态链接的可执行文件在运行时需要将所有的代码和数据加载到内存中。这意味着即使程序只用到了部分功能，也需要将整个程序加载到内存中，增加了内存占用的开销。</li>
-<li>内存配置限制：对于内存配置较小的系统，静态链接的可执行文件可能会占用过多的内存，导致无法正常加载和运行。这是由于静态链接将所有代码和数据都打包在可执行文件中，无法根据系统的实际内存情况进行动态调整。</li>
-<li>更新困难：当静态库或依赖的库发生更新时，需要重新编译和链接整个程序才能应用更新。这增加了更新和维护的复杂性，特别是在大型项目或多个项目共享同一静态库时。</li>
-</ol>
-<p>考虑到上述缺点，有些情况下可以选择使用动态链接库（共享库）。动态链接库在运行时被动态加载，可多个程序共享，减小了可执行文件的体积和内存占用。动态链接库的更新和维护也更加灵活，可以在不重新编译和链接整个程序的情况下进行库的更新。</p>
-<h1 id="3-14-2-动态链接"><a href="#3-14-2-动态链接" class="headerlink" title="3.14.2 动态链接"></a>3.14.2 动态链接</h1><p>动态链接与静态链接不同，它推迟到程序运行时进行，而不是在链接过程中完成。在动态链接中，目标文件被编译成动态链接库（也称为共享库），而不是静态库。这些动态链接库在程序运行时被加载到内存中，并进行重定位。</p>
-<p>动态链接的好处包括：</p>
-<ol>
-<li>节省内存：由于动态链接库是在运行时加载的，多个程序可以共享同一个动态链接库，避免了静态链接中的代码冗余和存储空间浪费。这样可以节省内存，并允许运行更大规模的程序。</li>
-<li>简化升级：由于动态链接库是独立于可执行文件的，当库需要升级时，只需替换动态链接库文件，而不需要重新编译和链接整个程序。这使得库的升级更加方便和灵活，减少了对程序的影响。</li>
-<li>提供更好的可维护性：动态链接库可以被多个程序共享，这意味着库的更新和维护只需在一个地方进行。这样有助于提高代码的可维护性，减少了重复的工作和潜在的错误。</li>
-</ol>
-<h1 id="3-14-3-程序执行过程"><a href="#3-14-3-程序执行过程" class="headerlink" title="3.14.3 程序执行过程"></a>3.14.3 程序执行过程</h1><p>在Linux命令行下运行一个程序的基本过程如下：</p>
-<ol>
-<li>操作系统给程序开启一个进程：当您在命令行中执行程序时，操作系统会为该程序创建一个新的进程，该进程将作为程序的执行环境。</li>
-<li>动态链接器被映射到程序地址空间：动态链接器（通常是ld.so或ld-linux.so）是负责动态链接的系统组件。在程序启动时，操作系统将动态链接器映射到程序的地址空间中。</li>
-<li>操作系统将控制权交给动态链接器：操作系统将控制权传递给动态链接器，使其可以开始执行动态链接的任务。</li>
-<li>动态链接器解析未确定符号和动态库链接：动态链接器首先会解析可执行文件中的未确定符号，这些符号是指在编译时无法确定其地址的符号（如函数或变量）。动态链接器会查找并加载包含这些符号定义的动态库。</li>
-<li>加载动态库并进行重定位：动态链接器会加载需要链接的动态库，并对这些库进行重定位操作。重定位是将动态库中的符号引用与实际的符号定义进行匹配，以确保程序能够正确地访问所需的函数和数据。</li>
-<li>动态链接器将控制权交给可执行程序：一旦动态链接器完成了解析和重定位的工作，它将控制权交还给可执行程序。此时，可执行程序中的所有符号引用都已经解析完毕，并且程序可以开始运行。</li>
-<li>可执行程序开始执行：控制权回到可执行程序，它会按照程序的逻辑开始执行，调用所需的函数和访问数据。</li>
-</ol>
-<p>在静态编译的情况下，可执行文件中包含了所有需要的代码和库函数，因此它是独立的、自包含的。以下是关于静态编译可执行文件和动态链接库的一些说明：</p>
-<ol>
-<li>可执行文件的加载和运行地址：<ul>
-<li>静态编译的可执行文件在加载到进程地址空间时，通常会被加载到一个固定的运行地址。这是因为在编译和链接时，所有的符号引用已经被解析并确定了其最终的地址。</li>
-<li>链接地址和运行地址是相同的，因此可执行文件在运行时可以直接通过固定的地址访问到所需的函数和数据。</li>
-</ul>
-</li>
-<li>动态链接库的加载和运行地址：<ul>
-<li>动态链接库（共享库）在加载到内存中时，其加载地址是由操作系统动态分配的。加载器根据当前进程的地址空间空闲情况，选择一个适当的地址来加载动态库。</li>
-<li>动态库被装载到内存中的地址可以是任意的，并不需要与其他库或可执行文件的地址相同。这是因为动态库的地址信息会被动态链接器处理和重定位，以确保库中的符号引用与实际的符号定义相匹配。</li>
-</ul>
-</li>
-</ol>
-<p>动态链接库被装载到内存中的地址可变的主要原因是为了避免不同进程之间的冲突。由于多个进程可以同时运行，每个进程都有自己的地址空间，因此需要动态分配适当的地址来加载动态库，以避免地址冲突和重复使用相同的地址。</p>
-<h1 id="3-14-4-装载时重定位"><a href="#3-14-4-装载时重定位" class="headerlink" title="3.14.4 装载时重定位"></a>3.14.4 装载时重定位</h1><p>装载时重定位是动态链接过程中的一项关键任务，它的基本思想是将对绝对地址的引用推迟到运行时进行解析和重定位。以下是装载时重定位的基本原理：</p>
-<ol>
-<li>推迟地址解析和重定位：在可执行文件中，对于动态库中的函数或变量的引用通常是使用绝对地址进行表示的。而在静态链接时，这些绝对地址是无法确定的，因为动态库的加载地址是在运行时动态分配的。因此，装载时重定位的基本思想是将对绝对地址的引用推迟到运行时去解析和重定位。</li>
-<li>动态库加载和地址确定：当动态库被加载到内存中时，操作系统会为其分配一段合适的地址空间，并将库中的函数和变量映射到该地址空间中。此时，动态库中的每个符号都有了确定的地址。</li>
-<li>可执行文件的重定位操作：一旦动态库的地址确定，装载时重定位会将可执行文件中对动态库中函数或变量的绝对地址引用进行重定位操作。具体而言，它会将绝对地址替换为实际的动态库中的地址，以确保可执行文件能够正确地访问所需的函数和变量。</li>
-</ol>
-<p>实现装载时重定位的方法有多种，编译器如GCC在生成共享动态链接库时可以使用<code>--shared</code>参数。这样生成的库在运行时会由动态链接器进行加载，并进行相应的地址解析和重定位操作。</p>
-<p>通过推迟地址解析和重定位到运行时，装载时重定位实现了动态链接的灵活性和可扩展性。它允许不同的进程在加载同一个动态库时，根据其实际地址空间的情况进行地址分配和重定位，确保了符号的正确链接和访问。</p>
-<h1 id="3-14-5-命令"><a href="#3-14-5-命令" class="headerlink" title="3.14.5 命令"></a>3.14.5 命令</h1><p>使用ldd命令可以查看一个可执行文件所需要的动态链接库</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309060823892.png" alt="image-20230906082331845"></p>
-<h1 id="3-14-6-与地址无关的代码"><a href="#3-14-6-与地址无关的代码" class="headerlink" title="3.14.6 与地址无关的代码"></a>3.14.6 与地址无关的代码</h1><p>地址无关代码（Position-Independent Code，PIC）是一种技术，它使得代码可以在不进行重定位的情况下在不同的地址空间中执行。以下是地址无关代码的一些特点和实现方式：</p>
-<p>特点：</p>
-<ol>
-<li>可以在任意地址加载和执行：地址无关代码可以在内存中的任意地址加载，并且无需进行重定位操作，就可以正确地执行。</li>
-<li>与地址无关的指令：地址无关代码将需要修改的部分指令与数据分离，数据可以与需要修改的指令放在一起，而其余指令则不依赖于具体的地址，实现了与地址无关的特性。</li>
-<li>被多个进程共享：地址无关代码可以被多个进程共享，每个进程都有自己的数据和需要修改的指令的副本，互不影响。</li>
-</ol>
-<p>实现方式：</p>
-<ol>
-<li>编译时生成位置无关代码：在编译阶段，可以使用编译器的参数来生成位置无关代码。对于GCC编译器，可以使用<code>-fPIC</code>参数来生成位置无关代码的目标文件。例如，使用命令<code>gcc -fPIC -c main.c</code>可以生成一个位置无关的目标文件。</li>
-<li>使用相对寻址和间接寻址：地址无关代码使用相对寻址和间接寻址来访问数据和需要修改的指令。相对寻址是指使用相对于当前指令的偏移量来访问数据，而不是使用绝对地址。间接寻址则是通过间接引用来访问数据，而不是直接使用数据的地址。</li>
-</ol>
-<p>通过以上的实现方式，地址无关代码可以实现在不同的地址空间中加载和执行，而无需进行重定位操作。这使得地址无关代码可以被多个进程共享，并且具有较高的灵活性和可移植性。</p>
-<h1 id="3-14-5-模块内部相对寻址"><a href="#3-14-5-模块内部相对寻址" class="headerlink" title="3.14.5 模块内部相对寻址"></a>3.14.5 模块内部相对寻址</h1><p>ARM相对寻址是一种使用PC作为基址，并将指令中的地址码段作为偏移量的寻址方式。通过将PC和偏移量相加，可以得到操作数的有效地址。这种寻址方式常见于ARM汇编语言中的B&#x2F;BL和ADR&#x2F;ADRL指令。</p>
-<p>例如，考虑以下示例代码：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">B LOOP</span><br><span class="line">.LOOP MOV R0, #1</span><br><span class="line">MOV R1, R0</span><br></pre></td></tr></table></figure>
-
-<p>在这个例子中，B LOOP指令会跳转到标签LOOP处执行。相当于使用相对寻址方式进行跳转。</p>
-<p>相对寻址的等效手动指令是：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ADD PC, PC, #OFFSET</span><br></pre></td></tr></table></figure>
-
-<p>其中OFFSET是B LOOP指令地址与LOOP标签地址之间的偏移量。B指令的前后跳转范围是[0, 32M]。</p>
-<p>通过这种相对寻址方式，可以将跳转目标限制在指令附近的相对范围内，而不是使用绝对地址。这样可以增加代码的灵活性和可移植性。</p>
-<h1 id="3-14-6-模块外部GOT表"><a href="#3-14-6-模块外部GOT表" class="headerlink" title="3.14.6 模块外部GOT表"></a>3.14.6 模块外部GOT表</h1><p>动态链接的核心GOT表问题是如何处理引用外部模块的符号地址无关。当一个模块需要引用其他模块中定义的符号（函数、变量等）时，如何确保在运行时能够正确找到这些符号的地址是一个关键问题。</p>
-<p>动态链接的核心思想是使用全局偏移表（Global Offset Table，GOT）来解决这个问题。在链接时，被引用的外部模块的符号地址被存储在GOT中。</p>
-<p>具体而言，当一个模块需要引用外部模块的符号时，它并不直接使用符号的地址，而是通过查找GOT表来间接获取符号的地址。GOT表中的每个表项对应一个被引用的符号，存储了该符号的地址或者加载该符号地址的指令。</p>
-<p>在链接时，GOT表的位置已经确定，因此在运行时可以通过GOT表来获取外部符号的地址，而不需要硬编码具体的地址。</p>
-<p>使用GOT表的好处是，它使得模块间的符号引用变得独立于具体的内存布局，从而增加了模块的可移植性和灵活性。当外部模块的地址发生变化时，只需要更新GOT表中对应的表项即可，而不需要修改引用该符号的模</p>
- 
+   
       <!-- reward -->
       
     </div>
@@ -621,7 +435,7 @@
     
     <footer class="article-footer">
        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%BC%96%E8%AF%91%E3%80%81%E9%93%BE%E6%8E%A5%E5%92%8C%E8%BF%90%E8%A1%8C/" rel="tag">程序的编译、链接和运行</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rk3568-%E9%A9%B1%E5%8A%A8/" rel="tag">rk3568 驱动</a></li></ul>
 
     </footer>
   </div>
@@ -633,7 +447,7 @@
 
     
     <article
-  id="post-3-13-链接静态库"
+  id="post-1-16-一个驱动兼容不同设备实验"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -644,8 +458,8 @@
     <header class="article-header">
        
 <h2 itemprop="name">
-  <a class="article-title" href="/2023/09/05/3-13-%E9%93%BE%E6%8E%A5%E9%9D%99%E6%80%81%E5%BA%93/"
-    >3.13-链接静态库</a> 
+  <a class="article-title" href="/2023/09/05/1-16-%E4%B8%80%E4%B8%AA%E9%A9%B1%E5%8A%A8%E5%85%BC%E5%AE%B9%E4%B8%8D%E5%90%8C%E8%AE%BE%E5%A4%87%E5%AE%9E%E9%AA%8C/"
+    >1-16-一个驱动兼容不同设备实验</a> 
 </h2>
  
 
@@ -653,57 +467,18 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2023/09/05/3-13-%E9%93%BE%E6%8E%A5%E9%9D%99%E6%80%81%E5%BA%93/" class="article-date">
-  <time datetime="2023-09-04T23:47:10.000Z" itemprop="datePublished">2023-09-05</time>
+      <a href="/2023/09/05/1-16-%E4%B8%80%E4%B8%AA%E9%A9%B1%E5%8A%A8%E5%85%BC%E5%AE%B9%E4%B8%8D%E5%90%8C%E8%AE%BE%E5%A4%87%E5%AE%9E%E9%AA%8C/" class="article-date">
+  <time datetime="2023-09-05T00:00:04.000Z" itemprop="datePublished">2023-09-05</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
+    <a class="article-category-link" href="/categories/rk3568-%E9%A9%B1%E5%8A%A8/">rk3568 驱动</a>
   </div>
    
     </div>
       
     <div class="article-entry" itemprop="articleBody">
        
-  <h1 id="3-13-1-静态库"><a href="#3-13-1-静态库" class="headerlink" title="3.13.1 静态库"></a>3.13.1 静态库</h1><p>静态库是一种包含预编译目标文件的归档文件，它可以被多个程序共享和链接。归档文件通常具有<code>.a</code>的文件扩展名，例如<code>libtest.a</code>。</p>
-<h1 id="3-13-2-静态库制作的步骤"><a href="#3-13-2-静态库制作的步骤" class="headerlink" title="3.13.2 静态库制作的步骤"></a>3.13.2 静态库制作的步骤</h1><p>制作静态库的步骤如下：</p>
-<ol>
-<li>编译源代码生成目标文件：首先，将源代码编译成目标文件（<code>.o</code>文件）。例如，<code>x.c</code>和<code>xx.c</code>分别编译成<code>x.o</code>和<code>xx.o</code>。</li>
-<li>创建归档文件：使用<code>ar</code>工具创建归档文件。命令格式为<code>ar rcs &lt;库文件名&gt; &lt;目标文件1&gt; &lt;目标文件2&gt; ...</code>。例如，使用命令<code>ar rcs libtest.a x.o xx.o</code>将<code>x.o</code>和<code>xx.o</code>归档到<code>libtest.a</code>文件中。</li>
-</ol>
-<h1 id="3-13-3-静态库链接的步骤"><a href="#3-13-3-静态库链接的步骤" class="headerlink" title="3.13.3 静态库链接的步骤"></a>3.13.3 静态库链接的步骤</h1><p>链接静态库的步骤如下：</p>
-<ol>
-<li>编写主程序：创建一个包含主程序逻辑的源文件，例如<code>main.c</code>。</li>
-<li>指定头文件路径和库文件路径：使用编译器选项指定头文件和库文件的搜索路径。例如，使用选项<code>-I./include</code>指定头文件搜索路径为<code>./include</code>，使用选项<code>-L./lib</code>指定库文件搜索路径为<code>./lib</code>。</li>
-<li>链接静态库：使用编译器选项<code>-l&lt;库名&gt;</code>指定要链接的静态库。例如，使用选项<code>-ltest</code>将<code>libtest.a</code>静态库链接到主程序中。</li>
-</ol>
-<p>完整的链接命令为<code>gcc main.c -I./include -L./lib -ltest</code>。该命令会将<code>main.c</code>编译成目标文件，并链接<code>libtest.a</code>静态库生成可执行文件。</p>
-<p>通过制作和链接静态库，可以将常用的函数和模块封装为可重用的代码库，提高代码的复用性和可维护性。</p>
-<h1 id="3-13-4-静态库的问题"><a href="#3-13-4-静态库的问题" class="headerlink" title="3.13.4 静态库的问题"></a>3.13.4 静态库的问题</h1><p>链接静态库可能会带来以下问题：</p>
-<ol>
-<li>可执行体积增大：当链接静态库时，所有库中的函数都会被组装到最终的可执行文件中，无论是否使用到这些函数。这会导致可执行文件的体积增大，尤其是当静态库包含大量函数时。</li>
-<li>冗余代码：由于静态库中的所有函数都会被链接到可执行文件中，可能会包含一些未使用的函数，从而造成代码的冗余。这会增加可执行文件的大小，并且在一些资源受限的环境中可能会浪费存储空间。</li>
-<li>更新困难：如果静态库中的函数发生变化，需要重新编译和链接整个程序才能更新。这会增加代码维护的复杂性，并且在多个项目中使用同一静态库时，每个项目都需要进行重新编译和链接。</li>
-</ol>
-<p>解决上述问题的一种方法是将每个函数的实现放在单独的源文件中，然后将这些源文件编译成对应的目标文件，最后将所有的目标文件归档到静态库中。这样做可以避免将未使用的函数链接到最终的可执行文件中，减小可执行文件的体积并提高代码的可维护性。</p>
-<p>这种方法的基本原理是，编译器的基本单位是文件，而链接器的基本单位是目标文件。当引用一个目标文件中的符号时，链接器会将整个目标文件进行链接，将引用的符号和相关的代码组装到最终的可执行文件中。</p>
-<p>举例来说，假设有以下几个源文件：</p>
-<ul>
-<li><code>func1.c</code>：包含函数<code>func1</code>的实现</li>
-<li><code>func2.c</code>：包含函数<code>func2</code>的实现</li>
-<li><code>main.c</code>：包含程序的主函数</li>
-</ul>
-<p>首先，分别将<code>func1.c</code>、<code>func2.c</code>和<code>main.c</code>编译成对应的目标文件：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">gcc -c func1.c -o func1.o</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">gcc -c func2.c -o func2.o</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">gcc -c main.c -o main.o</span></span><br></pre></td></tr></table></figure>
-
-<p>然后，将这些目标文件归档到静态库中：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">ar rcs libtest.a func1.o func2.o</span></span><br></pre></td></tr></table></figure>
-
-<p>最后，链接主程序并使用静态库：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">gcc main.o -L. -ltest -o executable</span></span><br></pre></td></tr></table></figure>
-
-<p>这样，只有主程序中实际引用的函数会被链接到最终的可执行文件中，减小了可执行文件的体积。</p>
-<p>Glibc（GNU C Library）就是使用类似的方法实现的。它将每个函数的实现放在单独的源文件中，然后将这些源文件编译成对应的目标文件，并将目标文件归档到一个静态库中。这样，在链接时只会将程序实际使用的函数链接到最终的可执行文件中，提高了程序的效率和可维护性。</p>
- 
+   
       <!-- reward -->
       
     </div>
@@ -713,7 +488,7 @@
     
     <footer class="article-footer">
        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%BC%96%E8%AF%91%E3%80%81%E9%93%BE%E6%8E%A5%E5%92%8C%E8%BF%90%E8%A1%8C/" rel="tag">程序的编译、链接和运行</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rk3568-%E9%A9%B1%E5%8A%A8/" rel="tag">rk3568 驱动</a></li></ul>
 
     </footer>
   </div>
@@ -725,7 +500,7 @@
 
     
     <article
-  id="post-3-12-main函数入口分析"
+  id="post-1-15-文件私有数据实验"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -736,8 +511,8 @@
     <header class="article-header">
        
 <h2 itemprop="name">
-  <a class="article-title" href="/2023/09/05/3-12-main%E5%87%BD%E6%95%B0%E5%85%A5%E5%8F%A3%E5%88%86%E6%9E%90/"
-    >3.12-main函数入口分析</a> 
+  <a class="article-title" href="/2023/09/05/1-15-%E6%96%87%E4%BB%B6%E7%A7%81%E6%9C%89%E6%95%B0%E6%8D%AE%E5%AE%9E%E9%AA%8C/"
+    >1-15-文件私有数据实验</a> 
 </h2>
  
 
@@ -745,38 +520,18 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2023/09/05/3-12-main%E5%87%BD%E6%95%B0%E5%85%A5%E5%8F%A3%E5%88%86%E6%9E%90/" class="article-date">
-  <time datetime="2023-09-04T23:47:09.000Z" itemprop="datePublished">2023-09-05</time>
+      <a href="/2023/09/05/1-15-%E6%96%87%E4%BB%B6%E7%A7%81%E6%9C%89%E6%95%B0%E6%8D%AE%E5%AE%9E%E9%AA%8C/" class="article-date">
+  <time datetime="2023-09-05T00:00:02.000Z" itemprop="datePublished">2023-09-05</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
+    <a class="article-category-link" href="/categories/rk3568-%E9%A9%B1%E5%8A%A8/">rk3568 驱动</a>
   </div>
    
     </div>
       
     <div class="article-entry" itemprop="articleBody">
        
-  <h1 id="7-12-1-main函数入口"><a href="#7-12-1-main函数入口" class="headerlink" title="7.12.1 main函数入口"></a>7.12.1 main函数入口</h1><p>编译器对程序入口有以下规定：</p>
-<ol>
-<li>缺省程序入口：编译器默认的程序入口是<code>_start</code>符号，而不是<code>main</code>函数。<code>_start</code>符号是由编译器生成的一个特殊符号，它标识程序的入口点。在程序启动时，操作系统会将控制权转移到<code>_start</code>符号所代表的代码位置。</li>
-<li><code>main</code>函数作为入口点：<code>main</code>函数是一个被C标准库调用的符号，用来告诉编译器在一个项目中哪里是程序的入口点。程序员需要遵守这个约定，将程序的逻辑代码放在<code>main</code>函数中，在执行<code>main</code>函数之前进行一些准备工作。</li>
-</ol>
-<p>在程序启动时，编译器会进行以下操作：</p>
-<ul>
-<li>设置堆栈指针：编译器会设置栈指针，以确保函数调用和局部变量的正确处理。</li>
-<li>初始化静态变量和全局变量：编译器会初始化静态变量和全局变量，即将它们所占用的数据段（data segment）中的内容赋初值。</li>
-<li>BSS段赋初值：BSS段中的变量会被初始化为默认值。例如，<code>int</code>类型的变量会被初始化为0，<code>bool</code>类型会被初始化为<code>FALSE</code>，指针会被初始化为<code>NULL</code>。</li>
-<li>传递参数给<code>main</code>函数：编译器会将命令行参数（<code>argc</code>、<code>argv</code>等）传递给<code>main</code>函数，并开始执行<code>main</code>函数中的代码。</li>
-</ul>
-<h1 id="7-12-2-CRT运行库"><a href="#7-12-2-CRT运行库" class="headerlink" title="7.12.2 CRT运行库"></a>7.12.2 CRT运行库</h1><p>CRT是C Runtime（运行时）的缩写，也称为C运行库。它是一组库函数和运行时环境，用于支持和管理C语言程序的执行。</p>
-<p>CRT的主要功能包括：</p>
-<ol>
-<li>实现C标准库函数：CRT实现了C标准库中定义的各种函数，例如输入输出函数（如printf、scanf）、字符串处理函数（如strcpy、strlen）、内存管理函数（如malloc、free）等。这些函数提供了常用的操作和功能，方便程序员开发C语言程序。</li>
-<li>执行初始化操作：CRT负责在程序执行之前进行一系列的初始化操作。这包括设置基本的堆栈环境和进程环境，准备动态库的加载和释放，进行动态库的初始化和清理等工作。</li>
-<li>调用main函数：CRT负责给main函数传递参数，并调用main函数开始执行程序的主要逻辑。它将命令行参数（如argc、argv）传递给main函数，以便程序可以根据需要进行处理。</li>
-<li>处理程序退出：在main函数执行完成后，CRT会调用exit函数，用于处理程序的退出。exit函数会执行一些清理操作，例如关闭文件、释放资源等，并将控制权返回给操作系统。</li>
-</ol>
- 
+   
       <!-- reward -->
       
     </div>
@@ -786,7 +541,7 @@
     
     <footer class="article-footer">
        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%BC%96%E8%AF%91%E3%80%81%E9%93%BE%E6%8E%A5%E5%92%8C%E8%BF%90%E8%A1%8C/" rel="tag">程序的编译、链接和运行</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rk3568-%E9%A9%B1%E5%8A%A8/" rel="tag">rk3568 驱动</a></li></ul>
 
     </footer>
   </div>
@@ -798,7 +553,7 @@
 
     
     <article
-  id="post-3-11-BSS段的处理"
+  id="post-1-14-内核空间与用户空间数据交互实验"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -809,8 +564,8 @@
     <header class="article-header">
        
 <h2 itemprop="name">
-  <a class="article-title" href="/2023/09/05/3-11-BSS%E6%AE%B5%E7%9A%84%E5%A4%84%E7%90%86/"
-    >3.11-BSS段的处理</a> 
+  <a class="article-title" href="/2023/09/05/1-14-%E5%86%85%E6%A0%B8%E7%A9%BA%E9%97%B4%E4%B8%8E%E7%94%A8%E6%88%B7%E7%A9%BA%E9%97%B4%E6%95%B0%E6%8D%AE%E4%BA%A4%E4%BA%92%E5%AE%9E%E9%AA%8C/"
+    >1-14-内核空间与用户空间数据交互实验</a> 
 </h2>
  
 
@@ -818,30 +573,18 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2023/09/05/3-11-BSS%E6%AE%B5%E7%9A%84%E5%A4%84%E7%90%86/" class="article-date">
-  <time datetime="2023-09-04T23:47:07.000Z" itemprop="datePublished">2023-09-05</time>
+      <a href="/2023/09/05/1-14-%E5%86%85%E6%A0%B8%E7%A9%BA%E9%97%B4%E4%B8%8E%E7%94%A8%E6%88%B7%E7%A9%BA%E9%97%B4%E6%95%B0%E6%8D%AE%E4%BA%A4%E4%BA%92%E5%AE%9E%E9%AA%8C/" class="article-date">
+  <time datetime="2023-09-05T00:00:01.000Z" itemprop="datePublished">2023-09-05</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
+    <a class="article-category-link" href="/categories/rk3568-%E9%A9%B1%E5%8A%A8/">rk3568 驱动</a>
   </div>
    
     </div>
       
     <div class="article-entry" itemprop="articleBody">
        
-  <h1 id="3-11-1-bss段"><a href="#3-11-1-bss段" class="headerlink" title="3.11.1 bss段"></a>3.11.1 bss段</h1><p>BSS（Block Started by Symbol）段是可执行文件或目标文件中的一个段（section），用于存储未初始化的全局变量和静态局部变量。BSS段具有以下特点：</p>
-<ol>
-<li>存储未初始化的变量：BSS段用于存储未显式初始化的全局变量和静态局部变量。这些变量在编译时没有赋予初始值，因此它们的存储空间可以在程序运行时动态地分配和初始化。</li>
-<li>不占目标文件空间：在目标文件中，BSS段不占用实际的空间。这是因为BSS段中的变量在编译时并没有实际的数值，所以在目标文件中只需记录BSS段的大小和位置信息。</li>
-<li>运行时分配空间：当可执行文件被加载到内存中运行时，操作系统会为BSS段分配实际的内存空间。这时，BSS段中的变量将被初始化为默认值（通常是0），以确保它们的初始状态是可预测的。</li>
-<li>节省存储资源：BSS段的设计初衷是为了节省存储资源。在早期计算机系统中，存储资源非常昂贵，因此将未初始化的变量放在BSS段中可以减少目标文件的大小，节省磁盘空间。</li>
-<li>记录BSS段信息：BSS段的总大小通常会在节头表（Section Header Table）中进行记录。节头表是目标文件格式中的一部分，它包含了关于各个段的信息，包括大小、位置等。此外，在符号表（Symbol Table）中也会记录每个变量的大小和地址等信息。</li>
-</ol>
-<h1 id="3-11-2-数据段和BSS段"><a href="#3-11-2-数据段和BSS段" class="headerlink" title="3.11.2 数据段和BSS段"></a>3.11.2 数据段和BSS段</h1><p>数据段和BSS段是可执行文件或目标文件中用于存储变量数据的段。它们在编译系统中的处理流程是相同的，但有一些差异。</p>
-<p>数据段用于存储已经初始化的全局变量和静态局部变量，这些变量在编译时已经赋予了初始值。数据段在可执行文件中占据实际的存储空间，并在程序运行时保持其初始值。</p>
-<p>BSS段设计的初衷是为了减少文件体积和节省磁盘资源。它用于存储未初始化的全局变量和静态局部变量，这些变量在编译时没有初始值。在目标文件中，BSS段不占用实际的存储空间，只记录其大小和位置信息。当可执行文件被加载到内存中运行时，操作系统会为BSS段分配实际的存储空间，并将其中的变量初始化为默认值。</p>
-<p>总的来说，数据段和BSS段都是用于存储变量数据的段。数据段存储已初始化的变量，占据实际的存储空间，而BSS段存储未初始化的变量，不占用实际的存储空间。它们在编译系统中的处理流程相同，但在可执行文件中的表现有所不同。</p>
- 
+   
       <!-- reward -->
       
     </div>
@@ -851,7 +594,7 @@
     
     <footer class="article-footer">
        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%BC%96%E8%AF%91%E3%80%81%E9%93%BE%E6%8E%A5%E5%92%8C%E8%BF%90%E8%A1%8C/" rel="tag">程序的编译、链接和运行</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rk3568-%E9%A9%B1%E5%8A%A8/" rel="tag">rk3568 驱动</a></li></ul>
 
     </footer>
   </div>
@@ -863,7 +606,7 @@
 
     
     <article
-  id="post-3-10-程序的运行"
+  id="post-1-13-杂项设备驱动实验"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -874,8 +617,8 @@
     <header class="article-header">
        
 <h2 itemprop="name">
-  <a class="article-title" href="/2023/09/05/3-10-%E7%A8%8B%E5%BA%8F%E7%9A%84%E8%BF%90%E8%A1%8C/"
-    >3.10-程序的运行</a> 
+  <a class="article-title" href="/2023/09/05/1-13-%E6%9D%82%E9%A1%B9%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E5%AE%9E%E9%AA%8C/"
+    >1-13-杂项设备驱动实验</a> 
 </h2>
  
 
@@ -883,87 +626,18 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2023/09/05/3-10-%E7%A8%8B%E5%BA%8F%E7%9A%84%E8%BF%90%E8%A1%8C/" class="article-date">
-  <time datetime="2023-09-04T23:47:06.000Z" itemprop="datePublished">2023-09-05</time>
+      <a href="/2023/09/05/1-13-%E6%9D%82%E9%A1%B9%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E5%AE%9E%E9%AA%8C/" class="article-date">
+  <time datetime="2023-09-04T23:59:59.000Z" itemprop="datePublished">2023-09-05</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
+    <a class="article-category-link" href="/categories/rk3568-%E9%A9%B1%E5%8A%A8/">rk3568 驱动</a>
   </div>
    
     </div>
       
     <div class="article-entry" itemprop="articleBody">
        
-  <h1 id="3-10-1-程序的运行"><a href="#3-10-1-程序的运行" class="headerlink" title="3.10.1 程序的运行"></a>3.10.1 程序的运行</h1><p>在操作系统环境下，可执行文件通常是以ELF（Executable and Linkable Format）格式存储的。ELF文件是一种可执行文件格式，包含了程序的机器代码、数据、符号表以及其他与程序执行相关的信息。运行可执行ELF文件需要依赖操作系统提供的执行环境和系统调用。</p>
-<p>在裸机环境下，即没有操作系统的情况下，常见的可执行文件格式是BIN（Binary）或HEX（Intel Hexadecimal）文件。这些文件包含了程序的机器代码，通常是一系列的二进制指令。</p>
-<p>运行BIN或HEX文件需要将其加载到裸机环境中执行，这通常涉及以下步骤：</p>
-<ol>
-<li>将BIN&#x2F;HEX文件加载到目标设备：<ul>
-<li>将BIN文件直接复制到目标设备的存储介质上，或者通过特定的通信方式将HEX文件发送到目标设备。</li>
-</ul>
-</li>
-<li>配置目标设备的执行环境：<ul>
-<li>在裸机环境中，没有操作系统提供的运行时环境，因此需要手动配置目标设备的执行环境。</li>
-<li>这包括设置适当的启动地址、堆栈地址、中断向量表等。</li>
-</ul>
-</li>
-<li>执行加载的程序：<ul>
-<li>在裸机环境中，程序的执行通常是从特定的启动地址开始。</li>
-<li>目标设备会按照启动地址开始执行加载的程序，即执行BIN&#x2F;HEX文件中的机器代码指令。</li>
-</ul>
-</li>
-</ol>
-<h2 id="3-10-2-可执行ELF文件"><a href="#3-10-2-可执行ELF文件" class="headerlink" title="3.10.2 可执行ELF文件"></a>3.10.2 可执行ELF文件</h2><p>可执行的ELF文件在操作系统环境下执行时，会经过加载器的处理。加载器负责将可执行文件加载到内存中，并进行相关的操作，最后跳转到程序入口处运行该程序。</p>
-<p>以下是与可执行ELF文件加载相关的一些概念和信息：</p>
-<ol>
-<li>镜像加载地址：<ul>
-<li>可执行ELF文件在内存中的加载地址，也称为镜像加载地址或基址。</li>
-<li>加载器将可执行文件的代码段、数据段等内容加载到内存时，会指定一个合适的地址作为加载地址，将文件映射到该地址开始的内存空间。</li>
-</ul>
-</li>
-<li>程序头表：<ul>
-<li>可执行ELF文件中包含一个程序头表（Program Header Table），记录了不同段的信息和在内存中的加载位置。</li>
-<li>程序头表指定了可执行文件镜像加载到内存中的地址。</li>
-<li>每个程序头表项描述了一个段（如代码段、数据段等），包括段的类型、文件偏移、在文件中的大小、在内存中的虚拟地址等信息。</li>
-</ul>
-</li>
-<li>ELF文件头基本信息：<ul>
-<li>ELF文件的开头是一个ELF文件头（ELF Header），包含了关于该可执行文件的基本信息。</li>
-<li>ELF文件头中的一些重要字段包括文件类型、运行平台（操作系统和处理器架构）、程序入口地址等。</li>
-<li>文件类型字段指示该文件是可执行文件、共享库还是目标文件。</li>
-<li>运行平台字段标识了目标操作系统和处理器架构。</li>
-<li>程序入口地址指示了程序在执行时的起始执行点，加载器会跳转到该地址开始执行程序。</li>
-</ul>
-</li>
-</ol>
-<h1 id="3-10-3-Linux内存映像"><a href="#3-10-3-Linux内存映像" class="headerlink" title="3.10.3 Linux内存映像"></a>3.10.3 Linux内存映像</h1><p>在Linux环境下，运行可执行文件涉及到创建进程和建立虚拟地址空间与可执行文件的映射关系。下面是在Linux环境下运行可执行文件的主要步骤：</p>
-<ol>
-<li>创建一个独立的虚拟地址空间：<ul>
-<li>当调用<code>execve</code>函数启动加载器时，操作系统会为新进程创建一个独立的虚拟地址空间。</li>
-<li>虚拟地址空间是进程独立使用的内存空间，包括代码段、数据段、堆、栈等区域。</li>
-</ul>
-</li>
-<li>读取可执行文件头，建立映射关系：<ul>
-<li>加载器会读取可执行文件的文件头，其中包含了关于该文件的一些基本信息，例如入口地址、段的大小等。</li>
-<li>加载器将可执行文件的不同段（如代码段、数据段）映射到进程的虚拟地址空间中的相应区域。</li>
-<li>这样，进程的虚拟地址空间中的某些区域就与可执行文件的对应部分建立了映射关系。</li>
-</ul>
-</li>
-<li>设置PC指针为可执行文件的入口地址，启动运行：<ul>
-<li>在建立好虚拟地址空间与可执行文件的映射关系之后，加载器会将程序计数器（PC）指针设置为可执行文件的入口地址。</li>
-<li>入口地址指示了程序在执行时的起始执行点。</li>
-<li>加载器启动运行，让进程从可执行文件的入口地址开始执行。</li>
-</ul>
-</li>
-</ol>
-<h1 id="3-10-4-MMU"><a href="#3-10-4-MMU" class="headerlink" title="3.10.4 MMU"></a>3.10.4 MMU</h1><p>MMU（Memory Management Unit，内存管理单元）是计算机系统中的一个硬件组件，负责虚拟地址与物理地址之间的转换。它是操作系统实现虚拟内存的关键部分。</p>
-<p>在CPU管脚的地址信号中，传递的是物理地址，即直接对应到计算机系统中的物理内存地址。但当启用MMU后，操作系统运行在虚拟地址空间上，这就涉及到虚拟地址与物理地址的转换。</p>
-<p>MMU的主要用途包括：</p>
-<ol>
-<li>虚拟内存：MMU负责将进程使用的虚拟地址映射到物理内存中的实际地址。通过虚拟内存技术，操作系统可以将部分进程的数据和代码存储在辅助存储设备（如硬盘）上，只在需要时加载到物理内存中。这样，操作系统可以运行比实际物理内存大的程序，提高系统的可用性和性能。</li>
-<li>内存保护：MMU允许操作系统为不同的内存块设置不同的读写权限。通过在虚拟地址空间和物理地址空间之间建立映射关系，并设置相应的访问权限，可以实现对内存的保护，防止进程越界访问或修改其他进程的内存数据。</li>
-</ol>
- 
+   
       <!-- reward -->
       
     </div>
@@ -973,7 +647,7 @@
     
     <footer class="article-footer">
        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%BC%96%E8%AF%91%E3%80%81%E9%93%BE%E6%8E%A5%E5%92%8C%E8%BF%90%E8%A1%8C/" rel="tag">程序的编译、链接和运行</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rk3568-%E9%A9%B1%E5%8A%A8/" rel="tag">rk3568 驱动</a></li></ul>
 
     </footer>
   </div>
@@ -985,7 +659,7 @@
 
     
     <article
-  id="post-3-9-链接过程-3-重定位"
+  id="post-1-12-字符设备驱动框架实验"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -996,8 +670,8 @@
     <header class="article-header">
        
 <h2 itemprop="name">
-  <a class="article-title" href="/2023/09/05/3-9-%E9%93%BE%E6%8E%A5%E8%BF%87%E7%A8%8B-3-%E9%87%8D%E5%AE%9A%E4%BD%8D/"
-    >3.9-链接过程(3)-重定位</a> 
+  <a class="article-title" href="/2023/09/05/1-12-%E5%AD%97%E7%AC%A6%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E6%A1%86%E6%9E%B6%E5%AE%9E%E9%AA%8C/"
+    >1-12-字符设备驱动框架实验</a> 
 </h2>
  
 
@@ -1005,86 +679,18 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2023/09/05/3-9-%E9%93%BE%E6%8E%A5%E8%BF%87%E7%A8%8B-3-%E9%87%8D%E5%AE%9A%E4%BD%8D/" class="article-date">
-  <time datetime="2023-09-04T23:47:04.000Z" itemprop="datePublished">2023-09-05</time>
+      <a href="/2023/09/05/1-12-%E5%AD%97%E7%AC%A6%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E6%A1%86%E6%9E%B6%E5%AE%9E%E9%AA%8C/" class="article-date">
+  <time datetime="2023-09-04T23:59:58.000Z" itemprop="datePublished">2023-09-05</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
+    <a class="article-category-link" href="/categories/rk3568-%E9%A9%B1%E5%8A%A8/">rk3568 驱动</a>
   </div>
    
     </div>
       
     <div class="article-entry" itemprop="articleBody">
        
-  <h1 id="3-9-1-重定位"><a href="#3-9-1-重定位" class="headerlink" title="3.9.1 重定位"></a>3.9.1 重定位</h1><p>重定位是链接过程中的核心步骤之一，它的主要目的是修正指令中的符号地址，使得程序可以正确地访问和调用其他模块或库中的函数和变量。</p>
-<p>在链接过程中，重定位完成以下任务：</p>
-<ol>
-<li>地址空间分配：<ul>
-<li>在链接过程中，编译器和链接器会为程序分配地址空间，包括代码段、数据段、堆、栈等。</li>
-<li>重定位阶段负责将各个模块的代码段和数据段中的地址修正为最终的实际地址，确保模块之间的地址空间不发生冲突。</li>
-</ul>
-</li>
-<li>符号解析：<ul>
-<li>在链接过程中，各个模块之间可能存在对函数和变量的引用或调用。</li>
-<li>重定位阶段负责解析这些引用，找到对应的函数或变量的实际地址，并将其填充到引用的位置，以便程序在执行时可以正确访问和调用。</li>
-</ul>
-</li>
-</ol>
-<h1 id="3-9-2-重定位过程1"><a href="#3-9-2-重定位过程1" class="headerlink" title="3.9.2 重定位过程1"></a>3.9.2 重定位过程1</h1><p>重定位过程是在链接过程中完成的，它涉及多个步骤和数据结构：</p>
-<ol>
-<li>汇编阶段：<ul>
-<li>在汇编阶段，汇编器会将源代码转换为机器代码，并生成目标模块。</li>
-<li>当汇编器遇到未定义的符号（外部定义的函数、变量、库函数引用等），它会认为这些符号在其他地方定义，不会报错。</li>
-<li>汇编器会收集这些未定义符号，并生成一个重定位表（relocation table），用于告诉链接器这些符号不在当前模块中定义，可能在其他文件或库中定义，需要在链接时进行解析。</li>
-</ul>
-</li>
-<li>段与重定位表：<ul>
-<li>目标模块通常被划分为多个段，如代码段、数据段等。</li>
-<li>在每个段中，可能存在对其他文件或库中定义的函数或变量的引用。</li>
-<li>汇编器会为每个段生成相应的重定位表，记录需要重定位的符号及其对应的位置信息。</li>
-</ul>
-</li>
-<li>重定位表的生成：<ul>
-<li>重定位表是一个数据结构，用于记录需要进行重定位的各种符号。</li>
-<li>对于每个需要重定位的符号，重定位表会记录符号的类型（函数或变量）、位置信息（段偏移量或地址）等。</li>
-<li>链接器在链接过程中会根据重定位表的信息，解析和修正这些符号的地址，使得它们指向正确的位置。</li>
-</ul>
-</li>
-</ol>
-<h1 id="3-9-3-重定位过程2"><a href="#3-9-3-重定位过程2" class="headerlink" title="3.9.3 重定位过程2"></a>3.9.3 重定位过程2</h1><p>重定位表是在ELF文件中用于记录需要进行重定位的符号及其相关信息的数据结构。在一个可重定位的ELF文件中，每个需要重定位的段都会有一个对应的重定位表，例如<code>.rel.text</code>和<code>.rel.data</code>。</p>
-<p>重定位表本身也是一个段，因此也被称为重定位段。通过查看重定位表，我们可以了解在链接过程中需要进行重定位的符号以及它们在代码中的偏移位置。</p>
-<p>重定位表的构成如下所示（对于32位ELF文件）：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Elf32_Rel</span> &#123;</span></span><br><span class="line">    Elf32_Addr r_offset;  <span class="comment">// 需要重定位的项在代码中的偏移位置</span></span><br><span class="line">    Elf32_Word r_info;    <span class="comment">// 重定位类型和符号索引</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>其中，<code>r_offset</code>字段指定了需要重定位的项在代码中的偏移位置，<code>r_info</code>字段包含了重定位类型和符号索引。</p>
-<p>通过解析重定位表中的信息，链接器可以根据符号索引找到对应的符号表项，并根据重定位类型进行相应的修正，使得符号的地址指向正确的位置。</p>
-<p>要查看一个ELF文件的重定位表，可以使用工具如<code>arm-linux-gnueabi-objdump</code>或<code>arm-linux-gnueabi-readelf</code>，并指定相应的选项来打印出重定位表的内容和相关信息。</p>
-<h1 id="3-9-4-重定位过程3"><a href="#3-9-4-重定位过程3" class="headerlink" title="3.9.4 重定位过程3"></a>3.9.4 重定位过程3</h1><p>在链接过程中，重定位过程涉及修改符号地址，通过读取各个目标文件中的重定位信息（重定位表）来进行符号重定位，即修改指令中的符号地址。</p>
-<p>具体步骤如下：</p>
-<ol>
-<li>读取重定位信息：<ul>
-<li>链接器会读取每个目标文件中的各个段的重定位信息，通常是通过读取重定位表来获取这些信息。</li>
-<li>重定位表记录了需要进行重定位的符号在代码中的位置以及相关的重定位类型和符号索引。</li>
-</ul>
-</li>
-<li>符号重定位：<ul>
-<li>链接器根据重定位表中的信息，确定各个重定位符号的新地址。</li>
-<li>这些新地址的计算通常涉及到基址的概念，即新的段基址加上段内的偏移量来得到重定位地址。</li>
-<li>重定位地址计算公式为：重定位地址 &#x3D; 新段基址 + 段内偏移。</li>
-</ul>
-</li>
-<li>修改指令中的符号地址：<ul>
-<li>链接器对目标文件中的指令进行扫描，在指令中定位到需要进行重定位的符号地址的位置。</li>
-<li>然后，链接器会将指令中的符号地址修改为相应的重定位地址，以完成符号的重定位。</li>
-</ul>
-</li>
-<li>形成新的符号表：<ul>
-<li>在重定位过程中，链接器会根据符号索引和重定位信息，确定每个重定位符号的新地址。</li>
-<li>链接器会将这些新地址形成一个新的符号表，用于在最终的可执行文件或共享库中进行符号解析和访问。</li>
-</ul>
-</li>
-</ol>
- 
+   
       <!-- reward -->
       
     </div>
@@ -1094,7 +700,7 @@
     
     <footer class="article-footer">
        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%BC%96%E8%AF%91%E3%80%81%E9%93%BE%E6%8E%A5%E5%92%8C%E8%BF%90%E8%A1%8C/" rel="tag">程序的编译、链接和运行</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rk3568-%E9%A9%B1%E5%8A%A8/" rel="tag">rk3568 驱动</a></li></ul>
 
     </footer>
   </div>
@@ -1111,7 +717,7 @@
   
   <nav class="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/15/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="page-number" href="/page/15/">15</a><span class="page-number current">16</span><a class="page-number" href="/page/17/">17</a><a class="page-number" href="/page/18/">18</a><a class="extend next" rel="next" href="/page/17/">下一页</a>
+    <a class="extend prev" rel="prev" href="/page/15/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="page-number" href="/page/15/">15</a><span class="page-number current">16</span><a class="page-number" href="/page/17/">17</a><a class="page-number" href="/page/18/">18</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><a class="extend next" rel="next" href="/page/17/">下一页</a>
   </nav>
   
 </section>

@@ -160,76 +160,131 @@
     
     
     <article
-  id="post-7-19-Linux内核的面向对象思想：多态"
+  id="post-0-12  .make.sh脚本的用法"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
   data-scroll-reveal
 >
   <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/09/09/7-19-Linux%E5%86%85%E6%A0%B8%E7%9A%84%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%80%9D%E6%83%B3%EF%BC%9A%E5%A4%9A%E6%80%81/"
-    >7.19 Linux内核的面向对象思想：多态</a> 
-</h2>
- 
-
-      
-    </header>
      
     <div class="article-meta">
-      <a href="/2023/09/09/7-19-Linux%E5%86%85%E6%A0%B8%E7%9A%84%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%80%9D%E6%83%B3%EF%BC%9A%E5%A4%9A%E6%80%81/" class="article-date">
-  <time datetime="2023-09-09T12:49:49.000Z" itemprop="datePublished">2023-09-09</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
-  </div>
-   
+      <a href="/2023/09/12/0-12%20%20.make.sh%E8%84%9A%E6%9C%AC%E7%9A%84%E7%94%A8%E6%B3%95/" class="article-date">
+  <time datetime="2023-09-12T14:09:53.391Z" itemprop="datePublished">2023-09-12</time>
+</a>    
     </div>
       
     <div class="article-entry" itemprop="articleBody">
        
-  <p>当涉及到C语言基础的结构体、指针、数组、函数指针、指针函数以及指针传参和返回值时，下面是一些相关的解释和示例：</p>
-<ol>
-<li><p>结构体（Structures）：</p>
-<p>结构体是一种用户自定义的数据类型，它可以包含不同数据类型的成员变量。结构体提供了一种组织数据的方式，使得可以将多个相关的数据项组合在一起。</p>
-<p>示例：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Person</span> &#123;</span></span><br><span class="line">    <span class="type">char</span> name[<span class="number">20</span>];</span><br><span class="line">    <span class="type">int</span> age;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Person</span> <span class="title">person1</span>;</span></span><br><span class="line">person1.age = <span class="number">25</span>;</span><br><span class="line">```</span><br></pre></td></tr></table></figure>
+  <p>直接在<code>u-boot</code>根目录执行<code>./make.sh -h</code>命令就能看到用法：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122210874.png" alt="img"></p>
+<h2 id="一、固件构建"><a href="#一、固件构建" class="headerlink" title="一、固件构建"></a>一、固件构建</h2><p>构建<code>rk3568</code>固件其实就是<code>./make.sh rk3568</code>，实际选用的是<code>rk3568_defconfig</code>，这里的构建固件一定要确保<code>configs</code>目录有相应的<code>*_defconfig</code>与<code>*.config</code>文件：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122210739.png" alt="img"><br>如果是相同的<code>.config</code>文件，再次构建直接执行<code>./make.sh</code>即可！</p>
+<p>除此之外，<code>./make.sh env</code>用于构建<code>fw_printenv</code>工具：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122210743.png" alt="img"></p>
+<p><code>fw_printenv</code>是U-Boot提供的一个给linux使用的env工具。通过这个工具，用户可以在linux上访问、修改env的内容。使用该工具要求env区域必须位于一个kernel可见的分区上（建议独立分区），本质上是通过kernel sys下的存储节点访问到env区域。</p>
+<p>几个重要文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">./tools/env/fw_printenv // env读写工具</span><br><span class="line">./tools/env/fw_env.config // env配置文件</span><br><span class="line">./tools/env/README // env读写工具说明文档</span><br></pre></td></tr></table></figure>
+
+<h2 id="二、固件打包"><a href="#二、固件打包" class="headerlink" title="二、固件打包"></a>二、固件打包</h2><p>固件打包有时候有特殊需求的时候会用到，用法如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">./make.sh trust // 打包trust</span><br><span class="line">./make.sh loader // 打包loader</span><br><span class="line">./make.sh trust &lt;ini-file&gt; // 打包trust时指定ini文件</span><br><span class="line">./make.sh loader &lt;ini-file&gt; // 打包loader时指定ini文件</span><br><span class="line">./make.sh --spl // 用u-boot-spl.bin替换miniloader，打包成loader</span><br><span class="line">./make.sh --tpl // 用u-boot-tpl.bin替换ddr，打包成loader</span><br><span class="line">./make.sh --tpl -spl // 用u-boot-tpl.bin与u-boot-spl.bin替换ddr与miniloader，打包成loader</span><br><span class="line">./make.sh itb // 打包u-boot.itb（64位平台只支持打包ATF和U-Boot，OP-TEE</span><br><span class="line">不打包）</span><br></pre></td></tr></table></figure>
+
+<p>但是由于<code>rk3568</code>的固件是使用FIT格式来打包的，因此以下命令都不支持<code>rk3568</code>（以下命令支持非FIT格式打包）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">./make.sh trust // 打包trust</span><br><span class="line">./make.sh loader // 打包loader</span><br><span class="line">./make.sh trust &lt;ini-file&gt; // 打包trust时指定ini文件</span><br><span class="line">./make.sh loader &lt;ini-file&gt; // 打包loader时指定ini文件</span><br></pre></td></tr></table></figure>
+
+<p>另外使用编译出来的<code>tpl</code>是无法启动的，因此对于<code>rk3568</code>，只有以下命令使用是有效果的：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">./make.sh --spl 用u-boot-spl.bin替换miniloader，打包成loader</span><br><span class="line">./make.sh --spl-new // ./make.sh --spl 命令只打包但不编译，此命令会重新编译再</span><br><span class="line">打包。</span><br><span class="line">./make.sh itb // 打包u-boot.itb（64位平台只支持打包ATF和U-Boot，OP-TEE</span><br><span class="line">不打包）</span><br></pre></td></tr></table></figure>
+
+<h2 id="三、反汇编调试"><a href="#三、反汇编调试" class="headerlink" title="三、反汇编调试"></a>三、反汇编调试</h2><p>反汇编调试用法如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">./make.sh elf-[x] [type] // 反汇编：使用-[x]参数, [type]可选择是否反汇编SPL或TPL</span><br><span class="line">./make.sh elf // 反汇编u-boot文件，默认使用-D参数</span><br><span class="line">./make.sh elf-S // 反汇编u-boot文件，使用-S参数</span><br><span class="line">./make.sh elf-d // 反汇编u-boot文件，使用-d参数</span><br><span class="line">./make.sh elf spl // 反汇编tpl/u-boot-tpl文件，默认使用-D参数</span><br><span class="line">./make.sh elf tpl // 反汇编spl/u-boot-tpl文件，默认使用-D参数</span><br><span class="line">./make.sh &lt;addr&gt; // 需要addr对应的函数名和代码位置</span><br><span class="line">./make.sh map // 打开u-boot.map</span><br><span class="line">./make.sh sym // 打开u-boot.sym</span><br></pre></td></tr></table></figure> 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-0-11 .make.sh rk3568编译命令执行分析（下）"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+     
+    <div class="article-meta">
+      <a href="/2023/09/12/0-11%20.make.sh%20rk3568%E7%BC%96%E8%AF%91%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E5%88%86%E6%9E%90%EF%BC%88%E4%B8%8B%EF%BC%89/" class="article-date">
+  <time datetime="2023-09-12T14:09:05.371Z" itemprop="datePublished">2023-09-12</time>
+</a>    
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h2 id="五、总结"><a href="#五、总结" class="headerlink" title="五、总结"></a>五、总结</h2><h3 id="5-1-编译脚本运行流程"><a href="#5-1-编译脚本运行流程" class="headerlink" title="5.1 编译脚本运行流程"></a>5.1 编译脚本运行流程</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">./make.sh rk3568</span><br><span class="line">    process_args rk3568 # 参数解析</span><br><span class="line">        make rk3568_defconfig # 生成.config</span><br><span class="line">    prepare # 指定rkbin路径与平台类似为fit</span><br><span class="line">    select_toolchain # 指定交叉工具链</span><br><span class="line">    select_chip_info # 指定芯片信息</span><br><span class="line">    fixup_platform_configure # 没作用</span><br><span class="line">    select_ini_file # 指定rkbin目录的ini文件</span><br><span class="line">    handle_args_late # 添加ini文件作为参数</span><br><span class="line">    sub_commands # 传入rk3568参数，执行unwind_addr_or_continue</span><br><span class="line">        unwind_addr_or_continue # 没作用</span><br><span class="line">    clean_files # 清除历史文件</span><br><span class="line">    make PYTHON=python2 CROSS_COMPILE=$&#123;TOOLCHAIN&#125; all --jobs=$&#123;JOB&#125; # 编译u-boot</span><br><span class="line">    pack_images # 打包固件</span><br><span class="line">        pack_fit_image --ini-trust ../rkbin/RKTRUST/RK3568TRUST.ini --ini-loader ../rkbin/RKBOOT/RK3568MINIALL.ini # 根据ini文件打包fit格式固件</span><br><span class="line">            ./scripts/fit.sh --ini-trust ../rkbin/RKTRUST/RK3568TRUST.ini --ini-loader ../rkbin/RKBOOT/RK3568MINIALL.ini --chip RK3568</span><br><span class="line">                fit_process_args --ini-trust ../rkbin/RKTRUST/RK3568TRUST.ini --ini-loader ../rkbin/RKBOOT/RK3568MINIALL.ini --chip RK3568 # 记录这三个参数</span><br><span class="line">                fit_raw_compile # 创建fit目录</span><br><span class="line">                fit_gen_uboot_itb # 产生u-boot.itb</span><br><span class="line">                    ./make.sh itb ../rkbin/RKTRUST/RK3568TRUST.ini</span><br><span class="line">                        process_args itb ../rkbin/RKTRUST/RK3568TRUST.ini # 参数解析</span><br><span class="line">                        ...</span><br><span class="line">                        sub_commands # 传入itb参数，执行unwind_addr_or_continue</span><br><span class="line">                            pack_uboot_itb_image # 打包u-boot.itb</span><br><span class="line">                                arch/arm/mach-rockchip/make_fit_atf.sh -t 0x08400000 &gt; u-boot.its # 生成u-boot.its</span><br><span class="line">                                ./tools/mkimage -f u-boot.its -E u-boot.itb # 根据u-boot.its生成u-boot.itb</span><br><span class="line">                    check_its u-boot.its # 校验u-boot.its</span><br><span class="line">                    ./make.sh loader ../rkbin/RKBOOT/RK3568MINIALL.ini</span><br><span class="line">                        process_args loader ../rkbin/RKBOOT/RK3568MINIALL.ini # 参数解析</span><br><span class="line">                        ...</span><br><span class="line">                        sub_commands # 传入loader参数，执行pack_loader_image</span><br><span class="line">                            pack_loader_image # 打包*_loader_*.bin</span><br><span class="line">                                ./scripts/loader.sh --ini ../rkbin/RKBOOT/RK3568MINIALL.ini</span><br><span class="line">                                    cd ../rkbin</span><br><span class="line">                                    ./tools/boot_merger RKBOOT/RK3568MINIALL.ini # 合成*_loader_*.bin</span><br><span class="line">                                    cd -</span><br><span class="line">                                    mv ../rkbin/*_loader_*.bin ./</span><br><span class="line">                    mv u-boot.its fit/</span><br><span class="line">                fit_gen_uboot_img # 产生uboot.img</span><br><span class="line">                    for ((i = 0; i &lt; 2; i++));</span><br><span class="line">                    do</span><br><span class="line">                        cat fit/uboot.itb &gt;&gt; uboot.img</span><br><span class="line">                        truncate -s %2048K uboot.img</span><br><span class="line">                    done</span><br><span class="line">                fit_gen_loader # 没作用</span><br><span class="line">                fit_msg_uboot # 打印uboot fit信息</span><br><span class="line">                fit_msg_recovery # 没作用</span><br><span class="line">                fit_msg_boot # 没作用</span><br><span class="line">                fit_msg_loader # 没作用</span><br><span class="line">    finish # 打印完成信息</span><br><span class="line">    echo $&#123;TOOLCHAIN&#125; # 打印工具链</span><br><span class="line">    date # 打印编译结束时间</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-2-简要分析"><a href="#5-2-简要分析" class="headerlink" title="5.2 简要分析"></a>5.2 简要分析</h3><h4 id="5-2-1-config文件生成"><a href="#5-2-1-config文件生成" class="headerlink" title="5.2.1 .config文件生成"></a>5.2.1 .config文件生成</h4><p><code>./make.sh rk3568</code>把参数字符串合成<code>rk3568_defconfig</code>，再生成<code>.config</code>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make rk3568_defconfig</span><br></pre></td></tr></table></figure>
+
+<h4 id="5-2-2-原始uboot编译"><a href="#5-2-2-原始uboot编译" class="headerlink" title="5.2.2 原始uboot编译"></a>5.2.2 原始uboot编译</h4><p><code>make.sh</code>脚本指定<code>TOOLCHAIN</code>工具链与<code>JOB</code>线程数参数，再编译：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make PYTHON=python2 CROSS_COMPILE=$&#123;TOOLCHAIN&#125; all --jobs=$&#123;JOB&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="5-2-3-打包机制浅析"><a href="#5-2-3-打包机制浅析" class="headerlink" title="5.2.3 打包机制浅析"></a>5.2.3 打包机制浅析</h4><p><code>fit.sh</code>脚本通过指定的<code>rkbin</code>的<code>ini</code>文件来打包。</p>
+<ul>
+<li><p>对于打包</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">u-boot.itb</span><br></pre></td></tr></table></figure>
+
+<p>，通过</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rkbin/RKTRUST/RK3568TRUST.ini</span><br></pre></td></tr></table></figure>
+
+<p>文件描述内容，调用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arch/arm/mach-rockchip/make_fit_atf.sh</span><br></pre></td></tr></table></figure>
+
+<p>脚本生成相应的</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">u-boot.its</span><br></pre></td></tr></table></figure>
+
+<p>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arch/arm/mach-rockchip/make_fit_atf.sh -t 0x08400000 &gt; u-boot.its</span><br></pre></td></tr></table></figure>
+
+<p>然后使用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tool/mkimage</span><br></pre></td></tr></table></figure>
+
+<p>工具生成</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">u-boot.itb</span><br></pre></td></tr></table></figure>
+
+<p>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./tools/mkimage -f u-boot.its -E u-boot.itb</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>指针（Pointers）：</p>
-<p>指针是一种变量，用于存储内存地址。通过指针，可以间接地访问和操作内存中的数据。</p>
-<p>示例：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> num = <span class="number">10</span>;</span><br><span class="line"><span class="type">int</span> *ptr = &amp;num; <span class="comment">// 指向num的指针</span></span><br><span class="line">```</span><br></pre></td></tr></table></figure>
+<li><p>对于打包<code>*_loader_*.bin</code>，通过<code>rkbin/RKBOOT/RK3568MINIALL.ini</code>文件描述内容，调用<code>scripts/loader.sh</code>脚本，该脚本使用<code>rkbin/tools/boot_merger</code>不开源二进制工具合成<code>*_loader_*.bin</code>。</p>
 </li>
-<li><p>数组（Arrays）：</p>
-<p>数组是一种存储相同类型数据项的连续内存区域。可以通过索引访问数组元素。</p>
-<p>示例：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> arr[<span class="number">5</span>] = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>&#125;;</span><br><span class="line"><span class="type">int</span> element = arr[<span class="number">2</span>]; <span class="comment">// 访问索引为2的数组元素</span></span><br><span class="line">```</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>函数指针（Function Pointers）：</p>
-<p>函数指针指向函数的内存地址。可以通过函数指针调用相应的函数。</p>
-<p>示例：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">add</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> (*ptr)(<span class="type">int</span>, <span class="type">int</span>) = add; <span class="comment">// 指向add函数的指针</span></span><br><span class="line"><span class="type">int</span> result = ptr(<span class="number">2</span>, <span class="number">3</span>); <span class="comment">// 调用函数指针</span></span><br><span class="line">```</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>指针函数（Pointer to a Function）：</p>
-<p>指针函数是一个返回指针的函数。它返回指向特定类型的数据的指针。</p>
-<p>示例：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span>* <span class="title function_">getArray</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">int</span> arr[<span class="number">5</span>] = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>&#125;;</span><br><span class="line">    <span class="keyword">return</span> arr;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> *ptr = getArray(); <span class="comment">// 调用指针函数，获取指针</span></span><br><span class="line">```</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>指针传参和指针返回值：</p>
-<p>在函数参数中，可以通过指针传递参数，使得函数能够修改传入的变量的值。同样，函数也可以返回指针，以便在函数外部访问函数内部创建的变量。</p>
-<p>示例：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">increment</span><span class="params">(<span class="type">int</span> *numPtr)</span> &#123;</span><br><span class="line">    (*numPtr)++;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">int</span> num = <span class="number">5</span>;</span><br><span class="line">    increment(&amp;num); <span class="comment">// 通过指针传参修改num的值</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, num); <span class="comment">// 输出 6</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line">```</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>数据结构：链表（Linked List）和队列（Queue）：</p>
-<p>链表和队列都是常见的数据结构。</p>
-<p>链表是一种动态数据结构，它由节点组成，每个节点包含数据和指向下一个节点的指针。链表的插入和删除操作比较高效。</p>
-<p>队列是一种先进先出（FIFO）的数据结构，可以在一端插入元素，在另一端删除元素。常见的队列有顺序队列和链式队列。</p>
-<p>示例：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 链表节点</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span> &#123;</span></span><br><span class="line">    <span class="type">int</span> data;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Node</span> *<span class="title">next</span>;</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// 队列节点</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">QueueNode</span> &#123;</span></span><br><span class="line">    <span class="type">int</span> data;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">QueueNode</span> *<span class="title">next</span>;</span></span><br><span class="line">&#125;;</span><br><span class="line">```</span><br></pre></td></tr></table></figure></li>
-</ol>
+<li><p>对于打包</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uboot.img</span><br></pre></td></tr></table></figure>
+
+<p>，它由</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uboot.itb</span><br></pre></td></tr></table></figure>
+
+<p>通过以下命令产生（注意</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uboot.itb</span><br></pre></td></tr></table></figure>
+
+<p>与</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">u-boot.itb</span><br></pre></td></tr></table></figure>
+
+<p>是一样的）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">for ((i = 0; i &lt; 2; i++));</span><br><span class="line">do</span><br><span class="line">  cat fit/uboot.itb &gt;&gt; uboot.img</span><br><span class="line">  truncate -s %2048K uboot.img</span><br><span class="line">done</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>注意最终烧录的固件是<code>*_loader_*.bin</code>与<code>uboot.img</code>，且需要是瑞芯微的工具：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122209586.png" alt="img"></p>
  
       <!-- reward -->
       
@@ -240,8 +295,6 @@
     
     <footer class="article-footer">
        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" rel="tag">数据结构和面向对象</a></li></ul>
-
     </footer>
   </div>
 
@@ -252,7 +305,184 @@
 
     
     <article
-  id="post-7-18-Linux内核的面向对象思想：继承（下）"
+  id="post-0-10 make.sh+rk3568编译命令执行分析（中）"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+     
+    <div class="article-meta">
+      <a href="/2023/09/12/0-10%20make.sh+rk3568%E7%BC%96%E8%AF%91%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E5%88%86%E6%9E%90%EF%BC%88%E4%B8%AD%EF%BC%89/" class="article-date">
+  <time datetime="2023-09-12T14:08:05.602Z" itemprop="datePublished">2023-09-12</time>
+</a>    
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h3 id="4-6-执行fit-sh脚本"><a href="#4-6-执行fit-sh脚本" class="headerlink" title="4.6 执行fit.sh脚本"></a>4.6 执行fit.sh脚本</h3><p>在上一节 4.5 中执行<code>pack_fit_image</code>函数，这个函数会调用<code>fit.sh</code>脚本：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208166.png" alt="img"></p>
+<p><code>SCRIPT_FIT</code>的定义：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208192.png" alt="img"><br>具体参数传递：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208179.png" alt="img"></p>
+<p>脚本函数执行如下：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208171.png" alt="img"><br>打开该脚本，添加打印：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208022.png" alt="img"><br>执行以下命令会输出具体的执行过程：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./scripts/fit.sh --ini-trust ../rkbin/RKTRUST/RK3568TRUST.ini --ini-loader ../rkbin/RKBOOT/RK3568MINIALL.ini --chip RK3568</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-6-1-编译相关变量初始化"><a href="#4-6-1-编译相关变量初始化" class="headerlink" title="4.6.1 编译相关变量初始化"></a>4.6.1 编译相关变量初始化</h4><p>打印日志：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208197.png" alt="img"><br>源代码：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208348.png" alt="img"></p>
+<h4 id="4-6-2-执行fit-process-args"><a href="#4-6-2-执行fit-process-args" class="headerlink" title="4.6.2 执行fit_process_args"></a>4.6.2 执行fit_process_args</h4><p>打印日志：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208426.png" alt="img"></p>
+<p><code>fit_process_args</code>函数解析<code>--ini-trust</code>参数，用于指定<code>rkbin</code>的<code>RK3568TRUST.ini</code>文件，同理<code>--ini-loader</code>指定<code>RK3568MINIALL.ini</code>文件，同时指定芯片平台<code>--chip</code>为<code>RK3568</code>，<code>fit_process_args</code>函数定义如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br></pre></td><td class="code"><pre><span class="line">function fit_process_args()</span><br><span class="line">&#123;</span><br><span class="line">	if [ $# -eq 0 ]; then</span><br><span class="line">		help</span><br><span class="line">		exit 0</span><br><span class="line">	fi</span><br><span class="line"></span><br><span class="line">	while [ $# -gt 0 ]; do</span><br><span class="line">		case $1 in</span><br><span class="line">			--args)</span><br><span class="line">				ARG_VALIDATE=$2</span><br><span class="line">				shift 2</span><br><span class="line">				;;</span><br><span class="line">			--boot_img)     # boot.img</span><br><span class="line">				ARG_BOOT_IMG=$2</span><br><span class="line">				shift 2</span><br><span class="line">				;;</span><br><span class="line">			--chip)</span><br><span class="line">				ARG_CHIP=$2</span><br><span class="line">				shift 2</span><br><span class="line">				;;</span><br><span class="line">			--recovery_img) # recovery.img</span><br><span class="line">				ARG_RECOVERY_IMG=$2</span><br><span class="line">				shift 2</span><br><span class="line">				;;</span><br><span class="line">			--boot_img_dir) # boot.img components directory</span><br><span class="line">				ARG_BOOT_IMG_DIR=$2</span><br><span class="line">				shift 2</span><br><span class="line">				;;</span><br><span class="line">			--no-check)     # No hostcc fit signature check</span><br><span class="line">				ARG_NO_CHECK=&quot;y&quot;</span><br><span class="line">				shift 1</span><br><span class="line">				;;</span><br><span class="line">			--ini-trust)    # Assign trust ini file</span><br><span class="line">				ARG_INI_TRUST=$2</span><br><span class="line">				shift 2</span><br><span class="line">				;;</span><br><span class="line">			--ini-loader)   # Assign loader ini file</span><br><span class="line">				ARG_INI_LOADER=$2</span><br><span class="line">				shift 2</span><br><span class="line">				;;</span><br><span class="line">			--spl-new)      # Use current build u-boot-spl.bin to pack loader</span><br><span class="line">				ARG_SPL_NEW=&quot;y&quot;</span><br><span class="line">				shift 1</span><br><span class="line">				;;</span><br><span class="line">			--rollback-index-boot)</span><br><span class="line">				ARG_ROLLBACK_IDX_BOOT=$2</span><br><span class="line">				arg_check_decimal $2</span><br><span class="line">				shift 2</span><br><span class="line">				;;</span><br><span class="line">			--rollback-index-recovery)</span><br><span class="line">				ARG_ROLLBACK_IDX_RECOVERY=$2</span><br><span class="line">				arg_check_decimal $2</span><br><span class="line">				shift 2</span><br><span class="line">				;;</span><br><span class="line">			--rollback-index-uboot)</span><br><span class="line">				ARG_ROLLBACK_IDX_UBOOT=$2</span><br><span class="line">				arg_check_decimal $2</span><br><span class="line">				shift 2</span><br><span class="line">				;;</span><br><span class="line">			--version-uboot)</span><br><span class="line">				ARG_VER_UBOOT=$2</span><br><span class="line">				arg_check_decimal $2</span><br><span class="line">				shift 2</span><br><span class="line">				;;</span><br><span class="line">			--version-boot)</span><br><span class="line">				ARG_VER_BOOT=$2</span><br><span class="line">				arg_check_decimal $2</span><br><span class="line">				shift 2</span><br><span class="line">				;;</span><br><span class="line">			--version-recovery)</span><br><span class="line">				ARG_VER_RECOVERY=$2</span><br><span class="line">				arg_check_decimal $2</span><br><span class="line">				shift 2</span><br><span class="line">				;;</span><br><span class="line">			--burn-key-hash)</span><br><span class="line">				ARG_BURN_KEY_HASH=&quot;y&quot;</span><br><span class="line">				shift 1</span><br><span class="line">				;;</span><br><span class="line">			*)</span><br><span class="line">				help</span><br><span class="line">				exit 1</span><br><span class="line">				;;</span><br><span class="line">		esac</span><br><span class="line">	done</span><br><span class="line"></span><br><span class="line">	if grep -q &#x27;^CONFIG_FIT_SIGNATURE=y&#x27; .config ; then</span><br><span class="line">		ARG_SIGN=&quot;y&quot;</span><br><span class="line">	fi</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>位置参数可以用<code>shift</code>命令左移。比如<code>shift 3</code>表示原来的<code>$4</code>现在变成<code>$1</code>，原来的<code>$5</code>现在变成<code>$2</code>等等，原来的<code>$1</code>、<code>$2</code>、<code>$3</code>丢弃，<code>$0</code>不移动。不带参数的<code>shift</code>命令相当于<code>shift 1</code>。</p>
+</blockquote>
+<h4 id="4-6-3-执行fit-raw-compile"><a href="#4-6-3-执行fit-raw-compile" class="headerlink" title="4.6.3 执行fit_raw_compile"></a>4.6.3 执行fit_raw_compile</h4><p>打印日志：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208448.png" alt="在这里插入图片描述"></p>
+<p><code>fit_raw_compile</code>函数在此处只是重新创建<code>fit</code>目录，函数体如下：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208459.png" alt="img"></p>
+<h4 id="4-6-4-执行fit-gen-uboot-itb"><a href="#4-6-4-执行fit-gen-uboot-itb" class="headerlink" title="4.6.4 执行fit_gen_uboot_itb"></a>4.6.4 执行fit_gen_uboot_itb</h4><p>打印日志：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208542.png" alt="img"><br><code>fit_gen_uboot_itb</code>函数从命名来看应该是产生<code>uboot.itb</code>文件，从日志可以知道，它调用了<code>make.sh</code>脚本，执行的命令是<code>./make.sh itb ../rkbin/RKTURST/RK3568TRUST.ini</code>，接下来执行类似与<code>./make.sh rk3568</code>，只是此时传入进去的参数是<code>itb</code>：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208486.png" alt="img"></p>
+<p>打印日志：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208648.png" alt="img"><br>执行<code>process_args</code>等等，大部分与<code>./make.sh rk3568</code>一样：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208747.png" alt="img"></p>
+<p>后面有差异的地方是从执行<code>sub_commands</code>函数开始，传入的参数是之前的<code>itb</code>，然后调用<code>pack_uboot_itb_image</code>函数：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208794.png" alt="img"></p>
+<p>源代码：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208753.png" alt="img"></p>
+<p><code>pack_uboot_itb_image</code>函数解析<code>../rkbin/RKTURST/RK3568TRUST.ini</code>文件的内容，文件内容如下：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208773.png" alt="img"></p>
+<p>把<code>bl31.elf</code>与<code>tee.bin</code>二进制文件拷贝到uboot目录：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208028.png" alt="img"><br><code>mcu*.bin</code>因为<code>../rkbin/RKTURST/RK3568TRUST.ini</code>文件并没有描述，因此实际上并没有拷贝!<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208966.png" alt="img"><br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208007.png" alt="img"></p>
+<p><code>load*.bin</code>因为<code>../rkbin/RKTURST/RK3568TRUST.ini</code>文件也没有描述，故没有拷贝!<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208041.png" alt="img"><br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208115.png" alt="img"><br>这个阶段执行的代码如下：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208128.png" alt="img"><br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208293.png" alt="img"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208301.png" alt="img"></p>
+<p><code>fit_gen_uboot_itb</code>函数执行到后面会执行<code>arch/arm/mach-rockchop/make_fit_atf.sh</code>脚本，这个脚本在<code>.config</code>文件中有指定：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208308.png" alt="img"><br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208115.png" alt="img"></p>
+<p>使用该脚本执行<code>arch/arm/mach-rockchip/make_fit_atf.sh -t 0x08400000</code>命令：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208421.png" alt="img"><br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208434.png" alt="img"></p>
+<p>这个脚本是用于生成固件描述文件<code>u-boot.its</code>，内容如下：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208470.png" alt="img"></p>
+<p>接着执行<code>./tools/mkimage -f u-boot.its -E u-boot.itb</code>命令生成<code>u-boot.itb</code>：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208550.png" alt="img"><br><code>mkimage</code>的用法如下：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208686.png" alt="img"><br><code>-E</code>是什么意思？看源代码：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208621.png" alt="img"></p>
+<p>接下来执行<code>check_its u-boot.its</code>：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208721.png" alt="img"><br>这个函数功能就是检查<code>u-boot.its</code>，源代码如下：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208828.png" alt="img"><br>接下来执行<code>./make.sh loader ../rkbin/RKBOOT/RK3568MINIALL.ini</code>，原理与之前的类似的：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208756.png" alt="img"></p>
+<p>打印日志（保留主要）：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208778.png" alt="img"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208880.png" alt="img"><br>调用<code>process_args</code>函数等等（保留主要）：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208090.png" alt="img"></p>
+<p>调用<code>sub_commands</code>函数等等（保留主要）：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208034.png" alt="img"><br>执行<code>./make.sh loader ../rkbin/RKBOOT/RK3568MINIALL.ini</code>最终调用到<code>pack_loader_image</code>函数：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208041.png" alt="img"><br><code>pack_loader_image</code>函数，里面调用<code>loader.sh</code>脚本：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208095.png" alt="img"><br>对<code>loader.sh</code>脚本也添加打印：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208077.png" alt="img"><br>打印日志如下，可以看到实际上是调用了<code>boot_merger</code>来打包loader：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208119.png" alt="img"><br>这个<code>boot_merger</code>存放在<code>rkbin/tools</code>目录，是不开源的二进制文件，用法如下：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208401.png" alt="img"><br><code>loader.sh</code>脚本源代码如下：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208429.png" alt="img"></p>
+<p>回到<code>fit_gen_uboot_itb</code>函数，打印：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208376.png" alt="img"><br>删除历史文件，把<code>u-boot.its</code>移动到<code>fit</code>目录，源代码如下：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208382.png" alt="img"></p>
+<p>调用<code>fit_gen_uboot_img</code>打包<code>uboot.img</code>：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208407.png" alt="img"></p>
+<p>源代码：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208411.png" alt="img"><br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208757.png" alt="img"></p>
+<p>执行过程：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208688.png" alt="img"><br>紧接着打包loader，实际上并没有运行：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208712.png" alt="img"><br>源代码：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208726.png" alt="img"><br>打印信息：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208734.png" alt="img"><br>源代码：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208776.png" alt="img"><br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208999.png" alt="img"><br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208166.png" alt="img"><br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208024.png" alt="img"><br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208006.png" alt="img"><br>至此<code>fit.sh</code>执行完毕！</p>
+<h3 id="4-7-执行finish"><a href="#4-7-执行finish" class="headerlink" title="4.7 执行finish"></a>4.7 执行finish</h3><p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208063.png" alt="img"><br>打印完成信息：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208034.png" alt="img"></p>
+<p>还有最后打印工具链与编译结束时间：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208268.png" alt="img"></p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-0-9 .make.sh rk3568编译命令执行分析（上） "
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+     
+    <div class="article-meta">
+      <a href="/2023/09/12/0-9%20.make.sh%20rk3568%E7%BC%96%E8%AF%91%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E5%88%86%E6%9E%90%EF%BC%88%E4%B8%8A%EF%BC%89%20/" class="article-date">
+  <time datetime="2023-09-12T14:06:46.208Z" itemprop="datePublished">2023-09-12</time>
+</a>    
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h2 id="一、打开脚本冗余输出"><a href="#一、打开脚本冗余输出" class="headerlink" title="一、打开脚本冗余输出"></a>一、打开脚本冗余输出</h2><p>在<code>make.sh</code>添加<code>set -x</code>：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122207615.png" alt="img"><br>然后执行编译即可：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ./make.sh rk3568</span><br></pre></td></tr></table></figure>
+
+<h2 id="二、编译线程数设置"><a href="#二、编译线程数设置" class="headerlink" title="二、编译线程数设置"></a>二、编译线程数设置</h2><p>从输出来看，把变量<code>JOB</code>赋值为<code>8</code>：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122207547.png" alt="img"><br>这个变量<code>JOB</code>用于后续以下编译命令使用（多线程编译用于提高编译速度）：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122207647.png" alt="img"></p>
+<h2 id="三、编译相关变量初始化"><a href="#三、编译相关变量初始化" class="headerlink" title="三、编译相关变量初始化"></a>三、编译相关变量初始化</h2><p>把编译命令<code>./make.sh rk3568</code>的<code>rk3568</code>赋值到<code>CMD_ARGS</code>变量，并制定工具链目录与声明一些变量：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122207594.png" alt="img"><br>脚本源代码（注释中指明<code>RKBIN_TOOLS</code>、<code>CROSS_COMPILE_ARM32</code>与<code>CROSS_COMPILE_ARM64</code>变量用户可以修改制定）：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122207618.png" alt="img"><br>制定目录树路径与脚本工具（这些都是RK自定义的脚本工具）：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122207588.png" alt="img"><br>脚本源代码：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122207795.png" alt="img"></p>
+<h2 id="四、执行脚本函数与编译"><a href="#四、执行脚本函数与编译" class="headerlink" title="四、执行脚本函数与编译"></a>四、执行脚本函数与编译</h2><p>脚本函数与编译按照顺序执行如下：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122207832.png" alt="img"></p>
+<h3 id="4-1-执行process-args与prepare"><a href="#4-1-执行process-args与prepare" class="headerlink" title="4.1 执行process_args与prepare"></a>4.1 执行process_args与prepare</h3><p>首先执行<code>process_args</code>函数，传递的参数是<code>rk3568</code>，在此处主要是用于生成<code>.config</code>使用，从输出信息看，目的是执行了<code>make rk3568_defconfig</code>，接着执行<code>prepare</code>函数，它主要制定<code>RKBIN</code>的真实路径、是否使能<code>ARM64_TRUSTZONE</code>与<code>PLAT_TYPE</code>是否为<code>FIT</code>格式：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122207907.png" alt="img"><code>process_args rk3568</code>执行的源代码如下：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122207899.png" alt="img"><code>prepare</code>函数执行如下：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122207920.png" alt="img"></p>
+<h3 id="4-2-执行select-toolchain与select-chip-info"><a href="#4-2-执行select-toolchain与select-chip-info" class="headerlink" title="4.2 执行select_toolchain与select_chip_info"></a>4.2 执行select_toolchain与select_chip_info</h3><p><code>select_toolchain</code> 函数是选择交叉工具链的意思，从打印日志可以看出，它首先判断系统是否是64位，然后从<code>../prebuilts/gcc/linux-x86/aarch64/</code>目录寻找交叉工具链，设置<code>TOOLCHAIN</code>、<code>TOOLCHAIN_NM</code>、<code>TOOLCHAIN_OBJDUMP</code>与<code>TOOLCHAIN_ADDR2LINE</code>；<code>select_chip_info</code>函数则为选择芯片信息，通过<code>.config</code>文件的<code>CONFIG_ROCKCHIP_RK3568</code>配置，设置<code>RKCHIP</code>、<code>RKCHIP_LOADER</code>、<code>RKCHIP_TRUST</code>与<code>RKCHIP_LABEL</code>环境变量：<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122207978.png" alt="img"><br><code>select_toolchain</code>函数执行如下：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122207074.png" alt="img"><br><code>select_chip_info</code>函数执行如下：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122207105.png" alt="img">这里还有注释说明了这些<code>RKCHIP</code>环境变量的作用！</p>
+<h3 id="4-3-执行fixup-platform-configure"><a href="#4-3-执行fixup-platform-configure" class="headerlink" title="4.3 执行fixup_platform_configure"></a>4.3 执行fixup_platform_configure</h3><p>我们看到这个很多个环境变量都是没有值的，这说明在 RK356x，<code>fixup_platform_configure</code>函数其实用不到：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122207151.png" alt="img"><br><code>fixup_platform_configure</code>函数执行如下：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122207192.png" alt="img"></p>
+<h3 id="4-4-执行select-ini-file、handle-args-late与sub-commands"><a href="#4-4-执行select-ini-file、handle-args-late与sub-commands" class="headerlink" title="4.4 执行select_ini_file、handle_args_late与sub_commands"></a>4.4 执行select_ini_file、handle_args_late与sub_commands</h3><p><code>select_ini_file</code> 函数用于选择<code>rkbin</code>目录下对应平台的<code>ini</code>文件，包括<code>INI_LOADER</code>与<code>INI_TRUST</code>；<code>handle_args_late</code>解决通过命令参数制定<code>ini</code>，并保存到<code>ARG_LIST_FIT</code>；<code>sub_commands</code>设置一些 U-Boot EFL、符号文件与映射文件等等：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122207226.png" alt="img"><br><code>select_ini_file</code> 函数执行如下：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122207276.png" alt="img"><br>从代码可以看出，<code>ini</code>文件既有默认指定，也能在配置文件与命令参数中指定！</p>
+<p><code>handle_args_late</code> 函数执行如下：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122207354.png" alt="img"></p>
+<p><code>sub_commands</code> 函数如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line">function sub_commands()</span><br><span class="line">&#123;</span><br><span class="line">	# skip &quot;--&quot; parameter, such as &quot;--rollback-index-...&quot;</span><br><span class="line">	if [[ $&#123;CMD_ARGS&#125; != --* ]]; then</span><br><span class="line">		CMD=$&#123;CMD_ARGS%-*&#125;</span><br><span class="line">		ARG=$&#123;CMD_ARGS#*-&#125;</span><br><span class="line">	else</span><br><span class="line">		CMD=$&#123;CMD_ARGS&#125;</span><br><span class="line">	fi</span><br><span class="line"></span><br><span class="line">	if [ &quot;$&#123;ARG_TSPL&#125;&quot; == &quot;tpl&quot; -o &quot;$&#123;ARG_TSPL&#125;&quot; == &quot;spl&quot; ]; then</span><br><span class="line">		ELF=`find -name u-boot-$&#123;ARG_TSPL&#125;`</span><br><span class="line">		MAP=`find -name u-boot-$&#123;ARG_TSPL&#125;.map`</span><br><span class="line">		SYM=`find -name u-boot-$&#123;ARG_TSPL&#125;.sym`</span><br><span class="line">	else</span><br><span class="line">		ELF=u-boot</span><br><span class="line">		MAP=u-boot.map</span><br><span class="line">		SYM=u-boot.sym</span><br><span class="line">	fi</span><br><span class="line"></span><br><span class="line">	case $&#123;CMD&#125; in</span><br><span class="line">		elf|nm)</span><br><span class="line">			if [ &quot;$&#123;CMD&#125;&quot; == &quot;nm&quot; ]; then</span><br><span class="line">				echo -e &quot;\n$&#123;ELF&#125;:     file format elf\n&quot;</span><br><span class="line">				$&#123;TOOLCHAIN_NM&#125; -r --size $&#123;ELF&#125; | grep -iv &#x27;b&#x27; | less</span><br><span class="line">			else</span><br><span class="line">				if [ &quot;$&#123;CMD&#125;&quot; == &quot;elf&quot; -a &quot;$&#123;ARG&#125;&quot; == &quot;elf&quot; ]; then</span><br><span class="line">					ARG=D # default</span><br><span class="line">				fi</span><br><span class="line">				$&#123;TOOLCHAIN_OBJDUMP&#125; -$&#123;ARG&#125; $&#123;ELF&#125; | less</span><br><span class="line">			fi</span><br><span class="line">			exit 0</span><br><span class="line">			;;</span><br><span class="line">		map|sym)</span><br><span class="line">			if [ $&#123;CMD&#125; == &quot;map&quot; ]; then</span><br><span class="line">				cat $&#123;MAP&#125; | less</span><br><span class="line">			else</span><br><span class="line">				cat $&#123;SYM&#125; | less</span><br><span class="line">			fi</span><br><span class="line">			exit 0</span><br><span class="line">			;;</span><br><span class="line">		debug)</span><br><span class="line">			./scripts/rkpatch.sh $&#123;ARG&#125;</span><br><span class="line">			exit 0</span><br><span class="line">			;;</span><br><span class="line">		fit)</span><br><span class="line">			# Non-secure</span><br><span class="line">			$&#123;SCRIPT_FIT&#125; --boot_img_dir images/ $&#123;ARG_LIST_FIT&#125;</span><br><span class="line">			exit 0</span><br><span class="line">			;;</span><br><span class="line">		uboot)</span><br><span class="line">			pack_uboot_image</span><br><span class="line">			exit 0</span><br><span class="line">			;;</span><br><span class="line">		trust)</span><br><span class="line">			pack_trust_image</span><br><span class="line">			exit 0</span><br><span class="line">			;;</span><br><span class="line">		loader)</span><br><span class="line">			pack_loader_image</span><br><span class="line">			exit 0</span><br><span class="line">			;;</span><br><span class="line">		itb)</span><br><span class="line">			pack_uboot_itb_image</span><br><span class="line">			exit 0</span><br><span class="line">			;;</span><br><span class="line">		env)</span><br><span class="line">			make CROSS_COMPILE=$&#123;TOOLCHAIN&#125; envtools</span><br><span class="line">			exit 0</span><br><span class="line">			;;</span><br><span class="line">		--idblock)</span><br><span class="line">			pack_idblock</span><br><span class="line">			exit 0</span><br><span class="line">			;;</span><br><span class="line">		--tpl|--spl|tpl|spl)</span><br><span class="line">			pack_spl_loader_image</span><br><span class="line">			exit 0</span><br><span class="line">			;;</span><br><span class="line">		*)</span><br><span class="line">			unwind_addr_or_continue</span><br><span class="line">			;;</span><br><span class="line">	esac</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>sub_commands</code> 函数功能丰富，只有传特定参数的时候才能用到！</p>
+<h3 id="4-5-执行clean-files、make与pack-images"><a href="#4-5-执行clean-files、make与pack-images" class="headerlink" title="4.5 执行clean_files、make与pack_images"></a>4.5 执行clean_files、make与pack_images</h3><p><code>clean_files</code>函数删除历史编译产生的的<code>dtb</code>、<code>spl</code>、<code>tpl</code>与<code>u-boot</code>文件；然后执行<code>make</code>开启<code>8</code>线程编译；最后是<code>pack_images</code>打包固件，由 RK356x 使用 FIT 格式打包，因此调用<code>pack_fit_image</code>函数，参数是前面<code>handle_args_late</code>函数执行的结果，在<code>pack_fit_image</code>函数中继续调用<code>script/fit.sh</code>脚本：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122207378.png" alt="img"><code>clean_files</code>函数执行如下：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122207411.png" alt="img"><br><code>make</code>执行如下：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122207532.png" alt="img"><br><code>pack_images</code>函数执行如下：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122207636.png" alt="img"><br><code>pack_fit_image</code>函数执行如下：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122207668.png" alt="img"></p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-8-20-使用模块机制分析内核"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -263,8 +493,8 @@
     <header class="article-header">
        
 <h2 itemprop="name">
-  <a class="article-title" href="/2023/09/09/7-18-Linux%E5%86%85%E6%A0%B8%E7%9A%84%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%80%9D%E6%83%B3%EF%BC%9A%E7%BB%A7%E6%89%BF%EF%BC%88%E4%B8%8B%EF%BC%89/"
-    >7.18 Linux内核的面向对象思想：继承（下）</a> 
+  <a class="article-title" href="/2023/09/11/8-20-%E4%BD%BF%E7%94%A8%E6%A8%A1%E5%9D%97%E6%9C%BA%E5%88%B6%E5%88%86%E6%9E%90%E5%86%85%E6%A0%B8/"
+    >8-20 使用模块机制分析内核</a> 
 </h2>
  
 
@@ -272,11 +502,11 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2023/09/09/7-18-Linux%E5%86%85%E6%A0%B8%E7%9A%84%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%80%9D%E6%83%B3%EF%BC%9A%E7%BB%A7%E6%89%BF%EF%BC%88%E4%B8%8B%EF%BC%89/" class="article-date">
-  <time datetime="2023-09-09T12:49:47.000Z" itemprop="datePublished">2023-09-09</time>
+      <a href="/2023/09/11/8-20-%E4%BD%BF%E7%94%A8%E6%A8%A1%E5%9D%97%E6%9C%BA%E5%88%B6%E5%88%86%E6%9E%90%E5%86%85%E6%A0%B8/" class="article-date">
+  <time datetime="2023-09-11T12:45:27.000Z" itemprop="datePublished">2023-09-11</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
+    <a class="article-category-link" href="/categories/%E5%86%85%E6%A0%B8%E7%BC%96%E7%A8%8B/">内核编程</a>
   </div>
    
     </div>
@@ -293,7 +523,7 @@
     
     <footer class="article-footer">
        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" rel="tag">数据结构和面向对象</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A8%A1%E5%9D%97%E6%9C%BA%E5%88%B6/" rel="tag">模块机制</a></li></ul>
 
     </footer>
   </div>
@@ -305,7 +535,7 @@
 
     
     <article
-  id="post-7-17-Linux内核的面向对象思想：继承（上）"
+  id="post-8-19-模块机制实现分析（下）"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -316,8 +546,8 @@
     <header class="article-header">
        
 <h2 itemprop="name">
-  <a class="article-title" href="/2023/09/09/7-17-Linux%E5%86%85%E6%A0%B8%E7%9A%84%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%80%9D%E6%83%B3%EF%BC%9A%E7%BB%A7%E6%89%BF%EF%BC%88%E4%B8%8A%EF%BC%89/"
-    >7.17 Linux内核的面向对象思想：继承（上）</a> 
+  <a class="article-title" href="/2023/09/11/8-19-%E6%A8%A1%E5%9D%97%E6%9C%BA%E5%88%B6%E5%AE%9E%E7%8E%B0%E5%88%86%E6%9E%90%EF%BC%88%E4%B8%8B%EF%BC%89/"
+    >8-19 模块机制实现分析（下）</a> 
 </h2>
  
 
@@ -325,11 +555,11 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2023/09/09/7-17-Linux%E5%86%85%E6%A0%B8%E7%9A%84%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%80%9D%E6%83%B3%EF%BC%9A%E7%BB%A7%E6%89%BF%EF%BC%88%E4%B8%8A%EF%BC%89/" class="article-date">
-  <time datetime="2023-09-09T12:49:46.000Z" itemprop="datePublished">2023-09-09</time>
+      <a href="/2023/09/11/8-19-%E6%A8%A1%E5%9D%97%E6%9C%BA%E5%88%B6%E5%AE%9E%E7%8E%B0%E5%88%86%E6%9E%90%EF%BC%88%E4%B8%8B%EF%BC%89/" class="article-date">
+  <time datetime="2023-09-11T12:45:26.000Z" itemprop="datePublished">2023-09-11</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
+    <a class="article-category-link" href="/categories/%E5%86%85%E6%A0%B8%E7%BC%96%E7%A8%8B/">内核编程</a>
   </div>
    
     </div>
@@ -346,7 +576,7 @@
     
     <footer class="article-footer">
        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" rel="tag">数据结构和面向对象</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A8%A1%E5%9D%97%E6%9C%BA%E5%88%B6/" rel="tag">模块机制</a></li></ul>
 
     </footer>
   </div>
@@ -358,7 +588,7 @@
 
     
     <article
-  id="post-7-16-Linux内核的面向对象思想：封装（下）"
+  id="post-8-18-模块机制实现分析（上）"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -369,8 +599,8 @@
     <header class="article-header">
        
 <h2 itemprop="name">
-  <a class="article-title" href="/2023/09/09/7-16-Linux%E5%86%85%E6%A0%B8%E7%9A%84%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%80%9D%E6%83%B3%EF%BC%9A%E5%B0%81%E8%A3%85%EF%BC%88%E4%B8%8B%EF%BC%89/"
-    >7.16 Linux内核的面向对象思想：封装（下）</a> 
+  <a class="article-title" href="/2023/09/11/8-18-%E6%A8%A1%E5%9D%97%E6%9C%BA%E5%88%B6%E5%AE%9E%E7%8E%B0%E5%88%86%E6%9E%90%EF%BC%88%E4%B8%8A%EF%BC%89/"
+    >8-18 模块机制实现分析（上）</a> 
 </h2>
  
 
@@ -378,11 +608,11 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2023/09/09/7-16-Linux%E5%86%85%E6%A0%B8%E7%9A%84%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%80%9D%E6%83%B3%EF%BC%9A%E5%B0%81%E8%A3%85%EF%BC%88%E4%B8%8B%EF%BC%89/" class="article-date">
-  <time datetime="2023-09-09T12:49:44.000Z" itemprop="datePublished">2023-09-09</time>
+      <a href="/2023/09/11/8-18-%E6%A8%A1%E5%9D%97%E6%9C%BA%E5%88%B6%E5%AE%9E%E7%8E%B0%E5%88%86%E6%9E%90%EF%BC%88%E4%B8%8A%EF%BC%89/" class="article-date">
+  <time datetime="2023-09-11T12:45:24.000Z" itemprop="datePublished">2023-09-11</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
+    <a class="article-category-link" href="/categories/%E5%86%85%E6%A0%B8%E7%BC%96%E7%A8%8B/">内核编程</a>
   </div>
    
     </div>
@@ -399,7 +629,7 @@
     
     <footer class="article-footer">
        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" rel="tag">数据结构和面向对象</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A8%A1%E5%9D%97%E6%9C%BA%E5%88%B6/" rel="tag">模块机制</a></li></ul>
 
     </footer>
   </div>
@@ -411,7 +641,7 @@
 
     
     <article
-  id="post-7-15-Linux内核的面向对象思想：封装（上）"
+  id="post-8-17-模块的运行过程"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -422,8 +652,8 @@
     <header class="article-header">
        
 <h2 itemprop="name">
-  <a class="article-title" href="/2023/09/09/7-15-Linux%E5%86%85%E6%A0%B8%E7%9A%84%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%80%9D%E6%83%B3%EF%BC%9A%E5%B0%81%E8%A3%85%EF%BC%88%E4%B8%8A%EF%BC%89/"
-    >7.15 Linux内核的面向对象思想：封装（上）</a> 
+  <a class="article-title" href="/2023/09/11/8-17-%E6%A8%A1%E5%9D%97%E7%9A%84%E8%BF%90%E8%A1%8C%E8%BF%87%E7%A8%8B/"
+    >8-17 模块的运行过程</a> 
 </h2>
  
 
@@ -431,11 +661,11 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2023/09/09/7-15-Linux%E5%86%85%E6%A0%B8%E7%9A%84%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%80%9D%E6%83%B3%EF%BC%9A%E5%B0%81%E8%A3%85%EF%BC%88%E4%B8%8A%EF%BC%89/" class="article-date">
-  <time datetime="2023-09-09T12:49:42.000Z" itemprop="datePublished">2023-09-09</time>
+      <a href="/2023/09/11/8-17-%E6%A8%A1%E5%9D%97%E7%9A%84%E8%BF%90%E8%A1%8C%E8%BF%87%E7%A8%8B/" class="article-date">
+  <time datetime="2023-09-11T12:45:23.000Z" itemprop="datePublished">2023-09-11</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
+    <a class="article-category-link" href="/categories/%E5%86%85%E6%A0%B8%E7%BC%96%E7%A8%8B/">内核编程</a>
   </div>
    
     </div>
@@ -452,7 +682,7 @@
     
     <footer class="article-footer">
        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" rel="tag">数据结构和面向对象</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A8%A1%E5%9D%97%E6%9C%BA%E5%88%B6/" rel="tag">模块机制</a></li></ul>
 
     </footer>
   </div>
@@ -464,7 +694,7 @@
 
     
     <article
-  id="post-7-14-面向对象编程：封装、继承与多态"
+  id="post-8-16-编写一个字符驱动"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -475,8 +705,8 @@
     <header class="article-header">
        
 <h2 itemprop="name">
-  <a class="article-title" href="/2023/09/09/7-14-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%EF%BC%9A%E5%B0%81%E8%A3%85%E3%80%81%E7%BB%A7%E6%89%BF%E4%B8%8E%E5%A4%9A%E6%80%81/"
-    >7.14 面向对象编程：封装、继承与多态</a> 
+  <a class="article-title" href="/2023/09/11/8-16-%E7%BC%96%E5%86%99%E4%B8%80%E4%B8%AA%E5%AD%97%E7%AC%A6%E9%A9%B1%E5%8A%A8/"
+    >8-16 编写一个字符驱动</a> 
 </h2>
  
 
@@ -484,11 +714,11 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2023/09/09/7-14-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%EF%BC%9A%E5%B0%81%E8%A3%85%E3%80%81%E7%BB%A7%E6%89%BF%E4%B8%8E%E5%A4%9A%E6%80%81/" class="article-date">
-  <time datetime="2023-09-09T12:49:40.000Z" itemprop="datePublished">2023-09-09</time>
+      <a href="/2023/09/11/8-16-%E7%BC%96%E5%86%99%E4%B8%80%E4%B8%AA%E5%AD%97%E7%AC%A6%E9%A9%B1%E5%8A%A8/" class="article-date">
+  <time datetime="2023-09-11T12:45:21.000Z" itemprop="datePublished">2023-09-11</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
+    <a class="article-category-link" href="/categories/%E5%86%85%E6%A0%B8%E7%BC%96%E7%A8%8B/">内核编程</a>
   </div>
    
     </div>
@@ -505,7 +735,7 @@
     
     <footer class="article-footer">
        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" rel="tag">数据结构和面向对象</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A8%A1%E5%9D%97%E6%9C%BA%E5%88%B6/" rel="tag">模块机制</a></li></ul>
 
     </footer>
   </div>
@@ -517,7 +747,7 @@
 
     
     <article
-  id="post-7-13-代码复用与分层思想"
+  id="post-8-15-模块间的依赖和自动加载"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -528,8 +758,8 @@
     <header class="article-header">
        
 <h2 itemprop="name">
-  <a class="article-title" href="/2023/09/09/7-13-%E4%BB%A3%E7%A0%81%E5%A4%8D%E7%94%A8%E4%B8%8E%E5%88%86%E5%B1%82%E6%80%9D%E6%83%B3/"
-    >7.13 代码复用与分层思想</a> 
+  <a class="article-title" href="/2023/09/11/8-15-%E6%A8%A1%E5%9D%97%E9%97%B4%E7%9A%84%E4%BE%9D%E8%B5%96%E5%92%8C%E8%87%AA%E5%8A%A8%E5%8A%A0%E8%BD%BD/"
+    >8-15 模块间的依赖和自动加载</a> 
 </h2>
  
 
@@ -537,11 +767,11 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2023/09/09/7-13-%E4%BB%A3%E7%A0%81%E5%A4%8D%E7%94%A8%E4%B8%8E%E5%88%86%E5%B1%82%E6%80%9D%E6%83%B3/" class="article-date">
-  <time datetime="2023-09-09T12:49:39.000Z" itemprop="datePublished">2023-09-09</time>
+      <a href="/2023/09/11/8-15-%E6%A8%A1%E5%9D%97%E9%97%B4%E7%9A%84%E4%BE%9D%E8%B5%96%E5%92%8C%E8%87%AA%E5%8A%A8%E5%8A%A0%E8%BD%BD/" class="article-date">
+  <time datetime="2023-09-11T12:45:20.000Z" itemprop="datePublished">2023-09-11</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
+    <a class="article-category-link" href="/categories/%E5%86%85%E6%A0%B8%E7%BC%96%E7%A8%8B/">内核编程</a>
   </div>
    
     </div>
@@ -558,166 +788,7 @@
     
     <footer class="article-footer">
        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" rel="tag">数据结构和面向对象</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-7-12-Linux内核中的队列：KFIFO-下"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/09/09/7-12-Linux%E5%86%85%E6%A0%B8%E4%B8%AD%E7%9A%84%E9%98%9F%E5%88%97%EF%BC%9AKFIFO-%E4%B8%8B/"
-    >7.12 Linux内核中的队列：KFIFO(下)</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/09/09/7-12-Linux%E5%86%85%E6%A0%B8%E4%B8%AD%E7%9A%84%E9%98%9F%E5%88%97%EF%BC%9AKFIFO-%E4%B8%8B/" class="article-date">
-  <time datetime="2023-09-09T12:49:37.000Z" itemprop="datePublished">2023-09-09</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-   
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" rel="tag">数据结构和面向对象</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-7-11-Linux内核中的队列：KFIFO-上"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/09/09/7-11-Linux%E5%86%85%E6%A0%B8%E4%B8%AD%E7%9A%84%E9%98%9F%E5%88%97%EF%BC%9AKFIFO-%E4%B8%8A/"
-    >7.11 Linux内核中的队列：KFIFO(上)</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/09/09/7-11-Linux%E5%86%85%E6%A0%B8%E4%B8%AD%E7%9A%84%E9%98%9F%E5%88%97%EF%BC%9AKFIFO-%E4%B8%8A/" class="article-date">
-  <time datetime="2023-09-09T12:49:36.000Z" itemprop="datePublished">2023-09-09</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-   
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" rel="tag">数据结构和面向对象</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-7-10-队列：链式队列"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/09/09/7-10-%E9%98%9F%E5%88%97%EF%BC%9A%E9%93%BE%E5%BC%8F%E9%98%9F%E5%88%97/"
-    >7.10 队列：链式队列</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/09/09/7-10-%E9%98%9F%E5%88%97%EF%BC%9A%E9%93%BE%E5%BC%8F%E9%98%9F%E5%88%97/" class="article-date">
-  <time datetime="2023-09-09T12:49:34.000Z" itemprop="datePublished">2023-09-09</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-   
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" rel="tag">数据结构和面向对象</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A8%A1%E5%9D%97%E6%9C%BA%E5%88%B6/" rel="tag">模块机制</a></li></ul>
 
     </footer>
   </div>
@@ -734,7 +805,7 @@
   
   <nav class="page-nav">
     
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
   </nav>
   
 </section>

@@ -90,7 +90,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">0</span>
+            <span class="post-count">422</span>
         </span>
     </span>
 
@@ -112,7 +112,22 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-   
+  <p>双向循环链表是一种常见的链表数据结构，它的每个节点除了包含指向下一个节点的指针之外，还包含指向前一个节点的指针，形成了一个循环的链表结构。双向循环链表在进程、文件、模块、设备驱动等许多场景中被广泛使用。</p>
+<p>在 Linux 内核中，双向循环链表的定义和基本操作在头文件 <code>include/linux/list.h</code> 和 <code>include/linux/types.h</code> 中进行了通用的定义。这些头文件提供了用于构建和操作双向循环链表的函数和宏定义。</p>
+<p>以下是一些常用的双向循环链表操作：</p>
+<ul>
+<li><code>struct list_head</code>：双向循环链表节点的结构定义，包含指向前一个节点和后一个节点的指针。</li>
+<li><code>INIT_LIST_HEAD(struct list_head *head)</code>：初始化一个双向循环链表头节点。</li>
+<li><code>list_add(struct list_head *new, struct list_head *head)</code>：将一个节点添加到链表头部。</li>
+<li><code>list_add_tail(struct list_head *new, struct list_head *head)</code>：将一个节点添加到链表尾部。</li>
+<li><code>list_del(struct list_head *entry)</code>：从链表中删除一个节点。</li>
+<li><code>list_empty(const struct list_head *head)</code>：检查链表是否为空。</li>
+<li><code>list_for_each(pos, head)</code>：遍历链表中的每个节点。</li>
+<li><code>list_entry(ptr, type, member)</code>：获取包含节点的结构体的指针。</li>
+</ul>
+<p>通过使用上述操作，不同的数据类型可以根据自己的需要构建自己的双向循环链表。这些操作提供了对链表的插入、删除、遍历等基本操作，使链表的管理和操作更加方便和高效。</p>
+<p>需要注意的是，此处提到的是 Linux 内核中的双向循环链表实现</p>
+ 
       <!-- reward -->
       
     </div>
@@ -177,19 +192,19 @@
    
   <nav class="article-nav">
     
-      <a href="/2023/09/09/7-8-Linux%E5%86%85%E6%A0%B8%E4%B8%AD%E7%9A%84%E9%80%9A%E7%94%A8%E9%93%BE%E8%A1%A8-%E4%B8%8B/" class="article-nav-link">
+      <a href="/2023/09/09/7-14-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%EF%BC%9A%E5%B0%81%E8%A3%85%E3%80%81%E7%BB%A7%E6%89%BF%E4%B8%8E%E5%A4%9A%E6%80%81/" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            7.8 Linux内核中的通用链表(下)
+            7.14 面向对象编程：封装、继承与多态
           
         </div>
       </a>
     
     
-      <a href="/2023/09/09/7-6-%E5%8F%8C%E5%90%91%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8/" class="article-nav-link">
+      <a href="/2023/09/09/7-2-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%9F%BA%E7%A1%80/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">7.6 双向循环链表</div>
+        <div class="article-nav-title">7.2 数据结构基础</div>
       </a>
     
   </nav>
