@@ -160,98 +160,6 @@
     
     
     <article
-  id="post-3-13-链接静态库"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/09/05/3-13-%E9%93%BE%E6%8E%A5%E9%9D%99%E6%80%81%E5%BA%93/"
-    >3.13-链接静态库</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/09/05/3-13-%E9%93%BE%E6%8E%A5%E9%9D%99%E6%80%81%E5%BA%93/" class="article-date">
-  <time datetime="2023-09-04T23:47:10.000Z" itemprop="datePublished">2023-09-05</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h1 id="3-13-1-静态库"><a href="#3-13-1-静态库" class="headerlink" title="3.13.1 静态库"></a>3.13.1 静态库</h1><p>静态库是一种包含预编译目标文件的归档文件，它可以被多个程序共享和链接。归档文件通常具有<code>.a</code>的文件扩展名，例如<code>libtest.a</code>。</p>
-<h1 id="3-13-2-静态库制作的步骤"><a href="#3-13-2-静态库制作的步骤" class="headerlink" title="3.13.2 静态库制作的步骤"></a>3.13.2 静态库制作的步骤</h1><p>制作静态库的步骤如下：</p>
-<ol>
-<li>编译源代码生成目标文件：首先，将源代码编译成目标文件（<code>.o</code>文件）。例如，<code>x.c</code>和<code>xx.c</code>分别编译成<code>x.o</code>和<code>xx.o</code>。</li>
-<li>创建归档文件：使用<code>ar</code>工具创建归档文件。命令格式为<code>ar rcs &lt;库文件名&gt; &lt;目标文件1&gt; &lt;目标文件2&gt; ...</code>。例如，使用命令<code>ar rcs libtest.a x.o xx.o</code>将<code>x.o</code>和<code>xx.o</code>归档到<code>libtest.a</code>文件中。</li>
-</ol>
-<h1 id="3-13-3-静态库链接的步骤"><a href="#3-13-3-静态库链接的步骤" class="headerlink" title="3.13.3 静态库链接的步骤"></a>3.13.3 静态库链接的步骤</h1><p>链接静态库的步骤如下：</p>
-<ol>
-<li>编写主程序：创建一个包含主程序逻辑的源文件，例如<code>main.c</code>。</li>
-<li>指定头文件路径和库文件路径：使用编译器选项指定头文件和库文件的搜索路径。例如，使用选项<code>-I./include</code>指定头文件搜索路径为<code>./include</code>，使用选项<code>-L./lib</code>指定库文件搜索路径为<code>./lib</code>。</li>
-<li>链接静态库：使用编译器选项<code>-l&lt;库名&gt;</code>指定要链接的静态库。例如，使用选项<code>-ltest</code>将<code>libtest.a</code>静态库链接到主程序中。</li>
-</ol>
-<p>完整的链接命令为<code>gcc main.c -I./include -L./lib -ltest</code>。该命令会将<code>main.c</code>编译成目标文件，并链接<code>libtest.a</code>静态库生成可执行文件。</p>
-<p>通过制作和链接静态库，可以将常用的函数和模块封装为可重用的代码库，提高代码的复用性和可维护性。</p>
-<h1 id="3-13-4-静态库的问题"><a href="#3-13-4-静态库的问题" class="headerlink" title="3.13.4 静态库的问题"></a>3.13.4 静态库的问题</h1><p>链接静态库可能会带来以下问题：</p>
-<ol>
-<li>可执行体积增大：当链接静态库时，所有库中的函数都会被组装到最终的可执行文件中，无论是否使用到这些函数。这会导致可执行文件的体积增大，尤其是当静态库包含大量函数时。</li>
-<li>冗余代码：由于静态库中的所有函数都会被链接到可执行文件中，可能会包含一些未使用的函数，从而造成代码的冗余。这会增加可执行文件的大小，并且在一些资源受限的环境中可能会浪费存储空间。</li>
-<li>更新困难：如果静态库中的函数发生变化，需要重新编译和链接整个程序才能更新。这会增加代码维护的复杂性，并且在多个项目中使用同一静态库时，每个项目都需要进行重新编译和链接。</li>
-</ol>
-<p>解决上述问题的一种方法是将每个函数的实现放在单独的源文件中，然后将这些源文件编译成对应的目标文件，最后将所有的目标文件归档到静态库中。这样做可以避免将未使用的函数链接到最终的可执行文件中，减小可执行文件的体积并提高代码的可维护性。</p>
-<p>这种方法的基本原理是，编译器的基本单位是文件，而链接器的基本单位是目标文件。当引用一个目标文件中的符号时，链接器会将整个目标文件进行链接，将引用的符号和相关的代码组装到最终的可执行文件中。</p>
-<p>举例来说，假设有以下几个源文件：</p>
-<ul>
-<li><code>func1.c</code>：包含函数<code>func1</code>的实现</li>
-<li><code>func2.c</code>：包含函数<code>func2</code>的实现</li>
-<li><code>main.c</code>：包含程序的主函数</li>
-</ul>
-<p>首先，分别将<code>func1.c</code>、<code>func2.c</code>和<code>main.c</code>编译成对应的目标文件：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">gcc -c func1.c -o func1.o</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">gcc -c func2.c -o func2.o</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">gcc -c main.c -o main.o</span></span><br></pre></td></tr></table></figure>
-
-<p>然后，将这些目标文件归档到静态库中：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">ar rcs libtest.a func1.o func2.o</span></span><br></pre></td></tr></table></figure>
-
-<p>最后，链接主程序并使用静态库：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">gcc main.o -L. -ltest -o executable</span></span><br></pre></td></tr></table></figure>
-
-<p>这样，只有主程序中实际引用的函数会被链接到最终的可执行文件中，减小了可执行文件的体积。</p>
-<p>Glibc（GNU C Library）就是使用类似的方法实现的。它将每个函数的实现放在单独的源文件中，然后将这些源文件编译成对应的目标文件，并将目标文件归档到一个静态库中。这样，在链接时只会将程序实际使用的函数链接到最终的可执行文件中，提高了程序的效率和可维护性。</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%BC%96%E8%AF%91%E3%80%81%E9%93%BE%E6%8E%A5%E5%92%8C%E8%BF%90%E8%A1%8C/" rel="tag">程序的编译、链接和运行</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
   id="post-3-12-main函数入口分析"
   class="article article-type-post"
   itemscope
@@ -1164,6 +1072,78 @@
 <li>寄存器分配：寄存器分配是将变量和临时值映射到物理寄存器的过程。寄存器分配可以基于静态或动态策略进行。静态寄存器分配在编译时确定寄存器的分配方案，而动态寄存器分配在运行时根据需要进行寄存器分配。寄存器分配的目标是最大程度地利用寄存器，减少内存访问。</li>
 <li>汇编语言生成：在这个过程中，编译器将经过指令选择、控制流分析、数据流分析和寄存器分配的中间代码转换为汇编语言。汇编语言是一种与目标机器相关的低级表示形式，它使用特定的汇编指令和寄存器来描述程序的操作和数据。生成的汇编代码将被进一步处理以生成目标文件。</li>
 <li>汇编器：汇编器是一个独立工具，它将汇编语言代码转换为可执行的目标文件。汇编器接受汇编语言作为输入，根据目标机器的指令集和格式，将汇编语言翻译为机器代码，并生成目标文件。</li>
+</ol>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%BC%96%E8%AF%91%E3%80%81%E9%93%BE%E6%8E%A5%E5%92%8C%E8%BF%90%E8%A1%8C/" rel="tag">程序的编译、链接和运行</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-3-3-预处理过程"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/09/05/3-3-%E9%A2%84%E5%A4%84%E7%90%86%E8%BF%87%E7%A8%8B/"
+    >3.3-预处理过程</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/09/05/3-3-%E9%A2%84%E5%A4%84%E7%90%86%E8%BF%87%E7%A8%8B/" class="article-date">
+  <time datetime="2023-09-04T23:46:55.000Z" itemprop="datePublished">2023-09-05</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="3-3-1-预处理的过程"><a href="#3-3-1-预处理的过程" class="headerlink" title="3.3.1 预处理的过程"></a>3.3.1 预处理的过程</h1><p>预处理是编译过程中的第一步，它对源代码进行一系列的处理，包括头文件展开、宏展开、条件编译、删除注释、添加行号和文件名标识等。下面是预处理过程的主要步骤：</p>
+<ol>
+<li>头文件展开：将所有<code>#include</code>指令包含的文件插入到指令所在的位置。这样可以将头文件的内容插入到源代码中，使得源代码中可以使用头文件中定义的函数、变量和宏等。</li>
+<li>宏展开：对所有的宏定义进行展开，并删除<code>#define</code>指令。预处理器会查找源代码中使用的宏，并将其替换为宏定义中的内容。这样可以将宏定义的代码在预处理阶段进行替换，减少了函数调用的开销。</li>
+<li>条件编译：处理所有的条件预编译指令，例如<code>#if</code>、<code>#ifdef</code>、<code>#else</code>等。根据条件的真假，选择性地编译或排除部分代码。这样可以根据不同的条件编译选项，编译不同的代码分支。</li>
+<li>删除注释：去除源代码中的注释部分。注释对于程序的理解和阅读很重要，但在编译过程中并不需要注释，因此预处理阶段会将注释删除，减少后续编译的工作量。</li>
+<li>添加行号和文件名标识：为了方便编译调试和错误定位，预处理阶段会为每一行源代码添加行号和文件名标识。这样在编译出错时，可以准确地定位错误所在的行和文件。</li>
+<li>保留#pragma命令：预处理阶段会保留<code>#pragma</code>指令。<code>#pragma</code>指令是编译器提供的一些特定功能的扩展，用于控制编译器的行为或实现特定的功能。</li>
+<li>宏命令展开和文本替换：预处理阶段最后一步是对源代码进行宏命令展开和文本替换。在宏展开过程中，预处理器会查找源代码中使用的宏，并将其展开为宏定义中的内容。同时，还会进行一些文本替换的操作，例如替换宏参数、替换宏函数调用等。</li>
+</ol>
+<h1 id="3-3-2-为什么要进行预处理"><a href="#3-3-2-为什么要进行预处理" class="headerlink" title="3.3.2 为什么要进行预处理"></a>3.3.2 为什么要进行预处理</h1><p>预处理过程在编译过程中起着重要的作用，原因如下：</p>
+<ol>
+<li>宏定义：预处理阶段允许使用宏定义，宏可以将一段代码或表达式替换为预定义的文本。通过使用宏定义，可以简化代码编写，提高代码的可读性和可维护性。</li>
+<li>方便条件编译：条件编译指令（如<code>#if</code>、<code>#ifdef</code>、<code>#else</code>）允许根据不同的编译条件选择性地编译或排除代码块。这对于实现跨平台兼容性或针对不同的编译配置进行调试和优化非常有用。</li>
+<li>兼容各个平台和处理器架构：预处理过程可以根据不同的平台和处理器架构进行编译选项的设置。通过使用条件编译指令，可以编写适用于不同平台和处理器的代码，提高代码的可移植性和兼容性。</li>
+<li>最大程度复用公用代码：通过使用头文件，可以将公用的函数、结构体和宏等定义保存在独立的文件中，并在需要的地方进行引用。这样可以实现代码的模块化和复用，减少代码的冗余和重复编写。</li>
+<li>头文件包含：预处理过程中的头文件展开允许将其他文件中的代码插入到源文件中。这样可以将相关的代码组织在一起，提高代码的可读性和可维护性，并减少代码中的重复内容。</li>
+<li>模块化编程：预处理过程可以通过定义和使用宏来实现模块化编程。模块化编程将代码划分为独立的功能模块，使代码更易于理解、测试和维护。</li>
 </ol>
  
       <!-- reward -->

@@ -160,114 +160,6 @@
     
     
     <article
-  id="post-6-14-指针与数组的暧昧：下标运算"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/09/08/6-14-%E6%8C%87%E9%92%88%E4%B8%8E%E6%95%B0%E7%BB%84%E7%9A%84%E6%9A%A7%E6%98%A7%EF%BC%9A%E4%B8%8B%E6%A0%87%E8%BF%90%E7%AE%97/"
-    >6.14 指针与数组的暧昧：下标运算</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/09/08/6-14-%E6%8C%87%E9%92%88%E4%B8%8E%E6%95%B0%E7%BB%84%E7%9A%84%E6%9A%A7%E6%98%A7%EF%BC%9A%E4%B8%8B%E6%A0%87%E8%BF%90%E7%AE%97/" class="article-date">
-  <time datetime="2023-09-07T23:39:19.000Z" itemprop="datePublished">2023-09-08</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h1 id="14-1-指针和数组之间的主要区别"><a href="#14-1-指针和数组之间的主要区别" class="headerlink" title="14.1 指针和数组之间的主要区别"></a>14.1 指针和数组之间的主要区别</h1><p>指针和数组在C语言中有密切的关系，并且它们之间有一些区别。以下是指针和数组之间的主要区别和关系：</p>
-<ol>
-<li>指针与数组的暧昧关系：<ul>
-<li>在C语言中，数组名可以被视为指向数组第一个元素的指针。因此，数组名可以用作指针来访问数组元素。</li>
-<li>例如，如果有一个整数数组<code>int arr[5]</code>，则<code>arr</code>可以被视为指向<code>arr[0]</code>的指针。</li>
-</ul>
-</li>
-<li>数组与指针的区别：<ul>
-<li>数组是一组固定长度的相同类型元素的集合，它们在内存中是连续存储的。</li>
-<li>指针是一个变量，存储了一个内存地址，它可以指向任意类型的数据。</li>
-<li>数组在创建后，其大小是固定的，不可更改；而指针可以根据需要指向不同的内存地址。</li>
-</ul>
-</li>
-<li>间接访问与直接访问：<ul>
-<li>通过指针间接访问数据，意味着使用指针来获取或修改指向的内存中的值。通过解引用操作符<code>*</code>来实现间接访问。</li>
-<li>通过数组直接访问数据，意味着使用数组名和索引来直接访问数组中的元素。</li>
-</ul>
-</li>
-<li>用途：<ul>
-<li>指针通常用于动态内存分配，例如在堆上分配内存，以及在数据结构中使用指针来创建链表、树等数据结构。</li>
-<li>数组用于存储一组固定长度的相同类型元素，可以方便地访问和处理这些元素。数组在编程中经常用于存储和处理数据集合，例如存储学生成绩、字母表等。</li>
-</ul>
-</li>
-</ol>
-<h1 id="14-2-引用方式"><a href="#14-2-引用方式" class="headerlink" title="14.2 引用方式"></a>14.2 引用方式</h1><p>指针可以使用间接访问（解引用操作符<code>*</code>）来访问数组元素，而数组可以使用索引操作符<code>[]</code>来访问数组元素。下面解释了为什么可以这样做：</p>
-<ol>
-<li><p>指针使用间接访问访问数组元素：</p>
-<ul>
-<li>指针是一个变量，存储了一个内存地址。当指针指向数组的首个元素时，可以使用指针进行间接访问来获取或修改数组元素的值。</li>
-<li>解引用操作符<code>*</code>用于间接访问指针所指向的内存地址中的值。当将指针与解引用操作符<code>*</code>结合使用时，可以获取或修改指针指向的数组元素的值。</li>
-</ul>
-<p>例如：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">int arr[] = &#123;1, 2, 3, 4, 5&#125;;</span><br><span class="line">int *ptr = arr;  // 将指针指向数组的首个元素</span><br><span class="line">int value = *ptr;  // 通过指针间接访问数组元素</span><br><span class="line">```</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>数组使用索引访问数组元素：</p>
-<ul>
-<li>数组是一组连续存储的相同类型元素。数组名代表了数组的首个元素的地址。可以使用索引操作符<code>[]</code>来访问数组中的元素。</li>
-<li>索引操作符<code>[]</code>接受一个整数索引，用于指定要访问的数组元素的位置。通过使用数组名和索引，可以直接访问数组元素的值。</li>
-</ul>
-<p>例如：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">int arr[] = &#123;1, 2, 3, 4, 5&#125;;</span><br><span class="line">int value = arr[2];  // 直接访问数组元素</span><br><span class="line">```</span><br></pre></td></tr></table></figure></li>
-</ol>
-<h1 id="14-3-重要"><a href="#14-3-重要" class="headerlink" title="14.3 重要"></a>14.3 重要</h1><p>在C语言中，表达式<code>E1[E2]</code>等价于<code>*(E1 + E2)</code>。这是因为在C语言中，指针算术运算定义了指针与整数之间的操作。</p>
-<p>具体解释如下：</p>
-<ol>
-<li><code>E1</code>是一个指针，<code>E2</code>是一个整数。</li>
-<li><code>E1[E2]</code>表示对指针<code>E1</code>进行偏移，偏移量为<code>E2</code>个元素的大小。</li>
-<li>当对指针<code>E1</code>进行偏移时，首先将<code>E1</code>与<code>E2</code>相加，得到一个新的指针，该指针指向<code>E1</code>所指向的内存地址加上<code>E2</code>个元素的大小的位置。</li>
-<li>最后，使用解引用操作符<code>*</code>对新的指针进行间接访问，获取该位置上的值。</li>
-</ol>
-<p>举个例子来说明：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">int arr[] = &#123;1, 2, 3, 4, 5&#125;;</span><br><span class="line">int* ptr = arr;  // 指针指向数组的首个元素</span><br><span class="line"></span><br><span class="line">int value1 = arr[2];      // 直接访问数组元素，等价于 *(arr + 2)</span><br><span class="line">int value2 = 2[arr];      // 使用 E1[E2] 访问数组元素，等价于 *(arr + 2)</span><br><span class="line"></span><br><span class="line">printf(&quot;%d\n&quot;, value1);  // 输出：3</span><br><span class="line">printf(&quot;%d\n&quot;, value2);  // 输出：3</span><br></pre></td></tr></table></figure>
-
-<p>在上面的例子中，<code>arr[2]</code>和<code>2[arr]</code>都是访问数组<code>arr</code>中的第3个元素，它们的结果都是3。这是因为它们等价于<code>*(arr + 2)</code>，即指针<code>arr</code>加上偏移量2，然后通过解引用操作符<code>*</code>来访问对应的内存位置。</p>
-<p>这种等价关系允许我们使用<code>E1[E2]</code>的形式来访问数组元素，尽管它的语法看起来有些奇怪，但在逻辑上是等价的，并且在某些特定的情况下可以增加代码的可读性。</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E5%92%8C%E6%8C%87%E9%92%88/" rel="tag">数据存储和指针</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
   id="post-6-13-指针类型与运算"
   class="article article-type-post"
   itemscope
@@ -1314,6 +1206,90 @@
 <li>实现了符号位的参与运算：补码的设计使符号位（最高位）也能参与运算，并与其他位一起进行统一处理。这样，符号位也可以像其他位一样参与加法和减法运算，简化了运算的处理逻辑。</li>
 </ol>
 <p>总的来说，补码采用反码加1的设计方式，使得负数可以用与正数相同的方式进行表示和运算，同时解决了零的编码问题。这种设计简化了硬件设计和运算逻辑，并提供了一种统一的方式来处理正数、负数和零。</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E5%92%8C%E6%8C%87%E9%92%88/" rel="tag">数据存储和指针</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-6-2-存储的基本概念"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/09/08/6-2-%E5%AD%98%E5%82%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/"
+    >6.2 存储的基本概念</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/09/08/6-2-%E5%AD%98%E5%82%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/" class="article-date">
+  <time datetime="2023-09-07T23:39:01.000Z" itemprop="datePublished">2023-09-08</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="6-2-1-存储单元"><a href="#6-2-1-存储单元" class="headerlink" title="6.2.1 存储单元"></a>6.2.1 存储单元</h1><p>存储单元是计算机中用于存储数据的最小单位。以下是几个常见的存储单元：</p>
+<ul>
+<li>位（Bit）：位是存储单元的最小单位，它只能表示0或1两种状态。计算机中的所有数据都以位的形式存储和处理。</li>
+<li>字节（Byte）：字节是计算机中常用的存储单位，它由8个连续的位组成。字节是计算机内存中数据传输和存储的基本单位，通常用于表示字符、整数等数据。</li>
+<li>字（Word）：字是开发者常用的存储单位，它表示计算机在一次操作中能够处理的固定大小的数据。字的大小取决于计算机的架构和操作系统，可以是8位、16位、32位或64位等。</li>
+</ul>
+<h1 id="6-2-2存储模式"><a href="#6-2-2存储模式" class="headerlink" title="6.2.2存储模式"></a>6.2.2存储模式</h1><p>存储模式指的是计算机在内存中存储多字节数据时，字节的顺序排列方式。关于存储模式，有两个相关的概念：位序（Bit Order）和字节序（Byte Order）。</p>
+<ol>
+<li><p>位序（Bit Order）：位序是指在一个字节（8位）中，比特位（bit）的排列顺序。在计算机中，有两种常见的位序方式：</p>
+<ul>
+<li>大端序（Big-Endian）：在大端序中，高位字节存储在低位地址，低位字节存储在高位地址。换句话说，数据的高位字节排在内存的低地址处，低位字节排在内存的高地址处。</li>
+<li>小端序（Little-Endian）：在小端序中，低位字节存储在低位地址，高位字节存储在高位地址。换句话说，数据的低位字节排在内存的低地址处，高位字节排在内存的高地址处。</li>
+</ul>
+<p>位序的选择会直接影响多字节数据的存储和解析方式。不同的计算机体系结构和操作系统有不同的位序规定，例如，x86架构和Windows操作系统使用小端序，而PowerPC架构和大多数UNIX系统使用大端序。</p>
+</li>
+<li><p>字节序（Byte Order）：字节序是指在多字节数据（例如16位、32位或64位）中，字节的排列顺序。与位序类似，字节序也有两种常见的方式：</p>
+<ul>
+<li>大端序（Big-Endian）：在大端序中，高位字节存储在内存的低地址，低位字节存储在内存的高地址。换句话说，多字节数据的高位字节排在内存的低地址处，低位字节排在内存的高地址处。</li>
+<li>小端序（Little-Endian）：在小端序中，低位字节存储在内存的低地址，高位字节存储在内存的高地址。换句话说，多字节数据的低位字节排在内存的低地址处，高位字节排在内存的高地址处。</li>
+</ul>
+<p>字节序的选择同样会影响多字节数据在不同计算机和操作系统之间的互通性。为了确保数据的正确解析和传输，程序员需要在跨平台的情况下正确处理字节序。</p>
+</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span> &#123;</span><br><span class="line">    <span class="type">int</span> a = <span class="number">0x11223344</span>;</span><br><span class="line">    <span class="type">char</span> b;</span><br><span class="line"></span><br><span class="line">    b = a;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (b == <span class="number">0x44</span>)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Little endian!\n&quot;</span>);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Big endian!\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>大小端之分源自于不同的设计和处理方式，主要原因如下：</p>
+<ol>
+<li>硬件设计：在硬件层面，计算机内存是以字节为单位进行寻址和存储的。对于多字节数据，如整数或浮点数，需要将其存储在内存中的连续字节中。在设计计算机体系结构时，可以选择将多字节数据的最低有效字节存储在最低地址（小端序）或最高地址（大端序）。</li>
+<li>处理习惯：小端模式与人类的思维习惯更为一致。我们在书写数字时，通常先写低位，后写高位。小端模式将最低有效字节存储在最低地址，与我们的书写习惯一致。这样可以使得值的表示更加直观和易于理解。</li>
+<li>计算机处理习惯：大端模式在某些计算操作中更加方便。在大端模式下，可以直接按照字节顺序从左到右读写多字节数据，不需要考虑字节的对应关系。这对于某些操作，如整数加法、乘法等，可以简化处理逻辑，提高效率。</li>
+</ol>
  
       <!-- reward -->
       

@@ -570,92 +570,6 @@
 
     
     <article
-  id="post-0-9 make.sh+rk3568编译命令执行分析 "
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/09/10/0-9%20make.sh+rk3568%E7%BC%96%E8%AF%91%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E5%88%86%E6%9E%90%20/"
-    >0-9make.sh+rk3568编译命令执行分析（上）</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/09/10/0-9%20make.sh+rk3568%E7%BC%96%E8%AF%91%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E5%88%86%E6%9E%90%20/" class="article-date">
-  <time datetime="2023-09-10T09:17:06.000Z" itemprop="datePublished">2023-09-10</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/">瑞芯微脚本分析</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h2 id="一、打开脚本冗余输出"><a href="#一、打开脚本冗余输出" class="headerlink" title="一、打开脚本冗余输出"></a>一、打开脚本冗余输出</h2><p>在<code>make.sh</code>添加<code>set -x</code>：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122207615.png" alt="img"><br>然后执行编译即可：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ./make.sh rk3568</span><br></pre></td></tr></table></figure>
-
-<h2 id="二、编译线程数设置"><a href="#二、编译线程数设置" class="headerlink" title="二、编译线程数设置"></a>二、编译线程数设置</h2><p>从输出来看，把变量<code>JOB</code>赋值为<code>8</code>：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122207547.png" alt="img"><br>这个变量<code>JOB</code>用于后续以下编译命令使用（多线程编译用于提高编译速度)：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122207647.png" alt="img"></p>
-<h2 id="三、编译相关变量初始化"><a href="#三、编译相关变量初始化" class="headerlink" title="三、编译相关变量初始化"></a>三、编译相关变量初始化</h2><p>把编译命令<code>./make.sh rk3568</code>的<code>rk3568</code>赋值到<code>CMD_ARGS</code>变量，并制定工具链目录与声明一些变量：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122207594.png" alt="img"><br>脚本源代码（注释中指明<code>RKBIN_TOOLS</code>、<code>CROSS_COMPILE_ARM32</code>与<code>CROSS_COMPILE_ARM64</code>变量用户可以修改制定）：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122207618.png" alt="img"><br>制定目录树路径与脚本工具（这些都是RK自定义的脚本工具）：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122207588.png" alt="img"><br>脚本源代码：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122207795.png" alt="img"></p>
-<h2 id="四、执行脚本函数与编译"><a href="#四、执行脚本函数与编译" class="headerlink" title="四、执行脚本函数与编译"></a>四、执行脚本函数与编译</h2><p>脚本函数与编译按照顺序执行如下：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122207832.png" alt="img"></p>
-<h3 id="4-1-执行process-args与prepare"><a href="#4-1-执行process-args与prepare" class="headerlink" title="4.1 执行process_args与prepare"></a>4.1 执行process_args与prepare</h3><p>首先执行<code>process_args</code>函数，传递的参数是<code>rk3568</code>，在此处主要是用于生成<code>.config</code>使用，从输出信息看，目的是执行了<code>make rk3568_defconfig</code>，接着执行<code>prepare</code>函数，它主要制定<code>RKBIN</code>的真实路径、是否使能<code>ARM64_TRUSTZONE</code>与<code>PLAT_TYPE</code>是否为<code>FIT</code>格式：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122207907.png" alt="img"><code>process_args rk3568</code>执行的源代码如下：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122207899.png" alt="img"><code>prepare</code>函数执行如下：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122207920.png" alt="img"></p>
-<h3 id="4-2-执行select-toolchain与select-chip-info"><a href="#4-2-执行select-toolchain与select-chip-info" class="headerlink" title="4.2 执行select_toolchain与select_chip_info"></a>4.2 执行select_toolchain与select_chip_info</h3><p><code>select_toolchain</code> 函数是选择交叉工具链的意思，从打印日志可以看出，它首先判断系统是否是64位，然后从<code>../prebuilts/gcc/linux-x86/aarch64/</code>目录寻找交叉工具链，设置<code>TOOLCHAIN</code>、<code>TOOLCHAIN_NM</code>、<code>TOOLCHAIN_OBJDUMP</code>与<code>TOOLCHAIN_ADDR2LINE</code>；<code>select_chip_info</code>函数则为选择芯片信息，通过<code>.config</code>文件的<code>CONFIG_ROCKCHIP_RK3568</code>配置，设置<code>RKCHIP</code>、<code>RKCHIP_LOADER</code>、<code>RKCHIP_TRUST</code>与<code>RKCHIP_LABEL</code>环境变量：<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122207978.png" alt="img"><br><code>select_toolchain</code>函数执行如下：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122207074.png" alt="img"><br><code>select_chip_info</code>函数执行如下：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122207105.png" alt="img">这里还有注释说明了这些<code>RKCHIP</code>环境变量的作用！</p>
-<h3 id="4-3-执行fixup-platform-configure"><a href="#4-3-执行fixup-platform-configure" class="headerlink" title="4.3 执行fixup_platform_configure"></a>4.3 执行fixup_platform_configure</h3><p>我们看到这个很多个环境变量都是没有值的，这说明在 RK356x，<code>fixup_platform_configure</code>函数其实用不到：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122207151.png" alt="img"><br><code>fixup_platform_configure</code>函数执行如下：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122207192.png" alt="img"></p>
-<h3 id="4-4-执行select-ini-file、handle-args-late与sub-commands"><a href="#4-4-执行select-ini-file、handle-args-late与sub-commands" class="headerlink" title="4.4 执行select_ini_file、handle_args_late与sub_commands"></a>4.4 执行select_ini_file、handle_args_late与sub_commands</h3><p><code>select_ini_file</code> 函数用于选择<code>rkbin</code>目录下对应平台的<code>ini</code>文件，包括<code>INI_LOADER</code>与<code>INI_TRUST</code>；<code>handle_args_late</code>解决通过命令参数制定<code>ini</code>，并保存到<code>ARG_LIST_FIT</code>；<code>sub_commands</code>设置一些 U-Boot EFL、符号文件与映射文件等等：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122207226.png" alt="img"><br><code>select_ini_file</code> 函数执行如下：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122207276.png" alt="img"><br>从代码可以看出，<code>ini</code>文件既有默认指定，也能在配置文件与命令参数中指定！</p>
-<p><code>handle_args_late</code> 函数执行如下：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122207354.png" alt="img"></p>
-<p><code>sub_commands</code> 函数如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line">function sub_commands()</span><br><span class="line">&#123;</span><br><span class="line">	# skip &quot;--&quot; parameter, such as &quot;--rollback-index-...&quot;</span><br><span class="line">	if [[ $&#123;CMD_ARGS&#125; != --* ]]; then</span><br><span class="line">		CMD=$&#123;CMD_ARGS%-*&#125;</span><br><span class="line">		ARG=$&#123;CMD_ARGS#*-&#125;</span><br><span class="line">	else</span><br><span class="line">		CMD=$&#123;CMD_ARGS&#125;</span><br><span class="line">	fi</span><br><span class="line"></span><br><span class="line">	if [ &quot;$&#123;ARG_TSPL&#125;&quot; == &quot;tpl&quot; -o &quot;$&#123;ARG_TSPL&#125;&quot; == &quot;spl&quot; ]; then</span><br><span class="line">		ELF=`find -name u-boot-$&#123;ARG_TSPL&#125;`</span><br><span class="line">		MAP=`find -name u-boot-$&#123;ARG_TSPL&#125;.map`</span><br><span class="line">		SYM=`find -name u-boot-$&#123;ARG_TSPL&#125;.sym`</span><br><span class="line">	else</span><br><span class="line">		ELF=u-boot</span><br><span class="line">		MAP=u-boot.map</span><br><span class="line">		SYM=u-boot.sym</span><br><span class="line">	fi</span><br><span class="line"></span><br><span class="line">	case $&#123;CMD&#125; in</span><br><span class="line">		elf|nm)</span><br><span class="line">			if [ &quot;$&#123;CMD&#125;&quot; == &quot;nm&quot; ]; then</span><br><span class="line">				echo -e &quot;\n$&#123;ELF&#125;:     file format elf\n&quot;</span><br><span class="line">				$&#123;TOOLCHAIN_NM&#125; -r --size $&#123;ELF&#125; | grep -iv &#x27;b&#x27; | less</span><br><span class="line">			else</span><br><span class="line">				if [ &quot;$&#123;CMD&#125;&quot; == &quot;elf&quot; -a &quot;$&#123;ARG&#125;&quot; == &quot;elf&quot; ]; then</span><br><span class="line">					ARG=D # default</span><br><span class="line">				fi</span><br><span class="line">				$&#123;TOOLCHAIN_OBJDUMP&#125; -$&#123;ARG&#125; $&#123;ELF&#125; | less</span><br><span class="line">			fi</span><br><span class="line">			exit 0</span><br><span class="line">			;;</span><br><span class="line">		map|sym)</span><br><span class="line">			if [ $&#123;CMD&#125; == &quot;map&quot; ]; then</span><br><span class="line">				cat $&#123;MAP&#125; | less</span><br><span class="line">			else</span><br><span class="line">				cat $&#123;SYM&#125; | less</span><br><span class="line">			fi</span><br><span class="line">			exit 0</span><br><span class="line">			;;</span><br><span class="line">		debug)</span><br><span class="line">			./scripts/rkpatch.sh $&#123;ARG&#125;</span><br><span class="line">			exit 0</span><br><span class="line">			;;</span><br><span class="line">		fit)</span><br><span class="line">			# Non-secure</span><br><span class="line">			$&#123;SCRIPT_FIT&#125; --boot_img_dir images/ $&#123;ARG_LIST_FIT&#125;</span><br><span class="line">			exit 0</span><br><span class="line">			;;</span><br><span class="line">		uboot)</span><br><span class="line">			pack_uboot_image</span><br><span class="line">			exit 0</span><br><span class="line">			;;</span><br><span class="line">		trust)</span><br><span class="line">			pack_trust_image</span><br><span class="line">			exit 0</span><br><span class="line">			;;</span><br><span class="line">		loader)</span><br><span class="line">			pack_loader_image</span><br><span class="line">			exit 0</span><br><span class="line">			;;</span><br><span class="line">		itb)</span><br><span class="line">			pack_uboot_itb_image</span><br><span class="line">			exit 0</span><br><span class="line">			;;</span><br><span class="line">		env)</span><br><span class="line">			make CROSS_COMPILE=$&#123;TOOLCHAIN&#125; envtools</span><br><span class="line">			exit 0</span><br><span class="line">			;;</span><br><span class="line">		--idblock)</span><br><span class="line">			pack_idblock</span><br><span class="line">			exit 0</span><br><span class="line">			;;</span><br><span class="line">		--tpl|--spl|tpl|spl)</span><br><span class="line">			pack_spl_loader_image</span><br><span class="line">			exit 0</span><br><span class="line">			;;</span><br><span class="line">		*)</span><br><span class="line">			unwind_addr_or_continue</span><br><span class="line">			;;</span><br><span class="line">	esac</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><code>sub_commands</code> 函数功能丰富，只有传特定参数的时候才能用到！</p>
-<h3 id="4-5-执行clean-files、make与pack-images"><a href="#4-5-执行clean-files、make与pack-images" class="headerlink" title="4.5 执行clean_files、make与pack_images"></a>4.5 执行clean_files、make与pack_images</h3><p><code>clean_files</code>函数删除历史编译产生的的<code>dtb</code>、<code>spl</code>、<code>tpl</code>与<code>u-boot</code>文件；然后执行<code>make</code>开启<code>8</code>线程编译；最后是<code>pack_images</code>打包固件，由 RK356x 使用 FIT 格式打包，因此调用<code>pack_fit_image</code>函数，参数是前面<code>handle_args_late</code>函数执行的结果，在<code>pack_fit_image</code>函数中继续调用<code>script/fit.sh</code>脚本：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122207378.png" alt="img"><code>clean_files</code>函数执行如下：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122207411.png" alt="img"><br><code>make</code>执行如下：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122207532.png" alt="img"><br><code>pack_images</code>函数执行如下：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122207636.png" alt="img"><br><code>pack_fit_image</code>函数执行如下：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122207668.png" alt="img"></p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%91%9E%E8%8A%AF%E5%BE%AE%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/" rel="tag">瑞芯微脚本分析</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
   id="post-0-8 U-Boot编译过程浅析"
   class="article article-type-post"
   itemscope
@@ -1015,6 +929,59 @@
   <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br></pre></td><td class="code"><pre><span class="line">Version V1.08 20220617</span><br><span class="line">LPDDR4X, 2112MHz</span><br><span class="line">channel[0] BW=16 Col=10 Bk=8 CS0 Row=16 CS=1 Die BW=16 Size=1024MB</span><br><span class="line">channel[1] BW=16 Col=10 Bk=8 CS0 Row=16 CS=1 Die BW=16 Size=1024MB</span><br><span class="line">channel[2] BW=16 Col=10 Bk=8 CS0 Row=16 CS=1 Die BW=16 Size=1024MB</span><br><span class="line">channel[3] BW=16 Col=10 Bk=8 CS0 Row=16 CS=1 Die BW=16 Size=1024MB</span><br><span class="line">Manufacturer ID:0x1 Samsung</span><br><span class="line">CH0 RX Vref:33.7%, TX Vref:21.8%,0.0%</span><br><span class="line">CH1 RX Vref:32.7%, TX Vref:18.8%,0.0%</span><br><span class="line">CH2 RX Vref:30.7%, TX Vref:17.8%,0.0%</span><br><span class="line">CH3 RX Vref:34.7%, TX Vref:18.8%,0.0%</span><br><span class="line">change to F1: 528MHz</span><br><span class="line">change to F2: 1068MHz</span><br><span class="line">change to F3: 1560MHz</span><br><span class="line">change to F0: 2112MHz</span><br><span class="line">out</span><br><span class="line">U-Boot SPL board init</span><br><span class="line">U-Boot SPL 2017.09-orangepi (Apr 21 2023 - 10:35:39)</span><br><span class="line">Trying to boot from MMC1</span><br><span class="line">Trying fit image at 0x4000 sector</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># Verified-boot: 0</span></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># Checking atf-1 0x00040000 ... sha256(806278dba1...) + OK</span></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># Checking uboot 0x00200000 ... sha256(a14cd96f5d...) + OK</span></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># Checking fdt 0x00349350 ... sha256(cf0060a3cf...) + OK</span></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># Checking atf-2 0x000f0000 ... sha256(c00c7fd75b...) + OK</span></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># Checking atf-3 0xff100000 ... sha256(71c3a5841b...) + OK</span></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># Checking atf-4 0xff001000 ... sha256(2301cf73be...) + OK</span></span></span><br><span class="line">Jumping to U-Boot(0x00200000) via ARM Trusted Firmware(0x00040000)</span><br><span class="line">Total: 209.584 ms</span><br><span class="line"></span><br><span class="line">INFO:    Preloader serial: 2</span><br><span class="line">NOTICE:  BL31: v2.3():v2.3-405-gb52c2eadd:derrick.huang</span><br><span class="line">NOTICE:  BL31: Built : 11:23:47, Aug 15 2022</span><br><span class="line">INFO:    spec: 0x13</span><br><span class="line">INFO:    ext 32k is valid</span><br><span class="line">INFO:    GICv3 without legacy support detected.</span><br><span class="line">INFO:    ARM GICv3 driver initialized in EL3</span><br><span class="line">INFO:    system boots from cpu-hwid-0</span><br><span class="line">INFO:    idle_st=0x21fff, pd_st=0x11fff9, repair_st=0xfff70001</span><br><span class="line">INFO:    dfs DDR fsp_params[0].freq_mhz= 2112MHz</span><br><span class="line">INFO:    dfs DDR fsp_params[1].freq_mhz= 528MHz</span><br><span class="line">INFO:    dfs DDR fsp_params[2].freq_mhz= 1068MHz</span><br><span class="line">INFO:    dfs DDR fsp_params[3].freq_mhz= 1560MHz</span><br><span class="line">INFO:    BL31: Initialising Exception Handling Framework</span><br><span class="line">INFO:    BL31: Initializing runtime services</span><br><span class="line">WARNING: No OPTEE provided by BL2 boot loader, Booting device without OPTEE initialization. SMC`s destined for OPTEE will return SMC_UNK</span><br><span class="line">ERROR:   Error initializing runtime service opteed_fast</span><br><span class="line">INFO:    BL31: Preparing for EL3 exit to normal world</span><br><span class="line">INFO:    Entry point address = 0x200000</span><br><span class="line">INFO:    SPSR = 0x3c9</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">U-Boot 2017.09-orangepi (Apr 21 2023 - 10:35:39 +0800)</span><br><span class="line"></span><br><span class="line">Model: Orange Pi 5B</span><br><span class="line">PreSerial: 2, raw, 0xfeb50000</span><br><span class="line">DRAM:  3.7 GiB</span><br><span class="line">Sysmem: init</span><br><span class="line">Relocation Offset: eda2d000</span><br><span class="line">Relocation fdt: eb9f9008 - eb9fecb8</span><br><span class="line">CR: M/C/I</span><br><span class="line">Using default environment</span><br><span class="line"></span><br><span class="line">mmc@fe2c0000: 0, mmc@fe2e0000: 1</span><br><span class="line">Bootdev(atags): mmc 0</span><br><span class="line">MMC0: Legacy, 52Mhz</span><br><span class="line">PartType: EFI</span><br><span class="line">DM: v2</span><br><span class="line">boot mode: None</span><br><span class="line">Model: Orange Pi 5B</span><br><span class="line">CLK: (sync kernel. arm: enter 1008000 KHz, init 1008000 KHz, kernel 0N/A)</span><br><span class="line">  b0pll 24000 KHz</span><br><span class="line">  b1pll 24000 KHz</span><br><span class="line">  lpll 24000 KHz</span><br><span class="line">  v0pll 24000 KHz</span><br><span class="line">  aupll 24000 KHz</span><br><span class="line">  cpll 1500000 KHz</span><br><span class="line">  gpll 1188000 KHz</span><br><span class="line">  npll 24000 KHz</span><br><span class="line">  ppll 1100000 KHz</span><br><span class="line">  aclk_center_root 702000 KHz</span><br><span class="line">  pclk_center_root 100000 KHz</span><br><span class="line">  hclk_center_root 396000 KHz</span><br><span class="line">  aclk_center_low_root 500000 KHz</span><br><span class="line">  aclk_top_root 750000 KHz</span><br><span class="line">  pclk_top_root 100000 KHz</span><br><span class="line">  aclk_low_top_root 396000 KHz</span><br><span class="line">Net:   No ethernet found.</span><br><span class="line">Hit key to stop autoboot(&#x27;CTRL+C&#x27;):  0</span><br><span class="line">switch to partitions #0, OK</span><br><span class="line">mmc0 is current device</span><br><span class="line">mmc@fe2c0000: 0 (SD)</span><br><span class="line">mmc@fe2e0000: 1</span><br><span class="line">switch to partitions #0, OK</span><br><span class="line">mmc0 is current device</span><br><span class="line">Scanning mmc 0:1...</span><br><span class="line">Found U-Boot script /boot.scr</span><br><span class="line">reading /boot.scr</span><br><span class="line">3411 bytes read in 4 ms (832 KiB/s)</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># Executing script at 00500000</span></span></span><br><span class="line">Boot script loaded from mmc 0</span><br><span class="line">reading /orangepiEnv.txt</span><br><span class="line">222 bytes read in 3 ms (72.3 KiB/s)</span><br><span class="line">reading /uInitrd</span><br><span class="line">18641659 bytes read in 1844 ms (9.6 MiB/s)</span><br><span class="line">reading /Image</span><br><span class="line">34736640 bytes read in 3049 ms (10.9 MiB/s)</span><br><span class="line">reading /dtb/rockchip/rk3588s-orangepi-5b.dtb</span><br><span class="line">233728 bytes read in 24 ms (9.3 MiB/s)</span><br><span class="line">reading /dtb/rockchip/overlay/rk3588-fixup.scr</span><br><span class="line">2756 bytes read in 6 ms (448.2 KiB/s)</span><br><span class="line">Applying kernel provided DT fixup script (rk3588-fixup.scr)</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># Executing script at 09000000</span></span></span><br><span class="line">Fdt Ramdisk skip relocation</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># Loading init Ramdisk from Legacy Image at 0a200000 ...</span></span></span><br><span class="line">   Image Name:   uInitrd</span><br><span class="line">   Image Type:   AArch64 Linux RAMDisk Image (gzip compressed)</span><br><span class="line">   Data Size:    18641595 Bytes = 17.8 MiB</span><br><span class="line">   Load Address: 00000000</span><br><span class="line">   Entry Point:  00000000</span><br><span class="line">   Verifying Checksum ... OK</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># Flattened Device Tree blob at 0x0a100000</span></span></span><br><span class="line">   Booting using the fdt blob at 0x0a100000</span><br><span class="line">   reserving fdt memory region: addr=a100000 size=9f000</span><br><span class="line">  &#x27;reserved-memory&#x27; ramoops@110000: addr=110000 size=f0000</span><br><span class="line">   Using Device Tree in place at 000000000a100000, end 000000000a1a1fff</span><br><span class="line">Adding bank: 0x00200000 - 0xf0000000 (size: 0xefe00000)</span><br><span class="line">Total: 5283.754 ms</span><br><span class="line"></span><br><span class="line">Starting kernel ...</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
  
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%91%9E%E8%8A%AF%E5%BE%AE%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/" rel="tag">瑞芯微脚本分析</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-0-5 Loader的编译"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/09/10/0-5%20Loader%E7%9A%84%E7%BC%96%E8%AF%91/"
+    >0-5 Loader的编译</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/09/10/0-5%20Loader%E7%9A%84%E7%BC%96%E8%AF%91/" class="article-date">
+  <time datetime="2023-09-10T09:17:00.000Z" itemprop="datePublished">2023-09-10</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/">瑞芯微脚本分析</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+   
       <!-- reward -->
       
     </div>
