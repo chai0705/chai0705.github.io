@@ -160,6 +160,78 @@
     
     
     <article
+  id="post-3-3-预处理过程"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/09/05/3-3-%E9%A2%84%E5%A4%84%E7%90%86%E8%BF%87%E7%A8%8B/"
+    >3.3-预处理过程</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/09/05/3-3-%E9%A2%84%E5%A4%84%E7%90%86%E8%BF%87%E7%A8%8B/" class="article-date">
+  <time datetime="2023-09-04T23:46:55.000Z" itemprop="datePublished">2023-09-05</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="3-3-1-预处理的过程"><a href="#3-3-1-预处理的过程" class="headerlink" title="3.3.1 预处理的过程"></a>3.3.1 预处理的过程</h1><p>预处理是编译过程中的第一步，它对源代码进行一系列的处理，包括头文件展开、宏展开、条件编译、删除注释、添加行号和文件名标识等。下面是预处理过程的主要步骤：</p>
+<ol>
+<li>头文件展开：将所有<code>#include</code>指令包含的文件插入到指令所在的位置。这样可以将头文件的内容插入到源代码中，使得源代码中可以使用头文件中定义的函数、变量和宏等。</li>
+<li>宏展开：对所有的宏定义进行展开，并删除<code>#define</code>指令。预处理器会查找源代码中使用的宏，并将其替换为宏定义中的内容。这样可以将宏定义的代码在预处理阶段进行替换，减少了函数调用的开销。</li>
+<li>条件编译：处理所有的条件预编译指令，例如<code>#if</code>、<code>#ifdef</code>、<code>#else</code>等。根据条件的真假，选择性地编译或排除部分代码。这样可以根据不同的条件编译选项，编译不同的代码分支。</li>
+<li>删除注释：去除源代码中的注释部分。注释对于程序的理解和阅读很重要，但在编译过程中并不需要注释，因此预处理阶段会将注释删除，减少后续编译的工作量。</li>
+<li>添加行号和文件名标识：为了方便编译调试和错误定位，预处理阶段会为每一行源代码添加行号和文件名标识。这样在编译出错时，可以准确地定位错误所在的行和文件。</li>
+<li>保留#pragma命令：预处理阶段会保留<code>#pragma</code>指令。<code>#pragma</code>指令是编译器提供的一些特定功能的扩展，用于控制编译器的行为或实现特定的功能。</li>
+<li>宏命令展开和文本替换：预处理阶段最后一步是对源代码进行宏命令展开和文本替换。在宏展开过程中，预处理器会查找源代码中使用的宏，并将其展开为宏定义中的内容。同时，还会进行一些文本替换的操作，例如替换宏参数、替换宏函数调用等。</li>
+</ol>
+<h1 id="3-3-2-为什么要进行预处理"><a href="#3-3-2-为什么要进行预处理" class="headerlink" title="3.3.2 为什么要进行预处理"></a>3.3.2 为什么要进行预处理</h1><p>预处理过程在编译过程中起着重要的作用，原因如下：</p>
+<ol>
+<li>宏定义：预处理阶段允许使用宏定义，宏可以将一段代码或表达式替换为预定义的文本。通过使用宏定义，可以简化代码编写，提高代码的可读性和可维护性。</li>
+<li>方便条件编译：条件编译指令（如<code>#if</code>、<code>#ifdef</code>、<code>#else</code>）允许根据不同的编译条件选择性地编译或排除代码块。这对于实现跨平台兼容性或针对不同的编译配置进行调试和优化非常有用。</li>
+<li>兼容各个平台和处理器架构：预处理过程可以根据不同的平台和处理器架构进行编译选项的设置。通过使用条件编译指令，可以编写适用于不同平台和处理器的代码，提高代码的可移植性和兼容性。</li>
+<li>最大程度复用公用代码：通过使用头文件，可以将公用的函数、结构体和宏等定义保存在独立的文件中，并在需要的地方进行引用。这样可以实现代码的模块化和复用，减少代码的冗余和重复编写。</li>
+<li>头文件包含：预处理过程中的头文件展开允许将其他文件中的代码插入到源文件中。这样可以将相关的代码组织在一起，提高代码的可读性和可维护性，并减少代码中的重复内容。</li>
+<li>模块化编程：预处理过程可以通过定义和使用宏来实现模块化编程。模块化编程将代码划分为独立的功能模块，使代码更易于理解、测试和维护。</li>
+</ol>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%BC%96%E8%AF%91%E3%80%81%E9%93%BE%E6%8E%A5%E5%92%8C%E8%BF%90%E8%A1%8C/" rel="tag">程序的编译、链接和运行</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
   id="post-预处理过程"
   class="article article-type-post"
   itemscope
@@ -493,7 +565,7 @@
 
     
     <article
-  id="post-cmake-基础课"
+  id="post-10-6 cmake-基础课"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -504,7 +576,7 @@
     <header class="article-header">
        
 <h2 itemprop="name">
-  <a class="article-title" href="/2023/09/03/cmake-%E5%9F%BA%E7%A1%80%E8%AF%BE/"
+  <a class="article-title" href="/2023/09/03/10-6%20cmake-%E5%9F%BA%E7%A1%80%E8%AF%BE/"
     >cmake 基础课</a> 
 </h2>
  
@@ -513,7 +585,7 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2023/09/03/cmake-%E5%9F%BA%E7%A1%80%E8%AF%BE/" class="article-date">
+      <a href="/2023/09/03/10-6%20cmake-%E5%9F%BA%E7%A1%80%E8%AF%BE/" class="article-date">
   <time datetime="2023-09-03T09:50:19.000Z" itemprop="datePublished">2023-09-03</time>
 </a> 
   <div class="article-category">
@@ -893,7 +965,7 @@
 
     
     <article
-  id="post-c-进阶语法-oop-智能指针-STL"
+  id="post-10-5 c-进阶语法-oop-智能指针-STL"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -904,7 +976,7 @@
     <header class="article-header">
        
 <h2 itemprop="name">
-  <a class="article-title" href="/2023/09/03/c-%E8%BF%9B%E9%98%B6%E8%AF%AD%E6%B3%95-oop-%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88-STL/"
+  <a class="article-title" href="/2023/09/03/10-5%20c-%E8%BF%9B%E9%98%B6%E8%AF%AD%E6%B3%95-oop-%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88-STL/"
     >c++进阶语法 oop 智能指针 STL</a> 
 </h2>
  
@@ -913,7 +985,7 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2023/09/03/c-%E8%BF%9B%E9%98%B6%E8%AF%AD%E6%B3%95-oop-%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88-STL/" class="article-date">
+      <a href="/2023/09/03/10-5%20c-%E8%BF%9B%E9%98%B6%E8%AF%AD%E6%B3%95-oop-%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88-STL/" class="article-date">
   <time datetime="2023-09-03T05:42:43.000Z" itemprop="datePublished">2023-09-03</time>
 </a> 
   <div class="article-category">
@@ -1245,7 +1317,7 @@
 
     
     <article
-  id="post-c-进阶-函数和指针"
+  id="post-10-4 c-进阶-函数和指针"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -1256,7 +1328,7 @@
     <header class="article-header">
        
 <h2 itemprop="name">
-  <a class="article-title" href="/2023/09/03/c-%E8%BF%9B%E9%98%B6-%E5%87%BD%E6%95%B0%E5%92%8C%E6%8C%87%E9%92%88/"
+  <a class="article-title" href="/2023/09/03/10-4%20c-%E8%BF%9B%E9%98%B6-%E5%87%BD%E6%95%B0%E5%92%8C%E6%8C%87%E9%92%88/"
     >c++ 进阶 函数和指针</a> 
 </h2>
  
@@ -1265,7 +1337,7 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2023/09/03/c-%E8%BF%9B%E9%98%B6-%E5%87%BD%E6%95%B0%E5%92%8C%E6%8C%87%E9%92%88/" class="article-date">
+      <a href="/2023/09/03/10-4%20c-%E8%BF%9B%E9%98%B6-%E5%87%BD%E6%95%B0%E5%92%8C%E6%8C%87%E9%92%88/" class="article-date">
   <time datetime="2023-09-03T03:48:33.000Z" itemprop="datePublished">2023-09-03</time>
 </a> 
   <div class="article-category">
@@ -1639,7 +1711,7 @@
 
     
     <article
-  id="post-c-基本语法"
+  id="post-10-3 c-基本语法"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -1650,7 +1722,7 @@
     <header class="article-header">
        
 <h2 itemprop="name">
-  <a class="article-title" href="/2023/09/02/c-%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/"
+  <a class="article-title" href="/2023/09/02/10-3%20c-%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/"
     >c++基本语法</a> 
 </h2>
  
@@ -1659,7 +1731,7 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2023/09/02/c-%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/" class="article-date">
+      <a href="/2023/09/02/10-3%20c-%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/" class="article-date">
   <time datetime="2023-09-02T13:41:01.000Z" itemprop="datePublished">2023-09-02</time>
 </a> 
   <div class="article-category">
@@ -1829,108 +1901,6 @@
     <footer class="article-footer">
        
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/c/" rel="tag">c++</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-0-0-2_hexo基本操作命令"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/09/02/0-0-2_hexo%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4/"
-    >hexo基本操作命令</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/09/02/0-0-2_hexo%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4/" class="article-date">
-  <time datetime="2023-09-02T12:37:14.000Z" itemprop="datePublished">2023-09-02</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/hexo/">hexo</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <p><a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=Hexo&spm=1001.2101.3001.7020">Hexo</a> 约有二十个命令，但普通用户经常使用的大概只有下列几个:</p>
-<h2 id="hexo-s"><a href="#hexo-s" class="headerlink" title="hexo s"></a><strong>hexo s</strong></h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo s</span><br></pre></td></tr></table></figure>
-
-<p>启动本地服务器，用于预览主题。默认地址： <a target="_blank" rel="noopener" href="http://localhost:4000/">http://localhost:4000/</a></p>
-<ul>
-<li>hexo s 是 hexo server 的缩写，命令效果一致；</li>
-<li>预览的同时可以修改文章内容或主题代码，保存后刷新页面即可；</li>
-<li>对 Hexo 根目录 _config.yml 的修改，需要重启本地服务器后才能预览效果。</li>
-</ul>
-<h2 id="hexo-new"><a href="#hexo-new" class="headerlink" title="hexo new"></a><strong>hexo new</strong></h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new &quot;学习笔记  六&quot;</span><br></pre></td></tr></table></figure>
-
-<p>新建一篇标题为 学习笔记 六 的文章，因为标题里有空格，所以加上了引号。</p>
-<ul>
-<li>文章标题可以在对应 md 文件里改，新建时标题可以写的简单些。</li>
-</ul>
-<h2 id="hexo-d"><a href="#hexo-d" class="headerlink" title="hexo d"></a><strong>hexo d</strong></h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo d</span><br></pre></td></tr></table></figure>
-
-<p>自动生成网站静态文件，并部署到设定的仓库。</p>
-<ul>
-<li>hexo d 是 hexo deploy 的缩写，命令效果一致。</li>
-</ul>
-<h2 id="hexo-clean"><a href="#hexo-clean" class="headerlink" title="hexo clean"></a><strong>hexo clean</strong></h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br></pre></td></tr></table></figure>
-
-<p>清除缓存文件 db.json 和已生成的静态文件 public 。</p>
-<ul>
-<li>网站显示异常时可以执行这条命令试试。</li>
-</ul>
-<h2 id="hexo-g"><a href="#hexo-g" class="headerlink" title="hexo g"></a><strong>hexo g</strong></h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br></pre></td></tr></table></figure>
-
-<p>生成网站静态文件到默认设置的 public 文件夹。</p>
-<ul>
-<li>便于查看网站生成的静态文件或者手动部署网站；</li>
-<li>如果使用自动部署，不需要先执行该命令；</li>
-<li>hexo g 是 hexo generate 的缩写，命令效果一致。</li>
-</ul>
-<h2 id="hexo-new-page"><a href="#hexo-new-page" class="headerlink" title="hexo new page"></a><strong>hexo new page</strong></h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new page aboutme</span><br></pre></td></tr></table></figure>
-
-<p>新建一个标题为 aboutme 的页面，默认链接地址为 主页地址&#x2F;aboutme&#x2F;</p>
-<ul>
-<li>标题可以为中文，但一般习惯用英文；</li>
-<li>页面标题和文章一样可以随意修改；</li>
-<li>页面不会出现在首页文章列表和归档中，也不支持设置分类和标签。</li>
-</ul>
-<p>hexo n “我的博客” 等价于 hexo new “我的博客” 还等价于 hexo new post “我的博客” #新建一篇文章<br>hexo p 等价于 hexo publish<br>hexo g 等价于 hexo generate<br>hexo s等价于 hexo server<br>hexo d 等价于 hexo deploy<br>hexo deploy -g 等价于 hexo deploy –generate<br>hexo generate -d等价于hexo generate –deploy</p>
-<p>一般只需要四个命令，</p>
-<p>hexo n 创建一个新的博客</p>
-<p>hexo s 开启一个新的服务</p>
-<p>hexo g 生成一个静态的网页</p>
-<p>hexo d 将生成的静态网页推到服务器github</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li></ul>
 
     </footer>
   </div>

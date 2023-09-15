@@ -1,6 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>10-1 rk3588+yolov5部署推理冒烟测试</title>
+    <url>/2023/09/15/10-1-rk3588-yolov5%E9%83%A8%E7%BD%B2%E6%8E%A8%E7%90%86%E5%86%92%E7%83%9F%E6%B5%8B%E8%AF%95/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="一、环境准备"><a href="#一、环境准备" class="headerlink" title="一、环境准备"></a>一、环境准备</h1><h2 id="1-1硬件设备信息"><a href="#1-1硬件设备信息" class="headerlink" title="1.1硬件设备信息"></a>1.1硬件设备信息</h2><p>北京迅为电子 RK3588开发板</p>
+<h2 id="1-2-烧录镜像"><a href="#1-2-烧录镜像" class="headerlink" title="1.2.烧录镜像"></a>1.2.烧录镜像</h2><p>ubuntu20 </p>
+<h2 id="1-3设备联网与SSH-vs-code远程开发"><a href="#1-3设备联网与SSH-vs-code远程开发" class="headerlink" title="1.3设备联网与SSH vs code远程开发"></a>1.3设备联网与SSH vs code远程开发</h2><p>等明天晚上我试试</p>
+<h1 id="二、冒烟测试"><a href="#二、冒烟测试" class="headerlink" title="二、冒烟测试"></a>二、冒烟测试</h1><h2 id="2-1-NPU测试"><a href="#2-1-NPU测试" class="headerlink" title="2.1 NPU测试"></a>2.1 NPU测试</h2><p>附件位置：<code>3.冒烟测试/1.npu_test</code></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">编译程序</span></span><br><span class="line">cmake -S . -B build</span><br><span class="line">cmake --build build </span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">运行测试命令</span></span><br><span class="line">./build/mobilenet ./weights/mobilenet_v1.rknn ./images/dog_224x224.jpg </span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">如果正确运行，你会看到如下输出：</span></span><br><span class="line">model input num: 1, output num: 1</span><br><span class="line">input tensors:</span><br><span class="line">  index=0, name=input, n_dims=4, dims=[1, 224, 224, 3], n_elems=150528, size=150528, fmt=NHWC, type=INT8, qnt_type=AFFINE, zp=0, scale=0.007812</span><br><span class="line">output tensors:</span><br><span class="line">  index=0, name=MobilenetV1/Predictions/Reshape_1, n_dims=2, dims=[1, 1001, 0, 0], n_elems=1001, size=1001, fmt=UNDEFINED, type=INT8, qnt_type=AFFINE, zp=-128, scale=0.003906</span><br><span class="line">rknn_run</span><br><span class="line"> --- Top5 ---</span><br><span class="line">156: 0.984375</span><br><span class="line">155: 0.007812</span><br><span class="line">205: 0.003906</span><br><span class="line"> -1: 0.000000</span><br><span class="line"> -1: 0.000000</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>如果上面的测试程序能够正确运行，则表示NPU可以正常使用。</p>
+<p>打开文件：<code>mobilenet_demo.cpp</code>，可以看到涉及的操作流程有：</p>
+<ul>
+<li>预处理图片（读取、BGR2RGB、Resize）</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 使用opencv</span></span><br><span class="line">cv::Mat orig_img = <span class="built_in">imread</span>(img_path, cv::IMREAD_COLOR);</span><br><span class="line"></span><br><span class="line">cv::<span class="built_in">cvtColor</span>(orig_img, orig_img_rgb, cv::COLOR_BGR2RGB);</span><br><span class="line"></span><br><span class="line">cv::<span class="built_in">resize</span>(orig_img, img, cv::<span class="built_in">Size</span>(MODEL_IN_WIDTH, MODEL_IN_HEIGHT), <span class="number">0</span>, <span class="number">0</span>, cv::INTER_LINEAR);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>初始化RKNN模型（用到RKNN API）</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">model = <span class="built_in">load_model</span>(model_path, &amp;model_len);</span><br><span class="line"></span><br><span class="line">ret = <span class="built_in">rknn_init</span>(&amp;ctx, model, model_len, <span class="number">0</span>, <span class="literal">NULL</span>);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>获取模型输入输出信息</p>
+<ul>
+<li><p>输入输出数量（用到RKNN API）</p>
+<blockquote>
+<p>主要用于确定遍历次数、定位输入</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 输入输出数量</span></span><br><span class="line">rknn_input_output_num io_num; </span><br><span class="line"><span class="comment">// 使用rknn_query函数获取模型输入输出数量</span></span><br><span class="line">ret = rknn_query(ctx, RKNN_QUERY_IN_OUT_NUM, &amp;io_num, <span class="keyword">sizeof</span>(io_num));</span><br><span class="line"><span class="comment">// 打印模型输入输出数量</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;model input num: %d, output num: %d\n&quot;</span>, io_num.n_input, io_num.n_output);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>输入输出属性（用到RKNN API）</p>
+<blockquote>
+<p>主要确定网络输入大小（类似dims&#x3D;[1, 224, 224, 3]），输入格式（类似fmt&#x3D;NHWC）等信息</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 使用rknn_tensor_attr结构体存储模型输入信息</span></span><br><span class="line">rknn_tensor_attr input_attrs[io_num.n_input];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用rknn_query函数获取模型输入信息，存储在input_attrs</span></span><br><span class="line">ret = rknn_query(ctx, RKNN_QUERY_INPUT_ATTR, &amp;(input_attrs[<span class="number">0</span>]), <span class="keyword">sizeof</span>(rknn_tensor_attr));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 打印模型输入信息</span></span><br><span class="line">dump_tensor_attr(&amp;(input_attrs[<span class="number">0</span>]));</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>设置模型输入（用到RKNN API）</p>
+<blockquote>
+<p>主要设置模型输入的类型、数据指针、大小等信息</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 使用rknn_input结构体存储模型输入信息</span></span><br><span class="line">rknn_input inputs[<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 设置模型输入数据</span></span><br><span class="line">inputs[<span class="number">0</span>].buf = img.data;                                              </span><br><span class="line"></span><br><span class="line"><span class="comment">// 输入：ctx：模型句柄，io_num.n_input：模型输入数量，inputs：模型输入信息</span></span><br><span class="line">ret = rknn_inputs_set(ctx, io_num.n_input, inputs);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>运行RKNN（用到RKNN API）</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 使用rknn_run函数运行RKNN模型</span></span><br><span class="line"><span class="comment">// 输入：ctx：模型句柄，nullptr：保留参数</span></span><br><span class="line">ret = rknn_run(ctx, nullptr);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>获取模型输出（用到RKNN API）</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 使用rknn_output结构体存储模型输出信息</span></span><br><span class="line">rknn_output outputs[<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用rknn_outputs_get函数获取模型输出</span></span><br><span class="line"><span class="comment">// 输入：ctx：模型句柄，1：模型输出数量，outputs：模型输出信息，nullptr：保留参数</span></span><br><span class="line">ret = rknn_outputs_get(ctx, <span class="number">1</span>, outputs, <span class="literal">NULL</span>);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>后处理</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 获取模型输出的Top5</span></span><br><span class="line">rknn_GetTop(buffer, fMaxProb, MaxClass, sz, <span class="number">5</span>); </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>释放资源（用到RKNN API）</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 释放rknn_outputs_get获取的输出</span></span><br><span class="line"><span class="comment">// 输入：ctx：模型句柄，1：模型输出数量，outputs：模型输出信息（数组）</span></span><br><span class="line">rknn_outputs_release(ctx, <span class="number">1</span>, outputs);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 释放RKNN模型</span></span><br><span class="line">rknn_destroy(ctx);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 释放模型数据</span></span><br><span class="line"><span class="built_in">free</span>(model);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-2-RKNN-Engine封装、"><a href="#2-2-RKNN-Engine封装、" class="headerlink" title="2.2 RKNN Engine封装、"></a>2.2 RKNN Engine封装、</h2></li>
+</ul>
+<blockquote>
+<p>参考：</p>
+<ul>
+<li>（模型转换）<a href="https://github.com/rockchip-linux/rknn-toolkit2">https://github.com/rockchip-linux/rknn-toolkit2</a></li>
+<li>（接口开发）<a href="https://github.com/rockchip-linux/rknpu2">https://github.com/rockchip-linux/rknpu2</a></li>
+</ul>
+</blockquote>
+<p><strong>RKNN介绍</strong></p>
+<p>RKNN是瑞芯微推出的一套神经网络推理框架，可以将神经网络模型转换为RKNN模型，然后在NPU上进行推理。RKNN模型转换工具可以将ONNX、Tensorflow、Caffe、Darknet等模型转换为RKNN模型, 从而可以将AI模型运行在嵌入式平台上。<br>RKNN的硬件基础是NPU，NPU是高性能神经网络专用处理芯片,在硬件层面对深度学习算子进行了深入优化，从而实现高效的神经网络推理。瑞芯微的NPU可以在嵌入式平台上提供高性能的神经网络推理能力。<br>利用RKNN，我们可以参考下图的研发流程，来进行我们的深度学习部署开发。</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309152228126.jpeg" alt="img"> </p>
+<h1 id="测试三、Yolov5-RKNN教程"><a href="#测试三、Yolov5-RKNN教程" class="headerlink" title="测试三、Yolov5 RKNN教程"></a>测试三、Yolov5 RKNN教程</h1><h2 id="3-1-Pytorch转-ONNX"><a href="#3-1-Pytorch转-ONNX" class="headerlink" title="3.1 Pytorch转 ONNX"></a>3.1 Pytorch转 ONNX</h2><h2 id="3-2-ONNX转-RKNN"><a href="#3-2-ONNX转-RKNN" class="headerlink" title="3.2 ONNX转 RKNN"></a>3.2 ONNX转 RKNN</h2><h2 id="3-3-RKNN-yolov5模型推理"><a href="#3-3-RKNN-yolov5模型推理" class="headerlink" title="3.3 RKNN yolov5模型推理"></a>3.3 RKNN yolov5模型推理</h2>]]></content>
+      <categories>
+        <category>3588 npu</category>
+      </categories>
+      <tags>
+        <tag>3588 npu</tag>
+      </tags>
+  </entry>
+  <entry>
     <title></title>
     <url>/2023/09/15/0-4%20recovery%E7%9A%84%E7%BC%96%E8%AF%91/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
@@ -7296,7 +7369,7 @@
   </entry>
   <entry>
     <title>cmake 基础课</title>
-    <url>/2023/09/03/cmake-%E5%9F%BA%E7%A1%80%E8%AF%BE/</url>
+    <url>/2023/09/03/10-6%20cmake-%E5%9F%BA%E7%A1%80%E8%AF%BE/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="一、准备知识"><a href="#一、准备知识" class="headerlink" title="一、准备知识"></a>一、准备知识</h1><h2 id="1-1-C-的编译过程"><a href="#1-1-C-的编译过程" class="headerlink" title="1.1 C++的编译过程"></a>1.1 C++的编译过程</h2><ul>
 <li>-E 仅预处理；不编译、汇编或链接。</li>
 <li>-S 仅编译；不汇编或链接。</li>
@@ -7654,7 +7727,7 @@
   </entry>
   <entry>
     <title>c++进阶语法 oop 智能指针 STL</title>
-    <url>/2023/09/03/c-%E8%BF%9B%E9%98%B6%E8%AF%AD%E6%B3%95-oop-%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88-STL/</url>
+    <url>/2023/09/03/10-5%20c-%E8%BF%9B%E9%98%B6%E8%AF%AD%E6%B3%95-oop-%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88-STL/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="1-OOP面向对象开发"><a href="#1-OOP面向对象开发" class="headerlink" title="1 OOP面向对象开发"></a>1 OOP面向对象开发</h1><h2 id="1-1-类-class-和对象-objects"><a href="#1-1-类-class-和对象-objects" class="headerlink" title="1.1 类(class)和对象(objects)"></a>1.1 类(class)和对象(objects)</h2><pre><code>类(classes)和对象(objects)
 </code></pre>
 <p>C++类(classes)</p>
@@ -7964,7 +8037,7 @@
   </entry>
   <entry>
     <title>c++ 进阶 函数和指针</title>
-    <url>/2023/09/03/c-%E8%BF%9B%E9%98%B6-%E5%87%BD%E6%95%B0%E5%92%8C%E6%8C%87%E9%92%88/</url>
+    <url>/2023/09/03/10-4%20c-%E8%BF%9B%E9%98%B6-%E5%87%BD%E6%95%B0%E5%92%8C%E6%8C%87%E9%92%88/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="1-掌握C-函数基本概念用法"><a href="#1-掌握C-函数基本概念用法" class="headerlink" title="1.掌握C++函数基本概念用法"></a>1.掌握C++函数基本概念用法</h1><h2 id="1-1-函数定义"><a href="#1-1-函数定义" class="headerlink" title="1.1 函数定义"></a>1.1 函数定义</h2><p>什么是函数(function)</p>
 <ul>
 <li><p>C++程序</p>
@@ -8232,7 +8305,7 @@
   </entry>
   <entry>
     <title>c++基本语法</title>
-    <url>/2023/09/02/c-%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/</url>
+    <url>/2023/09/02/10-3%20c-%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="1-C-程序结构"><a href="#1-C-程序结构" class="headerlink" title="1.C++程序结构"></a>1.C++程序结构</h1><h2 id="1-1-C-程序的基本组成部分"><a href="#1-1-C-程序的基本组成部分" class="headerlink" title="1.1 C++程序的基本组成部分"></a>1.1 C++程序的基本组成部分</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> favorites_num;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;请输入0~10中你最喜欢的数字: &quot;</span>;</span><br><span class="line">    std::cin &gt;&gt; favorites_num;</span><br><span class="line">    std::cout &lt;&lt; favorites_num &lt;&lt; <span class="string">&quot;也是我喜欢的数字！&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>标识符(identifiers)：</p>
@@ -8523,7 +8596,7 @@
   </entry>
   <entry>
     <title>c++ 环境搭建</title>
-    <url>/2023/09/02/c-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</url>
+    <url>/2023/09/02/10-2%20vscode%20c-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="1-课程所需运行环境配置"><a href="#1-课程所需运行环境配置" class="headerlink" title="1 课程所需运行环境配置"></a>1 课程所需运行环境配置</h1><p>​		ubuntu + windows双系统 4070ti 13900K 32G </p>
 <h1 id="2-VS-Code配置"><a href="#2-VS-Code配置" class="headerlink" title="2 VS Code配置"></a>2 VS Code配置</h1><h2 id="2-1-安装vscode"><a href="#2-1-安装vscode" class="headerlink" title="2.1 安装vscode"></a>2.1 安装vscode</h2><h2 id="2-2-安装插件"><a href="#2-2-安装插件" class="headerlink" title="2.2 安装插件"></a>2.2 安装插件</h2><ol>
 <li>chinese</li>

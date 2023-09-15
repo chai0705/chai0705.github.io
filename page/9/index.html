@@ -160,6 +160,73 @@
     
     
     <article
+  id="post-5-6-零长度数组"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/09/07/5-6-%E9%9B%B6%E9%95%BF%E5%BA%A6%E6%95%B0%E7%BB%84/"
+    >5.6 零长度数组</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/09/07/5-6-%E9%9B%B6%E9%95%BF%E5%BA%A6%E6%95%B0%E7%BB%84/" class="article-date">
+  <time datetime="2023-09-07T13:14:11.000Z" itemprop="datePublished">2023-09-07</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>这个例子展示了C语言中的零长度数组的用法。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">buffer</span> &#123;</span></span><br><span class="line">    <span class="type">int</span> len;</span><br><span class="line">    <span class="type">char</span> a[<span class="number">0</span>];</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span> &#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">buffer</span> *<span class="title">buf</span>;</span></span><br><span class="line">    buf = (<span class="keyword">struct</span> buffer*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">struct</span> buffer) + <span class="number">20</span>);</span><br><span class="line">    buf-&gt;len = <span class="number">20</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;size: %d\n&quot;</span>, <span class="keyword">sizeof</span>(buf));</span><br><span class="line">    <span class="built_in">strcpy</span>(buf-&gt;a, <span class="string">&quot;hello world&quot;</span>);</span><br><span class="line">    <span class="built_in">puts</span>(buf-&gt;a);</span><br><span class="line">    <span class="built_in">free</span>(buf);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在这个例子中，定义了一个结构体 <code>buffer</code>，它包含一个整型变量 <code>len</code> 和一个零长度数组 <code>a</code>。</p>
+<p>零长度数组是C语言中的一种特殊用法，它的长度为0，也就是没有元素。它通常用于结构体的最后一个成员，用于实现动态大小的数组。</p>
+<p>在 <code>main</code> 函数中，首先通过调用 <code>malloc</code> 动态分配了一块内存，大小为 <code>sizeof(struct buffer) + 20</code>。这里的 <code>20</code> 表示额外的数据空间，用于存储字符串 “hello world”。</p>
+<p>然后，将分配的内存地址强制转换为 <code>struct buffer*</code> 类型，并将其赋给指针变量 <code>buf</code>。</p>
+<p>接下来，通过 <code>buf-&gt;len = 20</code>，将结构体成员 <code>len</code> 的值设置为 <code>20</code>。</p>
+<p>然后，通过 <code>printf</code> 打印了指针变量 <code>buf</code> 的大小，即 <code>sizeof(buf)</code>。请注意，这里打印的是指针变量 <code>buf</code> 的大小，而不是结构体 <code>buffer</code> 的大小。因为指针变量的大小在不同的系统上是固定的，一般为 4 或 8 字节，不会随着结构体的大小而变化。</p>
+<p>随后，通过 <code>strcpy</code> 将字符串 “hello world” 复制到结构体成员 <code>a</code> 中。</p>
+<p>最后，通过 <code>puts</code> 打印结构体成员 <code>a</code> 中的字符串。</p>
+<p>最后，通过 <code>free</code> 释放了之前动态分配的内存。</p>
+<p>这个例子展示了零长度数组的一种使用方式，它允许在结构体中动态存储变长数据。需要注意的是，零长度数组只是一种技巧，并不是C语言标准中的定义。因此，使用零长度数组时需要注意编译器的兼容性和可移植性。</p>
+<p>ShareLikeDislike</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gun%E6%89%A9%E5%B1%95%E8%AF%AD%E6%B3%95/" rel="tag">gun扩展语法</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
   id="post-5-5-container-of"
   class="article article-type-post"
   itemscope
@@ -679,59 +746,6 @@
     <div class="article-meta">
       <a href="/2023/09/07/4-13-Linux%E5%A0%86%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86-3-%EF%BC%9A%E5%86%85%E5%AD%98%E7%94%B3%E8%AF%B7%E9%87%8A%E6%94%BE%E7%A4%BA%E4%BE%8B/" class="article-date">
   <time datetime="2023-09-06T23:40:28.000Z" itemprop="datePublished">2023-09-07</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-   
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A0%86%E6%A0%88%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" rel="tag">堆栈内存管理</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-4-12-linux堆内存管理-2-：内存申请与释放"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/09/07/4-12-linux%E5%A0%86%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86-2-%EF%BC%9A%E5%86%85%E5%AD%98%E7%94%B3%E8%AF%B7%E4%B8%8E%E9%87%8A%E6%94%BE/"
-    >4-12-linux堆内存管理(2)：内存申请与释放</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/09/07/4-12-linux%E5%A0%86%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86-2-%EF%BC%9A%E5%86%85%E5%AD%98%E7%94%B3%E8%AF%B7%E4%B8%8E%E9%87%8A%E6%94%BE/" class="article-date">
-  <time datetime="2023-09-06T23:40:27.000Z" itemprop="datePublished">2023-09-07</time>
 </a> 
   <div class="article-category">
     <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>

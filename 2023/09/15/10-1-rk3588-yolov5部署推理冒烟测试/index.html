@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+  
+
+    <head>
+      <meta charset="utf-8" />
+        
+      <meta name="description" content="永远年轻，永远热泪盈眶" />
+      
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>10-1 rk3588+yolov5部署推理冒烟测试 |  热爱学习的未来酱</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      
+<link rel="stylesheet" href="/css/fonts/remixicon.css">
+
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    <link rel="alternate" href="/atom.xml" title="热爱学习的未来酱" type="application/atom+xml">
+</head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+      <canvas width="1777" height="841"
+        style="position: fixed; left: 0px; top: 0px; z-index: 99999; pointer-events: none;"></canvas>
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-10-1-rk3588-yolov5部署推理冒烟测试"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  10-1 rk3588+yolov5部署推理冒烟测试
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/09/15/10-1-rk3588-yolov5%E9%83%A8%E7%BD%B2%E6%8E%A8%E7%90%86%E5%86%92%E7%83%9F%E6%B5%8B%E8%AF%95/" class="article-date">
+  <time datetime="2023-09-15T13:18:07.000Z" itemprop="datePublished">2023-09-15</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/3588-npu/">3588 npu</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">988</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">4 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="一、环境准备"><a href="#一、环境准备" class="headerlink" title="一、环境准备"></a>一、环境准备</h1><h2 id="1-1硬件设备信息"><a href="#1-1硬件设备信息" class="headerlink" title="1.1硬件设备信息"></a>1.1硬件设备信息</h2><p>北京迅为电子 RK3588开发板</p>
+<h2 id="1-2-烧录镜像"><a href="#1-2-烧录镜像" class="headerlink" title="1.2.烧录镜像"></a>1.2.烧录镜像</h2><p>ubuntu20 </p>
+<h2 id="1-3设备联网与SSH-vs-code远程开发"><a href="#1-3设备联网与SSH-vs-code远程开发" class="headerlink" title="1.3设备联网与SSH vs code远程开发"></a>1.3设备联网与SSH vs code远程开发</h2><p>等明天晚上我试试</p>
+<h1 id="二、冒烟测试"><a href="#二、冒烟测试" class="headerlink" title="二、冒烟测试"></a>二、冒烟测试</h1><h2 id="2-1-NPU测试"><a href="#2-1-NPU测试" class="headerlink" title="2.1 NPU测试"></a>2.1 NPU测试</h2><p>附件位置：<code>3.冒烟测试/1.npu_test</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">编译程序</span></span><br><span class="line">cmake -S . -B build</span><br><span class="line">cmake --build build </span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">运行测试命令</span></span><br><span class="line">./build/mobilenet ./weights/mobilenet_v1.rknn ./images/dog_224x224.jpg </span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">如果正确运行，你会看到如下输出：</span></span><br><span class="line">model input num: 1, output num: 1</span><br><span class="line">input tensors:</span><br><span class="line">  index=0, name=input, n_dims=4, dims=[1, 224, 224, 3], n_elems=150528, size=150528, fmt=NHWC, type=INT8, qnt_type=AFFINE, zp=0, scale=0.007812</span><br><span class="line">output tensors:</span><br><span class="line">  index=0, name=MobilenetV1/Predictions/Reshape_1, n_dims=2, dims=[1, 1001, 0, 0], n_elems=1001, size=1001, fmt=UNDEFINED, type=INT8, qnt_type=AFFINE, zp=-128, scale=0.003906</span><br><span class="line">rknn_run</span><br><span class="line"> --- Top5 ---</span><br><span class="line">156: 0.984375</span><br><span class="line">155: 0.007812</span><br><span class="line">205: 0.003906</span><br><span class="line"> -1: 0.000000</span><br><span class="line"> -1: 0.000000</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>如果上面的测试程序能够正确运行，则表示NPU可以正常使用。</p>
+<p>打开文件：<code>mobilenet_demo.cpp</code>，可以看到涉及的操作流程有：</p>
+<ul>
+<li>预处理图片（读取、BGR2RGB、Resize）</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用opencv</span></span><br><span class="line">cv::Mat orig_img = <span class="built_in">imread</span>(img_path, cv::IMREAD_COLOR);</span><br><span class="line"></span><br><span class="line">cv::<span class="built_in">cvtColor</span>(orig_img, orig_img_rgb, cv::COLOR_BGR2RGB);</span><br><span class="line"></span><br><span class="line">cv::<span class="built_in">resize</span>(orig_img, img, cv::<span class="built_in">Size</span>(MODEL_IN_WIDTH, MODEL_IN_HEIGHT), <span class="number">0</span>, <span class="number">0</span>, cv::INTER_LINEAR);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>初始化RKNN模型（用到RKNN API）</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">model = <span class="built_in">load_model</span>(model_path, &amp;model_len);</span><br><span class="line"></span><br><span class="line">ret = <span class="built_in">rknn_init</span>(&amp;ctx, model, model_len, <span class="number">0</span>, <span class="literal">NULL</span>);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>获取模型输入输出信息</p>
+<ul>
+<li><p>输入输出数量（用到RKNN API）</p>
+<blockquote>
+<p>主要用于确定遍历次数、定位输入</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 输入输出数量</span></span><br><span class="line">rknn_input_output_num io_num; </span><br><span class="line"><span class="comment">// 使用rknn_query函数获取模型输入输出数量</span></span><br><span class="line">ret = rknn_query(ctx, RKNN_QUERY_IN_OUT_NUM, &amp;io_num, <span class="keyword">sizeof</span>(io_num));</span><br><span class="line"><span class="comment">// 打印模型输入输出数量</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;model input num: %d, output num: %d\n&quot;</span>, io_num.n_input, io_num.n_output);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>输入输出属性（用到RKNN API）</p>
+<blockquote>
+<p>主要确定网络输入大小（类似dims&#x3D;[1, 224, 224, 3]），输入格式（类似fmt&#x3D;NHWC）等信息</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用rknn_tensor_attr结构体存储模型输入信息</span></span><br><span class="line">rknn_tensor_attr input_attrs[io_num.n_input];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用rknn_query函数获取模型输入信息，存储在input_attrs</span></span><br><span class="line">ret = rknn_query(ctx, RKNN_QUERY_INPUT_ATTR, &amp;(input_attrs[<span class="number">0</span>]), <span class="keyword">sizeof</span>(rknn_tensor_attr));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 打印模型输入信息</span></span><br><span class="line">dump_tensor_attr(&amp;(input_attrs[<span class="number">0</span>]));</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>设置模型输入（用到RKNN API）</p>
+<blockquote>
+<p>主要设置模型输入的类型、数据指针、大小等信息</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用rknn_input结构体存储模型输入信息</span></span><br><span class="line">rknn_input inputs[<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 设置模型输入数据</span></span><br><span class="line">inputs[<span class="number">0</span>].buf = img.data;                                              </span><br><span class="line"></span><br><span class="line"><span class="comment">// 输入：ctx：模型句柄，io_num.n_input：模型输入数量，inputs：模型输入信息</span></span><br><span class="line">ret = rknn_inputs_set(ctx, io_num.n_input, inputs);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>运行RKNN（用到RKNN API）</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用rknn_run函数运行RKNN模型</span></span><br><span class="line"><span class="comment">// 输入：ctx：模型句柄，nullptr：保留参数</span></span><br><span class="line">ret = rknn_run(ctx, nullptr);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>获取模型输出（用到RKNN API）</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用rknn_output结构体存储模型输出信息</span></span><br><span class="line">rknn_output outputs[<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用rknn_outputs_get函数获取模型输出</span></span><br><span class="line"><span class="comment">// 输入：ctx：模型句柄，1：模型输出数量，outputs：模型输出信息，nullptr：保留参数</span></span><br><span class="line">ret = rknn_outputs_get(ctx, <span class="number">1</span>, outputs, <span class="literal">NULL</span>);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>后处理</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取模型输出的Top5</span></span><br><span class="line">rknn_GetTop(buffer, fMaxProb, MaxClass, sz, <span class="number">5</span>); </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>释放资源（用到RKNN API）</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 释放rknn_outputs_get获取的输出</span></span><br><span class="line"><span class="comment">// 输入：ctx：模型句柄，1：模型输出数量，outputs：模型输出信息（数组）</span></span><br><span class="line">rknn_outputs_release(ctx, <span class="number">1</span>, outputs);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 释放RKNN模型</span></span><br><span class="line">rknn_destroy(ctx);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 释放模型数据</span></span><br><span class="line"><span class="built_in">free</span>(model);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-2-RKNN-Engine封装、"><a href="#2-2-RKNN-Engine封装、" class="headerlink" title="2.2 RKNN Engine封装、"></a>2.2 RKNN Engine封装、</h2></li>
+</ul>
+<blockquote>
+<p>参考：</p>
+<ul>
+<li>（模型转换）<a target="_blank" rel="noopener" href="https://github.com/rockchip-linux/rknn-toolkit2">https://github.com/rockchip-linux/rknn-toolkit2</a></li>
+<li>（接口开发）<a target="_blank" rel="noopener" href="https://github.com/rockchip-linux/rknpu2">https://github.com/rockchip-linux/rknpu2</a></li>
+</ul>
+</blockquote>
+<p><strong>RKNN介绍</strong></p>
+<p>RKNN是瑞芯微推出的一套神经网络推理框架，可以将神经网络模型转换为RKNN模型，然后在NPU上进行推理。RKNN模型转换工具可以将ONNX、Tensorflow、Caffe、Darknet等模型转换为RKNN模型, 从而可以将AI模型运行在嵌入式平台上。<br>RKNN的硬件基础是NPU，NPU是高性能神经网络专用处理芯片,在硬件层面对深度学习算子进行了深入优化，从而实现高效的神经网络推理。瑞芯微的NPU可以在嵌入式平台上提供高性能的神经网络推理能力。<br>利用RKNN，我们可以参考下图的研发流程，来进行我们的深度学习部署开发。</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309152228126.jpeg" alt="img"> </p>
+<h1 id="测试三、Yolov5-RKNN教程"><a href="#测试三、Yolov5-RKNN教程" class="headerlink" title="测试三、Yolov5 RKNN教程"></a>测试三、Yolov5 RKNN教程</h1><h2 id="3-1-Pytorch转-ONNX"><a href="#3-1-Pytorch转-ONNX" class="headerlink" title="3.1 Pytorch转 ONNX"></a>3.1 Pytorch转 ONNX</h2><h2 id="3-2-ONNX转-RKNN"><a href="#3-2-ONNX转-RKNN" class="headerlink" title="3.2 ONNX转 RKNN"></a>3.2 ONNX转 RKNN</h2><h2 id="3-3-RKNN-yolov5模型推理"><a href="#3-3-RKNN-yolov5模型推理" class="headerlink" title="3.3 RKNN yolov5模型推理"></a>3.3 RKNN yolov5模型推理</h2> 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2023/09/15/10-1-rk3588-yolov5%E9%83%A8%E7%BD%B2%E6%8E%A8%E7%90%86%E5%86%92%E7%83%9F%E6%B5%8B%E8%AF%95/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/3588-npu/" rel="tag">3588 npu</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+    
+      <a href="/2023/09/15/0-4%20recovery%E7%9A%84%E7%BC%96%E8%AF%91/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title"></div>
+      </a>
+    
+  </nav>
+
+  
+   
+  
+   
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2015-2023
+        <i class="ri-heart-fill heart_icon"></i> John Doe
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="热爱学习的未来酱"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/2019/about">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+ 
+<script src="/js/clickBoom2.js"></script>
+ 
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+ 
+<script src="/js/dz.js"></script>
+ 
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    
+
+  </div>
+</body>
+
+</html>
