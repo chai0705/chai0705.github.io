@@ -160,6 +160,90 @@
     
     
     <article
+  id="post-6-2-存储的基本概念"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/09/08/6-2-%E5%AD%98%E5%82%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/"
+    >6.2 存储的基本概念</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/09/08/6-2-%E5%AD%98%E5%82%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/" class="article-date">
+  <time datetime="2023-09-07T23:39:01.000Z" itemprop="datePublished">2023-09-08</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="6-2-1-存储单元"><a href="#6-2-1-存储单元" class="headerlink" title="6.2.1 存储单元"></a>6.2.1 存储单元</h1><p>存储单元是计算机中用于存储数据的最小单位。以下是几个常见的存储单元：</p>
+<ul>
+<li>位（Bit）：位是存储单元的最小单位，它只能表示0或1两种状态。计算机中的所有数据都以位的形式存储和处理。</li>
+<li>字节（Byte）：字节是计算机中常用的存储单位，它由8个连续的位组成。字节是计算机内存中数据传输和存储的基本单位，通常用于表示字符、整数等数据。</li>
+<li>字（Word）：字是开发者常用的存储单位，它表示计算机在一次操作中能够处理的固定大小的数据。字的大小取决于计算机的架构和操作系统，可以是8位、16位、32位或64位等。</li>
+</ul>
+<h1 id="6-2-2存储模式"><a href="#6-2-2存储模式" class="headerlink" title="6.2.2存储模式"></a>6.2.2存储模式</h1><p>存储模式指的是计算机在内存中存储多字节数据时，字节的顺序排列方式。关于存储模式，有两个相关的概念：位序（Bit Order）和字节序（Byte Order）。</p>
+<ol>
+<li><p>位序（Bit Order）：位序是指在一个字节（8位）中，比特位（bit）的排列顺序。在计算机中，有两种常见的位序方式：</p>
+<ul>
+<li>大端序（Big-Endian）：在大端序中，高位字节存储在低位地址，低位字节存储在高位地址。换句话说，数据的高位字节排在内存的低地址处，低位字节排在内存的高地址处。</li>
+<li>小端序（Little-Endian）：在小端序中，低位字节存储在低位地址，高位字节存储在高位地址。换句话说，数据的低位字节排在内存的低地址处，高位字节排在内存的高地址处。</li>
+</ul>
+<p>位序的选择会直接影响多字节数据的存储和解析方式。不同的计算机体系结构和操作系统有不同的位序规定，例如，x86架构和Windows操作系统使用小端序，而PowerPC架构和大多数UNIX系统使用大端序。</p>
+</li>
+<li><p>字节序（Byte Order）：字节序是指在多字节数据（例如16位、32位或64位）中，字节的排列顺序。与位序类似，字节序也有两种常见的方式：</p>
+<ul>
+<li>大端序（Big-Endian）：在大端序中，高位字节存储在内存的低地址，低位字节存储在内存的高地址。换句话说，多字节数据的高位字节排在内存的低地址处，低位字节排在内存的高地址处。</li>
+<li>小端序（Little-Endian）：在小端序中，低位字节存储在内存的低地址，高位字节存储在内存的高地址。换句话说，多字节数据的低位字节排在内存的低地址处，高位字节排在内存的高地址处。</li>
+</ul>
+<p>字节序的选择同样会影响多字节数据在不同计算机和操作系统之间的互通性。为了确保数据的正确解析和传输，程序员需要在跨平台的情况下正确处理字节序。</p>
+</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span> &#123;</span><br><span class="line">    <span class="type">int</span> a = <span class="number">0x11223344</span>;</span><br><span class="line">    <span class="type">char</span> b;</span><br><span class="line"></span><br><span class="line">    b = a;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (b == <span class="number">0x44</span>)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Little endian!\n&quot;</span>);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Big endian!\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>大小端之分源自于不同的设计和处理方式，主要原因如下：</p>
+<ol>
+<li>硬件设计：在硬件层面，计算机内存是以字节为单位进行寻址和存储的。对于多字节数据，如整数或浮点数，需要将其存储在内存中的连续字节中。在设计计算机体系结构时，可以选择将多字节数据的最低有效字节存储在最低地址（小端序）或最高地址（大端序）。</li>
+<li>处理习惯：小端模式与人类的思维习惯更为一致。我们在书写数字时，通常先写低位，后写高位。小端模式将最低有效字节存储在最低地址，与我们的书写习惯一致。这样可以使得值的表示更加直观和易于理解。</li>
+<li>计算机处理习惯：大端模式在某些计算操作中更加方便。在大端模式下，可以直接按照字节顺序从左到右读写多字节数据，不需要考虑字节的对应关系。这对于某些操作，如整数加法、乘法等，可以简化处理逻辑，提高效率。</li>
+</ol>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E5%92%8C%E6%8C%87%E9%92%88/" rel="tag">数据存储和指针</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
   id="post-6-1-存储才是C语言的精髓"
   class="article article-type-post"
   itemscope
@@ -719,67 +803,6 @@
 <li>当 <code>LEVEL</code> 为0时，表示返回当前函数的栈帧地址。</li>
 <li>当 <code>LEVEL</code> 为1时，表示返回当前函数的调用者的栈帧地址。</li>
 </ul>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gun%E6%89%A9%E5%B1%95%E8%AF%AD%E6%B3%95/" rel="tag">gun扩展语法</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-5-16-属性声明：used-unused"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/09/07/5-16-%E5%B1%9E%E6%80%A7%E5%A3%B0%E6%98%8E%EF%BC%9Aused-unused/"
-    >5.16 属性声明：used &amp; unused</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/09/07/5-16-%E5%B1%9E%E6%80%A7%E5%A3%B0%E6%98%8E%EF%BC%9Aused-unused/" class="article-date">
-  <time datetime="2023-09-07T13:14:27.000Z" itemprop="datePublished">2023-09-07</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <p>在给定的示例中，使用了 <code>used</code> 和 <code>unused</code> 属性来声明变量和函数的使用情况。</p>
-<ol>
-<li><code>.register int reg asm(&quot;r0&quot;) __attribute__((used));</code><br>这个声明将 <code>reg</code> 定义为一个寄存器变量，并使用 <code>used</code> 属性来指示编译器该变量会被使用。这可以防止编译器优化掉该变量，确保其在代码中的存在。</li>
-<li><code>static void func(void) __attribute__((used, section(&quot;.text&quot;)));</code><br>这个声明定义了一个静态函数 <code>func</code>，并使用 <code>used</code> 属性来指示编译器该函数会被使用。此外，通过 <code>section(&quot;.text&quot;)</code> 属性，将该函数放置在 <code>.text</code> 段中。</li>
-<li><code>static __attribute__((unused)) int a;</code><br>这个声明定义了一个静态变量 <code>a</code>，并使用 <code>unused</code> 属性来指示编识器该变量未被使用。这可以让编译器忽略该变量的存在，避免产生未使用变量的警告。</li>
-<li><code>static int func(void) __attribute__((unused));</code><br>这个声明定义了一个静态函数 <code>func</code>，并使用 <code>unused</code> 属性来指示编译器该函数未被使用。类似于上述的静态变量，这可以让编译器忽略该函数的存在。</li>
-<li><code>int fun(__attribute__((unused)) int a, int b);</code><br>这个声明定义了一个函数 <code>fun</code>，并使用 <code>unused</code> 属性来指示编译器函数中的参数 <code>a</code> 未被使用。这可以避免产生未使用参数的警告。</li>
-</ol>
  
       <!-- reward -->
       

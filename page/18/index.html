@@ -160,6 +160,201 @@
     
     
     <article
+  id="post-1-2-你好内核源码"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/09/05/1-2-%E4%BD%A0%E5%A5%BD%E5%86%85%E6%A0%B8%E6%BA%90%E7%A0%81/"
+    >1-2-你好内核源码</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/09/05/1-2-%E4%BD%A0%E5%A5%BD%E5%86%85%E6%A0%B8%E6%BA%90%E7%A0%81/" class="article-date">
+  <time datetime="2023-09-04T23:59:43.000Z" itemprop="datePublished">2023-09-05</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/rk3568-%E9%A9%B1%E5%8A%A8/">rk3568 驱动</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>本章我们来认识Linux内核源码，开始真正进入到驱动的世界里面，不知道各位小伙伴们有没有做好准备呢？</p>
+<h1 id="2-1-初识内核源码"><a href="#2-1-初识内核源码" class="headerlink" title="2.1 初识内核源码"></a>2.1 初识内核源码</h1><p>Linux内核源码的官方网站为<a target="_blank" rel="noopener" href="https://www.kernel.org/%EF%BC%8C%E5%8F%AF%E4%BB%A5%E5%9C%A8%E8%AF%A5%E7%BD%91%E7%AB%99%E4%B8%8B%E8%BD%BD%E6%9C%80%E6%96%B0%E7%9A%84Linux%E5%86%85%E6%A0%B8%E6%BA%90%E7%A0%81%E3%80%82%E8%BF%9B%E5%85%A5%E8%AF%A5%E7%BD%91%E7%AB%99%E4%B9%8B%E5%90%8E%E5%A6%82%E4%B8%8B%E5%9B%BE%EF%BC%88%E5%9B%BE2-1%EF%BC%89%E6%89%80%E7%A4%BA%EF%BC%9A">https://www.kernel.org/，可以在该网站下载最新的Linux内核源码。进入该网站之后如下图（图2-1）所示：</a></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309072016728.jpeg" alt="img"> </p>
+<p>图 2-1</p>
+<p>从上图（图1）可以看到多个版本的内核分支，分别为主线版本（mainline）、稳定版本（stable）和长期支持版本（longterm）。以上各个支线和主线是由linus torvalds（Linux之父）所领导。半导体厂商和一些内核爱好者会在官网下载相应版本的内核源码，对该源码进行打补丁等操作。以此让官网的内核源码可以在半导体厂家设计的主控（CPU）上跑起来，所以在开发和学习的过程中，我们并不会直接去Linux内核官网下去下载源码，而且是使用半导体厂家提供的源码包。</p>
+<p>但是不论是Linux官网的内核源码还是半导体厂家提供的内核源码不影响我们来看它的庐山真面目！作者下载了Linux官方网站的4.19.262分支源码，下载好的源码存放在“iTOP-RK3568开发板【底板V1.7版本】\03_【iTOP-RK3568开发板】指南教程\02_Linux驱动配套资料\01_Linux内核官方源码”如下图（图2-2）所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309072016714.jpeg" alt="img"> </p>
+<p>图 2-2</p>
+<p>将Linux内核官方源码拷贝到虚拟机ubuntu上如下图（图2-3）所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309072016708.jpeg" alt="img"> </p>
+<p>图 2-3</p>
+<p>使用以下命令对内核官方源码进行解压，解压完成如下图（图2-4）所示：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo tar -vxf linux-4.19.262.tar.xz </span><br></pre></td></tr></table></figure>
+
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309072016773.jpeg" alt="img"> </p>
+<p>图 2-4</p>
+<p>解压完成后我们会看到非常多的文件夹，这些文件夹放的就是Linux内核源码，在下一小节中作者来介绍Linux内核源码的结构和每个目录的作用。</p>
+<h1 id="2-2-内核源码结构"><a href="#2-2-内核源码结构" class="headerlink" title="2.2 内核源码结构"></a>2.2 内核源码结构</h1><p>上一小节解压的目录下的内核源码目录都是用来做什么的呢？如下图（图2-5）所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309072016717.jpeg" alt="img"> </p>
+<p>图 2-5</p>
+<p>目录的内容如下表（表2-6）所示：</p>
+<table>
+<thead>
+<tr>
+<th>目录</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>arch</td>
+<td>存放不同平台体系相关代码</td>
+</tr>
+<tr>
+<td>block</td>
+<td>存放块设备相关代码</td>
+</tr>
+<tr>
+<td>crypto</td>
+<td>存放加密、压缩、CRC校验等算法相关代码</td>
+</tr>
+<tr>
+<td>Documentation</td>
+<td>存放相关说明文档，很多实用文档，包括驱动编写等</td>
+</tr>
+<tr>
+<td>drivers</td>
+<td>存放Linux 内核设备驱动程序源码。该目录包含众多驱动，目录按照设备类别进行分类，如 char、block 、input、i2c、spi、pci、usb等。</td>
+</tr>
+<tr>
+<td>firmware</td>
+<td>存放处理器相关的一些特殊固件</td>
+</tr>
+<tr>
+<td>fs</td>
+<td>存放虚拟文件系统代码</td>
+</tr>
+<tr>
+<td>include</td>
+<td>存放内核所需、与平台无关的头文件</td>
+</tr>
+<tr>
+<td>init</td>
+<td>Linux系统启动初始化相关的代码</td>
+</tr>
+<tr>
+<td>ipc</td>
+<td>存放进程间通信代码</td>
+</tr>
+<tr>
+<td>kernel</td>
+<td>Linux内核的核心代码，包含了进程调度子系统，以及和进程调度相关的模块。</td>
+</tr>
+<tr>
+<td>lib</td>
+<td>库文件代码， 实现需要在内核中使用的库函数，例如CRC、FIFO、list、MD5等。</td>
+</tr>
+<tr>
+<td>mm</td>
+<td>实现存放内存管理代码</td>
+</tr>
+<tr>
+<td>net</td>
+<td>存放网络相关代码</td>
+</tr>
+<tr>
+<td>samples</td>
+<td>存放提供的一些内核编程范例</td>
+</tr>
+<tr>
+<td>scripts</td>
+<td>存放一些脚本文件</td>
+</tr>
+<tr>
+<td>security</td>
+<td>存放系统安全性相关代码</td>
+</tr>
+<tr>
+<td>sound</td>
+<td>存放声音、声卡相关驱动</td>
+</tr>
+<tr>
+<td>tools</td>
+<td>一些常用工具，如性能剖析、自测试等</td>
+</tr>
+<tr>
+<td>usr</td>
+<td>用于生成initramfs的代码。</td>
+</tr>
+<tr>
+<td>virt</td>
+<td>提供虚拟机技术（KVM等）的支持</td>
+</tr>
+</tbody></table>
+<p>表 2-6</p>
+<h1 id="2-3-编译内核源码"><a href="#2-3-编译内核源码" class="headerlink" title="2.3 编译内核源码"></a>2.3 编译内核源码</h1><p>本小节使用的内核源码是半导体厂家提供的内核源码，是我们学习和开发要使用的内核源码。在进行驱动学习之前需要将此内核源码编译成功。</p>
+<p>内核源码存放路径为“iTOP-RK3568开发板【底板V1.7版本】\03_【iTOP-RK3568开发板】指南教程\02_Linux驱动配套资料\02_Linux_SDK源码”，将对应目录下的内核源码拷贝到虚拟机ubuntu目录下，如下图（图2-7）所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309072016704.jpeg" alt="img"></p>
+<p>图 2-7</p>
+<p>注：编译环境使用的是迅为搭建好的编译环境，迅为的环境经过测试在不进行修改的前提下，可以直接将内核源码编译通过。</p>
+<p>使用以下命令对内核源码的进行解压，解压完成如下图（图2-8）所示：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -vxf linux_sdk.tar.gz</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309072016104.jpeg" alt="img"></p>
+<p>图 1-8</p>
+<p>使用“cd linux_sdk”命令进入内核源码目录，如下图（图2-9）所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309072016124.jpeg" alt="img"></p>
+<p>图 2-9</p>
+<p>使用命令“.&#x2F;build.sh kernel”进行内核源码的编译，编译过程如下图（图2-10）所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309072016152.jpeg" alt="img"></p>
+<p>图 2-10</p>
+<p>编译时间和电脑虚拟机配置相关，编译完成如下图（图2-11）所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309072016179.jpeg" alt="img"></p>
+<p>图 2-11</p>
+<p>通过对内核源码官网的探索，内核源码的目录结构讲解以及内核源码的编译。我相信大家对Linux内核源码应该有了一个初步的认识了。下一章我们来学习第一个驱动helloworld。</p>
+<p>【最新驱动资料（文档+例程）】</p>
+<p>链接 <a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1M4smUG2vw_hnn0Hye-tkog">https://pan.baidu.com/s/1M4smUG2vw_hnn0Hye-tkog</a></p>
+<p>提取码：hbh6</p>
+<p>【B 站配套视频】</p>
+<p><a target="_blank" rel="noopener" href="https://b23.tv/XqYa6Hm">https://b23.tv/XqYa6Hm</a></p>
+<p>【RK3568 购买链接】</p>
+<p><a target="_blank" rel="noopener" href="https://item.taobao.com/item.htm?spm=a1z10.5-c-s.w4002-2245">https://item.taobao.com/item.htm?spm=a1z10.5-c-s.w4002-2245</a></p>
+<p>2452613.11.2fec74a6elWNeA&amp;id&#x3D;669939423234</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rk3568-%E9%A9%B1%E5%8A%A8/" rel="tag">rk3568 驱动</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
   id="post-3-22-u-boot重定位分析-下"
   class="article article-type-post"
   itemscope
@@ -1036,98 +1231,6 @@
 <p>具体而言，当一个模块需要引用外部模块的符号时，它并不直接使用符号的地址，而是通过查找GOT表来间接获取符号的地址。GOT表中的每个表项对应一个被引用的符号，存储了该符号的地址或者加载该符号地址的指令。</p>
 <p>在链接时，GOT表的位置已经确定，因此在运行时可以通过GOT表来获取外部符号的地址，而不需要硬编码具体的地址。</p>
 <p>使用GOT表的好处是，它使得模块间的符号引用变得独立于具体的内存布局，从而增加了模块的可移植性和灵活性。当外部模块的地址发生变化时，只需要更新GOT表中对应的表项即可，而不需要修改引用该符号的模</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%BC%96%E8%AF%91%E3%80%81%E9%93%BE%E6%8E%A5%E5%92%8C%E8%BF%90%E8%A1%8C/" rel="tag">程序的编译、链接和运行</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-3-13-链接静态库"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/09/05/3-13-%E9%93%BE%E6%8E%A5%E9%9D%99%E6%80%81%E5%BA%93/"
-    >3.13-链接静态库</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/09/05/3-13-%E9%93%BE%E6%8E%A5%E9%9D%99%E6%80%81%E5%BA%93/" class="article-date">
-  <time datetime="2023-09-04T23:47:10.000Z" itemprop="datePublished">2023-09-05</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h1 id="3-13-1-静态库"><a href="#3-13-1-静态库" class="headerlink" title="3.13.1 静态库"></a>3.13.1 静态库</h1><p>静态库是一种包含预编译目标文件的归档文件，它可以被多个程序共享和链接。归档文件通常具有<code>.a</code>的文件扩展名，例如<code>libtest.a</code>。</p>
-<h1 id="3-13-2-静态库制作的步骤"><a href="#3-13-2-静态库制作的步骤" class="headerlink" title="3.13.2 静态库制作的步骤"></a>3.13.2 静态库制作的步骤</h1><p>制作静态库的步骤如下：</p>
-<ol>
-<li>编译源代码生成目标文件：首先，将源代码编译成目标文件（<code>.o</code>文件）。例如，<code>x.c</code>和<code>xx.c</code>分别编译成<code>x.o</code>和<code>xx.o</code>。</li>
-<li>创建归档文件：使用<code>ar</code>工具创建归档文件。命令格式为<code>ar rcs &lt;库文件名&gt; &lt;目标文件1&gt; &lt;目标文件2&gt; ...</code>。例如，使用命令<code>ar rcs libtest.a x.o xx.o</code>将<code>x.o</code>和<code>xx.o</code>归档到<code>libtest.a</code>文件中。</li>
-</ol>
-<h1 id="3-13-3-静态库链接的步骤"><a href="#3-13-3-静态库链接的步骤" class="headerlink" title="3.13.3 静态库链接的步骤"></a>3.13.3 静态库链接的步骤</h1><p>链接静态库的步骤如下：</p>
-<ol>
-<li>编写主程序：创建一个包含主程序逻辑的源文件，例如<code>main.c</code>。</li>
-<li>指定头文件路径和库文件路径：使用编译器选项指定头文件和库文件的搜索路径。例如，使用选项<code>-I./include</code>指定头文件搜索路径为<code>./include</code>，使用选项<code>-L./lib</code>指定库文件搜索路径为<code>./lib</code>。</li>
-<li>链接静态库：使用编译器选项<code>-l&lt;库名&gt;</code>指定要链接的静态库。例如，使用选项<code>-ltest</code>将<code>libtest.a</code>静态库链接到主程序中。</li>
-</ol>
-<p>完整的链接命令为<code>gcc main.c -I./include -L./lib -ltest</code>。该命令会将<code>main.c</code>编译成目标文件，并链接<code>libtest.a</code>静态库生成可执行文件。</p>
-<p>通过制作和链接静态库，可以将常用的函数和模块封装为可重用的代码库，提高代码的复用性和可维护性。</p>
-<h1 id="3-13-4-静态库的问题"><a href="#3-13-4-静态库的问题" class="headerlink" title="3.13.4 静态库的问题"></a>3.13.4 静态库的问题</h1><p>链接静态库可能会带来以下问题：</p>
-<ol>
-<li>可执行体积增大：当链接静态库时，所有库中的函数都会被组装到最终的可执行文件中，无论是否使用到这些函数。这会导致可执行文件的体积增大，尤其是当静态库包含大量函数时。</li>
-<li>冗余代码：由于静态库中的所有函数都会被链接到可执行文件中，可能会包含一些未使用的函数，从而造成代码的冗余。这会增加可执行文件的大小，并且在一些资源受限的环境中可能会浪费存储空间。</li>
-<li>更新困难：如果静态库中的函数发生变化，需要重新编译和链接整个程序才能更新。这会增加代码维护的复杂性，并且在多个项目中使用同一静态库时，每个项目都需要进行重新编译和链接。</li>
-</ol>
-<p>解决上述问题的一种方法是将每个函数的实现放在单独的源文件中，然后将这些源文件编译成对应的目标文件，最后将所有的目标文件归档到静态库中。这样做可以避免将未使用的函数链接到最终的可执行文件中，减小可执行文件的体积并提高代码的可维护性。</p>
-<p>这种方法的基本原理是，编译器的基本单位是文件，而链接器的基本单位是目标文件。当引用一个目标文件中的符号时，链接器会将整个目标文件进行链接，将引用的符号和相关的代码组装到最终的可执行文件中。</p>
-<p>举例来说，假设有以下几个源文件：</p>
-<ul>
-<li><code>func1.c</code>：包含函数<code>func1</code>的实现</li>
-<li><code>func2.c</code>：包含函数<code>func2</code>的实现</li>
-<li><code>main.c</code>：包含程序的主函数</li>
-</ul>
-<p>首先，分别将<code>func1.c</code>、<code>func2.c</code>和<code>main.c</code>编译成对应的目标文件：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">gcc -c func1.c -o func1.o</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">gcc -c func2.c -o func2.o</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">gcc -c main.c -o main.o</span></span><br></pre></td></tr></table></figure>
-
-<p>然后，将这些目标文件归档到静态库中：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">ar rcs libtest.a func1.o func2.o</span></span><br></pre></td></tr></table></figure>
-
-<p>最后，链接主程序并使用静态库：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">gcc main.o -L. -ltest -o executable</span></span><br></pre></td></tr></table></figure>
-
-<p>这样，只有主程序中实际引用的函数会被链接到最终的可执行文件中，减小了可执行文件的体积。</p>
-<p>Glibc（GNU C Library）就是使用类似的方法实现的。它将每个函数的实现放在单独的源文件中，然后将这些源文件编译成对应的目标文件，并将目标文件归档到一个静态库中。这样，在链接时只会将程序实际使用的函数链接到最终的可执行文件中，提高了程序的效率和可维护性。</p>
  
       <!-- reward -->
       

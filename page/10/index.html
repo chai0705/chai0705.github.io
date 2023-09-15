@@ -160,6 +160,59 @@
     
     
     <article
+  id="post-4-12-linux堆内存管理-2-：内存申请与释放"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/09/07/4-12-linux%E5%A0%86%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86-2-%EF%BC%9A%E5%86%85%E5%AD%98%E7%94%B3%E8%AF%B7%E4%B8%8E%E9%87%8A%E6%94%BE/"
+    >4-12-linux堆内存管理(2)：内存申请与释放</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/09/07/4-12-linux%E5%A0%86%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86-2-%EF%BC%9A%E5%86%85%E5%AD%98%E7%94%B3%E8%AF%B7%E4%B8%8E%E9%87%8A%E6%94%BE/" class="article-date">
+  <time datetime="2023-09-06T23:40:27.000Z" itemprop="datePublished">2023-09-07</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+   
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A0%86%E6%A0%88%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" rel="tag">堆栈内存管理</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
   id="post-4-11-Linux堆内存管理-1-：内存分配器"
   class="article article-type-post"
   itemscope
@@ -1005,160 +1058,6 @@
 <p>在函数调用过程中，栈的使用和管理确保了函数的正确执行、局部变量的隔离和数据的传递。栈帧的创建和释放，以及栈指针的维护，保证了函数调用的顺序和返回的正确性。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">f</span><span class="params">(<span class="type">void</span>)</span> &#123;</span><br><span class="line">    <span class="type">int</span> l = <span class="number">20</span>;</span><br><span class="line">    <span class="type">int</span> m = <span class="number">30</span>;</span><br><span class="line">    <span class="type">int</span> n = <span class="number">40</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">50</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span> &#123;</span><br><span class="line">    <span class="type">int</span> i = <span class="number">2</span>;</span><br><span class="line">    <span class="type">int</span> j = <span class="number">3</span>;</span><br><span class="line">    <span class="type">int</span> k = <span class="number">4</span>;</span><br><span class="line">    f();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A0%86%E6%A0%88%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" rel="tag">堆栈内存管理</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-4-2-栈的初始化及大小"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/09/07/4-2-%E6%A0%88%E7%9A%84%E5%88%9D%E5%A7%8B%E5%8C%96%E5%8F%8A%E5%A4%A7%E5%B0%8F/"
-    >4-2-栈的初始化及大小</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/09/07/4-2-%E6%A0%88%E7%9A%84%E5%88%9D%E5%A7%8B%E5%8C%96%E5%8F%8A%E5%A4%A7%E5%B0%8F/" class="article-date">
-  <time datetime="2023-09-06T23:40:10.000Z" itemprop="datePublished">2023-09-07</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h1 id="4-2-1-什么是栈"><a href="#4-2-1-什么是栈" class="headerlink" title="4.2.1 什么是栈"></a>4.2.1 什么是栈</h1><p>栈（Stack）是一种常见的数据结构，它遵循先进后出（FILO，First In Last Out）的原则。栈可以通过两个基本操作来操作元素：入栈（Push）和出栈（Pop）。</p>
-<ol>
-<li><p>入栈（Push）操作：</p>
-<ul>
-<li>入栈将一个元素添加到栈的顶部（也称为栈顶）。</li>
-<li>入栈操作会将元素压入栈中，栈的大小增加。</li>
-<li>入栈的元素成为新的栈顶。</li>
-</ul>
-</li>
-<li><p>出栈（Pop）操作：</p>
-<ul>
-<li><p>出栈将栈顶的元素移除，并返回该元素。</p>
-</li>
-<li><p>出栈操作会将栈顶元素弹出，栈的大小减少。</p>
-</li>
-<li><p>出栈的元素是最近入栈的元素，即最后一个添加到栈中的元素。</p>
-</li>
-</ul>
-<p>栈的操作可以用以下伪代码表示：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Push(<span class="built_in">stack</span>, element):</span><br><span class="line">    将元素添加到栈的顶部</span><br><span class="line">    栈的大小增加</span><br><span class="line">    新的栈顶指向添加的元素</span><br><span class="line"></span><br><span class="line">Pop(<span class="built_in">stack</span>):</span><br><span class="line">    如果栈为空，则抛出异常或返回特定值（取决于实现）</span><br><span class="line">    保存栈顶元素的值</span><br><span class="line">    将栈顶元素移除</span><br><span class="line">    栈的大小减少</span><br><span class="line">    返回保存的栈顶元素的值</span><br></pre></td></tr></table></figure>
-
-<p>栈在计算机科学中有广泛的应用，例如函数调用栈、表达式求值、深度优先搜索等。由于栈的先进后出的特性，它可以提供简单有效的数据存储和访问方式。</p>
-</li>
-</ol>
-<h1 id="4-2-2-线的作用"><a href="#4-2-2-线的作用" class="headerlink" title="4.2.2 线的作用"></a>4.2.2 线的作用</h1><ol>
-<li><h2 id="函数调用："><a href="#函数调用：" class="headerlink" title="函数调用："></a>函数调用：</h2><ul>
-<li>栈被广泛用于函数调用过程中的参数传递、局部变量和函数返回值的存储。</li>
-<li>当一个函数被调用时，函数的参数会被压入栈中，然后函数的局部变量也会被分配在栈上。</li>
-<li>函数执行完毕后，栈会按照相反的顺序弹出参数和局部变量，返回值也会通过栈传递回调用函数。</li>
-</ul>
-</li>
-<li><h2 id="编译器生成的临时变量："><a href="#编译器生成的临时变量：" class="headerlink" title="编译器生成的临时变量："></a>编译器生成的临时变量：</h2><ul>
-<li>编译器在编译过程中会生成一些临时变量，用于存储中间计算结果或其他需要临时存储的数据。</li>
-<li>这些临时变量通常会被存储在栈上，随着程序的执行进入和离开作用域而动态地压入和弹出栈。</li>
-</ul>
-</li>
-<li><h2 id="内存管理："><a href="#内存管理：" class="headerlink" title="内存管理："></a>内存管理：</h2><ul>
-<li>栈的一部分常用于存储程序的调用栈，用于跟踪函数调用和返回的地址。</li>
-<li>操作系统还使用栈来管理进程的堆栈空间，为每个线程和进程分配一块私有的栈空间。</li>
-</ul>
-</li>
-<li><h2 id="表达式求值："><a href="#表达式求值：" class="headerlink" title="表达式求值："></a>表达式求值：</h2><ul>
-<li>在编译器或解释器中，栈常用于表达式求值的过程中，用于存储运算符和操作数。</li>
-<li>通过栈的先进后出的特性，可以按照正确的优先级和顺序对表达式进行求值。</li>
-</ul>
-</li>
-</ol>
-<h1 id="4-2-3-栈初始化"><a href="#4-2-3-栈初始化" class="headerlink" title="4.2.3 栈初始化"></a>4.2.3 栈初始化</h1><p>栈的初始化是在程序执行之前进行的，它涉及到栈指针的设置和栈空间的分配。具体的栈初始化过程可能因处理器架构和操作系统而有所差异。</p>
-<p>下面是一些常见的栈初始化方式和相关的寄存器：</p>
-<ol>
-<li>ARM 架构：<ul>
-<li>栈指针寄存器（Stack Pointer Register）：ARM 架构中的栈指针寄存器是 SP（R13）。</li>
-<li>初始化栈指针：在启动时，操作系统或引导加载程序会设置 SP 寄存器的值，指向栈的初始位置。</li>
-<li>帧指针寄存器（Frame Pointer Register）：ARM 架构中的帧指针寄存器是 FP（R11），用于访问函数的局部变量和参数。</li>
-<li>在函数调用过程中，栈指针 SP 会动态地进行调整，而帧指针 FP 则用于指向当前函数的栈帧。</li>
-</ul>
-</li>
-<li>x86 架构：<ul>
-<li>栈指针寄存器（Stack Pointer Register）：x86 架构中的栈指针寄存器是 ESP（栈顶指针）和 EBP（栈底指针）。</li>
-<li>初始化栈指针：在启动时，操作系统或引导加载程序会设置 ESP 寄存器的值，指向栈的初始位置。</li>
-<li>在函数调用过程中，ESP 会动态地进行调整，用于栈帧的分配和释放。</li>
-<li>基址指针寄存器（Base Pointer Register）：x86 架构中的基址指针寄存器是 EBP，用于在函数中访问局部变量和参数。</li>
-</ul>
-</li>
-</ol>
-<h1 id="4-2-4-栈的起始地址"><a href="#4-2-4-栈的起始地址" class="headerlink" title="4.2.4 栈的起始地址"></a>4.2.4 栈的起始地址</h1><p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309070809175.png" alt="image-20230907080956110"></p>
-<p>栈的起始地址是根据操作系统和编译器的实现而定的。栈通常位于内存的高地址区域，并在程序执行前被初始化。</p>
-<p>下面是一些常见的栈起始地址情况：</p>
-<ol>
-<li>用户空间：<ul>
-<li>在用户空间的程序中，栈通常从高地址向低地址增长。</li>
-<li>栈的起始地址可以是固定的，也可以在每次程序执行时动态分配。</li>
-<li>在某些操作系统中，栈的起始地址可以通过随机偏移（Random Offset）来增加安全性，防止缓冲区溢出攻击。</li>
-</ul>
-</li>
-<li>内核空间：<ul>
-<li>在内核空间中，栈的起始地址通常是固定的，由操作系统内核决定。</li>
-<li>内核栈用于处理中断、异常和系统调用等内核级别的任务。</li>
-<li>内核栈的起始地址可能与用户空间的栈起始地址不同，且通常位于内核空间的高地址区域。</li>
-</ul>
-</li>
-</ol>
-<p>在一些特殊情况下，也可能使用其他内存区域作为栈的起始地址，例如堆（heap）或通过内存映射（mmap）分配的内存区域。但是，栈通常独立于堆和内存映射区域。</p>
-<p>栈的英文是stack</p>
-<h1 id="4-2-5-栈的大小"><a href="#4-2-5-栈的大小" class="headerlink" title="4.2.5 栈的大小"></a>4.2.5 栈的大小</h1><p>栈的大小是指栈所占用的内存空间大小。栈的大小在不同的操作系统和编译器中有所不同。</p>
-<p>对于 Linux 操作系统的进程栈大小，可以使用 ulimit 命令来查看和设置。下面是相关命令的说明：</p>
-<ul>
-<li>查看堆栈大小：使用命令 <code>ulimit -s</code> 可以查看当前进程的堆栈大小限制。</li>
-<li>设置堆栈大小：使用命令 <code>ulimit -s size</code> 可以设置当前进程的堆栈大小限制，其中 size 是以 KB 为单位的大小值。</li>
-</ul>
-<p>需要注意的是，增加堆栈容量会增加内存开销和启动时间。因此，需要合理配置堆栈大小，以满足程序的需求，同时避免浪费资源。</p>
-<p>栈溢出（Stack Overflow）是指当栈空间不足以容纳新的栈帧时，导致栈指针超出了栈的边界。这通常发生在递归函数调用层次过深或者局部变量占用过多栈空间的情况下。当发生栈溢出时，会导致段错误（Segmentation Fault）或程序异常退出。</p>
-<p>在最大堆栈大小的限制内，栈可以动态增长，即在需要时自动分配更多的栈空间。但是，若超过了最大堆栈大小限制，就会发生栈溢出。</p>
-<p>栈溢出的实例可以是一个递归函数调用层次过深，或者一个函数中声明了大量的局部变量导致栈空间不足的情况。当栈溢出发生时，程序无法正确地管理栈帧，导致异常行为或崩溃。</p>
-<p>为了避免栈溢出，应该合理控制递归深度、减少局部变量的使用或者使用动态内存管理（如堆）来存储大量数据。</p>
-<p>总结：栈的大小在不同的操作系统和编译器中有所不同。在 Linux 操作系统中，可以使用 ulimit 命令来查看和设置进程的堆栈大小。增加堆栈容量会增加内存开销和启动时间，而栈溢出会导致段错误或程序异常退出。栈在最大堆栈大小内可以动态增长，但超过最大值会导致栈溢出。为了避免栈溢出，应合理控制递归深度、减少局部变量的使用或使用动态内存管理。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">char</span> a[<span class="number">8</span> * <span class="number">1024</span> * <span class="number">1024</span>];</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;hello world!\n&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在<code>main</code>函数中声明了一个名为<code>a</code>的字符数组，其大小为8MB（8<em>1024</em>1024字节）。然后，你使用<code>printf</code>函数打印了一条”hello world!”的消息，并通过<code>return 0</code>语句结束了<code>main</code>函数。</p>
-<p>需要注意的是，你在栈上声明了一个非常大的数组（8MB），这可能会导致栈溢出。栈的大小是有限的，并且在不同的操作系统和编译器中有所不同。默认情况下，大多数操作系统都有一个较小的栈大小限制。因此，声明过大的局部数组可能会导致栈溢出，导致程序崩溃。</p>
-<p>如果你需要使用大量内存，建议使用堆分配（例如使用<code>malloc</code>函数）来动态分配内存空间，而不是在栈上声明大型数组。这样可以避免栈溢出的风险。</p>
  
       <!-- reward -->
       

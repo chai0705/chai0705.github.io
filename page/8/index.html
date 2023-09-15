@@ -160,6 +160,67 @@
     
     
     <article
+  id="post-5-16-属性声明：used-unused"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/09/07/5-16-%E5%B1%9E%E6%80%A7%E5%A3%B0%E6%98%8E%EF%BC%9Aused-unused/"
+    >5.16 属性声明：used &amp; unused</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/09/07/5-16-%E5%B1%9E%E6%80%A7%E5%A3%B0%E6%98%8E%EF%BC%9Aused-unused/" class="article-date">
+  <time datetime="2023-09-07T13:14:27.000Z" itemprop="datePublished">2023-09-07</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>在给定的示例中，使用了 <code>used</code> 和 <code>unused</code> 属性来声明变量和函数的使用情况。</p>
+<ol>
+<li><code>.register int reg asm(&quot;r0&quot;) __attribute__((used));</code><br>这个声明将 <code>reg</code> 定义为一个寄存器变量，并使用 <code>used</code> 属性来指示编译器该变量会被使用。这可以防止编译器优化掉该变量，确保其在代码中的存在。</li>
+<li><code>static void func(void) __attribute__((used, section(&quot;.text&quot;)));</code><br>这个声明定义了一个静态函数 <code>func</code>，并使用 <code>used</code> 属性来指示编译器该函数会被使用。此外，通过 <code>section(&quot;.text&quot;)</code> 属性，将该函数放置在 <code>.text</code> 段中。</li>
+<li><code>static __attribute__((unused)) int a;</code><br>这个声明定义了一个静态变量 <code>a</code>，并使用 <code>unused</code> 属性来指示编识器该变量未被使用。这可以让编译器忽略该变量的存在，避免产生未使用变量的警告。</li>
+<li><code>static int func(void) __attribute__((unused));</code><br>这个声明定义了一个静态函数 <code>func</code>，并使用 <code>unused</code> 属性来指示编译器该函数未被使用。类似于上述的静态变量，这可以让编译器忽略该函数的存在。</li>
+<li><code>int fun(__attribute__((unused)) int a, int b);</code><br>这个声明定义了一个函数 <code>fun</code>，并使用 <code>unused</code> 属性来指示编译器函数中的参数 <code>a</code> 未被使用。这可以避免产生未使用参数的警告。</li>
+</ol>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gun%E6%89%A9%E5%B1%95%E8%AF%AD%E6%B3%95/" rel="tag">gun扩展语法</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
   id="post-5-15-属性声明：noreturn"
   class="article article-type-post"
   itemscope
@@ -776,73 +837,6 @@
 <li>警告检查：属性还可以用于启用或禁用编译器的警告检查。通过指定特定的属性，可以控制编译器在编译过程中产生的警告信息。</li>
 <li>内存布局：属性可以用于控制变量或函数在内存中的位置。可以指定变量存放在特定的内存段中，或者指定函数使用特定的调用约定。</li>
 </ol>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gun%E6%89%A9%E5%B1%95%E8%AF%AD%E6%B3%95/" rel="tag">gun扩展语法</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-5-6-零长度数组"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/09/07/5-6-%E9%9B%B6%E9%95%BF%E5%BA%A6%E6%95%B0%E7%BB%84/"
-    >5.6 零长度数组</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/09/07/5-6-%E9%9B%B6%E9%95%BF%E5%BA%A6%E6%95%B0%E7%BB%84/" class="article-date">
-  <time datetime="2023-09-07T13:14:11.000Z" itemprop="datePublished">2023-09-07</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <p>这个例子展示了C语言中的零长度数组的用法。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">buffer</span> &#123;</span></span><br><span class="line">    <span class="type">int</span> len;</span><br><span class="line">    <span class="type">char</span> a[<span class="number">0</span>];</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span> &#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">buffer</span> *<span class="title">buf</span>;</span></span><br><span class="line">    buf = (<span class="keyword">struct</span> buffer*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">struct</span> buffer) + <span class="number">20</span>);</span><br><span class="line">    buf-&gt;len = <span class="number">20</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;size: %d\n&quot;</span>, <span class="keyword">sizeof</span>(buf));</span><br><span class="line">    <span class="built_in">strcpy</span>(buf-&gt;a, <span class="string">&quot;hello world&quot;</span>);</span><br><span class="line">    <span class="built_in">puts</span>(buf-&gt;a);</span><br><span class="line">    <span class="built_in">free</span>(buf);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在这个例子中，定义了一个结构体 <code>buffer</code>，它包含一个整型变量 <code>len</code> 和一个零长度数组 <code>a</code>。</p>
-<p>零长度数组是C语言中的一种特殊用法，它的长度为0，也就是没有元素。它通常用于结构体的最后一个成员，用于实现动态大小的数组。</p>
-<p>在 <code>main</code> 函数中，首先通过调用 <code>malloc</code> 动态分配了一块内存，大小为 <code>sizeof(struct buffer) + 20</code>。这里的 <code>20</code> 表示额外的数据空间，用于存储字符串 “hello world”。</p>
-<p>然后，将分配的内存地址强制转换为 <code>struct buffer*</code> 类型，并将其赋给指针变量 <code>buf</code>。</p>
-<p>接下来，通过 <code>buf-&gt;len = 20</code>，将结构体成员 <code>len</code> 的值设置为 <code>20</code>。</p>
-<p>然后，通过 <code>printf</code> 打印了指针变量 <code>buf</code> 的大小，即 <code>sizeof(buf)</code>。请注意，这里打印的是指针变量 <code>buf</code> 的大小，而不是结构体 <code>buffer</code> 的大小。因为指针变量的大小在不同的系统上是固定的，一般为 4 或 8 字节，不会随着结构体的大小而变化。</p>
-<p>随后，通过 <code>strcpy</code> 将字符串 “hello world” 复制到结构体成员 <code>a</code> 中。</p>
-<p>最后，通过 <code>puts</code> 打印结构体成员 <code>a</code> 中的字符串。</p>
-<p>最后，通过 <code>free</code> 释放了之前动态分配的内存。</p>
-<p>这个例子展示了零长度数组的一种使用方式，它允许在结构体中动态存储变长数据。需要注意的是，零长度数组只是一种技巧，并不是C语言标准中的定义。因此，使用零长度数组时需要注意编译器的兼容性和可移植性。</p>
-<p>ShareLikeDislike</p>
  
       <!-- reward -->
       
