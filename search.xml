@@ -54,70 +54,6 @@
       </tags>
   </entry>
   <entry>
-    <title>markdown 语法学习</title>
-    <url>/2023/09/02/markdown-%E8%AF%AD%E6%B3%95%E5%AD%A6%E4%B9%A0/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="第1节-标题"><a href="#第1节-标题" class="headerlink" title="第1节 标题"></a>第1节 标题</h1><p>markdown 里面总共有六级标题，可以使用#号的多少来来引用，现在使用的是typora也可以直接使用ctrl+1-6的快捷按键来进行设置</p>
-<h1 id="第2节-列表"><a href="#第2节-列表" class="headerlink" title="第2节 列表"></a>第2节 列表</h1><h2 id="2-1-有序列表"><a href="#2-1-有序列表" class="headerlink" title="2.1 有序列表"></a>2.1 有序列表</h2><p>​	顾名思义，有序列表就是有小标号的列表，同样也是两种方式英⽂输⼊法下，数字后⾯加⼀点，然后空格即可，或者使用快捷按键ctrl + shift + [即可</p>
-<p>1. </p>
-<p>1. </p>
-<h2 id="2-2-无序列表"><a href="#2-2-无序列表" class="headerlink" title="2.2 无序列表"></a>2.2 无序列表</h2><p>​	跟上面的有序列表相反，无序列表就是没有标号，有四种方法、</p>
-<ul>
-<li>aaa - aaa</li>
-</ul>
-<ul>
-<li>aaa + aaa</li>
-</ul>
-<ul>
-<li>aaa *aaa</li>
-</ul>
-<ul>
-<li>aaa ctrl+shift+]</li>
-</ul>
-<h1 id="第3节-字体标记"><a href="#第3节-字体标记" class="headerlink" title="第3节 字体标记"></a>第3节 字体标记</h1><h2 id="3-1-加粗"><a href="#3-1-加粗" class="headerlink" title="3.1 加粗"></a>3.1 加粗</h2><p><strong>加粗</strong> **   内容**在typora中可以使用ctrl+b</p>
-<h2 id="3-2-删除"><a href="#3-2-删除" class="headerlink" title="3.2 删除"></a>3.2 删除</h2><p><del>删除</del> ~~ 内容~~</p>
-<h2 id="3-3-斜体"><a href="#3-3-斜体" class="headerlink" title="3.3 斜体"></a>3.3 斜体</h2><p><em>斜体</em> * 内容 *</p>
-<h2 id="3-4-高亮"><a href="#3-4-高亮" class="headerlink" title="3.4 高亮"></a>3.4 高亮</h2><p>&#x3D;&#x3D;高亮&#x3D;&#x3D; &#x3D;&#x3D;内容  &#x3D;&#x3D;需要打开pytora的高亮功能之后才行</p>
-<h1 id="第4节-段落相关"><a href="#第4节-段落相关" class="headerlink" title="第4节 段落相关"></a>第4节 段落相关</h1><h2 id="4-1-引用"><a href="#4-1-引用" class="headerlink" title="4.1 引用"></a>4.1 引用</h2><blockquote>
-<p>这是一段引用 &gt; 大于号加内容引用</p>
-</blockquote>
-<h2 id="4-2-分割线"><a href="#4-2-分割线" class="headerlink" title="4.2 分割线"></a>4.2 分割线</h2><hr>
-<p>三个横杠或者更多的横杠表示分割线</p>
-<h1 id="第5节-代码"><a href="#第5节-代码" class="headerlink" title="第5节 代码"></a>第5节 代码</h1><h2 id="5-1-行内代码"><a href="#5-1-行内代码" class="headerlink" title="5.1 行内代码"></a>5.1 行内代码</h2><p><code>这是一个行内代码</code> 1旁边那个特殊按键</p>
-<h2 id="5-2-代码块"><a href="#5-2-代码块" class="headerlink" title="5.2 代码块"></a>5.2 代码块</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;hello world&quot;</span>)</span><br><span class="line">    三个```然后回车即可，然后在右下角的选择框中进行代码的选择</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="第6节-超链接"><a href="#第6节-超链接" class="headerlink" title="第6节 超链接"></a>第6节 超链接</h1><blockquote>
-<p>格式 ：[⽹址标题] [变量01]</p>
-</blockquote>
-<p><a href="www.baidu.com">百度</a></p>
-<ul>
-<li><p>在⽂稿起草阶段，还没确定具体⽹址，但可以先给出⽹址标题</p>
-</li>
-<li><p>同⼀篇⽂章需要重复出现同⼀个⽹址时</p>
-</li>
-</ul>
-<h1 id="第7节-脚注"><a href="#第7节-脚注" class="headerlink" title="第7节 脚注"></a>第7节 脚注</h1><p>这是一个脚注<a href="%E8%BF%99%E4%B8%AA%E6%98%AF%E6%94%BE%E5%9C%A8%E6%96%87%E7%AB%A0%E5%B0%BE%E9%83%A8%E7%9A%84%EF%BC%8C%E7%94%A8%E4%BA%8E%E6%89%BF%E6%8E%A5%E4%B8%8A%E9%9D%A2%E7%9A%84%E8%84%9A%E6%B3%A8">^01</a></p>
-<h1 id="第8节-图片"><a href="#第8节-图片" class="headerlink" title="第8节 图片"></a>第8节 图片</h1><p><img src="/"></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">基本格式：![](图⽚链接)</span><br></pre></td></tr></table></figure>
-
-<p><img src="D:\hexo\blog\source_posts\image-20230902075316489.png" alt="image-20230902075316489"></p>
-<p>图⽚链接可以是本地链接，也可以是在线链接</p>
-<p>但这个图片是本地路径，很有问题，所以你可能需要一个图床，用来无视地点，目前先不学呢，具体链接如下所示：</p>
-<p><a href="https://eryinote.com/post/105">图床搭建教程</a></p>
-<h1 id="第9节-表格"><a href="#第9节-表格" class="headerlink" title="第9节 表格"></a>第9节 表格</h1><p>在typora中可以使用快捷按键进行表格的创建  ctrl+t</p>
-<p>通用的语法为</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">| 表头 | 表头 |</span><br><span class="line">| ---- | ---- |</span><br><span class="line">| 单元格 | 单元格 |</span><br><span class="line">| 单元格 | 单元格 |</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>markdown</category>
-      </categories>
-      <tags>
-        <tag>markdown</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>c++ 环境搭建</title>
     <url>/2023/09/02/c-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="1-课程所需运行环境配置"><a href="#1-课程所需运行环境配置" class="headerlink" title="1 课程所需运行环境配置"></a>1 课程所需运行环境配置</h1><p>​		ubuntu + windows双系统 4070ti 13900K 32G </p>
@@ -139,138 +75,6 @@
       </categories>
       <tags>
         <tag>c++</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>ayer 主题熟悉</title>
-    <url>/2023/09/02/ayer-%E4%B8%BB%E9%A2%98%E7%86%9F%E6%82%89/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="1-整体介绍"><a href="#1-整体介绍" class="headerlink" title="1 整体介绍"></a>1 整体介绍</h1><p><a href="https://github.com/Shen-Yu/hexo-theme-ayer">Ayer</a> 是一个干净且优雅的 Hexo 主题，自带响应式，加载速度很快，该有的功能都有，可配置项很多，非常适合作为你的博客主题，主题内还附送了 6 张精美的高清壁纸。欢迎使用和 Star 支持，如果你在使用过程中有任何疑问或者建议，欢迎联系我！如果你的博客采用了本主题，欢迎在下面评论区留下地址~</p>
-<p><a href="https://github.com/Shen-Yu/hexo-theme-ayer">Ayer</a> 在马来语中是“水”的意思，在西班牙语中是“昨天”的意思。</p>
-<h1 id="2-特性"><a href="#2-特性" class="headerlink" title="2. 特性"></a>2. 特性</h1><ol>
-<li>干净且优雅，文章内容美观易读</li>
-<li>首页封面全屏平铺，扁平化设计，简洁又不失高大上</li>
-<li>响应式设计，博客在桌面端、平板、手机等设备上均能很好的展现</li>
-<li>首页封面和文案可以任意更换，主题内附送 6 张精美高清壁纸</li>
-<li>时间轴式的归档页</li>
-<li>支持 <code>黑夜阅读</code> 模式</li>
-<li>侧边栏可以点击显示或隐藏</li>
-<li>支持文章置顶和文章打赏</li>
-<li>支持文章字数和阅读时长统计</li>
-<li>支持网易云音乐播放</li>
-<li>支持  <code>MathJax</code> 和 <code>Katex</code> 数学公式</li>
-<li>支持 <code>Mermaid</code> 流程图、状态图、时序图、甘特图</li>
-<li><code>TOC</code> 目录在文章页悬浮，跳转更方便</li>
-<li>集成了博客加密访问的功能</li>
-<li>可设置阅读文章时做密码验证<a href="https://github.com/MikeCoder/hexo-blog-encrypt/blob/master/ReadMe.zh.md">hexo-blog-encrypt</a></li>
-<li><a href="https://valine.js.org/">Valine</a>和<a href="https://gitalk.github.io/">Gitalk</a>评论模块（推荐配合<code>leancloud</code>使用  <code>Valine</code>）</li>
-<li>集成了<a href="http://busuanzi.ibruce.info/">不蒜子</a>、百度统计、Google Analytics、CNZZ 等统计功能</li>
-<li>支持 Github Ribbons</li>
-</ol>
-<h1 id="3-主题配置"><a href="#3-主题配置" class="headerlink" title="3.主题配置"></a>3.主题配置</h1><p>以下是 ayer 主题目录下的 <code>_config.yml</code> 文件配置，</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 侧边栏菜单</span><br><span class="line">menu:</span><br><span class="line">  主页: /</span><br><span class="line">  归档: /archives</span><br><span class="line">  分类: /categories</span><br><span class="line">  标签: /tags</span><br><span class="line">  摄影: http://shenyu-vip.lofter.com</span><br><span class="line">  旅行: /tags/旅行/</span><br><span class="line">  关于我: /2019/about</span><br><span class="line"></span><br><span class="line"># 站点次标题和打字动效</span><br><span class="line"># https://github.com/mattboldt/typed.js</span><br><span class="line">subtitle:</span><br><span class="line">  enable: true # 是否开启动效</span><br><span class="line">  text: 面朝大海，春暖花开 # 显示的文字</span><br><span class="line">  text2: 愿你一生努力，一生被爱 # 滚动播放，如果不需要可以留空</span><br><span class="line">  text3: 想要的都拥有，得不到的都释怀 # 最多支持三段文字</span><br><span class="line">  startDelay: 0 # 延迟时间</span><br><span class="line">  typeSpeed: 200 # 打字速度</span><br><span class="line">  loop: true # 是否循环</span><br><span class="line">  backSpeed: 100 # 回退速度</span><br><span class="line">  showCursor: true # 是否显示光标</span><br><span class="line"></span><br><span class="line"># 网站图标和侧边栏logo</span><br><span class="line">favicon: /favicon.ico</span><br><span class="line">logo: /images/ayer-side.svg</span><br><span class="line"></span><br><span class="line"># 封面配置</span><br><span class="line"># enable-是否启用封面；path-封面背景图；logo-封面logo</span><br><span class="line">cover:</span><br><span class="line">  enable: true</span><br><span class="line">  path: /images/cover1.jpg # /source/images目录下附送多张精美壁纸，可任意更换</span><br><span class="line">  logo: /images/ayer.svg # 如果不要直接设置成false</span><br><span class="line"></span><br><span class="line"># 页面顶部进度条</span><br><span class="line">progressBar: true</span><br><span class="line"></span><br><span class="line"># 告示板模块</span><br><span class="line">broadcast:</span><br><span class="line">  enable: true # true开启，false关闭</span><br><span class="line">  type: 2 # 1：自定义输入，2：一言api(https://hitokoto.cn/)</span><br><span class="line">  text: 一个安静优雅的hexo主题，快速且响应式。 # type为1时有效</span><br><span class="line"></span><br><span class="line"># 文章配置</span><br><span class="line"># 文章太长，截断按钮文字(在需要截断的行增加此标记：&lt;!--more--&gt;)</span><br><span class="line">excerpt_link: 阅读更多...</span><br><span class="line"># 如果你嫌每篇文章手动加more标记比较麻烦，又不想在首页全文显示，可以把excerpt_all设置成true，这样首页只会显示文章归档</span><br><span class="line">excerpt_all: false</span><br><span class="line"></span><br><span class="line"># 是否开启代码复制按钮</span><br><span class="line">copy_btn: true</span><br><span class="line"># 是否开启文章分享按钮</span><br><span class="line">share_enable: true</span><br><span class="line"># 国内的社交平台(If you are not in China, maybe you prefer to set:false)</span><br><span class="line">share_china: true</span><br><span class="line"># 文章分享文字</span><br><span class="line">share_text: 分享</span><br><span class="line"></span><br><span class="line"># 分页文字</span><br><span class="line">nav_text:</span><br><span class="line">  page_prev: 上一页</span><br><span class="line">  page_next: 下一页</span><br><span class="line">  post_prev: 上一篇</span><br><span class="line">  post_next: 下一篇</span><br><span class="line"></span><br><span class="line"># 文章页是否显示目录</span><br><span class="line">toc: true</span><br><span class="line"></span><br><span class="line"># 文章中的图片是否支持点击放大</span><br><span class="line">image_viewer: true</span><br><span class="line"></span><br><span class="line"># https://github.com/willin/hexo-wordcount</span><br><span class="line"># 是否开启字数统计(关闭请设置enable为false)</span><br><span class="line"># 也可以单独在md文件里Front-matter设置`no_word_count: true`属性，来自定义关闭字数统计</span><br><span class="line">word_count:</span><br><span class="line">  enable: true</span><br><span class="line">  # 只在文章详情显示(不在首页显示)</span><br><span class="line">  only_article_visit: true</span><br><span class="line"></span><br><span class="line"># 打赏</span><br><span class="line"># 打赏type设定：0-关闭打赏； 1-文章对应的md文件里有reward:true属性，才有打赏； 2-默认开启所有文章均有打赏，如果有些文章你不需要，请在文章对应的md文件里设置no_reward:true</span><br><span class="line">reward_type: 2</span><br><span class="line"># 打赏wording</span><br><span class="line">reward_wording: &quot;请我喝杯咖啡吧~&quot;</span><br><span class="line"># 支付宝二维码图片地址，跟你设置logo的方式一样。比如：/images/alipay.jpg</span><br><span class="line">alipay: /images/alipay.jpg</span><br><span class="line"># 微信二维码图片地址</span><br><span class="line">weixin: /images/wechat.jpg</span><br><span class="line"></span><br><span class="line"># 版权声明</span><br><span class="line"># 版权声明type设定：0-关闭版权声明； 1-文章对应的md文件里有copyright: true属性，才有版权声明； 2-所有文章均有版权声明</span><br><span class="line">copyright_type: 2</span><br><span class="line"></span><br><span class="line"># 是否启用搜索</span><br><span class="line">search: true</span><br><span class="line"></span><br><span class="line"># RSS订阅(先安装hexo-generator-feed插件，再去博客根目录config进行配置)</span><br><span class="line"># 不想显示可以直接留空</span><br><span class="line">rss: /atom.xml</span><br><span class="line"></span><br><span class="line"># 是否启用黑夜模式开关</span><br><span class="line">darkmode: true</span><br><span class="line"></span><br><span class="line"># 动态背景效果: 0-关闭，1-动态线条(跟随鼠标)</span><br><span class="line">canvas_bg: 0</span><br><span class="line"></span><br><span class="line"># 自定义鼠标样式，直接替换/images/mouse.cur文件</span><br><span class="line">mouse:</span><br><span class="line">  enable: false</span><br><span class="line">  path: /images/mouse.cur</span><br><span class="line"></span><br><span class="line"># 鼠标点击效果：0-关闭，1-爱心，2-爆炸烟花，3-粒子烟花</span><br><span class="line">click_effect: 0</span><br><span class="line"></span><br><span class="line"># 页面宽度自定义（不建议修改，可能造成布局混乱），article_width文章宽度，sidebar_width侧边栏宽度</span><br><span class="line">layout:</span><br><span class="line">  article_width: 80rem</span><br><span class="line">  sidebar_width: 8rem</span><br><span class="line"></span><br><span class="line"># GitHub Ribbons-封面右上角的forkme，换样式直接在source/images目录下替换forkme图片</span><br><span class="line">github:</span><br><span class="line">  # (关闭请设置为false)</span><br><span class="line">  enable: true</span><br><span class="line">  url: https://github.com/Shen-Yu/hexo-theme-ayer</span><br><span class="line"></span><br><span class="line"># 网易云音乐插件</span><br><span class="line">music:</span><br><span class="line">  enable: false</span><br><span class="line">  # 播放器尺寸类型(1：小尺寸、2：大尺寸)</span><br><span class="line">  type: 1</span><br><span class="line">  id: 22707008 # 网易云分享的音乐ID(更换音乐请更改此配置项)</span><br><span class="line">  autoPlay: true # 是否开启自动播放</span><br><span class="line"></span><br><span class="line"># 访问量统计(不蒜子)</span><br><span class="line">busuanzi:</span><br><span class="line">  enable: true</span><br><span class="line"></span><br><span class="line"># 友盟cnzz统计(url填js代码src链接)</span><br><span class="line">cnzz:</span><br><span class="line">  enable: true</span><br><span class="line">  url: #</span><br><span class="line"></span><br><span class="line"># Google Analytics</span><br><span class="line">google_analytics: &quot;&quot;</span><br><span class="line"># 百度统计</span><br><span class="line">baidu_analytics: &quot;&quot;</span><br><span class="line"></span><br><span class="line"># Mathjax数学公式</span><br><span class="line">mathjax: true</span><br><span class="line"></span><br><span class="line"># Katex数学公式(allpost设置为false时只有头部设置math:true的文章才开启)</span><br><span class="line"># 需要更换hexo渲染器，npm un hexo-renderer-marked -S &amp;&amp; npm i hexo-renderer-markdown-it-katex -S</span><br><span class="line">katex:</span><br><span class="line">  enable: false # true</span><br><span class="line">  allpost: true</span><br><span class="line">  copy_tex: false</span><br><span class="line"></span><br><span class="line"># mermaid流程图 三个选项缺一不可(https://mermaid-js.github.io/mermaid/#/)</span><br><span class="line">mermaid:</span><br><span class="line">  enable: false</span><br><span class="line">  cdn: https://cdn.jsdelivr.net/npm/mermaid@8.9.2/dist/mermaid.min.js</span><br><span class="line">  theme: forest</span><br><span class="line"></span><br><span class="line"># 网站成立年份(默认为 2019，若填入年份小于当前年份，则显示为 2018-2019 类似的格式)</span><br><span class="line">since: 2019</span><br><span class="line"></span><br><span class="line"># ICP备案信息尾部显示</span><br><span class="line">icp:</span><br><span class="line">  enable: false</span><br><span class="line">  url: &quot;http://www.beian.miit.gov.cn/&quot; # 备案链接</span><br><span class="line">  text: &quot;浙ICP备88888888&quot; # 备案信息</span><br><span class="line"># 公安备案信息尾部显示</span><br><span class="line">gongan:</span><br><span class="line">  enable: true</span><br><span class="line">  img: /images/beian.png #公安备案图片</span><br><span class="line">  url: &quot;http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=01234567890123&quot; #公安备案链接</span><br><span class="line">  text: &quot;浙公网安备01234567890123号&quot; #公安备案信息</span><br><span class="line"></span><br><span class="line"># 友情链接</span><br><span class="line">friends_link:</span><br><span class="line">  Ayer主题: #网站名称</span><br><span class="line">    #网站地址</span><br><span class="line">    url: https://github.com/Shen-Yu/hexo-theme-ayer</span><br><span class="line">    #网站图片(可忽略不写)</span><br><span class="line">    img: /images/ayer.png</span><br><span class="line">  GitHub:</span><br><span class="line">    url: https://github.com/Shen-Yu</span><br><span class="line">    img: https://i.loli.net/2020/09/07/indb4PRYDA98EkN.png</span><br><span class="line">  码云:</span><br><span class="line">    url: https://gitee.com/shen-yu</span><br><span class="line">    img: https://i.loli.net/2020/09/07/K3AqO7h6krQFlRX.png</span><br><span class="line">  Hexo官网:</span><br><span class="line">    url: https://hexo.io</span><br><span class="line">    img: https://i.loli.net/2020/09/07/UYGzjo7h68CRWny.png</span><br><span class="line">  Hexo图表插件:</span><br><span class="line">    url: https://github.com/Shen-Yu/hexo-tag-chart</span><br><span class="line">    img: https://i.loli.net/2020/09/07/GIXBYE5SoylhR1r.png</span><br><span class="line"></span><br><span class="line"># 评论：1、Valine(推荐)；2、Gitalk；3、Twikoo; 4.MiniValine</span><br><span class="line"></span><br><span class="line"># 1、Valine[一款快速、简洁且高效的无后端评论系统](https://github.com/xCss/Valine)</span><br><span class="line"># 启用Valine必须先创建leancloud应用， 获取 id|key 填入即可</span><br><span class="line">leancloud:</span><br><span class="line">  enable: true</span><br><span class="line">  app_id: #</span><br><span class="line">  app_key: #</span><br><span class="line"># Valine配置</span><br><span class="line">valine:</span><br><span class="line">  enable: true # 是否启用</span><br><span class="line">  avatar: monsterid # 头像样式(https://valine.js.org/avatar.html)</span><br><span class="line">  placeholder: 给我的文章加点评论吧~ # placeholder</span><br><span class="line"></span><br><span class="line"># 2、Gitalk(https://github.com/gitalk/gitalk)</span><br><span class="line">gitalk:</span><br><span class="line">  enable: false # true</span><br><span class="line">  clientID: # GitHub Application Client ID</span><br><span class="line">  clientSecret: # Client Secret</span><br><span class="line">  repo: # Repository name</span><br><span class="line">  owner: # GitHub ID</span><br><span class="line">  admin: # GitHub ID</span><br><span class="line"></span><br><span class="line"># 3、Twikoo(https://github.com/imaegoo/twikoo)</span><br><span class="line">twikoo:</span><br><span class="line">  enable: false</span><br><span class="line">  envId: #</span><br><span class="line"></span><br><span class="line"># 4、MiniValine</span><br><span class="line"># See: https://github.com/MiniValine/MiniValine</span><br><span class="line">minivaline:</span><br><span class="line">  enable: false</span><br><span class="line">  serverURL: https://minivaline.your-domain.com</span><br><span class="line"></span><br><span class="line"># 首页广告配置</span><br><span class="line"># 可以根据需要自行增加ad_3，ad_4...，留空则不显示</span><br><span class="line">ads:</span><br><span class="line">  ad_1:</span><br><span class="line">    title: vultr优惠vps</span><br><span class="line">    img: https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/vultr.png</span><br><span class="line">    url: https://www.vultr.com/?ref=8630075</span><br><span class="line">    width: 300</span><br><span class="line">  ad_2:</span><br><span class="line">    title: 云服务器全球购低至2折</span><br><span class="line">    img: https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/ad_2.jpg</span><br><span class="line">    url: https://curl.qcloud.com/kvO7hb43</span><br><span class="line">    width: 300</span><br><span class="line"></span><br><span class="line"># 网站开启加密访问，密码可设置任何字符</span><br><span class="line">lock:</span><br><span class="line">  enable: false</span><br><span class="line">  password: 123456</span><br></pre></td></tr></table></figure>
-
-<h2 id="4-插件-可选"><a href="#4-插件-可选" class="headerlink" title="4 插件(可选)"></a>4 插件(可选)</h2><ul>
-<li><a href="https://github.com/netcan/hexo-generator-index-pin-top">hexo-generator-index-pin-top</a> 用于文章置顶</li>
-<li><a href="https://github.com/MikeCoder/hexo-blog-encrypt/blob/master/ReadMe.zh.md">hexo-blog-encrypt</a> 用于文章加密</li>
-<li><a href="https://github.com/MoePlayer/hexo-tag-aplayer/blob/master/docs/README-zh_cn.md">hexo-tag-aplayer</a> 用于播放音乐</li>
-<li><a href="https://github.com/MoePlayer/hexo-tag-dplayer">hexo-tag-dplayer</a> 用于播放视频</li>
-<li><a href="https://github.com/EYHN/hexo-helper-live2d/blob/master/README.zh-CN.md">hexo-helper-live2d</a> 二次元看板娘</li>
-</ul>
-<h2 id="5-分类"><a href="#5-分类" class="headerlink" title="5.分类"></a>5.分类</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo new page categories</span><br></pre></td></tr></table></figure>
-
-<p>然后将以下复制到 &#x2F;source&#x2F;categories&#x2F;index.md 文件</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: categories</span><br><span class="line">type: &quot;categories&quot;</span><br><span class="line">layout: &quot;categories&quot;</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
-
-<h2 id="6-标签"><a href="#6-标签" class="headerlink" title="6.标签"></a>6.标签</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo new page tags</span><br></pre></td></tr></table></figure>
-
-<p>配置同分类一样</p>
-<h2 id="7-友情链接"><a href="#7-友情链接" class="headerlink" title="7. 友情链接"></a>7. 友情链接</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo new page friends</span><br></pre></td></tr></table></figure>
-
-<p>然后将以下复制到 &#x2F;source&#x2F;friends&#x2F;index.md 文件</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: friends</span><br><span class="line">type: friends</span><br><span class="line">layout: &quot;friends&quot;</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
-
-<p>然后在 ayer 主题目录下的 <code>_config.yml</code> 中自定义 <code>friends_link</code> 配置项即可</p>
-<h2 id="8-相册"><a href="#8-相册" class="headerlink" title="8.相册"></a>8.相册</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo new page photos</span><br></pre></td></tr></table></figure>
-
-<p>然后将以下复制到 &#x2F;source&#x2F;photos&#x2F;index.md 文件，<code>img_url</code> 替换成图片路径，<code>caption</code> 替换成图片名称</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: Gallery</span><br><span class="line"></span><br><span class="line">albums: [[&quot;img_url&quot;, &quot;img_caption&quot;], [&quot;img_url&quot;, &quot;img_caption&quot;]]</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
-
-<h2 id="文章目录"><a href="#文章目录" class="headerlink" title="文章目录"></a>文章目录</h2><p>用 Tocbot 解析文章标题并生成目录</p>
-<ul>
-<li>将以下配置复制到你 ayer 主题目录下的 <code>_config.yml</code> 里：</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Toc</span><br><span class="line">toc: true</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>当然你可能并不想所有文章都生成悬浮目录，你可以在文章顶部的配置中加一行来进行关闭：</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">no_toc: true</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>hexo</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>hexo基本操作命令</title>
-    <url>/2023/09/02/hexo%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><a href="https://so.csdn.net/so/search?q=Hexo&spm=1001.2101.3001.7020">Hexo</a> 约有二十个命令，但普通用户经常使用的大概只有下列几个:</p>
-<h2 id="hexo-s"><a href="#hexo-s" class="headerlink" title="hexo s"></a><strong>hexo s</strong></h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo s</span><br></pre></td></tr></table></figure>
-
-<p>启动本地服务器，用于预览主题。默认地址： <a href="http://localhost:4000/">http://localhost:4000/</a></p>
-<ul>
-<li>hexo s 是 hexo server 的缩写，命令效果一致；</li>
-<li>预览的同时可以修改文章内容或主题代码，保存后刷新页面即可；</li>
-<li>对 Hexo 根目录 _config.yml 的修改，需要重启本地服务器后才能预览效果。</li>
-</ul>
-<h2 id="hexo-new"><a href="#hexo-new" class="headerlink" title="hexo new"></a><strong>hexo new</strong></h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo new &quot;学习笔记  六&quot;</span><br></pre></td></tr></table></figure>
-
-<p>新建一篇标题为 学习笔记 六 的文章，因为标题里有空格，所以加上了引号。</p>
-<ul>
-<li>文章标题可以在对应 md 文件里改，新建时标题可以写的简单些。</li>
-</ul>
-<h2 id="hexo-d"><a href="#hexo-d" class="headerlink" title="hexo d"></a><strong>hexo d</strong></h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo d</span><br></pre></td></tr></table></figure>
-
-<p>自动生成网站静态文件，并部署到设定的仓库。</p>
-<ul>
-<li>hexo d 是 hexo deploy 的缩写，命令效果一致。</li>
-</ul>
-<h2 id="hexo-clean"><a href="#hexo-clean" class="headerlink" title="hexo clean"></a><strong>hexo clean</strong></h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo clean</span><br></pre></td></tr></table></figure>
-
-<p>清除缓存文件 db.json 和已生成的静态文件 public 。</p>
-<ul>
-<li>网站显示异常时可以执行这条命令试试。</li>
-</ul>
-<h2 id="hexo-g"><a href="#hexo-g" class="headerlink" title="hexo g"></a><strong>hexo g</strong></h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo g</span><br></pre></td></tr></table></figure>
-
-<p>生成网站静态文件到默认设置的 public 文件夹。</p>
-<ul>
-<li>便于查看网站生成的静态文件或者手动部署网站；</li>
-<li>如果使用自动部署，不需要先执行该命令；</li>
-<li>hexo g 是 hexo generate 的缩写，命令效果一致。</li>
-</ul>
-<h2 id="hexo-new-page"><a href="#hexo-new-page" class="headerlink" title="hexo new page"></a><strong>hexo new page</strong></h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo new page aboutme</span><br></pre></td></tr></table></figure>
-
-<p>新建一个标题为 aboutme 的页面，默认链接地址为 主页地址&#x2F;aboutme&#x2F;</p>
-<ul>
-<li>标题可以为中文，但一般习惯用英文；</li>
-<li>页面标题和文章一样可以随意修改；</li>
-<li>页面不会出现在首页文章列表和归档中，也不支持设置分类和标签。</li>
-</ul>
-<p>hexo n “我的博客” 等价于 hexo new “我的博客” 还等价于 hexo new post “我的博客” #新建一篇文章<br>hexo p 等价于 hexo publish<br>hexo g 等价于 hexo generate<br>hexo s等价于 hexo server<br>hexo d 等价于 hexo deploy<br>hexo deploy -g 等价于 hexo deploy –generate<br>hexo generate -d等价于hexo generate –deploy</p>
-<p>一般只需要四个命令，</p>
-<p>hexo n 创建一个新的博客</p>
-<p>hexo s 开启一个新的服务</p>
-<p>hexo g 生成一个静态的网页</p>
-<p>hexo d 将生成的静态网页推到服务器github</p>
-]]></content>
-      <categories>
-        <category>hexo</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
       </tags>
   </entry>
   <entry>
@@ -430,26 +234,6 @@
       </categories>
       <tags>
         <tag>c++</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>hexo 进阶</title>
-    <url>/2023/09/03/hexo-%E8%BF%9B%E9%98%B6/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="1-文章的分类和标签"><a href="#1-文章的分类和标签" class="headerlink" title="1 文章的分类和标签"></a>1 文章的分类和标签</h1><p>分类的话就是在最上方的状态栏中加入	categories:  属性即可</p>
-<p>标签的话就是在最上方的状态栏中加入	tags:  属性即可</p>
-<h1 id="2图床搭建教程"><a href="#2图床搭建教程" class="headerlink" title="2图床搭建教程"></a>2图床搭建教程</h1><p>根据这个教程来即可</p>
-<p><a href="https://eryinote.com/post/105">图床</a></p>
-<p>踩坑 picgo这个软件双击并不是直接打开，而是到了右下角的小菜单。。。</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/image-20230903113402329.png" alt="image-20230903113402329"></p>
-<p>然后在typora软件中进行简单的设置即可。如下所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/image-20230903114440776.png" alt="image-20230903114440776"></p>
-<p>至此就搞完了，其他目前也没啥需求，继续学习C++</p>
-]]></content>
-      <categories>
-        <category>hexo</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
       </tags>
   </entry>
   <entry>
@@ -8333,11 +8117,6 @@
       </tags>
   </entry>
   <entry>
-    <title></title>
-    <url>/2023/09/10/04%20recovery%E7%9A%84%E7%BC%96%E8%AF%91/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
-  </entry>
-  <entry>
     <title>8-1 可加载模块的概念</title>
     <url>/2023/09/11/8-1-%E5%8F%AF%E5%8A%A0%E8%BD%BD%E6%A8%A1%E5%9D%97%E7%9A%84%E6%A6%82%E5%BF%B5/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
@@ -8599,6 +8378,288 @@
       </categories>
       <tags>
         <tag>瑞芯微脚本分析</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>windows搭建hexo</title>
+    <url>/2023/09/03/0-0-0%20windows%E6%90%AD%E5%BB%BAhexo/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 [Markdown]Daring Fireball: Markdown )（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p>
+<p>Hexo 官方中文网站: Hexo</p>
+<h1 id="第一章-前期准备"><a href="#第一章-前期准备" class="headerlink" title="第一章 前期准备"></a>第一章 前期准备</h1><h2 id="1-1-安装前所需环境介绍"><a href="#1-1-安装前所需环境介绍" class="headerlink" title="1.1 安装前所需环境介绍"></a>1.1 安装前所需环境介绍</h2><p>安装 Hexo 之前，需要确保您的 PC 中已经安装以下工具:</p>
+<p>Node.js           <a href="https://nodejs.org/en">https://nodejs.org/en</a><br>        Git    <a href="https://git-scm.com/">https://git-scm.com/</a><br>如果您的电脑已经具备所需工具，那么您可以直接进入第二章开始安装 Hexo 了。</p>
+<p>如果您还未安装这两款工具，那么请按照以下步骤进行安装。</p>
+<h2 id="1-2-安装-Git"><a href="#1-2-安装-Git" class="headerlink" title="1.2 安装 Git"></a>1.2 安装 Git</h2><p>官方下载地址: <a href="https://git-scm.com/">https://git-scm.com/</a><br>注意事项: 建议选择 64-bit Git for Windows Setup，并且安装时要勾选 Add to PATH 选项</p>
+<p>win + R 在命令行输入cmd进入终端模式，输入下面指令，当显示版本则安装成功<br>git -v</p>
+<h2 id="1-3-安装-Node-js"><a href="#1-3-安装-Node-js" class="headerlink" title="1.3 安装 Node.js"></a>1.3 安装 Node.js</h2><p>官方下载地址:  <a href="https://nodejs.org/en">https://nodejs.org/en</a><br>注意事项: 使用 Node.js 官方安装程序时，请确保勾选 Add to PATH 选项（默认已勾选）</p>
+<p>win + R 在命令行输入cmd进入终端模式，输入下面指令，当显示版本则安装成功<br>node –version</p>
+<p>至此，您已经完成了安装 Hexo 所需的所有额外环境，接下来就可以安装 Hexo 了。</p>
+<h1 id="第二章-安装-Hexo"><a href="#第二章-安装-Hexo" class="headerlink" title="第二章 安装 Hexo"></a>第二章 安装 Hexo</h1><h2 id="2-1-安装-cnpm"><a href="#2-1-安装-cnpm" class="headerlink" title="2.1 安装 cnpm"></a>2.1 安装 cnpm</h2><p>当您安装 Node.js 之后，便可以在命令行中通过 node install 命令安装您想要的程序了。但本文推荐使用 cnpm 安装 Hexo，所以需要先通过 npm install 安装 cnpm。</p>
+<p>命令:</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm install -g cnpm --registry==https://registry.npm.taobao.org</span><br></pre></td></tr></table></figure>
+
+
+<p>说明: -g 表示进行全局安装，–registry&#x3D;&#x3D;<a href="https://registry.npm.taobao.org/">https://registry.npm.taobao.org</a>  表示使用淘宝镜像安装 cnpm</p>
+<p>安装后验证: 在 cmd 中输入命令 cnpm -v, 可查看 cnpm 版本</p>
+<h2 id="2-2-安装-Hexo"><a href="#2-2-安装-Hexo" class="headerlink" title="2.2 安装 Hexo"></a>2.2 安装 Hexo</h2><p>命令:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cnpm install -g hexo-cli</span><br></pre></td></tr></table></figure>
+
+<p>说明: -g 表示全局安装，hexo-cli 为所安装的包<br>安装后验证: 在 cmd 中输入命令 hexo -v, 可查看 hexo 版本</p>
+<h2 id="2-3-注意事项"><a href="#2-3-注意事项" class="headerlink" title="2.3 注意事项"></a>2.3 注意事项</h2><p>建议永远安装最新版本的 Hexo，以及 [推荐的 Node.js 版本](文档 | Hexo )。<br>至此，您已成成功安装了 Hexo，接下来进入 Github 的配置吧!</p>
+<h1 id="第三章-配置-Github"><a href="#第三章-配置-Github" class="headerlink" title="第三章 配置 Github"></a>第三章 配置 Github</h1><p>如果您还没有 Gihub 账户，请注册一个 Github 账户吧!</p>
+<h2 id="3-1-在-Github-上创建仓库"><a href="#3-1-在-Github-上创建仓库" class="headerlink" title="3.1 在 Github 上创建仓库"></a>3.1 在 Github 上创建仓库</h2><p>新建一个名为: <a href="http://username.github.io/">http://username.github.io</a>  的仓库(username 为您的 Github 用户名)<br>比如，如果您的 github 用户名是 test，那么您就新建名为 <a href="http://test.github.io/">http://test.github.io</a>  的仓库（必须是您的用户名，其它名称无效），将来你的网站访问地址就是 <a href="https://test.github.io/">https://test.github.io</a>  了。由此可见，每一个 github 账户最多只能创建一个这样可以直接使用域名访问的仓库。</p>
+<h2 id="3-2-配置-SSH-免密登录"><a href="#3-2-配置-SSH-免密登录" class="headerlink" title="3.2 配置 SSH 免密登录"></a>3.2 配置 SSH 免密登录</h2><p>为什么要配置这个呢？因为您提交代码肯定要拥有您的 github 权限才可以，但是直接使用用户名和密码太不安全了，所以我们使用 ssh key 来解决本地和服务器的连接问题。</p>
+<p>注: 如果您已经配置过 SSH，可跳过此步骤</p>
+<p>步骤:</p>
+<p>1、首先打开电脑文件夹，找到 C:\Users\您的用户名\ .ssh文件夹并删除(如果没有，则直接进入第二步)</p>
+<p>2、在 C:\Users\您的用户名 文件夹下右键打开 Git Bash Here 输入命令: ssh-keygen -t rsa -C “你的github登录邮箱” 生成.ssh秘钥，输入后连敲三次回车，出现下图情况代表成功</p>
+<p>3、生成了一个新的 C:\Users\您的用户名\ .ssh文件夹，打开这个文件夹，找到 .ssh\id_rsa.pub 文件，记事本打开并复制里面的内容</p>
+<p>4、打开您的 github 主页，进入个人设置 -&gt; SSH and GPG keys -&gt; New SSH key，把复制的内容粘贴进去，title 随便填，保存即可，我们的公钥就添加成功了，设置好如下图:</p>
+<p>5、检测是否设置成功:</p>
+<p>输入命令: ssh -T <a href="mailto:&#103;&#x69;&#116;&#x40;&#x67;&#105;&#116;&#x68;&#117;&#x62;&#x2e;&#99;&#111;&#x6d;">&#103;&#x69;&#116;&#x40;&#x67;&#105;&#116;&#x68;&#117;&#x62;&#x2e;&#99;&#111;&#x6d;</a></p>
+<p>看到以上信息说明 SSH 已配置成功!</p>
+<p>如果出现提示则选择yes知道成功；</p>
+<p>6、此外您还需要如下配置:</p>
+<p>命令: git config –global user.name “chai0705 “</p>
+<p>命令: git config –global user.email  <a href="mailto:&#49;&#x33;&#x36;&#x31;&#x33;&#56;&#x32;&#x32;&#54;&#57;&#64;&#x71;&#x71;&#x2e;&#99;&#x6f;&#109;">&#49;&#x33;&#x36;&#x31;&#x33;&#56;&#x32;&#x32;&#54;&#57;&#64;&#x71;&#x71;&#x2e;&#99;&#x6f;&#109;</a> </p>
+<p>至此，您已经成功配置好了 Github，接下来开始搭建个人博客吧!</p>
+<h1 id="第四章-使用-Hexo-搭建博客"><a href="#第四章-使用-Hexo-搭建博客" class="headerlink" title="第四章 使用 Hexo 搭建博客"></a>第四章 使用 Hexo 搭建博客</h1><p>Hexo 的一些命令<br>生成静态文件：hexo g；<br>清空静态文件：hexo cl；<br>在本地运行：hexo s；<br>部署到网站：hexo d；<br>生成静态文件并部署到网站：hexo d -g 或 hexo g -d；<br>创建新文章：hexo new <file>。</p>
+<h2 id="4-1-初始化"><a href="#4-1-初始化" class="headerlink" title="4.1 初始化"></a>4.1 初始化</h2><p>1、在电脑的某个磁盘或路径新建一个名为 hexo 的文件夹(名字可以随便取)，比如我的是 D:\hexo，由于这个文件夹将来就作为您存放代码的地方，所以最好不要随便放</p>
+<p>2、在 D:\hexo 文件夹下右键打开 Git Bash Here，输入命令: hexo init 进行初始化</p>
+<p>hexo 会自动下载一些文件到这个目录，包括 node_modules，目录结构如下图:</p>
+<p>3、执行命令: hexo g 会在 public 文件夹下生成相关的 html 文件，这些文件将来需要提交到 Github 上</p>
+<p>4、执行命令: hexo s 可以开启本地预览服务，打开浏览器访问 <a href="http://localhost:4000/">http://localhost:4000</a>  即可看到博客内容</p>
+<h2 id="4-2-将博客部署到-Github"><a href="#4-2-将博客部署到-Github" class="headerlink" title="4.2 将博客部署到 Github"></a>4.2 将博客部署到 Github</h2><p>1、在 D:\hexo 目录下安装 hexo-deployer-git 插件</p>
+<p>命令: npm install hexo-deployer-git –save<br>2、编辑 D:\hexo 目录下的 _config.yml 文件，在文件末尾添加如下内容:</p>
+<p>注意: 其中 repository 中的内容即为 github 个人主页链接地址</p>
+<p>3、在 D:\hexo 目录下，输入命令: hexo d 将本地 blog 推送到 github 远程仓库，也可能需要输入 username &amp; pwd</p>
+<p>推送成功后，即可通过<a href="https://baizhouhaoyue.github.io/%E8%AE%BF%E9%97%AE%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E4%BA%86">https://baizhouhaoyue.github.io/访问个人博客了</a> !</p>
+]]></content>
+      <categories>
+        <category>hexo</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>hexo 进阶</title>
+    <url>/2023/09/03/0-0-1-hexo-%E8%BF%9B%E9%98%B6/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="1-文章的分类和标签"><a href="#1-文章的分类和标签" class="headerlink" title="1 文章的分类和标签"></a>1 文章的分类和标签</h1><p>分类的话就是在最上方的状态栏中加入	categories:  属性即可</p>
+<p>标签的话就是在最上方的状态栏中加入	tags:  属性即可</p>
+<h1 id="2图床搭建教程"><a href="#2图床搭建教程" class="headerlink" title="2图床搭建教程"></a>2图床搭建教程</h1><p>根据这个教程来即可</p>
+<p><a href="https://eryinote.com/post/105">图床</a></p>
+<p>踩坑 picgo这个软件双击并不是直接打开，而是到了右下角的小菜单。。。</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/image-20230903113402329.png" alt="image-20230903113402329"></p>
+<p>然后在typora软件中进行简单的设置即可。如下所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/image-20230903114440776.png" alt="image-20230903114440776"></p>
+<p>至此就搞完了，其他目前也没啥需求，继续学习C++</p>
+]]></content>
+      <categories>
+        <category>hexo</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>hexo基本操作命令</title>
+    <url>/2023/09/02/0-0-2_hexo%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><a href="https://so.csdn.net/so/search?q=Hexo&spm=1001.2101.3001.7020">Hexo</a> 约有二十个命令，但普通用户经常使用的大概只有下列几个:</p>
+<h2 id="hexo-s"><a href="#hexo-s" class="headerlink" title="hexo s"></a><strong>hexo s</strong></h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo s</span><br></pre></td></tr></table></figure>
+
+<p>启动本地服务器，用于预览主题。默认地址： <a href="http://localhost:4000/">http://localhost:4000/</a></p>
+<ul>
+<li>hexo s 是 hexo server 的缩写，命令效果一致；</li>
+<li>预览的同时可以修改文章内容或主题代码，保存后刷新页面即可；</li>
+<li>对 Hexo 根目录 _config.yml 的修改，需要重启本地服务器后才能预览效果。</li>
+</ul>
+<h2 id="hexo-new"><a href="#hexo-new" class="headerlink" title="hexo new"></a><strong>hexo new</strong></h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo new &quot;学习笔记  六&quot;</span><br></pre></td></tr></table></figure>
+
+<p>新建一篇标题为 学习笔记 六 的文章，因为标题里有空格，所以加上了引号。</p>
+<ul>
+<li>文章标题可以在对应 md 文件里改，新建时标题可以写的简单些。</li>
+</ul>
+<h2 id="hexo-d"><a href="#hexo-d" class="headerlink" title="hexo d"></a><strong>hexo d</strong></h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+
+<p>自动生成网站静态文件，并部署到设定的仓库。</p>
+<ul>
+<li>hexo d 是 hexo deploy 的缩写，命令效果一致。</li>
+</ul>
+<h2 id="hexo-clean"><a href="#hexo-clean" class="headerlink" title="hexo clean"></a><strong>hexo clean</strong></h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo clean</span><br></pre></td></tr></table></figure>
+
+<p>清除缓存文件 db.json 和已生成的静态文件 public 。</p>
+<ul>
+<li>网站显示异常时可以执行这条命令试试。</li>
+</ul>
+<h2 id="hexo-g"><a href="#hexo-g" class="headerlink" title="hexo g"></a><strong>hexo g</strong></h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo g</span><br></pre></td></tr></table></figure>
+
+<p>生成网站静态文件到默认设置的 public 文件夹。</p>
+<ul>
+<li>便于查看网站生成的静态文件或者手动部署网站；</li>
+<li>如果使用自动部署，不需要先执行该命令；</li>
+<li>hexo g 是 hexo generate 的缩写，命令效果一致。</li>
+</ul>
+<h2 id="hexo-new-page"><a href="#hexo-new-page" class="headerlink" title="hexo new page"></a><strong>hexo new page</strong></h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo new page aboutme</span><br></pre></td></tr></table></figure>
+
+<p>新建一个标题为 aboutme 的页面，默认链接地址为 主页地址&#x2F;aboutme&#x2F;</p>
+<ul>
+<li>标题可以为中文，但一般习惯用英文；</li>
+<li>页面标题和文章一样可以随意修改；</li>
+<li>页面不会出现在首页文章列表和归档中，也不支持设置分类和标签。</li>
+</ul>
+<p>hexo n “我的博客” 等价于 hexo new “我的博客” 还等价于 hexo new post “我的博客” #新建一篇文章<br>hexo p 等价于 hexo publish<br>hexo g 等价于 hexo generate<br>hexo s等价于 hexo server<br>hexo d 等价于 hexo deploy<br>hexo deploy -g 等价于 hexo deploy –generate<br>hexo generate -d等价于hexo generate –deploy</p>
+<p>一般只需要四个命令，</p>
+<p>hexo n 创建一个新的博客</p>
+<p>hexo s 开启一个新的服务</p>
+<p>hexo g 生成一个静态的网页</p>
+<p>hexo d 将生成的静态网页推到服务器github</p>
+]]></content>
+      <categories>
+        <category>hexo</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>markdown 语法学习</title>
+    <url>/2023/09/02/0-0-3_markdown-%E8%AF%AD%E6%B3%95%E5%AD%A6%E4%B9%A0/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="第1节-标题"><a href="#第1节-标题" class="headerlink" title="第1节 标题"></a>第1节 标题</h1><p>markdown 里面总共有六级标题，可以使用#号的多少来来引用，现在使用的是typora也可以直接使用ctrl+1-6的快捷按键来进行设置</p>
+<h1 id="第2节-列表"><a href="#第2节-列表" class="headerlink" title="第2节 列表"></a>第2节 列表</h1><h2 id="2-1-有序列表"><a href="#2-1-有序列表" class="headerlink" title="2.1 有序列表"></a>2.1 有序列表</h2><p>​	顾名思义，有序列表就是有小标号的列表，同样也是两种方式英⽂输⼊法下，数字后⾯加⼀点，然后空格即可，或者使用快捷按键ctrl + shift + [即可</p>
+<p>1. </p>
+<p>1. </p>
+<h2 id="2-2-无序列表"><a href="#2-2-无序列表" class="headerlink" title="2.2 无序列表"></a>2.2 无序列表</h2><p>​	跟上面的有序列表相反，无序列表就是没有标号，有四种方法、</p>
+<ul>
+<li>aaa - aaa</li>
+</ul>
+<ul>
+<li>aaa + aaa</li>
+</ul>
+<ul>
+<li>aaa *aaa</li>
+</ul>
+<ul>
+<li>aaa ctrl+shift+]</li>
+</ul>
+<h1 id="第3节-字体标记"><a href="#第3节-字体标记" class="headerlink" title="第3节 字体标记"></a>第3节 字体标记</h1><h2 id="3-1-加粗"><a href="#3-1-加粗" class="headerlink" title="3.1 加粗"></a>3.1 加粗</h2><p><strong>加粗</strong> **   内容**在typora中可以使用ctrl+b</p>
+<h2 id="3-2-删除"><a href="#3-2-删除" class="headerlink" title="3.2 删除"></a>3.2 删除</h2><p><del>删除</del> ~~ 内容~~</p>
+<h2 id="3-3-斜体"><a href="#3-3-斜体" class="headerlink" title="3.3 斜体"></a>3.3 斜体</h2><p><em>斜体</em> * 内容 *</p>
+<h2 id="3-4-高亮"><a href="#3-4-高亮" class="headerlink" title="3.4 高亮"></a>3.4 高亮</h2><p>&#x3D;&#x3D;高亮&#x3D;&#x3D; &#x3D;&#x3D;内容  &#x3D;&#x3D;需要打开pytora的高亮功能之后才行</p>
+<h1 id="第4节-段落相关"><a href="#第4节-段落相关" class="headerlink" title="第4节 段落相关"></a>第4节 段落相关</h1><h2 id="4-1-引用"><a href="#4-1-引用" class="headerlink" title="4.1 引用"></a>4.1 引用</h2><blockquote>
+<p>这是一段引用 &gt; 大于号加内容引用</p>
+</blockquote>
+<h2 id="4-2-分割线"><a href="#4-2-分割线" class="headerlink" title="4.2 分割线"></a>4.2 分割线</h2><hr>
+<p>三个横杠或者更多的横杠表示分割线</p>
+<h1 id="第5节-代码"><a href="#第5节-代码" class="headerlink" title="第5节 代码"></a>第5节 代码</h1><h2 id="5-1-行内代码"><a href="#5-1-行内代码" class="headerlink" title="5.1 行内代码"></a>5.1 行内代码</h2><p><code>这是一个行内代码</code> 1旁边那个特殊按键</p>
+<h2 id="5-2-代码块"><a href="#5-2-代码块" class="headerlink" title="5.2 代码块"></a>5.2 代码块</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;hello world&quot;</span>)</span><br><span class="line">    三个```然后回车即可，然后在右下角的选择框中进行代码的选择</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="第6节-超链接"><a href="#第6节-超链接" class="headerlink" title="第6节 超链接"></a>第6节 超链接</h1><blockquote>
+<p>格式 ：[⽹址标题] [变量01]</p>
+</blockquote>
+<p><a href="www.baidu.com">百度</a></p>
+<ul>
+<li><p>在⽂稿起草阶段，还没确定具体⽹址，但可以先给出⽹址标题</p>
+</li>
+<li><p>同⼀篇⽂章需要重复出现同⼀个⽹址时</p>
+</li>
+</ul>
+<h1 id="第7节-脚注"><a href="#第7节-脚注" class="headerlink" title="第7节 脚注"></a>第7节 脚注</h1><p>这是一个脚注<a href="%E8%BF%99%E4%B8%AA%E6%98%AF%E6%94%BE%E5%9C%A8%E6%96%87%E7%AB%A0%E5%B0%BE%E9%83%A8%E7%9A%84%EF%BC%8C%E7%94%A8%E4%BA%8E%E6%89%BF%E6%8E%A5%E4%B8%8A%E9%9D%A2%E7%9A%84%E8%84%9A%E6%B3%A8">^01</a></p>
+<h1 id="第8节-图片"><a href="#第8节-图片" class="headerlink" title="第8节 图片"></a>第8节 图片</h1><p><img src="/"></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">基本格式：![](图⽚链接)</span><br></pre></td></tr></table></figure>
+
+<p><img src="D:\hexo\blog\source_posts\image-20230902075316489.png" alt="image-20230902075316489"></p>
+<p>图⽚链接可以是本地链接，也可以是在线链接</p>
+<p>但这个图片是本地路径，很有问题，所以你可能需要一个图床，用来无视地点，目前先不学呢，具体链接如下所示：</p>
+<p><a href="https://eryinote.com/post/105">图床搭建教程</a></p>
+<h1 id="第9节-表格"><a href="#第9节-表格" class="headerlink" title="第9节 表格"></a>第9节 表格</h1><p>在typora中可以使用快捷按键进行表格的创建  ctrl+t</p>
+<p>通用的语法为</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">| 表头 | 表头 |</span><br><span class="line">| ---- | ---- |</span><br><span class="line">| 单元格 | 单元格 |</span><br><span class="line">| 单元格 | 单元格 |</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>markdown</category>
+      </categories>
+      <tags>
+        <tag>markdown</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title></title>
+    <url>/2023/09/15/0-4%20recovery%E7%9A%84%E7%BC%96%E8%AF%91/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+  </entry>
+  <entry>
+    <title>ayer 主题熟悉</title>
+    <url>/2023/09/02/004_ayer-%E4%B8%BB%E9%A2%98%E7%86%9F%E6%82%89/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="1-整体介绍"><a href="#1-整体介绍" class="headerlink" title="1 整体介绍"></a>1 整体介绍</h1><p><a href="https://github.com/Shen-Yu/hexo-theme-ayer">Ayer</a> 是一个干净且优雅的 Hexo 主题，自带响应式，加载速度很快，该有的功能都有，可配置项很多，非常适合作为你的博客主题，主题内还附送了 6 张精美的高清壁纸。欢迎使用和 Star 支持，如果你在使用过程中有任何疑问或者建议，欢迎联系我！如果你的博客采用了本主题，欢迎在下面评论区留下地址~</p>
+<p><a href="https://github.com/Shen-Yu/hexo-theme-ayer">Ayer</a> 在马来语中是“水”的意思，在西班牙语中是“昨天”的意思。</p>
+<h1 id="2-特性"><a href="#2-特性" class="headerlink" title="2. 特性"></a>2. 特性</h1><ol>
+<li>干净且优雅，文章内容美观易读</li>
+<li>首页封面全屏平铺，扁平化设计，简洁又不失高大上</li>
+<li>响应式设计，博客在桌面端、平板、手机等设备上均能很好的展现</li>
+<li>首页封面和文案可以任意更换，主题内附送 6 张精美高清壁纸</li>
+<li>时间轴式的归档页</li>
+<li>支持 <code>黑夜阅读</code> 模式</li>
+<li>侧边栏可以点击显示或隐藏</li>
+<li>支持文章置顶和文章打赏</li>
+<li>支持文章字数和阅读时长统计</li>
+<li>支持网易云音乐播放</li>
+<li>支持  <code>MathJax</code> 和 <code>Katex</code> 数学公式</li>
+<li>支持 <code>Mermaid</code> 流程图、状态图、时序图、甘特图</li>
+<li><code>TOC</code> 目录在文章页悬浮，跳转更方便</li>
+<li>集成了博客加密访问的功能</li>
+<li>可设置阅读文章时做密码验证<a href="https://github.com/MikeCoder/hexo-blog-encrypt/blob/master/ReadMe.zh.md">hexo-blog-encrypt</a></li>
+<li><a href="https://valine.js.org/">Valine</a>和<a href="https://gitalk.github.io/">Gitalk</a>评论模块（推荐配合<code>leancloud</code>使用  <code>Valine</code>）</li>
+<li>集成了<a href="http://busuanzi.ibruce.info/">不蒜子</a>、百度统计、Google Analytics、CNZZ 等统计功能</li>
+<li>支持 Github Ribbons</li>
+</ol>
+<h1 id="3-主题配置"><a href="#3-主题配置" class="headerlink" title="3.主题配置"></a>3.主题配置</h1><p>以下是 ayer 主题目录下的 <code>_config.yml</code> 文件配置，</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 侧边栏菜单</span><br><span class="line">menu:</span><br><span class="line">  主页: /</span><br><span class="line">  归档: /archives</span><br><span class="line">  分类: /categories</span><br><span class="line">  标签: /tags</span><br><span class="line">  摄影: http://shenyu-vip.lofter.com</span><br><span class="line">  旅行: /tags/旅行/</span><br><span class="line">  关于我: /2019/about</span><br><span class="line"></span><br><span class="line"># 站点次标题和打字动效</span><br><span class="line"># https://github.com/mattboldt/typed.js</span><br><span class="line">subtitle:</span><br><span class="line">  enable: true # 是否开启动效</span><br><span class="line">  text: 面朝大海，春暖花开 # 显示的文字</span><br><span class="line">  text2: 愿你一生努力，一生被爱 # 滚动播放，如果不需要可以留空</span><br><span class="line">  text3: 想要的都拥有，得不到的都释怀 # 最多支持三段文字</span><br><span class="line">  startDelay: 0 # 延迟时间</span><br><span class="line">  typeSpeed: 200 # 打字速度</span><br><span class="line">  loop: true # 是否循环</span><br><span class="line">  backSpeed: 100 # 回退速度</span><br><span class="line">  showCursor: true # 是否显示光标</span><br><span class="line"></span><br><span class="line"># 网站图标和侧边栏logo</span><br><span class="line">favicon: /favicon.ico</span><br><span class="line">logo: /images/ayer-side.svg</span><br><span class="line"></span><br><span class="line"># 封面配置</span><br><span class="line"># enable-是否启用封面；path-封面背景图；logo-封面logo</span><br><span class="line">cover:</span><br><span class="line">  enable: true</span><br><span class="line">  path: /images/cover1.jpg # /source/images目录下附送多张精美壁纸，可任意更换</span><br><span class="line">  logo: /images/ayer.svg # 如果不要直接设置成false</span><br><span class="line"></span><br><span class="line"># 页面顶部进度条</span><br><span class="line">progressBar: true</span><br><span class="line"></span><br><span class="line"># 告示板模块</span><br><span class="line">broadcast:</span><br><span class="line">  enable: true # true开启，false关闭</span><br><span class="line">  type: 2 # 1：自定义输入，2：一言api(https://hitokoto.cn/)</span><br><span class="line">  text: 一个安静优雅的hexo主题，快速且响应式。 # type为1时有效</span><br><span class="line"></span><br><span class="line"># 文章配置</span><br><span class="line"># 文章太长，截断按钮文字(在需要截断的行增加此标记：&lt;!--more--&gt;)</span><br><span class="line">excerpt_link: 阅读更多...</span><br><span class="line"># 如果你嫌每篇文章手动加more标记比较麻烦，又不想在首页全文显示，可以把excerpt_all设置成true，这样首页只会显示文章归档</span><br><span class="line">excerpt_all: false</span><br><span class="line"></span><br><span class="line"># 是否开启代码复制按钮</span><br><span class="line">copy_btn: true</span><br><span class="line"># 是否开启文章分享按钮</span><br><span class="line">share_enable: true</span><br><span class="line"># 国内的社交平台(If you are not in China, maybe you prefer to set:false)</span><br><span class="line">share_china: true</span><br><span class="line"># 文章分享文字</span><br><span class="line">share_text: 分享</span><br><span class="line"></span><br><span class="line"># 分页文字</span><br><span class="line">nav_text:</span><br><span class="line">  page_prev: 上一页</span><br><span class="line">  page_next: 下一页</span><br><span class="line">  post_prev: 上一篇</span><br><span class="line">  post_next: 下一篇</span><br><span class="line"></span><br><span class="line"># 文章页是否显示目录</span><br><span class="line">toc: true</span><br><span class="line"></span><br><span class="line"># 文章中的图片是否支持点击放大</span><br><span class="line">image_viewer: true</span><br><span class="line"></span><br><span class="line"># https://github.com/willin/hexo-wordcount</span><br><span class="line"># 是否开启字数统计(关闭请设置enable为false)</span><br><span class="line"># 也可以单独在md文件里Front-matter设置`no_word_count: true`属性，来自定义关闭字数统计</span><br><span class="line">word_count:</span><br><span class="line">  enable: true</span><br><span class="line">  # 只在文章详情显示(不在首页显示)</span><br><span class="line">  only_article_visit: true</span><br><span class="line"></span><br><span class="line"># 打赏</span><br><span class="line"># 打赏type设定：0-关闭打赏； 1-文章对应的md文件里有reward:true属性，才有打赏； 2-默认开启所有文章均有打赏，如果有些文章你不需要，请在文章对应的md文件里设置no_reward:true</span><br><span class="line">reward_type: 2</span><br><span class="line"># 打赏wording</span><br><span class="line">reward_wording: &quot;请我喝杯咖啡吧~&quot;</span><br><span class="line"># 支付宝二维码图片地址，跟你设置logo的方式一样。比如：/images/alipay.jpg</span><br><span class="line">alipay: /images/alipay.jpg</span><br><span class="line"># 微信二维码图片地址</span><br><span class="line">weixin: /images/wechat.jpg</span><br><span class="line"></span><br><span class="line"># 版权声明</span><br><span class="line"># 版权声明type设定：0-关闭版权声明； 1-文章对应的md文件里有copyright: true属性，才有版权声明； 2-所有文章均有版权声明</span><br><span class="line">copyright_type: 2</span><br><span class="line"></span><br><span class="line"># 是否启用搜索</span><br><span class="line">search: true</span><br><span class="line"></span><br><span class="line"># RSS订阅(先安装hexo-generator-feed插件，再去博客根目录config进行配置)</span><br><span class="line"># 不想显示可以直接留空</span><br><span class="line">rss: /atom.xml</span><br><span class="line"></span><br><span class="line"># 是否启用黑夜模式开关</span><br><span class="line">darkmode: true</span><br><span class="line"></span><br><span class="line"># 动态背景效果: 0-关闭，1-动态线条(跟随鼠标)</span><br><span class="line">canvas_bg: 0</span><br><span class="line"></span><br><span class="line"># 自定义鼠标样式，直接替换/images/mouse.cur文件</span><br><span class="line">mouse:</span><br><span class="line">  enable: false</span><br><span class="line">  path: /images/mouse.cur</span><br><span class="line"></span><br><span class="line"># 鼠标点击效果：0-关闭，1-爱心，2-爆炸烟花，3-粒子烟花</span><br><span class="line">click_effect: 0</span><br><span class="line"></span><br><span class="line"># 页面宽度自定义（不建议修改，可能造成布局混乱），article_width文章宽度，sidebar_width侧边栏宽度</span><br><span class="line">layout:</span><br><span class="line">  article_width: 80rem</span><br><span class="line">  sidebar_width: 8rem</span><br><span class="line"></span><br><span class="line"># GitHub Ribbons-封面右上角的forkme，换样式直接在source/images目录下替换forkme图片</span><br><span class="line">github:</span><br><span class="line">  # (关闭请设置为false)</span><br><span class="line">  enable: true</span><br><span class="line">  url: https://github.com/Shen-Yu/hexo-theme-ayer</span><br><span class="line"></span><br><span class="line"># 网易云音乐插件</span><br><span class="line">music:</span><br><span class="line">  enable: false</span><br><span class="line">  # 播放器尺寸类型(1：小尺寸、2：大尺寸)</span><br><span class="line">  type: 1</span><br><span class="line">  id: 22707008 # 网易云分享的音乐ID(更换音乐请更改此配置项)</span><br><span class="line">  autoPlay: true # 是否开启自动播放</span><br><span class="line"></span><br><span class="line"># 访问量统计(不蒜子)</span><br><span class="line">busuanzi:</span><br><span class="line">  enable: true</span><br><span class="line"></span><br><span class="line"># 友盟cnzz统计(url填js代码src链接)</span><br><span class="line">cnzz:</span><br><span class="line">  enable: true</span><br><span class="line">  url: #</span><br><span class="line"></span><br><span class="line"># Google Analytics</span><br><span class="line">google_analytics: &quot;&quot;</span><br><span class="line"># 百度统计</span><br><span class="line">baidu_analytics: &quot;&quot;</span><br><span class="line"></span><br><span class="line"># Mathjax数学公式</span><br><span class="line">mathjax: true</span><br><span class="line"></span><br><span class="line"># Katex数学公式(allpost设置为false时只有头部设置math:true的文章才开启)</span><br><span class="line"># 需要更换hexo渲染器，npm un hexo-renderer-marked -S &amp;&amp; npm i hexo-renderer-markdown-it-katex -S</span><br><span class="line">katex:</span><br><span class="line">  enable: false # true</span><br><span class="line">  allpost: true</span><br><span class="line">  copy_tex: false</span><br><span class="line"></span><br><span class="line"># mermaid流程图 三个选项缺一不可(https://mermaid-js.github.io/mermaid/#/)</span><br><span class="line">mermaid:</span><br><span class="line">  enable: false</span><br><span class="line">  cdn: https://cdn.jsdelivr.net/npm/mermaid@8.9.2/dist/mermaid.min.js</span><br><span class="line">  theme: forest</span><br><span class="line"></span><br><span class="line"># 网站成立年份(默认为 2019，若填入年份小于当前年份，则显示为 2018-2019 类似的格式)</span><br><span class="line">since: 2019</span><br><span class="line"></span><br><span class="line"># ICP备案信息尾部显示</span><br><span class="line">icp:</span><br><span class="line">  enable: false</span><br><span class="line">  url: &quot;http://www.beian.miit.gov.cn/&quot; # 备案链接</span><br><span class="line">  text: &quot;浙ICP备88888888&quot; # 备案信息</span><br><span class="line"># 公安备案信息尾部显示</span><br><span class="line">gongan:</span><br><span class="line">  enable: true</span><br><span class="line">  img: /images/beian.png #公安备案图片</span><br><span class="line">  url: &quot;http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=01234567890123&quot; #公安备案链接</span><br><span class="line">  text: &quot;浙公网安备01234567890123号&quot; #公安备案信息</span><br><span class="line"></span><br><span class="line"># 友情链接</span><br><span class="line">friends_link:</span><br><span class="line">  Ayer主题: #网站名称</span><br><span class="line">    #网站地址</span><br><span class="line">    url: https://github.com/Shen-Yu/hexo-theme-ayer</span><br><span class="line">    #网站图片(可忽略不写)</span><br><span class="line">    img: /images/ayer.png</span><br><span class="line">  GitHub:</span><br><span class="line">    url: https://github.com/Shen-Yu</span><br><span class="line">    img: https://i.loli.net/2020/09/07/indb4PRYDA98EkN.png</span><br><span class="line">  码云:</span><br><span class="line">    url: https://gitee.com/shen-yu</span><br><span class="line">    img: https://i.loli.net/2020/09/07/K3AqO7h6krQFlRX.png</span><br><span class="line">  Hexo官网:</span><br><span class="line">    url: https://hexo.io</span><br><span class="line">    img: https://i.loli.net/2020/09/07/UYGzjo7h68CRWny.png</span><br><span class="line">  Hexo图表插件:</span><br><span class="line">    url: https://github.com/Shen-Yu/hexo-tag-chart</span><br><span class="line">    img: https://i.loli.net/2020/09/07/GIXBYE5SoylhR1r.png</span><br><span class="line"></span><br><span class="line"># 评论：1、Valine(推荐)；2、Gitalk；3、Twikoo; 4.MiniValine</span><br><span class="line"></span><br><span class="line"># 1、Valine[一款快速、简洁且高效的无后端评论系统](https://github.com/xCss/Valine)</span><br><span class="line"># 启用Valine必须先创建leancloud应用， 获取 id|key 填入即可</span><br><span class="line">leancloud:</span><br><span class="line">  enable: true</span><br><span class="line">  app_id: #</span><br><span class="line">  app_key: #</span><br><span class="line"># Valine配置</span><br><span class="line">valine:</span><br><span class="line">  enable: true # 是否启用</span><br><span class="line">  avatar: monsterid # 头像样式(https://valine.js.org/avatar.html)</span><br><span class="line">  placeholder: 给我的文章加点评论吧~ # placeholder</span><br><span class="line"></span><br><span class="line"># 2、Gitalk(https://github.com/gitalk/gitalk)</span><br><span class="line">gitalk:</span><br><span class="line">  enable: false # true</span><br><span class="line">  clientID: # GitHub Application Client ID</span><br><span class="line">  clientSecret: # Client Secret</span><br><span class="line">  repo: # Repository name</span><br><span class="line">  owner: # GitHub ID</span><br><span class="line">  admin: # GitHub ID</span><br><span class="line"></span><br><span class="line"># 3、Twikoo(https://github.com/imaegoo/twikoo)</span><br><span class="line">twikoo:</span><br><span class="line">  enable: false</span><br><span class="line">  envId: #</span><br><span class="line"></span><br><span class="line"># 4、MiniValine</span><br><span class="line"># See: https://github.com/MiniValine/MiniValine</span><br><span class="line">minivaline:</span><br><span class="line">  enable: false</span><br><span class="line">  serverURL: https://minivaline.your-domain.com</span><br><span class="line"></span><br><span class="line"># 首页广告配置</span><br><span class="line"># 可以根据需要自行增加ad_3，ad_4...，留空则不显示</span><br><span class="line">ads:</span><br><span class="line">  ad_1:</span><br><span class="line">    title: vultr优惠vps</span><br><span class="line">    img: https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/vultr.png</span><br><span class="line">    url: https://www.vultr.com/?ref=8630075</span><br><span class="line">    width: 300</span><br><span class="line">  ad_2:</span><br><span class="line">    title: 云服务器全球购低至2折</span><br><span class="line">    img: https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/ad_2.jpg</span><br><span class="line">    url: https://curl.qcloud.com/kvO7hb43</span><br><span class="line">    width: 300</span><br><span class="line"></span><br><span class="line"># 网站开启加密访问，密码可设置任何字符</span><br><span class="line">lock:</span><br><span class="line">  enable: false</span><br><span class="line">  password: 123456</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-插件-可选"><a href="#4-插件-可选" class="headerlink" title="4 插件(可选)"></a>4 插件(可选)</h2><ul>
+<li><a href="https://github.com/netcan/hexo-generator-index-pin-top">hexo-generator-index-pin-top</a> 用于文章置顶</li>
+<li><a href="https://github.com/MikeCoder/hexo-blog-encrypt/blob/master/ReadMe.zh.md">hexo-blog-encrypt</a> 用于文章加密</li>
+<li><a href="https://github.com/MoePlayer/hexo-tag-aplayer/blob/master/docs/README-zh_cn.md">hexo-tag-aplayer</a> 用于播放音乐</li>
+<li><a href="https://github.com/MoePlayer/hexo-tag-dplayer">hexo-tag-dplayer</a> 用于播放视频</li>
+<li><a href="https://github.com/EYHN/hexo-helper-live2d/blob/master/README.zh-CN.md">hexo-helper-live2d</a> 二次元看板娘</li>
+</ul>
+<h2 id="5-分类"><a href="#5-分类" class="headerlink" title="5.分类"></a>5.分类</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo new page categories</span><br></pre></td></tr></table></figure>
+
+<p>然后将以下复制到 &#x2F;source&#x2F;categories&#x2F;index.md 文件</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: categories</span><br><span class="line">type: &quot;categories&quot;</span><br><span class="line">layout: &quot;categories&quot;</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+<h2 id="6-标签"><a href="#6-标签" class="headerlink" title="6.标签"></a>6.标签</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo new page tags</span><br></pre></td></tr></table></figure>
+
+<p>配置同分类一样</p>
+<h2 id="7-友情链接"><a href="#7-友情链接" class="headerlink" title="7. 友情链接"></a>7. 友情链接</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo new page friends</span><br></pre></td></tr></table></figure>
+
+<p>然后将以下复制到 &#x2F;source&#x2F;friends&#x2F;index.md 文件</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: friends</span><br><span class="line">type: friends</span><br><span class="line">layout: &quot;friends&quot;</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+<p>然后在 ayer 主题目录下的 <code>_config.yml</code> 中自定义 <code>friends_link</code> 配置项即可</p>
+<h2 id="8-相册"><a href="#8-相册" class="headerlink" title="8.相册"></a>8.相册</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo new page photos</span><br></pre></td></tr></table></figure>
+
+<p>然后将以下复制到 &#x2F;source&#x2F;photos&#x2F;index.md 文件，<code>img_url</code> 替换成图片路径，<code>caption</code> 替换成图片名称</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: Gallery</span><br><span class="line"></span><br><span class="line">albums: [[&quot;img_url&quot;, &quot;img_caption&quot;], [&quot;img_url&quot;, &quot;img_caption&quot;]]</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+<h2 id="文章目录"><a href="#文章目录" class="headerlink" title="文章目录"></a>文章目录</h2><p>用 Tocbot 解析文章标题并生成目录</p>
+<ul>
+<li>将以下配置复制到你 ayer 主题目录下的 <code>_config.yml</code> 里：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Toc</span><br><span class="line">toc: true</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>当然你可能并不想所有文章都生成悬浮目录，你可以在文章顶部的配置中加一行来进行关闭：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">no_toc: true</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>hexo</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
       </tags>
   </entry>
 </search>
