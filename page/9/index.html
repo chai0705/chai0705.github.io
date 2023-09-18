@@ -160,6 +160,204 @@
     
     
     <article
+  id="post-5-9-属性声明：format"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/09/07/5-9-%E5%B1%9E%E6%80%A7%E5%A3%B0%E6%98%8E%EF%BC%9Aformat/"
+    >5.9 属性声明：format</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/09/07/5-9-%E5%B1%9E%E6%80%A7%E5%A3%B0%E6%98%8E%EF%BC%9Aformat/" class="article-date">
+  <time datetime="2023-09-07T13:14:16.000Z" itemprop="datePublished">2023-09-07</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>属性 <code>format</code> 用于指定函数参数的格式化字符串检查，以帮助编译器检测格式化字符串与实际参数之间的匹配错误。它的使用方法如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">__attribute__((format(archetype, string-index, first-to-check)))</span><br></pre></td></tr></table></figure>
+
+<p>其中：</p>
+<ul>
+<li><code>archetype</code> 是一个字符串常量，用于指定格式化字符串的类型。常见的类型有 <code>&quot;printf&quot;</code> 和 <code>&quot;scanf&quot;</code>，分别用于格式化输出和格式化输入。</li>
+<li><code>string-index</code> 是一个整数常量，表示格式化字符串在函数参数列表中的索引。索引从 1 开始，0 表示函数本身。</li>
+<li><code>first-to-check</code> 是一个整数常量，表示从参数列表的第几个参数开始进行检查。一般情况下，这个值与 <code>string-index</code> 相同。</li>
+</ul>
+<p>例如，以下示例展示了如何使用 <code>format</code> 属性：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">__attribute__((format(printf, 1, 2)))</span><br><span class="line">void LoG(const char *fmt, ...) &#123;</span><br><span class="line">    // 函数体</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在这个例子中，<code>format(printf, 1, 2)</code> 属性应用于 <code>LoG</code> 函数。它告诉编译器检查函数的第一个参数（格式化字符串）与后续变参参数的匹配情况，以确保格式化字符串中的占位符与实际参数的类型相符。</p>
+<p>这样，在调用 <code>LoG</code> 函数时，如果格式化字符串与实际参数不匹配，编译器会发出警告或错误信息，提醒开发者修正问题。</p>
+<p>需要注意的是，<code>format</code> 属性对于编译器来说是一种提示，不会强制执行检查。因此，开发者仍需注意确保格式化字符串与实际参数的正确匹配，以避免潜在的错误。</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gun%E6%89%A9%E5%B1%95%E8%AF%AD%E6%B3%95/" rel="tag">gun扩展语法</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-5-8-属性声明：aligned-packed"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/09/07/5-8-%E5%B1%9E%E6%80%A7%E5%A3%B0%E6%98%8E%EF%BC%9Aaligned-packed/"
+    >5.8 属性声明：aligned &amp; packed</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/09/07/5-8-%E5%B1%9E%E6%80%A7%E5%A3%B0%E6%98%8E%EF%BC%9Aaligned-packed/" class="article-date">
+  <time datetime="2023-09-07T13:14:14.000Z" itemprop="datePublished">2023-09-07</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>属性声明 <code>aligned</code> 和 <code>packed</code> 是用于控制结构体或变量的对齐方式的特殊属性。</p>
+<ol>
+<li><p><code>aligned</code> 属性：<code>aligned</code> 属性用于指定结构体或变量的对齐方式。对齐方式是指变量在内存中的起始地址必须是某个特定值的倍数。这个特定值称为对齐边界。通过使用 <code>aligned</code> 属性，可以强制指定变量的对齐边界。</p>
+<p>例如，以下示例将一个结构体 <code>my_struct</code> 按照 16 字节对齐：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">my_struct</span> &#123;</span></span><br><span class="line">    <span class="type">int</span> a;</span><br><span class="line">    <span class="type">char</span> b;</span><br><span class="line">    <span class="type">short</span> c;</span><br><span class="line">&#125; __attribute__((aligned(<span class="number">16</span>)));</span><br><span class="line">```</span><br><span class="line"></span><br><span class="line">在这个例子中，`aligned(<span class="number">16</span>)` 属性将结构体 `my_struct` 的对齐边界设置为 <span class="number">16</span> 字节。这意味着结构体的起始地址必须是 <span class="number">16</span> 的倍数。</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>packed</code> 属性：<code>packed</code> 属性用于指定结构体或变量的紧凑布局，即取消对齐。默认情况下，结构体的成员按照其自然对齐边界进行对齐，以提高内存访问效率。但有时，我们需要取消对齐，以减小结构体的大小或与其他系统进行数据交互。</p>
+<p>例如，以下示例将一个结构体 <code>my_struct</code> 设置为紧凑布局：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">my_struct</span> &#123;</span></span><br><span class="line">    <span class="type">int</span> a;</span><br><span class="line">    <span class="type">char</span> b;</span><br><span class="line">    <span class="type">short</span> c;</span><br><span class="line">&#125; __attribute__((packed));</span><br><span class="line">```</span><br><span class="line"></span><br><span class="line">在这个例子中，`packed` 属性将结构体 `my_struct` 设置为紧凑布局，取消了成员的对齐。这意味着结构体的大小可能会减小，但访问成员时可能会带来性能开销。</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>需要注意的是，使用 <code>aligned</code> 和 <code>packed</code> 属性可能会对内存访问效率和可移植性产生影响。对齐和紧凑布局的选择应根据具体的需求和平台要求进行权衡。此外，这些属性的语法可能因编译器而异，应查阅相应的文档以确保正确使用。</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gun%E6%89%A9%E5%B1%95%E8%AF%AD%E6%B3%95/" rel="tag">gun扩展语法</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-5-7-属性声明：section"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/09/07/5-7-%E5%B1%9E%E6%80%A7%E5%A3%B0%E6%98%8E%EF%BC%9Asection/"
+    >5.7 属性声明：section</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/09/07/5-7-%E5%B1%9E%E6%80%A7%E5%A3%B0%E6%98%8E%EF%BC%9Asection/" class="article-date">
+  <time datetime="2023-09-07T13:14:13.000Z" itemprop="datePublished">2023-09-07</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>属性（Attributes）是一种在C语言中使用的特殊语法，用于声明变量或函数的特殊属性，以指导编译器进行特定方面的优化或代码检查。</p>
+<p>在C语言中，可以使用 <code>__attribute__</code> 关键字来声明属性。属性可以在变量或函数的声明后面使用，通过 <code>__attribute__((ATTRIBUTE))</code> 的语法进行指定。</p>
+<p>例如，假设有以下代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int global_val __attribute__((section(&quot;.data&quot;)));</span><br></pre></td></tr></table></figure>
+
+<p>在这个例子中，<code>global_val</code> 是一个整型变量，通过 <code>__attribute__((section(&quot;.data&quot;)))</code> 指定了它的属性。</p>
+<p>这里使用的属性是 <code>section</code>，它的作用是将 <code>global_val</code> 变量放置在指定的内存段（section）中。具体地，<code>section(&quot;.data&quot;)</code> 表示将 <code>global_val</code> 放置在名为 “.data” 的内存段中。</p>
+<p>属性的主要用途包括但不限于以下几个方面：</p>
+<ol>
+<li>优化：通过属性，可以告知编译器一些额外的信息，以便进行特定的优化。例如，可以指定变量的对齐方式、内联函数等，以优化程序的执行效率。</li>
+<li>警告检查：属性还可以用于启用或禁用编译器的警告检查。通过指定特定的属性，可以控制编译器在编译过程中产生的警告信息。</li>
+<li>内存布局：属性可以用于控制变量或函数在内存中的位置。可以指定变量存放在特定的内存段中，或者指定函数使用特定的调用约定。</li>
+</ol>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gun%E6%89%A9%E5%B1%95%E8%AF%AD%E6%B3%95/" rel="tag">gun扩展语法</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
   id="post-5-6-零长度数组"
   class="article article-type-post"
   itemscope
@@ -587,165 +785,6 @@
     <div class="article-meta">
       <a href="/2023/09/07/4-16-%E5%AE%9E%E6%88%98-%E4%BD%9C%E4%B8%9A%EF%BC%9A%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%B7%B1%E7%9A%84%E5%A0%86%E7%AE%A1%E7%90%86%E5%99%A8/" class="article-date">
   <time datetime="2023-09-06T23:40:34.000Z" itemprop="datePublished">2023-09-07</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-   
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A0%86%E6%A0%88%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" rel="tag">堆栈内存管理</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-4-15-常见内存错误及检测"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/09/07/4-15-%E5%B8%B8%E8%A7%81%E5%86%85%E5%AD%98%E9%94%99%E8%AF%AF%E5%8F%8A%E6%A3%80%E6%B5%8B/"
-    >4-15-常见内存错误及检测</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/09/07/4-15-%E5%B8%B8%E8%A7%81%E5%86%85%E5%AD%98%E9%94%99%E8%AF%AF%E5%8F%8A%E6%A3%80%E6%B5%8B/" class="article-date">
-  <time datetime="2023-09-06T23:40:32.000Z" itemprop="datePublished">2023-09-07</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-   
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A0%86%E6%A0%88%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" rel="tag">堆栈内存管理</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-4-14-内存泄露与防范"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/09/07/4-14-%E5%86%85%E5%AD%98%E6%B3%84%E9%9C%B2%E4%B8%8E%E9%98%B2%E8%8C%83/"
-    >4-14-内存泄露与防范</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/09/07/4-14-%E5%86%85%E5%AD%98%E6%B3%84%E9%9C%B2%E4%B8%8E%E9%98%B2%E8%8C%83/" class="article-date">
-  <time datetime="2023-09-06T23:40:30.000Z" itemprop="datePublished">2023-09-07</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-   
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A0%86%E6%A0%88%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" rel="tag">堆栈内存管理</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-4-13-Linux堆内存管理-3-：内存申请释放示例"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/09/07/4-13-Linux%E5%A0%86%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86-3-%EF%BC%9A%E5%86%85%E5%AD%98%E7%94%B3%E8%AF%B7%E9%87%8A%E6%94%BE%E7%A4%BA%E4%BE%8B/"
-    >4-13-Linux堆内存管理(3)：内存申请释放示例</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/09/07/4-13-Linux%E5%A0%86%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86-3-%EF%BC%9A%E5%86%85%E5%AD%98%E7%94%B3%E8%AF%B7%E9%87%8A%E6%94%BE%E7%A4%BA%E4%BE%8B/" class="article-date">
-  <time datetime="2023-09-06T23:40:28.000Z" itemprop="datePublished">2023-09-07</time>
 </a> 
   <div class="article-category">
     <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>

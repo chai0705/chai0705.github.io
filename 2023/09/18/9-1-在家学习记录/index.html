@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+  
+
+    <head>
+      <meta charset="utf-8" />
+        
+      <meta name="description" content="永远年轻，永远热泪盈眶" />
+      
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>9-1 在家学习记录 |  热爱学习的未来酱</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      
+<link rel="stylesheet" href="/css/fonts/remixicon.css">
+
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    <link rel="alternate" href="/atom.xml" title="热爱学习的未来酱" type="application/atom+xml">
+</head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+      <canvas width="1777" height="841"
+        style="position: fixed; left: 0px; top: 0px; z-index: 99999; pointer-events: none;"></canvas>
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-9-1-在家学习记录"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  9-1 在家学习记录
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/09/18/9-1-%E5%9C%A8%E5%AE%B6%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" class="article-date">
+  <time datetime="2023-09-18T13:50:14.000Z" itemprop="datePublished">2023-09-18</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%9C%A8%E5%AE%B6%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">在家学习记录</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">3k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">15 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <hr>
+<hr>
+<p>pinctrl.h的结构体中有三个要认识的函数操作集</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">pinctrl_desc</span> &#123;</span></span><br><span class="line">	<span class="type">const</span> <span class="type">char</span> *name;</span><br><span class="line">	<span class="type">const</span> <span class="class"><span class="keyword">struct</span> <span class="title">pinctrl_pin_desc</span> *<span class="title">pins</span>;</span></span><br><span class="line">	<span class="type">unsigned</span> <span class="type">int</span> npins;</span><br><span class="line">	<span class="type">const</span> <span class="class"><span class="keyword">struct</span> <span class="title">pinctrl_ops</span> *<span class="title">pctlops</span>;</span></span><br><span class="line">	<span class="type">const</span> <span class="class"><span class="keyword">struct</span> <span class="title">pinmux_ops</span> *<span class="title">pmxops</span>;</span></span><br><span class="line">	<span class="type">const</span> <span class="class"><span class="keyword">struct</span> <span class="title">pinconf_ops</span> *<span class="title">confops</span>;</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">module</span> *<span class="title">owner</span>;</span></span><br><span class="line"><span class="meta">#<span class="keyword">ifdef</span> CONFIG_GENERIC_PINCONF</span></span><br><span class="line">	<span class="type">unsigned</span> <span class="type">int</span> num_custom_params;</span><br><span class="line">	<span class="type">const</span> <span class="class"><span class="keyword">struct</span> <span class="title">pinconf_generic_params</span> *<span class="title">custom_params</span>;</span></span><br><span class="line">	<span class="type">const</span> <span class="class"><span class="keyword">struct</span> <span class="title">pin_config_item</span> *<span class="title">custom_conf_items</span>;</span></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line">	<span class="type">bool</span> link_consumers;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>分别是pinctrl_ops,pinmux_ops,pinconf_ops,三个操作集合的结构体定义如下</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">pinctrl_ops</span> &#123;</span></span><br><span class="line">	<span class="type">int</span> (*get_groups_count) (<span class="keyword">struct</span> pinctrl_dev *pctldev);<span class="comment">//返回全部组的数量</span></span><br><span class="line">	<span class="type">const</span> <span class="type">char</span> *(*get_group_name) (<span class="keyword">struct</span> pinctrl_dev *pctldev, <span class="comment">//返回组的名字</span></span><br><span class="line">				       <span class="type">unsigned</span> selector);  </span><br><span class="line">	<span class="type">int</span> (*get_group_pins) (<span class="keyword">struct</span> pinctrl_dev *pctldev, <span class="comment">//返回组的引脚</span></span><br><span class="line">			       <span class="type">unsigned</span> selector,</span><br><span class="line">			       <span class="type">const</span> <span class="type">unsigned</span> **pins,</span><br><span class="line">			       <span class="type">unsigned</span> *num_pins);</span><br><span class="line">	<span class="type">void</span> (*pin_dbg_show) (<span class="keyword">struct</span> pinctrl_dev *pctldev, <span class="keyword">struct</span> seq_file *s,</span><br><span class="line">			  <span class="type">unsigned</span> offset);</span><br><span class="line">	<span class="type">int</span> (*dt_node_to_map) (<span class="keyword">struct</span> pinctrl_dev *pctldev,</span><br><span class="line">			       <span class="keyword">struct</span> device_node *np_config,</span><br><span class="line">			       <span class="keyword">struct</span> pinctrl_map **<span class="built_in">map</span>, <span class="type">unsigned</span> *num_maps);</span><br><span class="line">	<span class="type">void</span> (*dt_free_map) (<span class="keyword">struct</span> pinctrl_dev *pctldev,</span><br><span class="line">			     <span class="keyword">struct</span> pinctrl_map *<span class="built_in">map</span>, <span class="type">unsigned</span> num_maps);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">pinmux_ops</span> &#123;</span></span><br><span class="line">	<span class="type">int</span> (*request) (<span class="keyword">struct</span> pinctrl_dev *pctldev, <span class="type">unsigned</span> offset);  <span class="comment">//申请复用</span></span><br><span class="line">	<span class="type">int</span> (*<span class="built_in">free</span>) (<span class="keyword">struct</span> pinctrl_dev *pctldev, <span class="type">unsigned</span> offset); <span class="comment">// 释放复用</span></span><br><span class="line">	<span class="type">int</span> (*get_functions_count) (<span class="keyword">struct</span> pinctrl_dev *pctldev); <span class="comment">//获取到functions的数量</span></span><br><span class="line">	<span class="type">const</span> <span class="type">char</span> *(*get_function_name) (<span class="keyword">struct</span> pinctrl_dev *pctldev, <span class="comment">// 获取function名字</span></span><br><span class="line">					  <span class="type">unsigned</span> selector);</span><br><span class="line">	<span class="type">int</span> (*get_function_groups) (<span class="keyword">struct</span> pinctrl_dev *pctldev,  <span class="comment">// 获取功能所在的组</span></span><br><span class="line">				  <span class="type">unsigned</span> selector,</span><br><span class="line">				  <span class="type">const</span> <span class="type">char</span> * <span class="type">const</span> **groups,</span><br><span class="line">				  <span class="type">unsigned</span> *num_groups);</span><br><span class="line">	<span class="type">int</span> (*set_mux) (<span class="keyword">struct</span> pinctrl_dev *pctldev, <span class="type">unsigned</span> func_selector, 设置复用</span><br><span class="line">			<span class="type">unsigned</span> group_selector);</span><br><span class="line">	<span class="type">int</span> (*gpio_request_enable) (<span class="keyword">struct</span> pinctrl_dev *pctldev,  <span class="comment">// gpio 申请复用使能</span></span><br><span class="line">				    <span class="keyword">struct</span> pinctrl_gpio_range *range,</span><br><span class="line">				    <span class="type">unsigned</span> offset);</span><br><span class="line">	<span class="type">void</span> (*gpio_disable_free) (<span class="keyword">struct</span> pinctrl_dev *pctldev,  <span class="comment">// gpio 使能取消</span></span><br><span class="line">				   <span class="keyword">struct</span> pinctrl_gpio_range *range,</span><br><span class="line">				   <span class="type">unsigned</span> offset);</span><br><span class="line">	<span class="type">int</span> (*gpio_set_direction) (<span class="keyword">struct</span> pinctrl_dev *pctldev, <span class="comment">//设置电器属性 的方向</span></span><br><span class="line">				   <span class="keyword">struct</span> pinctrl_gpio_range *range,</span><br><span class="line">				   <span class="type">unsigned</span> offset,</span><br><span class="line">				   <span class="type">bool</span> input);</span><br><span class="line">	<span class="type">bool</span> strict;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">pinconf_ops</span> &#123;</span></span><br><span class="line"><span class="meta">#<span class="keyword">ifdef</span> CONFIG_GENERIC_PINCONF</span></span><br><span class="line">	<span class="type">bool</span> is_generic;</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line">	<span class="type">int</span> (*pin_config_get) (<span class="keyword">struct</span> pinctrl_dev *pctldev, <span class="comment">//引脚配置获取</span></span><br><span class="line">			       <span class="type">unsigned</span> pin,</span><br><span class="line">			       <span class="type">unsigned</span> <span class="type">long</span> *config);</span><br><span class="line">	<span class="type">int</span> (*pin_config_set) (<span class="keyword">struct</span> pinctrl_dev *pctldev, <span class="comment">// 设置单个引脚</span></span><br><span class="line">			       <span class="type">unsigned</span> pin,</span><br><span class="line">			       <span class="type">unsigned</span> <span class="type">long</span> *configs,</span><br><span class="line">			       <span class="type">unsigned</span> num_configs);</span><br><span class="line">	<span class="type">int</span> (*pin_config_group_get) (<span class="keyword">struct</span> pinctrl_dev *pctldev, <span class="comment">// 获取一个组的配置</span></span><br><span class="line">				     <span class="type">unsigned</span> selector,</span><br><span class="line">				     <span class="type">unsigned</span> <span class="type">long</span> *config);</span><br><span class="line">	<span class="type">int</span> (*pin_config_group_set) (<span class="keyword">struct</span> pinctrl_dev *pctldev,  <span class="comment">// 设置一个组的配置</span></span><br><span class="line">				     <span class="type">unsigned</span> selector,</span><br><span class="line">				     <span class="type">unsigned</span> <span class="type">long</span> *configs,</span><br><span class="line">				     <span class="type">unsigned</span> num_configs);</span><br><span class="line">	<span class="type">void</span> (*pin_config_dbg_show) (<span class="keyword">struct</span> pinctrl_dev *pctldev,  <span class="comment">// 展示一个引脚的debug </span></span><br><span class="line">				     <span class="keyword">struct</span> seq_file *s,</span><br><span class="line">				     <span class="type">unsigned</span> offset);</span><br><span class="line">	<span class="type">void</span> (*pin_config_group_dbg_show) (<span class="keyword">struct</span> pinctrl_dev *pctldev,  <span class="comment">// 展示一组的deg</span></span><br><span class="line">					   <span class="keyword">struct</span> seq_file *s,</span><br><span class="line">					   <span class="type">unsigned</span> selector);</span><br><span class="line">	<span class="type">void</span> (*pin_config_config_dbg_show) (<span class="keyword">struct</span> pinctrl_dev *pctldev,  <span class="comment">// 展示配置</span></span><br><span class="line">					    <span class="keyword">struct</span> seq_file *s,</span><br><span class="line">					    <span class="type">unsigned</span> <span class="type">long</span> config);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>然后来到pinctrl-rockchip.c的文件中，肯定是有上面三个函数的具体实现的，这里要溯源，直接找到probe函数，具体内容如下所示：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><span class="line">static int rockchip_pinctrl_probe(struct platform_device *pdev)</span><br><span class="line">&#123;</span><br><span class="line">	struct rockchip_pinctrl *info;</span><br><span class="line">	struct device *dev = &amp;pdev-&gt;dev;</span><br><span class="line">	struct device_node *np = dev-&gt;of_node, *node;</span><br><span class="line">	struct rockchip_pin_ctrl *ctrl;</span><br><span class="line">	struct resource *res;</span><br><span class="line">	void __iomem *base;</span><br><span class="line">	int ret;</span><br><span class="line"></span><br><span class="line">	if (!dev-&gt;of_node)</span><br><span class="line">		return dev_err_probe(dev, -ENODEV, &quot;device tree node not found\n&quot;);</span><br><span class="line"></span><br><span class="line">	info = devm_kzalloc(dev, sizeof(*info), GFP_KERNEL);</span><br><span class="line">	if (!info)</span><br><span class="line">		return -ENOMEM;</span><br><span class="line"></span><br><span class="line">	info-&gt;dev = dev;</span><br><span class="line"></span><br><span class="line">	ctrl = rockchip_pinctrl_get_soc_data(info, pdev);</span><br><span class="line">	if (!ctrl)</span><br><span class="line">		return dev_err_probe(dev, -EINVAL, &quot;driver data not available\n&quot;);</span><br><span class="line">	info-&gt;ctrl = ctrl;</span><br><span class="line"></span><br><span class="line">	node = of_parse_phandle(np, &quot;rockchip,grf&quot;, 0);</span><br><span class="line">	if (node) &#123;</span><br><span class="line">		info-&gt;regmap_base = syscon_node_to_regmap(node);</span><br><span class="line">		of_node_put(node);</span><br><span class="line">		if (IS_ERR(info-&gt;regmap_base))</span><br><span class="line">			return PTR_ERR(info-&gt;regmap_base);</span><br><span class="line">	&#125; else &#123;</span><br><span class="line">		base = devm_platform_get_and_ioremap_resource(pdev, 0, &amp;res);</span><br><span class="line">		if (IS_ERR(base))</span><br><span class="line">			return PTR_ERR(base);</span><br><span class="line"></span><br><span class="line">		rockchip_regmap_config.max_register = resource_size(res) - 4;</span><br><span class="line">		rockchip_regmap_config.name = &quot;rockchip,pinctrl&quot;;</span><br><span class="line">		info-&gt;regmap_base =</span><br><span class="line">			devm_regmap_init_mmio(dev, base, &amp;rockchip_regmap_config);</span><br><span class="line"></span><br><span class="line">		/* to check for the old dt-bindings */</span><br><span class="line">		info-&gt;reg_size = resource_size(res);</span><br><span class="line"></span><br><span class="line">		/* Honor the old binding, with pull registers as 2nd resource */</span><br><span class="line">		if (ctrl-&gt;type == RK3188 &amp;&amp; info-&gt;reg_size &lt; 0x200) &#123;</span><br><span class="line">			base = devm_platform_get_and_ioremap_resource(pdev, 1, &amp;res);</span><br><span class="line">			if (IS_ERR(base))</span><br><span class="line">				return PTR_ERR(base);</span><br><span class="line"></span><br><span class="line">			rockchip_regmap_config.max_register = resource_size(res) - 4;</span><br><span class="line">			rockchip_regmap_config.name = &quot;rockchip,pinctrl-pull&quot;;</span><br><span class="line">			info-&gt;regmap_pull =</span><br><span class="line">				devm_regmap_init_mmio(dev, base, &amp;rockchip_regmap_config);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	/* try to find the optional reference to the pmu syscon */</span><br><span class="line">	node = of_parse_phandle(np, &quot;rockchip,pmu&quot;, 0);</span><br><span class="line">	if (node) &#123;</span><br><span class="line">		info-&gt;regmap_pmu = syscon_node_to_regmap(node);</span><br><span class="line">		of_node_put(node);</span><br><span class="line">		if (IS_ERR(info-&gt;regmap_pmu))</span><br><span class="line">			return PTR_ERR(info-&gt;regmap_pmu);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	if (IS_ENABLED(CONFIG_CPU_RK3308) &amp;&amp; ctrl-&gt;type == RK3308) &#123;</span><br><span class="line">		ret = rk3308_soc_data_init(info);</span><br><span class="line">		if (ret)</span><br><span class="line">			return ret;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	ret = rockchip_pinctrl_register(pdev, info);</span><br><span class="line">	if (ret)</span><br><span class="line">		return ret;</span><br><span class="line"></span><br><span class="line">	platform_set_drvdata(pdev, info);</span><br><span class="line">	g_pctldev = info-&gt;pctl_dev;</span><br><span class="line"></span><br><span class="line">	ret = of_platform_populate(np, NULL, NULL, &amp;pdev-&gt;dev);</span><br><span class="line">	if (ret)</span><br><span class="line">		return dev_err_probe(dev, ret, &quot;failed to register gpio device\n&quot;);</span><br><span class="line"></span><br><span class="line">	dev_info(dev, &quot;probed %s\n&quot;, dev_name(dev));</span><br><span class="line"></span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中最终要的是rockchip_pinctrl_register函数，找到该函数，同样在pinctrl-rockchip.c的目录下，如下所示：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="type">int</span> <span class="title function_">rockchip_pinctrl_register</span><span class="params">(<span class="keyword">struct</span> platform_device *pdev,</span></span><br><span class="line"><span class="params">					<span class="keyword">struct</span> rockchip_pinctrl *info)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">pinctrl_desc</span> *<span class="title">ctrldesc</span> =</span> &amp;info-&gt;pctl;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">pinctrl_pin_desc</span> *<span class="title">pindesc</span>, *<span class="title">pdesc</span>;</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">rockchip_pin_bank</span> *<span class="title">pin_bank</span>;</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">device</span> *<span class="title">dev</span> =</span> &amp;pdev-&gt;dev;</span><br><span class="line">	<span class="type">int</span> pin, bank, ret;</span><br><span class="line">	<span class="type">int</span> k;</span><br><span class="line"></span><br><span class="line">	ctrldesc-&gt;name = <span class="string">&quot;rockchip-pinctrl&quot;</span>;</span><br><span class="line">	ctrldesc-&gt;owner = THIS_MODULE;</span><br><span class="line">	ctrldesc-&gt;pctlops = &amp;rockchip_pctrl_ops;</span><br><span class="line">	ctrldesc-&gt;pmxops = &amp;rockchip_pmx_ops;</span><br><span class="line">	ctrldesc-&gt;confops = &amp;rockchip_pinconf_ops;</span><br><span class="line"></span><br><span class="line">	pindesc = devm_kcalloc(dev, info-&gt;ctrl-&gt;nr_pins, <span class="keyword">sizeof</span>(*pindesc), GFP_KERNEL);</span><br><span class="line">	<span class="keyword">if</span> (!pindesc)</span><br><span class="line">		<span class="keyword">return</span> -ENOMEM;</span><br><span class="line"></span><br><span class="line">	ctrldesc-&gt;pins = pindesc;</span><br><span class="line">	ctrldesc-&gt;npins = info-&gt;ctrl-&gt;nr_pins;</span><br><span class="line"></span><br><span class="line">	pdesc = pindesc;</span><br><span class="line">	<span class="keyword">for</span> (bank = <span class="number">0</span>, k = <span class="number">0</span>; bank &lt; info-&gt;ctrl-&gt;nr_banks; bank++) &#123;</span><br><span class="line">		pin_bank = &amp;info-&gt;ctrl-&gt;pin_banks[bank];</span><br><span class="line">		<span class="keyword">for</span> (pin = <span class="number">0</span>; pin &lt; pin_bank-&gt;nr_pins; pin++, k++) &#123;</span><br><span class="line">			pdesc-&gt;number = k;</span><br><span class="line">			pdesc-&gt;name = kasprintf(GFP_KERNEL, <span class="string">&quot;%s-%d&quot;</span>,</span><br><span class="line">						pin_bank-&gt;name, pin);</span><br><span class="line">			pdesc++;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		INIT_LIST_HEAD(&amp;pin_bank-&gt;deferred_pins);</span><br><span class="line">		mutex_init(&amp;pin_bank-&gt;deferred_lock);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	ret = rockchip_pinctrl_parse_dt(pdev, info);</span><br><span class="line">	<span class="keyword">if</span> (ret)</span><br><span class="line">		<span class="keyword">return</span> ret;</span><br><span class="line"></span><br><span class="line">	info-&gt;pctl_dev = devm_pinctrl_register(dev, ctrldesc, info);</span><br><span class="line">	<span class="keyword">if</span> (IS_ERR(info-&gt;pctl_dev))</span><br><span class="line">		<span class="keyword">return</span> dev_err_probe(dev, PTR_ERR(info-&gt;pctl_dev), <span class="string">&quot;could not register pinctrl driver\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>第14-第16行就是三个函数集合的填充：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ctrldesc-&gt;pctlops = &amp;rockchip_pctrl_ops;</span><br><span class="line">ctrldesc-&gt;pmxops = &amp;rockchip_pmx_ops;</span><br><span class="line">ctrldesc-&gt;confops = &amp;rockchip_pinconf_ops;</span><br></pre></td></tr></table></figure>
+
+<p>所以需要分别找到rockchip_pctrl_ops函数、rockchip_pmx_ops函数和rockchip_pinconf_ops函数</p>
+<h1 id="rockchip-pctrl-ops函数"><a href="#rockchip-pctrl-ops函数" class="headerlink" title="rockchip_pctrl_ops函数"></a>rockchip_pctrl_ops函数</h1><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">static</span> <span class="type">const</span> <span class="class"><span class="keyword">struct</span> <span class="title">pinctrl_ops</span> <span class="title">rockchip_pctrl_ops</span> =</span> &#123;</span><br><span class="line">	.get_groups_count	= rockchip_get_groups_count,	<span class="comment">// 获取引脚组数量的函数</span></span><br><span class="line">	.get_group_name		= rockchip_get_group_name,	<span class="comment">// 获取引脚组名称的函数</span></span><br><span class="line">	.get_group_pins		= rockchip_get_group_pins,	<span class="comment">// 获取引脚组引脚列表的函数</span></span><br><span class="line">	.dt_node_to_map		= rockchip_dt_node_to_map,	<span class="comment">// 将设备树节点转换为引脚控制器映射的函数</span></span><br><span class="line">	.dt_free_map		= rockchip_dt_free_map,		<span class="comment">// 释放引脚控制器映射资源的函数</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>下面是上面实现的五个函数的具体内容：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">static</span> <span class="type">int</span> <span class="title function_">rockchip_get_groups_count</span><span class="params">(<span class="keyword">struct</span> pinctrl_dev *pctldev)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">// 从 pinctrl_dev 结构中获取私有数据指针，将其转换为 rockchip_pinctrl 结构</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">rockchip_pinctrl</span> *<span class="title">info</span> =</span> pinctrl_dev_get_drvdata(pctldev);</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 返回 rockchip_pinctrl 结构中存储的引脚组数量</span></span><br><span class="line">	<span class="keyword">return</span> info-&gt;ngroups;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">static</span> <span class="type">const</span> <span class="type">char</span> *<span class="title function_">rockchip_get_group_name</span><span class="params">(<span class="keyword">struct</span> pinctrl_dev *pctldev,</span></span><br><span class="line"><span class="params">							<span class="type">unsigned</span> selector)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">// 从 pinctrl_dev 结构中获取私有数据指针，将其转换为 rockchip_pinctrl 结构</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">rockchip_pinctrl</span> *<span class="title">info</span> =</span> pinctrl_dev_get_drvdata(pctldev);</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 返回指定引脚组的名称</span></span><br><span class="line">	<span class="keyword">return</span> info-&gt;groups[selector].name;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"> <span class="type">static</span> <span class="type">int</span> <span class="title function_">rockchip_get_group_pins</span><span class="params">(<span class="keyword">struct</span> pinctrl_dev *pctldev,</span></span><br><span class="line"><span class="params">				      <span class="type">unsigned</span> selector, <span class="type">const</span> <span class="type">unsigned</span> **pins,</span></span><br><span class="line"><span class="params">				      <span class="type">unsigned</span> *npins)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">// 从 pinctrl_dev 结构中获取私有数据指针，将其转换为 rockchip_pinctrl 结构</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">rockchip_pinctrl</span> *<span class="title">info</span> =</span> pinctrl_dev_get_drvdata(pctldev);</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 如果选择器超出引脚组的范围，则返回错误码 -EINVAL</span></span><br><span class="line">	<span class="keyword">if</span> (selector &gt;= info-&gt;ngroups)</span><br><span class="line">		<span class="keyword">return</span> -EINVAL;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 将指向引脚组的引脚数组的指针赋值给传入的 pins 指针</span></span><br><span class="line">	*pins = info-&gt;groups[selector].pins;</span><br><span class="line">	<span class="comment">// 将引脚组中的引脚数量赋值给传入的 npins 变量</span></span><br><span class="line">	*npins = info-&gt;groups[selector].npins;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 返回成功的状态码 0</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">static</span> <span class="type">int</span> <span class="title function_">rockchip_dt_node_to_map</span><span class="params">(<span class="keyword">struct</span> pinctrl_dev *pctldev,</span></span><br><span class="line"><span class="params">				 <span class="keyword">struct</span> device_node *np,</span></span><br><span class="line"><span class="params">				 <span class="keyword">struct</span> pinctrl_map **<span class="built_in">map</span>, <span class="type">unsigned</span> *num_maps)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">// 从 pinctrl_dev 结构中获取私有数据指针，将其转换为 rockchip_pinctrl 结构</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">rockchip_pinctrl</span> *<span class="title">info</span> =</span> pinctrl_dev_get_drvdata(pctldev);</span><br><span class="line">	<span class="type">const</span> <span class="class"><span class="keyword">struct</span> <span class="title">rockchip_pin_group</span> *<span class="title">grp</span>;</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">device</span> *<span class="title">dev</span> =</span> info-&gt;dev;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">pinctrl_map</span> *<span class="title">new_map</span>;</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">device_node</span> *<span class="title">parent</span>;</span></span><br><span class="line">	<span class="type">int</span> map_num = <span class="number">1</span>;</span><br><span class="line">	<span class="type">int</span> i;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * 首先找到与该节点对应的引脚组，并检查是否需要为引脚创建配置映射。</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	grp = pinctrl_name_to_group(info, np-&gt;name);</span><br><span class="line">	<span class="keyword">if</span> (!grp) &#123;</span><br><span class="line">		dev_err(dev, <span class="string">&quot;unable to find group for node %pOFn\n&quot;</span>, np);</span><br><span class="line">		<span class="keyword">return</span> -EINVAL;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	map_num += grp-&gt;npins;</span><br><span class="line"></span><br><span class="line">	new_map = kcalloc(map_num, <span class="keyword">sizeof</span>(*new_map), GFP_KERNEL);</span><br><span class="line">	<span class="keyword">if</span> (!new_map)</span><br><span class="line">		<span class="keyword">return</span> -ENOMEM;</span><br><span class="line"></span><br><span class="line">	*<span class="built_in">map</span> = new_map;</span><br><span class="line">	*num_maps = map_num;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* 创建复用映射 */</span></span><br><span class="line">	parent = of_get_parent(np);</span><br><span class="line">	<span class="keyword">if</span> (!parent) &#123;</span><br><span class="line">		kfree(new_map);</span><br><span class="line">		<span class="keyword">return</span> -EINVAL;</span><br><span class="line">	&#125;</span><br><span class="line">	new_map[<span class="number">0</span>].type = PIN_MAP_TYPE_MUX_GROUP;</span><br><span class="line">	new_map[<span class="number">0</span>].data.mux.function = parent-&gt;name;</span><br><span class="line">	new_map[<span class="number">0</span>].data.mux.group = np-&gt;name;</span><br><span class="line">	of_node_put(parent);</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* 创建配置映射 */</span></span><br><span class="line">	new_map++;</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; grp-&gt;npins; i++) &#123;</span><br><span class="line">		new_map[i].type = PIN_MAP_TYPE_CONFIGS_PIN;</span><br><span class="line">		new_map[i].data.configs.group_or_pin =</span><br><span class="line">				pin_get_name(pctldev, grp-&gt;pins[i]);</span><br><span class="line">		new_map[i].data.configs.configs = grp-&gt;data[i].configs;</span><br><span class="line">		new_map[i].data.configs.num_configs = grp-&gt;data[i].nconfigs;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	dev_dbg(dev, <span class="string">&quot;maps: function %s group %s num %d\n&quot;</span>,</span><br><span class="line">		(*<span class="built_in">map</span>)-&gt;data.mux.function, (*<span class="built_in">map</span>)-&gt;data.mux.group, map_num);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">static</span> <span class="type">void</span> <span class="title function_">rockchip_dt_free_map</span><span class="params">(<span class="keyword">struct</span> pinctrl_dev *pctldev,</span></span><br><span class="line"><span class="params">				    <span class="keyword">struct</span> pinctrl_map *<span class="built_in">map</span>, <span class="type">unsigned</span> num_maps)</span></span><br><span class="line">&#123;</span><br><span class="line">	kfree(<span class="built_in">map</span>);  <span class="comment">// 释放引脚控制器映射的内存块</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="rockchip-pmx-ops函数"><a href="#rockchip-pmx-ops函数" class="headerlink" title="rockchip_pmx_ops函数"></a>rockchip_pmx_ops函数</h1><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">static</span> <span class="type">const</span> <span class="class"><span class="keyword">struct</span> <span class="title">pinmux_ops</span> <span class="title">rockchip_pmx_ops</span> =</span> &#123;</span><br><span class="line">	.get_functions_count	= rockchip_pmx_get_funcs_count,	<span class="comment">// 获取引脚复用功能数量的函数</span></span><br><span class="line">	.get_function_name	= rockchip_pmx_get_func_name,	<span class="comment">// 获取引脚复用功能名称的函数</span></span><br><span class="line">	.get_function_groups	= rockchip_pmx_get_groups,		<span class="comment">// 获取引脚复用功能对应的引脚组的函数</span></span><br><span class="line">	.set_mux		= rockchip_pmx_set,			<span class="comment">// 设置引脚复用功能的函数</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">static</span> <span class="type">int</span> <span class="title function_">rockchip_pmx_get_funcs_count</span><span class="params">(<span class="keyword">struct</span> pinctrl_dev *pctldev)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">rockchip_pinctrl</span> *<span class="title">info</span> =</span> pinctrl_dev_get_drvdata(pctldev);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> info-&gt;nfunctions;  <span class="comment">// 返回引脚复用功能的数量</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">static</span> <span class="type">const</span> <span class="type">char</span> *<span class="title function_">rockchip_pmx_get_func_name</span><span class="params">(<span class="keyword">struct</span> pinctrl_dev *pctldev,</span></span><br><span class="line"><span class="params">					  <span class="type">unsigned</span> selector)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">rockchip_pinctrl</span> *<span class="title">info</span> =</span> pinctrl_dev_get_drvdata(pctldev);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> info-&gt;functions[selector].name;  <span class="comment">// 返回引脚复用功能的名称</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">static</span> <span class="type">int</span> <span class="title function_">rockchip_pmx_get_groups</span><span class="params">(<span class="keyword">struct</span> pinctrl_dev *pctldev,</span></span><br><span class="line"><span class="params">				<span class="type">unsigned</span> selector, <span class="type">const</span> <span class="type">char</span> * <span class="type">const</span> **groups,</span></span><br><span class="line"><span class="params">				<span class="type">unsigned</span> * <span class="type">const</span> num_groups)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">rockchip_pinctrl</span> *<span class="title">info</span> =</span> pinctrl_dev_get_drvdata(pctldev);</span><br><span class="line"></span><br><span class="line">	*groups = info-&gt;functions[selector].groups;  <span class="comment">// 返回引脚复用功能对应的引脚组数组</span></span><br><span class="line">	*num_groups = info-&gt;functions[selector].ngroups;  <span class="comment">// 返回引脚组的数量</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;  <span class="comment">// 返回成功</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">static</span> <span class="type">int</span> <span class="title function_">rockchip_pmx_set</span><span class="params">(<span class="keyword">struct</span> pinctrl_dev *pctldev, <span class="type">unsigned</span> selector,</span></span><br><span class="line"><span class="params">			    <span class="type">unsigned</span> group)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">rockchip_pinctrl</span> *<span class="title">info</span> =</span> pinctrl_dev_get_drvdata(pctldev);</span><br><span class="line">	<span class="type">const</span> <span class="type">unsigned</span> <span class="type">int</span> *pins = info-&gt;groups[group].pins;</span><br><span class="line">	<span class="type">const</span> <span class="class"><span class="keyword">struct</span> <span class="title">rockchip_pin_config</span> *<span class="title">data</span> =</span> info-&gt;groups[group].data;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">device</span> *<span class="title">dev</span> =</span> info-&gt;dev;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">rockchip_pin_bank</span> *<span class="title">bank</span>;</span></span><br><span class="line">	<span class="type">int</span> cnt, ret = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">	dev_dbg(dev, <span class="string">&quot;enable function %s group %s\n&quot;</span>,</span><br><span class="line">		info-&gt;functions[selector].name, info-&gt;groups[group].name);</span><br><span class="line"></span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * 针对所选的引脚组中的每个引脚，将相应的引脚功能号码编程到配置寄存器中。</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">for</span> (cnt = <span class="number">0</span>; cnt &lt; info-&gt;groups[group].npins; cnt++) &#123;</span><br><span class="line">		bank = pin_to_bank(info, pins[cnt]);</span><br><span class="line">		ret = rockchip_set_mux(bank, pins[cnt] - bank-&gt;pin_base,</span><br><span class="line">				       data[cnt].func);</span><br><span class="line">		<span class="keyword">if</span> (ret)</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (ret &amp;&amp; cnt) &#123;</span><br><span class="line">		<span class="comment">/* 恢复已经设置的引脚设置 */</span></span><br><span class="line">		<span class="keyword">for</span> (cnt--; cnt &gt;= <span class="number">0</span> &amp;&amp; !data[cnt].func; cnt--)</span><br><span class="line">			rockchip_set_mux(bank, pins[cnt] - bank-&gt;pin_base, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">		<span class="keyword">return</span> ret;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;  <span class="comment">// 返回成功</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="rockchip-pinconf-ops函数"><a href="#rockchip-pinconf-ops函数" class="headerlink" title="rockchip_pinconf_ops函数"></a>rockchip_pinconf_ops函数</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">static const struct pinconf_ops rockchip_pinconf_ops = &#123;</span><br><span class="line">	.pin_config_get		= rockchip_pinconf_get,	// 获取引脚配置的函数</span><br><span class="line">	.pin_config_set		= rockchip_pinconf_set,	// 设置引脚配置的函数</span><br><span class="line">	.is_generic			= true,						// 表示是通用的引脚配置操作</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">static</span> <span class="type">int</span> <span class="title function_">rockchip_pinconf_set</span><span class="params">(<span class="keyword">struct</span> pinctrl_dev *pctldev, <span class="type">unsigned</span> <span class="type">int</span> pin,</span></span><br><span class="line"><span class="params">				<span class="type">unsigned</span> <span class="type">long</span> *configs, <span class="type">unsigned</span> num_configs)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">rockchip_pinctrl</span> *<span class="title">info</span> =</span> pinctrl_dev_get_drvdata(pctldev);</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">rockchip_pin_bank</span> *<span class="title">bank</span> =</span> pin_to_bank(info, pin);</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">gpio_chip</span> *<span class="title">gpio</span> =</span> &amp;bank-&gt;gpio_chip;</span><br><span class="line">	<span class="class"><span class="keyword">enum</span> <span class="title">pin_config_param</span> <span class="title">param</span>;</span></span><br><span class="line">	u32 arg;</span><br><span class="line">	<span class="type">int</span> i;</span><br><span class="line">	<span class="type">int</span> rc;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; num_configs; i++) &#123;</span><br><span class="line">		param = pinconf_to_config_param(configs[i]);</span><br><span class="line">		arg = pinconf_to_config_argument(configs[i]);</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (param == PIN_CONFIG_OUTPUT || param == PIN_CONFIG_INPUT_ENABLE) &#123;</span><br><span class="line">			<span class="comment">/*</span></span><br><span class="line"><span class="comment">			 * 检查 GPIO 驱动程序是否已经探测到。</span></span><br><span class="line"><span class="comment">			 * 锁定确保 GPIO 探测完成或者 GPIO 驱动程序尚未探测到。</span></span><br><span class="line"><span class="comment">			 */</span></span><br><span class="line">			mutex_lock(&amp;bank-&gt;deferred_lock);</span><br><span class="line">			<span class="keyword">if</span> (!gpio || !gpio-&gt;direction_output) &#123;</span><br><span class="line">				<span class="comment">// 如果驱动程序尚未探测到，则将配置信息延迟处理并返回。</span></span><br><span class="line">				rc = rockchip_pinconf_defer_pin(bank, pin - bank-&gt;pin_base, param, arg);</span><br><span class="line">				mutex_unlock(&amp;bank-&gt;deferred_lock);</span><br><span class="line">				<span class="keyword">if</span> (rc)</span><br><span class="line">					<span class="keyword">return</span> rc;</span><br><span class="line"></span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			mutex_unlock(&amp;bank-&gt;deferred_lock);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">switch</span> (param) &#123;</span><br><span class="line">		<span class="keyword">case</span> PIN_CONFIG_BIAS_DISABLE:</span><br><span class="line">			<span class="comment">// 禁用上下拉电阻</span></span><br><span class="line">			rc = rockchip_set_pull(bank, pin - bank-&gt;pin_base, param);</span><br><span class="line">			<span class="keyword">if</span> (rc)</span><br><span class="line">				<span class="keyword">return</span> rc;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">case</span> PIN_CONFIG_BIAS_PULL_UP:</span><br><span class="line">		<span class="keyword">case</span> PIN_CONFIG_BIAS_PULL_DOWN:</span><br><span class="line">		<span class="keyword">case</span> PIN_CONFIG_BIAS_PULL_PIN_DEFAULT:</span><br><span class="line">		<span class="keyword">case</span> PIN_CONFIG_BIAS_BUS_HOLD:</span><br><span class="line">			<span class="comment">// 检查上下拉电阻是否有效</span></span><br><span class="line">			<span class="keyword">if</span> (!rockchip_pinconf_pull_valid(info-&gt;ctrl, param))</span><br><span class="line">				<span class="keyword">return</span> -ENOTSUPP;</span><br><span class="line"></span><br><span class="line">			<span class="keyword">if</span> (!arg)</span><br><span class="line">				<span class="keyword">return</span> -EINVAL;</span><br><span class="line"></span><br><span class="line">			<span class="comment">// 设置上下拉电阻</span></span><br><span class="line">			rc = rockchip_set_pull(bank, pin - bank-&gt;pin_base, param);</span><br><span class="line">			<span class="keyword">if</span> (rc)</span><br><span class="line">				<span class="keyword">return</span> rc;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">case</span> PIN_CONFIG_OUTPUT:</span><br><span class="line">			<span class="comment">// 设置引脚复用功能为 GPIO</span></span><br><span class="line">			rc = rockchip_set_mux(bank, pin - bank-&gt;pin_base, RK_FUNC_GPIO);</span><br><span class="line">			<span class="keyword">if</span> (rc != RK_FUNC_GPIO)</span><br><span class="line">				<span class="keyword">return</span> -EINVAL;</span><br><span class="line"></span><br><span class="line">			<span class="comment">// 设置引脚为输出模式</span></span><br><span class="line">			rc = gpio-&gt;direction_output(gpio, pin - bank-&gt;pin_base, arg);</span><br><span class="line">			<span class="keyword">if</span> (rc)</span><br><span class="line">				<span class="keyword">return</span> rc;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">case</span> PIN_CONFIG_INPUT_ENABLE:</span><br><span class="line">			<span class="comment">// 设置引脚复用功能为 GPIO</span></span><br><span class="line">			rc = rockchip_set_mux(bank, pin - bank-&gt;pin_base, RK_FUNC_GPIO);</span><br><span class="line">			<span class="keyword">if</span> (rc != RK_FUNC_GPIO)</span><br><span class="line">				<span class="keyword">return</span> -EINVAL;</span><br><span class="line"></span><br><span class="line">			<span class="comment">// 设置引脚为输入模式</span></span><br><span class="line">			rc = gpio-&gt;direction_input(gpio, pin - bank-&gt;pin_base);</span><br><span class="line">			<span class="keyword">if</span> (rc)</span><br><span class="line">				<span class="keyword">return</span> rc;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">case</span> PIN_CONFIG_DRIVE_STRENGTH:</span><br><span class="line">			<span class="comment">// 仅支持某些芯片（如 rk3288）的每个引脚独立的驱动强度设置</span></span><br><span class="line">			<span class="keyword">if</span> (!info-&gt;ctrl-&gt;drv_calc_reg)</span><br><span class="line">				<span class="keyword">return</span> -ENOTSUPP;</span><br><span class="line"></span><br><span class="line">			<span class="comment">// 设置引脚的驱动强度</span></span><br><span class="line">			rc = rockchip_set_drive_perpin(bank, pin - bank-&gt;pin_base, arg);</span><br><span class="line">			<span class="keyword">if</span> (rc &lt; <span class="number">0</span>)</span><br><span class="line">				<span class="keyword">return</span> rc;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">case</span> PIN_CONFIG_INPUT_SCHMITT_ENABLE:</span><br><span class="line">			<span class="comment">// 仅支持某些芯片的施密特触发设置</span></span><br><span class="line">			<span class="keyword">if</span> (!info-&gt;ctrl-&gt;schmitt_calc_reg)</span><br><span class="line">				<span class="keyword">return</span> -ENOTSUPP;</span><br><span class="line"></span><br><span class="line">			<span class="comment">// 设置引脚的施密特触发模式</span></span><br><span class="line">			rc = rockchip_set_schmitt(bank, pin - bank-&gt;pin_base, arg);</span><br><span class="line">			<span class="keyword">if</span> (rc &lt; <span class="number">0</span>)</span><br><span class="line">				<span class="keyword">return</span> rc;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">case</span> PIN_CONFIG_SLEW_RATE:</span><br><span class="line">			<span class="comment">// 仅支持某些芯片的引脚驱动速率设置</span></span><br><span class="line">			<span class="keyword">if</span> (!info-&gt;ctrl-&gt;slew_rate_calc_reg)</span><br><span class="line">				<span class="keyword">return</span> -ENOTSUPP;</span><br><span class="line"></span><br><span class="line">			<span class="comment">// 设置引脚的驱动速率</span></span><br><span class="line">			rc = rockchip_set_slew_rate(bank, pin - bank-&gt;pin_base, arg);</span><br><span class="line">			<span class="keyword">if</span> (rc &lt; <span class="number">0</span>)</span><br><span class="line">				<span class="keyword">return</span> rc;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">default</span>:</span><br><span class="line">			<span class="comment">// 不支持的配置参数</span></span><br><span class="line">			<span class="keyword">return</span> -ENOTSUPP;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125; <span class="comment">/* for each config */</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 获取指定引脚的配置设置 */</span></span><br><span class="line"><span class="type">static</span> <span class="type">int</span> <span class="title function_">rockchip_pinconf_get</span><span class="params">(<span class="keyword">struct</span> pinctrl_dev *pctldev, <span class="type">unsigned</span> <span class="type">int</span> pin,</span></span><br><span class="line"><span class="params">				<span class="type">unsigned</span> <span class="type">long</span> *config)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">rockchip_pinctrl</span> *<span class="title">info</span> =</span> pinctrl_dev_get_drvdata(pctldev);</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">rockchip_pin_bank</span> *<span class="title">bank</span> =</span> pin_to_bank(info, pin);</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">gpio_chip</span> *<span class="title">gpio</span> =</span> &amp;bank-&gt;gpio_chip;</span><br><span class="line">	<span class="class"><span class="keyword">enum</span> <span class="title">pin_config_param</span> <span class="title">param</span> =</span> pinconf_to_config_param(*config);</span><br><span class="line">	u16 arg;</span><br><span class="line">	<span class="type">int</span> rc;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">switch</span> (param) &#123;</span><br><span class="line">	<span class="keyword">case</span> PIN_CONFIG_BIAS_DISABLE:</span><br><span class="line">		<span class="comment">// 检查上下拉电阻是否禁用</span></span><br><span class="line">		<span class="keyword">if</span> (rockchip_get_pull(bank, pin - bank-&gt;pin_base) != param)</span><br><span class="line">			<span class="keyword">return</span> -EINVAL;</span><br><span class="line"></span><br><span class="line">		arg = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line">	<span class="keyword">case</span> PIN_CONFIG_BIAS_PULL_UP:</span><br><span class="line">	<span class="keyword">case</span> PIN_CONFIG_BIAS_PULL_DOWN:</span><br><span class="line">	<span class="keyword">case</span> PIN_CONFIG_BIAS_PULL_PIN_DEFAULT:</span><br><span class="line">	<span class="keyword">case</span> PIN_CONFIG_BIAS_BUS_HOLD:</span><br><span class="line">		<span class="comment">// 检查上下拉电阻是否有效，并获取当前的上下拉电阻配置</span></span><br><span class="line">		<span class="keyword">if</span> (!rockchip_pinconf_pull_valid(info-&gt;ctrl, param))</span><br><span class="line">			<span class="keyword">return</span> -ENOTSUPP;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (rockchip_get_pull(bank, pin - bank-&gt;pin_base) != param)</span><br><span class="line">			<span class="keyword">return</span> -EINVAL;</span><br><span class="line"></span><br><span class="line">		arg = <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line">	<span class="keyword">case</span> PIN_CONFIG_OUTPUT:</span><br><span class="line">		<span class="comment">// 检查引脚是否配置为 GPIO 输出模式</span></span><br><span class="line">		rc = rockchip_get_mux(bank, pin - bank-&gt;pin_base);</span><br><span class="line">		<span class="keyword">if</span> (rc != RK_FUNC_GPIO)</span><br><span class="line">			<span class="keyword">return</span> -EINVAL;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (!gpio || !gpio-&gt;get) &#123;</span><br><span class="line">			arg = <span class="number">0</span>;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 获取引脚的输出状态</span></span><br><span class="line">		rc = gpio-&gt;get(gpio, pin - bank-&gt;pin_base);</span><br><span class="line">		<span class="keyword">if</span> (rc &lt; <span class="number">0</span>)</span><br><span class="line">			<span class="keyword">return</span> rc;</span><br><span class="line"></span><br><span class="line">		arg = rc ? <span class="number">1</span> : <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line">	<span class="keyword">case</span> PIN_CONFIG_DRIVE_STRENGTH:</span><br><span class="line">		<span class="comment">// 仅支持某些芯片（如 rk3288）的每个引脚独立的驱动强度设置</span></span><br><span class="line">		<span class="keyword">if</span> (!info-&gt;ctrl-&gt;drv_calc_reg)</span><br><span class="line">			<span class="keyword">return</span> -ENOTSUPP;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 获取引脚的驱动强度配置</span></span><br><span class="line">		rc = rockchip_get_drive_perpin(bank, pin - bank-&gt;pin_base);</span><br><span class="line">		<span class="keyword">if</span> (rc &lt; <span class="number">0</span>)</span><br><span class="line">			<span class="keyword">return</span> rc;</span><br><span class="line"></span><br><span class="line">		arg = rc;</span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line">	<span class="keyword">case</span> PIN_CONFIG_INPUT_SCHMITT_ENABLE:</span><br><span class="line">		<span class="comment">// 仅支持某些芯片的施密特触发设置</span></span><br><span class="line">		<span class="keyword">if</span> (!info-&gt;ctrl-&gt;schmitt_calc_reg)</span><br><span class="line">			<span class="keyword">return</span> -ENOTSUPP;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 获取引脚的施密特触发配置</span></span><br><span class="line">		rc = rockchip_get_schmitt(bank, pin - bank-&gt;pin_base);</span><br><span class="line">		<span class="keyword">if</span> (rc &lt; <span class="number">0</span>)</span><br><span class="line">			<span class="keyword">return</span> rc;</span><br><span class="line"></span><br><span class="line">		arg = rc;</span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line">	<span class="keyword">case</span> PIN_CONFIG_SLEW_RATE:</span><br><span class="line">		<span class="comment">// 仅支持某些芯片的引脚驱动速率设置</span></span><br><span class="line">		<span class="keyword">if</span> (!info-&gt;ctrl-&gt;slew_rate_calc_reg)</span><br><span class="line">			<span class="keyword">return</span> -ENOTSUPP;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 获取引脚的驱动速率配置</span></span><br><span class="line">		rc = rockchip_get_slew_rate(bank, pin - bank-&gt;pin_base);</span><br><span class="line">		<span class="keyword">if</span> (rc &lt; <span class="number">0</span>)</span><br><span class="line">			<span class="keyword">return</span> rc;</span><br><span class="line"></span><br><span class="line">		arg = rc;</span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line">	<span class="keyword">default</span>:</span><br><span class="line">		<span class="comment">// 不支持的配置参数</span></span><br><span class="line">		<span class="keyword">return</span> -ENOTSUPP;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	*config = pinconf_to_config_packed(param, arg);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2023/09/18/9-1-%E5%9C%A8%E5%AE%B6%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%9C%A8%E5%AE%B6%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" rel="tag">在家学习记录</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+    
+      <a href="/2023/09/17/0-14-%E9%A6%99%E6%A9%99%E6%B4%BE%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9C%80%E7%BB%88%E5%AE%9A%E4%BD%8D/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">0-14 香橙派文件系统最终定位</div>
+      </a>
+    
+  </nav>
+
+  
+   
+  
+   
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2015-2023
+        <i class="ri-heart-fill heart_icon"></i> John Doe
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="热爱学习的未来酱"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/2019/about">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+ 
+<script src="/js/clickBoom2.js"></script>
+ 
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+ 
+<script src="/js/dz.js"></script>
+ 
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    
+
+  </div>
+</body>
+
+</html>

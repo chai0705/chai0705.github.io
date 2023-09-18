@@ -160,6 +160,345 @@
     
     
     <article
+  id="post-1-5-驱动模块传参实验"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/09/05/1-5-%E9%A9%B1%E5%8A%A8%E6%A8%A1%E5%9D%97%E4%BC%A0%E5%8F%82%E5%AE%9E%E9%AA%8C/"
+    >1-5-驱动模块传参实验</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/09/05/1-5-%E9%A9%B1%E5%8A%A8%E6%A8%A1%E5%9D%97%E4%BC%A0%E5%8F%82%E5%AE%9E%E9%AA%8C/" class="article-date">
+  <time datetime="2023-09-04T23:59:47.000Z" itemprop="datePublished">2023-09-05</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/rk3568-%E9%A9%B1%E5%8A%A8/">rk3568 驱动</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>经过前两章实验的实战操作，我们已经完成最简单的helloworld驱动实验和模块驱动实验，加载模块可以使用“insmod”函数，使用“insmod”函数进行模块加载时也能进行参数的传递。运用得当可以极大提升内核测试速度。本节就来学习一下如何进行驱动模块的传参。</p>
+<h2 id="5-1-驱动模块传参简介"><a href="#5-1-驱动模块传参简介" class="headerlink" title="5.1 驱动模块传参简介"></a>5.1 驱动模块传参简介</h2><p> 驱动模块传参是一种可以随时向内核模块传递、修改参数的方法。例如可以传递串口驱动的波特率、数据位数、校验位、停止位等参数，进行功能的设置，以此节省编译模块的时间，大大提高调试速度。</p>
+<p> Linux内核提供了 module_param(name, type, perm)、module_param_array(name, type, nump, perm)宏和module_param_string(name, string, len, perm)宏，分别进行基本类型、数组和字符串参数的传递。它们定义在 “内核源码&#x2F;include&#x2F;linux&#x2F;moduleparam.h”文件中(在module.h文件中已经对export.h进行引用，所以不需要单独引用moduleparam.h文件),详细定义如下（图5-1）所示：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> module_param(name, type, perm)              \</span></span><br><span class="line"><span class="meta">    module_param_named(name, name, type, perm)</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> module_param_array(name, type, nump, perm)      \</span></span><br><span class="line"><span class="meta">module_param_array_named(name, name, type, nump, perm)  </span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> module_param_string(name, string, len, perm)            \</span></span><br><span class="line"><span class="meta">    static const struct kparam_string __param_string_##name     \                                                                                                                                                                                           </span></span><br><span class="line">        = &#123; len, <span class="built_in">string</span> &#125;;                  \</span><br><span class="line">    __module_param_call(MODULE_PARAM_PREFIX, name,          \</span><br><span class="line">                &amp;param_ops_string,              \</span><br><span class="line">                .str = &amp;__param_string_#<span class="meta">#name, perm, -1, 0);\</span></span><br><span class="line"><span class="meta">    __MODULE_PARM_TYPE(name, <span class="string">&quot;string&quot;</span>) </span></span><br></pre></td></tr></table></figure>
+
+<p>图5-1</p>
+<p>以上宏定义中的 module_param ()函数可以用来进行基本类型参数的传递，传入的三个参数定义如下：</p>
+<ul>
+<li>name：模块参数的名称</li>
+<li>type： 模块参数的数据类型</li>
+<li>perm： 模块参数的访问权限</li>
+</ul>
+<p>参数type可以取以下任意一种情况：</p>
+<ul>
+<li>bool <strong>:</strong> 布尔型</li>
+<li>inbool <strong>:</strong> 布尔反值</li>
+<li>charp**:** 字符指针（相当于char *,不超过1024字节的字符串）</li>
+<li>short**:** 短整型</li>
+<li>ushort <strong>:</strong> 无符号短整型</li>
+<li>int <strong>:</strong> 整型</li>
+<li>uint <strong>:</strong> 无符号整型</li>
+<li>long <strong>:</strong> 长整型</li>
+<li>ulong**:** 无符号长整型。</li>
+</ul>
+<p>参数perm表示该参数在sysfs文件系统中所对应的文件节点的属性，其权限定义在“内核源码&#x2F;include&#x2F;linux&#x2F;stat.h”文件中。可以用宏定义和数字法两种方式来表示。详细宏定义如下（图5-2）所示：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> S_IRUSR 00400 <span class="comment">/*文件所有者可读*/</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> S_IWUSR 00200 <span class="comment">/*文件所有者可写*/</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> S_IXUSR 00100 <span class="comment">/*文件所有者可执行*/</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> S_IRGRP 00040 <span class="comment">/*与文件所有者同组的用户可读*/</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> S_IWGRP 00020 <span class="comment">/*与文件所有者同组的用户可写*/</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> S_IXGRP 00010 <span class="comment">/*与文件所有者同组的用户可执行*/</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> S_IROTH 00004 <span class="comment">/*与文件所有者不同组的用户可读*/</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> S_IWOTH 00002 <span class="comment">/*与文件所有者不同组的用户可写*/</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> S_IXOTH 00001 <span class="comment">/*与文件所有者不同组的用户可可执行*/</span></span></span><br></pre></td></tr></table></figure>
+
+<p>图5-2</p>
+<p>如果要传递数组类型参数可以使用 module_param_array ()函数，相较于 module_param ()函数多了n_para参数，用来表示传递参数个数;n_para参数值会根据输入的参数个数而改变,n_para的最终值为传递的数组元素个数。</p>
+<p>最后是 module_param_string(name, string, len, perm)函数，用来传递字符串类型的变量，四个参数的定义如下所示：</p>
+<ul>
+<li>name：外部传入的参数名，即加载模块时的传入值</li>
+<li>string:内部的变量名，即程序内定义的参数名</li>
+<li>len:以string命名的buffer大小(可以小于buffer的大小，但是没有意义)</li>
+<li>perm:模块参数的访问权限</li>
+</ul>
+<p>至此，关于驱动模块传参所使用的函数就讲解完成了，在下一小节中将编写驱动模块传参函数代码。</p>
+<h2 id="5-2-实验程序的编写"><a href="#5-2-实验程序的编写" class="headerlink" title="5.2 实验程序的编写"></a>5.2 实验程序的编写</h2><p>本实验对应的网盘路径为：iTOP-RK3568开发板【底板V1.7版本】\03_【iTOP-RK3568开发板】指南教程\02_Linux驱动配套资料\04_Linux驱动例程\02。</p>
+<p>本章实验将编写Linux下的驱动传参实例代码，通过“insmod”命令进行参数的传递，并将相应的参数打印到串口终端上。</p>
+<p>编写完成的parameter.c代码如下（图5-3）所示</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;linux/init.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;linux/module.h&gt;</span></span></span><br><span class="line"><span class="type">static</span> <span class="type">int</span> number;<span class="comment">//定义int类型变量number</span></span><br><span class="line"><span class="type">static</span> <span class="type">char</span> *name;<span class="comment">//定义char类型变量name</span></span><br><span class="line"><span class="type">static</span> <span class="type">int</span> para[<span class="number">8</span>];<span class="comment">//定义int类型的数组</span></span><br><span class="line"><span class="type">static</span> <span class="type">char</span> str1[<span class="number">10</span>];<span class="comment">//定义char类型字符串str1</span></span><br><span class="line"><span class="type">static</span> <span class="type">int</span> n_para;<span class="comment">//定义int类型的用来记录module_param_array函数传递数组元素个数的变量n_para</span></span><br><span class="line">module_param(number, <span class="type">int</span>, S_IRUGO);<span class="comment">//传递int类型的参数number，S_IRUGO表示权限为可读</span></span><br><span class="line">module_param(name, charp, S_IRUGO);<span class="comment">//传递char类型变量name</span></span><br><span class="line">module_param_array(para , <span class="type">int</span> , &amp;n_para , S_IRUGO);<span class="comment">//传递int类型的数组变量para</span></span><br><span class="line">module_param_string(str, str1 ,<span class="keyword">sizeof</span>(str1), S_IRUGO);<span class="comment">//传递字符串类型的变量str1</span></span><br><span class="line"><span class="type">static</span> <span class="type">int</span> __init <span class="title function_">parameter_init</span><span class="params">(<span class="type">void</span>)</span><span class="comment">//驱动入口函数</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">static</span> <span class="type">int</span> i;</span><br><span class="line">    printk(KERN_EMERG <span class="string">&quot;%d\n&quot;</span>,number);</span><br><span class="line">    printk(KERN_EMERG <span class="string">&quot;%s\n&quot;</span>,name);                                                                                                                                                          </span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; n_para; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        printk(KERN_EMERG <span class="string">&quot;para[%d] : %d \n&quot;</span>, i, para[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    printk(KERN_EMERG <span class="string">&quot;%s\n&quot;</span>,str1);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">static</span> <span class="type">void</span> __exit <span class="title function_">parameter_exit</span><span class="params">(<span class="type">void</span>)</span><span class="comment">//驱动出口函数</span></span><br><span class="line">&#123;</span><br><span class="line">    printk(KERN_EMERG <span class="string">&quot;parameter_exit\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line">module_init(parameter_init);<span class="comment">//注册入口函数</span></span><br><span class="line">module_exit(parameter_exit);<span class="comment">//注册出口函数</span></span><br><span class="line">MODULE_LICENSE(<span class="string">&quot;GPL v2&quot;</span>);<span class="comment">//同意GPL开源协议</span></span><br><span class="line">MODULE_AUTHOR(<span class="string">&quot;topeet&quot;</span>); <span class="comment">//作者信息</span></span><br></pre></td></tr></table></figure>
+
+<p>图5-3</p>
+<p>以上代码将传递int类型参数number、char类型参数name、int类型的数组para和char类型字符串str1，并在驱动入口函数中，对各个参数进行打印。在下一小节会进行驱动加载测试。</p>
+<h2 id="5-3-运行测试"><a href="#5-3-运行测试" class="headerlink" title="5.3 运行测试"></a>5.3 运行测试</h2><h3 id="5-3-1-编译驱动程序"><a href="#5-3-1-编译驱动程序" class="headerlink" title="5.3.1 编译驱动程序"></a>5.3.1 编译驱动程序</h3><p>在上一小节中的parameter.c代码同一目录下创建 Makefile 文件，Makefile 文件内容如下（图5-4）所示：</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> ARCH=arm64<span class="comment">#设置平台架构</span></span><br><span class="line"><span class="keyword">export</span> CROSS_COMPILE=aarch64-linux-gnu-<span class="comment">#交叉编译器前缀</span></span><br><span class="line">obj-m += parameter.o    <span class="comment">#此处要和你的驱动源文件同名</span></span><br><span class="line">KDIR :=/home/topeet/Linux/linux_sdk/kernel    <span class="comment">#这里是你的内核目录                                                                                                                            </span></span><br><span class="line">PWD ?= <span class="variable">$(<span class="built_in">shell</span> pwd)</span></span><br><span class="line"><span class="section">all:</span></span><br><span class="line">    make -C <span class="variable">$(KDIR)</span> M=<span class="variable">$(PWD)</span> modules    <span class="comment">#make操作</span></span><br><span class="line"><span class="section">clean:</span></span><br><span class="line">    make -C <span class="variable">$(KDIR)</span> M=<span class="variable">$(PWD)</span> clean    <span class="comment">#make clean操作</span></span><br></pre></td></tr></table></figure>
+
+<p>图5-4</p>
+<p>对于Makefile的内容注释已在上图添加，保存退出之后，来到存放parameter.c和Makefile文件目录下，如下图（图5-5）所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309072017518.jpeg" alt="img"> </p>
+<p>图5-5</p>
+<p>然后使用命令“make”进行驱动的编译，编译完成如下图（图5-6）所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309072017541.jpeg" alt="img"> </p>
+<p>图5-6</p>
+<p>编译完生成 parameter.ko目标文件，如下图（图5-7）所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309072017448.jpeg" alt="img"> </p>
+<p>图5-7</p>
+<p>至此我们的驱动模块就编译成功了，下面进行驱动的运行测试。</p>
+<h3 id="5-3-2-运行测试"><a href="#5-3-2-运行测试" class="headerlink" title="5.3.2 运行测试"></a>5.3.2 运行测试</h3><p>在上一章节中已经学习了使用insmod命令加载模块，而驱动模块传参的命令格式为</p>
+<p>insmod 对应的模块 参数</p>
+<p>parameter.ko 驱动加载可以传递3个参数，分别为int类型的参数number，char类型的参数name和int数组类型的参数para。使用以下命令进行驱动的加载，加载完成之后的打印信息如下图（图5-8）所示：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">insmod parameter.ko number=100 name=&quot;topeet&quot; para=0,1,2,3,4,5,6,7 str=&quot;itop&quot;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309072017522.jpeg" alt="img"> </p>
+<p>图5-8</p>
+<p>可以看到传递的参数都分别打印了出来。最后可以输入以下命令进行驱动的卸载，如下图（图5-9）所示：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rmmod parameter.ko</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309072017515.jpeg" alt="img"> </p>
+<p>图5-9</p>
+<p>【最新驱动资料（文档+例程）】</p>
+<p>链接 <a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1M4smUG2vw_hnn0Hye-tkog">https://pan.baidu.com/s/1M4smUG2vw_hnn0Hye-tkog</a></p>
+<p>提取码：hbh6</p>
+<p>【B 站配套视频】</p>
+<p><a target="_blank" rel="noopener" href="https://b23.tv/XqYa6Hm">https://b23.tv/XqYa6Hm</a></p>
+<p>【RK3568 购买链接】</p>
+<p><a target="_blank" rel="noopener" href="https://item.taobao.com/item.htm?spm=a1z10.5-c-s.w4002-2245">https://item.taobao.com/item.htm?spm=a1z10.5-c-s.w4002-2245</a></p>
+<p>2452613.11.2fec74a6elWNeA&amp;id&#x3D;669939423234</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rk3568-%E9%A9%B1%E5%8A%A8/" rel="tag">rk3568 驱动</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-1-4-内核模块实验"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/09/05/1-4-%E5%86%85%E6%A0%B8%E6%A8%A1%E5%9D%97%E5%AE%9E%E9%AA%8C/"
+    >1-4-内核模块实验</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/09/05/1-4-%E5%86%85%E6%A0%B8%E6%A8%A1%E5%9D%97%E5%AE%9E%E9%AA%8C/" class="article-date">
+  <time datetime="2023-09-04T23:59:45.000Z" itemprop="datePublished">2023-09-05</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/rk3568-%E9%A9%B1%E5%8A%A8/">rk3568 驱动</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>在上一章节我们编写了最简单的helloworld驱动程序。有了驱动程序以后，要如何编译并使用驱动呢。编译驱动有俩种方法，分别是将驱动编译成内核和将驱动编译成内核模块。我们先来学习如何将驱动编译成内核模块、</p>
+<h1 id="4-1-设置交叉编译器"><a href="#4-1-设置交叉编译器" class="headerlink" title="4.1 设置交叉编译器"></a>4.1 设置交叉编译器</h1><p>1 下载网盘资料下的交叉编译器，网盘路径为：“XXX”，将下载的交叉编译器拷贝到Ubuntu的&#x2F;usr&#x2F;local目录下，如下图（图4-1）所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309072016495.jpeg" alt="img"></p>
+<p>图 4-1</p>
+<p>2 输入以下命令，解压交叉编译编译器压缩包，解压完毕会生成“gcc-linaro-6.3.1-2017.05-x86_64_aarch64-linux-gnu”文件夹，这是实验需要的交叉编译工具，如下图（图4-2）所示：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -vxf gcc-linaro-6.3.1-2017.05-x86_64_aarch64-linux-gnu.tar.gz</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309072016536.jpeg" alt="img"></p>
+<p>图 4-2</p>
+<p>3 在终端输入“sudo vi &#x2F;etc&#x2F;profile”命令，在文件最后输入以下命令修改环境变量。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export PATH=$PATH:/usr/local/gcc-linaro-6.3.1-2017.05-x86_64_aarch64-linux-gnu/bin</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309072016558.jpeg" alt="img"></p>
+<p>图 4-3</p>
+<p>4 保存退出，在终端输入“reboot”命令重新启动Ubuntu系统，使交叉编译环境生效。Ubuntu系统重新启动之后，登录到系统后，打开终端，输入命令“aarch64-linux-gnu-gcc -v”，如果终端有如下图（图4-4）所示的打印信息，说明交叉编译环境搭建成功。如果没有出现如下图（图4-4）的打印信息，需要检查上一步骤是否设置正确。</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309072016623.jpeg" alt="img"></p>
+<p>图 4-4</p>
+<h1 id="4-2-编写Makefile"><a href="#4-2-编写Makefile" class="headerlink" title="4.2 编写Makefile"></a>4.2 编写Makefile</h1><p>编译驱动程序还需要使用Makefile文件。我们为helloworld.c编写一个简单的Makefile，Makefile文件和源文件helloworld.c位于同一级目录，代码如下（图4-5）所示：</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> ARCH=arm64  </span><br><span class="line"><span class="keyword">export</span> CROSS_COMPILE=aarch64-linux-gnu-  </span><br><span class="line">obj-m += helloworld.o    <span class="comment">#helloworld.c对应.o文件的名称。名称要保持一致。</span></span><br><span class="line">KDIR :=/home/topeet/Linux/linux_sdk/kernel    <span class="comment">#内核源码所在虚拟机ubuntu的实际路径</span></span><br><span class="line">PWD ?= <span class="variable">$(<span class="built_in">shell</span> pwd)</span></span><br><span class="line"><span class="section">all:</span></span><br><span class="line">    make -C <span class="variable">$(KDIR)</span> M=<span class="variable">$(PWD)</span> modules    <span class="comment">#make操作</span></span><br><span class="line"><span class="section">clean:</span></span><br><span class="line">    make -C <span class="variable">$(KDIR)</span> M=<span class="variable">$(PWD)</span> clean    <span class="comment">#make clean操作</span></span><br></pre></td></tr></table></figure>
+
+<p>图 4-5</p>
+<p>代码解释如下：</p>
+<ul>
+<li>第1行设置ARCH变量为arm64</li>
+<li>第2行设置交叉编译器前缀为aarch64-linux-gnu-</li>
+<li>第3行obj-m +&#x3D; &lt;文件&gt;：将指定的文件（需要是以.o结尾）设为编译时以模块形式编译</li>
+<li>第4行是设备树内核的源码路径，请大家根据实际内核路径进行修改。</li>
+<li>第5行是获取当前目录的变量</li>
+<li>第7行是编译make操作，会进入内核源码的路径，然后把当前路径下的代码编译成模块。</li>
+<li>第9行是清除编译文件</li>
+</ul>
+<p>编写完成如下图（图4-6）所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309072016516.jpeg" alt="img"></p>
+<p>图 4-6</p>
+<p>4.3 编译模块</p>
+<p>有了Makefile以后，输入“make”命令就可以编译helloworld驱动模块，如下图（图4-7）所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309072016524.jpeg" alt="img"></p>
+<p>图 4-7</p>
+<p>编译完生成helloworld.ko目标文件就是我们需要的内核模块。内核模块是以ko为后缀名，如下图（图4-8）所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309072016931.jpeg" alt="img"></p>
+<p>图 4-8</p>
+<p>输入“make clean”命令清除编译文件，如下图（图4-9）所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309072016990.jpeg" alt="img"></p>
+<p>图 4-9</p>
+<h1 id="4-4-模块加载与卸载"><a href="#4-4-模块加载与卸载" class="headerlink" title="4.4 模块加载与卸载"></a>4.4 模块加载与卸载</h1><p>有了内核模块以后，我们要如何使用呢？编译驱动有俩种方式，那Linux驱动的运行方式也肯定有俩种。一种就是将驱动编译进内核，这样Linux系统启动后会自动运行程序。第二种就是将驱动编译成模块，在Linux系统启动以后使用“insmod”命令加载驱动模块。</p>
+<p>在上个小节中编译了驱动模块helloworld.ko，在RK3568开发板上通过“insmod helloworld.ko”命令可以加载驱动，在加载驱动模块的时候会执行驱动入口的函数，也就是helloworld程序中的helloworld_init函数，所以可以看到打印出来的字符串信息“helloworld_init”。如下图（图4-10）所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309072016987.jpeg" alt="img"></p>
+<p>图 4-10</p>
+<p>如果要卸载helloworld内核模块，可以通过“rmmod helloworld”命令来卸载驱动模块，同理在卸载驱动模块的时候会执行驱动出口的函数，所以可以看到驱动出口函数打印出来的字符串信息“helloworld_exit”，如下图（图4-11）所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309072016982.jpeg" alt="img"></p>
+<p>图 4-11</p>
+<p>加载驱动模块也可以使用modprobe命令，它比insmod命令更强大，modprobe命令在加载驱动模块的时候，会同时加载该模块依赖的其他模块。比如helloworld.ko依赖before.ko，使用insmod加载的时候，就必须先加载before.ko，然后在加载helloworld.ko才可以加载成功从。但是使用modprobe加载的时候，他会自动分析模块的依赖关系，然后将所有的依赖的模块都加载到内核当中。比较“聪明”。</p>
+<p>同样，在卸载驱动模块的时候，如果模块存在依赖关系，如果使用insmod命令，需要手动卸载依赖的内核模块，但是使用modprobe命令可以自动卸载驱动模块所依赖的其他模块。</p>
+<p>所以，如果驱动模块是以“modprobe helloworld.ko”命令加载的，卸载的时候使用“modprobe -r helloworld.ko”命令卸载。</p>
+<p>但是使用modprobe卸载存在一个问题，如果所依赖的模块被其他模块所使用，比如刚才例子中的before.ko还被其他的模块使用，这时候就不能使用modprobe卸载。所以还是推荐使用rmmod命令来卸载。</p>
+<h1 id="4-5查看模块信息"><a href="#4-5查看模块信息" class="headerlink" title="4.5查看模块信息"></a>4.5查看模块信息</h1><p>在驱动模块加载之后，使用“modinfo helloworld.ko”命令可以获得模块的信息，包括模块作者，模块说明，模块支持的参数等等。</p>
+<p>lsmod 命令可以列出已经载入Linux内核模块，在helloworld驱动加载之后，查看内核中加载的模块，如下（图4-12）所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309072016996.jpeg" alt="img"></p>
+<p>图 4-12</p>
+<p>【最新驱动资料（文档+例程）】</p>
+<p>链接 <a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1M4smUG2vw_hnn0Hye-tkog">https://pan.baidu.com/s/1M4smUG2vw_hnn0Hye-tkog</a></p>
+<p>提取码：hbh6</p>
+<p>【B 站配套视频】</p>
+<p><a target="_blank" rel="noopener" href="https://b23.tv/XqYa6Hm">https://b23.tv/XqYa6Hm</a></p>
+<p>【RK3568 购买链接】</p>
+<p><a target="_blank" rel="noopener" href="https://item.taobao.com/item.htm?spm=a1z10.5-c-s.w4002-2245">https://item.taobao.com/item.htm?spm=a1z10.5-c-s.w4002-2245</a></p>
+<p>2452613.11.2fec74a6elWNeA&amp;id&#x3D;669939423234</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rk3568-%E9%A9%B1%E5%8A%A8/" rel="tag">rk3568 驱动</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-1-3-helloworld-驱动实验"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/09/05/1-3-helloworld-%E9%A9%B1%E5%8A%A8%E5%AE%9E%E9%AA%8C/"
+    >1-3-helloworld 驱动实验</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/09/05/1-3-helloworld-%E9%A9%B1%E5%8A%A8%E5%AE%9E%E9%AA%8C/" class="article-date">
+  <time datetime="2023-09-04T23:59:44.000Z" itemprop="datePublished">2023-09-05</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/rk3568-%E9%A9%B1%E5%8A%A8/">rk3568 驱动</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>在学习C语言或者其他语言的时候，我们通常是打印一句“helloworld”来开启编程世界的大门。学习驱动程序编程亦可以如此，使用helloworld作为我们的第一个驱动程序。</p>
+<p>接下来开始编写第一个驱动程序—helloworld。</p>
+<h1 id="3-1-驱动编写"><a href="#3-1-驱动编写" class="headerlink" title="3.1 驱动编写"></a>3.1 驱动编写</h1><p>本小节来编写一个最简单的驱动——helloworld驱动。helloworld.c如下（图3-1）所示代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;linux/module.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;linux/kernel.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="type">int</span> __init <span class="title function_">helloworld_init</span><span class="params">(<span class="type">void</span>)</span>    <span class="comment">//驱动入口函数</span></span><br><span class="line">&#123;</span><br><span class="line">    printk(KERN_EMERG <span class="string">&quot;helloworld_init\r\n&quot;</span>);<span class="comment">//注意：内核打印用printk而不是printf</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="type">void</span> __exit <span class="title function_">helloworld_exit</span><span class="params">(<span class="type">void</span>)</span>    <span class="comment">//驱动出口函数</span></span><br><span class="line">&#123;</span><br><span class="line">    printk(KERN_EMERG <span class="string">&quot;helloworld_exit\r\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">module_init(helloworld_init);    <span class="comment">//注册入口函数</span></span><br><span class="line">module_exit(helloworld_exit);    <span class="comment">//注册出口函数</span></span><br><span class="line">MODULE_LICENSE(<span class="string">&quot;GPL v2&quot;</span>);    <span class="comment">//同意GPL开源协议</span></span><br><span class="line">MODULE_AUTHOR(<span class="string">&quot;topeet&quot;</span>);    <span class="comment">//作者信息</span></span><br></pre></td></tr></table></figure>
+
+<p>看似非常简单的helloworld驱动代码，却五脏俱全。一个简单的helloworld驱动包含驱动的基本框架。我们继续往下看。</p>
+<h1 id="3-2-驱动的基本框架"><a href="#3-2-驱动的基本框架" class="headerlink" title="3.2 驱动的基本框架"></a>3.2 驱动的基本框架</h1><p>Linux驱动的基本框架主要由模块加载函数，模块卸载函数，模块许可证声明，模块参数，模块导出符号，模块作者信息等几部分组成，其中模块参数，模块导出符号，模块作者信息是可选的部分，也就是可要可不要。剩余部分是必须有的。我们来看一下这几个部分的作用：</p>
+<p>1 模块加载函数</p>
+<p>​	当使用加载驱动模块时，内核会执行模块加载函数，完成模块加载函数中的初始化工作。</p>
+<p>2 模块卸载函数</p>
+<p>​	当卸载某模块时，内核会执行模块卸载函数，完成模块卸载函数中的退出工作。</p>
+<p>3 模块许可证声明</p>
+<p>​	许可证声明描述了内核模块的许可权限，如果不声明模块许可，模块在加载的时候，会收到“内核被污染（kernel tainted）”的警告。可接受的内核模块声明许可包括“GPL”“GPL v2”。</p>
+<p>4 模块参数（可选择）</p>
+<p>​	模块参数是模块被加载的时候可以传递给它的值。</p>
+<p>5 模块导出符号（可选择）</p>
+<p>​	内核模块可以导出的符号，如果导出，其他模块可以使用本模块中的变量或函数。</p>
+<p>6 模块作者信息等说明（可选择）</p>
+<p>上一小节我们说，helloworld驱动麻雀虽小五脏俱全，我们来分析helloworld驱动。通过helloworld代码再来看驱动框架。</p>
+<p>（1）模块加载函数：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">static</span> <span class="type">int</span> __init <span class="title function_">helloworld_init</span><span class="params">(<span class="type">void</span>)</span>    <span class="comment">//驱动入口函数</span></span><br><span class="line">&#123;</span><br><span class="line">    printk(KERN_EMERG <span class="string">&quot;helloworld_init\r\n&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line">module_init(helloworld_init);    <span class="comment">//注册入口函数</span></span><br></pre></td></tr></table></figure>
+
+<p>（2）模块卸载函数：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">static</span> <span class="type">void</span> __exit <span class="title function_">helloworld_exit</span><span class="params">(<span class="type">void</span>)</span>    <span class="comment">//驱动出口函数</span></span><br><span class="line">&#123;</span><br><span class="line">    printk(KERN_EMERG <span class="string">&quot;helloworld_exit\r\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line">module_exit(helloworld_exit);    <span class="comment">//注册出口函数</span></span><br></pre></td></tr></table></figure>
+
+<p>（3）模块许可证声明</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MODULE_LICENSE(<span class="string">&quot;GPL v2&quot;</span>);    <span class="comment">//同意GPL开源协议</span></span><br></pre></td></tr></table></figure>
+
+<p>（4）模块作者信息</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MODULE_AUTHOR(<span class="string">&quot;topeet&quot;</span>);    <span class="comment">//作者信息</span></span><br></pre></td></tr></table></figure>
+
+<p>（5）头文件</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;linux/module.h&gt;</span> <span class="comment">//模块加载函数和卸载函数需要的头文件</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;linux/kernel.h&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<p>通过上面的分析，helloworld驱动是不是包含了驱动框架的所有必要的部分呢。因此helloworld驱动我们可以看作是驱动代码的模板。任何一个驱动代码都用它作为基础来编写实现。同学们要将他记忆下来！</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rk3568-%E9%A9%B1%E5%8A%A8/" rel="tag">rk3568 驱动</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
   id="post-1-2-你好内核源码"
   class="article article-type-post"
   itemscope
@@ -922,315 +1261,6 @@
 
 <p>在上述示例中，假设libct.so是动态库文件，myfunc是动态库中的函数名。通过dlopen函数打开动态库，然后使用dlsym函数获取myfunc函数的地址，并将其赋值给funcp指针，以便后续调用该函数。</p>
 <p>需要注意的是，示例中的类型转换是为了将dlsym返回的地址转换为函数指针类型，以便正确调用函数。根据实际情况，类型转换的方式可能会有所不同。</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%BC%96%E8%AF%91%E3%80%81%E9%93%BE%E6%8E%A5%E5%92%8C%E8%BF%90%E8%A1%8C/" rel="tag">程序的编译、链接和运行</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-3-16-动态链接-3-共享库"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/09/05/3-16-%E5%8A%A8%E6%80%81%E9%93%BE%E6%8E%A5-3-%E5%85%B1%E4%BA%AB%E5%BA%93/"
-    >3.16-动态链接(3)-共享库</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/09/05/3-16-%E5%8A%A8%E6%80%81%E9%93%BE%E6%8E%A5-3-%E5%85%B1%E4%BA%AB%E5%BA%93/" class="article-date">
-  <time datetime="2023-09-04T23:47:15.000Z" itemprop="datePublished">2023-09-05</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h1 id="3-15-1-共享库的命名"><a href="#3-15-1-共享库的命名" class="headerlink" title="3.15.1 共享库的命名"></a>3.15.1 共享库的命名</h1><p>在Linux环境下，共享库的命名方式通常遵循以下格式：libname.so.X.Z。</p>
-<ul>
-<li>libname：表示库的名称，通常由开发者指定。</li>
-<li>X：主版本号，表示库的重大升级。当主版本号发生变化时，表示库的接口发生了不兼容的变化，可能需要重新编译依赖该库的程序才能正常运行。</li>
-<li>Z：发布版本号，表示库的发布版本。当发布版本号发生变化时，通常表示进行了错误修正、性能改进等，但没有增加新的接口，原有接口保持不变。</li>
-</ul>
-<p>例如，假设有一个名为libexample.so的共享库，其版本号为1.2.3，则库文件的命名可能是libexample.so.1.2.3。</p>
-<p>次版本号（Y）在库的命名中没有直接体现，它通常用于表示库的增量升级，即增加一些新的接口符号，而原有的接口符号保持不变。次版本号的变化通常不会破坏与之前版本的兼容性，因此使用高版本的库通常可以向后兼容低版本的库。</p>
-<h1 id="3-15-2-共享库软链接"><a href="#3-15-2-共享库软链接" class="headerlink" title="3.15.2 共享库软链接"></a>3.15.2 共享库软链接</h1><p>软链接（Symbolic link）是一个特殊类型的文件，它是一个指向另一个文件或目录的引用。在Linux系统中，软链接可以用来记录共享库的依赖关系，并且通常用于共享库的SO-NAME命名机制。</p>
-<p>SO-NAME是共享库的一个命名约定，用于标识共享库的接口。它通常通过去除共享库文件名中的次版本号和发布版本号来得到。例如，如果一个共享库文件的名称是libexample.so.1.2.3，那么它的SO-NAME可能是libexample.so.1。</p>
-<p>系统会在共享库文件所在的目录下创建一个与SO-NAME同名的软链接，该软链接指向具有相同主版本号的共享库文件中最新的次版本号和发布版本号。这样，依赖某个共享库的模块可以使用SO-NAME来引用该共享库，而不需要指定具体的版本号。这种方式有助于系统升级，因为只要保证新版本的共享库兼容旧版本的接口，依赖该库的模块就可以继续正常工作，无需修改代码。</p>
-<p>使用SO-NAME和软链接的好处是，它提供了一种稳定的共享库接口，并简化了依赖管理。通过使用SO-NAME作为共享库的标识，系统可以方便地管理共享库的版本，并且可以在不破坏接口兼容性的情况下进行升级和替换。同时，依赖该共享库的模块可以通过引用SO-NAME来保持与共享库的连接，而不需要关注具体的版本号，从而提高了系统的灵活性和可维护性。</p>
-<h1 id="3-15-3-共享库的路径"><a href="#3-15-3-共享库的路径" class="headerlink" title="3.15.3 共享库的路径"></a>3.15.3 共享库的路径</h1><p>在Linux系统中，共享库通常存放在以下三个主要路径：</p>
-<ol>
-<li>&#x2F;lib：该目录存放系统最关键和基础的共享库，例如动态链接器、C库、数学库等。这些库主要是用于&#x2F;bin、&#x2F;sbin下的程序运行以及系统启动所需要的库。这些共享库对于系统的正常运行非常重要。</li>
-<li>&#x2F;usr&#x2F;lib：该目录存放非系统运行所需要的关键性共享库。这些库通常是开发过程中使用的一些共享库，包括开发工具链、编译器等。这些库一般不会被用户的程序或者Shell脚本直接使用，而是被开发工具链和编译器等系统工具所使用。</li>
-<li>&#x2F;usr&#x2F;local&#x2F;lib：该目录主要存放第三方应用程序所需要的一些库。当用户安装自己编译或安装的软件时，这些软件通常会将其依赖的共享库安装到&#x2F;usr&#x2F;local&#x2F;lib目录下。这样做的好处是，可以将用户自定义的库与系统自带的库分开管理，避免冲突。</li>
-</ol>
-<h1 id="3-15-4-库的查找过程"><a href="#3-15-4-库的查找过程" class="headerlink" title="3.15.4 库的查找过程"></a>3.15.4 库的查找过程</h1><p>在Linux系统中，库的查找过程由动态链接器（dynamic linker）负责。以下是库的查找过程的基本步骤：</p>
-<ol>
-<li><p>ELF文件加载：当一个可执行的ELF文件被执行时，动态链接器（一般是&#x2F;lib&#x2F;ld-linux.so.x）会被加载并启动。</p>
-</li>
-<li><p>依赖关系查找：动态链接器会解析ELF文件的.dynamic段，查找该文件所依赖的共享库。</p>
-</li>
-<li><p>路径解析：根据共享库的路径信息，动态链接器会按照一定的顺序进行路径解析，以找到共享库文件。解析顺序如下：</p>
-<ul>
-<li>若路径是绝对路径，则直接到该绝对路径下查找共享库文件。</li>
-<li>若路径是相对路径，则按照一定的顺序在以下目录中查找共享库文件：<ul>
-<li>&#x2F;lib</li>
-<li>&#x2F;usr&#x2F;lib</li>
-<li>根据&#x2F;etc&#x2F;ld.so.conf配置文件中指定的目录</li>
-</ul>
-</li>
-</ul>
-<p>库目录缓存：为了加快库的查找速度，避免每次都进行路径解析，系统可以使用ldconfig命令生成一个缓存文件&#x2F;etc&#x2F;ld.so.cache。该缓存文件记录了系统中可用的共享库路径及其对应的共享库文件。动态链接器在查找库时会首先检查该缓存文件，并根据其中的路径信息进行查找。</p>
-<ul>
-<li>当新增、删除或更新共享库路径时，需要更新缓存文件，可以使用ldconfig命令进行更新。</li>
-</ul>
-</li>
-</ol>
-<h1 id="3-15-5-LD-LIBRARY-PATH"><a href="#3-15-5-LD-LIBRARY-PATH" class="headerlink" title="3.15.5 LD_LIBRARY_PATH"></a>3.15.5 LD_LIBRARY_PATH</h1><p>LD_LIBRARY_PATH是一个环境变量，它由若干个路径组成，每个路径之间用冒号”:”进行分隔。该环境变量用于临时改变程序运行时的共享库查找路径。</p>
-<p>当一个程序在运行过程中需要加载共享库时，系统会按照一定的规则进行共享库的查找。这些规则包括默认的系统库路径、配置文件中指定的路径等。然而，通过设置LD_LIBRARY_PATH环境变量，可以临时修改共享库的查找路径，优先使用LD_LIBRARY_PATH中指定的路径。</p>
-<p>当LD_LIBRARY_PATH环境变量被设置后，程序在加载共享库时会首先在LD_LIBRARY_PATH指定的路径中查找共享库文件，而不是按照默认的规则进行查找。如果找到了匹配的共享库文件，程序会使用该路径下的共享库进行链接和加载。</p>
-<p>这个特性可以用于临时改变程序依赖的共享库查找路径，而不影响系统中的其他应用程序。一旦程序运行结束或者LD_LIBRARY_PATH环境变量被重置，系统将恢复到默认的共享库查找路径。</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%BC%96%E8%AF%91%E3%80%81%E9%93%BE%E6%8E%A5%E5%92%8C%E8%BF%90%E8%A1%8C/" rel="tag">程序的编译、链接和运行</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-3-15-动态链接-2-全局符号表GOT"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/09/05/3-15-%E5%8A%A8%E6%80%81%E9%93%BE%E6%8E%A5-2-%E5%85%A8%E5%B1%80%E7%AC%A6%E5%8F%B7%E8%A1%A8GOT/"
-    >3.15-动态链接(2)-全局符号表GOT</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/09/05/3-15-%E5%8A%A8%E6%80%81%E9%93%BE%E6%8E%A5-2-%E5%85%A8%E5%B1%80%E7%AC%A6%E5%8F%B7%E8%A1%A8GOT/" class="article-date">
-  <time datetime="2023-09-04T23:47:13.000Z" itemprop="datePublished">2023-09-05</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h1 id="3-15-1-表和结构"><a href="#3-15-1-表和结构" class="headerlink" title="3.15.1 表和结构"></a>3.15.1 表和结构</h1><p>下面是这些表和结构的简要介绍：</p>
-<ol>
-<li>.dynamic段：.dynamic段是一个特殊的段，它包含了动态链接器所需的信息。这些信息包括动态链接库的依赖关系、重定位表的位置、初始化函数等。动态链接器在加载可执行文件时会解析.dynamic段以获取这些信息。</li>
-<li>动态符号表 (.dynsym)：动态符号表是一个表格，它记录了可执行文件或共享库中定义的所有动态符号。每个动态符号都有一个唯一的符号索引，可以用来在运行时进行符号解析和链接。动态符号表中的每个条目包含了符号名称、符号类型和符号值等信息。</li>
-<li>动态链接重定位表 (PLT)：动态链接重定位表是一个重要的数据结构，用于处理在运行时动态链接的符号重定位。它包含了跳转指令和符号解析逻辑，用于在首次调用某个符号时进行符号解析和重定位。PLT中的每个条目包含了一个跳转指令和一个GOT表项的索引。</li>
-<li>全局偏移表 (GOT)：全局偏移表是一个表格，用于存储全局符号的地址。GOT表的每个条目对应一个全局符号，它可以被动态链接器用来解析外部模块中的符号地址。GOT表的条目可能最初包含一个间接跳转指令，当符号地址被解析后，会被更新为具体的地址。</li>
-</ol>
-<h1 id="3-15-2-动态链接器"><a href="#3-15-2-动态链接器" class="headerlink" title="3.15.2 动态链接器"></a>3.15.2 动态链接器</h1><p>.interp：.interp是一个特殊的段，它包含了动态链接器的路径。当可执行文件被加载时，操作系统会使用.interp段中指定的路径来找到并加载动态链接器。这样可执行文件就能够正确地进行动态链接。</p>
-<p>动态链接器是负责在程序运行时加载和链接共享库的系统组件。它负责解析程序的依赖关系，加载所需的共享库，并将其链接到程序的地址空间中。</p>
-<p>.interp段是可执行文件中的一个特殊段，用于存放动态链接器的路径。该段中存储了一个字符串，指明了动态链接器的路径。当可执行文件被加载时，操作系统会根据.interp段中指定的路径找到并加载相应的动态链接器。</p>
-<p>要查看.interp段的内容，可以使用命令 <code>readelf -p .interp a.out</code>（其中 <code>a.out</code> 是可执行文件的名称）。该命令会显示.interp段的内容，即动态链接器的路径。</p>
-<p>动态链接器本质上也是一个共享库，它在程序运行之前首先需要进行自举（bootstrap），即对自身进行重定位。动态链接器通常由操作系统提供，并且在C标准库中实现，是GNU C库（Glibc）的一部分。Glibc是一个常用的C标准库实现，它包含了对动态链接器的实现。</p>
-<p>通过动态链接器的工作，程序能够在运行时动态地加载和链接共享库，实现了模块化、可扩展和灵活的程序设计。动态链接器的存在使得共享库的使用更加方便，并提供了许多动态链接相关的功能，如符号解析、重定位和依赖管理。</p>
-<h1 id="3-15-3-dynamic段"><a href="#3-15-3-dynamic段" class="headerlink" title="3.15.3 dynamic段"></a>3.15.3 dynamic段</h1><p>.dynamic段是可执行文件或共享库中的一个特殊段，它保存了动态链接器在加载和链接时所需的基本信息。这些信息包括：</p>
-<ul>
-<li>依赖的共享库：.dynamic段记录了程序或共享库所依赖的其他共享库的名称，使得动态链接器可以在加载时确定这些依赖关系，并加载相应的共享库。</li>
-<li>动态链接符号表位置：.dynamic段指示了动态链接符号表的位置，该符号表包含了程序或共享库中定义的所有动态符号。动态链接器在加载时使用这个符号表来进行符号解析和链接。</li>
-<li>动态链接字符串表的位置：.dynamic段也记录了动态链接字符串表的位置，这个字符串表包含了与动态链接相关的字符串，例如符号名称、共享库名称等。动态链接器使用这个字符串表来解析和处理动态链接相关的字符串。</li>
-<li>动态链接重定位表位置：.dynamic段指定了动态链接重定位表的位置，这个重定位表用于在运行时进行动态链接的符号重定位。它包含了需要进行重定位的符号及其相关信息，使得动态链接器可以在加载时进行符号重定位操作。</li>
-<li>共享库初始化代码位置：.dynamic段还包含了共享库初始化代码的位置信息，这些代码在共享库加载时被执行，用于执行一些初始化操作。</li>
-</ul>
-<p>.dynamic段的内容由多个结构体组成，这些结构体的定义可以在 <code>/usr/include/elf.h</code> 中找到。通过使用命令 <code>readelf -d xx.so</code>（其中 <code>xx.so</code> 是共享库文件的名称），可以查看.dynamic段的内容。这个命令会显示.dynamic段中的结构体信息，包括依赖的共享库、符号表位置、字符串表位置、重定位表位置等相关信息。</p>
-<h1 id="3-15-4-动态链接符号表"><a href="#3-15-4-动态链接符号表" class="headerlink" title="3.15.4 动态链接符号表"></a>3.15.4 动态链接符号表</h1><p>动态链接符号表是在动态链接过程中使用的符号表，它与静态链接符号表有一些区别。下面是关于动态链接符号表的一些说明：</p>
-<ul>
-<li>动态链接符号表（.dynsym）：动态链接符号表是一个特殊的符号表，它只保存了与动态链接相关的符号信息，而不保存所有的符号定义和引用。它包含了程序或共享库中定义的所有动态符号，如函数、变量等。每个符号表条目包含了符号的名称、地址、大小、绑定属性等信息。</li>
-<li>动态链接字符串表（.dynstr）：动态链接字符串表是动态链接符号表的辅助表，用于存储符号的名称。静态链接的符号表中的符号名称通常直接存储在符号表本身，但动态链接符号表中的符号名称存储在动态链接字符串表中。符号表（.dynsym）中的每个条目通过索引与字符串表（.dynstr）中的对应字符串关联起来。</li>
-<li>符号哈希表：符号哈希表是动态链接文件中的一个段，用于提高程序在运行时查找符号的速度。它通过哈希算法将符号的名称映射到符号表中的条目，从而加快符号查找的效率。符号哈希表在动态链接过程中起到加速符号解析和查找的作用。</li>
-</ul>
-<p>要查看动态链接符号表和字符串表的内容，可以使用命令 <code>readelf -s a.out</code>（对于可执行文件）或 <code>readelf -sD xx.so</code>（对于共享库）来查看。这些命令会显示符号表中的条目，包括符号的名称、地址、大小、绑定属性等信息。通过对比符号表（.dynsym）和字符串表（.dynstr）中的索引，可以关联符号的名称和其他属性。</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%BC%96%E8%AF%91%E3%80%81%E9%93%BE%E6%8E%A5%E5%92%8C%E8%BF%90%E8%A1%8C/" rel="tag">程序的编译、链接和运行</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-3-14-动态链接-1-与位置无关的代码"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/09/05/3-14-%E5%8A%A8%E6%80%81%E9%93%BE%E6%8E%A5-1-%E4%B8%8E%E4%BD%8D%E7%BD%AE%E6%97%A0%E5%85%B3%E7%9A%84%E4%BB%A3%E7%A0%81/"
-    >3.14-动态链接(1)-与位置无关的代码</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/09/05/3-14-%E5%8A%A8%E6%80%81%E9%93%BE%E6%8E%A5-1-%E4%B8%8E%E4%BD%8D%E7%BD%AE%E6%97%A0%E5%85%B3%E7%9A%84%E4%BB%A3%E7%A0%81/" class="article-date">
-  <time datetime="2023-09-04T23:47:12.000Z" itemprop="datePublished">2023-09-05</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h1 id="3-14-1-静态链接的缺点"><a href="#3-14-1-静态链接的缺点" class="headerlink" title="3.14.1 静态链接的缺点"></a>3.14.1 静态链接的缺点</h1><p>静态链接的确存在一些缺点，包括：</p>
-<ol>
-<li>可执行文件体积较大：由于静态链接将所有需要的代码和库函数都包含在可执行文件中，导致可执行文件的体积较大。如果多个程序都使用相同的静态库，会造成冗余的存储空间浪费。</li>
-<li>内存占用较大：静态链接的可执行文件在运行时需要将所有的代码和数据加载到内存中。这意味着即使程序只用到了部分功能，也需要将整个程序加载到内存中，增加了内存占用的开销。</li>
-<li>内存配置限制：对于内存配置较小的系统，静态链接的可执行文件可能会占用过多的内存，导致无法正常加载和运行。这是由于静态链接将所有代码和数据都打包在可执行文件中，无法根据系统的实际内存情况进行动态调整。</li>
-<li>更新困难：当静态库或依赖的库发生更新时，需要重新编译和链接整个程序才能应用更新。这增加了更新和维护的复杂性，特别是在大型项目或多个项目共享同一静态库时。</li>
-</ol>
-<p>考虑到上述缺点，有些情况下可以选择使用动态链接库（共享库）。动态链接库在运行时被动态加载，可多个程序共享，减小了可执行文件的体积和内存占用。动态链接库的更新和维护也更加灵活，可以在不重新编译和链接整个程序的情况下进行库的更新。</p>
-<h1 id="3-14-2-动态链接"><a href="#3-14-2-动态链接" class="headerlink" title="3.14.2 动态链接"></a>3.14.2 动态链接</h1><p>动态链接与静态链接不同，它推迟到程序运行时进行，而不是在链接过程中完成。在动态链接中，目标文件被编译成动态链接库（也称为共享库），而不是静态库。这些动态链接库在程序运行时被加载到内存中，并进行重定位。</p>
-<p>动态链接的好处包括：</p>
-<ol>
-<li>节省内存：由于动态链接库是在运行时加载的，多个程序可以共享同一个动态链接库，避免了静态链接中的代码冗余和存储空间浪费。这样可以节省内存，并允许运行更大规模的程序。</li>
-<li>简化升级：由于动态链接库是独立于可执行文件的，当库需要升级时，只需替换动态链接库文件，而不需要重新编译和链接整个程序。这使得库的升级更加方便和灵活，减少了对程序的影响。</li>
-<li>提供更好的可维护性：动态链接库可以被多个程序共享，这意味着库的更新和维护只需在一个地方进行。这样有助于提高代码的可维护性，减少了重复的工作和潜在的错误。</li>
-</ol>
-<h1 id="3-14-3-程序执行过程"><a href="#3-14-3-程序执行过程" class="headerlink" title="3.14.3 程序执行过程"></a>3.14.3 程序执行过程</h1><p>在Linux命令行下运行一个程序的基本过程如下：</p>
-<ol>
-<li>操作系统给程序开启一个进程：当您在命令行中执行程序时，操作系统会为该程序创建一个新的进程，该进程将作为程序的执行环境。</li>
-<li>动态链接器被映射到程序地址空间：动态链接器（通常是ld.so或ld-linux.so）是负责动态链接的系统组件。在程序启动时，操作系统将动态链接器映射到程序的地址空间中。</li>
-<li>操作系统将控制权交给动态链接器：操作系统将控制权传递给动态链接器，使其可以开始执行动态链接的任务。</li>
-<li>动态链接器解析未确定符号和动态库链接：动态链接器首先会解析可执行文件中的未确定符号，这些符号是指在编译时无法确定其地址的符号（如函数或变量）。动态链接器会查找并加载包含这些符号定义的动态库。</li>
-<li>加载动态库并进行重定位：动态链接器会加载需要链接的动态库，并对这些库进行重定位操作。重定位是将动态库中的符号引用与实际的符号定义进行匹配，以确保程序能够正确地访问所需的函数和数据。</li>
-<li>动态链接器将控制权交给可执行程序：一旦动态链接器完成了解析和重定位的工作，它将控制权交还给可执行程序。此时，可执行程序中的所有符号引用都已经解析完毕，并且程序可以开始运行。</li>
-<li>可执行程序开始执行：控制权回到可执行程序，它会按照程序的逻辑开始执行，调用所需的函数和访问数据。</li>
-</ol>
-<p>在静态编译的情况下，可执行文件中包含了所有需要的代码和库函数，因此它是独立的、自包含的。以下是关于静态编译可执行文件和动态链接库的一些说明：</p>
-<ol>
-<li>可执行文件的加载和运行地址：<ul>
-<li>静态编译的可执行文件在加载到进程地址空间时，通常会被加载到一个固定的运行地址。这是因为在编译和链接时，所有的符号引用已经被解析并确定了其最终的地址。</li>
-<li>链接地址和运行地址是相同的，因此可执行文件在运行时可以直接通过固定的地址访问到所需的函数和数据。</li>
-</ul>
-</li>
-<li>动态链接库的加载和运行地址：<ul>
-<li>动态链接库（共享库）在加载到内存中时，其加载地址是由操作系统动态分配的。加载器根据当前进程的地址空间空闲情况，选择一个适当的地址来加载动态库。</li>
-<li>动态库被装载到内存中的地址可以是任意的，并不需要与其他库或可执行文件的地址相同。这是因为动态库的地址信息会被动态链接器处理和重定位，以确保库中的符号引用与实际的符号定义相匹配。</li>
-</ul>
-</li>
-</ol>
-<p>动态链接库被装载到内存中的地址可变的主要原因是为了避免不同进程之间的冲突。由于多个进程可以同时运行，每个进程都有自己的地址空间，因此需要动态分配适当的地址来加载动态库，以避免地址冲突和重复使用相同的地址。</p>
-<h1 id="3-14-4-装载时重定位"><a href="#3-14-4-装载时重定位" class="headerlink" title="3.14.4 装载时重定位"></a>3.14.4 装载时重定位</h1><p>装载时重定位是动态链接过程中的一项关键任务，它的基本思想是将对绝对地址的引用推迟到运行时进行解析和重定位。以下是装载时重定位的基本原理：</p>
-<ol>
-<li>推迟地址解析和重定位：在可执行文件中，对于动态库中的函数或变量的引用通常是使用绝对地址进行表示的。而在静态链接时，这些绝对地址是无法确定的，因为动态库的加载地址是在运行时动态分配的。因此，装载时重定位的基本思想是将对绝对地址的引用推迟到运行时去解析和重定位。</li>
-<li>动态库加载和地址确定：当动态库被加载到内存中时，操作系统会为其分配一段合适的地址空间，并将库中的函数和变量映射到该地址空间中。此时，动态库中的每个符号都有了确定的地址。</li>
-<li>可执行文件的重定位操作：一旦动态库的地址确定，装载时重定位会将可执行文件中对动态库中函数或变量的绝对地址引用进行重定位操作。具体而言，它会将绝对地址替换为实际的动态库中的地址，以确保可执行文件能够正确地访问所需的函数和变量。</li>
-</ol>
-<p>实现装载时重定位的方法有多种，编译器如GCC在生成共享动态链接库时可以使用<code>--shared</code>参数。这样生成的库在运行时会由动态链接器进行加载，并进行相应的地址解析和重定位操作。</p>
-<p>通过推迟地址解析和重定位到运行时，装载时重定位实现了动态链接的灵活性和可扩展性。它允许不同的进程在加载同一个动态库时，根据其实际地址空间的情况进行地址分配和重定位，确保了符号的正确链接和访问。</p>
-<h1 id="3-14-5-命令"><a href="#3-14-5-命令" class="headerlink" title="3.14.5 命令"></a>3.14.5 命令</h1><p>使用ldd命令可以查看一个可执行文件所需要的动态链接库</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309060823892.png" alt="image-20230906082331845"></p>
-<h1 id="3-14-6-与地址无关的代码"><a href="#3-14-6-与地址无关的代码" class="headerlink" title="3.14.6 与地址无关的代码"></a>3.14.6 与地址无关的代码</h1><p>地址无关代码（Position-Independent Code，PIC）是一种技术，它使得代码可以在不进行重定位的情况下在不同的地址空间中执行。以下是地址无关代码的一些特点和实现方式：</p>
-<p>特点：</p>
-<ol>
-<li>可以在任意地址加载和执行：地址无关代码可以在内存中的任意地址加载，并且无需进行重定位操作，就可以正确地执行。</li>
-<li>与地址无关的指令：地址无关代码将需要修改的部分指令与数据分离，数据可以与需要修改的指令放在一起，而其余指令则不依赖于具体的地址，实现了与地址无关的特性。</li>
-<li>被多个进程共享：地址无关代码可以被多个进程共享，每个进程都有自己的数据和需要修改的指令的副本，互不影响。</li>
-</ol>
-<p>实现方式：</p>
-<ol>
-<li>编译时生成位置无关代码：在编译阶段，可以使用编译器的参数来生成位置无关代码。对于GCC编译器，可以使用<code>-fPIC</code>参数来生成位置无关代码的目标文件。例如，使用命令<code>gcc -fPIC -c main.c</code>可以生成一个位置无关的目标文件。</li>
-<li>使用相对寻址和间接寻址：地址无关代码使用相对寻址和间接寻址来访问数据和需要修改的指令。相对寻址是指使用相对于当前指令的偏移量来访问数据，而不是使用绝对地址。间接寻址则是通过间接引用来访问数据，而不是直接使用数据的地址。</li>
-</ol>
-<p>通过以上的实现方式，地址无关代码可以实现在不同的地址空间中加载和执行，而无需进行重定位操作。这使得地址无关代码可以被多个进程共享，并且具有较高的灵活性和可移植性。</p>
-<h1 id="3-14-5-模块内部相对寻址"><a href="#3-14-5-模块内部相对寻址" class="headerlink" title="3.14.5 模块内部相对寻址"></a>3.14.5 模块内部相对寻址</h1><p>ARM相对寻址是一种使用PC作为基址，并将指令中的地址码段作为偏移量的寻址方式。通过将PC和偏移量相加，可以得到操作数的有效地址。这种寻址方式常见于ARM汇编语言中的B&#x2F;BL和ADR&#x2F;ADRL指令。</p>
-<p>例如，考虑以下示例代码：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">B LOOP</span><br><span class="line">.LOOP MOV R0, #1</span><br><span class="line">MOV R1, R0</span><br></pre></td></tr></table></figure>
-
-<p>在这个例子中，B LOOP指令会跳转到标签LOOP处执行。相当于使用相对寻址方式进行跳转。</p>
-<p>相对寻址的等效手动指令是：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ADD PC, PC, #OFFSET</span><br></pre></td></tr></table></figure>
-
-<p>其中OFFSET是B LOOP指令地址与LOOP标签地址之间的偏移量。B指令的前后跳转范围是[0, 32M]。</p>
-<p>通过这种相对寻址方式，可以将跳转目标限制在指令附近的相对范围内，而不是使用绝对地址。这样可以增加代码的灵活性和可移植性。</p>
-<h1 id="3-14-6-模块外部GOT表"><a href="#3-14-6-模块外部GOT表" class="headerlink" title="3.14.6 模块外部GOT表"></a>3.14.6 模块外部GOT表</h1><p>动态链接的核心GOT表问题是如何处理引用外部模块的符号地址无关。当一个模块需要引用其他模块中定义的符号（函数、变量等）时，如何确保在运行时能够正确找到这些符号的地址是一个关键问题。</p>
-<p>动态链接的核心思想是使用全局偏移表（Global Offset Table，GOT）来解决这个问题。在链接时，被引用的外部模块的符号地址被存储在GOT中。</p>
-<p>具体而言，当一个模块需要引用外部模块的符号时，它并不直接使用符号的地址，而是通过查找GOT表来间接获取符号的地址。GOT表中的每个表项对应一个被引用的符号，存储了该符号的地址或者加载该符号地址的指令。</p>
-<p>在链接时，GOT表的位置已经确定，因此在运行时可以通过GOT表来获取外部符号的地址，而不需要硬编码具体的地址。</p>
-<p>使用GOT表的好处是，它使得模块间的符号引用变得独立于具体的内存布局，从而增加了模块的可移植性和灵活性。当外部模块的地址发生变化时，只需要更新GOT表中对应的表项即可，而不需要修改引用该符号的模</p>
  
       <!-- reward -->
       

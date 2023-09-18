@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2023-09-15T23:58:19.710Z</updated>
+  <updated>2023-09-18T14:45:53.141Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,81 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>9-1 在家学习记录</title>
+    <link href="http://example.com/2023/09/18/9-1-%E5%9C%A8%E5%AE%B6%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"/>
+    <id>http://example.com/2023/09/18/9-1-%E5%9C%A8%E5%AE%B6%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/</id>
+    <published>2023-09-18T13:50:14.000Z</published>
+    <updated>2023-09-18T14:45:53.141Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;&#92;assets&#92;css&#92;APlayer.min.css&quot;&gt;&lt;script src=&quot;&#92;assets&#92;js&#92;APlayer.min.js&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="在家学习记录" scheme="http://example.com/categories/%E5%9C%A8%E5%AE%B6%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"/>
+    
+    
+    <category term="在家学习记录" scheme="http://example.com/tags/%E5%9C%A8%E5%AE%B6%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>0-14 香橙派文件系统最终定位</title>
+    <link href="http://example.com/2023/09/17/0-14-%E9%A6%99%E6%A9%99%E6%B4%BE%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9C%80%E7%BB%88%E5%AE%9A%E4%BD%8D/"/>
+    <id>http://example.com/2023/09/17/0-14-%E9%A6%99%E6%A9%99%E6%B4%BE%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9C%80%E7%BB%88%E5%AE%9A%E4%BD%8D/</id>
+    <published>2023-09-17T11:02:33.000Z</published>
+    <updated>2023-09-17T11:15:26.884Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;&#92;assets&#92;css&#92;APlayer.min.css&quot;&gt;&lt;script src=&quot;&#92;assets&#92;js&#92;APlayer.min.js&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="香橙派构建脚本分析" scheme="http://example.com/categories/%E9%A6%99%E6%A9%99%E6%B4%BE%E6%9E%84%E5%BB%BA%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/"/>
+    
+    
+    <category term="瑞芯微脚本分析" scheme="http://example.com/tags/%E7%91%9E%E8%8A%AF%E5%BE%AE%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>0-13 香橙派文件系统构建脚本分析</title>
+    <link href="http://example.com/2023/09/17/0-13-%E9%A6%99%E6%A9%99%E6%B4%BE%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%84%E5%BB%BA%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/"/>
+    <id>http://example.com/2023/09/17/0-13-%E9%A6%99%E6%A9%99%E6%B4%BE%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%84%E5%BB%BA%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/</id>
+    <published>2023-09-17T07:01:21.000Z</published>
+    <updated>2023-09-17T10:53:24.540Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;&#92;assets&#92;css&#92;APlayer.min.css&quot;&gt;&lt;script src=&quot;&#92;assets&#92;js&#92;APlayer.min.js&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="香橙派构建脚本分析" scheme="http://example.com/categories/%E9%A6%99%E6%A9%99%E6%B4%BE%E6%9E%84%E5%BB%BA%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/"/>
+    
+    
+    <category term="瑞芯微脚本分析" scheme="http://example.com/tags/%E7%91%9E%E8%8A%AF%E5%BE%AE%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/"/>
+    
+  </entry>
   
   <entry>
     <title>0-0-4 clash for windows 使用</title>
@@ -46,7 +121,7 @@
     <link href="http://example.com/2023/09/15/10-1-rk3588-yolov5%E9%83%A8%E7%BD%B2%E6%8E%A8%E7%90%86%E5%86%92%E7%83%9F%E6%B5%8B%E8%AF%95/"/>
     <id>http://example.com/2023/09/15/10-1-rk3588-yolov5%E9%83%A8%E7%BD%B2%E6%8E%A8%E7%90%86%E5%86%92%E7%83%9F%E6%B5%8B%E8%AF%95/</id>
     <published>2023-09-15T13:18:07.000Z</published>
-    <updated>2023-09-16T00:06:16.505Z</updated>
+    <updated>2023-09-16T15:37:41.423Z</updated>
     
     
       
@@ -418,81 +493,6 @@
     <id>http://example.com/2023/09/11/8-7-%E6%A8%A1%E5%9D%97%E7%9A%84out-of-tree%E7%BC%96%E8%AF%91/</id>
     <published>2023-09-11T12:45:07.000Z</published>
     <updated>2023-09-11T12:51:23.043Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;&#92;assets&#92;css&#92;APlayer.min.css&quot;&gt;&lt;script src=&quot;&#92;assets&#92;js&#92;APlayer.min.js&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="内核编程" scheme="http://example.com/categories/%E5%86%85%E6%A0%B8%E7%BC%96%E7%A8%8B/"/>
-    
-    
-    <category term="模块机制" scheme="http://example.com/tags/%E6%A8%A1%E5%9D%97%E6%9C%BA%E5%88%B6/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>8-6 将模块编译进内核</title>
-    <link href="http://example.com/2023/09/11/8-6-%E5%B0%86%E6%A8%A1%E5%9D%97%E7%BC%96%E8%AF%91%E8%BF%9B%E5%86%85%E6%A0%B8/"/>
-    <id>http://example.com/2023/09/11/8-6-%E5%B0%86%E6%A8%A1%E5%9D%97%E7%BC%96%E8%AF%91%E8%BF%9B%E5%86%85%E6%A0%B8/</id>
-    <published>2023-09-11T12:45:06.000Z</published>
-    <updated>2023-09-11T12:51:21.171Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;&#92;assets&#92;css&#92;APlayer.min.css&quot;&gt;&lt;script src=&quot;&#92;assets&#92;js&#92;APlayer.min.js&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="内核编程" scheme="http://example.com/categories/%E5%86%85%E6%A0%B8%E7%BC%96%E7%A8%8B/"/>
-    
-    
-    <category term="模块机制" scheme="http://example.com/tags/%E6%A8%A1%E5%9D%97%E6%9C%BA%E5%88%B6/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>8-5 模块签名机制</title>
-    <link href="http://example.com/2023/09/11/8-5-%E6%A8%A1%E5%9D%97%E7%AD%BE%E5%90%8D%E6%9C%BA%E5%88%B6/"/>
-    <id>http://example.com/2023/09/11/8-5-%E6%A8%A1%E5%9D%97%E7%AD%BE%E5%90%8D%E6%9C%BA%E5%88%B6/</id>
-    <published>2023-09-11T12:45:04.000Z</published>
-    <updated>2023-09-11T12:51:19.593Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;&#92;assets&#92;css&#92;APlayer.min.css&quot;&gt;&lt;script src=&quot;&#92;assets&#92;js&#92;APlayer.min.js&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="内核编程" scheme="http://example.com/categories/%E5%86%85%E6%A0%B8%E7%BC%96%E7%A8%8B/"/>
-    
-    
-    <category term="模块机制" scheme="http://example.com/tags/%E6%A8%A1%E5%9D%97%E6%9C%BA%E5%88%B6/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>8-4 内核污染（kernel tainted）</title>
-    <link href="http://example.com/2023/09/11/8-4-%E5%86%85%E6%A0%B8%E6%B1%A1%E6%9F%93%EF%BC%88kernel-tainted%EF%BC%89/"/>
-    <id>http://example.com/2023/09/11/8-4-%E5%86%85%E6%A0%B8%E6%B1%A1%E6%9F%93%EF%BC%88kernel-tainted%EF%BC%89/</id>
-    <published>2023-09-11T12:45:03.000Z</published>
-    <updated>2023-09-11T12:51:18.144Z</updated>
     
     
       

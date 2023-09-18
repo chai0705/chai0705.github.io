@@ -160,6 +160,204 @@
     
     
     <article
+  id="post-5-19-内建函数：-builtin-expect"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/09/07/5-19-%E5%86%85%E5%BB%BA%E5%87%BD%E6%95%B0%EF%BC%9A-builtin-expect/"
+    >5.19 内建函数：__builtin_expect</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/09/07/5-19-%E5%86%85%E5%BB%BA%E5%87%BD%E6%95%B0%EF%BC%9A-builtin-expect/" class="article-date">
+  <time datetime="2023-09-07T13:14:31.000Z" itemprop="datePublished">2023-09-07</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p><code>__builtin_expect</code> 是一个内建函数，用于提示编译器表达式的预期结果。它的使用方法如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">__builtin_expect (exp, c)</span><br></pre></td></tr></table></figure>
+
+<p>其中，<code>exp</code> 是一个表达式，<code>c</code> 是一个常量。该函数返回 <code>exp</code> 的值，并表示 <code>exp</code> 的结果为 <code>c</code> 的概率很大。</p>
+<p>以下是 <code>__builtin_expect</code> 的示例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line">int max(int a, int b) &#123;</span><br><span class="line">    return (a &gt; b) ? a : b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    int x = 10;</span><br><span class="line">    int y = 5;</span><br><span class="line"></span><br><span class="line">    int result = max(x, y);</span><br><span class="line">    if (__builtin_expect(result == x, 1)) &#123;</span><br><span class="line">        printf(&quot;Result is likely to be x\n&quot;);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        printf(&quot;Result is likely not to be x\n&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在上述示例中，<code>__builtin_expect</code> 用于提示编译器 <code>result == x</code> 的结果很可能为真。如果 <code>result == x</code>，将输出 “Result is likely to be x”；否则，将输出 “Result is likely not to be x”。</p>
+<p>通过使用 <code>__builtin_expect</code>，可以提供编译器有关表达式预期结果的提示信息。这对于一些性能敏感的代码段，如分支预测优化，可以帮助编译器生成更优化的机器代码。</p>
+<p>需要注意的是，<code>__builtin_expect</code> 的提示只是一种提示，具体如何优化由编译器决定。此外，它在实际应用中的效果可能因编译器和目标平台的不同而有所差异。因此，在使用时需要进行测试和验证，并在实际性能分析中评估其效果。</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gun%E6%89%A9%E5%B1%95%E8%AF%AD%E6%B3%95/" rel="tag">gun扩展语法</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-5-18-内建函数：-builtin-constant-p"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/09/07/5-18-%E5%86%85%E5%BB%BA%E5%87%BD%E6%95%B0%EF%BC%9A-builtin-constant-p/"
+    >5.18 内建函数：__builtin_constant_p</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/09/07/5-18-%E5%86%85%E5%BB%BA%E5%87%BD%E6%95%B0%EF%BC%9A-builtin-constant-p/" class="article-date">
+  <time datetime="2023-09-07T13:14:30.000Z" itemprop="datePublished">2023-09-07</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p><code>__builtin_constant_p</code> 是一个内建函数，用于判断表达式是否为编译时常量。它在编译时进行求值，并返回一个整数常量，表示表达式是否为常量。</p>
+<p>以下是 <code>__builtin_constant_p</code> 的使用示例：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAX_SIZE 100</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">foo</span><span class="params">(<span class="type">int</span> size)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (__builtin_constant_p(size)) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;size is a compile-time constant\n&quot;</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;size is not a compile-time constant\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    foo(<span class="number">10</span>);        <span class="comment">// size is a compile-time constant</span></span><br><span class="line">    foo(MAX_SIZE);  <span class="comment">// size is not a compile-time constant</span></span><br><span class="line">    <span class="type">int</span> x = <span class="number">5</span>;</span><br><span class="line">    foo(x);         <span class="comment">// size is not a compile-time constant</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在上述示例中，<code>foo</code> 函数使用了 <code>__builtin_constant_p</code> 来判断 <code>size</code> 参数是否为编译时常量。如果 <code>size</code> 是编译时常量，将输出 “size is a compile-time constant”；否则，将输出 “size is not a compile-time constant”。</p>
+<p>通过使用 <code>__builtin_constant_p</code>，可以根据表达式是否为编译时常量来进行条件编译或优化。这对于在编译时进行静态优化或决策非常有用。</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gun%E6%89%A9%E5%B1%95%E8%AF%AD%E6%B3%95/" rel="tag">gun扩展语法</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-5-17-内建函数"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/09/07/5-17-%E5%86%85%E5%BB%BA%E5%87%BD%E6%95%B0/"
+    >5.17 内建函数</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/09/07/5-17-%E5%86%85%E5%BB%BA%E5%87%BD%E6%95%B0/" class="article-date">
+  <time datetime="2023-09-07T13:14:28.000Z" itemprop="datePublished">2023-09-07</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>内建函数（Built-in functions）是编译器提供的一组特殊函数，其实现直接内置在编译器中。它们通常具有与普通函数相同的语法和调用方式，但在执行时具有特殊的行为和性能优化。</p>
+<p>内建函数的特点如下：</p>
+<ol>
+<li>编译器内部实现：内建函数是编译器的一部分，其实现直接嵌入在编译器中。这使得编译器可以对这些函数进行特定的优化和内部处理。</li>
+<li>直接使用：与关键字类似，内建函数可以直接使用，无需包含头文件或外部库的引用。它们是编译器的一部分，因此可以直接在代码中使用。</li>
+<li>命名：内建函数的命名通常以 <code>_builtin</code> 开头，如 <code>_builtin_strlen</code>。这样的命名约定有助于与普通函数进行区分。</li>
+<li>主要用于性能优化：内建函数的设计目的通常是为了性能优化。它们可以针对特定的操作或算法提供更高效的实现，以提高程序的执行速度。</li>
+<li>部分是 C 标准库函数的内建版本：一些内建函数是对 C 标准库函数的内建版本，提供了更高效的实现。例如，<code>_builtin_strlen</code> 可能是对标准库函数 <code>strlen</code> 的内建优化版本。</li>
+<li>没有文档且变动频繁：与标准库函数相比，内建函数通常没有官方文档，并且其行为和实现可能在不同的编译器版本中有所变化。这使得内建函数的使用相对不稳定，一般不建议在通用代码中频繁使用。</li>
+</ol>
+<p><code>__builtin_return_address(LEVEL)</code> 是一个内建函数，用于返回当前函数或调用者的返回地址。它接受一个整数参数 <code>LEVEL</code>，用于指定返回地址的级别。</p>
+<ul>
+<li>当 <code>LEVEL</code> 为0时，表示返回当前函数的返回地址。</li>
+<li>当 <code>LEVEL</code> 为1时，表示返回当前函数的调用者的返回地址。</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">func1</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">void</span>* return_addr = __builtin_return_address(<span class="number">0</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Return address of func1: %p\n&quot;</span>, return_addr);</span><br><span class="line">    </span><br><span class="line">    return_addr = __builtin_return_address(<span class="number">1</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Return address of func1&#x27;s caller: %p\n&quot;</span>, return_addr);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">func2</span><span class="params">()</span> &#123;</span><br><span class="line">    func1();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    func2();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在上述示例中，<code>func1</code> 调用了 <code>__builtin_return_address</code> 来获取返回地址。当 <code>LEVEL</code> 为0时，它返回的是 <code>func1</code> 的返回地址；当 <code>LEVEL</code> 为1时，它返回的是 <code>func1</code> 的调用者（即 <code>func2</code>）的返回地址。</p>
+<p>类似地，<code>__builtin_frame_address(LEVEL)</code> 是另一个内建函数，用于返回函数的栈帧地址。它的使用方式类似于 <code>__builtin_return_address</code>，也接受一个整数参数 <code>LEVEL</code>。</p>
+<ul>
+<li>当 <code>LEVEL</code> 为0时，表示返回当前函数的栈帧地址。</li>
+<li>当 <code>LEVEL</code> 为1时，表示返回当前函数的调用者的栈帧地址。</li>
+</ul>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gun%E6%89%A9%E5%B1%95%E8%AF%AD%E6%B3%95/" rel="tag">gun扩展语法</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
   id="post-5-16-属性声明：used-unused"
   class="article article-type-post"
   itemscope
@@ -639,204 +837,6 @@
 <p>具体来说，<code>const</code> 属性表示函数的返回值不依赖于除了函数参数之外的任何外部状态。也就是说，对于相同的输入，函数始终返回相同的结果，并且不会修改任何全局变量或静态变量。这种属性可以帮助编译器进行一些优化，例如函数结果的缓存或重复计算的消除。</p>
 <p>使用 <code>const</code> 属性有助于提高代码的可读性和可靠性，因为它明确了函数的行为，并更容易推断出函数是否会产生副作用。</p>
 <p>需要注意的是，使用 <code>const</code> 属性并不会强制确保函数的实现不会产生副作用或修改全局状态。它只是一种提示或约定，应该由开发者遵循。</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gun%E6%89%A9%E5%B1%95%E8%AF%AD%E6%B3%95/" rel="tag">gun扩展语法</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-5-9-属性声明：format"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/09/07/5-9-%E5%B1%9E%E6%80%A7%E5%A3%B0%E6%98%8E%EF%BC%9Aformat/"
-    >5.9 属性声明：format</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/09/07/5-9-%E5%B1%9E%E6%80%A7%E5%A3%B0%E6%98%8E%EF%BC%9Aformat/" class="article-date">
-  <time datetime="2023-09-07T13:14:16.000Z" itemprop="datePublished">2023-09-07</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <p>属性 <code>format</code> 用于指定函数参数的格式化字符串检查，以帮助编译器检测格式化字符串与实际参数之间的匹配错误。它的使用方法如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">__attribute__((format(archetype, string-index, first-to-check)))</span><br></pre></td></tr></table></figure>
-
-<p>其中：</p>
-<ul>
-<li><code>archetype</code> 是一个字符串常量，用于指定格式化字符串的类型。常见的类型有 <code>&quot;printf&quot;</code> 和 <code>&quot;scanf&quot;</code>，分别用于格式化输出和格式化输入。</li>
-<li><code>string-index</code> 是一个整数常量，表示格式化字符串在函数参数列表中的索引。索引从 1 开始，0 表示函数本身。</li>
-<li><code>first-to-check</code> 是一个整数常量，表示从参数列表的第几个参数开始进行检查。一般情况下，这个值与 <code>string-index</code> 相同。</li>
-</ul>
-<p>例如，以下示例展示了如何使用 <code>format</code> 属性：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">__attribute__((format(printf, 1, 2)))</span><br><span class="line">void LoG(const char *fmt, ...) &#123;</span><br><span class="line">    // 函数体</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在这个例子中，<code>format(printf, 1, 2)</code> 属性应用于 <code>LoG</code> 函数。它告诉编译器检查函数的第一个参数（格式化字符串）与后续变参参数的匹配情况，以确保格式化字符串中的占位符与实际参数的类型相符。</p>
-<p>这样，在调用 <code>LoG</code> 函数时，如果格式化字符串与实际参数不匹配，编译器会发出警告或错误信息，提醒开发者修正问题。</p>
-<p>需要注意的是，<code>format</code> 属性对于编译器来说是一种提示，不会强制执行检查。因此，开发者仍需注意确保格式化字符串与实际参数的正确匹配，以避免潜在的错误。</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gun%E6%89%A9%E5%B1%95%E8%AF%AD%E6%B3%95/" rel="tag">gun扩展语法</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-5-8-属性声明：aligned-packed"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/09/07/5-8-%E5%B1%9E%E6%80%A7%E5%A3%B0%E6%98%8E%EF%BC%9Aaligned-packed/"
-    >5.8 属性声明：aligned &amp; packed</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/09/07/5-8-%E5%B1%9E%E6%80%A7%E5%A3%B0%E6%98%8E%EF%BC%9Aaligned-packed/" class="article-date">
-  <time datetime="2023-09-07T13:14:14.000Z" itemprop="datePublished">2023-09-07</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <p>属性声明 <code>aligned</code> 和 <code>packed</code> 是用于控制结构体或变量的对齐方式的特殊属性。</p>
-<ol>
-<li><p><code>aligned</code> 属性：<code>aligned</code> 属性用于指定结构体或变量的对齐方式。对齐方式是指变量在内存中的起始地址必须是某个特定值的倍数。这个特定值称为对齐边界。通过使用 <code>aligned</code> 属性，可以强制指定变量的对齐边界。</p>
-<p>例如，以下示例将一个结构体 <code>my_struct</code> 按照 16 字节对齐：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">my_struct</span> &#123;</span></span><br><span class="line">    <span class="type">int</span> a;</span><br><span class="line">    <span class="type">char</span> b;</span><br><span class="line">    <span class="type">short</span> c;</span><br><span class="line">&#125; __attribute__((aligned(<span class="number">16</span>)));</span><br><span class="line">```</span><br><span class="line"></span><br><span class="line">在这个例子中，`aligned(<span class="number">16</span>)` 属性将结构体 `my_struct` 的对齐边界设置为 <span class="number">16</span> 字节。这意味着结构体的起始地址必须是 <span class="number">16</span> 的倍数。</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><code>packed</code> 属性：<code>packed</code> 属性用于指定结构体或变量的紧凑布局，即取消对齐。默认情况下，结构体的成员按照其自然对齐边界进行对齐，以提高内存访问效率。但有时，我们需要取消对齐，以减小结构体的大小或与其他系统进行数据交互。</p>
-<p>例如，以下示例将一个结构体 <code>my_struct</code> 设置为紧凑布局：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">my_struct</span> &#123;</span></span><br><span class="line">    <span class="type">int</span> a;</span><br><span class="line">    <span class="type">char</span> b;</span><br><span class="line">    <span class="type">short</span> c;</span><br><span class="line">&#125; __attribute__((packed));</span><br><span class="line">```</span><br><span class="line"></span><br><span class="line">在这个例子中，`packed` 属性将结构体 `my_struct` 设置为紧凑布局，取消了成员的对齐。这意味着结构体的大小可能会减小，但访问成员时可能会带来性能开销。</span><br></pre></td></tr></table></figure></li>
-</ol>
-<p>需要注意的是，使用 <code>aligned</code> 和 <code>packed</code> 属性可能会对内存访问效率和可移植性产生影响。对齐和紧凑布局的选择应根据具体的需求和平台要求进行权衡。此外，这些属性的语法可能因编译器而异，应查阅相应的文档以确保正确使用。</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gun%E6%89%A9%E5%B1%95%E8%AF%AD%E6%B3%95/" rel="tag">gun扩展语法</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-5-7-属性声明：section"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/09/07/5-7-%E5%B1%9E%E6%80%A7%E5%A3%B0%E6%98%8E%EF%BC%9Asection/"
-    >5.7 属性声明：section</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/09/07/5-7-%E5%B1%9E%E6%80%A7%E5%A3%B0%E6%98%8E%EF%BC%9Asection/" class="article-date">
-  <time datetime="2023-09-07T13:14:13.000Z" itemprop="datePublished">2023-09-07</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <p>属性（Attributes）是一种在C语言中使用的特殊语法，用于声明变量或函数的特殊属性，以指导编译器进行特定方面的优化或代码检查。</p>
-<p>在C语言中，可以使用 <code>__attribute__</code> 关键字来声明属性。属性可以在变量或函数的声明后面使用，通过 <code>__attribute__((ATTRIBUTE))</code> 的语法进行指定。</p>
-<p>例如，假设有以下代码：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int global_val __attribute__((section(&quot;.data&quot;)));</span><br></pre></td></tr></table></figure>
-
-<p>在这个例子中，<code>global_val</code> 是一个整型变量，通过 <code>__attribute__((section(&quot;.data&quot;)))</code> 指定了它的属性。</p>
-<p>这里使用的属性是 <code>section</code>，它的作用是将 <code>global_val</code> 变量放置在指定的内存段（section）中。具体地，<code>section(&quot;.data&quot;)</code> 表示将 <code>global_val</code> 放置在名为 “.data” 的内存段中。</p>
-<p>属性的主要用途包括但不限于以下几个方面：</p>
-<ol>
-<li>优化：通过属性，可以告知编译器一些额外的信息，以便进行特定的优化。例如，可以指定变量的对齐方式、内联函数等，以优化程序的执行效率。</li>
-<li>警告检查：属性还可以用于启用或禁用编译器的警告检查。通过指定特定的属性，可以控制编译器在编译过程中产生的警告信息。</li>
-<li>内存布局：属性可以用于控制变量或函数在内存中的位置。可以指定变量存放在特定的内存段中，或者指定函数使用特定的调用约定。</li>
-</ol>
  
       <!-- reward -->
       
