@@ -160,6 +160,59 @@
     
     
     <article
+  id="post-7-18-Linux内核的面向对象思想：继承（下）"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/09/09/7-18-Linux%E5%86%85%E6%A0%B8%E7%9A%84%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%80%9D%E6%83%B3%EF%BC%9A%E7%BB%A7%E6%89%BF%EF%BC%88%E4%B8%8B%EF%BC%89/"
+    >7.18 Linux内核的面向对象思想：继承（下）</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/09/09/7-18-Linux%E5%86%85%E6%A0%B8%E7%9A%84%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%80%9D%E6%83%B3%EF%BC%9A%E7%BB%A7%E6%89%BF%EF%BC%88%E4%B8%8B%EF%BC%89/" class="article-date">
+  <time datetime="2023-09-09T12:49:47.000Z" itemprop="datePublished">2023-09-09</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+   
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" rel="tag">数据结构和面向对象</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
   id="post-7-17-Linux内核的面向对象思想：继承（上）"
   class="article article-type-post"
   itemscope
@@ -786,65 +839,6 @@
        
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E5%92%8C%E6%8C%87%E9%92%88/" rel="tag">数据存储和指针</a></li></ul>
 
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-6-18-二级指针：修改指针变量"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/09/08/6-18-%E4%BA%8C%E7%BA%A7%E6%8C%87%E9%92%88%EF%BC%9A%E4%BF%AE%E6%94%B9%E6%8C%87%E9%92%88%E5%8F%98%E9%87%8F/"
-    >6.18 二级指针：修改指针变量</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/09/08/6-18-%E4%BA%8C%E7%BA%A7%E6%8C%87%E9%92%88%EF%BC%9A%E4%BF%AE%E6%94%B9%E6%8C%87%E9%92%88%E5%8F%98%E9%87%8F/" class="article-date">
-  <time datetime="2023-09-07T23:39:26.000Z" itemprop="datePublished">2023-09-08</time>
-</a>    
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h1 id="18-1-二级指针示例："><a href="#18-1-二级指针示例：" class="headerlink" title="18.1 二级指针示例："></a>18.1 二级指针示例：</h1><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span> &#123;</span><br><span class="line">    <span class="type">int</span> a = <span class="number">10</span>;</span><br><span class="line">    <span class="type">int</span> *p = &amp;a;</span><br><span class="line">    <span class="type">int</span> **pp = &amp;p;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;a: %d\n&quot;</span>, a);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;*p: %d\n&quot;</span>, *p);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;**pp: %d\n&quot;</span>, **pp);</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">&quot;&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;&amp;a: %p\n&quot;</span>, &amp;a);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;&amp;p: %p\n&quot;</span>, &amp;p);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;&amp;pp: %p\n&quot;</span>, &amp;pp);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;p: %p\n&quot;</span>, p);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;pp: %p\n&quot;</span>, pp);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="18-2-修改指针变量值"><a href="#18-2-修改指针变量值" class="headerlink" title="18.2 修改指针变量值"></a>18.2 修改指针变量值</h1><p>二级指针可以用于修改指针变量的值。通过将一个指针变量的地址传递给二级指针，可以通过二级指针来修改指针变量的值。这在某些情况下可以方便地在函数内部修改指针变量的指向。</p>
-<p>示例代码如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line">void updatePointer(int **ptr) &#123;</span><br><span class="line">    int newValue = 20;</span><br><span class="line">    *ptr = &amp;newValue;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main(void) &#123;</span><br><span class="line">    int value = 10;</span><br><span class="line">    int *ptr = &amp;value;</span><br><span class="line"></span><br><span class="line">    printf(&quot;Before update: %d\n&quot;, *ptr);</span><br><span class="line">    updatePointer(&amp;ptr);</span><br><span class="line">    printf(&quot;After update: %d\n&quot;, *ptr);</span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line">```</span><br><span class="line">在上面的示例中，`updatePointer` 函数接收一个二级指针 `ptr`，并将其指向的一级指针指向一个新的整型变量。在 `main` 函数中，我们将指针变量 `ptr` 的地址传递给 `updatePointer` 函数，并打印了更新后的指针变量的值。</span><br></pre></td></tr></table></figure>
-
-<h1 id="18-3-指针数组传参："><a href="#18-3-指针数组传参：" class="headerlink" title="18.3 指针数组传参："></a>18.3 指针数组传参：</h1><p>二级指针也常用于指针数组（数组中的每个元素都是指针）的传参。通过二级指针，可以传递指针数组的地址，从而在函数内部操作指针数组的元素。</p>
-<p>示例代码如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line">void printStrings(char **arr, int size) &#123;</span><br><span class="line">    for (int i = 0; i &lt; size; i++) &#123;</span><br><span class="line">        printf(&quot;%s\n&quot;, arr[i]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main(void) &#123;</span><br><span class="line">    char *strings[] = &#123;&quot;Hello&quot;, &quot;World&quot;, &quot;C&quot;, &quot;Programming&quot;&#125;;</span><br><span class="line">    int size = sizeof(strings) / sizeof(strings[0]);</span><br><span class="line"></span><br><span class="line">    printStrings(strings, size);</span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line">```</span><br><span class="line">在上面的示例中，`printStrings` 函数接收一个二级指针 `arr` 和数组的大小，然后在循环中打印指针数组中的字符串。在 `main` 函数中，我们定义了一个指针数组 `strings`，并通过传递数组名和大小来调用 `printStrings` 函数。</span><br></pre></td></tr></table></figure>
-
-<p>二级指针可以提供更高级的灵活性，允许在函数间传递和修改指</p>
-<p>二级指针:指针数组</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
     </footer>
   </div>
 

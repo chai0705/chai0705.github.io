@@ -160,6 +160,59 @@
     
     
     <article
+  id="post-4-16-实战-作业：实现自己的堆管理器"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/09/07/4-16-%E5%AE%9E%E6%88%98-%E4%BD%9C%E4%B8%9A%EF%BC%9A%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%B7%B1%E7%9A%84%E5%A0%86%E7%AE%A1%E7%90%86%E5%99%A8/"
+    >4-16-实战&amp;作业：实现自己的堆管理器</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/09/07/4-16-%E5%AE%9E%E6%88%98-%E4%BD%9C%E4%B8%9A%EF%BC%9A%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%B7%B1%E7%9A%84%E5%A0%86%E7%AE%A1%E7%90%86%E5%99%A8/" class="article-date">
+  <time datetime="2023-09-06T23:40:34.000Z" itemprop="datePublished">2023-09-07</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+   
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A0%86%E6%A0%88%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" rel="tag">堆栈内存管理</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
   id="post-4-15-常见内存错误及检测"
   class="article article-type-post"
   itemscope
@@ -777,119 +830,6 @@
     <div class="article-entry" itemprop="articleBody">
        
    
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A0%86%E6%A0%88%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" rel="tag">堆栈内存管理</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-4-6-栈与作用域"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/09/07/4-6-%E6%A0%88%E4%B8%8E%E4%BD%9C%E7%94%A8%E5%9F%9F/"
-    >4-6-栈与作用域</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/09/07/4-6-%E6%A0%88%E4%B8%8E%E4%BD%9C%E7%94%A8%E5%9F%9F/" class="article-date">
-  <time datetime="2023-09-06T23:40:16.000Z" itemprop="datePublished">2023-09-07</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h1 id="4-6-1-变量的作用域和生命周期"><a href="#4-6-1-变量的作用域和生命周期" class="headerlink" title="4.6.1 变量的作用域和生命周期"></a>4.6.1 变量的作用域和生命周期</h1><p>变量的作用域和生命周期是关于变量可见性和存在时间的概念。下面是关于全局变量和局部变量的说明：</p>
-<ol>
-<li>全局变量：<ul>
-<li>全局变量是在函数外部定义的变量，可以被整个程序中的函数访问和使用。</li>
-<li>全局变量的作用域从其声明处开始，延伸到文件的结尾。这意味着它可以在声明处之后的任何位置使用。</li>
-<li>全局变量可以在一个源文件中定义，然后通过在其他源文件中使用 <code>extern</code> 关键字进行声明和引用。</li>
-</ul>
-</li>
-</ol>
-<p>示例代码：</p>
-<p>c</p>
-<p>Copy</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// file.c</span><br><span class="line">int a = 10;  // 在文件中定义全局变量</span><br><span class="line"></span><br><span class="line">// file2.c</span><br><span class="line">extern int a;  // 在另一个文件中使用 extern 关键字声明并引用全局变量</span><br><span class="line">printf(&quot;%d&quot;, a);</span><br></pre></td></tr></table></figure>
-
-<ol>
-<li>局部变量：<ul>
-<li>局部变量是在函数体内部定义的变量，它们的作用域仅限于所在的函数内部。</li>
-<li>局部变量只能在定义它们的函数内部使用，无法在函数外部访问。</li>
-<li>局部变量的生命周期从函数被调用开始，到函数执行结束为止。每次函数调用时都会创建一个新的局部变量实例。</li>
-</ul>
-</li>
-</ol>
-<p>示例代码：</p>
-<p>c</p>
-<p>Copy</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">void myFunction() &#123;</span><br><span class="line">  int b = 20;  // 在函数内部定义局部变量</span><br><span class="line">  // 可以在函数内部使用局部变量b</span><br><span class="line">  // 局部变量的生命周期仅限于函数执行期间</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>全局变量和局部变量的选择取决于变量在程序中的使用需求。全局变量具有全局可见性，可以在多个函数中共享，但会增加命名空间的复杂性。而局部变量具有更小的作用域和生命周期，对于只在函数内部使用的临时数据更加合适。</p>
-<h1 id="4-6-2-为什么程序不能访问其他函数内的局部变量"><a href="#4-6-2-为什么程序不能访问其他函数内的局部变量" class="headerlink" title="4.6.2 为什么程序不能访问其他函数内的局部变量"></a>4.6.2 为什么程序不能访问其他函数内的局部变量</h1><p>程序不能访问其他函数内的局部变量的原因主要有两点：</p>
-<ol>
-<li>内存空间的分配：<ul>
-<li>局部变量在函数被调用时才会在栈内分配内存空间。</li>
-<li>每个函数都有自己的栈帧，用于存储局部变量和其他函数调用所需的信息。</li>
-<li>当函数执行完毕，栈帧会被释放，局部变量所占用的内存空间也会被回收。</li>
-</ul>
-</li>
-<li>作用域和生命周期：<ul>
-<li>局部变量的作用域仅限于所在的函数内部，无法在函数外部访问。</li>
-<li>在函数内部声明的局部变量只在函数运行期间有效，在函数执行完毕后就会被销毁。</li>
-<li>其他函数无法直接访问该函数内部的局部变量，因为局部变量的作用域仅限于所在函数。</li>
-</ul>
-</li>
-</ol>
-<p>由于局部变量的内存空间是在函数调用时动态分配的，并且作用域和生命周期仅限于函数的执行过程，所以其他函数无法直接访问该函数的局部变量。如果需要在函数之间传递数据或共享变量，可以使用函数参数、全局变量或其他数据传递方式来实现。</p>
-<h1 id="4-6-3-编译器栈管理"><a href="#4-6-3-编译器栈管理" class="headerlink" title="4.6.3 编译器栈管理"></a>4.6.3 编译器栈管理</h1><p>编译器通过栈管理来处理函数调用和局部变量的作用域。下面是对编译器栈管理的简要说明：</p>
-<ol>
-<li>函数调用：<ul>
-<li>当一个函数被调用时，编译器会在栈上为该函数分配一个栈帧（也称为活动记录或帧）。</li>
-<li>栈帧包含了该函数的局部变量、函数参数、返回地址和其他与函数调用相关的信息。</li>
-<li>编译器通过在栈上进行压栈操作将栈帧入栈，以便在函数执行期间使用。</li>
-</ul>
-</li>
-<li>局部变量的作用域：<ul>
-<li>编译器通过栈帧的创建和销毁来限定局部变量的作用域。</li>
-<li>在函数内部定义的局部变量只在函数执行期间存在，它们的内存空间位于函数的栈帧中。</li>
-<li>当函数执行完毕时，编译器通过出栈操作销毁栈帧，同时销毁其中的局部变量，使其作用域终止。</li>
-</ul>
-</li>
-</ol>
-<p>编译器根据函数的调用关系和变量的作用域确定栈帧的分配和释放。每个函数的栈帧在栈上按照调用顺序依次入栈和出栈，保证了函数调用的正确执行和局部变量的正确作用域。这种栈管理机制使得函数可以嵌套调用，并且每个函数都有自己独立的局部变量空间，避免了命名冲突和数据混乱的问题。</p>
- 
       <!-- reward -->
       
     </div>

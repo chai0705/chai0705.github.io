@@ -160,6 +160,119 @@
     
     
     <article
+  id="post-4-6-栈与作用域"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/09/07/4-6-%E6%A0%88%E4%B8%8E%E4%BD%9C%E7%94%A8%E5%9F%9F/"
+    >4-6-栈与作用域</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/09/07/4-6-%E6%A0%88%E4%B8%8E%E4%BD%9C%E7%94%A8%E5%9F%9F/" class="article-date">
+  <time datetime="2023-09-06T23:40:16.000Z" itemprop="datePublished">2023-09-07</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="4-6-1-变量的作用域和生命周期"><a href="#4-6-1-变量的作用域和生命周期" class="headerlink" title="4.6.1 变量的作用域和生命周期"></a>4.6.1 变量的作用域和生命周期</h1><p>变量的作用域和生命周期是关于变量可见性和存在时间的概念。下面是关于全局变量和局部变量的说明：</p>
+<ol>
+<li>全局变量：<ul>
+<li>全局变量是在函数外部定义的变量，可以被整个程序中的函数访问和使用。</li>
+<li>全局变量的作用域从其声明处开始，延伸到文件的结尾。这意味着它可以在声明处之后的任何位置使用。</li>
+<li>全局变量可以在一个源文件中定义，然后通过在其他源文件中使用 <code>extern</code> 关键字进行声明和引用。</li>
+</ul>
+</li>
+</ol>
+<p>示例代码：</p>
+<p>c</p>
+<p>Copy</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// file.c</span><br><span class="line">int a = 10;  // 在文件中定义全局变量</span><br><span class="line"></span><br><span class="line">// file2.c</span><br><span class="line">extern int a;  // 在另一个文件中使用 extern 关键字声明并引用全局变量</span><br><span class="line">printf(&quot;%d&quot;, a);</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>局部变量：<ul>
+<li>局部变量是在函数体内部定义的变量，它们的作用域仅限于所在的函数内部。</li>
+<li>局部变量只能在定义它们的函数内部使用，无法在函数外部访问。</li>
+<li>局部变量的生命周期从函数被调用开始，到函数执行结束为止。每次函数调用时都会创建一个新的局部变量实例。</li>
+</ul>
+</li>
+</ol>
+<p>示例代码：</p>
+<p>c</p>
+<p>Copy</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">void myFunction() &#123;</span><br><span class="line">  int b = 20;  // 在函数内部定义局部变量</span><br><span class="line">  // 可以在函数内部使用局部变量b</span><br><span class="line">  // 局部变量的生命周期仅限于函数执行期间</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>全局变量和局部变量的选择取决于变量在程序中的使用需求。全局变量具有全局可见性，可以在多个函数中共享，但会增加命名空间的复杂性。而局部变量具有更小的作用域和生命周期，对于只在函数内部使用的临时数据更加合适。</p>
+<h1 id="4-6-2-为什么程序不能访问其他函数内的局部变量"><a href="#4-6-2-为什么程序不能访问其他函数内的局部变量" class="headerlink" title="4.6.2 为什么程序不能访问其他函数内的局部变量"></a>4.6.2 为什么程序不能访问其他函数内的局部变量</h1><p>程序不能访问其他函数内的局部变量的原因主要有两点：</p>
+<ol>
+<li>内存空间的分配：<ul>
+<li>局部变量在函数被调用时才会在栈内分配内存空间。</li>
+<li>每个函数都有自己的栈帧，用于存储局部变量和其他函数调用所需的信息。</li>
+<li>当函数执行完毕，栈帧会被释放，局部变量所占用的内存空间也会被回收。</li>
+</ul>
+</li>
+<li>作用域和生命周期：<ul>
+<li>局部变量的作用域仅限于所在的函数内部，无法在函数外部访问。</li>
+<li>在函数内部声明的局部变量只在函数运行期间有效，在函数执行完毕后就会被销毁。</li>
+<li>其他函数无法直接访问该函数内部的局部变量，因为局部变量的作用域仅限于所在函数。</li>
+</ul>
+</li>
+</ol>
+<p>由于局部变量的内存空间是在函数调用时动态分配的，并且作用域和生命周期仅限于函数的执行过程，所以其他函数无法直接访问该函数的局部变量。如果需要在函数之间传递数据或共享变量，可以使用函数参数、全局变量或其他数据传递方式来实现。</p>
+<h1 id="4-6-3-编译器栈管理"><a href="#4-6-3-编译器栈管理" class="headerlink" title="4.6.3 编译器栈管理"></a>4.6.3 编译器栈管理</h1><p>编译器通过栈管理来处理函数调用和局部变量的作用域。下面是对编译器栈管理的简要说明：</p>
+<ol>
+<li>函数调用：<ul>
+<li>当一个函数被调用时，编译器会在栈上为该函数分配一个栈帧（也称为活动记录或帧）。</li>
+<li>栈帧包含了该函数的局部变量、函数参数、返回地址和其他与函数调用相关的信息。</li>
+<li>编译器通过在栈上进行压栈操作将栈帧入栈，以便在函数执行期间使用。</li>
+</ul>
+</li>
+<li>局部变量的作用域：<ul>
+<li>编译器通过栈帧的创建和销毁来限定局部变量的作用域。</li>
+<li>在函数内部定义的局部变量只在函数执行期间存在，它们的内存空间位于函数的栈帧中。</li>
+<li>当函数执行完毕时，编译器通过出栈操作销毁栈帧，同时销毁其中的局部变量，使其作用域终止。</li>
+</ul>
+</li>
+</ol>
+<p>编译器根据函数的调用关系和变量的作用域确定栈帧的分配和释放。每个函数的栈帧在栈上按照调用顺序依次入栈和出栈，保证了函数调用的正确执行和局部变量的正确作用域。这种栈管理机制使得函数可以嵌套调用，并且每个函数都有自己独立的局部变量空间，避免了命名冲突和数据混乱的问题。</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A0%86%E6%A0%88%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" rel="tag">堆栈内存管理</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
   id="post-4-5-形参与实参"
   class="article article-type-post"
   itemscope
@@ -1287,172 +1400,6 @@
 <p>rmmod platform_driver.ko</p>
 <p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309062024444.png" alt="img"></p>
 <p>图 67-5</p>
-<p>至此，使用of操作函数获取设备树节点实验就完成了。</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rk3568-%E9%A9%B1%E5%8A%A8/" rel="tag">rk3568 驱动</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-1-66-of操作函数实验-获取设备树节点"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/09/05/1-66-of%E6%93%8D%E4%BD%9C%E5%87%BD%E6%95%B0%E5%AE%9E%E9%AA%8C-%E8%8E%B7%E5%8F%96%E8%AE%BE%E5%A4%87%E6%A0%91%E8%8A%82%E7%82%B9/"
-    >1-62-dtb文件格式讲解</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/09/05/1-66-of%E6%93%8D%E4%BD%9C%E5%87%BD%E6%95%B0%E5%AE%9E%E9%AA%8C-%E8%8E%B7%E5%8F%96%E8%AE%BE%E5%A4%87%E6%A0%91%E8%8A%82%E7%82%B9/" class="article-date">
-  <time datetime="2023-09-05T00:01:36.000Z" itemprop="datePublished">2023-09-05</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/rk3568-%E9%A9%B1%E5%8A%A8/">rk3568 驱动</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h1 id="第66章of操作函数实验：获取设备树节点"><a href="#第66章of操作函数实验：获取设备树节点" class="headerlink" title="第66章of操作函数实验：获取设备树节点"></a>第66章of操作函数实验：获取设备树节点</h1><p>在上一章节的学习中，我们学习了设备树下platform_device和platform_driver匹配，现在也只是让他们匹配在了一起，但这样显然是不够的，为了完成一些和硬件相关的需求，我们还需要获取到在设备树中编写的一些属性，那驱动是如何获取设备树中的属性呢，让我们一起进入后续章节的学习吧。</p>
-<h2 id="66-1-of操作：获取设备树节点"><a href="#66-1-of操作：获取设备树节点" class="headerlink" title="66.1 of操作：获取设备树节点"></a>66.1 of操作：获取设备树节点</h2><h3 id="66-1-1-of-find-node-by-name函数"><a href="#66-1-1-of-find-node-by-name函数" class="headerlink" title="66.1.1 of_find_node_by_name函数"></a>66.1.1 of_find_node_by_name函数</h3><p>of_find_node_by_name 是Linux内核中用于通过节点名称查找设备树节点的函数。下面是对of_find_node_by_name 函数的详细介绍：</p>
-<p><strong>函数原型：</strong></p>
-<p>​	struct device_node *of_find_node_by_name(struct device_node *from, const char *name);</p>
-<p><strong>头文件：</strong></p>
-<p>​	#include &lt;linux&#x2F;of.h&gt;</p>
-<p><strong>函数作用：</strong><br>        该函数通过指定的节点名称在设备树中进行查找，返回匹配的节点的 struct device_node 指针。</p>
-<p><strong>参数含义：</strong></p>
-<p>​	from：指定起始节点，表示从哪个节点开始查找。如果 from 参数为 NULL，则从设备树的根节点开始查找。</p>
-<p>​	name：要查找的节点名称。</p>
-<p><strong>返回值：</strong></p>
-<p>​	如果找到匹配的节点，则返回对应的 struct device_node 指针。</p>
-<p>​	如果未找到匹配的节点，则返回 NULL。</p>
-<p>会在接下来的实验小节中，对该函数进行实际演示。</p>
-<h3 id="66-1-2-of-find-node-by-path函数"><a href="#66-1-2-of-find-node-by-path函数" class="headerlink" title="66.1.2 of_find_node_by_path函数"></a>66.1.2 of_find_node_by_path函数</h3><p>of_find_node_by_path 是Linux内核中用于通过节点路径查找设备树节点的函数。下面是对of_find_node_by_path函数的详细介绍：</p>
-<p><strong>函数原型：</strong></p>
-<p>​	struct device_node *of_find_node_by_path(const char *path);</p>
-<p><strong>头文件：</strong></p>
-<p>​	#include &lt;linux&#x2F;of.h&gt;</p>
-<p><strong>函数作用：</strong><br>    该函数根据节点路径在设备树中进行查找，返回匹配的节点的 struct device_node 指针。</p>
-<p><strong>参数含义：</strong></p>
-<p>​	path：节点的路径，以斜杠分隔的字符串表示。路径格式为设备树节点的绝对路径，例如 &#x2F;topeet&#x2F;myLed。</p>
-<p><strong>返回值：</strong></p>
-<p>​	如果找到匹配的节点，则返回对应的 struct device_node 指针。</p>
-<p>​	如果未找到匹配的节点，则返回 NULL。</p>
-<p>​	of_find_node_by_path 函数通过节点路径在设备树中进行查找。路径是设备树节点从根节点到目标节点的完整路径。可以通过指定正确的路径来准确地访问设备树中的特定节点。</p>
-<p>​	使用 of_find_node_by_path 函数时，可以直接传递节点的完整路径作为 path 参数，函数会在设备树中查找匹配的节点。这对于已知节点路径的情况非常有用。</p>
-<h3 id="66-1-3-of-get-parent函数"><a href="#66-1-3-of-get-parent函数" class="headerlink" title="66.1.3 of_get_parent函数"></a>66.1.3 of_get_parent函数</h3><p>在Linux内核中，of_get_parent 函数用于获取设备树节点的父节点。下面是对of_get_parent函数的详细介绍：</p>
-<p><strong>函数原型：</strong></p>
-<p>​	struct device_node *of_get_parent(const struct device_node *node);</p>
-<p><strong>头文件：</strong></p>
-<p>​	#include &lt;linux&#x2F;of.h&gt;</p>
-<p><strong>函数作用：</strong><br>    该函数接收一个指向设备树节点的指针 node，并返回该节点的父节点的指针。</p>
-<p><strong>参数含义：</strong></p>
-<p>​	node：要获取父节点的设备树节点指针。</p>
-<p><strong>返回值：</strong></p>
-<p>​	如果找到匹配的节点，则返回对应的 struct device_node 指针。</p>
-<p>​	如果未找到匹配的节点，则返回 NULL。</p>
-<p>​	使用 of_get_parent 函数时，可以将特定的设备树节点作为参数传递给函数，然后它将返回该节点的父节点。这对于在设备树中导航和访问节点之间的层次关系非常有用。</p>
-<p>​	父节点在设备树中表示了节点之间的层次结构关系。通过获取父节点，你可以访问上一级节点的属性和配置信息，从而更好地理解设备树中的节点之间的关系。</p>
-<h3 id="66-1-4-of-get-next-child函数"><a href="#66-1-4-of-get-next-child函数" class="headerlink" title="66.1.4 of_get_next_child函数"></a>66.1.4 of_get_next_child函数</h3><p>在Linux内核中，of_get_next_child 函数用于获取设备树节点的下一个子节点。下面是对of_get_next_child 函数的详细介绍：</p>
-<p><strong>函数原型：</strong></p>
-<p>​	struct device_node *of_get_next_child(const struct device_node *node, struct device_node *prev);</p>
-<p><strong>头文件：</strong></p>
-<p>​	#include &lt;linux&#x2F;of.h&gt;</p>
-<p><strong>函数作用：</strong><br>    该函数接收两个参数：node 是当前节点，prev 是上一个子节点。它返回下一个子节点的指针。</p>
-<p><strong>参数含义：</strong></p>
-<p>​	node：当前节点，用于指定要获取子节点的起始节点。</p>
-<p>​	prev：上一个子节点，用于指定从哪个子节点开始获取下一个子节点。如果为 NULL，则从起始节点的第一个子节点开始。</p>
-<p><strong>返回值：</strong></p>
-<p>​	如果找到匹配的节点，则返回对应的 struct device_node 指针。</p>
-<p>​	如果未找到匹配的节点，则返回 NULL。</p>
-<p>​	使用 of_get_next_child 函数时，可以传递当前节点以及上一个子节点作为参数。函数将从上一个子节点的下一个节点开始，查找并返回下一个子节点。</p>
-<p>​	设备树中的子节点表示了节点之间的层次关系。通过获取子节点，你可以遍历和访问当前节点的所有子节点，以便进一步处理它们的属性和配置信息。</p>
-<h3 id="64-1-5-of-find-compatible-node函数"><a href="#64-1-5-of-find-compatible-node函数" class="headerlink" title="64.1.5 of_ find_ compatible_ node函数"></a>64.1.5 of_ find_ compatible_ node函数</h3><p>当设备树中存在多个设备节点，需要根据设备的兼容性字符串进行匹配时，可以使用 of_find_compatible_node 函数。该函数用于在设备树中查找与指定兼容性字符串匹配的节点。</p>
-<p><strong>函数原型：</strong></p>
-<p>​	struct device_node *of_find_compatible_node(struct device_node *from, const char *type, const char *compatible);</p>
-<p><strong>头文件：</strong></p>
-<p>​	#include &lt;linux&#x2F;of.h&gt;</p>
-<p><strong>函数作用：</strong><br>    在设备树中查找与指定兼容性字符串匹配的节点。</p>
-<p><strong>参数含义：</strong></p>
-<p>​	from：指定起始节点，表示从哪个节点开始查找。如果 from 参数为 NULL，则从设备树的根节点开始查找。</p>
-<p>​	type：要匹配的设备类型字符串，通常是 compatible 属性中的一部分。</p>
-<p>​	compatible：要匹配的兼容性字符串，通常是设备树节点的 compatible 属性中的值。</p>
-<p><strong>返回值：</strong></p>
-<p>​	如果找到匹配的节点，则返回对应的 struct device_node 指针。</p>
-<p>​	如果未找到匹配的节点，则返回 NULL。</p>
-<p>​	使用 of_find_compatible_node 函数时，可以指定起始节点和需要匹配的设备类型字符串以及兼容性字符串。函数会从起始节点开始遍历设备树，查找与指定兼容性字符串匹配的节点，并返回匹配节点的指针。</p>
-<h3 id="64-1-6-of-find-matching-node-and-match函数"><a href="#64-1-6-of-find-matching-node-and-match函数" class="headerlink" title="64.1.6 of_ find matching node_ and_ match函数"></a>64.1.6 of_ find matching node_ and_ match函数</h3><p>在Linux内核中，of_ find matching node_ and_ match函数用于根据给定的of_device_id匹配表在设备树中查找匹配的节点。</p>
-<p><strong>函数原型：</strong></p>
-<p>​	struct device_node *of_find_matching_node_and_match(struct device_node *from,const struct of_device_id *matches, const struct of_device_id **match);</p>
-<p><strong>头文件：</strong></p>
-<p>#include &lt;linux&#x2F;of.h&gt;</p>
-<p><strong>函数作用：</strong><br>    根据给定的of_device_id匹配表在设备树中查找匹配的节点。</p>
-<p><strong>参数含义：</strong></p>
-<p>​	from：表示从哪个节点开始搜索。通常将上一次调用该函数返回的节点作为参数传递给from，以便从上一次的下一个节点开始搜索。如果要从设备树的根节点开始搜索，可以将from参数设置为NULL。</p>
-<p>​	matches：指向一个of_device_id类型的匹配表，该表包含要搜索的匹配项。</p>
-<p>​	match：用于输出匹配到的of_device_id条目的指针。</p>
-<p><strong>返回值：</strong></p>
-<p>​	如果找到匹配的节点，则返回对应的 struct device_node 指针。</p>
-<p>​	如果未找到匹配的节点，则返回 NULL。</p>
-<p>of_find_matching_node_and_match函数在设备树中遍历节点，对每个节点使用__of_match_node函数进行匹配。如果找到匹配的节点，将返回该节点的指针，并将match指针更新为匹配到的of_device_id条目，函数会自动增加匹配节点的引用计数。以下是使用of_find_matching_node_and_match函数的示例代码：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;linux/of.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="type">const</span> <span class="class"><span class="keyword">struct</span> <span class="title">of_device_id</span> <span class="title">my_match_table</span>[] =</span> &#123;</span><br><span class="line">    &#123; .compatible = <span class="string">&quot;vendor,device&quot;</span> &#125;,</span><br><span class="line">    &#123; <span class="comment">/* sentinel */</span> &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="class"><span class="keyword">struct</span> <span class="title">of_device_id</span> *<span class="title">match</span>;</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">device_node</span> *<span class="title">np</span>;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 从根节点开始查找匹配的节点</span></span><br><span class="line">np = of_find_matching_node_and_match(<span class="literal">NULL</span>, my_match_table, &amp;match);</span><br></pre></td></tr></table></figure>
-
-<p>在上述示例中，我们定义了一个of_device_id匹配表my_match_table，其中包含了一个兼容性字符串为”vendor,device”的匹配项。然后，我们使用of_find_matching_node_and_match函数从根节点开始查找匹配的节点。</p>
-<h2 id="66-2实验程序编写"><a href="#66-2实验程序编写" class="headerlink" title="66.2实验程序编写"></a>66.2实验程序编写</h2><p>本实验驱动对应的网盘路径为：iTOP-RK3568开发板【底板V1.7版本】\03_【iTOP-RK3568开发板】指南教程\02_Linux驱动配套资料\04_Linux驱动例程\55_of_01。</p>
-<p>本小节驱动程序是由上一章程序修改而来，相较于源程序只是在probe函数中添加了本章节学习的of操作相关代码，用来获取设备树节点。</p>
-<p>编写完成的platform_driver.c代码如下所示：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;linux/module.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;linux/platform_device.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;linux/mod_devicetable.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;linux/of.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">device_node</span> *<span class="title">mydevice_node</span>;</span>      </span><br><span class="line"><span class="type">const</span> <span class="class"><span class="keyword">struct</span> <span class="title">of_device_id</span> *<span class="title">mynode_match</span>;</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">of_device_id</span> <span class="title">mynode_of_match</span>[] =</span> &#123;</span><br><span class="line">	&#123;.compatible=<span class="string">&quot;my devicetree&quot;</span>&#125;,</span><br><span class="line">	&#123;&#125;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 平台设备的初始化函数</span></span><br><span class="line"><span class="type">static</span> <span class="type">int</span> <span class="title function_">my_platform_probe</span><span class="params">(<span class="keyword">struct</span> platform_device *pdev)</span></span><br><span class="line">&#123;</span><br><span class="line">    printk(KERN_INFO <span class="string">&quot;my_platform_probe: Probing platform device\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 通过节点名称查找设备树节点</span></span><br><span class="line">    mydevice_node = of_find_node_by_name(<span class="literal">NULL</span>, <span class="string">&quot;myLed&quot;</span>);</span><br><span class="line">	printk(<span class="string">&quot;mydevice node is %s\n&quot;</span>, mydevice_node-&gt;name);</span><br><span class="line">    </span><br><span class="line">	<span class="comment">// 通过节点路径查找设备树节点</span></span><br><span class="line">    mydevice_node = of_find_node_by_path(<span class="string">&quot;/topeet/myLed&quot;</span>);</span><br><span class="line">    printk(<span class="string">&quot;mydevice node is %s\n&quot;</span>, mydevice_node-&gt;name);</span><br><span class="line">        </span><br><span class="line">    <span class="comment">// 获取父节点</span></span><br><span class="line">    mydevice_node = of_get_parent(mydevice_node);</span><br><span class="line">    printk(<span class="string">&quot;myled&#x27;s parent node is %s\n&quot;</span>, mydevice_node-&gt;name);</span><br><span class="line">            </span><br><span class="line">    <span class="comment">// 获取子节点</span></span><br><span class="line">    mydevice_node = of_get_next_child(mydevice_node, <span class="literal">NULL</span>);</span><br><span class="line">    printk(<span class="string">&quot;myled&#x27;s sibling node is %s\n&quot;</span>, mydevice_node-&gt;name);</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 使用compatible值查找节点</span></span><br><span class="line">	mydevice_node=of_find_compatible_node(<span class="literal">NULL</span> ,<span class="literal">NULL</span>, <span class="string">&quot;my devicetree&quot;</span>);</span><br><span class="line">	printk(<span class="string">&quot;mydevice node is %s\n&quot;</span> , mydevice_node-&gt;name);</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//根据给定的of_device_id匹配表在设备树中查找匹配的节点</span></span><br><span class="line">	mydevice_node=of_find_matching_node_and_match(<span class="literal">NULL</span> , mynode_of_match, &amp;mynode_match);</span><br><span class="line">	printk(<span class="string">&quot;mydevice node is %s\n&quot;</span> ,mydevice_node-&gt;name);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 平台设备的移除函数</span></span><br><span class="line"><span class="type">static</span> <span class="type">int</span> <span class="title function_">my_platform_remove</span><span class="params">(<span class="keyword">struct</span> platform_device *pdev)</span></span><br><span class="line">&#123;</span><br><span class="line">    printk(KERN_INFO <span class="string">&quot;my_platform_remove: Removing platform device\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 清理设备特定的操作</span></span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="class"><span class="keyword">struct</span> <span class="title">of_device_id</span> <span class="title">of_match_table_id</span>[]  =</span> &#123;</span><br><span class="line">	&#123;.compatible=<span class="string">&quot;my devicetree&quot;</span>&#125;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义平台驱动结构体</span></span><br><span class="line"><span class="type">static</span> <span class="class"><span class="keyword">struct</span> <span class="title">platform_driver</span> <span class="title">my_platform_driver</span> =</span> &#123;</span><br><span class="line">    .probe = my_platform_probe,</span><br><span class="line">    .remove = my_platform_remove,</span><br><span class="line">    .driver = &#123;</span><br><span class="line">        .name = <span class="string">&quot;my_platform_device&quot;</span>,</span><br><span class="line">        .owner = THIS_MODULE,</span><br><span class="line">		.of_match_table =  of_match_table_id,</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 模块初始化函数</span></span><br><span class="line"><span class="type">static</span> <span class="type">int</span> __init <span class="title function_">my_platform_driver_init</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> ret;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 注册平台驱动</span></span><br><span class="line">    ret = platform_driver_register(&amp;my_platform_driver);</span><br><span class="line">    <span class="keyword">if</span> (ret) &#123;</span><br><span class="line">        printk(KERN_ERR <span class="string">&quot;Failed to register platform driver\n&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    printk(KERN_INFO <span class="string">&quot;my_platform_driver: Platform driver initialized\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 模块退出函数</span></span><br><span class="line"><span class="type">static</span> <span class="type">void</span> __exit <span class="title function_">my_platform_driver_exit</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 注销平台驱动</span></span><br><span class="line">    platform_driver_unregister(&amp;my_platform_driver);</span><br><span class="line">    printk(KERN_INFO <span class="string">&quot;my_platform_driver: Platform driver exited\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">module_init(my_platform_driver_init);</span><br><span class="line">module_exit(my_platform_driver_exit);</span><br><span class="line"></span><br><span class="line">MODULE_LICENSE(<span class="string">&quot;GPL&quot;</span>);</span><br><span class="line">MODULE_AUTHOR(<span class="string">&quot;topeet&quot;</span>);</span><br></pre></td></tr></table></figure>
-
-<h2 id="66-3-运行测试"><a href="#66-3-运行测试" class="headerlink" title="66.3 运行测试"></a>66.3 运行测试</h2><h3 id="66-3-1-编译驱动程序"><a href="#66-3-1-编译驱动程序" class="headerlink" title="66.3.1 编译驱动程序"></a>66.3.1 编译驱动程序</h3><p>在上一小节中的platform_driver.c代码同一目录下创建 Makefile 文件，Makefile 文件内容如下所示：</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> ARCH=arm64<span class="comment">#设置平台架构</span></span><br><span class="line"><span class="keyword">export</span> CROSS_COMPILE=aarch64-linux-gnu-<span class="comment">#交叉编译器前缀</span></span><br><span class="line">obj-m += platform_driver.o    <span class="comment">#此处要和你的驱动源文件同名</span></span><br><span class="line">KDIR :=/home/topeet/Linux/linux_sdk/kernel    <span class="comment">#这里是你的内核目录                                                                                                                            </span></span><br><span class="line">PWD ?= <span class="variable">$(<span class="built_in">shell</span> pwd)</span></span><br><span class="line"><span class="section">all:</span></span><br><span class="line">    make -C <span class="variable">$(KDIR)</span> M=<span class="variable">$(PWD)</span> modules    <span class="comment">#make操作</span></span><br><span class="line"><span class="section">clean:</span></span><br><span class="line">    make -C <span class="variable">$(KDIR)</span> M=<span class="variable">$(PWD)</span> clean    <span class="comment">#make clean操作</span></span><br></pre></td></tr></table></figure>
-
-<p>对于Makefile的内容注释已在上图添加，保存退出之后，来到存放platform_driver.c和Makefile文件目录下，如下图（图66-1）所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309062024273.jpeg" alt="img"> </p>
-<p>图 66-1</p>
-<p>然后使用命令“make”进行驱动的编译，编译完成如下图（图66-2）所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309062024325.jpeg" alt="img"> </p>
-<p>图 66-2</p>
-<p>编译完生成platform_driver.ko目标文件，如下图（图66-3）所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309062024321.jpeg" alt="img"> </p>
-<p>图 66-3</p>
-<p>至此驱动模块就编译成功了。</p>
-<h3 id="66-3-2-运行测试"><a href="#66-3-2-运行测试" class="headerlink" title="66.3.2 运行测试"></a>66.3.2 运行测试</h3><p>在进行实验之前，首先要确保开发板烧写的是我们在65.2.1小节中编译出来的boot.img，开发板启动之后，使用以下命令进行驱动模块的加载，如下图（图66-4）所示：</p>
-<p>insmod platform_driver.ko</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309062024311.jpeg" alt="img"> </p>
-<p>图 66-4</p>
-<p>可以看到总共有4个打印，前两个打印都是查找的myLed节点，第三个打印是查找的myLed的父节点，也就是topeet节点，第四个打印是查找的topeet的子节点，也就又回到了myLed节点。第5个打印是通过compatible属性查找到的myLed节点，第6个打印是通过of_device_id匹配表查找到的myLed节点.</p>
-<p>然后使用以下命令进行驱动模块的卸载，如下图（图66-5）所示：</p>
-<p>rmmod platform_driver.ko</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309062024287.jpeg" alt="img"> </p>
-<p>图 66-5</p>
 <p>至此，使用of操作函数获取设备树节点实验就完成了。</p>
  
       <!-- reward -->

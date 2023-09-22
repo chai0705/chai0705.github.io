@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+  
+
+    <head>
+      <meta charset="utf-8" />
+        
+      <meta name="description" content="永远年轻，永远热泪盈眶" />
+      
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>0-15 ubuntu22构建 |  热爱学习的未来酱</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      
+<link rel="stylesheet" href="/css/fonts/remixicon.css">
+
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    <link rel="alternate" href="/atom.xml" title="热爱学习的未来酱" type="application/atom+xml">
+</head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+      <canvas width="1777" height="841"
+        style="position: fixed; left: 0px; top: 0px; z-index: 99999; pointer-events: none;"></canvas>
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-0-15 ubuntu22构建"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  0-15 ubuntu22构建
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/09/22/0-15%20ubuntu22%E6%9E%84%E5%BB%BA/" class="article-date">
+  <time datetime="2023-09-22T00:02:33.000Z" itemprop="datePublished">2023-09-22</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E9%A6%99%E6%A9%99%E6%B4%BE%E6%9E%84%E5%BB%BA%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/">香橙派构建脚本分析</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">6k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">37 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>最终定位的内容如下所示：xfce ubuntu22</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br><span class="line">341</span><br><span class="line">342</span><br><span class="line">343</span><br><span class="line">344</span><br><span class="line">345</span><br><span class="line">346</span><br><span class="line">347</span><br><span class="line">348</span><br><span class="line">349</span><br><span class="line">350</span><br><span class="line">351</span><br><span class="line">352</span><br><span class="line">353</span><br><span class="line">354</span><br><span class="line">355</span><br><span class="line">356</span><br><span class="line">357</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">MV packages</span></span><br><span class="line">cp ../packages $&#123;chroot_dir&#125; -r </span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Mount the temporary API filesystems</span></span><br><span class="line">mkdir -p $&#123;chroot_dir&#125;/&#123;proc,sys,run,dev,dev/pts&#125;</span><br><span class="line">mount -t proc /proc $&#123;chroot_dir&#125;/proc</span><br><span class="line">mount -t sysfs /sys $&#123;chroot_dir&#125;/sys</span><br><span class="line">mount -o bind /dev $&#123;chroot_dir&#125;/dev</span><br><span class="line">mount -o bind /dev/pts $&#123;chroot_dir&#125;/dev/pts</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">cat &lt;&lt; EOF | chroot $&#123;chroot_dir&#125; /bin/bash</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">RKAIQ</span></span><br><span class="line">dpkg -i /packages/rkaiq/camera-engine-rkaiq_rk3588_arm64.deb</span><br><span class="line">cp -f /packages/rkaiq/rkaiq_3A_server /usr/bin</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">RGA</span></span><br><span class="line">dpkg -i /packages/rga2/librga-dev_2.2.0-1_arm64.deb</span><br><span class="line">dpkg -i /packages/rga2/librga2_2.2.0-1_arm64.deb</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">cat &lt;&lt; EOF | chroot $&#123;chroot_dir&#125; /bin/bash</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Download some softwares</span></span><br><span class="line">apt-get -y install libaacs0 libavdevice58 libavfilter7 libavformat58 libbdplus0 libblas3 libbluray2  \</span><br><span class="line">libcdio-cdda2 libcdio-paranoia2 libgfortran5 liblapack3 liblua5.2-0 libmujs1 libmysofa1 \</span><br><span class="line">libnorm1 libpgm-5.3-0 libplacebo192 libpocketsphinx3 libpostproc55 librabbitmq4 librubberband2 \</span><br><span class="line">libsixel1 libsphinxbase3 libssh-gcrypt-4 libswscale5 libudfread0 libva-wayland2 libvidstab1.1 \</span><br><span class="line">libvulkan1  libzimg2 libzmq5 mesa-vulkan-drivers pocketsphinx-en-us \</span><br><span class="line">bzip2 libblkid-dev libdpkg-perl libdw-dev libelf-dev libffi-dev libfile-fcntllock-perl \</span><br><span class="line">libglib2.0-dev libglib2.0-dev-bin liblzma-dev libmount-dev libpcre16-3 libpcre2-32-0 \</span><br><span class="line">libpcre2-dev libpcre2-posix3 libpcre3-dev libpcre32-3 libpcrecpp0v5 libselinux1-dev  \</span><br><span class="line">libsepol-dev  libunwind-dev pkg-config python3-distutils python3-lib2to3 uuid-dev zlib1g-dev  \</span><br><span class="line">gir1.2-gudev-1.0 libdrm-dev libdrm-etnaviv1 libdrm-freedreno1 libdrm-tegra0 libgudev-1.0-dev  \</span><br><span class="line">liborc-0.4-dev liborc-0.4-dev-bin libpciaccess-dev libpciaccess0 libudev-dev libwayland-bin \</span><br><span class="line">libwayland-dev libx11-xcb-dev   bubblewrap gdal-data ibverbs-providers libaec0 libarmadillo10 libarpack2  \</span><br><span class="line">libavcodec-dev libavformat-dev  libavutil-dev libblosc1 libcfitsio9 libcharls2 libdc1394-dev libdeflate-dev \</span><br><span class="line">libevent-pthreads-2.1-7 libexif-dev libexif-doc libexif12 libfabric1 libfreexl1 libfyba0  \</span><br><span class="line">libgdal30 libgdcm-dev libgdcm3.0 libgeos-c1v5 libgeos3.10.2 libgeotiff5 libgif7 libgl2ps1.4 \</span><br><span class="line">libglew2.2 libgphoto2-6 libgphoto2-dev libgphoto2-l10n libgphoto2-port12 libharfbuzz-icu0 \</span><br><span class="line">libhdf4-0-alt libhdf5-103-1 libhdf5-hl-100 libhwloc-plugins libhwloc15 libibverbs1 libilmbase-dev libjbig-dev libjpeg-dev  \</span><br><span class="line">libjpeg-turbo8-dev libjpeg8-dev libjsoncpp25 libkmlbase1 libkmldom1 libkmlengine1 liblept5 libminizip1   \</span><br><span class="line">libmysqlclient21 libnetcdf19 libodbc2 libodbcinst2 libogdi4.1 libopencv-calib3d-dev libopencv-calib3d4.5d  \</span><br><span class="line">libopencv-contrib-dev libopencv-contrib4.5d libopencv-core-dev libopencv-core4.5d libopencv-dev \</span><br><span class="line">libopencv-dnn-dev libopencv-dnn4.5d libopencv-features2d-dev libopencv-features2d4.5d \</span><br><span class="line">libopencv-flann-dev libopencv-flann4.5d libopencv-highgui-dev libopencv-highgui4.5d libopencv-imgcodecs-dev \</span><br><span class="line">libopencv-imgcodecs4.5d libopencv-imgproc-dev libopencv-imgproc4.5d libopencv-ml-dev libopencv-ml4.5d  \</span><br><span class="line">libopencv-objdetect-dev libopencv-objdetect4.5d libopencv-photo-dev libopencv-photo4.5d libopencv-shape-dev \</span><br><span class="line">libopencv-shape4.5d libopencv-stitching-dev  libopencv-stitching4.5d libopencv-superres-dev libopencv-superres4.5d \</span><br><span class="line">libopencv-video-dev libopencv-video4.5d libopencv-videoio-dev libopencv-videoio4.5d libopencv-videostab-dev \</span><br><span class="line">libopencv-videostab4.5d libopencv-viz-dev libopencv-viz4.5d libopencv4.5-java libopencv4.5d-jni libopenexr-dev \</span><br><span class="line">libopenmpi3 libpmix2 libpng-dev libpng-tools libpoppler118 libpq5 libproj22 libprotobuf23 libqhull-r8.0 libraw1394-dev \</span><br><span class="line">libraw1394-tools librdmacm1 librttopo1 libsocket++1 libspatialite7 libsuperlu5 libswresample-dev libswscale-dev libsz2 \</span><br><span class="line">libtbb-dev libtbb12 libtbb2 libtbbmalloc2 libtesseract4 libtiff-dev libtiffxx5 libtk8.6 libucx0 liburiparser1 libvtk9.1 \</span><br><span class="line">libwoff1 libwpe-1.0-1 libwpebackend-fdo-1.0-1 libwpewebkit-1.0-3 libxerces-c3.2 libxft2 libxnvctrl0 mysql-common  \</span><br><span class="line">opencv-data proj-bin proj-data  unixodbc-common xdg-dbus-proxy libqt5opengl5 libcanberra0 libpipewire-0.3-0  \</span><br><span class="line">libpipewire-0.3-common libpipewire-0.3-modules libspa-0.2-modules libtdb1 pipewire pipewire-bin  \</span><br><span class="line">pipewire-media-session rtkit sound-theme-freedesktop pip qt5-image-formats-plugins qtwayland5 blueman \</span><br><span class="line">libegl-dev libgbm-dev libgl-dev libgles-dev libgles1 libgles2 libglx-dev</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">cat &lt;&lt; EOF | chroot $&#123;chroot_dir&#125; /bin/bash</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Video Gstreamer</span></span><br><span class="line">apt-get -y install gstreamer1.0-plugins-bad gstreamer1.0-plugins-base gstreamer1.0-plugins-ugly gstreamer1.0-tools gstreamer1.0-alsa \</span><br><span class="line">gstreamer1.0-plugins-base-apps qtmultimedia5-examples gstreamer1.0-x libxv1 libgstreamer-gl1.0-0 \</span><br><span class="line">gstreamer1.0-pulseaudio gstreamer1.0-qt5 libqt5x11extras5 libgstreamer-plugins-good1.0-dev</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">mpp</span></span><br><span class="line">dpkg -i /packages/mpp/librockchip-mpp1_1.5.0-1.2_arm64.deb</span><br><span class="line">dpkg -i /packages/mpp/librockchip-mpp-dev_1.5.0-1.2_arm64.deb</span><br><span class="line">dpkg -i /packages/mpp/librockchip-vpu0_1.5.0-1.2_arm64.deb</span><br><span class="line">dpkg -i /packages/mpp/rockchip-mpp-demos_1.5.0-1.2_arm64.deb</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">gst-rkmpp</span></span><br><span class="line">dpkg -i /packages/gst-rkmpp/gstreamer1.0-rockchip1_1.14-4_arm64.deb</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">gstreamer</span></span><br><span class="line">dpkg -i /packages/gstreamer/gir1.2-gstreamer-1.0_1.20.3-0ubuntu1_arm64.deb</span><br><span class="line">dpkg -i /packages/gstreamer/gstreamer1.0-tools_1.20.3-0ubuntu1_arm64.deb</span><br><span class="line">dpkg -i /packages/gstreamer/libgstreamer1.0-0_1.20.3-0ubuntu1_arm64.deb</span><br><span class="line">dpkg -i /packages/gstreamer/libgstreamer1.0-dev_1.20.3-0ubuntu1_arm64.deb</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">gst-plugins-base1.0</span></span><br><span class="line">dpkg -i /packages/gst-plugins-base1.0/gir1.2-gst-plugins-base-1.0_1.20.3-1_arm64.deb</span><br><span class="line">dpkg -i /packages/gst-plugins-base1.0/gstreamer1.0-alsa_1.20.3-1_arm64.deb</span><br><span class="line">dpkg -i /packages/gst-plugins-base1.0/gstreamer1.0-gl_1.20.3-1_arm64.deb</span><br><span class="line">dpkg -i /packages/gst-plugins-base1.0/gstreamer1.0-plugins-base_1.20.3-1_arm64.deb</span><br><span class="line">dpkg -i /packages/gst-plugins-base1.0/gstreamer1.0-plugins-base-apps_1.20.3-1_arm64.deb</span><br><span class="line">dpkg -i /packages/gst-plugins-base1.0/gstreamer1.0-x_1.20.3-1_arm64.deb</span><br><span class="line">dpkg -i /packages/gst-plugins-base1.0/libgstreamer-gl1.0-0_1.20.3-1_arm64.deb</span><br><span class="line">dpkg -i /packages/gst-plugins-base1.0/libgstreamer-plugins-base1.0-0_1.20.3-1_arm64.deb</span><br><span class="line">dpkg -i /packages/gst-plugins-base1.0/libgstreamer-plugins-base1.0-dev_1.20.3-1_arm64.deb</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">gst-plugins-bad1.0</span></span><br><span class="line">dpkg -i /packages/gst-plugins-bad1.0/libgstreamer-plugins-bad1.0-0_1.20.3-0ubuntu1_arm64.deb</span><br><span class="line">dpkg -i /packages/gst-plugins-bad1.0/gir1.2-gst-plugins-bad-1.0_1.20.3-0ubuntu1_arm64.deb</span><br><span class="line">dpkg -i /packages/gst-plugins-bad1.0/libgstreamer-opencv1.0-0_1.20.3-0ubuntu1_arm64.deb</span><br><span class="line">dpkg -i /packages/gst-plugins-bad1.0/gstreamer1.0-opencv_1.20.3-0ubuntu1_arm64.deb</span><br><span class="line">dpkg -i /packages/gst-plugins-bad1.0/gstreamer1.0-plugins-bad_1.20.3-0ubuntu1_arm64.deb</span><br><span class="line">dpkg -i /packages/gst-plugins-bad1.0/gstreamer1.0-plugins-bad-apps_1.20.3-0ubuntu1_arm64.deb</span><br><span class="line">dpkg -i /packages/gst-plugins-bad1.0/gstreamer1.0-wpe_1.20.3-0ubuntu1_arm64.deb</span><br><span class="line">dpkg -i /packages/gst-plugins-bad1.0/libgstreamer-plugins-bad1.0-dev_1.20.3-0ubuntu1_arm64.deb</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">gst-plugins-good1.0</span></span><br><span class="line">dpkg -i /packages/gst-plugins-good1.0/gstreamer1.0-gtk3_1.20.3-0ubuntu1_arm64.deb</span><br><span class="line">dpkg -i /packages/gst-plugins-good1.0/gstreamer1.0-plugins-good_1.20.3-0ubuntu1_arm64.deb</span><br><span class="line">dpkg -i /packages/gst-plugins-good1.0/gstreamer1.0-pulseaudio_1.20.3-0ubuntu1_arm64.deb</span><br><span class="line">dpkg -i /packages/gst-plugins-good1.0/gstreamer1.0-qt5_1.20.3-0ubuntu1_arm64.deb</span><br><span class="line">dpkg -i /packages/gst-plugins-good1.0/libgstreamer-plugins-good1.0-0_1.20.3-0ubuntu1_arm64.deb</span><br><span class="line">dpkg -i /packages/gst-plugins-good1.0/libgstreamer-plugins-good1.0-dev_1.20.3-0ubuntu1_arm64.deb</span><br><span class="line">apt --fix-broken -y install</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Camera</span></span><br><span class="line">dpkg -i /packages/libv4l/libdvbv5-0_1.22.1-2build1_arm64.deb</span><br><span class="line">dpkg -i /packages/libv4l/dvb-tools_1.22.1-2build1_arm64.deb</span><br><span class="line">dpkg -i /packages/libv4l/ir-keytable_1.22.1-2build1_arm64.deb</span><br><span class="line">dpkg -i /packages/libv4l/libdvbv5-dev_1.22.1-2build1_arm64.deb</span><br><span class="line">dpkg -i /packages/libv4l/libdvbv5-doc_1.22.1-2build1_all.deb</span><br><span class="line">dpkg -i /packages/libv4l/libv4l-0_1.22.1-2build1_arm64.deb</span><br><span class="line">dpkg -i /packages/libv4l/libv4l2rds0_1.22.1-2build1_arm64.deb</span><br><span class="line">dpkg -i /packages/libv4l/libv4lconvert0_1.22.1-2build1_arm64.deb</span><br><span class="line">dpkg -i /packages/libv4l/libv4l-dev_1.22.1-2build1_arm64.deb</span><br><span class="line">dpkg -i /packages/libv4l/libv4l-rkmpp_1.5.1-1.1_arm64.deb</span><br><span class="line">dpkg -i /packages/libv4l/v4l-utils_1.22.1-2build1_arm64.deb</span><br><span class="line">dpkg -i /packages/libv4l/qv4l2_1.22.1-2build1_arm64.deb</span><br><span class="line"></span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">cat &lt;&lt; EOF | chroot $&#123;chroot_dir&#125; /bin/bash</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Install Desktop</span></span><br><span class="line">apt-get install -y xubuntu-core libbrotli-dev libfontenc-dev libfreetype-dev libfreetype6-dev libpixman-1-dev libxcvt-dev libxfont-dev libxkbfile-dev mesa-common-dev</span><br><span class="line">apt-get remove -y gdm3 ubuntu-session</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">xserver</span></span><br><span class="line">dpkg -i /packages/xserver/xserver-xorg-core_21.1.3-2ubuntu2_arm64.deb</span><br><span class="line">dpkg -i /packages/xserver/xserver-common_21.1.3-2ubuntu2_all.deb</span><br><span class="line">dpkg -i /packages/xserver/xserver-xorg-dev_21.1.3-2ubuntu2_arm64.deb</span><br><span class="line">dpkg -i /packages/xserver/xserver-xorg-legacy_21.1.3-2ubuntu2_arm64.deb</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">DRM</span></span><br><span class="line">dpkg -i /packages/libdrm/libkms1_2.4.110-1ubuntu1_arm64.deb</span><br><span class="line">dpkg -i /packages/libdrm-cursor/libdrm-cursor_1.4.0-1_arm64.deb</span><br><span class="line">dpkg -i /packages/libdrm-cursor/libdrm-cursor-dev_1.4.0-1_arm64.deb</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">GPU</span></span><br><span class="line">dpkg -i /packages/libmali/libmali-valhall-g610-g6p0-x11_1.9-1_arm64.deb</span><br><span class="line">cp /packages/libmali/mali_csffw.bin /lib/firmware/</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">ffmpeg</span></span><br><span class="line">dpkg -i /packages/ffmpeg/libavutil56_4.4.2-0ubuntu0.22.04.1_arm64.deb</span><br><span class="line">dpkg -i /packages/ffmpeg/libavutil-dev_4.4.2-0ubuntu0.22.04.1_arm64.deb</span><br><span class="line">dpkg -i /packages/ffmpeg/libpostproc55_4.4.2-0ubuntu0.22.04.1_arm64.deb</span><br><span class="line">dpkg -i /packages/ffmpeg/libpostproc-dev_4.4.2-0ubuntu0.22.04.1_arm64.deb</span><br><span class="line">dpkg -i /packages/ffmpeg/libswresample3_4.4.2-0ubuntu0.22.04.1_arm64.deb</span><br><span class="line">dpkg -i /packages/ffmpeg/libswresample-dev_4.4.2-0ubuntu0.22.04.1_arm64.deb</span><br><span class="line">dpkg -i /packages/ffmpeg/libswscale5_4.4.2-0ubuntu0.22.04.1_arm64.deb</span><br><span class="line">dpkg -i /packages/ffmpeg/libswscale-dev_4.4.2-0ubuntu0.22.04.1_arm64.deb</span><br><span class="line">dpkg -i /packages/ffmpeg/libavcodec58_4.4.2-0ubuntu0.22.04.1_arm64.deb</span><br><span class="line">dpkg -i /packages/ffmpeg/libavcodec-dev_4.4.2-0ubuntu0.22.04.1_arm64.deb</span><br><span class="line">dpkg -i /packages/ffmpeg/libavformat58_4.4.2-0ubuntu0.22.04.1_arm64.deb</span><br><span class="line">dpkg -i /packages/ffmpeg/libavformat-dev_4.4.2-0ubuntu0.22.04.1_arm64.deb</span><br><span class="line">dpkg -i /packages/ffmpeg/libavfilter7_4.4.2-0ubuntu0.22.04.1_arm64.deb</span><br><span class="line">dpkg -i /packages/ffmpeg/libavfilter-dev_4.4.2-0ubuntu0.22.04.1_arm64.deb</span><br><span class="line">dpkg -i /packages/ffmpeg/libavdevice58_4.4.2-0ubuntu0.22.04.1_arm64.deb</span><br><span class="line">dpkg -i /packages/ffmpeg/libavdevice-dev_4.4.2-0ubuntu0.22.04.1_arm64.deb</span><br><span class="line">dpkg -i /packages/ffmpeg/ffmpeg_4.4.2-0ubuntu0.22.04.1_arm64.deb</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">mpv</span></span><br><span class="line">rm /etc/mpv/mpv.conf</span><br><span class="line">dpkg -i /packages/mpv/libmpv1_0.34.1-1ubuntu3_arm64.deb</span><br><span class="line">dpkg -i /packages/mpv/libmpv-dev_0.34.1-1ubuntu3_arm64.deb</span><br><span class="line">dpkg -i /packages/mpv/mpv_0.34.1-1ubuntu3_arm64.deb</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">chromium</span></span><br><span class="line">dpkg -i /packages/chromium-x11/chromium-codecs-ffmpeg-extra_110.0.5481.4-debian11~bullseye~rkmpp20230130+1_arm64.deb</span><br><span class="line">dpkg -i /packages/chromium-x11/chromium-browser_110.0.5481.4-debian11~bullseye~rkmpp20230130+1_arm64.deb</span><br><span class="line">mkdir -p /etc/chromium-browser/</span><br><span class="line">cp /packages/chromium-x11/default /etc/chromium-browser/</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">parpare</span></span><br><span class="line">sed -i &#x27;5aexport LD_PRELOAD=libdrm-cursor.so.1&#x27; /usr/bin/X</span><br><span class="line">ln -rsf /usr/lib/*/libv4l2.so /usr/lib/</span><br><span class="line">cd /usr/lib/aarch64-linux-gnu/dri/</span><br><span class="line">cp kms_swrast_dri.so swrast_dri.so rockchip_dri.so /</span><br><span class="line">rm /usr/lib/aarch64-linux-gnu/dri/*.so</span><br><span class="line">mv /*.so /usr/lib/aarch64-linux-gnu/dri/</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">GPU <span class="built_in">test</span></span></span><br><span class="line">dpkg -i /packages/glmark2/libjpeg62-turbo_1.5.1-2_arm64.deb</span><br><span class="line">dpkg -i /packages/glmark2/glmark2*deb</span><br><span class="line"></span><br><span class="line">apt --fix-broken -y install</span><br><span class="line">apt-mark hold xserver-common xserver-xorg-core xserver-xorg-legacy</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">opencv-python</span></span><br><span class="line">pip install opencv-python -i https://pypi.mirrors.ustc.edu.cn/simple/</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">clean deb</span></span><br><span class="line">rm -rf /packages</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Clean package cache</span></span><br><span class="line">apt-get -y autoremove &amp;&amp; apt-get -y clean &amp;&amp; apt-get -y autoclean</span><br><span class="line"></span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">cat &lt;&lt; EOF | chroot $&#123;chroot_dir&#125; /bin/bash</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">usb</span></span><br><span class="line">echo &quot;dash dash/sh boolean false&quot; | debconf-set-selections</span><br><span class="line">dpkg-reconfigure dash</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">cat &lt;&lt; EOF | chroot $&#123;chroot_dir&#125; /bin/bash</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="built_in">enable</span> lightdm</span></span><br><span class="line">echo &quot;/usr/sbin/lightdm&quot; &gt; /etc/X11/default-display-manager</span><br><span class="line">DEBIAN_FRONTEND=noninteractive DEBCONF_NONINTERACTIVE_SEEN=true dpkg-reconfigure lightdm</span><br><span class="line">echo set shared/default-x-display-manager lightdm | debconf-communicate</span><br><span class="line">EOF</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Swapfile</span></span><br><span class="line">cat &lt;&lt; EOF | chroot $&#123;chroot_dir&#125; /bin/bash</span><br><span class="line">set -eE</span><br><span class="line">trap &#x27;echo Error: in $0 on line $LINENO&#x27; ERR</span><br><span class="line"></span><br><span class="line">dd if=/dev/zero of=/tmp/swapfile bs=1024 count=2097152</span><br><span class="line">chmod 600 /tmp/swapfile</span><br><span class="line">mkswap /tmp/swapfile</span><br><span class="line">mv /tmp/swapfile /swapfile</span><br><span class="line">EOF</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">lightmd/gdm</span></span><br><span class="line">cp $&#123;overlay_dir&#125;/etc/gdm3/custom.conf $&#123;chroot_dir&#125;/etc/gdm3/custom.conf</span><br><span class="line">mkdir $&#123;chroot_dir&#125;/etc/lightdm/ -p</span><br><span class="line">cp $&#123;overlay_dir&#125;/etc/lightdm/lightdm.conf $&#123;chroot_dir&#125;/etc/lightdm/lightdm.conf</span><br><span class="line">cp $&#123;overlay_dir&#125;/usr/share/lightdm/lightdm.conf.d/60-xubuntu.conf $&#123;chroot_dir&#125;/usr/share/lightdm/lightdm.conf.d/</span><br><span class="line">cp $&#123;overlay_dir&#125;/etc/profile.d/x11.sh $&#123;chroot_dir&#125;/etc/profile.d/x11.sh</span><br><span class="line">cp $&#123;overlay_dir&#125;/etc/profile.d/qtwebengine.sh $&#123;chroot_dir&#125;/etc/profile.d/qtwebengine.sh</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">no <span class="built_in">sleep</span></span></span><br><span class="line">cp $&#123;overlay_dir&#125;/etc/xdg/xdg-xubuntu/xfce4/xfconf/xfce-perchannel-xml/xfce4-power-manager.xml $&#123;chroot_dir&#125;/etc/xdg/xdg-xubuntu/xfce4/xfconf/xfce-perchannel-xml/xfce4-power-manager.xml</span><br><span class="line">cp $&#123;overlay_dir&#125;/usr/bin/screan-sleep.sh $&#123;chroot_dir&#125;/usr/bin/</span><br><span class="line">cp -r $&#123;overlay_dir&#125;/etc/systemd/system/sysinit.target.wants/screan-sleep.service  $&#123;chroot_dir&#125;/etc/systemd/system/sysinit.target.wants/</span><br><span class="line">cp $&#123;overlay_dir&#125;/usr/lib/systemd/system/screan-sleep.service $&#123;chroot_dir&#125;/usr/lib/systemd/system/</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">rfkilL</span></span><br><span class="line">cp $&#123;overlay_dir&#125;/etc/polkit-1/localauthority.conf.d/02-allow-colord.conf  $&#123;chroot_dir&#125;/etc/polkit-1/localauthority.conf.d</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Set gstreamer environment variables</span></span><br><span class="line">cp $&#123;overlay_dir&#125;/etc/profile.d/gst.sh $&#123;chroot_dir&#125;/etc/profile.d/gst.sh</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Set cogl to use gles2</span></span><br><span class="line">cp $&#123;overlay_dir&#125;/etc/profile.d/cogl.sh $&#123;chroot_dir&#125;/etc/profile.d/cogl.sh</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Set qt to use wayland</span></span><br><span class="line">cp $&#123;overlay_dir&#125;/etc/profile.d/qt.sh $&#123;chroot_dir&#125;/etc/profile.d/qt.sh</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Config file <span class="keyword">for</span> mpv</span></span><br><span class="line">mkdir $&#123;chroot_dir&#125;/etc/mpv/ -p</span><br><span class="line">cp $&#123;overlay_dir&#125;/etc/mpv/mpv.conf $&#123;chroot_dir&#125;/etc/mpv/mpv.conf</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">iqfiles(ov5695 ov13850)</span></span><br><span class="line">mkdir $&#123;chroot_dir&#125;/etc/iqfiles/ -p</span><br><span class="line">cp $&#123;overlay_dir&#125;/etc/iqfiles/* $&#123;chroot_dir&#125;/etc/iqfiles/</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Config file <span class="keyword">for</span> xorg</span></span><br><span class="line">mkdir -p $&#123;chroot_dir&#125;/etc/X11/</span><br><span class="line">cp $&#123;overlay_dir&#125;/etc/X11/* $&#123;chroot_dir&#125;/etc/X11/ -r</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Networking interfaces</span></span><br><span class="line">mkdir -p $&#123;chroot_dir&#125;/etc/NetworkManager/</span><br><span class="line">cp $&#123;overlay_dir&#125;/etc/NetworkManager/NetworkManager.conf $&#123;chroot_dir&#125;/etc/NetworkManager/NetworkManager.conf</span><br><span class="line">cp $&#123;overlay_dir&#125;/usr/lib/NetworkManager/conf.d/10-globally-managed-devices.conf $&#123;chroot_dir&#125;/usr/lib/NetworkManager/conf.d/10-globally-managed-devices.conf</span><br><span class="line">cp $&#123;overlay_dir&#125;/usr/lib/NetworkManager/conf.d/10-override-wifi-random-mac-disable.conf $&#123;chroot_dir&#125;/usr/lib/NetworkManager/conf.d/10-override-wifi-random-mac-disable.conf</span><br><span class="line">cp $&#123;overlay_dir&#125;/usr/lib/NetworkManager/conf.d/20-override-wifi-powersave-disable.conf $&#123;chroot_dir&#125;/usr/lib/NetworkManager/conf.d/20-override-wifi-powersave-disable.conf</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Set chromium inital prefrences</span></span><br><span class="line">mkdir -p $&#123;chroot_dir&#125;/usr/lib/chromium-browser</span><br><span class="line">cp $&#123;overlay_dir&#125;/usr/lib/chromium-browser/initial_preferences $&#123;chroot_dir&#125;/usr/lib/chromium-browser/initial_preferences</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Set chromium default launch args</span></span><br><span class="line">mkdir -p $&#123;chroot_dir&#125;/etc/chromium-browser</span><br><span class="line">cp $&#123;overlay_dir&#125;/etc/chromium-browser/default $&#123;chroot_dir&#125;/etc/chromium-browser/default</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Have plymouth use the framebuffer</span></span><br><span class="line">mkdir -p $&#123;chroot_dir&#125;/etc/initramfs-tools/conf-hooks.d</span><br><span class="line">cp $&#123;overlay_dir&#125;/etc/initramfs-tools/conf-hooks.d/plymouth $&#123;chroot_dir&#125;/etc/initramfs-tools/conf-hooks.d/plymouth</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Update initramfs</span></span><br><span class="line">chroot $&#123;chroot_dir&#125; /bin/bash -c &quot;update-initramfs -u&quot;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">adbd usb</span></span><br><span class="line">cp $&#123;overlay_dir&#125;/usr/bin/adbd $&#123;chroot_dir&#125;/usr/bin/</span><br><span class="line">cp $&#123;overlay_dir&#125;/etc/profile.d/usbdevice.sh $&#123;chroot_dir&#125;/etc/profile.d/</span><br><span class="line">cp -r $&#123;overlay_dir&#125;/etc/systemd/system/sysinit.target.wants/usbdevice.service  $&#123;chroot_dir&#125;/etc/systemd/system/sysinit.target.wants/</span><br><span class="line">cp $&#123;overlay_dir&#125;/usr/bin/usbdevice $&#123;chroot_dir&#125;/usr/bin/</span><br><span class="line">cp $&#123;overlay_dir&#125;/usr/lib/systemd/system/usbdevice.service $&#123;chroot_dir&#125;/usr/lib/systemd/system/</span><br><span class="line">cp $&#123;overlay_dir&#125;/usr/lib/udev/rules.d/61-usbdevice.rules $&#123;chroot_dir&#125;/usr/lib/udev/rules.d/</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Config file <span class="keyword">for</span> xorg</span></span><br><span class="line">cp $&#123;overlay_dir&#125;/etc/X11/xorg.conf.d/* $&#123;chroot_dir&#125;/etc/X11/xorg.conf.d/</span><br><span class="line">cp $&#123;overlay_dir&#125;/etc/X11/Xsession.d/* $&#123;chroot_dir&#125;/etc/X11/Xsession.d/</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"> Set cpu governor to performance</span></span><br><span class="line">cp $&#123;overlay_dir&#125;/usr/lib/systemd/system/cpu-governor-performance.service $&#123;chroot_dir&#125;/usr/lib/systemd/system/cpu-governor-performance.service</span><br><span class="line">chroot $&#123;chroot_dir&#125; /bin/bash -c &quot;systemctl enable cpu-governor-performance&quot;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Set gpu governor to performance</span></span><br><span class="line">cp $&#123;overlay_dir&#125;/usr/lib/systemd/system/gpu-governor-performance.service $&#123;chroot_dir&#125;/usr/lib/systemd/system/gpu-governor-performance.service</span><br><span class="line">chroot $&#123;chroot_dir&#125; /bin/bash -c &quot;systemctl enable gpu-governor-performance&quot;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">async</span></span><br><span class="line">mkdir -p $&#123;chroot_dir&#125;/usr/local/bin/</span><br><span class="line">cp $&#123;overlay_dir&#125;/etc/init.d/S10atomic_commit.sh  $&#123;chroot_dir&#125;/etc/init.d/</span><br><span class="line">mkdir -p $&#123;chroot_dir&#125;/etc/systemd/system/multi-user.target.wants/</span><br><span class="line">cp -r $&#123;overlay_dir&#125;/etc/systemd/system/multi-user.target.wants/async.service $&#123;chroot_dir&#125;/etc/systemd/system/multi-user.target.wants/</span><br><span class="line">cp $&#123;overlay_dir&#125;/usr/local/bin/modetest $&#123;chroot_dir&#125;/usr/local/bin/</span><br><span class="line">cp $&#123;overlay_dir&#125;/usr/lib/systemd/system/async.service $&#123;chroot_dir&#125;/usr/lib/systemd/system/async.service</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">drm</span></span><br><span class="line">mkdir -p $&#123;chroot_dir&#125;/etc/udev/rules.d</span><br><span class="line">cp $&#123;overlay_dir&#125;/etc/udev/rules.d/60-drm.rules $&#123;chroot_dir&#125;/etc/udev/rules.d/</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">pulse</span></span><br><span class="line">cp -r $&#123;overlay_dir&#125;/etc/pulse $&#123;chroot_dir&#125;/etc/pulse</span><br><span class="line">cp $&#123;overlay_dir&#125;/etc/udev/rules.d/88-rockchip-camera.rules $&#123;chroot_dir&#125;/etc/udev/rules.d/</span><br><span class="line">cp $&#123;overlay_dir&#125;/etc/udev/rules.d/90-pulseaudio-rockchip.rules $&#123;chroot_dir&#125;/etc/udev/rules.d/</span><br><span class="line">cp $&#123;overlay_dir&#125;/etc/udev/rules.d/99-rockchip-permissions.rules $&#123;chroot_dir&#125;/etc/udev/rules.d/</span><br><span class="line">cp -r $&#123;overlay_dir&#125;/usr/share/alsa $&#123;chroot_dir&#125;/usr/share/</span><br><span class="line">cp -r $&#123;overlay_dir&#125;/usr/share/pulseaudio $&#123;chroot_dir&#125;/usr/share/</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">user <span class="built_in">local</span> bin apt ros docker qt</span></span><br><span class="line">cp $&#123;overlay_dir&#125;/usr/local/bin/*  $&#123;chroot_dir&#125;/usr/local/bin</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">etc/udev/rules.d</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">qt clean display</span></span><br><span class="line">cat &lt;&lt; EOF | chroot $&#123;chroot_dir&#125; /bin/bash</span><br><span class="line">cd /usr/lib/aarch64-linux-gnu/dri/</span><br><span class="line">cp rockchip_dri.so /</span><br><span class="line">rm /usr/lib/aarch64-linux-gnu/dri/*.so</span><br><span class="line">mv /*.so /usr/lib/aarch64-linux-gnu/dri/</span><br><span class="line">rm /etc/profile.d/qt.sh</span><br><span class="line">EOF</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Umount the temporary API filesystems</span></span><br><span class="line">umount -lf $&#123;chroot_dir&#125;/dev/pts 2&gt; /dev/null || true</span><br><span class="line">umount -lf $&#123;chroot_dir&#125;/* 2&gt; /dev/null || true</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Tar the entire rootfs</span></span><br><span class="line">cd $&#123;chroot_dir&#125; &amp;&amp; XZ_OPT=&quot;-3 -T0&quot; tar -cpJf ../ubuntu-22.04.2-preinstalled-desktop-arm64.rootfs.tar.xz . &amp;&amp; cd ..</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<p>gonme ubuntu22</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br><span class="line">341</span><br><span class="line">342</span><br><span class="line">343</span><br><span class="line">344</span><br><span class="line">345</span><br><span class="line">346</span><br><span class="line">347</span><br><span class="line">348</span><br><span class="line">349</span><br><span class="line">350</span><br><span class="line">351</span><br><span class="line">352</span><br><span class="line">353</span><br><span class="line">354</span><br><span class="line">355</span><br><span class="line">356</span><br><span class="line">357</span><br><span class="line">358</span><br><span class="line">359</span><br><span class="line">360</span><br><span class="line">361</span><br><span class="line">362</span><br><span class="line">363</span><br><span class="line">364</span><br><span class="line">365</span><br><span class="line">366</span><br><span class="line">367</span><br><span class="line">368</span><br><span class="line">369</span><br><span class="line">370</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">MV packages</span></span><br><span class="line">cp ../packages $&#123;chroot_dir&#125; -r </span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Mount the temporary API filesystems</span></span><br><span class="line">mkdir -p $&#123;chroot_dir&#125;/&#123;proc,sys,run,dev,dev/pts&#125;</span><br><span class="line">mount -t proc /proc $&#123;chroot_dir&#125;/proc</span><br><span class="line">mount -t sysfs /sys $&#123;chroot_dir&#125;/sys</span><br><span class="line">mount -o bind /dev $&#123;chroot_dir&#125;/dev</span><br><span class="line">mount -o bind /dev/pts $&#123;chroot_dir&#125;/dev/pts</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">cat &lt;&lt; EOF | chroot $&#123;chroot_dir&#125; /bin/bash</span><br><span class="line">[[ -f /etc/profile.d/x11.sh ]] &amp;&amp; rm/etc/profile.d/x11.sh</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">RKAIQ</span></span><br><span class="line">dpkg -i /packages/rkaiq/camera-engine-rkaiq_rk3588_arm64.deb</span><br><span class="line">cp -f /packages/rkaiq/rkaiq_3A_server /usr/bin</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">RGA</span></span><br><span class="line">dpkg -i /packages/rga2/librga2_2.2.0-1+git220920.c1d5c71~jammy_arm64.deb</span><br><span class="line">dpkg -i /packages/rga2/librga-dev_2.2.0-1+git220920.c1d5c71~jammy_arm64.deb</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">cat &lt;&lt; EOF | chroot $&#123;chroot_dir&#125; /bin/bash</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Download some softwares</span></span><br><span class="line">apt-get -y install libaacs0 libavdevice58 libavfilter7 libavformat58 libbdplus0 libblas3 libbluray2  \</span><br><span class="line">libcdio-cdda2 libcdio-paranoia2 libgfortran5 liblapack3 liblua5.2-0 libmujs1 libmysofa1 \</span><br><span class="line">libnorm1 libpgm-5.3-0 libplacebo192 libpocketsphinx3 libpostproc55 librabbitmq4 librubberband2 \</span><br><span class="line">libsixel1 libsphinxbase3 libssh-gcrypt-4 libswscale5 libudfread0 libva-wayland2 libvidstab1.1 \</span><br><span class="line">libvulkan1  libzimg2 libzmq5 mesa-vulkan-drivers pocketsphinx-en-us \</span><br><span class="line">bzip2 libblkid-dev libdpkg-perl libdw-dev libelf-dev libffi-dev libfile-fcntllock-perl \</span><br><span class="line">libglib2.0-dev libglib2.0-dev-bin liblzma-dev libmount-dev libpcre16-3 libpcre2-32-0 \</span><br><span class="line">libpcre2-dev libpcre2-posix3 libpcre3-dev libpcre32-3 libpcrecpp0v5 libselinux1-dev  \</span><br><span class="line">libsepol-dev  libunwind-dev pkg-config python3-distutils python3-lib2to3 uuid-dev zlib1g-dev  \</span><br><span class="line">gir1.2-gudev-1.0 libdrm-dev libdrm-etnaviv1 libdrm-freedreno1 libdrm-tegra0 libgudev-1.0-dev  \</span><br><span class="line">liborc-0.4-dev liborc-0.4-dev-bin libpciaccess-dev libpciaccess0 libudev-dev libwayland-bin \</span><br><span class="line">libwayland-dev libx11-xcb-dev   bubblewrap gdal-data ibverbs-providers libaec0 libarmadillo10 libarpack2  \</span><br><span class="line">libavcodec-dev libavformat-dev  libavutil-dev libblosc1 libcfitsio9 libcharls2 libdc1394-dev libdeflate-dev \</span><br><span class="line">libevent-pthreads-2.1-7 libexif-dev libexif-doc libexif12 libfabric1 libfreexl1 libfyba0  \</span><br><span class="line">libgdal30 libgdcm-dev libgdcm3.0 libgeos-c1v5 libgeos3.10.2 libgeotiff5 libgif7 libgl2ps1.4 \</span><br><span class="line">libglew2.2 libgphoto2-6 libgphoto2-dev libgphoto2-l10n libgphoto2-port12 libharfbuzz-icu0 \</span><br><span class="line">libhdf4-0-alt libhdf5-103-1 libhdf5-hl-100 libhwloc-plugins libhwloc15 libibverbs1 libilmbase-dev libjbig-dev libjpeg-dev  \</span><br><span class="line">libjpeg-turbo8-dev libjpeg8-dev libjsoncpp25 libkmlbase1 libkmldom1 libkmlengine1 liblept5 libminizip1   \</span><br><span class="line">libmysqlclient21 libnetcdf19 libodbc2 libodbcinst2 libogdi4.1 libopencv-calib3d-dev libopencv-calib3d4.5d  \</span><br><span class="line">libopencv-contrib-dev libopencv-contrib4.5d libopencv-core-dev libopencv-core4.5d libopencv-dev \</span><br><span class="line">libopencv-dnn-dev libopencv-dnn4.5d libopencv-features2d-dev libopencv-features2d4.5d \</span><br><span class="line">libopencv-flann-dev libopencv-flann4.5d libopencv-highgui-dev libopencv-highgui4.5d libopencv-imgcodecs-dev \</span><br><span class="line">libopencv-imgcodecs4.5d libopencv-imgproc-dev libopencv-imgproc4.5d libopencv-ml-dev libopencv-ml4.5d  \</span><br><span class="line">libopencv-objdetect-dev libopencv-objdetect4.5d libopencv-photo-dev libopencv-photo4.5d libopencv-shape-dev \</span><br><span class="line">libopencv-shape4.5d libopencv-stitching-dev  libopencv-stitching4.5d libopencv-superres-dev libopencv-superres4.5d \</span><br><span class="line">libopencv-video-dev libopencv-video4.5d libopencv-videoio-dev libopencv-videoio4.5d libopencv-videostab-dev \</span><br><span class="line">libopencv-videostab4.5d libopencv-viz-dev libopencv-viz4.5d libopencv4.5-java libopencv4.5d-jni libopenexr-dev \</span><br><span class="line">libopenmpi3 libpmix2 libpng-dev libpng-tools libpoppler118 libpq5 libproj22 libprotobuf23 libqhull-r8.0 libraw1394-dev \</span><br><span class="line">libraw1394-tools librdmacm1 librttopo1 libsocket++1 libspatialite7 libsuperlu5 libswresample-dev libswscale-dev libsz2 \</span><br><span class="line">libtbb-dev libtbb12 libtbb2 libtbbmalloc2 libtesseract4 libtiff-dev libtiffxx5 libtk8.6 libucx0 liburiparser1 libvtk9.1 \</span><br><span class="line">libwoff1 libwpe-1.0-1 libwpebackend-fdo-1.0-1 libwpewebkit-1.0-3 libxerces-c3.2 libxft2 libxnvctrl0 mysql-common  \</span><br><span class="line">opencv-data proj-bin proj-data  unixodbc-common xdg-dbus-proxy libqt5opengl5 libcanberra0 libpipewire-0.3-0  \</span><br><span class="line">libpipewire-0.3-common libpipewire-0.3-modules libspa-0.2-modules libtdb1 pipewire pipewire-bin \</span><br><span class="line">pipewire-media-session rtkit sound-theme-freedesktop pip qt5-image-formats-plugins qtwayland5 blueman \</span><br><span class="line">libegl-dev libgbm-dev libgl-dev libgles-dev libgles1 libgles2 libglx-dev \</span><br><span class="line">libauthen-sasl-perl libclone-perl libdata-dump-perl libencode-locale-perl libfile-basedir-perl \</span><br><span class="line">libauthen-sasl-perl libclone-perl libdata-dump-perl libfont-afm-perl libgtkd-3-0 \</span><br><span class="line">libhtml-form-perl libhtml-format-perl libhtml-parser-perl libhtml-tagset-perl libhtml-tree-perl \</span><br><span class="line">libhttp-cookies-perl libhttp-daemon-perl libhttp-date-perl libhttp-message-perl libhttp-negotiate-perl \</span><br><span class="line">libio-html-perl libio-socket-ssl-perl libio-stringy-perl libipc-system-simple-perl libllvm11 \</span><br><span class="line">liblwp-mediatypes-perl liblwp-protocol-https-perl libmailtools-perl libnet-dbus-perl libnet-http-perl \</span><br><span class="line">libnet-smtp-ssl-perl libnet-ssleay-perl libphobos2-ldc-shared98 libtie-ixhash-perl libtimedate-perl \</span><br><span class="line">libtry-tiny-perl liburi-perl libvted-3-0 libwww-perl libwww-robotrules-perl libx11-protocol-perl \</span><br><span class="line">libxml-parser-perl libxml-twig-perl libxml-xpathengine-perl libxxf86dga1 perl-openssl-defaults tilix \</span><br><span class="line">tilix-common x11-utils xdg-utils libglvnd-core-dev libglvnd-dev libopengl-dev \</span><br><span class="line">libcec6 libcrossguid0 libfmt8 libfstrcmp0 libimagequant0 libiso9660-11 libkissfft-float131 liblirc-client0 \</span><br><span class="line">libmicrohttpd12 libp8-platform2 libraqm0 libraspberrypi0 libshairplay0 libtinyxml2.6.2v5 \</span><br><span class="line">libwayland-client++0 libwayland-cursor++0 libwayland-egl++0 mailcap mime-support python3-olefile \</span><br><span class="line">python3-pil python3-pycryptodome libjs-iscroll mesa-utils mesa-utils-bin</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">cat &lt;&lt; EOF | chroot $&#123;chroot_dir&#125; /bin/bash</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Video Gstreamer</span></span><br><span class="line">apt-get -y install gstreamer1.0-plugins-bad gstreamer1.0-plugins-base gstreamer1.0-plugins-ugly gstreamer1.0-tools gstreamer1.0-alsa \</span><br><span class="line">gstreamer1.0-plugins-base-apps qtmultimedia5-examples gstreamer1.0-x libxv1 libgstreamer-gl1.0-0 \</span><br><span class="line">gstreamer1.0-pulseaudio gstreamer1.0-qt5 libqt5x11extras5 libgstreamer-plugins-good1.0-dev</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">mpp</span></span><br><span class="line">dpkg -i /packages/mpp/librockchip-mpp1_1.5.0-1.2_arm64.deb</span><br><span class="line">dpkg -i /packages/mpp/librockchip-mpp-dev_1.5.0-1.2_arm64.deb</span><br><span class="line">dpkg -i /packages/mpp/librockchip-vpu0_1.5.0-1.2_arm64.deb</span><br><span class="line">dpkg -i /packages/mpp/rockchip-mpp-demos_1.5.0-1.2_arm64.deb</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">gst-rkmpp</span></span><br><span class="line">dpkg -i /packages/gst-rkmpp/gstreamer1.0-rockchip1_1.14-4_arm64.deb</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">gstreamer</span></span><br><span class="line">dpkg -i /packages/gstreamer/gir1.2-gstreamer-1.0_1.20.3-0ubuntu1_arm64.deb</span><br><span class="line">dpkg -i /packages/gstreamer/gstreamer1.0-tools_1.20.3-0ubuntu1_arm64.deb</span><br><span class="line">dpkg -i /packages/gstreamer/libgstreamer1.0-0_1.20.3-0ubuntu1_arm64.deb</span><br><span class="line">dpkg -i /packages/gstreamer/libgstreamer1.0-dev_1.20.3-0ubuntu1_arm64.deb</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">gst-plugins-base1.0</span></span><br><span class="line">dpkg -i /packages/gst-plugins-base1.0/gir1.2-gst-plugins-base-1.0_1.20.3-1_arm64.deb</span><br><span class="line">dpkg -i /packages/gst-plugins-base1.0/gstreamer1.0-alsa_1.20.3-1_arm64.deb</span><br><span class="line">dpkg -i /packages/gst-plugins-base1.0/gstreamer1.0-gl_1.20.3-1_arm64.deb</span><br><span class="line">dpkg -i /packages/gst-plugins-base1.0/gstreamer1.0-plugins-base_1.20.3-1_arm64.deb</span><br><span class="line">dpkg -i /packages/gst-plugins-base1.0/gstreamer1.0-plugins-base-apps_1.20.3-1_arm64.deb</span><br><span class="line">dpkg -i /packages/gst-plugins-base1.0/gstreamer1.0-x_1.20.3-1_arm64.deb</span><br><span class="line">dpkg -i /packages/gst-plugins-base1.0/libgstreamer-gl1.0-0_1.20.3-1_arm64.deb</span><br><span class="line">dpkg -i /packages/gst-plugins-base1.0/libgstreamer-plugins-base1.0-0_1.20.3-1_arm64.deb</span><br><span class="line">dpkg -i /packages/gst-plugins-base1.0/libgstreamer-plugins-base1.0-dev_1.20.3-1_arm64.deb</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">gst-plugins-bad1.0</span></span><br><span class="line">dpkg -i /packages/gst-plugins-bad1.0/libgstreamer-plugins-bad1.0-0_1.20.3-0ubuntu1_arm64.deb</span><br><span class="line">dpkg -i /packages/gst-plugins-bad1.0/gir1.2-gst-plugins-bad-1.0_1.20.3-0ubuntu1_arm64.deb</span><br><span class="line">dpkg -i /packages/gst-plugins-bad1.0/libgstreamer-opencv1.0-0_1.20.3-0ubuntu1_arm64.deb</span><br><span class="line">dpkg -i /packages/gst-plugins-bad1.0/gstreamer1.0-opencv_1.20.3-0ubuntu1_arm64.deb</span><br><span class="line">dpkg -i /packages/gst-plugins-bad1.0/gstreamer1.0-plugins-bad_1.20.3-0ubuntu1_arm64.deb</span><br><span class="line">dpkg -i /packages/gst-plugins-bad1.0/gstreamer1.0-plugins-bad-apps_1.20.3-0ubuntu1_arm64.deb</span><br><span class="line">dpkg -i /packages/gst-plugins-bad1.0/gstreamer1.0-wpe_1.20.3-0ubuntu1_arm64.deb</span><br><span class="line">dpkg -i /packages/gst-plugins-bad1.0/libgstreamer-plugins-bad1.0-dev_1.20.3-0ubuntu1_arm64.deb</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">gst-plugins-good1.0</span></span><br><span class="line">dpkg -i /packages/gst-plugins-good1.0/gstreamer1.0-gtk3_1.20.3-0ubuntu1_arm64.deb</span><br><span class="line">dpkg -i /packages/gst-plugins-good1.0/gstreamer1.0-plugins-good_1.20.3-0ubuntu1_arm64.deb</span><br><span class="line">dpkg -i /packages/gst-plugins-good1.0/gstreamer1.0-pulseaudio_1.20.3-0ubuntu1_arm64.deb</span><br><span class="line">dpkg -i /packages/gst-plugins-good1.0/gstreamer1.0-qt5_1.20.3-0ubuntu1_arm64.deb</span><br><span class="line">dpkg -i /packages/gst-plugins-good1.0/libgstreamer-plugins-good1.0-0_1.20.3-0ubuntu1_arm64.deb</span><br><span class="line">dpkg -i /packages/gst-plugins-good1.0/libgstreamer-plugins-good1.0-dev_1.20.3-0ubuntu1_arm64.deb</span><br><span class="line">apt --fix-broken -y install</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Camera</span></span><br><span class="line">dpkg -i /packages/libv4l/libdvbv5-0_1.22.1-2build1_arm64.deb</span><br><span class="line">dpkg -i /packages/libv4l/dvb-tools_1.22.1-2build1_arm64.deb</span><br><span class="line">dpkg -i /packages/libv4l/ir-keytable_1.22.1-2build1_arm64.deb</span><br><span class="line">dpkg -i /packages/libv4l/libdvbv5-dev_1.22.1-2build1_arm64.deb</span><br><span class="line">dpkg -i /packages/libv4l/libdvbv5-doc_1.22.1-2build1_all.deb</span><br><span class="line">dpkg -i /packages/libv4l/libv4l-0_1.22.1-2build1_arm64.deb</span><br><span class="line">dpkg -i /packages/libv4l/libv4l2rds0_1.22.1-2build1_arm64.deb</span><br><span class="line">dpkg -i /packages/libv4l/libv4lconvert0_1.22.1-2build1_arm64.deb</span><br><span class="line">dpkg -i /packages/libv4l/libv4l-dev_1.22.1-2build1_arm64.deb</span><br><span class="line">dpkg -i /packages/libv4l/libv4l-rkmpp_1.5.1-1.1_arm64.deb</span><br><span class="line">dpkg -i /packages/libv4l/v4l-utils_1.22.1-2build1_arm64.deb</span><br><span class="line">dpkg -i /packages/libv4l/qv4l2_1.22.1-2build1_arm64.deb</span><br><span class="line">dpkg -i /packages/libv4l/libv4l-rkmpp_1.5.1-1.1_arm64.deb</span><br><span class="line">dpkg -i /packages/libv4l/rockchip-multimedia-config_1.0.0-2+jammy_all.deb</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">cat &lt;&lt; EOF | chroot $&#123;chroot_dir&#125; /bin/bash</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Install Desktop</span></span><br><span class="line">apt-get -y install ubuntu-desktop dbus-x11 xterm pulseaudio pavucontrol qtwayland5 \</span><br><span class="line">gstreamer1.0-plugins-bad gstreamer1.0-plugins-base gstreamer1.0-plugins-good mpv \</span><br><span class="line">gstreamer1.0-tools gstreamer1.0-rockchip1 chromium-browser mali-g610-firmware malirun \</span><br><span class="line">rockchip-multimedia-config librist4 librist-dev rist-tools dvb-tools ir-keytable \</span><br><span class="line">libdvbv5-0 libdvbv5-dev libdvbv5-doc libv4l-0 libv4l2rds0 libv4lconvert0 libv4l-dev \</span><br><span class="line">libv4l-rkmpp qv4l2 v4l-utils librockchip-mpp1 librockchip-mpp-dev librockchip-vpu0 \</span><br><span class="line">rockchip-mpp-demos librga2 librga-dev libegl-mesa0 libegl1-mesa-dev libgbm-dev \</span><br><span class="line">libgl1-mesa-dev libgles2-mesa-dev libglx-mesa0 mesa-common-dev mesa-vulkan-drivers \</span><br><span class="line">mesa-utils libwidevinecdm libcanberra-pulselibbrotli-dev libfontenc-dev libfreetype-dev \</span><br><span class="line">libfreetype6-dev libpixman-1-dev libxcvt-dev libxfont-dev libxkbfile-dev mesa-common-dev</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">chromium</span></span><br><span class="line">dpkg -i /packages/chromium/chromium-codecs-ffmpeg-extra_110.0.5481.4-0ubuntu1~jammy~rkmpp20230130_arm64.deb</span><br><span class="line">dpkg -i /packages/chromium/chromium-browser_110.0.5481.4-0ubuntu1~jammy~rkmpp20230130_arm64.deb</span><br><span class="line">dpkg -i /packages/chromium/chromium-browser-l10n_110.0.5481.4-0ubuntu1~jammy~rkmpp20230130_all.deb</span><br><span class="line">dpkg -i /packages/chromium/chromium-chromedriver_110.0.5481.4-0ubuntu1~jammy~rkmpp20230130_arm64.deb</span><br><span class="line">apt --fix-broken -y install</span><br><span class="line">mkdir -p /etc/chromium-browser/</span><br><span class="line">cp /packages/chromium-x11/default /etc/chromium-browser/</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">GPU</span></span><br><span class="line">apt-get remove -y libgl1-amber-dri:arm64</span><br><span class="line">dpkg -i /packages/mesa/mali-g610-firmware_1.0.0-1_all.deb</span><br><span class="line">dpkg -i /packages/mesa/libgbm1_23.0~panfork~csf~git221210.120202c6757~j+3_arm64.deb</span><br><span class="line">dpkg -i /packages/mesa/libgbm-dev_23.0~panfork~csf~git221210.120202c6757~j+3_arm64.deb</span><br><span class="line">dpkg -i /packages/mesa/libglapi-mesa_23.0~panfork~csf~git221210.120202c6757~j+3_arm64.deb</span><br><span class="line">dpkg -i /packages/mesa/libgl1-mesa-dri_23.0~panfork~csf~git221210.120202c6757~j+3_arm64.deb</span><br><span class="line">dpkg -i /packages/mesa/libegl-mesa0_23.0~panfork~csf~git221210.120202c6757~j+3_arm64.deb</span><br><span class="line">dpkg -i /packages/mesa/libglx-mesa0_23.0~panfork~csf~git221210.120202c6757~j+3_arm64.deb</span><br><span class="line">cp /packages/libmali/mali_csffw.bin /lib/firmware/</span><br><span class="line">echo &quot;PAN_MESA_DEBUG=gofaster&quot; &gt;&gt; /etc/environment</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">ffmpeg</span></span><br><span class="line">dpkg -i /packages/ffmpeg/libavutil56_4.4.2-0ubuntu0.22.04.1_arm64.deb</span><br><span class="line">dpkg -i /packages/ffmpeg/libavutil-dev_4.4.2-0ubuntu0.22.04.1_arm64.deb</span><br><span class="line">dpkg -i /packages/ffmpeg/libpostproc55_4.4.2-0ubuntu0.22.04.1_arm64.deb</span><br><span class="line">dpkg -i /packages/ffmpeg/libpostproc-dev_4.4.2-0ubuntu0.22.04.1_arm64.deb</span><br><span class="line">dpkg -i /packages/ffmpeg/libswresample3_4.4.2-0ubuntu0.22.04.1_arm64.deb</span><br><span class="line">dpkg -i /packages/ffmpeg/libswresample-dev_4.4.2-0ubuntu0.22.04.1_arm64.deb</span><br><span class="line">dpkg -i /packages/ffmpeg/libswscale5_4.4.2-0ubuntu0.22.04.1_arm64.deb</span><br><span class="line">dpkg -i /packages/ffmpeg/libswscale-dev_4.4.2-0ubuntu0.22.04.1_arm64.deb</span><br><span class="line">dpkg -i /packages/ffmpeg/libavcodec58_4.4.2-0ubuntu0.22.04.1_arm64.deb</span><br><span class="line">dpkg -i /packages/ffmpeg/libavcodec-dev_4.4.2-0ubuntu0.22.04.1_arm64.deb</span><br><span class="line">dpkg -i /packages/ffmpeg/libavformat58_4.4.2-0ubuntu0.22.04.1_arm64.deb</span><br><span class="line">dpkg -i /packages/ffmpeg/libavformat-dev_4.4.2-0ubuntu0.22.04.1_arm64.deb</span><br><span class="line">dpkg -i /packages/ffmpeg/libavfilter7_4.4.2-0ubuntu0.22.04.1_arm64.deb</span><br><span class="line">dpkg -i /packages/ffmpeg/libavfilter-dev_4.4.2-0ubuntu0.22.04.1_arm64.deb</span><br><span class="line">dpkg -i /packages/ffmpeg/libavdevice58_4.4.2-0ubuntu0.22.04.1_arm64.deb</span><br><span class="line">dpkg -i /packages/ffmpeg/libavdevice-dev_4.4.2-0ubuntu0.22.04.1_arm64.deb</span><br><span class="line">dpkg -i /packages/ffmpeg/ffmpeg_4.4.2-0ubuntu0.22.04.1_arm64.deb</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">mpv</span></span><br><span class="line">rm /etc/mpv/mpv.conf</span><br><span class="line">dpkg -i /packages/mpv/libmpv1_0.34.1-1ubuntu3_arm64.deb</span><br><span class="line">dpkg -i /packages/mpv/libmpv-dev_0.34.1-1ubuntu3_arm64.deb</span><br><span class="line">dpkg -i /packages/mpv/mpv_0.34.1-1ubuntu3_arm64.deb</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">kodi</span></span><br><span class="line">dpkg -i /packages/kodi/kodi-bin_19.4+dfsg1-2+gles2_arm64.deb</span><br><span class="line">dpkg -i /packages/kodi/kodi-data_19.4+dfsg1-2+gles2_all.deb</span><br><span class="line">dpkg -i /packages/kodi/kodi_19.4+dfsg1-2+gles2_arm64.deb</span><br><span class="line"><span class="meta prompt_">		</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">parpare</span></span><br><span class="line">ln -rsf /usr/lib/*/libv4l2.so /usr/lib/</span><br><span class="line">[ -e /usr/lib/aarch64-linux-gnu/ ] &amp;&amp; ln -Tsf lib /usr/lib64</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">GPU <span class="built_in">test</span></span></span><br><span class="line">dpkg -i /packages/glmark2/libjpeg62-turbo_1.5.1-2_arm64.deb</span><br><span class="line">dpkg -i /packages/glmark2/glmark2*deb</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">opencv-python</span></span><br><span class="line">pip install opencv-python -i https://pypi.mirrors.ustc.edu.cn/simple/</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">clean deb</span></span><br><span class="line">rm -rf /packages</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Clean package cache</span></span><br><span class="line">apt-get -y autoremove &amp;&amp; apt-get -y clean &amp;&amp; apt-get -y autoclean</span><br><span class="line"></span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">cat &lt;&lt; EOF | chroot $&#123;chroot_dir&#125; /bin/bash</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">usb</span></span><br><span class="line">echo &quot;dash dash/sh boolean false&quot; | debconf-set-selections</span><br><span class="line">dpkg-reconfigure dash</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Swapfile</span></span><br><span class="line">cat &lt;&lt; EOF | chroot $&#123;chroot_dir&#125; /bin/bash</span><br><span class="line">set -eE</span><br><span class="line">trap &#x27;echo Error: in $0 on line $LINENO&#x27; ERR</span><br><span class="line"></span><br><span class="line">dd if=/dev/zero of=/tmp/swapfile bs=1024 count=2097152</span><br><span class="line">chmod 600 /tmp/swapfile</span><br><span class="line">mkswap /tmp/swapfile</span><br><span class="line">mv /tmp/swapfile /swapfile</span><br><span class="line">EOF</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">gdm</span></span><br><span class="line">cp $&#123;overlay_dir&#125;/usr/lib/scripts/gdm-hack.sh $&#123;chroot_dir&#125;/usr/lib/scripts/gdm-hack.sh</span><br><span class="line">cp $&#123;overlay_dir&#125;/etc/udev/rules.d/99-gdm-hack.rules $&#123;chroot_dir&#125;/etc/udev/rules.d/99-gdm-hack.rules</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Enable wayland session</span></span><br><span class="line">cp $&#123;overlay_dir&#125;/etc/gdm3/custom.conf $&#123;chroot_dir&#125;/etc/gdm3/custom.conf</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">no <span class="built_in">sleep</span></span></span><br><span class="line">cp $&#123;overlay_dir&#125;/usr/bin/screan-sleep.sh $&#123;chroot_dir&#125;/usr/bin/</span><br><span class="line">cp -r $&#123;overlay_dir&#125;/etc/systemd/system/sysinit.target.wants/screan-sleep.service  $&#123;chroot_dir&#125;/etc/systemd/system/sysinit.target.wants/</span><br><span class="line">cp $&#123;overlay_dir&#125;/usr/lib/systemd/system/screan-sleep.service $&#123;chroot_dir&#125;/usr/lib/systemd/system/</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Config file <span class="keyword">for</span> xorg</span></span><br><span class="line">mkdir -p $&#123;chroot_dir&#125;/etc/X11/xorg.conf.d</span><br><span class="line">cp $&#123;overlay_dir&#125;/etc/X11/xorg.conf.d/20-modesetting.conf $&#123;chroot_dir&#125;/etc/X11/xorg.conf.d/20-modesetting.conf</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">rfkilL</span></span><br><span class="line">cp $&#123;overlay_dir&#125;/etc/polkit-1/localauthority.conf.d/02-allow-colord.conf  $&#123;chroot_dir&#125;/etc/polkit-1/localauthority.conf.d</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Set gstreamer environment variables</span></span><br><span class="line">cp $&#123;overlay_dir&#125;/etc/profile.d/gst.sh $&#123;chroot_dir&#125;/etc/profile.d/gst.sh</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Set cogl to use gles2</span></span><br><span class="line">cp $&#123;overlay_dir&#125;/etc/profile.d/cogl.sh $&#123;chroot_dir&#125;/etc/profile.d/cogl.sh</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Set qt to use wayland</span></span><br><span class="line">cp $&#123;overlay_dir&#125;/etc/profile.d/qt.sh $&#123;chroot_dir&#125;/etc/profile.d/qt.sh</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Config file <span class="keyword">for</span> mpv</span></span><br><span class="line">mkdir $&#123;chroot_dir&#125;/etc/mpv/ -p</span><br><span class="line">cp $&#123;overlay_dir&#125;/etc/mpv/mpv.conf $&#123;chroot_dir&#125;/etc/mpv/mpv.conf</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">iqfiles(ov5695 ov13850)</span></span><br><span class="line">mkdir $&#123;chroot_dir&#125;/etc/iqfiles/ -p</span><br><span class="line">cp $&#123;overlay_dir&#125;/etc/iqfiles/* $&#123;chroot_dir&#125;/etc/iqfiles/</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Networking interfaces</span></span><br><span class="line">mkdir -p $&#123;chroot_dir&#125;/etc/NetworkManager/</span><br><span class="line">cp $&#123;overlay_dir&#125;/etc/NetworkManager/NetworkManager.conf $&#123;chroot_dir&#125;/etc/NetworkManager/NetworkManager.conf</span><br><span class="line">cp $&#123;overlay_dir&#125;/usr/lib/NetworkManager/conf.d/10-globally-managed-devices.conf $&#123;chroot_dir&#125;/usr/lib/NetworkManager/conf.d/10-globally-managed-devices.conf</span><br><span class="line">cp $&#123;overlay_dir&#125;/usr/lib/NetworkManager/conf.d/10-override-wifi-random-mac-disable.conf $&#123;chroot_dir&#125;/usr/lib/NetworkManager/conf.d/10-override-wifi-random-mac-disable.conf</span><br><span class="line">cp $&#123;overlay_dir&#125;/usr/lib/NetworkManager/conf.d/20-override-wifi-powersave-disable.conf $&#123;chroot_dir&#125;/usr/lib/NetworkManager/conf.d/20-override-wifi-powersave-disable.conf</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Set chromium inital prefrences</span></span><br><span class="line">mkdir -p $&#123;chroot_dir&#125;/usr/lib/chromium-browser</span><br><span class="line">cp $&#123;overlay_dir&#125;/usr/lib/chromium-browser/initial_preferences $&#123;chroot_dir&#125;/usr/lib/chromium-browser/initial_preferences</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Set chromium default launch args</span></span><br><span class="line">mkdir -p $&#123;chroot_dir&#125;/etc/chromium-browser</span><br><span class="line">cp $&#123;overlay_dir&#125;/etc/chromium-browser/default $&#123;chroot_dir&#125;/etc/chromium-browser/default</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Have plymouth use the framebuffer</span></span><br><span class="line">mkdir -p $&#123;chroot_dir&#125;/etc/initramfs-tools/conf-hooks.d</span><br><span class="line">cp $&#123;overlay_dir&#125;/etc/initramfs-tools/conf-hooks.d/plymouth $&#123;chroot_dir&#125;/etc/initramfs-tools/conf-hooks.d/plymouth</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Update initramfs</span></span><br><span class="line">chroot $&#123;chroot_dir&#125; /bin/bash -c &quot;update-initramfs -u&quot;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">adbd usb</span></span><br><span class="line">cp $&#123;overlay_dir&#125;/usr/bin/adbd $&#123;chroot_dir&#125;/usr/bin/</span><br><span class="line">cp $&#123;overlay_dir&#125;/etc/profile.d/usbdevice.sh $&#123;chroot_dir&#125;/etc/profile.d/</span><br><span class="line">cp -r $&#123;overlay_dir&#125;/etc/systemd/system/sysinit.target.wants/usbdevice.service  $&#123;chroot_dir&#125;/etc/systemd/system/sysinit.target.wants/</span><br><span class="line">cp $&#123;overlay_dir&#125;/usr/bin/usbdevice $&#123;chroot_dir&#125;/usr/bin/</span><br><span class="line">cp $&#123;overlay_dir&#125;/usr/lib/systemd/system/usbdevice.service $&#123;chroot_dir&#125;/usr/lib/systemd/system/</span><br><span class="line">cp $&#123;overlay_dir&#125;/usr/lib/udev/rules.d/61-usbdevice.rules $&#123;chroot_dir&#125;/usr/lib/udev/rules.d/</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"> Set cpu governor to performance</span></span><br><span class="line">cp $&#123;overlay_dir&#125;/usr/lib/systemd/system/cpu-governor-performance.service $&#123;chroot_dir&#125;/usr/lib/systemd/system/cpu-governor-performance.service</span><br><span class="line">chroot $&#123;chroot_dir&#125; /bin/bash -c &quot;systemctl enable cpu-governor-performance&quot;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Set gpu governor to performance</span></span><br><span class="line">cp $&#123;overlay_dir&#125;/usr/lib/systemd/system/gpu-governor-performance.service $&#123;chroot_dir&#125;/usr/lib/systemd/system/gpu-governor-performance.service</span><br><span class="line">chroot $&#123;chroot_dir&#125; /bin/bash -c &quot;systemctl enable gpu-governor-performance&quot;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">async</span></span><br><span class="line">mkdir -p $&#123;chroot_dir&#125;/usr/local/bin/</span><br><span class="line">cp $&#123;overlay_dir&#125;/etc/init.d/S10atomic_commit.sh  $&#123;chroot_dir&#125;/etc/init.d/</span><br><span class="line">mkdir -p $&#123;chroot_dir&#125;/etc/systemd/system/multi-user.target.wants/</span><br><span class="line">cp -r $&#123;overlay_dir&#125;/etc/systemd/system/multi-user.target.wants/async.service $&#123;chroot_dir&#125;/etc/systemd/system/multi-user.target.wants/</span><br><span class="line">cp $&#123;overlay_dir&#125;/usr/local/bin/modetest $&#123;chroot_dir&#125;/usr/local/bin/</span><br><span class="line">cp $&#123;overlay_dir&#125;/usr/lib/systemd/system/async.service $&#123;chroot_dir&#125;/usr/lib/systemd/system/async.service</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">drm</span></span><br><span class="line">mkdir -p $&#123;chroot_dir&#125;/etc/udev/rules.d</span><br><span class="line">cp $&#123;overlay_dir&#125;/etc/udev/rules.d/60-drm.rules $&#123;chroot_dir&#125;/etc/udev/rules.d/</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">pulse</span></span><br><span class="line">cp -r $&#123;overlay_dir&#125;/etc/pulse $&#123;chroot_dir&#125;/etc/pulse</span><br><span class="line">cp $&#123;overlay_dir&#125;/etc/udev/rules.d/88-rockchip-camera.rules $&#123;chroot_dir&#125;/etc/udev/rules.d/</span><br><span class="line">cp $&#123;overlay_dir&#125;/etc/udev/rules.d/90-pulseaudio-rockchip.rules $&#123;chroot_dir&#125;/etc/udev/rules.d/</span><br><span class="line">cp $&#123;overlay_dir&#125;/etc/udev/rules.d/99-rockchip-permissions.rules $&#123;chroot_dir&#125;/etc/udev/rules.d/</span><br><span class="line">cp -r $&#123;overlay_dir&#125;/usr/share/alsa $&#123;chroot_dir&#125;/usr/share/</span><br><span class="line">cp -r $&#123;overlay_dir&#125;/usr/share/pulseaudio $&#123;chroot_dir&#125;/usr/share/</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">user <span class="built_in">local</span> bin apt ros docker qt</span></span><br><span class="line">cp $&#123;overlay_dir&#125;/usr/local/bin/*  $&#123;chroot_dir&#125;/usr/local/bin</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">etc/udev/rules.d</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">qt clean display</span></span><br><span class="line">cat &lt;&lt; EOF | chroot $&#123;chroot_dir&#125; /bin/bash</span><br><span class="line">cd /usr/lib/aarch64-linux-gnu/dri/</span><br><span class="line">cp rockchip_dri.so /</span><br><span class="line">rm /usr/lib/aarch64-linux-gnu/dri/*.so</span><br><span class="line">mv /*.so /usr/lib/aarch64-linux-gnu/dri/</span><br><span class="line">rm /etc/profile.d/qt.sh</span><br><span class="line">EOF</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Umount the temporary API filesystems</span></span><br><span class="line">umount -lf $&#123;chroot_dir&#125;/dev/pts 2&gt; /dev/null || true</span><br><span class="line">umount -lf $&#123;chroot_dir&#125;/* 2&gt; /dev/null || true</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Tar the entire rootfs</span></span><br><span class="line">cd $&#123;chroot_dir&#125; &amp;&amp; XZ_OPT=&quot;-3 -T0&quot; tar -cpJf ../ubuntu-22.04.2-preinstalled-desktop-arm64.rootfs.tar.xz . &amp;&amp; cd ..</span><br></pre></td></tr></table></figure>
+
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2023/09/22/0-15%20ubuntu22%E6%9E%84%E5%BB%BA/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%91%9E%E8%8A%AF%E5%BE%AE%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/" rel="tag">瑞芯微脚本分析</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+    
+      <a href="/2023/09/18/9-1-%E5%9C%A8%E5%AE%B6%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">9-1 在家学习记录</div>
+      </a>
+    
+  </nav>
+
+  
+   
+  
+   
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2015-2023
+        <i class="ri-heart-fill heart_icon"></i> John Doe
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="热爱学习的未来酱"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/2019/about">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+ 
+<script src="/js/clickBoom2.js"></script>
+ 
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+ 
+<script src="/js/dz.js"></script>
+ 
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    
+
+  </div>
+</body>
+
+</html>

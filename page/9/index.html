@@ -160,6 +160,66 @@
     
     
     <article
+  id="post-5-10-属性声明：const"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/09/07/5-10-%E5%B1%9E%E6%80%A7%E5%A3%B0%E6%98%8E%EF%BC%9Aconst/"
+    >5.10 属性声明：const</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/09/07/5-10-%E5%B1%9E%E6%80%A7%E5%A3%B0%E6%98%8E%EF%BC%9Aconst/" class="article-date">
+  <time datetime="2023-09-07T13:14:17.000Z" itemprop="datePublished">2023-09-07</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>属性声明 <code>const</code> 用于指定函数的返回值为常量（不可修改）。它的使用方法如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int func(int a) __attribute__((const));</span><br></pre></td></tr></table></figure>
+
+<p>在这个例子中，<code>const</code> 属性应用于函数 <code>func</code>，用于指定函数的返回值为常量。</p>
+<p>具体来说，<code>const</code> 属性表示函数的返回值不依赖于除了函数参数之外的任何外部状态。也就是说，对于相同的输入，函数始终返回相同的结果，并且不会修改任何全局变量或静态变量。这种属性可以帮助编译器进行一些优化，例如函数结果的缓存或重复计算的消除。</p>
+<p>使用 <code>const</code> 属性有助于提高代码的可读性和可靠性，因为它明确了函数的行为，并更容易推断出函数是否会产生副作用。</p>
+<p>需要注意的是，使用 <code>const</code> 属性并不会强制确保函数的实现不会产生副作用或修改全局状态。它只是一种提示或约定，应该由开发者遵循。</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gun%E6%89%A9%E5%B1%95%E8%AF%AD%E6%B3%95/" rel="tag">gun扩展语法</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
   id="post-5-9-属性声明：format"
   class="article article-type-post"
   itemscope
@@ -752,59 +812,6 @@
     <footer class="article-footer">
        
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gun%E6%89%A9%E5%B1%95%E8%AF%AD%E6%B3%95/" rel="tag">gun扩展语法</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-4-16-实战-作业：实现自己的堆管理器"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/09/07/4-16-%E5%AE%9E%E6%88%98-%E4%BD%9C%E4%B8%9A%EF%BC%9A%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%B7%B1%E7%9A%84%E5%A0%86%E7%AE%A1%E7%90%86%E5%99%A8/"
-    >4-16-实战&amp;作业：实现自己的堆管理器</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/09/07/4-16-%E5%AE%9E%E6%88%98-%E4%BD%9C%E4%B8%9A%EF%BC%9A%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%B7%B1%E7%9A%84%E5%A0%86%E7%AE%A1%E7%90%86%E5%99%A8/" class="article-date">
-  <time datetime="2023-09-06T23:40:34.000Z" itemprop="datePublished">2023-09-07</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-   
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A0%86%E6%A0%88%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" rel="tag">堆栈内存管理</a></li></ul>
 
     </footer>
   </div>

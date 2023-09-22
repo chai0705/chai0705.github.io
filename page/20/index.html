@@ -160,6 +160,101 @@
     
     
     <article
+  id="post-3-7-链接过程-1-地址空间分配与链接脚本"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/09/05/3-7-%E9%93%BE%E6%8E%A5%E8%BF%87%E7%A8%8B-1-%E5%9C%B0%E5%9D%80%E7%A9%BA%E9%97%B4%E5%88%86%E9%85%8D%E4%B8%8E%E9%93%BE%E6%8E%A5%E8%84%9A%E6%9C%AC/"
+    >3.7-链接过程(1)-地址空间分配与链接脚本</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/09/05/3-7-%E9%93%BE%E6%8E%A5%E8%BF%87%E7%A8%8B-1-%E5%9C%B0%E5%9D%80%E7%A9%BA%E9%97%B4%E5%88%86%E9%85%8D%E4%B8%8E%E9%93%BE%E6%8E%A5%E8%84%9A%E6%9C%AC/" class="article-date">
+  <time datetime="2023-09-04T23:47:01.000Z" itemprop="datePublished">2023-09-05</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/c%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">c高级编程</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="3-7-1-链接的重要性"><a href="#3-7-1-链接的重要性" class="headerlink" title="3.7.1 链接的重要性"></a>3.7.1 链接的重要性</h1><p>链接（Linking）是将多个可重定位目标文件合并、组装成可执行目标文件或共享库的过程。链接器（Linker）是执行链接操作的工具或程序。</p>
+<p>链接的主要目的是解决多个目标文件之间的符号引用和地址重定位问题，使得程序能够正确地执行。</p>
+<p>链接过程包括以下主要步骤：</p>
+<ol>
+<li>地址空间分配：链接器将可执行目标文件加载到内存中的适当地址空间中。这涉及到分配代码段、数据段、堆栈等内存区域，并为每个目标文件分配适当的地址范围。</li>
+<li>符号解析：在链接过程中，符号解析是一个重要的步骤。符号解析的目的是解决符号的引用关系，将符号引用与符号定义进行匹配。在符号解析阶段，链接器会根据符号的绑定属性（如全局、局部、弱符号）来确定符号的可见性和重复定义规则。<ul>
+<li>强符号（Strong Symbols）：具有全局绑定属性的符号，优先级高于弱符号。如果存在多个强符号同名定义，链接器会报错。</li>
+<li>弱符号（Weak Symbols）：具有弱绑定属性的符号，允许在多个目标文件中重复定义。如果存在多个弱符号同名定义，并且没有对应的强符号，链接器会选择其中一个定义。</li>
+</ul>
+</li>
+<li>重定位（Relocation）：重定位是将目标文件中的地址引用转换为最终可执行文件中的实际地址的过程。在链接过程中，由于目标文件中的地址是相对于各自的节（Section）的起始地址的偏移量，因此需要进行重定位操作，将这些相对地址转换为绝对地址。重定位过程涉及到修正目标文件中的跳转、调用和数据访问等指令，使得它们指向正确的地址。</li>
+</ol>
+<h1 id="3-7-2-地址空间分配"><a href="#3-7-2-地址空间分配" class="headerlink" title="3.7.2 地址空间分配"></a>3.7.2 地址空间分配</h1><p>地址空间分配是链接过程中的一项重要任务，它确定了各个目标文件中不同段（如代码段、数据段、bss段）在最终可执行目标文件中的位置和大小。</p>
+<p>以下是地址空间分配的一般步骤：</p>
+<ol>
+<li>扫描所有目标文件：链接器会逐个扫描所有目标文件，包括主程序文件和库文件。对于每个目标文件，链接器会读取其文件头部和段表等信息。</li>
+<li>获取段信息：链接器从各个目标文件的段表中获取各个段的信息，包括段的类型（如代码段、数据段、bss段）、大小和对齐等属性。每个目标文件中的段表记录了该文件中各个段的位置和长度。</li>
+<li>确定链接地址：链接器会指定一个链接地址（linkaddr）作为起始地址，用于存放最终可执行目标文件的各个段。</li>
+<li>合并同类型段：链接器按照段的类型（代码段、数据段、bss段）顺序，将各个目标文件中相同类型的段进行合并。对于代码段和数据段，链接器会根据链接地址和各个段的偏移量（offset）计算出最终的段地址。</li>
+<li>重新计算段长度和位置：合并后，链接器会重新计算各个段的长度和位置。对于代码段和数据段，它们的长度是各个段的长度之和；而对于bss段，它的长度通常为0，因为bss段存放的是未初始化的全局变量和静态变量。</li>
+<li>处理库文件：链接器还会处理库文件，将库文件中的目标模块合并到最终的可执行目标文件中。这涉及到符号解析、重定位和符号表的更新等操作。</li>
+</ol>
+<h1 id="3-7-3-创建全局符号表"><a href="#3-7-3-创建全局符号表" class="headerlink" title="3.7.3 创建全局符号表"></a>3.7.3 创建全局符号表</h1><p>创建全局符号表是链接过程的一项关键任务，它的目的是将各个目标文件中的符号收集起来，并统一保存在一个全局符号表中。</p>
+<p>以下是创建全局符号表的一般步骤：</p>
+<ol>
+<li>扫描所有目标文件：链接器会逐个扫描所有目标文件，包括主程序文件和库文件。对于每个目标文件，链接器会读取其符号表信息。</li>
+<li>收集符号：链接器从每个目标文件的符号表中收集符号信息。符号表中包含了各个目标文件中定义和引用的符号的名称、属性和地址等信息。</li>
+<li>统一放入全局符号表：链接器将从各个目标文件中收集到的符号统一放入一个全局符号表中。全局符号表是链接器维护的一个数据结构，用于保存所有目标文件中的符号信息。</li>
+<li>相对零地址偏移：在创建全局符号表时，符号的地址仍然是相对于零地址的偏移量。这是因为在链接过程的后续阶段，还需要进行重定位操作，将符号的地址转换为最终可执行目标文件中的实际地址。</li>
+</ol>
+<h1 id="3-7-4-链接脚本"><a href="#3-7-4-链接脚本" class="headerlink" title="3.7.4 链接脚本"></a>3.7.4 链接脚本</h1><p>不同的代码段在链接过程中的组装是由链接脚本（Linker Script）来规定的。链接脚本是一个文本文件，其中包含了链接器的指令和规则，用于指导链接器如何组装各个代码段。</p>
+<p>链接脚本通常包含以下信息：</p>
+<ol>
+<li>组装顺序：链接脚本规定了各个代码段的组装顺序。根据链接脚本的指定顺序，链接器会按照代码段的顺序将它们组装到最终可执行目标文件中。</li>
+<li>起始地址：链接脚本指定了各个代码段在最终可执行目标文件中的起始地址。链接器会根据链接脚本中的地址规定，将各个代码段放置到相应的地址位置。</li>
+<li>位置对齐：链接脚本还规定了代码段的位置对齐要求。根据链接脚本中指定的对齐规则，链接器会确保代码段在最终可执行目标文件中按照规定的对齐边界进行放置。</li>
+<li>输出格式和运行平台：链接脚本可以指定输出可执行文件的格式和运行平台。这些信息对于生成符合特定格式和平台要求的可执行目标文件非常重要。</li>
+<li>入口地址：链接脚本可以指定可执行目标文件的入口地址。入口地址是程序执行的起始点，在加载和执行可执行文件时，操作系统会将控制权转移到指定的入口地址处开始执行程序。</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">oUTPUT_FORMAT( <span class="string">&quot;elf32-littlearm”</span></span><br><span class="line"><span class="string">&quot;</span>elf32-bigarm”</span><br><span class="line"><span class="string">&quot;elf32-littlearm”)</span></span><br><span class="line"><span class="string">;输出ELF麻件格式</span></span><br><span class="line"><span class="string">OUTPUT_ARCH( “arm”)</span></span><br><span class="line"><span class="string">;输出可执行文件的运行平台为arm</span></span><br><span class="line"><span class="string">ENTRY(_start)</span></span><br><span class="line"><span class="string">;程序入口地址</span></span><br><span class="line"><span class="string">SECTIONS</span></span><br><span class="line"><span class="string">;各段描述</span></span><br><span class="line"><span class="string">&#123;</span></span><br><span class="line"><span class="string">.= Ox60000000;</span></span><br><span class="line"><span class="string">;代码段起始地址</span></span><br><span class="line"><span class="string">.text:&#123;*(.text)&#125;</span></span><br><span class="line"><span class="string">;代码段描述:所有.o文件的. text</span></span><br><span class="line"><span class="string">.= Ox60200000;</span></span><br><span class="line"><span class="string">;数据段的起始地址</span></span><br><span class="line"><span class="string">.data: &#123;*(. data)&#125;</span></span><br><span class="line"><span class="string">;数据段描述</span></span><br><span class="line"><span class="string">.bss :&#123;*(. bss)&#125;</span></span><br><span class="line"><span class="string">; BSS段描述</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string"></span></span><br></pre></td></tr></table></figure>
+
+<p>在SECTIONS部分，代码段的起始地址为0x60000000，紧接着是代码段的描述；数据段的起始地址为0x60200000，后面是数据段的描述；最后是BSS段的描述。</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%BC%96%E8%AF%91%E3%80%81%E9%93%BE%E6%8E%A5%E5%92%8C%E8%BF%90%E8%A1%8C/" rel="tag">程序的编译、链接和运行</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
   id="post-3-6-编译过程-3-符号表"
   class="article article-type-post"
   itemscope
@@ -1810,112 +1905,6 @@
     <footer class="article-footer">
        
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/3588-npu/" rel="tag">3588 npu</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-0-0-0 windows搭建hexo"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/09/03/0-0-0%20windows%E6%90%AD%E5%BB%BAhexo/"
-    >windows搭建hexo</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/09/03/0-0-0%20windows%E6%90%AD%E5%BB%BAhexo/" class="article-date">
-  <time datetime="2023-09-03T01:55:17.000Z" itemprop="datePublished">2023-09-03</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/hexo/">hexo</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <p>Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 [Markdown]Daring Fireball: Markdown )（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p>
-<p>Hexo 官方中文网站: Hexo</p>
-<h1 id="第一章-前期准备"><a href="#第一章-前期准备" class="headerlink" title="第一章 前期准备"></a>第一章 前期准备</h1><h2 id="1-1-安装前所需环境介绍"><a href="#1-1-安装前所需环境介绍" class="headerlink" title="1.1 安装前所需环境介绍"></a>1.1 安装前所需环境介绍</h2><p>安装 Hexo 之前，需要确保您的 PC 中已经安装以下工具:</p>
-<p>Node.js           <a target="_blank" rel="noopener" href="https://nodejs.org/en">https://nodejs.org/en</a><br>        Git    <a target="_blank" rel="noopener" href="https://git-scm.com/">https://git-scm.com/</a><br>如果您的电脑已经具备所需工具，那么您可以直接进入第二章开始安装 Hexo 了。</p>
-<p>如果您还未安装这两款工具，那么请按照以下步骤进行安装。</p>
-<h2 id="1-2-安装-Git"><a href="#1-2-安装-Git" class="headerlink" title="1.2 安装 Git"></a>1.2 安装 Git</h2><p>官方下载地址: <a target="_blank" rel="noopener" href="https://git-scm.com/">https://git-scm.com/</a><br>注意事项: 建议选择 64-bit Git for Windows Setup，并且安装时要勾选 Add to PATH 选项</p>
-<p>win + R 在命令行输入cmd进入终端模式，输入下面指令，当显示版本则安装成功<br>git -v</p>
-<h2 id="1-3-安装-Node-js"><a href="#1-3-安装-Node-js" class="headerlink" title="1.3 安装 Node.js"></a>1.3 安装 Node.js</h2><p>官方下载地址:  <a target="_blank" rel="noopener" href="https://nodejs.org/en">https://nodejs.org/en</a><br>注意事项: 使用 Node.js 官方安装程序时，请确保勾选 Add to PATH 选项（默认已勾选）</p>
-<p>win + R 在命令行输入cmd进入终端模式，输入下面指令，当显示版本则安装成功<br>node –version</p>
-<p>至此，您已经完成了安装 Hexo 所需的所有额外环境，接下来就可以安装 Hexo 了。</p>
-<h1 id="第二章-安装-Hexo"><a href="#第二章-安装-Hexo" class="headerlink" title="第二章 安装 Hexo"></a>第二章 安装 Hexo</h1><h2 id="2-1-安装-cnpm"><a href="#2-1-安装-cnpm" class="headerlink" title="2.1 安装 cnpm"></a>2.1 安装 cnpm</h2><p>当您安装 Node.js 之后，便可以在命令行中通过 node install 命令安装您想要的程序了。但本文推荐使用 cnpm 安装 Hexo，所以需要先通过 npm install 安装 cnpm。</p>
-<p>命令:</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g cnpm --registry==https://registry.npm.taobao.org</span><br></pre></td></tr></table></figure>
-
-
-<p>说明: -g 表示进行全局安装，–registry&#x3D;&#x3D;<a target="_blank" rel="noopener" href="https://registry.npm.taobao.org/">https://registry.npm.taobao.org</a>  表示使用淘宝镜像安装 cnpm</p>
-<p>安装后验证: 在 cmd 中输入命令 cnpm -v, 可查看 cnpm 版本</p>
-<h2 id="2-2-安装-Hexo"><a href="#2-2-安装-Hexo" class="headerlink" title="2.2 安装 Hexo"></a>2.2 安装 Hexo</h2><p>命令:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cnpm install -g hexo-cli</span><br></pre></td></tr></table></figure>
-
-<p>说明: -g 表示全局安装，hexo-cli 为所安装的包<br>安装后验证: 在 cmd 中输入命令 hexo -v, 可查看 hexo 版本</p>
-<h2 id="2-3-注意事项"><a href="#2-3-注意事项" class="headerlink" title="2.3 注意事项"></a>2.3 注意事项</h2><p>建议永远安装最新版本的 Hexo，以及 [推荐的 Node.js 版本](文档 | Hexo )。<br>至此，您已成成功安装了 Hexo，接下来进入 Github 的配置吧!</p>
-<h1 id="第三章-配置-Github"><a href="#第三章-配置-Github" class="headerlink" title="第三章 配置 Github"></a>第三章 配置 Github</h1><p>如果您还没有 Gihub 账户，请注册一个 Github 账户吧!</p>
-<h2 id="3-1-在-Github-上创建仓库"><a href="#3-1-在-Github-上创建仓库" class="headerlink" title="3.1 在 Github 上创建仓库"></a>3.1 在 Github 上创建仓库</h2><p>新建一个名为: <a target="_blank" rel="noopener" href="http://username.github.io/">http://username.github.io</a>  的仓库(username 为您的 Github 用户名)<br>比如，如果您的 github 用户名是 test，那么您就新建名为 <a target="_blank" rel="noopener" href="http://test.github.io/">http://test.github.io</a>  的仓库（必须是您的用户名，其它名称无效），将来你的网站访问地址就是 <a target="_blank" rel="noopener" href="https://test.github.io/">https://test.github.io</a>  了。由此可见，每一个 github 账户最多只能创建一个这样可以直接使用域名访问的仓库。</p>
-<h2 id="3-2-配置-SSH-免密登录"><a href="#3-2-配置-SSH-免密登录" class="headerlink" title="3.2 配置 SSH 免密登录"></a>3.2 配置 SSH 免密登录</h2><p>为什么要配置这个呢？因为您提交代码肯定要拥有您的 github 权限才可以，但是直接使用用户名和密码太不安全了，所以我们使用 ssh key 来解决本地和服务器的连接问题。</p>
-<p>注: 如果您已经配置过 SSH，可跳过此步骤</p>
-<p>步骤:</p>
-<p>1、首先打开电脑文件夹，找到 C:\Users\您的用户名\ .ssh文件夹并删除(如果没有，则直接进入第二步)</p>
-<p>2、在 C:\Users\您的用户名 文件夹下右键打开 Git Bash Here 输入命令: ssh-keygen -t rsa -C “你的github登录邮箱” 生成.ssh秘钥，输入后连敲三次回车，出现下图情况代表成功</p>
-<p>3、生成了一个新的 C:\Users\您的用户名\ .ssh文件夹，打开这个文件夹，找到 .ssh\id_rsa.pub 文件，记事本打开并复制里面的内容</p>
-<p>4、打开您的 github 主页，进入个人设置 -&gt; SSH and GPG keys -&gt; New SSH key，把复制的内容粘贴进去，title 随便填，保存即可，我们的公钥就添加成功了，设置好如下图:</p>
-<p>5、检测是否设置成功:</p>
-<p>输入命令: ssh -T <a href="mailto:&#x67;&#x69;&#x74;&#64;&#103;&#105;&#x74;&#104;&#117;&#98;&#x2e;&#x63;&#x6f;&#x6d;">&#x67;&#x69;&#x74;&#64;&#103;&#105;&#x74;&#104;&#117;&#98;&#x2e;&#x63;&#x6f;&#x6d;</a></p>
-<p>看到以上信息说明 SSH 已配置成功!</p>
-<p>如果出现提示则选择yes知道成功；</p>
-<p>6、此外您还需要如下配置:</p>
-<p>命令: git config –global user.name “chai0705 “</p>
-<p>命令: git config –global user.email  <a href="mailto:&#49;&#51;&#x36;&#x31;&#x33;&#56;&#50;&#50;&#54;&#x39;&#x40;&#x71;&#x71;&#x2e;&#x63;&#111;&#109;">&#49;&#51;&#x36;&#x31;&#x33;&#56;&#50;&#50;&#54;&#x39;&#x40;&#x71;&#x71;&#x2e;&#x63;&#111;&#109;</a> </p>
-<p>至此，您已经成功配置好了 Github，接下来开始搭建个人博客吧!</p>
-<h1 id="第四章-使用-Hexo-搭建博客"><a href="#第四章-使用-Hexo-搭建博客" class="headerlink" title="第四章 使用 Hexo 搭建博客"></a>第四章 使用 Hexo 搭建博客</h1><p>Hexo 的一些命令<br>生成静态文件：hexo g；<br>清空静态文件：hexo cl；<br>在本地运行：hexo s；<br>部署到网站：hexo d；<br>生成静态文件并部署到网站：hexo d -g 或 hexo g -d；<br>创建新文章：hexo new <file>。</p>
-<h2 id="4-1-初始化"><a href="#4-1-初始化" class="headerlink" title="4.1 初始化"></a>4.1 初始化</h2><p>1、在电脑的某个磁盘或路径新建一个名为 hexo 的文件夹(名字可以随便取)，比如我的是 D:\hexo，由于这个文件夹将来就作为您存放代码的地方，所以最好不要随便放</p>
-<p>2、在 D:\hexo 文件夹下右键打开 Git Bash Here，输入命令: hexo init 进行初始化</p>
-<p>hexo 会自动下载一些文件到这个目录，包括 node_modules，目录结构如下图:</p>
-<p>3、执行命令: hexo g 会在 public 文件夹下生成相关的 html 文件，这些文件将来需要提交到 Github 上</p>
-<p>4、执行命令: hexo s 可以开启本地预览服务，打开浏览器访问 <a target="_blank" rel="noopener" href="http://localhost:4000/">http://localhost:4000</a>  即可看到博客内容</p>
-<h2 id="4-2-将博客部署到-Github"><a href="#4-2-将博客部署到-Github" class="headerlink" title="4.2 将博客部署到 Github"></a>4.2 将博客部署到 Github</h2><p>1、在 D:\hexo 目录下安装 hexo-deployer-git 插件</p>
-<p>命令: npm install hexo-deployer-git –save<br>2、编辑 D:\hexo 目录下的 _config.yml 文件，在文件末尾添加如下内容:</p>
-<p>注意: 其中 repository 中的内容即为 github 个人主页链接地址</p>
-<p>3、在 D:\hexo 目录下，输入命令: hexo d 将本地 blog 推送到 github 远程仓库，也可能需要输入 username &amp; pwd</p>
-<p>推送成功后，即可通过<a target="_blank" rel="noopener" href="https://baizhouhaoyue.github.io/%E8%AE%BF%E9%97%AE%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E4%BA%86">https://baizhouhaoyue.github.io/访问个人博客了</a> !</p>
-<p>CLASH </p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309152249472.png" alt="image-20230915224913754"></p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309152250521.png" alt="image-20230915224959370"></p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li></ul>
 
     </footer>
   </div>
