@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2023-09-22T00:34:39.575Z</updated>
+  <updated>2023-09-24T14:12:43.748Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>1-1 git的学习</title>
+    <link href="http://example.com/2023/09/22/1-1-git%E7%9A%84%E5%AD%A6%E4%B9%A0/"/>
+    <id>http://example.com/2023/09/22/1-1-git%E7%9A%84%E5%AD%A6%E4%B9%A0/</id>
+    <published>2023-09-22T13:00:47.000Z</published>
+    <updated>2023-09-24T14:12:43.748Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;&#92;assets&#92;css&#92;APlayer.min.css&quot;&gt;&lt;script src=&quot;&#92;assets&#92;js&#92;APlayer.min.js&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="git" scheme="http://example.com/categories/git/"/>
+    
+    
+    <category term="git" scheme="http://example.com/tags/git/"/>
+    
+  </entry>
   
   <entry>
     <title>0-15 ubuntu22构建</title>
@@ -71,7 +96,7 @@
     <link href="http://example.com/2023/09/17/0-14-%E9%A6%99%E6%A9%99%E6%B4%BE%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9C%80%E7%BB%88%E5%AE%9A%E4%BD%8D/"/>
     <id>http://example.com/2023/09/17/0-14-%E9%A6%99%E6%A9%99%E6%B4%BE%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9C%80%E7%BB%88%E5%AE%9A%E4%BD%8D/</id>
     <published>2023-09-17T11:02:33.000Z</published>
-    <updated>2023-09-17T11:15:26.884Z</updated>
+    <updated>2023-09-24T08:36:04.848Z</updated>
     
     
       
@@ -188,11 +213,11 @@
   </entry>
   
   <entry>
-    <title>8-20 使用模块机制分析内核</title>
-    <link href="http://example.com/2023/09/11/8-20-%E4%BD%BF%E7%94%A8%E6%A8%A1%E5%9D%97%E6%9C%BA%E5%88%B6%E5%88%86%E6%9E%90%E5%86%85%E6%A0%B8/"/>
-    <id>http://example.com/2023/09/11/8-20-%E4%BD%BF%E7%94%A8%E6%A8%A1%E5%9D%97%E6%9C%BA%E5%88%B6%E5%88%86%E6%9E%90%E5%86%85%E6%A0%B8/</id>
-    <published>2023-09-11T12:45:27.000Z</published>
-    <updated>2023-09-11T12:51:55.041Z</updated>
+    <title>0-12  .make.sh脚本的用法</title>
+    <link href="http://example.com/2023/09/10/0-12%20%20.make.sh%E8%84%9A%E6%9C%AC%E7%9A%84%E7%94%A8%E6%B3%95/"/>
+    <id>http://example.com/2023/09/10/0-12%20%20.make.sh%E8%84%9A%E6%9C%AC%E7%9A%84%E7%94%A8%E6%B3%95/</id>
+    <published>2023-09-10T09:17:09.000Z</published>
+    <updated>2023-09-13T00:24:02.422Z</updated>
     
     
       
@@ -205,19 +230,19 @@
     
     
     
-    <category term="内核编程" scheme="http://example.com/categories/%E5%86%85%E6%A0%B8%E7%BC%96%E7%A8%8B/"/>
+    <category term="瑞芯微脚本分析" scheme="http://example.com/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/"/>
     
     
-    <category term="模块机制" scheme="http://example.com/tags/%E6%A8%A1%E5%9D%97%E6%9C%BA%E5%88%B6/"/>
+    <category term="瑞芯微脚本分析" scheme="http://example.com/tags/%E7%91%9E%E8%8A%AF%E5%BE%AE%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/"/>
     
   </entry>
   
   <entry>
-    <title>8-19 模块机制实现分析（下）</title>
-    <link href="http://example.com/2023/09/11/8-19-%E6%A8%A1%E5%9D%97%E6%9C%BA%E5%88%B6%E5%AE%9E%E7%8E%B0%E5%88%86%E6%9E%90%EF%BC%88%E4%B8%8B%EF%BC%89/"/>
-    <id>http://example.com/2023/09/11/8-19-%E6%A8%A1%E5%9D%97%E6%9C%BA%E5%88%B6%E5%AE%9E%E7%8E%B0%E5%88%86%E6%9E%90%EF%BC%88%E4%B8%8B%EF%BC%89/</id>
-    <published>2023-09-11T12:45:26.000Z</published>
-    <updated>2023-09-11T12:51:51.423Z</updated>
+    <title>0-11 .make.sh rk3568编译命令执行分析（下）</title>
+    <link href="http://example.com/2023/09/10/0-11%20.make.sh%20rk3568%E7%BC%96%E8%AF%91%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E5%88%86%E6%9E%90%EF%BC%88%E4%B8%8B%EF%BC%89/"/>
+    <id>http://example.com/2023/09/10/0-11%20.make.sh%20rk3568%E7%BC%96%E8%AF%91%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E5%88%86%E6%9E%90%EF%BC%88%E4%B8%8B%EF%BC%89/</id>
+    <published>2023-09-10T09:17:08.000Z</published>
+    <updated>2023-09-13T00:23:58.766Z</updated>
     
     
       
@@ -230,19 +255,19 @@
     
     
     
-    <category term="内核编程" scheme="http://example.com/categories/%E5%86%85%E6%A0%B8%E7%BC%96%E7%A8%8B/"/>
+    <category term="瑞芯微脚本分析" scheme="http://example.com/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/"/>
     
     
-    <category term="模块机制" scheme="http://example.com/tags/%E6%A8%A1%E5%9D%97%E6%9C%BA%E5%88%B6/"/>
+    <category term="瑞芯微脚本分析" scheme="http://example.com/tags/%E7%91%9E%E8%8A%AF%E5%BE%AE%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/"/>
     
   </entry>
   
   <entry>
-    <title>8-18 模块机制实现分析（上）</title>
-    <link href="http://example.com/2023/09/11/8-18-%E6%A8%A1%E5%9D%97%E6%9C%BA%E5%88%B6%E5%AE%9E%E7%8E%B0%E5%88%86%E6%9E%90%EF%BC%88%E4%B8%8A%EF%BC%89/"/>
-    <id>http://example.com/2023/09/11/8-18-%E6%A8%A1%E5%9D%97%E6%9C%BA%E5%88%B6%E5%AE%9E%E7%8E%B0%E5%88%86%E6%9E%90%EF%BC%88%E4%B8%8A%EF%BC%89/</id>
-    <published>2023-09-11T12:45:24.000Z</published>
-    <updated>2023-09-11T12:51:49.435Z</updated>
+    <title>0-10 make.sh+rk3568编译命令执行分析（中）</title>
+    <link href="http://example.com/2023/09/10/0-10%20make.sh+rk3568%E7%BC%96%E8%AF%91%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E5%88%86%E6%9E%90%EF%BC%88%E4%B8%AD%EF%BC%89/"/>
+    <id>http://example.com/2023/09/10/0-10%20make.sh+rk3568%E7%BC%96%E8%AF%91%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E5%88%86%E6%9E%90%EF%BC%88%E4%B8%AD%EF%BC%89/</id>
+    <published>2023-09-10T09:17:07.000Z</published>
+    <updated>2023-09-13T00:23:55.290Z</updated>
     
     
       
@@ -255,19 +280,19 @@
     
     
     
-    <category term="内核编程" scheme="http://example.com/categories/%E5%86%85%E6%A0%B8%E7%BC%96%E7%A8%8B/"/>
+    <category term="瑞芯微脚本分析" scheme="http://example.com/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/"/>
     
     
-    <category term="模块机制" scheme="http://example.com/tags/%E6%A8%A1%E5%9D%97%E6%9C%BA%E5%88%B6/"/>
+    <category term="瑞芯微脚本分析" scheme="http://example.com/tags/%E7%91%9E%E8%8A%AF%E5%BE%AE%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/"/>
     
   </entry>
   
   <entry>
-    <title>8-17 模块的运行过程</title>
-    <link href="http://example.com/2023/09/11/8-17-%E6%A8%A1%E5%9D%97%E7%9A%84%E8%BF%90%E8%A1%8C%E8%BF%87%E7%A8%8B/"/>
-    <id>http://example.com/2023/09/11/8-17-%E6%A8%A1%E5%9D%97%E7%9A%84%E8%BF%90%E8%A1%8C%E8%BF%87%E7%A8%8B/</id>
-    <published>2023-09-11T12:45:23.000Z</published>
-    <updated>2023-09-11T12:51:47.185Z</updated>
+    <title>0-8 U-Boot编译过程浅析</title>
+    <link href="http://example.com/2023/09/10/0-8%20U-Boot%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E6%B5%85%E6%9E%90/"/>
+    <id>http://example.com/2023/09/10/0-8%20U-Boot%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E6%B5%85%E6%9E%90/</id>
+    <published>2023-09-10T09:17:04.000Z</published>
+    <updated>2023-09-13T00:22:12.609Z</updated>
     
     
       
@@ -280,19 +305,19 @@
     
     
     
-    <category term="内核编程" scheme="http://example.com/categories/%E5%86%85%E6%A0%B8%E7%BC%96%E7%A8%8B/"/>
+    <category term="瑞芯微脚本分析" scheme="http://example.com/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/"/>
     
     
-    <category term="模块机制" scheme="http://example.com/tags/%E6%A8%A1%E5%9D%97%E6%9C%BA%E5%88%B6/"/>
+    <category term="瑞芯微脚本分析" scheme="http://example.com/tags/%E7%91%9E%E8%8A%AF%E5%BE%AE%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/"/>
     
   </entry>
   
   <entry>
-    <title>8-16 编写一个字符驱动</title>
-    <link href="http://example.com/2023/09/11/8-16-%E7%BC%96%E5%86%99%E4%B8%80%E4%B8%AA%E5%AD%97%E7%AC%A6%E9%A9%B1%E5%8A%A8/"/>
-    <id>http://example.com/2023/09/11/8-16-%E7%BC%96%E5%86%99%E4%B8%80%E4%B8%AA%E5%AD%97%E7%AC%A6%E9%A9%B1%E5%8A%A8/</id>
-    <published>2023-09-11T12:45:21.000Z</published>
-    <updated>2023-09-11T12:51:43.176Z</updated>
+    <title>0-7 bootloader引导流程</title>
+    <link href="http://example.com/2023/09/10/0-7%20bootloader%E5%BC%95%E5%AF%BC%E6%B5%81%E7%A8%8B/"/>
+    <id>http://example.com/2023/09/10/0-7%20bootloader%E5%BC%95%E5%AF%BC%E6%B5%81%E7%A8%8B/</id>
+    <published>2023-09-10T09:17:03.000Z</published>
+    <updated>2023-09-13T00:22:02.969Z</updated>
     
     
       
@@ -305,19 +330,19 @@
     
     
     
-    <category term="内核编程" scheme="http://example.com/categories/%E5%86%85%E6%A0%B8%E7%BC%96%E7%A8%8B/"/>
+    <category term="瑞芯微脚本分析" scheme="http://example.com/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/"/>
     
     
-    <category term="模块机制" scheme="http://example.com/tags/%E6%A8%A1%E5%9D%97%E6%9C%BA%E5%88%B6/"/>
+    <category term="瑞芯微脚本分析" scheme="http://example.com/tags/%E7%91%9E%E8%8A%AF%E5%BE%AE%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/"/>
     
   </entry>
   
   <entry>
-    <title>8-15 模块间的依赖和自动加载</title>
-    <link href="http://example.com/2023/09/11/8-15-%E6%A8%A1%E5%9D%97%E9%97%B4%E7%9A%84%E4%BE%9D%E8%B5%96%E5%92%8C%E8%87%AA%E5%8A%A8%E5%8A%A0%E8%BD%BD/"/>
-    <id>http://example.com/2023/09/11/8-15-%E6%A8%A1%E5%9D%97%E9%97%B4%E7%9A%84%E4%BE%9D%E8%B5%96%E5%92%8C%E8%87%AA%E5%8A%A8%E5%8A%A0%E8%BD%BD/</id>
-    <published>2023-09-11T12:45:20.000Z</published>
-    <updated>2023-09-11T12:51:41.338Z</updated>
+    <title>0-6 uboot目录下 make.sh 脚本分析</title>
+    <link href="http://example.com/2023/09/10/0-6%20uboot%E7%9B%AE%E5%BD%95%E4%B8%8B%20make.sh%20%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/"/>
+    <id>http://example.com/2023/09/10/0-6%20uboot%E7%9B%AE%E5%BD%95%E4%B8%8B%20make.sh%20%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/</id>
+    <published>2023-09-10T09:17:02.000Z</published>
+    <updated>2023-09-13T00:21:55.267Z</updated>
     
     
       
@@ -330,19 +355,19 @@
     
     
     
-    <category term="内核编程" scheme="http://example.com/categories/%E5%86%85%E6%A0%B8%E7%BC%96%E7%A8%8B/"/>
+    <category term="瑞芯微脚本分析" scheme="http://example.com/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/"/>
     
     
-    <category term="模块机制" scheme="http://example.com/tags/%E6%A8%A1%E5%9D%97%E6%9C%BA%E5%88%B6/"/>
+    <category term="瑞芯微脚本分析" scheme="http://example.com/tags/%E7%91%9E%E8%8A%AF%E5%BE%AE%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/"/>
     
   </entry>
   
   <entry>
-    <title>8-14 多文件构成的内核模块</title>
-    <link href="http://example.com/2023/09/11/8-14-%E5%A4%9A%E6%96%87%E4%BB%B6%E6%9E%84%E6%88%90%E7%9A%84%E5%86%85%E6%A0%B8%E6%A8%A1%E5%9D%97/"/>
-    <id>http://example.com/2023/09/11/8-14-%E5%A4%9A%E6%96%87%E4%BB%B6%E6%9E%84%E6%88%90%E7%9A%84%E5%86%85%E6%A0%B8%E6%A8%A1%E5%9D%97/</id>
-    <published>2023-09-11T12:45:18.000Z</published>
-    <updated>2023-09-11T12:51:39.553Z</updated>
+    <title>0-5 SPL的编译</title>
+    <link href="http://example.com/2023/09/10/0-5%20SPL%E7%9A%84%E7%BC%96%E8%AF%91/"/>
+    <id>http://example.com/2023/09/10/0-5%20SPL%E7%9A%84%E7%BC%96%E8%AF%91/</id>
+    <published>2023-09-10T09:17:01.000Z</published>
+    <updated>2023-09-13T00:21:47.337Z</updated>
     
     
       
@@ -355,19 +380,19 @@
     
     
     
-    <category term="内核编程" scheme="http://example.com/categories/%E5%86%85%E6%A0%B8%E7%BC%96%E7%A8%8B/"/>
+    <category term="瑞芯微脚本分析" scheme="http://example.com/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/"/>
     
     
-    <category term="模块机制" scheme="http://example.com/tags/%E6%A8%A1%E5%9D%97%E6%9C%BA%E5%88%B6/"/>
+    <category term="瑞芯微脚本分析" scheme="http://example.com/tags/%E7%91%9E%E8%8A%AF%E5%BE%AE%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/"/>
     
   </entry>
   
   <entry>
-    <title>8-13 内核模块的头文件</title>
-    <link href="http://example.com/2023/09/11/8-13-%E5%86%85%E6%A0%B8%E6%A8%A1%E5%9D%97%E7%9A%84%E5%A4%B4%E6%96%87%E4%BB%B6/"/>
-    <id>http://example.com/2023/09/11/8-13-%E5%86%85%E6%A0%B8%E6%A8%A1%E5%9D%97%E7%9A%84%E5%A4%B4%E6%96%87%E4%BB%B6/</id>
-    <published>2023-09-11T12:45:16.000Z</published>
-    <updated>2023-09-11T12:51:37.689Z</updated>
+    <title>0-5 Loader的编译</title>
+    <link href="http://example.com/2023/09/10/0-5%20Loader%E7%9A%84%E7%BC%96%E8%AF%91/"/>
+    <id>http://example.com/2023/09/10/0-5%20Loader%E7%9A%84%E7%BC%96%E8%AF%91/</id>
+    <published>2023-09-10T09:17:00.000Z</published>
+    <updated>2023-09-13T00:21:37.153Z</updated>
     
     
       
@@ -380,19 +405,19 @@
     
     
     
-    <category term="内核编程" scheme="http://example.com/categories/%E5%86%85%E6%A0%B8%E7%BC%96%E7%A8%8B/"/>
+    <category term="瑞芯微脚本分析" scheme="http://example.com/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/"/>
     
     
-    <category term="模块机制" scheme="http://example.com/tags/%E6%A8%A1%E5%9D%97%E6%9C%BA%E5%88%B6/"/>
+    <category term="瑞芯微脚本分析" scheme="http://example.com/tags/%E7%91%9E%E8%8A%AF%E5%BE%AE%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/"/>
     
   </entry>
   
   <entry>
-    <title>8-12 模块的版本控制</title>
-    <link href="http://example.com/2023/09/11/8-12-%E6%A8%A1%E5%9D%97%E7%9A%84%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/"/>
-    <id>http://example.com/2023/09/11/8-12-%E6%A8%A1%E5%9D%97%E7%9A%84%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/</id>
-    <published>2023-09-11T12:45:15.000Z</published>
-    <updated>2023-09-11T12:51:35.049Z</updated>
+    <title>0-4 kernel的编译</title>
+    <link href="http://example.com/2023/09/10/0-4%20kernel%E7%9A%84%E7%BC%96%E8%AF%91/"/>
+    <id>http://example.com/2023/09/10/0-4%20kernel%E7%9A%84%E7%BC%96%E8%AF%91/</id>
+    <published>2023-09-10T09:16:59.000Z</published>
+    <updated>2023-09-13T00:21:30.088Z</updated>
     
     
       
@@ -405,19 +430,19 @@
     
     
     
-    <category term="内核编程" scheme="http://example.com/categories/%E5%86%85%E6%A0%B8%E7%BC%96%E7%A8%8B/"/>
+    <category term="瑞芯微脚本分析" scheme="http://example.com/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/"/>
     
     
-    <category term="模块机制" scheme="http://example.com/tags/%E6%A8%A1%E5%9D%97%E6%9C%BA%E5%88%B6/"/>
+    <category term="瑞芯微脚本分析" scheme="http://example.com/tags/%E7%91%9E%E8%8A%AF%E5%BE%AE%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/"/>
     
   </entry>
   
   <entry>
-    <title>8-11 EXPORT_SYMBOL</title>
-    <link href="http://example.com/2023/09/11/8-11-EXPORT-SYMBOL/"/>
-    <id>http://example.com/2023/09/11/8-11-EXPORT-SYMBOL/</id>
-    <published>2023-09-11T12:45:13.000Z</published>
-    <updated>2023-09-11T12:51:32.759Z</updated>
+    <title>0-3 uboot的编译</title>
+    <link href="http://example.com/2023/09/10/0-3%20uboot%E7%9A%84%E7%BC%96%E8%AF%91/"/>
+    <id>http://example.com/2023/09/10/0-3%20uboot%E7%9A%84%E7%BC%96%E8%AF%91/</id>
+    <published>2023-09-10T09:16:58.000Z</published>
+    <updated>2023-09-13T00:21:22.677Z</updated>
     
     
       
@@ -430,19 +455,19 @@
     
     
     
-    <category term="内核编程" scheme="http://example.com/categories/%E5%86%85%E6%A0%B8%E7%BC%96%E7%A8%8B/"/>
+    <category term="瑞芯微脚本分析" scheme="http://example.com/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/"/>
     
     
-    <category term="模块机制" scheme="http://example.com/tags/%E6%A8%A1%E5%9D%97%E6%9C%BA%E5%88%B6/"/>
+    <category term="瑞芯微脚本分析" scheme="http://example.com/tags/%E7%91%9E%E8%8A%AF%E5%BE%AE%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/"/>
     
   </entry>
   
   <entry>
-    <title>8-10 通过U-boot给内核模块传参</title>
-    <link href="http://example.com/2023/09/11/8-10-%E9%80%9A%E8%BF%87U-boot%E7%BB%99%E5%86%85%E6%A0%B8%E6%A8%A1%E5%9D%97%E4%BC%A0%E5%8F%82/"/>
-    <id>http://example.com/2023/09/11/8-10-%E9%80%9A%E8%BF%87U-boot%E7%BB%99%E5%86%85%E6%A0%B8%E6%A8%A1%E5%9D%97%E4%BC%A0%E5%8F%82/</id>
-    <published>2023-09-11T12:45:12.000Z</published>
-    <updated>2023-09-11T12:51:27.938Z</updated>
+    <title>0-2 板子的选择</title>
+    <link href="http://example.com/2023/09/10/0-2%20%E6%9D%BF%E5%AD%90%E7%9A%84%E9%80%89%E6%8B%A9/"/>
+    <id>http://example.com/2023/09/10/0-2%20%E6%9D%BF%E5%AD%90%E7%9A%84%E9%80%89%E6%8B%A9/</id>
+    <published>2023-09-10T09:16:57.000Z</published>
+    <updated>2023-09-13T00:21:01.062Z</updated>
     
     
       
@@ -455,19 +480,19 @@
     
     
     
-    <category term="内核编程" scheme="http://example.com/categories/%E5%86%85%E6%A0%B8%E7%BC%96%E7%A8%8B/"/>
+    <category term="瑞芯微脚本分析" scheme="http://example.com/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/"/>
     
     
-    <category term="模块机制" scheme="http://example.com/tags/%E6%A8%A1%E5%9D%97%E6%9C%BA%E5%88%B6/"/>
+    <category term="瑞芯微脚本分析" scheme="http://example.com/tags/%E7%91%9E%E8%8A%AF%E5%BE%AE%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/"/>
     
   </entry>
   
   <entry>
-    <title>8-9 模块参数</title>
-    <link href="http://example.com/2023/09/11/8-9-%E6%A8%A1%E5%9D%97%E5%8F%82%E6%95%B0/"/>
-    <id>http://example.com/2023/09/11/8-9-%E6%A8%A1%E5%9D%97%E5%8F%82%E6%95%B0/</id>
-    <published>2023-09-11T12:45:10.000Z</published>
-    <updated>2023-09-11T12:51:26.515Z</updated>
+    <title>0-1 瑞芯微build-sh脚本分析</title>
+    <link href="http://example.com/2023/09/10/0-1%20%E7%91%9E%E8%8A%AF%E5%BE%AEbuild-sh%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/"/>
+    <id>http://example.com/2023/09/10/0-1%20%E7%91%9E%E8%8A%AF%E5%BE%AEbuild-sh%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/</id>
+    <published>2023-09-10T09:16:56.000Z</published>
+    <updated>2023-09-13T00:21:13.183Z</updated>
     
     
       
@@ -480,35 +505,10 @@
     
     
     
-    <category term="内核编程" scheme="http://example.com/categories/%E5%86%85%E6%A0%B8%E7%BC%96%E7%A8%8B/"/>
+    <category term="瑞芯微脚本分析" scheme="http://example.com/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/"/>
     
     
-    <category term="模块机制" scheme="http://example.com/tags/%E6%A8%A1%E5%9D%97%E6%9C%BA%E5%88%B6/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>8-8 模块的Makefile分析</title>
-    <link href="http://example.com/2023/09/11/8-8-%E6%A8%A1%E5%9D%97%E7%9A%84Makefile%E5%88%86%E6%9E%90/"/>
-    <id>http://example.com/2023/09/11/8-8-%E6%A8%A1%E5%9D%97%E7%9A%84Makefile%E5%88%86%E6%9E%90/</id>
-    <published>2023-09-11T12:45:09.000Z</published>
-    <updated>2023-09-11T12:51:24.925Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;&#92;assets&#92;css&#92;APlayer.min.css&quot;&gt;&lt;script src=&quot;&#92;assets&#92;js&#92;APlayer.min.js&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="内核编程" scheme="http://example.com/categories/%E5%86%85%E6%A0%B8%E7%BC%96%E7%A8%8B/"/>
-    
-    
-    <category term="模块机制" scheme="http://example.com/tags/%E6%A8%A1%E5%9D%97%E6%9C%BA%E5%88%B6/"/>
+    <category term="瑞芯微脚本分析" scheme="http://example.com/tags/%E7%91%9E%E8%8A%AF%E5%BE%AE%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/"/>
     
   </entry>
   
