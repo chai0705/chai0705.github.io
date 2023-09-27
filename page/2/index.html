@@ -160,6 +160,79 @@
     
     
     <article
+  id="post-0-12  .make.sh脚本的用法"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/09/10/0-12%20%20.make.sh%E8%84%9A%E6%9C%AC%E7%9A%84%E7%94%A8%E6%B3%95/"
+    >0-12  .make.sh脚本的用法</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/09/10/0-12%20%20.make.sh%E8%84%9A%E6%9C%AC%E7%9A%84%E7%94%A8%E6%B3%95/" class="article-date">
+  <time datetime="2023-09-10T09:17:09.000Z" itemprop="datePublished">2023-09-10</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/">瑞芯微脚本分析</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>直接在<code>u-boot</code>根目录执行<code>./make.sh -h</code>命令就能看到用法：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122210874.png" alt="img"></p>
+<h2 id="一、固件构建"><a href="#一、固件构建" class="headerlink" title="一、固件构建"></a>一、固件构建</h2><p>构建<code>rk3568</code>固件其实就是<code>./make.sh rk3568</code>，实际选用的是<code>rk3568_defconfig</code>，这里的构建固件一定要确保<code>configs</code>目录有相应的<code>*_defconfig</code>与<code>*.config</code>文件：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122210739.png" alt="img"><br>如果是相同的<code>.config</code>文件，再次构建直接执行<code>./make.sh</code>即可！</p>
+<p>除此之外，<code>./make.sh env</code>用于构建<code>fw_printenv</code>工具：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122210743.png" alt="img"></p>
+<p><code>fw_printenv</code>是U-Boot提供的一个给linux使用的env工具。通过这个工具，用户可以在linux上访问、修改env的内容。使用该工具要求env区域必须位于一个kernel可见的分区上（建议独立分区），本质上是通过kernel sys下的存储节点访问到env区域。</p>
+<p>几个重要文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">./tools/env/fw_printenv // env读写工具</span><br><span class="line">./tools/env/fw_env.config // env配置文件</span><br><span class="line">./tools/env/README // env读写工具说明文档</span><br></pre></td></tr></table></figure>
+
+<h2 id="二、固件打包"><a href="#二、固件打包" class="headerlink" title="二、固件打包"></a>二、固件打包</h2><p>固件打包有时候有特殊需求的时候会用到，用法如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">./make.sh trust // 打包trust</span><br><span class="line">./make.sh loader // 打包loader</span><br><span class="line">./make.sh trust &lt;ini-file&gt; // 打包trust时指定ini文件</span><br><span class="line">./make.sh loader &lt;ini-file&gt; // 打包loader时指定ini文件</span><br><span class="line">./make.sh --spl // 用u-boot-spl.bin替换miniloader，打包成loader</span><br><span class="line">./make.sh --tpl // 用u-boot-tpl.bin替换ddr，打包成loader</span><br><span class="line">./make.sh --tpl -spl // 用u-boot-tpl.bin与u-boot-spl.bin替换ddr与miniloader，打包成loader</span><br><span class="line">./make.sh itb // 打包u-boot.itb（64位平台只支持打包ATF和U-Boot，OP-TEE</span><br><span class="line">不打包）</span><br></pre></td></tr></table></figure>
+
+<p>但是由于<code>rk3568</code>的固件是使用FIT格式来打包的，因此以下命令都不支持<code>rk3568</code>（以下命令支持非FIT格式打包）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">./make.sh trust // 打包trust</span><br><span class="line">./make.sh loader // 打包loader</span><br><span class="line">./make.sh trust &lt;ini-file&gt; // 打包trust时指定ini文件</span><br><span class="line">./make.sh loader &lt;ini-file&gt; // 打包loader时指定ini文件</span><br></pre></td></tr></table></figure>
+
+<p>另外使用编译出来的<code>tpl</code>是无法启动的，因此对于<code>rk3568</code>，只有以下命令使用是有效果的：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">./make.sh --spl 用u-boot-spl.bin替换miniloader，打包成loader</span><br><span class="line">./make.sh --spl-new // ./make.sh --spl 命令只打包但不编译，此命令会重新编译再</span><br><span class="line">打包。</span><br><span class="line">./make.sh itb // 打包u-boot.itb（64位平台只支持打包ATF和U-Boot，OP-TEE</span><br><span class="line">不打包）</span><br></pre></td></tr></table></figure>
+
+<h2 id="三、反汇编调试"><a href="#三、反汇编调试" class="headerlink" title="三、反汇编调试"></a>三、反汇编调试</h2><p>反汇编调试用法如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">./make.sh elf-[x] [type] // 反汇编：使用-[x]参数, [type]可选择是否反汇编SPL或TPL</span><br><span class="line">./make.sh elf // 反汇编u-boot文件，默认使用-D参数</span><br><span class="line">./make.sh elf-S // 反汇编u-boot文件，使用-S参数</span><br><span class="line">./make.sh elf-d // 反汇编u-boot文件，使用-d参数</span><br><span class="line">./make.sh elf spl // 反汇编tpl/u-boot-tpl文件，默认使用-D参数</span><br><span class="line">./make.sh elf tpl // 反汇编spl/u-boot-tpl文件，默认使用-D参数</span><br><span class="line">./make.sh &lt;addr&gt; // 需要addr对应的函数名和代码位置</span><br><span class="line">./make.sh map // 打开u-boot.map</span><br><span class="line">./make.sh sym // 打开u-boot.sym</span><br></pre></td></tr></table></figure> 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%91%9E%E8%8A%AF%E5%BE%AE%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/" rel="tag">瑞芯微脚本分析</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
   id="post-0-11 .make.sh rk3568编译命令执行分析（下）"
   class="article article-type-post"
   itemscope
@@ -954,70 +1027,6 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./make.sh rk3588 CROSS_COMPILE=/home/topeet/Linux/3588-linux/prebuilts/gcc/linux-x86/aarch64/gcc-arm-10.3-2021.07-x86_64-aarch64-none-linux-gnu/bin/aarch64-none-linux-gnu-</span><br></pre></td></tr></table></figure>
 
 <p>这里面多出来了一个make.sh脚本，所以这里先去分析一下make.sh脚本</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%91%9E%E8%8A%AF%E5%BE%AE%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/" rel="tag">瑞芯微脚本分析</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-0-2 板子的选择"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/09/10/0-2%20%E6%9D%BF%E5%AD%90%E7%9A%84%E9%80%89%E6%8B%A9/"
-    >0-2 板子的选择</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/09/10/0-2%20%E6%9D%BF%E5%AD%90%E7%9A%84%E9%80%89%E6%8B%A9/" class="article-date">
-  <time datetime="2023-09-10T09:16:57.000Z" itemprop="datePublished">2023-09-10</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/">瑞芯微脚本分析</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h1 id="2-1-board选择"><a href="#2-1-board选择" class="headerlink" title="2.1 board选择"></a>2.1 board选择</h1><p>但其实上是默认情况下这里的配置文件已经搞好了</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">选择板卡函数</span></span><br><span class="line">choose_board()</span><br><span class="line">&#123;</span><br><span class="line"><span class="meta prompt_">	# </span><span class="language-bash">获取板卡配置文件列表到 BOARD_ARRAY 数组</span></span><br><span class="line">	BOARD_ARRAY=( $(cd $&#123;CHIP_DIR&#125;/; ls BoardConfig*.mk | sort) )</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">	# </span><span class="language-bash">获取板卡数组的长度</span>	</span><br><span class="line">	RK_TARGET_BOARD_ARRAY_LEN=$&#123;#BOARD_ARRAY[@]&#125;</span><br><span class="line"><span class="meta prompt_">	</span></span><br><span class="line"><span class="meta prompt_">	# </span><span class="language-bash">如果板卡数组长度为0，则表示没有可用的板卡配置文件，输出错误信息并返回-1</span></span><br><span class="line">	if [ $RK_TARGET_BOARD_ARRAY_LEN -eq 0 ]; then</span><br><span class="line">		echo &quot;No available Board Config&quot;</span><br><span class="line">		return -1</span><br><span class="line">	fi</span><br><span class="line"></span><br><span class="line">	echo</span><br><span class="line">	echo &quot;You&#x27;re building on Linux&quot;</span><br><span class="line">	echo &quot;Lunch menu...pick a combo:&quot;</span><br><span class="line">	echo &quot;&quot;</span><br><span class="line"><span class="meta prompt_">	</span></span><br><span class="line"><span class="meta prompt_">	# </span><span class="language-bash">输出可用的板卡配置文件列表</span></span><br><span class="line">	echo &quot;0. default BoardConfig.mk&quot;</span><br><span class="line">	echo $&#123;BOARD_ARRAY[@]&#125; | xargs -n 1 | sed &quot;=&quot; | sed &quot;N;s/\n/. /&quot;</span><br><span class="line"></span><br><span class="line">	local INDEX</span><br><span class="line">	read -p &quot;Which would you like? [0]: &quot; INDEX</span><br><span class="line">	INDEX=$(($&#123;INDEX:-0&#125; - 1))</span><br><span class="line"><span class="meta prompt_">	</span></span><br><span class="line"><span class="meta prompt_">	# </span><span class="language-bash">根据用户选择的索引确定所选的板卡配置文件</span></span><br><span class="line">	if echo $INDEX | grep -vq [^0-9]; then</span><br><span class="line">		BOARD=&quot;$&#123;BOARD_ARRAY[$INDEX]&#125;&quot;</span><br><span class="line">	else</span><br><span class="line">		echo &quot;Lunching for Default BoardConfig.mk boards...&quot;</span><br><span class="line">		BOARD=BoardConfig.mk</span><br><span class="line">	fi</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">	# </span><span class="language-bash">创建符号链接，将所选的板卡配置文件链接到 BOARD_CONFIG 变量指定的路径</span></span><br><span class="line">	ln -rsf &quot;$CHIP_DIR/$BOARD&quot; &quot;$BOARD_CONFIG&quot;</span><br><span class="line">	echo &quot;switching to board: $(realpath $BOARD_CONFIG)&quot;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">预处理选项</span></span><br><span class="line">unset POST_OPTIONS</span><br><span class="line">for option in $OPTIONS; do</span><br><span class="line">    case $option in</span><br><span class="line">        BoardConfig*.mk)</span><br><span class="line">            option=&quot;$CHIP_DIR/$option&quot;</span><br><span class="line">            ;&amp;</span><br><span class="line">        *.mk)</span><br><span class="line">            CONF=$(realpath $option)</span><br><span class="line">            echo &quot;切换到配置文件: $CONF&quot;</span><br><span class="line">            if [ ! -f $CONF ]; then</span><br><span class="line">                echo &quot;文件不存在!&quot;</span><br><span class="line">                exit 1</span><br><span class="line">            fi</span><br><span class="line"></span><br><span class="line">            ln -rsf $CONF $BOARD_CONFIG</span><br><span class="line">            ;;</span><br><span class="line">        lunch) choose_board ;;</span><br><span class="line">        kernel-4.4|kernel-4.19|kernel-5.10)</span><br><span class="line">            RK_KERNEL_VERSION=$&#123;option#kernel-&#125;</span><br><span class="line">            ;;</span><br><span class="line">        *) POST_OPTIONS=&quot;$POST_OPTIONS $option&quot;;;</span><br><span class="line">    esac</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
-
-<p>总共分为了两次options的遍历，如果是options里面有mk相关的就会进入choose_board，choose_board里面的命令其实也就是一个软连接，倒是挺简单的。</p>
-<p>而下面的这两句命令是一定会执行的，下面的$TOP_DIR&#x2F;device&#x2F;rockchip&#x2F;.BoardConfig.mk，在choose_board确定了，但是CHIP_DIR不知道啥时候确定的</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">设置 BOARD_CONFIG 变量为顶级目录下的 device/rockchip/.BoardConfig.mk 文件的绝对路径</span></span><br><span class="line">BOARD_CONFIG=&quot;$TOP_DIR/device/rockchip/.BoardConfig.mk&quot;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">获取 CHIP_DIR 变量的绝对路径，该变量指向顶级目录下的 device/rockchip/.target_product 目录</span></span><br><span class="line">CHIP_DIR=&quot;$(realpath $TOP_DIR/device/rockchip/.target_product)&quot;</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309102123667.png" alt="image-20230910212319606"></p>
-<h1 id="2-2-BoardConfig-mk文件介绍"><a href="#2-2-BoardConfig-mk文件介绍" class="headerlink" title="2.2 .BoardConfig.mk文件介绍"></a>2.2 .BoardConfig.mk文件介绍</h1><p>具体内容如下所示：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">目标架构</span></span><br><span class="line">export RK_KERNEL_ARCH=arm64</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Uboot的配置</span></span><br><span class="line">export RK_UBOOT_DEFCONFIG=rk3588</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Uboot镜像格式类型：fit（扁平化镜像树）</span></span><br><span class="line">export RK_UBOOT_FORMAT_TYPE=fit</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">内核的配置</span></span><br><span class="line">export RK_KERNEL_DEFCONFIG=rockchip_linux_defconfig</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">内核的配置片段</span></span><br><span class="line">export RK_KERNEL_DEFCONFIG_FRAGMENT=rk3588_linux.config</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">内核设备树</span></span><br><span class="line">export RK_KERNEL_DTS=rk3588-evb7-lp4-v10-linux</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">boot镜像类型</span></span><br><span class="line">export RK_BOOT_IMG=boot.img</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">内核镜像路径</span></span><br><span class="line">export RK_KERNEL_IMG=kernel/arch/arm64/boot/Image</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">内核镜像格式类型：fit（扁平化镜像树）</span></span><br><span class="line">export RK_KERNEL_FIT_ITS=boot.its</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">GPT表的参数</span></span><br><span class="line">export RK_PARAMETER=parameter.txt</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Buildroot的配置</span></span><br><span class="line">export RK_CFG_BUILDROOT=rockchip_rk3588</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Recovery的配置</span></span><br><span class="line">export RK_CFG_RECOVERY=rockchip_rk3588_recovery</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Recovery镜像格式类型：fit（扁平化镜像树）</span></span><br><span class="line">export RK_RECOVERY_FIT_ITS=boot4recovery.its</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Pcba的配置</span></span><br><span class="line">export RK_CFG_PCBA=rockchip_rk3588_pcba</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">目标芯片</span></span><br><span class="line">export RK_CHIP=rk3588</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">设置根文件系统的类型，包括ext2、ext4和squashfs</span></span><br><span class="line">export RK_ROOTFS_TYPE=ext4</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Debian版本（debian10: buster，debian11: bullseye）</span></span><br><span class="line">export RK_DEBIAN_VERSION=bullseye</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Yocto的机器</span></span><br><span class="line">export RK_YOCTO_MACHINE=rockchip-rk3588-evb</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">misc镜像</span></span><br><span class="line">export RK_MISC=wipe_all-misc.img</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">定义软件包文件</span></span><br><span class="line">export RK_PACKAGE_FILE=rk3588-package-file</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">定义WiFi和蓝牙芯片</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">兼容Realtek和AP6XXX WiFi：RK_WIFIBT_CHIP=ALL_AP</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">兼容Realtek和CYWXXX WiFi：RK_WIFIBT_CHIP=ALL_CY</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">单一WiFi配置：AP6256或CYW43455：RK_WIFIBT_CHIP=AP6256</span></span><br><span class="line">export RK_WIFIBT_CHIP=ALL_AP</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">定义BT串口</span></span><br><span class="line">export RK_WIFIBT_TTY=ttyS8</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">&lt;dev&gt;:&lt;mount point&gt;:&lt;fs <span class="built_in">type</span>&gt;:&lt;mount flags&gt;:&lt;<span class="built_in">source</span> <span class="built_in">dir</span>&gt;:&lt;image size(M|K|auto)&gt;:[options]</span></span><br><span class="line">export RK_EXTRA_PARTITIONS=&quot;oem:/oem:ext2:defaults:oem_normal:auto:resize@userdata:/userdata:ext2:defaults:userdata_normal:auto:resize&quot;</span><br></pre></td></tr></table></figure>
-
  
       <!-- reward -->
       

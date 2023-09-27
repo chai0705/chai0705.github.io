@@ -13,7 +13,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
-      <title>0-16 openwrt进阶 |  热爱学习的未来酱</title>
+      <title>0-17 适配瑞芯微官方SDK |  热爱学习的未来酱</title>
   <meta name="generator" content="hexo-theme-ayer">
       
       <link rel="shortcut icon" href="/favicon.ico" />
@@ -59,7 +59,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-0-16-openwrt进阶"
+  id="post-0-17 适配瑞芯微官方SDK"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -70,7 +70,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  0-16 openwrt进阶
+  0-17 适配瑞芯微官方SDK
 </h1>
  
 
@@ -78,11 +78,11 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2023/09/26/0-16-openwrt%E8%BF%9B%E9%98%B6/" class="article-date">
-  <time datetime="2023-09-26T12:47:53.000Z" itemprop="datePublished">2023-09-26</time>
+      <a href="/2023/09/27/0-17%20%E9%80%82%E9%85%8D%E7%91%9E%E8%8A%AF%E5%BE%AE%E5%AE%98%E6%96%B9SDK/" class="article-date">
+  <time datetime="2023-09-27T12:47:53.000Z" itemprop="datePublished">2023-09-27</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE%E5%9B%BA%E4%BB%B6%E5%88%86%E6%9E%90http-opensource-rock-chips-com-wiki-Main-Page/">瑞芯微固件分析http://opensource.rock-chips.com/wiki_Main_Page</a>
+    <a class="article-category-link" href="/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE%E5%9B%BA%E4%BB%B6%E5%88%86%E6%9E%90/">瑞芯微固件分析</a>
   </div>
   
 <div class="word_count">
@@ -90,7 +90,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">824</span>
+            <span class="post-count">1.1k</span>
         </span>
     </span>
 
@@ -99,7 +99,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">3 分钟</span>
+            <span class="post-count">4 分钟</span>
         </span>
     </span>
 </div>
@@ -114,50 +114,44 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <p><a target="_blank" rel="noopener" href="http://opensource.rock-chips.com/wiki_Main_Page">http://opensource.rock-chips.com/wiki_Main_Page</a></p>
-<h1 id="1-瑞芯微官方wiki"><a href="#1-瑞芯微官方wiki" class="headerlink" title="1.瑞芯微官方wiki"></a>1.瑞芯微官方wiki</h1><p>瑞芯微的wiki，目前支持的硬件如下所示：<br><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20230926204922178.png" alt="image-20230926204922178"></p>
-<p>关于3588的还没有出来，但其实都是一样的，这里不管。</p>
-<p>uboot的 wiki</p>
-<p><a target="_blank" rel="noopener" href="http://opensource.rock-chips.com/wiki_U-Boot">http://opensource.rock-chips.com/wiki_U-Boot</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">+--------+----------------+----------+-------------+---------+</span><br><span class="line">| Boot   | Terminology #1 | Actual   | Rockchip    | Image   |</span><br><span class="line">| stage  |                | program  |  Image      | Location|</span><br><span class="line">| number |                | name     |   Name      | (sector)|</span><br><span class="line">+--------+----------------+----------+-------------+---------+</span><br><span class="line">| 1      |  Primary       | ROM code | BootRom     |         |</span><br><span class="line">|        |  Program       |          |             |         |</span><br><span class="line">|        |  Loader        |          |             |         |</span><br><span class="line">|        |                |          |             |         |</span><br><span class="line">| 2      |  Secondary     | U-Boot   |idbloader.img| 0x40    | pre-loader</span><br><span class="line">|        |  Program       | TPL/SPL  |             |         |</span><br><span class="line">|        |  Loader (SPL)  |          |             |         |</span><br><span class="line">|        |                |          |             |         |</span><br><span class="line">| 3      |  -             | U-Boot   | u-boot.itb  | 0x4000  | including u-boot and atf</span><br><span class="line">|        |                |          | uboot.img   |         | only used with miniloader</span><br><span class="line">|        |                |          |             |         |</span><br><span class="line">|        |                | ATF/TEE  | trust.img   | 0x6000  | only used with miniloader</span><br><span class="line">|        |                |          |             |         |</span><br><span class="line">| 4      |  -             | kernel   | boot.img    | 0x8000  |</span><br><span class="line">|        |                |          |             |         |</span><br><span class="line">| 5      |  -             | rootfs   | rootfs.img  | 0x40000 |</span><br><span class="line">+--------+----------------+----------+-------------+---------+</span><br></pre></td></tr></table></figure>
-
-<p>当我们谈论从 eMMC&#x2F;SD&#x2F;U 盘&#x2F;网络启动时，它们涉及到不同的概念：</p>
-<p>第一阶段（Stage 1）始终在引导 ROM 中，它加载第二阶段（Stage 2），并可能加载第三阶段（当启用 SPL_BACK_TO_BROM 选项时）。<br>从 SPI 闪存启动意味着第二阶段（SPL 和 U-Boot）的固件位于 SPI 闪存中，而第四阶段（Stage 4）和第五阶段（Stage 5）位于其他地方；<br>从 eMMC 启动意味着所有固件（包括第二阶段、第三阶段、第四阶段和第五阶段）都存储在 eMMC 中；<br>从 SD 卡启动意味着所有固件（包括第二阶段、第三阶段、第四阶段和第五阶段）都存储在 SD 卡中；<br>从 U 盘启动意味着第四阶段和第五阶段的固件（不包括 SPL 和 U-Boot）存储在 U 盘中，可选地只包含第五阶段；<br>从网络&#x2F;TFTP启动意味着第四阶段和第五阶段的固件（不包括 SPL 和 U-Boot）存储在网络上。</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309262100985.jpeg" alt="Rockchip bootflow.jpg"></p>
-<h1 id="2-uboot官方"><a href="#2-uboot官方" class="headerlink" title="2. uboot官方"></a>2. uboot官方</h1><p><a target="_blank" rel="noopener" href="https://u-boot.readthedocs.io/en/latest/board/rockchip/index.html">https://u-boot.readthedocs.io/en/latest/board/rockchip/index.html</a></p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309262106742.png" alt="image-20230926210621659"></p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309262106001.png" alt="image-20230926210654968"></p>
-<p>sudo apt-get install python-pyelftools python3-pyelftools -y</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">export ARCH=arm64</span><br><span class="line">export BL31=../rkbin/bin/rk35/rk3588_bl31_v1.33.elf</span><br><span class="line">export ROCKCHIP_TPL=../rkbin/bin/rk35/rk3588_ddr_lp4_2112MHz_lp5_2736MHz_v1.09.bin</span><br><span class="line">make rk3588_defconfig</span><br><span class="line">make CROSS_COMPILE=aarch64-linux-gnu-</span><br><span class="line"></span><br><span class="line">./make.sh CROSS_COMPILE=aarch64-linux-gnu- rk3588</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/openwrt/openwrt.git</span><br><span class="line"> git branch -a</span><br><span class="line"> git checkout openwrt-23.05</span><br><span class="line"> make menuconfig </span><br><span class="line"> make V=99 download</span><br><span class="line"> make V=99 -j32</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/orangepi-xunlong/u-boot-orangepi.git</span><br><span class="line">git checkout v2017.09-rk3588</span><br><span class="line">export arch=arm64</span><br><span class="line">make orangepi_5b_defconfig</span><br><span class="line">make CROSS_COMPILE=&quot;aarch64-linux-gnu-&quot; -j32</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309262153640.png" alt="image-20230926215328624"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/chai0705/3588-uboot.git</span><br><span class="line">git branch -a</span><br><span class="line">make rockchip_linux_defconfig ARCH=arm64</span><br><span class="line">make CROSS_COMPILE=&quot;aarch64-linux-gnu-&quot; -j32</span><br></pre></td></tr></table></figure>
-
-<p>make ARCH&#x3D;arm64 CROSS_COMPILE&#x3D;”aarch64-linux-gnu-“  rk3588-evb7-lp4-v10-linux.img  -j32  </p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309262231481.png" alt="image-20230926223144462"></p>
-<p> “ddrbin_tool” 的工具，可用于修改和生成DDR（双数据率）二进制文件。该工具具有两个功能：</p>
-<p>功能1：从ddrbin_param.txt修改DDR二进制文件</p>
-<ol>
-<li><p>根据您的要求修改 “ddrbin_param.txt” 文件。该文件包含DDR频率、UART（通用异步收发器）信息等参数。如果您希望保持某些项目的默认值，请在文件中将其留空。</p>
-</li>
-<li><p>使用以下参数运行 “ddrbin_tool”：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">./ddrbin_tool ddrbin_param.txt px30_ddr_333MHz_v1.13.bin</span><br><span class="line">将 &quot;ddrbin_param.txt&quot; 替换为您修改后的参数文件的名称，将 &quot;px30_ddr_333MHz_v1.13.bin&quot; 替换为您要修改的DDR二进制文件的名称。</span><br></pre></td></tr></table></figure></li>
-</ol>
-<p>功能2：将DDR二进制文件配置获取到gen_param.txt文件中<br>如果您想获取DDR二进制文件的配置，可以使用 “-g” 标志运行该工具，并指定要保存配置的输出文件。例如：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./ddrbin_tool -g gen_param.txt px30_ddr_333MHz_v1.15.bin</span><br></pre></td></tr></table></figure>
-
-<p>该命令将生成一个名为 “gen_param.txt” 的文件，其中包含 “px30_ddr_333MHz_v1.15.bin” DDR二进制文件的配置详细信息。</p>
-<p>在我们开发板上使用的就是这个方法。</p>
+  <p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309272155420.jpeg" alt="Rockchip bootflow.jpg"></p>
+<p>瑞芯微的分区表如上图所示，虽然在瑞芯微的wiki中提供了一些简单的开源介绍，但是我是没有见过的。，，很坑，所以还是以瑞芯微的开放SDK进行移植</p>
+<h1 id="1-miniloader"><a href="#1-miniloader" class="headerlink" title="1. miniloader"></a>1. miniloader</h1><p>瑞芯微官方miniloader路径为<a target="_blank" rel="noopener" href="https://github.com/rockchip-linux/rkbin.git">https://github.com/rockchip-linux/rkbin.git</a></p>
+<p>首先克隆官方的rkbin，瑞芯微提供了闭源的的二进制文件</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/rockchip-linux/rkbin.git</span><br></pre></td></tr></table></figure>
 
+<p>拉取完成如下图所示：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309272158411.png" alt="image-20230927215856386"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309272159325.png" alt="image-20230927215908314"></p>
+<p>瑞芯微的README如下所示：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">Rockchip loader binaries naming rule</span><br><span class="line"></span><br><span class="line">总则：</span><br><span class="line">不管单个模块，还是合并后的loader，命名都采用</span><br><span class="line">[chip]_[module]_[feature]_[version].[postfix]</span><br><span class="line"></span><br><span class="line">chip: 芯片或芯片系列名称, 必选项, 与所有kernel/uboot driver中的名称保持一致, 具体命名方式不在此讨论, 小写</span><br><span class="line">module: 模块名称, 必选项, 如loader, ddr, miniloader，usbplug,bl3x,tee,tee_ta，小写</span><br><span class="line">feature: 模块特征, 可选项, 可多个, 如ddr使用的频率, 或者只支持某个特定的ddr, miniloader的特别选项等, 小写</span><br><span class="line">version: 版本信息, 必选项, 格式采用[v1.00,], 正式发布之前为0.xx, 正式发布后为1.00以后，小写</span><br><span class="line">postfix: 后缀名, 必选项, 代码编译出来的默认为.bin, 也有可能为.elf, 合并后为.img，小写</span><br><span class="line">连接符号采用下划线“_”</span><br><span class="line">例如：</span><br><span class="line">ddr模块提供的文件</span><br><span class="line">rk3228_ddr3_800MHz_v1.06.bin</span><br><span class="line"></span><br><span class="line">特殊规则：</span><br><span class="line">1. 合并后的loader命名:</span><br><span class="line">    loader: 由ddrbin, usbplug, miniloader合并而成可用于Windows RK升级工具使用的loader;</span><br><span class="line">    ubootloader: 由ddrbin, usbplug, U-Boot合并而成可用于Windows RK升级工具使用的loader;</span><br><span class="line">    idbloader: 由ddrbin, 一级loader(miniloader或uboot)按IDB格式合并直接用于烧写到IDB区的binary;</span><br><span class="line">    注: miniloader的命名, 仅表示miniloader工程编译输出的bin, 不再延续到合并后的loader中使用;</span><br><span class="line">2. 合并后的loader的version定义:</span><br><span class="line">    vx.yy.zzz</span><br><span class="line">v:  version的意思，一直采用这个字符，小写</span><br><span class="line">x.yy: ddr所提供文件的版本号，小写</span><br><span class="line">zzz: [1]是miniloader所提供文件的版本号，去掉点号的，小写</span><br><span class="line">     [2]uboot提供的版本号</span><br><span class="line"></span><br><span class="line">3. 命名小写会引起歧义的，就用大写</span><br><span class="line">如ddr的GB，不能写成gb</span><br><span class="line">举例：</span><br><span class="line">合并好的loader命名：</span><br><span class="line">rk3328_loader_v1.03.106.bin</span><br><span class="line">其中的1.03是ddr的版本号v1.03</span><br><span class="line">106是miniloader的版本号v1.06去掉点号的</span><br></pre></td></tr></table></figure>
+
+<p>接下来对这些目录的内容进行介绍</p>
+<ol>
+<li>**bin&#x2F;**：通常用于存放可执行文件（二进制文件）</li>
+</ol>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309272203645.png" alt="image-20230927220321625"></p>
+<p>进入该目录之后又有一系列的子目录，我们要适配的是3588，所以要进入rk35的目录，具体内容如下所示：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309272204357.png" alt="image-20230927220422326"></p>
+<p>根据名称来看总共是有两种类型的二进制文件，分别为rk<strong>ddr*的tpl 和 rk“</strong>”spl的spl，第一个用来进行初始化内存，然后加载spl，spl用来初始化时钟等其他外设，这里我们用到的应该是rk3588_ddr_lp4_2112MHz_lp5_2736MHz_v1.12.bin和rk3588_spl_v1.12.bin两二进制文件，</p>
+<p>2.**doc&#x2F;**目录，通常用于存放文档文件。在这个目录下，有着更新时候的一些说明，如下图所示：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309272213894.png" alt="image-20230927221327879"></p>
+<p>3.img目录根3588无关不用理会。</p>
+<p>4.<strong>LICENSE</strong>：通常用于存放软件或项目的许可证信息</p>
+<p>5.README**：是一个简要的说明文件</p>
+<p>6.**RKBOOT&#x2F;**：它可能包含与引导（Boot）相关的文件、脚本或配置。具体内容如下所示：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309272215234.png" alt="image-20230927221534210"></p>
+<p>这个其实是后面讲到uboot make.sh时候的说明，用来将spl和tpl整合成一个完整的miniloader的，我们要用到的是RK3588MINIALL.ini，具体内容如下所示：、</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309272217736.png" alt="image-20230927221754711"></p>
+<p>Path1&#x3D;bin&#x2F;rk35&#x2F;rk3588_ddr_lp4_2112MHz_lp5_2736MHz_v1.12.bin</p>
+<p>FlashData&#x3D;bin&#x2F;rk35&#x2F;rk3588_ddr_lp4_2112MHz_lp5_2736MHz_v1.12.bin</p>
+<p>FlashBoot&#x3D;bin&#x2F;rk35&#x2F;rk3588_spl_v1.12.bin</p>
+<p>PATH&#x3D;rk3588_spl_loader_v1.12.112.bin</p>
+<p>7.<strong>RKBOOT.ini</strong>：不用管</p>
+<p>8.**RKTRUST&#x2F;**：这是一个目录，可能与 Rockchip 平台安全性（Trust）相关。根据目录名称，它可能包含与安全启动、安全引导或安全认证相关的文件、脚本或配置。</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309272219951.png" alt="image-20230927221941937"></p>
+<p>​	这也是一些ini文件，这是基于开源的bl31和bl32来的，上面的两个流程呀，属于第二条，闭源的miniloader属于第一条。</p>
+<ol>
+<li>**scripts&#x2F;**：checkpatch.sh只有这一个脚本，看了一下应该没啥用，应该是瑞芯微用于检查时候的一个脚本，</li>
+<li>这些脚本可以用于自动化任务、配置设置、编译构建等。</li>
+<li>**tools&#x2F;**：这是一个目录，通常用于存放工具文件。工具文件可以是用于特定任务或目的的实用程序、应用程序或脚本。这些工具可以帮助你完成各种操作，如调试、分析、转换等。</li>
+</ol>
  
       <!-- reward -->
       
@@ -210,7 +204,7 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2023/09/26/0-16-openwrt%E8%BF%9B%E9%98%B6/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2023/09/27/0-17%20%E9%80%82%E9%85%8D%E7%91%9E%E8%8A%AF%E5%BE%AE%E5%AE%98%E6%96%B9SDK/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -223,19 +217,10 @@
    
   <nav class="article-nav">
     
-      <a href="/2023/09/27/0-17%20%E9%80%82%E9%85%8D%E7%91%9E%E8%8A%AF%E5%BE%AE%E5%AE%98%E6%96%B9SDK/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            0-17 适配瑞芯微官方SDK
-          
-        </div>
-      </a>
     
-    
-      <a href="/2023/09/22/1-1-git%E7%9A%84%E5%AD%A6%E4%B9%A0/" class="article-nav-link">
+      <a href="/2023/09/26/0-16-openwrt%E8%BF%9B%E9%98%B6/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">1-1 git的学习</div>
+        <div class="article-nav-title">0-16 openwrt进阶</div>
       </a>
     
   </nav>

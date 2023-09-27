@@ -160,6 +160,70 @@
     
     
     <article
+  id="post-0-2 板子的选择"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/09/10/0-2%20%E6%9D%BF%E5%AD%90%E7%9A%84%E9%80%89%E6%8B%A9/"
+    >0-2 板子的选择</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/09/10/0-2%20%E6%9D%BF%E5%AD%90%E7%9A%84%E9%80%89%E6%8B%A9/" class="article-date">
+  <time datetime="2023-09-10T09:16:57.000Z" itemprop="datePublished">2023-09-10</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/">瑞芯微脚本分析</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="2-1-board选择"><a href="#2-1-board选择" class="headerlink" title="2.1 board选择"></a>2.1 board选择</h1><p>但其实上是默认情况下这里的配置文件已经搞好了</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">选择板卡函数</span></span><br><span class="line">choose_board()</span><br><span class="line">&#123;</span><br><span class="line"><span class="meta prompt_">	# </span><span class="language-bash">获取板卡配置文件列表到 BOARD_ARRAY 数组</span></span><br><span class="line">	BOARD_ARRAY=( $(cd $&#123;CHIP_DIR&#125;/; ls BoardConfig*.mk | sort) )</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">	# </span><span class="language-bash">获取板卡数组的长度</span>	</span><br><span class="line">	RK_TARGET_BOARD_ARRAY_LEN=$&#123;#BOARD_ARRAY[@]&#125;</span><br><span class="line"><span class="meta prompt_">	</span></span><br><span class="line"><span class="meta prompt_">	# </span><span class="language-bash">如果板卡数组长度为0，则表示没有可用的板卡配置文件，输出错误信息并返回-1</span></span><br><span class="line">	if [ $RK_TARGET_BOARD_ARRAY_LEN -eq 0 ]; then</span><br><span class="line">		echo &quot;No available Board Config&quot;</span><br><span class="line">		return -1</span><br><span class="line">	fi</span><br><span class="line"></span><br><span class="line">	echo</span><br><span class="line">	echo &quot;You&#x27;re building on Linux&quot;</span><br><span class="line">	echo &quot;Lunch menu...pick a combo:&quot;</span><br><span class="line">	echo &quot;&quot;</span><br><span class="line"><span class="meta prompt_">	</span></span><br><span class="line"><span class="meta prompt_">	# </span><span class="language-bash">输出可用的板卡配置文件列表</span></span><br><span class="line">	echo &quot;0. default BoardConfig.mk&quot;</span><br><span class="line">	echo $&#123;BOARD_ARRAY[@]&#125; | xargs -n 1 | sed &quot;=&quot; | sed &quot;N;s/\n/. /&quot;</span><br><span class="line"></span><br><span class="line">	local INDEX</span><br><span class="line">	read -p &quot;Which would you like? [0]: &quot; INDEX</span><br><span class="line">	INDEX=$(($&#123;INDEX:-0&#125; - 1))</span><br><span class="line"><span class="meta prompt_">	</span></span><br><span class="line"><span class="meta prompt_">	# </span><span class="language-bash">根据用户选择的索引确定所选的板卡配置文件</span></span><br><span class="line">	if echo $INDEX | grep -vq [^0-9]; then</span><br><span class="line">		BOARD=&quot;$&#123;BOARD_ARRAY[$INDEX]&#125;&quot;</span><br><span class="line">	else</span><br><span class="line">		echo &quot;Lunching for Default BoardConfig.mk boards...&quot;</span><br><span class="line">		BOARD=BoardConfig.mk</span><br><span class="line">	fi</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">	# </span><span class="language-bash">创建符号链接，将所选的板卡配置文件链接到 BOARD_CONFIG 变量指定的路径</span></span><br><span class="line">	ln -rsf &quot;$CHIP_DIR/$BOARD&quot; &quot;$BOARD_CONFIG&quot;</span><br><span class="line">	echo &quot;switching to board: $(realpath $BOARD_CONFIG)&quot;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">预处理选项</span></span><br><span class="line">unset POST_OPTIONS</span><br><span class="line">for option in $OPTIONS; do</span><br><span class="line">    case $option in</span><br><span class="line">        BoardConfig*.mk)</span><br><span class="line">            option=&quot;$CHIP_DIR/$option&quot;</span><br><span class="line">            ;&amp;</span><br><span class="line">        *.mk)</span><br><span class="line">            CONF=$(realpath $option)</span><br><span class="line">            echo &quot;切换到配置文件: $CONF&quot;</span><br><span class="line">            if [ ! -f $CONF ]; then</span><br><span class="line">                echo &quot;文件不存在!&quot;</span><br><span class="line">                exit 1</span><br><span class="line">            fi</span><br><span class="line"></span><br><span class="line">            ln -rsf $CONF $BOARD_CONFIG</span><br><span class="line">            ;;</span><br><span class="line">        lunch) choose_board ;;</span><br><span class="line">        kernel-4.4|kernel-4.19|kernel-5.10)</span><br><span class="line">            RK_KERNEL_VERSION=$&#123;option#kernel-&#125;</span><br><span class="line">            ;;</span><br><span class="line">        *) POST_OPTIONS=&quot;$POST_OPTIONS $option&quot;;;</span><br><span class="line">    esac</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
+<p>总共分为了两次options的遍历，如果是options里面有mk相关的就会进入choose_board，choose_board里面的命令其实也就是一个软连接，倒是挺简单的。</p>
+<p>而下面的这两句命令是一定会执行的，下面的$TOP_DIR&#x2F;device&#x2F;rockchip&#x2F;.BoardConfig.mk，在choose_board确定了，但是CHIP_DIR不知道啥时候确定的</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">设置 BOARD_CONFIG 变量为顶级目录下的 device/rockchip/.BoardConfig.mk 文件的绝对路径</span></span><br><span class="line">BOARD_CONFIG=&quot;$TOP_DIR/device/rockchip/.BoardConfig.mk&quot;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">获取 CHIP_DIR 变量的绝对路径，该变量指向顶级目录下的 device/rockchip/.target_product 目录</span></span><br><span class="line">CHIP_DIR=&quot;$(realpath $TOP_DIR/device/rockchip/.target_product)&quot;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309102123667.png" alt="image-20230910212319606"></p>
+<h1 id="2-2-BoardConfig-mk文件介绍"><a href="#2-2-BoardConfig-mk文件介绍" class="headerlink" title="2.2 .BoardConfig.mk文件介绍"></a>2.2 .BoardConfig.mk文件介绍</h1><p>具体内容如下所示：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">目标架构</span></span><br><span class="line">export RK_KERNEL_ARCH=arm64</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Uboot的配置</span></span><br><span class="line">export RK_UBOOT_DEFCONFIG=rk3588</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Uboot镜像格式类型：fit（扁平化镜像树）</span></span><br><span class="line">export RK_UBOOT_FORMAT_TYPE=fit</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">内核的配置</span></span><br><span class="line">export RK_KERNEL_DEFCONFIG=rockchip_linux_defconfig</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">内核的配置片段</span></span><br><span class="line">export RK_KERNEL_DEFCONFIG_FRAGMENT=rk3588_linux.config</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">内核设备树</span></span><br><span class="line">export RK_KERNEL_DTS=rk3588-evb7-lp4-v10-linux</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">boot镜像类型</span></span><br><span class="line">export RK_BOOT_IMG=boot.img</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">内核镜像路径</span></span><br><span class="line">export RK_KERNEL_IMG=kernel/arch/arm64/boot/Image</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">内核镜像格式类型：fit（扁平化镜像树）</span></span><br><span class="line">export RK_KERNEL_FIT_ITS=boot.its</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">GPT表的参数</span></span><br><span class="line">export RK_PARAMETER=parameter.txt</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Buildroot的配置</span></span><br><span class="line">export RK_CFG_BUILDROOT=rockchip_rk3588</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Recovery的配置</span></span><br><span class="line">export RK_CFG_RECOVERY=rockchip_rk3588_recovery</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Recovery镜像格式类型：fit（扁平化镜像树）</span></span><br><span class="line">export RK_RECOVERY_FIT_ITS=boot4recovery.its</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Pcba的配置</span></span><br><span class="line">export RK_CFG_PCBA=rockchip_rk3588_pcba</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">目标芯片</span></span><br><span class="line">export RK_CHIP=rk3588</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">设置根文件系统的类型，包括ext2、ext4和squashfs</span></span><br><span class="line">export RK_ROOTFS_TYPE=ext4</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Debian版本（debian10: buster，debian11: bullseye）</span></span><br><span class="line">export RK_DEBIAN_VERSION=bullseye</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Yocto的机器</span></span><br><span class="line">export RK_YOCTO_MACHINE=rockchip-rk3588-evb</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">misc镜像</span></span><br><span class="line">export RK_MISC=wipe_all-misc.img</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">定义软件包文件</span></span><br><span class="line">export RK_PACKAGE_FILE=rk3588-package-file</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">定义WiFi和蓝牙芯片</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">兼容Realtek和AP6XXX WiFi：RK_WIFIBT_CHIP=ALL_AP</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">兼容Realtek和CYWXXX WiFi：RK_WIFIBT_CHIP=ALL_CY</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">单一WiFi配置：AP6256或CYW43455：RK_WIFIBT_CHIP=AP6256</span></span><br><span class="line">export RK_WIFIBT_CHIP=ALL_AP</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">定义BT串口</span></span><br><span class="line">export RK_WIFIBT_TTY=ttyS8</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">&lt;dev&gt;:&lt;mount point&gt;:&lt;fs <span class="built_in">type</span>&gt;:&lt;mount flags&gt;:&lt;<span class="built_in">source</span> <span class="built_in">dir</span>&gt;:&lt;image size(M|K|auto)&gt;:[options]</span></span><br><span class="line">export RK_EXTRA_PARTITIONS=&quot;oem:/oem:ext2:defaults:oem_normal:auto:resize@userdata:/userdata:ext2:defaults:userdata_normal:auto:resize&quot;</span><br></pre></td></tr></table></figure>
+
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%91%9E%E8%8A%AF%E5%BE%AE%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/" rel="tag">瑞芯微脚本分析</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
   id="post-0-1 瑞芯微build-sh脚本分析"
   class="article article-type-post"
   itemscope
@@ -1722,112 +1786,6 @@
     <footer class="article-footer">
        
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/3588-npu/" rel="tag">3588 npu</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-0-0-3_markdown-语法学习"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/09/02/0-0-3_markdown-%E8%AF%AD%E6%B3%95%E5%AD%A6%E4%B9%A0/"
-    >markdown 语法学习</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/09/02/0-0-3_markdown-%E8%AF%AD%E6%B3%95%E5%AD%A6%E4%B9%A0/" class="article-date">
-  <time datetime="2023-09-01T23:12:27.000Z" itemprop="datePublished">2023-09-02</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/markdown/">markdown</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h1 id="第1节-标题"><a href="#第1节-标题" class="headerlink" title="第1节 标题"></a>第1节 标题</h1><p>markdown 里面总共有六级标题，可以使用#号的多少来来引用，现在使用的是typora也可以直接使用ctrl+1-6的快捷按键来进行设置</p>
-<h1 id="第2节-列表"><a href="#第2节-列表" class="headerlink" title="第2节 列表"></a>第2节 列表</h1><h2 id="2-1-有序列表"><a href="#2-1-有序列表" class="headerlink" title="2.1 有序列表"></a>2.1 有序列表</h2><p>​	顾名思义，有序列表就是有小标号的列表，同样也是两种方式英⽂输⼊法下，数字后⾯加⼀点，然后空格即可，或者使用快捷按键ctrl + shift + [即可</p>
-<p>1. </p>
-<p>1. </p>
-<h2 id="2-2-无序列表"><a href="#2-2-无序列表" class="headerlink" title="2.2 无序列表"></a>2.2 无序列表</h2><p>​	跟上面的有序列表相反，无序列表就是没有标号，有四种方法、</p>
-<ul>
-<li>aaa - aaa</li>
-</ul>
-<ul>
-<li>aaa + aaa</li>
-</ul>
-<ul>
-<li>aaa *aaa</li>
-</ul>
-<ul>
-<li>aaa ctrl+shift+]</li>
-</ul>
-<h1 id="第3节-字体标记"><a href="#第3节-字体标记" class="headerlink" title="第3节 字体标记"></a>第3节 字体标记</h1><h2 id="3-1-加粗"><a href="#3-1-加粗" class="headerlink" title="3.1 加粗"></a>3.1 加粗</h2><p><strong>加粗</strong> **   内容**在typora中可以使用ctrl+b</p>
-<h2 id="3-2-删除"><a href="#3-2-删除" class="headerlink" title="3.2 删除"></a>3.2 删除</h2><p><del>删除</del> ~~ 内容~~</p>
-<h2 id="3-3-斜体"><a href="#3-3-斜体" class="headerlink" title="3.3 斜体"></a>3.3 斜体</h2><p><em>斜体</em> * 内容 *</p>
-<h2 id="3-4-高亮"><a href="#3-4-高亮" class="headerlink" title="3.4 高亮"></a>3.4 高亮</h2><p>&#x3D;&#x3D;高亮&#x3D;&#x3D; &#x3D;&#x3D;内容  &#x3D;&#x3D;需要打开pytora的高亮功能之后才行</p>
-<h1 id="第4节-段落相关"><a href="#第4节-段落相关" class="headerlink" title="第4节 段落相关"></a>第4节 段落相关</h1><h2 id="4-1-引用"><a href="#4-1-引用" class="headerlink" title="4.1 引用"></a>4.1 引用</h2><blockquote>
-<p>这是一段引用 &gt; 大于号加内容引用</p>
-</blockquote>
-<h2 id="4-2-分割线"><a href="#4-2-分割线" class="headerlink" title="4.2 分割线"></a>4.2 分割线</h2><hr>
-<p>三个横杠或者更多的横杠表示分割线</p>
-<h1 id="第5节-代码"><a href="#第5节-代码" class="headerlink" title="第5节 代码"></a>第5节 代码</h1><h2 id="5-1-行内代码"><a href="#5-1-行内代码" class="headerlink" title="5.1 行内代码"></a>5.1 行内代码</h2><p><code>这是一个行内代码</code> 1旁边那个特殊按键</p>
-<h2 id="5-2-代码块"><a href="#5-2-代码块" class="headerlink" title="5.2 代码块"></a>5.2 代码块</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;hello world&quot;</span>)</span><br><span class="line">    三个```然后回车即可，然后在右下角的选择框中进行代码的选择</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="第6节-超链接"><a href="#第6节-超链接" class="headerlink" title="第6节 超链接"></a>第6节 超链接</h1><blockquote>
-<p>格式 ：[⽹址标题] [变量01]</p>
-</blockquote>
-<p><a href="www.baidu.com">百度</a></p>
-<ul>
-<li><p>在⽂稿起草阶段，还没确定具体⽹址，但可以先给出⽹址标题</p>
-</li>
-<li><p>同⼀篇⽂章需要重复出现同⼀个⽹址时</p>
-</li>
-</ul>
-<h1 id="第7节-脚注"><a href="#第7节-脚注" class="headerlink" title="第7节 脚注"></a>第7节 脚注</h1><p>这是一个脚注<a href="%E8%BF%99%E4%B8%AA%E6%98%AF%E6%94%BE%E5%9C%A8%E6%96%87%E7%AB%A0%E5%B0%BE%E9%83%A8%E7%9A%84%EF%BC%8C%E7%94%A8%E4%BA%8E%E6%89%BF%E6%8E%A5%E4%B8%8A%E9%9D%A2%E7%9A%84%E8%84%9A%E6%B3%A8">^01</a></p>
-<h1 id="第8节-图片"><a href="#第8节-图片" class="headerlink" title="第8节 图片"></a>第8节 图片</h1><p><img src="/"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">基本格式：![](图⽚链接)</span><br></pre></td></tr></table></figure>
-
-<p><img src="D:\hexo\blog\source_posts\image-20230902075316489.png" alt="image-20230902075316489"></p>
-<p>图⽚链接可以是本地链接，也可以是在线链接</p>
-<p>但这个图片是本地路径，很有问题，所以你可能需要一个图床，用来无视地点，目前先不学呢，具体链接如下所示：</p>
-<p><a target="_blank" rel="noopener" href="https://eryinote.com/post/105">图床搭建教程</a></p>
-<h1 id="第9节-表格"><a href="#第9节-表格" class="headerlink" title="第9节 表格"></a>第9节 表格</h1><p>在typora中可以使用快捷按键进行表格的创建  ctrl+t</p>
-<p>通用的语法为</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">| 表头 | 表头 |</span><br><span class="line">| ---- | ---- |</span><br><span class="line">| 单元格 | 单元格 |</span><br><span class="line">| 单元格 | 单元格 |</span><br></pre></td></tr></table></figure>
-
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/markdown/" rel="tag">markdown</a></li></ul>
 
     </footer>
   </div>
