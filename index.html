@@ -160,6 +160,80 @@
     
     
     <article
+  id="post-0-20 挂载镜像文件"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/10/08/0-20%20%E6%8C%82%E8%BD%BD%E9%95%9C%E5%83%8F%E6%96%87%E4%BB%B6/"
+    >0-19 openwrt重新移植</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/10/08/0-20%20%E6%8C%82%E8%BD%BD%E9%95%9C%E5%83%8F%E6%96%87%E4%BB%B6/" class="article-date">
+  <time datetime="2023-10-08T12:47:53.000Z" itemprop="datePublished">2023-10-08</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE%E5%9B%BA%E4%BB%B6%E5%88%86%E6%9E%90/">瑞芯微固件分析</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>编译完成之后的镜像为ubuntu-22.04.3-preinstalled-desktop-arm64.img，这里面包括spl tpl uboot boot分区和文件系统分区，其中spl tpl uboot是通过dd命令写入的，而另外两个是创建的分区，现在我想的是挂载上这个img镜像，然后查看里面的系统，在CSDN上找到了这样一个博客</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/yangleo1987/article/details/58603205?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522169677013016800184112679%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&request_id=169677013016800184112679&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_ecpm_v1~rank_v31_ecpm-2-58603205-null-null.142%5Ev95%5EchatgptT3_1&utm_term=linux%E4%B8%8B%E6%8C%82%E8%BD%BDimg%E9%95%9C%E5%83%8F%E6%96%87%E4%BB%B6&spm=1018.2226.3001.4187">挂载img分区</a></p>
+<p>首先使用fdisk命令查看img镜像分区</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fdisk ubuntu-22.04.3-preinstalled-desktop-arm64.img</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310082107478.png" alt="image-20231008210757445"></p>
+<p>分区是从32768和1081344开始的，然后，就可以挂载分区了，这里要用到offset参数：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mount -o loop,offset=$((32768*512))  ubuntu-22.04.3-preinstalled-desktop-arm64.img    1 </span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mount -o loop,offset=$((1081344*512))  ubuntu-22.04.3-preinstalled-desktop-arm64.img    2 </span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">U-Boot 2017.09-g32640b0ada-230713-dirty #topeet (Oct 07 2023 - 22:14:24 +0800)</span><br><span class="line"></span><br><span class="line">Model: Rockchip RK3588 Evaluation Board</span><br><span class="line">MPIDR: 0x81000000</span><br><span class="line">PreSerial: 2, raw, 0xfeb50000</span><br><span class="line">DRAM:  8 GiB</span><br><span class="line">Sysmem: init</span><br><span class="line">Relocation Offset: eda1c000</span><br><span class="line">Relocation fdt: eb9fa160 - eb9fecd0</span><br><span class="line">CR: M/C/I</span><br><span class="line">Using default environment</span><br><span class="line"></span><br><span class="line">Hotkey: ctrl+c</span><br><span class="line">DM: v2</span><br><span class="line">no mmc device at slot 1</span><br><span class="line">mmc@fe2c0000: 1 (SD), mmc@fe2e0000: 0</span><br><span class="line">Bootdev(atags): mmc 1</span><br><span class="line">MMC1: Legacy, 52Mhz</span><br><span class="line">PartType: EFI</span><br><span class="line">No misc partition</span><br><span class="line">boot mode: None</span><br><span class="line">RESC: &#x27;boot&#x27;, blk@0x0001898a</span><br><span class="line">resource: sha256+</span><br><span class="line">FIT: no signed, no conf required</span><br><span class="line">DTB: rk-kernel.dtb</span><br><span class="line">HASH(c): OK</span><br><span class="line">I2c0 speed: 100000Hz</span><br><span class="line">vsel-gpios- not found!</span><br><span class="line">en-gpios- not found!</span><br><span class="line">vdd_cpu_big0_s0 800000 uV</span><br><span class="line">vsel-gpios- not found!</span><br><span class="line">en-gpios- not found!</span><br><span class="line">vdd_cpu_big1_s0 800000 uV</span><br><span class="line">I2c1 speed: 100000Hz</span><br><span class="line">vsel-gpios- not found!</span><br><span class="line">en-gpios- not found!</span><br><span class="line">vdd_npu_s0 800000 uV</span><br><span class="line">spi2: RK806: 2</span><br><span class="line">ON=0x40, OFF=0x00</span><br><span class="line">vdd_gpu_s0 750000 uV</span><br><span class="line">vdd_cpu_lit_s0 750000 uV</span><br><span class="line">vdd_log_s0 750000 uV</span><br><span class="line">vdd_vdenc_s0 init 750000 uV</span><br><span class="line">vdd_ddr_s0 850000 uV</span><br><span class="line">Device &#x27;gpio@fd8a0000&#x27;: seq 0 is in use by &#x27;gpio@fd8a0000&#x27;</span><br><span class="line">Warn: can&#x27;t find connect driver</span><br><span class="line">Warn: can&#x27;t get connect driver</span><br><span class="line">get vp0 plane mask:0x5, primary id:2, cursor_plane:-1, from dts</span><br><span class="line">get vp1 plane mask:0xa, primary id:3, cursor_plane:-1, from dts</span><br><span class="line">get vp2 plane mask:0x140, primary id:8, cursor_plane:-1, from dts</span><br><span class="line">get vp3 plane mask:0x280, primary id:9, cursor_plane:-1, from dts</span><br><span class="line">Could not find baseparameter partition</span><br><span class="line">Model: Rockchip RK3588 EVB7 LP4 V10 Board</span><br><span class="line">MPIDR: 0x81000000</span><br><span class="line">Rockchip UBOOT DRM driver version: v1.0.1</span><br><span class="line">vp0 have layer nr:2[0 2 ], primary plane: 2</span><br><span class="line">vp1 have layer nr:2[1 3 ], primary plane: 3</span><br><span class="line">vp2 have layer nr:2[6 8 ], primary plane: 8</span><br><span class="line">vp3 have layer nr:2[7 9 ], primary plane: 9</span><br><span class="line">Using display timing dts</span><br><span class="line">dsi@fde30000:  detailed mode clock 71900 kHz, flags[a]</span><br><span class="line">    H: 0800 0820 0840 0860</span><br><span class="line">    V: 1280 1290 1294 1298</span><br><span class="line">bus_format: 100e</span><br><span class="line">VOP update mode to: 800x1280p64, type: MIPI1 for VP3</span><br><span class="line">VP3 set crtc_clock to 71493KHz</span><br><span class="line">VOP VP3 enable Esmart3[654x270-&gt;654x270@73x505] fmt[2] addr[0xedf04000]</span><br><span class="line">final DSI-Link bandwidth: 476620 Kbps x 4</span><br><span class="line">CLK: (uboot. arm: enter 1008000 KHz, init 1008000 KHz, kernel 0N/A)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%91%9E%E8%8A%AF%E5%BE%AE%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/" rel="tag">瑞芯微脚本分析</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
   id="post-0-17 适配瑞芯微官方SDK"
   class="article article-type-post"
   itemscope
@@ -270,7 +344,7 @@
 
 <p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310031855129.png" alt="image-20231003185541087"></p>
 <p>目前只需要将这里的uboot修改为115200即可，然后重新保存configs&#x2F;rk3588_defconfig，重新编译</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export arch=arm64</span><br><span class="line">make rk3588_defconfig</span><br><span class="line">make CROSS_COMPILE=&quot;aarch64-linux-gnu-&quot; -j32</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">export arch=arm64</span><br><span class="line">make rk3588_defconfig</span><br><span class="line">make CROSS_COMPILE=&quot;aarch64-linux-gnu-&quot; -j32</span><br><span class="line">modules_install</span><br></pre></td></tr></table></figure>
 
 <p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310031858771.png" alt="image-20231003185809741"></p>
 <p>编译完这里的uboot.img就是我们需要的镜像，不对，后来发现事情并不是想的那样，理论上应该是uboot.img这里的选择不对。所以接下来去寻找uboot.img的生成流程</p>
@@ -278,6 +352,9 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./make.sh rk3588 CROSS_COMPILE=aarch64-linux-gnu-</span><br></pre></td></tr></table></figure>
 
 <p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310031920218.png" alt="image-20231003192010183"></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">编译uboot.itb</span></span><br><span class="line">make CROSS_COMPILE=&quot;aarch64-linux-gnu-&quot; -j32 u-boot.itb</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310051037632.png" alt="image-20231005103717571"></p>
 <p>但是并没有找到源头，然后找一下make.sh的内容具体内容如下所示：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">打包生成uboot镜像</span></span><br><span class="line">function pack_uboot_image()</span><br><span class="line">&#123;</span><br><span class="line">	rm u-boot.img u-boot-dtb.img -f</span><br><span class="line">	LOAD_ADDR=`sed -n &quot;/CONFIG_SYS_TEXT_BASE=/s/CONFIG_SYS_TEXT_BASE=//p&quot; include/autoconf.mk|tr -d &#x27;\r&#x27;`</span><br><span class="line">	if [ -z &quot;$&#123;LOAD_ADDR&#125;&quot; ]; then</span><br><span class="line"><span class="meta prompt_">		# </span><span class="language-bash">upstream U-Boot</span></span><br><span class="line">		LOAD_ADDR=`grep CONFIG_SYS_TEXT_BASE include/generated/autoconf.h | awk &#x27;&#123; print $3 &#125;&#x27; | tr -d &#x27;\r&#x27;`</span><br><span class="line">	fi</span><br><span class="line"></span><br><span class="line">	if [ -z &quot;$&#123;LOAD_ADDR&#125;&quot; ]; then</span><br><span class="line">		echo &quot;ERROR: No CONFIG_SYS_TEXT_BASE for u-boot&quot;;</span><br><span class="line">		exit 1</span><br><span class="line">	fi</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">	$</span><span class="language-bash">&#123;SCRIPT_UBOOT&#125; --load <span class="variable">$&#123;LOAD_ADDR&#125;</span> <span class="variable">$&#123;PLAT_UBOOT_SIZE&#125;</span></span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -334,11 +411,79 @@ make ARCH=arm64 -j32  CROSS_COMPILE=aarch64-linux-gnu- rk3588-evb7-lp4-v10-linux
 
 <p>我这里先以香橙派为例进行编译</p>
 <p>export VENDOR&#x3D;orangepi</p>
-<p>BOARD&#x3D;orangepi-5b</p>
+<p>export BOARD&#x3D;orangepi-5b</p>
 <p>build-u-boot.sh内容如下所示：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"></span><br><span class="line">set -eE </span><br><span class="line">trap &#x27;echo Error: in $0 on line $LINENO&#x27; ERR</span><br><span class="line"></span><br><span class="line">if [ &quot;$(id -u)&quot; -ne 0 ]; then</span><br><span class="line">    echo &quot;Please run as root&quot;</span><br><span class="line">    exit 1</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">cd &quot;$(dirname -- &quot;$(readlink -f -- &quot;$0&quot;)&quot;)&quot; &amp;&amp; cd ..</span><br><span class="line">mkdir -p build &amp;&amp; cd build</span><br><span class="line"></span><br><span class="line">if [[ -z $&#123;VENDOR&#125; ]]; then</span><br><span class="line">    echo &quot;Error: VENDOR is not set&quot;</span><br><span class="line">    exit 1</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">if [ ! -d u-boot-&quot;$&#123;VENDOR&#125;&quot; ]; then</span><br><span class="line">    # shellcheck source=/dev/null</span><br><span class="line">    source ../packages/u-boot-&quot;$&#123;VENDOR&#125;&quot;-rk3588/debian/upstream</span><br><span class="line">    git clone --single-branch --progress -b &quot;$&#123;BRANCH&#125;&quot; &quot;$&#123;GIT&#125;&quot; u-boot-&quot;$&#123;VENDOR&#125;&quot;</span><br><span class="line">    git -C u-boot-&quot;$&#123;VENDOR&#125;&quot; checkout &quot;$&#123;COMMIT&#125;&quot;</span><br><span class="line">    cp -r ../packages/u-boot-&quot;$&#123;VENDOR&#125;&quot;-rk3588/debian u-boot-&quot;$&#123;VENDOR&#125;&quot;</span><br><span class="line">fi</span><br><span class="line">cd u-boot-&quot;$&#123;VENDOR&#125;&quot;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Compile u-boot into a deb package</span></span><br><span class="line">dpkg-buildpackage -a &quot;$(cat debian/arch)&quot; -d -b -nc -uc</span><br><span class="line"></span><br><span class="line">rm -f ../*.buildinfo ../*.changes</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<p>dpkg-buildpackage -a arm64 -d -b -nc -uc</p>
+
+
+
+
+<p>build.sh内容如下所示：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">mkdir -p build/logs</span><br><span class="line">exec &gt; &gt;(tee &quot;build/logs/build-$(date +&quot;%Y%m%d%H%M%S&quot;).log&quot;) 2&gt;&amp;1</span><br><span class="line"></span><br><span class="line">if [[ $&#123;KERNEL_ONLY&#125; == &quot;Y&quot; ]]; then</span><br><span class="line">    eval &quot;$&#123;DOCKER&#125;&quot; ./scripts/build-kernel.sh</span><br><span class="line">    exit 0</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">if [[ $&#123;UBOOT_ONLY&#125; == &quot;Y&quot; ]]; then</span><br><span class="line">    eval &quot;$&#123;DOCKER&#125;&quot; ./scripts/build-u-boot.sh</span><br><span class="line">    exit 0</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">if [[ $&#123;LAUNCHPAD&#125; != &quot;Y&quot; ]]; then</span><br><span class="line">    if [[ ! -e &quot;$(find build/linux-image-*.deb | sort | tail -n1)&quot; || ! -e &quot;$(find build/linux-headers-*.deb | sort | tail -n1)&quot; ]]; then</span><br><span class="line">        eval &quot;$&#123;DOCKER&#125;&quot; ./scripts/build-kernel.sh</span><br><span class="line">    fi</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">if [[ $&#123;LAUNCHPAD&#125; != &quot;Y&quot; ]]; then</span><br><span class="line">    if [[ ! -e &quot;$(find build/u-boot-&quot;$&#123;BOARD&#125;&quot;_*.deb | sort | tail -n1)&quot; ]]; then</span><br><span class="line">        eval &quot;$&#123;DOCKER&#125;&quot; ./scripts/build-u-boot.sh</span><br><span class="line">    fi</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">eval &quot;$&#123;DOCKER&#125;&quot; ./scripts/build-rootfs.sh</span><br><span class="line">eval &quot;$&#123;DOCKER&#125;&quot; ./scripts/config-image.sh</span><br><span class="line"></span><br><span class="line">exit 0</span><br><span class="line">                                                                                                                                     </span><br></pre></td></tr></table></figure>
+
+
+
+<p>boot.cmd</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">setenv bootargs &quot;console=ttyS2,115200 earlycon=uart8250,mmio32,0xff130000 root=/dev/mmcblk1p2 rw rootwait&quot;</span><br><span class="line">load mmc 1:1 $&#123;fdt_addr_r&#125; rk3588-evb7-lp4-v10-linux.dtb</span><br><span class="line">setenv kernel_comp_addr_r 0x0a000000</span><br><span class="line">load mmc 1:1 $&#123;kernel_addr_r&#125; Image.gz</span><br><span class="line">setenv kernel_comp_size $&#123;filesize&#125;</span><br><span class="line">booti $&#123;kernel_addr_r&#125; - $&#123;fdt_addr_r&#125;</span><br></pre></td></tr></table></figure>
+
+<p>mkimage -A arm -O linux -T script -C none -a 0 -e 0 -d boot.cmd boot.scr</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310041050935.png" alt="image-20231004105004887"></p>
+<p>安装内核模块</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make ARCH=arm64 CROSS_COMPILE=&quot;aarch64-linux-gnu-&quot; INSTALL_MOD_STRIP=1 INSTALL_MOD_PATH=&quot;/home/topeet/rockchip/image/lib&quot; modules_install -j32</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310041100339.png" alt="image-20231004110040296"></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">find -name &quot;*ko&quot; -exec cp &#123;&#125; /home/topeet/rockchip/image/rootfs/lib/modules/5.10.110 \;</span><br><span class="line">find -name &quot;*ko&quot; | xargs -I &#123;&#125; cp &#123;&#125; /home/topeet/rockchip/image/rootfs/lib/modules/5.10.110</span><br></pre></td></tr></table></figure>
+
+
+
+<p>制作完整的镜像</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./gen_image_generic.sh &lt;file&gt; &lt;kernel size&gt; &lt;kernel directory&gt; &lt;rootfs size&gt; &lt;rootfs image&gt; [&lt;align&gt;]</span><br></pre></td></tr></table></figure>
+
+<p>其中，<code>&lt;file&gt;</code>是要生成的镜像文件的名称，<code>&lt;kernel size&gt;</code>是内核文件系统的大小，<code>&lt;kernel directory&gt;</code>是包含内核文件系统内容的目录，<code>&lt;rootfs size&gt;</code>是根文件系统的大小，<code>&lt;rootfs image&gt;</code>是根文件系统的镜像文件，<code>&lt;align&gt;</code>是可选的对齐参数。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./gen_image_generic.sh system.img 100 boot 7144 rootfs.img 32768</span><br></pre></td></tr></table></figure>
+
+
+
+<p>写入uboot</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo dd if=uboot.img of=system.img seek=64 conv=notrunc</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo dd if=system.img of=/dev/sdc status=progress</span><br></pre></td></tr></table></figure>
+
+<h1 id="5-打包"><a href="#5-打包" class="headerlink" title="5.打包"></a>5.打包</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">build_updateimg()</span><br><span class="line">&#123;</span><br><span class="line">	IMAGE_PATH=$TOP_DIR/rockdev   # 设置IMAGE_PATH变量为$TOP_DIR/rockdev，用于存储生成的镜像文件路径</span><br><span class="line">	PACK_TOOL_DIR=$TOP_DIR/tools/linux/Linux_Pack_Firmware   # 设置PACK_TOOL_DIR变量为$TOP_DIR/tools/linux/Linux_Pack_Firmware，用于存储打包工具的路径</span><br><span class="line"></span><br><span class="line">	cd $PACK_TOOL_DIR/rockdev   # 进入$PACK_TOOL_DIR/rockdev目录</span><br><span class="line"></span><br><span class="line">	if [ -f &quot;$RK_PACKAGE_FILE_AB&quot; ]; then   # 如果存在$RK_PACKAGE_FILE_AB文件</span><br><span class="line">		build_sdcard_package   # 调用build_sdcard_package函数，构建SD卡包</span><br><span class="line">		build_otapackage   # 调用build_otapackage函数，构建OTA包</span><br><span class="line"></span><br><span class="line">		cd $PACK_TOOL_DIR/rockdev   # 返回$PACK_TOOL_DIR/rockdev目录</span><br><span class="line">		echo &quot;Make Linux a/b update_ab.img.&quot;</span><br><span class="line">		source_package_file_name=`ls -lh package-file | awk -F &#x27; &#x27; &#x27;&#123;print $NF&#125;&#x27;`   # 获取package-file的文件名</span><br><span class="line">		ln -fs &quot;$RK_PACKAGE_FILE_AB&quot; package-file   # 创建软链接，将$RK_PACKAGE_FILE_AB链接到package-file</span><br><span class="line">		./mkupdate.sh   # 运行mkupdate.sh脚本，生成update.img</span><br><span class="line">		mv update.img $IMAGE_PATH/update_ab.img   # 将生成的update.img移动到$IMAGE_PATH/update_ab.img</span><br><span class="line">		ln -fs $source_package_file_name package-file   # 创建软链接，将source_package_file_name链接到package-file</span><br><span class="line">	else</span><br><span class="line">		echo &quot;Make update.img&quot;</span><br><span class="line"></span><br><span class="line">		if [ -f &quot;$RK_PACKAGE_FILE&quot; ]; then   # 如果存在$RK_PACKAGE_FILE文件</span><br><span class="line">			source_package_file_name=`ls -lh package-file | awk -F &#x27; &#x27; &#x27;&#123;print $NF&#125;&#x27;`   # 获取package-file的文件名</span><br><span class="line">			ln -fs &quot;$RK_PACKAGE_FILE&quot; package-file   # 创建软链接，将$RK_PACKAGE_FILE链接到package-file</span><br><span class="line">			./mkupdate.sh   # 运行mkupdate.sh脚本，生成update.img</span><br><span class="line">			ln -fs $source_package_file_name package-file   # 创建软链接，将source_package_file_name链接到package-file</span><br><span class="line">		else</span><br><span class="line">			./mkupdate.sh   # 运行mkupdate.sh脚本，生成update.img</span><br><span class="line">		fi</span><br><span class="line">		mv update.img $IMAGE_PATH   # 将生成的update.img移动到$IMAGE_PATH</span><br><span class="line">	fi</span><br><span class="line"></span><br><span class="line">	finish_build   # 调用finish_build函数，进行后续的清理和处理操作</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>研究了一下这个玩意，这个打包完成确实是问题不大，现在我只想知道boot.img是怎样编译出来的</p>
+<p>boot.img kernel.img resource.img zboot.img</p>
+<p>最后找到发现是在scripts&#x2F;mkimg脚本里，里面有一个repack_boot_img的函数</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">make_boot_img()</span><br><span class="line">&#123;</span><br><span class="line">        RAMDISK_IMG_PATH=$&#123;objtree&#125;/ramdisk.img</span><br><span class="line">        [ -f $&#123;RAMDISK_IMG_PATH&#125; ] &amp;&amp; RAMDISK_IMG=ramdisk.img &amp;&amp; RAMDISK_ARG=&quot;--ramdisk $&#123;RAMDISK_IMG_PATH&#125;&quot;</span><br><span class="line"></span><br><span class="line">        $&#123;srctree&#125;/scripts/mkbootimg \</span><br><span class="line">                $&#123;KERNEL_IMAGE_ARG&#125; \</span><br><span class="line">                $&#123;RAMDISK_ARG&#125; \</span><br><span class="line">                --second resource.img \</span><br><span class="line">                -o boot.img &amp;&amp; \</span><br><span class="line">        echo &quot;  Image:  boot.img (with Image $&#123;RAMDISK_IMG&#125; resource.img) is ready&quot;;</span><br><span class="line">        echo                 $&#123;KERNEL_IMAGE_ARG&#125; \</span><br><span class="line">                $&#123;RAMDISK_ARG&#125; \</span><br><span class="line">                --second resource.img \</span><br><span class="line">                -o boot.img &amp;&amp; \</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        $&#123;srctree&#125;/scripts/mkbootimg \</span><br><span class="line">                $&#123;KERNEL_ZIMAGE_ARG&#125; \</span><br><span class="line">                $&#123;RAMDISK_ARG&#125; \</span><br><span class="line">                --second resource.img \</span><br><span class="line">                -o zboot.img &amp;&amp; \</span><br><span class="line">        echo &quot;  Image:  zboot.img (with $&#123;ZIMAGE&#125; $&#123;RAMDISK_IMG&#125; resource.img) is ready&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p>resource.img的由来</p>
+<p>LOGO&#x3D;logo.bmp</p>
+<p>LOGO_KERNEL&#x3D;logo_kernel.bmp</p>
+<p>DTB_PATH&#x3D;${objtree}&#x2F;arch&#x2F;arm&#x2F;boot&#x2F;dts&#x2F;rk3588-evb7-lp4-v10-linux.dtb</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scripts/resource_tool $&#123;DTB_PATH&#125; $&#123;LOGO&#125; $&#123;LOGO_KERNEL&#125;</span><br><span class="line">scripts/resource_tool arch/arm64/boot/dts/rockchip/rk3588-evb7-lp4-v10-linux.dtb logo.bmp logo_kernel.bmp</span><br></pre></td></tr></table></figure>
+
+<p>然后可以用下面的命令解包</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scripts/resource_tool --verbose --unpack --image=resource.img</span><br></pre></td></tr></table></figure>
+
+
+
+<p>而是实际的打包其实是repack-bootimg这个脚本</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$</span><span class="language-bash">&#123;srctree&#125;/scripts/mkbootimg \</span></span><br><span class="line"><span class="language-bash">        <span class="variable">$&#123;KERNEL_IMAGE_ARG&#125;</span> \</span></span><br><span class="line"><span class="language-bash">        <span class="variable">$&#123;RAMDISK_ARG&#125;</span> \</span></span><br><span class="line"><span class="language-bash">        --second resource.img \</span></span><br><span class="line"><span class="language-bash">        -o boot.img &amp;&amp; \</span></span><br></pre></td></tr></table></figure>
+
+<p>打包</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scripts/mkbootimg --kernel ./arch/arm64/boot/Image --second resource.img -o boot.img</span><br></pre></td></tr></table></figure>
+
+
+
+<p>再一绕发现是mkbootimg这个脚本，，，真的6</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$</span><span class="language-bash">srctree/scripts/mkbootimg \</span></span><br><span class="line"><span class="language-bash">--kernel <span class="variable">$kernel</span> \</span></span><br><span class="line"><span class="language-bash"><span class="variable">$SECOND</span> \</span></span><br><span class="line"><span class="language-bash">--ramdisk <span class="variable">$ramdisk</span> \</span></span><br><span class="line"><span class="language-bash"><span class="variable">$DTB</span> \</span></span><br><span class="line"><span class="language-bash"><span class="variable">$RECOVERY_DTBO</span> \</span></span><br><span class="line"><span class="language-bash">--cmdline <span class="string">&quot;<span class="variable">$&#123;cmdline&#125;</span><span class="variable">$&#123;extra_cmdline&#125;</span>&quot;</span> \</span></span><br><span class="line"><span class="language-bash">--header_version <span class="variable">$version</span> \</span></span><br><span class="line"><span class="language-bash">--os_version <span class="variable">$os_version</span> \</span></span><br><span class="line"><span class="language-bash">--os_patch_level <span class="variable">$os_patch_level</span> \</span></span><br><span class="line"><span class="language-bash">--output <span class="variable">$output</span></span></span><br><span class="line">                      </span><br></pre></td></tr></table></figure>
+
+<p>一些相关内容如下所示：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">mkbootimg命令的帮助信息，它用于创建Android引导镜像。</span><br><span class="line"></span><br><span class="line">命令的用法如下：</span><br><span class="line"></span><br><span class="line">shell</span><br><span class="line">Copy</span><br><span class="line">mkbootimg [-h] [--kernel KERNEL] [--ramdisk RAMDISK] [--second SECOND]</span><br><span class="line">          [--dtb DTB] [--recovery_dtbo RECOVERY_DTBO | --recovery_acpio RECOVERY_ACPIO]</span><br><span class="line">          [--cmdline CMDLINE] [--vendor_cmdline VENDOR_CMDLINE]</span><br><span class="line">          [--base BASE] [--kernel_offset KERNEL_OFFSET]</span><br><span class="line">          [--ramdisk_offset RAMDISK_OFFSET]</span><br><span class="line">          [--second_offset SECOND_OFFSET] [--dtb_offset DTB_OFFSET]</span><br><span class="line">          [--os_version OS_VERSION] [--os_patch_level OS_PATCH_LEVEL]</span><br><span class="line">          [--tags_offset TAGS_OFFSET] [--board BOARD]</span><br><span class="line">          [--pagesize &#123;2048,4096,8192,16384&#125;] [--id]</span><br><span class="line">          [--header_version HEADER_VERSION] [-o OUTPUT]</span><br><span class="line">          [--vendor_boot VENDOR_BOOT] [--vendor_ramdisk VENDOR_RAMDISK]</span><br><span class="line">以下是参数的说明：</span><br><span class="line"></span><br><span class="line">-h, --help：显示帮助信息并退出。</span><br><span class="line">--kernel KERNEL：指定内核文件的路径。</span><br><span class="line">--ramdisk RAMDISK：指定ramdisk文件的路径。</span><br><span class="line">--second SECOND：指定第二级引导加载程序文件的路径。</span><br><span class="line">--dtb DTB：指定设备树二进制文件的路径。</span><br><span class="line">--recovery_dtbo RECOVERY_DTBO：指定恢复DTBO文件的路径。</span><br><span class="line">--recovery_acpio RECOVERY_ACPIO：指定恢复ACPIO文件的路径。</span><br><span class="line">--cmdline CMDLINE：指定传递给内核命令行的额外参数。</span><br><span class="line">--vendor_cmdline VENDOR_CMDLINE：包含在供应商引导中的内核命令行参数。</span><br><span class="line">--base BASE：指定基地址。</span><br><span class="line">--kernel_offset KERNEL_OFFSET：指定内核偏移量。</span><br><span class="line">--ramdisk_offset RAMDISK_OFFSET：指定ramdisk偏移量。</span><br><span class="line">--second_offset SECOND_OFFSET：指定第二级引导加载程序偏移量。</span><br><span class="line">--dtb_offset DTB_OFFSET：指定设备树偏移量。</span><br><span class="line">--os_version OS_VERSION：操作系统版本。</span><br><span class="line">--os_patch_level OS_PATCH_LEVEL：操作系统补丁级别。</span><br><span class="line">--tags_offset TAGS_OFFSET：标签偏移量。</span><br><span class="line">--board BOARD：板级名称。</span><br><span class="line">--pagesize &#123;2048,4096,8192,16384&#125;：页面大小。</span><br><span class="line">--id：在标准输出中打印图像ID。</span><br><span class="line">--header_version HEADER_VERSION：引导镜像头版本。</span><br><span class="line">-o OUTPUT, --output OUTPUT：输出文件名。</span><br><span class="line">--vendor_boot VENDOR_BOOT：供应商引导输出文件名。</span><br><span class="line">--vendor_ramdisk VENDOR_RAMDISK：指定供应商ramdisk文件的路径。</span><br></pre></td></tr></table></figure>
+
  
       <!-- reward -->
       
@@ -1054,42 +1199,6 @@ make ARCH=arm64 -j32  CROSS_COMPILE=aarch64-linux-gnu- rk3588-evb7-lp4-v10-linux
        
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/3588-npu/" rel="tag">3588 npu</a></li></ul>
 
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-0-4 recovery的编译"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-     
-    <div class="article-meta">
-      <a href="/2023/09/15/0-4%20recovery%E7%9A%84%E7%BC%96%E8%AF%91/" class="article-date">
-  <time datetime="2023-09-15T12:25:04.372Z" itemprop="datePublished">2023-09-15</time>
-</a>    
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-   
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
     </footer>
   </div>
 
