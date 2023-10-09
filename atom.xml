@@ -67,6 +67,56 @@
   </entry>
   
   <entry>
+    <title>0-18 启动流程重新学习</title>
+    <link href="http://example.com/2023/09/27/0-18%20%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B%E9%87%8D%E6%96%B0%E5%AD%A6%E4%B9%A0/"/>
+    <id>http://example.com/2023/09/27/0-18%20%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B%E9%87%8D%E6%96%B0%E5%AD%A6%E4%B9%A0/</id>
+    <published>2023-09-27T12:47:53.000Z</published>
+    <updated>2023-10-09T00:13:44.844Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;&#92;assets&#92;css&#92;APlayer.min.css&quot;&gt;&lt;script src=&quot;&#92;assets&#92;js&#92;APlayer.min.js&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="瑞芯微固件分析" scheme="http://example.com/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE%E5%9B%BA%E4%BB%B6%E5%88%86%E6%9E%90/"/>
+    
+    
+    <category term="瑞芯微脚本分析" scheme="http://example.com/tags/%E7%91%9E%E8%8A%AF%E5%BE%AE%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>0-19 openwrt重新移植</title>
+    <link href="http://example.com/2023/09/27/0-19%20openwrt%20%E9%87%8D%E6%96%B0%E7%A7%BB%E6%A4%8D/"/>
+    <id>http://example.com/2023/09/27/0-19%20openwrt%20%E9%87%8D%E6%96%B0%E7%A7%BB%E6%A4%8D/</id>
+    <published>2023-09-27T12:47:53.000Z</published>
+    <updated>2023-10-08T13:50:05.527Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;&#92;assets&#92;css&#92;APlayer.min.css&quot;&gt;&lt;script src=&quot;&#92;assets&#92;js&#92;APlayer.min.js&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="瑞芯微固件分析" scheme="http://example.com/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE%E5%9B%BA%E4%BB%B6%E5%88%86%E6%9E%90/"/>
+    
+    
+    <category term="瑞芯微脚本分析" scheme="http://example.com/tags/%E7%91%9E%E8%8A%AF%E5%BE%AE%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/"/>
+    
+  </entry>
+  
+  <entry>
     <title>0-16 openwrt进阶</title>
     <link href="http://example.com/2023/09/26/0-16-openwrt%E8%BF%9B%E9%98%B6/"/>
     <id>http://example.com/2023/09/26/0-16-openwrt%E8%BF%9B%E9%98%B6/</id>
@@ -443,56 +493,6 @@
     <id>http://example.com/2023/09/10/0-5%20SPL%E7%9A%84%E7%BC%96%E8%AF%91/</id>
     <published>2023-09-10T09:17:01.000Z</published>
     <updated>2023-09-13T00:21:47.337Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;&#92;assets&#92;css&#92;APlayer.min.css&quot;&gt;&lt;script src=&quot;&#92;assets&#92;js&#92;APlayer.min.js&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="瑞芯微脚本分析" scheme="http://example.com/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/"/>
-    
-    
-    <category term="瑞芯微脚本分析" scheme="http://example.com/tags/%E7%91%9E%E8%8A%AF%E5%BE%AE%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>0-5 Loader的编译</title>
-    <link href="http://example.com/2023/09/10/0-5%20Loader%E7%9A%84%E7%BC%96%E8%AF%91/"/>
-    <id>http://example.com/2023/09/10/0-5%20Loader%E7%9A%84%E7%BC%96%E8%AF%91/</id>
-    <published>2023-09-10T09:17:00.000Z</published>
-    <updated>2023-09-13T00:21:37.153Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;&#92;assets&#92;css&#92;APlayer.min.css&quot;&gt;&lt;script src=&quot;&#92;assets&#92;js&#92;APlayer.min.js&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="瑞芯微脚本分析" scheme="http://example.com/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/"/>
-    
-    
-    <category term="瑞芯微脚本分析" scheme="http://example.com/tags/%E7%91%9E%E8%8A%AF%E5%BE%AE%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>0-4 kernel的编译</title>
-    <link href="http://example.com/2023/09/10/0-4%20kernel%E7%9A%84%E7%BC%96%E8%AF%91/"/>
-    <id>http://example.com/2023/09/10/0-4%20kernel%E7%9A%84%E7%BC%96%E8%AF%91/</id>
-    <published>2023-09-10T09:16:59.000Z</published>
-    <updated>2023-09-13T00:21:30.088Z</updated>
     
     
       
