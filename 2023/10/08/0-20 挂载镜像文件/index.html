@@ -13,7 +13,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
-      <title>0-19 openwrt重新移植 |  热爱学习的未来酱</title>
+      <title>0-20挂载镜像文件 |  热爱学习的未来酱</title>
   <meta name="generator" content="hexo-theme-ayer">
       
       <link rel="shortcut icon" href="/favicon.ico" />
@@ -70,7 +70,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  0-19 openwrt重新移植
+  0-20挂载镜像文件
 </h1>
  
 
@@ -90,7 +90,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">497</span>
+            <span class="post-count">550</span>
         </span>
     </span>
 
@@ -99,7 +99,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">2 分钟</span>
+            <span class="post-count">3 分钟</span>
         </span>
     </span>
 </div>
@@ -123,9 +123,27 @@
 <p>分区是从32768和1081344开始的，然后，就可以挂载分区了，这里要用到offset参数：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mount -o loop,offset=$((32768*512))  ubuntu-22.04.3-preinstalled-desktop-arm64.img    1 </span><br></pre></td></tr></table></figure>
 
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mount -o loop,offset=$((61440*512))  ubuntu-22.04.3-preinstalled-desktop-arm64.img    1 </span><br></pre></td></tr></table></figure>
+
+
+
 
 
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mount -o loop,offset=$((1081344*512))  ubuntu-22.04.3-preinstalled-desktop-arm64.img    2 </span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">/usr/bin/make -f ./Makefile intdeb-pkg \</span><br><span class="line">  KERNELRELEASE=5.10.160-rockchip \</span><br><span class="line">  KDEB_PKGVERSION=5.10.160-14 \</span><br><span class="line">  CROSS_COMPILE=aarch64-linux-gnu- \</span><br><span class="line">  ARCH=arm64 \</span><br><span class="line">  -j 32</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gzip -dc ../initrd.img | cpio -idm</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lz4 -dc ../initrd.img | cpio -idm</span><br></pre></td></tr></table></figure>
 
 
 
@@ -198,10 +216,19 @@
    
   <nav class="article-nav">
     
+      <a href="/2023/10/10/0-22%20%E5%A3%B0%E5%8D%A1%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E5%86%B3/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            0-22 声卡问题的解决
+          
+        </div>
+      </a>
     
-      <a href="/2023/09/27/0-17%20%E9%80%82%E9%85%8D%E7%91%9E%E8%8A%AF%E5%BE%AE%E5%AE%98%E6%96%B9SDK/" class="article-nav-link">
+    
+      <a href="/2023/10/08/0-21%20%E6%9E%84%E5%BB%BAdeb%E5%8C%85/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">0-17 适配瑞芯微官方SDK</div>
+        <div class="article-nav-title">0-21 构建deb包</div>
       </a>
     
   </nav>
