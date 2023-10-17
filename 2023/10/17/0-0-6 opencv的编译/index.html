@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+  
+
+    <head>
+      <meta charset="utf-8" />
+        
+      <meta name="description" content="永远年轻，永远热泪盈眶" />
+      
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>opencv的编译 |  热爱学习的未来酱</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      
+<link rel="stylesheet" href="/css/fonts/remixicon.css">
+
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    <link rel="alternate" href="/atom.xml" title="热爱学习的未来酱" type="application/atom+xml">
+</head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+      <canvas width="1777" height="841"
+        style="position: fixed; left: 0px; top: 0px; z-index: 99999; pointer-events: none;"></canvas>
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-0-0-6 opencv的编译"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  opencv的编译
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/10/17/0-0-6%20opencv%E7%9A%84%E7%BC%96%E8%AF%91/" class="article-date">
+  <time datetime="2023-10-17T13:55:17.000Z" itemprop="datePublished">2023-10-17</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/opencv/">opencv</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">2.2k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">9 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>​	既然opencv中已经在ubuntu提供的库中了，那为什么人们更多的还是自己编译opencv再使用呢，就比如下面这个例子：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310172055957.png" alt="image-20231017205544904"></p>
+<p>想用一些库，然而发现ubuntu自带的opencv是没有开启的，这时候就要自己编译opencv了。</p>
+<h1 id="1-拉取opencv源码"><a href="#1-拉取opencv源码" class="headerlink" title="1.拉取opencv源码"></a>1.拉取opencv源码</h1><p>opencv地址 <strong><a target="_blank" rel="noopener" href="https://opencv.org/releases/">https://opencv.org/releases/</a></strong></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/opencv/opencv">https://github.com/opencv/opencv</a></p>
+<p>opencv-contrib 链接<a target="_blank" rel="noopener" href="https://github.com/opencv/opencv_contrib">https://github.com/opencv/opencv_contrib</a></p>
+<p>OpenCV (Open Source Computer Vision Library) 是一个开源计算机视觉和图像处理库，提供了一系列用于处理图像和视频的函数和工具。OpenCV-contrib（OpenCV contributions）是对OpenCV的扩展和补充，包含了一些额外的模块和功能，以增强OpenCV的功能和应用范围。</p>
+<p>OpenCV-contrib模块是由OpenCV社区的开发人员和贡献者创建和维护的，它提供了许多实用的功能、算法和工具，用于计算机视觉、图像处理、目标检测、机器学习等领域的应用。</p>
+<p>以下是一些常见的OpenCV-contrib模块及其功能：</p>
+<ol>
+<li><strong>aruco</strong>：提供了用于检测和跟踪ArUco标记的函数和类。ArUco标记是一种用于增强现实和相机姿态估计的二维条码。</li>
+<li><strong>bgsegm</strong>：包含了一些背景分割算法的实现，用于从视频中提取前景对象。这些算法可以用于运动检测、目标跟踪等任务。</li>
+<li><strong>bioinspired</strong>：实现了一些生物启发式的图像处理算法，包括视网膜模型、光流估计等。这些算法受到生物视觉系统的启发，用于模拟人眼的感知机制。</li>
+<li><strong>dnn</strong>：提供了深度学习的支持，包括加载和运行基于深度学习模型的图像分类、目标检测和图像分割等任务。</li>
+<li><strong>face</strong>：包含了人脸检测、人脸识别和人脸特征点检测等相关功能。这些功能可以用于人脸分析、人脸识别和表情识别等应用。</li>
+<li><strong>text</strong>：提供了文本检测和识别的功能，可以用于场景文本检测、OCR（光学字符识别）等任务。</li>
+<li><strong>xfeatures2d</strong>：扩展了OpenCV的特征检测和描述子模块，提供了一些额外的特征检测算法和描述子算法，如SURF、SIFT等。</li>
+</ol>
+<p>除了上述模块，OpenCV-contrib还包括其他一些模块和功能，如光学流、结构光、三维重建、图像分割等。这些模块和功能可以通过下载和编译OpenCV-contrib库来使用。</p>
+<p>在这里就只是编译opencv源码了，也就不再添加opencv-contrib，目前是用不到的。</p>
+<p>克隆opencv源码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/opencv/opencv</span><br></pre></td></tr></table></figure>
+
+<p>github的仓库源码太大了，还是直接从官网下载吧~，这里下载最新的opencv4.8 ，拷贝到ubuntu之上然后解压：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310172109149.png" alt="image-20231017210921130"></p>
+<p>在编译之前还需要先安装一些依赖</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install build-essential </span><br><span class="line"></span><br><span class="line">sudo apt-get install cmake git libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev</span><br><span class="line"></span><br><span class="line">sudo apt-get install python-dev-is-python2 python-numpy libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev  libdc1394-22-dev</span><br><span class="line"></span><br><span class="line">pip3 install numpy</span><br><span class="line"> </span><br><span class="line">sudo update-alternatives --install /usr/bin/python python /usr/bin/python2 100</span><br><span class="line">sudo update-alternatives --install /usr/bin/python python /usr/bin/python3 150</span><br></pre></td></tr></table></figure>
+
+<h1 id="2-源码编译（PC）"><a href="#2-源码编译（PC）" class="headerlink" title="2.源码编译（PC）"></a>2.源码编译（PC）</h1><p>然后在opencv源码目录下创建一个build目录进行工程</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir build</span><br><span class="line">cd build</span><br></pre></td></tr></table></figure>
+
+<p>构建命令如下所示：</p>
+<p>(1) 构建静态库</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">cmake -D  CMAKE_INSTALL_PREFIX=/usr/local \</span><br><span class="line">-D CMAKE_BUILD_TYPE=Release \</span><br><span class="line">-D OPENCV_GENERATE_PKGCONFIG=ON \</span><br><span class="line">-D WITH_QUIRC=ON  \</span><br><span class="line">-D OPENCV_ENABLE_NONFREE=True \</span><br><span class="line">-D OPENCV_GENERATE_PKGCONFIG=YES \</span><br><span class="line">-D WITH_OPENGL=ON \</span><br><span class="line">-D ENABLE_CXX11=1 \</span><br><span class="line">-D WITH_OPENMP=ON \</span><br><span class="line">-D WITH_1394=OFF \</span><br><span class="line">-D INSTALL_C_EXAMPLES=OFF \</span><br><span class="line">-D BUILD_EXAMPLES=OFF \</span><br><span class="line">-D PYTHON_DEFAULT_EXECUTABLE=/usr/bin/python3 \</span><br><span class="line">-D BUILD_opencv_python3=yes \</span><br><span class="line">-D BUILD_opencv_python2=no \</span><br><span class="line">-D PYTHON3_EXECUTABLE=/usr/bin/python3 \</span><br><span class="line">-D PYTHON3_INCLUDE_DIR=/usr/include/python3.8 \</span><br><span class="line">-D PYTHON3_LIBRARY=/usr/lib/x86_64-linux-gnu/libpython3.8.so \</span><br><span class="line">-D PYTHON3_NUMPY_INCLUDE_DIRS=/usr/local/lib/python3.8/dist-packages/numpy/core/include/ \</span><br><span class="line">-D BUILD_SHARED_LIBS=OFF \</span><br><span class="line">..</span><br></pre></td></tr></table></figure>
+
+
+
+<p>(2)构建动态库</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">cmake -D CMAKE_INSTALL_PREFIX=/usr/local \</span><br><span class="line">-D CMAKE_BUILD_TYPE=Release \</span><br><span class="line">-D OPENCV_GENERATE_PKGCONFIG=ON \</span><br><span class="line">-D WITH_QUIRC=ON  \</span><br><span class="line">-D OPENCV_ENABLE_NONFREE=True \</span><br><span class="line">-D OPENCV_GENERATE_PKGCONFIG=YES \</span><br><span class="line">-D WITH_OPENGL=ON \</span><br><span class="line">-D ENABLE_CXX11=1 \</span><br><span class="line">-D WITH_OPENMP=ON \</span><br><span class="line">-D WITH_1394=OFF \</span><br><span class="line">-D INSTALL_C_EXAMPLES=OFF \</span><br><span class="line">-D BUILD_EXAMPLES=OFF \</span><br><span class="line">-D PYTHON_DEFAULT_EXECUTABLE=/usr/bin/python3 \</span><br><span class="line">-D BUILD_opencv_python3=yes \</span><br><span class="line">-D BUILD_opencv_python2=no \</span><br><span class="line">-D PYTHON3_EXECUTABLE=/usr/bin/python3 \</span><br><span class="line">-D PYTHON3_INCLUDE_DIR=/usr/include/python3.8 \</span><br><span class="line">-D PYTHON3_LIBRARY=/usr/lib/x86_64-linux-gnu/libpython3.8.so \</span><br><span class="line">-D PYTHON3_NUMPY_INCLUDE_DIRS=/usr/local/lib/python3.8/dist-packages/numpy/core/include/ \</span><br><span class="line">..</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>-D CMAKE_INSTALL_PREFIX=/usr/local</code>: 指定安装目录为<code>/usr/local</code>，生成的库和可执行文件将安装到该目录下。</li>
+<li><code>-D CMAKE_BUILD_TYPE=Release</code>: 指定构建类型为”Release”，这意味着生成的库将进行优化，并且不包含调试信息。</li>
+<li><code>-D OPENCV_GENERATE_PKGCONFIG=ON</code>: 生成用于<code>pkg-config</code>的OpenCV配置文件，这样其他程序可以使用<code>pkg-config</code>来查找和链接OpenCV库。</li>
+<li><code>-D WITH_QUIRC=ON</code>: 启用QUIRC支持，QUIRC是用于解码二维条码（如QR码）的库。通过这个参数，编译生成的OpenCV库将包含QUIRC功能。</li>
+<li><code>-D OPENCV_ENABLE_NONFREE=True</code>: 启用非免费模块，这些模块可能包含受限制的功能，需要购买或获取许可证才能使用。</li>
+<li><code>-D OPENCV_GENERATE_PKGCONFIG=YES</code>: 生成用于<code>pkg-config</code>的OpenCV配置文件，这样其他程序可以使用<code>pkg-config</code>来查找和链接OpenCV库。</li>
+<li><code>-D WITH_OPENGL=ON</code>: 启用OpenGL支持，用于与OpenGL相关的功能。</li>
+<li><code>-D ENABLE_CXX11=1</code>: 启用C++11标准支持。</li>
+<li><code>-D WITH_OPENMP=ON</code>: 启用OpenMP多线程支持。</li>
+<li><code>-D WITH_1394=OFF</code>: 禁用IEEE 1394（FireWire）支持。</li>
+<li><code>-D INSTALL_C_EXAMPLES=OFF</code>: 禁用C语言示例的安装。</li>
+<li><code>-D BUILD_EXAMPLES=OFF</code>: 禁用构建示例程序。</li>
+<li><code>-D PYTHON_DEFAULT_EXECUTABLE=/usr/bin/python3</code>: 指定默认的Python解释器路径为<code>/usr/bin/python3</code>，这将用于与Python相关的构建和安装操作</li>
+<li><code>-D BUILD_opencv_python3=yes</code>: 启用构建OpenCV的Python 3绑定。</li>
+<li><code>-D BUILD_opencv_python2=no</code>: 禁用构建OpenCV的Python 2绑定。</li>
+<li><code>-D PYTHON3_EXECUTABLE=/usr/bin/python3</code>: 指定Python 3解释器的路径为<code>/usr/bin/python3</code>。</li>
+<li><code>-D PYTHON3_INCLUDE_DIR=/usr/include/python3.8</code>: 指定Python 3的头文件目录的路径为<code>/usr/include/python3.8</code>，这里需要提供Python 3的开发包路径，具体版本号可能会有所不同。</li>
+<li><code>-D PYTHON3_LIBRARY=/usr/lib/x86_64-linux-gnu/libpython3.8.so</code>: 指定Python 3的库文件路径为<code>/usr/lib/x86_64-linux-gnu/libpython3.8.so</code>，这里需要提供Python 3的动态链接库文件路径，具体路径和文件名可能会有所不同。</li>
+<li><code>-D PYTHON_DEFAULT_EXECUTABLE=/usr/bin/python3</code>: 指定默认的Python解释器路径为<code>/usr/bin/python3</code>，这将用于与Python相关的构建和安装操作。<code>-D PYTHON_DEFAULT_EXECUTABLE=/usr/bin/python3</code>: 指定默认的Python解释器路径为<code>/usr/bin/python3</code>，这将用于与Python相关的构建和安装操作。</li>
+</ul>
+<p>&#x3D;&#x3D;注意：在CMake中，使用-D参数来定义变量。每个参数开头的-D表示要定义一个CMake变量，并为其赋予特定的值&#x3D;&#x3D;</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310172218235.png" alt="image-20231017221820208"></p>
+<p>然后进行编译安装</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">make -j32</span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
+
+<p>我这电脑还是很快的，两分钟吧也就，还是家里的电脑好呀</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310172125269.png" alt="image-20231017212507239"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310172217427.png" alt="image-20231017221754400"></p>
+<p>​	最后拷贝和链接python库（&#x3D;&#x3D;这一步必须做，否则在使用的时候会找不到cv2这个模块&#x3D;&#x3D;）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cp lib/python3/cv2.cpython-38-x86_64-linux-gnu.so /usr/local/lib/python3.8/dist-packages/</span><br><span class="line">sudo ln -s  /usr/local/lib/python3.8/dist-packages/cv2.cpython-38-x86_64-linux-gnu.so  /usr/lib/python3/dist-packages/cv2.so</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310172226476.png" alt="image-20231017222605454"></p>
+<p>然后进行简单的测试：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">python</span><br><span class="line"></span><br><span class="line">import cv2</span><br><span class="line">cv2.__version__</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310172228970.png" alt="image-20231017222821948"></p>
+<p>然后测试一个opencv的C++程序</p>
+<p>首先创建三个目录build  install  src</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p build  install  src</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310172258435.png" alt="image-20231017225840415"></p>
+<p>然后在src目录下创建测试例程demo.cpp,然后向该文件中添加以下程序：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;opencv2/core/core.hpp&quot;</span>                                                                               </span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;opencv2/highgui/highgui.hpp&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;opencv2/imgproc/imgproc.hpp&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> cv;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">VideoCapture <span class="title">capture</span><span class="params">(<span class="number">0</span>)</span></span>;</span><br><span class="line">    <span class="keyword">if</span> (!capture.<span class="built_in">isOpened</span>())</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 如果无法打开摄像头，则输出提示信息</span></span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;无法打开摄像头&quot;</span> &lt;&lt; endl;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">double</span> time0 = <span class="built_in">static_cast</span>&lt;<span class="type">double</span>&gt;(<span class="built_in">getTickCount</span>()); <span class="comment">// 获取开始时间</span></span><br><span class="line">    <span class="keyword">while</span> (<span class="literal">true</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 从摄像头捕获帧</span></span><br><span class="line">        Mat frame;</span><br><span class="line">        capture &gt;&gt; frame;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 如果捕获到帧，则显示它</span></span><br><span class="line">        <span class="keyword">if</span> (!frame.<span class="built_in">empty</span>())</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">cvtColor</span>(frame, frame, COLOR_RGB2BGR);</span><br><span class="line">            <span class="type">double</span> time1 = <span class="built_in">static_cast</span>&lt;<span class="type">double</span>&gt;(<span class="built_in">getTickCount</span>()); <span class="comment">// 获取结束时间</span></span><br><span class="line">            <span class="type">double</span> fps = <span class="built_in">getTickFrequency</span>() / (time1 - time0); <span class="comment">// 计算实时帧率</span></span><br><span class="line">            time0 = time1; <span class="comment">// 更新开始时间</span></span><br><span class="line">            <span class="built_in">putText</span>(frame, <span class="string">&quot;FPS: &quot;</span> + <span class="built_in">to_string</span>(fps), <span class="built_in">Point</span>(<span class="number">10</span>, <span class="number">30</span>), FONT_HERSHEY_SIMPLEX, <span class="number">1</span>, <span class="built_in">Scalar</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">255</span>), <span class="number">2</span>); <span class="comment">// 在图像上显示帧率</span></span><br><span class="line">            <span class="built_in">imshow</span>(<span class="string">&quot;MIPI Camera&quot;</span>, frame);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 按下&#x27;q&#x27;键退出循环</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">waitKey</span>(<span class="number">1</span>) == <span class="string">&#x27;q&#x27;</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 释放资源并关闭窗口</span></span><br><span class="line">    capture.<span class="built_in">release</span>();</span><br><span class="line">    <span class="built_in">destroyAllWindows</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后创建cmake的配置文件CMakeLists.txt，添加内容如下所示：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cmake_minimum_required</span>(VERSION <span class="number">3.4</span>.<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置项目名称为 opencv_demo</span></span><br><span class="line"><span class="keyword">project</span>(opencv_demo)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置 C++ 标准为 11，并且要求编译器支持该标准</span></span><br><span class="line"><span class="keyword">set</span>(CMAKE_CXX_STANDARD <span class="number">11</span>)</span><br><span class="line"><span class="keyword">set</span>(CMAKE_CXX_STANDARD_REQUIRED <span class="keyword">ON</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查找并引入 OpenCV</span></span><br><span class="line"><span class="keyword">find_package</span>(OpenCV REQUIRED)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加可执行文件 opencv_demo，源文件为 src/demo.cpp</span></span><br><span class="line"><span class="keyword">add_executable</span>(opencv_demo</span><br><span class="line">        src/demo.cpp</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 链接 OpenCV 库</span></span><br><span class="line"><span class="keyword">target_link_libraries</span>(opencv_demo</span><br><span class="line">  <span class="variable">$&#123;OpenCV_LIBS&#125;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置安装目录为 ./install/操作系统名</span></span><br><span class="line"><span class="keyword">set</span>(CMAKE_INSTALL_PREFIX <span class="variable">$&#123;CMAKE_SOURCE_DIR&#125;</span>/<span class="keyword">install</span>/<span class="variable">$&#123;CMAKE_SYSTEM_NAME&#125;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装可执行文件 opencv_demo 到指定目录</span></span><br><span class="line"><span class="keyword">install</span>(TARGETS opencv_demo DESTINATION ./)</span><br></pre></td></tr></table></figure>
+
+<p>然后进入build目录，执行以下命令，进行配置、编译和安装三个步骤：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd build/</span><br><span class="line">cmake ../</span><br><span class="line">make </span><br><span class="line">make install </span><br></pre></td></tr></table></figure>
+
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310172303425.png" alt="image-20231017230355394"></p>
+<p>在install&#x2F;Linux目录下就生成了测试APP opencv_demo<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310172304597.png" alt="image-20231017230415584"></p>
+<p>然后接一个摄像头进行测试，测试功能正常：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310172310504.png" alt="image-20231017231044428"></p>
+<p>至此，opencv在PC机的编译就完成了。</p>
+<h1 id="3-交叉编译"><a href="#3-交叉编译" class="headerlink" title="3.交叉编译"></a>3.交叉编译</h1> 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2023/10/17/0-0-6%20opencv%E7%9A%84%E7%BC%96%E8%AF%91/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/opencv/" rel="tag">opencv</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+    
+      <a href="/2023/10/16/0-0-7%20buildroot%E7%9A%84%E5%AD%A6%E4%B9%A0/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">windows搭建hexo</div>
+      </a>
+    
+  </nav>
+
+  
+   
+  
+   
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2015-2023
+        <i class="ri-heart-fill heart_icon"></i> John Doe
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="热爱学习的未来酱"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/2019/about">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+ 
+<script src="/js/clickBoom2.js"></script>
+ 
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+ 
+<script src="/js/dz.js"></script>
+ 
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    
+
+  </div>
+</body>
+
+</html>

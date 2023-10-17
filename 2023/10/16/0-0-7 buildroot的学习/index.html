@@ -13,7 +13,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
-      <title>0-5 SPL的编译 |  热爱学习的未来酱</title>
+      <title>windows搭建hexo |  热爱学习的未来酱</title>
   <meta name="generator" content="hexo-theme-ayer">
       
       <link rel="shortcut icon" href="/favicon.ico" />
@@ -59,7 +59,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-0-5 SPL的编译"
+  id="post-0-0-7 buildroot的学习"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -70,7 +70,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  0-5 SPL的编译
+  windows搭建hexo
 </h1>
  
 
@@ -78,11 +78,11 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2023/09/10/0-5%20SPL%E7%9A%84%E7%BC%96%E8%AF%91/" class="article-date">
-  <time datetime="2023-09-10T09:17:01.000Z" itemprop="datePublished">2023-09-10</time>
+      <a href="/2023/10/16/0-0-7%20buildroot%E7%9A%84%E5%AD%A6%E4%B9%A0/" class="article-date">
+  <time datetime="2023-10-16T13:55:17.000Z" itemprop="datePublished">2023-10-16</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/">瑞芯微脚本分析</a>
+    <a class="article-category-link" href="/categories/buildroot/">buildroot</a>
   </div>
   
 <div class="word_count">
@@ -90,7 +90,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">671</span>
+            <span class="post-count">1k</span>
         </span>
     </span>
 
@@ -106,14 +106,54 @@
  
     </div>
       
+    <div class="tocbot"></div>
+
 
 
 
   
     <div class="article-entry" itemprop="articleBody">
        
-  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br></pre></td><td class="code"><pre><span class="line">Version V1.08 20220617</span><br><span class="line">LPDDR4X, 2112MHz</span><br><span class="line">channel[0] BW=16 Col=10 Bk=8 CS0 Row=16 CS=1 Die BW=16 Size=1024MB</span><br><span class="line">channel[1] BW=16 Col=10 Bk=8 CS0 Row=16 CS=1 Die BW=16 Size=1024MB</span><br><span class="line">channel[2] BW=16 Col=10 Bk=8 CS0 Row=16 CS=1 Die BW=16 Size=1024MB</span><br><span class="line">channel[3] BW=16 Col=10 Bk=8 CS0 Row=16 CS=1 Die BW=16 Size=1024MB</span><br><span class="line">Manufacturer ID:0x1 Samsung</span><br><span class="line">CH0 RX Vref:33.7%, TX Vref:21.8%,0.0%</span><br><span class="line">CH1 RX Vref:32.7%, TX Vref:18.8%,0.0%</span><br><span class="line">CH2 RX Vref:30.7%, TX Vref:17.8%,0.0%</span><br><span class="line">CH3 RX Vref:34.7%, TX Vref:18.8%,0.0%</span><br><span class="line">change to F1: 528MHz</span><br><span class="line">change to F2: 1068MHz</span><br><span class="line">change to F3: 1560MHz</span><br><span class="line">change to F0: 2112MHz</span><br><span class="line">out</span><br><span class="line">U-Boot SPL board init</span><br><span class="line">U-Boot SPL 2017.09-orangepi (Apr 21 2023 - 10:35:39)</span><br><span class="line">Trying to boot from MMC1</span><br><span class="line">Trying fit image at 0x4000 sector</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># Verified-boot: 0</span></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># Checking atf-1 0x00040000 ... sha256(806278dba1...) + OK</span></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># Checking uboot 0x00200000 ... sha256(a14cd96f5d...) + OK</span></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># Checking fdt 0x00349350 ... sha256(cf0060a3cf...) + OK</span></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># Checking atf-2 0x000f0000 ... sha256(c00c7fd75b...) + OK</span></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># Checking atf-3 0xff100000 ... sha256(71c3a5841b...) + OK</span></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># Checking atf-4 0xff001000 ... sha256(2301cf73be...) + OK</span></span></span><br><span class="line">Jumping to U-Boot(0x00200000) via ARM Trusted Firmware(0x00040000)</span><br><span class="line">Total: 209.584 ms</span><br><span class="line"></span><br><span class="line">INFO:    Preloader serial: 2</span><br><span class="line">NOTICE:  BL31: v2.3():v2.3-405-gb52c2eadd:derrick.huang</span><br><span class="line">NOTICE:  BL31: Built : 11:23:47, Aug 15 2022</span><br><span class="line">INFO:    spec: 0x13</span><br><span class="line">INFO:    ext 32k is valid</span><br><span class="line">INFO:    GICv3 without legacy support detected.</span><br><span class="line">INFO:    ARM GICv3 driver initialized in EL3</span><br><span class="line">INFO:    system boots from cpu-hwid-0</span><br><span class="line">INFO:    idle_st=0x21fff, pd_st=0x11fff9, repair_st=0xfff70001</span><br><span class="line">INFO:    dfs DDR fsp_params[0].freq_mhz= 2112MHz</span><br><span class="line">INFO:    dfs DDR fsp_params[1].freq_mhz= 528MHz</span><br><span class="line">INFO:    dfs DDR fsp_params[2].freq_mhz= 1068MHz</span><br><span class="line">INFO:    dfs DDR fsp_params[3].freq_mhz= 1560MHz</span><br><span class="line">INFO:    BL31: Initialising Exception Handling Framework</span><br><span class="line">INFO:    BL31: Initializing runtime services</span><br><span class="line">WARNING: No OPTEE provided by BL2 boot loader, Booting device without OPTEE initialization. SMC`s destined for OPTEE will return SMC_UNK</span><br><span class="line">ERROR:   Error initializing runtime service opteed_fast</span><br><span class="line">INFO:    BL31: Preparing for EL3 exit to normal world</span><br><span class="line">INFO:    Entry point address = 0x200000</span><br><span class="line">INFO:    SPSR = 0x3c9</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">U-Boot 2017.09-orangepi (Apr 21 2023 - 10:35:39 +0800)</span><br><span class="line"></span><br><span class="line">Model: Orange Pi 5B</span><br><span class="line">PreSerial: 2, raw, 0xfeb50000</span><br><span class="line">DRAM:  3.7 GiB</span><br><span class="line">Sysmem: init</span><br><span class="line">Relocation Offset: eda2d000</span><br><span class="line">Relocation fdt: eb9f9008 - eb9fecb8</span><br><span class="line">CR: M/C/I</span><br><span class="line">Using default environment</span><br><span class="line"></span><br><span class="line">mmc@fe2c0000: 0, mmc@fe2e0000: 1</span><br><span class="line">Bootdev(atags): mmc 0</span><br><span class="line">MMC0: Legacy, 52Mhz</span><br><span class="line">PartType: EFI</span><br><span class="line">DM: v2</span><br><span class="line">boot mode: None</span><br><span class="line">Model: Orange Pi 5B</span><br><span class="line">CLK: (sync kernel. arm: enter 1008000 KHz, init 1008000 KHz, kernel 0N/A)</span><br><span class="line">  b0pll 24000 KHz</span><br><span class="line">  b1pll 24000 KHz</span><br><span class="line">  lpll 24000 KHz</span><br><span class="line">  v0pll 24000 KHz</span><br><span class="line">  aupll 24000 KHz</span><br><span class="line">  cpll 1500000 KHz</span><br><span class="line">  gpll 1188000 KHz</span><br><span class="line">  npll 24000 KHz</span><br><span class="line">  ppll 1100000 KHz</span><br><span class="line">  aclk_center_root 702000 KHz</span><br><span class="line">  pclk_center_root 100000 KHz</span><br><span class="line">  hclk_center_root 396000 KHz</span><br><span class="line">  aclk_center_low_root 500000 KHz</span><br><span class="line">  aclk_top_root 750000 KHz</span><br><span class="line">  pclk_top_root 100000 KHz</span><br><span class="line">  aclk_low_top_root 396000 KHz</span><br><span class="line">Net:   No ethernet found.</span><br><span class="line">Hit key to stop autoboot(&#x27;CTRL+C&#x27;):  0</span><br><span class="line">switch to partitions #0, OK</span><br><span class="line">mmc0 is current device</span><br><span class="line">mmc@fe2c0000: 0 (SD)</span><br><span class="line">mmc@fe2e0000: 1</span><br><span class="line">switch to partitions #0, OK</span><br><span class="line">mmc0 is current device</span><br><span class="line">Scanning mmc 0:1...</span><br><span class="line">Found U-Boot script /boot.scr</span><br><span class="line">reading /boot.scr</span><br><span class="line">3411 bytes read in 4 ms (832 KiB/s)</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># Executing script at 00500000</span></span></span><br><span class="line">Boot script loaded from mmc 0</span><br><span class="line">reading /orangepiEnv.txt</span><br><span class="line">222 bytes read in 3 ms (72.3 KiB/s)</span><br><span class="line">reading /uInitrd</span><br><span class="line">18641659 bytes read in 1844 ms (9.6 MiB/s)</span><br><span class="line">reading /Image</span><br><span class="line">34736640 bytes read in 3049 ms (10.9 MiB/s)</span><br><span class="line">reading /dtb/rockchip/rk3588s-orangepi-5b.dtb</span><br><span class="line">233728 bytes read in 24 ms (9.3 MiB/s)</span><br><span class="line">reading /dtb/rockchip/overlay/rk3588-fixup.scr</span><br><span class="line">2756 bytes read in 6 ms (448.2 KiB/s)</span><br><span class="line">Applying kernel provided DT fixup script (rk3588-fixup.scr)</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># Executing script at 09000000</span></span></span><br><span class="line">Fdt Ramdisk skip relocation</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># Loading init Ramdisk from Legacy Image at 0a200000 ...</span></span></span><br><span class="line">   Image Name:   uInitrd</span><br><span class="line">   Image Type:   AArch64 Linux RAMDisk Image (gzip compressed)</span><br><span class="line">   Data Size:    18641595 Bytes = 17.8 MiB</span><br><span class="line">   Load Address: 00000000</span><br><span class="line">   Entry Point:  00000000</span><br><span class="line">   Verifying Checksum ... OK</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># Flattened Device Tree blob at 0x0a100000</span></span></span><br><span class="line">   Booting using the fdt blob at 0x0a100000</span><br><span class="line">   reserving fdt memory region: addr=a100000 size=9f000</span><br><span class="line">  &#x27;reserved-memory&#x27; ramoops@110000: addr=110000 size=f0000</span><br><span class="line">   Using Device Tree in place at 000000000a100000, end 000000000a1a1fff</span><br><span class="line">Adding bank: 0x00200000 - 0xf0000000 (size: 0xefe00000)</span><br><span class="line">Total: 5283.754 ms</span><br><span class="line"></span><br><span class="line">Starting kernel ...</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">~~~</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">buildroot官网地址：https://buildroot.org/</span><br><span class="line"></span><br><span class="line">github链接：https://github.com/buildroot/buildroot</span><br><span class="line"></span><br><span class="line">两个指导文档</span><br><span class="line"></span><br><span class="line">![image-20231016222739549](https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310162227581.png)</span><br><span class="line"></span><br><span class="line">![image-20231016222749732](https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310162227750.png)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 1.拉取buildroot</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">拉取下载buildroot</span><br><span class="line"></span><br><span class="line">~~~shell</span><br><span class="line">git clone https://github.com/buildroot/buildroot</span><br></pre></td></tr></table></figure>
 
+
+
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310170757701.png" alt="image-20231017075747677"></p>
+<p>建议以普通用户来进行操作，buildroot管饭极力推荐普通用户</p>
+<h1 id="2-help帮助菜单"><a href="#2-help帮助菜单" class="headerlink" title="2.help帮助菜单"></a>2.help帮助菜单</h1><p>所有的交互都是通过在主构建根源目录中调用make来实现的，可以通过make help来获取帮助，具体内容如下所示：</p>
+<p><strong>清理：</strong><br>    clean - 删除构建生成的所有文件<br>    distclean - 删除所有非源代码文件（包括.config文件）</p>
+<p><strong>构建：</strong><br>    all - 构建整个系统<br>    toolchain - 构建工具链<br>    sdk - 构建可移植的SDK</p>
+<p><strong>配置：</strong><br>    menuconfig - 交互式基于curses的配置工具<br>    nconfig - 交互式基于ncurses的配置工具<br>    xconfig - 交互式基于Qt的配置工具<br>    gconfig - 交互式基于GTK的配置工具<br>    oldconfig - 解决.config文件中的未解决符号<br>    syncconfig - 与oldconfig相同，但静默执行，并更新依赖关系<br>    olddefconfig - 与syncconfig相同，但将新符号设置为默认值<br>    randconfig - 随机回答所有选项的新配置<br>    <strong>defconfig - 所有选项都使用默认答案的新配置；如果在命令行上设置了BR2_DEFCONFIG，则使用其作为输入</strong><br>    <strong>savedefconfig - 将当前配置保存到BR2_DEFCONFIG（最小配置）</strong></p>
+<p>​		上面的这两个应该是在配置里面最有用的那一个，默认情况下这个BR2_DEFCONFIG并不会被设置，所以只能是配置完成之后，第一次是一定要设置的。特殊记忆一下。</p>
+<p>​	update-defconfig - 与savedefconfig相同<br>​	allyesconfig - 所有选项都接受yes答案的新配置<br>​	allnoconfig - 所有选项都使用no答案的新配置<br>​	alldefconfig - 所有选项都设置为默认值的新配置<br>​	randpackageconfig - 随机回答包选项的新配置<br>​	allyespackageconfig - 所有包选项都接受yes答案的新配置<br>​	allnopackageconfig - 所有包选项都使用no答案的新配置</p>
+<p><strong>针对特定软件包：</strong><br>    <pkg> - 构建并安装<pkg>及其所有依赖项<br>    <pkg>-source - 仅下载<pkg>的源代码文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make opencv4-source</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310170818453.png" alt="image-20231017081853414"></p>
+<p>​	<pkg>-extract - 提取<pkg>的源代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make opencv4-extract</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310170819393.png" alt="image-20231017081936374"></p>
+<p>​	<pkg>-patch - 对<pkg>应用补丁</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make opencv4-patch</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310170821298.png" alt="image-20231017082105272">	<pkg>-depends - 构建<pkg>的依赖项</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make opencv4-depends</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310170821715.png" alt="image-20231017082141682"></p>
+<p>​	<pkg>-configure - 构建<pkg>到配置阶段</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make opencv4-configure</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310170830641.png" alt="image-20231017083044583"></p>
+<p>​	<pkg>-build - 构建<pkg>到编译阶段</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make opencv4-build</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310170831059.png" alt="image-20231017083149028"></p>
+<p>​	<pkg>-show-info - 生成关于<pkg>的信息，以JSON格式呈现<br>​	<pkg>-show-depends - 列出<pkg>依赖的软件包<br>​	<pkg>-show-rdepends - 列出以<pkg>为依赖的软件包<br>​	<pkg>-show-recursive-depends 递归列出<pkg>依赖的软件包<br>​	<pkg>-show-recursive-rdepends  递归列出以<pkg>为依赖的软件包<br>​	<pkg>-graph-depends - 生成<pkg>依赖关系的图形<br>​	<pkg>-graph-rdepends - 生成<pkg>反向依赖关系的图形<br>​	<pkg>-dirclean - 删除<pkg>的构建目录<br>​	<pkg>-reconfigure - 从配置阶段重新开始构建<br>​	<pkg>-rebuild - 从编译阶段重新开始构建<br>​	<pkg>-reinstall - 从安装阶段重新开始构建</p>
+<p><strong>文档：</strong><br>    manual - 构建所有格式的手册<br>    manual-html - 构建HTML格式的手册<br>    manual-split-html - 构建拆分的HTML格式的手册<br>    manual-pdf - 构建PDF格式的手册<br>    manual-text - 构建文本格式的手册<br>    manual-epub - 构建ePub格式的手册<br>    graph-build - 生成构建时间的图表<br>    graph-depends - 生成依赖树的图表<br>    graph-size - 生成文件系统大小的统计信息<br>    list-defconfigs - 列出所有预配置的最小系统</p>
+<p><strong>杂项：</strong><br>source - 下载离线构建所需的所有源代码<br>external-deps - 列出使用的外部软件包<br>legal-info - 生成有关许可证合规性的信息<br>show-info - 生成关于软件包的信息，以JSON格式呈现<br>pkg-stats - 以JSON和HTML格式生成有关软件包的信息<br>printvars - 导出通过VARS&#x3D;…选择的内部变量<br>show-vars - 以JSON格式呈现所有内部变量；使用VARS&#x3D;…限制列表以匹配该模式</p>
+<p>make V&#x3D;0|1 - 0 &#x3D;&gt; 静默构建（默认），1 &#x3D;&gt; 详细构建<br>make O&#x3D;dir - 将所有输出文件定位在”dir”中，包括.config文件</p>
+<p>有关更多详细信息，请参阅README，生成Buildroot手册或在线查阅它，网址为<a target="_blank" rel="noopener" href="http://buildroot.org/docs.html">http://buildroot.org/docs.html</a></p>
  
       <!-- reward -->
       
@@ -166,12 +206,12 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2023/09/10/0-5%20SPL%E7%9A%84%E7%BC%96%E8%AF%91/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2023/10/16/0-0-7%20buildroot%E7%9A%84%E5%AD%A6%E4%B9%A0/" alt="微信分享二维码">
     </div>
 </div>
 
 <div id="share-mask"></div>  
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%91%9E%E8%8A%AF%E5%BE%AE%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/" rel="tag">瑞芯微脚本分析</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/buildroot/" rel="tag">buildroot</a></li></ul>
 
     </footer>
   </div>
@@ -179,19 +219,19 @@
    
   <nav class="article-nav">
     
-      <a href="/2023/09/10/0-6%20uboot%E7%9B%AE%E5%BD%95%E4%B8%8B%20make.sh%20%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/" class="article-nav-link">
+      <a href="/2023/10/17/0-0-6%20opencv%E7%9A%84%E7%BC%96%E8%AF%91/" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            0-6 uboot目录下 make.sh 脚本分析
+            opencv的编译
           
         </div>
       </a>
     
     
-      <a href="/2023/09/10/0-5%20Loader%E7%9A%84%E7%BC%96%E8%AF%91/" class="article-nav-link">
+      <a href="/2023/10/10/0-22%20%E5%A3%B0%E5%8D%A1%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E5%86%B3/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">0-5 Loader的编译</div>
+        <div class="article-nav-title">0-22 声卡问题的解决</div>
       </a>
     
   </nav>
