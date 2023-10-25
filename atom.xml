@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2023-10-18T15:14:00.326Z</updated>
+  <updated>2023-10-25T13:57:36.455Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,81 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>0-22 声卡问题的解决</title>
+    <link href="http://example.com/2023/10/25/0-22%20%E5%A3%B0%E5%8D%A1%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E5%86%B3/"/>
+    <id>http://example.com/2023/10/25/0-22%20%E5%A3%B0%E5%8D%A1%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E5%86%B3/</id>
+    <published>2023-10-25T12:47:53.000Z</published>
+    <updated>2023-10-25T13:57:36.455Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;&#92;assets&#92;css&#92;APlayer.min.css&quot;&gt;&lt;script src=&quot;&#92;assets&#92;js&#92;APlayer.min.js&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="瑞芯微固件分析" scheme="http://example.com/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE%E5%9B%BA%E4%BB%B6%E5%88%86%E6%9E%90/"/>
+    
+    
+    <category term="瑞芯微脚本分析" scheme="http://example.com/tags/%E7%91%9E%E8%8A%AF%E5%BE%AE%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>0-0-8 构建deb包</title>
+    <link href="http://example.com/2023/10/25/0-0-9%20systemd%20%E5%AD%A6%E4%B9%A0/"/>
+    <id>http://example.com/2023/10/25/0-0-9%20systemd%20%E5%AD%A6%E4%B9%A0/</id>
+    <published>2023-10-24T22:47:53.000Z</published>
+    <updated>2023-10-24T23:02:56.743Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;&#92;assets&#92;css&#92;APlayer.min.css&quot;&gt;&lt;script src=&quot;&#92;assets&#92;js&#92;APlayer.min.js&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="systemd学习" scheme="http://example.com/categories/systemd%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+    <category term="systemd学习" scheme="http://example.com/tags/systemd%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>0-0-8 构建deb包</title>
+    <link href="http://example.com/2023/10/19/0-0-8%20%E6%9E%84%E5%BB%BAdeb%E5%8C%85/"/>
+    <id>http://example.com/2023/10/19/0-0-8%20%E6%9E%84%E5%BB%BAdeb%E5%8C%85/</id>
+    <published>2023-10-19T12:47:53.000Z</published>
+    <updated>2023-10-19T13:52:45.793Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;&#92;assets&#92;css&#92;APlayer.min.css&quot;&gt;&lt;script src=&quot;&#92;assets&#92;js&#92;APlayer.min.js&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="deb包的制作" scheme="http://example.com/categories/deb%E5%8C%85%E7%9A%84%E5%88%B6%E4%BD%9C/"/>
+    
+    
+    <category term="deb包的制作" scheme="http://example.com/tags/deb%E5%8C%85%E7%9A%84%E5%88%B6%E4%BD%9C/"/>
+    
+  </entry>
   
   <entry>
     <title>opencv的编译</title>
@@ -67,61 +142,11 @@
   </entry>
   
   <entry>
-    <title>0-22 声卡问题的解决</title>
-    <link href="http://example.com/2023/10/10/0-22%20%E5%A3%B0%E5%8D%A1%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E5%86%B3/"/>
-    <id>http://example.com/2023/10/10/0-22%20%E5%A3%B0%E5%8D%A1%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E5%86%B3/</id>
-    <published>2023-10-10T12:47:53.000Z</published>
-    <updated>2023-10-11T14:08:19.794Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;&#92;assets&#92;css&#92;APlayer.min.css&quot;&gt;&lt;script src=&quot;&#92;assets&#92;js&#92;APlayer.min.js&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="瑞芯微固件分析" scheme="http://example.com/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE%E5%9B%BA%E4%BB%B6%E5%88%86%E6%9E%90/"/>
-    
-    
-    <category term="瑞芯微脚本分析" scheme="http://example.com/tags/%E7%91%9E%E8%8A%AF%E5%BE%AE%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/"/>
-    
-  </entry>
-  
-  <entry>
     <title>0-20挂载镜像文件</title>
     <link href="http://example.com/2023/10/08/0-20%20%E6%8C%82%E8%BD%BD%E9%95%9C%E5%83%8F%E6%96%87%E4%BB%B6/"/>
     <id>http://example.com/2023/10/08/0-20%20%E6%8C%82%E8%BD%BD%E9%95%9C%E5%83%8F%E6%96%87%E4%BB%B6/</id>
     <published>2023-10-08T12:47:53.000Z</published>
     <updated>2023-10-09T23:49:41.832Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;&#92;assets&#92;css&#92;APlayer.min.css&quot;&gt;&lt;script src=&quot;&#92;assets&#92;js&#92;APlayer.min.js&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="瑞芯微固件分析" scheme="http://example.com/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE%E5%9B%BA%E4%BB%B6%E5%88%86%E6%9E%90/"/>
-    
-    
-    <category term="瑞芯微脚本分析" scheme="http://example.com/tags/%E7%91%9E%E8%8A%AF%E5%BE%AE%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>0-21 构建deb包</title>
-    <link href="http://example.com/2023/10/08/0-21%20%E6%9E%84%E5%BB%BAdeb%E5%8C%85/"/>
-    <id>http://example.com/2023/10/08/0-21%20%E6%9E%84%E5%BB%BAdeb%E5%8C%85/</id>
-    <published>2023-10-08T12:47:53.000Z</published>
-    <updated>2023-10-09T13:46:30.331Z</updated>
     
     
       
@@ -472,31 +497,6 @@
     <id>http://example.com/2023/09/10/0-10%20make.sh+rk3568%E7%BC%96%E8%AF%91%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E5%88%86%E6%9E%90%EF%BC%88%E4%B8%AD%EF%BC%89/</id>
     <published>2023-09-10T09:17:07.000Z</published>
     <updated>2023-09-13T00:23:55.290Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;&#92;assets&#92;css&#92;APlayer.min.css&quot;&gt;&lt;script src=&quot;&#92;assets&#92;js&#92;APlayer.min.js&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="瑞芯微脚本分析" scheme="http://example.com/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/"/>
-    
-    
-    <category term="瑞芯微脚本分析" scheme="http://example.com/tags/%E7%91%9E%E8%8A%AF%E5%BE%AE%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>0-8 U-Boot编译过程浅析</title>
-    <link href="http://example.com/2023/09/10/0-8%20U-Boot%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E6%B5%85%E6%9E%90/"/>
-    <id>http://example.com/2023/09/10/0-8%20U-Boot%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E6%B5%85%E6%9E%90/</id>
-    <published>2023-09-10T09:17:04.000Z</published>
-    <updated>2023-09-13T00:22:12.609Z</updated>
     
     
       

@@ -13,7 +13,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
-      <title>0-20挂载镜像文件 |  热爱学习的未来酱</title>
+      <title>0-22 声卡问题的解决 |  热爱学习的未来酱</title>
   <meta name="generator" content="hexo-theme-ayer">
       
       <link rel="shortcut icon" href="/favicon.ico" />
@@ -59,7 +59,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-0-20 挂载镜像文件"
+  id="post-0-22 声卡问题的解决"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -70,7 +70,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  0-20挂载镜像文件
+  0-22 声卡问题的解决
 </h1>
  
 
@@ -78,8 +78,8 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2023/10/08/0-20%20%E6%8C%82%E8%BD%BD%E9%95%9C%E5%83%8F%E6%96%87%E4%BB%B6/" class="article-date">
-  <time datetime="2023-10-08T12:47:53.000Z" itemprop="datePublished">2023-10-08</time>
+      <a href="/2023/10/25/0-22%20%E5%A3%B0%E5%8D%A1%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E5%86%B3/" class="article-date">
+  <time datetime="2023-10-25T12:47:53.000Z" itemprop="datePublished">2023-10-25</time>
 </a> 
   <div class="article-category">
     <a class="article-category-link" href="/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE%E5%9B%BA%E4%BB%B6%E5%88%86%E6%9E%90/">瑞芯微固件分析</a>
@@ -90,7 +90,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">550</span>
+            <span class="post-count">819</span>
         </span>
     </span>
 
@@ -112,45 +112,89 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>编译完成之后的镜像为ubuntu-22.04.3-preinstalled-desktop-arm64.img，这里面包括spl tpl uboot boot分区和文件系统分区，其中spl tpl uboot是通过dd命令写入的，而另外两个是创建的分区，现在我想的是挂载上这个img镜像，然后查看里面的系统，在CSDN上找到了这样一个博客</p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/yangleo1987/article/details/58603205?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522169677013016800184112679%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&request_id=169677013016800184112679&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_ecpm_v1~rank_v31_ecpm-2-58603205-null-null.142%5Ev95%5EchatgptT3_1&utm_term=linux%E4%B8%8B%E6%8C%82%E8%BD%BDimg%E9%95%9C%E5%83%8F%E6%96%87%E4%BB%B6&spm=1018.2226.3001.4187">挂载img分区</a></p>
-<p>首先使用fdisk命令查看img镜像分区</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fdisk ubuntu-22.04.3-preinstalled-desktop-arm64.img</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310082107478.png" alt="image-20231008210757445"></p>
-<p>分区是从32768和1081344开始的，然后，就可以挂载分区了，这里要用到offset参数：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mount -o loop,offset=$((32768*512))  ubuntu-22.04.3-preinstalled-desktop-arm64.img    1 </span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mount -o loop,offset=$((61440*512))  ubuntu-22.04.3-preinstalled-desktop-arm64.img    1 </span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mount -o loop,offset=$((1081344*512))  ubuntu-22.04.3-preinstalled-desktop-arm64.img    2 </span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">/usr/bin/make -f ./Makefile intdeb-pkg \</span><br><span class="line">  KERNELRELEASE=5.10.160-rockchip \</span><br><span class="line">  KDEB_PKGVERSION=5.10.160-14 \</span><br><span class="line">  CROSS_COMPILE=aarch64-linux-gnu- \</span><br><span class="line">  ARCH=arm64 \</span><br><span class="line">  -j 32</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gzip -dc ../initrd.img | cpio -idm</span><br></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lz4 -dc ../initrd.img | cpio -idm</span><br></pre></td></tr></table></figure>
-
-
+  <pre><code>    es8388_sound: es8388-sound &#123;
+            status = &quot;okay&quot;;
+            compatible = &quot;rockchip,multicodecs-card&quot;;
+            rockchip,card-name = &quot;rockchip-es8388&quot;;
+            hp-det-gpio = &lt;&amp;gpio1 RK_PD5 GPIO_ACTIVE_HIGH&gt;;
+            io-channels = &lt;&amp;saradc 3&gt;;
+            io-channel-names = &quot;adc-detect&quot;;
+            keyup-threshold-microvolt = &lt;1800000&gt;;
+            poll-interval = &lt;100&gt;;
+            rockchip,format = &quot;i2s&quot;;
+            rockchip,mclk-fs = &lt;256&gt;;
+            rockchip,cpu = &lt;&amp;i2s1_8ch&gt;;
+            rockchip,codec = &lt;&amp;es8388&gt;;
+            rockchip,audio-routing =
+                    &quot;Headphone&quot;, &quot;LOUT1&quot;,
+                    &quot;Headphone&quot;, &quot;ROUT1&quot;,
+                    &quot;Headphone&quot;, &quot;Headphone Power&quot;,
+                    &quot;Headphone&quot;, &quot;Headphone Power&quot;,
+                    &quot;LINPUT1&quot;, &quot;Main Mic&quot;,
+                    &quot;LINPUT2&quot;, &quot;Main Mic&quot;,
+                    &quot;RINPUT1&quot;, &quot;Headset Mic&quot;,
+                    &quot;RINPUT2&quot;, &quot;Headset Mic&quot;;
+            pinctrl-names = &quot;default&quot;;
+            pinctrl-0 = &lt;&amp;hp_det&gt;;
+            play-pause-key &#123;
+                    label = &quot;playpause&quot;;
+                    linux,code = &lt;KEY_PLAYPAUSE&gt;;
+                    press-threshold-microvolt = &lt;2000&gt;;
+            &#125;;
+    &#125;;
+</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">es8388: es8388@10 &#123;</span><br><span class="line">        status = &quot;okay&quot;;</span><br><span class="line">        #sound-dai-cells = &lt;0&gt;;</span><br><span class="line">        compatible = &quot;everest,es8388&quot;, &quot;everest,es8323&quot;;</span><br><span class="line">        reg = &lt;0x10&gt;;</span><br><span class="line">        clocks = &lt;&amp;mclkout_i2s1&gt;;</span><br><span class="line">        clock-names = &quot;mclk&quot;;</span><br><span class="line">        assigned-clocks = &lt;&amp;mclkout_i2s1&gt;;</span><br><span class="line">        assigned-clock-rates = &lt;12288000&gt;;</span><br><span class="line">        pinctrl-names = &quot;default&quot;;</span><br><span class="line">        pinctrl-0 = &lt;&amp;i2s1m0_mclk&gt;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 
 
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">U-Boot 2017.09-g32640b0ada-230713-dirty #topeet (Oct 07 2023 - 22:14:24 +0800)</span><br><span class="line"></span><br><span class="line">Model: Rockchip RK3588 Evaluation Board</span><br><span class="line">MPIDR: 0x81000000</span><br><span class="line">PreSerial: 2, raw, 0xfeb50000</span><br><span class="line">DRAM:  8 GiB</span><br><span class="line">Sysmem: init</span><br><span class="line">Relocation Offset: eda1c000</span><br><span class="line">Relocation fdt: eb9fa160 - eb9fecd0</span><br><span class="line">CR: M/C/I</span><br><span class="line">Using default environment</span><br><span class="line"></span><br><span class="line">Hotkey: ctrl+c</span><br><span class="line">DM: v2</span><br><span class="line">no mmc device at slot 1</span><br><span class="line">mmc@fe2c0000: 1 (SD), mmc@fe2e0000: 0</span><br><span class="line">Bootdev(atags): mmc 1</span><br><span class="line">MMC1: Legacy, 52Mhz</span><br><span class="line">PartType: EFI</span><br><span class="line">No misc partition</span><br><span class="line">boot mode: None</span><br><span class="line">RESC: &#x27;boot&#x27;, blk@0x0001898a</span><br><span class="line">resource: sha256+</span><br><span class="line">FIT: no signed, no conf required</span><br><span class="line">DTB: rk-kernel.dtb</span><br><span class="line">HASH(c): OK</span><br><span class="line">I2c0 speed: 100000Hz</span><br><span class="line">vsel-gpios- not found!</span><br><span class="line">en-gpios- not found!</span><br><span class="line">vdd_cpu_big0_s0 800000 uV</span><br><span class="line">vsel-gpios- not found!</span><br><span class="line">en-gpios- not found!</span><br><span class="line">vdd_cpu_big1_s0 800000 uV</span><br><span class="line">I2c1 speed: 100000Hz</span><br><span class="line">vsel-gpios- not found!</span><br><span class="line">en-gpios- not found!</span><br><span class="line">vdd_npu_s0 800000 uV</span><br><span class="line">spi2: RK806: 2</span><br><span class="line">ON=0x40, OFF=0x00</span><br><span class="line">vdd_gpu_s0 750000 uV</span><br><span class="line">vdd_cpu_lit_s0 750000 uV</span><br><span class="line">vdd_log_s0 750000 uV</span><br><span class="line">vdd_vdenc_s0 init 750000 uV</span><br><span class="line">vdd_ddr_s0 850000 uV</span><br><span class="line">Device &#x27;gpio@fd8a0000&#x27;: seq 0 is in use by &#x27;gpio@fd8a0000&#x27;</span><br><span class="line">Warn: can&#x27;t find connect driver</span><br><span class="line">Warn: can&#x27;t get connect driver</span><br><span class="line">get vp0 plane mask:0x5, primary id:2, cursor_plane:-1, from dts</span><br><span class="line">get vp1 plane mask:0xa, primary id:3, cursor_plane:-1, from dts</span><br><span class="line">get vp2 plane mask:0x140, primary id:8, cursor_plane:-1, from dts</span><br><span class="line">get vp3 plane mask:0x280, primary id:9, cursor_plane:-1, from dts</span><br><span class="line">Could not find baseparameter partition</span><br><span class="line">Model: Rockchip RK3588 EVB7 LP4 V10 Board</span><br><span class="line">MPIDR: 0x81000000</span><br><span class="line">Rockchip UBOOT DRM driver version: v1.0.1</span><br><span class="line">vp0 have layer nr:2[0 2 ], primary plane: 2</span><br><span class="line">vp1 have layer nr:2[1 3 ], primary plane: 3</span><br><span class="line">vp2 have layer nr:2[6 8 ], primary plane: 8</span><br><span class="line">vp3 have layer nr:2[7 9 ], primary plane: 9</span><br><span class="line">Using display timing dts</span><br><span class="line">dsi@fde30000:  detailed mode clock 71900 kHz, flags[a]</span><br><span class="line">    H: 0800 0820 0840 0860</span><br><span class="line">    V: 1280 1290 1294 1298</span><br><span class="line">bus_format: 100e</span><br><span class="line">VOP update mode to: 800x1280p64, type: MIPI1 for VP3</span><br><span class="line">VP3 set crtc_clock to 71493KHz</span><br><span class="line">VOP VP3 enable Esmart3[654x270-&gt;654x270@73x505] fmt[2] addr[0xedf04000]</span><br><span class="line">final DSI-Link bandwidth: 476620 Kbps x 4</span><br><span class="line">CLK: (uboot. arm: enter 1008000 KHz, init 1008000 KHz, kernel 0N/A)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
+
+<p>香橙派 orangepib3 </p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310112154264.png" alt="image-20231011215420206"></p>
+<p>倒是没啥</p>
+<p>1126</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310112154846.png" alt="image-20231011215455816"></p>
+<p>正点3568</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310112155945.png" alt="image-20231011215514911"></p>
+<p>香橙派 rk3588s</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310112157444.png" alt="image-20231011215723418"></p>
+<p>firefly rk3568原理图</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310112159178.png" alt="image-20231011215957135"></p>
+<p>野火 3588s</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310112204368.png" alt="image-20231011220410343"></p>
+<p>野火 3568 </p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310112205798.png" alt="image-20231011220530778"></p>
+<p>迅为3588</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310112206820.png" alt="image-20231011220656801"></p>
+<p>迅为3568</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310112208009.png" alt="image-20231011220800981"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310252049564.png" alt="image-20231025204913524"></p>
+<p>​	</p>
+<p>rk3568-evb1-ddr4-v10.dtsi</p>
+<p>rk3568-linux.dtsi</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310252051872.png" alt="image-20231025205107855"></p>
+<p>rk3568-linux.dtsi</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310252101836.png" alt="image-20231025210156823"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310252103441.png" alt="image-20231025210324421"></p>
+<p>现在来分析一下这个耳机的检测机制</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310252114258.png" alt="image-20231025211450229"></p>
+<p>耳机和扬声器是有一个判断的，默认情况下耳机并没有插入，所以扬声器会启动，当耳机插上之后，扬声器会切换为head phone，那电路里面是怎样判断的呢，上面这个图很简单，HD_DET_L是耳机的检测引脚，当耳机没有插入的时候，1、2两个引脚是连接到一起的，所以HD_DET_L默认情况下是3.3V的高电平，如下图所示：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310252138437.png" alt="image-20231025213838398"></p>
+<p>其中的114就是耳机检测引脚，可以看到hi为高电平，然后插入，耳机插入之后为低电平，如下图示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310252139741.png" alt="image-20231025213944708"></p>
+<p>那么在设备树中要怎么写呢，先来找一下这个rk809 codec的一些描述，首先在rk3568-evb1-ddr4-v10.dtsi设备树中有一个关于rk_headset的节点，具体内容如下所示：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">rk_headset: rk-headset &#123;</span><br><span class="line">    compatible = &quot;rockchip_headset&quot;;</span><br><span class="line">    headset_gpio = &lt;&amp;gpio3 RK_PC2 GPIO_ACTIVE_LOW&gt;;</span><br><span class="line">    pinctrl-names = &quot;default&quot;;</span><br><span class="line">    pinctrl-0 = &lt;&amp;hp_det&gt;;</span><br><span class="line">&#125;;    </span><br><span class="line"></span><br><span class="line"> headphone &#123;</span><br><span class="line">    hp_det: hp-det &#123;                                                                                       </span><br><span class="line">        rockchip,pins = &lt;3 RK_PC2 RK_FUNC_GPIO &amp;pcfg_pull_down&gt;;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>​	这里的hp_det节点就很重要，这里默认会拉低，而正常情况下耳机接口应该是高的，所以这里应该是有问题的，我这里将它改为up高。</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310252149638.png" alt="image-20231025214922616"></p>
+<p>​	然后我去关掉rk3568-linux.dtsi设备树中的&amp;hdmi_sound，修改完成如下图所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310252150736.png" alt="image-20231025215010724"></p>
+<p>但是只改这个地方是不行的还有一个地方要改，那就是 rk809_sound节点</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">rk809_sound: rk809-sound &#123;</span><br><span class="line">       status = &quot;okay&quot;;</span><br><span class="line">       compatible = &quot;simple-audio-card&quot;;</span><br><span class="line">       simple-audio-card,format = &quot;i2s&quot;;</span><br><span class="line">       simple-audio-card,hp-det-gpio = &lt;&amp;gpio3 RK_PC2 GPIO_ACTIVE_HIGH&gt;;</span><br><span class="line">       simple-audio-card,name = &quot;rockchip,rk809-codec&quot;;</span><br><span class="line">       simple-audio-card,widgets = &quot;Headphones&quot;, &quot;Headphones Jack&quot;;</span><br><span class="line">       simple-audio-card,mclk-fs = &lt;256&gt;;</span><br><span class="line">       simple-audio-card,cpu &#123;</span><br><span class="line">           sound-dai = &lt;&amp;i2s1_8ch&gt;;</span><br><span class="line">       &#125;;</span><br><span class="line">       simple-audio-card,codec &#123;</span><br><span class="line">           sound-dai = &lt;&amp;rk809_codec&gt;;</span><br><span class="line">       &#125;;</span><br><span class="line">   &#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>第五行的 simple-audio-card,hp-det-gpio属性用于耳机检测的引脚，而后面设置的是高电平，表示耳机插入之后是高电平，上面我们分析过了应该是低电平，所以这里不对应该改为</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">simple-audio-card,hp-det-gpio = &lt;&amp;gpio3 RK_PC2 GPIO_ACTIVE_LOW&gt;;</span><br></pre></td></tr></table></figure>
+
+<p>问题解决完毕</p>
  
       <!-- reward -->
       
@@ -203,7 +247,7 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2023/10/08/0-20%20%E6%8C%82%E8%BD%BD%E9%95%9C%E5%83%8F%E6%96%87%E4%BB%B6/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2023/10/25/0-22%20%E5%A3%B0%E5%8D%A1%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E5%86%B3/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -216,19 +260,10 @@
    
   <nav class="article-nav">
     
-      <a href="/2023/10/16/0-0-7%20buildroot%E7%9A%84%E5%AD%A6%E4%B9%A0/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            buildroot的学习
-          
-        </div>
-      </a>
     
-    
-      <a href="/2023/09/27/0-17%20%E9%80%82%E9%85%8D%E7%91%9E%E8%8A%AF%E5%BE%AE%E5%AE%98%E6%96%B9SDK/" class="article-nav-link">
+      <a href="/2023/10/25/0-0-9%20systemd%20%E5%AD%A6%E4%B9%A0/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">0-17 适配瑞芯微官方SDK</div>
+        <div class="article-nav-title">0-0-8 构建deb包</div>
       </a>
     
   </nav>

@@ -13,7 +13,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
-      <title>0-22 声卡问题的解决 |  热爱学习的未来酱</title>
+      <title>Tag: systemd学习 |  热爱学习的未来酱</title>
   <meta name="generator" content="hexo-theme-ayer">
       
       <link rel="shortcut icon" href="/favicon.ico" />
@@ -58,212 +58,56 @@
       
     <main class="content on">
       <section class="outer">
-  <article
-  id="post-0-22 声卡问题的解决"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
+  
+  
+  <article class="articles">
     
-    <header class="article-header">
+    
+    <h1 class="page-type-title">#&nbspsystemd学习</h1>
+    
+    
+  
+  
+  
+  
+  
+  
+  <div class="archives-wrap">
+    <div class="archive-year-wrap">
+      <a href="/archives/2023" class="archive-year">2023</a>
+    </div>
+    <div class="archives">
+      
+      <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2023/10/25/0-0-9%20systemd%20%E5%AD%A6%E4%B9%A0/" class="archive-article-date">
+  <time datetime="2023-10-24T22:47:53.000Z" itemprop="datePublished">10/25</time>
+</a>
        
-<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  0-22 声卡问题的解决
-</h1>
+<h2 itemprop="name">
+  <a class="archive-article-title" href="/2023/10/25/0-0-9%20systemd%20%E5%AD%A6%E4%B9%A0/"
+    >0-0-8 构建deb包</a> 
+</h2>
  
 
-      
     </header>
-     
-    <div class="article-meta">
-      <a href="/2023/10/10/0-22%20%E5%A3%B0%E5%8D%A1%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E5%86%B3/" class="article-date">
-  <time datetime="2023-10-10T12:47:53.000Z" itemprop="datePublished">2023-10-10</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE%E5%9B%BA%E4%BB%B6%E5%88%86%E6%9E%90/">瑞芯微固件分析</a>
-  </div>
-  
-<div class="word_count">
-    <span class="post-time">
-        <span class="post-meta-item-icon">
-            <i class="ri-quill-pen-line"></i>
-            <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">261</span>
-        </span>
-    </span>
-
-    <span class="post-time">
-        &nbsp; | &nbsp;
-        <span class="post-meta-item-icon">
-            <i class="ri-book-open-line"></i>
-            <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">1 分钟</span>
-        </span>
-    </span>
-</div>
- 
-    </div>
+    
+    
       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/systemd%E5%AD%A6%E4%B9%A0/" rel="tag">systemd学习</a></li></ul>
 
-
-
-  
-    <div class="article-entry" itemprop="articleBody">
-       
-  <pre><code>    es8388_sound: es8388-sound &#123;
-            status = &quot;okay&quot;;
-            compatible = &quot;rockchip,multicodecs-card&quot;;
-            rockchip,card-name = &quot;rockchip-es8388&quot;;
-            hp-det-gpio = &lt;&amp;gpio1 RK_PD5 GPIO_ACTIVE_HIGH&gt;;
-            io-channels = &lt;&amp;saradc 3&gt;;
-            io-channel-names = &quot;adc-detect&quot;;
-            keyup-threshold-microvolt = &lt;1800000&gt;;
-            poll-interval = &lt;100&gt;;
-            rockchip,format = &quot;i2s&quot;;
-            rockchip,mclk-fs = &lt;256&gt;;
-            rockchip,cpu = &lt;&amp;i2s1_8ch&gt;;
-            rockchip,codec = &lt;&amp;es8388&gt;;
-            rockchip,audio-routing =
-                    &quot;Headphone&quot;, &quot;LOUT1&quot;,
-                    &quot;Headphone&quot;, &quot;ROUT1&quot;,
-                    &quot;Headphone&quot;, &quot;Headphone Power&quot;,
-                    &quot;Headphone&quot;, &quot;Headphone Power&quot;,
-                    &quot;LINPUT1&quot;, &quot;Main Mic&quot;,
-                    &quot;LINPUT2&quot;, &quot;Main Mic&quot;,
-                    &quot;RINPUT1&quot;, &quot;Headset Mic&quot;,
-                    &quot;RINPUT2&quot;, &quot;Headset Mic&quot;;
-            pinctrl-names = &quot;default&quot;;
-            pinctrl-0 = &lt;&amp;hp_det&gt;;
-            play-pause-key &#123;
-                    label = &quot;playpause&quot;;
-                    linux,code = &lt;KEY_PLAYPAUSE&gt;;
-                    press-threshold-microvolt = &lt;2000&gt;;
-            &#125;;
-    &#125;;
-</code></pre>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">es8388: es8388@10 &#123;</span><br><span class="line">        status = &quot;okay&quot;;</span><br><span class="line">        #sound-dai-cells = &lt;0&gt;;</span><br><span class="line">        compatible = &quot;everest,es8388&quot;, &quot;everest,es8323&quot;;</span><br><span class="line">        reg = &lt;0x10&gt;;</span><br><span class="line">        clocks = &lt;&amp;mclkout_i2s1&gt;;</span><br><span class="line">        clock-names = &quot;mclk&quot;;</span><br><span class="line">        assigned-clocks = &lt;&amp;mclkout_i2s1&gt;;</span><br><span class="line">        assigned-clock-rates = &lt;12288000&gt;;</span><br><span class="line">        pinctrl-names = &quot;default&quot;;</span><br><span class="line">        pinctrl-0 = &lt;&amp;i2s1m0_mclk&gt;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<p>香橙派 orangepib3 </p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310112154264.png" alt="image-20231011215420206"></p>
-<p>倒是没啥</p>
-<p>1126</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310112154846.png" alt="image-20231011215455816"></p>
-<p>正点3568</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310112155945.png" alt="image-20231011215514911"></p>
-<p>香橙派 rk3588s</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310112157444.png" alt="image-20231011215723418"></p>
-<p>firefly rk3568原理图</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310112159178.png" alt="image-20231011215957135"></p>
-<p>野火 3588s</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310112204368.png" alt="image-20231011220410343"></p>
-<p>野火 3568 </p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310112205798.png" alt="image-20231011220530778"></p>
-<p>迅为3588</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310112206820.png" alt="image-20231011220656801"></p>
-<p>迅为3568</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310112208009.png" alt="image-20231011220800981"></p>
- 
-      <!-- reward -->
-      
-    </div>
     
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-<div class="share-btn">
-      <span class="share-sns share-outer">
-        <i class="ri-share-forward-line"></i>
-        分享
-      </span>
-      <div class="share-wrap">
-        <i class="arrow"></i>
-        <div class="share-icons">
-          
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="ri-weibo-fill"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="ri-wechat-fill"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="ri-qq-fill"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="ri-douban-line"></i>
-          </a>
-          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a> -->
-          
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="ri-facebook-circle-fill"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="ri-twitter-fill"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="ri-google-fill"></i>
-          </a>
-        </div>
-      </div>
-</div>
-
-<div class="wx-share-modal">
-    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2023/10/10/0-22%20%E5%A3%B0%E5%8D%A1%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E5%86%B3/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div id="share-mask"></div>  
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%91%9E%E8%8A%AF%E5%BE%AE%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/" rel="tag">瑞芯微脚本分析</a></li></ul>
-
-    </footer>
   </div>
-
-   
-  <nav class="article-nav">
-    
-      <a href="/2023/10/16/0-0-7%20buildroot%E7%9A%84%E5%AD%A6%E4%B9%A0/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            buildroot的学习
-          
-        </div>
-      </a>
-    
-    
-      <a href="/2023/10/08/0-20%20%E6%8C%82%E8%BD%BD%E9%95%9C%E5%83%8F%E6%96%87%E4%BB%B6/" class="article-nav-link">
-        <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">0-20挂载镜像文件</div>
-      </a>
-    
-  </nav>
-
-  
-   
-  
-   
-    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
-    <div id="twikoo" class="twikoo"></div>
-    <script>
-        twikoo.init({
-            envId: ""
-        })
-    </script>
- 
 </article>
+      
+      
+    </div>
+  </div>
+  
+  
 
+  
 </section>
       <footer class="footer">
   <div class="outer">
@@ -404,22 +248,6 @@
 <script src="/js/lazyload.min.js"></script>
 
 <!-- Tocbot -->
- 
-<script src="/js/tocbot.min.js"></script>
-
-<script>
-  tocbot.init({
-    tocSelector: ".tocbot",
-    contentSelector: ".article-entry",
-    headingSelector: "h1, h2, h3, h4, h5, h6",
-    hasInnerContainers: true,
-    scrollSmooth: true,
-    scrollContainer: "main",
-    positionFixedSelector: ".tocbot",
-    positionFixedClass: "is-position-fixed",
-    fixedSidebarOffset: "auto",
-  });
-</script>
 
 <script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
 <link

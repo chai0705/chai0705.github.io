@@ -160,6 +160,410 @@
     
     
     <article
+  id="post-0-22 声卡问题的解决"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/10/25/0-22%20%E5%A3%B0%E5%8D%A1%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E5%86%B3/"
+    >0-22 声卡问题的解决</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/10/25/0-22%20%E5%A3%B0%E5%8D%A1%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E5%86%B3/" class="article-date">
+  <time datetime="2023-10-25T12:47:53.000Z" itemprop="datePublished">2023-10-25</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE%E5%9B%BA%E4%BB%B6%E5%88%86%E6%9E%90/">瑞芯微固件分析</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <pre><code>    es8388_sound: es8388-sound &#123;
+            status = &quot;okay&quot;;
+            compatible = &quot;rockchip,multicodecs-card&quot;;
+            rockchip,card-name = &quot;rockchip-es8388&quot;;
+            hp-det-gpio = &lt;&amp;gpio1 RK_PD5 GPIO_ACTIVE_HIGH&gt;;
+            io-channels = &lt;&amp;saradc 3&gt;;
+            io-channel-names = &quot;adc-detect&quot;;
+            keyup-threshold-microvolt = &lt;1800000&gt;;
+            poll-interval = &lt;100&gt;;
+            rockchip,format = &quot;i2s&quot;;
+            rockchip,mclk-fs = &lt;256&gt;;
+            rockchip,cpu = &lt;&amp;i2s1_8ch&gt;;
+            rockchip,codec = &lt;&amp;es8388&gt;;
+            rockchip,audio-routing =
+                    &quot;Headphone&quot;, &quot;LOUT1&quot;,
+                    &quot;Headphone&quot;, &quot;ROUT1&quot;,
+                    &quot;Headphone&quot;, &quot;Headphone Power&quot;,
+                    &quot;Headphone&quot;, &quot;Headphone Power&quot;,
+                    &quot;LINPUT1&quot;, &quot;Main Mic&quot;,
+                    &quot;LINPUT2&quot;, &quot;Main Mic&quot;,
+                    &quot;RINPUT1&quot;, &quot;Headset Mic&quot;,
+                    &quot;RINPUT2&quot;, &quot;Headset Mic&quot;;
+            pinctrl-names = &quot;default&quot;;
+            pinctrl-0 = &lt;&amp;hp_det&gt;;
+            play-pause-key &#123;
+                    label = &quot;playpause&quot;;
+                    linux,code = &lt;KEY_PLAYPAUSE&gt;;
+                    press-threshold-microvolt = &lt;2000&gt;;
+            &#125;;
+    &#125;;
+</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">es8388: es8388@10 &#123;</span><br><span class="line">        status = &quot;okay&quot;;</span><br><span class="line">        #sound-dai-cells = &lt;0&gt;;</span><br><span class="line">        compatible = &quot;everest,es8388&quot;, &quot;everest,es8323&quot;;</span><br><span class="line">        reg = &lt;0x10&gt;;</span><br><span class="line">        clocks = &lt;&amp;mclkout_i2s1&gt;;</span><br><span class="line">        clock-names = &quot;mclk&quot;;</span><br><span class="line">        assigned-clocks = &lt;&amp;mclkout_i2s1&gt;;</span><br><span class="line">        assigned-clock-rates = &lt;12288000&gt;;</span><br><span class="line">        pinctrl-names = &quot;default&quot;;</span><br><span class="line">        pinctrl-0 = &lt;&amp;i2s1m0_mclk&gt;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>香橙派 orangepib3 </p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310112154264.png" alt="image-20231011215420206"></p>
+<p>倒是没啥</p>
+<p>1126</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310112154846.png" alt="image-20231011215455816"></p>
+<p>正点3568</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310112155945.png" alt="image-20231011215514911"></p>
+<p>香橙派 rk3588s</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310112157444.png" alt="image-20231011215723418"></p>
+<p>firefly rk3568原理图</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310112159178.png" alt="image-20231011215957135"></p>
+<p>野火 3588s</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310112204368.png" alt="image-20231011220410343"></p>
+<p>野火 3568 </p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310112205798.png" alt="image-20231011220530778"></p>
+<p>迅为3588</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310112206820.png" alt="image-20231011220656801"></p>
+<p>迅为3568</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310112208009.png" alt="image-20231011220800981"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310252049564.png" alt="image-20231025204913524"></p>
+<p>​	</p>
+<p>rk3568-evb1-ddr4-v10.dtsi</p>
+<p>rk3568-linux.dtsi</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310252051872.png" alt="image-20231025205107855"></p>
+<p>rk3568-linux.dtsi</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310252101836.png" alt="image-20231025210156823"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310252103441.png" alt="image-20231025210324421"></p>
+<p>现在来分析一下这个耳机的检测机制</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310252114258.png" alt="image-20231025211450229"></p>
+<p>耳机和扬声器是有一个判断的，默认情况下耳机并没有插入，所以扬声器会启动，当耳机插上之后，扬声器会切换为head phone，那电路里面是怎样判断的呢，上面这个图很简单，HD_DET_L是耳机的检测引脚，当耳机没有插入的时候，1、2两个引脚是连接到一起的，所以HD_DET_L默认情况下是3.3V的高电平，如下图所示：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310252138437.png" alt="image-20231025213838398"></p>
+<p>其中的114就是耳机检测引脚，可以看到hi为高电平，然后插入，耳机插入之后为低电平，如下图示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310252139741.png" alt="image-20231025213944708"></p>
+<p>那么在设备树中要怎么写呢，先来找一下这个rk809 codec的一些描述，首先在rk3568-evb1-ddr4-v10.dtsi设备树中有一个关于rk_headset的节点，具体内容如下所示：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">rk_headset: rk-headset &#123;</span><br><span class="line">    compatible = &quot;rockchip_headset&quot;;</span><br><span class="line">    headset_gpio = &lt;&amp;gpio3 RK_PC2 GPIO_ACTIVE_LOW&gt;;</span><br><span class="line">    pinctrl-names = &quot;default&quot;;</span><br><span class="line">    pinctrl-0 = &lt;&amp;hp_det&gt;;</span><br><span class="line">&#125;;    </span><br><span class="line"></span><br><span class="line"> headphone &#123;</span><br><span class="line">    hp_det: hp-det &#123;                                                                                       </span><br><span class="line">        rockchip,pins = &lt;3 RK_PC2 RK_FUNC_GPIO &amp;pcfg_pull_down&gt;;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>​	这里的hp_det节点就很重要，这里默认会拉低，而正常情况下耳机接口应该是高的，所以这里应该是有问题的，我这里将它改为up高。</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310252149638.png" alt="image-20231025214922616"></p>
+<p>​	然后我去关掉rk3568-linux.dtsi设备树中的&amp;hdmi_sound，修改完成如下图所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310252150736.png" alt="image-20231025215010724"></p>
+<p>但是只改这个地方是不行的还有一个地方要改，那就是 rk809_sound节点</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">rk809_sound: rk809-sound &#123;</span><br><span class="line">       status = &quot;okay&quot;;</span><br><span class="line">       compatible = &quot;simple-audio-card&quot;;</span><br><span class="line">       simple-audio-card,format = &quot;i2s&quot;;</span><br><span class="line">       simple-audio-card,hp-det-gpio = &lt;&amp;gpio3 RK_PC2 GPIO_ACTIVE_HIGH&gt;;</span><br><span class="line">       simple-audio-card,name = &quot;rockchip,rk809-codec&quot;;</span><br><span class="line">       simple-audio-card,widgets = &quot;Headphones&quot;, &quot;Headphones Jack&quot;;</span><br><span class="line">       simple-audio-card,mclk-fs = &lt;256&gt;;</span><br><span class="line">       simple-audio-card,cpu &#123;</span><br><span class="line">           sound-dai = &lt;&amp;i2s1_8ch&gt;;</span><br><span class="line">       &#125;;</span><br><span class="line">       simple-audio-card,codec &#123;</span><br><span class="line">           sound-dai = &lt;&amp;rk809_codec&gt;;</span><br><span class="line">       &#125;;</span><br><span class="line">   &#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>第五行的 simple-audio-card,hp-det-gpio属性用于耳机检测的引脚，而后面设置的是高电平，表示耳机插入之后是高电平，上面我们分析过了应该是低电平，所以这里不对应该改为</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">simple-audio-card,hp-det-gpio = &lt;&amp;gpio3 RK_PC2 GPIO_ACTIVE_LOW&gt;;</span><br></pre></td></tr></table></figure>
+
+<p>问题解决完毕</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%91%9E%E8%8A%AF%E5%BE%AE%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/" rel="tag">瑞芯微脚本分析</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-0-0-9 systemd 学习"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/10/25/0-0-9%20systemd%20%E5%AD%A6%E4%B9%A0/"
+    >0-0-8 构建deb包</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/10/25/0-0-9%20systemd%20%E5%AD%A6%E4%B9%A0/" class="article-date">
+  <time datetime="2023-10-24T22:47:53.000Z" itemprop="datePublished">2023-10-25</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/systemd%E5%AD%A6%E4%B9%A0/">systemd学习</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <hr>
+<hr>
+<hr>
+<p>这两天一直在学习如何构建一个还算差不多的debina系统，之前的休眠都是通过田田的那个sysstemd来编写的，但是呢，我后来又将蓝牙wifi驱动的加载也放进去了，所以这就导致了不严谨，为了构建系统的严谨性，我决定好好的学习一下systemd。</p>
+<h1 id="一、systemd的由来"><a href="#一、systemd的由来" class="headerlink" title="一、systemd的由来"></a>一、systemd的由来</h1><p>​	在早期的 Linux 系统中，使用的是 SysV 初始化系统，它使用脚本和运行级别来管理系统启动和服务管理（&#x3D;&#x3D;rk3568和rk3588目前提供的buildroot系统仍旧使用的是 SysV&#x3D;&#x3D;）。这种方式存在一些问题，比如启动速度较慢、启动顺序固定、对并行启动的支持有限等。<br>​	而随着计算机硬件的发展和多核处理器的普及，用户对于快速启动和并行处理的需求越来越高。为了满足这些需求，Linux 社区开始探索更先进的启动机制。</p>
+<ol>
+<li>Upstart 的出现：<br>Upstart 是一个由 Canonical 公司开发的事件驱动的 init 系统，于 2006 年首次发布。它引入了事件驱动的启动方式，可以并行地启动系统服务，提高了启动速度。然而，Upstart 并没有成为主流，因为它只受到了 Ubuntu 等少数发行版的采用。</li>
+<li>Systemd 的诞生：<br>在 Upstart 的发展过程中，一些开发者对 Upstart 的复杂性和依赖关系提出了批评，并开始寻找更简单、更高效的替代方案。这些开发者中的一部分人最终创建了 Systemd 项目，旨在重新设计和实现一个全新的系统初始化和服务管理系统。</li>
+</ol>
+<h1 id="二、systemd-简介"><a href="#二、systemd-简介" class="headerlink" title="二、systemd 简介"></a>二、systemd 简介</h1><p>Systemd 是一个用于管理 Linux 系统启动和服务管理的工具。它取代了传统的 SysV 初始化系统，并成为大多数主流 Linux 发行版的默认初始化系统，包括 Fedora、Debian、CentOS、Ubuntu 等。下面是对 Systemd 的详细介绍：</p>
+<ol>
+<li>设计理念：<br>Systemd 的设计理念是以并行化和最大化利用系统资源为核心。它引入了一种基于单元（unit）的管理方式，将系统启动和服务管理抽象为单元的组合。每个单元代表一个系统组件或服务，可以独立地启动、停止、重启或管理。</li>
+<li>Systemd 单元：<br>Systemd 中的单元是对不同系统资源和组件的抽象表示。常见的单元类型包括服务单元（service unit）、套件单元（socket unit）、设备单元（device unit）、挂载单元（mount unit）等。每个单元都有一个对应的配置文件，用于描述其属性和行为。</li>
+<li>Systemd 服务管理：<br>Systemd 提供了强大的服务管理功能。通过服务单元，可以方便地启动、停止、重启和管理系统服务。Systemd 可以自动解析和管理服务之间的依赖关系，确保它们按照正确的顺序启动和停止。此外，Systemd 还支持服务单元的启动失败自动重试、服务状态的监控和故障恢复等功能。</li>
+<li>Systemd 启动过程：<br>Systemd 改变了传统的顺序执行启动脚本的方式，采用并行化的启动方式，提高了系统的启动速度。它使用一个特殊的目标单元（target unit）作为系统启动的起点，根据各个单元之间的依赖关系，并行地启动和管理系统服务。这种并行化的启动方式可以更好地利用多核处理器的能力，提高系统的启动性能。</li>
+<li>Systemd 日志管理：<br>Systemd 引入了 journald，一个用于集中管理和检索系统日志的组件。journald 收集、存储和索引系统的日志消息，并提供了强大的查询和过滤功能。与传统的日志工具相比，journald 具有更高的性能和更丰富的功能，可以方便地进行故障排查和问题分析。</li>
+<li>Systemd 套件化管理：<br>Systemd 引入了套件（socket）和总线（bus）的概念，支持套件和总线之间的激活、传递消息和共享资源。套件单元允许进程通过套接字进行通信，而总线单元则提供了高效的进程间通信机制。这种套件化管理使得进程之间的协作更加灵活和高效。</li>
+<li>Systemd 的其他特性：<br>除了上述核心特性外，Systemd 还具有许多其他功能，例如：<ul>
+<li>cgroups 集成：Systemd 可以与 cgroups（控制组）子系统集成，实现对进程资源限制和管理的精细控制。</li>
+<li>用户会话管理：Systemd 提供了用户会话管理的功能，可以跟踪和管理用户登录会话，并在用户注销时清理相关资源。</li>
+<li>快速用户切换：Systemd 支持快速用户切换，允许多个用户同时登录并在不同的登录会话之间快速切换。</li>
+<li>动态扩展：Systemd 具有动态加载和激活单元的能力，可以在运行时动态添加、修改和移除单元，无需重新启动系统。</li>
+</ul>
+</li>
+</ol>
+<h1 id="三、systemd系统管理"><a href="#三、systemd系统管理" class="headerlink" title="三、systemd系统管理"></a>三、systemd系统管理</h1><p>Systemd 并不是一个命令，而是一组命令，涉及到系统管理的方方面面。</p>
+<h4 id="3-1-systemctl"><a href="#3-1-systemctl" class="headerlink" title="3.1 systemctl"></a>3.1 systemctl</h4><p>systemctl是 Systemd 的主命令，用于管理系统。</p>
+<p>重启系统</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl reboot</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310250702374.png" alt="image-20231025070216351"></p>
+<p>关闭系统，切断电源</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl poweroff</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310250702554.png" alt="image-20231025070255534"></p>
+<p>CPU停止工作</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl halt</span><br></pre></td></tr></table></figure>
+
+<p>暂停系统</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl suspend</span><br></pre></td></tr></table></figure>
+
+<p>让系统进入冬眠状态</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl hibernate</span><br></pre></td></tr></table></figure>
+
+<p>让系统进入交互式休眠状态</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl hybrid-sleep</span><br></pre></td></tr></table></figure>
+
+<p>启动进入救援状态（单用户状态）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl rescue</span><br></pre></td></tr></table></figure>
+
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/systemd%E5%AD%A6%E4%B9%A0/" rel="tag">systemd学习</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-0-0-8 构建deb包"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/10/19/0-0-8%20%E6%9E%84%E5%BB%BAdeb%E5%8C%85/"
+    >0-0-8 构建deb包</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/10/19/0-0-8%20%E6%9E%84%E5%BB%BAdeb%E5%8C%85/" class="article-date">
+  <time datetime="2023-10-19T12:47:53.000Z" itemprop="datePublished">2023-10-19</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/deb%E5%8C%85%E7%9A%84%E5%88%B6%E4%BD%9C/">deb包的制作</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="1-三个核心概念"><a href="#1-三个核心概念" class="headerlink" title="1.三个核心概念"></a>1.三个核心概念</h1><p>三个最核心的概念为：</p>
+<ul>
+<li>上游原始代码包（upstream tarball）:<ul>
+<li>通常，人们为上游开发者（通常为第三方）编写的软件打包。</li>
+<li>上游开发者会使用源代码归档软件或原始代码包的方式发放他们的软件。</li>
+<li>原始代码包一般是上游制作的 <code>.tar.gz</code> 或 <code>.tgz</code> 文件，它也可能被压缩成 <code>.tar.bz2</code>，<code>.tb2</code> 或 <code>.tar.xz</code> 格式。原始代码包就是 Debian 构建包时使用的原材料。</li>
+</ul>
+</li>
+<li>源码包：<ul>
+<li>当您拥有了上游制作的原始代码包，下一步就可以制作 Debian 源码包了。</li>
+</ul>
+</li>
+<li>二进制包：<ul>
+<li>从源码包您可以构建 Debian 二进制包，它才是是实际上会被安装的包。</li>
+</ul>
+</li>
+</ul>
+<p>最简单的源码包由3个文件组成：</p>
+<ul>
+<li>上游原始代码包，需要被重命名来符合一个特定的模式。</li>
+<li>一个 debian 目录，带有所有上游源代码的更改记录，外加所有为 Debian 打包系统生成的所有文件。这种包拥有 <code>.debian.tar.gz</code> 的文件名。</li>
+<li>一个描述文件（以 <code>.dsc</code> 结尾），罗列了其他两个文件。</li>
+</ul>
+<p>听起来有些过于复杂，人们的第一印象是：所有东西都放在一个文件里会更简单。然而，保持上游代码包与 Debian 特定更改分离可以节省大量磁盘空间和带宽。对 Debian 来说，追踪必要的修改也更加简单。</p>
+<h1 id="2-deb包制作流程"><a href="#2-deb包制作流程" class="headerlink" title="2. deb包制作流程"></a>2. deb包制作流程</h1><p>首先创建一个debian目录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> debian</span><br></pre></td></tr></table></figure>
+
+<p>我们需要提供不少文件，让我们按顺序来看。</p>
+<h2 id="2-1-debian-changelog"><a href="#2-1-debian-changelog" class="headerlink" title="2.1 debian&#x2F;changelog"></a>2.1 debian&#x2F;changelog</h2><p>第一个文件是 <code>debian/changelog</code>，这个是记录 Debian 包变化的日志文件。它无需罗列出上游代码的每一个改变，只要它能帮助用户总结这些变化即可。我们在制作第一个版本，所以这里应当什么都没有。然而，我们仍需制作一个变化日志的入口，因为打包工具会从日志里读取特定信息。最重要的是它会读取包的版本。</p>
+<p><code>debian/changelog</code> 拥有一个十分特殊的格式。最简单的创建方式就是使用 <code>dch</code> 工具。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apt install devscripts</span><br><span class="line">dch --create -v 1.0-1 --package hithere</span><br></pre></td></tr></table></figure>
+
+<p>会在文件中产生以下内容：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310092059083.png" alt="image-20231009205902071"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310092058676.png" alt="image-20231009205839642"></p>
+<p>这里有很多注意点：</p>
+<p><code>hithere</code> 部分必须与源代码包的名字相同。<code>1.0-1</code> 是版本号，<code>1.0</code> 部分是上游版本号。<code>-1</code> 部分是 Debian 的版本：它是第一个上游版本为 <code>1.0</code> 的 Debian 包。如果这个 Debian 包有错误，并且被修复了，那么上游版本号仍保持相同，下一个版本应当被叫做 <code>1.0-2</code>，接下来是 <code>1.0-3</code>，依此类推。</p>
+<p>UNRELEASED 被称作上传目标。它会告诉上传工具这个二进制包应当被上传到哪里。UNRELEASED 意味着这个包还没有做好上传的准备。保持 UNRELEASED 是一个好主意，以避免您错误上传它。</p>
+<p>目前请先忽略 <code>urgency=medium</code>。</p>
+<p><code>(Closes：#XXXXXX)</code> 作用在于上传包时关闭错误。这是在 Debian 中关闭错误的常用方法：当上传修复错误的包时，错误跟踪器会注意到这一点，并将错误标记为已关闭。我们可以删除 <code>(Closes...)</code> 位</p>
+<h2 id="2-2-debian-control"><a href="#2-2-debian-control" class="headerlink" title="2.2 debian&#x2F;control"></a>2.2 debian&#x2F;control</h2><p>控制文件描述代码和二进制包，并给出他们的详细信息，比如名称、包的维护者是谁，等等。下面是一个示例：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Source: hithere</span><br><span class="line">Maintainer: Lars Wirzenius &lt;liw@liw.fi&gt;</span><br><span class="line">Section: misc</span><br><span class="line">Priority: optional</span><br><span class="line">Standards-Version: 3.9.2</span><br><span class="line">Build-Depends: debhelper (&gt;= 9)</span><br><span class="line"></span><br><span class="line">Package: hithere</span><br><span class="line">Architecture: any</span><br><span class="line">Depends: $&#123;shlibs:Depends&#125;, $&#123;misc:Depends&#125;</span><br><span class="line">Description: greet user</span><br><span class="line"> hithere greets the user, or the world.</span><br></pre></td></tr></table></figure>
+
+<p>在这个文件里有许多需求的字段，但是现在您可以像对待魔法一样对待它。那么，在 <code>debian/control</code> 中有两段文字。</p>
+<p>第一段文字描述了源代码包，使用以下字段：</p>
+<h3 id="2-2-1-Source"><a href="#2-2-1-Source" class="headerlink" title="2.2.1 Source"></a>2.2.1 Source</h3><p>源代码包名。</p>
+<h3 id="2-2-2-Maintainer"><a href="#2-2-2-Maintainer" class="headerlink" title="2.2.2 Maintainer"></a>2.2.2 Maintainer</h3><p>维护者的姓名和电子邮箱。</p>
+<h3 id="2-2-3-Priority"><a href="#2-2-3-Priority" class="headerlink" title="2.2.3 Priority"></a>2.2.3 Priority</h3><p>包的重要性（’required 可选的’, ‘important 重要的’, ‘standard 标准’ 或 ‘optional’ 其中之一）。通常，包是“可选”的，除非它对于标准系统功能是“必不可少的”，即启动或网络功能。 如果包与另一个“可选”包冲突，或者它不打算用于标准桌面安装，则应该是“额外”的而不是“可选”的。 “额外”包的显着例子是调试包。 （由Sebastian Tennant添加）。</p>
+<h3 id="2-2-4-Build-Depends"><a href="#2-2-4-Build-Depends" class="headerlink" title="2.2.4 Build-Depends"></a>2.2.4 Build-Depends</h3><p>需要安装以构建程序包的程序包列表。实际使用包时有可能需要它们。</p>
+<p>第一个之后的所有段落都描述了从此源构建的二进制包。 可以有许多从同一来源构建的二进制包; 但对于我们的例子只有一个。 我们使用这些字段：</p>
+<h3 id="2-2-5-Package"><a href="#2-2-5-Package" class="headerlink" title="2.2.5 Package"></a>2.2.5 Package</h3><p>二进制包的名称。 名称可能与源包名称不同。</p>
+<h3 id="2-2-6-Architecture"><a href="#2-2-6-Architecture" class="headerlink" title="2.2.6 Architecture"></a>2.2.6 Architecture</h3><p>指定二进制包预期使用的计算机体系结构：用于32位Intel CPU的i386，用于64位的amd64，用于ARM处理器的armel等等。 Debian总共可以处理大约十几种计算机体系结构，因此这种体系结构支持至关重要。 “Architecture”字段可以包含特定体系结构的名称，但通常它包含两个特殊值中的一个。</p>
+<p>any<br> （我们在示例中看到）意味着可以为任何体系结构构建包。 换句话说，代码是可移植的，因此它不会对硬件做太多假设。 但是，仍然需要为每个体系结构单独构建二进制包。</p>
+<p>all<br> 意味着相同的二进制包将适用于所有体系结构，而无需为每个体系结构单独构建。 例如，仅包含shell脚本的包将是“all”。 Shell脚本在任何地方都可以工作，不需要编译。</p>
+<h3 id="2-2-7-Depends"><a href="#2-2-7-Depends" class="headerlink" title="2.2.7 Depends"></a>2.2.7 Depends</h3><p>为了让二进制包中程序能够正常运行，需要安装的包列表。手动列出这些依赖项是繁琐且容易出错的工作。为了能够让其工作，我们需要一个神奇的小东西 <code>$&#123;shlibs:Depends&#125;</code>。另一个神奇的东西是给 <code>debhelper</code> 的，它是 <code>$&#123;misc:Depends&#125;</code>。shlibs 是为了动态链接库，而 misc 是为了 <code>debherlper</code> 的一些工作。对于别的依赖，您可以将其手动加入到 <code>Depends</code> 或 <code>Build-Depends</code> 中。但请注意，<code>$&#123;...&#125;</code> 仅在 <code>Depends</code> 中有效。</p>
+<h3 id="2-2-8-Description"><a href="#2-2-8-Description" class="headerlink" title="2.2.8 Description"></a>2.2.8 Description</h3><p>二进制包的完整描述。它希望对用户有所帮助。第一行用作简要概要（摘要）描述，其余部分是包的更长的描述。<br> 命令 <code>cme edit dpkg</code> 提供了一个GUI能够用来编辑大多数打包文件，包括 <code>debian/control</code>。 请参阅使用 <code>cme</code> 页面管理 <code>Debian</code> 软件包。<code>cme</code>命令在 Debian 中的 <code>cme</code> 包中提供。您也可以使用 <code>cme edit dpkg-control</code> 命令仅编辑 <code>debian/control</code> 文件。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Source: linux-rockchip-5.10.110</span><br><span class="line">Section: kernel</span><br><span class="line">Priority: optional</span><br><span class="line">Standards-Version: 4.6.0</span><br><span class="line">Build-Depends: bc, rsync, kmod, cpio, build-essential, u-boot-tools, bison, python3 | python, python-is-python3 | python-is-python2, flex | flex:native , , libssl-dev:native</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-3-debian-copyright"><a href="#2-3-debian-copyright" class="headerlink" title="2.3 debian&#x2F;copyright"></a>2.3 debian&#x2F;copyright</h2><p>这是一个非常重要的文件，但是现在我们将先使用一个空文件。<br> 对于 Debian ，此文件用于跟踪有关包的合法性、版权相关信息。但是，从技术角度来看，这并不重要。目前，我们将专注于技术方面。如果有兴趣，我们可以稍后再回到 <code>debian/copyright</code>。</p>
+<h2 id="2-4-debian-rules"><a href="#2-4-debian-rules" class="headerlink" title="2.4 debian&#x2F;rules"></a>2.4 debian&#x2F;rules</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/make -f</span><br><span class="line">%:</span><br><span class="line">        dh $@</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意： 最后一行应当使用一个 Tab 字符进行缩进，而不使用空格。这个文件是一个 Makefile，因此 Tab 字符是 make 所期望的。</strong></p>
+<p>事实上 <code>debian/rules</code> 可能是一个相当复杂的文件。然而，在 <code>debhelper 7</code> 中的 <code>dh</code> 命令让它可以在大多数情况下变得更简单。</p>
+<h2 id="2-5-debian-source-format"><a href="#2-5-debian-source-format" class="headerlink" title="2.5 debian&#x2F;source&#x2F;format"></a>2.5 debian&#x2F;source&#x2F;format</h2><p>最后一个我们需要的文件是 <code>debian/source/format</code>，它应当包含源代码包的版本号，这里为 <code>3.0 (quilt)</code>。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">3.0 (quilt)</span><br></pre></td></tr></table></figure>
+
+<h1 id="3-实例制作一个包"><a href="#3-实例制作一个包" class="headerlink" title="3.实例制作一个包"></a>3.实例制作一个包</h1><ul>
+<li>changelog: 文件记录了deb包的作者、版本以及最后一次更新日期等信息；</li>
+<li>control: 文件记录了包名、版本号、架构、维护者及描述等信息；</li>
+<li>copyright: 文件记录了一些版权信息；</li>
+<li>postinst: 软件在进行正常目录文件拷贝到系统后需要执行的脚本。</li>
+<li>postrm文件: 软件卸载后需要执行的脚本。</li>
+</ul>
+<p>这里以昨天编译的opencv静态库和动态库为例进行deb的打包</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310192125627.png" alt="image-20231019212535607"></p>
+<p>为了不影响两个包，我这里就单独创建一个deb目录了，然后拷贝动态opencv库，拷贝完成如下所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310192129240.png" alt="image-20231019212906221"></p>
+<p>然后创建DEBIAN目录，在DEBIAN目录下创建三个文件，命令如下所示：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir DEBIAN </span><br><span class="line"></span><br><span class="line">touch DEBIAN/control</span><br></pre></td></tr></table></figure>
+
+<p>但是我感觉我可以不用这些~~，我能安装上就行了，为啥还要有这些说明呢，现在还不需要呢，就先这样.</p>
+<p>但是control这个是必须要添加的,向DEBIAN&#x2F;control文件中写入以下内容</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Package: opencv-deb</span><br><span class="line">Version: 1.0.0</span><br><span class="line">Section: free</span><br><span class="line">Priority: optional</span><br><span class="line">Essential: no</span><br><span class="line">Architecture: arm64</span><br><span class="line">Maintainer: topeet &lt;topeet@topeet&gt;</span><br><span class="line">Provides: opencv_deb</span><br><span class="line">Description: opencv 4.8.0</span><br></pre></td></tr></table></figure>
+
+<p>然后使用以下命令构建deb包：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dpkg-deb -b ../deb ../opencv_4_8.0_arm64.deb</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310192137781.png" alt="image-20231019213754765"></p>
+<p>在上一级的目录下就创建了该目录</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310192138990.png" alt="image-20231019213855976"></p>
+<p>可以使用以下命令查看deb包的内容</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dpkg -c opencv_4_8.0_arm64.deb</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310192141793.png" alt="image-20231019214105760"></p>
+<p>使用以下命令查看deb包的信息：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dpkg --info  opencv_4_8.0_arm64.deb</span><br></pre></td></tr></table></figure>
+
+<p>可以看到该包的信息就被打印了出来，也就是我们在上面填写的DEBIAN&#x2F;control的内容</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310192142227.png" alt="image-20231019214247209"></p>
+<p>我现在这个包是arm64架构的，但是我想在虚拟机ubuntu上用，那我要怎么办呢，实际上是可以强制安装的，在-i参数前面加入一个–force-depends 参数：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dpkg --force-depends -i opencv_4_8.0_arm64.deb</span><br></pre></td></tr></table></figure>
+
+<p>然鹅发现还是不行，看来这个架构问题是永远改不了的呀，伤心了</p>
+<p>还是解包吧</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dpkg --unpack opencv_4_8.0_arm64.deb</span><br></pre></td></tr></table></figure>
+
+<p>因为体系不行解包都不行，因为这个也类似于安装</p>
+<p>只是解压应该用这个命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dpkg -x  opencv_4_8.0_arm64.deb opencv</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310192151417.png" alt="image-20231019215145390"></p>
+<p>这就好了，搞到这个地方应该就可以了，我认为。ok，那就先这样。</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/deb%E5%8C%85%E7%9A%84%E5%88%B6%E4%BD%9C/" rel="tag">deb包的制作</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
   id="post-0-0-6 opencv的编译"
   class="article article-type-post"
   itemscope
@@ -484,115 +888,6 @@
 
     
     <article
-  id="post-0-22 声卡问题的解决"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/10/10/0-22%20%E5%A3%B0%E5%8D%A1%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E5%86%B3/"
-    >0-22 声卡问题的解决</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/10/10/0-22%20%E5%A3%B0%E5%8D%A1%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E5%86%B3/" class="article-date">
-  <time datetime="2023-10-10T12:47:53.000Z" itemprop="datePublished">2023-10-10</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE%E5%9B%BA%E4%BB%B6%E5%88%86%E6%9E%90/">瑞芯微固件分析</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <pre><code>    es8388_sound: es8388-sound &#123;
-            status = &quot;okay&quot;;
-            compatible = &quot;rockchip,multicodecs-card&quot;;
-            rockchip,card-name = &quot;rockchip-es8388&quot;;
-            hp-det-gpio = &lt;&amp;gpio1 RK_PD5 GPIO_ACTIVE_HIGH&gt;;
-            io-channels = &lt;&amp;saradc 3&gt;;
-            io-channel-names = &quot;adc-detect&quot;;
-            keyup-threshold-microvolt = &lt;1800000&gt;;
-            poll-interval = &lt;100&gt;;
-            rockchip,format = &quot;i2s&quot;;
-            rockchip,mclk-fs = &lt;256&gt;;
-            rockchip,cpu = &lt;&amp;i2s1_8ch&gt;;
-            rockchip,codec = &lt;&amp;es8388&gt;;
-            rockchip,audio-routing =
-                    &quot;Headphone&quot;, &quot;LOUT1&quot;,
-                    &quot;Headphone&quot;, &quot;ROUT1&quot;,
-                    &quot;Headphone&quot;, &quot;Headphone Power&quot;,
-                    &quot;Headphone&quot;, &quot;Headphone Power&quot;,
-                    &quot;LINPUT1&quot;, &quot;Main Mic&quot;,
-                    &quot;LINPUT2&quot;, &quot;Main Mic&quot;,
-                    &quot;RINPUT1&quot;, &quot;Headset Mic&quot;,
-                    &quot;RINPUT2&quot;, &quot;Headset Mic&quot;;
-            pinctrl-names = &quot;default&quot;;
-            pinctrl-0 = &lt;&amp;hp_det&gt;;
-            play-pause-key &#123;
-                    label = &quot;playpause&quot;;
-                    linux,code = &lt;KEY_PLAYPAUSE&gt;;
-                    press-threshold-microvolt = &lt;2000&gt;;
-            &#125;;
-    &#125;;
-</code></pre>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">es8388: es8388@10 &#123;</span><br><span class="line">        status = &quot;okay&quot;;</span><br><span class="line">        #sound-dai-cells = &lt;0&gt;;</span><br><span class="line">        compatible = &quot;everest,es8388&quot;, &quot;everest,es8323&quot;;</span><br><span class="line">        reg = &lt;0x10&gt;;</span><br><span class="line">        clocks = &lt;&amp;mclkout_i2s1&gt;;</span><br><span class="line">        clock-names = &quot;mclk&quot;;</span><br><span class="line">        assigned-clocks = &lt;&amp;mclkout_i2s1&gt;;</span><br><span class="line">        assigned-clock-rates = &lt;12288000&gt;;</span><br><span class="line">        pinctrl-names = &quot;default&quot;;</span><br><span class="line">        pinctrl-0 = &lt;&amp;i2s1m0_mclk&gt;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<p>香橙派 orangepib3 </p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310112154264.png" alt="image-20231011215420206"></p>
-<p>倒是没啥</p>
-<p>1126</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310112154846.png" alt="image-20231011215455816"></p>
-<p>正点3568</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310112155945.png" alt="image-20231011215514911"></p>
-<p>香橙派 rk3588s</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310112157444.png" alt="image-20231011215723418"></p>
-<p>firefly rk3568原理图</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310112159178.png" alt="image-20231011215957135"></p>
-<p>野火 3588s</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310112204368.png" alt="image-20231011220410343"></p>
-<p>野火 3568 </p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310112205798.png" alt="image-20231011220530778"></p>
-<p>迅为3588</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310112206820.png" alt="image-20231011220656801"></p>
-<p>迅为3568</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310112208009.png" alt="image-20231011220800981"></p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%91%9E%E8%8A%AF%E5%BE%AE%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/" rel="tag">瑞芯微脚本分析</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
   id="post-0-20 挂载镜像文件"
   class="article article-type-post"
   itemscope
@@ -662,126 +957,6 @@
 
 
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">U-Boot 2017.09-g32640b0ada-230713-dirty #topeet (Oct 07 2023 - 22:14:24 +0800)</span><br><span class="line"></span><br><span class="line">Model: Rockchip RK3588 Evaluation Board</span><br><span class="line">MPIDR: 0x81000000</span><br><span class="line">PreSerial: 2, raw, 0xfeb50000</span><br><span class="line">DRAM:  8 GiB</span><br><span class="line">Sysmem: init</span><br><span class="line">Relocation Offset: eda1c000</span><br><span class="line">Relocation fdt: eb9fa160 - eb9fecd0</span><br><span class="line">CR: M/C/I</span><br><span class="line">Using default environment</span><br><span class="line"></span><br><span class="line">Hotkey: ctrl+c</span><br><span class="line">DM: v2</span><br><span class="line">no mmc device at slot 1</span><br><span class="line">mmc@fe2c0000: 1 (SD), mmc@fe2e0000: 0</span><br><span class="line">Bootdev(atags): mmc 1</span><br><span class="line">MMC1: Legacy, 52Mhz</span><br><span class="line">PartType: EFI</span><br><span class="line">No misc partition</span><br><span class="line">boot mode: None</span><br><span class="line">RESC: &#x27;boot&#x27;, blk@0x0001898a</span><br><span class="line">resource: sha256+</span><br><span class="line">FIT: no signed, no conf required</span><br><span class="line">DTB: rk-kernel.dtb</span><br><span class="line">HASH(c): OK</span><br><span class="line">I2c0 speed: 100000Hz</span><br><span class="line">vsel-gpios- not found!</span><br><span class="line">en-gpios- not found!</span><br><span class="line">vdd_cpu_big0_s0 800000 uV</span><br><span class="line">vsel-gpios- not found!</span><br><span class="line">en-gpios- not found!</span><br><span class="line">vdd_cpu_big1_s0 800000 uV</span><br><span class="line">I2c1 speed: 100000Hz</span><br><span class="line">vsel-gpios- not found!</span><br><span class="line">en-gpios- not found!</span><br><span class="line">vdd_npu_s0 800000 uV</span><br><span class="line">spi2: RK806: 2</span><br><span class="line">ON=0x40, OFF=0x00</span><br><span class="line">vdd_gpu_s0 750000 uV</span><br><span class="line">vdd_cpu_lit_s0 750000 uV</span><br><span class="line">vdd_log_s0 750000 uV</span><br><span class="line">vdd_vdenc_s0 init 750000 uV</span><br><span class="line">vdd_ddr_s0 850000 uV</span><br><span class="line">Device &#x27;gpio@fd8a0000&#x27;: seq 0 is in use by &#x27;gpio@fd8a0000&#x27;</span><br><span class="line">Warn: can&#x27;t find connect driver</span><br><span class="line">Warn: can&#x27;t get connect driver</span><br><span class="line">get vp0 plane mask:0x5, primary id:2, cursor_plane:-1, from dts</span><br><span class="line">get vp1 plane mask:0xa, primary id:3, cursor_plane:-1, from dts</span><br><span class="line">get vp2 plane mask:0x140, primary id:8, cursor_plane:-1, from dts</span><br><span class="line">get vp3 plane mask:0x280, primary id:9, cursor_plane:-1, from dts</span><br><span class="line">Could not find baseparameter partition</span><br><span class="line">Model: Rockchip RK3588 EVB7 LP4 V10 Board</span><br><span class="line">MPIDR: 0x81000000</span><br><span class="line">Rockchip UBOOT DRM driver version: v1.0.1</span><br><span class="line">vp0 have layer nr:2[0 2 ], primary plane: 2</span><br><span class="line">vp1 have layer nr:2[1 3 ], primary plane: 3</span><br><span class="line">vp2 have layer nr:2[6 8 ], primary plane: 8</span><br><span class="line">vp3 have layer nr:2[7 9 ], primary plane: 9</span><br><span class="line">Using display timing dts</span><br><span class="line">dsi@fde30000:  detailed mode clock 71900 kHz, flags[a]</span><br><span class="line">    H: 0800 0820 0840 0860</span><br><span class="line">    V: 1280 1290 1294 1298</span><br><span class="line">bus_format: 100e</span><br><span class="line">VOP update mode to: 800x1280p64, type: MIPI1 for VP3</span><br><span class="line">VP3 set crtc_clock to 71493KHz</span><br><span class="line">VOP VP3 enable Esmart3[654x270-&gt;654x270@73x505] fmt[2] addr[0xedf04000]</span><br><span class="line">final DSI-Link bandwidth: 476620 Kbps x 4</span><br><span class="line">CLK: (uboot. arm: enter 1008000 KHz, init 1008000 KHz, kernel 0N/A)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%91%9E%E8%8A%AF%E5%BE%AE%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/" rel="tag">瑞芯微脚本分析</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-0-21 构建deb包"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/10/08/0-21%20%E6%9E%84%E5%BB%BAdeb%E5%8C%85/"
-    >0-21 构建deb包</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/10/08/0-21%20%E6%9E%84%E5%BB%BAdeb%E5%8C%85/" class="article-date">
-  <time datetime="2023-10-08T12:47:53.000Z" itemprop="datePublished">2023-10-08</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE%E5%9B%BA%E4%BB%B6%E5%88%86%E6%9E%90/">瑞芯微固件分析</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h1 id="1-三个核心概念"><a href="#1-三个核心概念" class="headerlink" title="1.三个核心概念"></a>1.三个核心概念</h1><p>三个最核心的概念为：</p>
-<ul>
-<li>上游原始代码包（upstream tarball）:<ul>
-<li>通常，人们为上游开发者（通常为第三方）编写的软件打包。</li>
-<li>上游开发者会使用源代码归档软件或原始代码包的方式发放他们的软件。</li>
-<li>原始代码包一般是上游制作的 <code>.tar.gz</code> 或 <code>.tgz</code> 文件，它也可能被压缩成 <code>.tar.bz2</code>，<code>.tb2</code> 或 <code>.tar.xz</code> 格式。原始代码包就是 Debian 构建包时使用的原材料。</li>
-</ul>
-</li>
-<li>源码包：<ul>
-<li>当您拥有了上游制作的原始代码包，下一步就可以制作 Debian 源码包了。</li>
-</ul>
-</li>
-<li>二进制包：<ul>
-<li>从源码包您可以构建 Debian 二进制包，它才是是实际上会被安装的包。</li>
-</ul>
-</li>
-</ul>
-<p>最简单的源码包由3个文件组成：</p>
-<ul>
-<li>上游原始代码包，需要被重命名来符合一个特定的模式。</li>
-<li>一个 debian 目录，带有所有上游源代码的更改记录，外加所有为 Debian 打包系统生成的所有文件。这种包拥有 <code>.debian.tar.gz</code> 的文件名。</li>
-<li>一个描述文件（以 <code>.dsc</code> 结尾），罗列了其他两个文件。</li>
-</ul>
-<p>听起来有些过于复杂，人们的第一印象是：所有东西都放在一个文件里会更简单。然而，保持上游代码包与 Debian 特定更改分离可以节省大量磁盘空间和带宽。对 Debian 来说，追踪必要的修改也更加简单。</p>
-<h1 id="2-deb包制作流程"><a href="#2-deb包制作流程" class="headerlink" title="2. deb包制作流程"></a>2. deb包制作流程</h1><p>首先创建一个debian目录</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> debian</span><br></pre></td></tr></table></figure>
-
-<p>我们需要提供不少文件，让我们按顺序来看。</p>
-<h2 id="2-1-debian-changelog"><a href="#2-1-debian-changelog" class="headerlink" title="2.1 debian&#x2F;changelog"></a>2.1 debian&#x2F;changelog</h2><p>第一个文件是 <code>debian/changelog</code>，这个是记录 Debian 包变化的日志文件。它无需罗列出上游代码的每一个改变，只要它能帮助用户总结这些变化即可。我们在制作第一个版本，所以这里应当什么都没有。然而，我们仍需制作一个变化日志的入口，因为打包工具会从日志里读取特定信息。最重要的是它会读取包的版本。</p>
-<p><code>debian/changelog</code> 拥有一个十分特殊的格式。最简单的创建方式就是使用 <code>dch</code> 工具。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apt install devscripts</span><br><span class="line">dch --create -v 1.0-1 --package hithere</span><br></pre></td></tr></table></figure>
-
-<p>会在文件中产生以下内容：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310092059083.png" alt="image-20231009205902071"></p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310092058676.png" alt="image-20231009205839642"></p>
-<p>这里有很多注意点：</p>
-<p><code>hithere</code> 部分必须与源代码包的名字相同。<code>1.0-1</code> 是版本号，<code>1.0</code> 部分是上游版本号。<code>-1</code> 部分是 Debian 的版本：它是第一个上游版本为 <code>1.0</code> 的 Debian 包。如果这个 Debian 包有错误，并且被修复了，那么上游版本号仍保持相同，下一个版本应当被叫做 <code>1.0-2</code>，接下来是 <code>1.0-3</code>，依此类推。</p>
-<p>UNRELEASED 被称作上传目标。它会告诉上传工具这个二进制包应当被上传到哪里。UNRELEASED 意味着这个包还没有做好上传的准备。保持 UNRELEASED 是一个好主意，以避免您错误上传它。</p>
-<p>目前请先忽略 <code>urgency=medium</code>。</p>
-<p><code>(Closes：#XXXXXX)</code> 作用在于上传包时关闭错误。这是在 Debian 中关闭错误的常用方法：当上传修复错误的包时，错误跟踪器会注意到这一点，并将错误标记为已关闭。我们可以删除 <code>(Closes...)</code> 位</p>
-<h2 id="2-2-debian-control"><a href="#2-2-debian-control" class="headerlink" title="2.2 debian&#x2F;control"></a>2.2 debian&#x2F;control</h2><p>控制文件描述代码和二进制包，并给出他们的详细信息，比如名称、包的维护者是谁，等等。下面是一个示例：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Source: hithere</span><br><span class="line">Maintainer: Lars Wirzenius &lt;liw@liw.fi&gt;</span><br><span class="line">Section: misc</span><br><span class="line">Priority: optional</span><br><span class="line">Standards-Version: 3.9.2</span><br><span class="line">Build-Depends: debhelper (&gt;= 9)</span><br><span class="line"></span><br><span class="line">Package: hithere</span><br><span class="line">Architecture: any</span><br><span class="line">Depends: $&#123;shlibs:Depends&#125;, $&#123;misc:Depends&#125;</span><br><span class="line">Description: greet user</span><br><span class="line"> hithere greets the user, or the world.</span><br></pre></td></tr></table></figure>
-
-<p>在这个文件里有许多需求的字段，但是现在您可以像对待魔法一样对待它。那么，在 <code>debian/control</code> 中有两段文字。</p>
-<p>第一段文字描述了源代码包，使用以下字段：</p>
-<h3 id="2-2-1-Source"><a href="#2-2-1-Source" class="headerlink" title="2.2.1 Source"></a>2.2.1 Source</h3><p>源代码包名。</p>
-<h3 id="2-2-2-Maintainer"><a href="#2-2-2-Maintainer" class="headerlink" title="2.2.2 Maintainer"></a>2.2.2 Maintainer</h3><p>维护者的姓名和电子邮箱。</p>
-<h3 id="2-2-3-Priority"><a href="#2-2-3-Priority" class="headerlink" title="2.2.3 Priority"></a>2.2.3 Priority</h3><p>包的重要性（’required 可选的’, ‘important 重要的’, ‘standard 标准’ 或 ‘optional’ 其中之一）。通常，包是“可选”的，除非它对于标准系统功能是“必不可少的”，即启动或网络功能。 如果包与另一个“可选”包冲突，或者它不打算用于标准桌面安装，则应该是“额外”的而不是“可选”的。 “额外”包的显着例子是调试包。 （由Sebastian Tennant添加）。</p>
-<h3 id="2-2-4-Build-Depends"><a href="#2-2-4-Build-Depends" class="headerlink" title="2.2.4 Build-Depends"></a>2.2.4 Build-Depends</h3><p>需要安装以构建程序包的程序包列表。实际使用包时有可能需要它们。</p>
-<p>第一个之后的所有段落都描述了从此源构建的二进制包。 可以有许多从同一来源构建的二进制包; 但对于我们的例子只有一个。 我们使用这些字段：</p>
-<h3 id="2-2-5-Package"><a href="#2-2-5-Package" class="headerlink" title="2.2.5 Package"></a>2.2.5 Package</h3><p>二进制包的名称。 名称可能与源包名称不同。</p>
-<h3 id="2-2-6-Architecture"><a href="#2-2-6-Architecture" class="headerlink" title="2.2.6 Architecture"></a>2.2.6 Architecture</h3><p>指定二进制包预期使用的计算机体系结构：用于32位Intel CPU的i386，用于64位的amd64，用于ARM处理器的armel等等。 Debian总共可以处理大约十几种计算机体系结构，因此这种体系结构支持至关重要。 “Architecture”字段可以包含特定体系结构的名称，但通常它包含两个特殊值中的一个。</p>
-<p>any<br> （我们在示例中看到）意味着可以为任何体系结构构建包。 换句话说，代码是可移植的，因此它不会对硬件做太多假设。 但是，仍然需要为每个体系结构单独构建二进制包。</p>
-<p>all<br> 意味着相同的二进制包将适用于所有体系结构，而无需为每个体系结构单独构建。 例如，仅包含shell脚本的包将是“all”。 Shell脚本在任何地方都可以工作，不需要编译。</p>
-<h3 id="2-2-7-Depends"><a href="#2-2-7-Depends" class="headerlink" title="2.2.7 Depends"></a>2.2.7 Depends</h3><p>为了让二进制包中程序能够正常运行，需要安装的包列表。手动列出这些依赖项是繁琐且容易出错的工作。为了能够让其工作，我们需要一个神奇的小东西 <code>$&#123;shlibs:Depends&#125;</code>。另一个神奇的东西是给 <code>debhelper</code> 的，它是 <code>$&#123;misc:Depends&#125;</code>。shlibs 是为了动态链接库，而 misc 是为了 <code>debherlper</code> 的一些工作。对于别的依赖，您可以将其手动加入到 <code>Depends</code> 或 <code>Build-Depends</code> 中。但请注意，<code>$&#123;...&#125;</code> 仅在 <code>Depends</code> 中有效。</p>
-<h3 id="2-2-8-Description"><a href="#2-2-8-Description" class="headerlink" title="2.2.8 Description"></a>2.2.8 Description</h3><p>二进制包的完整描述。它希望对用户有所帮助。第一行用作简要概要（摘要）描述，其余部分是包的更长的描述。<br> 命令 <code>cme edit dpkg</code> 提供了一个GUI能够用来编辑大多数打包文件，包括 <code>debian/control</code>。 请参阅使用 <code>cme</code> 页面管理 <code>Debian</code> 软件包。<code>cme</code>命令在 Debian 中的 <code>cme</code> 包中提供。您也可以使用 <code>cme edit dpkg-control</code> 命令仅编辑 <code>debian/control</code> 文件。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Source: linux-rockchip-5.10.110</span><br><span class="line">Section: kernel</span><br><span class="line">Priority: optional</span><br><span class="line">Standards-Version: 4.6.0</span><br><span class="line">Build-Depends: bc, rsync, kmod, cpio, build-essential, u-boot-tools, bison, python3 | python, python-is-python3 | python-is-python2, flex | flex:native , , libssl-dev:native</span><br></pre></td></tr></table></figure>
-
-<h2 id="2-3-debian-copyright"><a href="#2-3-debian-copyright" class="headerlink" title="2.3 debian&#x2F;copyright"></a>2.3 debian&#x2F;copyright</h2><p>这是一个非常重要的文件，但是现在我们将先使用一个空文件。<br> 对于 Debian ，此文件用于跟踪有关包的合法性、版权相关信息。但是，从技术角度来看，这并不重要。目前，我们将专注于技术方面。如果有兴趣，我们可以稍后再回到 <code>debian/copyright</code>。</p>
-<h2 id="2-4-debian-rules"><a href="#2-4-debian-rules" class="headerlink" title="2.4 debian&#x2F;rules"></a>2.4 debian&#x2F;rules</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/usr/bin/make -f</span></span><br><span class="line"></span><br><span class="line">include /usr/share/dpkg/architecture.mk</span><br><span class="line">include /usr/share/dpkg/pkg-info.mk</span><br><span class="line"></span><br><span class="line">ifneq ($(DEB_BUILD_GNU_TYPE),$(DEB_HOST_GNU_TYPE))</span><br><span class="line">CROSS_COMPILE ?= $(DEB_HOST_GNU_TYPE)-</span><br><span class="line">endif</span><br><span class="line"></span><br><span class="line">ifneq (,$(filter parallel=%,$(DEB_BUILD_OPTIONS)))</span><br><span class="line">NJOBS := -j $(patsubst parallel=%,%,$(filter parallel=%,$(DEB_BUILD_OPTIONS)))</span><br><span class="line">else</span><br><span class="line">NJOBS := -j $(shell nproc)</span><br><span class="line">endif</span><br><span class="line"></span><br><span class="line">KDEB_PKGVERSION := $(shell dpkg-parsechangelog -SVersion -l debian/changelog | sed &#x27;s/-.*//&#x27;)</span><br><span class="line">PATCH_VERSION := $(shell dpkg-parsechangelog -SVersion -l debian/changelog | sed &#x27;s/.*-//&#x27;)</span><br><span class="line"></span><br><span class="line">srctree ?= .</span><br><span class="line"></span><br><span class="line">config:</span><br><span class="line">	@echo $(PATCH_VERSION)-1 | bc &gt; .version</span><br><span class="line">	@touch .scmversion</span><br><span class="line"><span class="meta prompt_">	$</span><span class="language-bash">(MAKE) rockchip_linux_defconfig \</span></span><br><span class="line"><span class="language-bash">	  CROSS_COMPILE=$(CROSS_COMPILE) \</span></span><br><span class="line"><span class="language-bash">	  ARCH=arm64 \</span></span><br><span class="line"><span class="language-bash">	  $(NJOBS)</span></span><br><span class="line"></span><br><span class="line">build-indep:</span><br><span class="line">build-arch: config</span><br><span class="line"><span class="meta prompt_">	$</span><span class="language-bash">(MAKE) -f $(srctree)/Makefile \</span></span><br><span class="line"><span class="language-bash">	  KERNELRELEASE=$(KDEB_PKGVERSION)-rockchip \</span></span><br><span class="line"><span class="language-bash">	  KDEB_PKGVERSION=$(KDEB_PKGVERSION)-$(PATCH_VERSION) \</span></span><br><span class="line"><span class="language-bash">	  CROSS_COMPILE=$(CROSS_COMPILE) \</span></span><br><span class="line"><span class="language-bash">	  ARCH=arm64 \</span></span><br><span class="line"><span class="language-bash">	  $(NJOBS)</span></span><br><span class="line"></span><br><span class="line">build: build-arch</span><br><span class="line"></span><br><span class="line">binary-indep:</span><br><span class="line">binary-arch: build-arch</span><br><span class="line"><span class="meta prompt_">	$</span><span class="language-bash">(MAKE) -f $(srctree)/Makefile intdeb-pkg \</span></span><br><span class="line"><span class="language-bash">	  KERNELRELEASE=$(KDEB_PKGVERSION)-rockchip \</span></span><br><span class="line"><span class="language-bash">	  KDEB_PKGVERSION=$(KDEB_PKGVERSION)-$(PATCH_VERSION) \</span></span><br><span class="line"><span class="language-bash">	  CROSS_COMPILE=$(CROSS_COMPILE) \</span></span><br><span class="line"><span class="language-bash">	  ARCH=arm64 \</span></span><br><span class="line"><span class="language-bash">	  $(NJOBS)</span></span><br><span class="line">	</span><br><span class="line">clean:</span><br><span class="line">	@rm -rf debian/*tmp debian/files</span><br><span class="line"><span class="meta prompt_">	$</span><span class="language-bash">(MAKE) clean</span></span><br><span class="line"></span><br><span class="line">binary: binary-arch</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- rockchip_linux_defconfig</span><br><span class="line">make KERNELRELEASE=&quot;$(make kernelversion)&quot; KBUILD_IMAGE=&quot;arch/arm64/boot/Image&quot; CROSS_COMPILE=aarch64-linux-gnu- ARCH=arm64 -j &quot;$(nproc)&quot; bindeb-pkg</span><br></pre></td></tr></table></figure>
 
  
       <!-- reward -->
@@ -1329,88 +1504,6 @@ make ARCH=arm64 -j32  CROSS_COMPILE=aarch64-linux-gnu- rk3588-evb7-lp4-v10-linux
     <footer class="article-footer">
        
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%91%9E%E8%8A%AF%E5%BE%AE%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/" rel="tag">瑞芯微脚本分析</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-1-1-git的学习"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/09/22/1-1-git%E7%9A%84%E5%AD%A6%E4%B9%A0/"
-    >1-1 git的学习</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/09/22/1-1-git%E7%9A%84%E5%AD%A6%E4%B9%A0/" class="article-date">
-  <time datetime="2023-09-22T13:00:47.000Z" itemprop="datePublished">2023-09-22</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/git/">git</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <p>s</p>
-<p>github名称</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1361382269@qq.com</span><br></pre></td></tr></table></figure>
-
-
-
-<p>github 令牌</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">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</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<p>添加信任表，否咋会报错</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global --add safe.directory &quot;*&quot;</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309242211841.png" alt="image-20230924221131815"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git lfs track &quot;*.deb&quot;</span><br></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add .gitattributes</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git branch -M main</span><br><span class="line">git remote add origin https://github.com/chai0705/rk3588_ubuntu20_xfce.git</span><br><span class="line">git push -u origin main</span><br></pre></td></tr></table></figure>
-
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/" rel="tag">git</a></li></ul>
 
     </footer>
   </div>
