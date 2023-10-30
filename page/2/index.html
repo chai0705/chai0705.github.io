@@ -160,6 +160,103 @@
     
     
     <article
+  id="post-0-16-openwrt进阶"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/09/26/0-16-openwrt%E8%BF%9B%E9%98%B6/"
+    >0-16 openwrt进阶</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/09/26/0-16-openwrt%E8%BF%9B%E9%98%B6/" class="article-date">
+  <time datetime="2023-09-26T12:47:53.000Z" itemprop="datePublished">2023-09-26</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE%E5%9B%BA%E4%BB%B6%E5%88%86%E6%9E%90http-opensource-rock-chips-com-wiki-Main-Page/">瑞芯微固件分析http://opensource.rock-chips.com/wiki_Main_Page</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p><a target="_blank" rel="noopener" href="http://opensource.rock-chips.com/wiki_Main_Page">http://opensource.rock-chips.com/wiki_Main_Page</a></p>
+<h1 id="1-瑞芯微官方wiki"><a href="#1-瑞芯微官方wiki" class="headerlink" title="1.瑞芯微官方wiki"></a>1.瑞芯微官方wiki</h1><p>瑞芯微的wiki，目前支持的硬件如下所示：<br><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20230926204922178.png" alt="image-20230926204922178"></p>
+<p>关于3588的还没有出来，但其实都是一样的，这里不管。</p>
+<p>uboot的 wiki</p>
+<p><a target="_blank" rel="noopener" href="http://opensource.rock-chips.com/wiki_U-Boot">http://opensource.rock-chips.com/wiki_U-Boot</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">+--------+----------------+----------+-------------+---------+</span><br><span class="line">| Boot   | Terminology #1 | Actual   | Rockchip    | Image   |</span><br><span class="line">| stage  |                | program  |  Image      | Location|</span><br><span class="line">| number |                | name     |   Name      | (sector)|</span><br><span class="line">+--------+----------------+----------+-------------+---------+</span><br><span class="line">| 1      |  Primary       | ROM code | BootRom     |         |</span><br><span class="line">|        |  Program       |          |             |         |</span><br><span class="line">|        |  Loader        |          |             |         |</span><br><span class="line">|        |                |          |             |         |</span><br><span class="line">| 2      |  Secondary     | U-Boot   |idbloader.img| 0x40    | pre-loader</span><br><span class="line">|        |  Program       | TPL/SPL  |             |         |</span><br><span class="line">|        |  Loader (SPL)  |          |             |         |</span><br><span class="line">|        |                |          |             |         |</span><br><span class="line">| 3      |  -             | U-Boot   | u-boot.itb  | 0x4000  | including u-boot and atf</span><br><span class="line">|        |                |          | uboot.img   |         | only used with miniloader</span><br><span class="line">|        |                |          |             |         |</span><br><span class="line">|        |                | ATF/TEE  | trust.img   | 0x6000  | only used with miniloader</span><br><span class="line">|        |                |          |             |         |</span><br><span class="line">| 4      |  -             | kernel   | boot.img    | 0x8000  |</span><br><span class="line">|        |                |          |             |         |</span><br><span class="line">| 5      |  -             | rootfs   | rootfs.img  | 0x40000 |</span><br><span class="line">+--------+----------------+----------+-------------+---------+</span><br></pre></td></tr></table></figure>
+
+<p>当我们谈论从 eMMC&#x2F;SD&#x2F;U 盘&#x2F;网络启动时，它们涉及到不同的概念：</p>
+<p>第一阶段（Stage 1）始终在引导 ROM 中，它加载第二阶段（Stage 2），并可能加载第三阶段（当启用 SPL_BACK_TO_BROM 选项时）。<br>从 SPI 闪存启动意味着第二阶段（SPL 和 U-Boot）的固件位于 SPI 闪存中，而第四阶段（Stage 4）和第五阶段（Stage 5）位于其他地方；<br>从 eMMC 启动意味着所有固件（包括第二阶段、第三阶段、第四阶段和第五阶段）都存储在 eMMC 中；<br>从 SD 卡启动意味着所有固件（包括第二阶段、第三阶段、第四阶段和第五阶段）都存储在 SD 卡中；<br>从 U 盘启动意味着第四阶段和第五阶段的固件（不包括 SPL 和 U-Boot）存储在 U 盘中，可选地只包含第五阶段；<br>从网络&#x2F;TFTP启动意味着第四阶段和第五阶段的固件（不包括 SPL 和 U-Boot）存储在网络上。</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309262100985.jpeg" alt="Rockchip bootflow.jpg"></p>
+<h1 id="2-uboot官方"><a href="#2-uboot官方" class="headerlink" title="2. uboot官方"></a>2. uboot官方</h1><p><a target="_blank" rel="noopener" href="https://u-boot.readthedocs.io/en/latest/board/rockchip/index.html">https://u-boot.readthedocs.io/en/latest/board/rockchip/index.html</a></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309262106742.png" alt="image-20230926210621659"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309262106001.png" alt="image-20230926210654968"></p>
+<p>sudo apt-get install python-pyelftools python3-pyelftools -y</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">export ARCH=arm64</span><br><span class="line">export BL31=../rkbin/bin/rk35/rk3588_bl31_v1.33.elf</span><br><span class="line">export ROCKCHIP_TPL=../rkbin/bin/rk35/rk3588_ddr_lp4_2112MHz_lp5_2736MHz_v1.09.bin</span><br><span class="line">make rk3588_defconfig</span><br><span class="line">make CROSS_COMPILE=aarch64-linux-gnu-</span><br><span class="line"></span><br><span class="line">./make.sh CROSS_COMPILE=aarch64-linux-gnu- rk3588</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/openwrt/openwrt.git</span><br><span class="line"> git branch -a</span><br><span class="line"> git checkout openwrt-23.05</span><br><span class="line"> make menuconfig </span><br><span class="line"> make V=99 download</span><br><span class="line"> make V=99 -j32</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/orangepi-xunlong/u-boot-orangepi.git</span><br><span class="line">git checkout v2017.09-rk3588</span><br><span class="line">export arch=arm64</span><br><span class="line">make orangepi_5b_defconfig</span><br><span class="line">make CROSS_COMPILE=&quot;aarch64-linux-gnu-&quot; -j32</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309262153640.png" alt="image-20230926215328624"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/chai0705/3588-uboot.git</span><br><span class="line">git branch -a</span><br><span class="line">make rockchip_linux_defconfig ARCH=arm64</span><br><span class="line">make CROSS_COMPILE=&quot;aarch64-linux-gnu-&quot; -j32</span><br></pre></td></tr></table></figure>
+
+<p>make ARCH&#x3D;arm64 CROSS_COMPILE&#x3D;”aarch64-linux-gnu-“  rk3588-evb7-lp4-v10-linux.img  -j32  </p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309262231481.png" alt="image-20230926223144462"></p>
+<p> “ddrbin_tool” 的工具，可用于修改和生成DDR（双数据率）二进制文件。该工具具有两个功能：</p>
+<p>功能1：从ddrbin_param.txt修改DDR二进制文件</p>
+<ol>
+<li><p>根据您的要求修改 “ddrbin_param.txt” 文件。该文件包含DDR频率、UART（通用异步收发器）信息等参数。如果您希望保持某些项目的默认值，请在文件中将其留空。</p>
+</li>
+<li><p>使用以下参数运行 “ddrbin_tool”：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">./ddrbin_tool ddrbin_param.txt px30_ddr_333MHz_v1.13.bin</span><br><span class="line">将 &quot;ddrbin_param.txt&quot; 替换为您修改后的参数文件的名称，将 &quot;px30_ddr_333MHz_v1.13.bin&quot; 替换为您要修改的DDR二进制文件的名称。</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>功能2：将DDR二进制文件配置获取到gen_param.txt文件中<br>如果您想获取DDR二进制文件的配置，可以使用 “-g” 标志运行该工具，并指定要保存配置的输出文件。例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./ddrbin_tool -g gen_param.txt px30_ddr_333MHz_v1.15.bin</span><br></pre></td></tr></table></figure>
+
+<p>该命令将生成一个名为 “gen_param.txt” 的文件，其中包含 “px30_ddr_333MHz_v1.15.bin” DDR二进制文件的配置详细信息。</p>
+<p>在我们开发板上使用的就是这个方法。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/rockchip-linux/rkbin.git</span><br></pre></td></tr></table></figure>
+
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%91%9E%E8%8A%AF%E5%BE%AE%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/" rel="tag">瑞芯微脚本分析</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
   id="post-1-1-git的学习"
   class="article article-type-post"
   itemscope
@@ -433,6 +530,17 @@
 
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">apt-get install -y libopencv-calib3d-dev libopencv-calib3d4.2  \</span><br><span class="line">libopencv-contrib-dev libopencv-contrib4.2 libopencv-core-dev libopencv-core4.2 libopencv-dev \</span><br><span class="line">libopencv-dnn-dev libopencv-dnn4.2 libopencv-features2d-dev libopencv-features2d4.2 \</span><br><span class="line">libopencv-flann-dev libopencv-flann4.2 libopencv-highgui-dev libopencv-highgui4.2 libopencv-imgcodecs-dev \</span><br><span class="line">libopencv-imgcodecs4.2 libopencv-imgproc-dev libopencv-imgproc4.2 libopencv-ml-dev libopencv-ml4.2  \</span><br><span class="line">libopencv-objdetect-dev libopencv-objdetect4.2 libopencv-photo-dev libopencv-photo4.2 libopencv-shape-dev \</span><br><span class="line">libopencv-shape4.2 libopencv-stitching-dev  libopencv-stitching4.2 libopencv-superres-dev libopencv-superres4.2 \</span><br><span class="line">libopencv-video-dev libopencv-video4.2 libopencv-videoio-dev libopencv-videoio4.2 libopencv-videostab-dev \</span><br><span class="line">libopencv-videostab4.2 libopencv-viz-dev libopencv-viz4.2 libopencv4.2-java libopencv4.2-jni</span><br></pre></td></tr></table></figure>
 
+
+
+
+
+
+
+<p>DEBIAN_FRONTEND&#x3D;noninteractive apt-get -yqq  –no-install-recommends install </p>
+<p>apt-get install -fy –allow-downgrades </p>
+<p>apt-get install -fy –allow-downgrades </p>
+<p> apt-get install -y –no-install-recommends</p>
+<p>chroot “${chroot_dir}” &#x2F;bin&#x2F;bash -c “dpkg-deb -f $name Package | xargs apt-mark hold” &gt;&gt; “${DEST}”&#x2F;${LOG_SUBPATH}&#x2F;install.log 2&gt;&amp;1</p>
  
       <!-- reward -->
       
@@ -923,131 +1031,6 @@
 </ul>
 <p>注意最终烧录的固件是<code>*_loader_*.bin</code>与<code>uboot.img</code>，且需要是瑞芯微的工具：</p>
 <p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122209586.png" alt="img"></p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%91%9E%E8%8A%AF%E5%BE%AE%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/" rel="tag">瑞芯微脚本分析</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-0-10 make.sh+rk3568编译命令执行分析（中）"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/09/10/0-10%20make.sh+rk3568%E7%BC%96%E8%AF%91%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E5%88%86%E6%9E%90%EF%BC%88%E4%B8%AD%EF%BC%89/"
-    >0-10 make.sh+rk3568编译命令执行分析（中）</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/09/10/0-10%20make.sh+rk3568%E7%BC%96%E8%AF%91%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E5%88%86%E6%9E%90%EF%BC%88%E4%B8%AD%EF%BC%89/" class="article-date">
-  <time datetime="2023-09-10T09:17:07.000Z" itemprop="datePublished">2023-09-10</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/">瑞芯微脚本分析</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h3 id="4-6-执行fit-sh脚本"><a href="#4-6-执行fit-sh脚本" class="headerlink" title="4.6 执行fit.sh脚本"></a>4.6 执行fit.sh脚本</h3><p>在上一节 4.5 中执行<code>pack_fit_image</code>函数，这个函数会调用<code>fit.sh</code>脚本：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208166.png" alt="img"></p>
-<p><code>SCRIPT_FIT</code>的定义：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208192.png" alt="img"><br>具体参数传递：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208179.png" alt="img"></p>
-<p>脚本函数执行如下：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208171.png" alt="img"><br>打开该脚本，添加打印：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208022.png" alt="img"><br>执行以下命令会输出具体的执行过程：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./scripts/fit.sh --ini-trust ../rkbin/RKTRUST/RK3568TRUST.ini --ini-loader ../rkbin/RKBOOT/RK3568MINIALL.ini --chip RK3568</span><br></pre></td></tr></table></figure>
-
-<h4 id="4-6-1-编译相关变量初始化"><a href="#4-6-1-编译相关变量初始化" class="headerlink" title="4.6.1 编译相关变量初始化"></a>4.6.1 编译相关变量初始化</h4><p>打印日志：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208197.png" alt="img"><br>源代码：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208348.png" alt="img"></p>
-<h4 id="4-6-2-执行fit-process-args"><a href="#4-6-2-执行fit-process-args" class="headerlink" title="4.6.2 执行fit_process_args"></a>4.6.2 执行fit_process_args</h4><p>打印日志：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208426.png" alt="img"></p>
-<p><code>fit_process_args</code>函数解析<code>--ini-trust</code>参数，用于指定<code>rkbin</code>的<code>RK3568TRUST.ini</code>文件，同理<code>--ini-loader</code>指定<code>RK3568MINIALL.ini</code>文件，同时指定芯片平台<code>--chip</code>为<code>RK3568</code>，<code>fit_process_args</code>函数定义如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br></pre></td><td class="code"><pre><span class="line">function fit_process_args()</span><br><span class="line">&#123;</span><br><span class="line">	if [ $# -eq 0 ]; then</span><br><span class="line">		help</span><br><span class="line">		exit 0</span><br><span class="line">	fi</span><br><span class="line"></span><br><span class="line">	while [ $# -gt 0 ]; do</span><br><span class="line">		case $1 in</span><br><span class="line">			--args)</span><br><span class="line">				ARG_VALIDATE=$2</span><br><span class="line">				shift 2</span><br><span class="line">				;;</span><br><span class="line">			--boot_img)     # boot.img</span><br><span class="line">				ARG_BOOT_IMG=$2</span><br><span class="line">				shift 2</span><br><span class="line">				;;</span><br><span class="line">			--chip)</span><br><span class="line">				ARG_CHIP=$2</span><br><span class="line">				shift 2</span><br><span class="line">				;;</span><br><span class="line">			--recovery_img) # recovery.img</span><br><span class="line">				ARG_RECOVERY_IMG=$2</span><br><span class="line">				shift 2</span><br><span class="line">				;;</span><br><span class="line">			--boot_img_dir) # boot.img components directory</span><br><span class="line">				ARG_BOOT_IMG_DIR=$2</span><br><span class="line">				shift 2</span><br><span class="line">				;;</span><br><span class="line">			--no-check)     # No hostcc fit signature check</span><br><span class="line">				ARG_NO_CHECK=&quot;y&quot;</span><br><span class="line">				shift 1</span><br><span class="line">				;;</span><br><span class="line">			--ini-trust)    # Assign trust ini file</span><br><span class="line">				ARG_INI_TRUST=$2</span><br><span class="line">				shift 2</span><br><span class="line">				;;</span><br><span class="line">			--ini-loader)   # Assign loader ini file</span><br><span class="line">				ARG_INI_LOADER=$2</span><br><span class="line">				shift 2</span><br><span class="line">				;;</span><br><span class="line">			--spl-new)      # Use current build u-boot-spl.bin to pack loader</span><br><span class="line">				ARG_SPL_NEW=&quot;y&quot;</span><br><span class="line">				shift 1</span><br><span class="line">				;;</span><br><span class="line">			--rollback-index-boot)</span><br><span class="line">				ARG_ROLLBACK_IDX_BOOT=$2</span><br><span class="line">				arg_check_decimal $2</span><br><span class="line">				shift 2</span><br><span class="line">				;;</span><br><span class="line">			--rollback-index-recovery)</span><br><span class="line">				ARG_ROLLBACK_IDX_RECOVERY=$2</span><br><span class="line">				arg_check_decimal $2</span><br><span class="line">				shift 2</span><br><span class="line">				;;</span><br><span class="line">			--rollback-index-uboot)</span><br><span class="line">				ARG_ROLLBACK_IDX_UBOOT=$2</span><br><span class="line">				arg_check_decimal $2</span><br><span class="line">				shift 2</span><br><span class="line">				;;</span><br><span class="line">			--version-uboot)</span><br><span class="line">				ARG_VER_UBOOT=$2</span><br><span class="line">				arg_check_decimal $2</span><br><span class="line">				shift 2</span><br><span class="line">				;;</span><br><span class="line">			--version-boot)</span><br><span class="line">				ARG_VER_BOOT=$2</span><br><span class="line">				arg_check_decimal $2</span><br><span class="line">				shift 2</span><br><span class="line">				;;</span><br><span class="line">			--version-recovery)</span><br><span class="line">				ARG_VER_RECOVERY=$2</span><br><span class="line">				arg_check_decimal $2</span><br><span class="line">				shift 2</span><br><span class="line">				;;</span><br><span class="line">			--burn-key-hash)</span><br><span class="line">				ARG_BURN_KEY_HASH=&quot;y&quot;</span><br><span class="line">				shift 1</span><br><span class="line">				;;</span><br><span class="line">			*)</span><br><span class="line">				help</span><br><span class="line">				exit 1</span><br><span class="line">				;;</span><br><span class="line">		esac</span><br><span class="line">	done</span><br><span class="line"></span><br><span class="line">	if grep -q &#x27;^CONFIG_FIT_SIGNATURE=y&#x27; .config ; then</span><br><span class="line">		ARG_SIGN=&quot;y&quot;</span><br><span class="line">	fi</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>位置参数可以用<code>shift</code>命令左移。比如<code>shift 3</code>表示原来的<code>$4</code>现在变成<code>$1</code>，原来的<code>$5</code>现在变成<code>$2</code>等等，原来的<code>$1</code>、<code>$2</code>、<code>$3</code>丢弃，<code>$0</code>不移动。不带参数的<code>shift</code>命令相当于<code>shift 1</code>。</p>
-</blockquote>
-<h4 id="4-6-3-执行fit-raw-compile"><a href="#4-6-3-执行fit-raw-compile" class="headerlink" title="4.6.3 执行fit_raw_compile"></a>4.6.3 执行fit_raw_compile</h4><p>打印日志：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208448.png" alt="在这里插入图片描述"></p>
-<p><code>fit_raw_compile</code>函数在此处只是重新创建<code>fit</code>目录，函数体如下：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208459.png" alt="img"></p>
-<h4 id="4-6-4-执行fit-gen-uboot-itb"><a href="#4-6-4-执行fit-gen-uboot-itb" class="headerlink" title="4.6.4 执行fit_gen_uboot_itb"></a>4.6.4 执行fit_gen_uboot_itb</h4><p>打印日志：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208542.png" alt="img"><br><code>fit_gen_uboot_itb</code>函数从命名来看应该是产生<code>uboot.itb</code>文件，从日志可以知道，它调用了<code>make.sh</code>脚本，执行的命令是<code>./make.sh itb ../rkbin/RKTURST/RK3568TRUST.ini</code>，接下来执行类似与<code>./make.sh rk3568</code>，只是此时传入进去的参数是<code>itb</code>：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208486.png" alt="img"></p>
-<p>打印日志：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208648.png" alt="img"><br>执行<code>process_args</code>等等，大部分与<code>./make.sh rk3568</code>一样：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208747.png" alt="img"></p>
-<p>后面有差异的地方是从执行<code>sub_commands</code>函数开始，传入的参数是之前的<code>itb</code>，然后调用<code>pack_uboot_itb_image</code>函数：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208794.png" alt="img"></p>
-<p>源代码：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208753.png" alt="img"></p>
-<p><code>pack_uboot_itb_image</code>函数解析<code>../rkbin/RKTURST/RK3568TRUST.ini</code>文件的内容，文件内容如下：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208773.png" alt="img"></p>
-<p>把<code>bl31.elf</code>与<code>tee.bin</code>二进制文件拷贝到uboot目录：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208028.png" alt="img"><br><code>mcu*.bin</code>因为<code>../rkbin/RKTURST/RK3568TRUST.ini</code>文件并没有描述，因此实际上并没有拷贝!<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208966.png" alt="img"><br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208007.png" alt="img"></p>
-<p><code>load*.bin</code>因为<code>../rkbin/RKTURST/RK3568TRUST.ini</code>文件也没有描述，故没有拷贝!<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208041.png" alt="img"><br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208115.png" alt="img"><br>这个阶段执行的代码如下：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208128.png" alt="img"><br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208293.png" alt="img"></p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208301.png" alt="img"></p>
-<p><code>fit_gen_uboot_itb</code>函数执行到后面会执行<code>arch/arm/mach-rockchop/make_fit_atf.sh</code>脚本，这个脚本在<code>.config</code>文件中有指定：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208308.png" alt="img"><br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208115.png" alt="img"></p>
-<p>使用该脚本执行<code>arch/arm/mach-rockchip/make_fit_atf.sh -t 0x08400000</code>命令：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208421.png" alt="img"><br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208434.png" alt="img"></p>
-<p>这个脚本是用于生成固件描述文件<code>u-boot.its</code>，内容如下：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208470.png" alt="img"></p>
-<p>接着执行<code>./tools/mkimage -f u-boot.its -E u-boot.itb</code>命令生成<code>u-boot.itb</code>：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208550.png" alt="img"><br><code>mkimage</code>的用法如下：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208686.png" alt="img"><br><code>-E</code>是什么意思？看源代码：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208621.png" alt="img"></p>
-<p>接下来执行<code>check_its u-boot.its</code>：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208721.png" alt="img"><br>这个函数功能就是检查<code>u-boot.its</code>，源代码如下：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208828.png" alt="img"><br>接下来执行<code>./make.sh loader ../rkbin/RKBOOT/RK3568MINIALL.ini</code>，原理与之前的类似的：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208756.png" alt="img"></p>
-<p>打印日志（保留主要）：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208778.png" alt="img"></p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208880.png" alt="img"><br>调用<code>process_args</code>函数等等（保留主要）：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208090.png" alt="img"></p>
-<p>调用<code>sub_commands</code>函数等等（保留主要）：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208034.png" alt="img"><br>执行<code>./make.sh loader ../rkbin/RKBOOT/RK3568MINIALL.ini</code>最终调用到<code>pack_loader_image</code>函数：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208041.png" alt="img"><br><code>pack_loader_image</code>函数，里面调用<code>loader.sh</code>脚本：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208095.png" alt="img"><br>对<code>loader.sh</code>脚本也添加打印：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208077.png" alt="img"><br>打印日志如下，可以看到实际上是调用了<code>boot_merger</code>来打包loader：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208119.png" alt="img"><br>这个<code>boot_merger</code>存放在<code>rkbin/tools</code>目录，是不开源的二进制文件，用法如下：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208401.png" alt="img"><br><code>loader.sh</code>脚本源代码如下：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208429.png" alt="img"></p>
-<p>回到<code>fit_gen_uboot_itb</code>函数，打印：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208376.png" alt="img"><br>删除历史文件，把<code>u-boot.its</code>移动到<code>fit</code>目录，源代码如下：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208382.png" alt="img"></p>
-<p>调用<code>fit_gen_uboot_img</code>打包<code>uboot.img</code>：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208407.png" alt="img"></p>
-<p>源代码：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208411.png" alt="img"><br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208757.png" alt="img"></p>
-<p>执行过程：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208688.png" alt="img"><br>紧接着打包loader，实际上并没有运行：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208712.png" alt="img"><br>源代码：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208726.png" alt="img"><br>打印信息：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208734.png" alt="img"><br>源代码：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208776.png" alt="img"><br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208999.png" alt="img"><br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208166.png" alt="img"><br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208024.png" alt="img"><br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208006.png" alt="img"><br>至此<code>fit.sh</code>执行完毕！</p>
-<h3 id="4-7-执行finish"><a href="#4-7-执行finish" class="headerlink" title="4.7 执行finish"></a>4.7 执行finish</h3><p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208063.png" alt="img"><br>打印完成信息：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208034.png" alt="img"></p>
-<p>还有最后打印工具链与编译结束时间：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208268.png" alt="img"></p>
  
       <!-- reward -->
       

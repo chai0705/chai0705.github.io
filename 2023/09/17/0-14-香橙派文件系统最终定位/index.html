@@ -90,7 +90,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">5.3k</span>
+            <span class="post-count">5.4k</span>
         </span>
     </span>
 
@@ -99,7 +99,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">32 分钟</span>
+            <span class="post-count">33 分钟</span>
         </span>
     </span>
 </div>
@@ -132,6 +132,17 @@
 
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">apt-get install -y libopencv-calib3d-dev libopencv-calib3d4.2  \</span><br><span class="line">libopencv-contrib-dev libopencv-contrib4.2 libopencv-core-dev libopencv-core4.2 libopencv-dev \</span><br><span class="line">libopencv-dnn-dev libopencv-dnn4.2 libopencv-features2d-dev libopencv-features2d4.2 \</span><br><span class="line">libopencv-flann-dev libopencv-flann4.2 libopencv-highgui-dev libopencv-highgui4.2 libopencv-imgcodecs-dev \</span><br><span class="line">libopencv-imgcodecs4.2 libopencv-imgproc-dev libopencv-imgproc4.2 libopencv-ml-dev libopencv-ml4.2  \</span><br><span class="line">libopencv-objdetect-dev libopencv-objdetect4.2 libopencv-photo-dev libopencv-photo4.2 libopencv-shape-dev \</span><br><span class="line">libopencv-shape4.2 libopencv-stitching-dev  libopencv-stitching4.2 libopencv-superres-dev libopencv-superres4.2 \</span><br><span class="line">libopencv-video-dev libopencv-video4.2 libopencv-videoio-dev libopencv-videoio4.2 libopencv-videostab-dev \</span><br><span class="line">libopencv-videostab4.2 libopencv-viz-dev libopencv-viz4.2 libopencv4.2-java libopencv4.2-jni</span><br></pre></td></tr></table></figure>
 
+
+
+
+
+
+
+<p>DEBIAN_FRONTEND&#x3D;noninteractive apt-get -yqq  –no-install-recommends install </p>
+<p>apt-get install -fy –allow-downgrades </p>
+<p>apt-get install -fy –allow-downgrades </p>
+<p> apt-get install -y –no-install-recommends</p>
+<p>chroot “${chroot_dir}” &#x2F;bin&#x2F;bash -c “dpkg-deb -f $name Package | xargs apt-mark hold” &gt;&gt; “${DEST}”&#x2F;${LOG_SUBPATH}&#x2F;install.log 2&gt;&amp;1</p>
  
       <!-- reward -->
       
