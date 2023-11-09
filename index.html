@@ -160,6 +160,62 @@
     
     
     <article
+  id="post-Untitled"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/11/06/Untitled/"
+    >PCB学习</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/11/06/Untitled/" class="article-date">
+  <time datetime="2023-11-06T13:55:17.000Z" itemprop="datePublished">2023-11-06</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/PCB%E5%AD%A6%E4%B9%A0/">PCB学习</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~~</span><br></pre></td></tr></table></figure>
+
+<p>从今天开始学习一下PCB的学习，我当然也是想画一些高速PCB板子，那些8层的、10层的，但是路还很远，很长，所以慢慢的加油吧。</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PCB%E5%AD%A6%E4%B9%A0/" rel="tag">PCB学习</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
   id="post-0-0-11 音视频测试"
   class="article article-type-post"
   itemscope
@@ -1424,73 +1480,6 @@ make ARCH=arm64 -j32  CROSS_COMPILE=aarch64-linux-gnu- rk3588-evb7-lp4-v10-linux
 
 
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"># This is a boot script for U-Boot</span><br><span class="line">#</span><br><span class="line"># Recompile with:</span><br><span class="line"># mkimage -A arm64 -O linux -T script -C none -n &quot;Boot Script&quot; -d boot.cmd boot.scr</span><br><span class="line"></span><br><span class="line">setenv load_addr &quot;0x9000000&quot;</span><br><span class="line">setenv overlay_error &quot;false&quot;</span><br><span class="line"></span><br><span class="line">echo &quot;Boot script loaded from $&#123;devtype&#125; $&#123;devnum&#125;&quot;</span><br><span class="line"></span><br><span class="line">if test -e $&#123;devtype&#125; $&#123;devnum&#125;:$&#123;distro_bootpart&#125; /ubuntuEnv.txt; then</span><br><span class="line">        load $&#123;devtype&#125; $&#123;devnum&#125;:$&#123;distro_bootpart&#125; $&#123;load_addr&#125; /ubuntuEnv.txt</span><br><span class="line">	env import -t $&#123;load_addr&#125; $&#123;filesize&#125;</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">load $&#123;devtype&#125; $&#123;devnum&#125;:$&#123;distro_bootpart&#125; $&#123;fdt_addr_r&#125; /dtbs/$&#123;fdtfile&#125;</span><br><span class="line">fdt addr $&#123;fdt_addr_r&#125; &amp;&amp; fdt resize 0x10000</span><br><span class="line"></span><br><span class="line">for overlay_file in $&#123;overlays&#125;; do</span><br><span class="line">    if load $&#123;devtype&#125; $&#123;devnum&#125;:$&#123;distro_bootpart&#125; $&#123;fdtoverlay_addr_r&#125; /dtbs/overlays/$&#123;overlay_prefix&#125;-$&#123;overlay_file&#125;.dtbo; then</span><br><span class="line">        echo &quot;Applying device tree overlay: /dtbs/overlays/$&#123;overlay_prefix&#125;-$&#123;overlay_file&#125;.dtbo&quot;</span><br><span class="line">        fdt apply $&#123;fdtoverlay_addr_r&#125; || setenv overlay_error &quot;true&quot;</span><br><span class="line">    elif load $&#123;devtype&#125; $&#123;devnum&#125;:$&#123;distro_bootpart&#125; $&#123;fdtoverlay_addr_r&#125; /dtbs/overlays/$&#123;overlay_file&#125;.dtbo; then</span><br><span class="line">        echo &quot;Applying device tree overlay: /dtbs/overlays/$&#123;overlay_file&#125;.dtbo&quot;</span><br><span class="line">        fdt apply $&#123;fdtoverlay_addr_r&#125; || setenv overlay_error &quot;true&quot;</span><br><span class="line">    elif load $&#123;devtype&#125; $&#123;devnum&#125;:$&#123;distro_bootpart&#125; $&#123;fdtoverlay_addr_r&#125; /dtbs/overlays/rk3588-$&#123;overlay_file&#125;.dtbo; then</span><br><span class="line">        echo &quot;Applying device tree overlay: /dtbs/overlays/rk3588-$&#123;overlay_file&#125;.dtbo&quot;</span><br><span class="line">        fdt apply $&#123;fdtoverlay_addr_r&#125; || setenv overlay_error &quot;true&quot;</span><br><span class="line">    fi</span><br><span class="line">done</span><br><span class="line">if test &quot;$&#123;overlay_error&#125;&quot; = &quot;true&quot;; then</span><br><span class="line">    echo &quot;Error applying device tree overlays, restoring original device tree&quot;</span><br><span class="line">    load $&#123;devtype&#125; $&#123;devnum&#125;:$&#123;distro_bootpart&#125; $&#123;fdt_addr_r&#125; /dtbs/$&#123;fdtfile&#125;</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">load $&#123;devtype&#125; $&#123;devnum&#125;:$&#123;distro_bootpart&#125; $&#123;kernel_addr_r&#125; /vmlinuz</span><br><span class="line">load $&#123;devtype&#125; $&#123;devnum&#125;:$&#123;distro_bootpart&#125; $&#123;ramdisk_addr_r&#125; /initrd.img</span><br><span class="line"></span><br><span class="line">booti $&#123;kernel_addr_r&#125; $&#123;ramdisk_addr_r&#125;:$&#123;filesize&#125; $&#123;fdt_addr_r&#125;</span><br></pre></td></tr></table></figure>
-
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%91%9E%E8%8A%AF%E5%BE%AE%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/" rel="tag">瑞芯微脚本分析</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-0-19 openwrt 重新移植"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/09/27/0-19%20openwrt%20%E9%87%8D%E6%96%B0%E7%A7%BB%E6%A4%8D/"
-    >0-19 openwrt重新移植</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/09/27/0-19%20openwrt%20%E9%87%8D%E6%96%B0%E7%A7%BB%E6%A4%8D/" class="article-date">
-  <time datetime="2023-09-27T12:47:53.000Z" itemprop="datePublished">2023-09-27</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE%E5%9B%BA%E4%BB%B6%E5%88%86%E6%9E%90/">瑞芯微固件分析</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <p>l</p>
-<p>拉取源码</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/coolsnowwolf/lede</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310051537522.png" alt="image-20231005153735500"></p>
-<p>然后使用以下命令进行软件源的更新，如下图所示：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./scripts/feeds update -a</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310051538914.png" alt="image-20231005153831888"></p>
-<p>更新完成之后使用以下命令进行组件的安装，安装完成如下图所示：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./scripts/feeds install -a</span><br></pre></td></tr></table></figure>
-
-
 
  
       <!-- reward -->
