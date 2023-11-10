@@ -13,7 +13,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
-      <title>0-0-11 音视频测试 |  热爱学习的未来酱</title>
+      <title>0-0-10 10月3568源码修改记录 |  热爱学习的未来酱</title>
   <meta name="generator" content="hexo-theme-ayer">
       
       <link rel="shortcut icon" href="/favicon.ico" />
@@ -59,7 +59,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-0-0-11 音视频测试"
+  id="post-0-0-10 10月源码修改记录"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -70,7 +70,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  0-0-11 音视频测试
+  0-0-10 10月3568源码修改记录
 </h1>
  
 
@@ -78,11 +78,11 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2023/10/26/0-0-11%20%E9%9F%B3%E8%A7%86%E9%A2%91%E6%B5%8B%E8%AF%95/" class="article-date">
-  <time datetime="2023-10-26T01:55:17.000Z" itemprop="datePublished">2023-10-26</time>
+      <a href="/2023/10/26/0-0-10%2010%E6%9C%88%E6%BA%90%E7%A0%81%E4%BF%AE%E6%94%B9%E8%AE%B0%E5%BD%95/" class="article-date">
+  <time datetime="2023-10-25T22:47:53.000Z" itemprop="datePublished">2023-10-26</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/%E9%9F%B3%E8%A7%86%E9%A2%91%E6%B5%8B%E8%AF%95/">音视频测试</a>
+    <a class="article-category-link" href="/categories/%E6%BA%90%E7%A0%81%E4%BF%AE%E6%94%B9/">源码修改</a>
   </div>
   
 <div class="word_count">
@@ -90,7 +90,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">711</span>
+            <span class="post-count">753</span>
         </span>
     </span>
 
@@ -114,49 +114,41 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h1 id="1-gst-play-1-0测试"><a href="#1-gst-play-1-0测试" class="headerlink" title="1.gst-play-1.0测试"></a>1.gst-play-1.0测试</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gst-play-1.0 --videosink=xvimagesink /usr/local/test.mp4</span><br></pre></td></tr></table></figure>
+  <hr>
+<hr>
+<h1 id="修改1：debian的选择"><a href="#修改1：debian的选择" class="headerlink" title="修改1：debian的选择"></a>修改1：debian的选择</h1><p>首先修改的是build.sh文件，将debian相关的构建部分修改成了以下内容，之前的太过繁琐</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function build_debian()&#123;</span><br><span class="line"></span><br><span class="line">    echo &quot;=========Start building debian for $ARCH=========&quot;</span><br><span class="line"></span><br><span class="line">    cd debian</span><br><span class="line">    VERSION=debian10 ./mk-rootfs.sh                                                                          </span><br><span class="line">    ./mk-image.sh</span><br><span class="line"></span><br><span class="line">    finish_build</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>GStreamer 的 gst-play-1.0 工具会加载指定的视频文件，并使用 xvimagesink 插件将视频渲染到 X Window 系统上的显示设备上，以实现视频的播放效果。</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310260944983.png" alt="image-20231026094404955"></p>
-<h1 id="2-mpv测试"><a href="#2-mpv测试" class="headerlink" title="2.mpv测试"></a>2.mpv测试</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mpv --hwdec=rkmpp --vd-lavc-software-fallback=no --vo=xv /usr/local/test.mp4        </span><br></pre></td></tr></table></figure>
+<p>然后修改的是debian的文件夹，目前只是保留这四个文件mk-image.sh  mk-rootfs.sh  post-build.sh linaro-buster-arm64.tar.xz，其中</p>
+<p>linaro-buster-arm64.tar.xz是源码，另外三个为脚本，mk-image.sh和 post-build.sh不需要改，而mk-rootfs.sh的内容如下所示：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash -e</span></span><br><span class="line">  </span><br><span class="line">echo -e &quot;\033[36m Building for $ARCH \033[0m&quot;</span><br><span class="line"></span><br><span class="line">if [ ! $VERSION ]; then</span><br><span class="line">    VERSION=&quot;debian10&quot;</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">if [ -d &quot;binary&quot; ]; then</span><br><span class="line">  rm -r binary</span><br><span class="line">  echo &quot;Deleted binary directory.&quot;</span><br><span class="line">fi</span><br><span class="line">                                                                                                             </span><br><span class="line">echo -e &quot;\033[36m Extract image \033[0m&quot;      </span><br><span class="line">case $VERSION in</span><br><span class="line">    &quot;debian10&quot;)</span><br><span class="line">        tar -xf linaro-buster-arm64.tar.xz</span><br><span class="line">        ;;</span><br><span class="line">    &quot;debian11&quot;)</span><br><span class="line">        tar -xf linaro-bullseye-arm64.tar.xz</span><br><span class="line">        ;;</span><br><span class="line">    &quot;debian12&quot;)</span><br><span class="line">        tar -xf linaro-bookworm-arm64.tar.xz</span><br><span class="line">        ;;</span><br><span class="line">    &quot;ubuntu18&quot;)</span><br><span class="line">        tar -xf ubuntu-bionic-arm64.tar.xz</span><br><span class="line">        ;;</span><br><span class="line">    &quot;ubuntu20&quot;)</span><br><span class="line">        tar -xf ubuntu-focal-arm64.tar.xz</span><br><span class="line">        ;;</span><br><span class="line">    &quot;ubuntu22&quot;)</span><br><span class="line">        tar -xf ubuntu-jammy-arm64.tar.xz</span><br><span class="line">        ;;</span><br><span class="line">    *)</span><br><span class="line">        echo &quot;Unsupported version.&quot;</span><br><span class="line">        ;;</span><br><span class="line">esac</span><br></pre></td></tr></table></figure>
 
-<p>mpv 媒体播放器将使用 Rockchip MPP 硬件解码器进行硬件解码，禁用软件回退以确保只使用硬件解码，并使用 xv 视频输出插件渲染视频，以实现高性能的视频播放效果。</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310260945251.png" alt="image-20231026094504212"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mpv --hwdec=rkmpp --vo=opengl --gpu-hwdec-interop=drmprime-drm --gpu-context=x11egl /usr/local/test.mp4</span><br></pre></td></tr></table></figure>
+<p>现在只是解包然后打包源码了，这是为之后的源码构建留出来余地，这里并不仅仅是debian10，这里将ubuntu18-ubuntu22 debian11 debian12的都放了上来。</p>
+<h1 id="修改2：耳机"><a href="#修改2：耳机" class="headerlink" title="修改2：耳机"></a>修改2：耳机</h1><p>在rk3568-evb1-ddr4-v10.dtsi设备树中有一个关于rk_headset的节点，具体内容如下所示：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">COPYrk_headset: rk-headset &#123;</span><br><span class="line">    compatible = &quot;rockchip_headset&quot;;</span><br><span class="line">    headset_gpio = &lt;&amp;gpio3 RK_PC2 GPIO_ACTIVE_LOW&gt;;</span><br><span class="line">    pinctrl-names = &quot;default&quot;;</span><br><span class="line">    pinctrl-0 = &lt;&amp;hp_det&gt;;</span><br><span class="line">&#125;;    </span><br><span class="line"></span><br><span class="line"> headphone &#123;</span><br><span class="line">    hp_det: hp-det &#123;                                                                                       </span><br><span class="line">        rockchip,pins = &lt;3 RK_PC2 RK_FUNC_GPIO &amp;pcfg_pull_down&gt;;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-<p>mpv 媒体播放器将使用 Rockchip MPP 硬件解码器进行硬件解码，使用 OpenGL 作为视频输出，同时启用 DRM Prime 与 DRM 之间的 GPU 硬件解码器互操作性，并使用 X11 EGL 上下文进行 GPU 加速，以实现高性能的视频播放效果。</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310260943085.png" alt="image-20231026094341042"></p>
-<h1 id="3-gst-launch-1-0-测试"><a href="#3-gst-launch-1-0-测试" class="headerlink" title="3. gst-launch-1.0 测试"></a>3. gst-launch-1.0 测试</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GST_DEBUG=fps*:7 gst-launch-1.0 uridecodebin uri=file:///usr/local/test.mp4 ! fpsdisplaysink video-sink=xvimagesink text-overlay=false signal-fps-measurements=true</span><br></pre></td></tr></table></figure>
+<p>将hp_det节点改为up高。</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310262005979.png" alt="image-20231025214922616"></p>
+<p> 然后关掉rk3568-linux.dtsi设备树中的&amp;hdmi_sound，修改完成如下图所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310262005974.png" alt="image-20231025215010724"></p>
+<p>最后修改rk809_sound节点，该节点当前内容如下所示：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">COPYrk809_sound: rk809-sound &#123;</span><br><span class="line">       status = &quot;okay&quot;;</span><br><span class="line">       compatible = &quot;simple-audio-card&quot;;</span><br><span class="line">       simple-audio-card,format = &quot;i2s&quot;;</span><br><span class="line">       simple-audio-card,hp-det-gpio = &lt;&amp;gpio3 RK_PC2 GPIO_ACTIVE_HIGH&gt;;</span><br><span class="line">       simple-audio-card,name = &quot;rockchip,rk809-codec&quot;;</span><br><span class="line">       simple-audio-card,widgets = &quot;Headphones&quot;, &quot;Headphones Jack&quot;;</span><br><span class="line">       simple-audio-card,mclk-fs = &lt;256&gt;;</span><br><span class="line">       simple-audio-card,cpu &#123;</span><br><span class="line">           sound-dai = &lt;&amp;i2s1_8ch&gt;;</span><br><span class="line">       &#125;;</span><br><span class="line">       simple-audio-card,codec &#123;</span><br><span class="line">           sound-dai = &lt;&amp;rk809_codec&gt;;</span><br><span class="line">       &#125;;</span><br><span class="line">   &#125;;</span><br></pre></td></tr></table></figure>
 
-<p>GStreamer 的 gst-launch-1.0 工具将创建一个简单的流水线，其中包含 <code>uridecodebin</code> 元素用于解码指定的视频文件，并通过 <code>fpsdisplaysink</code> 元素显示视频和帧率信息。帧率信息将以调试输出的形式显示在终端上。</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310261008898.png" alt="image-20231026100859800"></p>
-<p>测试最大的帧率</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GST_DEBUG=fps*:7 gst-launch-1.0 uridecodebin uri=file:///usr/local/test.mp4 ! fpsdisplaysink video-sink=fakesink text-overlay=false signal-fps-measurements=true sync=false</span><br></pre></td></tr></table></figure>
+<p>第五行的 simple-audio-card,hp-det-gpio属性用于耳机检测的引脚，而后面设置的是高电平，表示耳机插入之后是高电平，这里错误，实际上应该是低电平，所以这里不对应该改为</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">COPYsimple-audio-card,hp-det-gpio = &lt;&amp;gpio3 RK_PC2 GPIO_ACTIVE_LOW&gt;;</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310261010578.png" alt="image-20231026101009531"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gst-launch-1.0 uridecodebin uri=file:///usr/local/test.mp4 ! xvimagesink</span><br></pre></td></tr></table></figure>
+<h1 id="修改3：can"><a href="#修改3：can" class="headerlink" title="修改3：can"></a>修改3：can</h1><p>有五个patch包拷贝到内核源码目录下，如下图所示：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310262005993.png" alt="image-20231026164847618"></p>
+<p>然后这样</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">patch -p1 &lt; 0001-net-can-rockchip-support-can-2.0.patch</span><br><span class="line">patch -p1 &lt; 0002-net-can-rockchip-fix-up-the-canfd-can-error.patch</span><br><span class="line">patch -p1 &lt; 0003-net-can-rockchip-fix-up-the-canfd-can-BUS_OFF_INT-er.patch</span><br><span class="line">patch -p1 &lt; 0004-net-can-rockchip-canfd-Support-extended-frames-trans.patch</span><br><span class="line">patch -p1 &lt; 0005-net-can-rockchip-canfd-Add-delay-work-to-check-tx-er.patch</span><br></pre></td></tr></table></figure>
 
-<h1 id="4-谷歌浏览器测试"><a href="#4-谷歌浏览器测试" class="headerlink" title="4.谷歌浏览器测试"></a>4.谷歌浏览器测试</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo 0x100 &gt; /sys/module/rk_vcodec/parameters/mpp_dev_debug</span><br><span class="line">chromium --no-sandbox file:///usr/local/test.mp4</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310262005946.png" alt="image-20231026165303401"></p>
+<p>然后修改rk3568-evb1-ddr4-v10-linux.dts设备树</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim arch/arm64/boot/dts/rockchip/rk3568-evb1-ddr4-v10-linux.dts</span><br></pre></td></tr></table></figure>
 
-<p>Chromium 浏览器将在没有沙盒的情况下启动，并加载指定路径的 <code>test.mp4</code> 视频文件。这样，您可以在浏览器中直接播放本地视频文件。</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310261014311.png" alt="image-20231026101406276"></p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310261018085.png" alt="image-20231026101842048"></p>
-<p>播放视频的时候查看GPU的利用率发现明显的上升，所以判断谷歌浏览器为硬件解码。</p>
-<h1 id="5-摄像头测试"><a href="#5-摄像头测试" class="headerlink" title="5.摄像头测试"></a>5.摄像头测试</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/aarch64-linux-gnu/gstreamer-1.0</span><br><span class="line">gst-launch-1.0 v4l2src device=/dev/video0 ! video/x-raw,format=NV12,width=1920,height=1080, framerate=30/1 ! xvimagesink</span><br><span class="line">gst-launch-1.0 v4l2src device=/dev/video1 ! video/x-raw,format=NV12,width=1920,height=1080, framerate=30/1 ! xvimagesink</span><br></pre></td></tr></table></figure>
-
-<p>我发现不加上第一句的库的导入会出现发绿的情况，而且是0发绿，1没事，不加第一句的话1的颜色不太对</p>
-<p>gst-launch-1.0 v4l2src device&#x3D;&#x2F;dev&#x2F;video9 ! image&#x2F;jpeg, width&#x3D;640, height&#x3D;480, framerate&#x3D;30&#x2F;1 ! jpegparse ! mppjpegdec ! xvimagesink sync&#x3D;false</p>
-<h1 id="6-mpp测试"><a href="#6-mpp测试" class="headerlink" title="6.mpp测试"></a>6.mpp测试</h1><p>首先要监控输出：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tail -f /var/log/syslog</span><br></pre></td></tr></table></figure>
-
-<p>调用mpi_dec_test，解码视频，将<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=h264&spm=1001.2101.3001.7020">h264</a>转为yuv</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mpi_dec_test -i /oem/200frames_count.h264 -t 7 -n 250 -o /home/topeet/test.yuv -w 640 -h 480</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310261707707.png" alt="image-20231026170732680"></p>
-<p>调用mpi_enc_test，编码视频，将yuv转为h264</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mpi_enc_test -i /home/topeet/test.yuv -t 7 -n 250 -o /home/topeet/test.h264 -w 640 -h 480 -fps 25</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310261712235.png" alt="image-20231026171223218"></p>
+<p>取消can1节点中的 compatible属性，如下图所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310262005981.png" alt="image-20231026171344520"></p>
+<p>至此修改完成。</p>
+<h1 id="修改4-buildroot"><a href="#修改4-buildroot" class="headerlink" title="修改4 buildroot"></a>修改4 buildroot</h1><p>首先在默认配置选项中添加了opencv，这个是要加的。</p>
  
       <!-- reward -->
       
@@ -209,12 +201,12 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2023/10/26/0-0-11%20%E9%9F%B3%E8%A7%86%E9%A2%91%E6%B5%8B%E8%AF%95/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2023/10/26/0-0-10%2010%E6%9C%88%E6%BA%90%E7%A0%81%E4%BF%AE%E6%94%B9%E8%AE%B0%E5%BD%95/" alt="微信分享二维码">
     </div>
 </div>
 
 <div id="share-mask"></div>  
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9F%B3%E8%A7%86%E9%A2%91%E6%B5%8B%E8%AF%95/" rel="tag">音视频测试</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%BA%90%E7%A0%81%E4%BF%AE%E6%94%B9/" rel="tag">源码修改</a></li></ul>
 
     </footer>
   </div>
@@ -222,19 +214,19 @@
    
   <nav class="article-nav">
     
-      <a href="/2023/11/06/Untitled/" class="article-nav-link">
+      <a href="/2023/10/26/0-0-11%20%E9%9F%B3%E8%A7%86%E9%A2%91%E6%B5%8B%E8%AF%95/" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            PCB学习
+            0-0-11 音视频测试
           
         </div>
       </a>
     
     
-      <a href="/2023/10/26/0-0-10%2010%E6%9C%88%E6%BA%90%E7%A0%81%E4%BF%AE%E6%94%B9%E8%AE%B0%E5%BD%95/" class="article-nav-link">
+      <a href="/2023/10/25/0-22%20%E5%A3%B0%E5%8D%A1%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E5%86%B3/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">0-0-10 10月3568源码修改记录</div>
+        <div class="article-nav-title">0-22 声卡问题的解决</div>
       </a>
     
   </nav>
