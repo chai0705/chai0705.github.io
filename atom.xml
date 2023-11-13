@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2023-11-12T13:48:53.445Z</updated>
+  <updated>2023-11-13T14:29:17.191Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>0-0-13 rkdeb包的制作</title>
+    <link href="http://example.com/2023/11/13/0-0-13%20rk%20deb%E5%8C%85%E7%9A%84%E5%88%B6%E4%BD%9C/"/>
+    <id>http://example.com/2023/11/13/0-0-13%20rk%20deb%E5%8C%85%E7%9A%84%E5%88%B6%E4%BD%9C/</id>
+    <published>2023-11-13T11:55:17.000Z</published>
+    <updated>2023-11-13T14:29:17.191Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;&#92;assets&#92;css&#92;APlayer.min.css&quot;&gt;&lt;script src=&quot;&#92;assets&#92;js&#92;APlayer.min.js&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="deb包制作" scheme="http://example.com/categories/deb%E5%8C%85%E5%88%B6%E4%BD%9C/"/>
+    
+    
+    <category term="deb包制作" scheme="http://example.com/tags/deb%E5%8C%85%E5%88%B6%E4%BD%9C/"/>
+    
+  </entry>
   
   <entry>
     <title>PCB学习</title>
@@ -488,31 +513,6 @@
     
     
     <category term="翻墙" scheme="http://example.com/tags/%E7%BF%BB%E5%A2%99/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>10-1 rk3588+yolov5部署推理冒烟测试</title>
-    <link href="http://example.com/2023/09/15/10-1-rk3588-yolov5%E9%83%A8%E7%BD%B2%E6%8E%A8%E7%90%86%E5%86%92%E7%83%9F%E6%B5%8B%E8%AF%95/"/>
-    <id>http://example.com/2023/09/15/10-1-rk3588-yolov5%E9%83%A8%E7%BD%B2%E6%8E%A8%E7%90%86%E5%86%92%E7%83%9F%E6%B5%8B%E8%AF%95/</id>
-    <published>2023-09-15T13:18:07.000Z</published>
-    <updated>2023-09-16T15:37:41.423Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;&#92;assets&#92;css&#92;APlayer.min.css&quot;&gt;&lt;script src=&quot;&#92;assets&#92;js&#92;APlayer.min.js&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="3588 npu" scheme="http://example.com/categories/3588-npu/"/>
-    
-    
-    <category term="3588 npu" scheme="http://example.com/tags/3588-npu/"/>
     
   </entry>
   
