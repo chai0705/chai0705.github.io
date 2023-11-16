@@ -90,7 +90,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">18k</span>
+            <span class="post-count">18.8k</span>
         </span>
     </span>
 
@@ -99,7 +99,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">86 分钟</span>
+            <span class="post-count">89 分钟</span>
         </span>
     </span>
 </div>
@@ -652,18 +652,68 @@
 <p>使用以下命令构建deb包</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo DEB_BUILD_OPTIONS=nocheck dpkg-buildpackage -b -d -uc -us -aarm64</span><br></pre></td></tr></table></figure>
 
-<h1 id="18-xserver编译"><a href="#18-xserver编译" class="headerlink" title="18.xserver编译"></a>18.xserver编译</h1><p>可以下载到各个版本的源码</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://launchpad.net/ubuntu/focal/+source/xorg-server</span><br></pre></td></tr></table></figure>
+<h1 id="18-xserver编译"><a href="#18-xserver编译" class="headerlink" title="18.xserver编译"></a>18.xserver编译</h1><p>xserver这个我看瑞芯微并没有提供ubuntu20 和ubuntu22的，所以这里就使用它提供好的xserver来代替。现在就先这样了，也没有其他好办法。首先拉取提供好的源码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/JeffyCN/xorg-xserver.git</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --privileged -it -v /home/topeet/:/home/topeet/ ubuntu20</span><br></pre></td></tr></table></figure>
 
-<p>默认情况下是不可以下载软件源码的，当取消一些特定的注释之后，是可以使用apt-get source命令进行软件包源码的下载的，</p>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>&#x3D;&#x3D;上面的不对，看了看瑞芯微的直播课找到了方法&#x3D;&#x3D;</p>
+<p>获取ubuntu的xserver源码</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get source xorg-server</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DEBIAN_FRONTEND=noninteractive apt-get update &amp;&amp; apt-get build-dep -y -a arm64 xorg-server</span><br></pre></td></tr></table></figure>
+<p>获取rk的xserver源码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/JeffyCN/xorg-xserver.git</span><br></pre></td></tr></table></figure>
+
+<p>切换版本，这里切换到1.20.11：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout remotes/origin/rockchip/debian/1.20.11</span><br></pre></td></tr></table></figure>
+
+<p>获取补丁包</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git format-patch e4f4521ca</span><br></pre></td></tr></table></figure>
+
+<p>打补丁的脚本</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"></span><br><span class="line">PATCHES_DIR=&quot;$1&quot;  # 补丁文件所在目录</span><br><span class="line">SOURCE_DIR=&quot;$2&quot;  # 源码目录</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">检查补丁文件目录是否存在</span></span><br><span class="line">if [ ! -d &quot;$PATCHES_DIR&quot; ]; then</span><br><span class="line">  echo &quot;补丁文件目录不存在: $PATCHES_DIR&quot;</span><br><span class="line">  exit 1</span><br><span class="line">fi</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">检查源码目录是否存在</span></span><br><span class="line">if [ ! -d &quot;$SOURCE_DIR&quot; ]; then</span><br><span class="line">  echo &quot;源码目录不存在: $SOURCE_DIR&quot;</span><br><span class="line">  exit 1</span><br><span class="line">fi</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">获取补丁文件列表，并按文件名排序</span></span><br><span class="line">PATCH_FILES=$(find &quot;$PATCHES_DIR&quot; -type f -name &quot;*.patch&quot; | sort)</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">应用每个补丁文件到源码中</span></span><br><span class="line">for PATCH_FILE in $PATCH_FILES; do</span><br><span class="line">  echo &quot;应用补丁文件: $PATCH_FILE&quot;</span><br><span class="line">  patch -d &quot;$SOURCE_DIR&quot; -p1 --no-backup-if-mismatch -f &lt; &quot;$PATCH_FILE&quot;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">  # </span><span class="language-bash">检查应用补丁是否成功</span></span><br><span class="line">  if [ $? -eq 0 ]; then</span><br><span class="line">    echo &quot;补丁文件已成功应用&quot;</span><br><span class="line">  else</span><br><span class="line">    echo &quot;应用补丁文件时出错&quot;</span><br><span class="line">  fi</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
+<p>脚本运行如下所示：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311162144402.png" alt="image-20231116173059788"></p>
+<p>到这里就修改完成了，然后加载docker镜像，挂载相应的目录</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --privileged -it -v /home/topeet/tmp/xorg:/home/topeet/ ubuntu20</span><br></pre></td></tr></table></figure>
+
+<p>接下来修改一些版本号，首先是configure.ac，将原来的1.20.8修改为1.20.13</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim configure.ac</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311162144390.png" alt="image-20231116141046609"></p>
+<p>然后修改meson.build文件，通样修改版本号，修改完成如下图所示：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311162144393.png" alt="image-20231116141249595"></p>
+<p>最后修改构建deb包的debain文件，其中的debian&#x2F;changelog用来控制构建的名称，然后添加上下面这个，这样最后生成的就是对应名称的的包了。</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">xorg-server (2:1.20.13-1ubuntu1~20.04.9) focal-security; urgency=medium</span><br><span class="line"></span><br><span class="line">  * SECURITY UPDATE: OOB write in XIChangeDeviceProperty and</span><br><span class="line">    RRChangeOutputProperty</span><br><span class="line">    - debian/patches/CVE-2023-5367.patch: fix handling of PropModeAppend</span><br><span class="line">      and PropModePrepend in Xi/xiproperty.c, randr/rrproperty.c.</span><br><span class="line">    - CVE-2023-5367</span><br><span class="line">  * SECURITY UPDATE: Use-after-free bug in DestroyWindow</span><br><span class="line">    - debian/patches/CVE-2023-5380.patch: reset the PointerWindows</span><br><span class="line">      reference on screen switch in dix/enterleave.h, <span class="keyword">include</span>/eventstr.h,</span><br><span class="line">      mi/mipointer.c.</span><br><span class="line">    - CVE-2023-5380</span><br></pre></td></tr></table></figure>
+
+<p>到这里就修改完成了，然后加载docker镜像，挂载相应的目录</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --privileged -it -v /home/topeet/:/home/topeet/ ubuntu20</span><br></pre></td></tr></table></figure>
+
+<p>然后进行构建即可，构建完成如下所示	</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo quilt refresh -f</span><br><span class="line">sudo quilt pop -a -f</span><br><span class="line">sudo debian/rules clean</span><br></pre></td></tr></table></figure>
+
+
 
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo DEB_BUILD_OPTIONS=nocheck dpkg-buildpackage -b -d -uc -us -aarm64</span><br></pre></td></tr></table></figure>
 
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311162144432.png" alt="image-20231116142000186"></p>
+<p>无论是ubuntu20还是ubutnu22应该都能以同样的方式进行构建xserver的包，安装gpu驱动之后会黑屏，这时候上面构建的deb包就需要安装了。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo DEB_BUILD_OPTIONS=nocheck dpkg-buildpackage -b -d -uc -us -aarm64</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311162144432.png" alt="image-20231116142000186"></p>
+<p>自己做的deb包：<br>1.20.13</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">链接：https://pan.baidu.com/s/1237Qxwq0u7s6cJwTDF5oyQ </span><br><span class="line">提取码：gh2p </span><br><span class="line">--来自百度网盘超级会员V6的分享</span><br></pre></td></tr></table></figure>
+
+<p>明天再做ubuntu22的</p>
+<h1 id="19-firefly-网址"><a href="#19-firefly-网址" class="headerlink" title="19.firefly 网址"></a>19.firefly 网址</h1><p><a target="_blank" rel="noopener" href="https://wiki.t-firefly.com/zh_CN/Firefly-Linux-Guide/manual_ubuntu.html#shi-pin-ying-jian-bian-jie-ma-zhi-chi">https://wiki.t-firefly.com/zh_CN/Firefly-Linux-Guide/manual_ubuntu.html#shi-pin-ying-jian-bian-jie-ma-zhi-chi</a></p>
+<h1 id="20-Rockchip-Graphics介绍"><a href="#20-Rockchip-Graphics介绍" class="headerlink" title="20.Rockchip Graphics介绍"></a>20.Rockchip Graphics介绍</h1><p><a target="_blank" rel="noopener" href="https://bbs.elecfans.com/jishu_2275817_1_1.html">https://bbs.elecfans.com/jishu_2275817_1_1.html</a></p>
+<h1 id="21-ubuntu20-qt的编译"><a href="#21-ubuntu20-qt的编译" class="headerlink" title="21.ubuntu20 qt的编译"></a>21.ubuntu20 qt的编译</h1><p>docker加载镜像和源码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --privileged -it -v /home/topeet/Linux/qt/:/home/topeet/ ubuntu20</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311162144377.png" alt="image-20231116143753225"></p>
+<h1 id="22-开发调试流程简介"><a href="#22-开发调试流程简介" class="headerlink" title="22.开发调试流程简介"></a>22.开发调试流程简介</h1><p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311162144550.png" alt="image-20231116162242671"></p>
+<p>Rockchip_Developer_Guide_Third_Party_System_Adaptation_CN.pdf<br>这个pdf文件很重要。</p>
  
       <!-- reward -->
       
