@@ -1,45 +1,415 @@
-extends includes/layout.pug
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>0-7 bootloader引导流程 | 热爱学习的未来酱</title><meta name="keywords" content="瑞芯微脚本分析"><meta name="author" content="John Doe"><meta name="copyright" content="John Doe"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="0-7 bootloader引导流程"><meta name="application-name" content="0-7 bootloader引导流程"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="0-7 bootloader引导流程"><meta property="og:url" content="http://example.com/2023/09/10/0-7%20bootloader%E5%BC%95%E5%AF%BC%E6%B5%81%E7%A8%8B/index.html"><meta property="og:site_name" content="热爱学习的未来酱"><meta property="og:description" content="一、RK芯片通用引导流程对于RK芯片的引导流程，我们可以参考以下这张图：  根据两种Boot Flow，我们可以一次梳理两种不同的引导流程： 12Boot Code -&amp;gt; idbloader.img(miniloader) -&amp;gt; uboot.img -&amp;gt; boot.img -&amp;amp;gt"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg"><meta property="article:author" content="John Doe"><meta property="article:tag"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg"><meta name="description" content="一、RK芯片通用引导流程对于RK芯片的引导流程，我们可以参考以下这张图：  根据两种Boot Flow，我们可以一次梳理两种不同的引导流程： 12Boot Code -&amp;gt; idbloader.img(miniloader) -&amp;gt; uboot.img -&amp;gt; boot.img -&amp;amp;gt"><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="http://example.com/2023/09/10/0-7%20bootloader%E5%BC%95%E5%AF%BC%E6%B5%81%E7%A8%8B/"><link rel="preconnect" href="//cdn.cbd.int"/><meta name="google-site-verification" content="xxx"/><meta name="baidu-site-verification" content="code-xxx"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.20/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  linkPageTop: undefined,
+  peoplecanvas: {"enable":true,"img":"https://upload-bbs.miyoushe.com/upload/2023/09/03/125766904/ee23df8517f3c3e3efc4145658269c06_5714860933110284659.png"},
+  postHeadAiDescription: {"enable":true,"gptName":"AnZhiYu","mode":"local","switchBtn":false,"btnLink":"https://afdian.net/item/886a79d4db6711eda42a52540025c377","randomNum":3,"basicWordCount":1000,"key":"xxxx","Referer":"https://xx.xx/"},
+  diytitle: {"enable":true,"leaveTitle":"w(ﾟДﾟ)w 不要走！再看看嘛！","backTitle":"♪(^∇^*)欢迎肥来！"},
+  LA51: undefined,
+  greetingBox: undefined,
+  twikooEnvId: '',
+  commentBarrageConfig:undefined,
+  root: '/',
+  preloader: {"source":3},
+  friends_vue_info: undefined,
+  navMusic: true,
+  mainTone: undefined,
+  authorStatus: undefined,
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
+  noticeOutdate: {"limitDay":365,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":330},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":false,"limitCount":50,"languages":{"author":"作者: John Doe","link":"链接: ","source":"来源: 热爱学习的未来酱","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#425AEF","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: '热爱学习的未来酱',
+  title: '0-7 bootloader引导流程',
+  postAI: '',
+  pageFillDescription: '一、RK芯片通用引导流程, 二、RK356x引导流程, 2.1 ddr.bin运行, 2.2 spl.bin运行, 2.3 atf运行, 2.4 uboot运行, 2.4.1 设备环境初始化, 2.4.2 内核的加载, 三、BootRom阶段做了什么？, 四、RK固件在存储器中是如何分布的？一芯片通用引导流程对于芯片的引导流程我们可以参考以下这张图根据两种我们可以一次梳理两种不同的引导流程对于我们会发现有相似的地方此时我们会问为什么会有两套引导流程事实上这套引导方案是定制的它们并没有开源的发布的是二进制文件它们都存放于目录下例如注意上图中红方框处实际上指的是二引导流程下面通过的启动日志进行简要分析运行上电后我们看到的第一阶段日志是关于的这主要是对进行初始化我们看到使用的是频率逐步从切换到并且进行一些读写训练操作运行接下来我们会看到的板级初始化紧接着逐步从卡寻找包括通过来运行注意与这些是固件属于另外一个领域有兴趣可以参考以下文章运行运行初始化与运行运行设备环境初始化从切换到之后依次执行以下操作打印一些必要的信息板型串口内存系统内存初始化代码重定位情况获取存储器信息打印当前启动的存储器获取存储器分区情况并加载内核设备树初始化初始化电源芯片相关芯片供电电压与电源域初始化框架以及显示器接口初始化时钟树内核的加载从开始的生命周期结束之后产生的打印是由内核产生的值得注意的是加载设备树之后日志还打印了相关映像加载情况这部分非常有用我们以后再深入分析三阶段做了什么固件是原厂芯片出厂时烧录到内部存储器的目的是从各个外部存储媒介中加载以下是摘自它很清晰地说明了阶段做了什么事情我们按照正常引导走一遍从地址读取第一条指令运行逐一检查与校验中的固件定义在第扇区假如我们的固件存放于那么校验成功后就读取初始化代码到紧接着运行刚刚读取的代码来初始化初始化后就可以工作了把引导代码加载到并调到继续运行如果各个存储器都没有找到那么会执行以下操作等待请求程序即在工具可以看到处于模式四固件在存储器中是如何分布的如下图其中和是没有使用分区这个要注意另外要注意的是从分区开始所有的分区大小与起始地址是由文件进行描述具体参考',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-09-13 08:22:02',
+  postMainColor: '',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
 
-block content
-  #post
-    if top_img === false || page.bilibili_bg
-      include includes/header/post-info.pug
-    if theme.post_head_ai_description
-      include includes/anzhiyu/ai-info.pug
-    - let url = page.copyright_url || page.permalink
-    article#article-container.post-content(itemscope itemtype=url_for(url))
-      header
-        if (theme.post_meta.post.categories && page.categories && page.categories.data.length > 0)
-          each item, index in page.categories.data
-            a(href=url_for(item.path) itemprop="url").post-meta-categories #[=item.name]
-        if (theme.post_meta.page.tags)
-          each item, index in page.tags.data
-            a(href=url_for(item.path) tabindex="-1" itemprop="url")=item.name
-        h1#CrawlerTitle(itemprop="name headline")= page.title || _p('no_title')
-        - let author = page.copyright_author || config.author
-        span(itemprop="author" itemscope itemtype="http://schema.org/Person")=author
-        if (theme.post_meta.post.date_type)
-          if (theme.post_meta.post.date_type === 'both')
-            time(itemprop="dateCreated datePublished" datetime=date_xml(page.date) title=_p('post.created') + ' ' + full_date(page.date))=date(page.date, config.date_format)
-            time(itemprop="dateCreated datePublished" datetime=date_xml(page.updated) title=_p('post.updated') + ' ' + full_date(page.updated))=date(page.updated, config.date_format)
-          else
-            - let data_type_update = theme.post_meta.post.date_type === 'updated'
-            - let date_type = data_type_update ? 'updated' : 'date'
-            time(itemprop="dateCreated datePublished" datetime=date_xml(page[date_type]) title=date_title + ' ' + full_date(page[date_type]))=date(page[date_type], config.date_format)
-      !=page.content
-
-    include includes/post/post-copyright.pug
-
-    //- ad
-    if theme.ad && theme.ad.post
-      .ads-wrap!=theme.ad.post
-
-    if theme.post_pagination
-      include includes/pagination.pug
-    if theme.related_post && theme.related_post.enable
-      != related_posts(page,site.posts)
-
-    if page.comments !== false && theme.comments && theme.comments.use
-      - var commentsJsLoad = true
-      !=partial('includes/third-party/comments/index', {}, {cache: true})
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
       
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="热爱学习的未来酱" type="application/atom+xml">
+</head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="https://npm.elemecdn.com/anzhiyu-blog-static@1.0.4/img/avatar.jpg"/><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.getElementById('loading-box').classList.add("loaded");
+  },
+  initLoading: () => {
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+setTimeout(function(){preloader.endLoading();},10000)
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.10/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><a id="site-name" href="/" accesskey="h"><div class="title">热爱学习的未来酱</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png" target="_blank"><img class="post-qr-code-img" alt="微信" src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png" target="_blank"><img class="post-qr-code-img" alt="支付宝" src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/3588-npu/" style="font-size: 1.05rem;">3588 npu<sup>6</sup></a><a href="/tags/PCB%E5%AD%A6%E4%B9%A0/" style="font-size: 1.05rem;">PCB学习<sup>1</sup></a><a href="/tags/buildroot/" style="font-size: 1.05rem;">buildroot<sup>1</sup></a><a href="/tags/deb%E5%8C%85%E5%88%B6%E4%BD%9C/" style="font-size: 1.05rem;">deb包制作<sup>1</sup></a><a href="/tags/deb%E5%8C%85%E7%9A%84%E5%88%B6%E4%BD%9C/" style="font-size: 1.05rem;">deb包的制作<sup>1</sup></a><a href="/tags/docker/" style="font-size: 1.05rem;">docker<sup>1</sup></a><a href="/tags/hexo/" style="font-size: 1.05rem;">hexo<sup>3</sup></a><a href="/tags/markdown/" style="font-size: 1.05rem;">markdown<sup>2</sup></a><a href="/tags/opencv/" style="font-size: 1.05rem;">opencv<sup>1</sup></a><a href="/tags/systemd%E5%AD%A6%E4%B9%A0/" style="font-size: 1.05rem;">systemd学习<sup>1</sup></a><a href="/tags/%E5%9C%A8%E5%AE%B6%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" style="font-size: 1.05rem;">在家学习记录<sup>1</sup></a><a href="/tags/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%84%E5%BB%BA/" style="font-size: 1.05rem;">文件系统构建<sup>1</sup></a><a href="/tags/%E6%BA%90%E7%A0%81%E4%BF%AE%E6%94%B9/" style="font-size: 1.05rem;">源码修改<sup>1</sup></a><a href="/tags/%E7%91%9E%E8%8A%AF%E5%BE%AE%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/" style="font-size: 1.05rem;">瑞芯微脚本分析<sup>18</sup></a><a href="/tags/%E7%BF%BB%E5%A2%99/" style="font-size: 1.05rem;">翻墙<sup>1</sup></a><a href="/tags/%E9%9F%B3%E8%A7%86%E9%A2%91%E6%B5%8B%E8%AF%95/" style="font-size: 1.05rem;">音视频测试<sup>1</sup></a><a href="/tags/%E9%9F%B3%E8%A7%86%E9%A2%91%E7%BC%96%E8%A7%A3%E7%A0%81/" style="font-size: 1.05rem;">音视频编解码<sup>2</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/11/"><span class="card-archive-list-date">十一月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">6</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/10/"><span class="card-archive-list-date">十月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">8</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/09/"><span class="card-archive-list-date">九月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">29</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div><div class="console-btn-item" id="consoleMusic" onclick="anzhiyu.musicToggle()" title="音乐开关"><a class="music-switch"><i class="anzhiyufont anzhiyu-icon-music"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/" itemprop="url">瑞芯微脚本分析</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/%E7%91%9E%E8%8A%AF%E5%BE%AE%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>瑞芯微脚本分析</span></a></span></div></div><h1 class="post-title" itemprop="name headline">0-7 bootloader引导流程</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2023-09-10T09:17:03.000Z" title="发表于 2023-09-10 17:17:03">2023-09-10</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2023-09-13T00:22:02.969Z" title="更新于 2023-09-13 08:22:02">2023-09-13</time></span></div><div class="meta-secondline"><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为长沙"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>长沙</span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src=""></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope itemtype="http://example.com/2023/09/10/0-7%20bootloader%E5%BC%95%E5%AF%BC%E6%B5%81%E7%A8%8B/"><header><a class="post-meta-categories" href="/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/" itemprop="url">瑞芯微脚本分析</a><a href="/tags/%E7%91%9E%E8%8A%AF%E5%BE%AE%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/" tabindex="-1" itemprop="url">瑞芯微脚本分析</a><h1 id="CrawlerTitle" itemprop="name headline">0-7 bootloader引导流程</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">John Doe</span><time itemprop="dateCreated datePublished" datetime="2023-09-10T09:17:03.000Z" title="发表于 2023-09-10 17:17:03">2023-09-10</time><time itemprop="dateCreated datePublished" datetime="2023-09-13T00:22:02.969Z" title="更新于 2023-09-13 08:22:02">2023-09-13</time></header><h1 id="一、RK芯片通用引导流程"><a href="#一、RK芯片通用引导流程" class="headerlink" title="一、RK芯片通用引导流程"></a>一、RK芯片通用引导流程</h1><p>对于RK芯片的引导流程，我们可以参考以下这张图：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122126953.jpeg" alt="img"></p>
+<p>根据两种<code>Boot Flow</code>，我们可以一次梳理两种不同的引导流程：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Boot Code -&gt; idbloader.img(miniloader) -&gt; uboot.img -&gt; boot.img -&gt; rootfs.img</span><br><span class="line">Boot Code -&gt; idbloader.img(TPL/SPL) -&gt; uboot.itb -&gt; boot.img -&gt; rootfs.img</span><br></pre></td></tr></table></figure>
+
+<p>对于<code>idbloader.img</code>，我们会发现有相似的地方：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ddr.bin &lt;-&gt; u-boot-tpl.bin</span><br><span class="line">rkxx_miniloader_vx.xx.bin &lt;-&gt; u-boot-spl.bin</span><br></pre></td></tr></table></figure>
+
+<p>此时我们会问，为什么会有两套引导流程？</p>
+<p>事实上<code>idbloader.img(miniloader)</code>这套引导方案是RK定制的，它们并没有开源的，RK发布的是二进制文件，它们都存放于<code>rkbin</code>目录下，例如<code>RK356x</code>：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122137381.png" alt="image-20230912213741344"></p>
+<p>注意上图中红方框处：rk3588_spl_v1.11.bin<code>实际上指的是</code>rkxx_miniloader_vx.xx.bin&#96;！</p>
+<h1 id="二、RK356x引导流程"><a href="#二、RK356x引导流程" class="headerlink" title="二、RK356x引导流程"></a>二、RK356x引导流程</h1><p>下面通过<code>RK356x</code>的启动日志进行简要分析！</p>
+<h2 id="2-1-ddr-bin运行"><a href="#2-1-ddr-bin运行" class="headerlink" title="2.1 ddr.bin运行"></a>2.1 ddr.bin运行</h2><p><code>RK3588</code>上电后，我们看到的第一阶段日志是关于DDR的，这主要是对DDR进行初始化，我们看到使用的是<code>LPDDR4</code>，频率逐步从<code>528MHz </code>切换到<code>2112MHz</code>，并且进行一些读写训练操作</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">DDR Version V1.08 20220617</span><br><span class="line">LPDDR4X, 2112MHz</span><br><span class="line">channel[0] BW=16 Col=10 Bk=8 CS0 Row=16 CS=1 Die BW=16 Size=1024MB</span><br><span class="line">channel[1] BW=16 Col=10 Bk=8 CS0 Row=16 CS=1 Die BW=16 Size=1024MB</span><br><span class="line">channel[2] BW=16 Col=10 Bk=8 CS0 Row=16 CS=1 Die BW=16 Size=1024MB</span><br><span class="line">channel[3] BW=16 Col=10 Bk=8 CS0 Row=16 CS=1 Die BW=16 Size=1024MB</span><br><span class="line">Manufacturer ID:0x1 Samsung</span><br><span class="line">CH0 RX Vref:33.7%, TX Vref:21.8%,0.0%</span><br><span class="line">CH1 RX Vref:32.7%, TX Vref:18.8%,0.0%</span><br><span class="line">CH2 RX Vref:30.7%, TX Vref:17.8%,0.0%</span><br><span class="line">CH3 RX Vref:34.7%, TX Vref:18.8%,0.0%</span><br><span class="line">change to F1: 528MHz</span><br><span class="line">change to F2: 1068MHz</span><br><span class="line">change to F3: 1560MHz</span><br><span class="line">change to F0: 2112MHz</span><br><span class="line">out</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-2-spl-bin运行"><a href="#2-2-spl-bin运行" class="headerlink" title="2.2 spl.bin运行"></a>2.2 spl.bin运行</h2><p>​	接下来我们会看到SPL的板级初始化，紧接着逐步从<code>MMC2</code>（<code>SD</code>卡）、<code>MMC1</code>（<code>eMMC</code>）寻找<code>U-boot.img</code>（包括<code>atf-1</code>、<code>uboot</code>、<code>fdt</code>、<code>atf-2</code>、<code>atf-3</code>、<code>atf-4</code>、<code>atf-5</code>、<code>optee</code>），通过<code>atf-1</code>来运行<code>uboot</code>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">U-Boot SPL board init</span><br><span class="line">U-Boot SPL 2017.09-orangepi (Apr 21 2023 - 10:35:39)</span><br><span class="line">Trying to boot from MMC1</span><br><span class="line">Trying fit image at 0x4000 sector</span><br><span class="line">## Verified-boot: 0</span><br><span class="line">## Checking atf-1 0x00040000 ... sha256(806278dba1...) + OK</span><br><span class="line">## Checking uboot 0x00200000 ... sha256(a14cd96f5d...) + OK</span><br><span class="line">## Checking fdt 0x00349350 ... sha256(cf0060a3cf...) + OK</span><br><span class="line">## Checking atf-2 0x000f0000 ... sha256(c00c7fd75b...) + OK</span><br><span class="line">## Checking atf-3 0xff100000 ... sha256(71c3a5841b...) + OK</span><br><span class="line">## Checking atf-4 0xff001000 ... sha256(2301cf73be...) + OK</span><br><span class="line">Jumping to U-Boot(0x00200000) via ARM Trusted Firmware(0x00040000)</span><br><span class="line">Total: 209.584 ms</span><br></pre></td></tr></table></figure>
+
+<p>注意<code>atf-*</code>与<code>optee</code>这些是 <code>ARM trust</code> 固件，属于另外一个领域，有兴趣可以参考以下文章：</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Neutionwei/article/details/111395775">https://blog.csdn.net/Neutionwei/article/details/111395775</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/Neutionwei/article/det">https://blog.csdn.net/Neutionwei/article/det</a></p>
+</blockquote>
+<h2 id="2-3-atf运行"><a href="#2-3-atf运行" class="headerlink" title="2.3 atf运行"></a>2.3 atf运行</h2><p>运行<code>BL31</code>，初始化与运行<code>BL32</code>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">INFO:    Preloader serial: 2</span><br><span class="line">NOTICE:  BL31: v2.3():v2.3-405-gb52c2eadd:derrick.huang</span><br><span class="line">NOTICE:  BL31: Built : 11:23:47, Aug 15 2022</span><br><span class="line">INFO:    spec: 0x13</span><br><span class="line">INFO:    ext 32k is valid</span><br><span class="line">INFO:    GICv3 without legacy support detected.</span><br><span class="line">INFO:    ARM GICv3 driver initialized in EL3</span><br><span class="line">INFO:    system boots from cpu-hwid-0</span><br><span class="line">INFO:    idle_st=0x21fff, pd_st=0x11fff9, repair_st=0xfff70001</span><br><span class="line">INFO:    dfs DDR fsp_params[0].freq_mhz= 2112MHz</span><br><span class="line">INFO:    dfs DDR fsp_params[1].freq_mhz= 528MHz</span><br><span class="line">INFO:    dfs DDR fsp_params[2].freq_mhz= 1068MHz</span><br><span class="line">INFO:    dfs DDR fsp_params[3].freq_mhz= 1560MHz</span><br><span class="line">INFO:    BL31: Initialising Exception Handling Framework</span><br><span class="line">INFO:    BL31: Initializing runtime services</span><br><span class="line">WARNING: No OPTEE provided by BL2 boot loader, Booting device without OPTEE initialization. SMC`s destined for OPTEE will return SMC_UNK</span><br><span class="line">ERROR:   Error initializing runtime service opteed_fast</span><br><span class="line">INFO:    BL31: Preparing for EL3 exit to normal world</span><br><span class="line">INFO:    Entry point address = 0x200000</span><br><span class="line">INFO:    SPSR = 0x3c9</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+</blockquote>
+<h2 id="2-4-uboot运行"><a href="#2-4-uboot运行" class="headerlink" title="2.4 uboot运行"></a>2.4 uboot运行</h2><h3 id="2-4-1-设备环境初始化"><a href="#2-4-1-设备环境初始化" class="headerlink" title="2.4.1 设备环境初始化"></a>2.4.1 设备环境初始化</h3><p>从<code>atf</code>切换到<code>uboot</code>之后，<code>uboot</code>依次执行以下操作：</p>
+<ol>
+<li>打印一些必要的信息：板型、串口、内存、系统内存初始化、代码重定位情况；</li>
+<li>获取<code>MMC</code>存储器信息，打印当前启动的存储器（<code>atags</code>）；</li>
+<li>获取存储器分区情况并加载内核设备树；</li>
+<li>初始化<code>I2C0</code>、初始化<code>PMIC</code>电源芯片、相关芯片供电电压与<code>IO</code>电源域；</li>
+<li>初始化<code>DRM</code>框架以及显示器接口（<code>HDMI</code>）;</li>
+<li>初始化时钟树。</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">U-Boot 2017.09-orangepi (Apr 21 2023 - 10:35:39 +0800)</span><br><span class="line"></span><br><span class="line">Model: Orange Pi 5B</span><br><span class="line">PreSerial: 2, raw, 0xfeb50000</span><br><span class="line">DRAM:  3.7 GiB</span><br><span class="line">Sysmem: init</span><br><span class="line">Relocation Offset: eda2d000</span><br><span class="line">Relocation fdt: eb9f9008 - eb9fecb8</span><br><span class="line">CR: M/C/I</span><br><span class="line">Using default environment</span><br><span class="line"></span><br><span class="line">mmc@fe2c0000: 0, mmc@fe2e0000: 1</span><br><span class="line">Bootdev(atags): mmc 0</span><br><span class="line">MMC0: Legacy, 52Mhz</span><br><span class="line">PartType: EFI</span><br><span class="line">DM: v2</span><br><span class="line">boot mode: None</span><br><span class="line">Model: Orange Pi 5B</span><br><span class="line">CLK: (sync kernel. arm: enter 1008000 KHz, init 1008000 KHz, kernel 0N/A)</span><br><span class="line">  b0pll 24000 KHz</span><br><span class="line">  b1pll 24000 KHz</span><br><span class="line">  lpll 24000 KHz</span><br><span class="line">  v0pll 24000 KHz</span><br><span class="line">  aupll 24000 KHz</span><br><span class="line">  cpll 1500000 KHz</span><br><span class="line">  gpll 1188000 KHz</span><br><span class="line">  npll 24000 KHz</span><br><span class="line">  ppll 1100000 KHz</span><br><span class="line">  aclk_center_root 702000 KHz</span><br><span class="line">  pclk_center_root 100000 KHz</span><br><span class="line">  hclk_center_root 396000 KHz</span><br><span class="line">  aclk_center_low_root 500000 KHz</span><br><span class="line">  aclk_top_root 750000 KHz</span><br><span class="line">  pclk_top_root 100000 KHz</span><br><span class="line">  aclk_low_top_root 396000 KHz</span><br><span class="line">Net:   No ethernet found.</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-4-2-内核的加载"><a href="#2-4-2-内核的加载" class="headerlink" title="2.4.2 内核的加载"></a>2.4.2 内核的加载</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">switch to partitions #0, OK</span><br><span class="line">mmc0 is current device</span><br><span class="line">mmc@fe2c0000: 0 (SD)</span><br><span class="line">mmc@fe2e0000: 1</span><br><span class="line">switch to partitions #0, OK</span><br><span class="line">mmc0 is current device</span><br><span class="line">Scanning mmc 0:1...</span><br><span class="line">Found U-Boot script /boot.scr</span><br><span class="line">reading /boot.scr</span><br><span class="line">3411 bytes read in 4 ms (832 KiB/s)</span><br><span class="line">## Executing script at 00500000</span><br><span class="line">Boot script loaded from mmc 0</span><br><span class="line">reading /orangepiEnv.txt</span><br><span class="line">222 bytes read in 3 ms (72.3 KiB/s)</span><br><span class="line">reading /uInitrd</span><br><span class="line">18641659 bytes read in 1844 ms (9.6 MiB/s)</span><br><span class="line">reading /Image</span><br><span class="line">34736640 bytes read in 3049 ms (10.9 MiB/s)</span><br><span class="line">reading /dtb/rockchip/rk3588s-orangepi-5b.dtb</span><br><span class="line">233728 bytes read in 24 ms (9.3 MiB/s)</span><br><span class="line">reading /dtb/rockchip/overlay/rk3588-fixup.scr</span><br><span class="line">2756 bytes read in 6 ms (448.2 KiB/s)</span><br><span class="line">Applying kernel provided DT fixup script (rk3588-fixup.scr)</span><br><span class="line">## Executing script at 09000000</span><br><span class="line">Fdt Ramdisk skip relocation</span><br><span class="line">## Loading init Ramdisk from Legacy Image at 0a200000 ...</span><br><span class="line">   Image Name:   uInitrd</span><br><span class="line">   Image Type:   AArch64 Linux RAMDisk Image (gzip compressed)</span><br><span class="line">   Data Size:    18641595 Bytes = 17.8 MiB</span><br><span class="line">   Load Address: 00000000</span><br><span class="line">   Entry Point:  00000000</span><br><span class="line">   Verifying Checksum ... OK</span><br><span class="line">## Flattened Device Tree blob at 0x0a100000</span><br><span class="line">   Booting using the fdt blob at 0x0a100000</span><br><span class="line">   reserving fdt memory region: addr=a100000 size=9f000</span><br><span class="line">  &#x27;reserved-memory&#x27; ramoops@110000: addr=110000 size=f0000</span><br><span class="line">   Using Device Tree in place at 000000000a100000, end 000000000a1a1fff</span><br><span class="line">Adding bank: 0x00200000 - 0xf0000000 (size: 0xefe00000)</span><br><span class="line">Total: 5283.754 ms</span><br><span class="line"></span><br><span class="line">Starting kernel ...</span><br></pre></td></tr></table></figure>
+
+<p>从<code>Starting kernel ...</code>开始，<code>uboot</code>的生命周期结束，之后产生的打印是由内核产生的！</p>
+<p>值得注意的是，加载<code>Flat Device Tree</code>设备树之后，日志还打印了相关映像加载情况，这部分非常有用，我们以后再深入分析！</p>
+<h1 id="三、BootRom阶段做了什么？"><a href="#三、BootRom阶段做了什么？" class="headerlink" title="三、BootRom阶段做了什么？"></a>三、BootRom阶段做了什么？</h1><p><code>BootRom</code>固件是Rockchip原厂芯片出厂时烧录到内部存储器的，目的是从各个外部存储媒介中加载<code>miniloader</code>(<code>tpl</code> + <code>spl</code>)！</p>
+<p>以下是摘自《Rockchip RK3568 TRM Part1 V1.1-20210301》，它很清晰地说明了BootRom阶段做了什么事情：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122155809.png" alt="img"></p>
+<p>我们按照正常引导走一遍：</p>
+<ol>
+<li>从<code>0x0000FFFF</code>地址读取第一条指令运行；</li>
+<li>逐一检查与校验<code>Nor Flash</code>、<code>Nand Flash</code>、<code>eMMC</code>、<code>SD/MMC</code>中的<code>ID BLOCK</code>（RK 固件定义在第 <code>64</code> 扇区）；</li>
+<li>假如我们的固件存放于<code>eMMC</code>，那么校验<code>ID BLOCK</code>成功后就读取<code>DDR</code>初始化代码到<code>SYSTEM_SRAM</code>；</li>
+<li>紧接着运行刚刚读取的代码来初始化<code>DDR</code>；</li>
+<li>初始化<code>DDR</code>后<code>DDR</code>就可以工作了，把引导代码加载到<code>DDR</code>并调到<code>DDR</code>继续运行。</li>
+</ol>
+<p>如果各个存储器都没有找到<code>ID BLOCK</code>，那么会执行以下操作：</p>
+<ol>
+<li>等待请求<code>DDR</code>程序（即在<code>RKDevTool</code>工具可以看到处于<code>Maskrom</code>模式）：</li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122156818.png" alt="img"></p>
+<h1 id="四、RK固件在存储器中是如何分布的？"><a href="#四、RK固件在存储器中是如何分布的？" class="headerlink" title="四、RK固件在存储器中是如何分布的？"></a>四、RK固件在存储器中是如何分布的？</h1><p>如下图，其中 RK356x和rk3588 是没有使用 <code>trust</code>分区，这个要注意：	</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122156681.png" alt="img"></p>
+<p>另外要注意的是从<code>loader2</code>分区开始所有的分区大小与起始地址是由<code>parameter.txt</code>文件进行描述，具体参考：</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Neutionwei/article/details/122911086">https://blog.csdn.net/Neutionwei/article/details/122911086</a></p>
+</blockquote>
+</article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg" title="头像" alt="头像"></a><div class="post-copyright__author_name">John Doe</div><div class="post-copyright__author_desc">热爱学习</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="http://example.com/2023/09/10/0-7%20bootloader%E5%BC%95%E5%AF%BC%E6%B5%81%E7%A8%8B/">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('http://example.com/2023/09/10/0-7%20bootloader%E5%BC%95%E5%AF%BC%E6%B5%81%E7%A8%8B/')">0-7 bootloader引导流程</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"><div class="post-reward" onclick="anzhiyu.addRewardMask()"><div class="reward-button button--animated" title="赞赏作者"><i class="anzhiyufont anzhiyu-icon-hand-heart-fill"></i>打赏作者</div><div class="reward-main"><div class="reward-all"><span class="reward-title">感谢你赐予我前进的力量</span><ul class="reward-group"><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul><a class="reward-main-btn" href="/about/#about-reward" target="_blank"><div class="reward-text">赞赏者名单</div><div class="reward-dec">因为你们的支持让我意识到写文章的价值🙏</div></a></div></div></div><div id="quit-box" onclick="anzhiyu.removeRewardMask()" style="display: none"></div></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="http://example.com/2023/09/10/0-7%20bootloader%E5%BC%95%E5%AF%BC%E6%B5%81%E7%A8%8B/"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=0-7 bootloader引导流程&amp;url=http://example.com/2023/09/10/0-7%20bootloader%E5%BC%95%E5%AF%BC%E6%B5%81%E7%A8%8B/&amp;pic=" rel="external nofollow noreferrer noopener"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
+  var currentPageUrl = window.location.href;
+  var input = document.createElement("input");
+  input.setAttribute("value", currentPageUrl);
+  document.body.appendChild(input);
+  input.select();
+  input.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">热爱学习的未来酱</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/%E7%91%9E%E8%8A%AF%E5%BE%AE%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>瑞芯微脚本分析<span class="tagsPageCount">18</span></a></div></div></div><div class="post_share"><div class="social-share" data-image="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"/><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/09/10/0-6%20uboot%E7%9B%AE%E5%BD%95%E4%B8%8B%20make.sh%20%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">0-6 uboot目录下 make.sh 脚本分析</div></div></a></div><div class="next-post pull-right"><a href="/2023/09/10/0-8%20U-Boot%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E6%B5%85%E6%9E%90/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">0-8 U-Boot编译过程浅析</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="anzhiyufont anzhiyu-icon-thumbs-up fa-fw" style="font-size: 1.5rem; margin-right: 4px"></i><span>喜欢这篇文章的人也看了</span></div><div class="relatedPosts-list"><div><a href="/2023/10/25/0-22%20%E5%A3%B0%E5%8D%A1%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E5%86%B3/" title="0-22 声卡问题的解决"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2023-10-25</div><div class="title">0-22 声卡问题的解决</div></div></a></div><div><a href="/2023/10/08/0-20%20%E6%8C%82%E8%BD%BD%E9%95%9C%E5%83%8F%E6%96%87%E4%BB%B6/" title="0-20挂载镜像文件"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2023-10-08</div><div class="title">0-20挂载镜像文件</div></div></a></div><div><a href="/2023/09/27/0-19%20openwrt%20%E9%87%8D%E6%96%B0%E7%A7%BB%E6%A4%8D/" title="0-19 openwrt重新移植"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2023-09-27</div><div class="title">0-19 openwrt重新移植</div></div></a></div><div><a href="/2023/09/27/0-18%20%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B%E9%87%8D%E6%96%B0%E5%AD%A6%E4%B9%A0/" title="0-18 启动流程重新学习"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2023-09-27</div><div class="title">0-18 启动流程重新学习</div></div></a></div><div><a href="/2023/09/27/0-17%20%E9%80%82%E9%85%8D%E7%91%9E%E8%8A%AF%E5%BE%AE%E5%AE%98%E6%96%B9SDK/" title="0-17 适配瑞芯微官方SDK"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2023-09-27</div><div class="title">0-17 适配瑞芯微官方SDK</div></div></a></div><div><a href="/2023/09/26/0-16-openwrt%E8%BF%9B%E9%98%B6/" title="0-16 openwrt进阶"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2023-09-26</div><div class="title">0-16 openwrt进阶</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__description">永远年轻，永远热泪盈眶</div></div></div><div class="card-widget anzhiyu-right-widget" id="card-wechat" onclick="null"><div id="flip-wrapper"><div id="flip-content"><div class="face" style="background: url(https://bu.dusays.com/2023/01/13/63c02edf44033.png) center center / 100% no-repeat"></div><div class="back face" style="background: url(https://bu.dusays.com/2023/05/13/645fa415e8694.png) center center / 100% no-repeat"></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81RK%E8%8A%AF%E7%89%87%E9%80%9A%E7%94%A8%E5%BC%95%E5%AF%BC%E6%B5%81%E7%A8%8B"><span class="toc-number">1.</span> <span class="toc-text">一、RK芯片通用引导流程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81RK356x%E5%BC%95%E5%AF%BC%E6%B5%81%E7%A8%8B"><span class="toc-number">2.</span> <span class="toc-text">二、RK356x引导流程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-ddr-bin%E8%BF%90%E8%A1%8C"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 ddr.bin运行</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-spl-bin%E8%BF%90%E8%A1%8C"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 spl.bin运行</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-atf%E8%BF%90%E8%A1%8C"><span class="toc-number">2.3.</span> <span class="toc-text">2.3 atf运行</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4-uboot%E8%BF%90%E8%A1%8C"><span class="toc-number">2.4.</span> <span class="toc-text">2.4 uboot运行</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-1-%E8%AE%BE%E5%A4%87%E7%8E%AF%E5%A2%83%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="toc-number">2.4.1.</span> <span class="toc-text">2.4.1 设备环境初始化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-2-%E5%86%85%E6%A0%B8%E7%9A%84%E5%8A%A0%E8%BD%BD"><span class="toc-number">2.4.2.</span> <span class="toc-text">2.4.2 内核的加载</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%E3%80%81BootRom%E9%98%B6%E6%AE%B5%E5%81%9A%E4%BA%86%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">3.</span> <span class="toc-text">三、BootRom阶段做了什么？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%9B%E3%80%81RK%E5%9B%BA%E4%BB%B6%E5%9C%A8%E5%AD%98%E5%82%A8%E5%99%A8%E4%B8%AD%E6%98%AF%E5%A6%82%E4%BD%95%E5%88%86%E5%B8%83%E7%9A%84%EF%BC%9F"><span class="toc-number">4.</span> <span class="toc-text">四、RK固件在存储器中是如何分布的？</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/11/20/0-0-16%20debian%E5%92%8Cubuntu%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%84%E5%BB%BA%E8%AF%A6%E8%A7%A3/" title="0-0-16 ubuntu和debian文件系统构建详解">0-0-16 ubuntu和debian文件系统构建详解</a><time datetime="2023-11-20T13:16:57.000Z" title="发表于 2023-11-20 21:16:57">2023-11-20</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/11/19/0-0-15%20%E6%98%BE%E7%A4%BA%E7%A1%AC%E4%BB%B6%E5%8F%91%E5%B1%95%E4%B8%8E%E8%A7%86%E9%A2%91%E5%BC%80%E5%8F%91%E7%9F%A5%E8%AF%86%E7%82%B9%E6%89%AB%E7%9B%B2/" title="0-0-15 显示硬件发展与视频开发知识点扫盲">0-0-15 显示硬件发展与视频开发知识点扫盲</a><time datetime="2023-11-19T13:16:56.000Z" title="发表于 2023-11-19 21:16:56">2023-11-19</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/11/19/0-0-14%20%E9%9F%B3%E8%A7%86%E9%A2%91%E7%BC%96%E8%A7%A3%E7%A0%81%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E5%AD%A6%E4%B9%A0/" title="0-0-14 音视频编解码相关知识学习">0-0-14 音视频编解码相关知识学习</a><time datetime="2023-11-19T09:16:56.000Z" title="发表于 2023-11-19 17:16:56">2023-11-19</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/11/14/0-0-13%20rk%20deb%E5%8C%85%E7%9A%84%E5%88%B6%E4%BD%9C/" title="0-0-13 rkdeb包的制作">0-0-13 rkdeb包的制作</a><time datetime="2023-11-14T11:55:17.000Z" title="发表于 2023-11-14 19:55:17">2023-11-14</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/11/12/0-0-13%20ad%E5%AD%A6%E4%B9%A0/" title="PCB学习">PCB学习</a><time datetime="2023-11-12T13:55:17.000Z" title="发表于 2023-11-12 21:55:17">2023-11-12</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">&copy;2020 - 2023 By <a class="footer-bar-link" href="/" title="John Doe" target="_blank">John Doe</a></div></div><div id="footer-type-tips"></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/anzhiyu-c/hexo-theme-anzhiyu" title="主题">主题</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">43</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">17</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">20</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://blog.anheyu.com/" title="博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="博客"/><span class="back-menu-item-text">博客</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://image.anheyu.com/" title="安知鱼图床"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://image.anheyu.com/favicon.ico" alt="安知鱼图床"/><span class="back-menu-item-text">安知鱼图床</span></a></div></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/3588-npu/" style="font-size: 0.88rem;">3588 npu<sup>6</sup></a><a href="/tags/PCB%E5%AD%A6%E4%B9%A0/" style="font-size: 0.88rem;">PCB学习<sup>1</sup></a><a href="/tags/buildroot/" style="font-size: 0.88rem;">buildroot<sup>1</sup></a><a href="/tags/deb%E5%8C%85%E5%88%B6%E4%BD%9C/" style="font-size: 0.88rem;">deb包制作<sup>1</sup></a><a href="/tags/deb%E5%8C%85%E7%9A%84%E5%88%B6%E4%BD%9C/" style="font-size: 0.88rem;">deb包的制作<sup>1</sup></a><a href="/tags/docker/" style="font-size: 0.88rem;">docker<sup>1</sup></a><a href="/tags/hexo/" style="font-size: 0.88rem;">hexo<sup>3</sup></a><a href="/tags/markdown/" style="font-size: 0.88rem;">markdown<sup>2</sup></a><a href="/tags/opencv/" style="font-size: 0.88rem;">opencv<sup>1</sup></a><a href="/tags/systemd%E5%AD%A6%E4%B9%A0/" style="font-size: 0.88rem;">systemd学习<sup>1</sup></a><a href="/tags/%E5%9C%A8%E5%AE%B6%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" style="font-size: 0.88rem;">在家学习记录<sup>1</sup></a><a href="/tags/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%84%E5%BB%BA/" style="font-size: 0.88rem;">文件系统构建<sup>1</sup></a><a href="/tags/%E6%BA%90%E7%A0%81%E4%BF%AE%E6%94%B9/" style="font-size: 0.88rem;">源码修改<sup>1</sup></a><a href="/tags/%E7%91%9E%E8%8A%AF%E5%BE%AE%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/" style="font-size: 0.88rem;">瑞芯微脚本分析<sup>18</sup></a><a href="/tags/%E7%BF%BB%E5%A2%99/" style="font-size: 0.88rem;">翻墙<sup>1</sup></a><a href="/tags/%E9%9F%B3%E8%A7%86%E9%A2%91%E6%B5%8B%E8%AF%95/" style="font-size: 0.88rem;">音视频测试<sup>1</sup></a><a href="/tags/%E9%9F%B3%E8%A7%86%E9%A2%91%E7%BC%96%E8%A7%A3%E7%A0%81/" style="font-size: 0.88rem;">音视频编解码<sup>2</sup></a></div></div><hr/></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="nav-music"><a id="nav-music-hoverTips" onclick="anzhiyu.musicToggle()" accesskey="m">播放音乐</a><div id="console-music-bg"></div><meting-js id="8152976493" server="netease" type="playlist" mutex="true" preload="none" theme="var(--anzhiyu-main)" data-lrctype="0" order="random"></meting-js></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://y.qq.com/n/ryqq/playlist/8802438608&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@5.0.20/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.cbd.int/vanilla-lazyload@17.8.4/dist/lazyload.iife.min.js"></script><script src="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.js"></script><canvas id="universe"></canvas><script async src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
+var HoldLog = console.log;
+console.log = function () {};
+let now1 = new Date();
+queueMicrotask(() => {
+  const Log = function () {
+    HoldLog.apply(console, arguments);
+  }; //在恢复前输出日志
+  const grt = new Date("04/01/2021 00:00:00"); //此处修改你的建站时间或者网站上线时间
+  now1.setTime(now1.getTime() + 250);
+  const days = (now1 - grt) / 1000 / 60 / 60 / 24;
+  const dnum = Math.floor(days);
+  const ascll = [
+    `欢迎使用安知鱼!`,
+    `生活明朗, 万物可爱`,
+    `
+        
+       █████╗ ███╗   ██╗███████╗██╗  ██╗██╗██╗   ██╗██╗   ██╗
+      ██╔══██╗████╗  ██║╚══███╔╝██║  ██║██║╚██╗ ██╔╝██║   ██║
+      ███████║██╔██╗ ██║  ███╔╝ ███████║██║ ╚████╔╝ ██║   ██║
+      ██╔══██║██║╚██╗██║ ███╔╝  ██╔══██║██║  ╚██╔╝  ██║   ██║
+      ██║  ██║██║ ╚████║███████╗██║  ██║██║   ██║   ╚██████╔╝
+      ╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝    ╚═════╝
+        
+        `,
+    "已上线",
+    dnum,
+    "天",
+    "©2020 By 安知鱼 V1.6.9",
+  ];
+  const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
+
+  setTimeout(
+    Log.bind(
+      console,
+      `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      ""
+    )
+  );
+  setTimeout(
+    Log.bind(
+      console,
+      `%c ${ascll2[0]} %c ${ascll2[1]} %c \n${ascll2[2]} %c\n${ascll2[3]}\n`,
+      "color:white; background-color:#4fd953",
+      "",
+      "",
+      'background:url("https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/tinggge.gif") no-repeat;font-size:450%'
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c WELCOME %c 你好，小笨蛋.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(
+      console,
+      "%c ⚡ Powered by 安知鱼 %c 你正在访问 John Doe 的博客.",
+      "color:white; background-color:#f0ad4e",
+      ""
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c W23-12 %c 你已打开控制台.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
+  );
+});</script><script async src="/anzhiyu/random.js"></script><div class="js-pjax"><input type="hidden" name="page-type" id="page-type" value="post"></div><script>var visitorMail = "visitor@anheyu.com";
+</script><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://cdn.cbd.int/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div></body></html>
