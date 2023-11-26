@@ -330,7 +330,7 @@
 <p>制作完成之后会在当前目录生成一个名为rootfs.img的烧写镜像，只需要根据烧写手册进行单独烧写即可。至此，关于Ubuntu和Debian文件系统的构建就讲解完成了。</p>
 ]]></content>
       <categories>
-        <category>文件系统构建</category>
+        <category>瑞芯微</category>
       </categories>
       <tags>
         <tag>文件系统构建</tag>
@@ -1928,7 +1928,7 @@
 <p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311192116640.png" alt="image-20231119211617624"></p>
 <h1 id="VPU"><a href="#VPU" class="headerlink" title="VPU"></a>VPU</h1>]]></content>
       <categories>
-        <category>音视频编解码</category>
+        <category>瑞芯微</category>
       </categories>
       <tags>
         <tag>音视频编解码</tag>
@@ -2539,7 +2539,7 @@
 <p>Rockchip_Developer_Guide_Third_Party_System_Adaptation_CN.pdf<br>这个pdf文件很重要。</p>
 ]]></content>
       <categories>
-        <category>deb包制作</category>
+        <category>瑞芯微</category>
       </categories>
       <tags>
         <tag>deb包制作</tag>
@@ -2847,7 +2847,7 @@
 <p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310261712235.png" alt="image-20231026171223218"></p>
 ]]></content>
       <categories>
-        <category>音视频测试</category>
+        <category>瑞芯微</category>
       </categories>
       <tags>
         <tag>音视频测试</tag>
@@ -2893,7 +2893,7 @@
 <h1 id="修改4-buildroot"><a href="#修改4-buildroot" class="headerlink" title="修改4 buildroot"></a>修改4 buildroot</h1><p>首先在默认配置选项中添加了opencv，这个是要加的。</p>
 ]]></content>
       <categories>
-        <category>源码修改</category>
+        <category>瑞芯微</category>
       </categories>
       <tags>
         <tag>源码修改</tag>
@@ -3048,7 +3048,7 @@
 
 ]]></content>
       <categories>
-        <category>systemd学习</category>
+        <category>瑞芯微</category>
       </categories>
       <tags>
         <tag>systemd学习</tag>
@@ -3171,7 +3171,7 @@
 <p>这就好了，搞到这个地方应该就可以了，我认为。ok，那就先这样。</p>
 ]]></content>
       <categories>
-        <category>deb包的制作</category>
+        <category>瑞芯微</category>
       </categories>
       <tags>
         <tag>deb包的制作</tag>
@@ -3411,7 +3411,7 @@
 <p>有关更多详细信息，请参阅README，生成Buildroot手册或在线查阅它，网址为<a href="http://buildroot.org/docs.html">http://buildroot.org/docs.html</a></p>
 ]]></content>
       <categories>
-        <category>buildroot</category>
+        <category>瑞芯微</category>
       </categories>
       <tags>
         <tag>buildroot</tag>
@@ -3543,7 +3543,7 @@
 
 ]]></content>
       <categories>
-        <category>瑞芯微固件分析</category>
+        <category>瑞芯微</category>
       </categories>
       <tags>
         <tag>瑞芯微脚本分析</tag>
@@ -3773,7 +3773,7 @@ make ARCH=arm64 -j32  CROSS_COMPILE=aarch64-linux-gnu- rk3588-evb7-lp4-v10-linux
 
 ]]></content>
       <categories>
-        <category>瑞芯微固件分析</category>
+        <category>瑞芯微</category>
       </categories>
       <tags>
         <tag>瑞芯微脚本分析</tag>
@@ -3851,7 +3851,7 @@ make ARCH=arm64 -j32  CROSS_COMPILE=aarch64-linux-gnu- rk3588-evb7-lp4-v10-linux
 
 ]]></content>
       <categories>
-        <category>香橙派构建脚本分析</category>
+        <category>瑞芯微</category>
       </categories>
       <tags>
         <tag>瑞芯微脚本分析</tag>
@@ -3926,7 +3926,7 @@ make ARCH=arm64 -j32  CROSS_COMPILE=aarch64-linux-gnu- rk3588-evb7-lp4-v10-linux
 <p>chroot “${chroot_dir}” &#x2F;bin&#x2F;bash -c “dpkg-deb -f $name Package | xargs apt-mark hold” &gt;&gt; “${DEST}”&#x2F;${LOG_SUBPATH}&#x2F;install.log 2&gt;&amp;1</p>
 ]]></content>
       <categories>
-        <category>香橙派构建脚本分析</category>
+        <category>瑞芯微</category>
       </categories>
       <tags>
         <tag>瑞芯微脚本分析</tag>
@@ -3963,7 +3963,7 @@ make ARCH=arm64 -j32  CROSS_COMPILE=aarch64-linux-gnu- rk3588-evb7-lp4-v10-linux
 
 ]]></content>
       <categories>
-        <category>香橙派构建脚本分析</category>
+        <category>瑞芯微</category>
       </categories>
       <tags>
         <tag>瑞芯微脚本分析</tag>
@@ -4142,7 +4142,7 @@ make ARCH=arm64 -j32  CROSS_COMPILE=aarch64-linux-gnu- rk3588-evb7-lp4-v10-linux
 <h2 id="三、反汇编调试"><a href="#三、反汇编调试" class="headerlink" title="三、反汇编调试"></a>三、反汇编调试</h2><p>反汇编调试用法如下：</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">./make.sh elf-[x] [type] // 反汇编：使用-[x]参数, [type]可选择是否反汇编SPL或TPL</span><br><span class="line">./make.sh elf // 反汇编u-boot文件，默认使用-D参数</span><br><span class="line">./make.sh elf-S // 反汇编u-boot文件，使用-S参数</span><br><span class="line">./make.sh elf-d // 反汇编u-boot文件，使用-d参数</span><br><span class="line">./make.sh elf spl // 反汇编tpl/u-boot-tpl文件，默认使用-D参数</span><br><span class="line">./make.sh elf tpl // 反汇编spl/u-boot-tpl文件，默认使用-D参数</span><br><span class="line">./make.sh &lt;addr&gt; // 需要addr对应的函数名和代码位置</span><br><span class="line">./make.sh map // 打开u-boot.map</span><br><span class="line">./make.sh sym // 打开u-boot.sym</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
-        <category>瑞芯微脚本分析</category>
+        <category>瑞芯微</category>
       </categories>
       <tags>
         <tag>瑞芯微脚本分析</tag>
@@ -4206,7 +4206,7 @@ make ARCH=arm64 -j32  CROSS_COMPILE=aarch64-linux-gnu- rk3588-evb7-lp4-v10-linux
 <p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122209586.png" alt="img"></p>
 ]]></content>
       <categories>
-        <category>瑞芯微脚本分析</category>
+        <category>瑞芯微</category>
       </categories>
       <tags>
         <tag>瑞芯微脚本分析</tag>
@@ -4289,7 +4289,7 @@ make ARCH=arm64 -j32  CROSS_COMPILE=aarch64-linux-gnu- rk3588-evb7-lp4-v10-linux
 <p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122208268.png" alt="img"></p>
 ]]></content>
       <categories>
-        <category>瑞芯微脚本分析</category>
+        <category>瑞芯微</category>
       </categories>
       <tags>
         <tag>瑞芯微脚本分析</tag>
@@ -4395,7 +4395,7 @@ make ARCH=arm64 -j32  CROSS_COMPILE=aarch64-linux-gnu- rk3588-evb7-lp4-v10-linux
 <p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122159479.png" alt="img"></p>
 ]]></content>
       <categories>
-        <category>瑞芯微脚本分析</category>
+        <category>瑞芯微</category>
       </categories>
       <tags>
         <tag>瑞芯微脚本分析</tag>
@@ -4471,7 +4471,7 @@ make ARCH=arm64 -j32  CROSS_COMPILE=aarch64-linux-gnu- rk3588-evb7-lp4-v10-linux
 </blockquote>
 ]]></content>
       <categories>
-        <category>瑞芯微脚本分析</category>
+        <category>瑞芯微</category>
       </categories>
       <tags>
         <tag>瑞芯微脚本分析</tag>
@@ -4488,7 +4488,7 @@ make ARCH=arm64 -j32  CROSS_COMPILE=aarch64-linux-gnu- rk3588-evb7-lp4-v10-linux
 
 ]]></content>
       <categories>
-        <category>瑞芯微脚本分析</category>
+        <category>瑞芯微</category>
       </categories>
       <tags>
         <tag>瑞芯微脚本分析</tag>
@@ -4545,7 +4545,7 @@ make ARCH=arm64 -j32  CROSS_COMPILE=aarch64-linux-gnu- rk3588-evb7-lp4-v10-linux
 <p>这里面多出来了一个make.sh脚本，所以这里先去分析一下make.sh脚本</p>
 ]]></content>
       <categories>
-        <category>瑞芯微脚本分析</category>
+        <category>瑞芯微</category>
       </categories>
       <tags>
         <tag>瑞芯微脚本分析</tag>
@@ -4567,7 +4567,7 @@ make ARCH=arm64 -j32  CROSS_COMPILE=aarch64-linux-gnu- rk3588-evb7-lp4-v10-linux
 
 ]]></content>
       <categories>
-        <category>瑞芯微脚本分析</category>
+        <category>瑞芯微</category>
       </categories>
       <tags>
         <tag>瑞芯微脚本分析</tag>
@@ -4581,7 +4581,7 @@ make ARCH=arm64 -j32  CROSS_COMPILE=aarch64-linux-gnu- rk3588-evb7-lp4-v10-linux
 
 ]]></content>
       <categories>
-        <category>瑞芯微脚本分析</category>
+        <category>瑞芯微</category>
       </categories>
       <tags>
         <tag>瑞芯微脚本分析</tag>
