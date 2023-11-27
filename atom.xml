@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2023-11-27T13:21:05.253Z</updated>
+  <updated>2023-11-27T14:27:09.908Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -17,20 +17,33 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>反思1</title>
+    <link href="http://example.com/2023/11/27/%E5%8F%8D%E6%80%9D1/"/>
+    <id>http://example.com/2023/11/27/%E5%8F%8D%E6%80%9D1/</id>
+    <published>2023-11-27T13:26:56.000Z</published>
+    <updated>2023-11-27T14:27:09.908Z</updated>
+    
+    
+    <summary type="html">Here&#39;s something encrypted, password is required to continue reading.</summary>
+    
+    
+    
+    <category term="反思" scheme="http://example.com/categories/%E5%8F%8D%E6%80%9D/"/>
+    
+    
+    <category term="反思2023-11-27" scheme="http://example.com/tags/%E5%8F%8D%E6%80%9D2023-11-27/"/>
+    
+  </entry>
+  
+  <entry>
     <title>0-0-17 RGA的学习</title>
-    <link href="http://example.com/2023/11/26/0-0-17-RGA%E7%9A%84%E5%AD%A6%E4%B9%A0/"/>
-    <id>http://example.com/2023/11/26/0-0-17-RGA%E7%9A%84%E5%AD%A6%E4%B9%A0/</id>
-    <published>2023-11-26T06:17:20.000Z</published>
-    <updated>2023-11-27T13:21:05.253Z</updated>
+    <link href="http://example.com/2023/11/27/0-0-17-RGA%E7%9A%84%E5%AD%A6%E4%B9%A0/"/>
+    <id>http://example.com/2023/11/27/0-0-17-RGA%E7%9A%84%E5%AD%A6%E4%B9%A0/</id>
+    <published>2023-11-27T06:17:20.000Z</published>
+    <updated>2023-11-27T13:26:32.866Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;&#92;assets&#92;css&#92;APlayer.min.css&quot;&gt;&lt;script src=&quot;&#92;assets&#92;js&#92;APlayer.min.js&quot;</summary>
-        
-      
+    <summary type="html">Here&#39;s something encrypted, password is required to continue reading.</summary>
     
     
     
@@ -485,31 +498,6 @@
     
     
     <category term="瑞芯微固件分析" scheme="http://example.com/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE%E5%9B%BA%E4%BB%B6%E5%88%86%E6%9E%90/"/>
-    
-    
-    <category term="瑞芯微脚本分析" scheme="http://example.com/tags/%E7%91%9E%E8%8A%AF%E5%BE%AE%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>0-15 ubuntu22构建</title>
-    <link href="http://example.com/2023/09/22/0-15%20ubuntu22%E6%9E%84%E5%BB%BA/"/>
-    <id>http://example.com/2023/09/22/0-15%20ubuntu22%E6%9E%84%E5%BB%BA/</id>
-    <published>2023-09-22T00:02:33.000Z</published>
-    <updated>2023-11-26T06:19:36.477Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;&#92;assets&#92;css&#92;APlayer.min.css&quot;&gt;&lt;script src=&quot;&#92;assets&#92;js&#92;APlayer.min.js&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="瑞芯微" scheme="http://example.com/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE/"/>
     
     
     <category term="瑞芯微脚本分析" scheme="http://example.com/tags/%E7%91%9E%E8%8A%AF%E5%BE%AE%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/"/>
