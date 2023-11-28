@@ -1,211 +1,119 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>opencv的编译 | 热爱学习的未来酱</title><meta name="keywords" content="opencv"><meta name="author" content="John Doe"><meta name="copyright" content="John Doe"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="opencv的编译"><meta name="application-name" content="opencv的编译"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="opencv的编译"><meta property="og:url" content="http://example.com/2023/10/17/0-0-6%20opencv%E7%9A%84%E7%BC%96%E8%AF%91/index.html"><meta property="og:site_name" content="热爱学习的未来酱"><meta property="og:description" content="1  ​	既然opencv中已经在ubuntu提供的库中了，那为什么人们更多的还是自己编译opencv再使用呢，就比如下面这个例子： 想用一些库，然而发现ubuntu自带的opencv是没有开启的，这时候就要自己编译opencv了。 1.拉取opencv源码opencv地址 https:&amp;#x2F;&amp;#x2F;open"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg"><meta property="article:author" content="John Doe"><meta property="article:tag"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg"><meta name="description" content="1  ​	既然opencv中已经在ubuntu提供的库中了，那为什么人们更多的还是自己编译opencv再使用呢，就比如下面这个例子： 想用一些库，然而发现ubuntu自带的opencv是没有开启的，这时候就要自己编译opencv了。 1.拉取opencv源码opencv地址 https:&amp;#x2F;&amp;#x2F;open"><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="http://example.com/2023/10/17/0-0-6%20opencv%E7%9A%84%E7%BC%96%E8%AF%91/"><link rel="preconnect" href="//cdn.cbd.int"/><meta name="google-site-verification" content="xxx"/><meta name="baidu-site-verification" content="code-xxx"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.20/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
-  linkPageTop: undefined,
-  peoplecanvas: {"enable":true,"img":"https://upload-bbs.miyoushe.com/upload/2023/09/03/125766904/ee23df8517f3c3e3efc4145658269c06_5714860933110284659.png"},
-  postHeadAiDescription: {"enable":true,"gptName":"AnZhiYu","mode":"local","switchBtn":false,"btnLink":"https://afdian.net/item/886a79d4db6711eda42a52540025c377","randomNum":3,"basicWordCount":1000,"key":"xxxx","Referer":"https://xx.xx/"},
-  diytitle: {"enable":true,"leaveTitle":"w(ﾟДﾟ)w 不要走！再看看嘛！","backTitle":"♪(^∇^*)欢迎肥来！"},
-  LA51: undefined,
-  greetingBox: {"enable":true,"default":"晚上好👋","list":[{"greeting":"晚安😴","startTime":0,"endTime":5},{"greeting":"早上好鸭👋, 祝你一天好心情！","startTime":6,"endTime":9},{"greeting":"上午好👋, 状态很好，鼓励一下～","startTime":10,"endTime":10},{"greeting":"11点多啦, 在坚持一下就吃饭啦～","startTime":11,"endTime":11},{"greeting":"午安👋, 宝贝","startTime":12,"endTime":14},{"greeting":"🌈充实的一天辛苦啦！","startTime":14,"endTime":18},{"greeting":"19点喽, 奖励一顿丰盛的大餐吧🍔。","startTime":19,"endTime":19},{"greeting":"晚上好👋, 在属于自己的时间好好放松😌~","startTime":20,"endTime":24}]},
-  twikooEnvId: '',
-  commentBarrageConfig:undefined,
-  root: '/',
-  preloader: {"source":3},
-  friends_vue_info: undefined,
-  navMusic: true,
-  mainTone: undefined,
-  authorStatus: undefined,
-  algolia: undefined,
-  localSearch: undefined,
-  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
-  noticeOutdate: {"limitDay":365,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
-  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":330},
-  copy: {
-    success: '复制成功',
-    error: '复制错误',
-    noSupport: '浏览器不支持'
-  },
-  relativeDate: {
-    homepage: false,
-    simplehomepage: true,
-    post: false
-  },
-  runtime: '天',
-  date_suffix: {
-    just: '刚刚',
-    min: '分钟前',
-    hour: '小时前',
-    day: '天前',
-    month: '个月前'
-  },
-  copyright: {"copy":true,"copyrightEbable":false,"limitCount":50,"languages":{"author":"作者: John Doe","link":"链接: ","source":"来源: 热爱学习的未来酱","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
-  lightbox: 'fancybox',
-  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#425AEF","bgDark":"#1f1f1f","position":"top-center"},
-  source: {
-    justifiedGallery: {
-      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
-      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
-    }
-  },
-  isPhotoFigcaption: false,
-  islazyload: true,
-  isAnchor: false,
-  shortcutKey: undefined,
-  autoDarkmode: true
-}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
-  configTitle: '热爱学习的未来酱',
-  title: 'opencv的编译',
-  postAI: '',
-  pageFillDescription: '1.拉取opencv源码, 2.源码编译（PC）, 3.交叉编译（qemu）既然中已经在提供的库中了那为什么人们更多的还是自己编译再使用呢就比如下面这个例子想用一些库然而发现自带的是没有开启的这时候就要自己编译了拉取源码地址链接是一个开源计算机视觉和图像处理库提供了一系列用于处理图像和视频的函数和工具是对的扩展和补充包含了一些额外的模块和功能以增强的功能和应用范围模块是由社区的开发人员和贡献者创建和维护的它提供了许多实用的功能算法和工具用于计算机视觉图像处理目标检测机器学习等领域的应用以下是一些常见的模块及其功能提供了用于检测和跟踪标记的函数和类标记是一种用于增强现实和相机姿态估计的二维条码包含了一些背景分割算法的实现用于从视频中提取前景对象这些算法可以用于运动检测目标跟踪等任务实现了一些生物启发式的图像处理算法包括视网膜模型光流估计等这些算法受到生物视觉系统的启发用于模拟人眼的感知机制提供了深度学习的支持包括加载和运行基于深度学习模型的图像分类目标检测和图像分割等任务包含了人脸检测人脸识别和人脸特征点检测等相关功能这些功能可以用于人脸分析人脸识别和表情识别等应用提供了文本检测和识别的功能可以用于场景文本检测光学字符识别等任务扩展了的特征检测和描述子模块提供了一些额外的特征检测算法和描述子算法如等除了上述模块还包括其他一些模块和功能如光学流结构光三维重建图像分割等这些模块和功能可以通过下载和编译库来使用在这里就只是编译源码了也就不再添加目前是用不到的克隆源码的仓库源码太大了还是直接从官网下载吧这里下载最新的拷贝到之上然后解压在编译之前还需要先安装一些依赖源码编译然后在源码目录下创建一个目录进行工程构建命令如下所示构建静态库构建动态库指定安装目录为生成的库和可执行文件将安装到该目录下指定构建类型为这意味着生成的库将进行优化并且不包含调试信息生成用于的配置文件这样其他程序可以使用来查找和链接库启用支持是用于解码二维条码如码的库通过这个参数编译生成的库将包含功能启用非免费模块这些模块可能包含受限制的功能需要购买或获取许可证才能使用生成用于的配置文件这样其他程序可以使用来查找和链接库启用支持用于与相关的功能启用标准支持启用多线程支持禁用支持禁用语言示例的安装禁用构建示例程序指定默认的解释器路径为这将用于与相关的构建和安装操作启用构建的绑定禁用构建的绑定指定解释器的路径为指定的头文件目录的路径为这里需要提供的开发包路径具体版本号可能会有所不同指定的库文件路径为这里需要提供的动态链接库文件路径具体路径和文件名可能会有所不同指定默认的解释器路径为这将用于与相关的构建和安装操作指定默认的解释器路径为这将用于与相关的构建和安装操作注意在中使用参数来定义变量每个参数开头的表示要定义一个变量并为其赋予特定的值然后进行编译安装我这电脑还是很快的两分钟吧也就还是家里的电脑好呀最后拷贝和链接库这一步必须做否则在使用的时候会找不到这个模块然后进行简单的测试然后测试一个的程序首先创建三个目录然后在目录下创建测试例程然后向该文件中添加以下程序如果无法打开摄像头则输出提示信息无法打开摄像头获取开始时间从摄像头捕获帧如果捕获到帧则显示它获取结束时间计算实时帧率更新开始时间在图像上显示帧率按下键退出循环释放资源并关闭窗口然后创建的配置文件添加内容如下所示设置项目名称为设置标准为并且要求编译器支持该标准查找并引入添加可执行文件源文件为链接库设置安装目录为操作系统名安装可执行文件到指定目录然后进入目录执行以下命令进行配置编译和安装三个步骤在目录下就生成了测试然后接一个摄像头进行测试测试功能正常至此在机的编译就完成了交叉编译上面编译的其实都是在上编译的一些个版本而这里将编译开发板的版本本来想的是交叉编译呀可是后来我一想我有呀我还交叉编译啥呀完全不需要呀完全忘记了还有这个首先解压一下开发板的源码解压完成如下所示然后创建一个名为的挂载脚本该脚本的作用是挂载并然后这样进行挂载我这里首先更新了一下软件源然后就是安装一些依赖就跟上面在上安装依赖的方法相同然后将源码拷贝到的目录下如下图所示然后进行源码的解压然后在源码目录下创建一个目录进行工程构建命令如下所示构建静态库由于这里只是想要得到他的库所以这里就不安装到目录下了构建动态库由于这里只是想要得到他的库所以这里就不安装到目录下了指定安装目录为生成的库和可执行文件将安装到该目录下指定构建类型为这意味着生成的库将进行优化并且不包含调试信息生成用于的配置文件这样其他程序可以使用来查找和链接库启用支持是用于解码二维条码如码的库通过这个参数编译生成的库将包含功能启用非免费模块这些模块可能包含受限制的功能需要购买或获取许可证才能使用生成用于的配置文件这样其他程序可以使用来查找和链接库启用支持用于与相关的功能启用标准支持启用多线程支持禁用支持禁用语言示例的安装禁用构建示例程序指定默认的解释器路径为这将用于与相关的构建和安装操作启用构建的绑定禁用构建的绑定指定解释器的路径为指定的头文件目录的路径为这里需要提供的开发包路径具体版本号可能会有所不同指定的库文件路径为这里需要提供的动态链接库文件路径具体路径和文件名可能会有所不同指定默认的解释器路径为这将用于与相关的构建和安装操作指定默认的解释器路径为这将用于与相关的构建和安装操作注意在中使用参数来定义变量每个参数开头的表示要定义一个变量并为其赋予特定的值虽然是但是用的仍旧是的但是这个速度是真的慢呀但我看都跑满了呀竟然搞了三十分钟最后拷贝和链接库这一步必须做否则在使用的时候会找不到这个模块然后进行简单的测试然后测试一个的程序首先创建三个目录然后在目录下创建测试例程然后向该文件中添加以下程序如果无法打开摄像头则输出提示信息无法打开摄像头获取开始时间从摄像头捕获帧如果捕获到帧则显示它获取结束时间计算实时帧率更新开始时间在图像上显示帧率按下键退出循环释放资源并关闭窗口然后创建的配置文件添加内容如下所示设置项目名称为设置标准为并且要求编译器支持该标准查找并引入添加可执行文件源文件为链接库设置安装目录为操作系统名安装可执行文件到指定目录然后进入目录执行以下命令进行配置编译和安装三个步骤这里由于我是将的库和头文件等放到了上一级的目录所以这里可能要修改一下但也还好至此编译就完成了',
-  isPost: true,
-  isHome: false,
-  isHighlightShrink: false,
-  isToc: true,
-  postUpdate: '2023-10-18 23:14:00',
-  postMainColor: '',
-}</script><noscript><style type="text/css">
-  #nav {
-    opacity: 1
-  }
-  .justified-gallery img {
-    opacity: 1
-  }
+<!DOCTYPE html>
 
-  #recent-posts time,
-  #post-meta time {
-    display: inline !important
-  }
-</style></noscript><script>(win=>{
-      win.saveToLocal = {
-        set: (key, value, ttl) => {
-          if (ttl === 0) return
-          const now = Date.now()
-          const expiry = now + ttl * 86400000
-          const item = {
-            value,
-            expiry
-          }
-          localStorage.setItem(key, JSON.stringify(item))
-        },
-      
-        get: key => {
-          const itemStr = localStorage.getItem(key)
-      
-          if (!itemStr) {
-            return undefined
-          }
-          const item = JSON.parse(itemStr)
-          const now = Date.now()
-      
-          if (now > item.expiry) {
-            localStorage.removeItem(key)
-            return undefined
-          }
-          return item.value
-        }
-      }
-    
-      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
-        const script = document.createElement('script')
-        script.src = url
-        script.async = true
-        script.onerror = reject
-        script.onload = script.onreadystatechange = function() {
-          const loadState = this.readyState
-          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
-          script.onload = script.onreadystatechange = null
-          resolve()
-        }
 
-        Object.keys(attr).forEach(key => {
-          script.setAttribute(key, attr[key])
-        })
+<html lang="zh-CN">
+  
 
-        document.head.appendChild(script)
-      })
-    
-      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
-        const link = document.createElement('link')
-        link.rel = 'stylesheet'
-        link.href = url
-        if (id) link.id = id
-        link.onerror = reject
-        link.onload = link.onreadystatechange = function() {
-          const loadState = this.readyState
-          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
-          link.onload = link.onreadystatechange = null
-          resolve()
-        }
-        document.head.appendChild(link)
-      })
-    
-      win.activateDarkMode = () => {
-        document.documentElement.setAttribute('data-theme', 'dark')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
-        }
-      }
-      win.activateLightMode = () => {
-        document.documentElement.setAttribute('data-theme', 'light')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
-        }
-      }
-      const t = saveToLocal.get('theme')
-    
-          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
-          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
-          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
-          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
-
-          if (t === undefined) {
-            if (isLightMode) activateLightMode()
-            else if (isDarkMode) activateDarkMode()
-            else if (isNotSpecified || hasNoSupport) {
-              const now = new Date()
-              const hour = now.getHours()
-              const isNight = hour <= 6 || hour >= 18
-              isNight ? activateDarkMode() : activateLightMode()
-            }
-            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
-              if (saveToLocal.get('theme') === undefined) {
-                e.matches ? activateDarkMode() : activateLightMode()
-              }
-            })
-          } else if (t === 'light') activateLightMode()
-          else activateDarkMode()
+    <head>
+      <meta charset="utf-8" />
         
-      const asideStatus = saveToLocal.get('aside-status')
-      if (asideStatus !== undefined) {
-        if (asideStatus === 'hide') {
-          document.documentElement.classList.add('hide-aside')
-        } else {
-          document.documentElement.classList.remove('hide-aside')
+      <meta name="description" content="永远年轻，永远热泪盈眶" />
+      
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>opencv的编译 |  热爱学习的未来酱</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      
+<link rel="stylesheet" href="/css/fonts/remixicon.css">
+
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
         }
-      }
+      </style>
+    <link rel="alternate" href="/atom.xml" title="热爱学习的未来酱" type="application/atom+xml">
+</head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
     
-      const detectApple = () => {
-        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
-          document.documentElement.classList.add('apple')
-        }
-      }
-      detectApple()
-    })(window)</script><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="热爱学习的未来酱" type="application/atom+xml">
-</head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="https://npm.elemecdn.com/anzhiyu-blog-static@1.0.4/img/avatar.jpg"/><div class="loading-image-dot"></div></div></div><script>const preloader = {
-  endLoading: () => {
-    document.getElementById('loading-box').classList.add("loaded");
-  },
-  initLoading: () => {
-    document.getElementById('loading-box').classList.remove("loaded")
-  }
-}
-window.addEventListener('load',()=> { preloader.endLoading() })
-setTimeout(function(){preloader.endLoading();},10000)
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-0-0-6 opencv的编译"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  opencv的编译
+</h1>
+ 
 
-if (true) {
-  document.addEventListener('pjax:send', () => { preloader.initLoading() })
-  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
-}</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.10/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><a id="site-name" href="/" accesskey="h"><div class="title">热爱学习的未来酱</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png" target="_blank"><img class="post-qr-code-img" alt="微信" src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png" target="_blank"><img class="post-qr-code-img" alt="支付宝" src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/3588-npu/" style="font-size: 1.05rem;">3588 npu<sup>6</sup></a><a href="/tags/PCB%E5%AD%A6%E4%B9%A0/" style="font-size: 1.05rem;">PCB学习<sup>1</sup></a><a href="/tags/RGA%E7%9A%84%E5%AD%A6%E4%B9%A0/" style="font-size: 1.05rem;">RGA的学习<sup>1</sup></a><a href="/tags/buildroot/" style="font-size: 1.05rem;">buildroot<sup>1</sup></a><a href="/tags/deb%E5%8C%85%E5%88%B6%E4%BD%9C/" style="font-size: 1.05rem;">deb包制作<sup>1</sup></a><a href="/tags/deb%E5%8C%85%E7%9A%84%E5%88%B6%E4%BD%9C/" style="font-size: 1.05rem;">deb包的制作<sup>1</sup></a><a href="/tags/docker/" style="font-size: 1.05rem;">docker<sup>1</sup></a><a href="/tags/hexo/" style="font-size: 1.05rem;">hexo<sup>3</sup></a><a href="/tags/markdown/" style="font-size: 1.05rem;">markdown<sup>2</sup></a><a href="/tags/opencv/" style="font-size: 1.05rem;">opencv<sup>1</sup></a><a href="/tags/systemd%E5%AD%A6%E4%B9%A0/" style="font-size: 1.05rem;">systemd学习<sup>1</sup></a><a href="/tags/%E5%8F%8D%E6%80%9D2023-11-27/" style="font-size: 1.05rem;">反思2023-11-27<sup>1</sup></a><a href="/tags/%E5%9C%A8%E5%AE%B6%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" style="font-size: 1.05rem;">在家学习记录<sup>1</sup></a><a href="/tags/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%84%E5%BB%BA/" style="font-size: 1.05rem;">文件系统构建<sup>1</sup></a><a href="/tags/%E6%BA%90%E7%A0%81%E4%BF%AE%E6%94%B9/" style="font-size: 1.05rem;">源码修改<sup>1</sup></a><a href="/tags/%E7%91%9E%E8%8A%AF%E5%BE%AE%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/" style="font-size: 1.05rem;">瑞芯微脚本分析<sup>18</sup></a><a href="/tags/%E7%BF%BB%E5%A2%99/" style="font-size: 1.05rem;">翻墙<sup>1</sup></a><a href="/tags/%E9%9F%B3%E8%A7%86%E9%A2%91%E6%B5%8B%E8%AF%95/" style="font-size: 1.05rem;">音视频测试<sup>1</sup></a><a href="/tags/%E9%9F%B3%E8%A7%86%E9%A2%91%E7%BC%96%E8%A7%A3%E7%A0%81/" style="font-size: 1.05rem;">音视频编解码<sup>2</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/11/"><span class="card-archive-list-date">十一月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">8</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/10/"><span class="card-archive-list-date">十月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">8</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/09/"><span class="card-archive-list-date">九月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">29</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div><div class="console-btn-item" id="consoleMusic" onclick="anzhiyu.musicToggle()" title="音乐开关"><a class="music-switch"><i class="anzhiyufont anzhiyu-icon-music"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/opencv/" itemprop="url">opencv</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/opencv/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>opencv</span></a></span></div></div><h1 class="post-title" itemprop="name headline">opencv的编译</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2023-10-17T13:55:17.000Z" title="发表于 2023-10-17 21:55:17">2023-10-17</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2023-10-18T15:14:00.326Z" title="更新于 2023-10-18 23:14:00">2023-10-18</time></span></div><div class="meta-secondline"><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为保定"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>保定</span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src=""></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope itemtype="http://example.com/2023/10/17/0-0-6%20opencv%E7%9A%84%E7%BC%96%E8%AF%91/"><header><a class="post-meta-categories" href="/categories/opencv/" itemprop="url">opencv</a><a href="/tags/opencv/" tabindex="-1" itemprop="url">opencv</a><h1 id="CrawlerTitle" itemprop="name headline">opencv的编译</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">John Doe</span><time itemprop="dateCreated datePublished" datetime="2023-10-17T13:55:17.000Z" title="发表于 2023-10-17 21:55:17">2023-10-17</time><time itemprop="dateCreated datePublished" datetime="2023-10-18T15:14:00.326Z" title="更新于 2023-10-18 23:14:00">2023-10-18</time></header><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/10/17/0-0-6%20opencv%E7%9A%84%E7%BC%96%E8%AF%91/" class="article-date">
+  <time datetime="2023-10-17T13:55:17.000Z" itemprop="datePublished">2023-10-17</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/opencv/">opencv</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">4.2k</span>
+        </span>
+    </span>
 
-<p>​	既然opencv中已经在ubuntu提供的库中了，那为什么人们更多的还是自己编译opencv再使用呢，就比如下面这个例子：<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310172055957.png" alt="image-20231017205544904"></p>
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">18 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>​	既然opencv中已经在ubuntu提供的库中了，那为什么人们更多的还是自己编译opencv再使用呢，就比如下面这个例子：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310172055957.png" alt="image-20231017205544904"></p>
 <p>想用一些库，然而发现ubuntu自带的opencv是没有开启的，这时候就要自己编译opencv了。</p>
 <h1 id="1-拉取opencv源码"><a href="#1-拉取opencv源码" class="headerlink" title="1.拉取opencv源码"></a>1.拉取opencv源码</h1><p>opencv地址 <strong><a target="_blank" rel="noopener" href="https://opencv.org/releases/">https://opencv.org/releases/</a></strong></p>
 <p><a target="_blank" rel="noopener" href="https://github.com/opencv/opencv">https://github.com/opencv/opencv</a></p>
@@ -227,7 +135,7 @@ if (true) {
 <p>克隆opencv源码</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/opencv/opencv</span><br></pre></td></tr></table></figure>
 
-<p>github的仓库源码太大了，还是直接从官网下载吧~，这里下载最新的opencv4.8 ，拷贝到ubuntu之上然后解压：<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310172109149.png" alt="image-20231017210921130"></p>
+<p>github的仓库源码太大了，还是直接从官网下载吧~，这里下载最新的opencv4.8 ，拷贝到ubuntu之上然后解压：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310172109149.png" alt="image-20231017210921130"></p>
 <p>在编译之前还需要先安装一些依赖</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install build-essential </span><br><span class="line"></span><br><span class="line">sudo apt-get install cmake git libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev</span><br><span class="line"></span><br><span class="line">sudo apt-get install python-dev-is-python2 python-numpy libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev  libdc1394-22-dev</span><br><span class="line"></span><br><span class="line">pip3 install numpy</span><br><span class="line"> </span><br><span class="line">sudo update-alternatives --install /usr/bin/python python /usr/bin/python2 100</span><br><span class="line">sudo update-alternatives --install /usr/bin/python python /usr/bin/python3 150</span><br></pre></td></tr></table></figure>
 
@@ -265,26 +173,26 @@ if (true) {
 <li><code>-D PYTHON_DEFAULT_EXECUTABLE=/usr/bin/python3</code>: 指定默认的Python解释器路径为<code>/usr/bin/python3</code>，这将用于与Python相关的构建和安装操作。<code>-D PYTHON_DEFAULT_EXECUTABLE=/usr/bin/python3</code>: 指定默认的Python解释器路径为<code>/usr/bin/python3</code>，这将用于与Python相关的构建和安装操作。</li>
 </ul>
 <p>&#x3D;&#x3D;注意：在CMake中，使用-D参数来定义变量。每个参数开头的-D表示要定义一个CMake变量，并为其赋予特定的值&#x3D;&#x3D;</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310172218235.png" alt="image-20231017221820208"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310172218235.png" alt="image-20231017221820208"></p>
 <p>然后进行编译安装</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">make -j32</span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
 
 <p>我这电脑还是很快的，两分钟吧也就，还是家里的电脑好呀</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310172125269.png" alt="image-20231017212507239"></p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310172217427.png" alt="image-20231017221754400"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310172125269.png" alt="image-20231017212507239"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310172217427.png" alt="image-20231017221754400"></p>
 <p>​	最后拷贝和链接python库（&#x3D;&#x3D;这一步必须做，否则在使用的时候会找不到cv2这个模块&#x3D;&#x3D;）</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cp lib/python3/cv2.cpython-38-x86_64-linux-gnu.so /usr/local/lib/python3.8/dist-packages/</span><br><span class="line">sudo ln -s  /usr/local/lib/python3.8/dist-packages/cv2.cpython-38-x86_64-linux-gnu.so  /usr/lib/python3/dist-packages/cv2.so</span><br></pre></td></tr></table></figure>
 
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310172226476.png" alt="image-20231017222605454"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310172226476.png" alt="image-20231017222605454"></p>
 <p>然后进行简单的测试：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">python</span><br><span class="line"></span><br><span class="line">import cv2</span><br><span class="line">cv2.__version__</span><br></pre></td></tr></table></figure>
 
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310172228970.png" alt="image-20231017222821948"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310172228970.png" alt="image-20231017222821948"></p>
 <p>然后测试一个opencv的C++程序</p>
 <p>首先创建三个目录build  install  src</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p build  install  src</span><br></pre></td></tr></table></figure>
 
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310172258435.png" alt="image-20231017225840415"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310172258435.png" alt="image-20231017225840415"></p>
 <p>然后在src目录下创建测试例程demo.cpp,然后向该文件中添加以下程序：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;opencv2/core/core.hpp&quot;</span>                                                                               </span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;opencv2/highgui/highgui.hpp&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;opencv2/imgproc/imgproc.hpp&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> cv;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">VideoCapture <span class="title">capture</span><span class="params">(<span class="number">0</span>)</span></span>;</span><br><span class="line">    <span class="keyword">if</span> (!capture.<span class="built_in">isOpened</span>())</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 如果无法打开摄像头，则输出提示信息</span></span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;无法打开摄像头&quot;</span> &lt;&lt; endl;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">double</span> time0 = <span class="built_in">static_cast</span>&lt;<span class="type">double</span>&gt;(<span class="built_in">getTickCount</span>()); <span class="comment">// 获取开始时间</span></span><br><span class="line">    <span class="keyword">while</span> (<span class="literal">true</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 从摄像头捕获帧</span></span><br><span class="line">        Mat frame;</span><br><span class="line">        capture &gt;&gt; frame;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 如果捕获到帧，则显示它</span></span><br><span class="line">        <span class="keyword">if</span> (!frame.<span class="built_in">empty</span>())</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">cvtColor</span>(frame, frame, COLOR_RGB2BGR);</span><br><span class="line">            <span class="type">double</span> time1 = <span class="built_in">static_cast</span>&lt;<span class="type">double</span>&gt;(<span class="built_in">getTickCount</span>()); <span class="comment">// 获取结束时间</span></span><br><span class="line">            <span class="type">double</span> fps = <span class="built_in">getTickFrequency</span>() / (time1 - time0); <span class="comment">// 计算实时帧率</span></span><br><span class="line">            time0 = time1; <span class="comment">// 更新开始时间</span></span><br><span class="line">            <span class="built_in">putText</span>(frame, <span class="string">&quot;FPS: &quot;</span> + <span class="built_in">to_string</span>(fps), <span class="built_in">Point</span>(<span class="number">10</span>, <span class="number">30</span>), FONT_HERSHEY_SIMPLEX, <span class="number">1</span>, <span class="built_in">Scalar</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">255</span>), <span class="number">2</span>); <span class="comment">// 在图像上显示帧率</span></span><br><span class="line">            <span class="built_in">imshow</span>(<span class="string">&quot;MIPI Camera&quot;</span>, frame);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 按下&#x27;q&#x27;键退出循环</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">waitKey</span>(<span class="number">1</span>) == <span class="string">&#x27;q&#x27;</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 释放资源并关闭窗口</span></span><br><span class="line">    capture.<span class="built_in">release</span>();</span><br><span class="line">    <span class="built_in">destroyAllWindows</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -294,26 +202,26 @@ if (true) {
 <p>然后进入build目录，执行以下命令，进行配置、编译和安装三个步骤：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd build/</span><br><span class="line">cmake ../</span><br><span class="line">make </span><br><span class="line">make install </span><br></pre></td></tr></table></figure>
 
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310172303425.png" alt="image-20231017230355394"></p>
-<p>在install&#x2F;Linux目录下就生成了测试APP opencv_demo<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310172304597.png" alt="image-20231017230415584"></p>
-<p>然后接一个摄像头进行测试，测试功能正常：<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310172310504.png" alt="image-20231017231044428"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310172303425.png" alt="image-20231017230355394"></p>
+<p>在install&#x2F;Linux目录下就生成了测试APP opencv_demo<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310172304597.png" alt="image-20231017230415584"></p>
+<p>然后接一个摄像头进行测试，测试功能正常：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310172310504.png" alt="image-20231017231044428"></p>
 <p>至此，opencv在PC机的编译就完成了。</p>
 <h1 id="3-交叉编译（qemu）"><a href="#3-交叉编译（qemu）" class="headerlink" title="3.交叉编译（qemu）"></a>3.交叉编译（qemu）</h1><p>上面编译的其实都是在X86上编译的一些个版本，而这里将编译开发板的版本，本来想的是交叉编译呀，可是后来我一想，我有qemu呀，我还交叉编译啥呀，完全不需要呀，完全忘记了qemu还有这个~。</p>
 <p>首先解压一下开发板ubuntu20的源码，解压完成如下所示：</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310182204944.png" alt="image-20231018220418904"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310182204944.png" alt="image-20231018220418904"></p>
 <p>​	然后创建一个名为mount.sh的挂载脚本，该脚本的作用是挂载ubuntu并qemu</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"></span><br><span class="line">function mnt() &#123;</span><br><span class="line">    echo &quot;MOUNTING&quot;</span><br><span class="line">    sudo mount -t proc /proc $&#123;2&#125;proc</span><br><span class="line">    sudo mount -t sysfs /sys $&#123;2&#125;sys</span><br><span class="line">    sudo mount -o bind /dev $&#123;2&#125;dev</span><br><span class="line">    sudo mount -B /dev/pts $&#123;2&#125;dev/pts</span><br><span class="line"></span><br><span class="line">    sudo chroot $&#123;2&#125; /bin/sh</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function umnt() &#123;</span><br><span class="line">    echo &quot;UNMOUNTING&quot;</span><br><span class="line">    sudo umount $&#123;2&#125;proc</span><br><span class="line">    sudo umount $&#123;2&#125;sys</span><br><span class="line">    sudo umount $&#123;2&#125;dev/pts</span><br><span class="line">    sudo umount $&#123;2&#125;dev</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">if [ &quot;$1&quot; == &quot;-m&quot; ] &amp;&amp; [ -n &quot;$2&quot; ] ;</span><br><span class="line">then</span><br><span class="line">    mnt $1 $2</span><br><span class="line">elif [ &quot;$1&quot; == &quot;-u&quot; ] &amp;&amp; [ -n &quot;$2&quot; ];</span><br><span class="line">then</span><br><span class="line">    umnt $1 $2</span><br><span class="line">else</span><br><span class="line">    echo &quot;&quot;</span><br><span class="line">    echo &quot;Either 1&#x27;st, 2&#x27;nd or both parameters were missing&quot;</span><br><span class="line">    echo &quot;&quot;</span><br><span class="line">    echo &quot;1&#x27;st parameter can be one of these: -m(mount) OR -u(umount)&quot;</span><br><span class="line">    echo &quot;2&#x27;nd parameter is the full path of rootfs directory(with trailing &#x27;/&#x27;)&quot;</span><br><span class="line">    echo &quot;&quot;</span><br><span class="line">    echo &quot;For example: ch-mount -m /media/sdcard/&quot;</span><br><span class="line">    echo &quot;&quot;</span><br><span class="line">    echo 1st parameter : $&#123;1&#125;</span><br><span class="line">    echo 2nd parameter : $&#123;2&#125;</span><br><span class="line">fi</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310182205952.png" alt="image-20231018220519930"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310182205952.png" alt="image-20231018220519930"></p>
 <p>然后这样进行挂载：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./mount.sh -m ubuntu/</span><br></pre></td></tr></table></figure>
 
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310182206222.png" alt="image-20231018220618193"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310182206222.png" alt="image-20231018220618193"></p>
 <p>我这里首先更新了一下软件源，然后就是安装一些依赖，就跟上面在PC上安装依赖的方法相同。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install build-essential </span><br><span class="line"></span><br><span class="line">sudo apt-get install cmake git libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev</span><br><span class="line"></span><br><span class="line">sudo apt-get install python-dev-is-python2 python-numpy libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev  libdc1394-22-dev</span><br><span class="line"></span><br><span class="line">pip3 install numpy</span><br><span class="line"> </span><br><span class="line">sudo update-alternatives --install /usr/bin/python python /usr/bin/python2 100</span><br><span class="line">sudo update-alternatives --install /usr/bin/python python /usr/bin/python3 150</span><br></pre></td></tr></table></figure>
 
 <p>然后将opencv源码拷贝到qumu的uubntu目录下，如下图所示：</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310182209088.png" alt="image-20231018220935063"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310182209088.png" alt="image-20231018220935063"></p>
 <p>然后进行opencv源码的解压：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unzip opencv-4.8.0.zip</span><br></pre></td></tr></table></figure>
 
@@ -351,25 +259,25 @@ if (true) {
 <li><code>-D PYTHON_DEFAULT_EXECUTABLE=/usr/bin/python3</code>: 指定默认的Python解释器路径为<code>/usr/bin/python3</code>，这将用于与Python相关的构建和安装操作。<code>-D PYTHON_DEFAULT_EXECUTABLE=/usr/bin/python3</code>: 指定默认的Python解释器路径为<code>/usr/bin/python3</code>，这将用于与Python相关的构建和安装操作。</li>
 </ul>
 <p>&#x3D;&#x3D;注意：在CMake中，使用-D参数来定义变量。每个参数开头的-D表示要定义一个CMake变量，并为其赋予特定的值&#x3D;&#x3D;</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310182215457.png" alt="image-20231018221553413"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310182215457.png" alt="image-20231018221553413"></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">make -j32</span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
 
 <p>虽然是qemu，但是用的仍旧是PC的CPU，但是这个速度是真的慢呀，但我看CPU都跑满了呀~~竟然搞了三十分钟~</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310182257983.png" alt="image-20231018225750952"></p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310182258770.png" alt="image-20231018225848736"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310182257983.png" alt="image-20231018225750952"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310182258770.png" alt="image-20231018225848736"></p>
 <p>​	最后拷贝和链接python库（&#x3D;&#x3D;这一步必须做，否则在使用的时候会找不到cv2这个模块&#x3D;&#x3D;）</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cp lib/python3/cv2.cpython-38-aarch64-linux-gnu.so ../install/lib/python3.8/site-packages/</span><br><span class="line">ln -s  /usr/local/lib/python3.8/dist-packages/cv2.cpython-38-aarch64-linux-gnu.so  /usr/lib/python3/dist-packages/cv2.so</span><br></pre></td></tr></table></figure>
 
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310172226476.png" alt="image-20231017222605454"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310172226476.png" alt="image-20231017222605454"></p>
 <p>然后进行简单的测试：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">python</span><br><span class="line"></span><br><span class="line">import cv2</span><br><span class="line">cv2.__version__</span><br></pre></td></tr></table></figure>
 
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310172228970.png" alt="image-20231017222821948"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310172228970.png" alt="image-20231017222821948"></p>
 <p>然后测试一个opencv的C++程序</p>
 <p>首先创建三个目录build  install  src</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p build  install  src</span><br></pre></td></tr></table></figure>
 
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310172258435.png" alt="image-20231017225840415"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310172258435.png" alt="image-20231017225840415"></p>
 <p>然后在src目录下创建测试例程demo.cpp,然后向该文件中添加以下程序：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;opencv2/core/core.hpp&quot;</span>                                                                               </span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;opencv2/highgui/highgui.hpp&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;opencv2/imgproc/imgproc.hpp&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> cv;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">VideoCapture <span class="title">capture</span><span class="params">(<span class="number">0</span>)</span></span>;</span><br><span class="line">    <span class="keyword">if</span> (!capture.<span class="built_in">isOpened</span>())</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 如果无法打开摄像头，则输出提示信息</span></span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;无法打开摄像头&quot;</span> &lt;&lt; endl;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">double</span> time0 = <span class="built_in">static_cast</span>&lt;<span class="type">double</span>&gt;(<span class="built_in">getTickCount</span>()); <span class="comment">// 获取开始时间</span></span><br><span class="line">    <span class="keyword">while</span> (<span class="literal">true</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 从摄像头捕获帧</span></span><br><span class="line">        Mat frame;</span><br><span class="line">        capture &gt;&gt; frame;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 如果捕获到帧，则显示它</span></span><br><span class="line">        <span class="keyword">if</span> (!frame.<span class="built_in">empty</span>())</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">cvtColor</span>(frame, frame, COLOR_RGB2BGR);</span><br><span class="line">            <span class="type">double</span> time1 = <span class="built_in">static_cast</span>&lt;<span class="type">double</span>&gt;(<span class="built_in">getTickCount</span>()); <span class="comment">// 获取结束时间</span></span><br><span class="line">            <span class="type">double</span> fps = <span class="built_in">getTickFrequency</span>() / (time1 - time0); <span class="comment">// 计算实时帧率</span></span><br><span class="line">            time0 = time1; <span class="comment">// 更新开始时间</span></span><br><span class="line">            <span class="built_in">putText</span>(frame, <span class="string">&quot;FPS: &quot;</span> + <span class="built_in">to_string</span>(fps), <span class="built_in">Point</span>(<span class="number">10</span>, <span class="number">30</span>), FONT_HERSHEY_SIMPLEX, <span class="number">1</span>, <span class="built_in">Scalar</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">255</span>), <span class="number">2</span>); <span class="comment">// 在图像上显示帧率</span></span><br><span class="line">            <span class="built_in">imshow</span>(<span class="string">&quot;MIPI Camera&quot;</span>, frame);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 按下&#x27;q&#x27;键退出循环</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">waitKey</span>(<span class="number">1</span>) == <span class="string">&#x27;q&#x27;</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 释放资源并关闭窗口</span></span><br><span class="line">    capture.<span class="built_in">release</span>();</span><br><span class="line">    <span class="built_in">destroyAllWindows</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -379,150 +287,462 @@ if (true) {
 <p>然后进入build目录，执行以下命令，进行配置、编译和安装三个步骤（&#x3D;&#x3D;这里由于我是将opencv的库和头文件等放到了上一级的install目录，所以这里可能要修改一下CmakeLists，但也还好&#x3D;&#x3D;）：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd build/</span><br><span class="line">cmake ../</span><br><span class="line">make </span><br><span class="line">make install </span><br></pre></td></tr></table></figure>
 
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310172303425.png" alt="image-20231017230355394"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310172303425.png" alt="image-20231017230355394"></p>
 <p>至此，opencv qemu编译就完成了。</p>
-</article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg" title="头像" alt="头像"></a><div class="post-copyright__author_name">John Doe</div><div class="post-copyright__author_desc">热爱学习</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="http://example.com/2023/10/17/0-0-6%20opencv%E7%9A%84%E7%BC%96%E8%AF%91/">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('http://example.com/2023/10/17/0-0-6%20opencv%E7%9A%84%E7%BC%96%E8%AF%91/')">opencv的编译</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="http://example.com/2023/10/17/0-0-6%20opencv%E7%9A%84%E7%BC%96%E8%AF%91/"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=opencv的编译&amp;url=http://example.com/2023/10/17/0-0-6%20opencv%E7%9A%84%E7%BC%96%E8%AF%91/&amp;pic=" rel="external nofollow noreferrer noopener"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
-  var currentPageUrl = window.location.href;
-  var input = document.createElement("input");
-  input.setAttribute("value", currentPageUrl);
-  document.body.appendChild(input);
-  input.select();
-  input.setSelectionRange(0, 99999);
-  document.execCommand("copy");
-  document.body.removeChild(input);
-}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">热爱学习的未来酱</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/opencv/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>opencv<span class="tagsPageCount">1</span></a></div></div></div><div class="post_share"><div class="social-share" data-image="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"/><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/10/16/0-0-7%20buildroot%E7%9A%84%E5%AD%A6%E4%B9%A0/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">buildroot的学习</div></div></a></div><div class="next-post pull-right"><a href="/2023/10/19/0-0-8%20%E6%9E%84%E5%BB%BAdeb%E5%8C%85/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">0-0-8 构建deb包</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__description">永远年轻，永远热泪盈眶</div></div></div><div class="card-widget anzhiyu-right-widget" id="card-wechat" onclick="null"><div id="flip-wrapper"><div id="flip-content"><div class="face" style="background: url(https://bu.dusays.com/2023/01/13/63c02edf44033.png) center center / 100% no-repeat"></div><div class="back face" style="background: url(https://bu.dusays.com/2023/05/13/645fa415e8694.png) center center / 100% no-repeat"></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E6%8B%89%E5%8F%96opencv%E6%BA%90%E7%A0%81"><span class="toc-number">1.</span> <span class="toc-text">1.拉取opencv源码</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91%EF%BC%88PC%EF%BC%89"><span class="toc-number">2.</span> <span class="toc-text">2.源码编译（PC）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91%EF%BC%88qemu%EF%BC%89"><span class="toc-number">3.</span> <span class="toc-text">3.交叉编译（qemu）</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/11/27/%E5%8F%8D%E6%80%9D1/" title="反思1">反思1</a><time datetime="2023-11-27T13:26:56.000Z" title="发表于 2023-11-27 21:26:56">2023-11-27</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/11/27/0-0-17-RGA%E7%9A%84%E5%AD%A6%E4%B9%A0/" title="0-0-17 RGA的学习">0-0-17 RGA的学习</a><time datetime="2023-11-27T06:17:20.000Z" title="发表于 2023-11-27 14:17:20">2023-11-27</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/11/20/0-0-16%20debian%E5%92%8Cubuntu%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%84%E5%BB%BA%E8%AF%A6%E8%A7%A3/" title="0-0-16 ubuntu和debian文件系统构建详解">0-0-16 ubuntu和debian文件系统构建详解</a><time datetime="2023-11-20T13:16:57.000Z" title="发表于 2023-11-20 21:16:57">2023-11-20</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/11/19/0-0-15%20%E6%98%BE%E7%A4%BA%E7%A1%AC%E4%BB%B6%E5%8F%91%E5%B1%95%E4%B8%8E%E8%A7%86%E9%A2%91%E5%BC%80%E5%8F%91%E7%9F%A5%E8%AF%86%E7%82%B9%E6%89%AB%E7%9B%B2/" title="0-0-15 显示硬件发展与视频开发知识点扫盲">0-0-15 显示硬件发展与视频开发知识点扫盲</a><time datetime="2023-11-19T13:16:56.000Z" title="发表于 2023-11-19 21:16:56">2023-11-19</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/11/19/0-0-14%20%E9%9F%B3%E8%A7%86%E9%A2%91%E7%BC%96%E8%A7%A3%E7%A0%81%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E5%AD%A6%E4%B9%A0/" title="0-0-14 音视频编解码相关知识学习">0-0-14 音视频编解码相关知识学习</a><time datetime="2023-11-19T09:16:56.000Z" title="发表于 2023-11-19 17:16:56">2023-11-19</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">&copy;2020 - 2023 By <a class="footer-bar-link" href="/" title="John Doe" target="_blank">John Doe</a></div></div><div id="footer-type-tips"></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/anzhiyu-c/hexo-theme-anzhiyu" title="主题">主题</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">45</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">19</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">12</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://blog.anheyu.com/" title="博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="博客"/><span class="back-menu-item-text">博客</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://image.anheyu.com/" title="安知鱼图床"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://image.anheyu.com/favicon.ico" alt="安知鱼图床"/><span class="back-menu-item-text">安知鱼图床</span></a></div></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/3588-npu/" style="font-size: 0.88rem;">3588 npu<sup>6</sup></a><a href="/tags/PCB%E5%AD%A6%E4%B9%A0/" style="font-size: 0.88rem;">PCB学习<sup>1</sup></a><a href="/tags/RGA%E7%9A%84%E5%AD%A6%E4%B9%A0/" style="font-size: 0.88rem;">RGA的学习<sup>1</sup></a><a href="/tags/buildroot/" style="font-size: 0.88rem;">buildroot<sup>1</sup></a><a href="/tags/deb%E5%8C%85%E5%88%B6%E4%BD%9C/" style="font-size: 0.88rem;">deb包制作<sup>1</sup></a><a href="/tags/deb%E5%8C%85%E7%9A%84%E5%88%B6%E4%BD%9C/" style="font-size: 0.88rem;">deb包的制作<sup>1</sup></a><a href="/tags/docker/" style="font-size: 0.88rem;">docker<sup>1</sup></a><a href="/tags/hexo/" style="font-size: 0.88rem;">hexo<sup>3</sup></a><a href="/tags/markdown/" style="font-size: 0.88rem;">markdown<sup>2</sup></a><a href="/tags/opencv/" style="font-size: 0.88rem;">opencv<sup>1</sup></a><a href="/tags/systemd%E5%AD%A6%E4%B9%A0/" style="font-size: 0.88rem;">systemd学习<sup>1</sup></a><a href="/tags/%E5%8F%8D%E6%80%9D2023-11-27/" style="font-size: 0.88rem;">反思2023-11-27<sup>1</sup></a><a href="/tags/%E5%9C%A8%E5%AE%B6%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" style="font-size: 0.88rem;">在家学习记录<sup>1</sup></a><a href="/tags/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%84%E5%BB%BA/" style="font-size: 0.88rem;">文件系统构建<sup>1</sup></a><a href="/tags/%E6%BA%90%E7%A0%81%E4%BF%AE%E6%94%B9/" style="font-size: 0.88rem;">源码修改<sup>1</sup></a><a href="/tags/%E7%91%9E%E8%8A%AF%E5%BE%AE%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/" style="font-size: 0.88rem;">瑞芯微脚本分析<sup>18</sup></a><a href="/tags/%E7%BF%BB%E5%A2%99/" style="font-size: 0.88rem;">翻墙<sup>1</sup></a><a href="/tags/%E9%9F%B3%E8%A7%86%E9%A2%91%E6%B5%8B%E8%AF%95/" style="font-size: 0.88rem;">音视频测试<sup>1</sup></a><a href="/tags/%E9%9F%B3%E8%A7%86%E9%A2%91%E7%BC%96%E8%A7%A3%E7%A0%81/" style="font-size: 0.88rem;">音视频编解码<sup>2</sup></a></div></div><hr/></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="nav-music"><a id="nav-music-hoverTips" onclick="anzhiyu.musicToggle()" accesskey="m">播放音乐</a><div id="console-music-bg"></div><meting-js id="8152976493" server="netease" type="playlist" mutex="true" preload="none" theme="var(--anzhiyu-main)" data-lrctype="0" order="random"></meting-js></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://y.qq.com/n/ryqq/playlist/8802438608&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@5.0.20/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.cbd.int/vanilla-lazyload@17.8.4/dist/lazyload.iife.min.js"></script><script src="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.js"></script><canvas id="universe"></canvas><script async src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
-var HoldLog = console.log;
-console.log = function () {};
-let now1 = new Date();
-queueMicrotask(() => {
-  const Log = function () {
-    HoldLog.apply(console, arguments);
-  }; //在恢复前输出日志
-  const grt = new Date("04/01/2021 00:00:00"); //此处修改你的建站时间或者网站上线时间
-  now1.setTime(now1.getTime() + 250);
-  const days = (now1 - grt) / 1000 / 60 / 60 / 24;
-  const dnum = Math.floor(days);
-  const ascll = [
-    `欢迎使用安知鱼!`,
-    `生活明朗, 万物可爱`,
-    `
-        
-       █████╗ ███╗   ██╗███████╗██╗  ██╗██╗██╗   ██╗██╗   ██╗
-      ██╔══██╗████╗  ██║╚══███╔╝██║  ██║██║╚██╗ ██╔╝██║   ██║
-      ███████║██╔██╗ ██║  ███╔╝ ███████║██║ ╚████╔╝ ██║   ██║
-      ██╔══██║██║╚██╗██║ ███╔╝  ██╔══██║██║  ╚██╔╝  ██║   ██║
-      ██║  ██║██║ ╚████║███████╗██║  ██║██║   ██║   ╚██████╔╝
-      ╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝    ╚═════╝
-        
-        `,
-    "已上线",
-    dnum,
-    "天",
-    "©2020 By 安知鱼 V1.6.9",
-  ];
-  const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
+ 
+      <!-- reward -->
+      
+    </div>
+    
 
-  setTimeout(
-    Log.bind(
-      console,
-      `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
-      "color:#425AEF",
-      "",
-      "color:#425AEF",
-      "color:#425AEF",
-      "",
-      "color:#425AEF",
-      ""
-    )
-  );
-  setTimeout(
-    Log.bind(
-      console,
-      `%c ${ascll2[0]} %c ${ascll2[1]} %c \n${ascll2[2]} %c\n${ascll2[3]}\n`,
-      "color:white; background-color:#4fd953",
-      "",
-      "",
-      'background:url("https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/tinggge.gif") no-repeat;font-size:450%'
-    )
-  );
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
 
-  setTimeout(Log.bind(console, "%c WELCOME %c 你好，小笨蛋.", "color:white; background-color:#4f90d9", ""));
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2023/10/17/0-0-6%20opencv%E7%9A%84%E7%BC%96%E8%AF%91/" alt="微信分享二维码">
+    </div>
+</div>
 
-  setTimeout(
-    console.warn.bind(
-      console,
-      "%c ⚡ Powered by 安知鱼 %c 你正在访问 John Doe 的博客.",
-      "color:white; background-color:#f0ad4e",
-      ""
-    )
-  );
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/opencv/" rel="tag">opencv</a></li></ul>
 
-  setTimeout(Log.bind(console, "%c W23-12 %c 你已打开控制台.", "color:white; background-color:#4f90d9", ""));
+    </footer>
+  </div>
 
-  setTimeout(
-    console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
-  );
-});</script><script async src="/anzhiyu/random.js"></script><div class="js-pjax"><input type="hidden" name="page-type" id="page-type" value="post"></div><script>var visitorMail = "visitor@anheyu.com";
-</script><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://cdn.cbd.int/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
-var pjax = new Pjax({
-  elements: 'a:not([target="_blank"])',
-  selectors: pjaxSelectors,
-  cacheBust: false,
-  analytics: false,
-  scrollRestoration: false
-})
+   
+  <nav class="article-nav">
+    
+      <a href="/2023/10/19/0-0-8%20%E6%9E%84%E5%BB%BAdeb%E5%8C%85/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            0-0-8 构建deb包
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2023/10/16/0-0-7%20buildroot%E7%9A%84%E5%AD%A6%E4%B9%A0/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">buildroot的学习</div>
+      </a>
+    
+  </nav>
 
-document.addEventListener('pjax:send', function () {
-  // removeEventListener scroll 
-  anzhiyu.removeGlobalFnEvent('pjax')
-  anzhiyu.removeGlobalFnEvent('themeChange')
-
-  document.getElementById('rightside').classList.remove('rightside-show')
   
-  if (window.aplayers) {
-    for (let i = 0; i < window.aplayers.length; i++) {
-      if (!window.aplayers[i].options.fixed) {
-        window.aplayers[i].destroy()
-      }
+   
+  
+   
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2015-2023
+        <i class="ri-heart-fill heart_icon"></i> chai
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="热爱学习的未来酱"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/2019/about">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
     }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
   }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
 
-  typeof typed === 'object' && typed.destroy()
-
-  //reset readmode
-  const $bodyClassList = document.body.classList
-  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
-})
-
-document.addEventListener('pjax:complete', function () {
-  window.refreshFn()
-
-  document.querySelectorAll('script[data-pjax]').forEach(item => {
-    const newScript = document.createElement('script')
-    const content = item.text || item.textContent || item.innerHTML || ""
-    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
-    newScript.appendChild(document.createTextNode(content))
-    item.parentNode.replaceChild(newScript, item)
-  })
-
-  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
-
-  typeof panguInit === 'function' && panguInit()
-
-  // google analytics
-  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
-
-  // baidu analytics
-  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
-
-  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
-
-  // prismjs
-  typeof Prism === 'object' && Prism.highlightAll()
-})
-
-document.addEventListener('pjax:error', e => {
-  if (e.request.status === 404) {
-    pjax.loadUrl('/404.html')
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
   }
-})</script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div></body></html>
+</script>
+
+
+    
+    
+
+  </div>
+</body>
+
+</html>
