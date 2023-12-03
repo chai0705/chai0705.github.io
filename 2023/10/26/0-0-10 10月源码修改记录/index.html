@@ -111,9 +111,7 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <hr>
-<hr>
-<h1 id="修改1：debian的选择"><a href="#修改1：debian的选择" class="headerlink" title="修改1：debian的选择"></a>修改1：debian的选择</h1><p>首先修改的是build.sh文件，将debian相关的构建部分修改成了以下内容，之前的太过繁琐</p>
+  <h1 id="修改1：debian的选择"><a href="#修改1：debian的选择" class="headerlink" title="修改1：debian的选择"></a>修改1：debian的选择</h1><p>首先修改的是build.sh文件，将debian相关的构建部分修改成了以下内容，之前的太过繁琐</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function build_debian()&#123;</span><br><span class="line"></span><br><span class="line">    echo &quot;=========Start building debian for $ARCH=========&quot;</span><br><span class="line"></span><br><span class="line">    cd debian</span><br><span class="line">    VERSION=debian10 ./mk-rootfs.sh                                                                          </span><br><span class="line">    ./mk-image.sh</span><br><span class="line"></span><br><span class="line">    finish_build</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>然后修改的是debian的文件夹，目前只是保留这四个文件mk-image.sh  mk-rootfs.sh  post-build.sh linaro-buster-arm64.tar.xz，其中</p>

@@ -13,7 +13,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
-      <title>0-0-8 构建deb包 |  热爱学习的未来酱</title>
+      <title>0-0-8 system 学习 |  热爱学习的未来酱</title>
   <meta name="generator" content="hexo-theme-ayer">
       
       <link rel="shortcut icon" href="/favicon.ico" />
@@ -67,7 +67,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  0-0-8 构建deb包
+  0-0-8 system 学习
 </h1>
  
 
@@ -111,10 +111,7 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <hr>
-<hr>
-<hr>
-<p>这两天一直在学习如何构建一个还算差不多的debina系统，之前的休眠都是通过田田的那个sysstemd来编写的，但是呢，我后来又将蓝牙wifi驱动的加载也放进去了，所以这就导致了不严谨，为了构建系统的严谨性，我决定好好的学习一下systemd。</p>
+  <p>这两天一直在学习如何构建一个还算差不多的debina系统，之前的休眠都是通过田田的那个sysstemd来编写的，但是呢，我后来又将蓝牙wifi驱动的加载也放进去了，所以这就导致了不严谨，为了构建系统的严谨性，我决定好好的学习一下systemd。</p>
 <h1 id="一、systemd的由来"><a href="#一、systemd的由来" class="headerlink" title="一、systemd的由来"></a>一、systemd的由来</h1><p>​	在早期的 Linux 系统中，使用的是 SysV 初始化系统，它使用脚本和运行级别来管理系统启动和服务管理（&#x3D;&#x3D;rk3568和rk3588目前提供的buildroot系统仍旧使用的是 SysV&#x3D;&#x3D;）。这种方式存在一些问题，比如启动速度较慢、启动顺序固定、对并行启动的支持有限等。<br>​	而随着计算机硬件的发展和多核处理器的普及，用户对于快速启动和并行处理的需求越来越高。为了满足这些需求，Linux 社区开始探索更先进的启动机制。</p>
 <ol>
 <li>Upstart 的出现：<br>Upstart 是一个由 Canonical 公司开发的事件驱动的 init 系统，于 2006 年首次发布。它引入了事件驱动的启动方式，可以并行地启动系统服务，提高了启动速度。然而，Upstart 并没有成为主流，因为它只受到了 Ubuntu 等少数发行版的采用。</li>

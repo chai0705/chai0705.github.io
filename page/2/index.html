@@ -488,8 +488,7 @@
       
     <div class="article-entry" itemprop="articleBody">
        
-  <hr>
-<p>先说一下前情提要：<br>    最近这一个月一直在制作debian和ubuntu文件系统，rk官方默认情况下只是构建了debian，好像是因为版权问题，然而呢，我肯定是要构建ubuntu镜像的，而我要做的，就是根据rk提供的debian系统的构建方法，来进行ubuntu的构建。</p>
+  <p>先说一下前情提要：<br>    最近这一个月一直在制作debian和ubuntu文件系统，rk官方默认情况下只是构建了debian，好像是因为版权问题，然而呢，我肯定是要构建ubuntu镜像的，而我要做的，就是根据rk提供的debian系统的构建方法，来进行ubuntu的构建。</p>
 <p>​	最大的问题出现在deb包的构建,也就是下面这些deb包：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311132050152.png" alt="image-20231113205017093"></p>
 <p>很多很多的包，根本不知道从哪里来的~~，而现在呢大约知道了，首先呢先来分析一下各个dockerfile文件。</p>
 <p>几个很重要的github链接：</p>
@@ -1149,9 +1148,7 @@
       
     <div class="article-entry" itemprop="articleBody">
        
-  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~~</span><br></pre></td></tr></table></figure>
-
-<p>从今天开始学习一下PCB的学习，我当然也是想画一些高速PCB板子，那些8层的、10层的，但是路还很远，很长，所以慢慢的加油吧。</p>
+  <p>从今天开始学习一下PCB的学习，我当然也是想画一些高速PCB板子，那些8层的、10层的，但是路还很远，很长，所以慢慢的加油吧。</p>
 <p>11月12 日，今天来学习第一部分，软件的安装，由于使用的是两层板，版本是AD19,所以这里要先进行软件的安装和设置，后续的内容，下一个星期日再见。</p>
 <h1 id="1-AD-19软件安装和配置"><a href="#1-AD-19软件安装和配置" class="headerlink" title="1 AD 19软件安装和配置"></a>1 AD 19软件安装和配置</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">链接：https://pan.baidu.com/s/1gznZRe00REAmoUThExJrCQ </span><br><span class="line">提取码：gtqh </span><br><span class="line">--来自百度网盘超级会员V6的分享</span><br></pre></td></tr></table></figure>
 
@@ -1244,10 +1241,7 @@
       
     <div class="article-entry" itemprop="articleBody">
        
-  <hr>
-<hr>
-<hr>
-<p>这是我学习docker的一个前提条件，在之前的一些时间，我也是简单的看了一下docker，当时我是想用docker来进行deb包的构建的，为什么想到用docker了呢，这是因为我看大佬的github和瑞芯微的指导手册里都使用的docker，其实这个就跟开发板直接编译的效果是一样的，只是docker是在本机上，所以操作更流畅一些，而且开发板的编译速度以及方便程度，是有些区别的，所以docker就出现了，再然后我发现源码的编译里也是可以用到docker的，毕竟也就仅仅是一些环境而已，所以我又萌发了用docker编译源码的想法，所以docker的学习正式开始。</p>
+  <p>这是我学习docker的一个前提条件，在之前的一些时间，我也是简单的看了一下docker，当时我是想用docker来进行deb包的构建的，为什么想到用docker了呢，这是因为我看大佬的github和瑞芯微的指导手册里都使用的docker，其实这个就跟开发板直接编译的效果是一样的，只是docker是在本机上，所以操作更流畅一些，而且开发板的编译速度以及方便程度，是有些区别的，所以docker就出现了，再然后我发现源码的编译里也是可以用到docker的，毕竟也就仅仅是一些环境而已，所以我又萌发了用docker编译源码的想法，所以docker的学习正式开始。</p>
 <p><strong>弱小和无知不是生存的障碍，傲慢才是</strong></p>
 <p><strong>唯有出现需求，你的目标和需求相匹配，才是学习最快速的路径。</strong></p>
 <h1 id="Docker为什么出现"><a href="#Docker为什么出现" class="headerlink" title="Docker为什么出现"></a>Docker为什么出现</h1><p>在我看来，我不是运维人员，我是嵌入式软件工程师，现在编译一个系统，换一个开发板，他们的环境都是不一样的，这就很烦，然而docker呢就很方便的解决了依赖这些相关的问题，而且还很小，这也是我学习docker的原因。</p>
@@ -1583,9 +1577,7 @@
       
     <div class="article-entry" itemprop="articleBody">
        
-  <hr>
-<hr>
-<h1 id="修改1：debian的选择"><a href="#修改1：debian的选择" class="headerlink" title="修改1：debian的选择"></a>修改1：debian的选择</h1><p>首先修改的是build.sh文件，将debian相关的构建部分修改成了以下内容，之前的太过繁琐</p>
+  <h1 id="修改1：debian的选择"><a href="#修改1：debian的选择" class="headerlink" title="修改1：debian的选择"></a>修改1：debian的选择</h1><p>首先修改的是build.sh文件，将debian相关的构建部分修改成了以下内容，之前的太过繁琐</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function build_debian()&#123;</span><br><span class="line"></span><br><span class="line">    echo &quot;=========Start building debian for $ARCH=========&quot;</span><br><span class="line"></span><br><span class="line">    cd debian</span><br><span class="line">    VERSION=debian10 ./mk-rootfs.sh                                                                          </span><br><span class="line">    ./mk-image.sh</span><br><span class="line"></span><br><span class="line">    finish_build</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>然后修改的是debian的文件夹，目前只是保留这四个文件mk-image.sh  mk-rootfs.sh  post-build.sh linaro-buster-arm64.tar.xz，其中</p>
@@ -1788,7 +1780,7 @@
        
 <h2 itemprop="name">
   <a class="article-title" href="/2023/10/25/0-0-9%20systemd%20%E5%AD%A6%E4%B9%A0/"
-    >0-0-8 构建deb包</a> 
+    >0-0-8 system 学习</a> 
 </h2>
  
 
@@ -1807,10 +1799,7 @@
       
     <div class="article-entry" itemprop="articleBody">
        
-  <hr>
-<hr>
-<hr>
-<p>这两天一直在学习如何构建一个还算差不多的debina系统，之前的休眠都是通过田田的那个sysstemd来编写的，但是呢，我后来又将蓝牙wifi驱动的加载也放进去了，所以这就导致了不严谨，为了构建系统的严谨性，我决定好好的学习一下systemd。</p>
+  <p>这两天一直在学习如何构建一个还算差不多的debina系统，之前的休眠都是通过田田的那个sysstemd来编写的，但是呢，我后来又将蓝牙wifi驱动的加载也放进去了，所以这就导致了不严谨，为了构建系统的严谨性，我决定好好的学习一下systemd。</p>
 <h1 id="一、systemd的由来"><a href="#一、systemd的由来" class="headerlink" title="一、systemd的由来"></a>一、systemd的由来</h1><p>​	在早期的 Linux 系统中，使用的是 SysV 初始化系统，它使用脚本和运行级别来管理系统启动和服务管理（&#x3D;&#x3D;rk3568和rk3588目前提供的buildroot系统仍旧使用的是 SysV&#x3D;&#x3D;）。这种方式存在一些问题，比如启动速度较慢、启动顺序固定、对并行启动的支持有限等。<br>​	而随着计算机硬件的发展和多核处理器的普及，用户对于快速启动和并行处理的需求越来越高。为了满足这些需求，Linux 社区开始探索更先进的启动机制。</p>
 <ol>
 <li>Upstart 的出现：<br>Upstart 是一个由 Canonical 公司开发的事件驱动的 init 系统，于 2006 年首次发布。它引入了事件驱动的启动方式，可以并行地启动系统服务，提高了启动速度。然而，Upstart 并没有成为主流，因为它只受到了 Ubuntu 等少数发行版的采用。</li>
@@ -2075,9 +2064,7 @@
       
     <div class="article-entry" itemprop="articleBody">
        
-  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>​	既然opencv中已经在ubuntu提供的库中了，那为什么人们更多的还是自己编译opencv再使用呢，就比如下面这个例子：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310172055957.png" alt="image-20231017205544904"></p>
+  <p>​	既然opencv中已经在ubuntu提供的库中了，那为什么人们更多的还是自己编译opencv再使用呢，就比如下面这个例子：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310172055957.png" alt="image-20231017205544904"></p>
 <p>想用一些库，然而发现ubuntu自带的opencv是没有开启的，这时候就要自己编译opencv了。</p>
 <h1 id="1-拉取opencv源码"><a href="#1-拉取opencv源码" class="headerlink" title="1.拉取opencv源码"></a>1.拉取opencv源码</h1><p>opencv地址 <strong><a target="_blank" rel="noopener" href="https://opencv.org/releases/">https://opencv.org/releases/</a></strong></p>
 <p><a target="_blank" rel="noopener" href="https://github.com/opencv/opencv">https://github.com/opencv/opencv</a></p>
