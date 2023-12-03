@@ -1,6 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>反思5</title>
+    <url>/2023/12/03/%E5%8F%8D%E6%80%9D5/</url>
+    <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
+  <script id="hbeData" type="hbeData" data-hmacdigest="c358bb3df2978603775692eebabf3c17baf70866f08e6f9a28b4a31dbc7badbe">b3ce3877181dba7d2dc822c297e3a5e461a588a800d045df3c29113d12bf7cbbb7d0f7661783787c364a123d51c9fbf700082b8c18d8f9e529d57580720f57be8970ca695dc7fbf44a86a874ba1e45b1ee1c2e39ee3b3f5eef2eb21a2a574136ace8821ae5f04c462bc469942411a6763087c3520426f068d9b4d1e7a67aa8fd50cb8809d71a2895d47ddc2cef1ebc35a989bf96ceb363de24fe779f1e2e355d99d847884ed2f20d283657dc072bf44b0b5b3740a2d8277f69a855487eab439895752bdd95d5eb6a2ef7cdbce14358f2960a296c9c1491c32953d05d5d8027623f75562cf434e088c4ca23d5fabcb218cf4b12947634dbbb9cacc453d332379f719ef423e09b1f9a7e0b1dd1232e687f557dad5f38b573a382642f9da1c7ceb4a1f643e0634964ee55bd4ef18ba8d986bdb9a9c2d7c13438726516e42022bed8099ffef233045d1a5cdf5d865ed615574bffbae9eefd504aee5674d54d05ff59b921762175de4977b891ab76ac13f517e1819eb136383bb9b81e90c6e0db8073916208c26faf918f99c1dc12bbf4b699076f792c5bcee494e7afdc2af8e029e2fbaebc91e9f4c6ee4d2722565689ed266c6e4be7f432dbf9b6d01ff30799d2f766307408aa64f5ad7c222cda41e035664d4a4d9ff52905468b2380759cb1636c5dc58c565a3abf2f766a0297d12b5c282e208a352f262e63ba87f00063871f7f5d7a47a24110a5adf62de038444633b237d419dfa9f0195c3cc643318cf549b467905411961d3b375ebe546ad326d6dd955c399cfdd1caa46857d32a17de3274ac38a5a8e0ac177c9c5751f2b0f5c369af6bd527cc67aa90aefd885041585cfaa8fe3baf5d91dd6ffd8060f092cc47f28eaedf7427c47a8c0333637a2ede105068a8273ac73cc4164f521632e70cc7615c6acb23dd55c89dea1eb1fc7ef857ec06b765d585b4f76f7bfd95427c40097bb7999fb7c657acd1723c855f868e180348c68210c40643c3080b357a4d6e286281a103e6a2441dab45fd19bf8cd03aa2a7875572bd33bcfaa99c252e10ff202a87aa9490d6cdf5529e6276b8756b04675c4c256976e4c32435462a8d1a40c4ec76650113453cb348c4f77c59c095077ed4f13e3679ae9eee709a5a6dc986a90fc2d46dd248319f07f2f3a1497b567c72f106b38d4313e3a15d6dabe468ff2243a02c54f49123a5abc8213296253b03430372cedda7155a6c66adc76d9000d23194fef354ee837c0cf83eaf8be00419bf365774f4a6ebe76f5bd378b2eb7f98d90238e3b0218a28ed1134a5e2fb271e8276dfd079019fd42a3ea17cc856af2ad871396d7df4700a0481e0e8a1e6abb8323a381aa97971ef38de972e4ce1f1f496f52c1129520b01475d1b5190d433a3a6e8576efc90fc8d228bd8644813c615c1ba04a86fda0de1877976d2f29384f0a78e79288775faef5dc3411cb29aa2d1beb28649106fa6815d1f19e355abfa7017eb90eb1a12276c57ba4ad602863e971f</script>
+  <div class="hbe hbe-content">
+    <div class="hbe hbe-input hbe-input-default">
+      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
+      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
+        <span class="hbe hbe-input-label-content hbe-input-label-content-default">非礼勿视</span>
+      </label>
+    </div>
+  </div>
+</div>
+<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
+      <categories>
+        <category>反思</category>
+      </categories>
+  </entry>
+  <entry>
     <title>0-24 ubuntu和debian源</title>
     <url>/2023/12/03/0-24%20ubuntu%E5%92%8Cdebian%E6%BA%90/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>怎么说呢，这次可</p>
@@ -23,9 +42,6 @@
       <categories>
         <category>瑞芯微</category>
       </categories>
-      <tags>
-        <tag>ubuntu和debian源</tag>
-      </tags>
   </entry>
   <entry>
     <title>0-13 香橙派文件系统构建脚本分析</title>
@@ -65,9 +81,6 @@
       <categories>
         <category>瑞芯微</category>
       </categories>
-      <tags>
-        <tag>瑞芯微脚本分析</tag>
-      </tags>
   </entry>
   <entry>
     <title>0-13 香橙派文件系统构建脚本分析</title>
@@ -324,9 +337,6 @@
       <categories>
         <category>学习</category>
       </categories>
-      <tags>
-        <tag>shell脚本学习</tag>
-      </tags>
   </entry>
   <entry>
     <title>反思4</title>
@@ -346,9 +356,6 @@
       <categories>
         <category>反思</category>
       </categories>
-      <tags>
-        <tag>反思2023-12-2</tag>
-      </tags>
   </entry>
   <entry>
     <title>反思3</title>
@@ -368,12 +375,9 @@
       <categories>
         <category>反思</category>
       </categories>
-      <tags>
-        <tag>反思2023-11-29</tag>
-      </tags>
   </entry>
   <entry>
-    <title>反思1</title>
+    <title>反思2</title>
     <url>/2023/11/28/%E5%8F%8D%E6%80%9D2/</url>
     <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
   <script id="hbeData" type="hbeData" data-hmacdigest="9414fed30fffc17273fdc6eb65e563fa2aab6f61ffe8989742cbb2ff8e3f26aa">b3ce3877181dba7d2dc822c297e3a5e461a588a800d045df3c29113d12bf7cbbb7d0f7661783787c364a123d51c9fbf700082b8c18d8f9e529d57580720f57be8970ca695dc7fbf44a86a874ba1e45b1ee1c2e39ee3b3f5eef2eb21a2a574136ace8821ae5f04c462bc469942411a6763087c3520426f068d9b4d1e7a67aa8fd50cb8809d71a2895d47ddc2cef1ebc35a989bf96ceb363de24fe779f1e2e355d99d847884ed2f20d283657dc072bf44b0b5b3740a2d8277f69a855487eab439895752bdd95d5eb6a2ef7cdbce14358f2c6cf68414336f3468a84490af2249844aa10f1090b66b4e09e6d95b9b01760092168d307d32c910c27c9a5af220d9dde22aac075c91386af589465d43faee8bc12b13e8f5c54e9df6f524accac3dce6ee106c9d0f14bf089627ae9084b946a2cebc4b04de5468082ab11977ca463fb3782521f1518eada2ec4dae7ab027210529f6314819b1cfa781a1f1e1c5d6d4f5e62941ff3f5fc612c938a4748c45fb43e9bafbd8d4ae46dfaeb9c56ddcd6a73e790185d9a06837456919713fb1f18366c43ebc5270fee8d70f3b1bc8fa9407d1291dcd5dcde2e30c363f469e5be59683ded2a378d8da8e3779bc436ebae05c4d25b2c93b7a687041e7d5b7ee6592a67a429372b01867379aa033a94521dabede4c3a28599be3516fca6f5bc6a0b727c99a963ca5a00ce4a9b8036dcf3f53a99a3c5f66181ca39952ad583bf7cc3ceebdb2f6be1719a21e72e41b7ff031306253017b6edeb8bc2afc8820c0206ce2148a1042f547c3def475eb7554fdb2d3a0b6d6b8d548168a84302495674a59013590f980dbe06a430192413fb71246f298e7d464f74fe913657f0e08b4ac2364949923eacae77acd5c937caf898185a189c3f0add415f0c56c6952345b1fbd6b52db538df9d86a19369dfab5a10fc6a7974d56f247c7582c35e83565eed131d059b03d8253d22b469eaa404cd61dfd04581d0ddcdd5cba41b203fc9ca3a86ecf4b950c47f3ff3f5ba37c38623b1fc514d338b088cfdb1b0e5c336d2dbe2f2d73890ef46d257b63663ed1ec3d54d6db2d4c3634d344a07b80522141778cc27475ed7b83fa5f9960d7c9b2fa931eb6eaf82c248b31361e4813782c22578c2a8c8e86ca7e4df30e96d87b630b6ae267546c1b4666767467f7445216d3735f7085f0a86884b11bbbadfdc40b5904d9b8761d77a5f0dcb6e1d8ac7d81c5317ac8b2e2e7bc826ebaa76245b13eef1f291f9079d498bdba91e11b827744b70f960bb0ae3a9489b1a7b82d315b7cf23c4ca657a5ce1412187bf993590a0215bca73a6178a5ec2a71dfb05c83680997ffab915f0850db7339b979b7ce686bd8e3db6bf75bafb40e058c5d252f4b8ad1efe88671661805d2bcb0575d737fdb4911288e7e93a05213305860f369922dfe3ebd06e6d7ec7eb6497be0e410982b070bfeec9e5e17e30ce5d08b3a3431081f8097e2296f058b1e7aa6f7b96225bfed0e5401d44eadf1a5792495ace2695d0c06cb9771617b07e7289f15e363e090b99473537e437967616f58bec45ed18da98a09c897d8fdc22933635499b4987a61fffd221d2be436398bcd904b3a8182fc14d4bb8a4c1d0fdebcacfc942acfadc8df3e4ae9ab16b3fd7fe4ce16d38ca5c304b232c509a1c36dd3e3dd38607238d2c44a3f8a2825d6b6f669af54cf196ebcef265f4a052a89669358f3befd0872eb1359bd457794ddb557be3a1461b00d4b099fd508373311ab51c0406dd127ae438fdc179d23386f95b1819698743579b5e2695b1de96abbc31dcd8677c87576b511335520557c2b2feb1e20c2734381922d6996dcc2af41ad71a7b877dee0391ca4885be503073165362bf1ecb51d8f23681d0602942a0681ba3a7704fa95b34e4a6e74b03ec0ad41a463ddf785248d81ead2c9d85d56222c62d6d4a1e4e1d1f4f2d2a5af119c54d17aae6b060b4e90eeb92579f2b31e057642ff17e2b6553c2fdab1676cde5dd2fe149cb385953939dffda06fbe58e9d1ef137b501620a1de393265ae78dc7a582d5980590a2b7b585e1e96a7b6eed75287793fb27660f886aba4c492497faf6dee9cb1e9da615ccf8c4df026f1df83676eb2003ef2b83aad866245164b9eb4b1b6ef40e780fa2bd38b5d9c624f7246cee28e380084ee9fadfd31456dd5603a86ed07f676327027966f6b20a39915d9eeeb031c870a45885c17ff2639e6ce524091680b4f12d45c380e9937b27c43ef5556b1e88fe3e51bf532c6a608e548e87f8</script>
@@ -390,9 +394,6 @@
       <categories>
         <category>反思</category>
       </categories>
-      <tags>
-        <tag>反思2023-11-28</tag>
-      </tags>
   </entry>
   <entry>
     <title>反思1</title>
@@ -412,9 +413,6 @@
       <categories>
         <category>反思</category>
       </categories>
-      <tags>
-        <tag>反思2023-11-27</tag>
-      </tags>
   </entry>
   <entry>
     <title>0-0-17 RGA的学习</title>
@@ -534,9 +532,6 @@
       <categories>
         <category>瑞芯微</category>
       </categories>
-      <tags>
-        <tag>RGA的学习</tag>
-      </tags>
   </entry>
   <entry>
     <title>0-0-16 ubuntu和debian文件系统构建详解</title>
@@ -870,9 +865,6 @@
       <categories>
         <category>瑞芯微</category>
       </categories>
-      <tags>
-        <tag>文件系统构建</tag>
-      </tags>
   </entry>
   <entry>
     <title>0-0-15 显示硬件发展与视频开发知识点扫盲</title>
@@ -2163,11 +2155,8 @@
 <h2 id="9-25、FPGA"><a href="#9-25、FPGA" class="headerlink" title="9.25、FPGA"></a>9.25、FPGA</h2><p>FPGA：可编程逻辑，计算效率高，更接近底层IO，通过冗余晶体管和连线实现逻辑可编辑。本质上是无指令、无需共享内存，计算效率比CPU、GPU高。主要应用于智能手机、便携式移动设备、汽车。</p>
 ]]></content>
       <categories>
-        <category>瑞芯微</category>
+        <category>学习</category>
       </categories>
-      <tags>
-        <tag>音视频编解码</tag>
-      </tags>
   </entry>
   <entry>
     <title>0-0-14 音视频编解码相关知识学习</title>
@@ -2463,11 +2452,8 @@
 <p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311192116640.png" alt="image-20231119211617624"></p>
 <h1 id="VPU"><a href="#VPU" class="headerlink" title="VPU"></a>VPU</h1>]]></content>
       <categories>
-        <category>瑞芯微</category>
+        <category>学习</category>
       </categories>
-      <tags>
-        <tag>音视频编解码</tag>
-      </tags>
   </entry>
   <entry>
     <title>0-0-13 rkdeb包的制作</title>
@@ -3083,9 +3069,6 @@
       <categories>
         <category>瑞芯微</category>
       </categories>
-      <tags>
-        <tag>deb包制作</tag>
-      </tags>
   </entry>
   <entry>
     <title>PCB学习</title>
@@ -3132,11 +3115,8 @@
 <p>&#x3D;&#x3D;11月12日 21：48学习完成，下一次学习就是下个周日了，希望不会忘记&#x3D;&#x3D;</p>
 ]]></content>
       <categories>
-        <category>PCB学习</category>
+        <category>学习</category>
       </categories>
-      <tags>
-        <tag>PCB学习</tag>
-      </tags>
   </entry>
   <entry>
     <title>0-0-12 docker学习</title>
@@ -3330,11 +3310,8 @@
 
 ]]></content>
       <categories>
-        <category>docker</category>
+        <category>学习</category>
       </categories>
-      <tags>
-        <tag>docker</tag>
-      </tags>
   </entry>
   <entry>
     <title>0-0-11 音视频测试</title>
@@ -3386,9 +3363,6 @@
       <categories>
         <category>瑞芯微</category>
       </categories>
-      <tags>
-        <tag>音视频测试</tag>
-      </tags>
   </entry>
   <entry>
     <title>0-0-10 10月3568源码修改记录</title>
@@ -3430,9 +3404,6 @@
       <categories>
         <category>瑞芯微</category>
       </categories>
-      <tags>
-        <tag>源码修改</tag>
-      </tags>
   </entry>
   <entry>
     <title>0-22 声卡问题的解决</title>
@@ -3524,9 +3495,6 @@
       <categories>
         <category>瑞芯微</category>
       </categories>
-      <tags>
-        <tag>瑞芯微脚本分析</tag>
-      </tags>
   </entry>
   <entry>
     <title>0-0-8 system 学习</title>
@@ -3582,9 +3550,6 @@
       <categories>
         <category>瑞芯微</category>
       </categories>
-      <tags>
-        <tag>systemd学习</tag>
-      </tags>
   </entry>
   <entry>
     <title>0-0-8 构建deb包</title>
@@ -3705,9 +3670,6 @@
       <categories>
         <category>瑞芯微</category>
       </categories>
-      <tags>
-        <tag>deb包的制作</tag>
-      </tags>
   </entry>
   <entry>
     <title>opencv的编译</title>
@@ -3892,9 +3854,6 @@
       <categories>
         <category>3588 npu</category>
       </categories>
-      <tags>
-        <tag>opencv</tag>
-      </tags>
   </entry>
   <entry>
     <title>buildroot的学习</title>
@@ -3949,9 +3908,6 @@
       <categories>
         <category>瑞芯微</category>
       </categories>
-      <tags>
-        <tag>buildroot</tag>
-      </tags>
   </entry>
   <entry>
     <title>0-20挂载镜像文件</title>
@@ -3997,9 +3953,6 @@
       <categories>
         <category>瑞芯微</category>
       </categories>
-      <tags>
-        <tag>瑞芯微脚本分析</tag>
-      </tags>
   </entry>
   <entry>
     <title>0-17 适配瑞芯微官方SDK</title>
@@ -4227,9 +4180,6 @@ make ARCH=arm64 -j32  CROSS_COMPILE=aarch64-linux-gnu- rk3588-evb7-lp4-v10-linux
       <categories>
         <category>瑞芯微</category>
       </categories>
-      <tags>
-        <tag>瑞芯微脚本分析</tag>
-      </tags>
   </entry>
   <entry>
     <title>0-18 启动流程重新学习</title>
@@ -4284,9 +4234,6 @@ make ARCH=arm64 -j32  CROSS_COMPILE=aarch64-linux-gnu- rk3588-evb7-lp4-v10-linux
       <categories>
         <category>瑞芯微</category>
       </categories>
-      <tags>
-        <tag>瑞芯微脚本分析</tag>
-      </tags>
   </entry>
   <entry>
     <title>0-19 openwrt重新移植</title>
@@ -4308,9 +4255,6 @@ make ARCH=arm64 -j32  CROSS_COMPILE=aarch64-linux-gnu- rk3588-evb7-lp4-v10-linux
       <categories>
         <category>瑞芯微</category>
       </categories>
-      <tags>
-        <tag>瑞芯微脚本分析</tag>
-      </tags>
   </entry>
   <entry>
     <title>0-16 openwrt进阶</title>
@@ -4364,9 +4308,6 @@ make ARCH=arm64 -j32  CROSS_COMPILE=aarch64-linux-gnu- rk3588-evb7-lp4-v10-linux
       <categories>
         <category>瑞芯微</category>
       </categories>
-      <tags>
-        <tag>瑞芯微脚本分析</tag>
-      </tags>
   </entry>
   <entry>
     <title>0-15 ubuntu22构建</title>
@@ -4387,9 +4328,6 @@ make ARCH=arm64 -j32  CROSS_COMPILE=aarch64-linux-gnu- rk3588-evb7-lp4-v10-linux
       <categories>
         <category>瑞芯微</category>
       </categories>
-      <tags>
-        <tag>瑞芯微脚本分析</tag>
-      </tags>
   </entry>
   <entry>
     <title>0-14 香橙派文件系统最终定位</title>
@@ -4427,9 +4365,6 @@ make ARCH=arm64 -j32  CROSS_COMPILE=aarch64-linux-gnu- rk3588-evb7-lp4-v10-linux
       <categories>
         <category>瑞芯微</category>
       </categories>
-      <tags>
-        <tag>瑞芯微脚本分析</tag>
-      </tags>
   </entry>
   <entry>
     <title>0-0-4 clash for windows 使用</title>
@@ -4465,9 +4400,6 @@ make ARCH=arm64 -j32  CROSS_COMPILE=aarch64-linux-gnu- rk3588-evb7-lp4-v10-linux
       <categories>
         <category>学习</category>
       </categories>
-      <tags>
-        <tag>翻墙</tag>
-      </tags>
   </entry>
   <entry>
     <title>10-1 rk3588+yolov5部署推理冒烟测试</title>
@@ -4575,9 +4507,6 @@ make ARCH=arm64 -j32  CROSS_COMPILE=aarch64-linux-gnu- rk3588-evb7-lp4-v10-linux
       <categories>
         <category>3588 npu</category>
       </categories>
-      <tags>
-        <tag>3588 npu</tag>
-      </tags>
   </entry>
   <entry>
     <title>0-12  .make.sh脚本的用法</title>
@@ -4606,9 +4535,6 @@ make ARCH=arm64 -j32  CROSS_COMPILE=aarch64-linux-gnu- rk3588-evb7-lp4-v10-linux
       <categories>
         <category>瑞芯微</category>
       </categories>
-      <tags>
-        <tag>瑞芯微脚本分析</tag>
-      </tags>
   </entry>
   <entry>
     <title>0-11 .make.sh rk3568编译命令执行分析（下）</title>
@@ -4670,9 +4596,6 @@ make ARCH=arm64 -j32  CROSS_COMPILE=aarch64-linux-gnu- rk3588-evb7-lp4-v10-linux
       <categories>
         <category>瑞芯微</category>
       </categories>
-      <tags>
-        <tag>瑞芯微脚本分析</tag>
-      </tags>
   </entry>
   <entry>
     <title>0-10 make.sh+rk3568编译命令执行分析（中）</title>
@@ -4753,9 +4676,6 @@ make ARCH=arm64 -j32  CROSS_COMPILE=aarch64-linux-gnu- rk3588-evb7-lp4-v10-linux
       <categories>
         <category>瑞芯微</category>
       </categories>
-      <tags>
-        <tag>瑞芯微脚本分析</tag>
-      </tags>
   </entry>
   <entry>
     <title>0-8 U-Boot编译过程浅析</title>
@@ -4859,9 +4779,6 @@ make ARCH=arm64 -j32  CROSS_COMPILE=aarch64-linux-gnu- rk3588-evb7-lp4-v10-linux
       <categories>
         <category>瑞芯微</category>
       </categories>
-      <tags>
-        <tag>瑞芯微脚本分析</tag>
-      </tags>
   </entry>
   <entry>
     <title>0-7 bootloader引导流程</title>
@@ -4935,9 +4852,6 @@ make ARCH=arm64 -j32  CROSS_COMPILE=aarch64-linux-gnu- rk3588-evb7-lp4-v10-linux
       <categories>
         <category>瑞芯微</category>
       </categories>
-      <tags>
-        <tag>瑞芯微脚本分析</tag>
-      </tags>
   </entry>
   <entry>
     <title>0-6 uboot目录下 make.sh 脚本分析</title>
@@ -4952,9 +4866,6 @@ make ARCH=arm64 -j32  CROSS_COMPILE=aarch64-linux-gnu- rk3588-evb7-lp4-v10-linux
       <categories>
         <category>瑞芯微</category>
       </categories>
-      <tags>
-        <tag>瑞芯微脚本分析</tag>
-      </tags>
   </entry>
   <entry>
     <title>0-3 uboot的编译</title>
@@ -5009,9 +4920,6 @@ make ARCH=arm64 -j32  CROSS_COMPILE=aarch64-linux-gnu- rk3588-evb7-lp4-v10-linux
       <categories>
         <category>瑞芯微</category>
       </categories>
-      <tags>
-        <tag>瑞芯微脚本分析</tag>
-      </tags>
   </entry>
   <entry>
     <title>0-2 板子的选择</title>
@@ -5031,9 +4939,6 @@ make ARCH=arm64 -j32  CROSS_COMPILE=aarch64-linux-gnu- rk3588-evb7-lp4-v10-linux
       <categories>
         <category>瑞芯微</category>
       </categories>
-      <tags>
-        <tag>瑞芯微脚本分析</tag>
-      </tags>
   </entry>
   <entry>
     <title>0-1 瑞芯微build-sh脚本分析</title>
@@ -5045,9 +4950,6 @@ make ARCH=arm64 -j32  CROSS_COMPILE=aarch64-linux-gnu- rk3588-evb7-lp4-v10-linux
       <categories>
         <category>瑞芯微</category>
       </categories>
-      <tags>
-        <tag>瑞芯微脚本分析</tag>
-      </tags>
   </entry>
   <entry>
     <title>cmake 基础课</title>
@@ -5403,9 +5305,6 @@ make ARCH=arm64 -j32  CROSS_COMPILE=aarch64-linux-gnu- rk3588-evb7-lp4-v10-linux
       <categories>
         <category>3588 npu</category>
       </categories>
-      <tags>
-        <tag>3588 npu</tag>
-      </tags>
   </entry>
   <entry>
     <title>c++进阶语法 oop 智能指针 STL</title>
@@ -5713,9 +5612,6 @@ make ARCH=arm64 -j32  CROSS_COMPILE=aarch64-linux-gnu- rk3588-evb7-lp4-v10-linux
       <categories>
         <category>3588 npu</category>
       </categories>
-      <tags>
-        <tag>3588 npu</tag>
-      </tags>
   </entry>
   <entry>
     <title>c++ 进阶 函数和指针</title>
@@ -5900,9 +5796,6 @@ make ARCH=arm64 -j32  CROSS_COMPILE=aarch64-linux-gnu- rk3588-evb7-lp4-v10-linux
       <categories>
         <category>3588 npu</category>
       </categories>
-      <tags>
-        <tag>3588 npu</tag>
-      </tags>
   </entry>
   <entry>
     <title>hexo 进阶</title>
@@ -5918,11 +5811,8 @@ make ARCH=arm64 -j32  CROSS_COMPILE=aarch64-linux-gnu- rk3588-evb7-lp4-v10-linux
 <p>至此就搞完了，其他目前也没啥需求，继续学习C++</p>
 ]]></content>
       <categories>
-        <category>学习</category>
+        <category>网站的搭建</category>
       </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
   </entry>
   <entry>
     <title>windows搭建hexo</title>
@@ -5959,12 +5849,12 @@ make ARCH=arm64 -j32  CROSS_COMPILE=aarch64-linux-gnu- rk3588-evb7-lp4-v10-linux
 <p>3、生成了一个新的 C:\Users\您的用户名\ .ssh文件夹，打开这个文件夹，找到 .ssh\id_rsa.pub 文件，记事本打开并复制里面的内容</p>
 <p>4、打开您的 github 主页，进入个人设置 -&gt; SSH and GPG keys -&gt; New SSH key，把复制的内容粘贴进去，title 随便填，保存即可，我们的公钥就添加成功了，设置好如下图:</p>
 <p>5、检测是否设置成功:</p>
-<p>输入命令: ssh -T <a href="mailto:&#103;&#105;&#116;&#64;&#x67;&#105;&#x74;&#x68;&#x75;&#98;&#x2e;&#x63;&#x6f;&#x6d;">&#103;&#105;&#116;&#64;&#x67;&#105;&#x74;&#x68;&#x75;&#98;&#x2e;&#x63;&#x6f;&#x6d;</a></p>
+<p>输入命令: ssh -T <a href="mailto:&#103;&#105;&#x74;&#x40;&#103;&#x69;&#116;&#104;&#117;&#98;&#x2e;&#x63;&#111;&#109;">&#103;&#105;&#x74;&#x40;&#103;&#x69;&#116;&#104;&#117;&#98;&#x2e;&#x63;&#111;&#109;</a></p>
 <p>看到以上信息说明 SSH 已配置成功!</p>
 <p>如果出现提示则选择yes知道成功；</p>
 <p>6、此外您还需要如下配置:</p>
 <p>命令: git config –global user.name “chai0705 “</p>
-<p>命令: git config –global user.email  <a href="mailto:&#x31;&#51;&#x36;&#49;&#51;&#56;&#x32;&#x32;&#54;&#x39;&#x40;&#x71;&#113;&#46;&#99;&#111;&#109;">&#x31;&#51;&#x36;&#49;&#51;&#56;&#x32;&#x32;&#54;&#x39;&#x40;&#x71;&#113;&#46;&#99;&#111;&#109;</a> </p>
+<p>命令: git config –global user.email  <a href="mailto:&#49;&#51;&#x36;&#x31;&#51;&#56;&#50;&#50;&#x36;&#x39;&#64;&#x71;&#113;&#46;&#x63;&#x6f;&#109;">&#49;&#51;&#x36;&#x31;&#51;&#56;&#50;&#50;&#x36;&#x39;&#64;&#x71;&#113;&#46;&#x63;&#x6f;&#109;</a> </p>
 <p>至此，您已经成功配置好了 Github，接下来开始搭建个人博客吧!</p>
 <h1 id="第四章-使用-Hexo-搭建博客"><a href="#第四章-使用-Hexo-搭建博客" class="headerlink" title="第四章 使用 Hexo 搭建博客"></a>第四章 使用 Hexo 搭建博客</h1><p>Hexo 的一些命令<br>生成静态文件：hexo g；<br>清空静态文件：hexo cl；<br>在本地运行：hexo s；<br>部署到网站：hexo d；<br>生成静态文件并部署到网站：hexo d -g 或 hexo g -d；<br>创建新文章：hexo new <file>。</p>
 <h2 id="4-1-初始化"><a href="#4-1-初始化" class="headerlink" title="4.1 初始化"></a>4.1 初始化</h2><p>1、在电脑的某个磁盘或路径新建一个名为 hexo 的文件夹(名字可以随便取)，比如我的是 D:\hexo，由于这个文件夹将来就作为您存放代码的地方，所以最好不要随便放</p>
@@ -5982,11 +5872,8 @@ make ARCH=arm64 -j32  CROSS_COMPILE=aarch64-linux-gnu- rk3588-evb7-lp4-v10-linux
 <p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309152250521.png" alt="image-20230915224959370"></p>
 ]]></content>
       <categories>
-        <category>学习</category>
+        <category>网站的搭建</category>
       </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
   </entry>
   <entry>
     <title>c++基本语法</title>
@@ -6143,9 +6030,6 @@ make ARCH=arm64 -j32  CROSS_COMPILE=aarch64-linux-gnu- rk3588-evb7-lp4-v10-linux
       <categories>
         <category>3588 npu</category>
       </categories>
-      <tags>
-        <tag>3588 npu</tag>
-      </tags>
   </entry>
   <entry>
     <title>hexo基本操作命令</title>
@@ -6201,11 +6085,8 @@ make ARCH=arm64 -j32  CROSS_COMPILE=aarch64-linux-gnu- rk3588-evb7-lp4-v10-linux
 <p>hexo d 将生成的静态网页推到服务器github</p>
 ]]></content>
       <categories>
-        <category>学习</category>
+        <category>网站的搭建</category>
       </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
   </entry>
   <entry>
     <title>c++ 环境搭建</title>
@@ -6226,9 +6107,6 @@ make ARCH=arm64 -j32  CROSS_COMPILE=aarch64-linux-gnu- rk3588-evb7-lp4-v10-linux
       <categories>
         <category>3588 npu</category>
       </categories>
-      <tags>
-        <tag>3588 npu</tag>
-      </tags>
   </entry>
   <entry>
     <title>markdown 语法学习</title>
@@ -6290,9 +6168,6 @@ make ARCH=arm64 -j32  CROSS_COMPILE=aarch64-linux-gnu- rk3588-evb7-lp4-v10-linux
       <categories>
         <category>学习</category>
       </categories>
-      <tags>
-        <tag>markdown</tag>
-      </tags>
   </entry>
   <entry>
     <title>typora简单使用</title>

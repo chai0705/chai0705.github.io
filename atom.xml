@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2023-12-03T13:27:37.635Z</updated>
+  <updated>2023-12-03T14:34:14.384Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -17,11 +17,28 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>反思5</title>
+    <link href="http://example.com/2023/12/03/%E5%8F%8D%E6%80%9D5/"/>
+    <id>http://example.com/2023/12/03/%E5%8F%8D%E6%80%9D5/</id>
+    <published>2023-12-03T14:15:56.000Z</published>
+    <updated>2023-12-03T14:34:14.384Z</updated>
+    
+    
+    <summary type="html">Here&#39;s something encrypted, password is required to continue reading.</summary>
+    
+    
+    
+    <category term="反思" scheme="http://example.com/categories/%E5%8F%8D%E6%80%9D/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>0-24 ubuntu和debian源</title>
     <link href="http://example.com/2023/12/03/0-24%20ubuntu%E5%92%8Cdebian%E6%BA%90/"/>
     <id>http://example.com/2023/12/03/0-24%20ubuntu%E5%92%8Cdebian%E6%BA%90/</id>
     <published>2023-12-03T07:01:21.000Z</published>
-    <updated>2023-12-03T13:27:37.635Z</updated>
+    <updated>2023-12-03T14:38:15.752Z</updated>
     
     
       
@@ -36,8 +53,6 @@
     
     <category term="瑞芯微" scheme="http://example.com/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE/"/>
     
-    
-    <category term="ubuntu和debian源" scheme="http://example.com/tags/ubuntu%E5%92%8Cdebian%E6%BA%90/"/>
     
   </entry>
   
@@ -46,7 +61,7 @@
     <link href="http://example.com/2023/12/02/0-13-%E9%A6%99%E6%A9%99%E6%B4%BE%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%84%E5%BB%BA%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/"/>
     <id>http://example.com/2023/12/02/0-13-%E9%A6%99%E6%A9%99%E6%B4%BE%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%84%E5%BB%BA%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/</id>
     <published>2023-12-02T07:01:21.000Z</published>
-    <updated>2023-12-03T11:38:01.946Z</updated>
+    <updated>2023-12-03T14:37:45.697Z</updated>
     
     
       
@@ -62,8 +77,6 @@
     <category term="瑞芯微" scheme="http://example.com/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE/"/>
     
     
-    <category term="瑞芯微脚本分析" scheme="http://example.com/tags/%E7%91%9E%E8%8A%AF%E5%BE%AE%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/"/>
-    
   </entry>
   
   <entry>
@@ -71,7 +84,7 @@
     <link href="http://example.com/2023/12/02/0-23%20shell%E8%84%9A%E6%9C%AC%E5%AD%A6%E4%B9%A0/"/>
     <id>http://example.com/2023/12/02/0-23%20shell%E8%84%9A%E6%9C%AC%E5%AD%A6%E4%B9%A0/</id>
     <published>2023-12-02T07:01:21.000Z</published>
-    <updated>2023-12-03T13:26:26.382Z</updated>
+    <updated>2023-12-03T14:38:11.749Z</updated>
     
     
       
@@ -87,8 +100,6 @@
     <category term="学习" scheme="http://example.com/categories/%E5%AD%A6%E4%B9%A0/"/>
     
     
-    <category term="shell脚本学习" scheme="http://example.com/tags/shell%E8%84%9A%E6%9C%AC%E5%AD%A6%E4%B9%A0/"/>
-    
   </entry>
   
   <entry>
@@ -96,7 +107,7 @@
     <link href="http://example.com/2023/12/02/%E5%8F%8D%E6%80%9D4/"/>
     <id>http://example.com/2023/12/02/%E5%8F%8D%E6%80%9D4/</id>
     <published>2023-12-01T23:03:56.000Z</published>
-    <updated>2023-12-01T23:33:28.993Z</updated>
+    <updated>2023-12-03T14:34:08.776Z</updated>
     
     
     <summary type="html">Here&#39;s something encrypted, password is required to continue reading.</summary>
@@ -105,8 +116,6 @@
     
     <category term="反思" scheme="http://example.com/categories/%E5%8F%8D%E6%80%9D/"/>
     
-    
-    <category term="反思2023-12-2" scheme="http://example.com/tags/%E5%8F%8D%E6%80%9D2023-12-2/"/>
     
   </entry>
   
@@ -115,7 +124,7 @@
     <link href="http://example.com/2023/11/30/%E5%8F%8D%E6%80%9D3/"/>
     <id>http://example.com/2023/11/30/%E5%8F%8D%E6%80%9D3/</id>
     <published>2023-11-29T23:33:56.000Z</published>
-    <updated>2023-12-01T23:08:17.753Z</updated>
+    <updated>2023-12-03T14:34:04.205Z</updated>
     
     
     <summary type="html">Here&#39;s something encrypted, password is required to continue reading.</summary>
@@ -124,17 +133,15 @@
     
     <category term="反思" scheme="http://example.com/categories/%E5%8F%8D%E6%80%9D/"/>
     
-    
-    <category term="反思2023-11-29" scheme="http://example.com/tags/%E5%8F%8D%E6%80%9D2023-11-29/"/>
     
   </entry>
   
   <entry>
-    <title>反思1</title>
+    <title>反思2</title>
     <link href="http://example.com/2023/11/28/%E5%8F%8D%E6%80%9D2/"/>
     <id>http://example.com/2023/11/28/%E5%8F%8D%E6%80%9D2/</id>
     <published>2023-11-28T13:26:56.000Z</published>
-    <updated>2023-12-01T23:07:26.352Z</updated>
+    <updated>2023-12-03T14:33:58.274Z</updated>
     
     
     <summary type="html">Here&#39;s something encrypted, password is required to continue reading.</summary>
@@ -143,8 +150,6 @@
     
     <category term="反思" scheme="http://example.com/categories/%E5%8F%8D%E6%80%9D/"/>
     
-    
-    <category term="反思2023-11-28" scheme="http://example.com/tags/%E5%8F%8D%E6%80%9D2023-11-28/"/>
     
   </entry>
   
@@ -153,7 +158,7 @@
     <link href="http://example.com/2023/11/27/%E5%8F%8D%E6%80%9D1/"/>
     <id>http://example.com/2023/11/27/%E5%8F%8D%E6%80%9D1/</id>
     <published>2023-11-27T13:26:56.000Z</published>
-    <updated>2023-12-01T23:07:24.237Z</updated>
+    <updated>2023-12-03T14:33:51.464Z</updated>
     
     
     <summary type="html">Here&#39;s something encrypted, password is required to continue reading.</summary>
@@ -163,8 +168,6 @@
     <category term="反思" scheme="http://example.com/categories/%E5%8F%8D%E6%80%9D/"/>
     
     
-    <category term="反思2023-11-27" scheme="http://example.com/tags/%E5%8F%8D%E6%80%9D2023-11-27/"/>
-    
   </entry>
   
   <entry>
@@ -172,7 +175,7 @@
     <link href="http://example.com/2023/11/27/0-0-17-RGA%E7%9A%84%E5%AD%A6%E4%B9%A0/"/>
     <id>http://example.com/2023/11/27/0-0-17-RGA%E7%9A%84%E5%AD%A6%E4%B9%A0/</id>
     <published>2023-11-27T06:17:20.000Z</published>
-    <updated>2023-12-01T23:10:10.657Z</updated>
+    <updated>2023-12-03T14:37:06.129Z</updated>
     
     
       
@@ -187,8 +190,6 @@
     
     <category term="瑞芯微" scheme="http://example.com/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE/"/>
     
-    
-    <category term="RGA的学习" scheme="http://example.com/tags/RGA%E7%9A%84%E5%AD%A6%E4%B9%A0/"/>
     
   </entry>
   
@@ -197,7 +198,7 @@
     <link href="http://example.com/2023/11/20/0-0-16%20debian%E5%92%8Cubuntu%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%84%E5%BB%BA%E8%AF%A6%E8%A7%A3/"/>
     <id>http://example.com/2023/11/20/0-0-16%20debian%E5%92%8Cubuntu%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%84%E5%BB%BA%E8%AF%A6%E8%A7%A3/</id>
     <published>2023-11-20T13:16:57.000Z</published>
-    <updated>2023-11-26T06:18:47.375Z</updated>
+    <updated>2023-12-03T14:37:02.048Z</updated>
     
     
       
@@ -212,8 +213,6 @@
     
     <category term="瑞芯微" scheme="http://example.com/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE/"/>
     
-    
-    <category term="文件系统构建" scheme="http://example.com/tags/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%84%E5%BB%BA/"/>
     
   </entry>
   
@@ -222,7 +221,7 @@
     <link href="http://example.com/2023/11/19/0-0-15%20%E6%98%BE%E7%A4%BA%E7%A1%AC%E4%BB%B6%E5%8F%91%E5%B1%95%E4%B8%8E%E8%A7%86%E9%A2%91%E5%BC%80%E5%8F%91%E7%9F%A5%E8%AF%86%E7%82%B9%E6%89%AB%E7%9B%B2/"/>
     <id>http://example.com/2023/11/19/0-0-15%20%E6%98%BE%E7%A4%BA%E7%A1%AC%E4%BB%B6%E5%8F%91%E5%B1%95%E4%B8%8E%E8%A7%86%E9%A2%91%E5%BC%80%E5%8F%91%E7%9F%A5%E8%AF%86%E7%82%B9%E6%89%AB%E7%9B%B2/</id>
     <published>2023-11-19T13:16:56.000Z</published>
-    <updated>2023-12-01T23:10:30.195Z</updated>
+    <updated>2023-12-03T14:36:59.168Z</updated>
     
     
       
@@ -235,10 +234,8 @@
     
     
     
-    <category term="瑞芯微" scheme="http://example.com/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE/"/>
+    <category term="学习" scheme="http://example.com/categories/%E5%AD%A6%E4%B9%A0/"/>
     
-    
-    <category term="音视频编解码" scheme="http://example.com/tags/%E9%9F%B3%E8%A7%86%E9%A2%91%E7%BC%96%E8%A7%A3%E7%A0%81/"/>
     
   </entry>
   
@@ -247,7 +244,7 @@
     <link href="http://example.com/2023/11/19/0-0-14%20%E9%9F%B3%E8%A7%86%E9%A2%91%E7%BC%96%E8%A7%A3%E7%A0%81%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E5%AD%A6%E4%B9%A0/"/>
     <id>http://example.com/2023/11/19/0-0-14%20%E9%9F%B3%E8%A7%86%E9%A2%91%E7%BC%96%E8%A7%A3%E7%A0%81%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E5%AD%A6%E4%B9%A0/</id>
     <published>2023-11-19T09:16:56.000Z</published>
-    <updated>2023-12-01T23:07:55.509Z</updated>
+    <updated>2023-12-03T14:36:47.582Z</updated>
     
     
       
@@ -260,10 +257,8 @@
     
     
     
-    <category term="瑞芯微" scheme="http://example.com/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE/"/>
+    <category term="学习" scheme="http://example.com/categories/%E5%AD%A6%E4%B9%A0/"/>
     
-    
-    <category term="音视频编解码" scheme="http://example.com/tags/%E9%9F%B3%E8%A7%86%E9%A2%91%E7%BC%96%E8%A7%A3%E7%A0%81/"/>
     
   </entry>
   
@@ -272,7 +267,7 @@
     <link href="http://example.com/2023/11/14/0-0-13%20rk%20deb%E5%8C%85%E7%9A%84%E5%88%B6%E4%BD%9C/"/>
     <id>http://example.com/2023/11/14/0-0-13%20rk%20deb%E5%8C%85%E7%9A%84%E5%88%B6%E4%BD%9C/</id>
     <published>2023-11-14T11:55:17.000Z</published>
-    <updated>2023-12-03T13:40:17.187Z</updated>
+    <updated>2023-12-03T14:36:31.064Z</updated>
     
     
       
@@ -287,8 +282,6 @@
     
     <category term="瑞芯微" scheme="http://example.com/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE/"/>
     
-    
-    <category term="deb包制作" scheme="http://example.com/tags/deb%E5%8C%85%E5%88%B6%E4%BD%9C/"/>
     
   </entry>
   
@@ -297,7 +290,7 @@
     <link href="http://example.com/2023/11/12/0-0-13%20ad%E5%AD%A6%E4%B9%A0/"/>
     <id>http://example.com/2023/11/12/0-0-13%20ad%E5%AD%A6%E4%B9%A0/</id>
     <published>2023-11-12T13:55:17.000Z</published>
-    <updated>2023-12-03T13:40:14.786Z</updated>
+    <updated>2023-12-03T14:36:27.955Z</updated>
     
     
       
@@ -310,10 +303,8 @@
     
     
     
-    <category term="PCB学习" scheme="http://example.com/categories/PCB%E5%AD%A6%E4%B9%A0/"/>
+    <category term="学习" scheme="http://example.com/categories/%E5%AD%A6%E4%B9%A0/"/>
     
-    
-    <category term="PCB学习" scheme="http://example.com/tags/PCB%E5%AD%A6%E4%B9%A0/"/>
     
   </entry>
   
@@ -322,7 +313,7 @@
     <link href="http://example.com/2023/11/09/0-0-12%20docker%E5%AD%A6%E4%B9%A0/"/>
     <id>http://example.com/2023/11/09/0-0-12%20docker%E5%AD%A6%E4%B9%A0/</id>
     <published>2023-11-09T01:55:17.000Z</published>
-    <updated>2023-12-03T13:40:10.840Z</updated>
+    <updated>2023-12-03T14:36:21.648Z</updated>
     
     
       
@@ -335,10 +326,8 @@
     
     
     
-    <category term="docker" scheme="http://example.com/categories/docker/"/>
+    <category term="学习" scheme="http://example.com/categories/%E5%AD%A6%E4%B9%A0/"/>
     
-    
-    <category term="docker" scheme="http://example.com/tags/docker/"/>
     
   </entry>
   
@@ -347,7 +336,7 @@
     <link href="http://example.com/2023/10/26/0-0-11%20%E9%9F%B3%E8%A7%86%E9%A2%91%E6%B5%8B%E8%AF%95/"/>
     <id>http://example.com/2023/10/26/0-0-11%20%E9%9F%B3%E8%A7%86%E9%A2%91%E6%B5%8B%E8%AF%95/</id>
     <published>2023-10-26T01:55:17.000Z</published>
-    <updated>2023-12-03T13:40:07.023Z</updated>
+    <updated>2023-12-03T14:36:07.619Z</updated>
     
     
       
@@ -362,8 +351,6 @@
     
     <category term="瑞芯微" scheme="http://example.com/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE/"/>
     
-    
-    <category term="音视频测试" scheme="http://example.com/tags/%E9%9F%B3%E8%A7%86%E9%A2%91%E6%B5%8B%E8%AF%95/"/>
     
   </entry>
   
@@ -372,7 +359,7 @@
     <link href="http://example.com/2023/10/26/0-0-10%2010%E6%9C%88%E6%BA%90%E7%A0%81%E4%BF%AE%E6%94%B9%E8%AE%B0%E5%BD%95/"/>
     <id>http://example.com/2023/10/26/0-0-10%2010%E6%9C%88%E6%BA%90%E7%A0%81%E4%BF%AE%E6%94%B9%E8%AE%B0%E5%BD%95/</id>
     <published>2023-10-25T22:47:53.000Z</published>
-    <updated>2023-12-03T13:40:05.172Z</updated>
+    <updated>2023-12-03T14:36:04.038Z</updated>
     
     
       
@@ -387,8 +374,6 @@
     
     <category term="瑞芯微" scheme="http://example.com/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE/"/>
     
-    
-    <category term="源码修改" scheme="http://example.com/tags/%E6%BA%90%E7%A0%81%E4%BF%AE%E6%94%B9/"/>
     
   </entry>
   
@@ -397,7 +382,7 @@
     <link href="http://example.com/2023/10/25/0-22%20%E5%A3%B0%E5%8D%A1%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E5%86%B3/"/>
     <id>http://example.com/2023/10/25/0-22%20%E5%A3%B0%E5%8D%A1%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E5%86%B3/</id>
     <published>2023-10-25T12:47:53.000Z</published>
-    <updated>2023-12-01T23:09:33.735Z</updated>
+    <updated>2023-12-03T14:38:09.017Z</updated>
     
     
       
@@ -412,8 +397,6 @@
     
     <category term="瑞芯微" scheme="http://example.com/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE/"/>
     
-    
-    <category term="瑞芯微脚本分析" scheme="http://example.com/tags/%E7%91%9E%E8%8A%AF%E5%BE%AE%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/"/>
     
   </entry>
   
@@ -422,7 +405,7 @@
     <link href="http://example.com/2023/10/25/0-0-9%20systemd%20%E5%AD%A6%E4%B9%A0/"/>
     <id>http://example.com/2023/10/25/0-0-9%20systemd%20%E5%AD%A6%E4%B9%A0/</id>
     <published>2023-10-24T22:47:53.000Z</published>
-    <updated>2023-12-03T13:39:37.070Z</updated>
+    <updated>2023-12-03T14:36:00.957Z</updated>
     
     
       
@@ -437,8 +420,6 @@
     
     <category term="瑞芯微" scheme="http://example.com/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE/"/>
     
-    
-    <category term="systemd学习" scheme="http://example.com/tags/systemd%E5%AD%A6%E4%B9%A0/"/>
     
   </entry>
   
@@ -447,7 +428,7 @@
     <link href="http://example.com/2023/10/19/0-0-8%20%E6%9E%84%E5%BB%BAdeb%E5%8C%85/"/>
     <id>http://example.com/2023/10/19/0-0-8%20%E6%9E%84%E5%BB%BAdeb%E5%8C%85/</id>
     <published>2023-10-19T12:47:53.000Z</published>
-    <updated>2023-12-03T13:39:52.563Z</updated>
+    <updated>2023-12-03T14:35:53.661Z</updated>
     
     
       
@@ -462,33 +443,6 @@
     
     <category term="瑞芯微" scheme="http://example.com/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE/"/>
     
-    
-    <category term="deb包的制作" scheme="http://example.com/tags/deb%E5%8C%85%E7%9A%84%E5%88%B6%E4%BD%9C/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>opencv的编译</title>
-    <link href="http://example.com/2023/10/17/0-0-6%20opencv%E7%9A%84%E7%BC%96%E8%AF%91/"/>
-    <id>http://example.com/2023/10/17/0-0-6%20opencv%E7%9A%84%E7%BC%96%E8%AF%91/</id>
-    <published>2023-10-17T13:55:17.000Z</published>
-    <updated>2023-12-03T13:40:00.710Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;&#92;assets&#92;css&#92;APlayer.min.css&quot;&gt;&lt;script src=&quot;&#92;assets&#92;js&#92;APlayer.min.js&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="3588 npu" scheme="http://example.com/categories/3588-npu/"/>
-    
-    
-    <category term="opencv" scheme="http://example.com/tags/opencv/"/>
     
   </entry>
   
