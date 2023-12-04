@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+  
+
+    <head>
+      <meta charset="utf-8" />
+        
+      <meta name="description" content="永远年轻，永远热泪盈眶" />
+      
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>bootloader引导流程 |  热爱学习的未来酱</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      
+<link rel="stylesheet" href="/css/fonts/remixicon.css">
+
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    <link rel="alternate" href="/atom.xml" title="热爱学习的未来酱" type="application/atom+xml">
+</head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-13 bootloader引导流程"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  bootloader引导流程
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/09/10/13%20bootloader%E5%BC%95%E5%AF%BC%E6%B5%81%E7%A8%8B/" class="article-date">
+  <time datetime="2023-09-10T09:17:03.000Z" itemprop="datePublished">2023-09-10</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE/">瑞芯微</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">1.6k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">7 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="一、RK芯片通用引导流程"><a href="#一、RK芯片通用引导流程" class="headerlink" title="一、RK芯片通用引导流程"></a>一、RK芯片通用引导流程</h1><p>对于RK芯片的引导流程，我们可以参考以下这张图：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122126953.jpeg" alt="img"></p>
+<p>根据两种<code>Boot Flow</code>，我们可以一次梳理两种不同的引导流程：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Boot Code -&gt; idbloader.img(miniloader) -&gt; uboot.img -&gt; boot.img -&gt; rootfs.img</span><br><span class="line">Boot Code -&gt; idbloader.img(TPL/SPL) -&gt; uboot.itb -&gt; boot.img -&gt; rootfs.img</span><br></pre></td></tr></table></figure>
+
+<p>对于<code>idbloader.img</code>，我们会发现有相似的地方：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ddr.bin &lt;-&gt; u-boot-tpl.bin</span><br><span class="line">rkxx_miniloader_vx.xx.bin &lt;-&gt; u-boot-spl.bin</span><br></pre></td></tr></table></figure>
+
+<p>此时我们会问，为什么会有两套引导流程？</p>
+<p>事实上<code>idbloader.img(miniloader)</code>这套引导方案是RK定制的，它们并没有开源的，RK发布的是二进制文件，它们都存放于<code>rkbin</code>目录下，例如<code>RK356x</code>：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122137381.png" alt="image-20230912213741344"></p>
+<p>注意上图中红方框处：rk3588_spl_v1.11.bin<code>实际上指的是</code>rkxx_miniloader_vx.xx.bin&#96;！</p>
+<h1 id="二、RK356x引导流程"><a href="#二、RK356x引导流程" class="headerlink" title="二、RK356x引导流程"></a>二、RK356x引导流程</h1><p>下面通过<code>RK356x</code>的启动日志进行简要分析！</p>
+<h2 id="2-1-ddr-bin运行"><a href="#2-1-ddr-bin运行" class="headerlink" title="2.1 ddr.bin运行"></a>2.1 ddr.bin运行</h2><p><code>RK3588</code>上电后，我们看到的第一阶段日志是关于DDR的，这主要是对DDR进行初始化，我们看到使用的是<code>LPDDR4</code>，频率逐步从<code>528MHz </code>切换到<code>2112MHz</code>，并且进行一些读写训练操作</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">DDR Version V1.08 20220617</span><br><span class="line">LPDDR4X, 2112MHz</span><br><span class="line">channel[0] BW=16 Col=10 Bk=8 CS0 Row=16 CS=1 Die BW=16 Size=1024MB</span><br><span class="line">channel[1] BW=16 Col=10 Bk=8 CS0 Row=16 CS=1 Die BW=16 Size=1024MB</span><br><span class="line">channel[2] BW=16 Col=10 Bk=8 CS0 Row=16 CS=1 Die BW=16 Size=1024MB</span><br><span class="line">channel[3] BW=16 Col=10 Bk=8 CS0 Row=16 CS=1 Die BW=16 Size=1024MB</span><br><span class="line">Manufacturer ID:0x1 Samsung</span><br><span class="line">CH0 RX Vref:33.7%, TX Vref:21.8%,0.0%</span><br><span class="line">CH1 RX Vref:32.7%, TX Vref:18.8%,0.0%</span><br><span class="line">CH2 RX Vref:30.7%, TX Vref:17.8%,0.0%</span><br><span class="line">CH3 RX Vref:34.7%, TX Vref:18.8%,0.0%</span><br><span class="line">change to F1: 528MHz</span><br><span class="line">change to F2: 1068MHz</span><br><span class="line">change to F3: 1560MHz</span><br><span class="line">change to F0: 2112MHz</span><br><span class="line">out</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-2-spl-bin运行"><a href="#2-2-spl-bin运行" class="headerlink" title="2.2 spl.bin运行"></a>2.2 spl.bin运行</h2><p>​	接下来我们会看到SPL的板级初始化，紧接着逐步从<code>MMC2</code>（<code>SD</code>卡）、<code>MMC1</code>（<code>eMMC</code>）寻找<code>U-boot.img</code>（包括<code>atf-1</code>、<code>uboot</code>、<code>fdt</code>、<code>atf-2</code>、<code>atf-3</code>、<code>atf-4</code>、<code>atf-5</code>、<code>optee</code>），通过<code>atf-1</code>来运行<code>uboot</code>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">U-Boot SPL board init</span><br><span class="line">U-Boot SPL 2017.09-orangepi (Apr 21 2023 - 10:35:39)</span><br><span class="line">Trying to boot from MMC1</span><br><span class="line">Trying fit image at 0x4000 sector</span><br><span class="line">## Verified-boot: 0</span><br><span class="line">## Checking atf-1 0x00040000 ... sha256(806278dba1...) + OK</span><br><span class="line">## Checking uboot 0x00200000 ... sha256(a14cd96f5d...) + OK</span><br><span class="line">## Checking fdt 0x00349350 ... sha256(cf0060a3cf...) + OK</span><br><span class="line">## Checking atf-2 0x000f0000 ... sha256(c00c7fd75b...) + OK</span><br><span class="line">## Checking atf-3 0xff100000 ... sha256(71c3a5841b...) + OK</span><br><span class="line">## Checking atf-4 0xff001000 ... sha256(2301cf73be...) + OK</span><br><span class="line">Jumping to U-Boot(0x00200000) via ARM Trusted Firmware(0x00040000)</span><br><span class="line">Total: 209.584 ms</span><br></pre></td></tr></table></figure>
+
+<p>注意<code>atf-*</code>与<code>optee</code>这些是 <code>ARM trust</code> 固件，属于另外一个领域，有兴趣可以参考以下文章：</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Neutionwei/article/details/111395775">https://blog.csdn.net/Neutionwei/article/details/111395775</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/Neutionwei/article/det">https://blog.csdn.net/Neutionwei/article/det</a></p>
+</blockquote>
+<h2 id="2-3-atf运行"><a href="#2-3-atf运行" class="headerlink" title="2.3 atf运行"></a>2.3 atf运行</h2><p>运行<code>BL31</code>，初始化与运行<code>BL32</code>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">INFO:    Preloader serial: 2</span><br><span class="line">NOTICE:  BL31: v2.3():v2.3-405-gb52c2eadd:derrick.huang</span><br><span class="line">NOTICE:  BL31: Built : 11:23:47, Aug 15 2022</span><br><span class="line">INFO:    spec: 0x13</span><br><span class="line">INFO:    ext 32k is valid</span><br><span class="line">INFO:    GICv3 without legacy support detected.</span><br><span class="line">INFO:    ARM GICv3 driver initialized in EL3</span><br><span class="line">INFO:    system boots from cpu-hwid-0</span><br><span class="line">INFO:    idle_st=0x21fff, pd_st=0x11fff9, repair_st=0xfff70001</span><br><span class="line">INFO:    dfs DDR fsp_params[0].freq_mhz= 2112MHz</span><br><span class="line">INFO:    dfs DDR fsp_params[1].freq_mhz= 528MHz</span><br><span class="line">INFO:    dfs DDR fsp_params[2].freq_mhz= 1068MHz</span><br><span class="line">INFO:    dfs DDR fsp_params[3].freq_mhz= 1560MHz</span><br><span class="line">INFO:    BL31: Initialising Exception Handling Framework</span><br><span class="line">INFO:    BL31: Initializing runtime services</span><br><span class="line">WARNING: No OPTEE provided by BL2 boot loader, Booting device without OPTEE initialization. SMC`s destined for OPTEE will return SMC_UNK</span><br><span class="line">ERROR:   Error initializing runtime service opteed_fast</span><br><span class="line">INFO:    BL31: Preparing for EL3 exit to normal world</span><br><span class="line">INFO:    Entry point address = 0x200000</span><br><span class="line">INFO:    SPSR = 0x3c9</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+</blockquote>
+<h2 id="2-4-uboot运行"><a href="#2-4-uboot运行" class="headerlink" title="2.4 uboot运行"></a>2.4 uboot运行</h2><h3 id="2-4-1-设备环境初始化"><a href="#2-4-1-设备环境初始化" class="headerlink" title="2.4.1 设备环境初始化"></a>2.4.1 设备环境初始化</h3><p>从<code>atf</code>切换到<code>uboot</code>之后，<code>uboot</code>依次执行以下操作：</p>
+<ol>
+<li>打印一些必要的信息：板型、串口、内存、系统内存初始化、代码重定位情况；</li>
+<li>获取<code>MMC</code>存储器信息，打印当前启动的存储器（<code>atags</code>）；</li>
+<li>获取存储器分区情况并加载内核设备树；</li>
+<li>初始化<code>I2C0</code>、初始化<code>PMIC</code>电源芯片、相关芯片供电电压与<code>IO</code>电源域；</li>
+<li>初始化<code>DRM</code>框架以及显示器接口（<code>HDMI</code>）;</li>
+<li>初始化时钟树。</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">U-Boot 2017.09-orangepi (Apr 21 2023 - 10:35:39 +0800)</span><br><span class="line"></span><br><span class="line">Model: Orange Pi 5B</span><br><span class="line">PreSerial: 2, raw, 0xfeb50000</span><br><span class="line">DRAM:  3.7 GiB</span><br><span class="line">Sysmem: init</span><br><span class="line">Relocation Offset: eda2d000</span><br><span class="line">Relocation fdt: eb9f9008 - eb9fecb8</span><br><span class="line">CR: M/C/I</span><br><span class="line">Using default environment</span><br><span class="line"></span><br><span class="line">mmc@fe2c0000: 0, mmc@fe2e0000: 1</span><br><span class="line">Bootdev(atags): mmc 0</span><br><span class="line">MMC0: Legacy, 52Mhz</span><br><span class="line">PartType: EFI</span><br><span class="line">DM: v2</span><br><span class="line">boot mode: None</span><br><span class="line">Model: Orange Pi 5B</span><br><span class="line">CLK: (sync kernel. arm: enter 1008000 KHz, init 1008000 KHz, kernel 0N/A)</span><br><span class="line">  b0pll 24000 KHz</span><br><span class="line">  b1pll 24000 KHz</span><br><span class="line">  lpll 24000 KHz</span><br><span class="line">  v0pll 24000 KHz</span><br><span class="line">  aupll 24000 KHz</span><br><span class="line">  cpll 1500000 KHz</span><br><span class="line">  gpll 1188000 KHz</span><br><span class="line">  npll 24000 KHz</span><br><span class="line">  ppll 1100000 KHz</span><br><span class="line">  aclk_center_root 702000 KHz</span><br><span class="line">  pclk_center_root 100000 KHz</span><br><span class="line">  hclk_center_root 396000 KHz</span><br><span class="line">  aclk_center_low_root 500000 KHz</span><br><span class="line">  aclk_top_root 750000 KHz</span><br><span class="line">  pclk_top_root 100000 KHz</span><br><span class="line">  aclk_low_top_root 396000 KHz</span><br><span class="line">Net:   No ethernet found.</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-4-2-内核的加载"><a href="#2-4-2-内核的加载" class="headerlink" title="2.4.2 内核的加载"></a>2.4.2 内核的加载</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">switch to partitions #0, OK</span><br><span class="line">mmc0 is current device</span><br><span class="line">mmc@fe2c0000: 0 (SD)</span><br><span class="line">mmc@fe2e0000: 1</span><br><span class="line">switch to partitions #0, OK</span><br><span class="line">mmc0 is current device</span><br><span class="line">Scanning mmc 0:1...</span><br><span class="line">Found U-Boot script /boot.scr</span><br><span class="line">reading /boot.scr</span><br><span class="line">3411 bytes read in 4 ms (832 KiB/s)</span><br><span class="line">## Executing script at 00500000</span><br><span class="line">Boot script loaded from mmc 0</span><br><span class="line">reading /orangepiEnv.txt</span><br><span class="line">222 bytes read in 3 ms (72.3 KiB/s)</span><br><span class="line">reading /uInitrd</span><br><span class="line">18641659 bytes read in 1844 ms (9.6 MiB/s)</span><br><span class="line">reading /Image</span><br><span class="line">34736640 bytes read in 3049 ms (10.9 MiB/s)</span><br><span class="line">reading /dtb/rockchip/rk3588s-orangepi-5b.dtb</span><br><span class="line">233728 bytes read in 24 ms (9.3 MiB/s)</span><br><span class="line">reading /dtb/rockchip/overlay/rk3588-fixup.scr</span><br><span class="line">2756 bytes read in 6 ms (448.2 KiB/s)</span><br><span class="line">Applying kernel provided DT fixup script (rk3588-fixup.scr)</span><br><span class="line">## Executing script at 09000000</span><br><span class="line">Fdt Ramdisk skip relocation</span><br><span class="line">## Loading init Ramdisk from Legacy Image at 0a200000 ...</span><br><span class="line">   Image Name:   uInitrd</span><br><span class="line">   Image Type:   AArch64 Linux RAMDisk Image (gzip compressed)</span><br><span class="line">   Data Size:    18641595 Bytes = 17.8 MiB</span><br><span class="line">   Load Address: 00000000</span><br><span class="line">   Entry Point:  00000000</span><br><span class="line">   Verifying Checksum ... OK</span><br><span class="line">## Flattened Device Tree blob at 0x0a100000</span><br><span class="line">   Booting using the fdt blob at 0x0a100000</span><br><span class="line">   reserving fdt memory region: addr=a100000 size=9f000</span><br><span class="line">  &#x27;reserved-memory&#x27; ramoops@110000: addr=110000 size=f0000</span><br><span class="line">   Using Device Tree in place at 000000000a100000, end 000000000a1a1fff</span><br><span class="line">Adding bank: 0x00200000 - 0xf0000000 (size: 0xefe00000)</span><br><span class="line">Total: 5283.754 ms</span><br><span class="line"></span><br><span class="line">Starting kernel ...</span><br></pre></td></tr></table></figure>
+
+<p>从<code>Starting kernel ...</code>开始，<code>uboot</code>的生命周期结束，之后产生的打印是由内核产生的！</p>
+<p>值得注意的是，加载<code>Flat Device Tree</code>设备树之后，日志还打印了相关映像加载情况，这部分非常有用，我们以后再深入分析！</p>
+<h1 id="三、BootRom阶段做了什么？"><a href="#三、BootRom阶段做了什么？" class="headerlink" title="三、BootRom阶段做了什么？"></a>三、BootRom阶段做了什么？</h1><p><code>BootRom</code>固件是Rockchip原厂芯片出厂时烧录到内部存储器的，目的是从各个外部存储媒介中加载<code>miniloader</code>(<code>tpl</code> + <code>spl</code>)！</p>
+<p>以下是摘自《Rockchip RK3568 TRM Part1 V1.1-20210301》，它很清晰地说明了BootRom阶段做了什么事情：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122155809.png" alt="img"></p>
+<p>我们按照正常引导走一遍：</p>
+<ol>
+<li>从<code>0x0000FFFF</code>地址读取第一条指令运行；</li>
+<li>逐一检查与校验<code>Nor Flash</code>、<code>Nand Flash</code>、<code>eMMC</code>、<code>SD/MMC</code>中的<code>ID BLOCK</code>（RK 固件定义在第 <code>64</code> 扇区）；</li>
+<li>假如我们的固件存放于<code>eMMC</code>，那么校验<code>ID BLOCK</code>成功后就读取<code>DDR</code>初始化代码到<code>SYSTEM_SRAM</code>；</li>
+<li>紧接着运行刚刚读取的代码来初始化<code>DDR</code>；</li>
+<li>初始化<code>DDR</code>后<code>DDR</code>就可以工作了，把引导代码加载到<code>DDR</code>并调到<code>DDR</code>继续运行。</li>
+</ol>
+<p>如果各个存储器都没有找到<code>ID BLOCK</code>，那么会执行以下操作：</p>
+<ol>
+<li>等待请求<code>DDR</code>程序（即在<code>RKDevTool</code>工具可以看到处于<code>Maskrom</code>模式）：</li>
+</ol>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122156818.png" alt="img"></p>
+<h1 id="四、RK固件在存储器中是如何分布的？"><a href="#四、RK固件在存储器中是如何分布的？" class="headerlink" title="四、RK固件在存储器中是如何分布的？"></a>四、RK固件在存储器中是如何分布的？</h1><p>如下图，其中 RK356x和rk3588 是没有使用 <code>trust</code>分区，这个要注意：	</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122156681.png" alt="img"></p>
+<p>另外要注意的是从<code>loader2</code>分区开始所有的分区大小与起始地址是由<code>parameter.txt</code>文件进行描述，具体参考：</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Neutionwei/article/details/122911086">https://blog.csdn.net/Neutionwei/article/details/122911086</a></p>
+</blockquote>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2023/09/10/13%20bootloader%E5%BC%95%E5%AF%BC%E6%B5%81%E7%A8%8B/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2023/09/10/15%20U-Boot%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E6%B5%85%E6%9E%90/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            U-Boot编译过程浅析
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2023/09/10/12%20%E7%91%9E%E8%8A%AF%E5%BE%AEbuild-sh%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">瑞芯微build-sh脚本分析</div>
+      </a>
+    
+  </nav>
+
+  
+   
+  
+   
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2015-2023
+        <i class="ri-heart-fill heart_icon"></i> chai
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="热爱学习的未来酱"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE">瑞芯微</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/%E5%AD%A6%E4%B9%A0">学习</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/%E5%8F%8D%E6%80%9D">反思</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="52"
+        src="//music.163.com/outchain/player?type=2&id=22707008&auto=0&height=32"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
+    
+    
+
+  </div>
+</body>
+
+</html>

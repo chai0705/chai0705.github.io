@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+  
+
+    <head>
+      <meta charset="utf-8" />
+        
+      <meta name="description" content="永远年轻，永远热泪盈眶" />
+      
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>适配瑞芯微官方SDK |  热爱学习的未来酱</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      
+<link rel="stylesheet" href="/css/fonts/remixicon.css">
+
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    <link rel="alternate" href="/atom.xml" title="热爱学习的未来酱" type="application/atom+xml">
+</head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-17 适配瑞芯微官方SDK"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  适配瑞芯微官方SDK
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/09/27/17%20%E9%80%82%E9%85%8D%E7%91%9E%E8%8A%AF%E5%BE%AE%E5%AE%98%E6%96%B9SDK/" class="article-date">
+  <time datetime="2023-09-27T12:47:53.000Z" itemprop="datePublished">2023-09-27</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE/">瑞芯微</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">4.3k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">20 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309272155420.jpeg" alt="Rockchip bootflow.jpg"></p>
+<p>瑞芯微的分区表如上图所示，虽然在瑞芯微的wiki中提供了一些简单的开源介绍，但是我是没有见过的。，，很坑，所以还是以瑞芯微的开放SDK进行移植</p>
+<h1 id="1-miniloader"><a href="#1-miniloader" class="headerlink" title="1. miniloader"></a>1. miniloader</h1><p>瑞芯微官方miniloader路径为<a target="_blank" rel="noopener" href="https://github.com/rockchip-linux/rkbin.git">https://github.com/rockchip-linux/rkbin.git</a></p>
+<p>首先克隆官方的rkbin，瑞芯微提供了闭源的的二进制文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/rockchip-linux/rkbin.git</span><br></pre></td></tr></table></figure>
+
+<p>拉取完成如下图所示：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309272158411.png" alt="image-20230927215856386"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309272159325.png" alt="image-20230927215908314"></p>
+<p>瑞芯微的README如下所示：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">Rockchip loader binaries naming rule</span><br><span class="line"></span><br><span class="line">总则：</span><br><span class="line">不管单个模块，还是合并后的loader，命名都采用</span><br><span class="line">[chip]_[module]_[feature]_[version].[postfix]</span><br><span class="line"></span><br><span class="line">chip: 芯片或芯片系列名称, 必选项, 与所有kernel/uboot driver中的名称保持一致, 具体命名方式不在此讨论, 小写</span><br><span class="line">module: 模块名称, 必选项, 如loader, ddr, miniloader，usbplug,bl3x,tee,tee_ta，小写</span><br><span class="line">feature: 模块特征, 可选项, 可多个, 如ddr使用的频率, 或者只支持某个特定的ddr, miniloader的特别选项等, 小写</span><br><span class="line">version: 版本信息, 必选项, 格式采用[v1.00,], 正式发布之前为0.xx, 正式发布后为1.00以后，小写</span><br><span class="line">postfix: 后缀名, 必选项, 代码编译出来的默认为.bin, 也有可能为.elf, 合并后为.img，小写</span><br><span class="line">连接符号采用下划线“_”</span><br><span class="line">例如：</span><br><span class="line">ddr模块提供的文件</span><br><span class="line">rk3228_ddr3_800MHz_v1.06.bin</span><br><span class="line"></span><br><span class="line">特殊规则：</span><br><span class="line">1. 合并后的loader命名:</span><br><span class="line">    loader: 由ddrbin, usbplug, miniloader合并而成可用于Windows RK升级工具使用的loader;</span><br><span class="line">    ubootloader: 由ddrbin, usbplug, U-Boot合并而成可用于Windows RK升级工具使用的loader;</span><br><span class="line">    idbloader: 由ddrbin, 一级loader(miniloader或uboot)按IDB格式合并直接用于烧写到IDB区的binary;</span><br><span class="line">    注: miniloader的命名, 仅表示miniloader工程编译输出的bin, 不再延续到合并后的loader中使用;</span><br><span class="line">2. 合并后的loader的version定义:</span><br><span class="line">    vx.yy.zzz</span><br><span class="line">v:  version的意思，一直采用这个字符，小写</span><br><span class="line">x.yy: ddr所提供文件的版本号，小写</span><br><span class="line">zzz: [1]是miniloader所提供文件的版本号，去掉点号的，小写</span><br><span class="line">     [2]uboot提供的版本号</span><br><span class="line"></span><br><span class="line">3. 命名小写会引起歧义的，就用大写</span><br><span class="line">如ddr的GB，不能写成gb</span><br><span class="line">举例：</span><br><span class="line">合并好的loader命名：</span><br><span class="line">rk3328_loader_v1.03.106.bin</span><br><span class="line">其中的1.03是ddr的版本号v1.03</span><br><span class="line">106是miniloader的版本号v1.06去掉点号的</span><br></pre></td></tr></table></figure>
+
+<p>接下来对这些目录的内容进行介绍</p>
+<ol>
+<li>**bin&#x2F;**：通常用于存放可执行文件（二进制文件）</li>
+</ol>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309272203645.png" alt="image-20230927220321625"></p>
+<p>进入该目录之后又有一系列的子目录，我们要适配的是3588，所以要进入rk35的目录，具体内容如下所示：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309272204357.png" alt="image-20230927220422326"></p>
+<p>根据名称来看总共是有两种类型的二进制文件，分别为rk<strong>ddr*的tpl 和 rk“</strong>”spl的spl，第一个用来进行初始化内存，然后加载spl，spl用来初始化时钟等其他外设，这里我们用到的应该是rk3588_ddr_lp4_2112MHz_lp5_2736MHz_v1.12.bin和rk3588_spl_v1.12.bin两二进制文件，</p>
+<p>2.**doc&#x2F;**目录，通常用于存放文档文件。在这个目录下，有着更新时候的一些说明，如下图所示：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309272213894.png" alt="image-20230927221327879"></p>
+<p>3.img目录根3588无关不用理会。</p>
+<p>4.<strong>LICENSE</strong>：通常用于存放软件或项目的许可证信息</p>
+<p>5.README**：是一个简要的说明文件</p>
+<p>6.**RKBOOT&#x2F;**：它可能包含与引导（Boot）相关的文件、脚本或配置。具体内容如下所示：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309272215234.png" alt="image-20230927221534210"></p>
+<p>这个其实是后面讲到uboot make.sh时候的说明，用来将spl和tpl整合成一个完整的miniloader的，我们要用到的是RK3588MINIALL.ini，具体内容如下所示：、</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309272217736.png" alt="image-20230927221754711"></p>
+<p>Path1&#x3D;bin&#x2F;rk35&#x2F;rk3588_ddr_lp4_2112MHz_lp5_2736MHz_v1.12.bin</p>
+<p>FlashData&#x3D;bin&#x2F;rk35&#x2F;rk3588_ddr_lp4_2112MHz_lp5_2736MHz_v1.12.bin</p>
+<p>FlashBoot&#x3D;bin&#x2F;rk35&#x2F;rk3588_spl_v1.12.bin</p>
+<p>PATH&#x3D;rk3588_spl_loader_v1.12.112.bin</p>
+<p>7.<strong>RKBOOT.ini</strong>：不用管</p>
+<p>8.**RKTRUST&#x2F;**：这是一个目录，可能与 Rockchip 平台安全性（Trust）相关。根据目录名称，它可能包含与安全启动、安全引导或安全认证相关的文件、脚本或配置。</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309272219951.png" alt="image-20230927221941937"></p>
+<p>​	这也是一些ini文件，这是基于开源的bl31和bl32来的，上面的两个流程呀，属于第二条，闭源的miniloader属于第一条。</p>
+<ol>
+<li>**scripts&#x2F;**：checkpatch.sh只有这一个脚本，看了一下应该没啥用，应该是瑞芯微用于检查时候的一个脚本，</li>
+<li>这些脚本可以用于自动化任务、配置设置、编译构建等。</li>
+<li>**tools&#x2F;**：这是一个目录，通常用于存放工具文件。工具文件可以是用于特定任务或目的的实用程序、应用程序或脚本。这些工具可以帮助你完成各种操作，如调试、分析、转换等。</li>
+</ol>
+<p>ddrbin_tool_user_guide.txt 是ddrbin_tool的使用说明，倒是还挺详细，我们要改的是ddr相关的tpl，重要内容整理如下</p>
+<p><strong>功能 1：从 ddrbin_param.txt 修改 ddr.bin 文件。</strong></p>
+<ol>
+<li>修改 ‘ddrbin_param.txt’ 文件，设置你想要的 DDR 频率、UART 信息等。如果想保持默认值，请将这些项目留空。</li>
+<li>运行 ‘ddrbin_tool’，并使用以下参数：参数 1 为 ddrbin_param.txt，参数 2 为 ddr.bin 文件。<br>例如：.&#x2F;ddrbin_tool ddrbin_param.txt px30_ddr_333MHz_v1.13.bin</li>
+</ol>
+<p><strong>功能 2：将 ddr.bin 文件的配置保存到 gen_param.txt 文件中。</strong><br>如果想要获取 ddr.bin 文件的配置，请执行以下操作：<br>.&#x2F;ddrbin_tool -g gen_param.txt px30_ddr_333MHz_v1.15.bin<br>配置信息将显示在 gen_param.txt 文件中。</p>
+<p>而我要修改的是rk3588_ddr_lp4_2112MHz_lp5_2736MHz_v1.12.bin，想用功能2 保存到 gen_param.txt</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./ddrbin_tool -g  gen_param.txt rk3588_ddr_lp4_2112MHz_lp5_2736MHz_v1.12.bin</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310031753004.png" alt="image-20231003175311976"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310031753485.png" alt="image-20231003175354464"></p>
+<p>修改之后还需要重新生成bin文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./ddrbin_tool gen_param.txt rk3588_ddr_lp4_2112MHz_lp5_2736MHz_v1.12.bin</span><br></pre></td></tr></table></figure>
+
+<p><strong><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310031756166.png" alt="image-20231003175617140"></strong></p>
+<p>修改的地方只有这里的115200，其他倒是没关，然后就是看看如何整合spl和tpl了，整合成一个完整的loader.bin</p>
+<p>这里我就不用uboot的的make.sh了，而是找到他的命令和makefile具体内容如下所示：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">function pack_loader_image()</span><br><span class="line">&#123;</span><br><span class="line">	rm -f *loader*.bin *download*.bin *idblock*.img</span><br><span class="line">	cd $&#123;RKBIN&#125;</span><br><span class="line">	DEF_PATH=$&#123;RKBIN&#125;/`filt_val &quot;^PATH&quot; $&#123;INI_LOADER&#125;`</span><br><span class="line">	IDB_PATH=$&#123;RKBIN&#125;/`filt_val &quot;IDB_PATH&quot; $&#123;INI_LOADER&#125;`</span><br><span class="line"><span class="meta prompt_">	$</span><span class="language-bash">&#123;SCRIPT_LOADER&#125; --ini <span class="variable">$&#123;INI_LOADER&#125;</span></span></span><br><span class="line">	cd -</span><br><span class="line">	if [ -f $&#123;DEF_PATH&#125; ]; then</span><br><span class="line">		mv $&#123;DEF_PATH&#125; ./</span><br><span class="line">	fi</span><br><span class="line">	if [ -f $&#123;IDB_PATH&#125; ]; then</span><br><span class="line">		mv $&#123;IDB_PATH&#125; ./</span><br><span class="line">	fi</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"></span></span><br><span class="line"><span class="language-bash"><span class="comment"># Copyright (c) 2020 Rockchip Electronics Co., Ltd</span></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"></span></span><br><span class="line"><span class="language-bash"><span class="comment"># SPDX-License-Identifier: GPL-2.0</span></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"></span></span><br><span class="line"><span class="language-bash"></span></span><br><span class="line">set -e</span><br><span class="line"></span><br><span class="line">if [ $# -eq 0 ]; then</span><br><span class="line">	echo &quot;ERROR: No args of $0&quot;</span><br><span class="line">	exit 1</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">while [ $# -gt 0 ]; do</span><br><span class="line">	case $1 in</span><br><span class="line">		--ini)</span><br><span class="line">			INI=$2</span><br><span class="line">			shift 2</span><br><span class="line">			;;</span><br><span class="line">		*)</span><br><span class="line">			echo &quot;ERROR: Unknown arg: $1&quot;</span><br><span class="line">			exit 1</span><br><span class="line">			;;</span><br><span class="line">	esac</span><br><span class="line">done</span><br><span class="line"></span><br><span class="line">if [ ! -f $&#123;INI&#125; ]; then</span><br><span class="line">	echo &quot;pack loader failed! Can&#x27;t find: $&#123;INI&#125;&quot;</span><br><span class="line">	exit 0</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">COUNT=`cat $&#123;INI&#125; | wc -l`</span><br><span class="line">if [ $&#123;COUNT&#125; -eq 1 ]; then</span><br><span class="line">	IMG=`sed -n &quot;/PATH=/p&quot; $&#123;INI&#125; | tr -d &#x27;\r&#x27; | cut -d &#x27;=&#x27; -f 2`</span><br><span class="line">	cp $&#123;IMG&#125; ./</span><br><span class="line">else</span><br><span class="line">	./tools/boot_merger $&#123;INI&#125;</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">echo &quot;pack loader okay! Input: $&#123;INI&#125;&quot;</span><br></pre></td></tr></table></figure>
+
+<p>最后用的还是boot_merger这个工具。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./tools/boot_merger RKBOOT/RK3588MINIALL.ini</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310031810759.png" alt="image-20231003181000745"></p>
+<p>关于spl和tpl就这样了，然后是uboot</p>
+<h1 id="2-uboot"><a href="#2-uboot" class="headerlink" title="2.uboot"></a>2.uboot</h1><p>克隆源码</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/rockchip-linux/u-boot.git</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310031845388.png" alt="image-20231003184552359"></p>
+<p>修改make menuconfig，rk3588的默认配置文件为.&#x2F;configs&#x2F;rk3588_defconfig</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310031852329.png" alt="image-20231003185216305"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export arch=arm64</span><br><span class="line">make rk3588_defconfig</span><br><span class="line">make menuconfig</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310031855129.png" alt="image-20231003185541087"></p>
+<p>目前只需要将这里的uboot修改为115200即可，然后重新保存configs&#x2F;rk3588_defconfig，重新编译</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">export arch=arm64</span><br><span class="line">make rk3588_defconfig</span><br><span class="line">make CROSS_COMPILE=&quot;aarch64-linux-gnu-&quot; -j32</span><br><span class="line">modules_install</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310031858771.png" alt="image-20231003185809741"></p>
+<p>编译完这里的uboot.img就是我们需要的镜像，不对，后来发现事情并不是想的那样，理论上应该是uboot.img这里的选择不对。所以接下来去寻找uboot.img的生成流程</p>
+<p>实际应该是</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./make.sh rk3588 CROSS_COMPILE=aarch64-linux-gnu-</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310031920218.png" alt="image-20231003192010183"></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">编译uboot.itb</span></span><br><span class="line">make CROSS_COMPILE=&quot;aarch64-linux-gnu-&quot; -j32 u-boot.itb</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310051037632.png" alt="image-20231005103717571"></p>
+<p>但是并没有找到源头，然后找一下make.sh的内容具体内容如下所示：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">打包生成uboot镜像</span></span><br><span class="line">function pack_uboot_image()</span><br><span class="line">&#123;</span><br><span class="line">	rm u-boot.img u-boot-dtb.img -f</span><br><span class="line">	LOAD_ADDR=`sed -n &quot;/CONFIG_SYS_TEXT_BASE=/s/CONFIG_SYS_TEXT_BASE=//p&quot; include/autoconf.mk|tr -d &#x27;\r&#x27;`</span><br><span class="line">	if [ -z &quot;$&#123;LOAD_ADDR&#125;&quot; ]; then</span><br><span class="line"><span class="meta prompt_">		# </span><span class="language-bash">upstream U-Boot</span></span><br><span class="line">		LOAD_ADDR=`grep CONFIG_SYS_TEXT_BASE include/generated/autoconf.h | awk &#x27;&#123; print $3 &#125;&#x27; | tr -d &#x27;\r&#x27;`</span><br><span class="line">	fi</span><br><span class="line"></span><br><span class="line">	if [ -z &quot;$&#123;LOAD_ADDR&#125;&quot; ]; then</span><br><span class="line">		echo &quot;ERROR: No CONFIG_SYS_TEXT_BASE for u-boot&quot;;</span><br><span class="line">		exit 1</span><br><span class="line">	fi</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">	$</span><span class="language-bash">&#123;SCRIPT_UBOOT&#125; --load <span class="variable">$&#123;LOAD_ADDR&#125;</span> <span class="variable">$&#123;PLAT_UBOOT_SIZE&#125;</span></span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>SCRIPT_UBOOT&#x3D;”${SRCTREE}&#x2F;scripts&#x2F;uboot.sh”</p>
+<p>LOAD_ADDR&#x3D;0x00200000</p>
+<p>–size 2048 1</p>
+<p>configs&#x2F;rk3588-ramboot.config:4:CONFIG_UBOOT_SIZE_KB&#x3D;2048</p>
+<p>configs&#x2F;rk3588-ramboot.config:5:CONFIG_UBOOT_NUM&#x3D;1</p>
+<p>可行的代码为</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./scripts/uboot.sh --load  0x00200000 --size 2048 1</span><br></pre></td></tr></table></figure>
+
+
+
+<p>uboot.sh内容如下所示：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"></span></span><br><span class="line"><span class="language-bash"><span class="comment"># Copyright (c) 2020 Rockchip Electronics Co., Ltd</span></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"></span></span><br><span class="line"><span class="language-bash"><span class="comment"># SPDX-License-Identifier: GPL-2.0</span></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"></span></span><br><span class="line"><span class="language-bash"></span></span><br><span class="line">set -e</span><br><span class="line"></span><br><span class="line">if [ $# -eq 0 ]; then</span><br><span class="line">        echo &quot;ERROR: No args of $0&quot;</span><br><span class="line">        exit 1</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">while [ $# -gt 0 ]; do</span><br><span class="line">        case $1 in</span><br><span class="line">                --load)</span><br><span class="line">                        LOAD_ADDR=$2</span><br><span class="line">                        shift 2</span><br><span class="line">                        ;;</span><br><span class="line">                --size)</span><br><span class="line">                        SIZE=&quot;$1 $2 $3&quot;</span><br><span class="line">                        shift 3</span><br><span class="line">                        ;;</span><br><span class="line">                *)</span><br><span class="line">                        echo &quot;ERROR: Unknown arg: $1&quot;</span><br><span class="line">                        exit 1</span><br><span class="line">                        ;;</span><br><span class="line">        esac</span><br><span class="line">done</span><br><span class="line"></span><br><span class="line">rm uboot.img -f</span><br><span class="line"></span><br><span class="line">if [ -z &quot;$&#123;LOAD_ADDR&#125;&quot; ]; then</span><br><span class="line">        echo &quot;ERROR: No load address&quot;</span><br><span class="line">        exit 1</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">HEAD_KB=2</span><br><span class="line">BIN_KB=`ls -l u-boot.bin | awk &#x27;&#123; print $5 &#125;&#x27;`</span><br><span class="line">if [ -z &quot;$&#123;SIZE&#125;&quot; ]; then</span><br><span class="line">        MAX_KB=1046528</span><br><span class="line">else</span><br><span class="line">        MAX_KB=`echo $&#123;SIZE&#125; | awk &#x27;&#123;print strtonum($2)&#125;&#x27;`</span><br><span class="line">        MAX_KB=$(((MAX_KB-HEAD_KB)*1024))</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">if [ $&#123;BIN_KB&#125; -gt $&#123;MAX_KB&#125; ]; then</span><br><span class="line">        echo &quot;ERROR: pack uboot failed! u-boot.bin actual: $&#123;BIN_KB&#125; bytes, max limit: $&#123;MAX_KB&#125; bytes&quot;</span><br><span class="line">        exit 1</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">../rkbin/tools/loaderimage --pack --uboot u-boot.bin uboot.img $&#123;LOAD_ADDR&#125; $&#123;SIZE&#125;</span><br><span class="line">echo &quot;pack uboot okay! Input: u-boot.bin&quot;</span><br><span class="line">echo</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>而实际上使用的命令是</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">../rkbin/tools/loaderimage --pack --uboot u-boot.bin uboot.img 0x00200000 --size 2048 1</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310032021655.png" alt="image-20231003202108625"></p>
+<p>不知道他的源码呀~~~~，这就没意思了。。。先这样吧。</p>
+<h1 id="3-kernel"><a href="#3-kernel" class="headerlink" title="3.kernel"></a>3.kernel</h1><p>git拉取源码</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/rockchip-linux/kernel.git</span><br></pre></td></tr></table></figure>
+
+
+
+<p>查看全部分支，如下所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310032034502.png" alt="image-20231003203437480"></p>
+<p>我直接一步到位，直接到5.10就行</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout develop-5.10</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310032036427.png" alt="image-20231003203633412"></p>
+<p>然后寻找kernel的编译过程，</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">构建 Kernel</span></span><br><span class="line">build_kernel()</span><br><span class="line">&#123;</span><br><span class="line"><span class="meta prompt_">	# </span><span class="language-bash">检查 RK_KERNEL_DTS 和 RK_KERNEL_DEFCONFIG 配置是否存在，若不存在则返回</span></span><br><span class="line">	check_config RK_KERNEL_DTS RK_KERNEL_DEFCONFIG || return 0</span><br><span class="line"></span><br><span class="line">	echo &quot;============Start building kernel============&quot;</span><br><span class="line">	echo &quot;TARGET_KERNEL_ARCH   =$RK_KERNEL_ARCH&quot;</span><br><span class="line">	echo &quot;TARGET_KERNEL_CONFIG =$RK_KERNEL_DEFCONFIG&quot;</span><br><span class="line">	echo &quot;TARGET_KERNEL_DTS    =$RK_KERNEL_DTS&quot;</span><br><span class="line">	echo &quot;TARGET_KERNEL_CONFIG_FRAGMENT =$RK_KERNEL_DEFCONFIG_FRAGMENT&quot;</span><br><span class="line">	echo &quot;==========================================&quot;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">	# </span><span class="language-bash">设置交叉编译工具链</span></span><br><span class="line">	setup_cross_compile</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">	# </span><span class="language-bash">使用 KMAKE 构建 Kernel</span></span><br><span class="line"><span class="meta prompt_">	$</span><span class="language-bash">KMAKE <span class="variable">$RK_KERNEL_DEFCONFIG</span> <span class="variable">$RK_KERNEL_DEFCONFIG_FRAGMENT</span></span></span><br><span class="line"><span class="meta prompt_">	$</span><span class="language-bash">KMAKE <span class="variable">$RK_KERNEL_DTS</span>.img</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">	# </span><span class="language-bash">检查是否存在 Kernel FIT 文件并使用 mk-fitimage.sh 创建镜像</span></span><br><span class="line">	ITS=&quot;$CHIP_DIR/$RK_KERNEL_FIT_ITS&quot;</span><br><span class="line">	if [ -f &quot;$ITS&quot; ]; then</span><br><span class="line"><span class="meta prompt_">		$</span><span class="language-bash">COMMON_DIR/mk-fitimage.sh kernel/<span class="variable">$RK_BOOT_IMG</span> \</span></span><br><span class="line"><span class="language-bash">			<span class="string">&quot;<span class="variable">$ITS</span>&quot;</span> <span class="variable">$RK_KERNEL_IMG</span></span></span><br><span class="line">	fi</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">	# </span><span class="language-bash">创建链接到 rockdev 目录的 boot.img</span></span><br><span class="line">	ln -rsf kernel/$RK_BOOT_IMG rockdev/boot.img</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">	# </span><span class="language-bash">将 boot.img 复制到 u-boot 目录下，用于安全性考虑</span></span><br><span class="line">	cp rockdev/boot.img u-boot/</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">	# </span><span class="language-bash">构建检查电源域</span></span><br><span class="line">	build_check_power_domain</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">	# </span><span class="language-bash">完成构建流程</span></span><br><span class="line">	finish_build</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">KMAKE=&quot;make ARCH=arm64 -j32&quot; </span><br><span class="line">CROSS_COMPILE=aarch64-linux-gnu-</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<pre><code>make ARCH=arm64 -j32  CROSS_COMPILE=aarch64-linux-gnu- rockchip_linux_defconfig rk3588_linux.config
+make ARCH=arm64 -j32  CROSS_COMPILE=aarch64-linux-gnu- rk3588-evb7-lp4-v10-linux.img
+</code></pre>
+<p>编译成功，但是还需要修改波特率，要修改的设备树为rk3588-linux.dtsi</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310032048880.png" alt="image-20231003204847848"></p>
+<p>然后修改rk3588-evb7-lp4.dtsi文件，里面有PCIE相关的内容，需要disabled不然会卡在内核</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310032056361.png" alt="image-20231003205604330"></p>
+<p>反正现在的dhmi屏幕问题不大，就先这样了。</p>
+<h1 id="4-image"><a href="#4-image" class="headerlink" title="4.image"></a>4.image</h1><p>首先git大佬的源码</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/Joshua-Riek/ubuntu-rockchip.git</span><br></pre></td></tr></table></figure>
+
+<p>我这里先以香橙派为例进行编译</p>
+<p>export VENDOR&#x3D;orangepi</p>
+<p>export BOARD&#x3D;orangepi-5b</p>
+<p>build-u-boot.sh内容如下所示：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"></span><br><span class="line">set -eE </span><br><span class="line">trap &#x27;echo Error: in $0 on line $LINENO&#x27; ERR</span><br><span class="line"></span><br><span class="line">if [ &quot;$(id -u)&quot; -ne 0 ]; then</span><br><span class="line">    echo &quot;Please run as root&quot;</span><br><span class="line">    exit 1</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">cd &quot;$(dirname -- &quot;$(readlink -f -- &quot;$0&quot;)&quot;)&quot; &amp;&amp; cd ..</span><br><span class="line">mkdir -p build &amp;&amp; cd build</span><br><span class="line"></span><br><span class="line">if [[ -z $&#123;VENDOR&#125; ]]; then</span><br><span class="line">    echo &quot;Error: VENDOR is not set&quot;</span><br><span class="line">    exit 1</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">if [ ! -d u-boot-&quot;$&#123;VENDOR&#125;&quot; ]; then</span><br><span class="line">    # shellcheck source=/dev/null</span><br><span class="line">    source ../packages/u-boot-&quot;$&#123;VENDOR&#125;&quot;-rk3588/debian/upstream</span><br><span class="line">    git clone --single-branch --progress -b &quot;$&#123;BRANCH&#125;&quot; &quot;$&#123;GIT&#125;&quot; u-boot-&quot;$&#123;VENDOR&#125;&quot;</span><br><span class="line">    git -C u-boot-&quot;$&#123;VENDOR&#125;&quot; checkout &quot;$&#123;COMMIT&#125;&quot;</span><br><span class="line">    cp -r ../packages/u-boot-&quot;$&#123;VENDOR&#125;&quot;-rk3588/debian u-boot-&quot;$&#123;VENDOR&#125;&quot;</span><br><span class="line">fi</span><br><span class="line">cd u-boot-&quot;$&#123;VENDOR&#125;&quot;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Compile u-boot into a deb package</span></span><br><span class="line">dpkg-buildpackage -a &quot;$(cat debian/arch)&quot; -d -b -nc -uc</span><br><span class="line"></span><br><span class="line">rm -f ../*.buildinfo ../*.changes</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>build.sh内容如下所示：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">mkdir -p build/logs</span><br><span class="line">exec &gt; &gt;(tee &quot;build/logs/build-$(date +&quot;%Y%m%d%H%M%S&quot;).log&quot;) 2&gt;&amp;1</span><br><span class="line"></span><br><span class="line">if [[ $&#123;KERNEL_ONLY&#125; == &quot;Y&quot; ]]; then</span><br><span class="line">    eval &quot;$&#123;DOCKER&#125;&quot; ./scripts/build-kernel.sh</span><br><span class="line">    exit 0</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">if [[ $&#123;UBOOT_ONLY&#125; == &quot;Y&quot; ]]; then</span><br><span class="line">    eval &quot;$&#123;DOCKER&#125;&quot; ./scripts/build-u-boot.sh</span><br><span class="line">    exit 0</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">if [[ $&#123;LAUNCHPAD&#125; != &quot;Y&quot; ]]; then</span><br><span class="line">    if [[ ! -e &quot;$(find build/linux-image-*.deb | sort | tail -n1)&quot; || ! -e &quot;$(find build/linux-headers-*.deb | sort | tail -n1)&quot; ]]; then</span><br><span class="line">        eval &quot;$&#123;DOCKER&#125;&quot; ./scripts/build-kernel.sh</span><br><span class="line">    fi</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">if [[ $&#123;LAUNCHPAD&#125; != &quot;Y&quot; ]]; then</span><br><span class="line">    if [[ ! -e &quot;$(find build/u-boot-&quot;$&#123;BOARD&#125;&quot;_*.deb | sort | tail -n1)&quot; ]]; then</span><br><span class="line">        eval &quot;$&#123;DOCKER&#125;&quot; ./scripts/build-u-boot.sh</span><br><span class="line">    fi</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">eval &quot;$&#123;DOCKER&#125;&quot; ./scripts/build-rootfs.sh</span><br><span class="line">eval &quot;$&#123;DOCKER&#125;&quot; ./scripts/config-image.sh</span><br><span class="line"></span><br><span class="line">exit 0</span><br><span class="line">                                                                                                                                     </span><br></pre></td></tr></table></figure>
+
+
+
+<p>boot.cmd</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">setenv bootargs &quot;console=ttyS2,115200 earlycon=uart8250,mmio32,0xff130000 root=/dev/mmcblk1p2 rw rootwait&quot;</span><br><span class="line">load mmc 1:1 $&#123;fdt_addr_r&#125; rk3588-evb7-lp4-v10-linux.dtb</span><br><span class="line">setenv kernel_comp_addr_r 0x0a000000</span><br><span class="line">load mmc 1:1 $&#123;kernel_addr_r&#125; Image.gz</span><br><span class="line">setenv kernel_comp_size $&#123;filesize&#125;</span><br><span class="line">booti $&#123;kernel_addr_r&#125; - $&#123;fdt_addr_r&#125;</span><br></pre></td></tr></table></figure>
+
+<p>mkimage -A arm -O linux -T script -C none -a 0 -e 0 -d boot.cmd boot.scr</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310041050935.png" alt="image-20231004105004887"></p>
+<p>安装内核模块</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make ARCH=arm64 CROSS_COMPILE=&quot;aarch64-linux-gnu-&quot; INSTALL_MOD_STRIP=1 INSTALL_MOD_PATH=&quot;/home/topeet/rockchip/image/lib&quot; modules_install -j32</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310041100339.png" alt="image-20231004110040296"></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">find -name &quot;*ko&quot; -exec cp &#123;&#125; /home/topeet/rockchip/image/rootfs/lib/modules/5.10.110 \;</span><br><span class="line">find -name &quot;*ko&quot; | xargs -I &#123;&#125; cp &#123;&#125; /home/topeet/rockchip/image/rootfs/lib/modules/5.10.110</span><br></pre></td></tr></table></figure>
+
+
+
+<p>制作完整的镜像</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./gen_image_generic.sh &lt;file&gt; &lt;kernel size&gt; &lt;kernel directory&gt; &lt;rootfs size&gt; &lt;rootfs image&gt; [&lt;align&gt;]</span><br></pre></td></tr></table></figure>
+
+<p>其中，<code>&lt;file&gt;</code>是要生成的镜像文件的名称，<code>&lt;kernel size&gt;</code>是内核文件系统的大小，<code>&lt;kernel directory&gt;</code>是包含内核文件系统内容的目录，<code>&lt;rootfs size&gt;</code>是根文件系统的大小，<code>&lt;rootfs image&gt;</code>是根文件系统的镜像文件，<code>&lt;align&gt;</code>是可选的对齐参数。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./gen_image_generic.sh system.img 100 boot 7144 rootfs.img 32768</span><br></pre></td></tr></table></figure>
+
+
+
+<p>写入uboot</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo dd if=uboot.img of=system.img seek=64 conv=notrunc</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo dd if=system.img of=/dev/sdc status=progress</span><br></pre></td></tr></table></figure>
+
+<h1 id="5-打包"><a href="#5-打包" class="headerlink" title="5.打包"></a>5.打包</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">build_updateimg()</span><br><span class="line">&#123;</span><br><span class="line">	IMAGE_PATH=$TOP_DIR/rockdev   # 设置IMAGE_PATH变量为$TOP_DIR/rockdev，用于存储生成的镜像文件路径</span><br><span class="line">	PACK_TOOL_DIR=$TOP_DIR/tools/linux/Linux_Pack_Firmware   # 设置PACK_TOOL_DIR变量为$TOP_DIR/tools/linux/Linux_Pack_Firmware，用于存储打包工具的路径</span><br><span class="line"></span><br><span class="line">	cd $PACK_TOOL_DIR/rockdev   # 进入$PACK_TOOL_DIR/rockdev目录</span><br><span class="line"></span><br><span class="line">	if [ -f &quot;$RK_PACKAGE_FILE_AB&quot; ]; then   # 如果存在$RK_PACKAGE_FILE_AB文件</span><br><span class="line">		build_sdcard_package   # 调用build_sdcard_package函数，构建SD卡包</span><br><span class="line">		build_otapackage   # 调用build_otapackage函数，构建OTA包</span><br><span class="line"></span><br><span class="line">		cd $PACK_TOOL_DIR/rockdev   # 返回$PACK_TOOL_DIR/rockdev目录</span><br><span class="line">		echo &quot;Make Linux a/b update_ab.img.&quot;</span><br><span class="line">		source_package_file_name=`ls -lh package-file | awk -F &#x27; &#x27; &#x27;&#123;print $NF&#125;&#x27;`   # 获取package-file的文件名</span><br><span class="line">		ln -fs &quot;$RK_PACKAGE_FILE_AB&quot; package-file   # 创建软链接，将$RK_PACKAGE_FILE_AB链接到package-file</span><br><span class="line">		./mkupdate.sh   # 运行mkupdate.sh脚本，生成update.img</span><br><span class="line">		mv update.img $IMAGE_PATH/update_ab.img   # 将生成的update.img移动到$IMAGE_PATH/update_ab.img</span><br><span class="line">		ln -fs $source_package_file_name package-file   # 创建软链接，将source_package_file_name链接到package-file</span><br><span class="line">	else</span><br><span class="line">		echo &quot;Make update.img&quot;</span><br><span class="line"></span><br><span class="line">		if [ -f &quot;$RK_PACKAGE_FILE&quot; ]; then   # 如果存在$RK_PACKAGE_FILE文件</span><br><span class="line">			source_package_file_name=`ls -lh package-file | awk -F &#x27; &#x27; &#x27;&#123;print $NF&#125;&#x27;`   # 获取package-file的文件名</span><br><span class="line">			ln -fs &quot;$RK_PACKAGE_FILE&quot; package-file   # 创建软链接，将$RK_PACKAGE_FILE链接到package-file</span><br><span class="line">			./mkupdate.sh   # 运行mkupdate.sh脚本，生成update.img</span><br><span class="line">			ln -fs $source_package_file_name package-file   # 创建软链接，将source_package_file_name链接到package-file</span><br><span class="line">		else</span><br><span class="line">			./mkupdate.sh   # 运行mkupdate.sh脚本，生成update.img</span><br><span class="line">		fi</span><br><span class="line">		mv update.img $IMAGE_PATH   # 将生成的update.img移动到$IMAGE_PATH</span><br><span class="line">	fi</span><br><span class="line"></span><br><span class="line">	finish_build   # 调用finish_build函数，进行后续的清理和处理操作</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>研究了一下这个玩意，这个打包完成确实是问题不大，现在我只想知道boot.img是怎样编译出来的</p>
+<p>boot.img kernel.img resource.img zboot.img</p>
+<p>最后找到发现是在scripts&#x2F;mkimg脚本里，里面有一个repack_boot_img的函数</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">make_boot_img()</span><br><span class="line">&#123;</span><br><span class="line">        RAMDISK_IMG_PATH=$&#123;objtree&#125;/ramdisk.img</span><br><span class="line">        [ -f $&#123;RAMDISK_IMG_PATH&#125; ] &amp;&amp; RAMDISK_IMG=ramdisk.img &amp;&amp; RAMDISK_ARG=&quot;--ramdisk $&#123;RAMDISK_IMG_PATH&#125;&quot;</span><br><span class="line"></span><br><span class="line">        $&#123;srctree&#125;/scripts/mkbootimg \</span><br><span class="line">                $&#123;KERNEL_IMAGE_ARG&#125; \</span><br><span class="line">                $&#123;RAMDISK_ARG&#125; \</span><br><span class="line">                --second resource.img \</span><br><span class="line">                -o boot.img &amp;&amp; \</span><br><span class="line">        echo &quot;  Image:  boot.img (with Image $&#123;RAMDISK_IMG&#125; resource.img) is ready&quot;;</span><br><span class="line">        echo                 $&#123;KERNEL_IMAGE_ARG&#125; \</span><br><span class="line">                $&#123;RAMDISK_ARG&#125; \</span><br><span class="line">                --second resource.img \</span><br><span class="line">                -o boot.img &amp;&amp; \</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        $&#123;srctree&#125;/scripts/mkbootimg \</span><br><span class="line">                $&#123;KERNEL_ZIMAGE_ARG&#125; \</span><br><span class="line">                $&#123;RAMDISK_ARG&#125; \</span><br><span class="line">                --second resource.img \</span><br><span class="line">                -o zboot.img &amp;&amp; \</span><br><span class="line">        echo &quot;  Image:  zboot.img (with $&#123;ZIMAGE&#125; $&#123;RAMDISK_IMG&#125; resource.img) is ready&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p>resource.img的由来</p>
+<p>LOGO&#x3D;logo.bmp</p>
+<p>LOGO_KERNEL&#x3D;logo_kernel.bmp</p>
+<p>DTB_PATH&#x3D;${objtree}&#x2F;arch&#x2F;arm&#x2F;boot&#x2F;dts&#x2F;rk3588-evb7-lp4-v10-linux.dtb</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scripts/resource_tool $&#123;DTB_PATH&#125; $&#123;LOGO&#125; $&#123;LOGO_KERNEL&#125;</span><br><span class="line">scripts/resource_tool arch/arm64/boot/dts/rockchip/rk3588-evb7-lp4-v10-linux.dtb logo.bmp logo_kernel.bmp</span><br></pre></td></tr></table></figure>
+
+<p>然后可以用下面的命令解包</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scripts/resource_tool --verbose --unpack --image=resource.img</span><br></pre></td></tr></table></figure>
+
+
+
+<p>而是实际的打包其实是repack-bootimg这个脚本</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$</span><span class="language-bash">&#123;srctree&#125;/scripts/mkbootimg \</span></span><br><span class="line"><span class="language-bash">        <span class="variable">$&#123;KERNEL_IMAGE_ARG&#125;</span> \</span></span><br><span class="line"><span class="language-bash">        <span class="variable">$&#123;RAMDISK_ARG&#125;</span> \</span></span><br><span class="line"><span class="language-bash">        --second resource.img \</span></span><br><span class="line"><span class="language-bash">        -o boot.img &amp;&amp; \</span></span><br></pre></td></tr></table></figure>
+
+<p>打包</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scripts/mkbootimg --kernel ./arch/arm64/boot/Image --second resource.img -o boot.img</span><br></pre></td></tr></table></figure>
+
+
+
+<p>再一绕发现是mkbootimg这个脚本，，，真的6</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$</span><span class="language-bash">srctree/scripts/mkbootimg \</span></span><br><span class="line"><span class="language-bash">--kernel <span class="variable">$kernel</span> \</span></span><br><span class="line"><span class="language-bash"><span class="variable">$SECOND</span> \</span></span><br><span class="line"><span class="language-bash">--ramdisk <span class="variable">$ramdisk</span> \</span></span><br><span class="line"><span class="language-bash"><span class="variable">$DTB</span> \</span></span><br><span class="line"><span class="language-bash"><span class="variable">$RECOVERY_DTBO</span> \</span></span><br><span class="line"><span class="language-bash">--cmdline <span class="string">&quot;<span class="variable">$&#123;cmdline&#125;</span><span class="variable">$&#123;extra_cmdline&#125;</span>&quot;</span> \</span></span><br><span class="line"><span class="language-bash">--header_version <span class="variable">$version</span> \</span></span><br><span class="line"><span class="language-bash">--os_version <span class="variable">$os_version</span> \</span></span><br><span class="line"><span class="language-bash">--os_patch_level <span class="variable">$os_patch_level</span> \</span></span><br><span class="line"><span class="language-bash">--output <span class="variable">$output</span></span></span><br><span class="line">                      </span><br></pre></td></tr></table></figure>
+
+<p>一些相关内容如下所示：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">mkbootimg命令的帮助信息，它用于创建Android引导镜像。</span><br><span class="line"></span><br><span class="line">命令的用法如下：</span><br><span class="line"></span><br><span class="line">shell</span><br><span class="line">Copy</span><br><span class="line">mkbootimg [-h] [--kernel KERNEL] [--ramdisk RAMDISK] [--second SECOND]</span><br><span class="line">          [--dtb DTB] [--recovery_dtbo RECOVERY_DTBO | --recovery_acpio RECOVERY_ACPIO]</span><br><span class="line">          [--cmdline CMDLINE] [--vendor_cmdline VENDOR_CMDLINE]</span><br><span class="line">          [--base BASE] [--kernel_offset KERNEL_OFFSET]</span><br><span class="line">          [--ramdisk_offset RAMDISK_OFFSET]</span><br><span class="line">          [--second_offset SECOND_OFFSET] [--dtb_offset DTB_OFFSET]</span><br><span class="line">          [--os_version OS_VERSION] [--os_patch_level OS_PATCH_LEVEL]</span><br><span class="line">          [--tags_offset TAGS_OFFSET] [--board BOARD]</span><br><span class="line">          [--pagesize &#123;2048,4096,8192,16384&#125;] [--id]</span><br><span class="line">          [--header_version HEADER_VERSION] [-o OUTPUT]</span><br><span class="line">          [--vendor_boot VENDOR_BOOT] [--vendor_ramdisk VENDOR_RAMDISK]</span><br><span class="line">以下是参数的说明：</span><br><span class="line"></span><br><span class="line">-h, --help：显示帮助信息并退出。</span><br><span class="line">--kernel KERNEL：指定内核文件的路径。</span><br><span class="line">--ramdisk RAMDISK：指定ramdisk文件的路径。</span><br><span class="line">--second SECOND：指定第二级引导加载程序文件的路径。</span><br><span class="line">--dtb DTB：指定设备树二进制文件的路径。</span><br><span class="line">--recovery_dtbo RECOVERY_DTBO：指定恢复DTBO文件的路径。</span><br><span class="line">--recovery_acpio RECOVERY_ACPIO：指定恢复ACPIO文件的路径。</span><br><span class="line">--cmdline CMDLINE：指定传递给内核命令行的额外参数。</span><br><span class="line">--vendor_cmdline VENDOR_CMDLINE：包含在供应商引导中的内核命令行参数。</span><br><span class="line">--base BASE：指定基地址。</span><br><span class="line">--kernel_offset KERNEL_OFFSET：指定内核偏移量。</span><br><span class="line">--ramdisk_offset RAMDISK_OFFSET：指定ramdisk偏移量。</span><br><span class="line">--second_offset SECOND_OFFSET：指定第二级引导加载程序偏移量。</span><br><span class="line">--dtb_offset DTB_OFFSET：指定设备树偏移量。</span><br><span class="line">--os_version OS_VERSION：操作系统版本。</span><br><span class="line">--os_patch_level OS_PATCH_LEVEL：操作系统补丁级别。</span><br><span class="line">--tags_offset TAGS_OFFSET：标签偏移量。</span><br><span class="line">--board BOARD：板级名称。</span><br><span class="line">--pagesize &#123;2048,4096,8192,16384&#125;：页面大小。</span><br><span class="line">--id：在标准输出中打印图像ID。</span><br><span class="line">--header_version HEADER_VERSION：引导镜像头版本。</span><br><span class="line">-o OUTPUT, --output OUTPUT：输出文件名。</span><br><span class="line">--vendor_boot VENDOR_BOOT：供应商引导输出文件名。</span><br><span class="line">--vendor_ramdisk VENDOR_RAMDISK：指定供应商ramdisk文件的路径。</span><br></pre></td></tr></table></figure>
+
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2023/09/27/17%20%E9%80%82%E9%85%8D%E7%91%9E%E8%8A%AF%E5%BE%AE%E5%AE%98%E6%96%B9SDK/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2023/10/08/18%20%E6%8C%82%E8%BD%BD%E9%95%9C%E5%83%8F%E6%96%87%E4%BB%B6/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            挂载镜像文件
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2023/09/10/15%20U-Boot%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E6%B5%85%E6%9E%90/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">U-Boot编译过程浅析</div>
+      </a>
+    
+  </nav>
+
+  
+   
+  
+   
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2015-2023
+        <i class="ri-heart-fill heart_icon"></i> chai
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="热爱学习的未来酱"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE">瑞芯微</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/%E5%AD%A6%E4%B9%A0">学习</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/%E5%8F%8D%E6%80%9D">反思</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="52"
+        src="//music.163.com/outchain/player?type=2&id=22707008&auto=0&height=32"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
+    
+    
+
+  </div>
+</body>
+
+</html>
