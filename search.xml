@@ -2050,7 +2050,7 @@ Shell for Root（/sbin/sh）
       </categories>
   </entry>
   <entry>
-    <title>0-0-11 音视频测试</title>
+    <title>音视频测试</title>
     <url>/2023/10/26/4%20%E9%9F%B3%E8%A7%86%E9%A2%91%E6%B5%8B%E8%AF%95/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="1-gst-play-1-0测试"><a href="#1-gst-play-1-0测试" class="headerlink" title="1.gst-play-1.0测试"></a>1.gst-play-1.0测试</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">gst-play-1.0 --videosink=xvimagesink /usr/local/test.mp4</span><br></pre></td></tr></table></figure>
 
@@ -2226,7 +2226,7 @@ Shell for Root（/sbin/sh）
       </categories>
   </entry>
   <entry>
-    <title>0-0-12 docker学习</title>
+    <title>docker学习</title>
     <url>/2023/11/09/5%20docker%E5%AD%A6%E4%B9%A0/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>这是我学习docker的一个前提条件，在之前的一些时间，我也是简单的看了一下docker，当时我是想用docker来进行deb包的构建的，为什么想到用docker了呢，这是因为我看大佬的github和瑞芯微的指导手册里都使用的docker，其实这个就跟开发板直接编译的效果是一样的，只是docker是在本机上，所以操作更流畅一些，而且开发板的编译速度以及方便程度，是有些区别的，所以docker就出现了，再然后我发现源码的编译里也是可以用到docker的，毕竟也就仅仅是一些环境而已，所以我又萌发了用docker编译源码的想法，所以docker的学习正式开始。</p>
 <p><strong>弱小和无知不是生存的障碍，傲慢才是</strong></p>
@@ -2460,7 +2460,7 @@ Shell for Root（/sbin/sh）
       </categories>
   </entry>
   <entry>
-    <title>0-0-13 rkdeb包的制作</title>
+    <title>rkdeb包的制作</title>
     <url>/2023/11/14/7%20rk%20deb%E5%8C%85%E7%9A%84%E5%88%B6%E4%BD%9C/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>先说一下前情提要：<br>    最近这一个月一直在制作debian和ubuntu文件系统，rk官方默认情况下只是构建了debian，好像是因为版权问题，然而呢，我肯定是要构建ubuntu镜像的，而我要做的，就是根据rk提供的debian系统的构建方法，来进行ubuntu的构建。</p>
 <p>​	最大的问题出现在deb包的构建,也就是下面这些deb包：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311132050152.png" alt="image-20231113205017093"></p>
@@ -3372,7 +3372,7 @@ Shell for Root（/sbin/sh）
       </categories>
   </entry>
   <entry>
-    <title>0-0-15 显示硬件发展与视频开发知识点扫盲</title>
+    <title>显示硬件发展与视频开发知识点扫盲</title>
     <url>/2023/11/19/9%20%E6%98%BE%E7%A4%BA%E7%A1%AC%E4%BB%B6%E5%8F%91%E5%B1%95%E4%B8%8E%E8%A7%86%E9%A2%91%E5%BC%80%E5%8F%91%E7%9F%A5%E8%AF%86%E7%82%B9%E6%89%AB%E7%9B%B2/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p> 电脑上炫酷的展示，生动的形象，离不开硬件的支持，硬件是音视频编程文化的一部分。开发者有必要对相关硬件大概了解。本专题涉及视频硬件相关话题，音频相关以后讲述。</p>
 <p>​    视频编程的本质是图形图像编程，本专题以时间为主线，以公司硬件发展为点位，以图像图像开发接口为切面，宏观进行介绍，希望对视频编程开发者进行有益的启示。</p>
