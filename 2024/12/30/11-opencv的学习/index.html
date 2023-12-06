@@ -75,8 +75,8 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2023/11/27/11-opencv%E7%9A%84%E5%AD%A6%E4%B9%A0/" class="article-date">
-  <time datetime="2023-11-27T06:17:20.000Z" itemprop="datePublished">2023-11-27</time>
+      <a href="/2024/12/30/11-opencv%E7%9A%84%E5%AD%A6%E4%B9%A0/" class="article-date">
+  <time datetime="2024-12-30T06:17:20.000Z" itemprop="datePublished">2024-12-30</time>
 </a> 
   <div class="article-category">
     <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>
@@ -87,7 +87,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">8.4k</span>
+            <span class="post-count">9.8k</span>
         </span>
     </span>
 
@@ -96,7 +96,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">37 分钟</span>
+            <span class="post-count">43 分钟</span>
         </span>
     </span>
 </div>
@@ -481,6 +481,56 @@
 <p>遇到的第一个问题，第9行的路径问题，在windows目录下必须要使用两个\不知道这是为啥</p>
 <p>在Windows目录中，反斜杠 <code>\</code> 是用作路径分隔符。然而，反斜杠在C++中被用作转义字符，用于表示特殊字符序列。因此，如果您想在字符串中使用反斜杠作为路径分隔符，您需要使用双反斜杠 <code>\\</code> 来表示一个单独的反斜杠。</p>
 <p>这是因为一个反斜杠 <code>\</code> 表示一个转义字符的开始，例如 <code>\n</code> 表示换行符。为了在字符串中表示一个反斜杠字符本身，您需要使用两个连续的反斜杠 <code>\\</code> 来转义它，告诉编译器它是一个普通的反斜杠字符。</p>
+<p>没有自动补全，重新确定一下插件：<br>1)、C&#x2F;C++，这个肯定是必须的。</p>
+<p>2)、C&#x2F;C++ Snippets，即 C&#x2F;C++重用代码块。</p>
+<p>3)、C&#x2F;C++ Advanced Lint,即 C&#x2F;C++静态检测 。</p>
+<p>4)、Code Runner，即代码运行。</p>
+<p>5)、Include AutoComplete，即自动头文件包含。</p>
+<p>6)、Rainbow Brackets，彩虹花括号，有助于阅读代码。</p>
+<p>7)、One Dark Pro，VSCode 的主题。</p>
+<p>8)、GBKtoUTF8，将 GBK 转换为 UTF8。 </p>
+<p>9)、ARM，即支持 ARM 汇编语法高亮显示。</p>
+<p>10)、Chinese(Simplified)，即中文环境。</p>
+<p>11)、vscode-icons，VSCode 图标插件，主要是资源管理器下各个文件夹的图标。</p>
+<p>12)、compareit，比较插件，可以用于比较两个文件的差异。</p>
+<p>13)、DeviceTree，设备树语法插件。</p>
+<p>14)、CMake Tools Cmake 工具</p>
+<p>&#x3D;&#x3D;还是不能补全，不知道为啥windows的环境会这样，这样下去可不行，问题该解决的当然还是要解决的，遇到问题解决问题&#x3D;&#x3D;</p>
+<p>上面这个案例有以下几个重点我来回顾一下</p>
+<ol>
+<li>头文件</li>
+</ol>
+<p>一般情况下使用c++和opencv都会包含上面提到的两个头文件，也就是&lt;opencv2&#x2F;opencv.hpp&gt;和<iostream>这两个头文件。</p>
+<p>&lt;opencv&#x2F;opencv.hpp&gt;中包含了一些opencv中的常用函数，就比如imread、imwrite、imshow、waitkey、cvtColor等等，而<iostream>中存放的是c++中的一些常用函数，就比如cout输出等等。</p>
+<ol start="2">
+<li>工作区using namespace</li>
+</ol>
+<p>如果是我一般写C语言的话，我都会写上工作区，但是老师给的这些示例代码并没有，而是直接使用的就比如cv::imread() std::cout这些，都是在前加上工作去，然后再引用的，这样的好处应该是防止混乱引用，目前我还没遇到这个情况，这个以后再说。</p>
+<ol start="3">
+<li><p>opencv图像的格式Mat</p>
+<p>没记错的话这个Mat格式用来存放的是RGB三原色每个像素的值</p>
+</li>
+<li><p>相关函数的使用</p>
+</li>
+</ol>
+<p>cv::imread 两个参数，第一个参数为要读取图片的路径、第二个参数为flag标志位我记得是0 1 -1，这三个最常用，其中0代表灰度值，1代表彩色。</p>
+<p>cv::imwrite 这个是用来写入的，其实跟读取的使用方法一样，也是两个参数，其中第一个参数为要保存的图片名称，第二个参数为图片的数据，没有数据你只保存名字那肯定不行呀。</p>
+<p>cv::imshow 从名字可以看出来这是图片的展示，有两个参数，第一个参数为展示图片的框的名称，第二个参数为图片数据，同理，你只显示框的名称，但是没有数据拿什么也显示不出来呀，我说的对吗.</p>
+<p>cv::cvtColor 这个函数是用来进行颜色通道转换的，就比如从RGB转换为BGR等等，你可以思考一下应该有几个参数，你看要转换肯定要有一个原始数据对吧，然后肯定有一个输出数据对吧，最后必然要有一个如何转换对吧，所以必要填写的是三个参数。</p>
+<p>最后是cv::waitKey(0)这个函数的意义是让图片一直显示，直到按下一个按键。</p>
+<h2 id="6-2-读取视频并显示"><a href="#6-2-读取视频并显示" class="headerlink" title="6.2 读取视频并显示"></a>6.2 读取视频并显示</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 导入opencv 库</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;opencv2/opencv.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="comment">// 导入gflags 库</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;gflags/gflags.h&gt;</span></span></span><br><span class="line"><span class="comment">// 定义命令行参数</span></span><br><span class="line"><span class="built_in">DEFINE_string</span>(video, <span class="string">&quot;./media/dog.mp4&quot;</span>, <span class="string">&quot;Input video&quot;</span>); <span class="comment">// 视频路径</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> **argv)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 解析命令行参数</span></span><br><span class="line">    gflags::<span class="built_in">ParseCommandLineFlags</span>(&amp;argc, &amp;argv, <span class="literal">true</span>);</span><br><span class="line">    <span class="comment">// 读取视频：创建了一个VideoCapture对象，参数为视频路径</span></span><br><span class="line">    <span class="function">cv::VideoCapture <span class="title">capture</span><span class="params">(FLAGS_video)</span></span>;</span><br><span class="line">    <span class="comment">// 判断视频是否读取成功，返回true表示成功</span></span><br><span class="line">    <span class="keyword">if</span> (!capture.<span class="built_in">isOpened</span>())</span><br><span class="line">    &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;无法读取视频: &quot;</span> &lt;&lt; FLAGS_video &lt;&lt; std::endl;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 读取视频帧，使用Mat类型的frame存储返回的帧</span></span><br><span class="line">    cv::Mat frame;</span><br><span class="line">    <span class="comment">// 灰度图</span></span><br><span class="line">    cv::Mat gray_frame;</span><br><span class="line">    <span class="comment">// 循环读取视频帧</span></span><br><span class="line">    <span class="keyword">while</span> (<span class="literal">true</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 读取视频帧，使用 &gt;&gt; 运算符或者read()函数，他的参数是返回的帧</span></span><br><span class="line">        capture.<span class="built_in">read</span>(frame);</span><br><span class="line">        <span class="comment">// capture &gt;&gt; frame;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 判断是否读取成功</span></span><br><span class="line">        <span class="keyword">if</span> (frame.<span class="built_in">empty</span>())</span><br><span class="line">        &#123;</span><br><span class="line">            std::cout &lt;&lt; <span class="string">&quot;文件读取完毕&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 转成灰度图</span></span><br><span class="line">        cv::<span class="built_in">cvtColor</span>(frame, gray_frame, cv::COLOR_BGR2GRAY);</span><br><span class="line">        <span class="comment">// 显示视频帧</span></span><br><span class="line">        cv::<span class="built_in">imshow</span>(<span class="string">&quot;raw frame&quot;</span>, frame);</span><br><span class="line">        cv::<span class="built_in">imshow</span>(<span class="string">&quot;gray frame&quot;</span>, gray_frame);</span><br><span class="line">        <span class="comment">// 等待按键，延迟30ms，否则视频播放太快</span></span><br><span class="line">        <span class="type">int</span> k = cv::<span class="built_in">waitKey</span>(<span class="number">30</span>);</span><br><span class="line">        <span class="comment">// 按下ESC键退出</span></span><br><span class="line">        <span class="keyword">if</span> (k == <span class="number">27</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            std::cout &lt;&lt; <span class="string">&quot;退出&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>重点1：VideoCapture类</p>
+<p>​	就跟上一个小节讲解的Mat一样，可以看到VideoCapture的第一个字母也大写了，所以他也是一个opencv中的类型，用来存放捕获到的视频，<code>cv::VideoCapture</code> 类的构造函数可以接受不同的参数来指定要打开的视频源：</p>
+<p>1.通过设备索引：您可以传递一个整数值作为设备索引来指定要打开的摄像头设备。例如，<code>0</code> 表示默认的摄像头设备，<code>1</code> 表示第二个摄像头设备，以此类推。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cv::VideoCapture cap(0); // 打开默认的摄像头设备</span><br></pre></td></tr></table></figure>
+
+<p>2.通过视频文件路径：您可以传递一个字符串参数，表示要打开的视频文件的路径。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cv::VideoCapture cap(&quot;video.mp4&quot;); // 打开名为 &quot;video.mp4&quot; 的视频文件</span><br></pre></td></tr></table></figure>
+
+<p>一旦创建了 <code>cv::VideoCapture</code> 对象，您可以使用 <code>read()</code> 方法来连续读取视频帧。<code>read()</code> 方法将返回一个布尔值，指示是否成功读取了一帧图像。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">cv::Mat frame;</span><br><span class="line"><span class="keyword">while</span> (cap.<span class="built_in">read</span>(frame)) &#123;</span><br><span class="line">    <span class="comment">// 处理当前帧</span></span><br><span class="line">    cv::<span class="built_in">imshow</span>(<span class="string">&quot;Video&quot;</span>, frame);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 等待按键退出</span></span><br><span class="line">    <span class="keyword">if</span> (cv::<span class="built_in">waitKey</span>(<span class="number">1</span>) == <span class="string">&#x27;q&#x27;</span>) &#123;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
  
       <!-- reward -->
       
@@ -533,7 +583,7 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2023/11/27/11-opencv%E7%9A%84%E5%AD%A6%E4%B9%A0/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2024/12/30/11-opencv%E7%9A%84%E5%AD%A6%E4%B9%A0/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -544,19 +594,19 @@
    
   <nav class="article-nav">
     
-      <a href="/2023/12/02/16-%E9%A6%99%E6%A9%99%E6%B4%BE%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%84%E5%BB%BA%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/" class="article-nav-link">
+      <a href="/2024/12/31/%E5%8F%8D%E6%80%9D/" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            香橙派文件系统构建脚本分析
+            反思
           
         </div>
       </a>
     
     
-      <a href="/2023/11/20/10%20debian%E5%92%8Cubuntu%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%84%E5%BB%BA%E8%AF%A6%E8%A7%A3/" class="article-nav-link">
+      <a href="/2023/12/03/20%20ubuntu%E5%92%8Cdebian%E6%BA%90/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">ubuntu和debian文件系统构建详解</div>
+        <div class="article-nav-title">ubuntu和debian源</div>
       </a>
     
   </nav>
