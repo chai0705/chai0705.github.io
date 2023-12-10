@@ -220,237 +220,6 @@
 
     
     <article
-  id="post-22 git的学习"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/12/12/22%20git%E7%9A%84%E5%AD%A6%E4%B9%A0/"
-    >git的学习</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/12/12/22%20git%E7%9A%84%E5%AD%A6%E4%B9%A0/" class="article-date">
-  <time datetime="2023-12-12T02:50:19.000Z" itemprop="datePublished">2023-12-12</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <p>​	前提条件，先来说一下未什么要学习git吧，目前先不考虑远程git和github，我目前只是想要在Linux环境下进行git的使用，说一个最简单的目的，我想让我的Linux目录用到什么就显示什么，而且其他的文件也会进行存档，当我需要这个项目的时候就切换到这个分支进行开发，而不是像我现在这个样子，还要保存，删除等等，这样我也能知道我都做了哪些的修改，目前的需求就这样，学习去。</p>
-<h1 id="1-git的安装"><a href="#1-git的安装" class="headerlink" title="1.git的安装"></a>1.git的安装</h1><p>​	关于git的介绍就不再多说了，linus的丰功伟绩，一直是我的指路明灯，也是我为之不断努力的方向， 过多的就不再多说。</p>
-<p>安装需要的插件：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install libcurl4-gnutls-dev libexpat1-dev gettext libz-dev libssl-dev git</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101036140.png" alt="image-20231210103658547"></p>
-<p>安装完成之后查看git的版本：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git --version</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101038851.png" alt="image-20231210103828814"></p>
-<h1 id="2-git的配置"><a href="#2-git的配置" class="headerlink" title="2. git的配置"></a>2. git的配置</h1><p>配置个人的用户名和电子邮箱</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name &quot;chai&quot;</span><br><span class="line">git config --global user.email &quot;1361382269@qq.com&quot;</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101040420.png" alt="image-20231210104002380"></p>
-<p>查看配置</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --list --global</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101040757.png" alt="image-20231210104018710"></p>
-<p>配置也可以在 ~&#x2F;.gitconfig 或 &#x2F;etc&#x2F;gitconfig 看到这里加上 –global 是全局的配置， 如果想要在某个特定的配置中使用单独的配置就将–global去掉</p>
-<p>设置颜色差异：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global color.ui true</span><br></pre></td></tr></table></figure>
-
-<p>设置git命令补全</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://github.com/markgandolfo/git-bash-completion/blob/master/git-completion.bash</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101105829.png" alt="image-20231210110546532"></p>
-<p>​	然后将</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo mv git-completion.bash /usr/bin/</span><br><span class="line">sudo echo source /usr/bin/git-completion.bash &gt;&gt; /home/topeet/.bashrc</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">root的配置文件需要权限，sudo不顶用，所以要换到root用户</span></span><br><span class="line">sudo echo source /usr/bin/git-completion.bash &gt;&gt; /root/.bashrc</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101110920.png" alt="image-20231210111049872"></p>
-<p>现在git就可以正常的进行命令的提示了，如下图所示：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101111447.png" alt="image-20231210111136282"></p>
-<p>&#x3D;&#x3D;默认情况下ssh连接是不能翻墙的，原因是一些环境变量的问题，所以就需要手动导入一下下面的上网的环境变量&#x3D;&#x3D;</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">export ftp_proxy=http://127.0.0.1:8889/</span><br><span class="line">export https_proxy=http://127.0.0.1:8889/</span><br><span class="line">export FTP_PROXY=http://127.0.0.1:8889/</span><br><span class="line">export HTTPS_PROXY=http://127.0.0.1:8889/</span><br><span class="line">export HTTP_PROXY=http://127.0.0.1:8889/</span><br><span class="line">export http_proxy=http://127.0.0.1:8889/</span><br></pre></td></tr></table></figure>
-
-<p>目前还不想用码云和github所以这里的ssh配置就先不配置</p>
-<h1 id="3-git-基础理论"><a href="#3-git-基础理论" class="headerlink" title="3.git 基础理论"></a>3.git 基础理论</h1><p>​	我其实早就学习过了一遍git了，但是一直没有用起来，关于理论这里也算是学习过了，而git的核心命令也就在这个地方。我这里就不复制了，凭借我的记忆复述一下。</p>
-<p>​	git有三个工作区域，分别为工作目录（working directory）、暂存区（stage&#x2F;index）和资源库（repository），而原创git仓库这里先不管，以后再说，大概是长这个样子：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101117006.png" alt="image-20231210111712990"></p>
-<p>加上各种命令的切换，长这个样子：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101117699.png" alt="在这里插入图片描述"></p>
-<p>Workspace:工作区，就是平时存放项目代码的地方</p>
-<p>Index&#x2F;Stage:暂存区，用于临时存放你的改动，事实上它是一个文件，保存即将提交的列表信息</p>
-<p>local Repository:仓库区（或本地仓库），就是安全存放数据的位置，这里有你提交到所有版本的数据，其中HEAD指向最新放入仓库的版本</p>
-<p>Remote Repository:远程仓库，托管代码的服务器，可以简单的认为是你项目组中的一台电脑用于远程数据交换</p>
-<h1 id="4-git工作流程"><a href="#4-git工作流程" class="headerlink" title="4.git工作流程"></a>4.git工作流程</h1><p>git的工作流程一般是这样的：</p>
-<ol>
-<li><p>在工作中添加，修改文件</p>
-</li>
-<li><p>将需要进行的版本管理的文件放入暂存区域</p>
-</li>
-<li><p>将暂存区域文件提交到git仓库</p>
-<p>因此，git管理的文件有三种状态：已修改（modified）,已暂存（staged）,已提交（committed）</p>
-</li>
-</ol>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101131377.png" alt="在这里插入图片描述"></p>
-<h1 id="5-Git项目搭建"><a href="#5-Git项目搭建" class="headerlink" title="5.Git项目搭建"></a>5.Git项目搭建</h1><p>工作目录（WorkSpace）一般就是你希望Git帮助你管理的文件夹，可以是你的项目目录，也可以是空目录，建议不要有中文。</p>
-<p>日常使用只需要记住下图6个命令：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101137263.png" alt="在这里插入图片描述"></p>
-<p>建立一个git仓库</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101139420.png" alt="image-20231210113938373"></p>
-<p>执行万命令后可以看到，仅仅在项目目录多出了一个.git目录（注意这个默认是隐藏的文件夹，需要手动在查看选项里面去掉隐藏的文件才能显示），关于版本等所有信息都在这个目录里面</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101140306.png" alt="image-20231210114003052"></p>
-<p>git文件操作</p>
-<p>版本控制就是对文件的版本控制，要对文件进行修改，提交等操作，首先要知道文件当前什么状态，不然可能会提交了现在还不想提交的文件，或者要提交的文件没提交上。</p>
-<p>​	(1):Untracked:未跟踪，此文件在文件夹中，但并没有加入到git仓库，不参与版本控制.通过git add 状态变为Staged.</p>
-<p>​	(2):Unmodify:文件已经入库，未修改，即版本库中的文件快照内容与文件夹完全一致.这种类型的文件有两种去处，如果它被修改，而变为Modified.如果使用git rm 移出版本库，则成为Untracked文件.</p>
-<p>​	(3):Modified:文件已修改，仅仅是修改，并没有进行其他的操作.这个文件也有两个去处，通过git add可进入暂存staged状态，使用git </p>
-<p>checkout，则丢弃修改过，返回unmodify状态，这个git checkout即从库中取出文件，覆盖当前修改！</p>
-<p>​	(4):Staged：暂存状态，执行git commit则将修改同步到库中，这时库中的文件和本地文件又变为一致，文件为Unmodify状态.执行git </p>
-<p>reset </p>
-<p>查看制定文件状态</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git status [文件名]</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101145780.png" alt="image-20231210114548647"></p>
-<p>查看所有文件状态</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git status</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101146553.png" alt="image-20231210114602428"></p>
-<p>添加所有文件到暂存区</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add . </span><br></pre></td></tr></table></figure>
-
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101147341.png" alt="image-20231210114733202"></p>
-<p>​	这里也仅仅只是将工作区上传到了暂存区，可以看到status已经变为了绿色。</p>
-<p>提交暂存区中的内容到本地仓库 -m:提交的信息</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m &quot;信息&quot;</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101148098.png" alt="image-20231210114849962"></p>
-<p>可以看到git status的状态也已经更新了，如下所示：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101149264.png" alt="image-20231210114917210"></p>
-<h1 id="6-忽略文件"><a href="#6-忽略文件" class="headerlink" title="6.忽略文件"></a>6.忽略文件</h1><p>有些时候我们不想把某些文件纳入版本控制中，比如数据库文件，临时文件，设计文件等</p>
-<p>在主目录下建立“.gitignore”文件，此文件有如下规则：</p>
-<p>1.忽略文件中的空行或以井号（# ）开始的行将会被忽略。</p>
-<p>2.可以使用Linux通配符。例如∶星号(*)代表任意多个字符，问号(﹖)代表一个字符，方括号([abc] )代表可选字符范围，大括号( {string1,string2……})代表可选的字符串等。</p>
-<p>3.如果名称的最前面有一个感叹号( !)，表示例外规则，将不被忽略。</p>
-<p>4.如果名称的最前面是一个路径分隔符(&#x2F; )，表示要忽略的文件在此目录下，而子目录中的文件不忽略。</p>
-<p>5.如果名称的最后面是一个路径分隔符(&#x2F; )，表示要忽略的是此目录下该名称的子目录，而非文件（默认文件或目录都忽略）。</p>
-<p>例如以下这些实例:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">*.txt   #忽略所有的.txt结尾的文件</span><br><span class="line">！lib.txt  #但lib.txt除外</span><br><span class="line">/temp  #进忽略项目根目录下的TODO文件，不包括其他目录temp</span><br><span class="line">bulid/  #忽略bulid目录下的所有文件</span><br><span class="line">doc/*.txt #会忽略doc/notes.txt 但是不包括doc/sever/arch.txt</span><br></pre></td></tr></table></figure>
-
-<h1 id="7-查看日志以及恢复版本"><a href="#7-查看日志以及恢复版本" class="headerlink" title="7.查看日志以及恢复版本"></a>7.查看日志以及恢复版本</h1><p>在第5小节已经进行了第一次的提交，然后我进行第二次的提交</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101153879.png" alt="image-20231210115334834"></p>
-<p>上面是进行的修改，接下来进行提交，如下所示：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101154938.png" alt="image-20231210115438817"></p>
-<p>然后进行提交的查看</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101155808.png" alt="image-20231210115527651"></p>
-<p>可以看到这是两个提交，现在指向的是第二次提交，而目前的情况是这样的，这一次的提交是错误的我不想要了，我想回退到第一次的提交，可以使用git reset进行回复</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset [哈希值]</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101157577.png" alt="image-20231210115707464"></p>
-<p>然后查看提交的状态如下所示：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101158910.png" alt="image-20231210115820807"></p>
-<p>但是仍旧需要手动删除才行，如下所示：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101159755.png" alt="image-20231210115912689"></p>
-<h1 id="8-分支操作"><a href="#8-分支操作" class="headerlink" title="8.分支操作"></a>8.分支操作</h1><p>分支是Git使用过程中非常重要的概念。使用分支意味着你可以把你的工作从开发主线上分离开来，以免影响开发主线。同一个仓库可以有多个分支,各个分支相互独立,互不干扰。通过git init命令创建本地仓库时默认会创建- -个master分支。</p>
-<p>​	&#x3D;&#x3D;之前还是不懂，对于分支有了不一样的想法，分支并不是一个新的，而是一个当前内容的分支&#x3D;&#x3D;</p>
-<p>查看分支：</p>
-<p>（1）列出所有本地分支</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101201065.png" alt="image-20231210120127025"></p>
-<p>列出所有远程分支</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -r</span><br></pre></td></tr></table></figure>
-
-<p>列出所有本地分支和远程分支</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -a</span><br></pre></td></tr></table></figure>
-
-<p>我这里并没有涉及到远程分支，所以也就先不用管。</p>
-<p>（2）创建分支</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch name</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101205974.png" alt="image-20231210120516908"></p>
-<p>（3）删除分支</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -d name</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101205187.png" alt="image-20231210120535123"></p>
-<p>（4）分支切换</p>
-<p>首先在主分支创建了一个markdown测试文件，并且提交</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101210757.png" alt="image-20231210121055669"></p>
-<p>然后创建另一个分支</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch test</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101212631.png" alt="image-20231210121207568"></p>
-<p>切换到新创建的分支</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout name</span><br></pre></td></tr></table></figure>
-
-<p>这里关于分支的还是不太懂，这里应该是要看一看视频。现在懂了，分支的名称才真正的懂得了。</p>
-<p>（5）分支合并</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101501055.png" alt="image-20231210150127690"></p>
-<p>可以看到目前head领先了master一个提交，使用下面的命令进行分支合并，将分支上的修改进行合并</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git merge test</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101502556.png" alt="image-20231210150257210">					可以看到head和master已经是同一个分支了。</p>
-<h1 id="9-本地搭建git服务器"><a href="#9-本地搭建git服务器" class="headerlink" title="9.本地搭建git服务器"></a>9.本地搭建git服务器</h1><p>​	</p>
-<p><code>scp</code>（Secure Copy）命令用于在本地主机和远程主机之间进行文件传输。它使用SSH协议进行安全的文件传输。</p>
-<p><code>scp</code>命令的基本语法如下：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp [选项] 源文件 目标文件</span><br></pre></td></tr></table></figure>
-
-<p>其中，<code>源文件</code>是要传输的文件或目录的路径，<code>目标文件</code>是传输到的目标位置的路径。</p>
-<p>以下是一些常用的<code>scp</code>命令选项：</p>
-<ul>
-<li><code>-r</code>：递归复制整个目录。</li>
-<li><code>-P &lt;port&gt;</code>：指定SSH端口号。</li>
-<li><code>-i &lt;identity_file&gt;</code>：指定用于身份验证的私钥文件。</li>
-<li><code>-v</code>：显示详细的调试信息。</li>
-<li><code>-C</code>：开启压缩传输。</li>
-</ul>
-<p>下面是几个示例，演示了如何使用<code>scp</code>命令：</p>
-<ol>
-<li><p>从本地主机复制文件到远程主机：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp /path/to/local/file user@remote:/path/to/destination/</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>从远程主机复制文件到本地主机：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp user@remote:/path/to/remote/file /path/to/destination/</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>从本地主机复制整个目录到远程主机：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp -r /path/to/local/directory user@remote:/path/to/destination/</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>从远程主机复制整个目录到本地主机：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp -r user@remote:/path/to/remote/directory /path/to/destination/</span><br></pre></td></tr></table></figure></li>
-</ol>
-<p>这些示例中的<code>user</code>是远程主机上的用户名，<code>remote</code>是远程主机的地址（可以是IP地址或域名），<code>/path/to/</code>是文件或目录的路径。</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
   id="post-11-opencv的学习"
   class="article article-type-post"
   itemscope
@@ -922,6 +691,395 @@
 
     
     <article
+  id="post-22 tabby的使用"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/12/10/22%20tabby%E7%9A%84%E4%BD%BF%E7%94%A8/"
+    >tabby的使用</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/12/10/22%20tabby%E7%9A%84%E4%BD%BF%E7%94%A8/" class="article-date">
+  <time datetime="2023-12-10T04:50:19.000Z" itemprop="datePublished">2023-12-10</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>​	先说一下前提条件，本来我其实挺不爱用终端的，就算使用终端也是用mobaxterm，只能说这个软件很是强大，但是并没有给我一种给经验的感觉，当然肯定比之前的超级终端强得多，但还是不能给我一个十分想用的感觉，而这个tabby的软件就不一样，简洁而且看起来很好用，他的分屏、颜色、背景插件等等一系列的操作都让我很是喜欢，所以下面就简单的讲解一下tabby的使用。</p>
+<h1 id="1-Tabby简介"><a href="#1-Tabby简介" class="headerlink" title="1.Tabby简介"></a>1.Tabby简介</h1><p> 🍀 Tabby是一个无限可定制的跨平台终端应用程序，适用于local shells、serial、SSH和Telnet的连接。<br> 🍁 Tabby是基于TypeScript开发的终端模拟器，可用于Linux、Windows和Mac OS系统。</p>
+<p>🌺 Tabby (前身是 Terminus) 是一个可高度配置的终端模拟器和 SSH 或串口客户端，支持 Windows，macOS 和 Linux</p>
+<ul>
+<li>集成 SSH，Telnet 客户端和连接管理器</li>
+<li>集成串行终端</li>
+<li>定制主题和配色方案</li>
+<li>完全可配置的快捷键和多键快捷键</li>
+<li>分体式窗格</li>
+<li>自动保存标签页</li>
+<li>支持 PowerShell（和 PS Core）、WSL、Git-Bash、Cygwin、MSYS2、Cmder 和 CMD</li>
+<li>在 SSH 会话中通过 Zmodem 进行直接文件传输</li>
+<li>完整的 Unicode 支持，包括双角字符</li>
+<li>不会因快速的输出而卡住</li>
+<li>Windows 上舒适的 shell 体验，包括 tab 自动补全（通过 Clink）</li>
+<li>为 SSH secrets 和设置集成了加密容器</li>
+<li>SSH、SFTP 和 Telnet 客户端可用作 Web 应用（也可托管）</li>
+</ul>
+<h1 id="2-tabby的安装"><a href="#2-tabby的安装" class="headerlink" title="2.tabby的安装"></a>2.tabby的安装</h1><p>下载地址：<a target="_blank" rel="noopener" href="https://github.com/Eugeny/tabby/releases/tag/v1.0.205">https://github.com/Eugeny/tabby/releases/tag/v1.0.205</a></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101539329.png" alt="image-20231210153958212"></p>
+<p>​	有windows macos和linux多种类型的安装包，当然也包括多种架构的，我这里要在windows上进行使用，所以下载了windowd的exe文件，也就是这个<a target="_blank" rel="noopener" href="https://github.com/Eugeny/tabby/releases/download/v1.0.205/tabby-1.0.205-setup-x64.exe">tabby-1.0.205-setup-x64.exe</a>，下载完成之后进行安装。安装完成之后打开该软件</p>
+<p>​	由于我要写markdown，所以我把之前下载的删掉了，但是它仍旧保存了我之前的配置，所以除了删掉软件之外还需要去删掉C盘的配置文件：C:\Users\Administrator\AppData\Roaming。</p>
+<p>​	第一次启动如下所示：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101557259.png" alt="image-20231210155713230"></p>
+<p>​	这里的语言可以选择中文，选择之后如下所示：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101557342.png" alt="image-20231210155753314"></p>
+<p>​	而且我比较喜欢黑色的终端，所以就保持默认的黑色的配色方案了。关闭退出之后进入软件界面如下所示：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101558826.png" alt="image-20231210155851798"></p>
+<p>​	至此，关于tabby的安装就完成了。</p>
+<h1 id="3-tabby快捷键的修改"><a href="#3-tabby快捷键的修改" class="headerlink" title="3.tabby快捷键的修改"></a>3.tabby快捷键的修改</h1><p>删除显示配置选择器 ctrl+shift+e，因为我想要让该快捷键改为向右分割窗格。</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101601528.png" alt="image-20231210160101515"></p>
+<p>然后将ctrl+shift的快捷按键也删除掉，</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101602643.png" alt="image-20231210160223634"></p>
+<p>这里的关闭标签为ctrl+shift+w，我认为不方便，由于我经常将该快捷按键设置为关闭单一的窗格，所以这里也删除掉</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101605559.png" alt="image-20231210160540547"></p>
+<p>将向右拆分窗格设置为ctrl+shift+e，将向下拆分窗格设置为ctrl+shift+o</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101607090.png" alt="image-20231210160745073"></p>
+<p>将关闭已聚焦的窗格设置为ctrl+shift+w</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101608034.png" alt="image-20231210160817023"></p>
+<p>最后在写几个好用的快捷按键</p>
+<p>1.ctrl+shift+左右按键可以切换不同的&#x3D;&#x3D;标签页&#x3D;&#x3D;</p>
+<p>2.alt+数字按键也可以切换不同的&#x3D;&#x3D;标签页&#x3D;&#x3D;</p>
+<p>3.ctrl+alt +上下左右可以切换不同的&#x3D;&#x3D;窗格&#x3D;&#x3D;</p>
+<p>&#x3D;&#x3D;上面这些确实不错可以让我解放双手，不需要懂鼠标，只需要键盘即可&#x3D;&#x3D;</p>
+<p>4.当窗格进行拆分之后，可以通过ctrl+alt+回车最大化当前的&#x3D;&#x3D;窗格&#x3D;&#x3D;</p>
+<p>5.ctrl+alt+t 可以切换当前&#x3D;&#x3D;窗格&#x3D;&#x3D;的配置（&#x3D;&#x3D;本来不知道是做啥的后来才知道，但还挺好用&#x3D;&#x3D;）</p>
+<p>6.ctrl+shift+. 可以将当前的窗格修改为单独的&#x3D;&#x3D;标签页&#x3D;&#x3D;</p>
+<p>7.ctrl+shift+， 将所有的&#x3D;&#x3D;标签页&#x3D;&#x3D;合并到当前页</p>
+<p>可以看到跟ctrl+shift有关的都是标签页，而跟窗格有关的都是ctrl+alt，反正ctrl是不能少的，而是窗格还是标签就要根据shift和alt来决定了。</p>
+<h1 id="4-串口的连接"><a href="#4-串口的连接" class="headerlink" title="4.串口的连接"></a>4.串口的连接</h1><p>​	点击右上角的齿轮按钮或者标签页右侧的按钮都可以进行配置。</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101634986.png" alt="image-20231210163447978"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101634116.png" alt="image-20231210163454106"></p>
+<p>​	我这里是串口5，点击之后可以选择波特率，我这里选择115200，如下图所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101635089.png" alt="image-20231210163551067"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101636546.png" alt="image-20231210163634527"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101636210.png" alt="image-20231210163642195"></p>
+<p>如果是从齿轮设置打开，则需要先点击配置和连接，再选择串口5，如下所示：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101637283.png" alt="image-20231210163734239"></p>
+<h1 id="5-ssh的连接"><a href="#5-ssh的连接" class="headerlink" title="5.ssh的连接"></a>5.ssh的连接</h1><p>​	如果仅仅只是上面的串口功能，还并不能吸引我，更重要的是这个ssh功能，ssh功能因为要配置IP和密码，所以不能直接点击，需要从配置和连接中，点击ssh右侧小箭头中的克隆，如下图所示：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101640012.png" alt="image-20231210163959998"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101640130.png" alt="image-20231210164012101"></p>
+<p>​	然后以此输入名称，连接的主机ip即可，我这里连接的是ip为192.168.1.84的ubuntu20，我们一般情况下加载普通用户，就不要使用root用户了，设置完成如下所示：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101642173.png" alt="image-20231210164206146"></p>
+<p>​	而ssh的色彩我更喜欢这个名叫Argonaut的，看着还挺好的。</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101653467.png" alt="image-20231210165346454">	</p>
+<p>​	然后点击保存，可以发现刚刚配置的ssh已经在未命名的组内了：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101642152.png" alt="image-20231210164253114"></p>
+<p>​	然后点击箭头进行连接即可，连接成功如下所示：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101646500.png" alt="image-20231210164609480"></p>
+<h1 id="6-字体设置"><a href="#6-字体设置" class="headerlink" title="6.字体设置"></a>6.字体设置</h1><p>​	现在的字体特别小，而且颜色也并不是很好看，可以通过设置中的外观进行修改，进入之后如下所示：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101648741.png" alt="image-20231210164841697"></p>
+<p>这里的字体我喜欢设置为Cascadia Code SemiBold，而字体大小设置为20即可</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101656358.png" alt="image-20231210165607329"></p>
+<p>​	最后的效果如下所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101656926.png" alt="image-20231210165653910"></p>
+<p>​	对比度鲜艳，让人看着就赏心悦目，工作更加有动力，哈哈。</p>
+<h1 id="7-好用的插件"><a href="#7-好用的插件" class="headerlink" title="7.好用的插件"></a>7.好用的插件</h1><h2 id="7-1-background"><a href="#7-1-background" class="headerlink" title="7.1 background"></a>7.1 background</h2><p>​	重点来了，这个是我最最最最推荐的一个插件了，当你的终端背后是一个小姐姐的时候，你是不是想要多看会儿，这样你连摸鱼的时间都会少很多，而且还能适当的放松一下，极大的提高到了工作效率。</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101659617.png" alt="image-20231210165947584"></p>
+<p>​	获取之后需要重启软件，在菜单中会多出一个背景，如下图所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101700953.png" alt="image-20231210170052921"></p>
+<p>​	首先启用背景，如下所示：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101701772.png" alt="image-20231210170120756"></p>
+<p>​	然后选择一个你喜欢的图片，我这里当然是神里凌华了&#x3D;&#x3D;我是神里凌华的狗&#x3D;&#x3D;，修改完之后是这个样子</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101702859.png" alt="image-20231210170251409"></p>
+<p>​	但这也太招摇了，这时候下面的选项就有用了，将背景不透明度设置为6或者7这个样子，我测试最为合适，如下图所示：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101704726.png" alt="image-20231210170443701"></p>
+<p>​	最后的效果如下所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101705347.png" alt="image-20231210170508231"></p>
+<p>​	&#x3D;&#x3D;嘿嘿是不是感觉还不错&#x3D;&#x3D;</p>
+<p>我发现每次重新启动tabby的时候都会自动打开一个 windows的tabby，我感觉好烦，可以在菜单栏中找到终端如下所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101709443.png" alt="image-20231210170926400"></p>
+<p>然后取消下面的这个即可</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101709459.png" alt="image-20231210170905398"></p>
+<h2 id="7-2-trzsz"><a href="#7-2-trzsz" class="headerlink" title="7.2.trzsz"></a>7.2.trzsz</h2><p>​	默认情况下可以通过这里右上角的sftp进行文件的传输，但是这里有个问题，只能上传文件，但是不能上传文件夹：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101712233.png" alt="image-20231210171255099"></p>
+<p>​	而trzsz插件可以解决这个问题</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101713340.png" alt="image-20231210171347327"></p>
+<p>安装之后重启tabby，测试发现仍旧不行，但我看github有人说这个问题呀，就很奇怪，算了传输文件不行还能接受，就先这样吧。</p>
+<h2 id="7-3-highlight"><a href="#7-3-highlight" class="headerlink" title="7.3 highlight"></a>7.3 highlight</h2><p>从名字可以看出这是一个高亮的插件，有时候的一些错误信息是需要查看的，或者调试的时候需要捕获到一些特殊字符，所以这个高亮插件还是很重要的。</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101719770.png" alt="image-20231210171941753"></p>
+<p>安装完成重启，可以看到多出来了一个高亮的图标如下所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101720547.png" alt="image-20231210172013491"></p>
+<p>然后点击启动即可：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101720063.png" alt="image-20231210172048815"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101720552.png" alt="image-20231210172058507"></p>
+<p>​	默认已经给你写好了一些关键字，自己也可以根据需求进行添加。</p>
+<h2 id="7-4-save-output"><a href="#7-4-save-output" class="headerlink" title="7.4 save-output"></a>7.4 save-output</h2><p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101723396.png" alt="image-20231210172326381"></p>
+<p>​	有时候需要保存终端的输出，默认情况下该终端软件是没有保存的功能的，所以需要安装一个名为save-output的插件。</p>
+<p>​	安装完成之后会在菜单栏中多出来一个名为save-output的按钮如下所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101726132.png" alt="image-20231210172632938"></p>
+<p>​	设置为on之后设置要存储的路径即可。然后随意打开一个终端。按右键之后可以发现会有一个save-output to file的选项</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101727627.png" alt="image-20231210172727612"></p>
+<p>点击保存即可</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101728088.png" alt="image-20231210172814048"></p>
+<p>在对应的文件中可以看到打印信息，如下图所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101728121.png" alt="image-20231210172857106"></p>
+<p>​	到这里，关于tabby的简单设置和使用就介绍完成了，下面说一下感受吧，我之前其实并不是很喜欢这些华丽花哨的东西，感觉简简单单能用就好了，但随着时间的推移，发现有些东西并不是你想的那样的，一个好用的工具确实能给人带来不一样的体验，最后祝看到这里的小伙伴，事事顺心。</p>
+<p>​	为了方便我的后续使用，我将相应的配置进行了打包，以后如果换电脑了只需要将下面网盘的资料放到C:\Users\Administrator\AppData\Roaming目录下解压即可。</p>
+<p>链接：<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1EBBtEmSY9SCBeIlB5YVoWQ">https://pan.baidu.com/s/1EBBtEmSY9SCBeIlB5YVoWQ</a><br>提取码：bs5v<br>–来自百度网盘超级会员V6的分享</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-22 git的学习"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/12/10/22%20git%E7%9A%84%E5%AD%A6%E4%B9%A0/"
+    >git的学习</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/12/10/22%20git%E7%9A%84%E5%AD%A6%E4%B9%A0/" class="article-date">
+  <time datetime="2023-12-10T02:50:19.000Z" itemprop="datePublished">2023-12-10</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>​	前提条件，先来说一下未什么要学习git吧，目前先不考虑远程git和github，我目前只是想要在Linux环境下进行git的使用，说一个最简单的目的，我想让我的Linux目录用到什么就显示什么，而且其他的文件也会进行存档，当我需要这个项目的时候就切换到这个分支进行开发，而不是像我现在这个样子，还要保存，删除等等，这样我也能知道我都做了哪些的修改，目前的需求就这样，学习去。</p>
+<h1 id="1-git的安装"><a href="#1-git的安装" class="headerlink" title="1.git的安装"></a>1.git的安装</h1><p>​	关于git的介绍就不再多说了，linus的丰功伟绩，一直是我的指路明灯，也是我为之不断努力的方向， 过多的就不再多说。</p>
+<p>安装需要的插件：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install libcurl4-gnutls-dev libexpat1-dev gettext libz-dev libssl-dev git</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101036140.png" alt="image-20231210103658547"></p>
+<p>安装完成之后查看git的版本：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git --version</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101038851.png" alt="image-20231210103828814"></p>
+<h1 id="2-git的配置"><a href="#2-git的配置" class="headerlink" title="2. git的配置"></a>2. git的配置</h1><p>配置个人的用户名和电子邮箱</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name &quot;chai&quot;</span><br><span class="line">git config --global user.email &quot;1361382269@qq.com&quot;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101040420.png" alt="image-20231210104002380"></p>
+<p>查看配置</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --list --global</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101040757.png" alt="image-20231210104018710"></p>
+<p>配置也可以在 ~&#x2F;.gitconfig 或 &#x2F;etc&#x2F;gitconfig 看到这里加上 –global 是全局的配置， 如果想要在某个特定的配置中使用单独的配置就将–global去掉</p>
+<p>设置颜色差异：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global color.ui true</span><br></pre></td></tr></table></figure>
+
+<p>设置git命令补全</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://github.com/markgandolfo/git-bash-completion/blob/master/git-completion.bash</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101105829.png" alt="image-20231210110546532"></p>
+<p>​	然后将</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo mv git-completion.bash /usr/bin/</span><br><span class="line">sudo echo source /usr/bin/git-completion.bash &gt;&gt; /home/topeet/.bashrc</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">root的配置文件需要权限，sudo不顶用，所以要换到root用户</span></span><br><span class="line">sudo echo source /usr/bin/git-completion.bash &gt;&gt; /root/.bashrc</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101110920.png" alt="image-20231210111049872"></p>
+<p>现在git就可以正常的进行命令的提示了，如下图所示：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101111447.png" alt="image-20231210111136282"></p>
+<p>&#x3D;&#x3D;默认情况下ssh连接是不能翻墙的，原因是一些环境变量的问题，所以就需要手动导入一下下面的上网的环境变量&#x3D;&#x3D;</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">export ftp_proxy=http://127.0.0.1:8889/</span><br><span class="line">export https_proxy=http://127.0.0.1:8889/</span><br><span class="line">export FTP_PROXY=http://127.0.0.1:8889/</span><br><span class="line">export HTTPS_PROXY=http://127.0.0.1:8889/</span><br><span class="line">export HTTP_PROXY=http://127.0.0.1:8889/</span><br><span class="line">export http_proxy=http://127.0.0.1:8889/</span><br></pre></td></tr></table></figure>
+
+<p>目前还不想用码云和github所以这里的ssh配置就先不配置</p>
+<h1 id="3-git-基础理论"><a href="#3-git-基础理论" class="headerlink" title="3.git 基础理论"></a>3.git 基础理论</h1><p>​	我其实早就学习过了一遍git了，但是一直没有用起来，关于理论这里也算是学习过了，而git的核心命令也就在这个地方。我这里就不复制了，凭借我的记忆复述一下。</p>
+<p>​	git有三个工作区域，分别为工作目录（working directory）、暂存区（stage&#x2F;index）和资源库（repository），而原创git仓库这里先不管，以后再说，大概是长这个样子：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101117006.png" alt="image-20231210111712990"></p>
+<p>加上各种命令的切换，长这个样子：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101117699.png" alt="在这里插入图片描述"></p>
+<p>Workspace:工作区，就是平时存放项目代码的地方</p>
+<p>Index&#x2F;Stage:暂存区，用于临时存放你的改动，事实上它是一个文件，保存即将提交的列表信息</p>
+<p>local Repository:仓库区（或本地仓库），就是安全存放数据的位置，这里有你提交到所有版本的数据，其中HEAD指向最新放入仓库的版本</p>
+<p>Remote Repository:远程仓库，托管代码的服务器，可以简单的认为是你项目组中的一台电脑用于远程数据交换</p>
+<h1 id="4-git工作流程"><a href="#4-git工作流程" class="headerlink" title="4.git工作流程"></a>4.git工作流程</h1><p>git的工作流程一般是这样的：</p>
+<ol>
+<li><p>在工作中添加，修改文件</p>
+</li>
+<li><p>将需要进行的版本管理的文件放入暂存区域</p>
+</li>
+<li><p>将暂存区域文件提交到git仓库</p>
+<p>因此，git管理的文件有三种状态：已修改（modified）,已暂存（staged）,已提交（committed）</p>
+</li>
+</ol>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101131377.png" alt="在这里插入图片描述"></p>
+<h1 id="5-Git项目搭建"><a href="#5-Git项目搭建" class="headerlink" title="5.Git项目搭建"></a>5.Git项目搭建</h1><p>工作目录（WorkSpace）一般就是你希望Git帮助你管理的文件夹，可以是你的项目目录，也可以是空目录，建议不要有中文。</p>
+<p>日常使用只需要记住下图6个命令：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101137263.png" alt="在这里插入图片描述"></p>
+<p>建立一个git仓库</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101139420.png" alt="image-20231210113938373"></p>
+<p>执行万命令后可以看到，仅仅在项目目录多出了一个.git目录（注意这个默认是隐藏的文件夹，需要手动在查看选项里面去掉隐藏的文件才能显示），关于版本等所有信息都在这个目录里面</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101140306.png" alt="image-20231210114003052"></p>
+<p>git文件操作</p>
+<p>版本控制就是对文件的版本控制，要对文件进行修改，提交等操作，首先要知道文件当前什么状态，不然可能会提交了现在还不想提交的文件，或者要提交的文件没提交上。</p>
+<p>​	(1):Untracked:未跟踪，此文件在文件夹中，但并没有加入到git仓库，不参与版本控制.通过git add 状态变为Staged.</p>
+<p>​	(2):Unmodify:文件已经入库，未修改，即版本库中的文件快照内容与文件夹完全一致.这种类型的文件有两种去处，如果它被修改，而变为Modified.如果使用git rm 移出版本库，则成为Untracked文件.</p>
+<p>​	(3):Modified:文件已修改，仅仅是修改，并没有进行其他的操作.这个文件也有两个去处，通过git add可进入暂存staged状态，使用git </p>
+<p>checkout，则丢弃修改过，返回unmodify状态，这个git checkout即从库中取出文件，覆盖当前修改！</p>
+<p>​	(4):Staged：暂存状态，执行git commit则将修改同步到库中，这时库中的文件和本地文件又变为一致，文件为Unmodify状态.执行git </p>
+<p>reset </p>
+<p>查看制定文件状态</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git status [文件名]</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101145780.png" alt="image-20231210114548647"></p>
+<p>查看所有文件状态</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git status</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101146553.png" alt="image-20231210114602428"></p>
+<p>添加所有文件到暂存区</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add . </span><br></pre></td></tr></table></figure>
+
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101147341.png" alt="image-20231210114733202"></p>
+<p>​	这里也仅仅只是将工作区上传到了暂存区，可以看到status已经变为了绿色。</p>
+<p>提交暂存区中的内容到本地仓库 -m:提交的信息</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m &quot;信息&quot;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101148098.png" alt="image-20231210114849962"></p>
+<p>可以看到git status的状态也已经更新了，如下所示：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101149264.png" alt="image-20231210114917210"></p>
+<h1 id="6-忽略文件"><a href="#6-忽略文件" class="headerlink" title="6.忽略文件"></a>6.忽略文件</h1><p>有些时候我们不想把某些文件纳入版本控制中，比如数据库文件，临时文件，设计文件等</p>
+<p>在主目录下建立“.gitignore”文件，此文件有如下规则：</p>
+<p>1.忽略文件中的空行或以井号（# ）开始的行将会被忽略。</p>
+<p>2.可以使用Linux通配符。例如∶星号(*)代表任意多个字符，问号(﹖)代表一个字符，方括号([abc] )代表可选字符范围，大括号( {string1,string2……})代表可选的字符串等。</p>
+<p>3.如果名称的最前面有一个感叹号( !)，表示例外规则，将不被忽略。</p>
+<p>4.如果名称的最前面是一个路径分隔符(&#x2F; )，表示要忽略的文件在此目录下，而子目录中的文件不忽略。</p>
+<p>5.如果名称的最后面是一个路径分隔符(&#x2F; )，表示要忽略的是此目录下该名称的子目录，而非文件（默认文件或目录都忽略）。</p>
+<p>例如以下这些实例:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">*.txt   #忽略所有的.txt结尾的文件</span><br><span class="line">！lib.txt  #但lib.txt除外</span><br><span class="line">/temp  #进忽略项目根目录下的TODO文件，不包括其他目录temp</span><br><span class="line">bulid/  #忽略bulid目录下的所有文件</span><br><span class="line">doc/*.txt #会忽略doc/notes.txt 但是不包括doc/sever/arch.txt</span><br></pre></td></tr></table></figure>
+
+<h1 id="7-查看日志以及恢复版本"><a href="#7-查看日志以及恢复版本" class="headerlink" title="7.查看日志以及恢复版本"></a>7.查看日志以及恢复版本</h1><p>在第5小节已经进行了第一次的提交，然后我进行第二次的提交</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101153879.png" alt="image-20231210115334834"></p>
+<p>上面是进行的修改，接下来进行提交，如下所示：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101154938.png" alt="image-20231210115438817"></p>
+<p>然后进行提交的查看</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101155808.png" alt="image-20231210115527651"></p>
+<p>可以看到这是两个提交，现在指向的是第二次提交，而目前的情况是这样的，这一次的提交是错误的我不想要了，我想回退到第一次的提交，可以使用git reset进行回复</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset [哈希值]</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101157577.png" alt="image-20231210115707464"></p>
+<p>然后查看提交的状态如下所示：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101158910.png" alt="image-20231210115820807"></p>
+<p>但是仍旧需要手动删除才行，如下所示：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101159755.png" alt="image-20231210115912689"></p>
+<h1 id="8-分支操作"><a href="#8-分支操作" class="headerlink" title="8.分支操作"></a>8.分支操作</h1><p>分支是Git使用过程中非常重要的概念。使用分支意味着你可以把你的工作从开发主线上分离开来，以免影响开发主线。同一个仓库可以有多个分支,各个分支相互独立,互不干扰。通过git init命令创建本地仓库时默认会创建- -个master分支。</p>
+<p>​	&#x3D;&#x3D;之前还是不懂，对于分支有了不一样的想法，分支并不是一个新的，而是一个当前内容的分支&#x3D;&#x3D;</p>
+<p>查看分支：</p>
+<p>（1）列出所有本地分支</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101201065.png" alt="image-20231210120127025"></p>
+<p>列出所有远程分支</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -r</span><br></pre></td></tr></table></figure>
+
+<p>列出所有本地分支和远程分支</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -a</span><br></pre></td></tr></table></figure>
+
+<p>我这里并没有涉及到远程分支，所以也就先不用管。</p>
+<p>（2）创建分支</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch name</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101205974.png" alt="image-20231210120516908"></p>
+<p>（3）删除分支</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -d name</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101205187.png" alt="image-20231210120535123"></p>
+<p>（4）分支切换</p>
+<p>首先在主分支创建了一个markdown测试文件，并且提交</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101210757.png" alt="image-20231210121055669"></p>
+<p>然后创建另一个分支</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch test</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101212631.png" alt="image-20231210121207568"></p>
+<p>切换到新创建的分支</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout name</span><br></pre></td></tr></table></figure>
+
+<p>这里关于分支的还是不太懂，这里应该是要看一看视频。现在懂了，分支的名称才真正的懂得了。</p>
+<p>（5）分支合并</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101501055.png" alt="image-20231210150127690"></p>
+<p>可以看到目前head领先了master一个提交，使用下面的命令进行分支合并，将分支上的修改进行合并</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git merge test</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101502556.png" alt="image-20231210150257210">					可以看到head和master已经是同一个分支了。</p>
+<p>9.scp命令的学习</p>
+<p><code>scp</code>（Secure Copy）命令用于在本地主机和远程主机之间进行文件传输。它使用SSH协议进行安全的文件传输。</p>
+<p><code>scp</code>命令的基本语法如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp [选项] 源文件 目标文件</span><br></pre></td></tr></table></figure>
+
+<p>其中，<code>源文件</code>是要传输的文件或目录的路径，<code>目标文件</code>是传输到的目标位置的路径。</p>
+<p>以下是一些常用的<code>scp</code>命令选项：</p>
+<ul>
+<li><code>-r</code>：递归复制整个目录。</li>
+<li><code>-P &lt;port&gt;</code>：指定SSH端口号。</li>
+<li><code>-i &lt;identity_file&gt;</code>：指定用于身份验证的私钥文件。</li>
+<li><code>-v</code>：显示详细的调试信息。</li>
+<li><code>-C</code>：开启压缩传输。</li>
+</ul>
+<p>下面是几个示例，演示了如何使用<code>scp</code>命令：</p>
+<ol>
+<li><p>从本地主机复制文件到远程主机：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp /path/to/local/file user@remote:/path/to/destination/</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>从远程主机复制文件到本地主机：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp user@remote:/path/to/remote/file /path/to/destination/</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>从本地主机复制整个目录到远程主机：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp -r /path/to/local/directory user@remote:/path/to/destination/</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>从远程主机复制整个目录到本地主机：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp -r user@remote:/path/to/remote/directory /path/to/destination/</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>这些示例中的<code>user</code>是远程主机上的用户名，<code>remote</code>是远程主机的地址（可以是IP地址或域名），<code>/path/to/</code>是文件或目录的路径。</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
   id="post-20 ubuntu和debian源"
   class="article article-type-post"
   itemscope
@@ -1019,7 +1177,7 @@
       
     <div class="article-entry" itemprop="articleBody">
        
-  <h3 id="一、shell-入门简介"><a href="#一、shell-入门简介" class="headerlink" title="一、shell 入门简介"></a>一、shell 入门简介</h3><h2 id="1-1-什么是shell"><a href="#1-1-什么是shell" class="headerlink" title="1.1 什么是shell"></a>1.1 什么是shell</h2><p><strong>什么是shell</strong></p>
+  <h1 id="一、shell-入门简介"><a href="#一、shell-入门简介" class="headerlink" title="一、shell 入门简介"></a>一、shell 入门简介</h1><h2 id="1-1-什么是shell"><a href="#1-1-什么是shell" class="headerlink" title="1.1 什么是shell"></a>1.1 什么是shell</h2><p><strong>什么是shell</strong></p>
 <p>网上有很多shell 的概念介绍，其实都很官方化，如果你对linux 命令很熟悉，那么编写shell 就不是一个难事，shell 本质上是 linux 命令，一条一条命令组合在一起，实现某一个目的，就变成了shell脚本。它从一定程度上 减轻了工作量，提高了工作效率。</p>
 <p><strong>官方化的shell 介绍</strong></p>
 <p>Shell（也称为命令行解释器或命令行外壳）是计算机操作系统中提供与用户交互的一种用户界面。它允许用户通过键入文本命令来与操作系统进行通信和控制。Shell接受用户输入的命令并将其解释为操作系统可以理解和执行的指令。</p>
@@ -3080,346 +3238,6 @@ Shell for Root（/sbin/sh）
 <h2 id="9-24、F-Buffer"><a href="#9-24、F-Buffer" class="headerlink" title="9.24、F-Buffer"></a>9.24、F-Buffer</h2><p>​    F-Buffer：片断流缓冲区技术，处理无限制指令长度的阴影着色程序。执行原理：把需要经过渲染引擎多次处理的像素临时存储起来，而不是把它们写到帧缓冲里面。只有那些需要单通道处理的数据被写到帧缓冲。这样节省显存的带宽，从而使VPU工作得更加有效率。缺点：F-Buffer只能对所有流程都是基于同一视点的多流程渲染有效，对于用于生成不同视点图像的多流程渲染没用，在日常3D应用中，不同视点的多流程渲染十分普遍。其次F-Buffer的执行过程有可能产生溢出，一旦产生溢出其处理过程十分复杂，会影响GPU的执行效率。</p>
 <h2 id="9-25、FPGA"><a href="#9-25、FPGA" class="headerlink" title="9.25、FPGA"></a>9.25、FPGA</h2><p>FPGA：可编程逻辑，计算效率高，更接近底层IO，通过冗余晶体管和连线实现逻辑可编辑。本质上是无指令、无需共享内存，计算效率比CPU、GPU高。主要应用于智能手机、便携式移动设备、汽车。</p>
  
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-8 音视频编解码相关知识学习"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/11/19/8%20%E9%9F%B3%E8%A7%86%E9%A2%91%E7%BC%96%E8%A7%A3%E7%A0%81%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E5%AD%A6%E4%B9%A0/"
-    >音视频编解码相关知识学习</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/11/19/8%20%E9%9F%B3%E8%A7%86%E9%A2%91%E7%BC%96%E8%A7%A3%E7%A0%81%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E5%AD%A6%E4%B9%A0/" class="article-date">
-  <time datetime="2023-11-19T09:16:56.000Z" itemprop="datePublished">2023-11-19</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <p>前些天一直在研究关于GPUi相关的知识，在周六的时候终于是写好了相应的测试手册，周一法师检测出问题的话我再加，其实也没啥可以加的东西了，不管是OPENGL还是OPENCL，只要相应的mali库成功即可，其他的倒是没啥，然后呢我也该去搞一下mpp 音视频编解码相关的东西了，后面其实还有摄像头啥的，这些都是要搞的，至少软件里面是要适配的对吧，还有那个缠绕我好久的buildroot opencv的问题，问题太多了，但是总要一点一点来，问题是一个一个解决的，总不可能一蹴而就，慢慢来呗</p>
-<h1 id="音视频的基本概念"><a href="#音视频的基本概念" class="headerlink" title="音视频的基本概念"></a>音视频的基本概念</h1><h2 id="一-视频"><a href="#一-视频" class="headerlink" title="一 视频"></a>一 视频</h2><h3 id="1、码率√"><a href="#1、码率√" class="headerlink" title="1、码率√"></a>1、码率√</h3><p>码率，又叫比特率，单位时间内传输的数据量，单位一般为kbps(千位每秒)。需要注意的是，这里b代表bit，而不是Byte，这里乘以8是Byte转成bit。计算公式：平均码率(kbps)&#x3D;文件大小(kB)*8&#x2F;时间(s)。动态码率(kbps)&#x3D;每秒传输数据量(kB)*8。</p>
-<p>“bps” 是 “bits per second” 的缩写，指的是数据传输速率或比特率，用于测量数据在通信或存储系统中的传输速度。它表示每秒传输的比特数，其中比特是计算机中最小的数据单位。比特率通常用于描述网络带宽、调制解调器速度、数字音频&#x2F;视频流的传输速度等。</p>
-<p>恒定码率：CBR，码率稳定可控，带宽要求不高，图像变化量比较大时方块效应比较明显。</p>
-<p>动态码率：VBR，码率波动较大，带宽要求较高，图像变化量比较大时方块效应有所改善。发生网络抖动时，比较容易丢包，需要重传，或者FEC前向纠错，从而带来延时。</p>
-<h3 id="2、分辨率"><a href="#2、分辨率" class="headerlink" title="2、分辨率"></a>2、分辨率</h3><p>分辨率又称为解析度，分辨率越高，像素越多，图像越清晰。</p>
-<p>视频分辨率：又称为图像分辨率，由视频的宽高组成，表示形式宽x高，常见的视频分辨率有480P、720P、1080P、2K(2048x1080&#x2F;2160x1440)、4K(4096x2160&#x2F;3840x2160)，具体如下表1所示。</p>
-<p>屏幕分辨率：又称为显示分辨率，描述屏幕分辨率的单位是ppi(pixel per inch，每英寸的像素数)。</p>
-<p>位分辨率：又称为位深(BitDepth)，每个像素点存储信息的位数。常见的有：8位、16位、24位、32位色彩。Android的Bitmap常见的有ALPHA_8、RGB_565、ARGB_4444、ARGB_8888。</p>
-<table>
-<thead>
-<tr>
-<th align="left">显示模式</th>
-<th align="left">水平像素x垂直像素</th>
-<th align="left">宽高比</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">QCIF</td>
-<td align="left">176x144</td>
-<td align="left">11:9</td>
-</tr>
-<tr>
-<td align="left">QVGA</td>
-<td align="left">320x240</td>
-<td align="left">4:3</td>
-</tr>
-<tr>
-<td align="left">CIF</td>
-<td align="left">352x288</td>
-<td align="left">11:9</td>
-</tr>
-<tr>
-<td align="left">nHD</td>
-<td align="left">640x360</td>
-<td align="left">16:9</td>
-</tr>
-<tr>
-<td align="left">VGA</td>
-<td align="left">640x480</td>
-<td align="left">4:3</td>
-</tr>
-<tr>
-<td align="left">HD</td>
-<td align="left">1280x720</td>
-<td align="left">16:9</td>
-</tr>
-<tr>
-<td align="left">Full HD</td>
-<td align="left">1920x1080</td>
-<td align="left">16:9</td>
-</tr>
-<tr>
-<td align="left">2K(FHD+)</td>
-<td align="left">2048x1080</td>
-<td align="left">17:9</td>
-</tr>
-<tr>
-<td align="left">4K(UHD)</td>
-<td align="left">3840x2160</td>
-<td align="left">16:9</td>
-</tr>
-</tbody></table>
-<h3 id="3、帧率"><a href="#3、帧率" class="headerlink" title="3、帧率"></a>3、帧率</h3><p>视频帧率：测量显示帧数的量度，单位为每秒显示帧数(FPS，全称为Frame Per Second)。一般视频帧率为24fps，P制(PAL，德国提出，中国、印度、巴基斯坦等国家使用)为25fps，也就是每帧显示40ms，N制(NTSC，美国标准委员会提出，美国、日本、韩国等国家使用)为30fps。有些超高帧率的视频达到60fps。</p>
-<p>显示帧率：以帧为单位的位图图像连续出现在显示器的频率，也称为刷新速率。Android设备刷新率一般为60Hz，也就是帧率为60fps，每帧为16ms，超过16ms能给人的肉眼带来延迟卡顿的感觉。做性能优化方面，也就是保证从测量、布局、绘制、上传指令、与GPU交换缓冲区等一系列动作在16ms完成。Android11支持120Hz的更高帧率，一般为对帧率要求极高的应用场景，比如互动游戏。</p>
-<h3 id="4、像素格式"><a href="#4、像素格式" class="headerlink" title="4、像素格式"></a>4、像素格式</h3><p>像素格式：像素色彩分量的排列，由每个像素使用的总位数以及各分量的位数决定。图像的像素格式一般是RGBA四个分量通道各占8bits，组成一个32位的像素。其中R代表Red、G代表Green、B代表Blue、A代表Alpha。但是，视频压缩存储的像素格式不是RGBA，而是YUV，其中Y代表亮度(Luma)，U代表色度(Chroma)，V代表对比度(Contrast)。</p>
-<h3 id="5、画质"><a href="#5、画质" class="headerlink" title="5、画质"></a>5、画质</h3><p>画质：画面质量，由清晰度、锐度、解析度、色彩纯度、色彩平衡等指标构成。</p>
-<p>清晰度：指图像细节纹理及其边界的清晰程度。</p>
-<p>锐度：反应图像平面清晰程度，以及图像边缘的锐利程度。</p>
-<p>解析度：指像素点的数量，与分辨率对应，分辨率越高，解析度越高。</p>
-<p>色彩纯度：指色彩的鲜艳程度。所有色彩都是三原色组成，其他颜色都是三原色混合而成，理论上可以混合出256种颜色。原色的纯度最高。色彩纯度是指原色在色彩中的百分比。</p>
-<p>色彩平衡：用来控制图像的色彩分布，使得图像整体达到色彩平衡。</p>
-<h3 id="6、色域与HDR"><a href="#6、色域与HDR" class="headerlink" title="6、色域与HDR"></a>6、色域与HDR</h3><p>色域：指某种表色模式所能表达的颜色构成的范围区域，色域空间越大，所能表现的颜色越多。</p>
-<p>HDR：High Danamic Range，高动态范围，比普通图像提供更多动态范围和图像细节，能够更好反应真实环境的视觉效果。颜色值经过归一化后，范围一般是[0,1]。而HDR可以表达超出1的颜色值，拥有更大的颜色范围。</p>
-<h3 id="7、旋转角度"><a href="#7、旋转角度" class="headerlink" title="7、旋转角度"></a>7、旋转角度</h3><p>旋转角度：视频的YUV储存方向。一般的视频旋转角度是0°，对应的是横屏显示。后置摄像头竖屏拍的视频，旋转角度为90°，对应的是竖屏显示。Android中可以通过MediaMetaDataRetriever获取旋转角度。</p>
-<h3 id="8、时长"><a href="#8、时长" class="headerlink" title="8、时长"></a>8、时长</h3><p>视频所有图像播放所需要的时间称为视频时长。计算公式：时长(s)&#x3D;帧数x每帧时长&#x3D;帧数x(1&#x2F;帧率)。假设一个视频帧数为1000，帧率为25fps，那么时长为40s。</p>
-<h3 id="9、封装格式"><a href="#9、封装格式" class="headerlink" title="9、封装格式"></a>9、封装格式</h3><p>封装格式（Container Format），也被称为容器格式、多媒体容器或封装协议，是用于将音频、视频、字幕等多种媒体数据进行封装和存储的文件格式。它将不同类型的媒体数据组合在一起，同时提供了文件结构、元数据、同步信息和索引等，以便播放器或解码器能够正确解析和播放媒体内容。</p>
-<p>封装格式通常由以下几个主要组成部分构成：</p>
-<ol>
-<li>特定格式头（Format Header）：封装格式的文件头部分包含了关于文件本身的重要信息，如文件类型、版本、总体文件大小等。这些信息在解析和处理文件时起到了关键作用。</li>
-<li>媒体信息（Metadata）：封装格式可以包含有关媒体内容的附加信息，例如标题、作者、描述、时长、分辨率、采样率等。这些元数据提供了有关媒体文件的描述和标识，使其能够被正确地识别和分类。</li>
-<li>音视频轨（Track）：封装格式可以容纳多个音频、视频或字幕轨道。每个轨道包含相应媒体数据的编码信息、时间戳和相关参数。例如，一个视频轨道可能包含视频帧的压缩编码数据，而一个音频轨道可能包含音频样本的编码数据。</li>
-<li>索引（Index）：为了快速定位和访问媒体数据，封装格式通常包含一个索引表。索引表记录了文件中各个部分的位置、时间戳和长度等信息，以便播放器能够快速定位到需要的数据位置。通过索引，播放器可以跳转到特定时间点或轨道的特定位置。</li>
-<li>其他数据：除了上述主要组成部分之外，封装格式还可以包含其他数据，如字幕轨道、章节信息、描述文本、封面图像等。这些附加数据提供了更丰富的媒体体验和交互功能。</li>
-</ol>
-<p>不同的封装格式具有不同的特点和功能。一些封装格式具有更广泛的兼容性和流行度，例如MP4（MPEG-4 Part 14）和MKV（Matroska）。这些封装格式支持多种编码格式、多个轨道和广泛的元数据支持。其他封装格式如AVI、MOV、FLV等也有各自的特点和应用领域。</p>
-<p>封装格式在数字媒体的存储、传输和播放中起到了重要的作用。它们提供了一种标准化的方式来组织和管理多媒体数据，使得不同类型的媒体可以在各种设备和平台上进行兼容性播放和交互。。</p>
-<h3 id="10、编码协议"><a href="#10、编码协议" class="headerlink" title="10、编码协议"></a>10、编码协议</h3><p>编码协议是指用于将原始视频数据进行压缩和编码的特定算法和规范。这些编码协议的目的是减小视频文件的大小并提高传输和存储效率，同时尽量保持较高的视频质量。以下是对几种常见的视频编码协议的详细介绍：</p>
-<ol>
-<li>H.264 &#x2F; AVC：H.264（也称为高级视频编码，Advanced Video Coding）是一种广泛使用的视频编码协议。它采用了先进的压缩技术，能够提供较高的视频质量和更低的比特率。H.264广泛应用于各种领域，包括互联网视频流媒体、蓝光光盘、视频会议等。</li>
-<li>H.265 &#x2F; HEVC：H.265（High Efficiency Video Coding）是H.264的后继者，也是一种先进的视频编码协议。相比于H.264，H.265能够进一步减小视频文件大小，并提供更高的视频质量。它在保持相同视频质量的情况下，能够将比特率降低约50%。H.265常用于4K和8K高分辨率视频、流媒体服务等。</li>
-<li>VP8 &#x2F; VP9：VP8和VP9是由Google开发的开放源代码视频编码协议。它们提供了高效的视频压缩和较高的视频质量，并被广泛应用于WebRTC、WebM等互联网标准中。VP9相比VP8进一步提升了压缩性能，能够在更低的比特率下保持较高的视频质量。</li>
-<li>MPEG-4：MPEG-4是一系列的视频编码协议，包括MPEG-4 Part 2和MPEG-4 Part 10（也称为H.264）。MPEG-4 Part 2常用于视频的存储和传输，而MPEG-4 Part 10（H.264）被广泛使用于各种应用，包括互联网视频、移动视频等。</li>
-<li>MJPEG：MJPEG（Motion JPEG）是一种将视频中的每一帧都作为独立的JPEG图像进行压缩的编码协议。它适用于一些特定应用，如摄像头和视频监控系统。尽管MJPEG在压缩率和存储效率方面比较低，但解码过程相对简单，避免了帧间预测等复杂的算法。</li>
-<li>WMV3：WMV3（Windows Media Video 3）是由微软开发的一种视频编码协议。它广泛用于Windows Media Player和其他微软产品中，提供了较好的视频质量和压缩效率。WMV3支持各种分辨率和比特率，并具有较好的兼容性。</li>
-</ol>
-<p>这些编码协议在视频压缩方面采用了不同的算法和技术，以平衡视频质量、压缩比和解码复杂性。不同的应用场景和设备可能选择不同的编码协议，根据需求和限制来平衡视频质量和性能。</p>
-<h3 id="11、视频播放整体流程"><a href="#11、视频播放整体流程" class="headerlink" title="11、视频播放整体流程"></a>11、视频播放整体流程</h3><p>当您在电脑上打开一个视频文件时，涉及到了多个步骤和组件，以确保视频能够被正确解码和显示。以下是一个详细的视频文件在电脑上显示的典型流程：</p>
-<ol>
-<li>文件读取：计算机首先会读取视频文件的数据。这涉及从硬盘或其他存储设备中读取文件的二进制数据，并将其加载到计算机的内存中以供后续处理。</li>
-<li>封装格式解析：计算机会根据视频文件的封装格式（如MP4、MKV等）来解析文件的结构和元数据。这包括读取文件头部信息、索引表和媒体轨道的描述等。通过解析封装格式，计算机可以了解视频文件的整体结构和内容。</li>
-<li>视频解码：视频解码器开始对视频轨道进行解码。它根据封装格式中存储的视频编码器信息，解码压缩的视频数据并将其转换为原始的像素数据。解码过程涉及对视频帧进行逐帧解压缩和重构，以还原出原始的图像数据。</li>
-<li>音频解码：如果视频文件包含音频轨道，音频解码器将对音频轨道进行解码。类似于视频解码过程，音频解码器根据封装格式中的音频编码器信息，解码压缩的音频数据并将其转换为原始的音频样本数据。</li>
-<li>同步和播放：视频解码器和音频解码器的输出需要进行同步，以确保视频和音频的播放保持一致。计算机使用时间戳、帧率和采样率等信息来确保视频和音频流的同步，并根据显示设备的刷新率来进行适当的帧率调整。</li>
-<li>图像渲染：计算机使用图像渲染器将解码后的视频像素数据转换为适合显示的图像格式。这可能涉及色彩空间转换、调整图像大小、应用滤镜或效果等处理。</li>
-<li>音频渲染：类似地，音频渲染器将解码后的音频样本数据转换为适合音频输出设备的音频格式。这可能包括音频混合、音量调整、空间效果等处理。</li>
-<li>显示输出：最后，计算机将渲染后的视频图像和音频数据发送到显示设备和扬声器，以进行实际的播放。这可能涉及将视频图像传输到显示器，并通过显示器的硬件和软件进行显示。同时，音频数据也会被发送到扬声器或音频输出设备进行播放。</li>
-</ol>
-<h2 id="二-音频"><a href="#二-音频" class="headerlink" title="二 音频"></a>二 音频</h2><h3 id="1、采样率"><a href="#1、采样率" class="headerlink" title="1、采样率"></a>1、采样率</h3><p>采样率：对声音信号每秒的采样次数，采样率越高，声音的还原越真实。采样率单位为Hz，常见的采样率有：8000Hz、16000Hz、44100Hz、48000Hz。人类一般能够听到的声音范围：20Hz～20000Hz。根据奈奎斯特采样定理：当采样频率大于信号中最高频率的2倍时，采样后的数字信号能够完整保留原始信号的信息。</p>
-<h3 id="2、声道"><a href="#2、声道" class="headerlink" title="2、声道"></a>2、声道</h3><p>声道：指声音在录制或播放时，在不同空间位置采集或回放的相互独立音频信号。声道数指在录音时的音源数量，或者在播放时的扬声器数量。</p>
-<h3 id="3、声道布局"><a href="#3、声道布局" class="headerlink" title="3、声道布局"></a>3、声道布局</h3><p>不同声道数对应不同声道布局。常见的声道布局有单声道(mono)、立体声道(stereo)、四声环绕、5.1声道。</p>
-<p>单声道：只有一个声道，优点数据量小，amr_nb和amr_wb默认为单声道，缺点是缺乏对声音位置定位。</p>
-<p>立体声道：一般为两个声道，由左声道、右声道组成，改善对声音位置定位的状况。</p>
-<p>四声环绕：由前左、前右、后左、后右组成，形成立体环绕。4.1声道是在四声环绕基础上，增加一个低音。</p>
-<p>5.1声道：在4.1基础上，增加一个中场声道，杜比AC3就是采用5.1声道，也就是影院宣传的杜比音效。</p>
-<h3 id="4、音质"><a href="#4、音质" class="headerlink" title="4、音质"></a>4、音质</h3><p>音质：声音的质量，经过编码压缩后的音频信号保真度，由音量、音高和音色组成。</p>
-<p>音量：音频的强度，数值范围0-100，静音时为0，最大值为100。Android中有提供音量增强LoudnessEnhancer，调节声音分贝值。</p>
-<p>音高：声音的音调，即音频频率或每秒变化次数。</p>
-<p>音色：音频泛音，又称为音品，不同声音表现在波形方面与众不同的特性。</p>
-<h3 id="5、封装格式"><a href="#5、封装格式" class="headerlink" title="5、封装格式"></a>5、封装格式</h3><p>音频的封装格式，与视频封装格式类似，由特定格式头+媒体信息+音频轨数据组成。常见的封装格式有：mp3、m4a、ogg、amr、wma、wav、flac、aac、ape等。</p>
-<ol>
-<li>MP3（MPEG Audio Layer III）：MP3 是一种广泛使用的音频封装格式，具有较高的压缩比和音质，适用于音乐和语音的存储和传输。</li>
-<li>M4A（MPEG-4 Audio）：M4A 是苹果公司使用的音频封装格式，它可以包含多种编码格式的音频数据，如 AAC（Advanced Audio Coding）和 ALAC（Apple Lossless Audio Codec）。M4A 格式通常与 iTunes 和 Apple 设备相关联。</li>
-<li>OGG：OGG 是一种自由开放的音频封装格式，支持多种编码格式，如 Vorbis、Opus 等。它具有较好的音质和压缩比，常用于网络流媒体和游戏音效。</li>
-<li>AMR（Adaptive Multi-Rate）：AMR 是一种用于语音编码和封装的格式，主要用于手机通话和语音录制。它具有较高的压缩比，适合在低比特率下传输语音数据。</li>
-<li>WMA（Windows Media Audio）：WMA 是微软开发的音频封装格式，支持多种编码格式，如 WMA 标准、WMA Pro 和 WMA Lossless。它在 Windows 平台上得到广泛应用，常用于音乐和音频流媒体。</li>
-<li>WAV（Waveform Audio File Format）：WAV 是一种无损音频封装格式，它存储原始音频数据，不进行压缩。WAV 格式具有较高的音质，常用于音乐制作和音频编辑。</li>
-<li>FLAC（Free Lossless Audio Codec）：FLAC 是一种无损音频封装格式，它可以实现无损的音频压缩和解压缩，保留了原始音频数据的完整性。FLAC 格式适用于音乐存储和音频传输。</li>
-<li>AAC（Advanced Audio Coding）：AAC 是一种高级音频编码格式，常用于音乐和视频的存储和传输。它具有较高的音质和压缩效率，是目前广泛支持的音频编码格式。</li>
-<li>APE（Monkey’s Audio）：APE 是一种无损音频封装格式，类似于 FLAC，但压缩比略低。它常用于音乐存储和音频传输，提供了较高的音质和文件压缩率。</li>
-</ol>
-<h3 id="6、编码协议"><a href="#6、编码协议" class="headerlink" title="6、编码协议"></a>6、编码协议</h3><p>音频经过解封装得到的音频轨数据，也是经过编码的。常见的音频编码协议有：mp3、aac、amr_nb、amr_wb、ac3、vorbis、opus、flac、wmav2等。</p>
-<ol>
-<li>MP3（MPEG Audio Layer III）：MP3 是一种常见的有损音频编码格式，它通过移除人耳听不到或对音质影响较小的音频信号，实现了较高的压缩比。MP3 格式广泛用于音乐存储和传输。</li>
-<li>AAC（Advanced Audio Coding）：AAC 是一种先进的音频编码格式，它在音质和压缩效率上优于 MP3。AAC 常用于音乐、视频和流媒体的存储和传输，被广泛支持。</li>
-<li>AMR-NB（Adaptive Multi-Rate Narrowband）：AMR-NB 是一种窄带自适应多速率编码格式，用于语音编码和传输。它在低比特率下实现了较高的语音质量，常用于手机通话。</li>
-<li>AMR-WB（Adaptive Multi-Rate Wideband）：AMR-WB 是一种宽带自适应多速率编码格式，也用于语音编码和传输。相比于 AMR-NB，AMR-WB 在更宽的频率范围内提供了更好的语音质量。</li>
-<li>AC3（Audio Coding 3）：AC3 是一种有损音频编码格式，常用于影片音轨和 DVD 视频中。AC3 格式支持多声道音频，提供了较高的音质和环绕声效果。</li>
-<li>Vorbis：Vorbis 是一种开放的无损音频编码格式，采用了无损压缩算法，可以提供高音质和较小的文件大小。Vorbis 常用于音乐存储和网络流媒体。</li>
-<li>Opus：Opus 是一种开放的音频编码格式，具有低延迟、高音质和较高的压缩效率。Opus 支持多种应用场景，包括音乐、语音通信和网络流媒体。</li>
-<li>FLAC（Free Lossless Audio Codec）：FLAC 是一种开放的无损音频编码格式，可以实现无损的音频压缩和解压缩。FLAC 格式保留了原始音频数据的完整性，提供了较高的音质。</li>
-<li>WMA（Windows Media Audio）：WMA 是微软开发的音频编码格式，支持多种编码配置，如 WMA 标准、WMA Pro 和 WMA Lossless。WMA 常用于 Windows 平台上的音乐和音频流媒体。</li>
-</ol>
-<h3 id="7、采样数"><a href="#7、采样数" class="headerlink" title="7、采样数"></a>7、采样数</h3><p>采样数，即每帧采样的数量。在FFmpeg的AVFrame中，定义为nb_samples。</p>
-<h3 id="8、采样位数"><a href="#8、采样位数" class="headerlink" title="8、采样位数"></a>8、采样位数</h3><p>采样位数，即每个采样占用多少位。在RIFF(Resource Interchange File Format)资源交换文件格式有个字段bits_per_sample表示采样位数，在FFmpeg也是用这个字段表示采样位数。</p>
-<h3 id="9、存储空间"><a href="#9、存储空间" class="headerlink" title="9、存储空间"></a>9、存储空间</h3><p>音频的每秒存储空间由：采样率、声道数、每个采样位数。假设采样率为44.1k，声道数为2，采样位数为16。那么，每秒所占存储空间字节数&#x3D;44100 * 2 * 16 &#x2F; 8</p>
-<h3 id="10、帧时长"><a href="#10、帧时长" class="headerlink" title="10、帧时长"></a>10、帧时长</h3><p>音频的帧时长&#x3D;采样数 &#x2F; 采样率。假设采样率为44.1k，采样数为1024。那么每帧时长约等于23ms。</p>
-<h4 id="11、采样格式"><a href="#11、采样格式" class="headerlink" title="11、采样格式"></a>11、采样格式</h4><p>音频的采样格式分为大端存储和小端存储。按照符号划分有：有符号与无符号。按照类型划分有：整型与浮点型。按照存储位数划分有：8位、16位、32位、64位，都是8的倍数。在FFmpeg的AVSampleFormat枚举如下：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">enum</span> <span class="title">AVSampleFormat</span> &#123;</span></span><br><span class="line">    AV_SAMPLE_FMT_NONE = <span class="number">-1</span>,</span><br><span class="line">    AV_SAMPLE_FMT_U8,          <span class="comment">// unsigned 8 bits</span></span><br><span class="line">    AV_SAMPLE_FMT_S16,         <span class="comment">// signed 16 bits</span></span><br><span class="line">    AV_SAMPLE_FMT_S32,         <span class="comment">// signed 32 bits</span></span><br><span class="line">    AV_SAMPLE_FMT_FLT,         <span class="comment">// float</span></span><br><span class="line">    AV_SAMPLE_FMT_DBL,         <span class="comment">// double</span></span><br><span class="line"> </span><br><span class="line">    AV_SAMPLE_FMT_U8P,         <span class="comment">// unsigned 8 bits, planar</span></span><br><span class="line">    AV_SAMPLE_FMT_S16P,        <span class="comment">// signed 16 bits, planar</span></span><br><span class="line">    AV_SAMPLE_FMT_S32P,        <span class="comment">// signed 32 bits, planar</span></span><br><span class="line">    AV_SAMPLE_FMT_FLTP,        <span class="comment">// float, planar</span></span><br><span class="line">    AV_SAMPLE_FMT_DBLP,        <span class="comment">// double, planar</span></span><br><span class="line">    AV_SAMPLE_FMT_S64,         <span class="comment">// signed 64 bits</span></span><br><span class="line">    AV_SAMPLE_FMT_S64P,        <span class="comment">// signed 64 bits, planar</span></span><br><span class="line"> </span><br><span class="line">    AV_SAMPLE_FMT_NB           <span class="comment">// Number of sample formats</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<h1 id="视频封装格式"><a href="#视频封装格式" class="headerlink" title="视频封装格式"></a>视频封装格式</h1><p>   音视频的时长怎么获取，音视频的封面怎么获取，音视频的格式怎么获取呢？这些信息都以特定格式存储在文件开头或者结尾，称为多媒体信息或者多媒体元数据。通用的封装格式由：文件标识头+多媒体信息+音视频(字幕)轨+视频帧索引块组成，如果是纯音频，后面可能还有歌词。音视频的封装格式就是通过解析文件标识头进行判断的，然后解析多媒体信息从而获取时长，再解析视频帧索引块，最后根据索引块去获取对应时间戳的视频帧。</p>
-<p>   音视频封装格式存储的字段包括：时长、码率、音视频编码器、分辨率(宽x高)、帧率、像素格式、旋转角度、采样率、声道数等等。其中视频专有的字段是分辨率、帧率、像素格式、旋转角度，而音频专有的字段是采样率、声道数。</p>
-<p> 常见的视频格式有：mp4、mov、3gp、mkv、webm、flv、avi、mpg、wmv、ts等等。其中mp4、mov、3gp同属一个协议簇，目前mp4最为流行，mp4全称为MPEG-4，由国际标准化组织和国际电工委员会下属的动态图像专家组(Moving Picture Experts Group)制定，具体协议可参考：ISO&#x2F;IEC14496-14协议；mkv与webm公用封装格式：matroska，对于高清视频而言，mkv&#x2F;webm最受欢迎；而avi是比较古老的格式，音视频流交错(Audio Video Interleave)，可以封装各种编码格式的音视频流；mpg属于ps的一种封装格式；wmv(Windows Media Video)是微软推出的视频编解码格式统称，采用ASF(Advance System Format)作为容器，基于Object对象进行封装；而ts的全称为MPEG2-TS，即为Transport Stream的缩写，具体可参考ISO&#x2F;IEC13818-1协议，作用于传输层，主要用于实时传输的节目，HLS直播协议就是基于ts切片来传输视频流的，主要特点是从视频流任一片段都可独立解码播放；ps与ts类似，全称为MPEG-PS，即为Program Stream的缩写，用于存储固定时长的节目。视频格式如下图所示：</p>
-<p>  整个解封装流程：从读取文件头判断视频格式开始，然后选择对应的Extractor，解析多媒体信息，再解析视频帧的索引块，最后根据索引去定位并读取音视频数据。如下图所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311192038669.png" alt="20200907235506737 (1)"></p>
-<ol>
-<li><p>读取文件头：<br>读取文件头是为了获取文件的基本信息和标识。文件头通常是文件的前几个字节，它包含了文件的格式信息以及其他元数据。读取文件头可以通过打开文件并读取前几个字节的方式实现。</p>
-</li>
-<li><p>判断文件格式：<br>通过读取文件头中的信息，可以判断文件的格式。在提供的文件格式中，常见的文件格式有：</p>
-<ul>
-<li>视频格式：mp4、avi、mkv、flv、wmv</li>
-<li>音频格式：mp3、m4a、flac、amr</li>
-</ul>
-</li>
-<li><p>选择对应的解析器（Extractor）：<br>根据判断出的文件格式，选择对应的解析器（Extractor）。解析器是用于解析文件的工具或库，它能够提取出文件中的特定信息。不同的文件格式通常需要使用不同的解析器进行解析。</p>
-</li>
-<li><p>解析多媒体信息：<br>使用选择的解析器，对文件进行解析以获取多媒体信息。多媒体信息包括视频的分辨率、帧率、编码格式等，音频的采样率、声道数、编码格式等。解析多媒体信息可以通过解析器提供的函数或方法来实现。</p>
-</li>
-<li><p>解析视频帧索引：<br>如果文件是视频文件，可以进一步解析视频的帧索引。视频帧索引包含了视频中每一帧的位置和时间信息。解析视频帧索引可以帮助我们定位和提取特定的视频帧。</p>
-</li>
-<li><p>读取音视频数据：<br>最后，通过解析器提供的函数或方法，读取音视频数据。音视频数据是文件中实际存储的音频和视频内容。可以根据需要，逐帧读取视频数据或逐样本读取音频数据。</p>
-<p>mp4作为目前最流行的视频封装格式，也是本篇文章的男一号主角，下面将围绕mp4格式进行展开分析。mp4是由一系列的box组成(在quick time协议中，称为atom)，box又由Header和Data组成，box的结构如图2所示：</p>
-</li>
-</ol>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311192040157.png" alt="img"></p>
-<p> 而Header由size、type、largeSize、extendType组成，其中size和type是必要字段，如表1所示：   </p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311192040107.png" alt="image-20231119204029085"></p>
-<p>​    full box的Header多两个字段：version、flag，一般是track box采用full box形式，如表2所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311192040249.png" alt="image-20231119204051236"></p>
-<p>   box分为normal box、full box、large box、extend box。如果size为1，那么表明该box为large box，使用largeSize来存储box的大小；如果size为0，那么表明该box是文件的最后一个box；如果box的类型为uuid，那么表明该box是扩展box。如下面代码段所示：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">aligned(<span class="number">8</span>) class <span class="title function_">Box</span> <span class="params">(<span class="type">unsigned</span> <span class="type">int</span>(<span class="number">32</span>) boxtype,</span></span><br><span class="line"><span class="params">    optional <span class="type">unsigned</span> <span class="type">int</span>(<span class="number">8</span>)[<span class="number">16</span>] extended_type)</span> &#123;</span><br><span class="line">    <span class="type">unsigned</span> <span class="title function_">int</span><span class="params">(<span class="number">32</span>)</span> size;</span><br><span class="line">    <span class="type">unsigned</span> <span class="title function_">int</span><span class="params">(<span class="number">32</span>)</span> type = boxtype;</span><br><span class="line">    <span class="keyword">if</span> (size==<span class="number">1</span>) &#123;</span><br><span class="line">        <span class="type">unsigned</span> <span class="title function_">int</span><span class="params">(<span class="number">64</span>)</span> largesize;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (size==<span class="number">0</span>) &#123;</span><br><span class="line">        <span class="comment">// box extends to end of file</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (boxtype==‘uuid’) &#123;</span><br><span class="line">        <span class="type">unsigned</span> <span class="type">int</span>(<span class="number">8</span>)[<span class="number">16</span>] usertype = extended_type;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> moov box作为mp4格式的重要组成部分，根据moov box与mdat box的相对位置，分为moov前置和moov后置。如下面图3、图4所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311192041850.jpeg" alt="img"></p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311192041782.jpeg" alt="img"></p>
-<p>   通常情况下，mp4的moov都是在mdat前面的；一般只有实时录制的mp4视频，moov才在mdat的后面。</p>
-<p>  ftyp box：mp4视频标识头，包含major brand、minor version、compatible brands。其中major brand一般为isom，而compatible brands包括isom、iso2、avc、mp41、mp42等。</p>
-<p>   moov box：存储多媒体信息，嵌套着movie box(mvhd)、track box(trak box)、usedata box(udat)；而track box分为视频轨、音频轨、字幕轨，如果有多语言，就会对应有多音轨；trak&#x2F;mdia&#x2F;minf&#x2F;stbl&#x2F;stsd存储的是音视频编码器信息，比如视频轨的是avc，音频轨是mp4a；trak&#x2F;mdia&#x2F;minf&#x2F;stbl&#x2F;stsz存储的是视频帧size；trak&#x2F;mdia&#x2F;minf&#x2F;stbl&#x2F;stco存储的是chunk offset。</p>
-<p>   mdat box：音视频数据，根据moov及其嵌套box解析出来的视频帧索引，去定位关键帧，然后根据帧类型读取音视频数据。</p>
-<h1 id="音频封装格式"><a href="#音频封装格式" class="headerlink" title="音频封装格式"></a>音频封装格式</h1><p> 音频封装格式一般由：多媒体信息+音频流+封面流+歌词流组成。有些音乐会包含封面和歌词，则对应有封面流、歌词流。多媒体信息包括：标题、艺术家、专辑、作曲、音乐风格、日期、码率、时长、声道布局、采样率、音频编码器等。而音频封装包括：mp3、m4a、ogg、amr、wma、aac、wav、flac、ape等。前面两篇文章介绍过相关概念：走进音视频的世界——音视频基本概念、走进音视频世界——视频封装格式。音频格式如下图所示：</p>
-<p>以下面问题为出发点，揭开音频封装格式的面纱：</p>
-<p>① 音乐封面如何获取？</p>
-<p>② 音乐歌词如何获取与显示？</p>
-<p>③ 有损格式与无损格式有什么区别？</p>
-<p>④ 不同封装格式有什么联系，又有什么区别？</p>
-<p>先从FFprobe检测到的音频metadata说起，如下图1所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311192045466.jpeg" alt="img"></p>
-<p>从上图可以看出，前半部分是title标题、artist艺术家、album专辑、album_artist艺术家专辑、composer作曲者、genre音乐风格式；中间部分是lyrics歌词，每句歌词前面有对应的时间戳；后半部分是两个流，第0编号的流是音频轨，包含：音频编码器、采样率、声道布局、码率，第1编号的流是封面，其实是一帧图像，包含：图像编码器、像素格式、分辨率。接下来根据上面提出的问题进行展开分析。</p>
-<p>1、获取音乐的封面<br>音乐封面保存在视频图像流中，先解析出图像编码器、像素格式、分辨率等参数，然后根据编码器去寻找对应的解码器，并打开解码器，对图像编码压缩数据进行解码，最终解码出来的图像就是封面了。</p>
-<p>2、音乐歌词的获取与显示<br>上面有提及，每句歌词前面有显示的时间戳，以音频时钟为基准，歌词时间戳同步于音频时间戳。也就是根据音频时间戳来同步解析歌词，然后把歌词回调到应用层渲染显示。另外一个问题，当前歌词什么时候该消失呢？歌词没有具体的显示时长，等待下一个歌词的到来，把当前歌词覆盖。</p>
-<p>3、有损格式与无损格式的区别<br>(1) 无损音乐格式</p>
-<p>无损音乐格式有ape、wav、flac三种，其中ape、flac都是基于wav进行压缩。而wav是微软专门为Windows开发的一种标准数字音频文件，文件扩展名wav，是WaveForm的缩写，文件大小计算公式：size&#x3D;(采样率<em>量化位数</em>声道&#x2F;8)&#x2F;时间(秒)。一般采样率是44100Hz，量化位数为16位，声道数为2（即立体声道），1分钟的音频占用存储空间约为10M。</p>
-<p>在Windows环境下，大多数媒体文件都是按照资源互换文件格式(Resource Interchange File Format)来储存信息的，简称为RIFF格式。构成RIFF的基本单位成为块(Chunk)，每个RIFF文件由若干块组成，wav基本结构如下表所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311192045766.png" alt="image-20231119204555747"></p>
-<p>每个块由块标识、长度、数据组成，如下代码段：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">struct chunk &#123;</span><br><span class="line">    u32 id; //块标识</span><br><span class="line">    u32 size; //块大小</span><br><span class="line">    u8 data[size]; //块内容</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p> 其中fmt块由声道数、采样率、码率、块对齐、量化位数五个参数组成，如下表所示：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Num Channels	         2 Bytes	           小端存储</span><br><span class="line">SampleRate	         4 Bytes	           小端存储</span><br><span class="line">ByteRate	         4 Bytes	           小端存储</span><br><span class="line">Block Align	         2 Bytes	           小端存储</span><br><span class="line">BitsPerSample	         2 Bytes	           小端存储</span><br></pre></td></tr></table></figure>
-
-<p>(2) 有损音乐格式</p>
-<p>有损音乐格式包括：mp3、m4a、ogg、amr、wma、aac等。目前最为流行的是mp3(MPEG-1 audio layer3)，有着mp3的下一代之称的是aac(Advance Audio Coding)。有损格式压缩率比无损的高，文件占用存储空间小，但是声音还原度不如无损格式。我们下载音乐时，碰到高品质或者无损音质的音乐，通常要VIP会员或按需收费，因为越高品质越接近原声。而无损音乐从理论上能够100%保留声音细节，100%还原原声。无损音质英文简称为SQ(Super Quality，超音质)。关于无损格式与有损格式对比如下表所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311192046184.png" alt="image-20231119204633159"></p>
-<h4 id="4、不同封装格式的联系与区别"><a href="#4、不同封装格式的联系与区别" class="headerlink" title="4、不同封装格式的联系与区别"></a>4、不同封装格式的联系与区别</h4><p>封装格式共同点是基本结构是相同的，都是由多媒体信息+音频流+封面流+歌词流组成。区别是不同封装格式，采用编码方式不一样，压缩率不一样，音频流子结构不一样。下面是不同封装格式的多方位对比，如表4所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311192047768.png" alt="image-20231119204702747"></p>
-<h1 id="音视频编码"><a href="#音视频编码" class="headerlink" title="音视频编码"></a>音视频编码</h1><p>音视频流是通过特定编码器压缩，由一系列的压缩图像&#x2F;语音帧组成。当然可能存在多种语言多音轨，每个音轨之间的音频流相互独立。还可能存在内置字幕，常见的字幕格式有sub、smi、ssa、srt等。但是，本篇文章讨论的主角是音视频编码，常见的视频编码有h264、h265、vp9、mpeg4、mjpeg、wmv3、av1(Alliance for Open Media Video 1，由开放媒体联盟推出，对标h265，旨在成为下一代视频编码技术标准)，常见的音频编码有mp3、aac、amr_nb、amr_wb、ac3、vorbis、opus、flac、wmav2等等。音视频格式如下图所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311192049496.png" alt="img"></p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311192049324.png" alt="img"></p>
-<h2 id="一、视频编码"><a href="#一、视频编码" class="headerlink" title="一、视频编码"></a>一、视频编码</h2><p>视频编码是将原始视频信号进行压缩和编码的过程，以便在存储和传输中减少数据量。下面详细解释为什么需要对视频进行编码以及视频编码的原理和过程。</p>
-<p>为什么需要进行视频编码？<br>视频数据通常由连续的图像帧组成，每一帧都包含了大量的像素数据。原始的视频数据以YUV或RGB格式存储，其中Y表示亮度分量，U和V表示色度分量。这些原始数据非常大，特别是对于高分辨率和高帧率的视频来说，它们需要大量的存储空间和传输带宽。为了有效地存储和传输视频，需要对视频进行压缩，而视频编码就是实现视频压缩的一种方式。</p>
-<h3 id="1、变换与量化"><a href="#1、变换与量化" class="headerlink" title="1、变换与量化"></a>1、变换与量化</h3><p>变换：把空间域的图像信号变换到频率域。常见的变换有离散余弦变换、傅里叶变换。其中，离散余弦变换又称为DCT变换，在视频压缩中得到广泛应用。</p>
-<p>量化：人类对图像的低频特性的信息敏感(比如亮度)，对高频特性的信息不敏感(比如色度、对比度)，所以才编码过程中可以少用高频信息，全保留低频信息。量化过程是对低频区进行细量化，对高频区进行粗量化，减少人眼不太敏感的图像信息，从而减小数据量、提高压缩率。量化是有损的，量化参数(Quantization Parameter)越大，图像质量越低。</p>
-<h3 id="2、运动补偿与运动估计"><a href="#2、运动补偿与运动估计" class="headerlink" title="2、运动补偿与运动估计"></a>2、运动补偿与运动估计</h3><p>运动估计：把图像分割成互不重叠的子块，然后以一定大小的窗口，在前一图像或后一图像去移动搜索相似的图像块，这个搜索过程称为运动估计。</p>
-<p>运动补偿：通过先前的局部图像来预测、补偿当前的局部图像；</p>
-<h3 id="3、熵编码"><a href="#3、熵编码" class="headerlink" title="3、熵编码"></a>3、熵编码</h3><p>熵编码是基于变长编码，出现概率大的符号采用短码，出现概率小的符号采用长码，最终的平均码长接近信源熵值。其他的变长编码还包括：哈夫曼编码、游程编码、算术编码等。</p>
-<h3 id="4、帧内压缩与帧间压缩"><a href="#4、帧内压缩与帧间压缩" class="headerlink" title="4、帧内压缩与帧间压缩"></a>4、帧内压缩与帧间压缩</h3><p>帧内压缩：每帧图像内部存在数据冗余。比如一副图像中有一块颜色相同的画布，编码时按照nxn大小的宏块进行划分，那么宏块之间存在相似性，这就使得可以从空间层面进行压缩，即帧内压缩；</p>
-<p>帧间压缩：连续图像之间存在许多相似细节。比如一辆运动中的汽车，从当前时刻到下一时刻发生相对位移，从另外一个角度来说，是周边环境发生相对位移而汽车本身没有变化，这就使得可以从时间层面进行压缩，即帧间压缩；</p>
-<h3 id="5、I帧、P帧、B帧"><a href="#5、I帧、P帧、B帧" class="headerlink" title="5、I帧、P帧、B帧"></a>5、I帧、P帧、B帧</h3><p>I帧：内部编码帧，又称为关键帧，使用I帧编码可以完整还原一副图像，帧的数据量会比较大；</p>
-<p>P帧：前向预测帧，又称为前向参考帧，需要参考前一个I帧进行编码，数据量会比I帧小。同理，解码时也需要参考前一个I帧进行解码；</p>
-<p>B帧：双向内插帧，又称为双向参考帧，需要参考前后的I帧或P帧进行编码，压缩率会比P帧更高，数据量比P帧更小。但是，解码时需要下一个I帧或者P帧的到来，解码时序需要严格控制，解码复杂度也相对高。</p>
-<h3 id="6、GOP与关键帧间隔"><a href="#6、GOP与关键帧间隔" class="headerlink" title="6、GOP与关键帧间隔"></a>6、GOP与关键帧间隔</h3><p>GOP(全称Group Of Pictures)，图像序列组，由一个关键帧和若干个非关键帧组成。在编码器参数设置中，有一个参数设置GOP大小。以Android的mediacodec为例，设置关键帧间隔时间Key_Frame_Interval，也就是设置多少秒来一个关键帧。另外有一个类似的参数，关键帧间隔：多少帧来一个关键帧。</p>
-<h3 id="7、码率控制"><a href="#7、码率控制" class="headerlink" title="7、码率控制"></a>7、码率控制</h3><p>码率控制，是指网络请求码流时，根据网络带宽状况来控制码率大小。分为五种控制方式：恒定码率、动态码率、平均码率、恒定质量因子、恒定量化参数。而Youtube请求网络流时，会根据网络拥挤程度来动态调整码率，得益于一种新的多媒体传输控制协议——DASH，全称为Danymic Adaptive Streaming over HTTP，即基于HTTP的动态自适应媒体流。接下来对码率控制方式进行展开分析。</p>
-<p>恒定码率：CBR(Constant Bitrate)，以恒定的码率去编码，波动小，编码质量欠佳；</p>
-<p>动态码率：VBR(Variable Bitrate)，以动态的码率去编码，波动大，编码质量比较稳定；</p>
-<p>平均码率：ABR(Average Bitrate)，以平均的码率去编码，编码质量参差不齐；</p>
-<p>恒定质量因子：CQF(Constant Quality Factor)，又称为CRF(Constant Rate Factor)，在x264和x265编码默认采用CRF，取值范围为[0,51]，数值越大表示视频压缩率越高，编码质量越低；</p>
-<p>恒定量化参数：CQP(Constant Quantization Parameter)，瞬时码率会随场景复杂度有所波动，在H264定义的QP范围为[0,51]，数值越大表示量化步长越大，编码质量越低。当为QP&#x3D;0时，表示无损编码；</p>
-<h3 id="8、SVC分级编码"><a href="#8、SVC分级编码" class="headerlink" title="8、SVC分级编码"></a>8、SVC分级编码</h3><p>SVC(全称Scalable Video Coding)，可扩展的视频编码，也称为分级编码。具有三大特性：时间可分级、空间可分级、质量可分级。</p>
-<p>时间可分级：分为T0、T1、T2、T3，用来设置帧率，丢弃棕、绿、蓝得到不同帧率。如下图所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311192050136.png" alt="img"></p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311192050965.png" alt="img"></p>
-<p>质量可分级：可以从码流提取不同图像质量的子码流。</p>
-<p>   应用领域：视频监控、流媒体直播、视频会议。</p>
-<p>   优点：分级码流应用灵活，一次编码多次使用，可得到不同帧率、分辨率、质量；</p>
-<p>   缺点：分级码流的解码复杂度增加，比单层码流的压缩率低10%左右；</p>
-<h3 id="9、YUV"><a href="#9、YUV" class="headerlink" title="9、YUV"></a>9、YUV</h3><p>视频压缩编码后，是以YUV格式进行存储的，Y代表亮度(Chroma)，U代表色度(Luma)，V代表对比度(Contrast)。常见的YUV排列格式有YUV444、YUV422、YUV420，区别如下表所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311192050879.png" alt="image-20231119205039862"></p>
-<p>YUV420分为YUV420P和YUV420SP。其中，YUV420P又称为I420，P代表Planar平面，按照Y、U、V顺序排列，存储结构如下图所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311192050280.png" alt="image-20231119205051265"></p>
-<p> 而YUV420SP，其中SP代表Semi Planar半独立平面，U和V是交错存储的，存储结构如下图所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311192050526.png" alt="img"></p>
-<p>能不能举个例子，经过编码和不应该编码的一部电影他们的大小能差多少？</p>
-<p>当涉及到视频编码的压缩效果时，实际的压缩比例会受到多个因素的影响，包括视频内容、编码参数和压缩算法等。因此，无法给出具体的数字来表示编码前后视频大小的差异，因为结果会因情况而异。然而，我可以通过一个简化的例子来说明视频编码对文件大小的影响。</p>
-<p>假设我们有一部电影，持续时间为2小时，分辨率为1920x1080像素，帧率为24帧&#x2F;秒。我们将比较原始未经编码的视频（Raw Video）和经过常见有损压缩算法（如H.264）编码后的视频的文件大小。</p>
-<ol>
-<li>原始未经编码的视频（Raw Video）：<br>对于每一帧，假设使用RGB颜色空间，每个像素需要3个字节（一个字节用于红色通道，一个字节用于绿色通道，一个字节用于蓝色通道）。因此，每一帧的数据大小为：1920 x 1080 x 3 &#x3D; 6,220,800字节。考虑到24帧&#x2F;秒，2小时长的视频将需要非常大的存储空间。</li>
-<li>经过有损压缩编码的视频：<br>使用常见的有损压缩算法（如H.264）对视频进行编码时，会应用变换、量化、运动估计、运动补偿和熵编码等技术。这些技术将减少冗余数据和舍弃视觉上较不重要的信息，从而显著减小文件大小。具体的压缩比例将取决于编码参数和视频内容。</li>
-</ol>
-<p>每一帧的数据大小为：1920 x 1080 x 3 &#x3D; 6,220,800 字节。</p>
-<p>考虑到视频的帧率为 24 帧&#x2F;秒，接下来我们计算每秒的数据大小：<br>每秒的数据大小 &#x3D; 每帧的数据大小 x 帧率 &#x3D; 6,220,800 字节 x 24 &#x3D; 149,299,200 字节&#x3D; 0.1389636993408203 GB。</p>
-<p>接下来，我们计算整个视频的数据大小。视频的长度为 2 小时，即 2 x 60 x 60 &#x3D; 7,200 秒：<br>视频的数据大小 &#x3D; 每秒的数据大小 x 视频长度 &#x3D; 149,299,200 字节 x 7,200 &#x3D; 1,074,681,600,000 字节。</p>
-<p>将字节转换为更常见的单位，我们可以得到：<br>视频的数据大小约为 1.07 TB（1 TB &#x3D; 1,099,511,627,776 字节）。</p>
-<p>这意味着对于一部持续 2 小时的视频，如果每帧使用 RGB 颜色空间并且每个像素需要 3 个字节来表示，未经过任何编码压缩的视频将需要约 1.07 TB 的存储空间。</p>
-<p>这个数字显示了为什么视频编码在存储和传输视频时非常重要，因为原始视频数据的大小是非常庞大的。视频编码可以显著减小视频文件的大小，从而降低存储成本和传输带宽需求。</p>
-<h2 id="二、音频编码"><a href="#二、音频编码" class="headerlink" title="二、音频编码"></a>二、音频编码</h2><p>人类的听觉范围为20Hz~20KHz，那么低于20Hz或者高于20KHz，这些低频或高频信号基本听不到，可以作为冗余数据，通过特定采样率进行采样、编码。</p>
-<h3 id="1、采样率-1"><a href="#1、采样率-1" class="headerlink" title="1、采样率"></a>1、采样率</h3><p>采样率描述的是每秒对原始声音信号的采样次数，常见的采样率8000Hz、16000Hz、44100Hz、48000Hz，目前使用最广泛的是44100Hz，即44.1KHz。</p>
-<h3 id="2、波形编码"><a href="#2、波形编码" class="headerlink" title="2、波形编码"></a>2、波形编码</h3><p>直接把时域信号转换为数字编码，不利用任何参数，使得重构后的波形与原始信号的波形形状尽可能保持一致。基本原理是在时间轴对模拟语音信号按照一定速率采样，然后把幅度样本量化，并用代码表示。</p>
-<h3 id="3、参数编码"><a href="#3、参数编码" class="headerlink" title="3、参数编码"></a>3、参数编码</h3><p>从语音波形信号中提取生成语音的参数，使用这些参数通过语音生成模型重构出语音。音质比较低，但是保密性良好，广泛应用于军事技术中，典型的参数编码为LPC(Linear Predictive Coding)。</p>
-<h3 id="4、混合编码"><a href="#4、混合编码" class="headerlink" title="4、混合编码"></a>4、混合编码</h3><p>混合编码是指采用两种以上编码技术，比如波形编码与参数编码结合，形成优势互补。</p>
-<h3 id="5、PCM"><a href="#5、PCM" class="headerlink" title="5、PCM"></a>5、PCM</h3><p>PCM(Pulse Code Modulation 脉冲编码调制)，是对连续变化的模型信号抽样、量化、编码的过程，最终转换为数字信号。</p>
-<h1 id="音视频解码"><a href="#音视频解码" class="headerlink" title="音视频解码"></a>音视频解码</h1><p>音视频文件是经过编码、封装而成的。那么反过来，要播放音视频文件，首先得解封装、解码。上一篇博客讨论到音视频编码：走进音视频的世界——音视频编码，我们来个上下呼应，本文与大家探讨一下音视频解码。本质上，是按照既定的解码协议去解析编码内容，也就是编码的逆过程。常见的视频解码器有：H264、H265、VP8、VP9、MPEG4、MJPEG、WMV3、MSMPEG4V3，常见的音频解码器有：MP3、AAC、FLAC、AC3、OPUS、VORBIS、AMR、WMA。</p>
-<h2 id="一、视频解码"><a href="#一、视频解码" class="headerlink" title="一、视频解码"></a>一、视频解码</h2><h3 id="1、pts与dts"><a href="#1、pts与dts" class="headerlink" title="1、pts与dts"></a>1、pts与dts</h3><p>dts：Decode Timestamp，解码时间戳，决定什么时候解码该帧数据。</p>
-<p>pts：Presentation Timestamp，显示时间戳，决定什么时候显示该帧图像。以参考时钟为基准，超前参考时钟则等待，落后（在30ms与500ms之间）参考时钟则快速渲染，十分落后（超过500ms）参考时钟则丢弃该帧。参考时钟分为三种：系统时钟、音频时钟、视频时钟。一般以音频时钟作为参考时钟，因为人类对声音更加敏感，相对图像而言。</p>
-<h3 id="2、关键帧与非关键帧"><a href="#2、关键帧与非关键帧" class="headerlink" title="2、关键帧与非关键帧"></a>2、关键帧与非关键帧</h3><p>关键帧：I帧为关键帧，所以I帧可以直接解码还原出一个图像。</p>
-<p>非关键帧：P帧与B帧为非关键帧，需要依赖关键帧才能解码。而B帧是双向预测帧，还要另外等待下一个I帧或P帧，才可以成功解码出来。B帧压缩率比较高，但是编解码复杂度也相对高。</p>
-<h3 id="3、组包与拼帧"><a href="#3、组包与拼帧" class="headerlink" title="3、组包与拼帧"></a>3、组包与拼帧</h3><p>有些封装格式会把一帧数据拆成若干包，因为关键帧数据可能比较大；RTP封装数据时，也会把一帧拆成若干包，因为MTU规定网络层最大传输单元为1500bytes。因此，在解封装或者接收网络数据包时，需要根据序号排列，把若干个包组成一个完整包，然后再解码。例如FFmpeg读取一帧数据过程，源码在avformat&#x2F;utils.c中，如下图所示(参考雷神博客)：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311192115640.png" alt="img"></p>
-<h3 id="4、特定帧头"><a href="#4、特定帧头" class="headerlink" title="4、特定帧头"></a>4、特定帧头</h3><p>在解析h264&#x2F;h265编码的视频帧时，需要在帧头添加起始码，一般起始码为0x00 0x00 0x01或者0x00 0x00 0x00 0x01。比如mp4封装格式，一般是以h264为<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E8%A7%86%E9%A2%91%E7%BC%96%E7%A0%81&spm=1001.2101.3001.7020">视频编码</a>、aac为音频编码。</p>
-<h2 id="二、音频解码"><a href="#二、音频解码" class="headerlink" title="二、音频解码"></a>二、音频解码</h2><h3 id="1、planar与packed存储"><a href="#1、planar与packed存储" class="headerlink" title="1、planar与packed存储"></a>1、planar与packed存储</h3><p>planar：每个声道数据单独存储。以立体声道为例，L表示左声道，R表示右声道。那么存储格式为LLLLRRRR。在FFmpeg中，第i个声道数据存储在frame-&gt;data[i]。类似视频的像素格式YUV420P，Y、U、V三个分量单独存储，4个Y分量对应一个U分量与一个V分量。</p>
-<p>packed：所有声道数据交错存储。同样地，以立体声道数据为例。那么存储格式为LRLRLRLR。在FFmpeg中，所有声道数据都存储在frame-&gt;data[0]。类似视频的YUV420SP，Y独立存储，UV交错存储，4个Y分量对应一组UV分量。</p>
-<h3 id="2、量化位数"><a href="#2、量化位数" class="headerlink" title="2、量化位数"></a>2、量化位数</h3><p>量化位数：量化位是对模拟音频信号的幅度轴数字化，它决定了模拟信号数字化的动态范围。量化位数越大，质量越好。bitsPerSample，占2bytes，一般为8bits、16bits、32bits、64bits。在WAVE的Format chunk有定义，如下表所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311192115938.png" alt="image-20231119211557915"></p>
-<h3 id="3、采样率"><a href="#3、采样率" class="headerlink" title="3、采样率"></a>3、采样率</h3><p>音频采样率是指录音设备在1秒时间内对声音信号的采样次数，采样频率越高，那么声音的还原越真实自然。常见的采样率有8000Hz、16000Hz、32000Hz、44100Hz、48000Hz。其中44100Hz可达到CD音质标准，也是目前最为常用的采样率。</p>
-<h3 id="4、声道数与声道布局"><a href="#4、声道数与声道布局" class="headerlink" title="4、声道数与声道布局"></a>4、声道数与声道布局</h3><p>常见声道数有：单声道、立体声道、3声道、4声道、5声道、6声道、7声道、8声道。其中3声道以上，又称为立体环绕声道，其中杜比音效就是采用多声道同时输出，实现立体环绕效果。</p>
-<p>声道布局的各个声道描述如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">FC: front center</span><br><span class="line">BC: back center</span><br><span class="line">FL/FR: front left/right</span><br><span class="line">FCL/FCR: front center left/right</span><br><span class="line">FTL/FTR: front top left/right</span><br><span class="line">SL/SR: back surround left/right</span><br><span class="line">BL/BR: back left/right</span><br><span class="line">LFE: low frequency effects</span><br></pre></td></tr></table></figure>
-
-<p>声道数与声道布局关系，如下表所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311192116640.png" alt="image-20231119211617624"></p>
-<h1 id="VPU"><a href="#VPU" class="headerlink" title="VPU"></a>VPU</h1> 
       <!-- reward -->
       
     </div>
