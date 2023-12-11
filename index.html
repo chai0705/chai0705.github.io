@@ -556,7 +556,27 @@
 <p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312112220988.png" alt="img"></p>
 <p>其实现实中，CPU<strong>通用寄存器的速度和主存之间存在着太大的差异</strong>。两者之间的速度大致如下关系：</p>
 <p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312112220339.png" alt="img"></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/bleauchat/article/details/108312753?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522170230386216800225597418%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=170230386216800225597418&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-1-108312753-null-null.142%5Ev96%5Epc_search_result_base2&utm_term=cache&spm=1018.2226.3001.4187">明日再战</a></p>
+<p>​	CPU register的速度一般小于1ns，主存的速度一般是65ns左右。速度差异近百倍。因此，上面举例的3个步骤中，<strong>步骤1和步骤3实际上速度很慢</strong>。当CPU试图从主存中load&#x2F;store 操作时，由于主存的速度限制，CPU不得不等待这漫长的65ns时间。如果我们可以提升主存的速度，那么系统将会获得很大的性能提升。如今的DDR存储设备，动不动就是几个GB，容量很大。如果我们采用更快材料制作更快速度的主存，并且拥有几乎差不多的容量。其成本将会大幅度上升。我们试图提升主存的速度和容量，又期望其成本很低，这就有点难为人了。因此，我们有一种折中的方法，那就是制作一块速度极快但是容量极小的存储设备。那么其成本也不会太高。这块存储设备我们称之为<strong>cache memory</strong>。在硬件上，我们<strong>将cache放置在CPU和主存之间</strong>，作为主存数据的缓存。 <strong>当CPU试图从主存中load&#x2F;store数据的时候， CPU会首先从cache中查找对应地址的数据是否缓存在cache 中。如果其数据缓存在cache中，直接从cache中拿到数据并返回给CPU</strong>。当存在cache的时候，以上程序如何运行的例子的流程将会变成如下：</p>
+<p><img src="https://img-blog.csdnimg.cn/20200830230817392.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JsZWF1Y2hhdA==,size_16,color_FFFFFF,t_70" alt="img"></p>
+<p>CPU和主存之间直接数据传输的方式转变成CPU和cache之间直接数据传输，cache负责和主存之间数据传输。</p>
+<h2 id="多级cache存储结构"><a href="#多级cache存储结构" class="headerlink" title="多级cache存储结构"></a><strong>多级cache存储结构</strong></h2><p>cahe的速度在一定程度上同样影响着系统的性能。一般情况cache的速度可以达到1ns，几乎可以和CPU寄存器速度媲美。但是，这就满足人们对性能的追求了吗？并没有。当cache中没有缓存我们想要的数据的时候，依然需要漫长的等待从主存中load数据。为了进一步提升性能，引入多级cache。前面提到的cache，称之为<strong>L1 cache</strong>（第一级cache）。我们在L1 cache 后面连接<strong>L2 cache</strong>，在L2 cache 和主存之间连接<strong>L3 cache</strong>。等<strong>级越高，速度越慢，容量越大</strong>。但是速度相比较主存而言，依然很快。不同等级cache速度之间关系如下：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312120658651.png" alt="img"></p>
+<p>经过3级cache的缓冲，各级cache和主存之间的速度最萌差也逐级减小。在一个真实的系统上，各级cache之间硬件上是如何关联的呢？我们看下Cortex-A53架构上各级cache之间的硬件抽象框图如下：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312120659396.png" alt="img"></p>
+<p>​	在Cortex-A53架构上，<strong>L1 cache分为单独的instruction cache（ICache）和data cache（DCache），指令和数据分开</strong>。L1 cache是每个CPU私有的，<strong>每个CPU都有一个L1 cache</strong>。一个cluster 内的所有CPU共享一个L2 cache，<strong>L2 cache不区分指令和数据，都可以缓存</strong>。所有cluster之间共享L3 cache，L3 cache通过总线和主存相连</p>
+<p>​	关于cache就学习到这里，如果想要学习更多相关的可以看这个<a target="_blank" rel="noopener" href="https://blog.csdn.net/bleauchat/article/details/108312753?ops_request_misc=%7B%22request_id%22:%22170230386216800225597418%22,%22scm%22:%2220140713.130102334..%22%7D&request_id=170230386216800225597418&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-1-108312753-null-null.142%5Ev96%5Epc_search_result_base2&utm_term=cache&spm=1018.2226.3001.4187">博客</a>.</p>
+<h1 id="4-总线和地址"><a href="#4-总线和地址" class="headerlink" title="4.总线和地址"></a>4.总线和地址</h1><p>​	先来阐述一个疑惑<strong>32位的CPU和64位的CPU这里的32和64指的什么</strong>？</p>
+<p>​	32位CPU：指的是处理器的寻址能力或数据总线宽度为32位。这意味着该处理器可以在单个时钟周期内处理32位（4字节）的数据或地址。它最大支持的物理内存容量通常限制在4GB左右。</p>
+<p>​	64位CPU：指的是处理器的寻址能力或数据总线宽度为64位。这意味着该处理器可以在单个时钟周期内处理64位（8字节）的数据或地址。它的寻址能力更大，可以支持更大的物理内存容量，通常可以支持数TB（1TB &#x3D; 1024GB）的内存。</p>
+<p>​	因此，32位和64位CPU主要区别在于它们的寻址能力和数据总线宽度，这直接影响到它们在处理数据和内存方面的能力和限制。64位CPU相对于32位CPU具有更高的处理能力和更大的内存扩展性。</p>
+<p>​	CPU和内存以及各种外部设备是通过总线连接在一起的，那CPU是如何访问内存或者控制各个外部设备的呢？在CPU内部，存在一系列的寄存器，这些寄存器是没有地址的，只需要寄存器的名称去访问即可，而内存以及各个外部设备就需要地址去访问了。那这里的地址是什么，这里的地址又是如何分配的呢？</p>
+<p>​	地址的本质实际上就是由CPU管教发出的一组地址控制信号，因为这些信号是由CPU管教直接发出的，因此也被称之为物理地址。在带有MMU的CPU平台下 ，程序的运行一般使用的是虚拟地址，MMU会把虚拟地址转换为物理地址，然后通过CPU的管教发送出去。</p>
+<p>​	所谓总线（Bus），是指计算机设备和设备之间传输信息的公共数据通道。总线是连接计算机硬件系统内多种设备的通信线路，它的一个重要特征是由总线上的所有设备共享，可以将计算机系统内的多种设备连接到总线上。如果是某两个设备或设备之间专用的信号连线，就不能称之为总线。</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312120727706.png" alt="9bb1a43e2e0140128d3e1e35f1bf0096.png"></p>
+<p>​	一些总线标准：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312120726170.png" alt="770540885ce04b5a83ef5b49f5fc9546.png"></p>
+<h1 id="5-指令集和微架构"><a href="#5-指令集和微架构" class="headerlink" title="5.指令集和微架构"></a>5.指令集和微架构</h1><p>​	在第一节提到过，任何一个复杂的程序都可以分解位&#x3D;为有限个基本指令的组合，而这些是在CPU设计的时候就已经确定了的，他的内部只允许对应指令的完成，而不同架构的处理器，他们的指令是不一样的，哪怕是同样的指令，他们的内部电路实现也是不一样的，所以不同架构的可执行程序是不能混用的。ARM架构的处理器只能运行ARM架构的程序，X86架构的处理器只允许运行X86架构的程序。上面提到的这些指令的集合就被称之为指令集。</p>
+<p>​	在芯片工程师设计CPU的时候，要根据指令集中规定的格式指令作为标准，实现那不同的译码电路来支持指令集各种指令的运行（&#x3D;&#x3D;这里你不用管如何译码的，这里目前不需要深究&#x3D;&#x3D;），指令集的最终实现就是微架构，也就是CPU内部的各种译码和执行电路。</p>
  
       <!-- reward -->
       
