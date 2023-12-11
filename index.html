@@ -454,18 +454,109 @@
     <div class="article-entry" itemprop="articleBody">
        
   <p>​	先说一下前提条件，在五年前的大一下学期，我第一次系统的学习了C语言，但那也仅仅只是一个初步的入门，并且在学校中的学习呀，大家懂的都懂，没有深究、没有思考、一切呀都是为了考试，然而如今的我不一样了，相对而言，我更喜欢研究研究研究这些，或者在小说的世界里躲避一下生活，这些都是类似的，只不过研究研究这些更让我有成就感，晚上就慢慢的来吧。</p>
-<h1 id="1-CPU的工作原理"><a href="#1-CPU的工作原理" class="headerlink" title="1.CPU的工作原理"></a>1.CPU的工作原理</h1><p>​	前面的关于二极管、三极管以及cmos管的原理这里就不深究了，等我以后再更深层次的学习的时候再说，现在就直接从CPU直接的工作原理开始。</p>
-<p>​	计算机的核心&#x3D;&#x3D;任何复杂的运算都可以分解为有限个的基本指令运算&#x3D;&#x3D;。这句话其实我好久好久之前就听说过了，但其实呀一直不解其意,然后看看ai的解释：任何复杂的运算都可以分解为有限个基本指令的运算。这个原理被称为图灵完备性，它表明只要有足够的基本指令，就可以执行任何可计算的任务。</p>
+<h1 id="1-计算机理论基石"><a href="#1-计算机理论基石" class="headerlink" title="1.计算机理论基石"></a>1.计算机理论基石</h1><p>​	前面的关于二极管、三极管以及cmos管的原理这里就不深究了，等我以后再更深层次的学习的时候再说，现在就直接从CPU直接的工作原理开始。</p>
+<p>​	计算机的核心：&#x3D;&#x3D;任何复杂的运算都可以分解为有限个的基本指令运算&#x3D;&#x3D;。这句话其实我好久好久之前就听说过了，但其实呀一直不解其意这个原理被称为图灵完备性，它表明只要有足够的基本指令，就可以执行任何可计算的任务。</p>
 <p>​	在现代计算机上，也是采用这个原理。计算机的中央处理器（CPU）通过执行一系列的基本指令来完成各种复杂的任务。这些基本指令包括算术操作（如加法、减法、乘法）、逻辑操作（如与、或、非）、条件分支（如if语句）和循环（如for循环）等。</p>
 <p>​	下面是一个简单的例子，展示了如何使用基本指令来执行一个较复杂的任务，即计算一个整数的阶乘：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">factorial</span>(<span class="params">n</span>):</span><br><span class="line">    result = <span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, n+<span class="number">1</span>):</span><br><span class="line">        result *= i</span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(factorial(<span class="number">5</span>))  <span class="comment"># 输出 120</span></span><br></pre></td></tr></table></figure>
 
-<p>​	在这个例子中，我们使用了基本的乘法和循环指令来计算给定整数的阶乘。通过多次执行乘法操作和循环迭代，我们可以实现一个复杂的计算任务。即使是电脑上的按键操作和视频播放这样的高级任务，也可以通过分解为基本指令运算来实现。</p>
+<p>​	在这个例子中，我们使用了基本的乘法和循环指令来计算给定整数的阶乘。通过多次执行乘法操作和循环迭代，实现了一个复杂的计算任务。</p>
+<p>​	即使是电脑上的按键操作和视频播放这样的高级任务，也可以通过分解为基本指令运算来实现。</p>
 <p>​	例如，当你在电脑上按下一个键时，操作系统会通过底层的指令来检测按键的状态。这可能涉及到读取硬件设备的输入状态、处理中断信号和执行相应的操作。这些底层指令可能包括读取寄存器、执行条件分支、更新内存等等。通过组合这些基本指令，操作系统可以捕捉到按键事件，并触发相应的操作，如打开应用程序、输入字符等。</p>
 <p>​	类似地，视频播放也可以通过基本指令来实现。当你打开一个视频文件时，视频播放器会解码视频数据、渲染图像、播放音频等。这些操作涉及到复杂的算法和数据处理，但它们可以分解为基本指令的执行。例如，视频解码可能包括读取文件、解析视频编码、处理图像数据、渲染图像等。通过执行这些基本指令的组合，视频播放器可以实现流畅的视频播放。</p>
 <p>​	因此，无论是按键操作还是视频播放，都可以通过将复杂的任务分解为基本指令运算来实现，并且现代计算机提供了这些基本指令的支持。</p>
 <p>​	&#x3D;&#x3D;电脑上的一切操作都可以分解为上面所说的算术操作、逻辑操作、条件分支等一系列基本指令&#x3D;&#x3D;</p>
 <p>​	当然你要懂得的肯定不止上面这些，还有一些跟深层次的分解，就比如复杂的操作是如何被分解为一个个基本指令的、CPU是如何识别这些基本指令的、CPU如何确定这条指令是否运行完成，以及这些基本指令是如何一条条的排序逐次运行的呢？</p>
+<p>​	指令集：CPU的加减乘除、与或非、load、store等基本指令一般称之为指令集，任何复杂的运算都可以分解为指令集中的基本指令</p>
+<p>​	程序：这种由基本指令组成的不同组合就称之程序。</p>
+<p>​	汇编语言：为了变成方便，我们给每个二进制的指令起了一个别名，也可以称之为助记符，也就是我们常说的汇编指令。</p>
+<p>​	高级语言：虽然汇编语言的出现给人们带来了极大的便利，人们不需要面对不懂含义的101010，但是当工程更为复杂的时候，汇编的维护也会变得极为艰难，所以为了迎合人们的开发和阅读，人们在汇编的基础上做了一系列的高级语言，就比如python、C、c++和java。	</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312112059025.png" alt="image-20231211205948001"></p>
+<p>​	然后用一个最简单的C语言程序和C++程序来验证</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> <span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="number">2</span> </span><br><span class="line"><span class="number">3</span> <span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">4 &#123;</span><br><span class="line"><span class="number">5</span>     <span class="built_in">printf</span>(<span class="string">&quot;hello world \r\n&quot;</span>);           </span><br><span class="line"><span class="number">6</span>     <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"><span class="number">7</span> &#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;hello world&quot;</span> &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;                                    </span><br></pre></td></tr></table></figure>
+
+<p>​	上面是两个最简单的C语言和C++语言的helloworld编程示例，而且最终的实现效果相同都是打印出来helloworld，如下所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312112103692.png" alt="image-20231211210339665"></p>
+<p>​	这个a.out是编译过后的可执行文件，中间的编译过程又是怎么样的呢？</p>
+<p>​	就像上面图示绘制的那样，高级语言都有对应的编译器，C语言又gcc,C++有g++，如果只是通过下面的命令进行编译的话只会得到最后的可执行文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gcc test.c</span><br><span class="line">g++ test.cpp</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312112133800.png" alt="image-20231211213317748"></p>
+<p>​	当然因为上面两个命令生成的都是a.out所以就覆盖了，也可以通过-o命令进行执行生成的可执行文件名称</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gcc test.c -o test_c</span><br><span class="line">g++ test.cpp -o test_c++</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312112134585.png" alt="image-20231211213439536"></p>
+<p>一个高级语言编译成可执行文件，更详细的过程为预处理、编译、汇编、链接</p>
+<p>(1)预处理指的是将头文件、函数、恒定义等都展开，可以通过-E参数来实现</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gcc -E test.c</span><br><span class="line">g++ -E test.cpp</span><br></pre></td></tr></table></figure>
+
+<p>(2)编译指的是通过编译器将高级语言编译为汇编语言，可以通过-S参数来完成</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gcc -S test.c -o test_c.s</span><br><span class="line">g++ -S test.cpp -o test_cpp.s</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312112140031.png" alt="image-20231211214028969"></p>
+<p>以s结尾的就是汇编文件，现在对于汇编语言的理解可以不用过深，以后再说。</p>
+<p>(3)汇编指的是将汇编程序通过汇编器编译为二进制的.o文件，可以通过参数-c来完成。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gcc -c test.c -o test_c.o</span><br><span class="line">g++ -c test.cpp -o test_cpp.o</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312112144517.png" alt="image-20231211214409461"></p>
+<p>(4)链接，可以将多个.o文件链接到一起从而生成可执行文件，没有命令，直接gcc编译即可。</p>
+<p>​	&#x3D;&#x3D;我这里有个疑问，我这个程序是最简单那的hello world，也没有多个文件，那他未什么要进行链接呢，我这个地方不是很懂，希望下面的学习能解答我这个疑惑&#x3D;&#x3D;</p>
+<h1 id="2-CPU的频率指的是什么"><a href="#2-CPU的频率指的是什么" class="headerlink" title="2.CPU的频率指的是什么"></a>2.CPU的频率指的是什么</h1><p>​	我先说一下，这个我确实是不知道，我学了这么多年的计算机，我第一台电脑是18年大学，我爸给买的戴尔G3，那时候是一个8300的CPU，后来电脑烧了，我爸又给我买了一个洋垃圾台式机，CPU是2690,虽然现在知道了他是洋垃圾，但之前是不知道的呀，其实就也还好吧，每一段时间都有一段时间的感悟，再后来我工作了，自己花实习的一个月工资高了一台小主机，5900hx的CPU，一年之后没有笔记本，又搞了一台联想的笔记本，笔记本的CPU是6800hx，总体跟我的5900hx差不多，再后来不满足需求了，又因为我的4070ti显卡一直在闲置，我也不想卖掉，所以两个月前又买了一个13900kf的无核显主机，买了这么多电脑，终于是对电脑有了一些基本的认识，但是对于CPU的频率依然是一知半解，趁着这个机会学习一下。</p>
+<p>​	<strong>频率的概念</strong></p>
+<p>​	在CPU这个复杂的数字系统中，为了确保内部所有硬件单元能够协同快速工作，CPU架构工程师们往往会设计一套时钟信号与系统同步进行操作。时钟信号是由一系列的脉冲信号构成，并且总是按一定电压幅度、时间间隔连续发出的方波信号，它周期性地在0与1之间往复变化。在第一脉冲和第二个脉冲之间的时间间隔称之为周期，它的单位是秒（s）。但单位时间1s内所产生的脉冲个数称之为频率，频率的最基本计量单位就是赫兹Hz。</p>
+<p>​	以Intel Core i3-8350k为例，它的默频是4GHz，意味着它内部时钟频率为4GHz，一秒钟可以产生40亿个脉冲信号，换句话说每一个脉冲信号仅仅用时0.25ns（时钟周期）。这是多么令人震惊的时钟，可以想象到CPU内部结构是多么精妙，可以处理如此之短的信号，整套系统协同有序地运行，所以才会说CPU是全人类智慧的结晶，极大地提升了我们的科技水平进步。</p>
+<p>​	时钟周期作为CPU操作的最小时间单位，内部的所有操作都是以这个时钟周期作为基准。一般来说CPU都是以时钟脉冲的上升沿作为执行指令的基准，频率越高，CPU执行的指令数越多，工作速度越快。</p>
+<p>​	那么CPU频率是由什么决定的呢？其实这个是一个非常复杂的问题，因为决定这个频率是一个系统学的东西，影响到频率高度的因素非常之多，诸如CPU的架构、流水线设计、内部寄存器设计、支持的指令甚至是功耗、温度这些物理因素，所以说CPU出厂频率就是综合多种考虑，以木桶效应下的最小值作为CPU的最高频率。</p>
+<p>​	G是十的9次方也就是十亿，M是10的6次方也就是百万，K是10的3次方，</p>
+<p><strong>外频</strong></p>
+<p>​	CPU在诞生后不久，各大CPU巨头为了追求高性能，开启了频率大战（有没有效果这个我们先不提），但是这样一来，CPU虽然跑得更换了（主频更高），但是外部的主板芯片组、内存、外部接口（PCIe、Sata）可还是处于旧有标准，而且这些设备的运行频率早就固定下来了，并且远低于CPU工作频率。</p>
+<p>​	这样一来CPU就无法很好与之交流，Intel就机智地提出了倍频的概念（下面讲述），并且提出了影响至今的一个CPU主频计算公式：主频&#x3D;外频 X 倍频，外频的提出可以让主板外部的设备工作在较低的频率下，并且还能正确地CPU进行交流。</p>
+<p>​	但总是有很多网友将前端总线频率和外频混为一谈，其实他们不太一样。在以前有北桥的时代，前端总线是CPU总线接口单元和北桥芯片之间的数据交换通道，曾经在AMD雷鸟系列、Intel奔腾 4处理器以前，前端总线与外频是一致的，但后来有了四倍数据传输率技术或者是八倍数据传输率技术，前端总线频率就极大地提高了。</p>
+<p>​	举个例子，如果一个处理器的频率是2GHz，外频为100MHz，使用四倍数据传输率技术时，前端总线频率就变成400MHz；如果是八倍，那么就是800MHz。前端总线频率越大, 代表着CPU与北桥芯片之间的数据传输能力越大, 更能充分发挥出CPU的功能。<br>目前处理器的默认外频基本上都是100MHz</p>
+<p><strong>倍频</strong></p>
+<p>​	目前的CPU设计的外频都相当低，只有100MHz，CPU要获得更快运算速度，我们就需要获得一个超高速的频率来支撑更快运算速度。而CPU通常就是在内部设计有一个锁相环频率发生器，对于输入的时钟信号进行分频处理，按照一定比例提高输入的外频频率，从而得到CPU的实际工作频率，这个比例就称之为倍频系数（简称倍频）。</p>
+<p>​	利用倍频技术, 较为完美地解决了CPU和内存等数据中转站的异步运行问题。为CPU后来向更高频率方向发展打下了扎实的基础。 </p>
+<p>​	倍频系数是指CPU主频与外频之间的相对比例关系。在相同的外频下，倍频越高CPU的频率也越高。但实际上，在相同外频的前提下，高倍频的CPU本身意义并不大。这是因为CPU与系统之间数据传输速度是有限的，一味追求高主频而得到高倍频的CPU就会出现明显的“瓶颈”效应－CPU从系统中得到数据的极限速度不能够满足CPU运算的速度。</p>
+<p>​	我有个问题，我的13900KF的CPU频率是5.8GHZ ,我的内存频率是6000M的DDR5内存，这么算的话我的内存比CPU频率高呀，但理论来说不是呀，那问题出在哪？</p>
+<p>​	时间的单位是纳秒（ns，十亿分之一秒），毫秒（ms，千分之一秒），和秒（s）。吞吐量的单位是兆字节（MB）和千兆字节（GB）。让我们先从CPU和内存开始，下图是北桥部分：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312112227283.webp" alt="img"></p>
+<p>​	第一个令人惊叹的事实是：CPU快得离谱。在Core 2 3.0GHz上，大部分简单指令的执行只需要一个时钟周期，也就是<strong>1&#x2F;3纳秒</strong>。即使是真空中传播的光，在这段时间内也只能走10厘米（约4英寸）。把上述事实记在心中是有好处的。当你要对程序做优化的时候就会想到，执行指令的开销对于当今的CPU而言是多么的微不足道。</p>
+<p>​	当CPU运转起来以后，它便会通过L1 cache和L2 cache对系统中的主存进行读写访问。cache使用的是静态存储器(SRAM)。相对于系统主存中使用的动态存储器（DRAM），cache读写速度快得多、造价也高昂得多。cache一般被放置在CPU芯片的内部，加之使用昂贵高速的存储器，使其给CPU带来的延迟非常低。在指令层次上的优化（instruction-level optimization），其效果是与优化后代码的大小息息相关。由于使用了高速缓存技术（caching），那些能够整体放入L1&#x2F;L2 cache中的代码，和那些在运行时需要不断调入&#x2F;调出（marshall into&#x2F;out of）cache的代码，在性能上会产生非常明显的差异。</p>
+<p>​	正常情况下，当CPU操作一块内存区域时，其中的信息要么已经保存在L1&#x2F;L2 cache，要么就需要将之从系统主存中调入cache，然后再处理。如果是后一种情况，我们就碰到了第一个瓶颈，一个大约250个时钟周期的延迟。在此期间如果CPU没有其他事情要做，则往往是处在停机状态的（stall）。为了给大家一个直观的印象，我们把CPU的一个时钟周期看作一秒。那么，从L1 cache读取信息就好像是拿起桌上的一张草稿纸（3秒）；从L2 cache读取信息则是从身边的书架上取出一本书（14秒）；而从主存中读取信息则相当于走到办公楼下去买个零食（4分钟）。</p>
+<p>​	主存操作的准确延迟是不固定的，与具体的应用以及其他许多因素有关。比如，它依赖于列选通延迟(CAS)以及内存条的型号，它还依赖于CPU指令预取的成功率。指令预取可以根据当前执行的代码来猜测主存中哪些部分即将被使用，从而提前将这些信息载入cache。</p>
+<p>看看L1&#x2F;L2 cache的性能，再对比主存，就会发现：配置更大的cache或者编写能更好的利用cache的应用程序，会使系统的性能得到多么显著的提高。</p>
+<p>​	人们通常把CPU与内存之间的瓶颈叫做<strong>冯·诺依曼瓶颈（von Neumann bottleneck）</strong>。当今系统的前端总线带宽约为10GB&#x2F;s，看起来很令人满意。在这个速度下，你可以在1秒内从内存中读取8GB的信息，或者10纳秒内读取100字 节。遗憾的是，这个吞吐量只是理论最大值（图中其他数据为实际值），而且是根本不可能达到的，因为主存控制电路会引入延迟。在做内存访问时，会遇到很多零 散的等待周期。比如电平协议要求，在选通一行、选通一列、取到可靠的数据之前，需要有一定的信号稳定时间。由于主存中使用电容来存储信息，为了防止因自然 放电而导致的信息丢失，就需要周期性的刷新它所存储的内容，这也带来额外的等待时间。某些连续的内存访问方式可能会比较高效，但仍然具有延时。而那些随机 的内存访问则消耗更多时间。所以延迟是不可避免的。</p>
+<p>图中下方的南桥连接了很多其他总线（如：PCI-E, USB）和外围设备：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312112229804.webp" alt="img"></p>
+<p>​	令人沮丧的是，南桥管理了一些反应相当迟钝的设备，比如硬盘。就算是缓慢的系统主存，和硬盘相比也可谓速度如飞了。继续拿办公室做比喻，等待硬盘寻道的时间相当于离开办公大楼并开始长达<strong>一年零三个月</strong>的环球旅行。这就解释了为何电脑的大部分工作都受制于磁盘I&#x2F;O，以及为何数据库的性能在内存缓冲区被耗尽后会陡然下降。同时也解释了为何充足的RAM（用于缓冲）和高速的磁盘驱动器对系统的整体性能如此重要。</p>
+<p>虽然磁盘的”连续”存取速度确实可以在实际使用中达到，但这并非故事的全部。真正令人头疼的瓶颈在于寻道操作，也就是在磁盘表面移动读写磁头到正确的磁道上，然后再等待磁盘旋转到正确的位置上，以便读取指定扇区内的信息。RPM（每分钟绕转次数）用来指示磁盘的旋转速度：RPM越大，耽误在寻道上的时间就越少，所以越高的RPM意味着越快的磁盘。</p>
+<p>当 磁盘驱动器读取一个大的、连续存储的文件时会达到更高的持续读取速度，因为省去了寻道的时间。文件系统的碎片整理器就是用来把文件信息重组在连续的数据块 中，通过尽可能减少寻道来提高数据吞吐量。然而，说到计算机实际使用时的感受，磁盘的连续存取速度就不那么重要了，反而应该关注驱动器在单位时间内可以完 成的寻道和随机I&#x2F;O操作的次数。对此，固态硬盘可以成为一个很棒的选择。</p>
+<p>硬盘的cache也有助于改进性能。虽然16MB的cache只能覆盖整个磁盘容量的0.002%，可别看cache只有这么一点大，其效果十分明显。它可以把一组零散的写入操作合成一个，也就是使磁盘能够控制写入操作的顺序，从而减少寻道的次数。同样的，为了提高效率，一系列读取操作也可以被重组，而且操作系统和驱动器固件(firmware)都会参与到这类优化中来。</p>
+<p>最后，图中还列出了网络和其他总线的实际数据吞吐量。火线(fireware)仅供参考，Intel X48芯片组并不直接支持火线。我们可以把Internet看作是计算机之间的总线。去访问那些速度很快的网站（比如<a href="https://link.zhihu.com/?target=http://google.com">http://google.com</a>），延迟大约45毫秒，与硬盘驱动器带来的延迟相当。事实上，尽管硬盘比内存慢了5个数量级，它的速度与Internet是在同一数量级上的。目前，一般家用网络的带宽还是要落后于硬盘连续读取速度的，但”网络就是计算机”这句话可谓名符其实。如果将来Internet比硬盘还快了，那会是个什么景象呢？</p>
+<p>&#x3D;&#x3D;内存频率（6000 MHz）指的是内存模块的时钟速度，它表示内存模块每秒钟能够完成的数据传输次数。它通常用于衡量内存模块的性能，较高的内存频率可以提供更快的数据传输速度。&#x3D;&#x3D;</p>
+<p>&#x3D;&#x3D;CPU频率（5.8 GHz）指的是中央处理器（CPU）的时钟速度，它表示CPU每秒钟执行指令的次数。CPU频率是衡量CPU性能的指标之一，较高的CPU频率通常表示更高的计算能力和处理速度。&#x3D;&#x3D;</p>
+<h1 id="3-cache"><a href="#3-cache" class="headerlink" title="3.cache"></a>3.cache</h1><p>​	cache是sram是静态随机存储器，而内存是sram是动态随机存储器，静态是比动态速度更快的，但是呢，更快意味着更贵。我之前一直对cache了解的不多，知道一级cache、二级cache、三级cache，但并不明白他们的作用，如今学习到这里了，就认识一下。找了一段cdsn大佬的讲解，很生动，这里记录一下。</p>
+<p>对于没有接触过底层技术的朋友来说，或许从未听说过cache。毕竟cache的存在对程序员来说是透明的。在接触cache之前，先为你准备段code分析：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> arr[<span class="number">10</span>][<span class="number">128</span>];</span><br><span class="line"> </span><br><span class="line"><span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++)</span><br><span class="line">        <span class="keyword">for</span> (j = <span class="number">0</span>; j &lt; <span class="number">128</span>; j++)</span><br><span class="line">                arr[i][j] = <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+
+<p>如果你曾经学习过C&#x2F;C++语言，这段code自然不会陌生。如此简单的将<code>arr</code><a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E6%95%B0%E7%BB%84&spm=1001.2101.3001.7020">数组</a>所有元素置1。 你有没有想过这段code还有下面的一种写法：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> arr[<span class="number">10</span>][<span class="number">128</span>];</span><br><span class="line"> </span><br><span class="line"><span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">128</span>; i++)</span><br><span class="line">        <span class="keyword">for</span> (j = <span class="number">0</span>; j &lt; <span class="number">10</span>; j++)</span><br><span class="line">                arr[j][i] = <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+
+<p>​	功能完全一样，但是我们一直在重复着第一种写法（或许很多的书中也是建议这么编码），你是否想过这其中的缘由？文章的主角是cache，所以你一定猜到了答案。那么cache是如何影响这2段code的呢？</p>
+<h2 id="为什么需要cache"><a href="#为什么需要cache" class="headerlink" title="为什么需要cache"></a>为什么需要cache</h2><p>在思考为什么需要cache之前，我们首先先来思考另一个问题：我们的程序是如何运行起来的？</p>
+<p>我们应该知道程序是运行在 <strong>RAM</strong>之中，RAM 就是我们常说的DDR（例如： <strong>DDR3、DDR4</strong>等）。我们称之为<strong>main memory（主存）</strong>。当我们需要运行一个进程的时候，首先会从<strong>磁盘设备</strong>（例如，eMMC、UFS、SSD等）中将可执行程序load到主存中，然后开始执行。在CPU内部存在一堆的<strong>通用寄存器（register）</strong>。如果CPU需要将一个变量（假设地址是A）加1，一般分为以下3个步骤：</p>
+<ol>
+<li>CPU 从主存中读取地址A的数据到内部通用寄存器 x0（ARM64架构的通用寄存器之一）</li>
+<li>通用寄存器 x0 加1</li>
+<li>CPU 将通用寄存器 x0 的值写入<strong>主存</strong></li>
+</ol>
+<p>我们将这个过程可以表示如下：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312112220988.png" alt="img"></p>
+<p>其实现实中，CPU<strong>通用寄存器的速度和主存之间存在着太大的差异</strong>。两者之间的速度大致如下关系：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312112220339.png" alt="img"></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/bleauchat/article/details/108312753?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522170230386216800225597418%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=170230386216800225597418&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-1-108312753-null-null.142%5Ev96%5Epc_search_result_base2&utm_term=cache&spm=1018.2226.3001.4187">明日再战</a></p>
  
       <!-- reward -->
       
