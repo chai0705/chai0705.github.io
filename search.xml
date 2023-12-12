@@ -349,6 +349,39 @@
 <p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312122209612.png" alt="image-20231212220932369"></p>
 <p>使用readelf -r可以获得该重定位目标文件的重定位表，如下所示：</p>
 <p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312122214971.png" alt="image-20231212221407848"></p>
+<h1 id="8-静态链接库"><a href="#8-静态链接库" class="headerlink" title="8.静态链接库"></a>8.静态链接库</h1><p>​	仍旧先说一下我的理解和看法，无论是静态链接库还是动态链接库，他们实际上就是可重定位的目标文件，即汇编过程之后生成的文件，当然也不对，可以是由一个目标文件生成的库文件也可以是由好几个目标文件生成库文件。很多时候人们会将函数的实现给封装起来，我们只需要调用相应的函数即可，而很多不开源的项目，也会提供封装好的库，让人们只需要使用头文件中定义的相应函数即可。</p>
+<p>​	静态库会在编译程序的时候将引用的函数代码或者变量链接到可执行文件里，和在可执行程序组装到一起，而动态库不会和可执行文件组装到一起，而是在程序运行的时候加载到内存参与链接。</p>
+<p>​	所以静态库的本质就是一个可重定位的目标文件，与上面经过汇编编译出来的.o文件没什么不同，只是多了一个归档的过程。静态库的制作使用ar归档命令来实现，ar是一个用于创建和管理静态库（Archive）的命令行工具。它的名称是”ar”，代表”archive”，可以在Unix和Unix-like系统上使用。ar命令可以用于创建静态库、向静态库中添加对象文件、从静态库中提取对象文件以及执行其他与静态库相关的操作。下面是对ar命令的一些常见用法的详细解释：</p>
+<p>1.创建静态库</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ar -rcs libexample.a file1.o file2.o file3.o</span><br></pre></td></tr></table></figure>
+
+<p>这个命令将创建一个名为”libexample.a”的静态库，并将文件”file1.o”、”file2.o”和”file3.o”添加到该库中。选项”r”表示替换库中的现有文件，选项”c”表示创建库，选项”s”用于在库中添加索引信息。</p>
+<ul>
+<li><code>-r</code>：将指定的文件插入或替换到归档文件中。</li>
+<li><code>-s</code>：创建索引表。</li>
+<li><code>-c</code>:   不在必须创建库的时候给出警告</li>
+</ul>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312130724504.png"></p>
+<p>2.向静态库中添加对象文件</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ar -r libexample.a newfile.o</span><br></pre></td></tr></table></figure>
+
+<p>这个命令将向现有的静态库”libexample.a”中添加新的对象文件”newfile.o”。选项”r”表示替换库中的现有文件。</p>
+<p>3.从静态库中提取对象文件</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ar -x libexample.a newfile.o</span><br></pre></td></tr></table></figure>
+
+<p>这个命令将从静态库”libexample.a”中提取出对象文件”file1.o”。选项”x”表示提取</p>
+<p>4.列出静态库中的对象文件</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ar -t libexample.a</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312130727529.png" alt="image-20231213072726515"></p>
+<p>5.替换静态库中的对象文件</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ar -d libexample.a file1.o</span><br><span class="line">ar -r libexample.a newfile.o</span><br></pre></td></tr></table></figure>
+
+<p>这两个命令分别用于从静态库中删除对象文件”file1.o”和向静态库中添加新的对象文件”newfile.o”。选项”d”表示删除。</p>
+<p>​	编译器是以源文件为单位进行程序编译的，链接器在连接的过程中逐个对目标文件进行分解和组装，但这样很容易产生一个问题，如果一个源文件中我们定义了一百个函数，但是只使用了其中的一个，链接器在连接的过程中会将这一百个函数都组装到可执行文件中，这会让最终生成的可执行文件大大增加，那要如何解决这个问题呢，只需要将每一个函数单独使用一个源文件来实现，最终将多个目标文件打包即可。而我们最常用的libc库就是这样实现的，可以通过上面学习的ar -t命令来查看对象文件列表</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312130742069.png" alt="image-20231213074253042"></p>
+<p>​	可以看到libc将每个函数都搞成了一个目标文件，从而解决了上面提到的问题。这时候又出现了另一个问题，就比如我们经常用到printf进行字段的打印，可能很多个程序都调用了它，链接器在链接的时候就要将多个printf指令添加到多个可执行文件中，在一个多任务的环境中，多个进程并发运行的时候，你会发现内存中有大量重复的printf指令代码，从而浪费了很多的资源，那这个问题要如何解决呢，聪明的工程师们想出来了动态库的方法。</p>
+<p>​	&#x3D;&#x3D;今天就学习到这个地方了，其实上面的这些东西你都不配说难，因为已经有先人替你踩过坑了，也有更厉害的先人提出来了这些理论，并且用到了实践中，计算机当中的一切都不再属于新鲜事，我们已经站在了巨人的肩膀上，没有理由后人比前人笨，也没有道理学不会，学不会只能证明你没有用心&#x3D;&#x3D;</p>
 ]]></content>
       <categories>
         <category>学习</category>
