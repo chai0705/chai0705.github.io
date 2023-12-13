@@ -1,516 +1,191 @@
-<!DOCTYPE html>
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="robots" content="noindex"><title>分类: 生活 - 热爱学习的未来酱</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="热爱学习的未来酱"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="热爱学习的未来酱"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="永远年轻，永远热泪盈眶"><meta property="og:type" content="website"><meta property="og:title" content="热爱学习的未来酱"><meta property="og:url" content="http://example.com/"><meta property="og:site_name" content="热爱学习的未来酱"><meta property="og:description" content="永远年轻，永远热泪盈眶"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="http://example.com/img/og_image.png"><meta property="article:author" content="chai"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://example.com/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://example.com"},"headline":"热爱学习的未来酱","image":["http://example.com/img/og_image.png"],"author":{"@type":"Person","name":"chai"},"publisher":{"@type":"Organization","name":"热爱学习的未来酱","logo":{"@type":"ImageObject"}},"description":"永远年轻，永远热泪盈眶"}</script><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
 
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
 
-<html lang="zh-CN">
-  
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
 
-    <head>
-      <meta charset="utf-8" />
-        
-      <meta name="description" content="永远年轻，永远热泪盈眶" />
-      
-      <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1, maximum-scale=1"
-      />
-      <title>生活 |  热爱学习的未来酱</title>
-  <meta name="generator" content="hexo-theme-ayer">
-      
-      <link rel="shortcut icon" href="/favicon.ico" />
-       
-<link rel="stylesheet" href="/dist/main.css">
-
-      
-<link rel="stylesheet" href="/css/fonts/remixicon.css">
-
-      
-<link rel="stylesheet" href="/css/custom.css">
- 
-      <script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script>
-       
- 
-
-      <link
-        rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
-      />
-      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
-
-      <!-- mermaid -->
-      
-      <style>
-        .swal2-styled.swal2-confirm {
-          font-size: 1.6rem;
-        }
-      </style>
-    <link rel="alternate" href="/atom.xml" title="热爱学习的未来酱" type="application/atom+xml">
-</head>
-  </html>
-</html>
-
-
-<body>
-  <div id="app">
-    
-      
-    <main class="content on">
-      <section class="outer">
-  
-  
-  <article class="articles">
-    
-    
-    <h1 class="page-type-title">生活</h1>
-    
-    
-  
-  
-  
-  
-  
-  
-  <div class="archives-wrap">
-    <div class="archive-year-wrap">
-      <a href="/archives/2024" class="archive-year">2024</a>
-    </div>
-    <div class="archives">
-      
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2024/12/31/%E8%A7%84%E7%9F%A9/" class="archive-article-date">
-  <time datetime="2024-12-31T14:15:56.000Z" itemprop="datePublished">12/31</time>
-</a>
-       
-<h2 itemprop="name">
-  <a class="archive-article-title" href="/2024/12/31/%E8%A7%84%E7%9F%A9/"
-    >规矩</a> 
-</h2>
- 
-
-    </header>
-    
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a>
-  </div>
-
-    
-    
-  </div>
-</article>
-      
-  
-  
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2024/12/31/%E5%8F%8D%E6%80%9D/" class="archive-article-date">
-  <time datetime="2024-12-31T13:26:56.000Z" itemprop="datePublished">12/31</time>
-</a>
-       
-<h2 itemprop="name">
-  <a class="archive-article-title" href="/2024/12/31/%E5%8F%8D%E6%80%9D/"
-    >反思</a> 
-</h2>
- 
-
-    </header>
-    
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a>
-  </div>
-
-    
-    
-  </div>
-</article>
-      
-  
-  
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2024/12/11/24%20%E8%AF%BB%E5%90%8E%E6%84%9F/" class="archive-article-date">
-  <time datetime="2024-12-10T22:50:19.000Z" itemprop="datePublished">12/11</time>
-</a>
-       
-<h2 itemprop="name">
-  <a class="archive-article-title" href="/2024/12/11/24%20%E8%AF%BB%E5%90%8E%E6%84%9F/"
-    >读后感</a> 
-</h2>
- 
-
-    </header>
-    
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a>
-  </div>
-
-    
-    
-  </div>
-</article>
-      
-      
-    </div>
-  </div>
-  
-  
-
-  
-</section>
-      <footer class="footer">
-  <div class="outer">
-    <ul>
-      <li>
-        Copyrights &copy;
-        2015-2023
-        <i class="ri-heart-fill heart_icon"></i> chai
-      </li>
-    </ul>
-    <ul>
-      <li>
-        
-      </li>
-    </ul>
-    <ul>
-      <li>
-        
-      </li>
-    </ul>
-    <ul>
-      
-    </ul>
-    <ul>
-      
-    </ul>
-    <ul>
-      <li>
-        <!-- cnzz统计 -->
-        
-        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
-        
-      </li>
-    </ul>
-  </div>
-</footer>    
-    </main>
-    <div class="float_btns">
-      <div class="totop" id="totop">
-  <i class="ri-arrow-up-line"></i>
-</div>
-
-<div class="todark" id="todark">
-  <i class="ri-moon-line"></i>
-</div>
-
-    </div>
-    <aside class="sidebar on">
-      <button class="navbar-toggle"></button>
-<nav class="navbar">
-  
-  <div class="logo">
-    <a href="/"><img src="/images/ayer-side.svg" alt="热爱学习的未来酱"></a>
-  </div>
-  
-  <ul class="nav nav-main">
-    
-    <li class="nav-item">
-      <a class="nav-item-link" href="/">主页</a>
-    </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link" href="/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE">瑞芯微</a>
-    </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link" href="/categories/%E5%AD%A6%E4%B9%A0">学习</a>
-    </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link" href="/categories/%E7%94%9F%E6%B4%BB">生活</a>
-    </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link" href="/archives">归档</a>
-    </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link" href="/categories">分类</a>
-    </li>
-    
-  </ul>
-</nav>
-<nav class="navbar navbar-bottom">
-  <ul class="nav">
-    <li class="nav-item">
-      
-      <a class="nav-item-link nav-item-search"  title="搜索">
-        <i class="ri-search-line"></i>
-      </a>
-      
-      
-      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
-        <i class="ri-rss-line"></i>
-      </a>
-      
-    </li>
-  </ul>
-</nav>
-<div class="search-form-wrap">
-  <div class="local-search local-search-plugin">
-  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
-  <div id="local-search-result" class="local-search-result"></div>
-</div>
-</div>
-    </aside>
-    <div id="mask"></div>
-
-<!-- #reward -->
-<div id="reward">
-  <span class="close"><i class="ri-close-line"></i></span>
-  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
-  <div class="reward-box">
-    
-    <div class="reward-item">
-      <img class="reward-img" src="/images/alipay.jpg">
-      <span class="reward-type">支付宝</span>
-    </div>
-    
-    
-    <div class="reward-item">
-      <img class="reward-img" src="/images/wechat.jpg">
-      <span class="reward-type">微信</span>
-    </div>
-    
-  </div>
-</div>
-    
-<script src="/js/jquery-3.6.0.min.js"></script>
- 
-<script src="/js/lazyload.min.js"></script>
-
-<!-- Tocbot -->
-
-<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
-<link
-  rel="stylesheet"
-  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
-/>
-<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
-
-<script src="/dist/main.js"></script>
-
-<!-- ImageViewer -->
- <!-- Root element of PhotoSwipe. Must have class pswp. -->
-<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
-
-    <!-- Background of PhotoSwipe. 
-         It's a separate element as animating opacity is faster than rgba(). -->
-    <div class="pswp__bg"></div>
-
-    <!-- Slides wrapper with overflow:hidden. -->
-    <div class="pswp__scroll-wrap">
-
-        <!-- Container that holds slides. 
-            PhotoSwipe keeps only 3 of them in the DOM to save memory.
-            Don't modify these 3 pswp__item elements, data is added later on. -->
-        <div class="pswp__container">
-            <div class="pswp__item"></div>
-            <div class="pswp__item"></div>
-            <div class="pswp__item"></div>
-        </div>
-
-        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
-        <div class="pswp__ui pswp__ui--hidden">
-
-            <div class="pswp__top-bar">
-
-                <!--  Controls are self-explanatory. Order can be changed. -->
-
-                <div class="pswp__counter"></div>
-
-                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
-
-                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
-
-                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
-
-                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
-
-                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
-                <!-- element will get class pswp__preloader--active when preloader is running -->
-                <div class="pswp__preloader">
-                    <div class="pswp__preloader__icn">
-                        <div class="pswp__preloader__cut">
-                            <div class="pswp__preloader__donut"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
-                <div class="pswp__share-tooltip"></div>
-            </div>
-
-            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
-            </button>
-
-            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
-            </button>
-
-            <div class="pswp__caption">
-                <div class="pswp__caption__center"></div>
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
-
-<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
-<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
-<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
-<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
-
-<script>
-    function viewer_init() {
-        let pswpElement = document.querySelectorAll('.pswp')[0];
-        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
-
-        $imgArr.forEach(($em, i) => {
-            $em.onclick = () => {
-                // slider展开状态
-                // todo: 这样不好，后面改成状态
-                if (document.querySelector('.left-col.show')) return
-                let items = []
-                $imgArr.forEach(($em2, i2) => {
-                    let img = $em2.getAttribute('data-idx', i2)
-                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
-                    let title = $em2.getAttribute('alt')
-                    // 获得原图尺寸
-                    const image = new Image()
-                    image.src = src
-                    items.push({
-                        src: src,
-                        w: image.width || $em2.width,
-                        h: image.height || $em2.height,
-                        title: title
-                    })
-                })
-                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
-                    index: parseInt(i)
-                });
-                gallery.init()
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="热爱学习的未来酱" type="application/atom+xml">
+</head><body class="is-1-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">热爱学习的未来酱</a></div><div class="navbar-menu"><div class="navbar-end"></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-12"><div class="card"><div class="card-content"><nav class="breadcrumb" aria-label="breadcrumbs"><ul><li><a href="/categories">分类</a></li><li class="is-active"><a href="#" aria-current="page">生活</a></li></ul></nav></div></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-12-31T14:15:56.000Z" title="2024/12/31 22:15:56">2024-12-31</time>发表</span><span class="level-item"><time dateTime="2023-12-11T23:18:45.079Z" title="2023/12/12 07:18:45">2023-12-12</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a></span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2024/12/31/%E8%A7%84%E7%9F%A9/">规矩</a></p><div class="content">Here's something encrypted, password is required to continue reading.</div><a class="article-more button is-small is-size-7" href="/2024/12/31/%E8%A7%84%E7%9F%A9/#more">阅读更多</a></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-12-31T13:26:56.000Z" title="2024/12/31 21:26:56">2024-12-31</time>发表</span><span class="level-item"><time dateTime="2023-12-13T23:28:01.865Z" title="2023/12/14 07:28:01">2023-12-14</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a></span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2024/12/31/%E5%8F%8D%E6%80%9D/">反思</a></p><div class="content">Here's something encrypted, password is required to continue reading.</div><a class="article-more button is-small is-size-7" href="/2024/12/31/%E5%8F%8D%E6%80%9D/#more">阅读更多</a></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-12-10T22:50:19.000Z" title="2024/12/11 06:50:19">2024-12-11</time>发表</span><span class="level-item"><time dateTime="2023-12-11T00:05:17.078Z" title="2023/12/11 08:05:17">2023-12-11</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a></span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2024/12/11/24%20%E8%AF%BB%E5%90%8E%E6%84%9F/">读后感</a></p><div class="content"><p>​	先说一下前提条件，在五年前的大一下学期，我第一次系统的学习了C语言，但那也仅仅只是一个初步的入门，并且在学校中的学习呀，大家懂的都懂，没有</p>
+<h2 id="1-斗破苍穹"><a href="#1-斗破苍穹" class="headerlink" title="1.斗破苍穹"></a>1.斗破苍穹</h2><p> 为什么看完《斗破苍穹》会有一种失落感？ 因为那终究是人们的黄粱一梦，我们都是在生活中跌宕起伏的普通人，梦醒之前是，梦醒之后依然是，但即使这样，我们依然要满怀热情的过好这一生，这便是在读了斗破之后的意义。</p>
+<p><strong>萧炎的一生（现实生活版）:</strong></p>
+<p>生来就是世界顶级天才，智商280+。</p>
+<p>父亲萧战，是县城里的巨富之一。</p>
+<p>和伊万卡 · 特朗普 (<a target="_blank" rel="noopener" href="https://www.zhihu.com/search?q=%E5%8F%A4%E8%96%B0%E5%84%BF&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra=%7B%22sourceType%22:%22answer%22,%22sourceId%22:3238961177%7D">古薰儿</a>）是青梅竹马，后来伊万卡 · 特朗普成为他的老婆。</p>
+<p>还有个老婆是市里某龙头企业女总裁，后来成为某<a target="_blank" rel="noopener" href="https://www.zhihu.com/search?q=%E7%8B%AC%E8%A7%92%E5%85%BD%E4%BC%81%E4%B8%9A&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra=%7B%22sourceType%22:%22answer%22,%22sourceId%22:3238961177%7D">独角兽企业</a>炎盟的CEO(美杜莎），炎盟上市之后成为世界200强企业，后来逐步成为成为<a target="_blank" rel="noopener" href="https://www.zhihu.com/search?q=%E5%A4%A9%E5%BA%9C%E5%85%AC%E5%8F%B8&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra=%7B%22sourceType%22:%22answer%22,%22sourceId%22:3238961177%7D">天府公司</a>（世界前20强企业）高级总裁，银河系<a target="_blank" rel="noopener" href="https://www.zhihu.com/search?q=%E6%97%A0%E5%B0%BD%E7%81%AB%E5%9F%9F&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra=%7B%22sourceType%22:%22answer%22,%22sourceId%22:3238961177%7D">无尽火域</a>公司CEO。</p>
+<p>还有几个红颜知己:</p>
+<p>一个是加玛市首富（云山）的干女儿，本市龙头企业CEO(云韵），后成为<a target="_blank" rel="noopener" href="https://www.zhihu.com/search?q=%E8%8A%B1%E5%AE%97%E5%85%AC%E5%8F%B8&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra=%7B%22sourceType%22:%22answer%22,%22sourceId%22:3238961177%7D">花宗公司</a>（世界前50强企业）CEO。</p>
+<p>一个年纪轻轻成为了隔壁出云市龙头企业的董事长，后来成为了天府公司（世界前20强企业）高级副总裁(小医仙）。</p>
+<p>一个是<a target="_blank" rel="noopener" href="https://www.zhihu.com/search?q=%E9%A9%AC%E6%96%AF%E5%85%8B&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra=%7B%22sourceType%22:%22answer%22,%22sourceId%22:3238961177%7D">马斯克</a>的千金Exa Dark Siderl(<a target="_blank" rel="noopener" href="https://www.zhihu.com/search?q=%E7%B4%AB%E5%A6%8D&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra=%7B%22sourceType%22:%22answer%22,%22sourceId%22:3238961177%7D">紫妍</a>)，后来成为了天府公司（世界前20强企业）股东。</p>
+<p>一个是斯坦福学霸，拿<a target="_blank" rel="noopener" href="https://www.zhihu.com/search?q=%E5%A5%A5%E8%BF%90%E9%87%91%E7%89%8C&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra=%7B%22sourceType%22:%22answer%22,%22sourceId%22:3238961177%7D">奥运金牌</a>的<a target="_blank" rel="noopener" href="https://www.zhihu.com/search?q=%E8%B0%B7%E7%88%B1%E5%87%8C&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra=%7B%22sourceType%22:%22answer%22,%22sourceId%22:3238961177%7D">谷爱凌</a>(青鳞)，后来成为了天府公司（世界前20强企业）高级副总裁。</p>
+<p><strong>简历：</strong></p>
+<p>4岁识万字，会小学以内的算术，会英语（斗之气）。</p>
+<p>10岁上高中（斗者）。</p>
+<p>11岁上高二，患脑瘫+精神病，智商止步于小学生水平，被家族歧视，被迫休学三年。</p>
+<p>15-16岁，病被<a target="_blank" rel="noopener" href="https://www.zhihu.com/search?q=%E8%8D%AF%E5%B0%98&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra=%7B%22sourceType%22:%22answer%22,%22sourceId%22:3238961177%7D">药尘</a>院士治好，在药尘院士指导下，直接参加高考，一年内考上985（斗者）。</p>
+<p>17-19岁，三年之内速通本硕博，发表数篇sci二区论文（斗师到斗灵）。本科发的论文能爆杀一堆博士。期间，萧炎自主创业，创办萧门公司，磐门公司等公司，后来发展为地方龙头企业。</p>
+<p>20岁，做博后，受聘成为讲师，发表数篇顶刊，顶会（斗王，斗皇）。期间萧炎创办炎盟公司，后来发展为世界前200强企业。</p>
+<p>23岁，去几个qs100的学校做访问学者，发表一篇science，几个qs100的学校震动，成为特聘副教授（斗宗）。</p>
+<p>24岁，升为教授（斗尊）。</p>
+<p>26岁，到藤校做访问学者，发表数篇nature子刊，技惊四座，回国后拿海归青千帽子（斗尊巅峰）。</p>
+<p>27岁，研究某个方向，发表一篇nature正刊，轰动学术界，一个月内被评为院士（九转斗尊），又一个月内获得诺奖（斗圣）。之后不久，萧炎创办天府公司，该公司后来发展为世界前20强的巨型企业。</p>
+<p>在之后的几年里，又斩获<a target="_blank" rel="noopener" href="https://www.zhihu.com/search?q=%E5%9B%BE%E7%81%B5%E5%A5%96&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra=%7B%22sourceType%22:%22answer%22,%22sourceId%22:3238961177%7D">图灵奖</a>，菲尔兹奖等奖项（斗圣）。</p>
+<p>33岁，发表数篇重量级论文，轰动全世界，推动该领域革命性进步，成为某藤校校长，划时代科学家，被誉为“xx学之父”（斗帝）。</p>
+<p>此外，萧炎从小到大每次数学，物理，编程比赛(炼丹比赛）都能拿第一，无论是县级，市级，省级还是世界级。</p>
+<p>靠着极强的工程能力和创新能力，解决了无数的工程难题，获得了极高的威望，被各家大企业争着招为客座科学家，<a target="_blank" rel="noopener" href="https://www.zhihu.com/search?q=%E9%A6%96%E5%B8%AD%E7%A7%91%E5%AD%A6%E5%AE%B6&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra=%7B%22sourceType%22:%22answer%22,%22sourceId%22:3238961177%7D">首席科学家</a>。</p>
+<p>麾下有天府公司(世界前20强企业），炎盟(世界前200强企业）等公司，还有萧门公司，磐门公司等地方龙头企业，总资产几十万亿，成为世界首富。</p>
+<p>若干年后，成为银河系三大首席科学家及首富之一（步入主宰境，大千世界无尽火域之主，苍穹榜题名）。</p>
+<p>之所以一些人会有失落感，是因为他们把自己代入了主角。</p>
+<p>别人的人生，终究是别人的。</p>
+<p>大部分人穷其一生，也只不过是斗者，斗师，大斗师水平，顶多是个斗灵。</p>
+<p>而斗皇，无论是在科学界，企业界，还是玄幻界，都是普通人奋斗一生难以突破的天花板。</p>
+<p>你的爱情不会像萧炎一样完美。</p>
+<p>你是个普通人，没有萧炎的实力，没有萧炎的颜值，也没有萧炎的魄力和毅力，提供不了异性需要的情绪价值。</p>
+<p>薰儿不会喜欢你。因为你成为不了斗气大陆的巅峰强者，即使你们是青梅竹马。</p>
+<p><a target="_blank" rel="noopener" href="https://www.zhihu.com/search?q=%E5%BD%A9%E9%B3%9E&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra=%7B%22sourceType%22:%22answer%22,%22sourceId%22:3238961177%7D">彩鳞</a>也不会喜欢你，你炼不出六品丹，她会直接拍死你。</p>
+<p>小医仙可能会喜欢你，但是你治不了她的病。</p>
+<p>紫妍不会喜欢你，或许你做的饭能吸引到她，但是她随手一挥，就能招来一堆世界级大厨。</p>
+<p><a target="_blank" rel="noopener" href="https://www.zhihu.com/search?q=%E4%BA%91%E9%9F%B5&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra=%7B%22sourceType%22:%22answer%22,%22sourceId%22:3238961177%7D">云韵</a>不会喜欢你，她即便是跟萧炎的生活也没有太多交集，倒是云山可能会一掌拍死你。</p>
+<p><a target="_blank" rel="noopener" href="https://www.zhihu.com/search?q=%E9%9B%85%E8%8F%B2&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra=%7B%22sourceType%22:%22answer%22,%22sourceId%22:3238961177%7D">雅菲</a>当然不会喜欢你，因为她后来会成为全市首富，无数男子追求，开个男后宫，都绰绰有余。</p>
+<p><a target="_blank" rel="noopener" href="https://www.zhihu.com/search?q=%E7%BA%B3%E5%85%B0%E5%AB%A3%E7%84%B6&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra=%7B%22sourceType%22:%22answer%22,%22sourceId%22:3238961177%7D">纳兰嫣然</a>更不会喜欢你，极度慕强的她，不会把弱者当人看。</p>
+<p><a target="_blank" rel="noopener" href="https://www.zhihu.com/search?q=%E9%9D%92%E9%B3%9E&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra=%7B%22sourceType%22:%22answer%22,%22sourceId%22:3238961177%7D">青鳞</a>可能会被你感动，但是她后来去了更高的平台，你没有实力也遇不到她。</p>
+<p>韩雪不会找你帮忙，因为你打不了巅峰赛，打个王者荣耀都够呛。</p>
+<p><a target="_blank" rel="noopener" href="https://www.zhihu.com/search?q=%E5%8F%B6%E6%AC%A3%E8%93%9D&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra=%7B%22sourceType%22:%22answer%22,%22sourceId%22:3238961177%7D">叶欣蓝</a>不会找你帮忙，因为你炼丹赢不了曹家。</p>
+<p><a target="_blank" rel="noopener" href="https://www.zhihu.com/search?q=%E6%9B%B9%E9%A2%96&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra=%7B%22sourceType%22:%22answer%22,%22sourceId%22:3238961177%7D">曹颖</a>不会喜欢你，你拿不了丹会第一。</p>
+<p>唐火儿不会喜欢你，你练不成丹药。</p>
+<p>还有个从来不舔萧炎的<a target="_blank" rel="noopener" href="https://www.zhihu.com/search?q=%E5%87%A4%E6%B8%85%E5%84%BF&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra=%7B%22sourceType%22:%22answer%22,%22sourceId%22:3238961177%7D">凤清儿</a>，但她是每天开法拉利（七彩巨鹤）上班的女人。</p>
+<p>这些人，你大概率一辈子都接触不到。</p>
+<p>普通人若是有机缘，或许能够逢着<a target="_blank" rel="noopener" href="https://www.zhihu.com/search?q=%E5%8D%A1%E5%86%88&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra=%7B%22sourceType%22:%22answer%22,%22sourceId%22:3238961177%7D">卡冈</a>大叔和苓儿，和苓儿相伴一生，仅此而已。</p>
+<p>你的学业不会像萧炎那样开挂。</p>
+<p>你上学的时候生病了，找若琳导师请个三天的假，可能都会被质疑半天。</p>
+<p>你被白程欺负了，只能把屈辱咽在肚子里，想着哪一天忍不住了，就找白程一换一。</p>
+<p>苏千和长老们，也不会像小说里那样和蔼。</p>
+<p>他们会根据他们的kpi，给你教一堆没用的东西。</p>
+<p>在你还是斗之气和斗者的时候，他们会给你教，古人写了些什么诗词歌赋，给你教怎么算术，说这是帮你凝聚灵智的必备法门。</p>
+<p>他们会给你教中洲的方言。这个的作用因人而异。如果一直你待在西北大陆，那么这辈子都不会用到。如果你想润到中洲，那么可能会后悔当年没有学好。</p>
+<p>他们会告诉你斗气大陆的风貌和各势力的渊源，有的人觉得这课程挺有意思的，不过大家都知道没什么用，上课就是在睡觉中度过。</p>
+<p>他们会给你讲加刑天，法犸，<a target="_blank" rel="noopener" href="https://www.zhihu.com/search?q=%E7%BA%B3%E5%85%B0%E6%A1%80&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra=%7B%22sourceType%22:%22answer%22,%22sourceId%22:3238961177%7D">纳兰桀</a>，雷族族长有多么多么的伟大，考核是写一堆赞美加刑天，法犸的文章。</p>
+<p>当然，他们偶尔也会讲讲斗气原理，炼药原理，药材种类，魔兽种类，人体体质。但是就是不会给你教斗技和炼药术。</p>
+<p>在你是斗师和大斗师的时候，他们就会给你教一堆没用的，这辈子都不会用到的斗技。学不会这些斗技，没通过考核，就要受到惩罚，这辈子也别想进入内院。</p>
+<p>而有用的斗技，则要么是自学成才，要么是家族传承。</p>
+<p>一群长老和斗师们还会给你洗脑，比如：</p>
+<p>“你突破了斗者，你以后就轻松了。”</p>
+<p>“考上了斗师，大宗门抢着要。”</p>
+<p>“现在斗师没啥用，多如牛毛，想找到好工作，还是得突破大斗师。”</p>
+<p>“现在大斗师多如狗，能自创黄阶斗技的也一大堆，精通玄阶、甚至地阶斗技的也有一大堆，你这样出去毫无竞争力，要不，你在我院突破斗灵吧。”</p>
+<p>“区区斗灵，也配留在我校当老师？你自创过几个玄阶斗技？”</p>
+<p>……</p>
+<p>并且，外院还有一些奇怪的规定，比如，学生每天必须排成密集的方阵，在校场上跑两圈，仰天高呼一万次“桀桀桀”，比如学生每天需要穿统一的黑袍制服，在校内必须呈跑步状态前进，哪怕你会斗气化甲，斗气凝物，斗气化翼也得这么干。虽然你不知道这有什么用，但是你必须照做。</p>
+<p>因为校长<a target="_blank" rel="noopener" href="https://www.zhihu.com/search?q=%E9%82%99%E5%A4%A9%E5%B0%BA&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra=%7B%22sourceType%22:%22answer%22,%22sourceId%22:3238961177%7D">邙天尺</a>很羡慕魂族的管理方法，他时不时地会来视察学生们的精气神，他认为这样就可以让<a target="_blank" rel="noopener" href="https://www.zhihu.com/search?q=%E8%BF%A6%E5%8D%97%E5%AD%A6%E9%99%A2&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra=%7B%22sourceType%22:%22answer%22,%22sourceId%22:3238961177%7D">迦南学院</a>达到魂族的高度。</p>
+<p>并且他可以把这种整齐划一的拍成视频，拿到雷族或者其他族去炫耀，这样雷族族长可能会给他更多的赏赐。</p>
+<p>你靠着苦修而来的斗技和一手炼药术，好不容易从外院卷到了内院。</p>
+<p>但是你又发现，<a target="_blank" rel="noopener" href="https://www.zhihu.com/search?q=%E6%9E%97%E4%BF%AE%E5%B4%96&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra=%7B%22sourceType%22:%22answer%22,%22sourceId%22:3238961177%7D">林修崖</a>，柳擎，林焱这些人，不但会斗技和炼丹，人家制作傀儡，制符，结阵，魂技，星象，占卜，历史，<a target="_blank" rel="noopener" href="https://www.zhihu.com/search?q=%E7%90%B4%E6%A3%8B%E4%B9%A6%E7%94%BB&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra=%7B%22sourceType%22:%22answer%22,%22sourceId%22:3238961177%7D">琴棋书画</a>，样样精通。</p>
+<p>人家这些中产家庭的孩子，每天除了修炼，还能到处游山玩水，吟诗作对，修炼也没落下，你在人家面前就是个笑话。</p>
+<p>他们的女朋友还会变着法的换。你每天看着韩月和林修崖花前月下，你侬我侬。柳菲的男朋友换了一个又一个，就是不会瞅你一眼。</p>
+<p>即便你不是最差的那个，你比内院70%的人要强，甚至比她们的对象还要强。但是人家觉得，你强不强，跟我有什么关系？跟大街上那些人有什么区别？人家可能宁愿找个长得帅的斗者，或者天生就是斗王的贵族。</p>
+<p>你的事业不会像萧炎那样顺利。</p>
+<p>你工作了，运气好又肯努力的话，给<a target="_blank" rel="noopener" href="https://www.zhihu.com/search?q=%E4%BA%91%E5%B2%9A%E5%AE%97&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra=%7B%22sourceType%22:%22answer%22,%22sourceId%22:3238961177%7D">云岚宗</a>投个简历，或许人家会招你当苦力。当然，如果云岚宗公司经营管理不善的话，你就会成为云岚宗被解散之后，失业的那个人。</p>
+<p>运气和能力差点儿的话，就只能去血战佣兵团这些，或者天天给柳席，穆蛇，哈朗捏脚。</p>
+<p>当然，能力极强，去牛逼的企业，这个人生，也未必会过的很舒坦。</p>
+<p>比如，你能力很强，突破了斗皇，投奔了风雷阁公司。结果风雷阁老板闲着没事，非得抢星陨阁的业务，结果被人家一纸诉状告上法庭，公司直接破产，你失业了。</p>
+<p>你精彩绝艳，身怀三种异火，名动中洲北域。有一堆七八品的炼药师，带着一群斗尊、斗宗来抢你的异火。</p>
+<p>你能力极强，突破了斗宗，投奔了魂殿。魂殿每天让你收集灵魂体，每年收集的灵魂体达不到kpi，就会把你架在异火上面烤，让你生不如死。而你如果碰到棘手的问题，需要向上反映，上司们只会桀桀怪笑，一个比一个拖延，层层外包，层层甩锅。必要的时候会壮士断腕，引爆你的灵魂，然后对外宣称某某事情是这个外包干的。桀桀桀，还不是你不努力，没人会管你。</p>
+<p>你跑到圣丹城炼药，结果光是一个月的房租，都得支付一枚六品高级丹药。而在圣丹城买房，则是好几枚八品高级丹药的价格。</p>
+<p>你又辗转去投奔了<a target="_blank" rel="noopener" href="https://www.zhihu.com/search?q=%E5%A4%A9%E5%A6%96%E5%87%B0%E6%97%8F&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra=%7B%22sourceType%22:%22answer%22,%22sourceId%22:3238961177%7D">天妖凰族</a>，结果碰上一堆斗尊干扰，有个事情不幸干砸了，就要受到各种惩罚和绩效淘汰，甚至直接卡试用期，或者塞给你一堆事情变着法的恶心你，美其名曰培养你，不达标就直接把你优化掉，中年危机让你这辈子都找不到工作。</p>
+<p>你历尽千辛万苦，突破斗尊，去了古族，想拿个编制，从此躺平，但受到各路强者排挤。他们在你面前摆老资格，给你穿小鞋。翎泉实力远不如你，但是人家有背景，就是可以骑在你脖子上拉s。</p>
+<p>面试的时候，你在大寂灭指下瑟瑟发抖。试用期培训的时候，你在天墓里九死一生。做业务的时候，你在兽潮里杀的心力交瘁。所有的脏活累活都会派给你，假期是别人的，你的工作是你的，别人的工作？对不起，也是你的。</p>
+<p>而古族的公子们，有的即使只有斗者，斗师实力，有的实力和智商连条鲶鱼都不如，但是每天可以游山玩水，有的在云雨宗里寻欢作乐，有的在花宗里寻觅伴侣，有的在极乐世界的赌场狂欢，还有的在丹域和药界体验生活，光是躺着就能被喂药喂到斗皇。</p>
+<p>而有的公子们，则是极为恐怖的斗尊实力，身怀各种天阶斗技，丹符傀阵，星象占卜，琴棋书画也是样样精通，每天高喊着家族传承吾辈责。但他们不会出手，他们就等着你把菩提子带回来，炼成菩提丹，让他们吃掉就行。</p>
+<p>你又历尽千难万险，突破半圣，结果斗圣们打了一架，你的五脏六腑，被他们打架的余波震成了粉末。</p>
+<p>靠着强横的灵魂力量，你侥幸活了下来，但是实力又重新掉回了斗灵。你饱受病痛的折磨，没有宗门愿意招揽你，你也没法炼药，所以你只能吃老本。你的孩子嗷嗷待哺，你的老婆骂你不成器，跟你退婚。你的父亲被病痛天天折磨，你救不了他，救不了他。你的孩子又重复你的人生，被老师pua，被宗主pua，开始了新一轮的轮回。</p>
+<p>掉回斗灵的你，选择走入塔戈尔沙漠隐居，你捡到了一片<a target="_blank" rel="noopener" href="https://www.zhihu.com/search?q=%E5%87%80%E8%8E%B2%E5%A6%96%E7%81%AB&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra=%7B%22sourceType%22:%22answer%22,%22sourceId%22:3238961177%7D">净莲妖火</a>的残图，把它撕成了两半……</p>
+<p>斗破是一场梦，梦醒了，还得上学，还得加班，未来仍然没什么起色，悲惨的生活依旧。</p>
+<hr>
+<p>当然，以上只是把加玛，出云等，对应到现实生活中一个市，斗气大陆对应到世界。</p>
+<p>如果把加玛算成一个郭，斗气大陆算作整个太阳系或者银河系，人口直接拉到一万亿人，那差距又会增大。</p>
+<p>大部分人会连斗者，斗师都很难达到，大斗师就是绝对的天花板。</p>
+<p>18岁之前到斗者，是一件极为稀罕的事情。有的人终其一生修炼，也只能止步于斗者。</p>
+<p>要知道木战年轻的时候，当个斗师，都能被称为精彩绝艳之辈。</p>
+<p>年轻的时候突破大斗师，则具备成为云岚宗少宗主的资格。</p>
+<p>斗皇，斗王，斗灵，大斗师，斗师，斗者，在军队中，可以分别对应帅，将，校，尉，士，兵六个级别。</p>
+<p>现实生活中，很多人因为近视之类的身体缺陷参不了军，即使入伍也只能作为填线部队。普通专科生参军，最开始只能到兵级，大部分只能在军中待两三年，立功提干后可以到士，知识分子可以到尉，军校优秀博士或许能给到少校。再想往前，就看天意了。</p>
+<p>如果对应到学业的话，可以对应古代的科举。斗灵，大斗师，斗师，斗者，分别对应进士，贡生，举人，秀才四个级别。</p>
+<p>秀才的录取率大致相当于211本科录取率，秀才的实际地位，远高于211本。</p>
+<p>举人的录取率大致相当于清北本科录取率，举人的实际地位，远高于清北。</p>
+<p>而斗皇和斗王两级，已经是加玛帝国的高级官员，无法通过科举获得。</p>
+<p>所以，大部分人在斗破里边，就是路边随时会被打成肉酱的小摊贩，佣兵团的小佣兵，炼药师的采药队员（我似乎想不到什么别的职业了）。</p>
+<p>能给柳席捏脚，是普通人的福分，想给哈朗捏脚，人家可能都看不上。</p>
+<p>你是个人才，踏实勤奋，到老了，突破了大斗师或者低级斗灵，也最多找找关系，给云岚宗，炼药师公会之类的当个保安。</p>
+<hr>
+<p>但其实，我认为，斗破的魅力，并非是便于读者代入主角，享受那一路金手指开挂的爽感。</p>
+<p>斗破的作者，虽然很年轻，但是社会阅历，应该也远远超过当时同年龄的人。</p>
+<p>虽然小说有不少不合理的地方，但是小说中的一些配角和情节，我认为灵感可能是来源于现实中具体的人和故事。</p>
+<p>看似很梦幻，实际上，也很现实。梦幻或是现实，只是取决于读者是自己代入主角，还是将自己代入小说中的一个小斗师。</p>
+<p>我小时候不太喜欢修仙文，当时就觉得，大部分人放到这种修仙文的世界里，穷其一生努力，最多也就是大斗师或斗灵的水平，幻想一路开挂，只能是异想天开。</p>
+<p>直到走上社会，被社会毒打到怀疑人生，怀疑奋斗的价值，怀疑过去走过的路是否值得。</p>
+<p>我回过头来再看这本小说，才发现这本小说这就是人生啊。</p>
+<p>人和人的差距，确实，就如同斗者和斗圣的差距一样大，无论是颜值，才能，财富，差距都是巨大的鸿沟。而人的努力，只不过是在弥补这种鸿沟。</p>
+<p>有斗帝血脉的种族，给富二代小辈们几本天阶功法和斗技，小辈就可以坐火箭一样爬到斗宗，甚至斗尊。甚至一出生就是斗宗，可以飙升到八星斗圣，不用修炼，随便玩就行了。</p>
+<p>而没天赋、没血脉、没颜值、没实力，不但异性不会多看一眼，就连强者们打架的余波，都能震死你。类比到现实生活中，就是郭嘉，企业等各种势力之间的斗争，导致的大裁员和大萧条。</p>
+<p>虽然现实生活并不如斗破那么混乱，但为了生存，为了发展，大多数普通人都在忍受痛苦，实际上是众生皆苦。</p>
+<p>大部分时候，忍受痛苦仅仅只是在忍受痛苦，什么也得不到。</p>
+<p>斗破里边，努力的人其实并不少。</p>
+<p>有的人修炼百年，而不放弃。</p>
+<p>有的人以斗皇之躯，硬闯莽荒古域。</p>
+<p>有的人经历换骨吸髓之痛。</p>
+<p>有的人布局千年，机关算尽，只为了一朝突破斗帝。</p>
+<p>有的人没有修炼焚诀，但为了变强，仍然硬吞异火。</p>
+<p>然而很多人到老了，也只止步于大斗师，斗灵，斗王，斗皇，斗宗，斗尊。</p>
+<p>有天赋的人也并不少，但要说斗破的运气王，只有萧炎这一个人。</p>
+<p>我总是在想，为什么我的人生会那么痛苦。</p>
+<p>我为什么要经历学生时代无休止的刷题，只为了争取那一个月薪一两万，甚至可能不到五千的工作机会。</p>
+<p>为什么学校里别人都可以打游戏、谈恋爱，到处旅游。</p>
+<p>而我则要经受各种考试，科研，找工作的折磨，来到工作岗位上还要996，甚至通宵加班，被上司批评，被公司优化，跟妻子离婚，跟父母生离死别，最后在病痛交加中离世。</p>
+<p>最后孩子还要忍受这样的人生，父母仍然想要逼我结婚生孩子，仍然不希望我就这样放弃，我死掉他们仍然会伤心。</p>
+<p>没意思，真的没意思。</p>
+<p>有时真的会想象自己有金刚琉璃身，可以把地球一拳打爆。</p>
+<p>但是如果积极一点来看的话，我感觉，或许我所受的一些苦难都是值得的。</p>
+<p>小学初中时代，我被同学孤立，遭受过校园暴力，当时极为痛苦。但是回过头去看，如果没有这些经历，我可能仍然是一个狂妄自大的人，不会低头去审视自己身上的缺点和不讨喜的地方。</p>
+<p>高中时期，我经历过<a target="_blank" rel="noopener" href="https://www.zhihu.com/search?q=%E8%A1%A1%E6%B0%B4%E6%A8%A1%E5%BC%8F&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra=%7B%22sourceType%22:%22answer%22,%22sourceId%22:3238961177%7D">衡水模式</a>的折磨，虽然很痛苦，也没有考到什么好学校里去。但是现在想想，如果当时没有生活在这种高压的环境，或许我就会止步于二本，或者普通一本，更加为工作而发愁。</p>
+<p>大学时期，我舍弃了几乎所有的玩耍时间去学习，我获得过一些奖学金，参加过一些竞赛，做过一些科研。虽然做的时候都很痛苦，获得的奖项都很水，远远比不上真正的强者。但是最后看来，这些东西也不是毫无用处，简历总不至于什么都写不上去。</p>
+<p>研究生期间，我每天做在实验室里度年如日，科研上却毫无成果，技术上也是毫无突破。我深感痛苦，焦虑，时刻感觉要分裂成两个人。但是最后看来，即使毫无成果，这些平平无奇的经历，也可以吸引到一些面试官。</p>
+<p>工作期间，我每天战战兢兢，如履薄冰。但最后看来，我也攒到了一些钱，可以买自己想要的东西，不用再依赖父母。我也见到了不少世面，我周围有一堆斗灵强者的师兄，小老板算是斗王强者，大老板算是斗宗强者，经常带我们去见斗尊强者，甚至偶尔还能见到斗圣强者。</p>
+<p>我把自己经受的一切苦难，都想象成自己是在吞噬火焰，吸收风雷之力。</p>
+<p>斗破围绕的两个最核心的思想是:</p>
+<p>1.只要一念尚存，痛苦便不会将人击倒。</p>
+<p>2.亲情，爱情，友情这些东西其实才是成长路上最宝贵的财富，也是激励人不断进步的动力源泉。</p>
+<p>我们每攀上一个阶梯，总会见到无数比我们强的多的强者，都会感到一种来自灵魂的威压。当我们是斗师时，看到斗皇觉得他们好厉害，当我们是斗皇时，发现周围斗皇一大堆，而斗尊和斗圣，又好像是普通人不可能企及的存在。但是伴随着我们的努力，打造出属于我们的优势，那么我们即使达不到他们的水平，也不必去羡慕这些强者，专心走自己的路即可。</p>
+<p>我总想逃避苦难，但有些事是躲不过去的。为了父母眼中的骄傲，为了我的孩子以后能少些痛苦，为了我能一步一步地提升实力，换个更幸福的环境，我愿意继续奔跑下去。</p>
+<p>就像书里说的：人就是那么傻，明知道不可能，明知道自己渺小，但还是会豁出性命，去保护自己重要的东西。</p>
+</div></article></div></div><!--!--><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/">热爱学习的未来酱</a><p class="is-size-7"><span>&copy; 2023 chai</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
             }
-        })
-    }
-    viewer_init()
-</script> 
-<!-- MathJax -->
-
-<!-- Katex -->
-
-<!-- busuanzi  -->
-
-<!-- ClickLove -->
-
-<!-- ClickBoom1 -->
-
-<!-- ClickBoom2 -->
-
-<!-- CodeCopy -->
- 
-<link rel="stylesheet" href="/css/clipboard.css">
- <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
-<script>
-  function wait(callback, seconds) {
-    var timelag = null;
-    timelag = window.setTimeout(callback, seconds);
-  }
-  !function (e, t, a) {
-    var initCopyCode = function(){
-      var copyHtml = '';
-      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
-      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
-      copyHtml += '</button>';
-      $(".highlight .code pre").before(copyHtml);
-      $(".article pre code").before(copyHtml);
-      var clipboard = new ClipboardJS('.btn-copy', {
-        target: function(trigger) {
-          return trigger.nextElementSibling;
-        }
-      });
-      clipboard.on('success', function(e) {
-        let $btn = $(e.trigger);
-        $btn.addClass('copied');
-        let $icon = $($btn.find('i'));
-        $icon.removeClass('ri-file-copy-2-line');
-        $icon.addClass('ri-checkbox-circle-line');
-        let $span = $($btn.find('span'));
-        $span[0].innerText = 'COPIED';
-        
-        wait(function () { // 等待两秒钟后恢复
-          $icon.removeClass('ri-checkbox-circle-line');
-          $icon.addClass('ri-file-copy-2-line');
-          $span[0].innerText = 'COPY';
-        }, 2000);
-      });
-      clipboard.on('error', function(e) {
-        e.clearSelection();
-        let $btn = $(e.trigger);
-        $btn.addClass('copy-failed');
-        let $icon = $($btn.find('i'));
-        $icon.removeClass('ri-file-copy-2-line');
-        $icon.addClass('ri-time-line');
-        let $span = $($btn.find('span'));
-        $span[0].innerText = 'COPY FAILED';
-        
-        wait(function () { // 等待两秒钟后恢复
-          $icon.removeClass('ri-time-line');
-          $icon.addClass('ri-file-copy-2-line');
-          $span[0].innerText = 'COPY';
-        }, 2000);
-      });
-    }
-    initCopyCode();
-  }(window, document);
-</script>
- 
-<!-- CanvasBackground -->
-
-<script>
-  if (window.mermaid) {
-    mermaid.initialize({ theme: "forest" });
-  }
-</script>
-
-
-    
-    <div id="music">
-    
-    
-    
-    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="52"
-        src="//music.163.com/outchain/player?type=2&id=22707008&auto=0&height=32"></iframe>
-</div>
-
-<style>
-    #music {
-        position: fixed;
-        right: 15px;
-        bottom: 0;
-        z-index: 998;
-    }
-</style>
-    
-    
-
-  </div>
-</body>
-
-</html>
+        };</script><script src="/js/column.js"></script><!--!--><script src="/js/main.js" defer></script><!--!--></body></html>
