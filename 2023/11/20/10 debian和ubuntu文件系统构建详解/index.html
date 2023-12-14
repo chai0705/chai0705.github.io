@@ -1,36 +1,117 @@
-<!doctype html>
-<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><title>ubuntu和debian文件系统构建详解 - 热爱学习的未来酱</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="热爱学习的未来酱"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="热爱学习的未来酱"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="第7章 Ubuntu和Debian系统构建在前面的几个章节中，我们利用了busybox，buildroot，yocto工具构建文件系统。我们也可以使用Linux发行版来直接作为文件系统，比如Ubuntu系统和Debian系统。由于Ubuntu和Debian系统的构建方法相同，所以作者将他们两个系统的构建放到了一起。 注意：必须要在ubuntu20等更高版本的系统上进行本章节的文件系统构建，经测试在"><meta property="og:type" content="article"><meta property="og:title" content="ubuntu和debian文件系统构建详解"><meta property="og:url" content="http://example.com/2023/11/20/10%20debian%E5%92%8Cubuntu%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%84%E5%BB%BA%E8%AF%A6%E8%A7%A3/"><meta property="og:site_name" content="热爱学习的未来酱"><meta property="og:description" content="第7章 Ubuntu和Debian系统构建在前面的几个章节中，我们利用了busybox，buildroot，yocto工具构建文件系统。我们也可以使用Linux发行版来直接作为文件系统，比如Ubuntu系统和Debian系统。由于Ubuntu和Debian系统的构建方法相同，所以作者将他们两个系统的构建放到了一起。 注意：必须要在ubuntu20等更高版本的系统上进行本章节的文件系统构建，经测试在"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311212050842.jpg"><meta property="og:image" content="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311212050838.jpg"><meta property="og:image" content="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311212050845.jpg"><meta property="og:image" content="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311212050849.jpg"><meta property="og:image" content="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311212050848.jpg"><meta property="og:image" content="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311212050850.jpg"><meta property="og:image" content="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311212050000.jpg"><meta property="og:image" content="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311212050010.jpg"><meta property="og:image" content="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311212050017.jpg"><meta property="og:image" content="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311220745228.png"><meta property="og:image" content="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311212050030.jpg"><meta property="og:image" content="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311212050040.jpg"><meta property="og:image" content="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311212050045.jpg"><meta property="og:image" content="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311212050162.jpg"><meta property="og:image" content="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311212050190.jpg"><meta property="og:image" content="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311212050196.jpg"><meta property="og:image" content="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311212050210.jpg"><meta property="og:image" content="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311212050231.jpg"><meta property="og:image" content="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311212050239.jpg"><meta property="og:image" content="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311212050316.jpg"><meta property="og:image" content="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311212050334.jpg"><meta property="og:image" content="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311212254933.png"><meta property="og:image" content="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311220732603.png"><meta property="og:image" content="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311220734847.png"><meta property="og:image" content="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023023.jpg"><meta property="og:image" content="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023029.jpg"><meta property="og:image" content="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023030.jpg"><meta property="og:image" content="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023031.jpg"><meta property="og:image" content="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023035.jpg"><meta property="og:image" content="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023033.jpg"><meta property="og:image" content="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023203.jpg"><meta property="og:image" content="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023212.jpg"><meta property="og:image" content="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023222.jpg"><meta property="og:image" content="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023229.jpg"><meta property="og:image" content="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023238.jpg"><meta property="og:image" content="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023246.jpg"><meta property="og:image" content="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023348.jpg"><meta property="og:image" content="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023362.jpg"><meta property="og:image" content="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023376.png"><meta property="og:image" content="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023386.jpg"><meta property="og:image" content="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023392.jpg"><meta property="og:image" content="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023399.jpg"><meta property="og:image" content="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023546.jpg"><meta property="og:image" content="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023562.jpg"><meta property="og:image" content="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023572.jpg"><meta property="og:image" content="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023578.jpg"><meta property="og:image" content="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023584.jpg"><meta property="og:image" content="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023685.jpg"><meta property="og:image" content="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023716.jpg"><meta property="og:image" content="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023722.jpg"><meta property="og:image" content="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023728.png"><meta property="og:image" content="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023739.png"><meta property="og:image" content="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023770.jpg"><meta property="og:image" content="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023832.jpg"><meta property="og:image" content="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023859.jpg"><meta property="og:image" content="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023871.jpg"><meta property="og:image" content="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023943.jpg"><meta property="og:image" content="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023992.jpg"><meta property="og:image" content="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023026.jpg"><meta property="og:image" content="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023034.jpg"><meta property="og:image" content="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023053.jpg"><meta property="og:image" content="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222226972.jpg"><meta property="og:image" content="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222226970.jpg"><meta property="og:image" content="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222226980.jpg"><meta property="og:image" content="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222226975.jpg"><meta property="og:image" content="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222226973.jpg"><meta property="og:image" content="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222226987.jpg"><meta property="og:image" content="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222226355.jpg"><meta property="og:image" content="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222226373.jpg"><meta property="og:image" content="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222226388.jpg"><meta property="og:image" content="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222226397.jpg"><meta property="og:image" content="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222226407.jpg"><meta property="og:image" content="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222226421.jpg"><meta property="og:image" content="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222226522.jpg"><meta property="og:image" content="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222226531.jpg"><meta property="og:image" content="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222226543.jpg"><meta property="og:image" content="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222226565.jpg"><meta property="og:image" content="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222226608.jpg"><meta property="og:image" content="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222226627.jpg"><meta property="og:image" content="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222226706.jpg"><meta property="og:image" content="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222226714.jpg"><meta property="og:image" content="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222226722.jpg"><meta property="article:published_time" content="2023-11-20T13:16:57.000Z"><meta property="article:modified_time" content="2023-12-04T13:14:48.360Z"><meta property="article:author" content="chai"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311212050842.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://example.com/2023/11/20/10%20debian%E5%92%8Cubuntu%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%84%E5%BB%BA%E8%AF%A6%E8%A7%A3/"},"headline":"ubuntu和debian文件系统构建详解","image":["https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311212050842.jpg","https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311212050838.jpg","https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311212050845.jpg","https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311212050849.jpg","https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311212050848.jpg","https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311212050850.jpg","https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311212050000.jpg","https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311212050010.jpg","https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311212050017.jpg","https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311220745228.png","https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311212050030.jpg","https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311212050040.jpg","https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311212050045.jpg","https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311212050162.jpg","https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311212050190.jpg","https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311212050196.jpg","https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311212050210.jpg","https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311212050231.jpg","https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311212050239.jpg","https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311212050316.jpg","https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311212050334.jpg","https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311212254933.png","https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311220732603.png","https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311220734847.png","https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023023.jpg","https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023029.jpg","https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023030.jpg","https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023031.jpg","https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023035.jpg","https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023033.jpg","https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023203.jpg","https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023212.jpg","https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023222.jpg","https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023229.jpg","https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023238.jpg","https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023246.jpg","https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023348.jpg","https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023362.jpg","https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023376.png","https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023386.jpg","https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023392.jpg","https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023399.jpg","https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023546.jpg","https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023562.jpg","https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023572.jpg","https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023578.jpg","https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023584.jpg","https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023685.jpg","https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023716.jpg","https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023722.jpg","https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023728.png","https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023739.png","https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023770.jpg","https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023832.jpg","https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023859.jpg","https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023871.jpg","https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023943.jpg","https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023992.jpg","https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023026.jpg","https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023034.jpg","https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023053.jpg","https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222226972.jpg","https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222226970.jpg","https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222226980.jpg","https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222226975.jpg","https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222226973.jpg","https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222226987.jpg","https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222226355.jpg","https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222226373.jpg","https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222226388.jpg","https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222226397.jpg","https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222226407.jpg","https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222226421.jpg","https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222226522.jpg","https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222226531.jpg","https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222226543.jpg","https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222226565.jpg","https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222226608.jpg","https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222226627.jpg","https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222226706.jpg","https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222226714.jpg","https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222226722.jpg"],"datePublished":"2023-11-20T13:16:57.000Z","dateModified":"2023-12-04T13:14:48.360Z","author":{"@type":"Person","name":"chai"},"publisher":{"@type":"Organization","name":"热爱学习的未来酱","logo":{"@type":"ImageObject"}},"description":"第7章 Ubuntu和Debian系统构建在前面的几个章节中，我们利用了busybox，buildroot，yocto工具构建文件系统。我们也可以使用Linux发行版来直接作为文件系统，比如Ubuntu系统和Debian系统。由于Ubuntu和Debian系统的构建方法相同，所以作者将他们两个系统的构建放到了一起。 注意：必须要在ubuntu20等更高版本的系统上进行本章节的文件系统构建，经测试在"}</script><link rel="canonical" href="http://example.com/2023/11/20/10%20debian%E5%92%8Cubuntu%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%84%E5%BB%BA%E8%AF%A6%E8%A7%A3/"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><!--!--><!-- hexo injector head_end start --><script>
-  (function () {
-      function switchTab() {
-          if (!location.hash) {
-            return;
-          }
+<!DOCTYPE html>
 
-          const id = '#' + CSS.escape(location.hash.substring(1));
-          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
-          if (!$tabMenu) {
-            return;
-          }
 
-          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
-          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
-          Array.from($tabMenuContainer.querySelectorAll('a'))
-              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
-              .forEach($content => $content.classList.add('is-hidden'));
+<html lang="zh-CN">
+  
 
-          if ($tabMenu) {
-              $tabMenu.parentElement.classList.add('is-active');
-          }
-          const $activeTab = document.querySelector(id);
-          if ($activeTab) {
-              $activeTab.classList.remove('is-hidden');
-          }
-      }
-      switchTab();
-      window.addEventListener('hashchange', switchTab, false);
-  })();
-  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="热爱学习的未来酱" type="application/atom+xml">
-</head><body class="is-1-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">热爱学习的未来酱</a></div><div class="navbar-menu"><div class="navbar-end"></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-12"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2023-11-20T13:16:57.000Z" title="2023/11/20 21:16:57">2023-11-20</time>发表</span><span class="level-item"><time dateTime="2023-12-04T13:14:48.360Z" title="2023/12/4 21:14:48">2023-12-04</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE/">瑞芯微</a></span></div></div><h1 class="title is-3 is-size-4-mobile">ubuntu和debian文件系统构建详解</h1><div class="content"><h1 id="第7章-Ubuntu和Debian系统构建"><a href="#第7章-Ubuntu和Debian系统构建" class="headerlink" title="第7章 Ubuntu和Debian系统构建"></a>第7章 Ubuntu和Debian系统构建</h1><p>在前面的几个章节中，我们利用了busybox，buildroot，yocto工具构建文件系统。我们也可以使用Linux发行版来直接作为文件系统，比如Ubuntu系统和Debian系统。由于Ubuntu和Debian系统的构建方法相同，所以作者将他们两个系统的构建放到了一起。</p>
+    <head>
+      <meta charset="utf-8" />
+        
+      <meta name="description" content="永远年轻，永远热泪盈眶" />
+      
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>ubuntu和debian文件系统构建详解 |  热爱学习的未来酱</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      
+<link rel="stylesheet" href="/css/fonts/remixicon.css">
+
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    <link rel="alternate" href="/atom.xml" title="热爱学习的未来酱" type="application/atom+xml">
+</head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-10 debian和ubuntu文件系统构建详解"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  ubuntu和debian文件系统构建详解
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/11/20/10%20debian%E5%92%8Cubuntu%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%84%E5%BB%BA%E8%AF%A6%E8%A7%A3/" class="article-date">
+  <time datetime="2023-11-20T13:16:57.000Z" itemprop="datePublished">2023-11-20</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE/">瑞芯微</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">10.9k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">48 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="第7章-Ubuntu和Debian系统构建"><a href="#第7章-Ubuntu和Debian系统构建" class="headerlink" title="第7章 Ubuntu和Debian系统构建"></a>第7章 Ubuntu和Debian系统构建</h1><p>在前面的几个章节中，我们利用了busybox，buildroot，yocto工具构建文件系统。我们也可以使用Linux发行版来直接作为文件系统，比如Ubuntu系统和Debian系统。由于Ubuntu和Debian系统的构建方法相同，所以作者将他们两个系统的构建放到了一起。</p>
 <p>注意：必须要在ubuntu20等更高版本的系统上进行本章节的文件系统构建，经测试在ubutnu18上因为一些工具的版本问题，会出现很多意想不到的问题。</p>
 <h2 id="7-1-安装所需的工具"><a href="#7-1-安装所需的工具" class="headerlink" title="7.1 安装所需的工具"></a>7.1 安装所需的工具</h2><p>使用如下命令安装所需的工具</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install binfmt-support qemu qemu-user-static debootstrap</span><br></pre></td></tr></table></figure>
@@ -355,11 +436,466 @@
 <p>chmod 777 mk-image.sh post-build.sh<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222226714.jpg" alt="img"></p>
 <p>然后运行mk-image.sh脚本即可完成烧写镜像的制作了，制作过程如下图所示：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222226722.jpg" alt="img"></p>
 <p>制作完成之后会在当前目录生成一个名为rootfs.img的烧写镜像，只需要根据烧写手册进行单独烧写即可。至此，关于Ubuntu和Debian文件系统的构建就讲解完成了。</p>
-</div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/2023/12/02/16-%E9%A6%99%E6%A9%99%E6%B4%BE%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%84%E5%BB%BA%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">香橙派文件系统构建脚本分析</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2023/11/19/9%20%E6%98%BE%E7%A4%BA%E7%A1%AC%E4%BB%B6%E5%8F%91%E5%B1%95%E4%B8%8E%E8%A7%86%E9%A2%91%E5%BC%80%E5%8F%91%E7%9F%A5%E8%AF%86%E7%82%B9%E6%89%AB%E7%9B%B2/"><span class="level-item">显示硬件发展与视频开发知识点扫盲</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><!--!--></div><!--!--><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/">热爱学习的未来酱</a><p class="is-size-7"><span>&copy; 2023 chai</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
-            article: {
-                highlight: {
-                    clipboard: true,
-                    fold: 'unfolded'
-                }
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2023/11/20/10%20debian%E5%92%8Cubuntu%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%84%E5%BB%BA%E8%AF%A6%E8%A7%A3/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2023/12/02/16-%E9%A6%99%E6%A9%99%E6%B4%BE%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%84%E5%BB%BA%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            香橙派文件系统构建脚本分析
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2023/11/19/9%20%E6%98%BE%E7%A4%BA%E7%A1%AC%E4%BB%B6%E5%8F%91%E5%B1%95%E4%B8%8E%E8%A7%86%E9%A2%91%E5%BC%80%E5%8F%91%E7%9F%A5%E8%AF%86%E7%82%B9%E6%89%AB%E7%9B%B2/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">显示硬件发展与视频开发知识点扫盲</div>
+      </a>
+    
+  </nav>
+
+  
+   
+  
+   
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2015-2023
+        <i class="ri-heart-fill heart_icon"></i> chai
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="热爱学习的未来酱"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE">瑞芯微</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/%E5%AD%A6%E4%B9%A0">学习</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/%E7%94%9F%E6%B4%BB">生活</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
             }
-        };</script><script src="/js/column.js"></script><!--!--><script src="/js/main.js" defer></script><!--!--></body></html>
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="52"
+        src="//music.163.com/outchain/player?type=2&id=22707008&auto=0&height=32"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
+    
+    
+
+  </div>
+</body>
+
+</html>

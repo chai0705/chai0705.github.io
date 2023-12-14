@@ -1,36 +1,147 @@
-<!doctype html>
-<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><title>热爱学习的未来酱</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="热爱学习的未来酱"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="热爱学习的未来酱"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="永远年轻，永远热泪盈眶"><meta property="og:type" content="website"><meta property="og:title" content="热爱学习的未来酱"><meta property="og:url" content="http://example.com/"><meta property="og:site_name" content="热爱学习的未来酱"><meta property="og:description" content="永远年轻，永远热泪盈眶"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="http://example.com/img/og_image.png"><meta property="article:author" content="chai"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://example.com/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://example.com"},"headline":"热爱学习的未来酱","image":["http://example.com/img/og_image.png"],"author":{"@type":"Person","name":"chai"},"publisher":{"@type":"Organization","name":"热爱学习的未来酱","logo":{"@type":"ImageObject"}},"description":"永远年轻，永远热泪盈眶"}</script><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><!--!--><!-- hexo injector head_end start --><script>
-  (function () {
-      function switchTab() {
-          if (!location.hash) {
-            return;
-          }
+<!DOCTYPE html>
 
-          const id = '#' + CSS.escape(location.hash.substring(1));
-          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
-          if (!$tabMenu) {
-            return;
-          }
 
-          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
-          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
-          Array.from($tabMenuContainer.querySelectorAll('a'))
-              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
-              .forEach($content => $content.classList.add('is-hidden'));
+<html lang="zh-CN">
+  
 
-          if ($tabMenu) {
-              $tabMenu.parentElement.classList.add('is-active');
-          }
-          const $activeTab = document.querySelector(id);
-          if ($activeTab) {
-              $activeTab.classList.remove('is-hidden');
-          }
-      }
-      switchTab();
-      window.addEventListener('hashchange', switchTab, false);
-  })();
-  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="热爱学习的未来酱" type="application/atom+xml">
-</head><body class="is-1-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">热爱学习的未来酱</a></div><div class="navbar-menu"><div class="navbar-end"></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-12"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2023-11-20T13:16:57.000Z" title="2023/11/20 21:16:57">2023-11-20</time>发表</span><span class="level-item"><time dateTime="2023-12-04T13:14:48.360Z" title="2023/12/4 21:14:48">2023-12-04</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE/">瑞芯微</a></span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2023/11/20/10%20debian%E5%92%8Cubuntu%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%84%E5%BB%BA%E8%AF%A6%E8%A7%A3/">ubuntu和debian文件系统构建详解</a></p><div class="content"><h1 id="第7章-Ubuntu和Debian系统构建"><a href="#第7章-Ubuntu和Debian系统构建" class="headerlink" title="第7章 Ubuntu和Debian系统构建"></a>第7章 Ubuntu和Debian系统构建</h1><p>在前面的几个章节中，我们利用了busybox，buildroot，yocto工具构建文件系统。我们也可以使用Linux发行版来直接作为文件系统，比如Ubuntu系统和Debian系统。由于Ubuntu和Debian系统的构建方法相同，所以作者将他们两个系统的构建放到了一起。</p>
+    <head>
+      <meta charset="utf-8" />
+        
+      <meta name="description" content="永远年轻，永远热泪盈眶" />
+      
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title> 热爱学习的未来酱</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      
+<link rel="stylesheet" href="/css/fonts/remixicon.css">
+
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    <link rel="alternate" href="/atom.xml" title="热爱学习的未来酱" type="application/atom+xml">
+</head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      
+<section class="cover">
+    
+  <div class="cover-frame">
+    <div class="bg-box">
+      <img src="/images/1.png" alt="image frame" />
+    </div>
+    <div class="cover-inner text-center text-white">
+      <h1><a href="/">热爱学习的未来酱</a></h1>
+      <div id="subtitle-box">
+        
+        <span id="subtitle"></span>
+        
+      </div>
+      <div>
+        
+      </div>
+    </div>
+  </div>
+  <div class="cover-learn-more">
+    <a href="javascript:void(0)" class="anchor"><i class="ri-arrow-down-line"></i></a>
+  </div>
+</section>
+
+
+
+<script src="https://cdn.staticfile.org/typed.js/2.0.12/typed.min.js"></script>
+
+
+<!-- Subtitle -->
+
+  <script>
+    try {
+      var typed = new Typed("#subtitle", {
+        strings: ['巨人的肩膀，除了站得更高，随之而来的还有压力', '向上的路，并不拥挤。拥挤是因为，大部分人选择了安逸', '想要的都拥有，得不到的都释怀'],
+        startDelay: 0,
+        typeSpeed: 200,
+        loop: true,
+        backSpeed: 100,
+        showCursor: true
+      });
+    } catch (err) {
+      console.log(err)
+    }
+  </script>
+  
+<div id="main">
+  <section class="outer">
+  
+  
+  <article class="articles">
+    
+    
+    
+    
+    <article
+  id="post-10 debian和ubuntu文件系统构建详解"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/11/20/10%20debian%E5%92%8Cubuntu%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%84%E5%BB%BA%E8%AF%A6%E8%A7%A3/"
+    >ubuntu和debian文件系统构建详解</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/11/20/10%20debian%E5%92%8Cubuntu%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%84%E5%BB%BA%E8%AF%A6%E8%A7%A3/" class="article-date">
+  <time datetime="2023-11-20T13:16:57.000Z" itemprop="datePublished">2023-11-20</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE/">瑞芯微</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="第7章-Ubuntu和Debian系统构建"><a href="#第7章-Ubuntu和Debian系统构建" class="headerlink" title="第7章 Ubuntu和Debian系统构建"></a>第7章 Ubuntu和Debian系统构建</h1><p>在前面的几个章节中，我们利用了busybox，buildroot，yocto工具构建文件系统。我们也可以使用Linux发行版来直接作为文件系统，比如Ubuntu系统和Debian系统。由于Ubuntu和Debian系统的构建方法相同，所以作者将他们两个系统的构建放到了一起。</p>
 <p>注意：必须要在ubuntu20等更高版本的系统上进行本章节的文件系统构建，经测试在ubutnu18上因为一些工具的版本问题，会出现很多意想不到的问题。</p>
 <h2 id="7-1-安装所需的工具"><a href="#7-1-安装所需的工具" class="headerlink" title="7.1 安装所需的工具"></a>7.1 安装所需的工具</h2><p>使用如下命令安装所需的工具</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install binfmt-support qemu qemu-user-static debootstrap</span><br></pre></td></tr></table></figure>
@@ -355,7 +466,58 @@
 <p>chmod 777 mk-image.sh post-build.sh<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222226714.jpg" alt="img"></p>
 <p>然后运行mk-image.sh脚本即可完成烧写镜像的制作了，制作过程如下图所示：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222226722.jpg" alt="img"></p>
 <p>制作完成之后会在当前目录生成一个名为rootfs.img的烧写镜像，只需要根据烧写手册进行单独烧写即可。至此，关于Ubuntu和Debian文件系统的构建就讲解完成了。</p>
-</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2023-11-19T13:16:56.000Z" title="2023/11/19 21:16:56">2023-11-19</time>发表</span><span class="level-item"><time dateTime="2023-12-04T13:28:45.197Z" title="2023/12/4 21:28:45">2023-12-04</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a></span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2023/11/19/9%20%E6%98%BE%E7%A4%BA%E7%A1%AC%E4%BB%B6%E5%8F%91%E5%B1%95%E4%B8%8E%E8%A7%86%E9%A2%91%E5%BC%80%E5%8F%91%E7%9F%A5%E8%AF%86%E7%82%B9%E6%89%AB%E7%9B%B2/">显示硬件发展与视频开发知识点扫盲</a></p><div class="content"><p> 电脑上炫酷的展示，生动的形象，离不开硬件的支持，硬件是音视频编程文化的一部分。开发者有必要对相关硬件大概了解。本专题涉及视频硬件相关话题，音频相关以后讲述。</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-9 显示硬件发展与视频开发知识点扫盲"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/11/19/9%20%E6%98%BE%E7%A4%BA%E7%A1%AC%E4%BB%B6%E5%8F%91%E5%B1%95%E4%B8%8E%E8%A7%86%E9%A2%91%E5%BC%80%E5%8F%91%E7%9F%A5%E8%AF%86%E7%82%B9%E6%89%AB%E7%9B%B2/"
+    >显示硬件发展与视频开发知识点扫盲</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/11/19/9%20%E6%98%BE%E7%A4%BA%E7%A1%AC%E4%BB%B6%E5%8F%91%E5%B1%95%E4%B8%8E%E8%A7%86%E9%A2%91%E5%BC%80%E5%8F%91%E7%9F%A5%E8%AF%86%E7%82%B9%E6%89%AB%E7%9B%B2/" class="article-date">
+  <time datetime="2023-11-19T13:16:56.000Z" itemprop="datePublished">2023-11-19</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p> 电脑上炫酷的展示，生动的形象，离不开硬件的支持，硬件是音视频编程文化的一部分。开发者有必要对相关硬件大概了解。本专题涉及视频硬件相关话题，音频相关以后讲述。</p>
 <p>​    视频编程的本质是图形图像编程，本专题以时间为主线，以公司硬件发展为点位，以图像图像开发接口为切面，宏观进行介绍，希望对视频编程开发者进行有益的启示。</p>
 <p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311192138685.png" alt="img"></p>
 <p>​    本系列文章依发展顺序，从早期起源开始，再到2D时代，3D时代，移动时代，智能时代，最后到显示标准与专业视频处理单元，大体分为6部分。</p>
@@ -1639,7 +1801,58 @@
 <h2 id="9-23、显卡流水线"><a href="#9-23、显卡流水线" class="headerlink" title="9.23、显卡流水线"></a>9.23、显卡流水线</h2><p>​    显卡流水线：数量的多少决定显卡性能高低的一个很重要的指标，Nvidia和AMD-ATI也在不断地增加显卡的流处理器数量使显卡的性能达到跳跃式增长。这个和核心构建，显存带宽等因素配合，单一多，意义不大。</p>
 <h2 id="9-24、F-Buffer"><a href="#9-24、F-Buffer" class="headerlink" title="9.24、F-Buffer"></a>9.24、F-Buffer</h2><p>​    F-Buffer：片断流缓冲区技术，处理无限制指令长度的阴影着色程序。执行原理：把需要经过渲染引擎多次处理的像素临时存储起来，而不是把它们写到帧缓冲里面。只有那些需要单通道处理的数据被写到帧缓冲。这样节省显存的带宽，从而使VPU工作得更加有效率。缺点：F-Buffer只能对所有流程都是基于同一视点的多流程渲染有效，对于用于生成不同视点图像的多流程渲染没用，在日常3D应用中，不同视点的多流程渲染十分普遍。其次F-Buffer的执行过程有可能产生溢出，一旦产生溢出其处理过程十分复杂，会影响GPU的执行效率。</p>
 <h2 id="9-25、FPGA"><a href="#9-25、FPGA" class="headerlink" title="9.25、FPGA"></a>9.25、FPGA</h2><p>FPGA：可编程逻辑，计算效率高，更接近底层IO，通过冗余晶体管和连线实现逻辑可编辑。本质上是无指令、无需共享内存，计算效率比CPU、GPU高。主要应用于智能手机、便携式移动设备、汽车。</p>
-</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2023-11-19T09:16:56.000Z" title="2023/11/19 17:16:56">2023-11-19</time>发表</span><span class="level-item"><time dateTime="2023-12-04T13:15:01.834Z" title="2023/12/4 21:15:01">2023-12-04</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a></span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2023/11/19/8%20%E9%9F%B3%E8%A7%86%E9%A2%91%E7%BC%96%E8%A7%A3%E7%A0%81%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E5%AD%A6%E4%B9%A0/">音视频编解码相关知识学习</a></p><div class="content"><p>前些天一直在研究关于GPUi相关的知识，在周六的时候终于是写好了相应的测试手册，周一法师检测出问题的话我再加，其实也没啥可以加的东西了，不管是OPENGL还是OPENCL，只要相应的mali库成功即可，其他的倒是没啥，然后呢我也该去搞一下mpp 音视频编解码相关的东西了，后面其实还有摄像头啥的，这些都是要搞的，至少软件里面是要适配的对吧，还有那个缠绕我好久的buildroot opencv的问题，问题太多了，但是总要一点一点来，问题是一个一个解决的，总不可能一蹴而就，慢慢来呗</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-8 音视频编解码相关知识学习"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/11/19/8%20%E9%9F%B3%E8%A7%86%E9%A2%91%E7%BC%96%E8%A7%A3%E7%A0%81%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E5%AD%A6%E4%B9%A0/"
+    >音视频编解码相关知识学习</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/11/19/8%20%E9%9F%B3%E8%A7%86%E9%A2%91%E7%BC%96%E8%A7%A3%E7%A0%81%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E5%AD%A6%E4%B9%A0/" class="article-date">
+  <time datetime="2023-11-19T09:16:56.000Z" itemprop="datePublished">2023-11-19</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>前些天一直在研究关于GPUi相关的知识，在周六的时候终于是写好了相应的测试手册，周一法师检测出问题的话我再加，其实也没啥可以加的东西了，不管是OPENGL还是OPENCL，只要相应的mali库成功即可，其他的倒是没啥，然后呢我也该去搞一下mpp 音视频编解码相关的东西了，后面其实还有摄像头啥的，这些都是要搞的，至少软件里面是要适配的对吧，还有那个缠绕我好久的buildroot opencv的问题，问题太多了，但是总要一点一点来，问题是一个一个解决的，总不可能一蹴而就，慢慢来呗</p>
 <h1 id="音视频的基本概念"><a href="#音视频的基本概念" class="headerlink" title="音视频的基本概念"></a>音视频的基本概念</h1><h2 id="一-视频"><a href="#一-视频" class="headerlink" title="一 视频"></a>一 视频</h2><h3 id="1、码率√"><a href="#1、码率√" class="headerlink" title="1、码率√"></a>1、码率√</h3><p>码率，又叫比特率，单位时间内传输的数据量，单位一般为kbps(千位每秒)。需要注意的是，这里b代表bit，而不是Byte，这里乘以8是Byte转成bit。计算公式：平均码率(kbps)&#x3D;文件大小(kB)*8&#x2F;时间(s)。动态码率(kbps)&#x3D;每秒传输数据量(kB)*8。</p>
 <p>“bps” 是 “bits per second” 的缩写，指的是数据传输速率或比特率，用于测量数据在通信或存储系统中的传输速度。它表示每秒传输的比特数，其中比特是计算机中最小的数据单位。比特率通常用于描述网络带宽、调制解调器速度、数字音频&#x2F;视频流的传输速度等。</p>
 <p>恒定码率：CBR，码率稳定可控，带宽要求不高，图像变化量比较大时方块效应比较明显。</p>
@@ -1928,7 +2141,58 @@
 
 <p>声道数与声道布局关系，如下表所示：</p>
 <p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311192116640.png" alt="image-20231119211617624"></p>
-<h1 id="VPU"><a href="#VPU" class="headerlink" title="VPU"></a>VPU</h1></div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2023-11-14T11:55:17.000Z" title="2023/11/14 19:55:17">2023-11-14</time>发表</span><span class="level-item"><time dateTime="2023-12-04T13:28:40.755Z" title="2023/12/4 21:28:40">2023-12-04</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE/">瑞芯微</a></span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2023/11/14/7%20rk%20deb%E5%8C%85%E7%9A%84%E5%88%B6%E4%BD%9C/">rkdeb包的制作</a></p><div class="content"><p>先说一下前情提要：<br>    最近这一个月一直在制作debian和ubuntu文件系统，rk官方默认情况下只是构建了debian，好像是因为版权问题，然而呢，我肯定是要构建ubuntu镜像的，而我要做的，就是根据rk提供的debian系统的构建方法，来进行ubuntu的构建。</p>
+<h1 id="VPU"><a href="#VPU" class="headerlink" title="VPU"></a>VPU</h1> 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-7 rk deb包的制作"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/11/14/7%20rk%20deb%E5%8C%85%E7%9A%84%E5%88%B6%E4%BD%9C/"
+    >rkdeb包的制作</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/11/14/7%20rk%20deb%E5%8C%85%E7%9A%84%E5%88%B6%E4%BD%9C/" class="article-date">
+  <time datetime="2023-11-14T11:55:17.000Z" itemprop="datePublished">2023-11-14</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE/">瑞芯微</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>先说一下前情提要：<br>    最近这一个月一直在制作debian和ubuntu文件系统，rk官方默认情况下只是构建了debian，好像是因为版权问题，然而呢，我肯定是要构建ubuntu镜像的，而我要做的，就是根据rk提供的debian系统的构建方法，来进行ubuntu的构建。</p>
 <p>​	最大的问题出现在deb包的构建,也就是下面这些deb包：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311132050152.png" alt="image-20231113205017093"></p>
 <p>很多很多的包，根本不知道从哪里来的~~，而现在呢大约知道了，首先呢先来分析一下各个dockerfile文件。</p>
 <p>几个很重要的github链接：</p>
@@ -2535,7 +2799,58 @@
 <p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311162144377.png" alt="image-20231116143753225"></p>
 <h1 id="22-开发调试流程简介"><a href="#22-开发调试流程简介" class="headerlink" title="22.开发调试流程简介"></a>22.开发调试流程简介</h1><p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311162144550.png" alt="image-20231116162242671"></p>
 <p>Rockchip_Developer_Guide_Third_Party_System_Adaptation_CN.pdf<br>这个pdf文件很重要。</p>
-</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2023-11-12T13:55:17.000Z" title="2023/11/12 21:55:17">2023-11-12</time>发表</span><span class="level-item"><time dateTime="2023-12-03T14:36:27.955Z" title="2023/12/3 22:36:27">2023-12-03</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a></span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2023/11/12/6%20ad%E5%AD%A6%E4%B9%A0/">PCB学习</a></p><div class="content"><p>从今天开始学习一下PCB的学习，我当然也是想画一些高速PCB板子，那些8层的、10层的，但是路还很远，很长，所以慢慢的加油吧。</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-6 ad学习"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/11/12/6%20ad%E5%AD%A6%E4%B9%A0/"
+    >PCB学习</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/11/12/6%20ad%E5%AD%A6%E4%B9%A0/" class="article-date">
+  <time datetime="2023-11-12T13:55:17.000Z" itemprop="datePublished">2023-11-12</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>从今天开始学习一下PCB的学习，我当然也是想画一些高速PCB板子，那些8层的、10层的，但是路还很远，很长，所以慢慢的加油吧。</p>
 <p>11月12 日，今天来学习第一部分，软件的安装，由于使用的是两层板，版本是AD19,所以这里要先进行软件的安装和设置，后续的内容，下一个星期日再见。</p>
 <h1 id="1-AD-19软件安装和配置"><a href="#1-AD-19软件安装和配置" class="headerlink" title="1 AD 19软件安装和配置"></a>1 AD 19软件安装和配置</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">链接：https://pan.baidu.com/s/1gznZRe00REAmoUThExJrCQ </span><br><span class="line">提取码：gtqh </span><br><span class="line">--来自百度网盘超级会员V6的分享</span><br></pre></td></tr></table></figure>
 
@@ -2575,7 +2890,58 @@
 <p>保存好的ad配置网盘链接如下所示：<br>链接：<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1EKzwbSOtfkkl_NPCFTDGCw">https://pan.baidu.com/s/1EKzwbSOtfkkl_NPCFTDGCw</a><br>提取码：sd8a<br>–来自百度网盘超级会员V6的分享</p>
 <p>可以直接进行导入即可，省去了这一系列的设置，还是挺方便的。</p>
 <p>&#x3D;&#x3D;11月12日 21：48学习完成，下一次学习就是下个周日了，希望不会忘记&#x3D;&#x3D;</p>
-</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2023-11-09T01:55:17.000Z" title="2023/11/9 09:55:17">2023-11-09</time>发表</span><span class="level-item"><time dateTime="2023-12-04T13:28:35.689Z" title="2023/12/4 21:28:35">2023-12-04</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a></span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2023/11/09/5%20docker%E5%AD%A6%E4%B9%A0/">docker学习</a></p><div class="content"><p>这是我学习docker的一个前提条件，在之前的一些时间，我也是简单的看了一下docker，当时我是想用docker来进行deb包的构建的，为什么想到用docker了呢，这是因为我看大佬的github和瑞芯微的指导手册里都使用的docker，其实这个就跟开发板直接编译的效果是一样的，只是docker是在本机上，所以操作更流畅一些，而且开发板的编译速度以及方便程度，是有些区别的，所以docker就出现了，再然后我发现源码的编译里也是可以用到docker的，毕竟也就仅仅是一些环境而已，所以我又萌发了用docker编译源码的想法，所以docker的学习正式开始。</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-5 docker学习"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/11/09/5%20docker%E5%AD%A6%E4%B9%A0/"
+    >docker学习</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/11/09/5%20docker%E5%AD%A6%E4%B9%A0/" class="article-date">
+  <time datetime="2023-11-09T01:55:17.000Z" itemprop="datePublished">2023-11-09</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>这是我学习docker的一个前提条件，在之前的一些时间，我也是简单的看了一下docker，当时我是想用docker来进行deb包的构建的，为什么想到用docker了呢，这是因为我看大佬的github和瑞芯微的指导手册里都使用的docker，其实这个就跟开发板直接编译的效果是一样的，只是docker是在本机上，所以操作更流畅一些，而且开发板的编译速度以及方便程度，是有些区别的，所以docker就出现了，再然后我发现源码的编译里也是可以用到docker的，毕竟也就仅仅是一些环境而已，所以我又萌发了用docker编译源码的想法，所以docker的学习正式开始。</p>
 <p><strong>弱小和无知不是生存的障碍，傲慢才是</strong></p>
 <p><strong>唯有出现需求，你的目标和需求相匹配，才是学习最快速的路径。</strong></p>
 <h1 id="Docker为什么出现"><a href="#Docker为什么出现" class="headerlink" title="Docker为什么出现"></a>Docker为什么出现</h1><p>在我看来，我不是运维人员，我是嵌入式软件工程师，现在编译一个系统，换一个开发板，他们的环境都是不一样的，这就很烦，然而docker呢就很方便的解决了依赖这些相关的问题，而且还很小，这也是我学习docker的原因。</p>
@@ -2762,7 +3128,58 @@
 <p>测试没有什么问题，编译的时间太长了，晚上再测。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --privileged -it -v /home/topeet/Android/3588-android12:/home/topeet/3588-android12 ubuntu20:1</span><br></pre></td></tr></table></figure>
 
-</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2023-10-26T01:55:17.000Z" title="2023/10/26 09:55:17">2023-10-26</time>发表</span><span class="level-item"><time dateTime="2023-12-04T13:28:32.518Z" title="2023/12/4 21:28:32">2023-12-04</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE/">瑞芯微</a></span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2023/10/26/4%20%E9%9F%B3%E8%A7%86%E9%A2%91%E6%B5%8B%E8%AF%95/">音视频测试</a></p><div class="content"><h1 id="1-gst-play-1-0测试"><a href="#1-gst-play-1-0测试" class="headerlink" title="1.gst-play-1.0测试"></a>1.gst-play-1.0测试</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gst-play-1.0 --videosink=xvimagesink /usr/local/test.mp4</span><br></pre></td></tr></table></figure>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-4 音视频测试"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/10/26/4%20%E9%9F%B3%E8%A7%86%E9%A2%91%E6%B5%8B%E8%AF%95/"
+    >音视频测试</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/10/26/4%20%E9%9F%B3%E8%A7%86%E9%A2%91%E6%B5%8B%E8%AF%95/" class="article-date">
+  <time datetime="2023-10-26T01:55:17.000Z" itemprop="datePublished">2023-10-26</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE/">瑞芯微</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="1-gst-play-1-0测试"><a href="#1-gst-play-1-0测试" class="headerlink" title="1.gst-play-1.0测试"></a>1.gst-play-1.0测试</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gst-play-1.0 --videosink=xvimagesink /usr/local/test.mp4</span><br></pre></td></tr></table></figure>
 
 <p>GStreamer 的 gst-play-1.0 工具会加载指定的视频文件，并使用 xvimagesink 插件将视频渲染到 X Window 系统上的显示设备上，以实现视频的播放效果。</p>
 <p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310260944983.png" alt="image-20231026094404955"></p>
@@ -2805,7 +3222,58 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mpi_enc_test -i /home/topeet/test.yuv -t 7 -n 250 -o /home/topeet/test.h264 -w 640 -h 480 -fps 25</span><br></pre></td></tr></table></figure>
 
 <p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310261712235.png" alt="image-20231026171223218"></p>
-</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2023-10-19T12:47:53.000Z" title="2023/10/19 20:47:53">2023-10-19</time>发表</span><span class="level-item"><time dateTime="2023-12-04T13:16:01.596Z" title="2023/12/4 21:16:01">2023-12-04</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE/">瑞芯微</a></span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2023/10/19/14%20%E6%9E%84%E5%BB%BAdeb%E5%8C%85.md/">如何构建deb包</a></p><div class="content"><h1 id="1-三个核心概念"><a href="#1-三个核心概念" class="headerlink" title="1.三个核心概念"></a>1.三个核心概念</h1><p>三个最核心的概念为：</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-14 构建deb包.md"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/10/19/14%20%E6%9E%84%E5%BB%BAdeb%E5%8C%85.md/"
+    >如何构建deb包</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/10/19/14%20%E6%9E%84%E5%BB%BAdeb%E5%8C%85.md/" class="article-date">
+  <time datetime="2023-10-19T12:47:53.000Z" itemprop="datePublished">2023-10-19</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE/">瑞芯微</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="1-三个核心概念"><a href="#1-三个核心概念" class="headerlink" title="1.三个核心概念"></a>1.三个核心概念</h1><p>三个最核心的概念为：</p>
 <ul>
 <li>上游原始代码包（upstream tarball）:<ul>
 <li>通常，人们为上游开发者（通常为第三方）编写的软件打包。</li>
@@ -2917,7 +3385,58 @@
 
 <p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310192151417.png" alt="image-20231019215145390"></p>
 <p>这就好了，搞到这个地方应该就可以了，我认为。ok，那就先这样。</p>
-</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2023-10-16T13:55:17.000Z" title="2023/10/16 21:55:17">2023-10-16</time>发表</span><span class="level-item"><time dateTime="2023-12-03T14:35:49.994Z" title="2023/12/3 22:35:49">2023-12-03</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE/">瑞芯微</a></span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2023/10/16/2%20buildroot%E7%9A%84%E5%AD%A6%E4%B9%A0/">buildroot的学习</a></p><div class="content"><p>buildroot官网地址：<a target="_blank" rel="noopener" href="https://buildroot.org/">https://buildroot.org/</a></p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-2 buildroot的学习"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/10/16/2%20buildroot%E7%9A%84%E5%AD%A6%E4%B9%A0/"
+    >buildroot的学习</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/10/16/2%20buildroot%E7%9A%84%E5%AD%A6%E4%B9%A0/" class="article-date">
+  <time datetime="2023-10-16T13:55:17.000Z" itemprop="datePublished">2023-10-16</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE/">瑞芯微</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>buildroot官网地址：<a target="_blank" rel="noopener" href="https://buildroot.org/">https://buildroot.org/</a></p>
 <p>github链接：<a target="_blank" rel="noopener" href="https://github.com/buildroot/buildroot">https://github.com/buildroot/buildroot</a></p>
 <p>两个指导文档</p>
 <p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310162227581.png" alt="image-20231016222739549"></p>
@@ -2963,7 +3482,58 @@
 <p><strong>杂项：</strong><br>source - 下载离线构建所需的所有源代码<br>external-deps - 列出使用的外部软件包<br>legal-info - 生成有关许可证合规性的信息<br>show-info - 生成关于软件包的信息，以JSON格式呈现<br>pkg-stats - 以JSON和HTML格式生成有关软件包的信息<br>printvars - 导出通过VARS&#x3D;…选择的内部变量<br>show-vars - 以JSON格式呈现所有内部变量；使用VARS&#x3D;…限制列表以匹配该模式</p>
 <p>make V&#x3D;0|1 - 0 &#x3D;&gt; 静默构建（默认），1 &#x3D;&gt; 详细构建<br>make O&#x3D;dir - 将所有输出文件定位在”dir”中，包括.config文件</p>
 <p>有关更多详细信息，请参阅README，生成Buildroot手册或在线查阅它，网址为<a target="_blank" rel="noopener" href="http://buildroot.org/docs.html">http://buildroot.org/docs.html</a></p>
-</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2023-10-08T12:47:53.000Z" title="2023/10/8 20:47:53">2023-10-08</time>发表</span><span class="level-item"><time dateTime="2023-12-04T13:10:54.693Z" title="2023/12/4 21:10:54">2023-12-04</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE/">瑞芯微</a></span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2023/10/08/18%20%E6%8C%82%E8%BD%BD%E9%95%9C%E5%83%8F%E6%96%87%E4%BB%B6/">挂载镜像文件</a></p><div class="content"><p>编译完成之后的镜像为ubuntu-22.04.3-preinstalled-desktop-arm64.img，这里面包括spl tpl uboot boot分区和文件系统分区，其中spl tpl uboot是通过dd命令写入的，而另外两个是创建的分区，现在我想的是挂载上这个img镜像，然后查看里面的系统，在CSDN上找到了这样一个博客</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-18 挂载镜像文件"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/10/08/18%20%E6%8C%82%E8%BD%BD%E9%95%9C%E5%83%8F%E6%96%87%E4%BB%B6/"
+    >挂载镜像文件</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/10/08/18%20%E6%8C%82%E8%BD%BD%E9%95%9C%E5%83%8F%E6%96%87%E4%BB%B6/" class="article-date">
+  <time datetime="2023-10-08T12:47:53.000Z" itemprop="datePublished">2023-10-08</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE/">瑞芯微</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>编译完成之后的镜像为ubuntu-22.04.3-preinstalled-desktop-arm64.img，这里面包括spl tpl uboot boot分区和文件系统分区，其中spl tpl uboot是通过dd命令写入的，而另外两个是创建的分区，现在我想的是挂载上这个img镜像，然后查看里面的系统，在CSDN上找到了这样一个博客</p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/yangleo1987/article/details/58603205?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522169677013016800184112679%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&request_id=169677013016800184112679&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_ecpm_v1~rank_v31_ecpm-2-58603205-null-null.142%5Ev95%5EchatgptT3_1&utm_term=linux%E4%B8%8B%E6%8C%82%E8%BD%BDimg%E9%95%9C%E5%83%8F%E6%96%87%E4%BB%B6&spm=1018.2226.3001.4187">挂载img分区</a></p>
 <p>首先使用fdisk命令查看img镜像分区</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fdisk ubuntu-22.04.3-preinstalled-desktop-arm64.img</span><br></pre></td></tr></table></figure>
@@ -2997,11 +3567,386 @@
 
 
 
-</div></article></div><nav class="pagination" role="navigation" aria-label="pagination"><div class="pagination-previous"><a href="/">上一页</a></div><div class="pagination-next"><a href="/page/3/">下一页</a></div><ul class="pagination-list is-hidden-mobile"><li><a class="pagination-link" href="/">1</a></li><li><a class="pagination-link is-current" href="/page/2/">2</a></li><li><a class="pagination-link" href="/page/3/">3</a></li></ul></nav></div><!--!--><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/">热爱学习的未来酱</a><p class="is-size-7"><span>&copy; 2023 chai</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
-            article: {
-                highlight: {
-                    clipboard: true,
-                    fold: 'unfolded'
-                }
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+  </article>
+  
+
+  
+  <nav class="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/">上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">下一页</a>
+  </nav>
+  
+</section>
+</div>
+
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2015-2023
+        <i class="ri-heart-fill heart_icon"></i> chai
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="热爱学习的未来酱"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE">瑞芯微</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/%E5%AD%A6%E4%B9%A0">学习</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/%E7%94%9F%E6%B4%BB">生活</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+
+<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
             }
-        };</script><script src="/js/column.js"></script><!--!--><script src="/js/main.js" defer></script><!--!--></body></html>
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="52"
+        src="//music.163.com/outchain/player?type=2&id=22707008&auto=0&height=32"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
+    
+    
+
+  </div>
+</body>
+
+</html>
