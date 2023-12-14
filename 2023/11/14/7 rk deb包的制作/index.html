@@ -1,132 +1,224 @@
-<!DOCTYPE html>
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>rkdeb包的制作 | 热爱学习的未来酱</title><meta name="author" content="chai"><meta name="copyright" content="chai"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="rkdeb包的制作"><meta name="application-name" content="rkdeb包的制作"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="rkdeb包的制作"><meta property="og:url" content="http://example.com/2023/11/14/7%20rk%20deb%E5%8C%85%E7%9A%84%E5%88%B6%E4%BD%9C/index.html"><meta property="og:site_name" content="热爱学习的未来酱"><meta property="og:description" content="先说一下前情提要：    最近这一个月一直在制作debian和ubuntu文件系统，rk官方默认情况下只是构建了debian，好像是因为版权问题，然而呢，我肯定是要构建ubuntu镜像的，而我要做的，就是根据rk提供的debian系统的构建方法，来进行ubuntu的构建。 ​	最大的问题出现在deb"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg"><meta property="article:author" content="chai"><meta property="article:tag"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg"><meta name="description" content="先说一下前情提要：    最近这一个月一直在制作debian和ubuntu文件系统，rk官方默认情况下只是构建了debian，好像是因为版权问题，然而呢，我肯定是要构建ubuntu镜像的，而我要做的，就是根据rk提供的debian系统的构建方法，来进行ubuntu的构建。 ​	最大的问题出现在deb"><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="http://example.com/2023/11/14/7%20rk%20deb%E5%8C%85%E7%9A%84%E5%88%B6%E4%BD%9C/"><link rel="preconnect" href="//cdn.cbd.int"/><meta name="google-site-verification" content="xxx"/><meta name="baidu-site-verification" content="code-xxx"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  linkPageTop: undefined,
+  peoplecanvas: {"enable":true,"img":"https://upload-bbs.miyoushe.com/upload/2023/09/03/125766904/ee23df8517f3c3e3efc4145658269c06_5714860933110284659.png"},
+  postHeadAiDescription: {"enable":true,"gptName":"AnZhiYu","mode":"local","switchBtn":false,"btnLink":"https://afdian.net/item/886a79d4db6711eda42a52540025c377","randomNum":3,"basicWordCount":1000,"key":"xxxx","Referer":"https://xx.xx/"},
+  diytitle: {"enable":true,"leaveTitle":"w(ﾟДﾟ)w 不要走！再看看嘛！","backTitle":"♪(^∇^*)欢迎肥来！"},
+  LA51: undefined,
+  greetingBox: undefined,
+  twikooEnvId: '',
+  commentBarrageConfig:undefined,
+  root: '/',
+  preloader: {"source":3},
+  friends_vue_info: undefined,
+  navMusic: true,
+  mainTone: undefined,
+  authorStatus: undefined,
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":330},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":false,"limitCount":50,"languages":{"author":"作者: chai","link":"链接: ","source":"来源: 热爱学习的未来酱","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#425AEF","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: '热爱学习的未来酱',
+  title: 'rkdeb包的制作',
+  postAI: '',
+  pageFillDescription: '1 dockerfile 文件, 1.1 debian10, 1.2 debian11, 1.3 debian12, 2.问题探究, 1.debian10 dockerfile, 2.debian11 dockerfile, 3.debian12 dockerfile, 4.ubuntu20 dockerfile, 5.ubuntu22 dockerfile, 6.继续构建, 7.测试xserver, 8.测试opencl, 9.对比测试（编译一个什么都没有的ubuntu）, 10 opengl学习, 10.1 环境搭建, 10.2：画一个圆, 10.3 画一个五角星, 10.4 画一个正弦, 10.5 指定着色模型, 10.6 三维变换, 10.7 动起来, 11.opencl学习, 12.rga编译, 13.mpp编译, 14.drm-cursor编译, 15.mali编译, 16.libv4l-mpp编译(目前没这个还不需要), 17.gst-rk编译(目前没这个还不需要), 18.xserver编译, 19.firefly 网址, 20.Rockchip Graphics介绍, 21.ubuntu20 qt的编译, 22.开发调试流程简介先说一下前情提要最近这一个月一直在制作和文件系统官方默认情况下只是构建了好像是因为版权问题然而呢我肯定是要构建镜像的而我要做的就是根据提供的系统的构建方法来进行的构建最大的问题出现在包的构建也就是下面这些包很多很多的包根本不知道从哪里来的而现在呢大约知道了首先呢先来分析一下各个文件几个很重要的链接环境的大佬链接各种库的大佬链接香橙派的仓库链接文件设置多架构环境设置配置以跳过验证添加源列表更新并安装交叉编译所需的基本软件包添加目录安装构建依赖项安装架构下的构建依赖项安装架构下的构建依赖项安装架构下的相关软件包安装安装相关软件包安装相关软件包安装相关软件包安装相关软件包安装相关软件包安装相关软件包安装的构建依赖项生成本地化设置交互式切换到非用户设置多架构环境运行并安装添加文件到目录添加目录到根目录安装构建依赖项安装所需的依赖项安装所需的依赖项安装所需的依赖项安装所需的依赖项安装所需的依赖项安装所需的依赖项安装所需的依赖项生成本地化切换到非用户使用作为基础镜像设置镜像的维护者信息添加架构支持配置禁用的证书验证添加自定义的文件到容器的目录更新源并安装软件包将当前目录下的目录添加到镜像的根目录安装构建过程中需要的依赖包安装构建库所需的依赖包安装构建所需的依赖包安装相关的依赖包安装依赖包安装等依赖包安装等依赖包安装依赖包安装等依赖包安装构建所需的依赖包生成并设置系统的为修改文件并重新配置更新设置打印日志信息安装软件包安装软件包安装软件包安装软件包安装软件包解压软件包更新源并安装依赖包创建名为的用户修改文件允许用户使用命令无需密码验证将用户添加到用户组中切换到用户问题探究默认情况下是不可以下载软件源码的当取消一些特定的注释之后是可以使用命令进行软件包源码的下载的最后一句话忽略即可这是一个目录其中包含了软件包的源代码文件和其他相关文件这是一个压缩文件其中包含了对源代码进行修改的补丁文件文件这是一个文本文件其中包含了软件包的元数据信息例如软件包的名称版本号维护者等这是一个压缩文件其中包含了软件包的原始源代码文件即未经过任何修改的原始文件这是一个数字签名文件用于验证软件包的完整性和真实性由于我是虚拟机上进行测试的所以我应该安装电脑的这里先安装构建的软件包下面需要注意的是这个参数然后使用以下命令构建包这个选项设置构建过程中不运行自动化的测试这个命令用于构建软件包这个选项在构建过程中模拟权限以便可以在非特权用户下进行构建这个选项告诉构建二进制软件包即生成文件这个选项告诉忽略构建依赖关系即不检查构建依赖关系是否满足这个选项告诉不使用软件包的维护者密钥进行签名这个选项告诉不生成源码软件包即不生成文件这个选项指定了目标架构为即构建适用于架构的软件包构建完成之后如下图所示根据提供的软件包列表可以将它们分为以下几类相关的源代码包的二进制软件包的调试符号包相关的二进制软件包的调试符号包的用于安装程序的最小化二进制软件包相关的二进制软件包的调试符号包相关的二进制软件包的调试符号包其他组件的二进制软件包的调试符号包的二进制软件包的调试符号包的二进制软件包的调试符号包的二进制软件包的调试符号包的公共文件包的二进制软件包的二进制软件包的调试符号包为什么会有呢有什么区别在系统中软件包文件的扩展名可以有不同的形式如和这些扩展名代表了不同类型的软件包是最常见的软件包扩展名用于二进制软件包这些软件包包含已经编译好的二进制文件可以直接安装和使用通常用于常规的应用程序库和工具等是用于安装程序的特殊类型的软件包扩展名它表示微型二进制软件包这些软件包通常非常小并包含了在系统安装过程中所需的最小化组件文件主要用于安装程序如期间的系统安装和配置它们通常包含一些核心组件和驱动程序是调试符号软件包的扩展名调试符号包包含了编译后的二进制文件与调试信息的映射关系它们用于在调试软件时进行符号解析和调试通过将调试符号包与相应的二进制软件包结合使用开发人员可以在调试过程中获取更详细和有用的调试信息文件通常用于开发和调试目的也就是说这些才是最重要的那么现在我上面的那些镜像终于有作用了然后拉取大佬的源码拉取完成如下所示然后切换分支到然后查看一下分支最后使用加载一下该源码然后使用以下命令构建包我还以为这是我说咋一直不对构建完成如下图所示然后开始在上一节目录下生成了对应的包设置多架构环境设置配置以跳过验证添加源列表更新并安装交叉编译所需的基本软件包添加目录安装构建依赖项安装架构下的构建依赖项安装架构下的构建依赖项安装架构下的相关软件包安装安装相关软件包安装相关软件包安装相关软件包安装相关软件包安装相关软件包安装相关软件包安装的构建依赖项生成本地化设置交互式切换到非用户然后运行以下命令进行镜像的构建之前都构建了一次了所以这次应该挺快的发现问题源不太对了所以这里先改一下源好像不改也可以是我自己的电脑问题重启就好了构建完成如上所示然后打包该镜像最后整体打包一下设置多架构环境运行并安装添加文件到目录添加目录到根目录安装构建依赖项安装所需的依赖项安装所需的依赖项安装所需的依赖项安装所需的依赖项安装所需的依赖项安装所需的依赖项安装所需的依赖项生成本地化切换到非用户然后运行以下命令进行镜像的构建之前都构建了一次了所以这次应该挺快的构建完成如上所示然后打包该镜像最后整体打包一下使用作为基础镜像设置镜像的维护者信息添加架构支持配置禁用的证书验证添加自定义的文件到容器的目录更新源并安装软件包将当前目录下的目录添加到镜像的根目录安装构建过程中需要的依赖包安装构建库所需的依赖包安装构建所需的依赖包安装相关的依赖包安装依赖包安装等依赖包安装等依赖包安装依赖包安装等依赖包安装构建所需的依赖包生成并设置系统的为修改文件并重新配置更新设置打印日志信息安装软件包安装软件包安装软件包安装软件包安装软件包解压软件包更新源并安装依赖包切换到非用户然后运行以下命令进行镜像的构建之前都构建了一次了所以这次应该挺快的构建完成如上所示然后打包该镜像最后整体打包一下设置多架构环境运行并安装添加文件到目录添加目录到根目录安装构建依赖项安装所需的依赖项安装所需的依赖项安装所需的依赖项安装所需的依赖项安装所需的依赖项安装所需的依赖项安装所需的依赖项生成本地化切换到非用户然后运行以下命令进行镜像的构建之前都构建了一次了所以这次应该挺快的构建完成如上所示然后打包该镜像添加架构支持配置禁用的证书验证添加自定义的文件到容器的目录更新源并安装软件包将当前目录下的目录添加到镜像的根目录安装构建过程中需要的依赖包安装构建库所需的依赖包安装构建所需的依赖包安装相关的依赖包安装依赖包安装等依赖包安装等依赖包安装依赖包安装等依赖包安装构建所需的依赖包生成并设置系统的为修改文件并重新配置更新设置打印日志信息安装软件包安装软件包安装软件包安装软件包安装软件包解压软件包更新源并安装依赖包切换到非用户然后运行以下命令进行镜像的构建之前都构建了一次了所以这次应该挺快的构建完成如上所示然后打包该镜像继续构建搞完了然后继续搞包的构建先使用构建的然后使用以下命令构建包构建成功了但是我目前仍旧不知道具体的区别所在是一种实现图形用户界面的服务器软件它允许图形应用程序在计算机上运行并与显示设备交互是中的一个加速架构它提供了对的支持可以加速图形渲染是一种基于的图形加速器可以提高图形渲染性能是的一个图形加速架构可以提高图形操作的性能因此意味着某种针对图形加速和图形加速的的改进版本或配置这可能是一种优化后的可以提供更好的图形渲染性能和功能测试测试的灵感来自这个我先来几个疑问什么是是一个用于加速图形渲染的开源库和技术它最初是为服务器开发的旨在提供更高效的图形渲染方式的目标是通过利用现代图形硬件的能力提供快速和高效的图形渲染从而改善用户界面的性能和响应能力传统上服务器使用软件渲染来处理图形操作这对于复杂的图形和动画效果可能效率较低的出现解决了这个问题它利用了现代图形硬件中的加速功能从而在支持硬件加速的系统上提供更快的图形渲染性能的工作原理是将高级的图形操作转换为底层的图形加速接口调用如或它通过将图形操作转发给底层硬件加速接口利用强大的并行处理能力来加速图形渲染这种方式比传统的软件渲染更高效可以显著提升图形渲染的性能和响应速度提供了一个抽象层使得开发者可以方便地在支持的系统上使用硬件加速的图形渲染它可以与多种图形库和窗口系统集成如和开发者可以使用提供的来绘制图形而无需直接操作底层的硬件加速接口上面提到了是一个硬件加速技术那在上我要如何实现硬件加速呢确认硬件支持首先确保平台的图形硬件支持硬件加速是一款搭载了的芯片是一款支持和等标准的图形处理器你需要确保该芯片在系统上的驱动程序正确安装和配置并支持硬件加速功能安装相关软件为了使用硬件加速你需要安装支持的图形库和驱动程序通常这包括图形库服务器和相应的驱动程序你可以根据具体的发行版和系统配置使用包管理器来安装这些软件包配置服务器是为服务器设计的因此你需要配置服务器以启用你可以编辑服务器的配置文件通常是或目录下的文件添加或修改相关的配置选项来启用具体的配置选项可能会因不同的系统和驱动程序而有所差异你可以参考相关文档或官方指南来了解如何正确配置测试和验证完成上述步骤后你可以编写一个简单的测试程序来验证硬件加速是否正常工作你可以使用或等图形库来进行绘图操作并通过性能测试或其他指标来评估图形渲染性能的提升你也可以尝试使用提供的来进行图形绘制以验证的功能和性能那我用默认的软件包和驱动能正常使用吗在使用默认的软件包和驱动时使用应该是可行的是一个广泛使用的发行版它通常包含了图形库和服务器等组件这些组件对于使用是必要的是公司的图形处理器它在系统上有对应的驱动程序用于与服务器和图形库进行交互这些驱动程序通常会随着操作系统的更新和发布而更新以确保兼容性和性能优化在大多数情况下当你使用默认的软件包和驱动时应该已经预先配置并启用了这意味着你可以直接通过服务器和相关图形库如来进行图形渲染而无需额外的配置步骤但我看瑞芯微已经对等软件包进行了魔改这是为啥呢瑞芯微对和服务器等软件包进行魔改的主要目的是为了更好地适配和优化他们的芯片和硬件这种魔改通常是为了解决特定的硬件功能性能或兼容性问题并确保在特定的瑞芯微平台上能够获得最佳的图形渲染性能和用户体验以下是一些可能的原因和动机硬件优化瑞芯微可能会对和服务器进行修改以最大程度地利用他们的芯片中的硬件加速功能通过直接访问硬件特性和功能他们可以实现更高效的图形渲染和处理提供更好的性能和响应能力兼容性和稳定性瑞芯微可能会对软件包进行修改以确保其与他们的芯片和硬件之间的兼容性这可能涉及对驱动程序的修改参数的调整或特定硬件功能的支持通过这些修改他们可以提供更稳定和可靠的图形渲染环境减少与硬件相关的问题和兼容性冲突定制化需求瑞芯微的客户可能有特定的需求需要定制化的图形渲染解决方案通过对软件包进行魔改他们可以满足客户的定制需求提供针对特定应用场景和硬件平台的优化和定制化功能测试程序如下所示无法打开服务器连接大小的矩形使用次绘制每次绘制耗时毫秒每秒绘制次数为次无法打开服务器连接大小的矩形不使用次绘制每次绘制耗时毫秒每秒绘制次数为次不使用的测试使用的测试然后使用以下命令进行编译然后运行测试测试结果如下所示得出的结论如下所示使用加速对于和大小的矩形每次绘制的耗时都在毫秒到毫秒之间每秒绘制次数在到之间不使用加速对于和大小的矩形每次绘制的耗时在毫秒到毫秒之间每秒绘制次数在到之间从这些数据中可以看出使用加速相对于不使用加速绘制矩形的耗时更稳定且更快而不使用加速的情况下绘制耗时有较大的波动并且随着矩形大小的增加绘制次数呈现不同程度的下降总体而言使用加速可以提供更稳定和高效的绘制性能特别是在处理较大尺寸的矩形时然而要注意这些结论仅基于你提供的数据具体的性能差异可能会因不同的环境和配置而有所变化上面是通过程序测试的也有一个专门的命令行进行查看显示则表示已启用加速测试打印基础信息使用标准库函数需包含该头文件获取平台数量无法获取平台数量获取平台无法获取平台获取平台名称获取平台供应商获取平台版本获取平台配置文件获取平台扩展编译运行然后使用命令也可以打印的信息测试这个源里面是没有的所以需要先这个输出显示了在平台上的性能测试结果具体来说它提供了以下信息平台信息平台设备信息设备具有以下特性驱动版本计算单元数量时钟频率然后它提供了一系列性能指标包括全局内存带宽单位浮点数运算的带宽单精度浮点数计算性能单位半精度浮点数计算性能单位不支持双精度浮点数计算整数计算性能单位快速位整数计算性能单位传输带宽单位不同类型的内存传输操作的带宽内核启动延迟微秒对比测试编译一个什么都没有的学习学习网址什么是是一个用于渲染和图形的跨平台图形编程接口它提供了一套函数和命令用于管理图形数据执行基本绘图操作和实现高级的图形效果下面是一些关于的详细说明跨平台性是跨平台的可以在不同的操作系统如上运行这使得开发者可以编写与特定操作系统无关的图形应用程序硬件加速可以利用计算机中的图形硬件如显卡进行硬件加速以提高图形渲染的性能这使得在处理复杂的图形时具有出色的性能图形渲染管线使用图形渲染管线来处理图形数据图形渲染管线是一系列的处理阶段将输入的图形数据转换为最终在屏幕上显示的图像它包括几何处理光栅化着色和输出等阶段基本几何图元支持绘制基本几何图元如点线和三角形这些图元构成了绘制复杂对象的基础着色器编程使用着色器来处理图形的顶点和像素顶点着色器负责对每个顶点进行变换和处理而像素着色器则在光栅化阶段对每个像素进行处理这使得开发者可以根据需要自定义图形的外观和效果纹理映射支持将纹理映射到模型的表面以实现更加真实和详细的图形效果纹理可以包含图像颜色或其他数据可以用于模拟材质添加细节和实现纹理映射效果光照和阴影提供了灯光模型和阴影技术可以模拟光的交互和对象之间的阴影关系这使得图形更加逼真和真实扩展和版本不断发展和更新引入新的功能和扩展以适应不断增长的图形需求每个版本都有其特定的功能和支持的硬件级别环境搭建安装安装是一组建构于之上的工具组提供许多很方便的函式使更强大且更容易使用安装是建立在上面的工具箱除了强化了的不足之外也增加了对于视窗介面支援测试程序演示效果如下所示画一个圆引入库定义多边形的边数多边形的半径圆周率清空颜色缓冲区开始绘制多边形计算多边形每个顶点的坐标添加顶点结束绘制多边形清空命令缓冲区强制执行绘图命令初始化库设置显示模式为颜色模式设置窗口大小创建窗口并设置标题为注册显示回调函数进入主循环开始事件处理画一个五角星计算五角星的相关坐标定义五个顶点的坐标按照的顺序绘制五角星画一个正弦绘制坐标轴轴起点轴终点轴起点轴终点绘制正弦曲线指定着色模型这个图形渲染出来就很慢这可能就是的作用了三维变换模型变换和视图变换投影变换视口变换操作矩阵堆栈添加深度测试函数动起来太阳地球和月亮假设每个月都是天一年个月共是天的变化从到绘制红色的太阳绘制蓝色的地球绘制黄色的月亮新的函数在空闲时调用作用是把日期往后移动一天并重新绘制达到动画效果通知系统重新绘制窗口触发显示回调函数太阳地球和月亮定义一些材质颜色清除屏幕启动混合并设置混合因子设置光源以为中心绘制一个半径为的不透明红色球体离观察者最远下面将绘制半透明物体了因此将深度缓冲设置为只读以为中心绘制一个半径为的半透明蓝色球体离观察者最近以为中心绘制一个半径为的半透明绿色球体在前两个球体之间完成半透明物体的绘制将深度缓冲区恢复为可读可写的形式学习什么是是一个开放的跨平台编程框架用于实现并行计算和通用计算任务的加速它允许开发者利用多核和其他加速器等异构计算资源以高效地执行并行计算任务下面是对的详细解释跨平台性是一个跨平台的编程框架可在各种操作系统如和硬件平台上运行这使得开发者可以编写与特定平台和硬件无关的并行计算代码异构计算支持异构计算利用多种计算设备如等的并行计算能力这些设备以不同的方式处理数据和执行计算任务使得开发者能够充分利用各种硬件资源并行计算模型采用基于任务和数据并行的计算模型开发者可以将计算任务分解为多个独立的子任务然后并行执行这些子任务这种并行计算模型可以在不同的设备上同时执行任务实现高效的并行计算内核函数使用内核函数来描述并行计算任务内核函数是程序员编写的并行计算代码运行在设备上的并行处理单元上开发者可以通过编写内核函数来定义要执行的计算任务内存模型提供了全局内存局部内存和私有内存等不同类型的内存来管理数据全局内存对所有内核函数可见局部内存用于共享数据和协同工作而私有内存用于每个工作项的私有数据开发者可以根据计算需求来选择合适的内存类型任务调度和并行执行使用工作组和工作项的概念来管理任务的调度和并行执行工作组是一组相关的工作项它们可以协同工作和共享数据工作项是最小的并行执行单元每个工作项独立执行内核函数运行时系统通过运行时系统来管理和调度并行计算任务运行时系统负责加载和初始化设备驱动程序分配和管理内存调度并行任务的执行以及在设备之间进行数据传输扩展和版本不断发展和更新引入新的功能和扩展以适应不断增长的并行计算需求每个版本都有其特定的功能和支持的硬件级别编译光栅图形加速单元是一个独立的硬件加速器专门用于加速图形操作它提供了高效的点线绘制图像缩放旋转位块传输混合等常见的图形操作功能的设计目标是通过硬件加速来提高图形处理的性能和效率减轻的负担它具有独立的硬件模块可以通过用户空间驱动程序进行访问和控制以下是的主要特性和功能点线绘制加速提供了硬件加速的点和线绘制功能可以快速绘制图形中的点和线条提供更高的绘制性能图像缩放和旋转支持硬件加速的图像缩放和旋转可以快速执行图像的放大缩小和旋转操作适用于图像处理和显示应用位块传输提供了硬件加速的位块传输功能可以高效地在内存之间传输图像数据包括复制填充和裁剪等操作混合支持硬件加速的混合操作可以实现图像的透明度混合以实现图像叠加和特效效果用户空间驱动程序提供了用户空间驱动程序允许应用程序通过访问和控制硬件加速器这样开发者可以方便地利用的功能来加速图形操作的优势在于它提供了高效的硬件加速能够加速常见的图形操作从而提高图形处理和显示的性能应用程序可以通过使用的用户空间驱动程序来利用这些功能实现更快速流畅的图形处理和显示效果并不是一个独立的硬件加速器实际上是一种软件技术也可以指代一组相关的软件库和驱动程序是瑞芯微电子公司开发的图像处理技术主要应用于他们的系统芯片中技术在的芯片中集成了一个专门的硬件模块用于加速图形操作这个硬件模块通常被称为硬件加速器然而并不是像图形处理单元这样的独立硬件设备它是与系统芯片集成的一部分用于提供图形处理的加速功能的驱动程序和软件库允许开发者通过来访问和利用这个硬件加速器因此实际上是芯片中的一个特定功能模块用于加速图形操作并通过软件驱动程序提供对该模块的访问和控制的的使用以下命令构建包这是一个环境变量设置指定在构建软件包时不运行自动化测试选项告诉构建系统跳过自动化测试阶段以加快构建过程这是用于构建软件包的工具它会根据当前目录中的源代码和相关文件构建一个文件这是一个选项指定只构建二进制软件包不包括源代码这是一个选项告诉在构建过程中处理依赖关系这是两个选项用于指定在构建过程中不签名软件包表示不对源代码包进行签名表示不对二进制软件包进行签名这是一个选项指定要构建的目标架构为位架构这就编译成功了得到了三个包编译是一种多媒体处理平台用于实现音频和视频数据的处理编解码和处理提供了一组丰富的功能和算法用于处理各种多媒体数据并且能够在硬件加速的环境下提供高效的处理性能以下是的主要作用视频编解码提供了各种视频编解码器如等这些编解码器能够将视频数据进行压缩编码和解压缩解码以满足不同应用场景对视频数据的存储和传输需求通过硬件加速可以提供高效的视频编解码性能减轻的负担图像处理包含了一系列图像处理算法如图像缩放旋转裁剪色彩空间转换等这些算法可以对图像进行各种操作和转换以满足不同应用场景对图像处理的需求的硬件加速能力可以加快图像处理的速度并提供更高的效率音频编解码除了视频编解码还提供了音频编解码的功能它支持常见的音频编码格式如等通过可以对音频数据进行高效的压缩和解压缩实现音频的存储传输和处理多媒体处理流程管理提供了一个统一的框架和接口用于管理和控制多媒体处理流程它可以对多个媒体处理单元进行调度和协调实现复杂的多媒体处理任务还提供了丰富的配置选项和参数设置以满足不同应用场景的需求总之是一个强大的多媒体处理平台提供了视频编解码图像处理音频编解码等功能它通过硬件加速能够实现高效的多媒体数据处理和处理性能满足各种应用场景对多媒体处理的需求使用以下命令构建包编译模块的作用是在内核中管理和控制硬件光标的显示和操作它提供了对硬件光标平面的支持允许用户在图形界面中显示和操作硬件加速的光标具体而言模块负责以下功能硬件光标位置控制它允许用户在屏幕上模块的作用是在内核中管理和控制硬件光标的显示和操作它提供了对硬件光标平面的支持允许用户在图形界面中显示和操作硬件加速的光标具体而言模块负责以下功能硬件光标位置控制它允许用户在屏幕上设置光标的位置使光标能够随着鼠标移动而移动硬件光标外观设置它允许用户定义光标的外观包括光标的形状大小颜色等硬件光标的显示和更新它负责将光标的图像数据传递给显示硬件以便在屏幕上显示光标它还负责在光标位置发生变化时更新光标的显示硬件光标的交互响应它监听用户的鼠标输入并将相应的事件传递给应用程序以实现光标的交互操作如点击拖动等通过硬件加速的光标显示和操作模块提供了更高效更平滑和更响应的光标体验从而提升了图形界面的用户体验使用以下命令构建包编译使用以下命令构建包编译目前没这个还不需要编译目前没这个还不需要使用以下命令构建包编译这个我看瑞芯微并没有提供和的所以这里就使用它提供好的来代替现在就先这样了也没有其他好办法首先拉取提供好的源码上面的不对看了看瑞芯微的直播课找到了方法获取的源码获取的源码切换版本这里切换到获取补丁包打补丁的脚本补丁文件所在目录源码目录检查补丁文件目录是否存在补丁文件目录不存在检查源码目录是否存在源码目录不存在获取补丁文件列表并按文件名排序应用每个补丁文件到源码中应用补丁文件检查应用补丁是否成功补丁文件已成功应用应用补丁文件时出错脚本运行如下所示到这里就修改完成了然后加载镜像挂载相应的目录接下来修改一些版本号首先是将原来的修改为然后修改文件通样修改版本号修改完成如下图所示最后修改构建包的文件其中的用来控制构建的名称然后添加上下面这个这样最后生成的就是对应名称的的包了到这里就修改完成了然后加载镜像挂载相应的目录然后进行构建即可构建完成如下所示无论是还是应该都能以同样的方式进行构建的包安装驱动之后会黑屏这时候上面构建的包就需要安装了自己做的包链接提取码来自百度网盘超级会员的分享明天再做的网址介绍的编译加载镜像和源码开发调试流程简介这个文件很重要',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-12-04 21:28:40',
+  postMainColor: '',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
 
-
-<html lang="zh-CN">
-  
-
-    <head>
-      <meta charset="utf-8" />
-        
-      <meta name="description" content="永远年轻，永远热泪盈眶" />
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
       
-      <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1, maximum-scale=1"
-      />
-      <title>rkdeb包的制作 |  热爱学习的未来酱</title>
-  <meta name="generator" content="hexo-theme-ayer">
+        get: key => {
+          const itemStr = localStorage.getItem(key)
       
-      <link rel="shortcut icon" href="/favicon.ico" />
-       
-<link rel="stylesheet" href="/dist/main.css">
-
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
       
-<link rel="stylesheet" href="/css/fonts/remixicon.css">
-
-      
-<link rel="stylesheet" href="/css/custom.css">
- 
-      <script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script>
-       
- 
-
-      <link
-        rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
-      />
-      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
-
-      <!-- mermaid -->
-      
-      <style>
-        .swal2-styled.swal2-confirm {
-          font-size: 1.6rem;
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
         }
-      </style>
-    <link rel="alternate" href="/atom.xml" title="热爱学习的未来酱" type="application/atom+xml">
-</head>
-  </html>
-</html>
-
-
-<body>
-  <div id="app">
+      }
     
-      
-    <main class="content on">
-      <section class="outer">
-  <article
-  id="post-7 rk deb包的制作"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
     
-    <header class="article-header">
-       
-<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  rkdeb包的制作
-</h1>
- 
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
 
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/11/14/7%20rk%20deb%E5%8C%85%E7%9A%84%E5%88%B6%E4%BD%9C/" class="article-date">
-  <time datetime="2023-11-14T11:55:17.000Z" itemprop="datePublished">2023-11-14</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE/">瑞芯微</a>
-  </div>
-  
-<div class="word_count">
-    <span class="post-time">
-        <span class="post-meta-item-icon">
-            <i class="ri-quill-pen-line"></i>
-            <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">18.7k</span>
-        </span>
-    </span>
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="热爱学习的未来酱" type="application/atom+xml">
+</head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="https://npm.elemecdn.com/anzhiyu-blog-static@1.0.4/img/avatar.jpg"/><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.getElementById('loading-box').classList.add("loaded");
+  },
+  initLoading: () => {
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+setTimeout(function(){preloader.endLoading();},10000)
 
-    <span class="post-time">
-        &nbsp; | &nbsp;
-        <span class="post-meta-item-icon">
-            <i class="ri-book-open-line"></i>
-            <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">89 分钟</span>
-        </span>
-    </span>
-</div>
- 
-    </div>
-      
-    <div class="tocbot"></div>
-
-
-
-
-  
-    <div class="article-entry" itemprop="articleBody">
-       
-  <p>先说一下前情提要：<br>    最近这一个月一直在制作debian和ubuntu文件系统，rk官方默认情况下只是构建了debian，好像是因为版权问题，然而呢，我肯定是要构建ubuntu镜像的，而我要做的，就是根据rk提供的debian系统的构建方法，来进行ubuntu的构建。</p>
-<p>​	最大的问题出现在deb包的构建,也就是下面这些deb包：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311132050152.png" alt="image-20231113205017093"></p>
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.10/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><a id="site-name" href="/" accesskey="h"><div class="title">热爱学习的未来酱</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png" target="_blank"><img class="post-qr-code-img" alt="微信" src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png" target="_blank"><img class="post-qr-code-img" alt="支付宝" src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/12/"><span class="card-archive-list-date">十二月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">3</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/12/"><span class="card-archive-list-date">十二月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">7</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/11/"><span class="card-archive-list-date">十一月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">6</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/10/"><span class="card-archive-list-date">十月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">4</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/09/"><span class="card-archive-list-date">九月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">7</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div><div class="console-btn-item" id="consoleMusic" onclick="anzhiyu.musicToggle()" title="音乐开关"><a class="music-switch"><i class="anzhiyufont anzhiyu-icon-music"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE/" itemprop="url">瑞芯微</a></span><span class="article-meta tags"></span></div></div><h1 class="post-title" itemprop="name headline">rkdeb包的制作</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2023-11-14T11:55:17.000Z" title="发表于 2023-11-14 19:55:17">2023-11-14</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2023-12-04T13:28:40.755Z" title="更新于 2023-12-04 21:28:40">2023-12-04</time></span></div><div class="meta-secondline"><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为长沙"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>长沙</span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src=""></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope itemtype="http://example.com/2023/11/14/7%20rk%20deb%E5%8C%85%E7%9A%84%E5%88%B6%E4%BD%9C/"><header><a class="post-meta-categories" href="/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE/" itemprop="url">瑞芯微</a><h1 id="CrawlerTitle" itemprop="name headline">rkdeb包的制作</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">chai</span><time itemprop="dateCreated datePublished" datetime="2023-11-14T11:55:17.000Z" title="发表于 2023-11-14 19:55:17">2023-11-14</time><time itemprop="dateCreated datePublished" datetime="2023-12-04T13:28:40.755Z" title="更新于 2023-12-04 21:28:40">2023-12-04</time></header><p>先说一下前情提要：<br>    最近这一个月一直在制作debian和ubuntu文件系统，rk官方默认情况下只是构建了debian，好像是因为版权问题，然而呢，我肯定是要构建ubuntu镜像的，而我要做的，就是根据rk提供的debian系统的构建方法，来进行ubuntu的构建。</p>
+<p>​	最大的问题出现在deb包的构建,也就是下面这些deb包：<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311132050152.png" alt="image-20231113205017093"></p>
 <p>很多很多的包，根本不知道从哪里来的~~，而现在呢大约知道了，首先呢先来分析一下各个dockerfile文件。</p>
 <p>几个很重要的github链接：</p>
 <p><strong>docker环境的大佬链接</strong></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/Caesar-github</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311132057450.png" alt="image-20231113205704425"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311132057450.png" alt="image-20231113205704425"></p>
 <p>各种库的大佬链接：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/JeffyCN?tab=repositories</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311132058219.png" alt="image-20231113205817179"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311132058219.png" alt="image-20231113205817179"></p>
 <p>香橙派的仓库链接</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/orangepi-xunlong/rk-rootfs-build</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311132205565.png" alt="image-20231113220515527"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311132205565.png" alt="image-20231113220515527"></p>
 <h1 id="1-dockerfile-文件"><a href="#1-dockerfile-文件" class="headerlink" title="1 dockerfile 文件"></a>1 dockerfile 文件</h1><h2 id="1-1-debian10"><a href="#1-1-debian10" class="headerlink" title="1.1 debian10"></a>1.1 debian10</h2><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> debian:buster</span><br><span class="line"><span class="keyword">MAINTAINER</span> Caesar Wang <span class="string">&quot;wxt@rock-chips.com&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置多架构环境</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> dpkg --add-architecture arm64</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置 apt 配置以跳过 SSL 验证</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> <span class="built_in">touch</span> /etc/apt/apt.conf.d/99verify-peer.conf &amp;&amp; <span class="built_in">echo</span> &gt;&gt;/etc/apt/apt.conf.d/99verify-peer.conf <span class="string">&quot;Acquire &#123; https::Verify-Peer false &#125;&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加源列表</span></span><br><span class="line"><span class="keyword">ADD</span><span class="language-bash"> sources.list /etc/apt/</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 更新并安装交叉编译所需的基本软件包</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> apt-get update &amp;&amp; apt-get install -y crossbuild-essential-arm64 apt-transport-https</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加 overlay 目录</span></span><br><span class="line"><span class="keyword">ADD</span><span class="language-bash"> ./overlay/  /</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装构建依赖项</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> DEBIAN_FRONTEND=noninteractive apt-get update &amp;&amp; apt-get install -y sudo locales git fakeroot devscripts cmake vim qemu-user-static:arm64 binfmt-support \</span></span><br><span class="line"><span class="language-bash">        dh-make dh-exec pkg-kde-tools device-tree-compiler:arm64 bc cpio parted dosfstools mtools libssl-dev:arm64 \</span></span><br><span class="line"><span class="language-bash">        g++-aarch64-linux-gnu dpkg-dev meson debhelper pkgconf</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装 arm64 架构下 libdrm 的构建依赖项</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> DEBIAN_FRONTEND=noninteractive apt-get update &amp;&amp; apt-get build-dep -y -a arm64 libdrm</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装 arm64 架构下 xorg-server 的构建依赖项</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> DEBIAN_FRONTEND=noninteractive apt-get update &amp;&amp; apt-get build-dep -y -a arm64 xorg-server</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装 arm64 架构下的 gstreamer 相关软件包</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> DEBIAN_FRONTEND=noninteractive apt-get update &amp;&amp; apt-get install -y gstreamer1.0-plugins-bad:arm64 gstreamer1.0-plugins-base:arm64 gstreamer1.0-tools:arm64 \</span></span><br><span class="line"><span class="language-bash">        gstreamer1.0-alsa:arm64 gstreamer1.0-plugins-base-apps:arm64 qtmultimedia5-examples:arm64</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装 libdrm-dev:arm64</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> DEBIAN_FRONTEND=noninteractive apt-get install -y libdrm-dev:arm64</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装 gstreamer-rockchip 相关软件包</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> DEBIAN_FRONTEND=noninteractive apt-get install -y libx11-dev:arm64 libdrm-dev:arm64 libgstreamer1.0-dev:arm64 \</span></span><br><span class="line"><span class="language-bash">        libgstreamer-plugins-base1.0-dev:arm64</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装 libmali 相关软件包</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> DEBIAN_FRONTEND=noninteractive apt-get install -y libstdc++6:arm64 libgbm-dev:arm64 libdrm-dev:arm64 libx11-xcb1:arm64 libxcb-dri2-0:arm64 libxdamage1:arm64 \</span></span><br><span class="line"><span class="language-bash">        libxext6:arm64 libwayland-client0:arm64</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装 drm-cursor 相关软件包</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> DEBIAN_FRONTEND=noninteractive apt-get install -y libgbm-dev:arm64 libegl1-mesa-dev:arm64 libgles2-mesa-dev:arm64</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装 glmark2 相关软件包</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> apt-get install -y debhelper-compat libjpeg-dev:arm64 libpng-dev:arm64 libudev-dev:arm64  libxcb1-dev:arm64 python3 wayland-protocols libwayland-dev libwayland-bin</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装 rktoolkit 相关软件包</span></span><br><span class="line"><span class="comment">#RUN apt install -y libmad-ocaml-dev libmad0-dev:arm64</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装 lib4l2 相关软件包</span></span><br><span class="line"><span class="comment">#RUN apt update -y</span></span><br><span class="line"><span class="comment">#RUN apt build-dep -y libv4l-dev:arm64</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装 blueman 的构建依赖项</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> apt-get build-dep -y blueman</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成 en_US.UTF-8 本地化设置</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> locale-gen en_US.UTF-8</span></span><br><span class="line"><span class="keyword">ENV</span> LANG en_US.UTF-<span class="number">8</span></span><br><span class="line"><span class="keyword">ENV</span> LANGUAGE en_US:en</span><br><span class="line"><span class="keyword">ENV</span> LC_ALL en_US.UTF-<span class="number">8</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> sed -i -e <span class="string">&#x27;s/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/&#x27;</span> /etc/locale.gen &amp;&amp; \</span></span><br><span class="line"><span class="language-bash">    <span class="built_in">echo</span> <span class="string">&#x27;LANG=&quot;en_US.UTF-8&quot;&#x27;</span>&gt;/etc/default/locale &amp;&amp; \</span></span><br><span class="line"><span class="language-bash">    dpkg-reconfigure --frontend=non交互式 locales &amp;&amp; \</span></span><br><span class="line"><span class="language-bash">    update-locale LANG=en_US.UTF-8</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> <span class="built_in">echo</span> <span class="string">&quot;Update Headers!&quot;</span></span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> dpkg -i /packages/arm64/rga/*.deb</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> dpkg -i /packages/arm64/mpp/*.deb</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> apt-get install -fy --allow-downgrades /packages/arm64/gst-rkmpp/*.deb</span></span><br><span class="line"><span class="comment">#RUN apt-get install -fy --allow-downgrades /packages/arm64/gstreamer/*.deb</span></span><br><span class="line"><span class="comment">#RUN apt-get install -fy --allow-downgrades /packages/arm64/gst-plugins-base1.0/*.deb</span></span><br><span class="line"><span class="comment">#RUN apt-get install -fy --allow-downgrades /packages/arm64/gst-plugins-bad1.0/*.deb</span></span><br><span class="line"><span class="comment">#RUN apt-get install -fy --allow-downgrades /packages/arm64/gst-plugins-good1.0/*.deb</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> apt-get install -fy --allow-downgrades /packages/arm64/libv4l/*.deb</span></span><br><span class="line"><span class="comment">#RUN dpkg -i /packages/arm64/gst-rkmpp/*.deb</span></span><br><span class="line"><span class="comment">#RUN dpkg -i /packages/arm64/ffmpeg/*.deb</span></span><br><span class="line"><span class="comment">#RUN dpkg -i /packages/arm64/libmali/libmali-midgard-t86x-r18p0-x11*.deb</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> find /packages/arm64/libdrm -name <span class="string">&#x27;*.deb&#x27;</span> | sudo xargs -I&#123;&#125; dpkg -x &#123;&#125; /</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> <span class="built_in">echo</span> <span class="string">&quot;deb https://mirrors.ustc.edu.cn/debian/ bullseye main contrib non-free&quot;</span> &gt;&gt; /etc/apt/sources.list</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> apt update</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> apt install -y meson=0.56.2-1</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> apt-get update &amp;&amp; apt-get install -y -f</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 切换到非 root 用户</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> useradd -c <span class="string">&#x27;rk user&#x27;</span> -m -d /home/rk -s /bin/bash rk</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> sed -i -e <span class="string">&#x27;/\%sudo/ c \%sudo ALL=(ALL) NOPASSWD: ALL&#x27;</span> /etc/sudoers</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> usermod -a -G sudo rk</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">USER</span> rk</span><br></pre></td></tr></table></figure>
 
 
@@ -140,9 +232,9 @@
 <h1 id="2-问题探究"><a href="#2-问题探究" class="headerlink" title="2.问题探究"></a>2.问题探究</h1><p>默认情况下是不可以下载软件源码的，当取消一些特定的注释之后，是可以使用apt-get source命令进行软件包源码的下载的，</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get source xorg-server</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311132118169.png" alt="image-20231113211818133"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311132118169.png" alt="image-20231113211818133"></p>
 <p>最后一句话忽略即可</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311132118188.png" alt="image-20231113211831167"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311132118188.png" alt="image-20231113211831167"></p>
 <ul>
 <li><code>xorg-server-1.20.13</code>：这是一个目录，其中包含了<code>xorg-server</code>软件包的源代码文件和其他相关文件。</li>
 <li><code>xorg-server_1.20.13-1ubuntu1~20.04.9.diff.gz</code>：这是一个压缩文件，其中包含了对源代码进行修改的补丁文件（diff文件）。</li>
@@ -153,7 +245,7 @@
 <p>由于我是虚拟机上进行测试的所以我应该安装电脑amd64的，这里先安装构建xorg-server的软件包，下面需要注意的是build-dep这个参数：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DEBIAN_FRONTEND=noninteractive apt-get update &amp;&amp; apt-get build-dep -y -a amd64 xorg-server</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311132125078.png" alt="image-20231113212511030"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311132125078.png" alt="image-20231113212511030"></p>
 <p>然后使用以下命令构建deb包</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DEB_BUILD_OPTIONS=nocheck dpkg-buildpackage -rfakeroot -b -d -uc -us -aamd64</span><br></pre></td></tr></table></figure>
 
@@ -167,8 +259,8 @@
 <li><code>-us</code>：这个选项告诉 <code>dpkg-buildpackage</code> 不生成源码软件包（即不生成 .dsc 文件）。</li>
 <li><code>-aamd64</code>：这个选项指定了目标架构为 amd64，即构建适用于 amd64 架构的软件包。</li>
 </ul>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311132126611.png" alt="image-20231113212628562"></p>
-<p>构建完成之后如下图所示：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311132130327.png" alt="image-20231113213003305"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311132126611.png" alt="image-20231113212628562"></p>
+<p>构建完成之后如下图所示：<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311132130327.png" alt="image-20231113213003305"></p>
 <p>根据提供的软件包列表，可以将它们分为以下几类：</p>
 <ol>
 <li><strong>xorg-server 相关</strong>：<ul>
@@ -216,43 +308,43 @@
 <li><strong>.udeb</strong>：.udeb 是用于 Debian 安装程序的特殊类型的软件包扩展名，它表示微型二进制软件包（microdeb）。这些软件包通常非常小，并包含了在系统安装过程中所需的最小化组件。.udeb 文件主要用于 Debian 安装程序（如 Debian Installer）期间的系统安装和配置，它们通常包含一些核心组件和驱动程序。</li>
 <li><strong>.ddeb</strong>：.ddeb 是调试符号软件包的扩展名。调试符号包包含了编译后的二进制文件与调试信息的映射关系，它们用于在调试软件时进行符号解析和调试。通过将调试符号包与相应的二进制软件包结合使用，开发人员可以在调试过程中获取更详细和有用的调试信息。.ddeb 文件通常用于开发和调试目的。</li>
 </ol>
-<p>也就是说这些才是最重要的：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311132134590.png" alt="image-20231113213434571"></p>
+<p>也就是说这些才是最重要的：<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311132134590.png" alt="image-20231113213434571"></p>
 <p>那么现在我上面的那些docker镜像终于有作用了。</p>
 <p>然后拉取大佬的xserver源码，拉取完成如下所示：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/JeffyCN/xorg-xserver.git</span><br></pre></td></tr></table></figure>
 
 
 
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311132213321.png" alt="image-20231113221319299"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311132213321.png" alt="image-20231113221319299"></p>
 <p>然后切换分支到1.20.4</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git chechout remotes/origin/rockchip/debian/1.20.4</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311132217566.png" alt="image-20231113221707543"></p>
-<p>然后查看一下分支：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311132217464.png" alt="image-20231113221726438"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311132217566.png" alt="image-20231113221707543"></p>
+<p>然后查看一下分支：<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311132217464.png" alt="image-20231113221726438"></p>
 <p>最后使用docker加载一下该源码</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --privileged -it -v /home/topeet/Linux/xorg-xserver:/home/topeet/xorg-xserver debian10</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311132220805.png" alt="image-20231113222045776"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311132220805.png" alt="image-20231113222045776"></p>
 <p>然后使用以下命令构建deb包</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo DEB_BUILD_OPTIONS=nocheck dpkg-buildpackage -rfakeroot -b -d -uc -us -aarm64</span><br></pre></td></tr></table></figure>
 
 <p>&#x3D;&#x3D;我还以为这是aarch64，我说咋一直不对~~~&#x3D;&#x3D;，构建完成如下图所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311132226598.png" alt="image-20231113222638562"></p>
-<p>然后开始在上一节目录下生成了对应的deb包：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311132227725.png" alt="image-20231113222742691"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311132226598.png" alt="image-20231113222638562"></p>
+<p>然后开始在上一节目录下生成了对应的deb包：<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311132227725.png" alt="image-20231113222742691"></p>
 <h1 id="1-debian10-dockerfile"><a href="#1-debian10-dockerfile" class="headerlink" title="1.debian10 dockerfile"></a>1.debian10 dockerfile</h1><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> debian:buster</span><br><span class="line"><span class="keyword">MAINTAINER</span> Caesar Wang <span class="string">&quot;wxt@rock-chips.com&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置多架构环境</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> dpkg --add-architecture arm64</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置 apt 配置以跳过 SSL 验证</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> <span class="built_in">touch</span> /etc/apt/apt.conf.d/99verify-peer.conf &amp;&amp; <span class="built_in">echo</span> &gt;&gt;/etc/apt/apt.conf.d/99verify-peer.conf <span class="string">&quot;Acquire &#123; https::Verify-Peer false &#125;&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加源列表</span></span><br><span class="line"><span class="keyword">ADD</span><span class="language-bash"> sources.list /etc/apt/</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 更新并安装交叉编译所需的基本软件包</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> apt-get update &amp;&amp; apt-get install -y crossbuild-essential-arm64 apt-transport-https</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加 overlay 目录</span></span><br><span class="line"><span class="keyword">ADD</span><span class="language-bash"> ./overlay/  /</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装构建依赖项</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> DEBIAN_FRONTEND=noninteractive apt-get update &amp;&amp; apt-get install -y sudo locales git fakeroot devscripts cmake vim qemu-user-static:arm64 binfmt-support \</span></span><br><span class="line"><span class="language-bash">        dh-make dh-exec pkg-kde-tools device-tree-compiler:arm64 bc cpio parted dosfstools mtools libssl-dev:arm64 \</span></span><br><span class="line"><span class="language-bash">        g++-aarch64-linux-gnu dpkg-dev meson debhelper pkgconf</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装 arm64 架构下 libdrm 的构建依赖项</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> DEBIAN_FRONTEND=noninteractive apt-get update &amp;&amp; apt-get build-dep -y -a arm64 libdrm</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装 arm64 架构下 xorg-server 的构建依赖项</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> DEBIAN_FRONTEND=noninteractive apt-get update &amp;&amp; apt-get build-dep -y -a arm64 xorg-server</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装 arm64 架构下的 gstreamer 相关软件包</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> DEBIAN_FRONTEND=noninteractive apt-get update &amp;&amp; apt-get install -y gstreamer1.0-plugins-bad:arm64 gstreamer1.0-plugins-base:arm64 gstreamer1.0-tools:arm64 \</span></span><br><span class="line"><span class="language-bash">        gstreamer1.0-alsa:arm64 gstreamer1.0-plugins-base-apps:arm64 qtmultimedia5-examples:arm64</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装 libdrm-dev:arm64</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> DEBIAN_FRONTEND=noninteractive apt-get install -y libdrm-dev:arm64</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装 gstreamer-rockchip 相关软件包</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> DEBIAN_FRONTEND=noninteractive apt-get install -y libx11-dev:arm64 libdrm-dev:arm64 libgstreamer1.0-dev:arm64 \</span></span><br><span class="line"><span class="language-bash">        libgstreamer-plugins-base1.0-dev:arm64</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装 libmali 相关软件包</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> DEBIAN_FRONTEND=noninteractive apt-get install -y libstdc++6:arm64 libgbm-dev:arm64 libdrm-dev:arm64 libx11-xcb1:arm64 libxcb-dri2-0:arm64 libxdamage1:arm64 \</span></span><br><span class="line"><span class="language-bash">        libxext6:arm64 libwayland-client0:arm64</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装 drm-cursor 相关软件包</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> DEBIAN_FRONTEND=noninteractive apt-get install -y libgbm-dev:arm64 libegl1-mesa-dev:arm64 libgles2-mesa-dev:arm64</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装 glmark2 相关软件包</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> apt-get install -y debhelper-compat libjpeg-dev:arm64 libpng-dev:arm64 libudev-dev:arm64  libxcb1-dev:arm64 python3 wayland-protocols libwayland-dev libwayland-bin</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装 rktoolkit 相关软件包</span></span><br><span class="line"><span class="comment">#RUN apt install -y libmad-ocaml-dev libmad0-dev:arm64</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装 lib4l2 相关软件包</span></span><br><span class="line"><span class="comment">#RUN apt update -y</span></span><br><span class="line"><span class="comment">#RUN apt build-dep -y libv4l-dev:arm64</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装 blueman 的构建依赖项</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> apt-get build-dep -y blueman</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成 en_US.UTF-8 本地化设置</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> locale-gen en_US.UTF-8</span></span><br><span class="line"><span class="keyword">ENV</span> LANG en_US.UTF-<span class="number">8</span></span><br><span class="line"><span class="keyword">ENV</span> LANGUAGE en_US:en</span><br><span class="line"><span class="keyword">ENV</span> LC_ALL en_US.UTF-<span class="number">8</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> sed -i -e <span class="string">&#x27;s/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/&#x27;</span> /etc/locale.gen &amp;&amp; \</span></span><br><span class="line"><span class="language-bash">    <span class="built_in">echo</span> <span class="string">&#x27;LANG=&quot;en_US.UTF-8&quot;&#x27;</span>&gt;/etc/default/locale &amp;&amp; \</span></span><br><span class="line"><span class="language-bash">    dpkg-reconfigure --frontend=non交互式 locales &amp;&amp; \</span></span><br><span class="line"><span class="language-bash">    update-locale LANG=en_US.UTF-8</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> <span class="built_in">echo</span> <span class="string">&quot;Update Headers!&quot;</span></span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> dpkg -i /packages/arm64/rga/*.deb</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> dpkg -i /packages/arm64/mpp/*.deb</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> apt-get install -fy --allow-downgrades /packages/arm64/gst-rkmpp/*.deb</span></span><br><span class="line"><span class="comment">#RUN apt-get install -fy --allow-downgrades /packages/arm64/gstreamer/*.deb</span></span><br><span class="line"><span class="comment">#RUN apt-get install -fy --allow-downgrades /packages/arm64/gst-plugins-base1.0/*.deb</span></span><br><span class="line"><span class="comment">#RUN apt-get install -fy --allow-downgrades /packages/arm64/gst-plugins-bad1.0/*.deb</span></span><br><span class="line"><span class="comment">#RUN apt-get install -fy --allow-downgrades /packages/arm64/gst-plugins-good1.0/*.deb</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> apt-get install -fy --allow-downgrades /packages/arm64/libv4l/*.deb</span></span><br><span class="line"><span class="comment">#RUN dpkg -i /packages/arm64/gst-rkmpp/*.deb</span></span><br><span class="line"><span class="comment">#RUN dpkg -i /packages/arm64/ffmpeg/*.deb</span></span><br><span class="line"><span class="comment">#RUN dpkg -i /packages/arm64/libmali/libmali-midgard-t86x-r18p0-x11*.deb</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> find /packages/arm64/libdrm -name <span class="string">&#x27;*.deb&#x27;</span> | sudo xargs -I&#123;&#125; dpkg -x &#123;&#125; /</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> <span class="built_in">echo</span> <span class="string">&quot;deb https://mirrors.ustc.edu.cn/debian/ bullseye main contrib non-free&quot;</span> &gt;&gt; /etc/apt/sources.list</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> apt update</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> apt install -y meson=0.56.2-1</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> apt-get update &amp;&amp; apt-get install -y -f</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 切换到非 root 用户</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> useradd -c <span class="string">&#x27;topeet user&#x27;</span> -m -d /home/topeet -s /bin/bash topeet</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> sed -i -e <span class="string">&#x27;/\%sudo/ c \%sudo ALL=(ALL) NOPASSWD: ALL&#x27;</span> /etc/sudoers</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> usermod -a -G sudo topeet</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">USER</span> topeet</span><br><span class="line"><span class="keyword">WORKDIR</span><span class="language-bash"> /home/topeet</span></span><br><span class="line"><span class="keyword">ENTRYPOINT</span><span class="language-bash"> [ <span class="string">&quot;/bin/bash&quot;</span>]</span></span><br></pre></td></tr></table></figure>
 
 <p>然后运行以下命令进行镜像的构建，之前都构建了一次了所以这次应该挺快的</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker build -t debian10 .</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311142043237.png" alt="image-20231114101013852"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311142043237.png" alt="image-20231114101013852"></p>
 <p>发现问题，源不太对了，所以这里先改一下源，好像不改也可以，是我自己的电脑问题，重启就好了</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">deb https://mirrors.huaweicloud.com/repository/debian/ buster main contrib non-free</span><br><span class="line">deb-src https://mirrors.tuna.tsinghua.edu.cn/debian/ buster main contrib non-free</span><br><span class="line">deb https://mirrors.huaweicloud.com/repository/debian/ buster-updates main contrib non-free</span><br><span class="line">deb-src https://mirrors.tuna.tsinghua.edu.cn/debian/ buster-updates main contrib non-free</span><br><span class="line">deb https://mirrors.huaweicloud.com/repository/debian/ buster-backports main contrib non-free</span><br><span class="line">deb-src https://mirrors.tuna.tsinghua.edu.cn/debian/ buster-backports main contrib non-free</span><br><span class="line">deb https://mirrors.huaweicloud.com/repository/debian-security buster/updates main contrib non-free</span><br><span class="line">deb-src https://mirrors.tuna.tsinghua.edu.cn/debian-security buster/updates main contrib non-free</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311142043278.png" alt="image-20231114102245237"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311142043278.png" alt="image-20231114102245237"></p>
 <p>构建完成如上所示，然后打包该镜像</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker save -o debian10.tar.gz debian10</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311142043250.png" alt="image-20231114102532308"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311142043250.png" alt="image-20231114102532308"></p>
 <p>最后整体打包一下：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zcvf docker-rockchip-debian-buster.tar.gz docker-rockchip-debian-buster/</span><br></pre></td></tr></table></figure>
 
@@ -263,8 +355,8 @@
 <p>然后运行以下命令进行镜像的构建，之前都构建了一次了所以这次应该挺快的</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker build -t debian11 .</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311142043356.png" alt="image-20231114103043179"></p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311142043290.png" alt="image-20231114103238803"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311142043356.png" alt="image-20231114103043179"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311142043290.png" alt="image-20231114103238803"></p>
 <p>构建完成如上所示，然后打包该镜像</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker save -o debian11.tar.gz debian11</span><br></pre></td></tr></table></figure>
 
@@ -278,11 +370,11 @@
 <p>然后运行以下命令进行镜像的构建，之前都构建了一次了所以这次应该挺快的</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker build -t debian12 .</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311142043237.png" alt="image-20231114101013852"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311142043237.png" alt="image-20231114101013852"></p>
 <p>构建完成如上所示，然后打包该镜像</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker save -o debian12.tar.gz debian12</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311142043250.png" alt="image-20231114102532308"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311142043250.png" alt="image-20231114102532308"></p>
 <p>最后整体打包一下：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zcvf docker-rockchip-debian-bookworm.tar.gz docker-rockchip-debian-bookworm</span><br></pre></td></tr></table></figure>
 
@@ -291,8 +383,8 @@
 <p>然后运行以下命令进行镜像的构建，之前都构建了一次了所以这次应该挺快的</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker build -t debian11 .</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311142043356.png" alt="image-20231114103043179"></p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311142043290.png" alt="image-20231114103238803"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311142043356.png" alt="image-20231114103043179"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311142043290.png" alt="image-20231114103238803"></p>
 <p>构建完成如上所示，然后打包该镜像</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker save -o ubuntu20.tar.gz ubuntu20</span><br></pre></td></tr></table></figure>
 
@@ -301,22 +393,22 @@
 <p>然后运行以下命令进行镜像的构建，之前都构建了一次了所以这次应该挺快的</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker build -t debian12 .</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311142043237.png" alt="image-20231114101013852"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311142043237.png" alt="image-20231114101013852"></p>
 <p>构建完成如上所示，然后打包该镜像</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker save -o ubuntu22.tar.gz ubuntu22</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311142043250.png" alt="image-20231114102532308"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311142043250.png" alt="image-20231114102532308"></p>
 <h1 id="6-继续构建"><a href="#6-继续构建" class="headerlink" title="6.继续构建"></a>6.继续构建</h1><p>docker搞完了，然后继续搞deb包的构建。先使用debian10 构建xserver的，</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --privileged -it -v /home/topeet/Linux/xorg-xserver:/home/topeet/ubuntu20_build debian10</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311142043305.png" alt="image-20231114125740932"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311142043305.png" alt="image-20231114125740932"></p>
 <p>然后使用以下命令构建deb包</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo DEB_BUILD_OPTIONS=nocheck dpkg-buildpackage -rfakeroot -b -d -uc -us -aarm64</span><br></pre></td></tr></table></figure>
 
 <p>构建成功了，但是我目前仍旧不知道具体的区别所在。</p>
 <p>X server 是一种实现图形用户界面的服务器软件，它允许图形应用程序在计算机上运行并与显示设备交互。“glamor” 是 X server 中的一个加速架构，它提供了对OpenGL ES 2.0的支持，可以加速图形渲染。“rga” 是一种基于 Arm Mali GPU 的图形加速器，可以提高图形渲染性能。“exa” 是 X server 的一个图形加速架构，可以提高 2D 图形操作的性能。因此，“X server with glamor hacks for gles2 and rga based exa” 意味着某种针对 OpenGL ES 2.0、rga 图形加速和 exa 图形加速的 X server 的改进版本或配置。这可能是一种优化后的 X server，可以提供更好的图形渲染性能和功能。</p>
 <h1 id="7-测试xserver"><a href="#7-测试xserver" class="headerlink" title="7.测试xserver"></a>7.测试xserver</h1><p>测试的灵感来自这个csdn <a target="_blank" rel="noopener" href="https://blog.csdn.net/Neutionwei/article/details/111411023">https://blog.csdn.net/Neutionwei/article/details/111411023</a></p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311142043592.png" alt="image-20231114135548345"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311142043592.png" alt="image-20231114135548345"></p>
 <p>我先来几个疑问？</p>
 <p><strong>1.什么是glamor</strong>？</p>
 <p>Glamor 是一个用于加速 2D 图形渲染的开源库和技术。它最初是为 X.Org 服务器开发的，旨在提供更高效的图形渲染方式。Glamor 的目标是通过利用现代图形硬件的能力，提供快速和高效的图形渲染，从而改善用户界面的性能和响应能力。</p>
@@ -346,9 +438,9 @@
 <p>然后使用以下命令进行编译：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">g++ test.cpp -o test -lX11</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311142043661.png" alt="image-20231114140810933"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311142043661.png" alt="image-20231114140810933"></p>
 <p>然后运行测试，测试结果如下所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311142043817.png"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311142043817.png"></p>
 <p>得出的结论如下所示：使用加速（glamor）：</p>
 <ul>
 <li>对于1x1、10x10、100x100和500x500大小的矩形，每次绘制的耗时都在0.0057毫秒到0.0061毫秒之间。</li>
@@ -364,7 +456,7 @@
 <p>上面是通过程序测试的，也有一个专门的命令行进行查看</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /var/log/Xorg.0.log | grep glamor</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311142043734.png" alt="image-20231114145330988"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311142043734.png" alt="image-20231114145330988"></p>
 <p>显示“glamor initialized”，则表示已启用加速。</p>
 <h1 id="8-测试opencl"><a href="#8-测试opencl" class="headerlink" title="8.测试opencl"></a>8.测试opencl</h1><p>打印基础信息</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> CL_TARGET_OPENCL_VERSION 220</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;CL/cl.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span> <span class="comment">// 使用标准库函数需包含该头文件</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    cl_platform_id *platform;</span><br><span class="line">    cl_uint num_platform;</span><br><span class="line">    cl_int err;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 获取平台数量</span></span><br><span class="line">    err = <span class="built_in">clGetPlatformIDs</span>(<span class="number">0</span>, <span class="literal">NULL</span>, &amp;num_platform);</span><br><span class="line">    <span class="keyword">if</span> (err != CL_SUCCESS) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;无法获取平台数量\n&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> err;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    platform = (cl_platform_id *)<span class="built_in">malloc</span>(<span class="built_in">sizeof</span>(cl_platform_id) * num_platform);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 获取平台ID</span></span><br><span class="line">    err = <span class="built_in">clGetPlatformIDs</span>(num_platform, platform, <span class="literal">NULL</span>);</span><br><span class="line">    <span class="keyword">if</span> (err != CL_SUCCESS) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;无法获取平台ID\n&quot;</span>);</span><br><span class="line">        <span class="built_in">free</span>(platform);</span><br><span class="line">        <span class="keyword">return</span> err;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; num_platform; i++) &#123;</span><br><span class="line">        <span class="type">size_t</span> size;</span><br><span class="line">        <span class="type">char</span> *name, *vendor, *version, *profile, *extensions;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 获取平台名称</span></span><br><span class="line">        err = <span class="built_in">clGetPlatformInfo</span>(platform[i], CL_PLATFORM_NAME, <span class="number">0</span>, <span class="literal">NULL</span>, &amp;size);</span><br><span class="line">        name = (<span class="type">char</span> *)<span class="built_in">malloc</span>(size);</span><br><span class="line">        err = <span class="built_in">clGetPlatformInfo</span>(platform[i], CL_PLATFORM_NAME, size, name, <span class="literal">NULL</span>);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;CL_PLATFORM_NAME: %s\n&quot;</span>, name);</span><br><span class="line">        <span class="built_in">free</span>(name);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 获取平台供应商</span></span><br><span class="line">        err = <span class="built_in">clGetPlatformInfo</span>(platform[i], CL_PLATFORM_VENDOR, <span class="number">0</span>, <span class="literal">NULL</span>, &amp;size);</span><br><span class="line">        vendor = (<span class="type">char</span> *)<span class="built_in">malloc</span>(size);</span><br><span class="line">        err = <span class="built_in">clGetPlatformInfo</span>(platform[i], CL_PLATFORM_VENDOR, size, vendor, <span class="literal">NULL</span>);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;CL_PLATFORM_VENDOR: %s\n&quot;</span>, vendor);</span><br><span class="line">        <span class="built_in">free</span>(vendor);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 获取平台版本</span></span><br><span class="line">        err = <span class="built_in">clGetPlatformInfo</span>(platform[i], CL_PLATFORM_VERSION, <span class="number">0</span>, <span class="literal">NULL</span>, &amp;size);</span><br><span class="line">        version = (<span class="type">char</span> *)<span class="built_in">malloc</span>(size);</span><br><span class="line">        err = <span class="built_in">clGetPlatformInfo</span>(platform[i], CL_PLATFORM_VERSION, size, version, <span class="literal">NULL</span>);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;CL_PLATFORM_VERSION: %s\n&quot;</span>, version);</span><br><span class="line">        <span class="built_in">free</span>(version);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 获取平台配置文件</span></span><br><span class="line">        err = <span class="built_in">clGetPlatformInfo</span>(platform[i], CL_PLATFORM_PROFILE, <span class="number">0</span>, <span class="literal">NULL</span>, &amp;size);</span><br><span class="line">        profile = (<span class="type">char</span> *)<span class="built_in">malloc</span>(size);</span><br><span class="line">        err = <span class="built_in">clGetPlatformInfo</span>(platform[i], CL_PLATFORM_PROFILE, size, profile, <span class="literal">NULL</span>);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;CL_PLATFORM_PROFILE: %s\n&quot;</span>, profile);</span><br><span class="line">        <span class="built_in">free</span>(profile);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 获取平台扩展</span></span><br><span class="line">        err = <span class="built_in">clGetPlatformInfo</span>(platform[i], CL_PLATFORM_EXTENSIONS, <span class="number">0</span>, <span class="literal">NULL</span>, &amp;size);</span><br><span class="line">        extensions = (<span class="type">char</span> *)<span class="built_in">malloc</span>(size);</span><br><span class="line">        err = <span class="built_in">clGetPlatformInfo</span>(platform[i], CL_PLATFORM_EXTENSIONS, size, extensions, <span class="literal">NULL</span>);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;CL_PLATFORM_EXTENSIONS: %s\n&quot;</span>, extensions);</span><br><span class="line">        <span class="built_in">free</span>(extensions);</span><br><span class="line"></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;\n\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">free</span>(platform);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -372,7 +464,7 @@
 <p>编译：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc opencl.cpp -o opencl_test -lmali -L/usr/lib/aarch64-linux-gnu/  -I/usr/include/CL/</span><br></pre></td></tr></table></figure>
 
-<p>运行“<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311142043741.png" alt="image-20231114160309270"></p>
+<p>运行“<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311142043741.png" alt="image-20231114160309270"></p>
 <p>然后使用clinfo命令也可以打印opencl的信息</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">root@topeet:/home/topeet$ clinfo</span><br><span class="line">Number of platforms                               1</span><br><span class="line">  Platform Name                                   ARM Platform</span><br><span class="line">  Platform Vendor                                 ARM</span><br><span class="line">  Platform Version                                OpenCL 2.1 v1.g6p0-01eac0.efb75e2978d783a80fe78be1bfb0efc1</span><br><span class="line">  Platform Profile                                FULL_PROFILE</span><br><span class="line">  Platform Extensions                             cl_khr_global_int32_base_atomics cl_khr_global_int32_extended_atomics cl_khr_local_int32_base_atomics cl_khr_local_int32_extended_atomics cl_khr_byte_addressable_store cl_khr_3d_image_writes cl_khr_int64_base_atomics cl_khr_int64_extended_atomics cl_khr_fp16 cl_khr_icd cl_khr_egl_image cl_khr_image2d_from_buffer cl_khr_depth_images cl_khr_subgroups cl_khr_subgroup_extended_types cl_khr_subgroup_non_uniform_vote cl_khr_subgroup_ballot cl_khr_il_program cl_khr_priority_hints cl_khr_create_command_queue cl_khr_spirv_no_integer_wrap_decoration cl_khr_extended_versioning cl_khr_device_uuid cl_arm_core_id cl_arm_printf cl_arm_non_uniform_work_group_size cl_arm_import_memory cl_arm_import_memory_dma_buf cl_arm_import_memory_host cl_arm_integer_dot_product_int8 cl_arm_integer_dot_product_accumulate_int8 cl_arm_integer_dot_product_accumulate_saturate_int8 cl_arm_scheduling_controls cl_arm_controlled_kernel_termination cl_ext_cxx_for_opencl</span><br><span class="line">  Platform Extensions function suffix             ARM</span><br><span class="line">  Platform Host timer resolution                  1ns</span><br><span class="line"></span><br><span class="line">  Platform Name                                   ARM Platform</span><br><span class="line">Number of devices                                 1</span><br><span class="line">arm_release_ver of this libmali is &#x27;g6p0-01eac0&#x27;, rk_so_ver is &#x27;5&#x27;.</span><br><span class="line">  Device Name                                     Mali-LODX r0p0</span><br><span class="line">  Device Vendor                                   ARM</span><br><span class="line">  Device Vendor ID                                0xa8670000</span><br><span class="line">  Device Version                                  OpenCL 2.1 v1.g6p0-01eac0.efb75e2978d783a80fe78be1bfb0efc1</span><br><span class="line">  Device UUID                                     000067a8-0100-0000-0000-000000000000</span><br><span class="line">  Driver UUID                                     d9495bef-ea91-7c52-8a43-8a3c2f7b49cc</span><br><span class="line">  Valid Device LUID                               No</span><br><span class="line">  Device LUID                                     0000-000000000000</span><br><span class="line">  Device Node Mask                                0</span><br><span class="line">  Device Numeric Version                          0x801000 (2.1.0)</span><br><span class="line">  Driver Version                                  2.1</span><br><span class="line">  Device OpenCL C Version                         OpenCL C 2.0 v1.g6p0-01eac0.efb75e2978d783a80fe78be1bfb0efc1</span><br><span class="line">  Device C++ for OpenCL Numeric Version           0x400000 (1.0.0)</span><br><span class="line">  Device Type                                     GPU</span><br><span class="line">  Device Profile                                  FULL_PROFILE</span><br><span class="line">  Device Available                                Yes</span><br><span class="line">  Compiler Available                              Yes</span><br><span class="line">  Linker Available                                Yes</span><br><span class="line">  Max compute units                               4</span><br><span class="line">  Available core IDs                              0, 2, 16, 18</span><br><span class="line">  Max clock frequency                             1000MHz</span><br><span class="line">  Device Partition                                (core)</span><br><span class="line">    Max number of sub-devices                     0</span><br><span class="line">    Supported partition types                     None</span><br><span class="line">    Supported affinity domains                    (n/a)</span><br><span class="line">  Max work item dimensions                        3</span><br><span class="line">  Max work item sizes                             1024x1024x1024</span><br><span class="line">  Max work group size                             1024</span><br><span class="line">  Preferred work group size multiple (kernel)     16</span><br></pre></td></tr></table></figure>
 
@@ -484,7 +576,7 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -o test test.c -lGL -lGLU -lglut</span><br></pre></td></tr></table></figure>
 
 <p>演示效果如下所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311142139102.png" alt="image-20231114213934062"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311142139102.png" alt="image-20231114213934062"></p>
 <h2 id="10-2：画一个圆"><a href="#10-2：画一个圆" class="headerlink" title="10.2：画一个圆"></a>10.2：画一个圆</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;GL/glut.h&gt;</span>  <span class="comment">// 引入OpenGL库</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;math.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> n = <span class="number">20</span>;  <span class="comment">// 定义多边形的边数</span></span><br><span class="line"><span class="type">const</span> GLfloat R = <span class="number">0.5f</span>;  <span class="comment">// 多边形的半径</span></span><br><span class="line"><span class="type">const</span> GLfloat Pi = <span class="number">3.1415926536f</span>;  <span class="comment">// 圆周率Pi</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">myDisplay</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    glClear(GL_COLOR_BUFFER_BIT);  <span class="comment">// 清空颜色缓冲区</span></span><br><span class="line"></span><br><span class="line">    glBegin(GL_POLYGON);  <span class="comment">// 开始绘制多边形</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 计算多边形每个顶点的坐标</span></span><br><span class="line">        GLfloat x = R * <span class="built_in">cos</span>(<span class="number">2</span> * Pi / n * i);</span><br><span class="line">        GLfloat y = R * <span class="built_in">sin</span>(<span class="number">2</span> * Pi / n * i);</span><br><span class="line">        glVertex2f(x, y);  <span class="comment">// 添加顶点</span></span><br><span class="line">    &#125;</span><br><span class="line">    glEnd();  <span class="comment">// 结束绘制多边形</span></span><br><span class="line"></span><br><span class="line">    glFlush();  <span class="comment">// 清空OpenGL命令缓冲区，强制执行绘图命令</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span>* argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">    glutInit(&amp;argc, argv);  <span class="comment">// 初始化GLUT库</span></span><br><span class="line"></span><br><span class="line">    glutInitDisplayMode(GLUT_RGB);  <span class="comment">// 设置显示模式为RGB颜色模式</span></span><br><span class="line">    glutInitWindowSize(<span class="number">400</span>, <span class="number">400</span>);  <span class="comment">// 设置窗口大小</span></span><br><span class="line">    glutCreateWindow(<span class="string">&quot;OpenGL Polygon&quot;</span>);  <span class="comment">// 创建窗口，并设置标题为 &quot;OpenGL Polygon&quot;</span></span><br><span class="line"></span><br><span class="line">    glutDisplayFunc(myDisplay);  <span class="comment">// 注册显示回调函数</span></span><br><span class="line"></span><br><span class="line">    glutMainLoop();  <span class="comment">// 进入主循环，开始事件处理</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
@@ -493,21 +585,21 @@
 
 
 
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311142142229.png" alt="image-20231114214250208"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311142142229.png" alt="image-20231114214250208"></p>
 <h2 id="10-3-画一个五角星"><a href="#10-3-画一个五角星" class="headerlink" title="10.3 画一个五角星"></a>10.3 画一个五角星</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;GL/glut.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;math.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">const</span> GLfloat Pi = <span class="number">3.1415926536f</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">myDisplay</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 计算五角星的相关坐标</span></span><br><span class="line">    GLfloat a = <span class="number">1</span> / (<span class="number">2</span> - <span class="number">2</span> * <span class="built_in">cos</span>(<span class="number">72</span> * Pi / <span class="number">180</span>));</span><br><span class="line">    GLfloat bx = a * <span class="built_in">cos</span>(<span class="number">18</span> * Pi / <span class="number">180</span>);</span><br><span class="line">    GLfloat by = a * <span class="built_in">sin</span>(<span class="number">18</span> * Pi / <span class="number">180</span>);</span><br><span class="line">    GLfloat cy = -a * <span class="built_in">cos</span>(<span class="number">18</span> * Pi / <span class="number">180</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 定义五个顶点的坐标</span></span><br><span class="line">    GLfloat PointA[<span class="number">2</span>] = &#123;<span class="number">0</span>, a&#125;;</span><br><span class="line">    GLfloat PointB[<span class="number">2</span>] = &#123;bx, by&#125;;</span><br><span class="line">    GLfloat PointC[<span class="number">2</span>] = &#123;<span class="number">0.5</span>, cy&#125;;</span><br><span class="line">    GLfloat PointD[<span class="number">2</span>] = &#123;<span class="number">-0.5</span>, cy&#125;;</span><br><span class="line">    GLfloat PointE[<span class="number">2</span>] = &#123;-bx, by&#125;;</span><br><span class="line"></span><br><span class="line">    glClear(GL_COLOR_BUFFER_BIT);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 按照A-&gt;C-&gt;E-&gt;B-&gt;D-&gt;A的顺序，绘制五角星</span></span><br><span class="line">    glBegin(GL_LINE_LOOP);</span><br><span class="line">    glVertex2fv(PointA);</span><br><span class="line">    glVertex2fv(PointC);</span><br><span class="line">    glVertex2fv(PointE);</span><br><span class="line">    glVertex2fv(PointB);</span><br><span class="line">    glVertex2fv(PointD);</span><br><span class="line">    glEnd();</span><br><span class="line"></span><br><span class="line">    glFlush();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span>* argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">    glutInit(&amp;argc, argv);</span><br><span class="line">    glutInitDisplayMode(GLUT_RGB);</span><br><span class="line">    glutInitWindowSize(<span class="number">400</span>, <span class="number">400</span>);</span><br><span class="line">    glutCreateWindow(<span class="string">&quot;OpenGL Star&quot;</span>);</span><br><span class="line"></span><br><span class="line">    glutDisplayFunc(myDisplay);</span><br><span class="line"></span><br><span class="line">    glutMainLoop();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
 
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -o test test.c -lm -lGL -lGLU -lglut</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311142146381.png" alt="image-20231114214602345"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311142146381.png" alt="image-20231114214602345"></p>
 <h2 id="10-4-画一个正弦"><a href="#10-4-画一个正弦" class="headerlink" title="10.4 画一个正弦"></a>10.4 画一个正弦</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;GL/glut.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;math.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">const</span> GLfloat factor = <span class="number">0.1f</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">myDisplay</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    GLfloat x;</span><br><span class="line"></span><br><span class="line">    glClear(GL_COLOR_BUFFER_BIT);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 绘制坐标轴</span></span><br><span class="line">    glBegin(GL_LINES);</span><br><span class="line">    glVertex2f(<span class="number">-1.0f</span>, <span class="number">0.0f</span>); <span class="comment">// x轴起点</span></span><br><span class="line">    glVertex2f(<span class="number">1.0f</span>, <span class="number">0.0f</span>);  <span class="comment">// x轴终点</span></span><br><span class="line">    glVertex2f(<span class="number">0.0f</span>, <span class="number">-1.0f</span>); <span class="comment">// y轴起点</span></span><br><span class="line">    glVertex2f(<span class="number">0.0f</span>, <span class="number">1.0f</span>);  <span class="comment">// y轴终点</span></span><br><span class="line">    glEnd();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 绘制正弦曲线</span></span><br><span class="line">    glBegin(GL_LINE_STRIP);</span><br><span class="line">    <span class="keyword">for</span> (x = <span class="number">-1.0f</span> / factor; x &lt; <span class="number">1.0f</span> / factor; x += <span class="number">0.01f</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        glVertex2f(x * factor, <span class="built_in">sin</span>(x) * factor);</span><br><span class="line">    &#125;</span><br><span class="line">    glEnd();</span><br><span class="line"></span><br><span class="line">    glFlush();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span>* argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">    glutInit(&amp;argc, argv);</span><br><span class="line">    glutInitDisplayMode(GLUT_RGB);</span><br><span class="line">    glutInitWindowSize(<span class="number">400</span>, <span class="number">400</span>);</span><br><span class="line">    glutCreateWindow(<span class="string">&quot;OpenGL Sine Curve&quot;</span>);</span><br><span class="line"></span><br><span class="line">    glutDisplayFunc(myDisplay);</span><br><span class="line"></span><br><span class="line">    glutMainLoop();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
 
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -o test test.c -lm -lGL -lGLU -lglut</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311142147823.png" alt="image-20231114214746801"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311142147823.png" alt="image-20231114214746801"></p>
 <h2 id="10-5-指定着色模型"><a href="#10-5-指定着色模型" class="headerlink" title="10.5 指定着色模型"></a>10.5 指定着色模型</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;GL/glut.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;math.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">const</span> GLdouble Pi = <span class="number">3.1415926536</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">myDisplay</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line"></span><br><span class="line">    glClear(GL_COLOR_BUFFER_BIT);</span><br><span class="line"></span><br><span class="line">    glBegin(GL_TRIANGLE_FAN);</span><br><span class="line"></span><br><span class="line">    glColor3f(<span class="number">1.0f</span>, <span class="number">1.0f</span>, <span class="number">1.0f</span>);</span><br><span class="line">    glVertex2f(<span class="number">0.0f</span>, <span class="number">0.0f</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt;= <span class="number">8</span>; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        glColor3f((i &amp; <span class="number">0x04</span>) ? <span class="number">1.0f</span> : <span class="number">0.0f</span>, (i &amp; <span class="number">0x02</span>) ? <span class="number">1.0f</span> : <span class="number">0.0f</span>, (i &amp; <span class="number">0x01</span>) ? <span class="number">1.0f</span> : <span class="number">0.0f</span>);</span><br><span class="line">        glVertex2f(<span class="built_in">cos</span>(i * Pi / <span class="number">4</span>), <span class="built_in">sin</span>(i * Pi / <span class="number">4</span>));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    glEnd();</span><br><span class="line"></span><br><span class="line">    glFlush();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> *argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">    glutInit(&amp;argc, argv);</span><br><span class="line">    glutInitDisplayMode(GLUT_RGB);</span><br><span class="line">    glutInitWindowSize(<span class="number">400</span>, <span class="number">400</span>);</span><br><span class="line">    glutCreateWindow(<span class="string">&quot;OpenGL Colorful Triangle&quot;</span>);</span><br><span class="line"></span><br><span class="line">    glutDisplayFunc(myDisplay);</span><br><span class="line"></span><br><span class="line">    glutMainLoop();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
@@ -516,7 +608,7 @@
 
 
 
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311142149974.png" alt="image-20231114214959931"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311142149974.png" alt="image-20231114214959931"></p>
 <p>这个图形渲染出来就很慢，这可能就是GPU的作用了</p>
 <h2 id="10-6-三维变换"><a href="#10-6-三维变换" class="headerlink" title="10.6 三维变换"></a>10.6 三维变换</h2><p>模型变换和视图变换</p>
 <p>投影变换</p>
@@ -532,12 +624,12 @@
 
 
 
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311142156920.png" alt="image-20231114215605879"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311142156920.png" alt="image-20231114215605879"></p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;GL/glut.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">setLight</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">static</span> <span class="type">const</span> GLfloat light_position[] = &#123;<span class="number">1.0f</span>, <span class="number">1.0f</span>, <span class="number">-1.0f</span>, <span class="number">1.0f</span>&#125;;</span><br><span class="line">    <span class="type">static</span> <span class="type">const</span> GLfloat light_ambient[] = &#123;<span class="number">0.2f</span>, <span class="number">0.2f</span>, <span class="number">0.2f</span>, <span class="number">1.0f</span>&#125;;</span><br><span class="line">    <span class="type">static</span> <span class="type">const</span> GLfloat light_diffuse[] = &#123;<span class="number">1.0f</span>, <span class="number">1.0f</span>, <span class="number">1.0f</span>, <span class="number">1.0f</span>&#125;;</span><br><span class="line">    <span class="type">static</span> <span class="type">const</span> GLfloat light_specular[] = &#123;<span class="number">1.0f</span>, <span class="number">1.0f</span>, <span class="number">1.0f</span>, <span class="number">1.0f</span>&#125;;</span><br><span class="line"></span><br><span class="line">    glLightfv(GL_LIGHT0, GL_POSITION, light_position);</span><br><span class="line">    glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);</span><br><span class="line">    glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);</span><br><span class="line">    glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular);</span><br><span class="line"></span><br><span class="line">    glEnable(GL_LIGHT0);</span><br><span class="line">    glEnable(GL_LIGHTING);</span><br><span class="line">    glEnable(GL_DEPTH_TEST);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">setMaterial</span><span class="params">(<span class="type">const</span> GLfloat mat_diffuse[<span class="number">4</span>], GLfloat mat_shininess)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">static</span> <span class="type">const</span> GLfloat mat_specular[] = &#123;<span class="number">0.0f</span>, <span class="number">0.0f</span>, <span class="number">0.0f</span>, <span class="number">1.0f</span>&#125;;</span><br><span class="line">    <span class="type">static</span> <span class="type">const</span> GLfloat mat_emission[] = &#123;<span class="number">0.0f</span>, <span class="number">0.0f</span>, <span class="number">0.0f</span>, <span class="number">1.0f</span>&#125;;</span><br><span class="line"></span><br><span class="line">    glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, mat_diffuse);</span><br><span class="line">    glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);</span><br><span class="line">    glMaterialfv(GL_FRONT, GL_EMISSION, mat_emission);</span><br><span class="line">    glMaterialf(GL_FRONT, GL_SHININESS, mat_shininess);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">myDisplay</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 定义一些材质颜色</span></span><br><span class="line">    <span class="type">const</span> <span class="type">static</span> GLfloat red_color[] = &#123;<span class="number">1.0f</span>, <span class="number">0.0f</span>, <span class="number">0.0f</span>, <span class="number">1.0f</span>&#125;;</span><br><span class="line">    <span class="type">const</span> <span class="type">static</span> GLfloat green_color[] = &#123;<span class="number">0.0f</span>, <span class="number">1.0f</span>, <span class="number">0.0f</span>, <span class="number">0.3333f</span>&#125;;</span><br><span class="line">    <span class="type">const</span> <span class="type">static</span> GLfloat blue_color[] = &#123;<span class="number">0.0f</span>, <span class="number">0.0f</span>, <span class="number">1.0f</span>, <span class="number">0.5f</span>&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 清除屏幕</span></span><br><span class="line">    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 启动混合并设置混合因子</span></span><br><span class="line">    glEnable(GL_BLEND);</span><br><span class="line">    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 设置光源</span></span><br><span class="line">    setLight();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 以(0, 0, 0.5)为中心，绘制一个半径为0.3的不透明红色球体（离观察者最远）</span></span><br><span class="line">    setMaterial(red_color, <span class="number">30.0</span>);</span><br><span class="line">    glPushMatrix();</span><br><span class="line">    glTranslatef(<span class="number">0.0f</span>, <span class="number">0.0f</span>, <span class="number">0.5f</span>);</span><br><span class="line">    glutSolidSphere(<span class="number">0.3</span>, <span class="number">30</span>, <span class="number">30</span>);</span><br><span class="line">    glPopMatrix();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 下面将绘制半透明物体了，因此将深度缓冲设置为只读</span></span><br><span class="line">    glDepthMask(GL_FALSE);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 以(0.2, 0, -0.5)为中心，绘制一个半径为0.2的半透明蓝色球体（离观察者最近）</span></span><br><span class="line">    setMaterial(blue_color, <span class="number">30.0</span>);</span><br><span class="line">    glPushMatrix();</span><br><span class="line">    glTranslatef(<span class="number">0.2f</span>, <span class="number">0.0f</span>, <span class="number">-0.5f</span>);</span><br><span class="line">    glutSolidSphere(<span class="number">0.2</span>, <span class="number">30</span>, <span class="number">30</span>);</span><br><span class="line">    glPopMatrix();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 以(0.1, 0, 0)为中心，绘制一个半径为0.15的半透明绿色球体（在前两个球体之间）</span></span><br><span class="line">    setMaterial(green_color, <span class="number">30.0</span>);</span><br><span class="line">    glPushMatrix();</span><br><span class="line">    glTranslatef(<span class="number">0.1</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">    glutSolidSphere(<span class="number">0.15</span>, <span class="number">30</span>, <span class="number">30</span>);</span><br><span class="line">    glPopMatrix();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 完成半透明物体的绘制，将深度缓冲区恢复为可读可写的形式</span></span><br><span class="line">    glDepthMask(GL_TRUE);</span><br><span class="line"></span><br><span class="line">    glutSwapBuffers();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span>** argv)</span> &#123;</span><br><span class="line">    glutInit(&amp;argc, argv);</span><br><span class="line">    glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);</span><br><span class="line">    glutInitWindowPosition(<span class="number">100</span>, <span class="number">100</span>);</span><br><span class="line">    glutInitWindowSize(<span class="number">800</span>, <span class="number">600</span>);</span><br><span class="line">    glutCreateWindow(<span class="string">&quot;Transparent Objects&quot;</span>);</span><br><span class="line"></span><br><span class="line">    glClearColor(<span class="number">0.0f</span>, <span class="number">0.0f</span>, <span class="number">0.0f</span>, <span class="number">1.0f</span>);</span><br><span class="line"></span><br><span class="line">    glutDisplayFunc(myDisplay);</span><br><span class="line"></span><br><span class="line">    glutMainLoop();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -o test test.c -lm -lGL -lGLU -lglut</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311142203186.png" alt="image-20231114220315130"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311142203186.png" alt="image-20231114220315130"></p>
 <h1 id="11-opencl学习"><a href="#11-opencl学习" class="headerlink" title="11.opencl学习"></a>11.opencl学习</h1><p>&#x3D;&#x3D;什么是opencl？&#x3D;&#x3D;</p>
 <p>OpenCL（Open Computing Language）是一个开放的跨平台编程框架，用于实现并行计算和通用计算任务的加速。它允许开发者利用多核 CPU、GPU、FPGA和其他加速器等异构计算资源，以高效地执行并行计算任务。</p>
 <p>下面是对OpenCL的详细解释：</p>
@@ -589,7 +681,7 @@
 <li><p><code>-aarm64</code>: 这是一个选项，指定要构建的目标架构为 arm64（ARM 64位架构）。</p>
 </li>
 </ul>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311152100173.png" alt="image-20231115152331453"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311152100173.png" alt="image-20231115152331453"></p>
 <p>这就编译成功了，得到了三个包。</p>
 <h1 id="13-mpp编译"><a href="#13-mpp编译" class="headerlink" title="13.mpp编译"></a>13.mpp编译</h1><p>MPP（Media Processing Platform）是一种多媒体处理平台，用于实现音频和视频数据的处理、编解码和处理。MPP 提供了一组丰富的功能和算法，用于处理各种多媒体数据，并且能够在硬件加速的环境下提供高效的处理性能。</p>
 <p>以下是 MPP 的主要作用：</p>
@@ -606,7 +698,7 @@
 <p>使用以下命令构建deb包</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo DEB_BUILD_OPTIONS=nocheck dpkg-buildpackage -b -d -uc -us -aarm64</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311152100221.png" alt="image-20231115153242539"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311152100221.png" alt="image-20231115153242539"></p>
 <h1 id="14-drm-cursor编译"><a href="#14-drm-cursor编译" class="headerlink" title="14.drm-cursor编译"></a>14.drm-cursor编译</h1><p>drm-cursor 模块的作用是在 Linux 内核中管理和控制硬件光标的显示和操作。它提供了对硬件光标平面（cursor plane）的支持，允许用户在图形界面中显示和操作硬件加速的光标。</p>
 <p>具体而言，drm-cursor 模块负责以下功能：</p>
 <ol>
@@ -628,7 +720,7 @@
 <p>使用以下命令构建deb包</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo DEB_BUILD_OPTIONS=nocheck dpkg-buildpackage -b -d -uc -us -aarm64</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311152100215.png" alt="image-20231115173657884"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311152100215.png" alt="image-20231115173657884"></p>
 <h1 id="15-mali编译"><a href="#15-mali编译" class="headerlink" title="15.mali编译"></a>15.mali编译</h1><p><a target="_blank" rel="noopener" href="https://github.com/JeffyCN/mirrors/tree/libmali">https://github.com/JeffyCN/mirrors/tree/libmali</a></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/JeffyCN/mirrors/tree/libmali</span><br></pre></td></tr></table></figure>
 
@@ -639,7 +731,7 @@
 
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apt-get install pip</span><br><span class="line">pip3 install meson==0.54.0 -i https://pypi.mirrors.ustc.edu.cn/simple/</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311152100218.png" alt="image-20231115173447296"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311152100218.png" alt="image-20231115173447296"></p>
 <h1 id="16-libv4l-mpp编译-目前没这个，还不需要"><a href="#16-libv4l-mpp编译-目前没这个，还不需要" class="headerlink" title="16.libv4l-mpp编译(目前没这个，还不需要)"></a>16.libv4l-mpp编译(目前没这个，还不需要)</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/JeffyCN/libv4l-rkmpp.git</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --privileged -it -v /home/topeet/:/home/topeet/ ubuntu20</span><br></pre></td></tr></table></figure>
@@ -679,15 +771,15 @@
 <p>打补丁的脚本</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"></span><br><span class="line">PATCHES_DIR=&quot;$1&quot;  # 补丁文件所在目录</span><br><span class="line">SOURCE_DIR=&quot;$2&quot;  # 源码目录</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">检查补丁文件目录是否存在</span></span><br><span class="line">if [ ! -d &quot;$PATCHES_DIR&quot; ]; then</span><br><span class="line">  echo &quot;补丁文件目录不存在: $PATCHES_DIR&quot;</span><br><span class="line">  exit 1</span><br><span class="line">fi</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">检查源码目录是否存在</span></span><br><span class="line">if [ ! -d &quot;$SOURCE_DIR&quot; ]; then</span><br><span class="line">  echo &quot;源码目录不存在: $SOURCE_DIR&quot;</span><br><span class="line">  exit 1</span><br><span class="line">fi</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">获取补丁文件列表，并按文件名排序</span></span><br><span class="line">PATCH_FILES=$(find &quot;$PATCHES_DIR&quot; -type f -name &quot;*.patch&quot; | sort)</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">应用每个补丁文件到源码中</span></span><br><span class="line">for PATCH_FILE in $PATCH_FILES; do</span><br><span class="line">  echo &quot;应用补丁文件: $PATCH_FILE&quot;</span><br><span class="line">  patch -d &quot;$SOURCE_DIR&quot; -p1 --no-backup-if-mismatch -f &lt; &quot;$PATCH_FILE&quot;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">  # </span><span class="language-bash">检查应用补丁是否成功</span></span><br><span class="line">  if [ $? -eq 0 ]; then</span><br><span class="line">    echo &quot;补丁文件已成功应用&quot;</span><br><span class="line">  else</span><br><span class="line">    echo &quot;应用补丁文件时出错&quot;</span><br><span class="line">  fi</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
 
-<p>脚本运行如下所示：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311162144402.png" alt="image-20231116173059788"></p>
+<p>脚本运行如下所示：<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311162144402.png" alt="image-20231116173059788"></p>
 <p>到这里就修改完成了，然后加载docker镜像，挂载相应的目录</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --privileged -it -v /home/topeet/tmp/xorg:/home/topeet/ ubuntu20</span><br></pre></td></tr></table></figure>
 
 <p>接下来修改一些版本号，首先是configure.ac，将原来的1.20.8修改为1.20.13</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim configure.ac</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311162144390.png" alt="image-20231116141046609"></p>
-<p>然后修改meson.build文件，通样修改版本号，修改完成如下图所示：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311162144393.png" alt="image-20231116141249595"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311162144390.png" alt="image-20231116141046609"></p>
+<p>然后修改meson.build文件，通样修改版本号，修改完成如下图所示：<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311162144393.png" alt="image-20231116141249595"></p>
 <p>最后修改构建deb包的debain文件，其中的debian&#x2F;changelog用来控制构建的名称，然后添加上下面这个，这样最后生成的就是对应名称的的包了。</p>
 <figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">xorg-server (2:1.20.13-1ubuntu1~20.04.9) focal-security; urgency=medium</span><br><span class="line"></span><br><span class="line">  * SECURITY UPDATE: OOB write in XIChangeDeviceProperty and</span><br><span class="line">    RRChangeOutputProperty</span><br><span class="line">    - debian/patches/CVE-2023-5367.patch: fix handling of PropModeAppend</span><br><span class="line">      and PropModePrepend in Xi/xiproperty.c, randr/rrproperty.c.</span><br><span class="line">    - CVE-2023-5367</span><br><span class="line">  * SECURITY UPDATE: Use-after-free bug in DestroyWindow</span><br><span class="line">    - debian/patches/CVE-2023-5380.patch: reset the PointerWindows</span><br><span class="line">      reference on screen switch in dix/enterleave.h, <span class="keyword">include</span>/eventstr.h,</span><br><span class="line">      mi/mipointer.c.</span><br><span class="line">    - CVE-2023-5380</span><br></pre></td></tr></table></figure>
 
@@ -701,11 +793,11 @@
 
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo DEB_BUILD_OPTIONS=nocheck dpkg-buildpackage -b -d -uc -us -aarm64</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311162144432.png" alt="image-20231116142000186"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311162144432.png" alt="image-20231116142000186"></p>
 <p>无论是ubuntu20还是ubutnu22应该都能以同样的方式进行构建xserver的包，安装gpu驱动之后会黑屏，这时候上面构建的deb包就需要安装了。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo DEB_BUILD_OPTIONS=nocheck dpkg-buildpackage -b -d -uc -us -aarm64</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311162144432.png" alt="image-20231116142000186"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311162144432.png" alt="image-20231116142000186"></p>
 <p>自己做的deb包：<br>1.20.13</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">链接：https://pan.baidu.com/s/1237Qxwq0u7s6cJwTDF5oyQ </span><br><span class="line">提取码：gh2p </span><br><span class="line">--来自百度网盘超级会员V6的分享</span><br></pre></td></tr></table></figure>
 
@@ -715,469 +807,151 @@
 <h1 id="21-ubuntu20-qt的编译"><a href="#21-ubuntu20-qt的编译" class="headerlink" title="21.ubuntu20 qt的编译"></a>21.ubuntu20 qt的编译</h1><p>docker加载镜像和源码：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --privileged -it -v /home/topeet/Linux/qt/:/home/topeet/ ubuntu20</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311162144377.png" alt="image-20231116143753225"></p>
-<h1 id="22-开发调试流程简介"><a href="#22-开发调试流程简介" class="headerlink" title="22.开发调试流程简介"></a>22.开发调试流程简介</h1><p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311162144550.png" alt="image-20231116162242671"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311162144377.png" alt="image-20231116143753225"></p>
+<h1 id="22-开发调试流程简介"><a href="#22-开发调试流程简介" class="headerlink" title="22.开发调试流程简介"></a>22.开发调试流程简介</h1><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311162144550.png" alt="image-20231116162242671"></p>
 <p>Rockchip_Developer_Guide_Third_Party_System_Adaptation_CN.pdf<br>这个pdf文件很重要。</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-<div class="share-btn">
-      <span class="share-sns share-outer">
-        <i class="ri-share-forward-line"></i>
-        分享
-      </span>
-      <div class="share-wrap">
-        <i class="arrow"></i>
-        <div class="share-icons">
-          
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="ri-weibo-fill"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="ri-wechat-fill"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="ri-qq-fill"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="ri-douban-line"></i>
-          </a>
-          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a> -->
-          
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="ri-facebook-circle-fill"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="ri-twitter-fill"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="ri-google-fill"></i>
-          </a>
-        </div>
-      </div>
-</div>
-
-<div class="wx-share-modal">
-    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2023/11/14/7%20rk%20deb%E5%8C%85%E7%9A%84%E5%88%B6%E4%BD%9C/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div id="share-mask"></div>  
-    </footer>
-  </div>
-
-   
-  <nav class="article-nav">
-    
-      <a href="/2023/11/19/8%20%E9%9F%B3%E8%A7%86%E9%A2%91%E7%BC%96%E8%A7%A3%E7%A0%81%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E5%AD%A6%E4%B9%A0/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            音视频编解码相关知识学习
-          
-        </div>
-      </a>
-    
-    
-      <a href="/2023/11/12/6%20ad%E5%AD%A6%E4%B9%A0/" class="article-nav-link">
-        <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">PCB学习</div>
-      </a>
-    
-  </nav>
-
-  
-   
-  
-   
-    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
-    <div id="twikoo" class="twikoo"></div>
-    <script>
-        twikoo.init({
-            envId: ""
-        })
-    </script>
- 
-</article>
-
-</section>
-      <footer class="footer">
-  <div class="outer">
-    <ul>
-      <li>
-        Copyrights &copy;
-        2015-2023
-        <i class="ri-heart-fill heart_icon"></i> chai
-      </li>
-    </ul>
-    <ul>
-      <li>
+</article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg" title="头像" alt="头像"></a><div class="post-copyright__author_name">chai</div><div class="post-copyright__author_desc">热爱学习</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="http://example.com/2023/11/14/7%20rk%20deb%E5%8C%85%E7%9A%84%E5%88%B6%E4%BD%9C/">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('http://example.com/2023/11/14/7%20rk%20deb%E5%8C%85%E7%9A%84%E5%88%B6%E4%BD%9C/')">rkdeb包的制作</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"><div class="post-reward" onclick="anzhiyu.addRewardMask()"><div class="reward-button button--animated" title="赞赏作者"><i class="anzhiyufont anzhiyu-icon-hand-heart-fill"></i>打赏作者</div><div class="reward-main"><div class="reward-all"><span class="reward-title">感谢你赐予我前进的力量</span><ul class="reward-group"><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul><a class="reward-main-btn" href="/about/#about-reward" target="_blank"><div class="reward-text">赞赏者名单</div><div class="reward-dec">因为你们的支持让我意识到写文章的价值🙏</div></a></div></div></div><div id="quit-box" onclick="anzhiyu.removeRewardMask()" style="display: none"></div></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="http://example.com/2023/11/14/7%20rk%20deb%E5%8C%85%E7%9A%84%E5%88%B6%E4%BD%9C/"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=rkdeb包的制作&amp;url=http://example.com/2023/11/14/7%20rk%20deb%E5%8C%85%E7%9A%84%E5%88%B6%E4%BD%9C/&amp;pic=" rel="external nofollow noreferrer noopener"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
+  var currentPageUrl = window.location.href;
+  var input = document.createElement("input");
+  input.setAttribute("value", currentPageUrl);
+  document.body.appendChild(input);
+  input.select();
+  input.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">热爱学习的未来酱</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"></div></div></div><div class="post_share"><div class="social-share" data-image="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"/><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/11/12/6%20ad%E5%AD%A6%E4%B9%A0/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">PCB学习</div></div></a></div><div class="next-post pull-right"><a href="/2023/11/19/8%20%E9%9F%B3%E8%A7%86%E9%A2%91%E7%BC%96%E8%A7%A3%E7%A0%81%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E5%AD%A6%E4%B9%A0/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">音视频编解码相关知识学习</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__description">永远年轻，永远热泪盈眶</div></div></div><div class="card-widget anzhiyu-right-widget" id="card-wechat" onclick="null"><div id="flip-wrapper"><div id="flip-content"><div class="face" style="background: url(https://bu.dusays.com/2023/01/13/63c02edf44033.png) center center / 100% no-repeat"></div><div class="back face" style="background: url(https://bu.dusays.com/2023/05/13/645fa415e8694.png) center center / 100% no-repeat"></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-dockerfile-%E6%96%87%E4%BB%B6"><span class="toc-number">1.</span> <span class="toc-text">1 dockerfile 文件</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-debian10"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 debian10</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-debian11"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 debian11</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-debian12"><span class="toc-number">1.3.</span> <span class="toc-text">1.3 debian12</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E9%97%AE%E9%A2%98%E6%8E%A2%E7%A9%B6"><span class="toc-number">2.</span> <span class="toc-text">2.问题探究</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-debian10-dockerfile"><span class="toc-number">3.</span> <span class="toc-text">1.debian10 dockerfile</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-debian11-dockerfile"><span class="toc-number">4.</span> <span class="toc-text">2.debian11 dockerfile</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-debian12-dockerfile"><span class="toc-number">5.</span> <span class="toc-text">3.debian12 dockerfile</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-ubuntu20-dockerfile"><span class="toc-number">6.</span> <span class="toc-text">4.ubuntu20 dockerfile</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-ubuntu22-dockerfile"><span class="toc-number">7.</span> <span class="toc-text">5.ubuntu22 dockerfile</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-%E7%BB%A7%E7%BB%AD%E6%9E%84%E5%BB%BA"><span class="toc-number">8.</span> <span class="toc-text">6.继续构建</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#7-%E6%B5%8B%E8%AF%95xserver"><span class="toc-number">9.</span> <span class="toc-text">7.测试xserver</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#8-%E6%B5%8B%E8%AF%95opencl"><span class="toc-number">10.</span> <span class="toc-text">8.测试opencl</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#9-%E5%AF%B9%E6%AF%94%E6%B5%8B%E8%AF%95%EF%BC%88%E7%BC%96%E8%AF%91%E4%B8%80%E4%B8%AA%E4%BB%80%E4%B9%88%E9%83%BD%E6%B2%A1%E6%9C%89%E7%9A%84ubuntu%EF%BC%89"><span class="toc-number">11.</span> <span class="toc-text">9.对比测试（编译一个什么都没有的ubuntu）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#10-opengl%E5%AD%A6%E4%B9%A0"><span class="toc-number">12.</span> <span class="toc-text">10 opengl学习</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#10-1-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="toc-number">12.1.</span> <span class="toc-text">10.1 环境搭建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-2%EF%BC%9A%E7%94%BB%E4%B8%80%E4%B8%AA%E5%9C%86"><span class="toc-number">12.2.</span> <span class="toc-text">10.2：画一个圆</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-3-%E7%94%BB%E4%B8%80%E4%B8%AA%E4%BA%94%E8%A7%92%E6%98%9F"><span class="toc-number">12.3.</span> <span class="toc-text">10.3 画一个五角星</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-4-%E7%94%BB%E4%B8%80%E4%B8%AA%E6%AD%A3%E5%BC%A6"><span class="toc-number">12.4.</span> <span class="toc-text">10.4 画一个正弦</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-5-%E6%8C%87%E5%AE%9A%E7%9D%80%E8%89%B2%E6%A8%A1%E5%9E%8B"><span class="toc-number">12.5.</span> <span class="toc-text">10.5 指定着色模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-6-%E4%B8%89%E7%BB%B4%E5%8F%98%E6%8D%A2"><span class="toc-number">12.6.</span> <span class="toc-text">10.6 三维变换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-7-%E5%8A%A8%E8%B5%B7%E6%9D%A5"><span class="toc-number">12.7.</span> <span class="toc-text">10.7 动起来</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#11-opencl%E5%AD%A6%E4%B9%A0"><span class="toc-number">13.</span> <span class="toc-text">11.opencl学习</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#12-rga%E7%BC%96%E8%AF%91"><span class="toc-number">14.</span> <span class="toc-text">12.rga编译</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#13-mpp%E7%BC%96%E8%AF%91"><span class="toc-number">15.</span> <span class="toc-text">13.mpp编译</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#14-drm-cursor%E7%BC%96%E8%AF%91"><span class="toc-number">16.</span> <span class="toc-text">14.drm-cursor编译</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#15-mali%E7%BC%96%E8%AF%91"><span class="toc-number">17.</span> <span class="toc-text">15.mali编译</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#16-libv4l-mpp%E7%BC%96%E8%AF%91-%E7%9B%AE%E5%89%8D%E6%B2%A1%E8%BF%99%E4%B8%AA%EF%BC%8C%E8%BF%98%E4%B8%8D%E9%9C%80%E8%A6%81"><span class="toc-number">18.</span> <span class="toc-text">16.libv4l-mpp编译(目前没这个，还不需要)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#17-gst-rk%E7%BC%96%E8%AF%91-%E7%9B%AE%E5%89%8D%E6%B2%A1%E8%BF%99%E4%B8%AA%EF%BC%8C%E8%BF%98%E4%B8%8D%E9%9C%80%E8%A6%81"><span class="toc-number">19.</span> <span class="toc-text">17.gst-rk编译(目前没这个，还不需要)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#18-xserver%E7%BC%96%E8%AF%91"><span class="toc-number">20.</span> <span class="toc-text">18.xserver编译</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#19-firefly-%E7%BD%91%E5%9D%80"><span class="toc-number">21.</span> <span class="toc-text">19.firefly 网址</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#20-Rockchip-Graphics%E4%BB%8B%E7%BB%8D"><span class="toc-number">22.</span> <span class="toc-text">20.Rockchip Graphics介绍</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#21-ubuntu20-qt%E7%9A%84%E7%BC%96%E8%AF%91"><span class="toc-number">23.</span> <span class="toc-text">21.ubuntu20 qt的编译</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#22-%E5%BC%80%E5%8F%91%E8%B0%83%E8%AF%95%E6%B5%81%E7%A8%8B%E7%AE%80%E4%BB%8B"><span class="toc-number">24.</span> <span class="toc-text">22.开发调试流程简介</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item"><div class="content"><a class="title" href="/2024/12/31/%E8%A7%84%E7%9F%A9/" title="规矩">规矩</a><time datetime="2024-12-31T14:15:56.000Z" title="发表于 2024-12-31 22:15:56">2024-12-31</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/12/31/%E5%8F%8D%E6%80%9D/" title="反思">反思</a><time datetime="2024-12-31T13:26:56.000Z" title="发表于 2024-12-31 21:26:56">2024-12-31</time></div></div><div class="aside-list-item"><div class="content"><a class="title" href="/2024/12/11/24%20%E8%AF%BB%E5%90%8E%E6%84%9F/" title="读后感">读后感</a><time datetime="2024-12-10T22:50:19.000Z" title="发表于 2024-12-11 06:50:19">2024-12-11</time></div></div><div class="aside-list-item"><div class="content"><a class="title" href="/2023/12/11/23%20%E5%B5%8C%E5%85%A5%E5%BC%8FC%E8%AF%AD%E8%A8%80%E7%9A%84%E8%87%AA%E6%88%91%E4%BF%AE%E5%85%BB/" title="嵌入式C语言的自我修养">嵌入式C语言的自我修养</a><time datetime="2023-12-10T22:50:19.000Z" title="发表于 2023-12-11 06:50:19">2023-12-11</time></div></div><div class="aside-list-item"><div class="content"><a class="title" href="/2023/12/10/22%20tabby%E7%9A%84%E4%BD%BF%E7%94%A8/" title="tabby的使用">tabby的使用</a><time datetime="2023-12-10T04:50:19.000Z" title="发表于 2023-12-10 12:50:19">2023-12-10</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">&copy;2020 - 2023 By <a class="footer-bar-link" href="/" title="chai" target="_blank">chai</a></div></div><div id="footer-type-tips"></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/anzhiyu-c/hexo-theme-anzhiyu" title="主题">主题</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">27</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">4</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://blog.anheyu.com/" title="博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="博客"/><span class="back-menu-item-text">博客</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://image.anheyu.com/" title="安知鱼图床"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://image.anheyu.com/favicon.ico" alt="安知鱼图床"/><span class="back-menu-item-text">安知鱼图床</span></a></div></div></div><span class="sidebar-menu-item-title">标签</span></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="nav-music"><a id="nav-music-hoverTips" onclick="anzhiyu.musicToggle()" accesskey="m">播放音乐</a><div id="console-music-bg"></div><meting-js id="8152976493" server="netease" type="playlist" mutex="true" preload="none" theme="var(--anzhiyu-main)" data-lrctype="0" order="random" volume="0.7"></meting-js></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://y.qq.com/n/ryqq/playlist/8802438608&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.cbd.int/vanilla-lazyload@17.8.5/dist/lazyload.iife.min.js"></script><script src="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.js"></script><canvas id="universe"></canvas><script async src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
+var HoldLog = console.log;
+console.log = function () {};
+let now1 = new Date();
+queueMicrotask(() => {
+  const Log = function () {
+    HoldLog.apply(console, arguments);
+  }; //在恢复前输出日志
+  const grt = new Date("04/01/2021 00:00:00"); //此处修改你的建站时间或者网站上线时间
+  now1.setTime(now1.getTime() + 250);
+  const days = (now1 - grt) / 1000 / 60 / 60 / 24;
+  const dnum = Math.floor(days);
+  const ascll = [
+    `欢迎使用安知鱼!`,
+    `生活明朗, 万物可爱`,
+    `
         
-      </li>
-    </ul>
-    <ul>
-      <li>
+       █████╗ ███╗   ██╗███████╗██╗  ██╗██╗██╗   ██╗██╗   ██╗
+      ██╔══██╗████╗  ██║╚══███╔╝██║  ██║██║╚██╗ ██╔╝██║   ██║
+      ███████║██╔██╗ ██║  ███╔╝ ███████║██║ ╚████╔╝ ██║   ██║
+      ██╔══██║██║╚██╗██║ ███╔╝  ██╔══██║██║  ╚██╔╝  ██║   ██║
+      ██║  ██║██║ ╚████║███████╗██║  ██║██║   ██║   ╚██████╔╝
+      ╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝    ╚═════╝
         
-      </li>
-    </ul>
-    <ul>
-      
-    </ul>
-    <ul>
-      
-    </ul>
-    <ul>
-      <li>
-        <!-- cnzz统计 -->
-        
-        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
-        
-      </li>
-    </ul>
-  </div>
-</footer>    
-    </main>
-    <div class="float_btns">
-      <div class="totop" id="totop">
-  <i class="ri-arrow-up-line"></i>
-</div>
+        `,
+    "已上线",
+    dnum,
+    "天",
+    "©2020 By 安知鱼 V1.6.12",
+  ];
+  const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
 
-<div class="todark" id="todark">
-  <i class="ri-moon-line"></i>
-</div>
+  setTimeout(
+    Log.bind(
+      console,
+      `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      ""
+    )
+  );
+  setTimeout(
+    Log.bind(
+      console,
+      `%c ${ascll2[0]} %c ${ascll2[1]} %c \n${ascll2[2]} %c\n${ascll2[3]}\n`,
+      "color:white; background-color:#4fd953",
+      "",
+      "",
+      'background:url("https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/tinggge.gif") no-repeat;font-size:450%'
+    )
+  );
 
-    </div>
-    <aside class="sidebar on">
-      <button class="navbar-toggle"></button>
-<nav class="navbar">
+  setTimeout(Log.bind(console, "%c WELCOME %c 你好，小笨蛋.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(
+      console,
+      "%c ⚡ Powered by 安知鱼 %c 你正在访问 chai 的博客.",
+      "color:white; background-color:#f0ad4e",
+      ""
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c W23-12 %c 你已打开控制台.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
+  );
+});</script><script async src="/anzhiyu/random.js"></script><div class="js-pjax"><input type="hidden" name="page-type" id="page-type" value="post"></div><script>var visitorMail = "";
+</script><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://cdn.cbd.int/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
   
-  <div class="logo">
-    <a href="/"><img src="/images/ayer-side.svg" alt="热爱学习的未来酱"></a>
-  </div>
-  
-  <ul class="nav nav-main">
-    
-    <li class="nav-item">
-      <a class="nav-item-link" href="/">主页</a>
-    </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link" href="/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE">瑞芯微</a>
-    </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link" href="/categories/%E5%AD%A6%E4%B9%A0">学习</a>
-    </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link" href="/categories/%E7%94%9F%E6%B4%BB">生活</a>
-    </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link" href="/archives">归档</a>
-    </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link" href="/categories">分类</a>
-    </li>
-    
-  </ul>
-</nav>
-<nav class="navbar navbar-bottom">
-  <ul class="nav">
-    <li class="nav-item">
-      
-      <a class="nav-item-link nav-item-search"  title="搜索">
-        <i class="ri-search-line"></i>
-      </a>
-      
-      
-      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
-        <i class="ri-rss-line"></i>
-      </a>
-      
-    </li>
-  </ul>
-</nav>
-<div class="search-form-wrap">
-  <div class="local-search local-search-plugin">
-  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
-  <div id="local-search-result" class="local-search-result"></div>
-</div>
-</div>
-    </aside>
-    <div id="mask"></div>
-
-<!-- #reward -->
-<div id="reward">
-  <span class="close"><i class="ri-close-line"></i></span>
-  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
-  <div class="reward-box">
-    
-    <div class="reward-item">
-      <img class="reward-img" src="/images/alipay.jpg">
-      <span class="reward-type">支付宝</span>
-    </div>
-    
-    
-    <div class="reward-item">
-      <img class="reward-img" src="/images/wechat.jpg">
-      <span class="reward-type">微信</span>
-    </div>
-    
-  </div>
-</div>
-    
-<script src="/js/jquery-3.6.0.min.js"></script>
- 
-<script src="/js/lazyload.min.js"></script>
-
-<!-- Tocbot -->
- 
-<script src="/js/tocbot.min.js"></script>
-
-<script>
-  tocbot.init({
-    tocSelector: ".tocbot",
-    contentSelector: ".article-entry",
-    headingSelector: "h1, h2, h3, h4, h5, h6",
-    hasInnerContainers: true,
-    scrollSmooth: true,
-    scrollContainer: "main",
-    positionFixedSelector: ".tocbot",
-    positionFixedClass: "is-position-fixed",
-    fixedSidebarOffset: "auto",
-  });
-</script>
-
-<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
-<link
-  rel="stylesheet"
-  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
-/>
-<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
-
-<script src="/dist/main.js"></script>
-
-<!-- ImageViewer -->
- <!-- Root element of PhotoSwipe. Must have class pswp. -->
-<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
-
-    <!-- Background of PhotoSwipe. 
-         It's a separate element as animating opacity is faster than rgba(). -->
-    <div class="pswp__bg"></div>
-
-    <!-- Slides wrapper with overflow:hidden. -->
-    <div class="pswp__scroll-wrap">
-
-        <!-- Container that holds slides. 
-            PhotoSwipe keeps only 3 of them in the DOM to save memory.
-            Don't modify these 3 pswp__item elements, data is added later on. -->
-        <div class="pswp__container">
-            <div class="pswp__item"></div>
-            <div class="pswp__item"></div>
-            <div class="pswp__item"></div>
-        </div>
-
-        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
-        <div class="pswp__ui pswp__ui--hidden">
-
-            <div class="pswp__top-bar">
-
-                <!--  Controls are self-explanatory. Order can be changed. -->
-
-                <div class="pswp__counter"></div>
-
-                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
-
-                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
-
-                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
-
-                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
-
-                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
-                <!-- element will get class pswp__preloader--active when preloader is running -->
-                <div class="pswp__preloader">
-                    <div class="pswp__preloader__icn">
-                        <div class="pswp__preloader__cut">
-                            <div class="pswp__preloader__donut"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
-                <div class="pswp__share-tooltip"></div>
-            </div>
-
-            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
-            </button>
-
-            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
-            </button>
-
-            <div class="pswp__caption">
-                <div class="pswp__caption__center"></div>
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
-
-<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
-<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
-<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
-<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
-
-<script>
-    function viewer_init() {
-        let pswpElement = document.querySelectorAll('.pswp')[0];
-        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
-
-        $imgArr.forEach(($em, i) => {
-            $em.onclick = () => {
-                // slider展开状态
-                // todo: 这样不好，后面改成状态
-                if (document.querySelector('.left-col.show')) return
-                let items = []
-                $imgArr.forEach(($em2, i2) => {
-                    let img = $em2.getAttribute('data-idx', i2)
-                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
-                    let title = $em2.getAttribute('alt')
-                    // 获得原图尺寸
-                    const image = new Image()
-                    image.src = src
-                    items.push({
-                        src: src,
-                        w: image.width || $em2.width,
-                        h: image.height || $em2.height,
-                        title: title
-                    })
-                })
-                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
-                    index: parseInt(i)
-                });
-                gallery.init()
-            }
-        })
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
     }
-    viewer_init()
-</script> 
-<!-- MathJax -->
-
-<!-- Katex -->
-
-<!-- busuanzi  -->
-
-<!-- ClickLove -->
-
-<!-- ClickBoom1 -->
-
-<!-- ClickBoom2 -->
-
-<!-- CodeCopy -->
- 
-<link rel="stylesheet" href="/css/clipboard.css">
- <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
-<script>
-  function wait(callback, seconds) {
-    var timelag = null;
-    timelag = window.setTimeout(callback, seconds);
   }
-  !function (e, t, a) {
-    var initCopyCode = function(){
-      var copyHtml = '';
-      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
-      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
-      copyHtml += '</button>';
-      $(".highlight .code pre").before(copyHtml);
-      $(".article pre code").before(copyHtml);
-      var clipboard = new ClipboardJS('.btn-copy', {
-        target: function(trigger) {
-          return trigger.nextElementSibling;
-        }
-      });
-      clipboard.on('success', function(e) {
-        let $btn = $(e.trigger);
-        $btn.addClass('copied');
-        let $icon = $($btn.find('i'));
-        $icon.removeClass('ri-file-copy-2-line');
-        $icon.addClass('ri-checkbox-circle-line');
-        let $span = $($btn.find('span'));
-        $span[0].innerText = 'COPIED';
-        
-        wait(function () { // 等待两秒钟后恢复
-          $icon.removeClass('ri-checkbox-circle-line');
-          $icon.addClass('ri-file-copy-2-line');
-          $span[0].innerText = 'COPY';
-        }, 2000);
-      });
-      clipboard.on('error', function(e) {
-        e.clearSelection();
-        let $btn = $(e.trigger);
-        $btn.addClass('copy-failed');
-        let $icon = $($btn.find('i'));
-        $icon.removeClass('ri-file-copy-2-line');
-        $icon.addClass('ri-time-line');
-        let $span = $($btn.find('span'));
-        $span[0].innerText = 'COPY FAILED';
-        
-        wait(function () { // 等待两秒钟后恢复
-          $icon.removeClass('ri-time-line');
-          $icon.addClass('ri-file-copy-2-line');
-          $span[0].innerText = 'COPY';
-        }, 2000);
-      });
-    }
-    initCopyCode();
-  }(window, document);
-</script>
- 
-<!-- CanvasBackground -->
 
-<script>
-  if (window.mermaid) {
-    mermaid.initialize({ theme: "forest" });
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
   }
-</script>
-
-
-    
-    <div id="music">
-    
-    
-    
-    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="52"
-        src="//music.163.com/outchain/player?type=2&id=22707008&auto=0&height=32"></iframe>
-</div>
-
-<style>
-    #music {
-        position: fixed;
-        right: 15px;
-        bottom: 0;
-        z-index: 998;
-    }
-</style>
-    
-    
-
-  </div>
-</body>
-
-</html>
+})</script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div></body></html>
