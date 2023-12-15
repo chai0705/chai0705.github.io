@@ -87,7 +87,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">711</span>
+            <span class="post-count">704</span>
         </span>
     </span>
 
@@ -111,49 +111,44 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h1 id="1-gst-play-1-0测试"><a href="#1-gst-play-1-0测试" class="headerlink" title="1.gst-play-1.0测试"></a>1.gst-play-1.0测试</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gst-play-1.0 --videosink=xvimagesink /usr/local/test.mp4</span><br></pre></td></tr></table></figure>
-
+  <h1 id="1gst-play-10测试"><a class="markdownIt-Anchor" href="#1gst-play-10测试"></a> 1.gst-play-1.0测试</h1>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gst-play-1.0 --videosink=xvimagesink /usr/local/test.mp4</span><br></pre></td></tr></table></figure>
 <p>GStreamer 的 gst-play-1.0 工具会加载指定的视频文件，并使用 xvimagesink 插件将视频渲染到 X Window 系统上的显示设备上，以实现视频的播放效果。</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310260944983.png" alt="image-20231026094404955"></p>
-<h1 id="2-mpv测试"><a href="#2-mpv测试" class="headerlink" title="2.mpv测试"></a>2.mpv测试</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mpv --hwdec=rkmpp --vd-lavc-software-fallback=no --vo=xv /usr/local/test.mp4        </span><br></pre></td></tr></table></figure>
-
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310260944983.png" alt="image-20231026094404955" /></p>
+<h1 id="2mpv测试"><a class="markdownIt-Anchor" href="#2mpv测试"></a> 2.mpv测试</h1>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mpv --hwdec=rkmpp --vd-lavc-software-fallback=no --vo=xv /usr/local/test.mp4        </span><br></pre></td></tr></table></figure>
 <p>mpv 媒体播放器将使用 Rockchip MPP 硬件解码器进行硬件解码，禁用软件回退以确保只使用硬件解码，并使用 xv 视频输出插件渲染视频，以实现高性能的视频播放效果。</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310260945251.png" alt="image-20231026094504212"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310260945251.png" alt="image-20231026094504212" /></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mpv --hwdec=rkmpp --vo=opengl --gpu-hwdec-interop=drmprime-drm --gpu-context=x11egl /usr/local/test.mp4</span><br></pre></td></tr></table></figure>
-
 <p>mpv 媒体播放器将使用 Rockchip MPP 硬件解码器进行硬件解码，使用 OpenGL 作为视频输出，同时启用 DRM Prime 与 DRM 之间的 GPU 硬件解码器互操作性，并使用 X11 EGL 上下文进行 GPU 加速，以实现高性能的视频播放效果。</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310260943085.png" alt="image-20231026094341042"></p>
-<h1 id="3-gst-launch-1-0-测试"><a href="#3-gst-launch-1-0-测试" class="headerlink" title="3. gst-launch-1.0 测试"></a>3. gst-launch-1.0 测试</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GST_DEBUG=fps*:7 gst-launch-1.0 uridecodebin uri=file:///usr/local/test.mp4 ! fpsdisplaysink video-sink=xvimagesink text-overlay=false signal-fps-measurements=true</span><br></pre></td></tr></table></figure>
-
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310260943085.png" alt="image-20231026094341042" /></p>
+<h1 id="3-gst-launch-10-测试"><a class="markdownIt-Anchor" href="#3-gst-launch-10-测试"></a> 3. gst-launch-1.0 测试</h1>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GST_DEBUG=fps*:7 gst-launch-1.0 uridecodebin uri=file:///usr/local/test.mp4 ! fpsdisplaysink video-sink=xvimagesink text-overlay=false signal-fps-measurements=true</span><br></pre></td></tr></table></figure>
 <p>GStreamer 的 gst-launch-1.0 工具将创建一个简单的流水线，其中包含 <code>uridecodebin</code> 元素用于解码指定的视频文件，并通过 <code>fpsdisplaysink</code> 元素显示视频和帧率信息。帧率信息将以调试输出的形式显示在终端上。</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310261008898.png" alt="image-20231026100859800"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310261008898.png" alt="image-20231026100859800" /></p>
 <p>测试最大的帧率</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GST_DEBUG=fps*:7 gst-launch-1.0 uridecodebin uri=file:///usr/local/test.mp4 ! fpsdisplaysink video-sink=fakesink text-overlay=false signal-fps-measurements=true sync=false</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310261010578.png" alt="image-20231026101009531"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310261010578.png" alt="image-20231026101009531" /></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gst-launch-1.0 uridecodebin uri=file:///usr/local/test.mp4 ! xvimagesink</span><br></pre></td></tr></table></figure>
-
-<h1 id="4-谷歌浏览器测试"><a href="#4-谷歌浏览器测试" class="headerlink" title="4.谷歌浏览器测试"></a>4.谷歌浏览器测试</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo 0x100 &gt; /sys/module/rk_vcodec/parameters/mpp_dev_debug</span><br><span class="line">chromium --no-sandbox file:///usr/local/test.mp4</span><br></pre></td></tr></table></figure>
-
+<h1 id="4谷歌浏览器测试"><a class="markdownIt-Anchor" href="#4谷歌浏览器测试"></a> 4.谷歌浏览器测试</h1>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo 0x100 &gt; /sys/module/rk_vcodec/parameters/mpp_dev_debug</span><br><span class="line">chromium --no-sandbox file:///usr/local/test.mp4</span><br></pre></td></tr></table></figure>
 <p>Chromium 浏览器将在没有沙盒的情况下启动，并加载指定路径的 <code>test.mp4</code> 视频文件。这样，您可以在浏览器中直接播放本地视频文件。</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310261014311.png" alt="image-20231026101406276"></p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310261018085.png" alt="image-20231026101842048"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310261014311.png" alt="image-20231026101406276" /></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310261018085.png" alt="image-20231026101842048" /></p>
 <p>播放视频的时候查看GPU的利用率发现明显的上升，所以判断谷歌浏览器为硬件解码。</p>
-<h1 id="5-摄像头测试"><a href="#5-摄像头测试" class="headerlink" title="5.摄像头测试"></a>5.摄像头测试</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/aarch64-linux-gnu/gstreamer-1.0</span><br><span class="line">gst-launch-1.0 v4l2src device=/dev/video0 ! video/x-raw,format=NV12,width=1920,height=1080, framerate=30/1 ! xvimagesink</span><br><span class="line">gst-launch-1.0 v4l2src device=/dev/video1 ! video/x-raw,format=NV12,width=1920,height=1080, framerate=30/1 ! xvimagesink</span><br></pre></td></tr></table></figure>
-
+<h1 id="5摄像头测试"><a class="markdownIt-Anchor" href="#5摄像头测试"></a> 5.摄像头测试</h1>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/aarch64-linux-gnu/gstreamer-1.0</span><br><span class="line">gst-launch-1.0 v4l2src device=/dev/video0 ! video/x-raw,format=NV12,width=1920,height=1080, framerate=30/1 ! xvimagesink</span><br><span class="line">gst-launch-1.0 v4l2src device=/dev/video1 ! video/x-raw,format=NV12,width=1920,height=1080, framerate=30/1 ! xvimagesink</span><br></pre></td></tr></table></figure>
 <p>我发现不加上第一句的库的导入会出现发绿的情况，而且是0发绿，1没事，不加第一句的话1的颜色不太对</p>
-<p>gst-launch-1.0 v4l2src device&#x3D;&#x2F;dev&#x2F;video9 ! image&#x2F;jpeg, width&#x3D;640, height&#x3D;480, framerate&#x3D;30&#x2F;1 ! jpegparse ! mppjpegdec ! xvimagesink sync&#x3D;false</p>
-<h1 id="6-mpp测试"><a href="#6-mpp测试" class="headerlink" title="6.mpp测试"></a>6.mpp测试</h1><p>首先要监控输出：</p>
+<p>gst-launch-1.0 v4l2src device=/dev/video9 ! image/jpeg, width=640, height=480, framerate=30/1 ! jpegparse ! mppjpegdec ! xvimagesink sync=false</p>
+<h1 id="6mpp测试"><a class="markdownIt-Anchor" href="#6mpp测试"></a> 6.mpp测试</h1>
+<p>首先要监控输出：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tail -f /var/log/syslog</span><br></pre></td></tr></table></figure>
-
-<p>调用mpi_dec_test，解码视频，将<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=h264&spm=1001.2101.3001.7020">h264</a>转为yuv</p>
+<p>调用mpi_dec_test，解码视频，将<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=h264&amp;spm=1001.2101.3001.7020">h264</a>转为yuv</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mpi_dec_test -i /oem/200frames_count.h264 -t 7 -n 250 -o /home/topeet/test.yuv -w 640 -h 480</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310261707707.png" alt="image-20231026170732680"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310261707707.png" alt="image-20231026170732680" /></p>
 <p>调用mpi_enc_test，编码视频，将yuv转为h264</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mpi_enc_test -i /home/topeet/test.yuv -t 7 -n 250 -o /home/topeet/test.h264 -w 640 -h 480 -fps 25</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310261712235.png" alt="image-20231026171223218"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310261712235.png" alt="image-20231026171223218" /></p>
  
       <!-- reward -->
       
