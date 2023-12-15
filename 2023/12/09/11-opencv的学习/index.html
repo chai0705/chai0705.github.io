@@ -1,209 +1,117 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>opencv的学习 | 热爱学习的未来酱</title><meta name="author" content="chai"><meta name="copyright" content="chai"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="opencv的学习"><meta name="application-name" content="opencv的学习"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="opencv的学习"><meta property="og:url" content="http://example.com/2023/12/09/11-opencv%E7%9A%84%E5%AD%A6%E4%B9%A0/index.html"><meta property="og:site_name" content="热爱学习的未来酱"><meta property="og:description" content="&amp;#x3D;&amp;#x3D;多好的周日呀，玩了一半总要学习一半，你说对吧&amp;#x3D;&amp;#x3D; RGA是我总想要要学习的一个东西，只是一直没有机会，好吧，还是我自己的问题~ RGA是一个硬件，他是用来加速2d的，也就是说对于画线等2d操作有很好的加速作用，而我是在哪些时候见到的RGA的呢，是在open"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg"><meta property="article:author" content="chai"><meta property="article:tag"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg"><meta name="description" content="&amp;#x3D;&amp;#x3D;多好的周日呀，玩了一半总要学习一半，你说对吧&amp;#x3D;&amp;#x3D; RGA是我总想要要学习的一个东西，只是一直没有机会，好吧，还是我自己的问题~ RGA是一个硬件，他是用来加速2d的，也就是说对于画线等2d操作有很好的加速作用，而我是在哪些时候见到的RGA的呢，是在open"><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="http://example.com/2023/12/09/11-opencv%E7%9A%84%E5%AD%A6%E4%B9%A0/"><link rel="preconnect" href="//cdn.cbd.int"/><meta name="google-site-verification" content="xxx"/><meta name="baidu-site-verification" content="code-xxx"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
-  linkPageTop: undefined,
-  peoplecanvas: {"enable":true,"img":"https://upload-bbs.miyoushe.com/upload/2023/09/03/125766904/ee23df8517f3c3e3efc4145658269c06_5714860933110284659.png"},
-  postHeadAiDescription: {"enable":true,"gptName":"AnZhiYu","mode":"local","switchBtn":false,"btnLink":"https://afdian.net/item/886a79d4db6711eda42a52540025c377","randomNum":3,"basicWordCount":1000,"key":"xxxx","Referer":"https://xx.xx/"},
-  diytitle: {"enable":true,"leaveTitle":"w(ﾟДﾟ)w 不要走！再看看嘛！","backTitle":"♪(^∇^*)欢迎肥来！"},
-  LA51: undefined,
-  greetingBox: undefined,
-  twikooEnvId: '',
-  commentBarrageConfig:undefined,
-  root: '/',
-  preloader: {"source":3},
-  friends_vue_info: undefined,
-  navMusic: true,
-  mainTone: undefined,
-  authorStatus: undefined,
-  algolia: undefined,
-  localSearch: undefined,
-  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
-  noticeOutdate: undefined,
-  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":330},
-  copy: {
-    success: '复制成功',
-    error: '复制错误',
-    noSupport: '浏览器不支持'
-  },
-  relativeDate: {
-    homepage: false,
-    simplehomepage: true,
-    post: false
-  },
-  runtime: '天',
-  date_suffix: {
-    just: '刚刚',
-    min: '分钟前',
-    hour: '小时前',
-    day: '天前',
-    month: '个月前'
-  },
-  copyright: {"copy":true,"copyrightEbable":false,"limitCount":50,"languages":{"author":"作者: chai","link":"链接: ","source":"来源: 热爱学习的未来酱","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
-  lightbox: 'fancybox',
-  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#425AEF","bgDark":"#1f1f1f","position":"top-center"},
-  source: {
-    justifiedGallery: {
-      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
-      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
-    }
-  },
-  isPhotoFigcaption: false,
-  islazyload: true,
-  isAnchor: false,
-  shortcutKey: undefined,
-  autoDarkmode: true
-}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
-  configTitle: '热爱学习的未来酱',
-  title: 'opencv的学习',
-  postAI: '',
-  pageFillDescription: '1 windows opencv的配置, 1.1 软件准备, 1.2 软件的下载, 1.2.1 MinGw下载, 1.2.2 Cmake下载, 1.2.3 Opencv下载, 1.3 编译, 1.3.1、cmake-gui, 1.3.2 编译, 1.3.3 安装, 1.4 vscode配置, 2 VS opencv的配置, 2.1 安装vs, 2.2 安装opencv, 2.3 配置VSCODE, 3 oepncv源码的编译（Linux）, 1.拉取opencv源码, 2.源码编译（PC）, 3.交叉编译（qemu）, 4.vscode 配置python, 4.1.下载VScode, 4.2.在python插件, 4.3.配置python环境, 4.4选择python解释器, 5 windows c++环境的配置, 5.1 Visual Studio Code相关信息, 5.2下载安装g++, 5.3配置调试功能, 6.opencv的学习, 6.1 读取图片并显示, 6.2 读取视频并显示多好的周日呀玩了一半总要学习一半你说对吧是我总想要要学习的一个东西只是一直没有机会好吧还是我自己的问题是一个硬件他是用来加速的也就是说对于画线等操作有很好的加速作用而我是在哪些时候见到的的呢是在里面具体是怎样用的呢我忘记了所以这里先来重新学习一下也不用多学只需要学习和里面的配置即可的配置看样子最好的一个链接下面是我根据教程来构建的步骤软件准备版本版本版本其中和我当然知道是什么是用来编译的而是什么呢是一个用于在操作系统上进行开发的开源软件开发工具集合它提供了一组工具和库包括编译器调试器构建工具等使开发者能够在环境下编译和运行等程序的目标是为提供一个简洁轻量级的开发环境以便开发者能够在上进行基于工具的软件开发而无需依赖于等大型开发工具基于工具链因此它支持标准的编程工具和库使开发者能够编写和构建跨平台的应用程序通过开发者可以使用编译器在上编译和构建命令行程序库文件或者跨平台的应用程序此外还有一个变种版本叫做它提供了对位系统的支持并且在一些方面进行了改进和扩展上面是人工智能得到的我目前就简单的将它理解为在上的一个工具链吧软件的下载下载表示位架构表示位架构也称为或表示采用标准的操作系统接口表示基于操作系统的接口对于异常处理方式使用基于函数的异常处理机制使用结构化异常处理机制对于调试信息方式使用调试格式和不涉及调试信息解压该软件包之后得到的文件夹我将它放到了盘的根目录随后将这个地址加入环境变量注搜索环境变量可以快速打开环境配置对进行配置即可之前这里对我还挺困难的如果现在还不懂那就是你的问题了最后通过来进行验证验证成功如下所示下载下载地址这里直接选用最新的版本同理跟上面的一样以同样的方法设置解压之后的名字为也放到盘下如下所示具体要添加的路径为也要加入然后测试如下所示下载这里也直接下的最新版也是一样的虽然是一个文件实际也是解包的一个过程解包完成如下所示编译是一个广泛使用的计算机视觉库它提供了各种图像和视频处理功能用于开发计算机视觉应用程序在操作系统上原生支持作为开发环境可以直接在中使用然而过于庞大和笨重不太方便使用相比之下是一个轻量级的代码编辑器具有良好的可定制性和扩展性因此他们选择使用作为开发环境来配置在使用配置时有一个重要的前提那就是我们需要将的源代码进行编译编译是将源代码转换为可执行程序或库的过程在这里我们使用作为构建工具来管理编译过程找到文件夹下的里的文件启动这里使用目录下的目录这里是编译后的文件的放置目录配置完成如下所示点击之后一点不能选错选择如下所示接下来编译器的选择分别选择和选择完成如下所示然后开始配置等待配置完成在执行完后把关于的都给取消勾选勾选和不勾选和如果有的话选空然后继续配置完成如下所示到这里该配置的也都完成了需要去用编译生成编译执行命令问题去掉选项代表了下的使用以及功能编译会出错应该是需要相关支持问题去掉问题去掉至此编译成功安装然后我们继续添加两个环境变量第一个是第二个是然后随便打开一个终端输入以下命令测试即可配置最终效果上面这个是我自己定义的为了方便放置生成的文件这里如果为则说明调试直接运行反之则停止是否调用外部自己进行设置为启用整齐打印上面这个是我自己定义的为了方便放置生成的文件测试例程的配置安装上面是配置事实上可以直接通过来配置上面也算是走了弯路了官网等待安装完成安装程序下载安装验证完毕将会提示进入这个界面选择的桌面开发和扩展开发然后更改安装位置安装在第一小节已经讲解过就不再讲了配置其实也就那几步没啥好写的我留个链接吧测试完成如下所示既然中已经在提供的库中了那为什么人们更多的还是自己编译再使用呢就比如下面这个例子想用一些库然而发现自带的是没有开启的这时候就要自己编译了源码的编译拉取源码地址链接是一个开源计算机视觉和图像处理库提供了一系列用于处理图像和视频的函数和工具是对的扩展和补充包含了一些额外的模块和功能以增强的功能和应用范围模块是由社区的开发人员和贡献者创建和维护的它提供了许多实用的功能算法和工具用于计算机视觉图像处理目标检测机器学习等领域的应用以下是一些常见的模块及其功能提供了用于检测和跟踪标记的函数和类标记是一种用于增强现实和相机姿态估计的二维条码包含了一些背景分割算法的实现用于从视频中提取前景对象这些算法可以用于运动检测目标跟踪等任务实现了一些生物启发式的图像处理算法包括视网膜模型光流估计等这些算法受到生物视觉系统的启发用于模拟人眼的感知机制提供了深度学习的支持包括加载和运行基于深度学习模型的图像分类目标检测和图像分割等任务包含了人脸检测人脸识别和人脸特征点检测等相关功能这些功能可以用于人脸分析人脸识别和表情识别等应用提供了文本检测和识别的功能可以用于场景文本检测光学字符识别等任务扩展了的特征检测和描述子模块提供了一些额外的特征检测算法和描述子算法如等除了上述模块还包括其他一些模块和功能如光学流结构光三维重建图像分割等这些模块和功能可以通过下载和编译库来使用在这里就只是编译源码了也就不再添加目前是用不到的克隆源码的仓库源码太大了还是直接从官网下载吧这里下载最新的拷贝到之上然后解压在编译之前还需要先安装一些依赖源码编译然后在源码目录下创建一个目录进行工程构建命令如下所示构建静态库构建动态库指定安装目录为生成的库和可执行文件将安装到该目录下指定构建类型为这意味着生成的库将进行优化并且不包含调试信息生成用于的配置文件这样其他程序可以使用来查找和链接库启用支持是用于解码二维条码如码的库通过这个参数编译生成的库将包含功能启用非免费模块这些模块可能包含受限制的功能需要购买或获取许可证才能使用生成用于的配置文件这样其他程序可以使用来查找和链接库启用支持用于与相关的功能启用标准支持启用多线程支持禁用支持禁用语言示例的安装禁用构建示例程序指定默认的解释器路径为这将用于与相关的构建和安装操作启用构建的绑定禁用构建的绑定指定解释器的路径为指定的头文件目录的路径为这里需要提供的开发包路径具体版本号可能会有所不同指定的库文件路径为这里需要提供的动态链接库文件路径具体路径和文件名可能会有所不同指定默认的解释器路径为这将用于与相关的构建和安装操作指定默认的解释器路径为这将用于与相关的构建和安装操作注意在中使用参数来定义变量每个参数开头的表示要定义一个变量并为其赋予特定的值然后进行编译安装我这电脑还是很快的两分钟吧也就还是家里的电脑好呀最后拷贝和链接库这一步必须做否则在使用的时候会找不到这个模块然后进行简单的测试然后测试一个的程序首先创建三个目录然后在目录下创建测试例程然后向该文件中添加以下程序如果无法打开摄像头则输出提示信息无法打开摄像头获取开始时间从摄像头捕获帧如果捕获到帧则显示它获取结束时间计算实时帧率更新开始时间在图像上显示帧率按下键退出循环释放资源并关闭窗口然后创建的配置文件添加内容如下所示设置项目名称为设置标准为并且要求编译器支持该标准查找并引入添加可执行文件源文件为链接库设置安装目录为操作系统名安装可执行文件到指定目录然后进入目录执行以下命令进行配置编译和安装三个步骤在目录下就生成了测试然后接一个摄像头进行测试测试功能正常至此在机的编译就完成了交叉编译上面编译的其实都是在上编译的一些个版本而这里将编译开发板的版本本来想的是交叉编译呀可是后来我一想我有呀我还交叉编译啥呀完全不需要呀完全忘记了还有这个首先解压一下开发板的源码解压完成如下所示然后创建一个名为的挂载脚本该脚本的作用是挂载并然后这样进行挂载我这里首先更新了一下软件源然后就是安装一些依赖就跟上面在上安装依赖的方法相同然后将源码拷贝到的目录下如下图所示然后进行源码的解压然后在源码目录下创建一个目录进行工程构建命令如下所示构建静态库由于这里只是想要得到他的库所以这里就不安装到目录下了构建动态库由于这里只是想要得到他的库所以这里就不安装到目录下了指定安装目录为生成的库和可执行文件将安装到该目录下指定构建类型为这意味着生成的库将进行优化并且不包含调试信息生成用于的配置文件这样其他程序可以使用来查找和链接库启用支持是用于解码二维条码如码的库通过这个参数编译生成的库将包含功能启用非免费模块这些模块可能包含受限制的功能需要购买或获取许可证才能使用生成用于的配置文件这样其他程序可以使用来查找和链接库启用支持用于与相关的功能启用标准支持启用多线程支持禁用支持禁用语言示例的安装禁用构建示例程序指定默认的解释器路径为这将用于与相关的构建和安装操作启用构建的绑定禁用构建的绑定指定解释器的路径为指定的头文件目录的路径为这里需要提供的开发包路径具体版本号可能会有所不同指定的库文件路径为这里需要提供的动态链接库文件路径具体路径和文件名可能会有所不同指定默认的解释器路径为这将用于与相关的构建和安装操作指定默认的解释器路径为这将用于与相关的构建和安装操作注意在中使用参数来定义变量每个参数开头的表示要定义一个变量并为其赋予特定的值虽然是但是用的仍旧是的但是这个速度是真的慢呀但我看都跑满了呀竟然搞了三十分钟最后拷贝和链接库这一步必须做否则在使用的时候会找不到这个模块然后进行简单的测试然后测试一个的程序首先创建三个目录然后在目录下创建测试例程然后向该文件中添加以下程序如果无法打开摄像头则输出提示信息无法打开摄像头获取开始时间从摄像头捕获帧如果捕获到帧则显示它获取结束时间计算实时帧率更新开始时间在图像上显示帧率按下键退出循环释放资源并关闭窗口然后创建的配置文件添加内容如下所示设置项目名称为设置标准为并且要求编译器支持该标准查找并引入添加可执行文件源文件为链接库设置安装目录为操作系统名安装可执行文件到指定目录然后进入目录执行以下命令进行配置编译和安装三个步骤这里由于我是将的库和头文件等放到了上一级的目录所以这里可能要修改一下但也还好至此编译就完成了配置下载附上官网地址在安装插件这个很简单我就不再截图了配置环境官网虽然已经到了的版本但这个随意了我认为无所谓然后打开一个终端发现运行之后没什么问题如下图所示然后安装两个包会检查编写代码时的不规范的地方和语法错误是一个代码格式化工具可以一键美化代码一键美化代码一定要在目录下才可以难道我需要再添加一下路径吗很奇怪反正选择解释器打开点击左上角文件首选项设置然后打开界面右上角的箭头纸张这就是设置然后将下面代码替换里面的内容第一行即为所在路径记得在路径多加之后保存即可就可以在文件中使用来格式化你的代码啦测试可用环境的配置相关信息下载地址建议安装插件列表中文菜单远程开发开发代码补全下载安装具体可以看小节配置调试功能首先大家在一个你希望的位置建一个文件夹随意起名就可以注意不可以用中文以后的代码文件都要放在这个文件夹里才可以正常调试然后进入点击或者点击左上角然后打开刚刚建的文件夹选择信任父级文件夹点击这个图标新建一个文件夹命名为注意必须是这个名字创建完成后再点击这个图标新建四个文件文件名分别是接下来复制粘贴这四个文件的内容首先是注意这一项要把路径改成刚才的安装路径找到刚刚的安装文件夹然后复制或者手动把的路径敲上去格式要跟上面代码段一样然后是注意这一项也要把路径改成刚才的安装路径找到刚刚的安装文件夹然后复制或者手动把的路径敲上去格式要跟上面代码段一样接下来是最后是保存这四个文件就配置完成了再次强调以后的代码文件必须放在这个文件夹里或者说有文件夹的文件夹里如果调试放在其他位置的代码文件会报错测试完成如下所示的学习读取图片并显示图片的读取和显示导入头文件读取图片是的缩写是一个矩阵类似与判断是否读取成功无法读取图片打印图片高度和宽度图片高度宽度打印图片以的方式打印图片以的方式打印图片创建一个灰度图转换为灰度图保存显示原图灰度图等待按键遇到的第一个问题第行的路径问题在目录下必须要使用两个不知道这是为啥在目录中反斜杠是用作路径分隔符然而反斜杠在中被用作转义字符用于表示特殊字符序列因此如果您想在字符串中使用反斜杠作为路径分隔符您需要使用双反斜杠来表示一个单独的反斜杠这是因为一个反斜杠表示一个转义字符的开始例如表示换行符为了在字符串中表示一个反斜杠字符本身您需要使用两个连续的反斜杠来转义它告诉编译器它是一个普通的反斜杠字符没有自动补全重新确定一下插件这个肯定是必须的即重用代码块即静态检测即代码运行即自动头文件包含彩虹花括号有助于阅读代码的主题将转换为即支持汇编语法高亮显示即中文环境图标插件主要是资源管理器下各个文件夹的图标比较插件可以用于比较两个文件的差异设备树语法插件工具还是不能补全不知道为啥的环境会这样这样下去可不行问题该解决的当然还是要解决的遇到问题解决问题上面这个案例有以下几个重点我来回顾一下头文件一般情况下使用和都会包含上面提到的两个头文件也就是和这两个头文件中包含了一些中的常用函数就比如等等而中存放的是中的一些常用函数就比如输出等等工作区如果是我一般写语言的话我都会写上工作区但是老师给的这些示例代码并没有而是直接使用的就比如这些都是在前加上工作去然后再引用的这样的好处应该是防止混乱引用目前我还没遇到这个情况这个以后再说图像的格式没记错的话这个格式用来存放的是三原色每个像素的值相关函数的使用两个参数第一个参数为要读取图片的路径第二个参数为标志位我记得是这三个最常用其中代表灰度值代表彩色这个是用来写入的其实跟读取的使用方法一样也是两个参数其中第一个参数为要保存的图片名称第二个参数为图片的数据没有数据你只保存名字那肯定不行呀从名字可以看出来这是图片的展示有两个参数第一个参数为展示图片的框的名称第二个参数为图片数据同理你只显示框的名称但是没有数据拿什么也显示不出来呀我说的对吗这个函数是用来进行颜色通道转换的就比如从转换为等等你可以思考一下应该有几个参数你看要转换肯定要有一个原始数据对吧然后肯定有一个输出数据对吧最后必然要有一个如何转换对吧所以必要填写的是三个参数最后是这个函数的意义是让图片一直显示直到按下一个按键读取视频并显示导入库导入库定义命令行参数视频路径解析命令行参数读取视频创建了一个对象参数为视频路径判断视频是否读取成功返回表示成功无法读取视频读取视频帧使用类型的存储返回的帧灰度图循环读取视频帧读取视频帧使用运算符或者函数他的参数是返回的帧判断是否读取成功文件读取完毕转成灰度图显示视频帧等待按键延迟否则视频播放太快按下键退出退出重点类就跟上一个小节讲解的一样可以看到的第一个字母也大写了所以他也是一个中的类型用来存放捕获到的视频类的构造函数可以接受不同的参数来指定要打开的视频源通过设备索引您可以传递一个整数值作为设备索引来指定要打开的摄像头设备例如表示默认的摄像头设备表示第二个摄像头设备以此类推打开默认的摄像头设备通过视频文件路径您可以传递一个字符串参数表示要打开的视频文件的路径打开名为的视频文件一旦创建了对象您可以使用方法来连续读取视频帧方法将返回一个布尔值指示是否成功读取了一帧图像处理当前帧等待按键退出',
-  isPost: true,
-  isHome: false,
-  isHighlightShrink: false,
-  isToc: true,
-  postUpdate: '2023-12-10 22:33:23',
-  postMainColor: '',
-}</script><noscript><style type="text/css">
-  #nav {
-    opacity: 1
-  }
-  .justified-gallery img {
-    opacity: 1
-  }
+<!DOCTYPE html>
 
-  #recent-posts time,
-  #post-meta time {
-    display: inline !important
-  }
-</style></noscript><script>(win=>{
-      win.saveToLocal = {
-        set: (key, value, ttl) => {
-          if (ttl === 0) return
-          const now = Date.now()
-          const expiry = now + ttl * 86400000
-          const item = {
-            value,
-            expiry
-          }
-          localStorage.setItem(key, JSON.stringify(item))
-        },
-      
-        get: key => {
-          const itemStr = localStorage.getItem(key)
-      
-          if (!itemStr) {
-            return undefined
-          }
-          const item = JSON.parse(itemStr)
-          const now = Date.now()
-      
-          if (now > item.expiry) {
-            localStorage.removeItem(key)
-            return undefined
-          }
-          return item.value
-        }
-      }
-    
-      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
-        const script = document.createElement('script')
-        script.src = url
-        script.async = true
-        script.onerror = reject
-        script.onload = script.onreadystatechange = function() {
-          const loadState = this.readyState
-          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
-          script.onload = script.onreadystatechange = null
-          resolve()
-        }
 
-        Object.keys(attr).forEach(key => {
-          script.setAttribute(key, attr[key])
-        })
+<html lang="zh-CN">
+  
 
-        document.head.appendChild(script)
-      })
-    
-      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
-        const link = document.createElement('link')
-        link.rel = 'stylesheet'
-        link.href = url
-        if (id) link.id = id
-        link.onerror = reject
-        link.onload = link.onreadystatechange = function() {
-          const loadState = this.readyState
-          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
-          link.onload = link.onreadystatechange = null
-          resolve()
-        }
-        document.head.appendChild(link)
-      })
-    
-      win.activateDarkMode = () => {
-        document.documentElement.setAttribute('data-theme', 'dark')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
-        }
-      }
-      win.activateLightMode = () => {
-        document.documentElement.setAttribute('data-theme', 'light')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
-        }
-      }
-      const t = saveToLocal.get('theme')
-    
-          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
-          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
-          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
-          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
-
-          if (t === undefined) {
-            if (isLightMode) activateLightMode()
-            else if (isDarkMode) activateDarkMode()
-            else if (isNotSpecified || hasNoSupport) {
-              const now = new Date()
-              const hour = now.getHours()
-              const isNight = hour <= 6 || hour >= 18
-              isNight ? activateDarkMode() : activateLightMode()
-            }
-            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
-              if (saveToLocal.get('theme') === undefined) {
-                e.matches ? activateDarkMode() : activateLightMode()
-              }
-            })
-          } else if (t === 'light') activateLightMode()
-          else activateDarkMode()
+    <head>
+      <meta charset="utf-8" />
         
-      const asideStatus = saveToLocal.get('aside-status')
-      if (asideStatus !== undefined) {
-        if (asideStatus === 'hide') {
-          document.documentElement.classList.add('hide-aside')
-        } else {
-          document.documentElement.classList.remove('hide-aside')
-        }
-      }
-    
-      const detectApple = () => {
-        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
-          document.documentElement.classList.add('apple')
-        }
-      }
-      detectApple()
-    })(window)</script><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="热爱学习的未来酱" type="application/atom+xml">
-</head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="https://npm.elemecdn.com/anzhiyu-blog-static@1.0.4/img/avatar.jpg"/><div class="loading-image-dot"></div></div></div><script>const preloader = {
-  endLoading: () => {
-    document.getElementById('loading-box').classList.add("loaded");
-  },
-  initLoading: () => {
-    document.getElementById('loading-box').classList.remove("loaded")
-  }
-}
-window.addEventListener('load',()=> { preloader.endLoading() })
-setTimeout(function(){preloader.endLoading();},10000)
+      <meta name="description" content="永远年轻，永远热泪盈眶" />
+      
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>opencv的学习 |  热爱学习的未来酱</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
 
-if (true) {
-  document.addEventListener('pjax:send', () => { preloader.initLoading() })
-  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
-}</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.10/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><a id="site-name" href="/" accesskey="h"><div class="title">热爱学习的未来酱</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png" target="_blank"><img class="post-qr-code-img" alt="微信" src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png" target="_blank"><img class="post-qr-code-img" alt="支付宝" src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/12/"><span class="card-archive-list-date">十二月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">3</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/12/"><span class="card-archive-list-date">十二月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">7</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/11/"><span class="card-archive-list-date">十一月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">6</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/10/"><span class="card-archive-list-date">十月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">4</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/09/"><span class="card-archive-list-date">九月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">7</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div><div class="console-btn-item" id="consoleMusic" onclick="anzhiyu.musicToggle()" title="音乐开关"><a class="music-switch"><i class="anzhiyufont anzhiyu-icon-music"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url">学习</a></span><span class="article-meta tags"></span></div></div><h1 class="post-title" itemprop="name headline">opencv的学习</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2023-12-09T06:17:20.000Z" title="发表于 2023-12-09 14:17:20">2023-12-09</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2023-12-10T14:33:23.633Z" title="更新于 2023-12-10 22:33:23">2023-12-10</time></span></div><div class="meta-secondline"><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为长沙"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>长沙</span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src=""></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope itemtype="http://example.com/2023/12/09/11-opencv%E7%9A%84%E5%AD%A6%E4%B9%A0/"><header><a class="post-meta-categories" href="/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url">学习</a><h1 id="CrawlerTitle" itemprop="name headline">opencv的学习</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">chai</span><time itemprop="dateCreated datePublished" datetime="2023-12-09T06:17:20.000Z" title="发表于 2023-12-09 14:17:20">2023-12-09</time><time itemprop="dateCreated datePublished" datetime="2023-12-10T14:33:23.633Z" title="更新于 2023-12-10 22:33:23">2023-12-10</time></header><p>&#x3D;&#x3D;多好的周日呀，玩了一半总要学习一半，你说对吧&#x3D;&#x3D;</p>
+      
+<link rel="stylesheet" href="/css/fonts/remixicon.css">
+
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    <link rel="alternate" href="/atom.xml" title="热爱学习的未来酱" type="application/atom+xml">
+</head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-11-opencv的学习"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  opencv的学习
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/12/09/11-opencv%E7%9A%84%E5%AD%A6%E4%B9%A0/" class="article-date">
+  <time datetime="2023-12-09T06:17:20.000Z" itemprop="datePublished">2023-12-09</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">9.8k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">43 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>&#x3D;&#x3D;多好的周日呀，玩了一半总要学习一半，你说对吧&#x3D;&#x3D;</p>
 <p>RGA是我总想要要学习的一个东西，只是一直没有机会，好吧，还是我自己的问题~</p>
 <p>RGA是一个硬件，他是用来加速2d的，也就是说对于画线等2d操作有很好的加速作用，而我是在哪些时候见到的RGA的呢，是在opencv里面，具体RK是怎样用的呢，我忘记了，所以这里先来重新学习一下opencv，也不用多学，只需要学习windows和Linux里面opencv的配置即可。</p>
 <h1 id="1-windows-opencv的配置"><a href="#1-windows-opencv的配置" class="headerlink" title="1 windows opencv的配置"></a>1 windows opencv的配置</h1><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_45022687/article/details/120241068?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522170117660416800222888362%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=170117660416800222888362&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-1-120241068-null-null.142%5Ev96%5Epc_search_result_base2&utm_term=vscode%20opencv&spm=1018.2226.3001.4187">看样子最好的一个链接</a><br>下面是我根据教程来构建的步骤。</p>
@@ -217,7 +125,7 @@ if (true) {
 <p>此外，MinGW还有一个变种版本叫做MinGW-w64，它提供了对64位Windows系统的支持，并且在一些方面进行了改进和扩展。</p>
 <p>&#x3D;&#x3D;上面是人工智能得到的，我目前就简单的将它理解为在windows上的一个GCC工具链吧&#x3D;&#x3D;</p>
 <h2 id="1-2-软件的下载"><a href="#1-2-软件的下载" class="headerlink" title="1.2 软件的下载"></a>1.2 软件的下载</h2><h3 id="1-2-1-MinGw下载"><a href="#1-2-1-MinGw下载" class="headerlink" title="1.2.1 MinGw下载"></a>1.2.1 MinGw下载</h3><p><a target="_blank" rel="noopener" href="https://sourceforge.net/projects/mingw-w64/files/mingw-w64/">mingw</a></p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311282124974.png" alt="image-20231128212412942"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311282124974.png" alt="image-20231128212412942"></p>
 <ul>
 <li><code>x86_64</code>: 表示64位x86架构。</li>
 <li><code>i686</code>: 表示32位x86架构（也称为x86或IA-32）。</li>
@@ -235,52 +143,52 @@ if (true) {
 <li><code>sjlj</code> 和 <code>seh</code> 不涉及调试信息。</li>
 </ul>
 <p>解压该软件包之后得到ming64的文件夹，我将它放到了D盘的根目录</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311282142004.png" alt="image-20231128214221986"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311282142004.png" alt="image-20231128214221986"></p>
 <p>随后将“&#x3D;&#x3D;D:\mingw64\bin&#x3D;&#x3D;”这个地址加入环境变量，注：win+q 搜索环境变量可以快速打开环境配置，对Path进行配置即可，之前这里对我还挺困难的，如果现在还不懂，那就是你的问题了。最后通过“&#x3D;&#x3D;g++ -v&#x3D;&#x3D;”来进行验证，验证成功如下所示：</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311282153126.png" alt="image-20231128215324105"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311282153126.png" alt="image-20231128215324105"></p>
 <h3 id="1-2-2-Cmake下载"><a href="#1-2-2-Cmake下载" class="headerlink" title="1.2.2 Cmake下载"></a>1.2.2 Cmake下载</h3><p><a target="_blank" rel="noopener" href="https://cmake.org/files/">cmake下载地址</a></p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311282133808.png" alt="image-20231128213309747"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311282133808.png" alt="image-20231128213309747"></p>
 <p>这里直接选用最新的版本<a target="_blank" rel="noopener" href="https://cmake.org/files/v3.28/">3.28</a>，同理跟上面的mingw一样，以同样的方法设置cmake，解压之后的名字为cmake-3.28.0-rc5-windows-x86_64，也放到D盘下，如下所示：</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311282155794.png" alt="image-20231128215506778"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311282155794.png" alt="image-20231128215506778"></p>
 <p>具体要添加的路径为D:\cmake-3.28.0-rc5-windows-x86_64\bin，也要加入Path，然后测试如下所示：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cmake --version</span><br></pre></td></tr></table></figure>
 
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311282156434.png" alt="image-20231128215641421"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311282156434.png" alt="image-20231128215641421"></p>
 <h3 id="1-2-3-Opencv下载"><a href="#1-2-3-Opencv下载" class="headerlink" title="1.2.3 Opencv下载"></a>1.2.3 Opencv下载</h3><p><a target="_blank" rel="noopener" href="https://opencv.org/releases/">opencv</a></p>
 <p>这里也直接下windows的最新版4.8</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311282139382.png" alt="image-20231128213946356"></p>
-<p>opencv也是一样的，opencv虽然是一个exe文件，实际也是解包的一个过程，解包完成如下所示：<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311282158637.png" alt="image-20231128215855620"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311282139382.png" alt="image-20231128213946356"></p>
+<p>opencv也是一样的，opencv虽然是一个exe文件，实际也是解包的一个过程，解包完成如下所示：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311282158637.png" alt="image-20231128215855620"></p>
 <h2 id="1-3-编译"><a href="#1-3-编译" class="headerlink" title="1.3 编译"></a>1.3 编译</h2><p>OpenCV是一个广泛使用的计算机视觉库，它提供了各种图像和视频处理功能，用于开发计算机视觉应用程序。在Windows操作系统上，原生支持Visual Studio（VS）作为开发环境，可以直接在VS中使用OpenCV。</p>
 <p>然而，Visual Studio过于庞大和笨重，不太方便使用。相比之下，Visual Studio Code（VSCode）是一个轻量级的代码编辑器，具有良好的可定制性和扩展性。因此，他们选择使用VSCode作为开发环境来配置OpenCV。</p>
 <p>在使用VSCode配置OpenCV时，有一个重要的前提，那就是我们需要将OpenCV的源代码进行编译。编译是将源代码转换为可执行程序或库的过程。在这里，我们使用CMake作为构建工具来管理编译过程。</p>
-<h3 id="1-3-1、cmake-gui"><a href="#1-3-1、cmake-gui" class="headerlink" title="1.3.1、cmake-gui"></a>1.3.1、cmake-gui</h3><p>找到cmake文件夹下的bin里的cmake-gui 文件，启动。<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311282204857.png" alt="image-20231128220416838"></p>
+<h3 id="1-3-1、cmake-gui"><a href="#1-3-1、cmake-gui" class="headerlink" title="1.3.1、cmake-gui"></a>1.3.1、cmake-gui</h3><p>找到cmake文件夹下的bin里的cmake-gui 文件，启动。<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311282204857.png" alt="image-20231128220416838"></p>
 <p>Where is the source code: 这里使用opencv目录下的source目录</p>
 <p>Where to build the binaries: 这里是编译后的文件的放置目录</p>
-<p>配置完成如下所示：<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311282205939.png" alt="image-20231128220536920"></p>
-<p>点击configure之后一点不能选错，选择如下所示：<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311282206498.png" alt="image-20231128220629482"></p>
-<p>接下来编译器的选择，分别选择gcc和g++，选择完成如下所示：<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311282207767.png" alt="image-20231128220726753"></p>
-<p>然后开始配置，等待配置完成：<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311282207571.png" alt="image-20231128220750554"></p>
+<p>配置完成如下所示：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311282205939.png" alt="image-20231128220536920"></p>
+<p>点击configure之后一点不能选错，选择如下所示：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311282206498.png" alt="image-20231128220629482"></p>
+<p>接下来编译器的选择，分别选择gcc和g++，选择完成如下所示：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311282207767.png" alt="image-20231128220726753"></p>
+<p>然后开始配置，等待配置完成：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311282207571.png" alt="image-20231128220750554"></p>
 <p>在执行完后，把关于python的都给取消勾选。勾选BUILD_opencv_world，WITH_OPENGL和BUILD_EXAMPLES，不勾选WITH_IPP、WITH_MSMF和ENABLE_PRECOMPILED_HEADERS（如果有的话），CPU_DISPATCH选空，然后继续General。</p>
 <p>配置完成如下所示：</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311282224674.png" alt="image-20231128222444655"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311282224674.png" alt="image-20231128222444655"></p>
 <p>到这里，该配置的也都完成了，需要去用编译生成。</p>
 <h3 id="1-3-2-编译"><a href="#1-3-2-编译" class="headerlink" title="1.3.2 编译"></a>1.3.2 编译</h3><p>D:\opencv\build\x64\mingw<br>执行命令: </p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">minGW32-make -j 32</span><br></pre></td></tr></table></figure>
 
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311282226079.png" alt="image-20231128222621959"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311282226079.png" alt="image-20231128222621959"></p>
 <p>问题1：</p>
 <p>去掉WITH_DIRECTX,WITH_OPENCL_D3D11_NV选项-代表了windows下directx的使用以及d3d功能，编译会出错，应该是需要windows相关支持</p>
 <p>问题2：<br>去掉 test java python</p>
 <p>问题3：<br>去掉OPENCV_GENERATE_SETUPVARS</p>
-<p>至此，编译成功：<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311282242616.png" alt="image-20231128224242594"></p>
+<p>至此，编译成功：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311282242616.png" alt="image-20231128224242594"></p>
 <h3 id="1-3-3-安装"><a href="#1-3-3-安装" class="headerlink" title="1.3.3 安装"></a>1.3.3 安装</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">minGW32-make install</span><br></pre></td></tr></table></figure>
 
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311290724934.png" alt="image-20231129072435906"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311290724934.png" alt="image-20231129072435906"></p>
 <p>然后我们继续添加两个环境变量：<br>第一个path是：D:\opencv\build\x64\vc16\bin<br>第二个path是：D:\opencv\build\x64\mingw\bin</p>
 <p>然后随便打开一个shell终端，输入以下命令测试即可。</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311290727554.png" alt="image-20231129072736532"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311290727554.png" alt="image-20231129072736532"></p>
 <h2 id="1-4-vscode配置"><a href="#1-4-vscode配置" class="headerlink" title="1.4 vscode配置"></a>1.4 vscode配置</h2><p>最终效果</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311292053680.png" alt="image-20231129205332655"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311292053680.png" alt="image-20231129205332655"></p>
 <p>launch.json</p>
 <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line"></span><br><span class="line">    <span class="attr">&quot;version&quot;</span><span class="punctuation">:</span> <span class="string">&quot;0.2.0&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;configurations&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">        <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;opencv debuge&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;cppdbg&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;request&quot;</span><span class="punctuation">:</span> <span class="string">&quot;launch&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;program&quot;</span><span class="punctuation">:</span> <span class="string">&quot;$&#123;workspaceFolder&#125;\\Debugger\\$&#123;fileBasenameNoExtension&#125;.exe&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="comment">//上面这个Debugger是我自己定义的，为了方便放置生成的exe文件</span></span><br><span class="line">            <span class="attr">&quot;args&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;stopAtEntry&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span><span class="punctuation">,</span> <span class="comment">//这里如果为 false，则说明调试直接运行。（反之则停止）</span></span><br><span class="line">            <span class="attr">&quot;cwd&quot;</span><span class="punctuation">:</span> <span class="string">&quot;$&#123;workspaceFolder&#125;&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;environment&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;externalConsole&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span><span class="comment">//是否调用外部cmd</span></span><br><span class="line">            <span class="attr">&quot;MIMode&quot;</span><span class="punctuation">:</span> <span class="string">&quot;gdb&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;miDebuggerPath&quot;</span><span class="punctuation">:</span> <span class="string">&quot;D:\\mingw64\\bin\\gdb.exe&quot;</span><span class="punctuation">,</span><span class="comment">//自己进行设置</span></span><br><span class="line">            <span class="attr">&quot;setupCommands&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">                <span class="punctuation">&#123;</span></span><br><span class="line">                    <span class="attr">&quot;description&quot;</span><span class="punctuation">:</span> <span class="string">&quot;为 gdb 启用整齐打印&quot;</span><span class="punctuation">,</span></span><br><span class="line">                    <span class="attr">&quot;text&quot;</span><span class="punctuation">:</span> <span class="string">&quot;-enable-pretty-printing&quot;</span><span class="punctuation">,</span></span><br><span class="line">                    <span class="attr">&quot;ignoreFailures&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span></span><br><span class="line">                <span class="punctuation">&#125;</span></span><br><span class="line">            <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;preLaunchTask&quot;</span><span class="punctuation">:</span> <span class="string">&quot;opencv3.5.2&quot;</span></span><br><span class="line">        <span class="punctuation">&#125;</span></span><br><span class="line">    <span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
@@ -304,17 +212,17 @@ if (true) {
 <h1 id="2-VS-opencv的配置"><a href="#2-VS-opencv的配置" class="headerlink" title="2 VS opencv的配置"></a>2 VS opencv的配置</h1><h2 id="2-1-安装vs"><a href="#2-1-安装vs" class="headerlink" title="2.1 安装vs"></a>2.1 安装vs</h2><p>​	上面是VS code配置opencv事实上，可以直接通过vs来配置，上面也算是走了弯路了。</p>
 <p><a target="_blank" rel="noopener" href="https://visualstudio.microsoft.com/zh-hans/">VS 官网</a></p>
 <p>​	等待安装完成：</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311292102072.png" alt="image-20231129210245054"> </p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311292102072.png" alt="image-20231129210245054"> </p>
 <p>安装程序下载安装验证完毕，将会提示进入这个界面</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311292106854.png" alt="image-20231129210632825"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311292106854.png" alt="image-20231129210632825"></p>
 <p>选择C++的桌面开发和Visual Studio 扩展开发，然后更改安装位置。</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311292108111.png" alt="image-20231129210813082"></p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311292108494.png" alt="image-20231129210828463"></p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311292107884.png" alt="image-20231129210742854"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311292108111.png" alt="image-20231129210813082"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311292108494.png" alt="image-20231129210828463"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311292107884.png" alt="image-20231129210742854"></p>
 <h2 id="2-2-安装opencv"><a href="#2-2-安装opencv" class="headerlink" title="2.2 安装opencv"></a>2.2 安装opencv</h2><p>​	在第一小节已经讲解过，就不再讲了</p>
 <h2 id="2-3-配置VSCODE"><a href="#2-3-配置VSCODE" class="headerlink" title="2.3 配置VSCODE"></a>2.3 配置VSCODE</h2><p>​	其实也就那几步，没啥好写的，我留个<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_54583016/article/details/121424060?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522170126271516800186526751%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=170126271516800186526751&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-1-121424060-null-null.142%5Ev96%5Epc_search_result_base2&utm_term=vs%20opencv&spm=1018.2226.3001.4187">链接</a>吧</p>
-<p>测试完成如下所示：<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311292150244.png" alt="image-20231129215026178"></p>
-<p>​	既然opencv中已经在ubuntu提供的库中了，那为什么人们更多的还是自己编译opencv再使用呢，就比如下面这个例子：<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312042116812.png" alt="image-20231017205544904"></p>
+<p>测试完成如下所示：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311292150244.png" alt="image-20231129215026178"></p>
+<p>​	既然opencv中已经在ubuntu提供的库中了，那为什么人们更多的还是自己编译opencv再使用呢，就比如下面这个例子：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312042116812.png" alt="image-20231017205544904"></p>
 <p>想用一些库，然而发现ubuntu自带的opencv是没有开启的，这时候就要自己编译opencv了。</p>
 <h1 id="3-oepncv源码的编译（Linux）"><a href="#3-oepncv源码的编译（Linux）" class="headerlink" title="3 oepncv源码的编译（Linux）"></a>3 oepncv源码的编译（Linux）</h1><h2 id="1-拉取opencv源码"><a href="#1-拉取opencv源码" class="headerlink" title="1.拉取opencv源码"></a>1.拉取opencv源码</h2><p>opencv地址 <strong><a target="_blank" rel="noopener" href="https://opencv.org/releases/">https://opencv.org/releases/</a></strong></p>
 <p><a target="_blank" rel="noopener" href="https://github.com/opencv/opencv">https://github.com/opencv/opencv</a></p>
@@ -336,7 +244,7 @@ if (true) {
 <p>克隆opencv源码</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/opencv/opencv</span><br></pre></td></tr></table></figure>
 
-<p>github的仓库源码太大了，还是直接从官网下载吧~，这里下载最新的opencv4.8 ，拷贝到ubuntu之上然后解压：<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312042116816.png" alt="image-20231017210921130"></p>
+<p>github的仓库源码太大了，还是直接从官网下载吧~，这里下载最新的opencv4.8 ，拷贝到ubuntu之上然后解压：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312042116816.png" alt="image-20231017210921130"></p>
 <p>在编译之前还需要先安装一些依赖</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install build-essential </span><br><span class="line"></span><br><span class="line">sudo apt-get install cmake git libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev</span><br><span class="line"></span><br><span class="line">sudo apt-get install python-dev-is-python2 python-numpy libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev  libdc1394-22-dev</span><br><span class="line"></span><br><span class="line">pip3 install numpy</span><br><span class="line"> </span><br><span class="line">sudo update-alternatives --install /usr/bin/python python /usr/bin/python2 100</span><br><span class="line">sudo update-alternatives --install /usr/bin/python python /usr/bin/python3 150</span><br></pre></td></tr></table></figure>
 
@@ -374,26 +282,26 @@ if (true) {
 <li><code>-D PYTHON_DEFAULT_EXECUTABLE=/usr/bin/python3</code>: 指定默认的Python解释器路径为<code>/usr/bin/python3</code>，这将用于与Python相关的构建和安装操作。<code>-D PYTHON_DEFAULT_EXECUTABLE=/usr/bin/python3</code>: 指定默认的Python解释器路径为<code>/usr/bin/python3</code>，这将用于与Python相关的构建和安装操作。</li>
 </ul>
 <p>&#x3D;&#x3D;注意：在CMake中，使用-D参数来定义变量。每个参数开头的-D表示要定义一个CMake变量，并为其赋予特定的值&#x3D;&#x3D;</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312042116804.png" alt="image-20231017221820208"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312042116804.png" alt="image-20231017221820208"></p>
 <p>然后进行编译安装</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">make -j32</span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
 
 <p>我这电脑还是很快的，两分钟吧也就，还是家里的电脑好呀</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312042116859.png" alt="image-20231017212507239"></p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312042116801.png" alt="image-20231017221754400"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312042116859.png" alt="image-20231017212507239"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312042116801.png" alt="image-20231017221754400"></p>
 <p>​	最后拷贝和链接python库（&#x3D;&#x3D;这一步必须做，否则在使用的时候会找不到cv2这个模块&#x3D;&#x3D;）</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cp lib/python3/cv2.cpython-38-x86_64-linux-gnu.so /usr/local/lib/python3.8/dist-packages/</span><br><span class="line">sudo ln -s  /usr/local/lib/python3.8/dist-packages/cv2.cpython-38-x86_64-linux-gnu.so  /usr/lib/python3/dist-packages/cv2.so</span><br></pre></td></tr></table></figure>
 
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312042116808.png" alt="image-20231017222605454"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312042116808.png" alt="image-20231017222605454"></p>
 <p>然后进行简单的测试：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">python</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line">cv2.__version__</span><br></pre></td></tr></table></figure>
 
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312042116273.png" alt="image-20231017222821948"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312042116273.png" alt="image-20231017222821948"></p>
 <p>然后测试一个opencv的C++程序</p>
 <p>首先创建三个目录build  install  src</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p build  install  src</span><br></pre></td></tr></table></figure>
 
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312042116304.png" alt="image-20231017225840415"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312042116304.png" alt="image-20231017225840415"></p>
 <p>然后在src目录下创建测试例程demo.cpp,然后向该文件中添加以下程序：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;opencv2/core/core.hpp&quot;</span>                                                                               </span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;opencv2/highgui/highgui.hpp&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;opencv2/imgproc/imgproc.hpp&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> cv;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">VideoCapture <span class="title">capture</span><span class="params">(<span class="number">0</span>)</span></span>;</span><br><span class="line">    <span class="keyword">if</span> (!capture.<span class="built_in">isOpened</span>())</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 如果无法打开摄像头，则输出提示信息</span></span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;无法打开摄像头&quot;</span> &lt;&lt; endl;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">double</span> time0 = <span class="built_in">static_cast</span>&lt;<span class="type">double</span>&gt;(<span class="built_in">getTickCount</span>()); <span class="comment">// 获取开始时间</span></span><br><span class="line">    <span class="keyword">while</span> (<span class="literal">true</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 从摄像头捕获帧</span></span><br><span class="line">        Mat frame;</span><br><span class="line">        capture &gt;&gt; frame;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 如果捕获到帧，则显示它</span></span><br><span class="line">        <span class="keyword">if</span> (!frame.<span class="built_in">empty</span>())</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">cvtColor</span>(frame, frame, COLOR_RGB2BGR);</span><br><span class="line">            <span class="type">double</span> time1 = <span class="built_in">static_cast</span>&lt;<span class="type">double</span>&gt;(<span class="built_in">getTickCount</span>()); <span class="comment">// 获取结束时间</span></span><br><span class="line">            <span class="type">double</span> fps = <span class="built_in">getTickFrequency</span>() / (time1 - time0); <span class="comment">// 计算实时帧率</span></span><br><span class="line">            time0 = time1; <span class="comment">// 更新开始时间</span></span><br><span class="line">            <span class="built_in">putText</span>(frame, <span class="string">&quot;FPS: &quot;</span> + <span class="built_in">to_string</span>(fps), <span class="built_in">Point</span>(<span class="number">10</span>, <span class="number">30</span>), FONT_HERSHEY_SIMPLEX, <span class="number">1</span>, <span class="built_in">Scalar</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">255</span>), <span class="number">2</span>); <span class="comment">// 在图像上显示帧率</span></span><br><span class="line">            <span class="built_in">imshow</span>(<span class="string">&quot;MIPI Camera&quot;</span>, frame);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 按下&#x27;q&#x27;键退出循环</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">waitKey</span>(<span class="number">1</span>) == <span class="string">&#x27;q&#x27;</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 释放资源并关闭窗口</span></span><br><span class="line">    capture.<span class="built_in">release</span>();</span><br><span class="line">    <span class="built_in">destroyAllWindows</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -403,26 +311,26 @@ if (true) {
 <p>然后进入build目录，执行以下命令，进行配置、编译和安装三个步骤：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd build/</span><br><span class="line">cmake ../</span><br><span class="line">make </span><br><span class="line">make install </span><br></pre></td></tr></table></figure>
 
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312042116295.png" alt="image-20231017230355394"></p>
-<p>在install&#x2F;Linux目录下就生成了测试APP opencv_demo<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312042116215.png" alt="image-20231017230415584"></p>
-<p>然后接一个摄像头进行测试，测试功能正常：<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312042116448.png" alt="image-20231017231044428"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312042116295.png" alt="image-20231017230355394"></p>
+<p>在install&#x2F;Linux目录下就生成了测试APP opencv_demo<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312042116215.png" alt="image-20231017230415584"></p>
+<p>然后接一个摄像头进行测试，测试功能正常：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312042116448.png" alt="image-20231017231044428"></p>
 <p>至此，opencv在PC机的编译就完成了。</p>
 <h2 id="3-交叉编译（qemu）"><a href="#3-交叉编译（qemu）" class="headerlink" title="3.交叉编译（qemu）"></a>3.交叉编译（qemu）</h2><p>上面编译的其实都是在X86上编译的一些个版本，而这里将编译开发板的版本，本来想的是交叉编译呀，可是后来我一想，我有qemu呀，我还交叉编译啥呀，完全不需要呀，完全忘记了qemu还有这个~。</p>
 <p>首先解压一下开发板ubuntu20的源码，解压完成如下所示：</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312042116328.png" alt="image-20231018220418904"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312042116328.png" alt="image-20231018220418904"></p>
 <p>​	然后创建一个名为mount.sh的挂载脚本，该脚本的作用是挂载ubuntu并qemu</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"></span><br><span class="line">function mnt() &#123;</span><br><span class="line">    echo &quot;MOUNTING&quot;</span><br><span class="line">    sudo mount -t proc /proc $&#123;2&#125;proc</span><br><span class="line">    sudo mount -t sysfs /sys $&#123;2&#125;sys</span><br><span class="line">    sudo mount -o bind /dev $&#123;2&#125;dev</span><br><span class="line">    sudo mount -B /dev/pts $&#123;2&#125;dev/pts</span><br><span class="line"></span><br><span class="line">    sudo chroot $&#123;2&#125; /bin/sh</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function umnt() &#123;</span><br><span class="line">    echo &quot;UNMOUNTING&quot;</span><br><span class="line">    sudo umount $&#123;2&#125;proc</span><br><span class="line">    sudo umount $&#123;2&#125;sys</span><br><span class="line">    sudo umount $&#123;2&#125;dev/pts</span><br><span class="line">    sudo umount $&#123;2&#125;dev</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">if [ &quot;$1&quot; == &quot;-m&quot; ] &amp;&amp; [ -n &quot;$2&quot; ] ;</span><br><span class="line">then</span><br><span class="line">    mnt $1 $2</span><br><span class="line">elif [ &quot;$1&quot; == &quot;-u&quot; ] &amp;&amp; [ -n &quot;$2&quot; ];</span><br><span class="line">then</span><br><span class="line">    umnt $1 $2</span><br><span class="line">else</span><br><span class="line">    echo &quot;&quot;</span><br><span class="line">    echo &quot;Either 1&#x27;st, 2&#x27;nd or both parameters were missing&quot;</span><br><span class="line">    echo &quot;&quot;</span><br><span class="line">    echo &quot;1&#x27;st parameter can be one of these: -m(mount) OR -u(umount)&quot;</span><br><span class="line">    echo &quot;2&#x27;nd parameter is the full path of rootfs directory(with trailing &#x27;/&#x27;)&quot;</span><br><span class="line">    echo &quot;&quot;</span><br><span class="line">    echo &quot;For example: ch-mount -m /media/sdcard/&quot;</span><br><span class="line">    echo &quot;&quot;</span><br><span class="line">    echo 1st parameter : $&#123;1&#125;</span><br><span class="line">    echo 2nd parameter : $&#123;2&#125;</span><br><span class="line">fi</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312042116667.png" alt="image-20231018220519930"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312042116667.png" alt="image-20231018220519930"></p>
 <p>然后这样进行挂载：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./mount.sh -m ubuntu/</span><br></pre></td></tr></table></figure>
 
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312042116729.png" alt="image-20231018220618193"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312042116729.png" alt="image-20231018220618193"></p>
 <p>我这里首先更新了一下软件源，然后就是安装一些依赖，就跟上面在PC上安装依赖的方法相同。</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install build-essential </span><br><span class="line"></span><br><span class="line">sudo apt-get install cmake git libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev</span><br><span class="line"></span><br><span class="line">sudo apt-get install python-dev-is-python2 python-numpy libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev  libdc1394-22-dev</span><br><span class="line"></span><br><span class="line">pip3 install numpy</span><br><span class="line"> </span><br><span class="line">sudo update-alternatives --install /usr/bin/python python /usr/bin/python2 100</span><br><span class="line">sudo update-alternatives --install /usr/bin/python python /usr/bin/python3 150</span><br></pre></td></tr></table></figure>
 
 <p>然后将opencv源码拷贝到qumu的uubntu目录下，如下图所示：</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312042116797.png" alt="image-20231018220935063"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312042116797.png" alt="image-20231018220935063"></p>
 <p>然后进行opencv源码的解压：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unzip opencv-4.8.0.zip</span><br></pre></td></tr></table></figure>
 
@@ -460,25 +368,25 @@ if (true) {
 <li><code>-D PYTHON_DEFAULT_EXECUTABLE=/usr/bin/python3</code>: 指定默认的Python解释器路径为<code>/usr/bin/python3</code>，这将用于与Python相关的构建和安装操作。<code>-D PYTHON_DEFAULT_EXECUTABLE=/usr/bin/python3</code>: 指定默认的Python解释器路径为<code>/usr/bin/python3</code>，这将用于与Python相关的构建和安装操作。</li>
 </ul>
 <p>&#x3D;&#x3D;注意：在CMake中，使用-D参数来定义变量。每个参数开头的-D表示要定义一个CMake变量，并为其赋予特定的值&#x3D;&#x3D;</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312042116906.png" alt="image-20231018221553413"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312042116906.png" alt="image-20231018221553413"></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">make -j32</span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
 
 <p>虽然是qemu，但是用的仍旧是PC的CPU，但是这个速度是真的慢呀，但我看CPU都跑满了呀~~竟然搞了三十分钟~</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312042116875.png" alt="image-20231018225750952"></p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312042116200.png" alt="image-20231018225848736"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312042116875.png" alt="image-20231018225750952"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312042116200.png" alt="image-20231018225848736"></p>
 <p>​	最后拷贝和链接python库（&#x3D;&#x3D;这一步必须做，否则在使用的时候会找不到cv2这个模块&#x3D;&#x3D;）</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cp lib/python3/cv2.cpython-38-aarch64-linux-gnu.so ../install/lib/python3.8/site-packages/</span><br><span class="line">ln -s  /usr/local/lib/python3.8/dist-packages/cv2.cpython-38-aarch64-linux-gnu.so  /usr/lib/python3/dist-packages/cv2.so</span><br></pre></td></tr></table></figure>
 
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312042116808.png" alt="image-20231017222605454"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312042116808.png" alt="image-20231017222605454"></p>
 <p>然后进行简单的测试：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">python</span><br><span class="line"></span><br><span class="line">import cv2</span><br><span class="line">cv2.__version__</span><br></pre></td></tr></table></figure>
 
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312042116273.png" alt="image-20231017222821948"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312042116273.png" alt="image-20231017222821948"></p>
 <p>然后测试一个opencv的C++程序</p>
 <p>首先创建三个目录build  install  src</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p build  install  src</span><br></pre></td></tr></table></figure>
 
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312042116304.png" alt="image-20231017225840415"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312042116304.png" alt="image-20231017225840415"></p>
 <p>然后在src目录下创建测试例程demo.cpp,然后向该文件中添加以下程序：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;opencv2/core/core.hpp&quot;</span>                                                                               </span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;opencv2/highgui/highgui.hpp&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;opencv2/imgproc/imgproc.hpp&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> cv;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">VideoCapture <span class="title">capture</span><span class="params">(<span class="number">0</span>)</span></span>;</span><br><span class="line">    <span class="keyword">if</span> (!capture.<span class="built_in">isOpened</span>())</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 如果无法打开摄像头，则输出提示信息</span></span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;无法打开摄像头&quot;</span> &lt;&lt; endl;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">double</span> time0 = <span class="built_in">static_cast</span>&lt;<span class="type">double</span>&gt;(<span class="built_in">getTickCount</span>()); <span class="comment">// 获取开始时间</span></span><br><span class="line">    <span class="keyword">while</span> (<span class="literal">true</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 从摄像头捕获帧</span></span><br><span class="line">        Mat frame;</span><br><span class="line">        capture &gt;&gt; frame;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 如果捕获到帧，则显示它</span></span><br><span class="line">        <span class="keyword">if</span> (!frame.<span class="built_in">empty</span>())</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">cvtColor</span>(frame, frame, COLOR_RGB2BGR);</span><br><span class="line">            <span class="type">double</span> time1 = <span class="built_in">static_cast</span>&lt;<span class="type">double</span>&gt;(<span class="built_in">getTickCount</span>()); <span class="comment">// 获取结束时间</span></span><br><span class="line">            <span class="type">double</span> fps = <span class="built_in">getTickFrequency</span>() / (time1 - time0); <span class="comment">// 计算实时帧率</span></span><br><span class="line">            time0 = time1; <span class="comment">// 更新开始时间</span></span><br><span class="line">            <span class="built_in">putText</span>(frame, <span class="string">&quot;FPS: &quot;</span> + <span class="built_in">to_string</span>(fps), <span class="built_in">Point</span>(<span class="number">10</span>, <span class="number">30</span>), FONT_HERSHEY_SIMPLEX, <span class="number">1</span>, <span class="built_in">Scalar</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">255</span>), <span class="number">2</span>); <span class="comment">// 在图像上显示帧率</span></span><br><span class="line">            <span class="built_in">imshow</span>(<span class="string">&quot;MIPI Camera&quot;</span>, frame);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 按下&#x27;q&#x27;键退出循环</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">waitKey</span>(<span class="number">1</span>) == <span class="string">&#x27;q&#x27;</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 释放资源并关闭窗口</span></span><br><span class="line">    capture.<span class="built_in">release</span>();</span><br><span class="line">    <span class="built_in">destroyAllWindows</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -488,32 +396,32 @@ if (true) {
 <p>然后进入build目录，执行以下命令，进行配置、编译和安装三个步骤（&#x3D;&#x3D;这里由于我是将opencv的库和头文件等放到了上一级的install目录，所以这里可能要修改一下CmakeLists，但也还好&#x3D;&#x3D;）：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd build/</span><br><span class="line">cmake ../</span><br><span class="line">make </span><br><span class="line">make install </span><br></pre></td></tr></table></figure>
 
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312042116295.png" alt="image-20231017230355394"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312042116295.png" alt="image-20231017230355394"></p>
 <p>至此，opencv qemu编译就完成了。</p>
 <h1 id="4-vscode-配置python"><a href="#4-vscode-配置python" class="headerlink" title="4.vscode 配置python"></a>4.vscode 配置python</h1><h2 id="4-1-下载VScode"><a href="#4-1-下载VScode" class="headerlink" title="4.1.下载VScode"></a>4.1.下载VScode</h2><p><a target="_blank" rel="noopener" href="https://code.visualstudio.com/">附上官网地址：Visual Studio Code - Code Editing. Redefined</a></p>
 <h2 id="4-2-在vs安装python插件"><a href="#4-2-在vs安装python插件" class="headerlink" title="4.2.在vs安装python插件"></a>4.2.在<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=vs%E5%AE%89%E8%A3%85&spm=1001.2101.3001.7020">vs安装</a>python插件</h2><p>这个很简单，我就不再截图了。</p>
 <h2 id="4-3-配置python环境"><a href="#4-3-配置python环境" class="headerlink" title="4.3.配置python环境"></a>4.3.配置python环境</h2><p><a target="_blank" rel="noopener" href="https://www.python.org/">python官网：Welcome to Python.org</a></p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312050734569.png" alt="image-20231205073415526"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312050734569.png" alt="image-20231205073415526"></p>
 <p>虽然已经到了3.12的版本，但这个随意了，我认为无所谓。</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312050739764.png" alt="image-20231205073900729"></p>
-<p>然后打开一个shell终端，发现运行python之后没什么问题，如下图所示：<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312050739725.png" alt="image-20231205073953699"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312050739764.png" alt="image-20231205073900729"></p>
+<p>然后打开一个shell终端，发现运行python之后没什么问题，如下图所示：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312050739725.png" alt="image-20231205073953699"></p>
 <p>然后安装两个包：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install flake8 yapf -i https://pypi.tuna.tsinghua.edu.cn/simple</span><br></pre></td></tr></table></figure>
 
 <p>flake8会检查编写代码时的不规范的地方和语法错误。</p>
 <p>yapf是一个代码格式化工具，可以一键美化代码。<strong>Shift + Alt + F一键美化代码</strong></p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312050743881.png" alt="image-20231205074300847"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312050743881.png" alt="image-20231205074300847"></p>
 <p>一定要在python目录下才可以，难道我需要再添加一下路径吗，很奇怪反正~~。</p>
 <h3 id="4-4选择python解释器"><a href="#4-4选择python解释器" class="headerlink" title="4.4选择python解释器"></a>4.4选择python解释器</h3><p>打开VScode，点击左上角，文件-&gt;首选项-&gt;设置</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312052129421.png" alt="image-20231205212927391"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312052129421.png" alt="image-20231205212927391"></p>
 <p>然后打开界面右上角的箭头纸张这就是json设置</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312052131657.png" alt="image-20231205213107628"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312052131657.png" alt="image-20231205213107628"></p>
 <p>然后将下面代码替换里面的内容，第一行即为python所在路径。记得在路径多加 \ </p>
 <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;python.PYTHONPATH&quot;</span><span class="punctuation">:</span><span class="string">&quot;D:\\Python\\Python312&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;python.linting.flake8Enabled&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;editor.formatOnSave&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;python.formatting.provider&quot;</span><span class="punctuation">:</span> <span class="string">&quot;yapf&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;python.formatting.yapfArgs&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">        <span class="string">&quot;--style=&#123;based_on_style: pep8, indent_width: 4&#125;&quot;</span></span><br><span class="line">    <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;python.linting.flake8Args&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;--max-line-length=248&quot;</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;python.linting.pylintEnabled&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;explorer.confirmDelete&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;[python]&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;editor.formatOnType&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
 
 <p>之后保存即可，就可以在python文件中使用<strong>Shift + Alt + F</strong>来格式化你的代码啦。</p>
-<p>测试可用：<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312052135998.png" alt="image-20231205213520975"></p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312052135954.png" alt="image-20231205213527919"></p>
+<p>测试可用：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312052135998.png" alt="image-20231205213520975"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312052135954.png" alt="image-20231205213527919"></p>
 <h1 id="5-windows-c-环境的配置"><a href="#5-windows-c-环境的配置" class="headerlink" title="5 windows c++环境的配置"></a>5 windows c++环境的配置</h1><h2 id="5-1-Visual-Studio-Code相关信息"><a href="#5-1-Visual-Studio-Code相关信息" class="headerlink" title="5.1 Visual Studio Code相关信息"></a>5.1 Visual Studio Code相关信息</h2><ul>
 <li>Visual Studio Code 下载地址：<a target="_blank" rel="noopener" href="https://code.visualstudio.com/download">https://code.visualstudio.com/download</a></li>
 <li>VS Code建议安装插件列表：<ul>
@@ -542,11 +450,11 @@ if (true) {
 <h2 id="5-2下载安装g"><a href="#5-2下载安装g" class="headerlink" title="5.2下载安装g++"></a>5.2下载安装g++</h2><p>&#x3D;&#x3D;具体可以看1.2.1小节&#x3D;&#x3D;</p>
 <h2 id="5-3配置调试功能"><a href="#5-3配置调试功能" class="headerlink" title="5.3配置调试功能"></a>5.3配置调试功能</h2><p>首先大家在一个你希望的位置建一个文件夹，随意起名就可以（注意不可以用中文！），以后的C&#x2F;C++代码文件都要放在这个文件夹里才可以正常调试。</p>
 <p>然后进入VSCode,点击Open Folder或者点击左上角File -&gt; Open Folder，然后打开刚刚建的文件夹，选择信任父级文件夹点击这个图标新建一个文件夹，命名为.vscode（注意必须是这个名字！）</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312052146527.png" alt="image-20231205214658480"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312052146527.png" alt="image-20231205214658480"></p>
 <p>创建完成后再点击这个图标新建四个文件，文件名分别是</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//c_cpp_properties.json</span><br><span class="line">//launch.json</span><br><span class="line">//settings.json</span><br><span class="line">//tasks.json</span><br></pre></td></tr></table></figure>
 
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312052148993.png" alt="image-20231205214844970"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312052148993.png" alt="image-20231205214844970"></p>
 <p>接下来复制粘贴这四个文件的内容 </p>
 <p>首先是c_cpp_properties.json</p>
 <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;configurations&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">        <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Win64&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;includePath&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">                <span class="string">&quot;$&#123;workspaceFolder&#125;/**&quot;</span></span><br><span class="line">            <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;defines&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">                <span class="string">&quot;_DEBUG&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="string">&quot;UNICODE&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="string">&quot;_UNICODE&quot;</span></span><br><span class="line">            <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;windowsSdkVersion&quot;</span><span class="punctuation">:</span> <span class="string">&quot;10.0.18362.0&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;compilerPath&quot;</span><span class="punctuation">:</span> <span class="string">&quot;D:/mingw64/bin/gcc.exe&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;cStandard&quot;</span><span class="punctuation">:</span> <span class="string">&quot;c17&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;cppStandard&quot;</span><span class="punctuation">:</span> <span class="string">&quot;c++17&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;intelliSenseMode&quot;</span><span class="punctuation">:</span> <span class="string">&quot;gcc-x64&quot;</span></span><br><span class="line">        <span class="punctuation">&#125;</span></span><br><span class="line">    <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;version&quot;</span><span class="punctuation">:</span> <span class="number">4</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
@@ -567,7 +475,7 @@ if (true) {
 
 <p>保存这四个文件就配置完成了！</p>
 <p>再次强调：以后的C&#x2F;C++代码文件必须放在这个Code文件夹里，或者说有.vscode文件夹的文件夹里，如果调试放在其他位置的代码文件会报错！</p>
-<p>测试完成如下所示：<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312052214005.png" alt="image-20231205221434929"></p>
+<p>测试完成如下所示：<br><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312052214005.png" alt="image-20231205221434929"></p>
 <h1 id="6-opencv的学习"><a href="#6-opencv的学习" class="headerlink" title="6.opencv的学习"></a>6.opencv的学习</h1><h2 id="6-1-读取图片并显示"><a href="#6-1-读取图片并显示" class="headerlink" title="6.1 读取图片并显示"></a>6.1 读取图片并显示</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 图片的读取和显示</span></span><br><span class="line"><span class="comment">// 导入opencv头文件</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;opencv2/opencv.hpp&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> **argv)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 读取图片，mat是matrix的缩写，是一个矩阵，类似与numpy ndarray</span></span><br><span class="line">    cv::Mat image = cv::<span class="built_in">imread</span>(<span class="string">&quot;E:\\05_opencv\\work\\src\\cat.jpg&quot;</span>);</span><br><span class="line">    <span class="comment">// 判断是否读取成功</span></span><br><span class="line">    <span class="keyword">if</span> (image.<span class="built_in">empty</span>())</span><br><span class="line">    &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;无法读取图片 &quot;</span> &lt;&lt; std::endl;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 打印图片高度和宽度</span></span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;图片高度: &quot;</span> &lt;&lt; image.rows &lt;&lt; <span class="string">&quot; 宽度: &quot;</span> &lt;&lt; image.cols &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 打印图片data</span></span><br><span class="line">    <span class="comment">// 以Numpy的方式打印</span></span><br><span class="line">    <span class="comment">// std::cout &lt;&lt; &quot;图片data: &quot; &lt;&lt; cv::format(image, cv::Formatter::FMT_NUMPY) &lt;&lt; std::endl;</span></span><br><span class="line">    <span class="comment">// 以python list的方式打印</span></span><br><span class="line">    <span class="comment">// std::cout &lt;&lt; &quot;图片data: &quot; &lt;&lt; cv::format(image, cv::Formatter::FMT_PYTHON) &lt;&lt; std::endl;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建一个灰度图</span></span><br><span class="line">    cv::Mat gray;</span><br><span class="line">    <span class="comment">// 转换为灰度图</span></span><br><span class="line">    cv::<span class="built_in">cvtColor</span>(image, gray, cv::COLOR_BGR2GRAY);</span><br><span class="line">    <span class="comment">// 保存</span></span><br><span class="line">    cv::<span class="built_in">imwrite</span>(<span class="string">&quot;gray.jpg&quot;</span>, gray);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 显示</span></span><br><span class="line">    cv::<span class="built_in">imshow</span>(<span class="string">&quot;原图&quot;</span>, image);</span><br><span class="line">    cv::<span class="built_in">imshow</span>(<span class="string">&quot;灰度图&quot;</span>, gray);</span><br><span class="line">    <span class="comment">// 等待按键</span></span><br><span class="line">    cv::<span class="built_in">waitKey</span>(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>遇到的第一个问题，第9行的路径问题，在windows目录下必须要使用两个\不知道这是为啥</p>
@@ -623,148 +531,466 @@ if (true) {
 <p>一旦创建了 <code>cv::VideoCapture</code> 对象，您可以使用 <code>read()</code> 方法来连续读取视频帧。<code>read()</code> 方法将返回一个布尔值，指示是否成功读取了一帧图像。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">cv::Mat frame;</span><br><span class="line"><span class="keyword">while</span> (cap.<span class="built_in">read</span>(frame)) &#123;</span><br><span class="line">    <span class="comment">// 处理当前帧</span></span><br><span class="line">    cv::<span class="built_in">imshow</span>(<span class="string">&quot;Video&quot;</span>, frame);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 等待按键退出</span></span><br><span class="line">    <span class="keyword">if</span> (cv::<span class="built_in">waitKey</span>(<span class="number">1</span>) == <span class="string">&#x27;q&#x27;</span>) &#123;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-</article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg" title="头像" alt="头像"></a><div class="post-copyright__author_name">chai</div><div class="post-copyright__author_desc">热爱学习</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="http://example.com/2023/12/09/11-opencv%E7%9A%84%E5%AD%A6%E4%B9%A0/">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('http://example.com/2023/12/09/11-opencv%E7%9A%84%E5%AD%A6%E4%B9%A0/')">opencv的学习</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"><div class="post-reward" onclick="anzhiyu.addRewardMask()"><div class="reward-button button--animated" title="赞赏作者"><i class="anzhiyufont anzhiyu-icon-hand-heart-fill"></i>打赏作者</div><div class="reward-main"><div class="reward-all"><span class="reward-title">感谢你赐予我前进的力量</span><ul class="reward-group"><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul><a class="reward-main-btn" href="/about/#about-reward" target="_blank"><div class="reward-text">赞赏者名单</div><div class="reward-dec">因为你们的支持让我意识到写文章的价值🙏</div></a></div></div></div><div id="quit-box" onclick="anzhiyu.removeRewardMask()" style="display: none"></div></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="http://example.com/2023/12/09/11-opencv%E7%9A%84%E5%AD%A6%E4%B9%A0/"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=opencv的学习&amp;url=http://example.com/2023/12/09/11-opencv%E7%9A%84%E5%AD%A6%E4%B9%A0/&amp;pic=" rel="external nofollow noreferrer noopener"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
-  var currentPageUrl = window.location.href;
-  var input = document.createElement("input");
-  input.setAttribute("value", currentPageUrl);
-  document.body.appendChild(input);
-  input.select();
-  input.setSelectionRange(0, 99999);
-  document.execCommand("copy");
-  document.body.removeChild(input);
-}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">热爱学习的未来酱</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"></div></div></div><div class="post_share"><div class="social-share" data-image="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"/><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/12/03/20%20ubuntu%E5%92%8Cdebian%E6%BA%90/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">ubuntu和debian源</div></div></a></div><div class="next-post pull-right"><a href="/2023/12/10/22%20git%E7%9A%84%E5%AD%A6%E4%B9%A0/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">git的学习</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__description">永远年轻，永远热泪盈眶</div></div></div><div class="card-widget anzhiyu-right-widget" id="card-wechat" onclick="null"><div id="flip-wrapper"><div id="flip-content"><div class="face" style="background: url(https://bu.dusays.com/2023/01/13/63c02edf44033.png) center center / 100% no-repeat"></div><div class="back face" style="background: url(https://bu.dusays.com/2023/05/13/645fa415e8694.png) center center / 100% no-repeat"></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-windows-opencv%E7%9A%84%E9%85%8D%E7%BD%AE"><span class="toc-number">1.</span> <span class="toc-text">1 windows opencv的配置</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-%E8%BD%AF%E4%BB%B6%E5%87%86%E5%A4%87"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 软件准备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-%E8%BD%AF%E4%BB%B6%E7%9A%84%E4%B8%8B%E8%BD%BD"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 软件的下载</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-1-MinGw%E4%B8%8B%E8%BD%BD"><span class="toc-number">1.2.1.</span> <span class="toc-text">1.2.1 MinGw下载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-2-Cmake%E4%B8%8B%E8%BD%BD"><span class="toc-number">1.2.2.</span> <span class="toc-text">1.2.2 Cmake下载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-3-Opencv%E4%B8%8B%E8%BD%BD"><span class="toc-number">1.2.3.</span> <span class="toc-text">1.2.3 Opencv下载</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-%E7%BC%96%E8%AF%91"><span class="toc-number">1.3.</span> <span class="toc-text">1.3 编译</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-1%E3%80%81cmake-gui"><span class="toc-number">1.3.1.</span> <span class="toc-text">1.3.1、cmake-gui</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-2-%E7%BC%96%E8%AF%91"><span class="toc-number">1.3.2.</span> <span class="toc-text">1.3.2 编译</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-3-%E5%AE%89%E8%A3%85"><span class="toc-number">1.3.3.</span> <span class="toc-text">1.3.3 安装</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-4-vscode%E9%85%8D%E7%BD%AE"><span class="toc-number">1.4.</span> <span class="toc-text">1.4 vscode配置</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-VS-opencv%E7%9A%84%E9%85%8D%E7%BD%AE"><span class="toc-number">2.</span> <span class="toc-text">2 VS opencv的配置</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-%E5%AE%89%E8%A3%85vs"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 安装vs</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-%E5%AE%89%E8%A3%85opencv"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 安装opencv</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-%E9%85%8D%E7%BD%AEVSCODE"><span class="toc-number">2.3.</span> <span class="toc-text">2.3 配置VSCODE</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-oepncv%E6%BA%90%E7%A0%81%E7%9A%84%E7%BC%96%E8%AF%91%EF%BC%88Linux%EF%BC%89"><span class="toc-number">3.</span> <span class="toc-text">3 oepncv源码的编译（Linux）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%8B%89%E5%8F%96opencv%E6%BA%90%E7%A0%81"><span class="toc-number">3.1.</span> <span class="toc-text">1.拉取opencv源码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91%EF%BC%88PC%EF%BC%89"><span class="toc-number">3.2.</span> <span class="toc-text">2.源码编译（PC）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91%EF%BC%88qemu%EF%BC%89"><span class="toc-number">3.3.</span> <span class="toc-text">3.交叉编译（qemu）</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-vscode-%E9%85%8D%E7%BD%AEpython"><span class="toc-number">4.</span> <span class="toc-text">4.vscode 配置python</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-%E4%B8%8B%E8%BD%BDVScode"><span class="toc-number">4.1.</span> <span class="toc-text">4.1.下载VScode</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-%E5%9C%A8vs%E5%AE%89%E8%A3%85python%E6%8F%92%E4%BB%B6"><span class="toc-number">4.2.</span> <span class="toc-text">4.2.在vs安装python插件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-3-%E9%85%8D%E7%BD%AEpython%E7%8E%AF%E5%A2%83"><span class="toc-number">4.3.</span> <span class="toc-text">4.3.配置python环境</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-4%E9%80%89%E6%8B%A9python%E8%A7%A3%E9%87%8A%E5%99%A8"><span class="toc-number">4.3.1.</span> <span class="toc-text">4.4选择python解释器</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-windows-c-%E7%8E%AF%E5%A2%83%E7%9A%84%E9%85%8D%E7%BD%AE"><span class="toc-number">5.</span> <span class="toc-text">5 windows c++环境的配置</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#5-1-Visual-Studio-Code%E7%9B%B8%E5%85%B3%E4%BF%A1%E6%81%AF"><span class="toc-number">5.1.</span> <span class="toc-text">5.1 Visual Studio Code相关信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-2%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85g"><span class="toc-number">5.2.</span> <span class="toc-text">5.2下载安装g++</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-3%E9%85%8D%E7%BD%AE%E8%B0%83%E8%AF%95%E5%8A%9F%E8%83%BD"><span class="toc-number">5.3.</span> <span class="toc-text">5.3配置调试功能</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-opencv%E7%9A%84%E5%AD%A6%E4%B9%A0"><span class="toc-number">6.</span> <span class="toc-text">6.opencv的学习</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#6-1-%E8%AF%BB%E5%8F%96%E5%9B%BE%E7%89%87%E5%B9%B6%E6%98%BE%E7%A4%BA"><span class="toc-number">6.1.</span> <span class="toc-text">6.1 读取图片并显示</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-2-%E8%AF%BB%E5%8F%96%E8%A7%86%E9%A2%91%E5%B9%B6%E6%98%BE%E7%A4%BA"><span class="toc-number">6.2.</span> <span class="toc-text">6.2 读取视频并显示</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/12/31/%E8%A7%84%E7%9F%A9/" title="规矩">规矩</a><time datetime="2024-12-31T14:15:56.000Z" title="发表于 2024-12-31 22:15:56">2024-12-31</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/12/31/%E5%8F%8D%E6%80%9D/" title="反思">反思</a><time datetime="2024-12-31T13:26:56.000Z" title="发表于 2024-12-31 21:26:56">2024-12-31</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/12/11/24%20%E8%AF%BB%E5%90%8E%E6%84%9F/" title="读后感">读后感</a><time datetime="2024-12-10T22:50:19.000Z" title="发表于 2024-12-11 06:50:19">2024-12-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/12/11/23%20%E5%B5%8C%E5%85%A5%E5%BC%8FC%E8%AF%AD%E8%A8%80%E7%9A%84%E8%87%AA%E6%88%91%E4%BF%AE%E5%85%BB/" title="嵌入式C语言的自我修养">嵌入式C语言的自我修养</a><time datetime="2023-12-10T22:50:19.000Z" title="发表于 2023-12-11 06:50:19">2023-12-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/12/10/22%20tabby%E7%9A%84%E4%BD%BF%E7%94%A8/" title="tabby的使用">tabby的使用</a><time datetime="2023-12-10T04:50:19.000Z" title="发表于 2023-12-10 12:50:19">2023-12-10</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">&copy;2020 - 2023 By <a class="footer-bar-link" href="/" title="chai" target="_blank">chai</a></div></div><div id="footer-type-tips"></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/anzhiyu-c/hexo-theme-anzhiyu" title="主题">主题</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">27</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">4</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://blog.anheyu.com/" title="博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="博客"/><span class="back-menu-item-text">博客</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://image.anheyu.com/" title="安知鱼图床"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://image.anheyu.com/favicon.ico" alt="安知鱼图床"/><span class="back-menu-item-text">安知鱼图床</span></a></div></div></div><span class="sidebar-menu-item-title">标签</span></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="nav-music"><a id="nav-music-hoverTips" onclick="anzhiyu.musicToggle()" accesskey="m">播放音乐</a><div id="console-music-bg"></div><meting-js id="8152976493" server="netease" type="playlist" mutex="true" preload="none" theme="var(--anzhiyu-main)" data-lrctype="0" order="random" volume="0.7"></meting-js></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://y.qq.com/n/ryqq/playlist/8802438608&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.cbd.int/vanilla-lazyload@17.8.5/dist/lazyload.iife.min.js"></script><script src="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.js"></script><canvas id="universe"></canvas><script async src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
-var HoldLog = console.log;
-console.log = function () {};
-let now1 = new Date();
-queueMicrotask(() => {
-  const Log = function () {
-    HoldLog.apply(console, arguments);
-  }; //在恢复前输出日志
-  const grt = new Date("04/01/2021 00:00:00"); //此处修改你的建站时间或者网站上线时间
-  now1.setTime(now1.getTime() + 250);
-  const days = (now1 - grt) / 1000 / 60 / 60 / 24;
-  const dnum = Math.floor(days);
-  const ascll = [
-    `欢迎使用安知鱼!`,
-    `生活明朗, 万物可爱`,
-    `
-        
-       █████╗ ███╗   ██╗███████╗██╗  ██╗██╗██╗   ██╗██╗   ██╗
-      ██╔══██╗████╗  ██║╚══███╔╝██║  ██║██║╚██╗ ██╔╝██║   ██║
-      ███████║██╔██╗ ██║  ███╔╝ ███████║██║ ╚████╔╝ ██║   ██║
-      ██╔══██║██║╚██╗██║ ███╔╝  ██╔══██║██║  ╚██╔╝  ██║   ██║
-      ██║  ██║██║ ╚████║███████╗██║  ██║██║   ██║   ╚██████╔╝
-      ╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝    ╚═════╝
-        
-        `,
-    "已上线",
-    dnum,
-    "天",
-    "©2020 By 安知鱼 V1.6.12",
-  ];
-  const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
+ 
+      <!-- reward -->
+      
+    </div>
+    
 
-  setTimeout(
-    Log.bind(
-      console,
-      `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
-      "color:#425AEF",
-      "",
-      "color:#425AEF",
-      "color:#425AEF",
-      "",
-      "color:#425AEF",
-      ""
-    )
-  );
-  setTimeout(
-    Log.bind(
-      console,
-      `%c ${ascll2[0]} %c ${ascll2[1]} %c \n${ascll2[2]} %c\n${ascll2[3]}\n`,
-      "color:white; background-color:#4fd953",
-      "",
-      "",
-      'background:url("https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/tinggge.gif") no-repeat;font-size:450%'
-    )
-  );
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
 
-  setTimeout(Log.bind(console, "%c WELCOME %c 你好，小笨蛋.", "color:white; background-color:#4f90d9", ""));
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2023/12/09/11-opencv%E7%9A%84%E5%AD%A6%E4%B9%A0/" alt="微信分享二维码">
+    </div>
+</div>
 
-  setTimeout(
-    console.warn.bind(
-      console,
-      "%c ⚡ Powered by 安知鱼 %c 你正在访问 chai 的博客.",
-      "color:white; background-color:#f0ad4e",
-      ""
-    )
-  );
+<div id="share-mask"></div>  
+    </footer>
+  </div>
 
-  setTimeout(Log.bind(console, "%c W23-12 %c 你已打开控制台.", "color:white; background-color:#4f90d9", ""));
+   
+  <nav class="article-nav">
+    
+      <a href="/2023/12/10/22%20git%E7%9A%84%E5%AD%A6%E4%B9%A0/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            git的学习
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2023/12/03/20%20ubuntu%E5%92%8Cdebian%E6%BA%90/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">ubuntu和debian源</div>
+      </a>
+    
+  </nav>
 
-  setTimeout(
-    console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
-  );
-});</script><script async src="/anzhiyu/random.js"></script><div class="js-pjax"><input type="hidden" name="page-type" id="page-type" value="post"></div><script>var visitorMail = "";
-</script><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://cdn.cbd.int/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
-var pjax = new Pjax({
-  elements: 'a:not([target="_blank"])',
-  selectors: pjaxSelectors,
-  cacheBust: false,
-  analytics: false,
-  scrollRestoration: false
-})
-
-document.addEventListener('pjax:send', function () {
-  // removeEventListener scroll 
-  anzhiyu.removeGlobalFnEvent('pjax')
-  anzhiyu.removeGlobalFnEvent('themeChange')
-
-  document.getElementById('rightside').classList.remove('rightside-show')
   
-  if (window.aplayers) {
-    for (let i = 0; i < window.aplayers.length; i++) {
-      if (!window.aplayers[i].options.fixed) {
-        window.aplayers[i].destroy()
-      }
+   
+  
+   
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2015-2023
+        <i class="ri-heart-fill heart_icon"></i> chai
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="热爱学习的未来酱"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE">瑞芯微</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/%E5%AD%A6%E4%B9%A0">学习</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/%E7%94%9F%E6%B4%BB">生活</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
     }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
   }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
 
-  typeof typed === 'object' && typed.destroy()
-
-  //reset readmode
-  const $bodyClassList = document.body.classList
-  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
-})
-
-document.addEventListener('pjax:complete', function () {
-  window.refreshFn()
-
-  document.querySelectorAll('script[data-pjax]').forEach(item => {
-    const newScript = document.createElement('script')
-    const content = item.text || item.textContent || item.innerHTML || ""
-    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
-    newScript.appendChild(document.createTextNode(content))
-    item.parentNode.replaceChild(newScript, item)
-  })
-
-  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
-
-  typeof panguInit === 'function' && panguInit()
-
-  // google analytics
-  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
-
-  // baidu analytics
-  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
-
-  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
-
-  // prismjs
-  typeof Prism === 'object' && Prism.highlightAll()
-})
-
-document.addEventListener('pjax:error', e => {
-  if (e.request.status === 404) {
-    pjax.loadUrl('/404.html')
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
   }
-})</script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div></body></html>
+</script>
+
+
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="52"
+        src="//music.163.com/outchain/player?type=2&id=22707008&auto=0&height=32"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
+    
+    
+
+  </div>
+</body>
+
+</html>

@@ -1,209 +1,117 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>音视频编解码相关知识学习 | 热爱学习的未来酱</title><meta name="author" content="chai"><meta name="copyright" content="chai"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="音视频编解码相关知识学习"><meta name="application-name" content="音视频编解码相关知识学习"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="音视频编解码相关知识学习"><meta property="og:url" content="http://example.com/2023/11/19/8%20%E9%9F%B3%E8%A7%86%E9%A2%91%E7%BC%96%E8%A7%A3%E7%A0%81%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E5%AD%A6%E4%B9%A0/index.html"><meta property="og:site_name" content="热爱学习的未来酱"><meta property="og:description" content="前些天一直在研究关于GPUi相关的知识，在周六的时候终于是写好了相应的测试手册，周一法师检测出问题的话我再加，其实也没啥可以加的东西了，不管是OPENGL还是OPENCL，只要相应的mali库成功即可，其他的倒是没啥，然后呢我也该去搞一下mpp 音视频编解码相关的东西了，后面其实还有摄像头啥的，这些"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg"><meta property="article:author" content="chai"><meta property="article:tag"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg"><meta name="description" content="前些天一直在研究关于GPUi相关的知识，在周六的时候终于是写好了相应的测试手册，周一法师检测出问题的话我再加，其实也没啥可以加的东西了，不管是OPENGL还是OPENCL，只要相应的mali库成功即可，其他的倒是没啥，然后呢我也该去搞一下mpp 音视频编解码相关的东西了，后面其实还有摄像头啥的，这些"><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="http://example.com/2023/11/19/8%20%E9%9F%B3%E8%A7%86%E9%A2%91%E7%BC%96%E8%A7%A3%E7%A0%81%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E5%AD%A6%E4%B9%A0/"><link rel="preconnect" href="//cdn.cbd.int"/><meta name="google-site-verification" content="xxx"/><meta name="baidu-site-verification" content="code-xxx"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
-  linkPageTop: undefined,
-  peoplecanvas: {"enable":true,"img":"https://upload-bbs.miyoushe.com/upload/2023/09/03/125766904/ee23df8517f3c3e3efc4145658269c06_5714860933110284659.png"},
-  postHeadAiDescription: {"enable":true,"gptName":"AnZhiYu","mode":"local","switchBtn":false,"btnLink":"https://afdian.net/item/886a79d4db6711eda42a52540025c377","randomNum":3,"basicWordCount":1000,"key":"xxxx","Referer":"https://xx.xx/"},
-  diytitle: {"enable":true,"leaveTitle":"w(ﾟДﾟ)w 不要走！再看看嘛！","backTitle":"♪(^∇^*)欢迎肥来！"},
-  LA51: undefined,
-  greetingBox: undefined,
-  twikooEnvId: '',
-  commentBarrageConfig:undefined,
-  root: '/',
-  preloader: {"source":3},
-  friends_vue_info: undefined,
-  navMusic: true,
-  mainTone: undefined,
-  authorStatus: undefined,
-  algolia: undefined,
-  localSearch: undefined,
-  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
-  noticeOutdate: undefined,
-  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":330},
-  copy: {
-    success: '复制成功',
-    error: '复制错误',
-    noSupport: '浏览器不支持'
-  },
-  relativeDate: {
-    homepage: false,
-    simplehomepage: true,
-    post: false
-  },
-  runtime: '天',
-  date_suffix: {
-    just: '刚刚',
-    min: '分钟前',
-    hour: '小时前',
-    day: '天前',
-    month: '个月前'
-  },
-  copyright: {"copy":true,"copyrightEbable":false,"limitCount":50,"languages":{"author":"作者: chai","link":"链接: ","source":"来源: 热爱学习的未来酱","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
-  lightbox: 'fancybox',
-  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#425AEF","bgDark":"#1f1f1f","position":"top-center"},
-  source: {
-    justifiedGallery: {
-      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
-      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
-    }
-  },
-  isPhotoFigcaption: false,
-  islazyload: true,
-  isAnchor: false,
-  shortcutKey: undefined,
-  autoDarkmode: true
-}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
-  configTitle: '热爱学习的未来酱',
-  title: '音视频编解码相关知识学习',
-  postAI: '',
-  pageFillDescription: '音视频的基本概念, 一 视频, 1、码率√, 2、分辨率, 3、帧率, 4、像素格式, 5、画质, 6、色域与HDR, 7、旋转角度, 8、时长, 9、封装格式, 10、编码协议, 11、视频播放整体流程, 二 音频, 1、采样率, 2、声道, 3、声道布局, 4、音质, 5、封装格式, 6、编码协议, 7、采样数, 8、采样位数, 9、存储空间, 10、帧时长, 11、采样格式, 视频封装格式, 音频封装格式, 4、不同封装格式的联系与区别, 音视频编码, 一、视频编码, 1、变换与量化, 2、运动补偿与运动估计, 3、熵编码, 4、帧内压缩与帧间压缩, 5、I帧、P帧、B帧, 6、GOP与关键帧间隔, 7、码率控制, 8、SVC分级编码, 9、YUV, 二、音频编码, 1、采样率, 2、波形编码, 3、参数编码, 4、混合编码, 5、PCM, 音视频解码, 一、视频解码, 1、pts与dts, 2、关键帧与非关键帧, 3、组包与拼帧, 4、特定帧头, 二、音频解码, 1、planar与packed存储, 2、量化位数, 3、采样率, 4、声道数与声道布局, VPU前些天一直在研究关于相关的知识在周六的时候终于是写好了相应的测试手册周一法师检测出问题的话我再加其实也没啥可以加的东西了不管是还是只要相应的库成功即可其他的倒是没啥然后呢我也该去搞一下音视频编解码相关的东西了后面其实还有摄像头啥的这些都是要搞的至少软件里面是要适配的对吧还有那个缠绕我好久的的问题问题太多了但是总要一点一点来问题是一个一个解决的总不可能一蹴而就慢慢来呗音视频的基本概念一视频码率码率又叫比特率单位时间内传输的数据量单位一般为千位每秒需要注意的是这里代表而不是这里乘以是转成计算公式平均码率文件大小时间动态码率每秒传输数据量是的缩写指的是数据传输速率或比特率用于测量数据在通信或存储系统中的传输速度它表示每秒传输的比特数其中比特是计算机中最小的数据单位比特率通常用于描述网络带宽调制解调器速度数字音频视频流的传输速度等恒定码率码率稳定可控带宽要求不高图像变化量比较大时方块效应比较明显动态码率码率波动较大带宽要求较高图像变化量比较大时方块效应有所改善发生网络抖动时比较容易丢包需要重传或者前向纠错从而带来延时分辨率分辨率又称为解析度分辨率越高像素越多图像越清晰视频分辨率又称为图像分辨率由视频的宽高组成表示形式宽高常见的视频分辨率有具体如下表所示屏幕分辨率又称为显示分辨率描述屏幕分辨率的单位是每英寸的像素数位分辨率又称为位深每个像素点存储信息的位数常见的有位位位位色彩的常见的有显示模式水平像素垂直像素宽高比帧率视频帧率测量显示帧数的量度单位为每秒显示帧数全称为一般视频帧率为制德国提出中国印度巴基斯坦等国家使用为也就是每帧显示制美国标准委员会提出美国日本韩国等国家使用为有些超高帧率的视频达到显示帧率以帧为单位的位图图像连续出现在显示器的频率也称为刷新速率设备刷新率一般为也就是帧率为每帧为超过能给人的肉眼带来延迟卡顿的感觉做性能优化方面也就是保证从测量布局绘制上传指令与交换缓冲区等一系列动作在完成支持的更高帧率一般为对帧率要求极高的应用场景比如互动游戏像素格式像素格式像素色彩分量的排列由每个像素使用的总位数以及各分量的位数决定图像的像素格式一般是四个分量通道各占组成一个位的像素其中代表代表代表代表但是视频压缩存储的像素格式不是而是其中代表亮度代表色度代表对比度画质画质画面质量由清晰度锐度解析度色彩纯度色彩平衡等指标构成清晰度指图像细节纹理及其边界的清晰程度锐度反应图像平面清晰程度以及图像边缘的锐利程度解析度指像素点的数量与分辨率对应分辨率越高解析度越高色彩纯度指色彩的鲜艳程度所有色彩都是三原色组成其他颜色都是三原色混合而成理论上可以混合出种颜色原色的纯度最高色彩纯度是指原色在色彩中的百分比色彩平衡用来控制图像的色彩分布使得图像整体达到色彩平衡色域与色域指某种表色模式所能表达的颜色构成的范围区域色域空间越大所能表现的颜色越多高动态范围比普通图像提供更多动态范围和图像细节能够更好反应真实环境的视觉效果颜色值经过归一化后范围一般是而可以表达超出的颜色值拥有更大的颜色范围旋转角度旋转角度视频的储存方向一般的视频旋转角度是对应的是横屏显示后置摄像头竖屏拍的视频旋转角度为对应的是竖屏显示中可以通过获取旋转角度时长视频所有图像播放所需要的时间称为视频时长计算公式时长帧数每帧时长帧数帧率假设一个视频帧数为帧率为那么时长为封装格式封装格式也被称为容器格式多媒体容器或封装协议是用于将音频视频字幕等多种媒体数据进行封装和存储的文件格式它将不同类型的媒体数据组合在一起同时提供了文件结构元数据同步信息和索引等以便播放器或解码器能够正确解析和播放媒体内容封装格式通常由以下几个主要组成部分构成特定格式头封装格式的文件头部分包含了关于文件本身的重要信息如文件类型版本总体文件大小等这些信息在解析和处理文件时起到了关键作用媒体信息封装格式可以包含有关媒体内容的附加信息例如标题作者描述时长分辨率采样率等这些元数据提供了有关媒体文件的描述和标识使其能够被正确地识别和分类音视频轨封装格式可以容纳多个音频视频或字幕轨道每个轨道包含相应媒体数据的编码信息时间戳和相关参数例如一个视频轨道可能包含视频帧的压缩编码数据而一个音频轨道可能包含音频样本的编码数据索引为了快速定位和访问媒体数据封装格式通常包含一个索引表索引表记录了文件中各个部分的位置时间戳和长度等信息以便播放器能够快速定位到需要的数据位置通过索引播放器可以跳转到特定时间点或轨道的特定位置其他数据除了上述主要组成部分之外封装格式还可以包含其他数据如字幕轨道章节信息描述文本封面图像等这些附加数据提供了更丰富的媒体体验和交互功能不同的封装格式具有不同的特点和功能一些封装格式具有更广泛的兼容性和流行度例如和这些封装格式支持多种编码格式多个轨道和广泛的元数据支持其他封装格式如等也有各自的特点和应用领域封装格式在数字媒体的存储传输和播放中起到了重要的作用它们提供了一种标准化的方式来组织和管理多媒体数据使得不同类型的媒体可以在各种设备和平台上进行兼容性播放和交互编码协议编码协议是指用于将原始视频数据进行压缩和编码的特定算法和规范这些编码协议的目的是减小视频文件的大小并提高传输和存储效率同时尽量保持较高的视频质量以下是对几种常见的视频编码协议的详细介绍也称为高级视频编码是一种广泛使用的视频编码协议它采用了先进的压缩技术能够提供较高的视频质量和更低的比特率广泛应用于各种领域包括互联网视频流媒体蓝光光盘视频会议等是的后继者也是一种先进的视频编码协议相比于能够进一步减小视频文件大小并提供更高的视频质量它在保持相同视频质量的情况下能够将比特率降低约常用于和高分辨率视频流媒体服务等和是由开发的开放源代码视频编码协议它们提供了高效的视频压缩和较高的视频质量并被广泛应用于等互联网标准中相比进一步提升了压缩性能能够在更低的比特率下保持较高的视频质量是一系列的视频编码协议包括和也称为常用于视频的存储和传输而被广泛使用于各种应用包括互联网视频移动视频等是一种将视频中的每一帧都作为独立的图像进行压缩的编码协议它适用于一些特定应用如摄像头和视频监控系统尽管在压缩率和存储效率方面比较低但解码过程相对简单避免了帧间预测等复杂的算法是由微软开发的一种视频编码协议它广泛用于和其他微软产品中提供了较好的视频质量和压缩效率支持各种分辨率和比特率并具有较好的兼容性这些编码协议在视频压缩方面采用了不同的算法和技术以平衡视频质量压缩比和解码复杂性不同的应用场景和设备可能选择不同的编码协议根据需求和限制来平衡视频质量和性能视频播放整体流程当您在电脑上打开一个视频文件时涉及到了多个步骤和组件以确保视频能够被正确解码和显示以下是一个详细的视频文件在电脑上显示的典型流程文件读取计算机首先会读取视频文件的数据这涉及从硬盘或其他存储设备中读取文件的二进制数据并将其加载到计算机的内存中以供后续处理封装格式解析计算机会根据视频文件的封装格式如等来解析文件的结构和元数据这包括读取文件头部信息索引表和媒体轨道的描述等通过解析封装格式计算机可以了解视频文件的整体结构和内容视频解码视频解码器开始对视频轨道进行解码它根据封装格式中存储的视频编码器信息解码压缩的视频数据并将其转换为原始的像素数据解码过程涉及对视频帧进行逐帧解压缩和重构以还原出原始的图像数据音频解码如果视频文件包含音频轨道音频解码器将对音频轨道进行解码类似于视频解码过程音频解码器根据封装格式中的音频编码器信息解码压缩的音频数据并将其转换为原始的音频样本数据同步和播放视频解码器和音频解码器的输出需要进行同步以确保视频和音频的播放保持一致计算机使用时间戳帧率和采样率等信息来确保视频和音频流的同步并根据显示设备的刷新率来进行适当的帧率调整图像渲染计算机使用图像渲染器将解码后的视频像素数据转换为适合显示的图像格式这可能涉及色彩空间转换调整图像大小应用滤镜或效果等处理音频渲染类似地音频渲染器将解码后的音频样本数据转换为适合音频输出设备的音频格式这可能包括音频混合音量调整空间效果等处理显示输出最后计算机将渲染后的视频图像和音频数据发送到显示设备和扬声器以进行实际的播放这可能涉及将视频图像传输到显示器并通过显示器的硬件和软件进行显示同时音频数据也会被发送到扬声器或音频输出设备进行播放二音频采样率采样率对声音信号每秒的采样次数采样率越高声音的还原越真实采样率单位为常见的采样率有人类一般能够听到的声音范围根据奈奎斯特采样定理当采样频率大于信号中最高频率的倍时采样后的数字信号能够完整保留原始信号的信息声道声道指声音在录制或播放时在不同空间位置采集或回放的相互独立音频信号声道数指在录音时的音源数量或者在播放时的扬声器数量声道布局不同声道数对应不同声道布局常见的声道布局有单声道立体声道四声环绕声道单声道只有一个声道优点数据量小和默认为单声道缺点是缺乏对声音位置定位立体声道一般为两个声道由左声道右声道组成改善对声音位置定位的状况四声环绕由前左前右后左后右组成形成立体环绕声道是在四声环绕基础上增加一个低音声道在基础上增加一个中场声道杜比就是采用声道也就是影院宣传的杜比音效音质音质声音的质量经过编码压缩后的音频信号保真度由音量音高和音色组成音量音频的强度数值范围静音时为最大值为中有提供音量增强调节声音分贝值音高声音的音调即音频频率或每秒变化次数音色音频泛音又称为音品不同声音表现在波形方面与众不同的特性封装格式音频的封装格式与视频封装格式类似由特定格式头媒体信息音频轨数据组成常见的封装格式有等是一种广泛使用的音频封装格式具有较高的压缩比和音质适用于音乐和语音的存储和传输是苹果公司使用的音频封装格式它可以包含多种编码格式的音频数据如和格式通常与和设备相关联是一种自由开放的音频封装格式支持多种编码格式如等它具有较好的音质和压缩比常用于网络流媒体和游戏音效是一种用于语音编码和封装的格式主要用于手机通话和语音录制它具有较高的压缩比适合在低比特率下传输语音数据是微软开发的音频封装格式支持多种编码格式如标准和它在平台上得到广泛应用常用于音乐和音频流媒体是一种无损音频封装格式它存储原始音频数据不进行压缩格式具有较高的音质常用于音乐制作和音频编辑是一种无损音频封装格式它可以实现无损的音频压缩和解压缩保留了原始音频数据的完整性格式适用于音乐存储和音频传输是一种高级音频编码格式常用于音乐和视频的存储和传输它具有较高的音质和压缩效率是目前广泛支持的音频编码格式是一种无损音频封装格式类似于但压缩比略低它常用于音乐存储和音频传输提供了较高的音质和文件压缩率编码协议音频经过解封装得到的音频轨数据也是经过编码的常见的音频编码协议有等是一种常见的有损音频编码格式它通过移除人耳听不到或对音质影响较小的音频信号实现了较高的压缩比格式广泛用于音乐存储和传输是一种先进的音频编码格式它在音质和压缩效率上优于常用于音乐视频和流媒体的存储和传输被广泛支持是一种窄带自适应多速率编码格式用于语音编码和传输它在低比特率下实现了较高的语音质量常用于手机通话是一种宽带自适应多速率编码格式也用于语音编码和传输相比于在更宽的频率范围内提供了更好的语音质量是一种有损音频编码格式常用于影片音轨和视频中格式支持多声道音频提供了较高的音质和环绕声效果是一种开放的无损音频编码格式采用了无损压缩算法可以提供高音质和较小的文件大小常用于音乐存储和网络流媒体是一种开放的音频编码格式具有低延迟高音质和较高的压缩效率支持多种应用场景包括音乐语音通信和网络流媒体是一种开放的无损音频编码格式可以实现无损的音频压缩和解压缩格式保留了原始音频数据的完整性提供了较高的音质是微软开发的音频编码格式支持多种编码配置如标准和常用于平台上的音乐和音频流媒体采样数采样数即每帧采样的数量在的中定义为采样位数采样位数即每个采样占用多少位在资源交换文件格式有个字段表示采样位数在也是用这个字段表示采样位数存储空间音频的每秒存储空间由采样率声道数每个采样位数假设采样率为声道数为采样位数为那么每秒所占存储空间字节数帧时长音频的帧时长采样数采样率假设采样率为采样数为那么每帧时长约等于采样格式音频的采样格式分为大端存储和小端存储按照符号划分有有符号与无符号按照类型划分有整型与浮点型按照存储位数划分有位位位位都是的倍数在的枚举如下视频封装格式音视频的时长怎么获取音视频的封面怎么获取音视频的格式怎么获取呢这些信息都以特定格式存储在文件开头或者结尾称为多媒体信息或者多媒体元数据通用的封装格式由文件标识头多媒体信息音视频字幕轨视频帧索引块组成如果是纯音频后面可能还有歌词音视频的封装格式就是通过解析文件标识头进行判断的然后解析多媒体信息从而获取时长再解析视频帧索引块最后根据索引块去获取对应时间戳的视频帧音视频封装格式存储的字段包括时长码率音视频编码器分辨率宽高帧率像素格式旋转角度采样率声道数等等其中视频专有的字段是分辨率帧率像素格式旋转角度而音频专有的字段是采样率声道数常见的视频格式有等等其中同属一个协议簇目前最为流行全称为由国际标准化组织和国际电工委员会下属的动态图像专家组制定具体协议可参考协议与公用封装格式对于高清视频而言最受欢迎而是比较古老的格式音视频流交错可以封装各种编码格式的音视频流属于的一种封装格式是微软推出的视频编解码格式统称采用作为容器基于对象进行封装而的全称为即为的缩写具体可参考协议作用于传输层主要用于实时传输的节目直播协议就是基于切片来传输视频流的主要特点是从视频流任一片段都可独立解码播放与类似全称为即为的缩写用于存储固定时长的节目视频格式如下图所示整个解封装流程从读取文件头判断视频格式开始然后选择对应的解析多媒体信息再解析视频帧的索引块最后根据索引去定位并读取音视频数据如下图所示读取文件头读取文件头是为了获取文件的基本信息和标识文件头通常是文件的前几个字节它包含了文件的格式信息以及其他元数据读取文件头可以通过打开文件并读取前几个字节的方式实现判断文件格式通过读取文件头中的信息可以判断文件的格式在提供的文件格式中常见的文件格式有视频格式音频格式选择对应的解析器根据判断出的文件格式选择对应的解析器解析器是用于解析文件的工具或库它能够提取出文件中的特定信息不同的文件格式通常需要使用不同的解析器进行解析解析多媒体信息使用选择的解析器对文件进行解析以获取多媒体信息多媒体信息包括视频的分辨率帧率编码格式等音频的采样率声道数编码格式等解析多媒体信息可以通过解析器提供的函数或方法来实现解析视频帧索引如果文件是视频文件可以进一步解析视频的帧索引视频帧索引包含了视频中每一帧的位置和时间信息解析视频帧索引可以帮助我们定位和提取特定的视频帧读取音视频数据最后通过解析器提供的函数或方法读取音视频数据音视频数据是文件中实际存储的音频和视频内容可以根据需要逐帧读取视频数据或逐样本读取音频数据作为目前最流行的视频封装格式也是本篇文章的男一号主角下面将围绕格式进行展开分析是由一系列的组成在协议中称为又由和组成的结构如图所示而由组成其中和是必要字段如表所示的多两个字段一般是采用形式如表所示分为如果为那么表明该为使用来存储的大小如果为那么表明该是文件的最后一个如果的类型为那么表明该是扩展如下面代码段所示作为格式的重要组成部分根据与的相对位置分为前置和后置如下面图图所示通常情况下的都是在前面的一般只有实时录制的视频才在的后面视频标识头包含其中一般为而包括等存储多媒体信息嵌套着而分为视频轨音频轨字幕轨如果有多语言就会对应有多音轨存储的是音视频编码器信息比如视频轨的是音频轨是存储的是视频帧存储的是音视频数据根据及其嵌套解析出来的视频帧索引去定位关键帧然后根据帧类型读取音视频数据音频封装格式音频封装格式一般由多媒体信息音频流封面流歌词流组成有些音乐会包含封面和歌词则对应有封面流歌词流多媒体信息包括标题艺术家专辑作曲音乐风格日期码率时长声道布局采样率音频编码器等而音频封装包括等前面两篇文章介绍过相关概念走进音视频的世界音视频基本概念走进音视频世界视频封装格式音频格式如下图所示以下面问题为出发点揭开音频封装格式的面纱音乐封面如何获取音乐歌词如何获取与显示有损格式与无损格式有什么区别不同封装格式有什么联系又有什么区别先从检测到的音频说起如下图所示从上图可以看出前半部分是标题艺术家专辑艺术家专辑作曲者音乐风格式中间部分是歌词每句歌词前面有对应的时间戳后半部分是两个流第编号的流是音频轨包含音频编码器采样率声道布局码率第编号的流是封面其实是一帧图像包含图像编码器像素格式分辨率接下来根据上面提出的问题进行展开分析获取音乐的封面音乐封面保存在视频图像流中先解析出图像编码器像素格式分辨率等参数然后根据编码器去寻找对应的解码器并打开解码器对图像编码压缩数据进行解码最终解码出来的图像就是封面了音乐歌词的获取与显示上面有提及每句歌词前面有显示的时间戳以音频时钟为基准歌词时间戳同步于音频时间戳也就是根据音频时间戳来同步解析歌词然后把歌词回调到应用层渲染显示另外一个问题当前歌词什么时候该消失呢歌词没有具体的显示时长等待下一个歌词的到来把当前歌词覆盖有损格式与无损格式的区别无损音乐格式无损音乐格式有三种其中都是基于进行压缩而是微软专门为开发的一种标准数字音频文件文件扩展名是的缩写文件大小计算公式采样率量化位数声道时间秒一般采样率是量化位数为位声道数为即立体声道分钟的音频占用存储空间约为在环境下大多数媒体文件都是按照资源互换文件格式来储存信息的简称为格式构成的基本单位成为块每个文件由若干块组成基本结构如下表所示每个块由块标识长度数据组成如下代码段块标识块大小块内容其中块由声道数采样率码率块对齐量化位数五个参数组成如下表所示小端存储小端存储小端存储小端存储小端存储有损音乐格式有损音乐格式包括等目前最为流行的是有着的下一代之称的是有损格式压缩率比无损的高文件占用存储空间小但是声音还原度不如无损格式我们下载音乐时碰到高品质或者无损音质的音乐通常要会员或按需收费因为越高品质越接近原声而无损音乐从理论上能够保留声音细节还原原声无损音质英文简称为超音质关于无损格式与有损格式对比如下表所示不同封装格式的联系与区别封装格式共同点是基本结构是相同的都是由多媒体信息音频流封面流歌词流组成区别是不同封装格式采用编码方式不一样压缩率不一样音频流子结构不一样下面是不同封装格式的多方位对比如表所示音视频编码音视频流是通过特定编码器压缩由一系列的压缩图像语音帧组成当然可能存在多种语言多音轨每个音轨之间的音频流相互独立还可能存在内置字幕常见的字幕格式有等但是本篇文章讨论的主角是音视频编码常见的视频编码有由开放媒体联盟推出对标旨在成为下一代视频编码技术标准常见的音频编码有等等音视频格式如下图所示一视频编码视频编码是将原始视频信号进行压缩和编码的过程以便在存储和传输中减少数据量下面详细解释为什么需要对视频进行编码以及视频编码的原理和过程为什么需要进行视频编码视频数据通常由连续的图像帧组成每一帧都包含了大量的像素数据原始的视频数据以或格式存储其中表示亮度分量和表示色度分量这些原始数据非常大特别是对于高分辨率和高帧率的视频来说它们需要大量的存储空间和传输带宽为了有效地存储和传输视频需要对视频进行压缩而视频编码就是实现视频压缩的一种方式变换与量化变换把空间域的图像信号变换到频率域常见的变换有离散余弦变换傅里叶变换其中离散余弦变换又称为变换在视频压缩中得到广泛应用量化人类对图像的低频特性的信息敏感比如亮度对高频特性的信息不敏感比如色度对比度所以才编码过程中可以少用高频信息全保留低频信息量化过程是对低频区进行细量化对高频区进行粗量化减少人眼不太敏感的图像信息从而减小数据量提高压缩率量化是有损的量化参数越大图像质量越低运动补偿与运动估计运动估计把图像分割成互不重叠的子块然后以一定大小的窗口在前一图像或后一图像去移动搜索相似的图像块这个搜索过程称为运动估计运动补偿通过先前的局部图像来预测补偿当前的局部图像熵编码熵编码是基于变长编码出现概率大的符号采用短码出现概率小的符号采用长码最终的平均码长接近信源熵值其他的变长编码还包括哈夫曼编码游程编码算术编码等帧内压缩与帧间压缩帧内压缩每帧图像内部存在数据冗余比如一副图像中有一块颜色相同的画布编码时按照大小的宏块进行划分那么宏块之间存在相似性这就使得可以从空间层面进行压缩即帧内压缩帧间压缩连续图像之间存在许多相似细节比如一辆运动中的汽车从当前时刻到下一时刻发生相对位移从另外一个角度来说是周边环境发生相对位移而汽车本身没有变化这就使得可以从时间层面进行压缩即帧间压缩帧帧帧帧内部编码帧又称为关键帧使用帧编码可以完整还原一副图像帧的数据量会比较大帧前向预测帧又称为前向参考帧需要参考前一个帧进行编码数据量会比帧小同理解码时也需要参考前一个帧进行解码帧双向内插帧又称为双向参考帧需要参考前后的帧或帧进行编码压缩率会比帧更高数据量比帧更小但是解码时需要下一个帧或者帧的到来解码时序需要严格控制解码复杂度也相对高与关键帧间隔全称图像序列组由一个关键帧和若干个非关键帧组成在编码器参数设置中有一个参数设置大小以的为例设置关键帧间隔时间也就是设置多少秒来一个关键帧另外有一个类似的参数关键帧间隔多少帧来一个关键帧码率控制码率控制是指网络请求码流时根据网络带宽状况来控制码率大小分为五种控制方式恒定码率动态码率平均码率恒定质量因子恒定量化参数而请求网络流时会根据网络拥挤程度来动态调整码率得益于一种新的多媒体传输控制协议全称为即基于的动态自适应媒体流接下来对码率控制方式进行展开分析恒定码率以恒定的码率去编码波动小编码质量欠佳动态码率以动态的码率去编码波动大编码质量比较稳定平均码率以平均的码率去编码编码质量参差不齐恒定质量因子又称为在和编码默认采用取值范围为数值越大表示视频压缩率越高编码质量越低恒定量化参数瞬时码率会随场景复杂度有所波动在定义的范围为数值越大表示量化步长越大编码质量越低当为时表示无损编码分级编码全称可扩展的视频编码也称为分级编码具有三大特性时间可分级空间可分级质量可分级时间可分级分为用来设置帧率丢弃棕绿蓝得到不同帧率如下图所示质量可分级可以从码流提取不同图像质量的子码流应用领域视频监控流媒体直播视频会议优点分级码流应用灵活一次编码多次使用可得到不同帧率分辨率质量缺点分级码流的解码复杂度增加比单层码流的压缩率低左右视频压缩编码后是以格式进行存储的代表亮度代表色度代表对比度常见的排列格式有区别如下表所示分为和其中又称为代表平面按照顺序排列存储结构如下图所示而其中代表半独立平面和是交错存储的存储结构如下图所示能不能举个例子经过编码和不应该编码的一部电影他们的大小能差多少当涉及到视频编码的压缩效果时实际的压缩比例会受到多个因素的影响包括视频内容编码参数和压缩算法等因此无法给出具体的数字来表示编码前后视频大小的差异因为结果会因情况而异然而我可以通过一个简化的例子来说明视频编码对文件大小的影响假设我们有一部电影持续时间为小时分辨率为像素帧率为帧秒我们将比较原始未经编码的视频和经过常见有损压缩算法如编码后的视频的文件大小原始未经编码的视频对于每一帧假设使用颜色空间每个像素需要个字节一个字节用于红色通道一个字节用于绿色通道一个字节用于蓝色通道因此每一帧的数据大小为字节考虑到帧秒小时长的视频将需要非常大的存储空间经过有损压缩编码的视频使用常见的有损压缩算法如对视频进行编码时会应用变换量化运动估计运动补偿和熵编码等技术这些技术将减少冗余数据和舍弃视觉上较不重要的信息从而显著减小文件大小具体的压缩比例将取决于编码参数和视频内容每一帧的数据大小为字节考虑到视频的帧率为帧秒接下来我们计算每秒的数据大小每秒的数据大小每帧的数据大小帧率字节字节接下来我们计算整个视频的数据大小视频的长度为小时即秒视频的数据大小每秒的数据大小视频长度字节字节将字节转换为更常见的单位我们可以得到视频的数据大小约为字节这意味着对于一部持续小时的视频如果每帧使用颜色空间并且每个像素需要个字节来表示未经过任何编码压缩的视频将需要约的存储空间这个数字显示了为什么视频编码在存储和传输视频时非常重要因为原始视频数据的大小是非常庞大的视频编码可以显著减小视频文件的大小从而降低存储成本和传输带宽需求二音频编码人类的听觉范围为那么低于或者高于这些低频或高频信号基本听不到可以作为冗余数据通过特定采样率进行采样编码采样率采样率描述的是每秒对原始声音信号的采样次数常见的采样率目前使用最广泛的是即波形编码直接把时域信号转换为数字编码不利用任何参数使得重构后的波形与原始信号的波形形状尽可能保持一致基本原理是在时间轴对模拟语音信号按照一定速率采样然后把幅度样本量化并用代码表示参数编码从语音波形信号中提取生成语音的参数使用这些参数通过语音生成模型重构出语音音质比较低但是保密性良好广泛应用于军事技术中典型的参数编码为混合编码混合编码是指采用两种以上编码技术比如波形编码与参数编码结合形成优势互补脉冲编码调制是对连续变化的模型信号抽样量化编码的过程最终转换为数字信号音视频解码音视频文件是经过编码封装而成的那么反过来要播放音视频文件首先得解封装解码上一篇博客讨论到音视频编码走进音视频的世界音视频编码我们来个上下呼应本文与大家探讨一下音视频解码本质上是按照既定的解码协议去解析编码内容也就是编码的逆过程常见的视频解码器有常见的音频解码器有一视频解码与解码时间戳决定什么时候解码该帧数据显示时间戳决定什么时候显示该帧图像以参考时钟为基准超前参考时钟则等待落后在与之间参考时钟则快速渲染十分落后超过参考时钟则丢弃该帧参考时钟分为三种系统时钟音频时钟视频时钟一般以音频时钟作为参考时钟因为人类对声音更加敏感相对图像而言关键帧与非关键帧关键帧帧为关键帧所以帧可以直接解码还原出一个图像非关键帧帧与帧为非关键帧需要依赖关键帧才能解码而帧是双向预测帧还要另外等待下一个帧或帧才可以成功解码出来帧压缩率比较高但是编解码复杂度也相对高组包与拼帧有些封装格式会把一帧数据拆成若干包因为关键帧数据可能比较大封装数据时也会把一帧拆成若干包因为规定网络层最大传输单元为因此在解封装或者接收网络数据包时需要根据序号排列把若干个包组成一个完整包然后再解码例如读取一帧数据过程源码在中如下图所示参考雷神博客特定帧头在解析编码的视频帧时需要在帧头添加起始码一般起始码为或者比如封装格式一般是以为视频编码为音频编码二音频解码与存储每个声道数据单独存储以立体声道为例表示左声道表示右声道那么存储格式为在中第个声道数据存储在类似视频的像素格式三个分量单独存储个分量对应一个分量与一个分量所有声道数据交错存储同样地以立体声道数据为例那么存储格式为在中所有声道数据都存储在类似视频的独立存储交错存储个分量对应一组分量量化位数量化位数量化位是对模拟音频信号的幅度轴数字化它决定了模拟信号数字化的动态范围量化位数越大质量越好占一般为在的有定义如下表所示采样率音频采样率是指录音设备在秒时间内对声音信号的采样次数采样频率越高那么声音的还原越真实自然常见的采样率有其中可达到音质标准也是目前最为常用的采样率声道数与声道布局常见声道数有单声道立体声道声道声道声道声道声道声道其中声道以上又称为立体环绕声道其中杜比音效就是采用多声道同时输出实现立体环绕效果声道布局的各个声道描述如下声道数与声道布局关系如下表所示',
-  isPost: true,
-  isHome: false,
-  isHighlightShrink: false,
-  isToc: true,
-  postUpdate: '2023-12-04 21:15:01',
-  postMainColor: '',
-}</script><noscript><style type="text/css">
-  #nav {
-    opacity: 1
-  }
-  .justified-gallery img {
-    opacity: 1
-  }
+<!DOCTYPE html>
 
-  #recent-posts time,
-  #post-meta time {
-    display: inline !important
-  }
-</style></noscript><script>(win=>{
-      win.saveToLocal = {
-        set: (key, value, ttl) => {
-          if (ttl === 0) return
-          const now = Date.now()
-          const expiry = now + ttl * 86400000
-          const item = {
-            value,
-            expiry
-          }
-          localStorage.setItem(key, JSON.stringify(item))
-        },
-      
-        get: key => {
-          const itemStr = localStorage.getItem(key)
-      
-          if (!itemStr) {
-            return undefined
-          }
-          const item = JSON.parse(itemStr)
-          const now = Date.now()
-      
-          if (now > item.expiry) {
-            localStorage.removeItem(key)
-            return undefined
-          }
-          return item.value
-        }
-      }
-    
-      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
-        const script = document.createElement('script')
-        script.src = url
-        script.async = true
-        script.onerror = reject
-        script.onload = script.onreadystatechange = function() {
-          const loadState = this.readyState
-          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
-          script.onload = script.onreadystatechange = null
-          resolve()
-        }
 
-        Object.keys(attr).forEach(key => {
-          script.setAttribute(key, attr[key])
-        })
+<html lang="zh-CN">
+  
 
-        document.head.appendChild(script)
-      })
-    
-      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
-        const link = document.createElement('link')
-        link.rel = 'stylesheet'
-        link.href = url
-        if (id) link.id = id
-        link.onerror = reject
-        link.onload = link.onreadystatechange = function() {
-          const loadState = this.readyState
-          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
-          link.onload = link.onreadystatechange = null
-          resolve()
-        }
-        document.head.appendChild(link)
-      })
-    
-      win.activateDarkMode = () => {
-        document.documentElement.setAttribute('data-theme', 'dark')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
-        }
-      }
-      win.activateLightMode = () => {
-        document.documentElement.setAttribute('data-theme', 'light')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
-        }
-      }
-      const t = saveToLocal.get('theme')
-    
-          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
-          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
-          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
-          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
-
-          if (t === undefined) {
-            if (isLightMode) activateLightMode()
-            else if (isDarkMode) activateDarkMode()
-            else if (isNotSpecified || hasNoSupport) {
-              const now = new Date()
-              const hour = now.getHours()
-              const isNight = hour <= 6 || hour >= 18
-              isNight ? activateDarkMode() : activateLightMode()
-            }
-            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
-              if (saveToLocal.get('theme') === undefined) {
-                e.matches ? activateDarkMode() : activateLightMode()
-              }
-            })
-          } else if (t === 'light') activateLightMode()
-          else activateDarkMode()
+    <head>
+      <meta charset="utf-8" />
         
-      const asideStatus = saveToLocal.get('aside-status')
-      if (asideStatus !== undefined) {
-        if (asideStatus === 'hide') {
-          document.documentElement.classList.add('hide-aside')
-        } else {
-          document.documentElement.classList.remove('hide-aside')
-        }
-      }
-    
-      const detectApple = () => {
-        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
-          document.documentElement.classList.add('apple')
-        }
-      }
-      detectApple()
-    })(window)</script><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="热爱学习的未来酱" type="application/atom+xml">
-</head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="https://npm.elemecdn.com/anzhiyu-blog-static@1.0.4/img/avatar.jpg"/><div class="loading-image-dot"></div></div></div><script>const preloader = {
-  endLoading: () => {
-    document.getElementById('loading-box').classList.add("loaded");
-  },
-  initLoading: () => {
-    document.getElementById('loading-box').classList.remove("loaded")
-  }
-}
-window.addEventListener('load',()=> { preloader.endLoading() })
-setTimeout(function(){preloader.endLoading();},10000)
+      <meta name="description" content="永远年轻，永远热泪盈眶" />
+      
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>音视频编解码相关知识学习 |  热爱学习的未来酱</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
 
-if (true) {
-  document.addEventListener('pjax:send', () => { preloader.initLoading() })
-  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
-}</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.10/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><a id="site-name" href="/" accesskey="h"><div class="title">热爱学习的未来酱</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png" target="_blank"><img class="post-qr-code-img" alt="微信" src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png" target="_blank"><img class="post-qr-code-img" alt="支付宝" src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/12/"><span class="card-archive-list-date">十二月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">3</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/12/"><span class="card-archive-list-date">十二月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">7</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/11/"><span class="card-archive-list-date">十一月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">6</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/10/"><span class="card-archive-list-date">十月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">4</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/09/"><span class="card-archive-list-date">九月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">7</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div><div class="console-btn-item" id="consoleMusic" onclick="anzhiyu.musicToggle()" title="音乐开关"><a class="music-switch"><i class="anzhiyufont anzhiyu-icon-music"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url">学习</a></span><span class="article-meta tags"></span></div></div><h1 class="post-title" itemprop="name headline">音视频编解码相关知识学习</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2023-11-19T09:16:56.000Z" title="发表于 2023-11-19 17:16:56">2023-11-19</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2023-12-04T13:15:01.834Z" title="更新于 2023-12-04 21:15:01">2023-12-04</time></span></div><div class="meta-secondline"><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为长沙"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>长沙</span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src=""></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope itemtype="http://example.com/2023/11/19/8%20%E9%9F%B3%E8%A7%86%E9%A2%91%E7%BC%96%E8%A7%A3%E7%A0%81%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E5%AD%A6%E4%B9%A0/"><header><a class="post-meta-categories" href="/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url">学习</a><h1 id="CrawlerTitle" itemprop="name headline">音视频编解码相关知识学习</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">chai</span><time itemprop="dateCreated datePublished" datetime="2023-11-19T09:16:56.000Z" title="发表于 2023-11-19 17:16:56">2023-11-19</time><time itemprop="dateCreated datePublished" datetime="2023-12-04T13:15:01.834Z" title="更新于 2023-12-04 21:15:01">2023-12-04</time></header><p>前些天一直在研究关于GPUi相关的知识，在周六的时候终于是写好了相应的测试手册，周一法师检测出问题的话我再加，其实也没啥可以加的东西了，不管是OPENGL还是OPENCL，只要相应的mali库成功即可，其他的倒是没啥，然后呢我也该去搞一下mpp 音视频编解码相关的东西了，后面其实还有摄像头啥的，这些都是要搞的，至少软件里面是要适配的对吧，还有那个缠绕我好久的buildroot opencv的问题，问题太多了，但是总要一点一点来，问题是一个一个解决的，总不可能一蹴而就，慢慢来呗</p>
+      
+<link rel="stylesheet" href="/css/fonts/remixicon.css">
+
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    <link rel="alternate" href="/atom.xml" title="热爱学习的未来酱" type="application/atom+xml">
+</head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-8 音视频编解码相关知识学习"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  音视频编解码相关知识学习
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/11/19/8%20%E9%9F%B3%E8%A7%86%E9%A2%91%E7%BC%96%E8%A7%A3%E7%A0%81%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E5%AD%A6%E4%B9%A0/" class="article-date">
+  <time datetime="2023-11-19T09:16:56.000Z" itemprop="datePublished">2023-11-19</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">12.5k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">45 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>前些天一直在研究关于GPUi相关的知识，在周六的时候终于是写好了相应的测试手册，周一法师检测出问题的话我再加，其实也没啥可以加的东西了，不管是OPENGL还是OPENCL，只要相应的mali库成功即可，其他的倒是没啥，然后呢我也该去搞一下mpp 音视频编解码相关的东西了，后面其实还有摄像头啥的，这些都是要搞的，至少软件里面是要适配的对吧，还有那个缠绕我好久的buildroot opencv的问题，问题太多了，但是总要一点一点来，问题是一个一个解决的，总不可能一蹴而就，慢慢来呗</p>
 <h1 id="音视频的基本概念"><a href="#音视频的基本概念" class="headerlink" title="音视频的基本概念"></a>音视频的基本概念</h1><h2 id="一-视频"><a href="#一-视频" class="headerlink" title="一 视频"></a>一 视频</h2><h3 id="1、码率√"><a href="#1、码率√" class="headerlink" title="1、码率√"></a>1、码率√</h3><p>码率，又叫比特率，单位时间内传输的数据量，单位一般为kbps(千位每秒)。需要注意的是，这里b代表bit，而不是Byte，这里乘以8是Byte转成bit。计算公式：平均码率(kbps)&#x3D;文件大小(kB)*8&#x2F;时间(s)。动态码率(kbps)&#x3D;每秒传输数据量(kB)*8。</p>
 <p>“bps” 是 “bits per second” 的缩写，指的是数据传输速率或比特率，用于测量数据在通信或存储系统中的传输速度。它表示每秒传输的比特数，其中比特是计算机中最小的数据单位。比特率通常用于描述网络带宽、调制解调器速度、数字音频&#x2F;视频流的传输速度等。</p>
 <p>恒定码率：CBR，码率稳定可控，带宽要求不高，图像变化量比较大时方块效应比较明显。</p>
@@ -357,7 +265,7 @@ if (true) {
 <p>   音视频封装格式存储的字段包括：时长、码率、音视频编码器、分辨率(宽x高)、帧率、像素格式、旋转角度、采样率、声道数等等。其中视频专有的字段是分辨率、帧率、像素格式、旋转角度，而音频专有的字段是采样率、声道数。</p>
 <p> 常见的视频格式有：mp4、mov、3gp、mkv、webm、flv、avi、mpg、wmv、ts等等。其中mp4、mov、3gp同属一个协议簇，目前mp4最为流行，mp4全称为MPEG-4，由国际标准化组织和国际电工委员会下属的动态图像专家组(Moving Picture Experts Group)制定，具体协议可参考：ISO&#x2F;IEC14496-14协议；mkv与webm公用封装格式：matroska，对于高清视频而言，mkv&#x2F;webm最受欢迎；而avi是比较古老的格式，音视频流交错(Audio Video Interleave)，可以封装各种编码格式的音视频流；mpg属于ps的一种封装格式；wmv(Windows Media Video)是微软推出的视频编解码格式统称，采用ASF(Advance System Format)作为容器，基于Object对象进行封装；而ts的全称为MPEG2-TS，即为Transport Stream的缩写，具体可参考ISO&#x2F;IEC13818-1协议，作用于传输层，主要用于实时传输的节目，HLS直播协议就是基于ts切片来传输视频流的，主要特点是从视频流任一片段都可独立解码播放；ps与ts类似，全称为MPEG-PS，即为Program Stream的缩写，用于存储固定时长的节目。视频格式如下图所示：</p>
 <p>  整个解封装流程：从读取文件头判断视频格式开始，然后选择对应的Extractor，解析多媒体信息，再解析视频帧的索引块，最后根据索引去定位并读取音视频数据。如下图所示：</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311192038669.png" alt="20200907235506737 (1)"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311192038669.png" alt="20200907235506737 (1)"></p>
 <ol>
 <li><p>读取文件头：<br>读取文件头是为了获取文件的基本信息和标识。文件头通常是文件的前几个字节，它包含了文件的格式信息以及其他元数据。读取文件头可以通过打开文件并读取前几个字节的方式实现。</p>
 </li>
@@ -377,17 +285,17 @@ if (true) {
 <p>mp4作为目前最流行的视频封装格式，也是本篇文章的男一号主角，下面将围绕mp4格式进行展开分析。mp4是由一系列的box组成(在quick time协议中，称为atom)，box又由Header和Data组成，box的结构如图2所示：</p>
 </li>
 </ol>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311192040157.png" alt="img"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311192040157.png" alt="img"></p>
 <p> 而Header由size、type、largeSize、extendType组成，其中size和type是必要字段，如表1所示：   </p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311192040107.png" alt="image-20231119204029085"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311192040107.png" alt="image-20231119204029085"></p>
 <p>​    full box的Header多两个字段：version、flag，一般是track box采用full box形式，如表2所示：</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311192040249.png" alt="image-20231119204051236"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311192040249.png" alt="image-20231119204051236"></p>
 <p>   box分为normal box、full box、large box、extend box。如果size为1，那么表明该box为large box，使用largeSize来存储box的大小；如果size为0，那么表明该box是文件的最后一个box；如果box的类型为uuid，那么表明该box是扩展box。如下面代码段所示：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">aligned(<span class="number">8</span>) class <span class="title function_">Box</span> <span class="params">(<span class="type">unsigned</span> <span class="type">int</span>(<span class="number">32</span>) boxtype,</span></span><br><span class="line"><span class="params">    optional <span class="type">unsigned</span> <span class="type">int</span>(<span class="number">8</span>)[<span class="number">16</span>] extended_type)</span> &#123;</span><br><span class="line">    <span class="type">unsigned</span> <span class="title function_">int</span><span class="params">(<span class="number">32</span>)</span> size;</span><br><span class="line">    <span class="type">unsigned</span> <span class="title function_">int</span><span class="params">(<span class="number">32</span>)</span> type = boxtype;</span><br><span class="line">    <span class="keyword">if</span> (size==<span class="number">1</span>) &#123;</span><br><span class="line">        <span class="type">unsigned</span> <span class="title function_">int</span><span class="params">(<span class="number">64</span>)</span> largesize;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (size==<span class="number">0</span>) &#123;</span><br><span class="line">        <span class="comment">// box extends to end of file</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (boxtype==‘uuid’) &#123;</span><br><span class="line">        <span class="type">unsigned</span> <span class="type">int</span>(<span class="number">8</span>)[<span class="number">16</span>] usertype = extended_type;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p> moov box作为mp4格式的重要组成部分，根据moov box与mdat box的相对位置，分为moov前置和moov后置。如下面图3、图4所示：</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311192041850.jpeg" alt="img"></p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311192041782.jpeg" alt="img"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311192041850.jpeg" alt="img"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311192041782.jpeg" alt="img"></p>
 <p>   通常情况下，mp4的moov都是在mdat前面的；一般只有实时录制的mp4视频，moov才在mdat的后面。</p>
 <p>  ftyp box：mp4视频标识头，包含major brand、minor version、compatible brands。其中major brand一般为isom，而compatible brands包括isom、iso2、avc、mp41、mp42等。</p>
 <p>   moov box：存储多媒体信息，嵌套着movie box(mvhd)、track box(trak box)、usedata box(udat)；而track box分为视频轨、音频轨、字幕轨，如果有多语言，就会对应有多音轨；trak&#x2F;mdia&#x2F;minf&#x2F;stbl&#x2F;stsd存储的是音视频编码器信息，比如视频轨的是avc，音频轨是mp4a；trak&#x2F;mdia&#x2F;minf&#x2F;stbl&#x2F;stsz存储的是视频帧size；trak&#x2F;mdia&#x2F;minf&#x2F;stbl&#x2F;stco存储的是chunk offset。</p>
@@ -399,14 +307,14 @@ if (true) {
 <p>③ 有损格式与无损格式有什么区别？</p>
 <p>④ 不同封装格式有什么联系，又有什么区别？</p>
 <p>先从FFprobe检测到的音频metadata说起，如下图1所示：</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311192045466.jpeg" alt="img"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311192045466.jpeg" alt="img"></p>
 <p>从上图可以看出，前半部分是title标题、artist艺术家、album专辑、album_artist艺术家专辑、composer作曲者、genre音乐风格式；中间部分是lyrics歌词，每句歌词前面有对应的时间戳；后半部分是两个流，第0编号的流是音频轨，包含：音频编码器、采样率、声道布局、码率，第1编号的流是封面，其实是一帧图像，包含：图像编码器、像素格式、分辨率。接下来根据上面提出的问题进行展开分析。</p>
 <p>1、获取音乐的封面<br>音乐封面保存在视频图像流中，先解析出图像编码器、像素格式、分辨率等参数，然后根据编码器去寻找对应的解码器，并打开解码器，对图像编码压缩数据进行解码，最终解码出来的图像就是封面了。</p>
 <p>2、音乐歌词的获取与显示<br>上面有提及，每句歌词前面有显示的时间戳，以音频时钟为基准，歌词时间戳同步于音频时间戳。也就是根据音频时间戳来同步解析歌词，然后把歌词回调到应用层渲染显示。另外一个问题，当前歌词什么时候该消失呢？歌词没有具体的显示时长，等待下一个歌词的到来，把当前歌词覆盖。</p>
 <p>3、有损格式与无损格式的区别<br>(1) 无损音乐格式</p>
 <p>无损音乐格式有ape、wav、flac三种，其中ape、flac都是基于wav进行压缩。而wav是微软专门为Windows开发的一种标准数字音频文件，文件扩展名wav，是WaveForm的缩写，文件大小计算公式：size&#x3D;(采样率<em>量化位数</em>声道&#x2F;8)&#x2F;时间(秒)。一般采样率是44100Hz，量化位数为16位，声道数为2（即立体声道），1分钟的音频占用存储空间约为10M。</p>
 <p>在Windows环境下，大多数媒体文件都是按照资源互换文件格式(Resource Interchange File Format)来储存信息的，简称为RIFF格式。构成RIFF的基本单位成为块(Chunk)，每个RIFF文件由若干块组成，wav基本结构如下表所示：</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311192045766.png" alt="image-20231119204555747"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311192045766.png" alt="image-20231119204555747"></p>
 <p>每个块由块标识、长度、数据组成，如下代码段：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">struct chunk &#123;</span><br><span class="line">    u32 id; //块标识</span><br><span class="line">    u32 size; //块大小</span><br><span class="line">    u8 data[size]; //块内容</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
@@ -415,12 +323,12 @@ if (true) {
 
 <p>(2) 有损音乐格式</p>
 <p>有损音乐格式包括：mp3、m4a、ogg、amr、wma、aac等。目前最为流行的是mp3(MPEG-1 audio layer3)，有着mp3的下一代之称的是aac(Advance Audio Coding)。有损格式压缩率比无损的高，文件占用存储空间小，但是声音还原度不如无损格式。我们下载音乐时，碰到高品质或者无损音质的音乐，通常要VIP会员或按需收费，因为越高品质越接近原声。而无损音乐从理论上能够100%保留声音细节，100%还原原声。无损音质英文简称为SQ(Super Quality，超音质)。关于无损格式与有损格式对比如下表所示：</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311192046184.png" alt="image-20231119204633159"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311192046184.png" alt="image-20231119204633159"></p>
 <h4 id="4、不同封装格式的联系与区别"><a href="#4、不同封装格式的联系与区别" class="headerlink" title="4、不同封装格式的联系与区别"></a>4、不同封装格式的联系与区别</h4><p>封装格式共同点是基本结构是相同的，都是由多媒体信息+音频流+封面流+歌词流组成。区别是不同封装格式，采用编码方式不一样，压缩率不一样，音频流子结构不一样。下面是不同封装格式的多方位对比，如表4所示：</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311192047768.png" alt="image-20231119204702747"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311192047768.png" alt="image-20231119204702747"></p>
 <h1 id="音视频编码"><a href="#音视频编码" class="headerlink" title="音视频编码"></a>音视频编码</h1><p>音视频流是通过特定编码器压缩，由一系列的压缩图像&#x2F;语音帧组成。当然可能存在多种语言多音轨，每个音轨之间的音频流相互独立。还可能存在内置字幕，常见的字幕格式有sub、smi、ssa、srt等。但是，本篇文章讨论的主角是音视频编码，常见的视频编码有h264、h265、vp9、mpeg4、mjpeg、wmv3、av1(Alliance for Open Media Video 1，由开放媒体联盟推出，对标h265，旨在成为下一代视频编码技术标准)，常见的音频编码有mp3、aac、amr_nb、amr_wb、ac3、vorbis、opus、flac、wmav2等等。音视频格式如下图所示：</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311192049496.png" alt="img"></p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311192049324.png" alt="img"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311192049496.png" alt="img"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311192049324.png" alt="img"></p>
 <h2 id="一、视频编码"><a href="#一、视频编码" class="headerlink" title="一、视频编码"></a>一、视频编码</h2><p>视频编码是将原始视频信号进行压缩和编码的过程，以便在存储和传输中减少数据量。下面详细解释为什么需要对视频进行编码以及视频编码的原理和过程。</p>
 <p>为什么需要进行视频编码？<br>视频数据通常由连续的图像帧组成，每一帧都包含了大量的像素数据。原始的视频数据以YUV或RGB格式存储，其中Y表示亮度分量，U和V表示色度分量。这些原始数据非常大，特别是对于高分辨率和高帧率的视频来说，它们需要大量的存储空间和传输带宽。为了有效地存储和传输视频，需要对视频进行压缩，而视频编码就是实现视频压缩的一种方式。</p>
 <h3 id="1、变换与量化"><a href="#1、变换与量化" class="headerlink" title="1、变换与量化"></a>1、变换与量化</h3><p>变换：把空间域的图像信号变换到频率域。常见的变换有离散余弦变换、傅里叶变换。其中，离散余弦变换又称为DCT变换，在视频压缩中得到广泛应用。</p>
@@ -442,18 +350,18 @@ if (true) {
 <p>恒定量化参数：CQP(Constant Quantization Parameter)，瞬时码率会随场景复杂度有所波动，在H264定义的QP范围为[0,51]，数值越大表示量化步长越大，编码质量越低。当为QP&#x3D;0时，表示无损编码；</p>
 <h3 id="8、SVC分级编码"><a href="#8、SVC分级编码" class="headerlink" title="8、SVC分级编码"></a>8、SVC分级编码</h3><p>SVC(全称Scalable Video Coding)，可扩展的视频编码，也称为分级编码。具有三大特性：时间可分级、空间可分级、质量可分级。</p>
 <p>时间可分级：分为T0、T1、T2、T3，用来设置帧率，丢弃棕、绿、蓝得到不同帧率。如下图所示：</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311192050136.png" alt="img"></p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311192050965.png" alt="img"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311192050136.png" alt="img"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311192050965.png" alt="img"></p>
 <p>质量可分级：可以从码流提取不同图像质量的子码流。</p>
 <p>   应用领域：视频监控、流媒体直播、视频会议。</p>
 <p>   优点：分级码流应用灵活，一次编码多次使用，可得到不同帧率、分辨率、质量；</p>
 <p>   缺点：分级码流的解码复杂度增加，比单层码流的压缩率低10%左右；</p>
 <h3 id="9、YUV"><a href="#9、YUV" class="headerlink" title="9、YUV"></a>9、YUV</h3><p>视频压缩编码后，是以YUV格式进行存储的，Y代表亮度(Chroma)，U代表色度(Luma)，V代表对比度(Contrast)。常见的YUV排列格式有YUV444、YUV422、YUV420，区别如下表所示：</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311192050879.png" alt="image-20231119205039862"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311192050879.png" alt="image-20231119205039862"></p>
 <p>YUV420分为YUV420P和YUV420SP。其中，YUV420P又称为I420，P代表Planar平面，按照Y、U、V顺序排列，存储结构如下图所示：</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311192050280.png" alt="image-20231119205051265"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311192050280.png" alt="image-20231119205051265"></p>
 <p> 而YUV420SP，其中SP代表Semi Planar半独立平面，U和V是交错存储的，存储结构如下图所示：</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311192050526.png" alt="img"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311192050526.png" alt="img"></p>
 <p>能不能举个例子，经过编码和不应该编码的一部电影他们的大小能差多少？</p>
 <p>当涉及到视频编码的压缩效果时，实际的压缩比例会受到多个因素的影响，包括视频内容、编码参数和压缩算法等。因此，无法给出具体的数字来表示编码前后视频大小的差异，因为结果会因情况而异。然而，我可以通过一个简化的例子来说明视频编码对文件大小的影响。</p>
 <p>假设我们有一部电影，持续时间为2小时，分辨率为1920x1080像素，帧率为24帧&#x2F;秒。我们将比较原始未经编码的视频（Raw Video）和经过常见有损压缩算法（如H.264）编码后的视频的文件大小。</p>
@@ -479,161 +387,479 @@ if (true) {
 <h3 id="2、关键帧与非关键帧"><a href="#2、关键帧与非关键帧" class="headerlink" title="2、关键帧与非关键帧"></a>2、关键帧与非关键帧</h3><p>关键帧：I帧为关键帧，所以I帧可以直接解码还原出一个图像。</p>
 <p>非关键帧：P帧与B帧为非关键帧，需要依赖关键帧才能解码。而B帧是双向预测帧，还要另外等待下一个I帧或P帧，才可以成功解码出来。B帧压缩率比较高，但是编解码复杂度也相对高。</p>
 <h3 id="3、组包与拼帧"><a href="#3、组包与拼帧" class="headerlink" title="3、组包与拼帧"></a>3、组包与拼帧</h3><p>有些封装格式会把一帧数据拆成若干包，因为关键帧数据可能比较大；RTP封装数据时，也会把一帧拆成若干包，因为MTU规定网络层最大传输单元为1500bytes。因此，在解封装或者接收网络数据包时，需要根据序号排列，把若干个包组成一个完整包，然后再解码。例如FFmpeg读取一帧数据过程，源码在avformat&#x2F;utils.c中，如下图所示(参考雷神博客)：</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311192115640.png" alt="img"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311192115640.png" alt="img"></p>
 <h3 id="4、特定帧头"><a href="#4、特定帧头" class="headerlink" title="4、特定帧头"></a>4、特定帧头</h3><p>在解析h264&#x2F;h265编码的视频帧时，需要在帧头添加起始码，一般起始码为0x00 0x00 0x01或者0x00 0x00 0x00 0x01。比如mp4封装格式，一般是以h264为<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E8%A7%86%E9%A2%91%E7%BC%96%E7%A0%81&spm=1001.2101.3001.7020">视频编码</a>、aac为音频编码。</p>
 <h2 id="二、音频解码"><a href="#二、音频解码" class="headerlink" title="二、音频解码"></a>二、音频解码</h2><h3 id="1、planar与packed存储"><a href="#1、planar与packed存储" class="headerlink" title="1、planar与packed存储"></a>1、planar与packed存储</h3><p>planar：每个声道数据单独存储。以立体声道为例，L表示左声道，R表示右声道。那么存储格式为LLLLRRRR。在FFmpeg中，第i个声道数据存储在frame-&gt;data[i]。类似视频的像素格式YUV420P，Y、U、V三个分量单独存储，4个Y分量对应一个U分量与一个V分量。</p>
 <p>packed：所有声道数据交错存储。同样地，以立体声道数据为例。那么存储格式为LRLRLRLR。在FFmpeg中，所有声道数据都存储在frame-&gt;data[0]。类似视频的YUV420SP，Y独立存储，UV交错存储，4个Y分量对应一组UV分量。</p>
 <h3 id="2、量化位数"><a href="#2、量化位数" class="headerlink" title="2、量化位数"></a>2、量化位数</h3><p>量化位数：量化位是对模拟音频信号的幅度轴数字化，它决定了模拟信号数字化的动态范围。量化位数越大，质量越好。bitsPerSample，占2bytes，一般为8bits、16bits、32bits、64bits。在WAVE的Format chunk有定义，如下表所示：</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311192115938.png" alt="image-20231119211557915"></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311192115938.png" alt="image-20231119211557915"></p>
 <h3 id="3、采样率"><a href="#3、采样率" class="headerlink" title="3、采样率"></a>3、采样率</h3><p>音频采样率是指录音设备在1秒时间内对声音信号的采样次数，采样频率越高，那么声音的还原越真实自然。常见的采样率有8000Hz、16000Hz、32000Hz、44100Hz、48000Hz。其中44100Hz可达到CD音质标准，也是目前最为常用的采样率。</p>
 <h3 id="4、声道数与声道布局"><a href="#4、声道数与声道布局" class="headerlink" title="4、声道数与声道布局"></a>4、声道数与声道布局</h3><p>常见声道数有：单声道、立体声道、3声道、4声道、5声道、6声道、7声道、8声道。其中3声道以上，又称为立体环绕声道，其中杜比音效就是采用多声道同时输出，实现立体环绕效果。</p>
 <p>声道布局的各个声道描述如下：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">FC: front center</span><br><span class="line">BC: back center</span><br><span class="line">FL/FR: front left/right</span><br><span class="line">FCL/FCR: front center left/right</span><br><span class="line">FTL/FTR: front top left/right</span><br><span class="line">SL/SR: back surround left/right</span><br><span class="line">BL/BR: back left/right</span><br><span class="line">LFE: low frequency effects</span><br></pre></td></tr></table></figure>
 
 <p>声道数与声道布局关系，如下表所示：</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311192116640.png" alt="image-20231119211617624"></p>
-<h1 id="VPU"><a href="#VPU" class="headerlink" title="VPU"></a>VPU</h1></article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg" title="头像" alt="头像"></a><div class="post-copyright__author_name">chai</div><div class="post-copyright__author_desc">热爱学习</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="http://example.com/2023/11/19/8%20%E9%9F%B3%E8%A7%86%E9%A2%91%E7%BC%96%E8%A7%A3%E7%A0%81%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E5%AD%A6%E4%B9%A0/">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('http://example.com/2023/11/19/8%20%E9%9F%B3%E8%A7%86%E9%A2%91%E7%BC%96%E8%A7%A3%E7%A0%81%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E5%AD%A6%E4%B9%A0/')">音视频编解码相关知识学习</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"><div class="post-reward" onclick="anzhiyu.addRewardMask()"><div class="reward-button button--animated" title="赞赏作者"><i class="anzhiyufont anzhiyu-icon-hand-heart-fill"></i>打赏作者</div><div class="reward-main"><div class="reward-all"><span class="reward-title">感谢你赐予我前进的力量</span><ul class="reward-group"><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul><a class="reward-main-btn" href="/about/#about-reward" target="_blank"><div class="reward-text">赞赏者名单</div><div class="reward-dec">因为你们的支持让我意识到写文章的价值🙏</div></a></div></div></div><div id="quit-box" onclick="anzhiyu.removeRewardMask()" style="display: none"></div></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="http://example.com/2023/11/19/8%20%E9%9F%B3%E8%A7%86%E9%A2%91%E7%BC%96%E8%A7%A3%E7%A0%81%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E5%AD%A6%E4%B9%A0/"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=音视频编解码相关知识学习&amp;url=http://example.com/2023/11/19/8%20%E9%9F%B3%E8%A7%86%E9%A2%91%E7%BC%96%E8%A7%A3%E7%A0%81%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E5%AD%A6%E4%B9%A0/&amp;pic=" rel="external nofollow noreferrer noopener"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
-  var currentPageUrl = window.location.href;
-  var input = document.createElement("input");
-  input.setAttribute("value", currentPageUrl);
-  document.body.appendChild(input);
-  input.select();
-  input.setSelectionRange(0, 99999);
-  document.execCommand("copy");
-  document.body.removeChild(input);
-}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">热爱学习的未来酱</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"></div></div></div><div class="post_share"><div class="social-share" data-image="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"/><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/11/14/7%20rk%20deb%E5%8C%85%E7%9A%84%E5%88%B6%E4%BD%9C/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">rkdeb包的制作</div></div></a></div><div class="next-post pull-right"><a href="/2023/11/19/9%20%E6%98%BE%E7%A4%BA%E7%A1%AC%E4%BB%B6%E5%8F%91%E5%B1%95%E4%B8%8E%E8%A7%86%E9%A2%91%E5%BC%80%E5%8F%91%E7%9F%A5%E8%AF%86%E7%82%B9%E6%89%AB%E7%9B%B2/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">显示硬件发展与视频开发知识点扫盲</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__description">永远年轻，永远热泪盈眶</div></div></div><div class="card-widget anzhiyu-right-widget" id="card-wechat" onclick="null"><div id="flip-wrapper"><div id="flip-content"><div class="face" style="background: url(https://bu.dusays.com/2023/01/13/63c02edf44033.png) center center / 100% no-repeat"></div><div class="back face" style="background: url(https://bu.dusays.com/2023/05/13/645fa415e8694.png) center center / 100% no-repeat"></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%9F%B3%E8%A7%86%E9%A2%91%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-number">1.</span> <span class="toc-text">音视频的基本概念</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80-%E8%A7%86%E9%A2%91"><span class="toc-number">1.1.</span> <span class="toc-text">一 视频</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81%E7%A0%81%E7%8E%87%E2%88%9A"><span class="toc-number">1.1.1.</span> <span class="toc-text">1、码率√</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81%E5%88%86%E8%BE%A8%E7%8E%87"><span class="toc-number">1.1.2.</span> <span class="toc-text">2、分辨率</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E3%80%81%E5%B8%A7%E7%8E%87"><span class="toc-number">1.1.3.</span> <span class="toc-text">3、帧率</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4%E3%80%81%E5%83%8F%E7%B4%A0%E6%A0%BC%E5%BC%8F"><span class="toc-number">1.1.4.</span> <span class="toc-text">4、像素格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5%E3%80%81%E7%94%BB%E8%B4%A8"><span class="toc-number">1.1.5.</span> <span class="toc-text">5、画质</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6%E3%80%81%E8%89%B2%E5%9F%9F%E4%B8%8EHDR"><span class="toc-number">1.1.6.</span> <span class="toc-text">6、色域与HDR</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7%E3%80%81%E6%97%8B%E8%BD%AC%E8%A7%92%E5%BA%A6"><span class="toc-number">1.1.7.</span> <span class="toc-text">7、旋转角度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8%E3%80%81%E6%97%B6%E9%95%BF"><span class="toc-number">1.1.8.</span> <span class="toc-text">8、时长</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9%E3%80%81%E5%B0%81%E8%A3%85%E6%A0%BC%E5%BC%8F"><span class="toc-number">1.1.9.</span> <span class="toc-text">9、封装格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10%E3%80%81%E7%BC%96%E7%A0%81%E5%8D%8F%E8%AE%AE"><span class="toc-number">1.1.10.</span> <span class="toc-text">10、编码协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11%E3%80%81%E8%A7%86%E9%A2%91%E6%92%AD%E6%94%BE%E6%95%B4%E4%BD%93%E6%B5%81%E7%A8%8B"><span class="toc-number">1.1.11.</span> <span class="toc-text">11、视频播放整体流程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C-%E9%9F%B3%E9%A2%91"><span class="toc-number">1.2.</span> <span class="toc-text">二 音频</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81%E9%87%87%E6%A0%B7%E7%8E%87"><span class="toc-number">1.2.1.</span> <span class="toc-text">1、采样率</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81%E5%A3%B0%E9%81%93"><span class="toc-number">1.2.2.</span> <span class="toc-text">2、声道</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E3%80%81%E5%A3%B0%E9%81%93%E5%B8%83%E5%B1%80"><span class="toc-number">1.2.3.</span> <span class="toc-text">3、声道布局</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4%E3%80%81%E9%9F%B3%E8%B4%A8"><span class="toc-number">1.2.4.</span> <span class="toc-text">4、音质</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5%E3%80%81%E5%B0%81%E8%A3%85%E6%A0%BC%E5%BC%8F"><span class="toc-number">1.2.5.</span> <span class="toc-text">5、封装格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6%E3%80%81%E7%BC%96%E7%A0%81%E5%8D%8F%E8%AE%AE"><span class="toc-number">1.2.6.</span> <span class="toc-text">6、编码协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7%E3%80%81%E9%87%87%E6%A0%B7%E6%95%B0"><span class="toc-number">1.2.7.</span> <span class="toc-text">7、采样数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8%E3%80%81%E9%87%87%E6%A0%B7%E4%BD%8D%E6%95%B0"><span class="toc-number">1.2.8.</span> <span class="toc-text">8、采样位数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9%E3%80%81%E5%AD%98%E5%82%A8%E7%A9%BA%E9%97%B4"><span class="toc-number">1.2.9.</span> <span class="toc-text">9、存储空间</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10%E3%80%81%E5%B8%A7%E6%97%B6%E9%95%BF"><span class="toc-number">1.2.10.</span> <span class="toc-text">10、帧时长</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#11%E3%80%81%E9%87%87%E6%A0%B7%E6%A0%BC%E5%BC%8F"><span class="toc-number">1.2.10.1.</span> <span class="toc-text">11、采样格式</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%A7%86%E9%A2%91%E5%B0%81%E8%A3%85%E6%A0%BC%E5%BC%8F"><span class="toc-number">2.</span> <span class="toc-text">视频封装格式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%9F%B3%E9%A2%91%E5%B0%81%E8%A3%85%E6%A0%BC%E5%BC%8F"><span class="toc-number">3.</span> <span class="toc-text">音频封装格式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4%E3%80%81%E4%B8%8D%E5%90%8C%E5%B0%81%E8%A3%85%E6%A0%BC%E5%BC%8F%E7%9A%84%E8%81%94%E7%B3%BB%E4%B8%8E%E5%8C%BA%E5%88%AB"><span class="toc-number">3.0.0.1.</span> <span class="toc-text">4、不同封装格式的联系与区别</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%9F%B3%E8%A7%86%E9%A2%91%E7%BC%96%E7%A0%81"><span class="toc-number">4.</span> <span class="toc-text">音视频编码</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E8%A7%86%E9%A2%91%E7%BC%96%E7%A0%81"><span class="toc-number">4.1.</span> <span class="toc-text">一、视频编码</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81%E5%8F%98%E6%8D%A2%E4%B8%8E%E9%87%8F%E5%8C%96"><span class="toc-number">4.1.1.</span> <span class="toc-text">1、变换与量化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81%E8%BF%90%E5%8A%A8%E8%A1%A5%E5%81%BF%E4%B8%8E%E8%BF%90%E5%8A%A8%E4%BC%B0%E8%AE%A1"><span class="toc-number">4.1.2.</span> <span class="toc-text">2、运动补偿与运动估计</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E3%80%81%E7%86%B5%E7%BC%96%E7%A0%81"><span class="toc-number">4.1.3.</span> <span class="toc-text">3、熵编码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4%E3%80%81%E5%B8%A7%E5%86%85%E5%8E%8B%E7%BC%A9%E4%B8%8E%E5%B8%A7%E9%97%B4%E5%8E%8B%E7%BC%A9"><span class="toc-number">4.1.4.</span> <span class="toc-text">4、帧内压缩与帧间压缩</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5%E3%80%81I%E5%B8%A7%E3%80%81P%E5%B8%A7%E3%80%81B%E5%B8%A7"><span class="toc-number">4.1.5.</span> <span class="toc-text">5、I帧、P帧、B帧</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6%E3%80%81GOP%E4%B8%8E%E5%85%B3%E9%94%AE%E5%B8%A7%E9%97%B4%E9%9A%94"><span class="toc-number">4.1.6.</span> <span class="toc-text">6、GOP与关键帧间隔</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7%E3%80%81%E7%A0%81%E7%8E%87%E6%8E%A7%E5%88%B6"><span class="toc-number">4.1.7.</span> <span class="toc-text">7、码率控制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8%E3%80%81SVC%E5%88%86%E7%BA%A7%E7%BC%96%E7%A0%81"><span class="toc-number">4.1.8.</span> <span class="toc-text">8、SVC分级编码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9%E3%80%81YUV"><span class="toc-number">4.1.9.</span> <span class="toc-text">9、YUV</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E9%9F%B3%E9%A2%91%E7%BC%96%E7%A0%81"><span class="toc-number">4.2.</span> <span class="toc-text">二、音频编码</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81%E9%87%87%E6%A0%B7%E7%8E%87-1"><span class="toc-number">4.2.1.</span> <span class="toc-text">1、采样率</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81%E6%B3%A2%E5%BD%A2%E7%BC%96%E7%A0%81"><span class="toc-number">4.2.2.</span> <span class="toc-text">2、波形编码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E3%80%81%E5%8F%82%E6%95%B0%E7%BC%96%E7%A0%81"><span class="toc-number">4.2.3.</span> <span class="toc-text">3、参数编码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4%E3%80%81%E6%B7%B7%E5%90%88%E7%BC%96%E7%A0%81"><span class="toc-number">4.2.4.</span> <span class="toc-text">4、混合编码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5%E3%80%81PCM"><span class="toc-number">4.2.5.</span> <span class="toc-text">5、PCM</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%9F%B3%E8%A7%86%E9%A2%91%E8%A7%A3%E7%A0%81"><span class="toc-number">5.</span> <span class="toc-text">音视频解码</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E8%A7%86%E9%A2%91%E8%A7%A3%E7%A0%81"><span class="toc-number">5.1.</span> <span class="toc-text">一、视频解码</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81pts%E4%B8%8Edts"><span class="toc-number">5.1.1.</span> <span class="toc-text">1、pts与dts</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81%E5%85%B3%E9%94%AE%E5%B8%A7%E4%B8%8E%E9%9D%9E%E5%85%B3%E9%94%AE%E5%B8%A7"><span class="toc-number">5.1.2.</span> <span class="toc-text">2、关键帧与非关键帧</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E3%80%81%E7%BB%84%E5%8C%85%E4%B8%8E%E6%8B%BC%E5%B8%A7"><span class="toc-number">5.1.3.</span> <span class="toc-text">3、组包与拼帧</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4%E3%80%81%E7%89%B9%E5%AE%9A%E5%B8%A7%E5%A4%B4"><span class="toc-number">5.1.4.</span> <span class="toc-text">4、特定帧头</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E9%9F%B3%E9%A2%91%E8%A7%A3%E7%A0%81"><span class="toc-number">5.2.</span> <span class="toc-text">二、音频解码</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81planar%E4%B8%8Epacked%E5%AD%98%E5%82%A8"><span class="toc-number">5.2.1.</span> <span class="toc-text">1、planar与packed存储</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81%E9%87%8F%E5%8C%96%E4%BD%8D%E6%95%B0"><span class="toc-number">5.2.2.</span> <span class="toc-text">2、量化位数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E3%80%81%E9%87%87%E6%A0%B7%E7%8E%87"><span class="toc-number">5.2.3.</span> <span class="toc-text">3、采样率</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4%E3%80%81%E5%A3%B0%E9%81%93%E6%95%B0%E4%B8%8E%E5%A3%B0%E9%81%93%E5%B8%83%E5%B1%80"><span class="toc-number">5.2.4.</span> <span class="toc-text">4、声道数与声道布局</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#VPU"><span class="toc-number">6.</span> <span class="toc-text">VPU</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/12/31/%E8%A7%84%E7%9F%A9/" title="规矩">规矩</a><time datetime="2024-12-31T14:15:56.000Z" title="发表于 2024-12-31 22:15:56">2024-12-31</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/12/31/%E5%8F%8D%E6%80%9D/" title="反思">反思</a><time datetime="2024-12-31T13:26:56.000Z" title="发表于 2024-12-31 21:26:56">2024-12-31</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/12/11/24%20%E8%AF%BB%E5%90%8E%E6%84%9F/" title="读后感">读后感</a><time datetime="2024-12-10T22:50:19.000Z" title="发表于 2024-12-11 06:50:19">2024-12-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/12/11/23%20%E5%B5%8C%E5%85%A5%E5%BC%8FC%E8%AF%AD%E8%A8%80%E7%9A%84%E8%87%AA%E6%88%91%E4%BF%AE%E5%85%BB/" title="嵌入式C语言的自我修养">嵌入式C语言的自我修养</a><time datetime="2023-12-10T22:50:19.000Z" title="发表于 2023-12-11 06:50:19">2023-12-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/12/10/22%20tabby%E7%9A%84%E4%BD%BF%E7%94%A8/" title="tabby的使用">tabby的使用</a><time datetime="2023-12-10T04:50:19.000Z" title="发表于 2023-12-10 12:50:19">2023-12-10</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">&copy;2020 - 2023 By <a class="footer-bar-link" href="/" title="chai" target="_blank">chai</a></div></div><div id="footer-type-tips"></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/anzhiyu-c/hexo-theme-anzhiyu" title="主题">主题</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">27</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">4</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://blog.anheyu.com/" title="博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="博客"/><span class="back-menu-item-text">博客</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://image.anheyu.com/" title="安知鱼图床"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://image.anheyu.com/favicon.ico" alt="安知鱼图床"/><span class="back-menu-item-text">安知鱼图床</span></a></div></div></div><span class="sidebar-menu-item-title">标签</span></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="nav-music"><a id="nav-music-hoverTips" onclick="anzhiyu.musicToggle()" accesskey="m">播放音乐</a><div id="console-music-bg"></div><meting-js id="8152976493" server="netease" type="playlist" mutex="true" preload="none" theme="var(--anzhiyu-main)" data-lrctype="0" order="random" volume="0.7"></meting-js></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://y.qq.com/n/ryqq/playlist/8802438608&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.cbd.int/vanilla-lazyload@17.8.5/dist/lazyload.iife.min.js"></script><script src="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.js"></script><canvas id="universe"></canvas><script async src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
-var HoldLog = console.log;
-console.log = function () {};
-let now1 = new Date();
-queueMicrotask(() => {
-  const Log = function () {
-    HoldLog.apply(console, arguments);
-  }; //在恢复前输出日志
-  const grt = new Date("04/01/2021 00:00:00"); //此处修改你的建站时间或者网站上线时间
-  now1.setTime(now1.getTime() + 250);
-  const days = (now1 - grt) / 1000 / 60 / 60 / 24;
-  const dnum = Math.floor(days);
-  const ascll = [
-    `欢迎使用安知鱼!`,
-    `生活明朗, 万物可爱`,
-    `
-        
-       █████╗ ███╗   ██╗███████╗██╗  ██╗██╗██╗   ██╗██╗   ██╗
-      ██╔══██╗████╗  ██║╚══███╔╝██║  ██║██║╚██╗ ██╔╝██║   ██║
-      ███████║██╔██╗ ██║  ███╔╝ ███████║██║ ╚████╔╝ ██║   ██║
-      ██╔══██║██║╚██╗██║ ███╔╝  ██╔══██║██║  ╚██╔╝  ██║   ██║
-      ██║  ██║██║ ╚████║███████╗██║  ██║██║   ██║   ╚██████╔╝
-      ╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝    ╚═════╝
-        
-        `,
-    "已上线",
-    dnum,
-    "天",
-    "©2020 By 安知鱼 V1.6.12",
-  ];
-  const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311192116640.png" alt="image-20231119211617624"></p>
+<h1 id="VPU"><a href="#VPU" class="headerlink" title="VPU"></a>VPU</h1> 
+      <!-- reward -->
+      
+    </div>
+    
 
-  setTimeout(
-    Log.bind(
-      console,
-      `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
-      "color:#425AEF",
-      "",
-      "color:#425AEF",
-      "color:#425AEF",
-      "",
-      "color:#425AEF",
-      ""
-    )
-  );
-  setTimeout(
-    Log.bind(
-      console,
-      `%c ${ascll2[0]} %c ${ascll2[1]} %c \n${ascll2[2]} %c\n${ascll2[3]}\n`,
-      "color:white; background-color:#4fd953",
-      "",
-      "",
-      'background:url("https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/tinggge.gif") no-repeat;font-size:450%'
-    )
-  );
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
 
-  setTimeout(Log.bind(console, "%c WELCOME %c 你好，小笨蛋.", "color:white; background-color:#4f90d9", ""));
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2023/11/19/8%20%E9%9F%B3%E8%A7%86%E9%A2%91%E7%BC%96%E8%A7%A3%E7%A0%81%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E5%AD%A6%E4%B9%A0/" alt="微信分享二维码">
+    </div>
+</div>
 
-  setTimeout(
-    console.warn.bind(
-      console,
-      "%c ⚡ Powered by 安知鱼 %c 你正在访问 chai 的博客.",
-      "color:white; background-color:#f0ad4e",
-      ""
-    )
-  );
+<div id="share-mask"></div>  
+    </footer>
+  </div>
 
-  setTimeout(Log.bind(console, "%c W23-12 %c 你已打开控制台.", "color:white; background-color:#4f90d9", ""));
+   
+  <nav class="article-nav">
+    
+      <a href="/2023/11/19/9%20%E6%98%BE%E7%A4%BA%E7%A1%AC%E4%BB%B6%E5%8F%91%E5%B1%95%E4%B8%8E%E8%A7%86%E9%A2%91%E5%BC%80%E5%8F%91%E7%9F%A5%E8%AF%86%E7%82%B9%E6%89%AB%E7%9B%B2/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            显示硬件发展与视频开发知识点扫盲
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2023/11/14/7%20rk%20deb%E5%8C%85%E7%9A%84%E5%88%B6%E4%BD%9C/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">rkdeb包的制作</div>
+      </a>
+    
+  </nav>
 
-  setTimeout(
-    console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
-  );
-});</script><script async src="/anzhiyu/random.js"></script><div class="js-pjax"><input type="hidden" name="page-type" id="page-type" value="post"></div><script>var visitorMail = "";
-</script><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://cdn.cbd.int/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
-var pjax = new Pjax({
-  elements: 'a:not([target="_blank"])',
-  selectors: pjaxSelectors,
-  cacheBust: false,
-  analytics: false,
-  scrollRestoration: false
-})
-
-document.addEventListener('pjax:send', function () {
-  // removeEventListener scroll 
-  anzhiyu.removeGlobalFnEvent('pjax')
-  anzhiyu.removeGlobalFnEvent('themeChange')
-
-  document.getElementById('rightside').classList.remove('rightside-show')
   
-  if (window.aplayers) {
-    for (let i = 0; i < window.aplayers.length; i++) {
-      if (!window.aplayers[i].options.fixed) {
-        window.aplayers[i].destroy()
-      }
+   
+  
+   
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2015-2023
+        <i class="ri-heart-fill heart_icon"></i> chai
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="热爱学习的未来酱"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE">瑞芯微</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/%E5%AD%A6%E4%B9%A0">学习</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/%E7%94%9F%E6%B4%BB">生活</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
     }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
   }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
 
-  typeof typed === 'object' && typed.destroy()
-
-  //reset readmode
-  const $bodyClassList = document.body.classList
-  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
-})
-
-document.addEventListener('pjax:complete', function () {
-  window.refreshFn()
-
-  document.querySelectorAll('script[data-pjax]').forEach(item => {
-    const newScript = document.createElement('script')
-    const content = item.text || item.textContent || item.innerHTML || ""
-    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
-    newScript.appendChild(document.createTextNode(content))
-    item.parentNode.replaceChild(newScript, item)
-  })
-
-  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
-
-  typeof panguInit === 'function' && panguInit()
-
-  // google analytics
-  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
-
-  // baidu analytics
-  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
-
-  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
-
-  // prismjs
-  typeof Prism === 'object' && Prism.highlightAll()
-})
-
-document.addEventListener('pjax:error', e => {
-  if (e.request.status === 404) {
-    pjax.loadUrl('/404.html')
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
   }
-})</script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div></body></html>
+</script>
+
+
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="52"
+        src="//music.163.com/outchain/player?type=2&id=22707008&auto=0&height=32"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
+    
+    
+
+  </div>
+</body>
+
+</html>
