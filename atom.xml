@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2024-01-03T12:42:28.880Z</updated>
+  <updated>2024-01-12T00:06:57.429Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://example.com/2024/12/31/%E8%A7%84%E7%9F%A9/"/>
     <id>http://example.com/2024/12/31/%E8%A7%84%E7%9F%A9/</id>
     <published>2024-12-31T14:15:56.000Z</published>
-    <updated>2024-01-03T12:42:28.880Z</updated>
+    <updated>2024-01-12T00:06:57.429Z</updated>
     
     
     <summary type="html">Here&#39;s something encrypted, password is required to continue reading.</summary>
