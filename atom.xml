@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2024-01-12T00:06:57.429Z</updated>
+  <updated>2024-01-19T00:24:10.449Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://example.com/2024/12/31/%E8%A7%84%E7%9F%A9/"/>
     <id>http://example.com/2024/12/31/%E8%A7%84%E7%9F%A9/</id>
     <published>2024-12-31T14:15:56.000Z</published>
-    <updated>2024-01-12T00:06:57.429Z</updated>
+    <updated>2024-01-19T00:24:10.449Z</updated>
     
     
     <summary type="html">Here&#39;s something encrypted, password is required to continue reading.</summary>
@@ -55,7 +55,7 @@
     <link href="http://example.com/2024/12/31/%E5%8F%8D%E6%80%9D/"/>
     <id>http://example.com/2024/12/31/%E5%8F%8D%E6%80%9D/</id>
     <published>2024-12-31T13:26:56.000Z</published>
-    <updated>2024-01-14T22:44:18.526Z</updated>
+    <updated>2024-01-19T00:38:10.576Z</updated>
     
     
     <summary type="html">Here&#39;s something encrypted, password is required to continue reading.</summary>
@@ -63,6 +63,29 @@
     
     
     <category term="生活" scheme="http://example.com/categories/%E7%94%9F%E6%B4%BB/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>必剪学习</title>
+    <link href="http://example.com/2024/01/18/28_%E5%BF%85%E5%89%AA/"/>
+    <id>http://example.com/2024/01/18/28_%E5%BF%85%E5%89%AA/</id>
+    <published>2024-01-17T22:50:19.000Z</published>
+    <updated>2024-01-17T13:57:55.616Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;&#92;assets&#92;css&#92;APlayer.min.css&quot;&gt;&lt;script src=&quot;&#92;assets&#92;js&#92;APlayer.min.js&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="剪辑" scheme="http://example.com/categories/%E5%89%AA%E8%BE%91/"/>
     
     
   </entry>
@@ -418,29 +441,6 @@
     <id>http://example.com/2023/11/12/6%20ad%E5%AD%A6%E4%B9%A0/</id>
     <published>2023-11-12T13:55:17.000Z</published>
     <updated>2023-12-03T14:36:27.955Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;&#92;assets&#92;css&#92;APlayer.min.css&quot;&gt;&lt;script src=&quot;&#92;assets&#92;js&#92;APlayer.min.js&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="学习" scheme="http://example.com/categories/%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>docker学习</title>
-    <link href="http://example.com/2023/11/09/5%20docker%E5%AD%A6%E4%B9%A0/"/>
-    <id>http://example.com/2023/11/09/5%20docker%E5%AD%A6%E4%B9%A0/</id>
-    <published>2023-11-09T01:55:17.000Z</published>
-    <updated>2023-12-04T13:28:35.689Z</updated>
     
     
       
