@@ -1,233 +1,117 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>C高级学习 | 热爱学习的未来酱</title><meta name="author" content="chai"><meta name="copyright" content="chai"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#18171d"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="C高级学习"><meta name="application-name" content="C高级学习"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#18171d"><meta property="og:type" content="article"><meta property="og:title" content="C高级学习"><meta property="og:url" content="http://example.com/2024/01/02/23%20%E5%B5%8C%E5%85%A5%E5%BC%8FC%E8%AF%AD%E8%A8%80%E7%9A%84%E8%87%AA%E6%88%91%E4%BF%AE%E5%85%BB/index.html"><meta property="og:site_name" content="热爱学习的未来酱"><meta property="og:description" content="​	先说一下前提条件，在五年前的大一下学期，我第一次系统的学习了C语言，但那也仅仅只是一个初步的入门，并且在学校中的学习呀，大家懂的都懂，没有深究、没有思考、一切呀都是为了考试，然而如今的我不一样了，相对而言，我更喜欢研究研究研究这些，或者在小说的世界里躲避一下生活，这些都是类似的，只不过研究研究这"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg"><meta property="article:author" content="chai"><meta property="article:tag"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg"><meta name="description" content="​	先说一下前提条件，在五年前的大一下学期，我第一次系统的学习了C语言，但那也仅仅只是一个初步的入门，并且在学校中的学习呀，大家懂的都懂，没有深究、没有思考、一切呀都是为了考试，然而如今的我不一样了，相对而言，我更喜欢研究研究研究这些，或者在小说的世界里躲避一下生活，这些都是类似的，只不过研究研究这"><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="http://example.com/2024/01/02/23%20%E5%B5%8C%E5%85%A5%E5%BC%8FC%E8%AF%AD%E8%A8%80%E7%9A%84%E8%87%AA%E6%88%91%E4%BF%AE%E5%85%BB/"><link rel="preconnect" href="//cdn.cbd.int"/><meta name="google-site-verification" content="xxx"/><meta name="baidu-site-verification" content="code-xxx"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
-  linkPageTop: undefined,
-  peoplecanvas: undefined,
-  postHeadAiDescription: {"enable":true,"gptName":"AnZhiYu","mode":"local","switchBtn":false,"btnLink":"https://afdian.net/item/886a79d4db6711eda42a52540025c377","randomNum":3,"basicWordCount":1000,"key":"xxxx","Referer":"https://xx.xx/"},
-  diytitle: {"enable":true,"leaveTitle":"w(ﾟДﾟ)w 不要走！再看看嘛！","backTitle":"♪(^∇^*)欢迎肥来！"},
-  LA51: undefined,
-  greetingBox: {"enable":true,"default":"晚上好👋","list":[{"greeting":"晚安😴","startTime":0,"endTime":5},{"greeting":"早上好鸭👋, 祝你一天好心情！","startTime":6,"endTime":9},{"greeting":"上午好👋, 状态很好，鼓励一下～","startTime":10,"endTime":10},{"greeting":"11点多啦, 在坚持一下就吃饭啦～","startTime":11,"endTime":11},{"greeting":"午安👋, 宝贝","startTime":12,"endTime":14},{"greeting":"🌈充实的一天辛苦啦！","startTime":14,"endTime":18},{"greeting":"19点喽, 奖励一顿丰盛的大餐吧🍔。","startTime":19,"endTime":19},{"greeting":"晚上好👋, 在属于自己的时间好好放松😌~","startTime":20,"endTime":24}]},
-  twikooEnvId: '',
-  commentBarrageConfig:undefined,
-  root: '/',
-  preloader: {"source":3},
-  friends_vue_info: undefined,
-  navMusic: true,
-  mainTone: undefined,
-  authorStatus: undefined,
-  algolia: undefined,
-  localSearch: undefined,
-  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
-  noticeOutdate: undefined,
-  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":false,"highlightHeightLimit":330},
-  copy: {
-    success: '复制成功',
-    error: '复制错误',
-    noSupport: '浏览器不支持'
-  },
-  relativeDate: {
-    homepage: false,
-    simplehomepage: true,
-    post: false
-  },
-  runtime: '天',
-  date_suffix: {
-    just: '刚刚',
-    min: '分钟前',
-    hour: '小时前',
-    day: '天前',
-    month: '个月前'
-  },
-  copyright: {"copy":true,"copyrightEbable":false,"limitCount":50,"languages":{"author":"作者: chai","link":"链接: ","source":"来源: 热爱学习的未来酱","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
-  lightbox: 'fancybox',
-  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#425AEF","bgDark":"#1f1f1f","position":"top-center"},
-  source: {
-    justifiedGallery: {
-      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
-      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
-    }
-  },
-  isPhotoFigcaption: false,
-  islazyload: true,
-  isAnchor: false,
-  shortcutKey: undefined,
-  autoDarkmode: true
-}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
-  configTitle: '热爱学习的未来酱',
-  title: 'C高级学习',
-  postAI: '',
-  pageFillDescription: ' 1.计算机理论基石,  2.CPU的频率指的是什么,  3.cache,  为什么需要cache,  多级cache存储结构,  4.总线和地址,  5.指令集和微架构,  6.可执行文件的组成,  7.汇编过程,  8.静态链接库,  9.动态链接库,  10.堆栈,  11.数据对齐先说一下前提条件在五年前的大一下学期我第一次系统的学习了语言但那也仅仅只是一个初步的入门并且在学校中的学习呀大家懂的都懂没有深究没有思考一切呀都是为了考试然而如今的我不一样了相对而言我更喜欢研究研究研究这些或者在小说的世界里躲避一下生活这些都是类似的只不过研究研究这些更让我有成就感晚上就慢慢的来吧计算机理论基石前面的关于二极管三极管以及管的原理这里就不深究了等我以后再更深层次的学习的时候再说现在就直接从直接的工作原理开始计算机的核心任何复杂的运算都可以分解为有限个的基本指令运算这句话其实我好久好久之前就听说过了但其实呀一直不解其意这个原理被称为图灵完备性它表明只要有足够的基本指令就可以执行任何可计算的任务在现代计算机上也是采用这个原理计算机的中央处理器通过执行一系列的基本指令来完成各种复杂的任务这些基本指令包括算术操作如加法减法乘法逻辑操作如与或非条件分支如语句和循环如循环等下面是一个简单的例子展示了如何使用基本指令来执行一个较复杂的任务即计算一个整数的阶乘输出在这个例子中我们使用了基本的乘法和循环指令来计算给定整数的阶乘通过多次执行乘法操作和循环迭代实现了一个复杂的计算任务即使是电脑上的按键操作和视频播放这样的高级任务也可以通过分解为基本指令运算来实现例如当你在电脑上按下一个键时操作系统会通过底层的指令来检测按键的状态这可能涉及到读取硬件设备的输入状态处理中断信号和执行相应的操作这些底层指令可能包括读取寄存器执行条件分支更新内存等等通过组合这些基本指令操作系统可以捕捉到按键事件并触发相应的操作如打开应用程序输入字符等类似地视频播放也可以通过基本指令来实现当你打开一个视频文件时视频播放器会解码视频数据渲染图像播放音频等这些操作涉及到复杂的算法和数据处理但它们可以分解为基本指令的执行例如视频解码可能包括读取文件解析视频编码处理图像数据渲染图像等通过执行这些基本指令的组合视频播放器可以实现流畅的视频播放因此无论是按键操作还是视频播放都可以通过将复杂的任务分解为基本指令运算来实现并且现代计算机提供了这些基本指令的支持电脑上的一切操作都可以分解为上面所说的算术操作逻辑操作条件分支等一系列基本指令当然你要懂得的肯定不止上面这些还有一些跟深层次的分解就比如复杂的操作是如何被分解为一个个基本指令的是如何识别这些基本指令的如何确定这条指令是否运行完成以及这些基本指令是如何一条条的排序逐次运行的呢指令集的加减乘除与或非等基本指令一般称之为指令集任何复杂的运算都可以分解为指令集中的基本指令程序这种由基本指令组成的不同组合就称之程序汇编语言为了变成方便我们给每个二进制的指令起了一个别名也可以称之为助记符也就是我们常说的汇编指令高级语言虽然汇编语言的出现给人们带来了极大的便利人们不需要面对不懂含义的但是当工程更为复杂的时候汇编的维护也会变得极为艰难所以为了迎合人们的开发和阅读人们在汇编的基础上做了一系列的高级语言就比如和然后用一个最简单的语言程序和程序来验证上面是两个最简单的语言和语言的编程示例而且最终的实现效果相同都是打印出来如下所示这个是编译过后的可执行文件中间的编译过程又是怎么样的呢就像上面图示绘制的那样高级语言都有对应的编译器语言又有如果只是通过下面的命令进行编译的话只会得到最后的可执行文件当然因为上面两个命令生成的都是所以就覆盖了也可以通过命令进行执行生成的可执行文件名称一个高级语言编译成可执行文件更详细的过程为预处理编译汇编链接预处理指的是将头文件函数恒定义等都展开可以通过参数来实现编译指的是通过编译器将高级语言编译为汇编语言可以通过参数来完成以结尾的就是汇编文件现在对于汇编语言的理解可以不用过深以后再说汇编指的是将汇编程序通过汇编器编译为二进制的文件可以通过参数来完成链接可以将多个文件链接到一起从而生成可执行文件没有命令直接编译即可我这里有个疑问我这个程序是最简单那的也没有多个文件那他未什么要进行链接呢我这个地方不是很懂希望下面的学习能解答我这个疑惑的频率指的是什么我先说一下这个我确实是不知道我学了这么多年的计算机我第一台电脑是年大学我爸给买的戴尔那时候是一个的后来电脑烧了我爸又给我买了一个洋垃圾台式机是虽然现在知道了他是洋垃圾但之前是不知道的呀其实就也还好吧每一段时间都有一段时间的感悟再后来我工作了自己花实习的一个月工资高了一台小主机的一年之后没有笔记本又搞了一台联想的笔记本笔记本的是总体跟我的差不多再后来不满足需求了又因为我的显卡一直在闲置我也不想卖掉所以两个月前又买了一个的无核显主机买了这么多电脑终于是对电脑有了一些基本的认识但是对于的频率依然是一知半解趁着这个机会学习一下频率的概念在这个复杂的数字系统中为了确保内部所有硬件单元能够协同快速工作架构工程师们往往会设计一套时钟信号与系统同步进行操作时钟信号是由一系列的脉冲信号构成并且总是按一定电压幅度时间间隔连续发出的方波信号它周期性地在与之间往复变化在第一脉冲和第二个脉冲之间的时间间隔称之为周期它的单位是秒但单位时间内所产生的脉冲个数称之为频率频率的最基本计量单位就是赫兹以为例它的默频是意味着它内部时钟频率为一秒钟可以产生亿个脉冲信号换句话说每一个脉冲信号仅仅用时时钟周期这是多么令人震惊的时钟可以想象到内部结构是多么精妙可以处理如此之短的信号整套系统协同有序地运行所以才会说是全人类智慧的结晶极大地提升了我们的科技水平进步时钟周期作为操作的最小时间单位内部的所有操作都是以这个时钟周期作为基准一般来说都是以时钟脉冲的上升沿作为执行指令的基准频率越高执行的指令数越多工作速度越快那么频率是由什么决定的呢其实这个是一个非常复杂的问题因为决定这个频率是一个系统学的东西影响到频率高度的因素非常之多诸如的架构流水线设计内部寄存器设计支持的指令甚至是功耗温度这些物理因素所以说出厂频率就是综合多种考虑以木桶效应下的最小值作为的最高频率是十的次方也就是十亿是的次方也就是百万是的次方外频在诞生后不久各大巨头为了追求高性能开启了频率大战有没有效果这个我们先不提但是这样一来虽然跑得更换了主频更高但是外部的主板芯片组内存外部接口可还是处于旧有标准而且这些设备的运行频率早就固定下来了并且远低于工作频率这样一来就无法很好与之交流就机智地提出了倍频的概念下面讲述并且提出了影响至今的一个主频计算公式主频外频倍频外频的提出可以让主板外部的设备工作在较低的频率下并且还能正确地进行交流但总是有很多网友将前端总线频率和外频混为一谈其实他们不太一样在以前有北桥的时代前端总线是总线接口单元和北桥芯片之间的数据交换通道曾经在雷鸟系列奔腾处理器以前前端总线与外频是一致的但后来有了四倍数据传输率技术或者是八倍数据传输率技术前端总线频率就极大地提高了举个例子如果一个处理器的频率是外频为使用四倍数据传输率技术时前端总线频率就变成如果是八倍那么就是前端总线频率越大代表着与北桥芯片之间的数据传输能力越大更能充分发挥出的功能目前处理器的默认外频基本上都是倍频目前的设计的外频都相当低只有要获得更快运算速度我们就需要获得一个超高速的频率来支撑更快运算速度而通常就是在内部设计有一个锁相环频率发生器对于输入的时钟信号进行分频处理按照一定比例提高输入的外频频率从而得到的实际工作频率这个比例就称之为倍频系数简称倍频利用倍频技术较为完美地解决了和内存等数据中转站的异步运行问题为后来向更高频率方向发展打下了扎实的基础倍频系数是指主频与外频之间的相对比例关系在相同的外频下倍频越高的频率也越高但实际上在相同外频的前提下高倍频的本身意义并不大这是因为与系统之间数据传输速度是有限的一味追求高主频而得到高倍频的就会出现明显的瓶颈效应从系统中得到数据的极限速度不能够满足运算的速度我有个问题我的的频率是我的内存频率是的内存这么算的话我的内存比频率高呀但理论来说不是呀那问题出在哪时间的单位是纳秒十亿分之一秒毫秒千分之一秒和秒吞吐量的单位是兆字节和千兆字节让我们先从和内存开始下图是北桥部分第一个令人惊叹的事实是快得离谱在上大部分简单指令的执行只需要一个时钟周期也就是纳秒即使是真空中传播的光在这段时间内也只能走厘米约英寸把上述事实记在心中是有好处的当你要对程序做优化的时候就会想到执行指令的开销对于当今的而言是多么的微不足道当运转起来以后它便会通过和对系统中的主存进行读写访问使用的是静态存储器相对于系统主存中使用的动态存储器读写速度快得多造价也高昂得多一般被放置在芯片的内部加之使用昂贵高速的存储器使其给带来的延迟非常低在指令层次上的优化其效果是与优化后代码的大小息息相关由于使用了高速缓存技术那些能够整体放入中的代码和那些在运行时需要不断调入调出的代码在性能上会产生非常明显的差异正常情况下当操作一块内存区域时其中的信息要么已经保存在要么就需要将之从系统主存中调入然后再处理如果是后一种情况我们就碰到了第一个瓶颈一个大约个时钟周期的延迟在此期间如果没有其他事情要做则往往是处在停机状态的为了给大家一个直观的印象我们把的一个时钟周期看作一秒那么从读取信息就好像是拿起桌上的一张草稿纸秒从读取信息则是从身边的书架上取出一本书秒而从主存中读取信息则相当于走到办公楼下去买个零食分钟主存操作的准确延迟是不固定的与具体的应用以及其他许多因素有关比如它依赖于列选通延迟以及内存条的型号它还依赖于指令预取的成功率指令预取可以根据当前执行的代码来猜测主存中哪些部分即将被使用从而提前将这些信息载入看看的性能再对比主存就会发现配置更大的或者编写能更好的利用的应用程序会使系统的性能得到多么显著的提高人们通常把与内存之间的瓶颈叫做冯诺依曼瓶颈当今系统的前端总线带宽约为看起来很令人满意在这个速度下你可以在秒内从内存中读取的信息或者纳秒内读取字节遗憾的是这个吞吐量只是理论最大值图中其他数据为实际值而且是根本不可能达到的因为主存控制电路会引入延迟在做内存访问时会遇到很多零散的等待周期比如电平协议要求在选通一行选通一列取到可靠的数据之前需要有一定的信号稳定时间由于主存中使用电容来存储信息为了防止因自然放电而导致的信息丢失就需要周期性的刷新它所存储的内容这也带来额外的等待时间某些连续的内存访问方式可能会比较高效但仍然具有延时而那些随机的内存访问则消耗更多时间所以延迟是不可避免的图中下方的南桥连接了很多其他总线如和外围设备令人沮丧的是南桥管理了一些反应相当迟钝的设备比如硬盘就算是缓慢的系统主存和硬盘相比也可谓速度如飞了继续拿办公室做比喻等待硬盘寻道的时间相当于离开办公大楼并开始长达一年零三个月的环球旅行这就解释了为何电脑的大部分工作都受制于磁盘以及为何数据库的性能在内存缓冲区被耗尽后会陡然下降同时也解释了为何充足的用于缓冲和高速的磁盘驱动器对系统的整体性能如此重要虽然磁盘的连续存取速度确实可以在实际使用中达到但这并非故事的全部真正令人头疼的瓶颈在于寻道操作也就是在磁盘表面移动读写磁头到正确的磁道上然后再等待磁盘旋转到正确的位置上以便读取指定扇区内的信息每分钟绕转次数用来指示磁盘的旋转速度越大耽误在寻道上的时间就越少所以越高的意味着越快的磁盘当磁盘驱动器读取一个大的连续存储的文件时会达到更高的持续读取速度因为省去了寻道的时间文件系统的碎片整理器就是用来把文件信息重组在连续的数据块中通过尽可能减少寻道来提高数据吞吐量然而说到计算机实际使用时的感受磁盘的连续存取速度就不那么重要了反而应该关注驱动器在单位时间内可以完成的寻道和随机操作的次数对此固态硬盘可以成为一个很棒的选择硬盘的也有助于改进性能虽然的只能覆盖整个磁盘容量的可别看只有这么一点大其效果十分明显它可以把一组零散的写入操作合成一个也就是使磁盘能够控制写入操作的顺序从而减少寻道的次数同样的为了提高效率一系列读取操作也可以被重组而且操作系统和驱动器固件都会参与到这类优化中来最后图中还列出了网络和其他总线的实际数据吞吐量火线仅供参考芯片组并不直接支持火线我们可以把看作是计算机之间的总线去访问那些速度很快的网站比如延迟大约毫秒与硬盘驱动器带来的延迟相当事实上尽管硬盘比内存慢了个数量级它的速度与是在同一数量级上的目前一般家用网络的带宽还是要落后于硬盘连续读取速度的但网络就是计算机这句话可谓名符其实如果将来比硬盘还快了那会是个什么景象呢内存频率指的是内存模块的时钟速度它表示内存模块每秒钟能够完成的数据传输次数它通常用于衡量内存模块的性能较高的内存频率可以提供更快的数据传输速度频率指的是中央处理器的时钟速度它表示每秒钟执行指令的次数频率是衡量性能的指标之一较高的频率通常表示更高的计算能力和处理速度是是静态随机存储器而内存是是动态随机存储器静态是比动态速度更快的但是呢更快意味着更贵我之前一直对了解的不多知道一级二级三级但并不明白他们的作用如今学习到这里了就认识一下找了一段大佬的讲解很生动这里记录一下对于没有接触过底层技术的朋友来说或许从未听说过毕竟的存在对程序员来说是透明的在接触之前先为你准备段分析如果你曾经学习过语言这段自然不会陌生如此简单的将数组所有元素置你有没有想过这段还有下面的一种写法功能完全一样但是我们一直在重复着第一种写法或许很多的书中也是建议这么编码你是否想过这其中的缘由文章的主角是所以你一定猜到了答案那么是如何影响这段的呢为什么需要在思考为什么需要之前我们首先先来思考另一个问题我们的程序是如何运行起来的我们应该知道程序是运行在之中就是我们常说的例如等我们称之为主存当我们需要运行一个进程的时候首先会从磁盘设备例如等中将可执行程序到主存中然后开始执行在内部存在一堆的通用寄存器如果需要将一个变量假设地址是加一般分为以下个步骤从主存中读取地址的数据到内部通用寄存器架构的通用寄存器之一通用寄存器加将通用寄存器的值写入主存我们将这个过程可以表示如下其实现实中通用寄存器的速度和主存之间存在着太大的差异两者之间的速度大致如下关系的速度一般小于主存的速度一般是左右速度差异近百倍因此上面举例的个步骤中步骤和步骤实际上速度很慢当试图从主存中操作时由于主存的速度限制不得不等待这漫长的时间如果我们可以提升主存的速度那么系统将会获得很大的性能提升如今的存储设备动不动就是几个容量很大如果我们采用更快材料制作更快速度的主存并且拥有几乎差不多的容量其成本将会大幅度上升我们试图提升主存的速度和容量又期望其成本很低这就有点难为人了因此我们有一种折中的方法那就是制作一块速度极快但是容量极小的存储设备那么其成本也不会太高这块存储设备我们称之为在硬件上我们将放置在和主存之间作为主存数据的缓存当试图从主存中数据的时候会首先从中查找对应地址的数据是否缓存在中如果其数据缓存在中直接从中拿到数据并返回给当存在的时候以上程序如何运行的例子的流程将会变成如下和主存之间直接数据传输的方式转变成和之间直接数据传输负责和主存之间数据传输多级存储结构的速度在一定程度上同样影响着系统的性能一般情况的速度可以达到几乎可以和寄存器速度媲美但是这就满足人们对性能的追求了吗并没有当中没有缓存我们想要的数据的时候依然需要漫长的等待从主存中数据为了进一步提升性能引入多级前面提到的称之为第一级我们在后面连接在和主存之间连接等级越高速度越慢容量越大但是速度相比较主存而言依然很快不同等级速度之间关系如下经过级的缓冲各级和主存之间的速度最萌差也逐级减小在一个真实的系统上各级之间硬件上是如何关联的呢我们看下架构上各级之间的硬件抽象框图如下在架构上分为单独的和指令和数据分开是每个私有的每个都有一个一个内的所有共享一个不区分指令和数据都可以缓存所有之间共享通过总线和主存相连关于就学习到这里如果想要学习更多相关的可以看这个博客总线和地址先来阐述一个疑惑位的和位的这里的和指的什么位指的是处理器的寻址能力或数据总线宽度为位这意味着该处理器可以在单个时钟周期内处理位字节的数据或地址它最大支持的物理内存容量通常限制在左右位指的是处理器的寻址能力或数据总线宽度为位这意味着该处理器可以在单个时钟周期内处理位字节的数据或地址它的寻址能力更大可以支持更大的物理内存容量通常可以支持数的内存因此位和位主要区别在于它们的寻址能力和数据总线宽度这直接影响到它们在处理数据和内存方面的能力和限制位相对于位具有更高的处理能力和更大的内存扩展性和内存以及各种外部设备是通过总线连接在一起的那是如何访问内存或者控制各个外部设备的呢在内部存在一系列的寄存器这些寄存器是没有地址的只需要寄存器的名称去访问即可而内存以及各个外部设备就需要地址去访问了那这里的地址是什么这里的地址又是如何分配的呢地址的本质实际上就是由管教发出的一组地址控制信号因为这些信号是由管教直接发出的因此也被称之为物理地址在带有的平台下程序的运行一般使用的是虚拟地址会把虚拟地址转换为物理地址然后通过的管教发送出去所谓总线是指计算机设备和设备之间传输信息的公共数据通道总线是连接计算机硬件系统内多种设备的通信线路它的一个重要特征是由总线上的所有设备共享可以将计算机系统内的多种设备连接到总线上如果是某两个设备或设备之间专用的信号连线就不能称之为总线一些总线标准指令集和微架构在第一节提到过任何一个复杂的程序都可以分解位为有限个基本指令的组合而这些是在设计的时候就已经确定了的他的内部只允许对应指令的完成而不同架构的处理器他们的指令是不一样的哪怕是同样的指令他们的内部电路实现也是不一样的所以不同架构的可执行程序是不能混用的架构的处理器只能运行架构的程序架构的处理器只允许运行架构的程序上面提到的这些指令的集合就被称之为指令集在芯片工程师设计的时候要根据指令集中规定的格式指令作为标准实现那不同的译码电路来支持指令集各种指令的运行这里你不用管如何译码的这里目前不需要深究指令集的最终实现就是微架构也就是内部的各种译码和执行电路就比如核心核心等就是微架构而的四核心就是指的微架构这里目前认识到这个程度就可以了不做过多的深究以及后面有需要再去学习了解一下汇编语言可执行文件的组成在上面已经讲解过了编译完成之后会生成一个二进制的可执行文件这个可执行文件只能在对应架构的机器上才能运行那这个可执行程序都是由什么组成的呢这时候就要提到一个命令了也就是从名字就可以看出他的作用是读取一个可执行文件先来用命令查看一下可执行程序如下所示这是文件的名称这是文件的类型和架构它是一个位的共享对象针对架构这是文件的版本采用格式这表示该文件是动态链接的它依赖于其他共享库来提供其所需的功能这是解释器路径指示系统在执行该文件时使用的动态链接器这是文件的构建用于唯一标识该文件的构建版本它是使用算法计算的哈希值这表示该文件是为版本编译的这表示该文件没有被剥离即没有从文件中移除调试信息和符号表可执行和可链接的格式可以通过命令查看可执行文件的文件头信息例如查看上面编译的文件具体内容如下所示这里了解到的信息其实并没有什么用唯一有用的就是最下面的数量用来主要用来描述可执行文件的信息一个可执行文件通常由不同的来组成包括代码段数据段段只读数据段每个由来描述这里的文件头其实也就是指的文件最开始的那几个字节的信息然后通过查看可执行文件的节头表仍旧以为里查看到的节头表内容如下所示通过节头表的信息可以窥探到一个可执行文件的组成上面我比较熟悉的其实并不多其实也就知道代码段数据段段其他知道的并不多函数翻译成二级制指令放在代码段之中初始化的全局变量和静态局部变量放在数据段之中未初始化的全局变量和静态局部变量放在段当中其他就没了汇编过程先说一下我的想法本来我是不想学习这个的后来我感觉这个东西与后面的链接与动态库静态库有很深的联系所以我还是回来看这个了预处理之后就是编译汇编的过程就是将程序代码转换为一个个的汇编指令再后面才是真正的汇编过程汇编依靠汇编器汇编器会将汇编语言转换为二进制语言每个重定位的目标文件都是以零地址为基地址进行的代码段的组装但是后面的链接过程需要将好多个目标文件链接为一个可执行文件而每个文件都是以零地址进行偏移的所以在链接的时候需要更新目标文件中的变量或者函数的地址这个被称之为重定义那链接器如何知道哪些函数或者变量需要重定位呢很简单将需要重定位的符号收集起来生成一个重定位表以的形式保存到每个可重定位目标文件即可上面提到符号表和重定位表都是很重要的概念符号表可以通过命令来获取注意这里是小使用可以获得该重定位目标文件的重定位表如下所示静态链接库仍旧先说一下我的理解和看法无论是静态链接库还是动态链接库他们实际上就是可重定位的目标文件即汇编过程之后生成的文件当然也不对可以是由一个目标文件生成的库文件也可以是由好几个目标文件生成库文件很多时候人们会将函数的实现给封装起来我们只需要调用相应的函数即可而很多不开源的项目也会提供封装好的库让人们只需要使用头文件中定义的相应函数即可静态库会在编译程序的时候将引用的函数代码或者变量链接到可执行文件里和在可执行程序组装到一起而动态库不会和可执行文件组装到一起而是在程序运行的时候加载到内存参与链接所以静态库的本质就是一个可重定位的目标文件与上面经过汇编编译出来的文件没什么不同只是多了一个归档的过程静态库的制作使用归档命令来实现是一个用于创建和管理静态库的命令行工具它的名称是代表可以在和系统上使用命令可以用于创建静态库向静态库中添加对象文件从静态库中提取对象文件以及执行其他与静态库相关的操作下面是对命令的一些常见用法的详细解释创建静态库这个命令将创建一个名为的静态库并将文件和添加到该库中选项表示替换库中的现有文件选项表示创建库选项用于在库中添加索引信息将指定的文件插入或替换到归档文件中创建索引表不在必须创建库的时候给出警告向静态库中添加对象文件这个命令将向现有的静态库中添加新的对象文件选项表示替换库中的现有文件从静态库中提取对象文件这个命令将从静态库中提取出对象文件选项表示提取列出静态库中的对象文件替换静态库中的对象文件这两个命令分别用于从静态库中删除对象文件和向静态库中添加新的对象文件选项表示删除编译器是以源文件为单位进行程序编译的链接器在连接的过程中逐个对目标文件进行分解和组装但这样很容易产生一个问题如果一个源文件中我们定义了一百个函数但是只使用了其中的一个链接器在连接的过程中会将这一百个函数都组装到可执行文件中这会让最终生成的可执行文件大大增加那要如何解决这个问题呢只需要将每一个函数单独使用一个源文件来实现最终将多个目标文件打包即可而我们最常用的库就是这样实现的可以通过上面学习的命令来查看对象文件列表可以看到将每个函数都搞成了一个目标文件从而解决了上面提到的问题这时候又出现了另一个问题就比如我们经常用到进行字段的打印可能很多个程序都调用了它链接器在链接的时候就要将多个指令添加到多个可执行文件中在一个多任务的环境中多个进程并发运行的时候你会发现内存中有大量重复的指令代码从而浪费了很多的资源那这个问题要如何解决呢聪明的工程师们想出来了动态库的方法今天就学习到这个地方了其实上面的这些东西你都不配说难因为已经有先人替你踩过坑了也有更厉害的先人提出来了这些理论并且用到了实践中计算机当中的一切都不再属于新鲜事我们已经站在了巨人的肩膀上没有理由后人比前人笨也没有道理学不会学不会只能证明你没有用心动态链接库在讲解静态链接库的最后面也提到了静态链接库现有的一些问题所以人们就提出了动态链接库动态链接库在程序运行时进行加载而且不同的可执行文件可以共用动态链接库所以可以极大的节省内存动态链接库的编译方式如下文件库文件在环境下当我们运行一个程序时操作系统首先会在给程序一个子进程接着动态连接器加载到内存操作系统将控制器权交给动态链接器让动态链接器完成动态库的加载和重定位搞作最后跳转到要运行的程序动态链接器在标准库中实现是的一部分主要完成程序运行前的动态链接工作在可执行文件的段中存放的有动态链接器的加载路径可以通过命令查看是一个用于分析目标文件的常用命令行工具它在各种操作系统和编程环境中都有提供例如和的主要作用是提供目标文件的反汇编符号表节信息等相关信息以下是一些常见的用途反汇编目标文件可以将目标文件中的机器码转换为可读的汇编代码以便进行代码分析调试和优化这对于理解代码的执行流程查找问题和进行二进制分析非常有用显示符号表可以列出目标文件中的符号表包括函数变量和其他符号的信息这对于了解代码的结构查找特定符号检查符号的可见性和解决符号冲突非常有帮助显示节信息可以显示目标文件中各个节的信息例如代码段数据段符号表重定位表等这对于了解目标文件的布局存储的数据链接信息和其他元数据非常有用检查目标文件的属性可以提供有关目标文件的一些属性例如目标文件格式目标架构入口点等这对于验证目标文件的正确性和兼容性非常有帮助动态链接器本身也是一个动态库即文件动态链接器被加载到内存后会首先给自己重定位然后才能运行像这种给自己重定位然后自动运行的行为我们称之为自举在嵌入式系统中也有自举功能它在系统上电启动之后会完成代码的自我复制和重定位操作然后加载到内核镜像中运行动态链接器解析解析可执行文件中未确定的符号以及需要链接的动态库信息将对应的动态库加载到内存并进行重定位操作这个过程其实和静态链接的重定位过程相同只不过推迟到了运行阶段重定位结束之后程序中要引用的符号都有了地址和定义动态链接器要将控制权交给可执行程序跳转到该程序运行静态链接的可执行程序在运行时一般加载地址等于链接地址而且这个地址是固定的可执行文件是操作系统帮我们创建一个子进程之后第一个被加载到内存空间的文件此时进程的地址一马平川还未被占用所以不用考虑地址资源的问题而动态链接库加载到内存的地址是随机的因为每一个可执行文件的带线啊哦不同所以加载到内存后剩余的地址空间也不相同动态链接库的地址要根据进程地址空间的实际空间的情况随机分配文件是在加载时进行的重定位虽然解决了可执行文件中对绝对地址的引用问题但也带来了另外的问题那就是对于每个进行动态库加载到内存的不同地址只能被进程自身共享无法再多个进程间共享无法节约内存但这也又违背了动态库设计的初衷跟静态库是一样的效果要如何解决这个问题呢如果想要让动态库放到内存的任何位置都可以运行都可以被多个进行共享那就是将动态库设计成与位置无关的代码上面的的参数就是指与位置无关最终的设计思路为将指令中需要修改的部分分离出来剩余的部分就与地址无关了放在哪里都能执行而且可以被多个进程共享需要被修改的指令和数据在每个进行中都有一个副本互不影响各自的运行对于同一个程序我们很容易通过相对寻址来实现代码和地址无关但是当动态库作为第三方模块被不同的应用程序引用的时候库中的一些绝对地址符号如何能做到同时被不同的应用程序引用的呢解决这个问题的方法其实也很简单那就是将应用程序引用的动态库符号收集起来保存到一个表之中买这个表用来记录各个引用符号的地址这个表被称之为全局偏移表现在大部分软件都是通过动态链接的方式开发的不仅可以节省内存空间升级维护也比较方便动态链接器会在系统默认的路径下查找即也回到系统指定的一些路径下查找用户可以在文件中添加自己的共享库路径修改之后可以使用重新生成一个缓存的每次增加或者删除共享库的路径时都需要使用更新缓存除此之外也可以使用库的路径临时改变共享库的查找路径堆栈在一个进程的地址空间中代码段数据段段在内存加载程序运行之后地址就已经被确定了在整个此程序的运行期间不在发生变化这部分内存就被称之为静态内存而在程序中使用申请的内存函数调用过程中的栈在程序运行期间是不断进行变化的这部分内存被称之为动态内存用户使用申请的内存一般被称之为堆内存函数调用过程中使用的内存被称之为栈内存堆内存一般在的后面随着用户使用申请的内存越来越多堆空间并不断地往高地址增长栈空间则紧挨着内核空间使用的是满递减堆栈栈指针会从用户空间的高地址向低地址不断增长栈是语言运行的基础一个函数内定义的局部变量传递的实参都是保存在栈中每个函数都会有专门的栈空间来保存这些数据每个函数的栈空间都被称之为栈帧只是感觉目前堆和栈对于我并没有什么作用下次真的有需求再来吧数据对齐仍旧先来说一下我的看法数据对齐其实我听过很多次了无论是在学习里接触到的数据对其还是在这里遇到的数据对其他们都说数据对齐可以极大的加速程序运行时间我不知道这个说法是不是对的但我还是比较奇怪不是很懂这样加速的原理今天就来真正的理解一下为什么非要进行地址对齐呢这是由的硬件决定的为了简化的电路设计有些在设计师简化了地址的访问只支持边界对齐的访问方式就比如有这八个地址只能读取和这俩为两组如果有一个数据存储在了这四个地址那么就需要读取两次而如果单独放在每个组里那也就只需要一次我可能知道为什么要用指针了上面也说过了堆栈相关的东西我之前还疑惑那些值传递和地址的传递现在可能是懂得了函数的形参和实参如果将一个很庞大的值传递到函数中该函数会有一个专门的栈空间而那些值同样也会重新复制一份但是如果是地址的话就不会如此只需要传递相应的地址即可省去了拷贝的步骤从而大大提升运行的速度',
-  isPost: true,
-  isHome: false,
-  isHighlightShrink: false,
-  isToc: true,
-  postUpdate: '2024-01-02 20:57:55',
-  postMainColor: '',
-}</script><noscript><style type="text/css">
-  #nav {
-    opacity: 1
-  }
-  .justified-gallery img {
-    opacity: 1
-  }
+<!DOCTYPE html>
 
-  #recent-posts time,
-  #post-meta time {
-    display: inline !important
-  }
-</style></noscript><script>(win=>{
-      win.saveToLocal = {
-        set: (key, value, ttl) => {
-          if (ttl === 0) return
-          const now = Date.now()
-          const expiry = now + ttl * 86400000
-          const item = {
-            value,
-            expiry
-          }
-          localStorage.setItem(key, JSON.stringify(item))
-        },
-      
-        get: key => {
-          const itemStr = localStorage.getItem(key)
-      
-          if (!itemStr) {
-            return undefined
-          }
-          const item = JSON.parse(itemStr)
-          const now = Date.now()
-      
-          if (now > item.expiry) {
-            localStorage.removeItem(key)
-            return undefined
-          }
-          return item.value
-        }
-      }
-    
-      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
-        const script = document.createElement('script')
-        script.src = url
-        script.async = true
-        script.onerror = reject
-        script.onload = script.onreadystatechange = function() {
-          const loadState = this.readyState
-          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
-          script.onload = script.onreadystatechange = null
-          resolve()
-        }
 
-        Object.keys(attr).forEach(key => {
-          script.setAttribute(key, attr[key])
-        })
+<html lang="zh-CN">
+  
 
-        document.head.appendChild(script)
-      })
-    
-      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
-        const link = document.createElement('link')
-        link.rel = 'stylesheet'
-        link.href = url
-        if (id) link.id = id
-        link.onerror = reject
-        link.onload = link.onreadystatechange = function() {
-          const loadState = this.readyState
-          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
-          link.onload = link.onreadystatechange = null
-          resolve()
-        }
-        document.head.appendChild(link)
-      })
-    
-      win.activateDarkMode = () => {
-        document.documentElement.setAttribute('data-theme', 'dark')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
-        }
-      }
-      win.activateLightMode = () => {
-        document.documentElement.setAttribute('data-theme', 'light')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
-        }
-      }
-      const t = saveToLocal.get('theme')
-    
-          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
-          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
-          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
-          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
-
-          if (t === undefined) {
-            if (isLightMode) activateLightMode()
-            else if (isDarkMode) activateDarkMode()
-            else if (isNotSpecified || hasNoSupport) {
-              const now = new Date()
-              const hour = now.getHours()
-              const isNight = hour <= 6 || hour >= 18
-              isNight ? activateDarkMode() : activateLightMode()
-            }
-            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
-              if (saveToLocal.get('theme') === undefined) {
-                e.matches ? activateDarkMode() : activateLightMode()
-              }
-            })
-          } else if (t === 'light') activateLightMode()
-          else activateDarkMode()
+    <head>
+      <meta charset="utf-8" />
         
-      const asideStatus = saveToLocal.get('aside-status')
-      if (asideStatus !== undefined) {
-        if (asideStatus === 'hide') {
-          document.documentElement.classList.add('hide-aside')
-        } else {
-          document.documentElement.classList.remove('hide-aside')
-        }
-      }
-    
-      const detectApple = () => {
-        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
-          document.documentElement.classList.add('apple')
-        }
-      }
-      detectApple()
-    })(window)</script><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="热爱学习的未来酱" type="application/atom+xml">
-</head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="https://npm.elemecdn.com/anzhiyu-blog-static@1.0.4/img/avatar.jpg"/><div class="loading-image-dot"></div></div></div><script>const preloader = {
-  endLoading: () => {
-    document.getElementById('loading-box').classList.add("loaded");
-  },
-  initLoading: () => {
-    document.getElementById('loading-box').classList.remove("loaded")
-  }
-}
-window.addEventListener('load',()=> { preloader.endLoading() })
-setTimeout(function(){preloader.endLoading();},10000)
+      <meta name="description" content="永远年轻，永远热泪盈眶" />
+      
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>C高级学习 |  热爱学习的未来酱</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
 
-if (true) {
-  document.addEventListener('pjax:send', () => { preloader.initLoading() })
-  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
-}</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.10/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><div class="back-home-button"><i class="anzhiyufont anzhiyu-icon-grip-vertical"></i><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://chai0705.github.io/" title="博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="博客"/><span class="back-menu-item-text">博客</span></a></div></div></div></div><a id="site-name" href="/" accesskey="h"><div class="title">热爱学习的未来酱</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a><div id="he-plugin-simple"></div><script>var WIDGET = {
-  "CONFIG": {
-    "modules": "0124",
-    "background": "2",
-    "tmpColor": "FFFFFF",
-    "tmpSize": "16",
-    "cityColor": "FFFFFF",
-    "citySize": "16",
-    "aqiColor": "E8D87B",
-    "aqiSize": "16",
-    "weatherIconSize": "24",
-    "alertIconSize": "18",
-    "padding": "10px 10px 10px 10px",
-    "shadow": "0",
-    "language": "auto",
-    "borderRadius": "20",
-    "fixed": "true",
-    "vertical": "top",
-    "horizontal": "left",
-    "left": "20",
-    "top": "7.1",
-    "key": "df245676fb434a0691ead1c63341cd94"
-  }
-}
-</script><link rel="stylesheet" href="https://widget.qweather.net/simple/static/css/he-simple.css?v=1.4.0"/><script src="https://widget.qweather.net/simple/static/js/he-simple.js?v=1.4.0"></script></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png" target="_blank"><img class="post-qr-code-img" alt="微信" src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png" target="_blank"><img class="post-qr-code-img" alt="支付宝" src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/12/"><span class="card-archive-list-date">十二月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">3</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/01/"><span class="card-archive-list-date">一月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">3</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/12/"><span class="card-archive-list-date">十二月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">9</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/11/"><span class="card-archive-list-date">十一月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">6</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/10/"><span class="card-archive-list-date">十月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">4</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/09/"><span class="card-archive-list-date">九月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">7</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div><div class="console-btn-item" id="consoleMusic" onclick="anzhiyu.musicToggle()" title="音乐开关"><a class="music-switch"><i class="anzhiyufont anzhiyu-icon-music"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url">学习</a></span><span class="article-meta tags"></span></div></div><h1 class="post-title" itemprop="name headline">C高级学习</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2024-01-01T22:50:19.000Z" title="发表于 2024-01-02 06:50:19">2024-01-02</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2024-01-02T12:57:55.211Z" title="更新于 2024-01-02 20:57:55">2024-01-02</time></span></div><div class="meta-secondline"><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为保定"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>保定</span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src=""></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope itemtype="http://example.com/2024/01/02/23%20%E5%B5%8C%E5%85%A5%E5%BC%8FC%E8%AF%AD%E8%A8%80%E7%9A%84%E8%87%AA%E6%88%91%E4%BF%AE%E5%85%BB/"><header><a class="post-meta-categories" href="/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url">学习</a><h1 id="CrawlerTitle" itemprop="name headline">C高级学习</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">chai</span><time itemprop="dateCreated datePublished" datetime="2024-01-01T22:50:19.000Z" title="发表于 2024-01-02 06:50:19">2024-01-02</time><time itemprop="dateCreated datePublished" datetime="2024-01-02T12:57:55.211Z" title="更新于 2024-01-02 20:57:55">2024-01-02</time></header><p>​	先说一下前提条件，在五年前的大一下学期，我第一次系统的学习了C语言，但那也仅仅只是一个初步的入门，并且在学校中的学习呀，大家懂的都懂，没有深究、没有思考、一切呀都是为了考试，然而如今的我不一样了，相对而言，我更喜欢研究研究研究这些，或者在小说的世界里躲避一下生活，这些都是类似的，只不过研究研究这些更让我有成就感，晚上就慢慢的来吧。</p>
+      
+<link rel="stylesheet" href="/css/fonts/remixicon.css">
+
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    <link rel="alternate" href="/atom.xml" title="热爱学习的未来酱" type="application/atom+xml">
+</head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-23 嵌入式C语言的自我修养"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  C高级学习
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2024/01/02/23%20%E5%B5%8C%E5%85%A5%E5%BC%8FC%E8%AF%AD%E8%A8%80%E7%9A%84%E8%87%AA%E6%88%91%E4%BF%AE%E5%85%BB/" class="article-date">
+  <time datetime="2024-01-01T22:50:19.000Z" itemprop="datePublished">2024-01-02</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">12.7k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">44 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>​	先说一下前提条件，在五年前的大一下学期，我第一次系统的学习了C语言，但那也仅仅只是一个初步的入门，并且在学校中的学习呀，大家懂的都懂，没有深究、没有思考、一切呀都是为了考试，然而如今的我不一样了，相对而言，我更喜欢研究研究研究这些，或者在小说的世界里躲避一下生活，这些都是类似的，只不过研究研究这些更让我有成就感，晚上就慢慢的来吧。</p>
 <h1 id="1计算机理论基石"><a class="markdownIt-Anchor" href="#1计算机理论基石"></a> 1.计算机理论基石</h1>
 <p>​	前面的关于二极管、三极管以及cmos管的原理这里就不深究了，等我以后再更深层次的学习的时候再说，现在就直接从CPU直接的工作原理开始。</p>
 <p>​	计算机的核心：==任何复杂的运算都可以分解为有限个的基本指令运算==。这句话其实我好久好久之前就听说过了，但其实呀一直不解其意这个原理被称为图灵完备性，它表明只要有足够的基本指令，就可以执行任何可计算的任务。</p>
@@ -245,29 +129,29 @@ if (true) {
 <p>​	程序：这种由基本指令组成的不同组合就称之程序。</p>
 <p>​	汇编语言：为了变成方便，我们给每个二进制的指令起了一个别名，也可以称之为助记符，也就是我们常说的汇编指令。</p>
 <p>​	高级语言：虽然汇编语言的出现给人们带来了极大的便利，人们不需要面对不懂含义的101010，但是当工程更为复杂的时候，汇编的维护也会变得极为艰难，所以为了迎合人们的开发和阅读，人们在汇编的基础上做了一系列的高级语言，就比如python、C、c++和java。</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312112059025.png" alt="image-20231211205948001" /></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312112059025.png" alt="image-20231211205948001" /></p>
 <p>​	然后用一个最简单的C语言程序和C++程序来验证</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> <span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="number">2</span> </span><br><span class="line"><span class="number">3</span> <span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">4 &#123;</span><br><span class="line"><span class="number">5</span>     <span class="built_in">printf</span>(<span class="string">&quot;hello world \r\n&quot;</span>);           </span><br><span class="line"><span class="number">6</span>     <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"><span class="number">7</span> &#125;</span><br></pre></td></tr></table></figure>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;hello world&quot;</span> &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;                                    </span><br></pre></td></tr></table></figure>
 <p>​	上面是两个最简单的C语言和C++语言的helloworld编程示例，而且最终的实现效果相同都是打印出来helloworld，如下所示：</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312112103692.png" alt="image-20231211210339665" /></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312112103692.png" alt="image-20231211210339665" /></p>
 <p>​	这个a.out是编译过后的可执行文件，中间的编译过程又是怎么样的呢？</p>
 <p>​	就像上面图示绘制的那样，高级语言都有对应的编译器，C语言又gcc,C<ins>有g</ins>，如果只是通过下面的命令进行编译的话只会得到最后的可执行文件</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gcc test.c</span><br><span class="line">g++ test.cpp</span><br></pre></td></tr></table></figure>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312112133800.png" alt="image-20231211213317748" /></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312112133800.png" alt="image-20231211213317748" /></p>
 <p>​	当然因为上面两个命令生成的都是a.out所以就覆盖了，也可以通过-o命令进行执行生成的可执行文件名称</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gcc test.c -o test_c</span><br><span class="line">g++ test.cpp -o test_c++</span><br></pre></td></tr></table></figure>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312112134585.png" alt="image-20231211213439536" /></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312112134585.png" alt="image-20231211213439536" /></p>
 <p>一个高级语言编译成可执行文件，更详细的过程为预处理、编译、汇编、链接</p>
 <p>(1)预处理指的是将头文件、函数、恒定义等都展开，可以通过-E参数来实现</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gcc -E test.c</span><br><span class="line">g++ -E test.cpp</span><br></pre></td></tr></table></figure>
 <p>(2)编译指的是通过编译器将高级语言编译为汇编语言，可以通过-S参数来完成</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gcc -S test.c -o test_c.s</span><br><span class="line">g++ -S test.cpp -o test_cpp.s</span><br></pre></td></tr></table></figure>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312112140031.png" alt="image-20231211214028969" /></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312112140031.png" alt="image-20231211214028969" /></p>
 <p>以s结尾的就是汇编文件，现在对于汇编语言的理解可以不用过深，以后再说。</p>
 <p>(3)汇编指的是将汇编程序通过汇编器编译为二进制的.o文件，可以通过参数-c来完成。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gcc -c test.c -o test_c.o</span><br><span class="line">g++ -c test.cpp -o test_cpp.o</span><br></pre></td></tr></table></figure>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312112144517.png" alt="image-20231211214409461" /></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312112144517.png" alt="image-20231211214409461" /></p>
 <p>(4)链接，可以将多个.o文件链接到一起从而生成可执行文件，没有命令，直接gcc编译即可。</p>
 <p>​	==我这里有个疑问，我这个程序是最简单那的hello world，也没有多个文件，那他未什么要进行链接呢，我这个地方不是很懂，希望下面的学习能解答我这个疑惑==</p>
 <h1 id="2cpu的频率指的是什么"><a class="markdownIt-Anchor" href="#2cpu的频率指的是什么"></a> 2.CPU的频率指的是什么</h1>
@@ -290,7 +174,7 @@ if (true) {
 <p>​	倍频系数是指CPU主频与外频之间的相对比例关系。在相同的外频下，倍频越高CPU的频率也越高。但实际上，在相同外频的前提下，高倍频的CPU本身意义并不大。这是因为CPU与系统之间数据传输速度是有限的，一味追求高主频而得到高倍频的CPU就会出现明显的“瓶颈”效应－CPU从系统中得到数据的极限速度不能够满足CPU运算的速度。</p>
 <p>​	我有个问题，我的13900KF的CPU频率是5.8GHZ ,我的内存频率是6000M的DDR5内存，这么算的话我的内存比CPU频率高呀，但理论来说不是呀，那问题出在哪？</p>
 <p>​	时间的单位是纳秒（ns，十亿分之一秒），毫秒（ms，千分之一秒），和秒（s）。吞吐量的单位是兆字节（MB）和千兆字节（GB）。让我们先从CPU和内存开始，下图是北桥部分：</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312112227283.webp" alt="img" /></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312112227283.webp" alt="img" /></p>
 <p>​	第一个令人惊叹的事实是：CPU快得离谱。在Core 2 3.0GHz上，大部分简单指令的执行只需要一个时钟周期，也就是<strong>1/3纳秒</strong>。即使是真空中传播的光，在这段时间内也只能走10厘米（约4英寸）。把上述事实记在心中是有好处的。当你要对程序做优化的时候就会想到，执行指令的开销对于当今的CPU而言是多么的微不足道。</p>
 <p>​	当CPU运转起来以后，它便会通过L1 cache和L2 cache对系统中的主存进行读写访问。cache使用的是静态存储器(SRAM)。相对于系统主存中使用的动态存储器（DRAM），cache读写速度快得多、造价也高昂得多。cache一般被放置在CPU芯片的内部，加之使用昂贵高速的存储器，使其给CPU带来的延迟非常低。在指令层次上的优化（instruction-level optimization），其效果是与优化后代码的大小息息相关。由于使用了高速缓存技术（caching），那些能够整体放入L1/L2 cache中的代码，和那些在运行时需要不断调入/调出（marshall into/out of）cache的代码，在性能上会产生非常明显的差异。</p>
 <p>​	正常情况下，当CPU操作一块内存区域时，其中的信息要么已经保存在L1/L2 cache，要么就需要将之从系统主存中调入cache，然后再处理。如果是后一种情况，我们就碰到了第一个瓶颈，一个大约250个时钟周期的延迟。在此期间如果CPU没有其他事情要做，则往往是处在停机状态的（stall）。为了给大家一个直观的印象，我们把CPU的一个时钟周期看作一秒。那么，从L1 cache读取信息就好像是拿起桌上的一张草稿纸（3秒）；从L2 cache读取信息则是从身边的书架上取出一本书（14秒）；而从主存中读取信息则相当于走到办公楼下去买个零食（4分钟）。</p>
@@ -298,7 +182,7 @@ if (true) {
 <p>看看L1/L2 cache的性能，再对比主存，就会发现：配置更大的cache或者编写能更好的利用cache的应用程序，会使系统的性能得到多么显著的提高。</p>
 <p>​	人们通常把CPU与内存之间的瓶颈叫做<strong>冯·诺依曼瓶颈（von Neumann bottleneck）</strong>。当今系统的前端总线带宽约为10GB/s，看起来很令人满意。在这个速度下，你可以在1秒内从内存中读取8GB的信息，或者10纳秒内读取100字 节。遗憾的是，这个吞吐量只是理论最大值（图中其他数据为实际值），而且是根本不可能达到的，因为主存控制电路会引入延迟。在做内存访问时，会遇到很多零 散的等待周期。比如电平协议要求，在选通一行、选通一列、取到可靠的数据之前，需要有一定的信号稳定时间。由于主存中使用电容来存储信息，为了防止因自然 放电而导致的信息丢失，就需要周期性的刷新它所存储的内容，这也带来额外的等待时间。某些连续的内存访问方式可能会比较高效，但仍然具有延时。而那些随机 的内存访问则消耗更多时间。所以延迟是不可避免的。</p>
 <p>图中下方的南桥连接了很多其他总线（如：PCI-E, USB）和外围设备：</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312112229804.webp" alt="img" /></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312112229804.webp" alt="img" /></p>
 <p>​	令人沮丧的是，南桥管理了一些反应相当迟钝的设备，比如硬盘。就算是缓慢的系统主存，和硬盘相比也可谓速度如飞了。继续拿办公室做比喻，等待硬盘寻道的时间相当于离开办公大楼并开始长达<strong>一年零三个月</strong>的环球旅行。这就解释了为何电脑的大部分工作都受制于磁盘I/O，以及为何数据库的性能在内存缓冲区被耗尽后会陡然下降。同时也解释了为何充足的RAM（用于缓冲）和高速的磁盘驱动器对系统的整体性能如此重要。</p>
 <p>虽然磁盘的&quot;连续&quot;存取速度确实可以在实际使用中达到，但这并非故事的全部。真正令人头疼的瓶颈在于寻道操作，也就是在磁盘表面移动读写磁头到正确的磁道上，然后再等待磁盘旋转到正确的位置上，以便读取指定扇区内的信息。RPM（每分钟绕转次数）用来指示磁盘的旋转速度：RPM越大，耽误在寻道上的时间就越少，所以越高的RPM意味着越快的磁盘。</p>
 <p>当 磁盘驱动器读取一个大的、连续存储的文件时会达到更高的持续读取速度，因为省去了寻道的时间。文件系统的碎片整理器就是用来把文件信息重组在连续的数据块 中，通过尽可能减少寻道来提高数据吞吐量。然而，说到计算机实际使用时的感受，磁盘的连续存取速度就不那么重要了，反而应该关注驱动器在单位时间内可以完 成的寻道和随机I/O操作的次数。对此，固态硬盘可以成为一个很棒的选择。</p>
@@ -322,17 +206,17 @@ if (true) {
 <li>CPU 将通用寄存器 x0 的值写入<strong>主存</strong></li>
 </ol>
 <p>我们将这个过程可以表示如下：</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312112220988.png" alt="img" /></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312112220988.png" alt="img" /></p>
 <p>其实现实中，CPU<strong>通用寄存器的速度和主存之间存在着太大的差异</strong>。两者之间的速度大致如下关系：</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312112220339.png" alt="img" /></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312112220339.png" alt="img" /></p>
 <p>​	CPU register的速度一般小于1ns，主存的速度一般是65ns左右。速度差异近百倍。因此，上面举例的3个步骤中，<strong>步骤1和步骤3实际上速度很慢</strong>。当CPU试图从主存中load/store 操作时，由于主存的速度限制，CPU不得不等待这漫长的65ns时间。如果我们可以提升主存的速度，那么系统将会获得很大的性能提升。如今的DDR存储设备，动不动就是几个GB，容量很大。如果我们采用更快材料制作更快速度的主存，并且拥有几乎差不多的容量。其成本将会大幅度上升。我们试图提升主存的速度和容量，又期望其成本很低，这就有点难为人了。因此，我们有一种折中的方法，那就是制作一块速度极快但是容量极小的存储设备。那么其成本也不会太高。这块存储设备我们称之为<strong>cache memory</strong>。在硬件上，我们<strong>将cache放置在CPU和主存之间</strong>，作为主存数据的缓存。 <strong>当CPU试图从主存中load/store数据的时候， CPU会首先从cache中查找对应地址的数据是否缓存在cache 中。如果其数据缓存在cache中，直接从cache中拿到数据并返回给CPU</strong>。当存在cache的时候，以上程序如何运行的例子的流程将会变成如下：</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img-blog.csdnimg.cn/20200830230817392.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JsZWF1Y2hhdA==,size_16,color_FFFFFF,t_70" alt="img" /></p>
+<p><img src="https://img-blog.csdnimg.cn/20200830230817392.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JsZWF1Y2hhdA==,size_16,color_FFFFFF,t_70" alt="img" /></p>
 <p>CPU和主存之间直接数据传输的方式转变成CPU和cache之间直接数据传输，cache负责和主存之间数据传输。</p>
 <h2 id="多级cache存储结构"><a class="markdownIt-Anchor" href="#多级cache存储结构"></a> <strong>多级cache存储结构</strong></h2>
 <p>cahe的速度在一定程度上同样影响着系统的性能。一般情况cache的速度可以达到1ns，几乎可以和CPU寄存器速度媲美。但是，这就满足人们对性能的追求了吗？并没有。当cache中没有缓存我们想要的数据的时候，依然需要漫长的等待从主存中load数据。为了进一步提升性能，引入多级cache。前面提到的cache，称之为<strong>L1 cache</strong>（第一级cache）。我们在L1 cache 后面连接<strong>L2 cache</strong>，在L2 cache 和主存之间连接<strong>L3 cache</strong>。等<strong>级越高，速度越慢，容量越大</strong>。但是速度相比较主存而言，依然很快。不同等级cache速度之间关系如下：</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312120658651.png" alt="img" /></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312120658651.png" alt="img" /></p>
 <p>经过3级cache的缓冲，各级cache和主存之间的速度最萌差也逐级减小。在一个真实的系统上，各级cache之间硬件上是如何关联的呢？我们看下Cortex-A53架构上各级cache之间的硬件抽象框图如下：</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312120659396.png" alt="img" /></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312120659396.png" alt="img" /></p>
 <p>​	在Cortex-A53架构上，<strong>L1 cache分为单独的instruction cache（ICache）和data cache（DCache），指令和数据分开</strong>。L1 cache是每个CPU私有的，<strong>每个CPU都有一个L1 cache</strong>。一个cluster 内的所有CPU共享一个L2 cache，<strong>L2 cache不区分指令和数据，都可以缓存</strong>。所有cluster之间共享L3 cache，L3 cache通过总线和主存相连</p>
 <p>​	关于cache就学习到这里，如果想要学习更多相关的可以看这个<a target="_blank" rel="noopener" href="https://blog.csdn.net/bleauchat/article/details/108312753?ops_request_misc=%7B%22request%5Fid%22%3A%22170230386216800225597418%22%2C%22scm%22%3A%2220140713.130102334..%22%7D&amp;request_id=170230386216800225597418&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-1-108312753-null-null.142%5Ev96%5Epc_search_result_base2&amp;utm_term=cache&amp;spm=1018.2226.3001.4187">博客</a>.</p>
 <h1 id="4总线和地址"><a class="markdownIt-Anchor" href="#4总线和地址"></a> 4.总线和地址</h1>
@@ -343,9 +227,9 @@ if (true) {
 <p>​	CPU和内存以及各种外部设备是通过总线连接在一起的，那CPU是如何访问内存或者控制各个外部设备的呢？在CPU内部，存在一系列的寄存器，这些寄存器是没有地址的，只需要寄存器的名称去访问即可，而内存以及各个外部设备就需要地址去访问了。那这里的地址是什么，这里的地址又是如何分配的呢？</p>
 <p>​	地址的本质实际上就是由CPU管教发出的一组地址控制信号，因为这些信号是由CPU管教直接发出的，因此也被称之为物理地址。在带有MMU的CPU平台下 ，程序的运行一般使用的是虚拟地址，MMU会把虚拟地址转换为物理地址，然后通过CPU的管教发送出去。</p>
 <p>​	所谓总线（Bus），是指计算机设备和设备之间传输信息的公共数据通道。总线是连接计算机硬件系统内多种设备的通信线路，它的一个重要特征是由总线上的所有设备共享，可以将计算机系统内的多种设备连接到总线上。如果是某两个设备或设备之间专用的信号连线，就不能称之为总线。</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312120727706.png" alt="9bb1a43e2e0140128d3e1e35f1bf0096.png" /></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312120727706.png" alt="9bb1a43e2e0140128d3e1e35f1bf0096.png" /></p>
 <p>​	一些总线标准：</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312120726170.png" alt="770540885ce04b5a83ef5b49f5fc9546.png" /></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312120726170.png" alt="770540885ce04b5a83ef5b49f5fc9546.png" /></p>
 <h1 id="5指令集和微架构"><a class="markdownIt-Anchor" href="#5指令集和微架构"></a> 5.指令集和微架构</h1>
 <p>​	在第一节提到过，任何一个复杂的程序都可以分解位=为有限个基本指令的组合，而这些是在CPU设计的时候就已经确定了的，他的内部只允许对应指令的完成，而不同架构的处理器，他们的指令是不一样的，哪怕是同样的指令，他们的内部电路实现也是不一样的，所以不同架构的可执行程序是不能混用的。ARM架构的处理器只能运行ARM架构的程序，X86架构的处理器只允许运行X86架构的程序。上面提到的这些指令的集合就被称之为指令集。</p>
 <p>​	在芯片工程师设计CPU的时候，要根据指令集中规定的格式指令作为标准，实现那不同的译码电路来支持指令集各种指令的运行（==这里你不用管如何译码的，这里目前不需要深究==），指令集的最终实现就是微架构，也就是CPU内部的各种译码和执行电路。</p>
@@ -353,7 +237,7 @@ if (true) {
 <p>​	这里目前认识到这个程度就可以了，不做过多的深究，以及后面有需要再去学习了解一下汇编语言。</p>
 <h1 id="6可执行文件的组成"><a class="markdownIt-Anchor" href="#6可执行文件的组成"></a> 6.可执行文件的组成</h1>
 <p>​	在上面已经讲解过了，编译完成之后会生成一个二进制的可执行文件，这个可执行文件只能在对应架构的机器上才能运行，那这个可执行程序都是由什么组成的呢？这时候就要提到一个命令了，也就是readelf，从名字就可以看出他的作用是读取一个可执行文件，先来用file命令查看一下可执行程序，如下所示：<br />
-<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312122103556.png" alt="image-20231212210354485" /></p>
+<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312122103556.png" alt="image-20231212210354485" /></p>
 <ul>
 <li>“test_c:”: 这是文件的名称。</li>
 <li>“ELF 64-bit LSB shared object, x86-64”: 这是文件的类型和架构。它是一个64位的LSB（Linux Standard Base）共享对象，针对x86-64架构。</li>
@@ -366,18 +250,18 @@ if (true) {
 </ul>
 <p>Executable and Linkable Format  可执行和可链接的格式。</p>
 <p>可以通过readelf -h命令查看可执行文件的文件头（header）信息，例如查看上面编译的hellloworld文件，具体内容如下所示：</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312122111923.png" alt="image-20231212211112738" /></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312122111923.png" alt="image-20231212211112738" /></p>
 <p>​	这里了解到的信息其实并没有什么用，唯一有用的就是最下面的section header数量，section header用来主要用来描述可执行文件的section信息，一个可执行文件通常由不同的section来组成，包括代码段、数据段、BSS段、只读数据段，每个section由section header来描述。这里的文件头其实也就是指的文件最开始的那几个字节的信息，然后通过readelf -S 查看可执行文件的节头表（section header）。仍旧以helloworld为里，查看到的节头表内容如下所示：<br />
-<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312122118128.png" alt="image-20231212211818864" /></p>
+<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312122118128.png" alt="image-20231212211818864" /></p>
 <p>​	通过节头表的信息可以窥探到一个可执行文件的组成，上面我比较熟悉的其实并不多，其实也就知道代码段 text ，数据段 data，。bss段，其他知道的并不多，函数翻译成二级制指令放在代码段之中，初始化的全局变量和静态局部变量放在数据段之中，未初始化的全局变量和静态局部变量放在BSS段当中，其他就没了。</p>
 <h1 id="7汇编过程"><a class="markdownIt-Anchor" href="#7汇编过程"></a> 7.汇编过程</h1>
 <p>​	先说一下我的想法，本来我是不想学习这个的，后来我感觉这个东西与后面的链接、与动态库静态库有很深的联系，所以我还是回来看这个了。</p>
 <p>​	预处理之后就是编译，汇编的过程就是将程序代码转换为一个个的汇编指令，再后面才是真正的汇编过程，汇编依靠汇编器，汇编器会将汇编语言转换为二进制语言。</p>
 <p>​	每个重定位的目标文件都是以零地址为基地址进行的代码段的组装，但是后面的链接过程需要将好多个目标文件链接为一个可执行文件，而每个文件都是以零地址进行偏移的，所以在链接的时候需要更新目标文件中的变量或者函数的地址，这个被称之为重定义。那链接器如何知道哪些函数或者变量需要重定位呢？很简单将需要重定位的符号收集起来，生成一个重定位表，以section的形式保存到每个可重定位目标文件即可。</p>
 <p>​	上面提到符号表和重定位表都是很重要的概念。符号表可以通过readelf -s命令来获取，注意这里是小s</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312122209612.png" alt="image-20231212220932369" /></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312122209612.png" alt="image-20231212220932369" /></p>
 <p>使用readelf -r可以获得该重定位目标文件的重定位表，如下所示：</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312122214971.png" alt="image-20231212221407848" /></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312122214971.png" alt="image-20231212221407848" /></p>
 <h1 id="8静态链接库"><a class="markdownIt-Anchor" href="#8静态链接库"></a> 8.静态链接库</h1>
 <p>​	仍旧先说一下我的理解和看法，无论是静态链接库还是动态链接库，他们实际上就是可重定位的目标文件，即汇编过程之后生成的文件，当然也不对，可以是由一个目标文件生成的库文件也可以是由好几个目标文件生成库文件。很多时候人们会将函数的实现给封装起来，我们只需要调用相应的函数即可，而很多不开源的项目，也会提供封装好的库，让人们只需要使用头文件中定义的相应函数即可。</p>
 <p>​	静态库会在编译程序的时候将引用的函数代码或者变量链接到可执行文件里，和在可执行程序组装到一起，而动态库不会和可执行文件组装到一起，而是在程序运行的时候加载到内存参与链接。</p>
@@ -390,7 +274,7 @@ if (true) {
 <li><code>-s</code>：创建索引表。</li>
 <li><code>-c</code>:   不在必须创建库的时候给出警告</li>
 </ul>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312130724504.png" alt="" /></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312130724504.png" alt="" /></p>
 <p>2.向静态库中添加对象文件</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ar -r libexample.a newfile.o</span><br></pre></td></tr></table></figure>
 <p>这个命令将向现有的静态库&quot;libexample.a&quot;中添加新的对象文件&quot;newfile.o&quot;。选项&quot;r&quot;表示替换库中的现有文件。</p>
@@ -399,12 +283,12 @@ if (true) {
 <p>这个命令将从静态库&quot;libexample.a&quot;中提取出对象文件&quot;file1.o&quot;。选项&quot;x&quot;表示提取</p>
 <p>4.列出静态库中的对象文件</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ar -t libexample.a</span><br></pre></td></tr></table></figure>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312130727529.png" alt="image-20231213072726515" /></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312130727529.png" alt="image-20231213072726515" /></p>
 <p>5.替换静态库中的对象文件</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ar -d libexample.a file1.o</span><br><span class="line">ar -r libexample.a newfile.o</span><br></pre></td></tr></table></figure>
 <p>这两个命令分别用于从静态库中删除对象文件&quot;file1.o&quot;和向静态库中添加新的对象文件&quot;newfile.o&quot;。选项&quot;d&quot;表示删除。</p>
 <p>​	编译器是以源文件为单位进行程序编译的，链接器在连接的过程中逐个对目标文件进行分解和组装，但这样很容易产生一个问题，如果一个源文件中我们定义了一百个函数，但是只使用了其中的一个，链接器在连接的过程中会将这一百个函数都组装到可执行文件中，这会让最终生成的可执行文件大大增加，那要如何解决这个问题呢，只需要将每一个函数单独使用一个源文件来实现，最终将多个目标文件打包即可。而我们最常用的libc库就是这样实现的，可以通过上面学习的ar -t命令来查看对象文件列表</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312130742069.png" alt="image-20231213074253042" /></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312130742069.png" alt="image-20231213074253042" /></p>
 <p>​	可以看到libc将每个函数都搞成了一个目标文件，从而解决了上面提到的问题。这时候又出现了另一个问题，就比如我们经常用到printf进行字段的打印，可能很多个程序都调用了它，链接器在链接的时候就要将多个printf指令添加到多个可执行文件中，在一个多任务的环境中，多个进程并发运行的时候，你会发现内存中有大量重复的printf指令代码，从而浪费了很多的资源，那这个问题要如何解决呢，聪明的工程师们想出来了动态库的方法。</p>
 <p>​	==今天就学习到这个地方了，其实上面的这些东西你都不配说难，因为已经有先人替你踩过坑了，也有更厉害的先人提出来了这些理论，并且用到了实践中，计算机当中的一切都不再属于新鲜事，我们已经站在了巨人的肩膀上，没有理由后人比前人笨，也没有道理学不会，学不会只能证明你没有用心==</p>
 <h1 id="9动态链接库"><a class="markdownIt-Anchor" href="#9动态链接库"></a> 9.动态链接库</h1>
@@ -412,7 +296,7 @@ if (true) {
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -fPIC -shared C文件 -o 库文件</span><br></pre></td></tr></table></figure>
 <p>​		在Linux环境下，当我们运行一个程序时，操作系统首先会在给程序fork一个子进程，接着动态连接器加载到内存，操作系统将控制器权交给动态链接器，让动态链接器完成动态库的加载和重定位搞作，最后跳转到要运行的程序。动态链接器在C标准库中实现，是glibc的一部分，主要完成程序运行前的动态链接工作，在可执行文件的.interp段中存放的有动态链接器的加载路径，可以通过objdump命令查看。</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">objdump -j .interp -s a.out</span><br></pre></td></tr></table></figure>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312132058333.png" alt="" /></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312132058333.png" alt="" /></p>
 <p><code>objdump</code>是一个用于分析目标文件（object file）的常用命令行工具。它在各种操作系统和编程环境中都有提供，例如Linux和Windows。</p>
 <p><code>objdump</code>的主要作用是提供目标文件的反汇编、符号表、节（section）信息等相关信息。以下是一些常见的用途：</p>
 <ol>
@@ -441,148 +325,466 @@ if (true) {
 <p>​	我可能知道为什么要用指针了，上面也说过了堆栈相关的东西，我之前还疑惑那些值传递和地址的传递，现在可能是懂得了，函数的形参和实参。</p>
 <p>​	如果将一个很庞大的值传递到函数中，该函数会有一个专门的栈空间，而那些值同样也会重新复制一份，但是如果是地址的话，就不会如此，只需要传递相应的地址即可，省去了拷贝的步骤，从而大大提升运行的速度。</p>
 <p>​</p>
-</article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg" title="头像" alt="头像"></a><div class="post-copyright__author_name">chai</div><div class="post-copyright__author_desc">热爱学习</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="http://example.com/2024/01/02/23%20%E5%B5%8C%E5%85%A5%E5%BC%8FC%E8%AF%AD%E8%A8%80%E7%9A%84%E8%87%AA%E6%88%91%E4%BF%AE%E5%85%BB/">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('http://example.com/2024/01/02/23%20%E5%B5%8C%E5%85%A5%E5%BC%8FC%E8%AF%AD%E8%A8%80%E7%9A%84%E8%87%AA%E6%88%91%E4%BF%AE%E5%85%BB/')">C高级学习</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="http://example.com/2024/01/02/23%20%E5%B5%8C%E5%85%A5%E5%BC%8FC%E8%AF%AD%E8%A8%80%E7%9A%84%E8%87%AA%E6%88%91%E4%BF%AE%E5%85%BB/"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=C高级学习&amp;url=http://example.com/2024/01/02/23%20%E5%B5%8C%E5%85%A5%E5%BC%8FC%E8%AF%AD%E8%A8%80%E7%9A%84%E8%87%AA%E6%88%91%E4%BF%AE%E5%85%BB/&amp;pic=" rel="external nofollow noreferrer noopener"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
-  var currentPageUrl = window.location.href;
-  var input = document.createElement("input");
-  input.setAttribute("value", currentPageUrl);
-  document.body.appendChild(input);
-  input.select();
-  input.setSelectionRange(0, 99999);
-  document.execCommand("copy");
-  document.body.removeChild(input);
-}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">热爱学习的未来酱</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"></div></div></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/01/02/27%20CPU%E9%87%8C%E7%9A%84C%E5%92%8CC++/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">计算机眼里的C和C++</div></div></a></div><div class="next-post pull-right"><a href="/2024/01/18/28_%E5%BF%85%E5%89%AA/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">必剪学习</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__description">永远年轻，永远热泪盈眶</div></div></div><div class="card-widget anzhiyu-right-widget" id="card-wechat" onclick="null"><div id="flip-wrapper"><div id="flip-content"><div class="face" style="background: url(https://bu.dusays.com/2023/01/13/63c02edf44033.png) center center / 100% no-repeat"></div><div class="back face" style="background: url(https://bu.dusays.com/2023/05/13/645fa415e8694.png) center center / 100% no-repeat"></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%90%86%E8%AE%BA%E5%9F%BA%E7%9F%B3"><span class="toc-number">1.</span> <span class="toc-text"> 1.计算机理论基石</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2cpu%E7%9A%84%E9%A2%91%E7%8E%87%E6%8C%87%E7%9A%84%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-number">2.</span> <span class="toc-text"> 2.CPU的频率指的是什么</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3cache"><span class="toc-number">3.</span> <span class="toc-text"> 3.cache</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81cache"><span class="toc-number">3.1.</span> <span class="toc-text"> 为什么需要cache</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E7%BA%A7cache%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84"><span class="toc-number">3.2.</span> <span class="toc-text"> 多级cache存储结构</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4%E6%80%BB%E7%BA%BF%E5%92%8C%E5%9C%B0%E5%9D%80"><span class="toc-number">4.</span> <span class="toc-text"> 4.总线和地址</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5%E6%8C%87%E4%BB%A4%E9%9B%86%E5%92%8C%E5%BE%AE%E6%9E%B6%E6%9E%84"><span class="toc-number">5.</span> <span class="toc-text"> 5.指令集和微架构</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6%E7%9A%84%E7%BB%84%E6%88%90"><span class="toc-number">6.</span> <span class="toc-text"> 6.可执行文件的组成</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#7%E6%B1%87%E7%BC%96%E8%BF%87%E7%A8%8B"><span class="toc-number">7.</span> <span class="toc-text"> 7.汇编过程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#8%E9%9D%99%E6%80%81%E9%93%BE%E6%8E%A5%E5%BA%93"><span class="toc-number">8.</span> <span class="toc-text"> 8.静态链接库</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#9%E5%8A%A8%E6%80%81%E9%93%BE%E6%8E%A5%E5%BA%93"><span class="toc-number">9.</span> <span class="toc-text"> 9.动态链接库</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#10%E5%A0%86%E6%A0%88"><span class="toc-number">10.</span> <span class="toc-text"> 10.堆栈</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#11%E6%95%B0%E6%8D%AE%E5%AF%B9%E9%BD%90"><span class="toc-number">11.</span> <span class="toc-text"> 11.数据对齐</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/12/31/%E8%A7%84%E7%9F%A9/" title="规矩">规矩</a><time datetime="2024-12-31T14:15:56.000Z" title="发表于 2024-12-31 22:15:56">2024-12-31</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/12/31/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/" title="工作记录">工作记录</a><time datetime="2024-12-31T14:15:56.000Z" title="发表于 2024-12-31 22:15:56">2024-12-31</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/12/31/%E5%8F%8D%E6%80%9D/" title="反思">反思</a><time datetime="2024-12-31T13:26:56.000Z" title="发表于 2024-12-31 21:26:56">2024-12-31</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/01/18/28_%E5%BF%85%E5%89%AA/" title="必剪学习">必剪学习</a><time datetime="2024-01-17T22:50:19.000Z" title="发表于 2024-01-18 06:50:19">2024-01-18</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/01/02/23%20%E5%B5%8C%E5%85%A5%E5%BC%8FC%E8%AF%AD%E8%A8%80%E7%9A%84%E8%87%AA%E6%88%91%E4%BF%AE%E5%85%BB/" title="C高级学习">C高级学习</a><time datetime="2024-01-01T22:50:19.000Z" title="发表于 2024-01-02 06:50:19">2024-01-02</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">&copy;2020 - 2024 By <a class="footer-bar-link" href="/" title="chai" target="_blank">chai</a></div></div><div id="footer-type-tips"></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/anzhiyu-c/hexo-theme-anzhiyu" title="主题">主题</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">32</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">5</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://chai0705.github.io/" title="博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="博客"/><span class="back-menu-item-text">博客</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="nav-music"><a id="nav-music-hoverTips" onclick="anzhiyu.musicToggle()" accesskey="m">播放音乐</a><div id="console-music-bg"></div><meting-js id="8152976493" server="netease" type="playlist" mutex="true" preload="none" theme="var(--anzhiyu-main)" data-lrctype="0" order="random" volume="0.7"></meting-js></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://y.qq.com/n/ryqq/playlist/8802438608&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.cbd.int/vanilla-lazyload@17.8.5/dist/lazyload.iife.min.js"></script><script src="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.js"></script><canvas id="universe"></canvas><script async src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
-var HoldLog = console.log;
-console.log = function () {};
-let now1 = new Date();
-queueMicrotask(() => {
-  const Log = function () {
-    HoldLog.apply(console, arguments);
-  }; //在恢复前输出日志
-  const grt = new Date("04/01/2021 00:00:00"); //此处修改你的建站时间或者网站上线时间
-  now1.setTime(now1.getTime() + 250);
-  const days = (now1 - grt) / 1000 / 60 / 60 / 24;
-  const dnum = Math.floor(days);
-  const ascll = [
-    `欢迎使用安知鱼!`,
-    `生活明朗, 万物可爱`,
-    `
-        
-       █████╗ ███╗   ██╗███████╗██╗  ██╗██╗██╗   ██╗██╗   ██╗
-      ██╔══██╗████╗  ██║╚══███╔╝██║  ██║██║╚██╗ ██╔╝██║   ██║
-      ███████║██╔██╗ ██║  ███╔╝ ███████║██║ ╚████╔╝ ██║   ██║
-      ██╔══██║██║╚██╗██║ ███╔╝  ██╔══██║██║  ╚██╔╝  ██║   ██║
-      ██║  ██║██║ ╚████║███████╗██║  ██║██║   ██║   ╚██████╔╝
-      ╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝    ╚═════╝
-        
-        `,
-    "已上线",
-    dnum,
-    "天",
-    "©2020 By 安知鱼 V1.6.12",
-  ];
-  const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
+ 
+      <!-- reward -->
+      
+    </div>
+    
 
-  setTimeout(
-    Log.bind(
-      console,
-      `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
-      "color:#425AEF",
-      "",
-      "color:#425AEF",
-      "color:#425AEF",
-      "",
-      "color:#425AEF",
-      ""
-    )
-  );
-  setTimeout(
-    Log.bind(
-      console,
-      `%c ${ascll2[0]} %c ${ascll2[1]} %c \n${ascll2[2]} %c\n${ascll2[3]}\n`,
-      "color:white; background-color:#4fd953",
-      "",
-      "",
-      'background:url("https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/tinggge.gif") no-repeat;font-size:450%'
-    )
-  );
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
 
-  setTimeout(Log.bind(console, "%c WELCOME %c 你好，小笨蛋.", "color:white; background-color:#4f90d9", ""));
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2024/01/02/23%20%E5%B5%8C%E5%85%A5%E5%BC%8FC%E8%AF%AD%E8%A8%80%E7%9A%84%E8%87%AA%E6%88%91%E4%BF%AE%E5%85%BB/" alt="微信分享二维码">
+    </div>
+</div>
 
-  setTimeout(
-    console.warn.bind(
-      console,
-      "%c ⚡ Powered by 安知鱼 %c 你正在访问 chai 的博客.",
-      "color:white; background-color:#f0ad4e",
-      ""
-    )
-  );
+<div id="share-mask"></div>  
+    </footer>
+  </div>
 
-  setTimeout(Log.bind(console, "%c W23-12 %c 你已打开控制台.", "color:white; background-color:#4f90d9", ""));
+   
+  <nav class="article-nav">
+    
+      <a href="/2024/01/18/28_%E5%BF%85%E5%89%AA/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            必剪学习
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2024/01/02/27%20CPU%E9%87%8C%E7%9A%84C%E5%92%8CC++/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">计算机眼里的C和C++</div>
+      </a>
+    
+  </nav>
 
-  setTimeout(
-    console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
-  );
-});</script><script async src="/anzhiyu/random.js"></script><div class="js-pjax"><input type="hidden" name="page-type" id="page-type" value="post"></div><script>var visitorMail = "";
-</script><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><script src="/js/anzhiyu/right_click_menu.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://cdn.cbd.int/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
-var pjax = new Pjax({
-  elements: 'a:not([target="_blank"])',
-  selectors: pjaxSelectors,
-  cacheBust: false,
-  analytics: false,
-  scrollRestoration: false
-})
-
-document.addEventListener('pjax:send', function () {
-  // removeEventListener scroll 
-  anzhiyu.removeGlobalFnEvent('pjax')
-  anzhiyu.removeGlobalFnEvent('themeChange')
-
-  document.getElementById('rightside').classList.remove('rightside-show')
   
-  if (window.aplayers) {
-    for (let i = 0; i < window.aplayers.length; i++) {
-      if (!window.aplayers[i].options.fixed) {
-        window.aplayers[i].destroy()
-      }
+   
+  
+   
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2015-2024
+        <i class="ri-heart-fill heart_icon"></i> chai
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="热爱学习的未来酱"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE">瑞芯微</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/%E5%AD%A6%E4%B9%A0">学习</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/%E7%94%9F%E6%B4%BB">生活</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
     }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
   }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
 
-  typeof typed === 'object' && typed.destroy()
-
-  //reset readmode
-  const $bodyClassList = document.body.classList
-  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
-})
-
-document.addEventListener('pjax:complete', function () {
-  window.refreshFn()
-
-  document.querySelectorAll('script[data-pjax]').forEach(item => {
-    const newScript = document.createElement('script')
-    const content = item.text || item.textContent || item.innerHTML || ""
-    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
-    newScript.appendChild(document.createTextNode(content))
-    item.parentNode.replaceChild(newScript, item)
-  })
-
-  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
-
-  typeof panguInit === 'function' && panguInit()
-
-  // google analytics
-  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
-
-  // baidu analytics
-  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
-
-  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
-
-  // prismjs
-  typeof Prism === 'object' && Prism.highlightAll()
-})
-
-document.addEventListener('pjax:error', e => {
-  if (e.request.status === 404) {
-    pjax.loadUrl('/404.html')
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
   }
-})</script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div></body></html>
+</script>
+
+
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="52"
+        src="//music.163.com/outchain/player?type=2&id=22707008&auto=0&height=32"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
+    
+    
+
+  </div>
+</body>
+
+</html>
