@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2024-02-01T00:43:22.770Z</updated>
+  <updated>2024-02-16T14:01:09.840Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -17,11 +17,68 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>反思</title>
-    <link href="http://example.com/2024/01/31/%E5%8F%8D%E6%80%9D/"/>
-    <id>http://example.com/2024/01/31/%E5%8F%8D%E6%80%9D/</id>
+    <title>反思(2月上)</title>
+    <link href="http://example.com/2024/02/16/%E5%8F%8D%E6%80%9D(2%E6%9C%88%E4%B8%8A)/"/>
+    <id>http://example.com/2024/02/16/%E5%8F%8D%E6%80%9D(2%E6%9C%88%E4%B8%8A)/</id>
+    <published>2024-02-16T13:26:56.000Z</published>
+    <updated>2024-02-16T14:01:09.840Z</updated>
+    
+    
+    <summary type="html">Here&#39;s something encrypted, password is required to continue reading.</summary>
+    
+    
+    
+    <category term="生活" scheme="http://example.com/categories/%E7%94%9F%E6%B4%BB/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>反思(2月上)</title>
+    <link href="http://example.com/2024/02/16/%E5%8F%8D%E6%80%9D(2%E6%9C%88%E4%B8%8B)/"/>
+    <id>http://example.com/2024/02/16/%E5%8F%8D%E6%80%9D(2%E6%9C%88%E4%B8%8B)/</id>
+    <published>2024-02-16T13:26:56.000Z</published>
+    <updated>2024-02-17T14:35:32.159Z</updated>
+    
+    
+    <summary type="html">Here&#39;s something encrypted, password is required to continue reading.</summary>
+    
+    
+    
+    <category term="生活" scheme="http://example.com/categories/%E7%94%9F%E6%B4%BB/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>shell编程 第二次学习</title>
+    <link href="http://example.com/2024/02/02/32%20shell%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%BA%8C%E6%AC%A1%E5%AD%A6%E4%B9%A0/"/>
+    <id>http://example.com/2024/02/02/32%20shell%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%BA%8C%E6%AC%A1%E5%AD%A6%E4%B9%A0/</id>
+    <published>2024-02-02T12:00:19.000Z</published>
+    <updated>2024-02-02T12:40:30.342Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;&#92;assets&#92;css&#92;APlayer.min.css&quot;&gt;&lt;script src=&quot;&#92;assets&#92;js&#92;APlayer.min.js&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="学习" scheme="http://example.com/categories/%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>反思(24年1月及之前)</title>
+    <link href="http://example.com/2024/01/31/%E5%8F%8D%E6%80%9D%20(24%E5%B9%B41%E6%9C%88%E5%8F%8A%E4%B9%8B%E5%89%8D)/"/>
+    <id>http://example.com/2024/01/31/%E5%8F%8D%E6%80%9D%20(24%E5%B9%B41%E6%9C%88%E5%8F%8A%E4%B9%8B%E5%89%8D)/</id>
     <published>2024-01-31T13:26:56.000Z</published>
-    <updated>2024-02-01T00:43:22.770Z</updated>
+    <updated>2024-02-16T08:49:55.595Z</updated>
     
     
     <summary type="html">Here&#39;s something encrypted, password is required to continue reading.</summary>
@@ -147,7 +204,7 @@
     <link href="http://example.com/2024/01/02/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/"/>
     <id>http://example.com/2024/01/02/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/</id>
     <published>2024-01-02T14:15:56.000Z</published>
-    <updated>2024-01-24T23:32:36.901Z</updated>
+    <updated>2024-02-17T14:31:49.018Z</updated>
     
     
     <summary type="html">Here&#39;s something encrypted, password is required to continue reading.</summary>
@@ -275,11 +332,11 @@
   </entry>
   
   <entry>
-    <title>shell编程</title>
+    <title>shell编程 第一次学习</title>
     <link href="http://example.com/2023/12/18/19%20shell%E7%BC%96%E7%A8%8B/"/>
     <id>http://example.com/2023/12/18/19%20shell%E7%BC%96%E7%A8%8B/</id>
     <published>2023-12-18T12:41:19.000Z</published>
-    <updated>2024-01-05T13:37:26.248Z</updated>
+    <updated>2024-02-02T11:58:36.414Z</updated>
     
     
       
@@ -385,75 +442,6 @@
     
     
     <category term="瑞芯微" scheme="http://example.com/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>香橙派文件系统构建脚本分析</title>
-    <link href="http://example.com/2023/12/02/16-%E9%A6%99%E6%A9%99%E6%B4%BE%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%84%E5%BB%BA%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/"/>
-    <id>http://example.com/2023/12/02/16-%E9%A6%99%E6%A9%99%E6%B4%BE%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%84%E5%BB%BA%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/</id>
-    <published>2023-12-02T07:01:21.000Z</published>
-    <updated>2023-12-04T13:12:25.920Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;&#92;assets&#92;css&#92;APlayer.min.css&quot;&gt;&lt;script src=&quot;&#92;assets&#92;js&#92;APlayer.min.js&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="瑞芯微" scheme="http://example.com/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>ubuntu和debian文件系统构建详解</title>
-    <link href="http://example.com/2023/11/20/10%20debian%E5%92%8Cubuntu%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%84%E5%BB%BA%E8%AF%A6%E8%A7%A3/"/>
-    <id>http://example.com/2023/11/20/10%20debian%E5%92%8Cubuntu%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%84%E5%BB%BA%E8%AF%A6%E8%A7%A3/</id>
-    <published>2023-11-20T13:16:57.000Z</published>
-    <updated>2023-12-04T13:14:48.360Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;&#92;assets&#92;css&#92;APlayer.min.css&quot;&gt;&lt;script src=&quot;&#92;assets&#92;js&#92;APlayer.min.js&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="瑞芯微" scheme="http://example.com/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>显示硬件发展与视频开发知识点扫盲</title>
-    <link href="http://example.com/2023/11/19/9%20%E6%98%BE%E7%A4%BA%E7%A1%AC%E4%BB%B6%E5%8F%91%E5%B1%95%E4%B8%8E%E8%A7%86%E9%A2%91%E5%BC%80%E5%8F%91%E7%9F%A5%E8%AF%86%E7%82%B9%E6%89%AB%E7%9B%B2/"/>
-    <id>http://example.com/2023/11/19/9%20%E6%98%BE%E7%A4%BA%E7%A1%AC%E4%BB%B6%E5%8F%91%E5%B1%95%E4%B8%8E%E8%A7%86%E9%A2%91%E5%BC%80%E5%8F%91%E7%9F%A5%E8%AF%86%E7%82%B9%E6%89%AB%E7%9B%B2/</id>
-    <published>2023-11-19T13:16:56.000Z</published>
-    <updated>2023-12-04T13:28:45.197Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;&#92;assets&#92;css&#92;APlayer.min.css&quot;&gt;&lt;script src=&quot;&#92;assets&#92;js&#92;APlayer.min.js&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="学习" scheme="http://example.com/categories/%E5%AD%A6%E4%B9%A0/"/>
     
     
   </entry>
