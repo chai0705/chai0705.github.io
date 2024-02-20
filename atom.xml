@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2024-02-19T00:25:18.767Z</updated>
+  <updated>2024-02-19T23:24:46.068Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -17,11 +17,34 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>书单</title>
+    <link href="http://example.com/2024/02/20/33_%E4%B9%A6%E5%8D%95/"/>
+    <id>http://example.com/2024/02/20/33_%E4%B9%A6%E5%8D%95/</id>
+    <published>2024-02-19T23:14:19.000Z</published>
+    <updated>2024-02-19T23:24:46.068Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;&#92;assets&#92;css&#92;APlayer.min.css&quot;&gt;&lt;script src=&quot;&#92;assets&#92;js&#92;APlayer.min.js&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="生活" scheme="http://example.com/categories/%E7%94%9F%E6%B4%BB/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>反思(2月第三个星期)</title>
     <link href="http://example.com/2024/02/19/%E5%8F%8D%E6%80%9D(2%E6%9C%88%E7%AC%AC3%E4%B8%AA%E6%98%9F%E6%9C%9F)/"/>
     <id>http://example.com/2024/02/19/%E5%8F%8D%E6%80%9D(2%E6%9C%88%E7%AC%AC3%E4%B8%AA%E6%98%9F%E6%9C%9F)/</id>
     <published>2024-02-18T22:26:56.000Z</published>
-    <updated>2024-02-19T00:25:18.767Z</updated>
+    <updated>2024-02-20T00:13:13.254Z</updated>
     
     
     <summary type="html">Here&#39;s something encrypted, password is required to continue reading.</summary>
@@ -419,29 +442,6 @@
     
     
     <category term="学习" scheme="http://example.com/categories/%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>ubuntu和debian源</title>
-    <link href="http://example.com/2023/12/03/20%20ubuntu%E5%92%8Cdebian%E6%BA%90/"/>
-    <id>http://example.com/2023/12/03/20%20ubuntu%E5%92%8Cdebian%E6%BA%90/</id>
-    <published>2023-12-03T07:01:21.000Z</published>
-    <updated>2023-12-04T13:10:13.290Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;&#92;assets&#92;css&#92;APlayer.min.css&quot;&gt;&lt;script src=&quot;&#92;assets&#92;js&#92;APlayer.min.js&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="瑞芯微" scheme="http://example.com/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE/"/>
     
     
   </entry>

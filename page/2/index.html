@@ -110,6 +110,61 @@
     
     
     <article
+  id="post-工作记录"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2024/01/02/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/"
+    >工作记录</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2024/01/02/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/" class="article-date">
+  <time datetime="2024-01-02T14:15:56.000Z" itemprop="datePublished">2024-01-02</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  Here's something encrypted, password is required to continue reading. 
+      <a class="article-more-link" href="/2024/01/02/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/"
+        >阅读更多...</a
+      >
+       
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
   id="post-23 嵌入式C语言的自我修养"
   class="article article-type-post"
   itemscope
@@ -2007,67 +2062,6 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cv::VideoCapture cap(&quot;video.mp4&quot;); // 打开名为 &quot;video.mp4&quot; 的视频文件</span><br></pre></td></tr></table></figure>
 <p>一旦创建了 <code>cv::VideoCapture</code> 对象，您可以使用 <code>read()</code> 方法来连续读取视频帧。<code>read()</code> 方法将返回一个布尔值，指示是否成功读取了一帧图像。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">cv::Mat frame;</span><br><span class="line"><span class="keyword">while</span> (cap.<span class="built_in">read</span>(frame)) &#123;</span><br><span class="line">    <span class="comment">// 处理当前帧</span></span><br><span class="line">    cv::<span class="built_in">imshow</span>(<span class="string">&quot;Video&quot;</span>, frame);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 等待按键退出</span></span><br><span class="line">    <span class="keyword">if</span> (cv::<span class="built_in">waitKey</span>(<span class="number">1</span>) == <span class="string">&#x27;q&#x27;</span>) &#123;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-20 ubuntu和debian源"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/12/03/20%20ubuntu%E5%92%8Cdebian%E6%BA%90/"
-    >ubuntu和debian源</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/12/03/20%20ubuntu%E5%92%8Cdebian%E6%BA%90/" class="article-date">
-  <time datetime="2023-12-03T07:01:21.000Z" itemprop="datePublished">2023-12-03</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE/">瑞芯微</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <p>ubuntu20</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">deb https://repo.huaweicloud.com/ubuntu-ports/ focal main restricted universe multiverse</span><br><span class="line">deb-src https://repo.huaweicloud.com/ubuntu-ports/ focal main restricted universe multiverse</span><br><span class="line"></span><br><span class="line">deb https://repo.huaweicloud.com/ubuntu-ports/ focal-security main restricted universe multiverse</span><br><span class="line">deb-src https://repo.huaweicloud.com/ubuntu-ports/ focal-security main restricted universe multiverse</span><br><span class="line"></span><br><span class="line">deb https://repo.huaweicloud.com/ubuntu-ports/ focal-updates main restricted universe multiverse</span><br><span class="line">deb-src https://repo.huaweicloud.com/ubuntu-ports/ focal-updates main restricted universe multiverse</span><br><span class="line"></span><br><span class="line">deb https://repo.huaweicloud.com/ubuntu-ports/ focal-backports main restricted universe multiverse</span><br><span class="line">deb-src https://repo.huaweicloud.com/ubuntu-ports/ focal-backports main restricted universe multiverse</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># Not recommended</span></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">deb https://repo.huaweicloud.com/ubuntu-ports/ focal-proposed main restricted universe multiverse</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">deb-src https://repo.huaweicloud.com/ubuntu-ports/ focal-proposed main restricted universe multiverse</span></span><br></pre></td></tr></table></figure>
-<p>ubuntu22</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">deb https://repo.huaweicloud.com/ubuntu-ports/ jammy main restricted universe multiverse</span><br><span class="line">deb-src https://repo.huaweicloud.com/ubuntu-ports/ jammy main restricted universe multiverse</span><br><span class="line"></span><br><span class="line">deb https://repo.huaweicloud.com/ubuntu-ports/ jammy-updates main restricted universe multiverse</span><br><span class="line">deb-src https://repo.huaweicloud.com/ubuntu-ports/ jammy-updates main restricted universe multiverse</span><br><span class="line"></span><br><span class="line">deb https://repo.huaweicloud.com/ubuntu-ports/ jammy-backports main restricted universe multiverse</span><br><span class="line">deb-src https://repo.huaweicloud.com/ubuntu-ports/ jammy-backports main restricted universe multiverse</span><br><span class="line"></span><br><span class="line">deb https://repo.huaweicloud.com/ubuntu-ports/ jammy-security main restricted universe multiverse</span><br><span class="line">deb-src https://repo.huaweicloud.com/ubuntu-ports/ jammy-security main restricted universe multiverse</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"> Not recommended</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">deb http://ports.ubuntu.com/ubuntu-ports/ jammy-proposed main restricted universe multiverse</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">deb-src http://ports.ubuntu.com/ubuntu-ports/ jammy-proposed main restricted universe multiverse</span></span><br></pre></td></tr></table></figure>
-<p>debian10</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">deb https://mirrors.huaweicloud.com/repository/debian/ buster main contrib non-free</span><br><span class="line">deb-src https://mirrors.tuna.tsinghua.edu.cn/debian/ buster main contrib non-free</span><br><span class="line">deb https://mirrors.huaweicloud.com/repository/debian/ buster-updates main contrib non-free</span><br><span class="line">deb-src https://mirrors.tuna.tsinghua.edu.cn/debian/ buster-updates main contrib non-free</span><br><span class="line">deb https://mirrors.huaweicloud.com/repository/debian/ buster-backports main contrib non-free</span><br><span class="line">deb-src https://mirrors.tuna.tsinghua.edu.cn/debian/ buster-backports main contrib non-free</span><br><span class="line">deb https://mirrors.huaweicloud.com/repository/debian-security buster/updates main contrib non-free</span><br><span class="line">deb-src https://mirrors.tuna.tsinghua.edu.cn/debian-security buster/updates main contrib non-free</span><br></pre></td></tr></table></figure>
-<p>debian11</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">deb https://mirrors.huaweicloud.com/debian/ bullseye main non-free contrib</span><br><span class="line">deb-src https://mirrors.huaweicloud.com/debian/ bullseye main non-free contrib</span><br><span class="line">deb https://mirrors.huaweicloud.com/debian-security/ bullseye-security main</span><br><span class="line">deb-src https://mirrors.huaweicloud.com/debian-security/ bullseye-security main</span><br><span class="line">deb https://mirrors.huaweicloud.com/debian/ bullseye-updates main non-free contrib</span><br><span class="line">deb-src https://mirrors.huaweicloud.com/debian/ bullseye-updates main non-free contrib</span><br><span class="line">deb https://mirrors.huaweicloud.com/debian/ bullseye-backports main non-free contrib</span><br><span class="line">deb-src https://mirrors.huaweicloud.com/debian/ bullseye-backports main non-free contrib</span><br></pre></td></tr></table></figure>
-<p>debian12</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">deb https://mirrors.huaweicloud.com/debian/ bookworm main non-free non-free-firmware contrib </span><br><span class="line">deb-src https://mirrors.huaweicloud.com/debian/ bookworm main non-free non-free-firmware contrib</span><br><span class="line">deb https://mirrors.huaweicloud.com/debian-security/ bookworm-security main </span><br><span class="line">deb-src https://mirrors.huaweicloud.com/debian-security/ bookworm-security main </span><br><span class="line">deb https://mirrors.huaweicloud.com/debian/ bookworm-updates main non-free non-free-firmware contrib </span><br><span class="line">deb-src https://mirrors.huaweicloud.com/debian/ bookworm-updates main non-free non-free-firmware contrib </span><br><span class="line">deb https://mirrors.huaweicloud.com/debian/ bookworm-backports main non-free non-free-firmware contrib </span><br><span class="line">deb-src https://mirrors.huaweicloud.com/debian/ bookworm-backports main non-free non-free-firmware contrib </span><br></pre></td></tr></table></figure>
  
       <!-- reward -->
       
