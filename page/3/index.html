@@ -110,6 +110,823 @@
     
     
     <article
+  id="post-19 shell编程"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/12/18/19%20shell%E7%BC%96%E7%A8%8B/"
+    >shell编程 第一次学习</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/12/18/19%20shell%E7%BC%96%E7%A8%8B/" class="article-date">
+  <time datetime="2023-12-18T12:41:19.000Z" itemprop="datePublished">2023-12-18</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>​	先说一下前提条件，其实shell编程我好早之前就知道了，其实吧，这个就跟法师最后让我录制的课程是差不多的，只是一个叫做Ubuntu基础，一个叫做shell编程，这两个其实是一个东西，而我对于ubuntu中的一些命令其实并不熟悉，我也并不能独立写出来一个脚本，所以我并不反感法师让我去录课，我的基础其实并不牢固，要学习的东西真的太多了，而我这一星期的重点就是戒掉小说，学生shell。</p>
+<p>==弱小和无知并不是生存的障碍，傲慢才是==</p>
+<h1 id="1什么是shell和bash"><a class="markdownIt-Anchor" href="#1什么是shell和bash"></a> 1.什么是shell和bash</h1>
+<p>​	近代以来，计算机操作系统都采用了某种形式的用户界面，借此指定需要操作系统执行的命令，但是很多操作系统当中命令是内建的，是同计算机交互的唯一方式，而shell无非也就是一个程序而已，这个程序的作用就是为用户执行其他程序，但他要做的并不只于此，一个只允许你输入命令的shell确实没有太大的意思，但如果你可以使用这些命令编程呢，是不是很酷。</p>
+<p>​	Shell（壳层）是计算机科学中的一个概念。在操作系统中，Shell 是用户与操作系统内核之间的接口。它提供了一个命令行界面（CLI）或图形用户界面（GUI），使用户能够与操作系统进行交互、运行命令和访问系统资源。</p>
+<p>​	bash也是一种shell，即命令解释器，bash的目的是让用户同计算机操作系统进行交互，从而完成想做的任务，当然这些任务可能是重复性的、要么非常的复杂，shell编程允许你对此任务进行自动化，以实现易用性、可靠性以及可重现性。</p>
+<h1 id="2标准输出"><a class="markdownIt-Anchor" href="#2标准输出"></a> 2.标准输出</h1>
+<h2 id="21-输出到终端"><a class="markdownIt-Anchor" href="#21-输出到终端"></a> 2.1 输出到终端</h2>
+<p>​	使用内建命令echo，将命令行中的参数打印到屏幕上</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo hello shell</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312182109865.png" alt="image-20231218210955820" /></p>
+<p>​	echo是最简单的bash命令之一，该命令可以将参数输出到屏幕上，需要注意的是shell会接续echo的命令行参数，即在输出之前，shell自动完成赋值、替换、等一系列操作，除此之外参数之间的空白字符会忽略，无论多少个空白字符，都会是一个字符，具体示例如下所示：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo hello    shell !  !    !</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312182112259.png" alt="image-20231218211254225" /></p>
+<p>​	但有些时候又需要空白字符，那要如何做呢？</p>
+<h2 id="22-保留空白字符"><a class="markdownIt-Anchor" href="#22-保留空白字符"></a> 2.2 保留空白字符</h2>
+<p>​	其实保留空白字符的方法十分简单，只需要在字符前后加上双引号或者单引号即可，具体示例如下所示：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;hello    shell !  !    !&quot;</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312182119526.png" alt="image-20231218211953490" /></p>
+<p>​	通过单引号和双引号可以指定为字符串，而shell不会对字符串进行干涉，双引号和单引号也是有区别的,单引号明确告诉不要干涉，而双引号仍旧会执行一些替换操作，包括变量扩展、算数运算、波浪号扩展等</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312182135535.png" alt="image-20231218213521502" /></p>
+<h2 id="23-在输出中加入更多的格式控制"><a class="markdownIt-Anchor" href="#23-在输出中加入更多的格式控制"></a> 2.3 在输出中加入更多的格式控制</h2>
+<p>​	就跟C语言里面的相同，仍旧可以使用printf命令打印这些，具体示例如下所示：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">printf &quot;%s = %d\n&quot; lines $LINES</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312182138655.png" alt="image-20231218213848622" /></p>
+<p>​	==我知道你想说，这个东西有什么用吗，没错我也是这样想的，但是你怎么知道你以后不用它呢，当你真的用的时候你还能想的起来吗==</p>
+<h2 id="24-消除换行符"><a class="markdownIt-Anchor" href="#24-消除换行符"></a> 2.4 消除换行符</h2>
+<p>​	认真观察的同学可能发现了，上面的echo命令自带换行，而printf命令默认不带换行，换行需要一个\n来完成，那echo如何不换行呢，其实可以加一个参数-n，具体示例如下所示：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo -n lines</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312182146056.png" alt="image-20231218214603028" /></p>
+<p>除此之外还可以通过添加-e参数和\c转义序列来实现，具体示例如下所示：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo -e &#x27;lines\c&#x27;</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312182147836.png" alt="image-20231218214717809" /></p>
+<h2 id="25-保存命令输出"><a class="markdownIt-Anchor" href="#25-保存命令输出"></a> 2.5 保存命令输出</h2>
+<p>可以通过&gt;符号来告诉shell将输出重定向到文件中，具体示例如下所示：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo hello shell &gt; 01_helloshell</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312182149376.png" alt="image-20231218214925317" /></p>
+<p>​	上面用到了cat命令进行文件夹内容的查看，当然cat并不仅仅是用来查看文件夹内容的，cat的英文原型是concatenation（拼接），该命令会将出现在命令行上的文件的输出拼接在一起。后面会有章节对cat进行学习，这里先了解这么多。</p>
+<h2 id="26-追加输出"><a class="markdownIt-Anchor" href="#26-追加输出"></a> 2.6 追加输出</h2>
+<p>​	上面使用单括号进行了输出重定向，使用两个单括号进行追加输出。具体示例如下所示：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">echo hello shell &gt; 02_helloshell</span><br><span class="line">echo hello shell too &gt;&gt; 02_helloshell</span><br><span class="line">cat 02_helloshell</span><br></pre></td></tr></table></figure>
+<p><img src="C:%5CUsers%5CAdministrator%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20231218215813823.png" alt="image-20231218215813823" /></p>
+<h2 id="27-获取文件的开始和结尾"><a class="markdownIt-Anchor" href="#27-获取文件的开始和结尾"></a> 2.7 获取文件的开始和结尾</h2>
+<p>​	使用head和tail命令输出指定文件的开始和结尾前10行或者后10行的内容，也可以加入-number参数指定默认行数：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">head -1 02_helloshell</span><br><span class="line">tail -1 02_helloshell</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312182201446.png" alt="image-20231218220159397" /></p>
+<p>​	tail除了-number这一参数外，还可以有这样的格式 -n number，这样可以指定相对于文件末尾的行偏移。因此tail -n 10 file 会显示文件的最后10行，而如果以加号开头则表示文件起始的偏移数，例如tail -n +1 file会显示整个文件，tail -n +2 file会跳过第一行，以此类推。</p>
+<h2 id="28-丢弃输出"><a class="markdownIt-Anchor" href="#28-丢弃输出"></a> 2.8 丢弃输出</h2>
+<p>​	这个我还是很熟悉的，我前些日子搞了一下这个，通过将输出丢弃，从而起到了美化终端的作用。其实也挺简单的，就是输出重定向到/dev/null中。具体示例如下所示：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo hello shell too &gt; /dev/null</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312182220976.png" alt="image-20231218222037949" /></p>
+<h2 id="29-将输出作为输入管道"><a class="markdownIt-Anchor" href="#29-将输出作为输入管道"></a> 2.9 将输出作为输入(管道)</h2>
+<p>管道符 | ，可以将上一个命令的输出作为输入传给下一个命令，具体示例如下所示：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat 02_helloshell | grep too</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312182224603.png" alt="image-20231218222447569" /></p>
+<p>tee可以保留输出前的副本，上面的管道可以省略步骤，但是呢，如果想要查看中间步骤的结果要怎么办呢，那就是tee命令了，tee可以将管道分成两个一模一样的流，一个用来写入文件，一个用来继续向下传递，具体示例如下所示：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat 02_helloshell | tee 03_tee | grep too</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312182230184.png" alt="image-20231218223034147" /></p>
+<h2 id="210-以输出为参数连接两个程序"><a class="markdownIt-Anchor" href="#210-以输出为参数连接两个程序"></a> 2.10 以输出为参数连接两个程序</h2>
+<p>​	<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312190736817.png" alt="image-20231219073617761" />	如上图所示，可以通过find命令查找上面的三个文件，那如何将这些输入引入rm 从而删除呢，rm只能以命令行参数的形式获取文件名，所以像下面这种方式是不对的</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find -name &#x27;0*&#x27; | rm </span><br></pre></td></tr></table></figure>
+<p>​	那应该如何操作呢，其实也不难，只需使用<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mo stretchy="false">)</mo><mtext>即可，</mtext></mrow><annotation encoding="application/x-tex">()即可，</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mclose">)</span><span class="mord cjk_fallback">即</span><span class="mord cjk_fallback">可</span><span class="mord cjk_fallback">，</span></span></span></span>()会被替换成所包含的命令输出，具体示例如下所示</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo $(find -name &#x27;0*&#x27;)</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312190742576.png" alt="image-20231219074243540" /></p>
+<p>可以看到输出就变成了命令行参数，所以可以通过下面的命令来删除：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm $(find -name &#x27;0*&#x27;)</span><br></pre></td></tr></table></figure>
+<h1 id="3-标准输入"><a class="markdownIt-Anchor" href="#3-标准输入"></a> 3 标准输入</h1>
+<h2 id="31获取文件输入"><a class="markdownIt-Anchor" href="#31获取文件输入"></a> 3.1获取文件输入</h2>
+<p>​	这个其实比较简单，标准输出的符号是&gt;，那相对的标准输入的符号肯定就是&lt;了，但是我目前并不理解这个&lt;的实际用法是什么，以后如果学习到了再来进行弥补。</p>
+<h2 id="32-获得脚本输入"><a class="markdownIt-Anchor" href="#32-获得脚本输入"></a> 3.2 获得脚本输入</h2>
+<p>​	使用&lt;&lt;两个箭头来从命令行，而非文件重定向输入文本，如果放在shell脚本中，可以同时包含数据和代码，一个具体示例如下所示：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">grep $1 &lt;&lt;EOF</span><br><span class="line">111 1</span><br><span class="line">222 2</span><br><span class="line">333 3</span><br><span class="line">444 4</span><br><span class="line">555 5</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312192029903.png" alt="image-20231219202905867" /></p>
+<p>​		上面这个shell脚本有两个地方要注意的，第一个是$1。这个表示脚本输入的第一个参数，而后面的&lt;&lt;表示我们想要创建一个临时的输入源，==EOF是上面最重要的一个点，我之前一直以为他是开始和结束的标志，而实际上并不是，在&lt;&lt;后面可以是任意的字符串，只要最后的结束也是这个字符串即可==。</p>
+<p>​	仍旧需要注意的是，在&lt;&lt;内部的这些内容，都是可以被解释的，例如如果内部输入了一个$1，那就会被转换为输入的第一个字符，那要如何避免这个情况呢，其实也很简单，那就是给EOF加上‘’单引号，表示不用执行扩展。</p>
+<h2 id="33-获取用户输入"><a class="markdownIt-Anchor" href="#33-获取用户输入"></a> 3.3 获取用户输入</h2>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312192038960.png" alt="image-20231219203837889" /></p>
+<p>​	可以通过read命令进行用户输入的获取，就比如上面的RPE变量，通过输入之后再读取出来。</p>
+<h1 id="4-执行命令"><a class="markdownIt-Anchor" href="#4-执行命令"></a> 4 执行命令</h1>
+<h2 id="41-运行程序"><a class="markdownIt-Anchor" href="#41-运行程序"></a> 4.1 运行程序</h2>
+<p>​	bash的基本操作就是载入并运行程序，其他都是一些准备工作，除了shell的变量之外还有循环控制语句、判断以及各种控制输入和输出的方法，但是上面的这些描述仅仅只是锦上添花而已，所以这时候就应该想一些内容了，程序到底是从哪里开始运行的呢。</p>
+<p>​	bash使用名为￥PATH的shell变量来定位这些可执行文件，￥PATH变量包含了一个目录列表，各个目录之间以冒号：进行分割，bash在这些目录中查找命令行上指定的可执行文件，目录的顺序很重要，会根据PATH变量中定义的顺序依次查找，选择所找到的第一个同名的可执行文件。</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312210733311.png" alt="image-20231221073336242" /></p>
+<p>​	赋予可执行权限的命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod +x name</span><br></pre></td></tr></table></figure>
+<h2 id="42-执行多个命令"><a class="markdownIt-Anchor" href="#42-执行多个命令"></a> 4.2 执行多个命令</h2>
+<p>​	方法一：不停的输入，Linux系统足够先进，在运行上一个命令的同时允许你继续输入，因此可以将命令依次输入进去即可。</p>
+<p>​	方法二：将多个命令写入脚本中，运行这个脚本即可</p>
+<p>​	方法三：依次执行这些命令，只需要使用分号将这些命令分隔开然后输入即可：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">long ; medium ; short</span><br></pre></td></tr></table></figure>
+<p>​	这样无论前面的程序是否运行成功，都会继续执行后面的命令，如果想要确保前面的命令运行成功，可以用下面这种写法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">long &amp;&amp; medium &amp;&amp; short</span><br></pre></td></tr></table></figure>
+<h2 id="43-同时执行多个命令"><a class="markdownIt-Anchor" href="#43-同时执行多个命令"></a> 4.3 同时执行多个命令</h2>
+<p>​	可以在命令行的末尾加上一个&amp;符号，在后台运行起来，这样一来，就能够快速的同时执行三个命令了。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">long &amp;</span><br><span class="line">medium &amp;</span><br><span class="line">short </span><br></pre></td></tr></table></figure>
+<p>或者也可以将他们放在一个单行，具体如下所示：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">long &amp; medium &amp; short </span><br></pre></td></tr></table></figure>
+<p>这里提一下bg命令,一个示例如下所示：<br />
+<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312210751415.png" alt="image-20231221075105359" /></p>
+<p>​	这个脚本的作用很简单就是睡眠10秒钟，在睡眠的过程中使用ctrl+z暂停，需要注意的是这里是暂停，而不是中断或者停止，暂停是可以回复的，可以使用两个命令进行恢复命令，也就是fg和bg，这两个命令从名字就可以看出fg是放到前台，而bg是放到后台，但每个命令都能继续运行相应的脚本。</p>
+<h2 id="44-了解命令是否成功运行"><a class="markdownIt-Anchor" href="#44-了解命令是否成功运行"></a> 4.4 了解命令是否成功运行</h2>
+<p>​	shell变量中$?中保存着命令的退出状态，其取值范围为0-255，在编写shell脚本的时候，正确的做法是，如果一切正常，退出时候就会返回0，如果运行的过程中出错了，就会返回非0值，一个具体示例如下所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312210757591.png" alt="image-20231221075735514" /></p>
+<p>​	可以看到睡眠十秒的程序被打断了，然后它的返回值为148，为非零值就表示没有正常退出，但要注意的是，退出状态的机会只有一次。</p>
+<h2 id="45-无人值守下运行耗时作业"><a class="markdownIt-Anchor" href="#45-无人值守下运行耗时作业"></a> 4.5 无人值守下运行耗时作业</h2>
+<p>​	这个很重要呀，就比如，我在我的电脑上运行服务器编译，当我的本地终端关掉之后，服务器的命令我想让他仍旧可以继续运行，放到后台当然也是一个很好的办法，但是终端关掉之后这个仍旧是退出了，所以本小节的nohup命令很是重要，nohup命令的效果只是设置子进程忽略hangup信号，但其仍旧可以被kail杀死，这当然是两回事。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup ./06_bg &amp;</span><br></pre></td></tr></table></figure>
+<p>​	这样运行06进行睡眠，然后关掉终端，这个程序仍旧是在运行的。</p>
+<h1 id="5-shell变量"><a class="markdownIt-Anchor" href="#5-shell变量"></a> 5 shell变量</h1>
+<p>​	无论是什么编程语言，变量都是必不可少的一个，shell编程中也不例外，一般情况下，shell中的变量采用全大写的方式，变量不需要进行声明，直接使用即可，由于命令的区分困难，所以赋值语句前后都不能有空格，当然在文件名字中也不能出现=等于号。引用变量的时候要使用$美元符号，而赋值的时候不需要加上引用符。</p>
+<h2 id="51-注释"><a class="markdownIt-Anchor" href="#51-注释"></a> 5.1 注释</h2>
+<p>​	在shell中使用#作为注释，在#后面的一行不会被解释。</p>
+<h2 id="52-提高脚本可读性"><a class="markdownIt-Anchor" href="#52-提高脚本可读性"></a> 5.2 提高脚本可读性</h2>
+<ol>
+<li>​	以四个空格为一个等级，不要使用tab指标符号。</li>
+<li>尽可能的不要省略变量名称，利于后期的维护</li>
+<li>每行的内容描述不完时可以使用\进行断行</li>
+</ol>
+<h2 id="53-变量的导出"><a class="markdownIt-Anchor" href="#53-变量的导出"></a> 5.3 变量的导出</h2>
+<p>​	如果在一个脚本中定义了一个变量，其他脚本中是不能共享该变量的，如果想要共享这个变量需要使用export进行变量的导出。</p>
+<h2 id="54查看所有的变量"><a class="markdownIt-Anchor" href="#54查看所有的变量"></a> 5.4查看所有的变量</h2>
+<p>​	可以使用set或者env对变量进行查看，set可以查看定义的所有变量和值，而env是查看所有导出的变量。</p>
+<h2 id="55在shell脚本中使用参数"><a class="markdownIt-Anchor" href="#55在shell脚本中使用参数"></a> 5.5在shell脚本中使用参数</h2>
+<p>​	 使用$1 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mtext>来代替脚本中所使用的参数，当然要是有很多个，超过了十个以上的参数，那么需要用双括号引起来</mtext></mrow><annotation encoding="application/x-tex">2 来代替脚本中所使用的参数，当然要是有很多个，超过了十个以上的参数，那么需要用双括号引起来</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord">2</span><span class="mord cjk_fallback">来</span><span class="mord cjk_fallback">代</span><span class="mord cjk_fallback">替</span><span class="mord cjk_fallback">脚</span><span class="mord cjk_fallback">本</span><span class="mord cjk_fallback">中</span><span class="mord cjk_fallback">所</span><span class="mord cjk_fallback">使</span><span class="mord cjk_fallback">用</span><span class="mord cjk_fallback">的</span><span class="mord cjk_fallback">参</span><span class="mord cjk_fallback">数</span><span class="mord cjk_fallback">，</span><span class="mord cjk_fallback">当</span><span class="mord cjk_fallback">然</span><span class="mord cjk_fallback">要</span><span class="mord cjk_fallback">是</span><span class="mord cjk_fallback">有</span><span class="mord cjk_fallback">很</span><span class="mord cjk_fallback">多</span><span class="mord cjk_fallback">个</span><span class="mord cjk_fallback">，</span><span class="mord cjk_fallback">超</span><span class="mord cjk_fallback">过</span><span class="mord cjk_fallback">了</span><span class="mord cjk_fallback">十</span><span class="mord cjk_fallback">个</span><span class="mord cjk_fallback">以</span><span class="mord cjk_fallback">上</span><span class="mord cjk_fallback">的</span><span class="mord cjk_fallback">参</span><span class="mord cjk_fallback">数</span><span class="mord cjk_fallback">，</span><span class="mord cjk_fallback">那</span><span class="mord cjk_fallback">么</span><span class="mord cjk_fallback">需</span><span class="mord cjk_fallback">要</span><span class="mord cjk_fallback">用</span><span class="mord cjk_fallback">双</span><span class="mord cjk_fallback">括</span><span class="mord cjk_fallback">号</span><span class="mord cjk_fallback">引</span><span class="mord cjk_fallback">起</span><span class="mord cjk_fallback">来</span></span></span></span>{10}</p>
+<h2 id="56-获取参数的数量"><a class="markdownIt-Anchor" href="#56-获取参数的数量"></a> 5.6 获取参数的数量</h2>
+<p>​	使用$#来获取脚本输入的数量，在限定输入参数的一些脚本中有用。</p>
+<h1 id="6-shell逻辑和运算"><a class="markdownIt-Anchor" href="#6-shell逻辑和运算"></a> 6 shell逻辑和运算</h1>
+<h2 id="61-算数运算"><a class="markdownIt-Anchor" href="#61-算数运算"></a> 6.1 算数运算</h2>
+<p>​	使用$(())或者let进行算数运算，例如</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">COUNT=$((COUNT + 5 + MAX * 2))</span><br><span class="line">let COUNT+=&#x27;5+MAX*2&#x27;</span><br></pre></td></tr></table></figure>
+<p>​	需要注意等于号两边不能有任何的空格，举一个反面例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">COUNT = $((COUNT + 5 + MAX * 2))</span><br></pre></td></tr></table></figure>
+<p>​	那么shell会解析成COUNT这个命令第一个参数是等于号，后面是运算。</p>
+<h2 id="62-分支条件"><a class="markdownIt-Anchor" href="#62-分支条件"></a> 6.2 分支条件</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">if [$# -lt 3 ]</span><br><span class="line">then</span><br><span class="line">	printf &quot;xxx&quot;</span><br><span class="line">elif [$# &gt; 3 ]</span><br><span class="line">then </span><br><span class="line">	printf &quot;xxx&quot;</span><br><span class="line">else</span><br><span class="line">    printf &quot;xxx&quot;</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+<p>上面使用的是换行符号，其实也可以使用分号来替代上面的换行符。</p>
+<h2 id="63-测试文件特性"><a class="markdownIt-Anchor" href="#63-测试文件特性"></a> 6.3 测试文件特性</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">-b # 块设备文件</span><br><span class="line">-c # 字符设备文件</span><br><span class="line">-d # 目录文件</span><br><span class="line">-e # 文件是否存在</span><br><span class="line">-f # 普通文件</span><br><span class="line">-h # 链接符号文件</span><br><span class="line">-r # 可读文件</span><br><span class="line">-s # 文件大小不为空</span><br><span class="line">-w # 可写文件</span><br><span class="line">-x # 可执行文件</span><br></pre></td></tr></table></figure>
+<p>也可以使用-a或者-o参数在判断内进行逻辑判断的组合，-a表示逻辑与，-o表示逻辑或</p>
+<h2 id="64-多路分支"><a class="markdownIt-Anchor" href="#64-多路分支"></a> 6.4 多路分支</h2>
+<p>​	如果有多个比较，如果只是简单的使用if elif else 则会显得非常啰嗦和重复，而更好的解决办法是case，一个case的示例如下所示：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">case $FN in</span><br><span class="line">	1）xxx;;</span><br><span class="line">	2) xxx;;</span><br><span class="line">	3) xxx;;</span><br><span class="line">esac</span><br></pre></td></tr></table></figure>
+<p>​	case语句会扩展case和in之间的单词，然后依次匹配多种模式</p>
+<h1 id="7-中级shell工具"><a class="markdownIt-Anchor" href="#7-中级shell工具"></a> 7 中级shell工具</h1>
+<h2 id="71-在文件中查找字符串"><a class="markdownIt-Anchor" href="#71-在文件中查找字符串"></a> 7.1 在文件中查找字符串</h2>
+<p>​	使用grep命令在文件中查找相关的字符串，一个具体示例如下所示：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep printf *.c</span><br></pre></td></tr></table></figure>
+<p>​	这段shell代码的作用就是在本地的C程序中查找printf语句。</p>
+<p>​	如果一个文件中出现了很多次的printtf，那会将这个文件打印很多遍，要如何只打印一遍呢，这个只需要-l参数即可，具体如下所示：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep -l printf *.c</span><br></pre></td></tr></table></figure>
+<p>​	如果只是想知道在某个文件中是否有这个字符，只需要使用-q参数即可，该参数的作用是将输入结果丢弃到/dev/null，然后通过$?查看即可。</p>
+<p>不区分大小写的话要使用-i参数，具体示例如下所示：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep -i printf *.c</span><br></pre></td></tr></table></figure>
+<p>​	那如何在压缩文件中搜索呢，其实也只能搜索是不是有这个文件，但不能得到相应的信息，就比如下面这样</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312222132396.png" alt="image-20231222213204345" /></p>
+<p>​	我还以为能有好东西了，原来只是简单的搜索。</p>
+<h2 id="72-保留部分行"><a class="markdownIt-Anchor" href="#72-保留部分行"></a> 7.2 保留部分行</h2>
+<p>​	使用awk命令从命令行上指定的文件中读取数据，例如默认情况下ls -l的打印如下所示：<br />
+<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312222137695.png" alt="image-20231222213709584" />	可以通过下面这个命令只打印第一行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -l | awk &#x27;&#123;print $1&#125;&#x27;</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312222137811.png" alt="image-20231222213756694" /></p>
+<p>​	而现在得到的结果也并不好，因为并没有相应的文件名，上面的<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mtext>是第一行，那文件名是第几行呢，是最后一行，我们并不知道最后一行是多少，不要着急，有内建命令，在</mtext><mi>a</mi><mi>w</mi><mi>k</mi><mtext>中</mtext></mrow><annotation encoding="application/x-tex">1是第一行，那文件名是第几行呢，是最后一行，我们并不知道最后一行是多少，不要着急，有内建命令，在awk中</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord cjk_fallback">是</span><span class="mord cjk_fallback">第</span><span class="mord cjk_fallback">一</span><span class="mord cjk_fallback">行</span><span class="mord cjk_fallback">，</span><span class="mord cjk_fallback">那</span><span class="mord cjk_fallback">文</span><span class="mord cjk_fallback">件</span><span class="mord cjk_fallback">名</span><span class="mord cjk_fallback">是</span><span class="mord cjk_fallback">第</span><span class="mord cjk_fallback">几</span><span class="mord cjk_fallback">行</span><span class="mord cjk_fallback">呢</span><span class="mord cjk_fallback">，</span><span class="mord cjk_fallback">是</span><span class="mord cjk_fallback">最</span><span class="mord cjk_fallback">后</span><span class="mord cjk_fallback">一</span><span class="mord cjk_fallback">行</span><span class="mord cjk_fallback">，</span><span class="mord cjk_fallback">我</span><span class="mord cjk_fallback">们</span><span class="mord cjk_fallback">并</span><span class="mord cjk_fallback">不</span><span class="mord cjk_fallback">知</span><span class="mord cjk_fallback">道</span><span class="mord cjk_fallback">最</span><span class="mord cjk_fallback">后</span><span class="mord cjk_fallback">一</span><span class="mord cjk_fallback">行</span><span class="mord cjk_fallback">是</span><span class="mord cjk_fallback">多</span><span class="mord cjk_fallback">少</span><span class="mord cjk_fallback">，</span><span class="mord cjk_fallback">不</span><span class="mord cjk_fallback">要</span><span class="mord cjk_fallback">着</span><span class="mord cjk_fallback">急</span><span class="mord cjk_fallback">，</span><span class="mord cjk_fallback">有</span><span class="mord cjk_fallback">内</span><span class="mord cjk_fallback">建</span><span class="mord cjk_fallback">命</span><span class="mord cjk_fallback">令</span><span class="mord cjk_fallback">，</span><span class="mord cjk_fallback">在</span><span class="mord mathnormal">a</span><span class="mord mathnormal" style="margin-right:0.02691em;">w</span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mord cjk_fallback">中</span></span></span></span>NF表示最后一行的元素。所以这个命令可以这样写：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -l | awk &#x27;&#123;print $1,$NF&#125;&#x27;</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312222142312.png" alt="image-20231222214203181" /></p>
+<h2 id="73-压缩文件"><a class="markdownIt-Anchor" href="#73-压缩文件"></a> 7.3 压缩文件</h2>
+<p>tar这个命令我用过很多次了，但好像我一直都不解其意，tar的英文全程是tape archive翻译成中文也就是磁带归档。</p>
+<h2 id="74-find"><a class="markdownIt-Anchor" href="#74-find"></a> 7.4 find</h2>
+<p>好像find并不是我想象中的那么简单，一个具体的示例如下所示：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find . -name *gz -print -exec mv &#x27;&#123;&#125;&#x27; /home/topeet/ \;</span><br></pre></td></tr></table></figure>
+<p>​	上面这句脚本前面很用以理解，那就是查找以gz结尾的文件，后面是print是必须要有的，打印正确，而-exec是找到文件之后要执行的命令，这里是mv，而后面的‘{}’就表示前面查找到的内容，再后面是移动到的位置，最后是\；这个不能缺少</p>
+<p>​	可如果是软链接或者硬链接呢，上面的find查找到的只是文件名，并没有找到文件的根本位置，其实也很见到那，只需要加入一个-L参数即可，具体示例如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find -L . -name *gz -print -exec mv &#x27;&#123;&#125;&#x27; /home/topeet/ \;</span><br></pre></td></tr></table></figure>
+<p>​	那如何不区分大小写进行查找呢，其实也简单只需要将上面的-name 换位-iname即可，具体示例如下所示：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find -L . -iname *gz -print -exec mv &#x27;&#123;&#125;&#x27; /home/topeet/ \;</span><br></pre></td></tr></table></figure>
+<h2 id="75-函数"><a class="markdownIt-Anchor" href="#75-函数"></a> 7.5 函数</h2>
+<p>​	三种不同的函数编写方法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">function usage ()</span><br><span class="line">&#123;</span><br><span class="line">	printf xxx</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function usage &#123;</span><br><span class="line">	printf xxx</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">usage ()</span><br><span class="line">&#123;</span><br><span class="line">	printf xxx</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>​	可以注意到保留字function或者（）必须出现，如果使用了function，那么（）就是可选的，一般情况下都使用第一种情况</p>
+<h2 id="76-别名"><a class="markdownIt-Anchor" href="#76-别名"></a> 7.6 别名</h2>
+<p>​	可以通过alias对一些常用命令进行重命名，默认情况下其实已经有一些别名了，如下所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312230714153.png" alt="image-20231223071432992" /></p>
+<p>​	一个具体的示例如下所示：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alias h=’ls -’</span><br></pre></td></tr></table></figure>
+<h2 id="77-计算时间"><a class="markdownIt-Anchor" href="#77-计算时间"></a> 7.7 计算时间</h2>
+<p>​	不建议使用time，建议使用bash内建的SECONDS变量，可以记录时间，具体如下所示：<br />
+<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312230726458.png" alt="image-20231223072615391" /></p>
+<h1 id="8-简单的图形界面"><a class="markdownIt-Anchor" href="#8-简单的图形界面"></a> 8 简单的图形界面</h1>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">/bin/bash</span> </span><br><span class="line">titlestr=&quot;选择一个选项&quot;  # 标题字符串</span><br><span class="line">backtitle=&quot;iTOP-RK3568构建脚本，http://www.topeet.com&quot;  # 返回标题，网站链接</span><br><span class="line">menustr=&quot;Compile image | uboot| kernel| recovery| buildroot | debian | yocto | all&quot;  # 菜单字符串</span><br><span class="line">TTY_X=$(($(stty size | awk &#x27;&#123;print $2&#125;&#x27;)-6))                    # 确定终端宽度</span><br><span class="line">TTY_Y=$(($(stty size | awk &#x27;&#123;print $1&#125;&#x27;)-6))                    # 确定终端高度</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">选项数组，包含选项和对应的函数名</span></span><br><span class="line">choose+=(&quot;uboot&quot; &quot;build_uboot&quot;)</span><br><span class="line">choose+=(&quot;kernel&quot; &quot;build_kernel&quot;)</span><br><span class="line">choose+=(&quot;recovery&quot; &quot;build_recovery&quot;)</span><br><span class="line">choose+=(&quot;buildroot&quot; &quot;build_rootfs buildroot&quot;)</span><br><span class="line">choose+=(&quot;debian&quot; &quot;build_rootfs debian&quot;)</span><br><span class="line">choose+=(&quot;yocto&quot; &quot;build_rootfs yocto&quot;)</span><br><span class="line">choose+=(&quot;save&quot; &quot;build_save&quot;)</span><br><span class="line">choose+=(&quot;all&quot; &quot;build_all&quot;)</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">使用whiptail创建菜单，保存用户选择的选项到变量OPTIONS中</span></span><br><span class="line">OPTIONS=$(whiptail --title &quot;$&#123;titlestr&#125;&quot; --backtitle &quot;$&#123;backtitle&#125;&quot; --notags \</span><br><span class="line">                            --menu &quot;$&#123;menustr&#125;&quot; &quot;$&#123;TTY_Y&#125;&quot; &quot;$&#123;TTY_X&#125;&quot; $((TTY_Y - 8))  \</span><br><span class="line">                            --cancel-button Exit --ok-button Select &quot;$&#123;choose[@]&#125;&quot; \</span><br><span class="line">                            3&gt;&amp;1 1&gt;&amp;2 2&gt;&amp;3)</span><br><span class="line">echo $OPTIONS</span><br></pre></td></tr></table></figure>
+<p>​	图像示例如下所示：<br />
+<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312250734246.png" alt="image-20231225073426133" />	然后进行简单的修改将脚本修改为两页。具体脚本内容如下所示：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">/bin/bash</span> </span><br><span class="line">titlestr=&quot;选择一个选项&quot;  # 标题字符串</span><br><span class="line">backtitle=&quot;iTOP-RK3568构建脚本，http://www.topeet.com&quot;  # 返回标题，网站链接</span><br><span class="line">menustr=&quot;Compile image | uboot| kernel| recovery| buildroot | debian | yocto | all&quot;  # 菜单字符串</span><br><span class="line">TTY_X=$(($(stty size | awk &#x27;&#123;print $2&#125;&#x27;)-6))                    # 确定终端宽度</span><br><span class="line">TTY_Y=$(($(stty size | awk &#x27;&#123;print $1&#125;&#x27;)-6))                    # 确定终端高度</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">第一页选项数组，包含选项和对应的函数名</span></span><br><span class="line">choose_page1+=(&quot;uboot&quot; &quot;build_uboot&quot;)</span><br><span class="line">choose_page1+=(&quot;kernel&quot; &quot;build_kernel&quot;)</span><br><span class="line">choose_page1+=(&quot;recovery&quot; &quot;build_recovery&quot;)</span><br><span class="line">choose_page1+=(&quot;save&quot; &quot;build_save&quot;)</span><br><span class="line">choose_page1+=(&quot;all&quot; &quot;build_all&quot;)</span><br><span class="line">choose_page1+=(&quot;rootfs&quot; &quot;build_rootfs&quot;)</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">第二页选项数组，包含选项和对应的函数名</span></span><br><span class="line">choose_page2+=(&quot;buildroot&quot; &quot;build_rootfs buildroot&quot;)</span><br><span class="line">choose_page2+=(&quot;debian&quot; &quot;build_rootfs debian&quot;)</span><br><span class="line">choose_page2+=(&quot;yocto&quot; &quot;build_rootfs yocto&quot;)</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">使用whiptail创建第一页菜单，保存用户选择的选项到变量OPTIONS中</span></span><br><span class="line">OPTIONS=$(whiptail --title &quot;$&#123;titlestr&#125;&quot; --backtitle &quot;$&#123;backtitle&#125;&quot; --notags \</span><br><span class="line">                    --menu &quot;$&#123;menustr&#125;&quot; &quot;$&#123;TTY_Y&#125;&quot; &quot;$&#123;TTY_X&#125;&quot; $((TTY_Y - 8))  \</span><br><span class="line">                    --cancel-button Exit --ok-button Select &quot;$&#123;choose_page1[@]&#125;&quot; \</span><br><span class="line">                    3&gt;&amp;1 1&gt;&amp;2 2&gt;&amp;3)</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">根据用户选择的选项，判断是否需要显示第二页菜单</span></span><br><span class="line">if [[ $OPTIONS == &quot;rootfs&quot; ]]; then</span><br><span class="line">    # 使用whiptail创建第二页菜单，保存用户选择的选项到变量OPTIONS中</span><br><span class="line">    OPTIONS=$(whiptail --title &quot;$&#123;titlestr&#125;&quot; --backtitle &quot;$&#123;backtitle&#125;&quot; --notags \</span><br><span class="line">                        --menu &quot;$&#123;menustr&#125;&quot; &quot;$&#123;TTY_Y&#125;&quot; &quot;$&#123;TTY_X&#125;&quot; $((TTY_Y - 8))  \</span><br><span class="line">                        --cancel-button Exit --ok-button Select &quot;$&#123;choose_page2[@]&#125;&quot; \</span><br><span class="line">                        3&gt;&amp;1 1&gt;&amp;2 2&gt;&amp;3)</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">echo $OPTIONS</span><br></pre></td></tr></table></figure>
+<p>这是第一页的内容：<br />
+<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312250743408.png" alt="image-20231225074324294" />	这是第二页的内容：<br />
+<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312250744974.png" alt="image-20231225074424898" />	还有许多要改的内容，就比如上面的标题，然后那个提示文字等等，这些都需要改，慢慢来吧，最后对该命令的介绍进行总结：当我们需要在终端界面中创建交互式的对话框和菜单时，Whiptail是一个非常有用的命令行工具。它提供了一种简单的方式来创建和显示对话框、消息框、输入框、菜单等，并且可以捕获用户的选择和输入。下面我将详细介绍Whiptail命令及其使用方法。</p>
+<p>Whiptail命令的基本语法如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">whiptail [选项] [标题] [高度] [宽度] [默认值]</span><br></pre></td></tr></table></figure>
+<p>选项可以用来配置对话框的外观和行为，标题是对话框的标题栏文本，高度和宽度指定对话框的尺寸，而默认值是可选的，用于设置输入框的默认值。</p>
+<p>下面是Whiptail命令中常用的选项：</p>
+<ul>
+<li><code>--title &lt;文本&gt;</code>：设置对话框的标题。</li>
+<li><code>--backtitle &lt;文本&gt;</code>：设置对话框的返回标题，通常用来显示相关的信息或链接。</li>
+<li><code>--yesno &lt;文本&gt; &lt;高度&gt; &lt;宽度&gt;</code>：显示一个简单的是/否对话框，用户可以选择是或否。</li>
+<li><code>--msgbox &lt;文本&gt; &lt;高度&gt; &lt;宽度&gt;</code>：显示一个简单的消息框，只用于显示信息，没有用户选择。</li>
+<li><code>--inputbox &lt;文本&gt; &lt;高度&gt; &lt;宽度&gt; [默认值]</code>：显示一个输入框，用户可以输入文本。</li>
+<li><code>--passwordbox &lt;文本&gt; &lt;高度&gt; &lt;宽度&gt;</code>：显示一个密码输入框，用户输入的内容会被隐藏。</li>
+<li><code>--menu &lt;文本&gt; &lt;高度&gt; &lt;宽度&gt; &lt;菜单项1&gt; &lt;菜单项2&gt; ...</code>：显示一个菜单，用户可以从选项中选择一个。</li>
+<li><code>--checklist &lt;文本&gt; &lt;高度&gt; &lt;宽度&gt; &lt;菜单项1&gt; &lt;菜单项2&gt; ...</code>：显示一个复选框菜单，用户可以选择多个选项。</li>
+<li><code>--radiolist &lt;文本&gt; &lt;高度&gt; &lt;宽度&gt; &lt;菜单项1&gt; &lt;菜单项2&gt; ...</code>：显示一个单选框菜单，用户可以从选项中选择一个。</li>
+<li><code>--textbox &lt;文件&gt; &lt;高度&gt; &lt;宽度&gt;</code>：显示一个只读文本框，用于显示文件中的内容。</li>
+</ul>
+<p>除了上述选项之外，Whiptail还提供了其他一些选项和功能，例如<code>--yes-button</code>、<code>--no-button</code>、<code>--defaultno</code>、<code>--nocancel</code>等，用于自定义对话框的按钮和默认行为。</p>
+<p>使用Whiptail命令创建对话框时，用户的选择和输入可以通过标准输出返回，可以使用命令替换或重定向来捕获这些值。例如，可以将用户选择的选项保存到变量中：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">OPTIONS=$(whiptail --menu &quot;请选择一个选项&quot; 10 40 3 \</span><br><span class="line">           &quot;1&quot; &quot;选项1&quot; \</span><br><span class="line">           &quot;2&quot; &quot;选项2&quot; \</span><br><span class="line">           &quot;3&quot; &quot;选项3&quot; \</span><br><span class="line">           3&gt;&amp;1 1&gt;&amp;2 2&gt;&amp;3)</span><br></pre></td></tr></table></figure>
+<p>在上面的例子中，用户选择的选项将保存在变量<code>OPTIONS</code>中。使用<code>3&gt;&amp;1 1&gt;&amp;2 2&gt;&amp;3</code>的重定向语法可以将标准输出和标准错误输出互换，这样可以将用户的选择输出到标准输出。</p>
+<p>Whiptail还提供了一些辅助功能，例如获取终端的尺寸可以使用<code>stty size</code>命令，并结合算术运算来动态计算对话框的尺寸。这对于使对话框在不同终端上具有良好的可移植性非常有用。</p>
+<p>总结一下，Whiptail是一个功能强大的命令行工具，用于创建交互式的对话框和菜单。它提供了当我们需要在终端界面中创建交互式的对话框和菜单时，Whiptail是一个非常有用的命令行工具。它提供了一种简单的方式来创建和显示对话框、消息框、输入框、菜单等，并且可以捕获用户的选择和输入。下面我将详细介绍Whiptail命令及其使用方法。</p>
+<h1 id="9-实战"><a class="markdownIt-Anchor" href="#9-实战"></a> 9 实战</h1>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> tabstop=4 <span class="string">&quot;设置tab按键为四个字符</span></span><br><span class="line"><span class="string">set shiftwidth=4 &quot;</span>设置缩进为四个字符</span><br></pre></td></tr></table></figure>
+<h2 id="91-在path-中查找程序"><a class="markdownIt-Anchor" href="#91-在path-中查找程序"></a> 9.1 在PATH 中查找程序</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">in_path 函数用于检查给定命令是否在指定路径中可执行</span></span><br><span class="line">in_path()</span><br><span class="line">&#123;</span><br><span class="line">    cmd=$1 ourpath=$2 result=1</span><br><span class="line">    oldIFS=$IFS IFS=&quot;:&quot;</span><br><span class="line">    for directory in $ourpath</span><br><span class="line">    do</span><br><span class="line">        if [ -x $directory/$cmd ] ; then</span><br><span class="line">            result=0</span><br><span class="line">        fi</span><br><span class="line">    done</span><br><span class="line">    IFS=$oldIFS</span><br><span class="line">    return $result</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">checkForCmdInPath 函数用于检查指定命令是否在环境变量 PATH 中可执行</span></span><br><span class="line">checkForCmdInPath()</span><br><span class="line">&#123;</span><br><span class="line">    var=$1</span><br><span class="line">    if [ &quot;$var&quot; != &quot;&quot; ] ; then</span><br><span class="line">        if [ &quot;$&#123;var:0:1&#125;&quot; = &quot;/&quot; ] ; then</span><br><span class="line">            if [ ! -x $var ] ; then</span><br><span class="line">                return 1</span><br><span class="line">            fi</span><br><span class="line">        elif ! in_path $var &quot;$PATH&quot; ; then</span><br><span class="line">            return 2</span><br><span class="line">        fi</span><br><span class="line">    fi</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">检查参数数量是否正确</span></span><br><span class="line">if [ $# -ne 1 ] ; then</span><br><span class="line">    echo &quot;使用方法: $0 命令&quot; &gt;&amp;2</span><br><span class="line">    exit 1</span><br><span class="line">fi</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">调用 checkForCmdInPath 函数检查命令是否在 PATH 中</span></span><br><span class="line">checkForCmdInPath &quot;$1&quot;</span><br><span class="line">case $? in</span><br><span class="line">    0 ) echo &quot;$1 在 PATH 中找到&quot; ;;</span><br><span class="line">    1 ) echo &quot;$1 未找到或不可执行&quot; ;;</span><br><span class="line">    2 ) echo &quot;$1 未在 PATH 中找到&quot; ;;</span><br><span class="line">esac</span><br><span class="line"></span><br><span class="line">exit 0</span><br></pre></td></tr></table></figure>
+<p>​	<strong>知识点1：$用法</strong></p>
+<ol>
+<li><code>$1</code>：表示脚本中的第一个参数。在这个脚本中，<code>$1</code> 用于获取传递给脚本的命令参数。</li>
+<li><code>$2</code>：表示脚本中的第二个参数。在 <code>in_path</code> 函数中，<code>$2</code> 用于获取传递给该函数的第二个参数，即路径。</li>
+<li><code>$IFS</code>：表示内部字段分隔符（Internal Field Separator）。在脚本中，<code>$IFS</code> 用于保存原始的字段分隔符，并在后续代码中修改为 <code>:</code>，以便在路径中进行分隔。</li>
+<li><code>$&#123;var:0:1&#125;</code>：表示对变量 <code>var</code> 进行字符串截取。<code>$&#123;var:0:1&#125;</code> 表示从字符串的第一个字符开始，截取长度为 1 的子字符串。在脚本中，<code>$&#123;var:0:1&#125;</code> 用于检查给定的命令是否是以 <code>/</code> 开头。</li>
+<li><code>&quot;$var&quot;</code>：表示对变量进行引用。在脚本中，<code>&quot;$var&quot;</code> 用于将变量 <code>var</code> 的值作为字符串进行引用，以便在条件语句中进行判断。</li>
+<li><code>$?</code>：表示上一个命令的退出状态。在脚本中，<code>$?</code> 用于获取 <code>checkForCmdInPath</code> 函数的返回值，即命令是否在 PATH 中可执行的状态。</li>
+<li><code>$#</code> ：表示传递给脚本的参数数量。</li>
+</ol>
+<p>​	<strong>知识点2：if语法</strong></p>
+<p>​		在Shell脚本中，<code>if</code>语句是用于执行条件判断的控制结构。它的基本语法如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> [ condition ]; <span class="keyword">then</span></span><br><span class="line">    <span class="comment"># 执行条件为真时的代码块</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    <span class="comment"># 执行条件为假时的代码块</span></span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+<p><code>if</code>语句的工作原理如下：</p>
+<ol>
+<li>首先，<code>if</code>关键字标识条件语句的开始。</li>
+<li>紧接着是一个条件表达式，用于判断条件的真假。条件表达式通常使用方括号 <code>[ ]</code> 来包裹，且表达式与方括号之间需要有空格。</li>
+<li>如果条件表达式的结果为真（非零），则执行<code>then</code>关键字后面的代码块。代码块可以是单行命令或多行代码块，可以包含任何Shell支持的命令。</li>
+<li>如果条件表达式的结果为假（零），则跳过<code>then</code>代码块，执行<code>else</code>关键字后面的代码块（可选）。如果没有<code>else</code>部分，整个<code>if</code>语句结束。</li>
+<li>最后，通过<code>fi</code>关键字结束整个<code>if</code>语句块。</li>
+</ol>
+<p>在条件表达式中，可以使用各种条件判断运算符和Shell的内置命令来进行条件判断。常用的条件判断运算符包括：</p>
+<ul>
+<li><code>-eq</code>：等于</li>
+<li><code>-ne</code>：不等于</li>
+<li><code>-gt</code>：大于</li>
+<li><code>-lt</code>：小于</li>
+<li><code>-ge</code>：大于等于</li>
+<li><code>-le</code>：小于等于</li>
+<li><code>-z</code>：判断字符串是否为空</li>
+<li><code>-n</code>：判断字符串是否非空</li>
+<li><code>-f</code>：判断文件是否存在且为普通文件</li>
+<li><code>-d</code>：判断路径是否存在且为目录</li>
+<li><code>-x</code>：判断文件或路径是否可执行</li>
+</ul>
+<p><strong>知识点3：case语句</strong></p>
+<p>在Shell脚本中，<code>case</code>语句是一种用于多重条件判断的控制结构。它的基本语法如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">case</span> expression <span class="keyword">in</span></span><br><span class="line">    pattern1)</span><br><span class="line">        <span class="comment"># 匹配 pattern1 执行的代码块</span></span><br><span class="line">        ;;</span><br><span class="line">    pattern2)</span><br><span class="line">        <span class="comment"># 匹配 pattern2 执行的代码块</span></span><br><span class="line">        ;;</span><br><span class="line">    pattern3)</span><br><span class="line">        <span class="comment"># 匹配 pattern3 执行的代码块</span></span><br><span class="line">        ;;</span><br><span class="line">    *)</span><br><span class="line">        <span class="comment"># 默认情况（即未匹配任何模式）执行的代码块</span></span><br><span class="line">        ;;</span><br><span class="line"><span class="keyword">esac</span></span><br></pre></td></tr></table></figure>
+<p><code>case</code>语句的工作原理如下：</p>
+<ol>
+<li>首先，<code>case</code>关键字标识多重条件语句的开始。</li>
+<li><code>expression</code>是要进行匹配的表达式或变量。通常，<code>expression</code>是一个变量，你希望根据其值进行多重条件判断。</li>
+<li>接下来，使用<code>in</code>关键字表示要开始进行模式匹配。</li>
+<li>然后，每个模式使用圆括号<code>()</code>包括起来，并在每个模式后面加上<code>)</code>。</li>
+<li>对于每个模式，如果<code>expression</code>的值与模式相匹配，则执行与该模式对应的代码块。代码块可以是单行命令或多行代码块，可以包含任何Shell支持的命令。</li>
+<li>每个代码块的结尾需要使用两个分号<code>;;</code>表示结束。</li>
+<li>如果<code>expression</code>的值未匹配任何模式，则执行<code>*)</code>后面的代码块（即默认情况）。这部分代码块是可选的。</li>
+<li>最后，通过<code>esac</code>关键字结束整个<code>case</code>语句块。</li>
+</ol>
+<p>以下是一个具体的示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line">fruit=<span class="string">&quot;apple&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">case</span> <span class="variable">$fruit</span> <span class="keyword">in</span></span><br><span class="line">    <span class="string">&quot;apple&quot;</span>)</span><br><span class="line">        <span class="built_in">echo</span> <span class="string">&quot;这是一个苹果&quot;</span></span><br><span class="line">        ;;</span><br><span class="line">    <span class="string">&quot;orange&quot;</span>)</span><br><span class="line">        <span class="built_in">echo</span> <span class="string">&quot;这是一个橘子&quot;</span></span><br><span class="line">        ;;</span><br><span class="line">    <span class="string">&quot;banana&quot;</span>)</span><br><span class="line">        <span class="built_in">echo</span> <span class="string">&quot;这是一个香蕉&quot;</span></span><br><span class="line">        ;;</span><br><span class="line">    *)</span><br><span class="line">        <span class="built_in">echo</span> <span class="string">&quot;未知的水果&quot;</span></span><br><span class="line">        ;;</span><br><span class="line"><span class="keyword">esac</span></span><br></pre></td></tr></table></figure>
+<p>在上述示例中，我们使用变量<code>fruit</code>作为匹配表达式。根据<code>$fruit</code>的值，<code>case</code>语句会依次进行模式匹配。如果<code>$fruit</code>的值匹配到某个模式（例如，“apple”），则执行与该模式对应的代码块（输出&quot;这是一个苹果&quot;）。如果<code>$fruit</code>的值未匹配到任何模式，则执行默认情况下的代码块（输出&quot;未知的水果&quot;）。</p>
+<h2 id="92-验证输入仅限字母和数字"><a class="markdownIt-Anchor" href="#92-验证输入仅限字母和数字"></a> 9.2 验证输入：仅限字母和数字</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义函数，用于验证字符串是否仅由字母和数字组成</span></span><br><span class="line"><span class="function"><span class="title">volidAlphaNum</span></span>()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment"># 通过sed命令将输入的字符串中的非字母和数字字符替换为空字符串</span></span><br><span class="line">    validchars=<span class="string">&quot;<span class="subst">$(echo $1 | sed &#x27;s/[^[:alnum:]]//g&#x27;)</span>&quot;</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 比较替换后的字符串与原始输入的字符串是否相等</span></span><br><span class="line">    <span class="comment"># 如果相等，说明输入的字符串仅由字母和数字组成，返回0</span></span><br><span class="line">    <span class="keyword">if</span> [ <span class="string">&quot;<span class="variable">$validchars</span>&quot;</span> = <span class="string">&quot;<span class="variable">$1</span>&quot;</span> ] ; <span class="keyword">then</span></span><br><span class="line">        <span class="built_in">return</span> 0</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="comment"># 如果不相等，说明输入的字符串包含非字母和数字字符，返回1</span></span><br><span class="line">        <span class="built_in">return</span> 1</span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出提示并读取用户输入</span></span><br><span class="line"><span class="built_in">echo</span> -n <span class="string">&quot;请输入输入内容:&quot;</span></span><br><span class="line"><span class="built_in">read</span> input</span><br><span class="line"></span><br><span class="line"><span class="comment"># 调用验证函数检查输入的内容是否仅由字母和数字组成</span></span><br><span class="line"><span class="keyword">if</span> ! volidAlphaNum <span class="string">&quot;<span class="variable">$input</span>&quot;</span> ; <span class="keyword">then</span></span><br><span class="line">    <span class="comment"># 如果验证函数返回非0，说明输入的内容包含非字母和数字字符</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;错误：输入内容必须仅包含字母和数字&quot;</span> &gt;&amp;2</span><br><span class="line">    <span class="built_in">exit</span> 1</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    <span class="comment"># 如果验证函数返回0，说明输入的内容仅由字母和数字组成</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;输入内容有效&quot;</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 脚本正常结束，退出状态码为0</span></span><br><span class="line"><span class="built_in">exit</span> 0</span><br></pre></td></tr></table></figure>
+<p><strong>知识点</strong>1 <strong>read</strong></p>
+<p>在Shell脚本中，<code>read</code> 是一个用于读取用户输入的命令。它允许脚本暂停执行，等待用户从标准输入（通常是键盘）输入一行文本，并将输入的内容保存到一个或多个变量中。</p>
+<p><code>read</code> 命令的基本语法如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">read</span> [options] [variable ...]</span><br></pre></td></tr></table></figure>
+<p>其中，<code>options</code> 是一些可选的参数，用于控制 <code>read</code> 命令的行为。<code>variable</code> 是一个或多个变量名，用于保存用户输入的值。</p>
+<p>以下是一些常用的 <code>read</code> 命令选项：</p>
+<ul>
+<li><code>-p prompt</code>：显示一个提示符，提示用户输入。<code>prompt</code> 是要显示的提示信息，可以是字符串或变量。示例：<code>read -p &quot;Enter your name: &quot; name</code></li>
+<li><code>-s</code>：静默模式，用户输入内容时不回显在终端上，适用于输入密码等敏感信息。示例：<code>read -s password</code></li>
+<li><code>-n num</code>：读取指定数量的字符后立即返回，而不需要等待用户按下回车键。<code>num</code> 是要读取的字符数。示例：<code>read -n 1 key</code> 读取一个字符。</li>
+<li><code>-t timeout</code>：设置等待用户输入的超时时间（秒），如果超过指定时间没有输入，则 <code>read</code> 命令返回一个非零的退出状态码。示例：<code>read -t 5 input</code> 设置等待时间为5秒。</li>
+</ul>
+<p><strong>知识点2 sed</strong></p>
+<p>​	在Shell脚本中，<code>sed</code>（Stream Editor）是一种流式文本编辑器，用于处理和转换文本流。它可以读取输入流中的文本，根据指定的编辑命令对文本进行修改，并将结果输出到标准输出流。</p>
+<p><code>sed</code> 命令的基本语法如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed [options] <span class="string">&#x27;command&#x27;</span> file</span><br></pre></td></tr></table></figure>
+<p>其中，<code>options</code> 是一些可选的参数，用于控制 <code>sed</code> 命令的行为。<code>'command'</code> 是一个或多个编辑命令，用于指定要对文本进行的操作。<code>file</code> 是要处理的输入文件。</p>
+<p>以下是一些常用的 <code>sed</code> 命令选项：</p>
+<ul>
+<li><code>-n</code>：禁止默认输出，只输出经过编辑处理后的结果。如果没有使用 <code>-n</code>，则 <code>sed</code> 会默认将每一行的结果输出到标准输出。</li>
+<li><code>-e script</code>：指定要执行的编辑命令。可以在一个 <code>sed</code> 命令中指定多个编辑命令，使用 <code>-e</code> 分隔它们。</li>
+<li><code>-i</code>：原地编辑，直接修改输入文件，而不是将结果输出到标准输出。使用 <code>-i</code> 选项时可以指定备份文件的扩展名，备份文件会保留原始文件的副本。</li>
+<li><code>-r</code>（或 <code>-E</code>）：启用扩展的正则表达式语法，可以使用更强大的正则表达式功能。</li>
+</ul>
+<p><code>sed</code> 命令的编辑命令由一个或多个操作组成，每个操作由一个地址和一个命令组成。地址指定了要应用命令的行范围，命令指定了要对行执行的操作。</p>
+<p>以下是一些常用的 <code>sed</code> 命令操作：</p>
+<ul>
+<li><code>s/regexp/replacement/</code>：替换操作，将与正则表达式 <code>regexp</code> 匹配的文本替换为 <code>replacement</code>。例如：<code>sed 's/apple/orange/' file</code> 将文件中的 “apple” 替换为 “orange”。</li>
+<li><code>p</code>：打印操作，输出指定范围内的行。例如：<code>sed -n '1,10p' file</code> 打印文件中的前10行。</li>
+<li><code>d</code>：删除操作，删除指定范围内的行。例如：<code>sed '5,10d' file</code> 删除文件中的第5到第10行。</li>
+<li><code>i\text</code>：插入操作，向指定行之前插入文本。例如：<code>sed '3i\This is a new line.' file</code> 在文件的第3行之前插入一行文本。</li>
+<li><code>a\text</code>：追加操作，向指定行之后追加文本。例如：<code>sed '3a\This is a new line.' file</code> 在文件的第3行之后追加一行文本。</li>
+</ul>
+<p><code>sed 's/[^[:alnum:]]//g'</code>：这是 <code>sed</code> 命令的一部分，用于对输入的文本进行替换操作。</p>
+<ol>
+<li><code>s/[^[:alnum:]]//g</code> 是一个替换命令，用于将输入中的非字母数字字符替换为空字符串。</li>
+<li><code>[^[:alnum:]]</code> 是一个正则表达式，表示匹配任何非字母数字字符。</li>
+<li><code>//</code> 是替换命令的分隔符，用于指定要替换的文本为空字符串。</li>
+<li><code>g</code> 是替换命令的标志，表示要替换所有匹配项，而不是只替换第一个匹配项。</li>
+</ol>
+<h2 id="93-规范日期格式"><a class="markdownIt-Anchor" href="#93-规范日期格式"></a> 9.3 规范日期格式</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">mounthNumToName</span></span>()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="variable">$1</span> <span class="keyword">in</span></span><br><span class="line">        1 ) month=<span class="string">&quot;Jan&quot;</span>;; 2 ) month=<span class="string">&quot;Feb&quot;</span> ;;</span><br><span class="line">        3 ) month=<span class="string">&quot;Mar&quot;</span>;; 4 ) month=<span class="string">&quot;Apr&quot;</span>;;</span><br><span class="line">        5 ) month=<span class="string">&quot;May&quot;</span>;; 6 ) month=<span class="string">&quot;Jun&quot;</span>;;</span><br><span class="line">        7 ) month=<span class="string">&quot;Jul&quot;</span>;; 8 ) month=<span class="string">&quot;Aug&quot;</span>;;</span><br><span class="line">        9 ) month=<span class="string">&quot;Sep&quot;</span>;; 10 ) month=<span class="string">&quot;Oct&quot;</span>;;</span><br><span class="line">        11 ) month=<span class="string">&quot;Nov&quot;</span>;; 12 ) month=<span class="string">&quot;Dec&quot;</span>;;</span><br><span class="line">        * ) <span class="built_in">echo</span> <span class="string">&quot;<span class="variable">$0</span>: 未知的月份数值 <span class="variable">$1</span>&quot;</span> &gt;&amp;2</span><br><span class="line">            <span class="built_in">exit</span> 1</span><br><span class="line">    <span class="keyword">esac</span></span><br><span class="line">    <span class="built_in">return</span> 0</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 检查参数数量是否正确</span></span><br><span class="line"><span class="keyword">if</span> [ <span class="variable">$#</span> -ne 3 ] ; <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;用法: <span class="variable">$0</span> 月份 日  年份&quot;</span> &gt;&amp;2</span><br><span class="line">    <span class="built_in">exit</span> 1</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 检查年份是否为4位数字</span></span><br><span class="line"><span class="keyword">if</span> [ <span class="variable">$3</span> -le 99 ] ; <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;<span class="variable">$0</span>: 预期为4位数字的年份&quot;</span> &gt;&amp;2</span><br><span class="line">    <span class="built_in">exit</span> 1</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 检查月份是否为纯数字</span></span><br><span class="line"><span class="keyword">if</span> [ -z $(<span class="built_in">echo</span> <span class="variable">$1</span>|sed <span class="string">&#x27;s/[[:digit:]]//g&#x27;</span>) ] ; <span class="keyword">then</span></span><br><span class="line">    <span class="comment"># 如果是纯数字，则调用函数将月份转换为对应的名称</span></span><br><span class="line">    mounthNumToName <span class="variable">$1</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    <span class="comment"># 如果不是纯数字，则将首字母大写，后续字母小写</span></span><br><span class="line">    month=<span class="string">&quot;<span class="subst">$(echo $1| cut -c1|tr &#x27;[:lower:]&#x27; &#x27;[:upper:]&#x27;)</span>&quot;</span></span><br><span class="line">    month=<span class="string">&quot;$month<span class="subst">$(echo $1|cut -c2-3 | tr &#x27;[:upper:]&#x27; &#x27;[:lower:]&#x27;)</span>&quot;</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$month</span> <span class="variable">$2</span> <span class="variable">$3</span></span><br></pre></td></tr></table></figure>
+<h2 id="94-美化多位数字"><a class="markdownIt-Anchor" href="#94-美化多位数字"></a> 9.4 美化多位数字</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">nicenumber--给定一个数字，以逗号分隔的形式显示它。</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">  需要DD（小数点分隔符）和TD（千位分隔符）被实例化。如果指定了第二个参数，</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">  则将输出回显到标准输出。</span></span><br><span class="line"></span><br><span class="line">nicenumber()</span><br><span class="line">&#123;</span><br><span class="line"><span class="meta prompt_">  # </span><span class="language-bash">注意，我们假设“.”是此脚本输入值中的小数分隔符。</span></span><br><span class="line"><span class="meta prompt_">  # </span><span class="language-bash">输出值中的小数分隔符是“.”，除非用户使用-d标志指定。</span></span><br><span class="line"></span><br><span class="line">  integer=$(echo $1 | cut -d. -f1)        # 小数点左边</span><br><span class="line">  decimal=$(echo $1 | cut -d. -f2)        # 小数点右边</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">  # </span><span class="language-bash">检查我们的数字是否除了整数部分之外还有其他部分。</span></span><br><span class="line">  if [ &quot;$decimal&quot; != &quot;$1&quot; ]; then</span><br><span class="line">    # 存在小数部分，因此将其包含在内。</span><br><span class="line">    result=&quot;$&#123;DD:= &#x27;.&#x27;&#125;$decimal&quot;</span><br><span class="line">  fi</span><br><span class="line"></span><br><span class="line">  thousands=$integer</span><br><span class="line"></span><br><span class="line">  while [ $thousands -gt 999 ]; do</span><br><span class="line">    remainder=$(($thousands % 1000))    # 三个最低有效位</span><br><span class="line">    </span><br><span class="line">    # 我们需要“remainder”是三位数。我们需要添加零吗？</span><br><span class="line">    while [ $&#123;#remainder&#125; -lt 3 ] ; do  # 强制前导零</span><br><span class="line">      remainder=&quot;0$remainder&quot;</span><br><span class="line">    done</span><br><span class="line"></span><br><span class="line">    result=&quot;$&#123;TD:=&quot;,&quot;&#125;$&#123;remainder&#125;$&#123;result&#125;&quot;    # 从右向左构建</span><br><span class="line">    thousands=$(($thousands / 1000))    # 如果有余数，则向左移动</span><br><span class="line">  done</span><br><span class="line"></span><br><span class="line">  nicenum=&quot;$&#123;thousands&#125;$&#123;result&#125;&quot;</span><br><span class="line">  if [ ! -z $2 ] ; then</span><br><span class="line">    echo $nicenum</span><br><span class="line">  fi</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">DD=&quot;.&quot;  # 小数点分隔符，用于分隔整数和小数部分</span><br><span class="line">TD=&quot;,&quot;  # 千位分隔符，用于每三位数分隔</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">开始主脚本</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">=================</span></span><br><span class="line"></span><br><span class="line">while getopts &quot;d:t:&quot; opt; do</span><br><span class="line">  case $opt in</span><br><span class="line">    d ) DD=&quot;$OPTARG&quot;    ;;</span><br><span class="line">    t ) TD=&quot;$OPTARG&quot;    ;;</span><br><span class="line">  esac</span><br><span class="line">done</span><br><span class="line">shift $(($OPTIND - 1))</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">输入验证</span></span><br><span class="line">if [ $# -eq 0 ] ; then</span><br><span class="line">  echo &quot;Usage: $(basename $0) [-d c] [-t c] numeric_value&quot;</span><br><span class="line">  echo &quot;  -d 指定小数点分隔符（默认为&#x27;.&#x27;）&quot;</span><br><span class="line">  echo &quot;  -t 指定千位分隔符（默认为&#x27;,&#x27;）&quot;</span><br><span class="line">  exit 0</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">nicenumber $1 1         # 第二个参数强制nicenumber将输出回显。</span><br><span class="line"></span><br><span class="line">exit 0</span><br></pre></td></tr></table></figure>
+<p><strong>重点1：</strong><br />
+<code>getopts</code> 是一个用于处理命令行选项的 Bash 内置命令。它可以帮助你解析和处理脚本或命令的命令行参数。<code>getopts</code> 在循环中使用，每次循环处理一个选项，并将其与相应的参数关联起来。</p>
+<p><code>getopts</code> 命令的语法如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">getopts</span> optstring variable [args]</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>optstring</code>：定义了脚本支持的选项列表，每个选项由一个字母表示。如果选项后面带有冒号（<code>:</code>），则表示该选项需要附加参数。</li>
+<li><code>variable</code>：用于存储当前解析的选项的变量名。</li>
+<li><code>args</code>：可选参数，用于指定要解析的命令行参数列表。如果省略，则默认使用脚本的命令行参数。</li>
+</ul>
+<p>在使用 <code>getopts</code> 时，你需要在脚本中使用一个 <code>while</code> 循环来处理每个选项。在循环中，<code>getopts</code> 会将当前解析的选项存储在 <code>variable</code> 变量中，并将附加的参数存储在特殊变量 <code>OPTARG</code> 中。</p>
+<p>以下是一个简单的示例，展示了如何使用 <code>getopts</code> 处理命令行选项：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="built_in">getopts</span> <span class="string">&quot;a:b:&quot;</span> opt; <span class="keyword">do</span></span><br><span class="line">  <span class="keyword">case</span> <span class="variable">$opt</span> <span class="keyword">in</span></span><br><span class="line">    a)</span><br><span class="line">      <span class="built_in">echo</span> <span class="string">&quot;选项 -a，参数为 <span class="variable">$OPTARG</span>&quot;</span></span><br><span class="line">      ;;</span><br><span class="line">    b)</span><br><span class="line">      <span class="built_in">echo</span> <span class="string">&quot;选项 -b，参数为 <span class="variable">$OPTARG</span>&quot;</span></span><br><span class="line">      ;;</span><br><span class="line">    \?)</span><br><span class="line">      <span class="built_in">echo</span> <span class="string">&quot;无效的选项： -<span class="variable">$OPTARG</span>&quot;</span></span><br><span class="line">      ;;</span><br><span class="line">  <span class="keyword">esac</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行脚本并传递选项和参数</span></span><br><span class="line"><span class="comment"># ./script.sh -a value1 -b value2</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出：</span></span><br><span class="line"><span class="comment"># 选项 -a，参数为 value1</span></span><br><span class="line"><span class="comment"># 选项 -b，参数为 value2</span></span><br></pre></td></tr></table></figure>
+<p>在这个示例中，脚本使用 <code>getopts</code> 解析了两个选项 <code>-a</code> 和 <code>-b</code>，并将它们的参数打印出来。如果脚本遇到无效的选项，则会打印出错误信息。</p>
+<p>总之，<code>getopts</code> 命令是一个用于处理命令行选项的工具，可以帮助你编写更灵活和可配置的脚本。</p>
+<p><strong>重点2：</strong></p>
+<ul>
+<li><code>-z string</code>：判断给定的字符串是否为空。如果字符串为空，则条件为真。</li>
+<li><code>-n string</code>：判断给定的字符串是否非空。如果字符串非空，则条件为真。</li>
+<li><code>string1 = string2</code>：判断两个字符串是否相等。如果相等，则条件为真。</li>
+<li><code>string1 != string2</code>：判断两个字符串是否不相等。如果不相等，则条件为真。</li>
+<li><code>file1 -eq file2</code>：判断两个文件是否具有相同的设备号和 inode 号。如果相同，则条件为真。</li>
+<li><code>file1 -nt file2</code>：判断文件 1 是否比文件 2 更新（修改时间更晚）。如果是，则条件为真。</li>
+<li><code>file1 -ot file2</code>：判断文件 1 是否比文件 2 更旧（修改时间更早）。如果是，则条件为真。</li>
+<li><code>num1 -eq num2</code>：判断两个数字是否相等。如果相等，则条件为真。</li>
+<li><code>num1 -ne num2</code>：判断两个数字是否不相等。如果不相等，则条件为真。</li>
+<li><code>num1 -lt num2</code>：判断 num1 是否小于 num2。如果是，则条件为真。</li>
+<li><code>num1 -le num2</code>：判断 num1 是否小于等于 num2。如果是，则条件为真。</li>
+<li><code>num1 -gt num2</code>：判断 num1 是否大于 num2。如果是，则条件为真。</li>
+<li><code>num1 -ge num2</code>：判断 num1 是否大于等于 num2。如果是，则条件为真。</li>
+</ul>
+<h2 id="95-验证整数输入"><a class="markdownIt-Anchor" href="#95-验证整数输入"></a> 9.5 验证整数输入</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">validint--验证整数输入，允许负数。</span></span><br><span class="line"></span><br><span class="line">validint()</span><br><span class="line">&#123;</span><br><span class="line"><span class="meta prompt_">  # </span><span class="language-bash">验证第一个字段，并将其与提供的最小值 <span class="variable">$2</span> 和/或最大值 <span class="variable">$3</span> 进行比较：</span></span><br><span class="line"><span class="meta prompt_">  # </span><span class="language-bash">如果值不在范围内或不仅由数字组成，则失败。</span></span><br><span class="line"></span><br><span class="line">  number=&quot;$1&quot;;      min=&quot;$2&quot;;      max=&quot;$3&quot;</span><br><span class="line"></span><br><span class="line">  if [ -z $number ] ; then</span><br><span class="line">    echo &quot;您未输入任何内容。请输入一个数字。&quot; &gt;&amp;2 ; return 1</span><br><span class="line">  fi</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">  # </span><span class="language-bash">第一个字符是否为 <span class="string">&#x27;-&#x27;</span> 符号？</span></span><br><span class="line">  if [ &quot;$&#123;number%$&#123;number#?&#125;&#125;&quot; = &quot;-&quot; ] ; then</span><br><span class="line">    testvalue=&quot;$&#123;number#?&#125;&quot; # 提取除第一个字符外的所有字符进行测试。</span><br><span class="line">  else</span><br><span class="line">    testvalue=&quot;$number&quot;</span><br><span class="line">  fi</span><br><span class="line">  </span><br><span class="line"><span class="meta prompt_">  # </span><span class="language-bash">创建一个没有数字的版本，用于测试。</span></span><br><span class="line">  nodigits=&quot;$(echo $testvalue | sed &#x27;s/[[:digit:]]//g&#x27;)&quot;</span><br><span class="line">  </span><br><span class="line"><span class="meta prompt_">  # </span><span class="language-bash">检查是否存在非数字字符。</span></span><br><span class="line">  if [ ! -z $nodigits ] ; then</span><br><span class="line">    echo &quot;无效的数字格式！只允许数字，不允许逗号、空格等。&quot; &gt;&amp;2</span><br><span class="line">    return 1</span><br><span class="line">  fi</span><br><span class="line">  </span><br><span class="line">  if [ ! -z $min ] ; then</span><br><span class="line">    # 输入值是否小于最小值？</span><br><span class="line">    if [ &quot;$number&quot; -lt &quot;$min&quot; ] ; then</span><br><span class="line">      echo &quot;$number 太小了：最小可接受值为 $min&quot; &gt;&amp;2</span><br><span class="line">      return 1</span><br><span class="line">    fi</span><br><span class="line">  fi</span><br><span class="line">  if [ ! -z $max ] ; then</span><br><span class="line">    # 输入值是否大于最大值？</span><br><span class="line">    if [ &quot;$number&quot; -gt &quot;$max&quot; ] ; then</span><br><span class="line">      echo &quot;您的值太大了：最大可接受值为 $max&quot; &gt;&amp;2</span><br><span class="line">      return 1</span><br><span class="line">    fi</span><br><span class="line">  fi</span><br><span class="line">  return 0</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">输入验证</span></span><br><span class="line">if validint &quot;$1&quot; &quot;$2&quot; &quot;$3&quot; ; then</span><br><span class="line">  echo &quot;输入是一个在您约束条件内的有效整数&quot;</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+<h2 id="96-验证浮点数输入"><a class="markdownIt-Anchor" href="#96-验证浮点数输入"></a> 9.6 验证浮点数输入</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">validfloat--检测一个数字是否是有效的浮点数。</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">  注意，此脚本无法接受科学计数法（1.304e5）表示的浮点数。</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">为了测试输入值是否是有效的浮点数，我们需要将该值拆分为两部分：整数部分和小数部分。</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">我们可以测试第一部分，看它是否是有效的整数，然后再测试第二部分是否是有效的 &gt;=0 整数。</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">因此，-30.5 被认为是有效的，但 -30.-8 不是。</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">要在此脚本中包含另一个 shell 脚本作为一部分，可以使用 <span class="string">&quot;.&quot;</span> 来源符号。非常简单。</span></span><br><span class="line"></span><br><span class="line">. validint   # Bourne shell 的方式，引入 validint 函数</span><br><span class="line"></span><br><span class="line">validfloat()</span><br><span class="line">&#123;</span><br><span class="line">  fvalue=&quot;$1&quot;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">  # </span><span class="language-bash">检查输入的数字是否有小数点。</span></span><br><span class="line">  if [ ! -z $(echo $fvalue | sed &#x27;s/[^.]//g&#x27;) ] ; then</span><br><span class="line"></span><br><span class="line">    # 提取小数点前的部分（比如 &#x27;3.14&#x27; 中的 &#x27;3&#x27;）。</span><br><span class="line">    decimalPart=&quot;$(echo $fvalue | cut -d. -f1)&quot;</span><br><span class="line"></span><br><span class="line">    # 提取小数点后的数字部分（比如 &#x27;3.14&#x27; 中的 &#x27;14&#x27;）。</span><br><span class="line">    fractionalPart=&quot;$&#123;fvalue#*\.&#125;&quot;</span><br><span class="line"></span><br><span class="line">    # 首先测试小数部分，即小数点左边的部分。</span><br><span class="line"></span><br><span class="line">    if [ ! -z $decimalPart ] ; then</span><br><span class="line">      # &quot;!&quot; 反转了测试逻辑，所以下面的条件表示 &quot;如果不是有效的整数&quot;</span><br><span class="line">      if ! validint &quot;$decimalPart&quot; &quot;&quot; &quot;&quot; ; then</span><br><span class="line">        return 1</span><br><span class="line">      fi </span><br><span class="line">    fi</span><br><span class="line"></span><br><span class="line">    # 现在测试小数部分（小数点右边的值）。</span><br><span class="line">    # 首先，小数点后面不能有负号，比如 33.-11，所以我们要检查小数部分是否包含负号。</span><br><span class="line">    if [ &quot;$&#123;fractionalPart%$&#123;fractionalPart#?&#125;&#125;&quot; = &quot;-&quot; ] ; then</span><br><span class="line">      echo &quot;无效的浮点数：小数点后面不允许有负号&quot; &gt;&amp;2  # &gt;&amp;2 将输出发送到 stderr。</span><br><span class="line">      return 1</span><br><span class="line">    fi </span><br><span class="line">    if [ &quot;$fractionalPart&quot; != &quot;&quot; ] ; then </span><br><span class="line">      # 如果小数部分不是有效的整数...</span><br><span class="line">      if ! validint &quot;$fractionalPart&quot; &quot;0&quot; &quot;&quot; ; then</span><br><span class="line">        return 1</span><br><span class="line">      fi</span><br><span class="line">    fi</span><br><span class="line">  else </span><br><span class="line">    # 如果整个值只是 &quot;-&quot;，也是不允许的。</span><br><span class="line">    if [ &quot;$fvalue&quot; = &quot;-&quot; ] ; then</span><br><span class="line">      echo &quot;无效的浮点格式。&quot; &gt;&amp;2 ; return 1</span><br><span class="line">    fi</span><br><span class="line"></span><br><span class="line">    # 最后，检查剩余的数字是否是有效的整数。</span><br><span class="line">    if ! validint &quot;$fvalue&quot; &quot;&quot; &quot;&quot; ; then</span><br><span class="line">      return 1</span><br><span class="line">    fi</span><br><span class="line">  fi</span><br><span class="line"></span><br><span class="line">  return 0</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">if validfloat $1 ; then</span><br><span class="line">  echo &quot;$1 是一个有效的浮点数&quot;</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">exit 0</span><br></pre></td></tr></table></figure>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-22 tabby的使用"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/12/10/22%20tabby%E7%9A%84%E4%BD%BF%E7%94%A8/"
+    >tabby的使用</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/12/10/22%20tabby%E7%9A%84%E4%BD%BF%E7%94%A8/" class="article-date">
+  <time datetime="2023-12-10T04:50:19.000Z" itemprop="datePublished">2023-12-10</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>​	先说一下前提条件，本来我其实挺不爱用终端的，就算使用终端也是用mobaxterm，只能说这个软件很是强大，但是并没有给我一种给经验的感觉，当然肯定比之前的超级终端强得多，但还是不能给我一个十分想用的感觉，而这个tabby的软件就不一样，简洁而且看起来很好用，他的分屏、颜色、背景插件等等一系列的操作都让我很是喜欢，所以下面就简单的讲解一下tabby的使用。</p>
+<h1 id="1tabby简介"><a class="markdownIt-Anchor" href="#1tabby简介"></a> 1.Tabby简介</h1>
+<p>🍀 Tabby是一个无限可定制的跨平台终端应用程序，适用于local shells、serial、SSH和Telnet的连接。<br />
+🍁 Tabby是基于TypeScript开发的终端模拟器，可用于Linux、Windows和Mac OS系统。</p>
+<p>🌺 Tabby (前身是 Terminus) 是一个可高度配置的终端模拟器和 SSH 或串口客户端，支持 Windows，macOS 和 Linux</p>
+<ul>
+<li>集成 SSH，Telnet 客户端和连接管理器</li>
+<li>集成串行终端</li>
+<li>定制主题和配色方案</li>
+<li>完全可配置的快捷键和多键快捷键</li>
+<li>分体式窗格</li>
+<li>自动保存标签页</li>
+<li>支持 PowerShell（和 PS Core）、WSL、Git-Bash、Cygwin、MSYS2、Cmder 和 CMD</li>
+<li>在 SSH 会话中通过 Zmodem 进行直接文件传输</li>
+<li>完整的 Unicode 支持，包括双角字符</li>
+<li>不会因快速的输出而卡住</li>
+<li>Windows 上舒适的 shell 体验，包括 tab 自动补全（通过 Clink）</li>
+<li>为 SSH secrets 和设置集成了加密容器</li>
+<li>SSH、SFTP 和 Telnet 客户端可用作 Web 应用（也可托管）</li>
+</ul>
+<h1 id="2tabby的安装"><a class="markdownIt-Anchor" href="#2tabby的安装"></a> 2.tabby的安装</h1>
+<p>下载地址：<a target="_blank" rel="noopener" href="https://github.com/Eugeny/tabby/releases/tag/v1.0.205">https://github.com/Eugeny/tabby/releases/tag/v1.0.205</a></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101539329.png" alt="image-20231210153958212" /></p>
+<p>​	有windows macos和linux多种类型的安装包，当然也包括多种架构的，我这里要在windows上进行使用，所以下载了windowd的exe文件，也就是这个<a target="_blank" rel="noopener" href="https://github.com/Eugeny/tabby/releases/download/v1.0.205/tabby-1.0.205-setup-x64.exe">tabby-1.0.205-setup-x64.exe</a>，下载完成之后进行安装。安装完成之后打开该软件</p>
+<p>​	由于我要写markdown，所以我把之前下载的删掉了，但是它仍旧保存了我之前的配置，所以除了删掉软件之外还需要去删掉C盘的配置文件：C:\Users\Administrator\AppData\Roaming。</p>
+<p>​	第一次启动如下所示：<br />
+<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101557259.png" alt="image-20231210155713230" /></p>
+<p>​	这里的语言可以选择中文，选择之后如下所示：<br />
+<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101557342.png" alt="image-20231210155753314" /></p>
+<p>​	而且我比较喜欢黑色的终端，所以就保持默认的黑色的配色方案了。关闭退出之后进入软件界面如下所示：<br />
+<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101558826.png" alt="image-20231210155851798" /></p>
+<p>​	至此，关于tabby的安装就完成了。</p>
+<h1 id="3tabby快捷键的修改"><a class="markdownIt-Anchor" href="#3tabby快捷键的修改"></a> 3.tabby快捷键的修改</h1>
+<p>删除显示配置选择器 ctrl+shift+e，因为我想要让该快捷键改为向右分割窗格。</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101601528.png" alt="image-20231210160101515" /></p>
+<p>然后将ctrl+shift的快捷按键也删除掉，</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101602643.png" alt="image-20231210160223634" /></p>
+<p>这里的关闭标签为ctrl+shift+w，我认为不方便，由于我经常将该快捷按键设置为关闭单一的窗格，所以这里也删除掉</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101605559.png" alt="image-20231210160540547" /></p>
+<p>将向右拆分窗格设置为ctrl+shift+e，将向下拆分窗格设置为ctrl+shift+o</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101607090.png" alt="image-20231210160745073" /></p>
+<p>将关闭已聚焦的窗格设置为ctrl+shift+w</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101608034.png" alt="image-20231210160817023" /></p>
+<p>最后在写几个好用的快捷按键</p>
+<p>1.ctrl+shift+左右按键可以切换不同的==标签页==</p>
+<p>2.alt+数字按键也可以切换不同的==标签页==</p>
+<p>3.ctrl+alt +上下左右可以切换不同的==窗格==</p>
+<p>==上面这些确实不错可以让我解放双手，不需要懂鼠标，只需要键盘即可==</p>
+<p>4.当窗格进行拆分之后，可以通过ctrl+alt+回车最大化当前的==窗格==</p>
+<p>5.ctrl+alt+t 可以切换当前==窗格==的配置（==本来不知道是做啥的后来才知道，但还挺好用==）</p>
+<p>6.ctrl+shift+. 可以将当前的窗格修改为单独的==标签页==</p>
+<p>7.ctrl+shift+， 将所有的==标签页==合并到当前页</p>
+<p>可以看到跟ctrl+shift有关的都是标签页，而跟窗格有关的都是ctrl+alt，反正ctrl是不能少的，而是窗格还是标签就要根据shift和alt来决定了。</p>
+<h1 id="4串口的连接"><a class="markdownIt-Anchor" href="#4串口的连接"></a> 4.串口的连接</h1>
+<p>​	点击右上角的齿轮按钮或者标签页右侧的按钮都可以进行配置。</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101634986.png" alt="image-20231210163447978" /></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101634116.png" alt="image-20231210163454106" /></p>
+<p>​	我这里是串口5，点击之后可以选择波特率，我这里选择115200，如下图所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101635089.png" alt="image-20231210163551067" /></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101636546.png" alt="image-20231210163634527" /></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101636210.png" alt="image-20231210163642195" /></p>
+<p>如果是从齿轮设置打开，则需要先点击配置和连接，再选择串口5，如下所示：<br />
+<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101637283.png" alt="image-20231210163734239" /></p>
+<h1 id="5ssh的连接"><a class="markdownIt-Anchor" href="#5ssh的连接"></a> 5.ssh的连接</h1>
+<p>​	如果仅仅只是上面的串口功能，还并不能吸引我，更重要的是这个ssh功能，ssh功能因为要配置IP和密码，所以不能直接点击，需要从配置和连接中，点击ssh右侧小箭头中的克隆，如下图所示：<br />
+<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101640012.png" alt="image-20231210163959998" /></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101640130.png" alt="image-20231210164012101" /></p>
+<p>​	然后以此输入名称，连接的主机ip即可，我这里连接的是ip为192.168.1.84的ubuntu20，我们一般情况下加载普通用户，就不要使用root用户了，设置完成如下所示：<br />
+<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101642173.png" alt="image-20231210164206146" /></p>
+<p>​	而ssh的色彩我更喜欢这个名叫Argonaut的，看着还挺好的。</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101653467.png" alt="image-20231210165346454" /></p>
+<p>​	然后点击保存，可以发现刚刚配置的ssh已经在未命名的组内了：<br />
+<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101642152.png" alt="image-20231210164253114" /></p>
+<p>​	然后点击箭头进行连接即可，连接成功如下所示：<br />
+<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101646500.png" alt="image-20231210164609480" /></p>
+<h1 id="6字体设置"><a class="markdownIt-Anchor" href="#6字体设置"></a> 6.字体设置</h1>
+<p>​	现在的字体特别小，而且颜色也并不是很好看，可以通过设置中的外观进行修改，进入之后如下所示：<br />
+<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101648741.png" alt="image-20231210164841697" /></p>
+<p>这里的字体我喜欢设置为Cascadia Code SemiBold，而字体大小设置为20即可</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101656358.png" alt="image-20231210165607329" /></p>
+<p>​	最后的效果如下所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101656926.png" alt="image-20231210165653910" /></p>
+<p>​	对比度鲜艳，让人看着就赏心悦目，工作更加有动力，哈哈。</p>
+<h1 id="7好用的插件"><a class="markdownIt-Anchor" href="#7好用的插件"></a> 7.好用的插件</h1>
+<h2 id="71-background"><a class="markdownIt-Anchor" href="#71-background"></a> 7.1 background</h2>
+<p>​	重点来了，这个是我最最最最推荐的一个插件了，当你的终端背后是一个小姐姐的时候，你是不是想要多看会儿，这样你连摸鱼的时间都会少很多，而且还能适当的放松一下，极大的提高到了工作效率。</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101659617.png" alt="image-20231210165947584" /></p>
+<p>​	获取之后需要重启软件，在菜单中会多出一个背景，如下图所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101700953.png" alt="image-20231210170052921" /></p>
+<p>​	首先启用背景，如下所示：<br />
+<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101701772.png" alt="image-20231210170120756" /></p>
+<p>​	然后选择一个你喜欢的图片，我这里当然是神里凌华了==我是神里凌华的狗==，修改完之后是这个样子</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101702859.png" alt="image-20231210170251409" /></p>
+<p>​	但这也太招摇了，这时候下面的选项就有用了，将背景不透明度设置为6或者7这个样子，我测试最为合适，如下图所示：<br />
+<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101704726.png" alt="image-20231210170443701" /></p>
+<p>​	最后的效果如下所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101705347.png" alt="image-20231210170508231" /></p>
+<p>​	==嘿嘿是不是感觉还不错==</p>
+<p>我发现每次重新启动tabby的时候都会自动打开一个 windows的tabby，我感觉好烦，可以在菜单栏中找到终端如下所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101709443.png" alt="image-20231210170926400" /></p>
+<p>然后取消下面的这个即可</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101709459.png" alt="image-20231210170905398" /></p>
+<h2 id="72trzsz"><a class="markdownIt-Anchor" href="#72trzsz"></a> 7.2.trzsz</h2>
+<p>​	默认情况下可以通过这里右上角的sftp进行文件的传输，但是这里有个问题，只能上传文件，但是不能上传文件夹：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101712233.png" alt="image-20231210171255099" /></p>
+<p>​	而trzsz插件可以解决这个问题</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101713340.png" alt="image-20231210171347327" /></p>
+<p>安装之后重启tabby，测试发现仍旧不行，但我看github有人说这个问题呀，就很奇怪，算了传输文件不行还能接受，就先这样吧。</p>
+<h2 id="73-highlight"><a class="markdownIt-Anchor" href="#73-highlight"></a> 7.3 highlight</h2>
+<p>从名字可以看出这是一个高亮的插件，有时候的一些错误信息是需要查看的，或者调试的时候需要捕获到一些特殊字符，所以这个高亮插件还是很重要的。</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101719770.png" alt="image-20231210171941753" /></p>
+<p>安装完成重启，可以看到多出来了一个高亮的图标如下所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101720547.png" alt="image-20231210172013491" /></p>
+<p>然后点击启动即可：<br />
+<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101720063.png" alt="image-20231210172048815" /></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101720552.png" alt="image-20231210172058507" /></p>
+<p>​	默认已经给你写好了一些关键字，自己也可以根据需求进行添加。</p>
+<h2 id="74-save-output"><a class="markdownIt-Anchor" href="#74-save-output"></a> 7.4 save-output</h2>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101723396.png" alt="image-20231210172326381" /></p>
+<p>​	有时候需要保存终端的输出，默认情况下该终端软件是没有保存的功能的，所以需要安装一个名为save-output的插件。</p>
+<p>​	安装完成之后会在菜单栏中多出来一个名为save-output的按钮如下所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101726132.png" alt="image-20231210172632938" /></p>
+<p>​	设置为on之后设置要存储的路径即可。然后随意打开一个终端。按右键之后可以发现会有一个save-output to file的选项</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101727627.png" alt="image-20231210172727612" /></p>
+<p>点击保存即可</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101728088.png" alt="image-20231210172814048" /></p>
+<p>在对应的文件中可以看到打印信息，如下图所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101728121.png" alt="image-20231210172857106" /></p>
+<p>​	到这里，关于tabby的简单设置和使用就介绍完成了，下面说一下感受吧，我之前其实并不是很喜欢这些华丽花哨的东西，感觉简简单单能用就好了，但随着时间的推移，发现有些东西并不是你想的那样的，一个好用的工具确实能给人带来不一样的体验，最后祝看到这里的小伙伴，事事顺心。</p>
+<p>​	为了方便我的后续使用，我将相应的配置进行了打包，以后如果换电脑了只需要将下面网盘的资料放到C:\Users\Administrator\AppData\Roaming目录下解压即可。</p>
+<p>链接：<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1EBBtEmSY9SCBeIlB5YVoWQ">https://pan.baidu.com/s/1EBBtEmSY9SCBeIlB5YVoWQ</a><br />
+提取码：bs5v<br />
+–来自百度网盘超级会员V6的分享</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-22 git的学习"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/12/10/22%20git%E7%9A%84%E5%AD%A6%E4%B9%A0/"
+    >git的学习</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/12/10/22%20git%E7%9A%84%E5%AD%A6%E4%B9%A0/" class="article-date">
+  <time datetime="2023-12-10T02:50:19.000Z" itemprop="datePublished">2023-12-10</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>​	前提条件，先来说一下未什么要学习git吧，目前先不考虑远程git和github，我目前只是想要在Linux环境下进行git的使用，说一个最简单的目的，我想让我的Linux目录用到什么就显示什么，而且其他的文件也会进行存档，当我需要这个项目的时候就切换到这个分支进行开发，而不是像我现在这个样子，还要保存，删除等等，这样我也能知道我都做了哪些的修改，目前的需求就这样，学习去。</p>
+<h1 id="1git的安装"><a class="markdownIt-Anchor" href="#1git的安装"></a> 1.git的安装</h1>
+<p>​	关于git的介绍就不再多说了，linus的丰功伟绩，一直是我的指路明灯，也是我为之不断努力的方向， 过多的就不再多说。</p>
+<p>安装需要的插件：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install libcurl4-gnutls-dev libexpat1-dev gettext libz-dev libssl-dev git</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101036140.png" alt="image-20231210103658547" /></p>
+<p>安装完成之后查看git的版本：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git --version</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101038851.png" alt="image-20231210103828814" /></p>
+<h1 id="2-git的配置"><a class="markdownIt-Anchor" href="#2-git的配置"></a> 2. git的配置</h1>
+<p>配置个人的用户名和电子邮箱</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name &quot;chai&quot;</span><br><span class="line">git config --global user.email &quot;1361382269@qq.com&quot;</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101040420.png" alt="image-20231210104002380" /></p>
+<p>查看配置</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --list --global</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101040757.png" alt="image-20231210104018710" /></p>
+<p>配置也可以在 ~/.gitconfig 或 /etc/gitconfig 看到这里加上 --global 是全局的配置， 如果想要在某个特定的配置中使用单独的配置就将–global去掉</p>
+<p>设置颜色差异：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global color.ui true</span><br></pre></td></tr></table></figure>
+<p>设置git命令补全</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://github.com/markgandolfo/git-bash-completion/blob/master/git-completion.bash</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101105829.png" alt="image-20231210110546532" /></p>
+<p>​	然后将</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo mv git-completion.bash /usr/bin/</span><br><span class="line">sudo echo source /usr/bin/git-completion.bash &gt;&gt; /home/topeet/.bashrc</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">root的配置文件需要权限，sudo不顶用，所以要换到root用户</span></span><br><span class="line">sudo echo source /usr/bin/git-completion.bash &gt;&gt; /root/.bashrc</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101110920.png" alt="image-20231210111049872" /></p>
+<p>现在git就可以正常的进行命令的提示了，如下图所示：<br />
+<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101111447.png" alt="image-20231210111136282" /></p>
+<p>==默认情况下ssh连接是不能翻墙的，原因是一些环境变量的问题，所以就需要手动导入一下下面的上网的环境变量==</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">export ftp_proxy=http://127.0.0.1:8889/</span><br><span class="line">export https_proxy=http://127.0.0.1:8889/</span><br><span class="line">export FTP_PROXY=http://127.0.0.1:8889/</span><br><span class="line">export HTTPS_PROXY=http://127.0.0.1:8889/</span><br><span class="line">export HTTP_PROXY=http://127.0.0.1:8889/</span><br><span class="line">export http_proxy=http://127.0.0.1:8889/</span><br></pre></td></tr></table></figure>
+<p>目前还不想用码云和github所以这里的ssh配置就先不配置</p>
+<p>==另一个方法，更简单，使用自带的即可==</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo echo source /usr/share/bash-completion/completions/git &gt;&gt; /home/topeet/.bashrc</span><br><span class="line">sudo echo source /usr/share/bash-completion/completions/git  &gt;&gt; /home/topeet/.bashrc</span><br></pre></td></tr></table></figure>
+<h1 id="3git-基础理论"><a class="markdownIt-Anchor" href="#3git-基础理论"></a> 3.git 基础理论</h1>
+<p>​	我其实早就学习过了一遍git了，但是一直没有用起来，关于理论这里也算是学习过了，而git的核心命令也就在这个地方。我这里就不复制了，凭借我的记忆复述一下。</p>
+<p>​	git有三个工作区域，分别为工作目录（working directory）、暂存区（stage/index）和资源库（repository），而原创git仓库这里先不管，以后再说，大概是长这个样子：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101117006.png" alt="image-20231210111712990" /></p>
+<p>加上各种命令的切换，长这个样子：<br />
+<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101117699.png" alt="在这里插入图片描述" /></p>
+<p>Workspace:工作区，就是平时存放项目代码的地方</p>
+<p>Index/Stage:暂存区，用于临时存放你的改动，事实上它是一个文件，保存即将提交的列表信息</p>
+<p>local Repository:仓库区（或本地仓库），就是安全存放数据的位置，这里有你提交到所有版本的数据，其中HEAD指向最新放入仓库的版本</p>
+<p>Remote Repository:远程仓库，托管代码的服务器，可以简单的认为是你项目组中的一台电脑用于远程数据交换</p>
+<h1 id="4git工作流程"><a class="markdownIt-Anchor" href="#4git工作流程"></a> 4.git工作流程</h1>
+<p>git的工作流程一般是这样的：</p>
+<ol>
+<li>
+<p>在工作中添加，修改文件</p>
+</li>
+<li>
+<p>将需要进行的版本管理的文件放入暂存区域</p>
+</li>
+<li>
+<p>将暂存区域文件提交到git仓库</p>
+<p>因此，git管理的文件有三种状态：已修改（modified）,已暂存（staged）,已提交（committed）</p>
+</li>
+</ol>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101131377.png" alt="在这里插入图片描述" /></p>
+<h1 id="5git项目搭建"><a class="markdownIt-Anchor" href="#5git项目搭建"></a> 5.Git项目搭建</h1>
+<p>工作目录（WorkSpace）一般就是你希望Git帮助你管理的文件夹，可以是你的项目目录，也可以是空目录，建议不要有中文。</p>
+<p>日常使用只需要记住下图6个命令：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101137263.png" alt="在这里插入图片描述" /></p>
+<p>建立一个git仓库</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101139420.png" alt="image-20231210113938373" /></p>
+<p>执行万命令后可以看到，仅仅在项目目录多出了一个.git目录（注意这个默认是隐藏的文件夹，需要手动在查看选项里面去掉隐藏的文件才能显示），关于版本等所有信息都在这个目录里面</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101140306.png" alt="image-20231210114003052" /></p>
+<p>git文件操作</p>
+<p>版本控制就是对文件的版本控制，要对文件进行修改，提交等操作，首先要知道文件当前什么状态，不然可能会提交了现在还不想提交的文件，或者要提交的文件没提交上。</p>
+<p>​	(1):Untracked:未跟踪，此文件在文件夹中，但并没有加入到git仓库，不参与版本控制.通过git add 状态变为Staged.</p>
+<p>​	(2):Unmodify:文件已经入库，未修改，即版本库中的文件快照内容与文件夹完全一致.这种类型的文件有两种去处，如果它被修改，而变为Modified.如果使用git rm 移出版本库，则成为Untracked文件.</p>
+<p>​	(3):Modified:文件已修改，仅仅是修改，并没有进行其他的操作.这个文件也有两个去处，通过git add可进入暂存staged状态，使用git</p>
+<p>checkout，则丢弃修改过，返回unmodify状态，这个git checkout即从库中取出文件，覆盖当前修改！</p>
+<p>​	(4):Staged：暂存状态，执行git commit则将修改同步到库中，这时库中的文件和本地文件又变为一致，文件为Unmodify状态.执行git</p>
+<p>reset</p>
+<p>查看制定文件状态</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git status [文件名]</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101145780.png" alt="image-20231210114548647" /></p>
+<p>查看所有文件状态</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git status</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101146553.png" alt="image-20231210114602428" /></p>
+<p>添加所有文件到暂存区</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add . </span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101147341.png" alt="image-20231210114733202" /></p>
+<p>​	这里也仅仅只是将工作区上传到了暂存区，可以看到status已经变为了绿色。</p>
+<p>提交暂存区中的内容到本地仓库 -m:提交的信息</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m &quot;信息&quot;</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101148098.png" alt="image-20231210114849962" /></p>
+<p>可以看到git status的状态也已经更新了，如下所示：<br />
+<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101149264.png" alt="image-20231210114917210" /></p>
+<h1 id="6忽略文件"><a class="markdownIt-Anchor" href="#6忽略文件"></a> 6.忽略文件</h1>
+<p>有些时候我们不想把某些文件纳入版本控制中，比如数据库文件，临时文件，设计文件等</p>
+<p>在主目录下建立“.gitignore”文件，此文件有如下规则：</p>
+<p>1.忽略文件中的空行或以井号（# ）开始的行将会被忽略。</p>
+<p>2.可以使用Linux通配符。例如∶星号(*)代表任意多个字符，问号(﹖)代表一个字符，方括号([abc] )代表可选字符范围，大括号( {string1,string2……})代表可选的字符串等。</p>
+<p>3.如果名称的最前面有一个感叹号( !)，表示例外规则，将不被忽略。</p>
+<p>4.如果名称的最前面是一个路径分隔符(/ )，表示要忽略的文件在此目录下，而子目录中的文件不忽略。</p>
+<p>5.如果名称的最后面是一个路径分隔符(/ )，表示要忽略的是此目录下该名称的子目录，而非文件（默认文件或目录都忽略）。</p>
+<p>例如以下这些实例:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">*.txt   #忽略所有的.txt结尾的文件</span><br><span class="line">！lib.txt  #但lib.txt除外</span><br><span class="line">/temp  #进忽略项目根目录下的TODO文件，不包括其他目录temp</span><br><span class="line">bulid/  #忽略bulid目录下的所有文件</span><br><span class="line">doc/*.txt #会忽略doc/notes.txt 但是不包括doc/sever/arch.txt</span><br></pre></td></tr></table></figure>
+<h1 id="7查看日志以及恢复版本"><a class="markdownIt-Anchor" href="#7查看日志以及恢复版本"></a> 7.查看日志以及恢复版本</h1>
+<p>在第5小节已经进行了第一次的提交，然后我进行第二次的提交</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101153879.png" alt="image-20231210115334834" /></p>
+<p>上面是进行的修改，接下来进行提交，如下所示：<br />
+<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101154938.png" alt="image-20231210115438817" /></p>
+<p>然后进行提交的查看</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101155808.png" alt="image-20231210115527651" /></p>
+<p>可以看到这是两个提交，现在指向的是第二次提交，而目前的情况是这样的，这一次的提交是错误的我不想要了，我想回退到第一次的提交，可以使用git reset进行回复</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset [哈希值]</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101157577.png" alt="image-20231210115707464" /></p>
+<p>然后查看提交的状态如下所示：<br />
+<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101158910.png" alt="image-20231210115820807" /></p>
+<p>但是仍旧需要手动删除才行，如下所示：<br />
+<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101159755.png" alt="image-20231210115912689" /></p>
+<h1 id="8分支操作"><a class="markdownIt-Anchor" href="#8分支操作"></a> 8.分支操作</h1>
+<p>分支是Git使用过程中非常重要的概念。使用分支意味着你可以把你的工作从开发主线上分离开来，以免影响开发主线。同一个仓库可以有多个分支,各个分支相互独立,互不干扰。通过git init命令创建本地仓库时默认会创建- -个master分支。</p>
+<p>​	==之前还是不懂，对于分支有了不一样的想法，分支并不是一个新的，而是一个当前内容的分支==</p>
+<p>查看分支：</p>
+<p>（1）列出所有本地分支</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101201065.png" alt="image-20231210120127025" /></p>
+<p>列出所有远程分支</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -r</span><br></pre></td></tr></table></figure>
+<p>列出所有本地分支和远程分支</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -a</span><br></pre></td></tr></table></figure>
+<p>我这里并没有涉及到远程分支，所以也就先不用管。</p>
+<p>（2）创建分支</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch name</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101205974.png" alt="image-20231210120516908" /></p>
+<p>（3）删除分支</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -d name</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101205187.png" alt="image-20231210120535123" /></p>
+<p>（4）分支切换</p>
+<p>首先在主分支创建了一个markdown测试文件，并且提交</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101210757.png" alt="image-20231210121055669" /></p>
+<p>然后创建另一个分支</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch test</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101212631.png" alt="image-20231210121207568" /></p>
+<p>切换到新创建的分支</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout name</span><br></pre></td></tr></table></figure>
+<p>这里关于分支的还是不太懂，这里应该是要看一看视频。现在懂了，分支的名称才真正的懂得了。</p>
+<p>（5）分支合并</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101501055.png" alt="image-20231210150127690" /></p>
+<p>可以看到目前head领先了master一个提交，使用下面的命令进行分支合并，将分支上的修改进行合并</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git merge test</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101502556.png" alt="image-20231210150257210" />					可以看到head和master已经是同一个分支了。</p>
+<p>9.scp命令的学习</p>
+<p><code>scp</code>（Secure Copy）命令用于在本地主机和远程主机之间进行文件传输。它使用SSH协议进行安全的文件传输。</p>
+<p><code>scp</code>命令的基本语法如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp [选项] 源文件 目标文件</span><br></pre></td></tr></table></figure>
+<p>其中，<code>源文件</code>是要传输的文件或目录的路径，<code>目标文件</code>是传输到的目标位置的路径。</p>
+<p>以下是一些常用的<code>scp</code>命令选项：</p>
+<ul>
+<li><code>-r</code>：递归复制整个目录。</li>
+<li><code>-P &lt;port&gt;</code>：指定SSH端口号。</li>
+<li><code>-i &lt;identity_file&gt;</code>：指定用于身份验证的私钥文件。</li>
+<li><code>-v</code>：显示详细的调试信息。</li>
+<li><code>-C</code>：开启压缩传输。</li>
+</ul>
+<p>下面是几个示例，演示了如何使用<code>scp</code>命令：</p>
+<ol>
+<li>
+<p>从本地主机复制文件到远程主机：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp /path/to/local/file user@remote:/path/to/destination/</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>从远程主机复制文件到本地主机：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp user@remote:/path/to/remote/file /path/to/destination/</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>从本地主机复制整个目录到远程主机：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp -r /path/to/local/directory user@remote:/path/to/destination/</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>从远程主机复制整个目录到本地主机：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp -r user@remote:/path/to/remote/directory /path/to/destination/</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>这些示例中的<code>user</code>是远程主机上的用户名，<code>remote</code>是远程主机的地址（可以是IP地址或域名），<code>/path/to/</code>是文件或目录的路径。</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
   id="post-11-opencv的学习"
   class="article article-type-post"
   itemscope
@@ -3605,439 +4422,13 @@ dpkg -i xserver-common_1.20.13-1ubuntu1~20.04.9_all.deb</p>
 </article>
 
     
-    <article
-  id="post-6 ad学习"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/11/12/6%20ad%E5%AD%A6%E4%B9%A0/"
-    >PCB学习</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/11/12/6%20ad%E5%AD%A6%E4%B9%A0/" class="article-date">
-  <time datetime="2023-11-12T13:55:17.000Z" itemprop="datePublished">2023-11-12</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <p>从今天开始学习一下PCB的学习，我当然也是想画一些高速PCB板子，那些8层的、10层的，但是路还很远，很长，所以慢慢的加油吧。</p>
-<p>11月12 日，今天来学习第一部分，软件的安装，由于使用的是两层板，版本是AD19,所以这里要先进行软件的安装和设置，后续的内容，下一个星期日再见。</p>
-<h1 id="1-ad-19软件安装和配置"><a class="markdownIt-Anchor" href="#1-ad-19软件安装和配置"></a> 1 AD 19软件安装和配置</h1>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">链接：https://pan.baidu.com/s/1gznZRe00REAmoUThExJrCQ </span><br><span class="line">提取码：gtqh </span><br><span class="line">--来自百度网盘超级会员V6的分享</span><br></pre></td></tr></table></figure>
-<p>下载之后如下图所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311122054070.png" alt="image-20231112205457032" /></p>
-<p>先来安装：<br />
-<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311122058090.png" alt="image-20231112205829074" /></p>
-<p>这里的安装倒是没啥，换个中文然后下一步即可，等待安装完成：<br />
-<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311122059776.png" alt="image-20231112205938748" /></p>
-<p>然后来到License文件</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311122100769.png" alt="image-20231112210025754" /></p>
-<p>将两个用于破解和验证的文件放到安装的AD目录，</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311122118366.png" alt="image-20231112211807344" /></p>
-<p>然后打开AD软件，找到add licence</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311122119378.png" alt="image-20231112211923345" /></p>
-<p>然后找到拷贝过去的alf文件，点击确定，破解完成如下图所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311122123467.png" alt="image-20231112212333451" /></p>
-<p>然后进行中文的切换，点击右上角的小齿轮，进入设置界面，如下图所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311122124175.png" alt="image-20231112212448161" /></p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311122125573.png" alt="image-20231112212500549" /></p>
-<p>点击使用本地资源，如下图所示：<br />
-<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311122125233.png" alt="image-20231112212529208" /></p>
-<p>设置完成之后，重启ad软件即可，可以看到已经是中文了。</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311122126032.png" alt="image-20231112212617017" /></p>
-<p><a target="_blank" rel="noopener" href="http://www.baidu.com/link?url=g5y-7qzhA8Qmd06DRFxhB5NMwanpnh580e8Dyaa7qAnmN373vLCa5UQZL42gPzCSzdfLiKF4PSbBsMfZ7DzTnq"><em>navigation</em></a> 导航，这里可以通过原理图去寻找PCB，需要注意的是右面只是保存了元件，其他两个可能并不好用</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311122130017.png" alt="image-20231112213052978" /></p>
-<p>然后是design insight，将这些全部取消勾选</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311122132319.png" alt="image-20231112213241293" /></p>
-<p>然后是data 的自动保存，这里设置十分钟自动保存：<br />
-<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311122133235.png" alt="image-20231112213355211" /></p>
-<p>原理图中的\代表负信号，进行勾选</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311122135497.png" alt="image-20231112213527468" /></p>
-<p>PCB中的设置，这里的光标类型选择Large 90，然后文件报告忽略都打开<br />
-<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311122137017.png" alt="image-20231112213743978" /></p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311122138876.png" alt="image-20231112213854832" /></p>
-<p>显示抬头颜色这里取消：<br />
-<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311122140678.png" alt="image-20231112214002651" /></p>
-<p>颜色选择实心覆盖：<br />
-<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311122140402.png" alt="image-20231112214048376" /></p>
-<p>过孔大小设置为12 和 24，并且i勾选盖油</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311122143733.png" alt="image-20231112214328703" /></p>
-<p>铜皮操作，设置大小为4和5，移除死铜</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311122144991.png" alt="image-20231112214442963" /></p>
-<p>保存好的ad配置网盘链接如下所示：<br />
-链接：<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1EKzwbSOtfkkl_NPCFTDGCw">https://pan.baidu.com/s/1EKzwbSOtfkkl_NPCFTDGCw</a><br />
-提取码：sd8a<br />
-–来自百度网盘超级会员V6的分享</p>
-<p>可以直接进行导入即可，省去了这一系列的设置，还是挺方便的。</p>
-<p>==11月12日 21：48学习完成，下一次学习就是下个周日了，希望不会忘记==</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-5 docker学习"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/11/09/5%20docker%E5%AD%A6%E4%B9%A0/"
-    >docker学习</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/11/09/5%20docker%E5%AD%A6%E4%B9%A0/" class="article-date">
-  <time datetime="2023-11-09T01:55:17.000Z" itemprop="datePublished">2023-11-09</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <p>这是我学习docker的一个前提条件，在之前的一些时间，我也是简单的看了一下docker，当时我是想用docker来进行deb包的构建的，为什么想到用docker了呢，这是因为我看大佬的github和瑞芯微的指导手册里都使用的docker，其实这个就跟开发板直接编译的效果是一样的，只是docker是在本机上，所以操作更流畅一些，而且开发板的编译速度以及方便程度，是有些区别的，所以docker就出现了，再然后我发现源码的编译里也是可以用到docker的，毕竟也就仅仅是一些环境而已，所以我又萌发了用docker编译源码的想法，所以docker的学习正式开始。</p>
-<p><strong>弱小和无知不是生存的障碍，傲慢才是</strong></p>
-<p><strong>唯有出现需求，你的目标和需求相匹配，才是学习最快速的路径。</strong></p>
-<h1 id="docker为什么出现"><a class="markdownIt-Anchor" href="#docker为什么出现"></a> Docker为什么出现</h1>
-<p>在我看来，我不是运维人员，我是嵌入式软件工程师，现在编译一个系统，换一个开发板，他们的环境都是不一样的，这就很烦，然而docker呢就很方便的解决了依赖这些相关的问题，而且还很小，这也是我学习docker的原因。</p>
-<p>Docker的思想来自于集装箱，集装箱解决了什么问题？在一艘大船上，可以把货物规整的摆放起来。并且各种各样的货物被集装箱标准化了，集装箱和集装箱之间不会互相影响。那么我就不需要专门运送水果的船和专门运送化学品的船了。只要这些货物在集装箱里封装的好好的，那我就可以用一艘大船把他们都运走。</p>
-<p>Docker是基于Go语言实现的云开源项目。</p>
-<p>Docker的主要目标是“Build，Ship and Run Any App , Anywhere”，也就是通过对应用组件的封装、分发、部署、运行等生命周期的管理，使用户的APP（可以是一个WEB应用或数据库应用等等）及其运行环境能够做到“一次封装，到处运行”。Linux 容器技术的出现就解决了这样一个问题，而 Docker 就是在它的基础上发展过来的。将应用运行在Docker 容器上面，而 Docker 容器在任何操作系统上都是一致的，这就实现了跨平台、跨服务器。只需要一次配置好环境，换到别的机子上就可以一键部署好，大大简化了操作。</p>
-<p><strong>虚拟机的缺点：</strong></p>
-<p>1、资源占用多</p>
-<p>2、冗余步骤多</p>
-<p>3 、启动慢</p>
-<p>容器虚拟化技术</p>
-<p>由于前面虚拟机存在这些缺点，Linux 发展出了另一种虚拟化技术：Linux 容器（Linux Containers，缩写为 LXC）。</p>
-<p>Linux 容器不是模拟一个完整的操作系统，而是对进程进行隔离。有了容器，就可以将软件运行所需的所有资源打包到一个隔离的容器中。容器与虚拟机不同，不需要捆绑一整套操作系统，只需要软件工作所需的库资源和设置。系统因此而变得高效轻量并保证部署在任何环境中的软件都能始终如一地运行。</p>
-<p>比较了 Docker 和传统虚拟化方式的不同之处：</p>
-<ul>
-<li>传统虚拟机技术是虚拟出一套硬件后，在其上运行一个完整操作系统，在该系统上再运行所需应用进程；</li>
-<li>而容器内的应用进程直接运行于宿主的内核，容器内没有自己的内核，而且也没有进行硬件虚拟。因此容器要比传统虚拟机更为轻便。</li>
-<li>每个容器之间互相隔离，每个容器有自己的文件系统 ，容器之间进程不会相互影响，能区分计算资源。</li>
-</ul>
-<p>学习途径</p>
-<p>Docker官网：<a target="_blank" rel="noopener" href="http://www.docker.com">http://www.docker.com</a></p>
-<p>Docker中文网站：<a target="_blank" rel="noopener" href="https://www.docker-cn.com">https://www.docker-cn.com</a></p>
-<p>Docker Hub官网：<a target="_blank" rel="noopener" href="https://hub.docker.com">https://hub.docker.com</a> （仓库）</p>
-<p>还是我那句话，只要学不死，就往死里学！</p>
-<h1 id="docker安装"><a class="markdownIt-Anchor" href="#docker安装"></a> Docker安装</h1>
-<p>我这里就直接使用ubuntu20 ，也就是3588的虚拟机了，我要虚拟一个ubuntu20的docker容器，这是我的第一个目的。</p>
-<p>1.安装gcc g++相关环境</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get -y install gcc g++</span><br></pre></td></tr></table></figure>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311102028310.png" alt="image-20231110095659265" /></p>
-<p>确保之前的docker删除掉：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do sudo apt-get remove $pkg; done</span><br></pre></td></tr></table></figure>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311102028358.png" alt="image-20231110100326456" /></p>
-<p>然后设置镜像仓库</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Add Docker<span class="string">&#x27;s official GPG key:</span></span></span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install ca-certificates curl gnupg</span><br><span class="line">sudo install -m 0755 -d /etc/apt/keyrings</span><br><span class="line">curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg</span><br><span class="line">sudo chmod a+r /etc/apt/keyrings/docker.gpg</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="string">Add the repository to Apt sources:</span></span></span><br><span class="line">echo \</span><br><span class="line">  &quot;deb [arch=&quot;$(dpkg --print-architecture)&quot; signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \</span><br><span class="line">  &quot;$(. /etc/os-release &amp;&amp; echo &quot;$VERSION_CODENAME&quot;)&quot; stable&quot; | \</span><br><span class="line">  sudo tee /etc/apt/sources.list.d/docker.list &gt; /dev/null</span><br><span class="line">sudo apt-get update</span><br></pre></td></tr></table></figure>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311102028368.png" alt="image-20231110100407513" /></p>
-<p>接下来安装docker</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin</span><br></pre></td></tr></table></figure>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311102028314.png" alt="image-20231110100446286" /></p>
-<p>测试docker helloworld</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run hello-world</span><br></pre></td></tr></table></figure>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311102028319.png" alt="image-20231110100628135" /></p>
-<p>首先本地是没有docker的helloworld镜像的，所以他会首先从dockerhub拉取helloworld镜像，然后开始运行，到这里docker就安装完成了。</p>
-<p>然后可以使用以下命令可以查看目前系统中有哪些docker镜像。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker ps -a</span><br></pre></td></tr></table></figure>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311102028329.png" alt="image-20231110101205930" /></p>
-<h1 id="阿里云镜像加速"><a class="markdownIt-Anchor" href="#阿里云镜像加速"></a> 阿里云镜像加速</h1>
-<p>由于国外的dockerhub太慢了。拉取一些镜像非常慢，所以就需要更换国内的源来进行加速</p>
-<p>1、介绍：<a target="_blank" rel="noopener" href="https://www.aliyun.com/product/acr">https://www.aliyun.com/product/acr</a></p>
-<p>2、注册一个属于自己的阿里云账户(可复用淘宝账号)</p>
-<p>3、进入管理控制台设置密码，开通</p>
-<p>4、查看镜像加速器自己的</p>
-<p><a target="_blank" rel="noopener" href="https://cr.console.aliyun.com/cn-hangzhou/instances/mirrors">https://cr.console.aliyun.com/cn-hangzhou/instances/mirrors</a></p>
-<p>针对Docker客户端版本大于 1.10.0 的用户</p>
-<p>您可以通过修改daemon配置文件/etc/docker/daemon.json来使用加速器</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir -p /etc/docker</span><br><span class="line">sudo tee /etc/docker/daemon.json &lt;&lt;-&#x27;EOF&#x27;</span><br><span class="line">&#123;</span><br><span class="line">  &quot;registry-mirrors&quot;: [&quot;https://4cmfmhps.mirror.aliyuncs.com&quot;]</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br><span class="line">sudo systemctl daemon-reload</span><br><span class="line">sudo systemctl restart docker</span><br></pre></td></tr></table></figure>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311102028744.png" alt="image-20231110101800496" /></p>
-<h1 id="docker常用命令"><a class="markdownIt-Anchor" href="#docker常用命令"></a> Docker常用命令</h1>
-<h2 id="帮助命令"><a class="markdownIt-Anchor" href="#帮助命令"></a> 帮助命令</h2>
-<p>docker version # 显示 Docker 版本信息。</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311102028784.png" alt="image-20231110101930475" /></p>
-<p>docker info # 显示 Docker 系统信息，包括镜像和容器数。</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311102028763.png" alt="image-20231110101954091" /></p>
-<p>docker --help # 帮助</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311102028769.png" alt="image-20231110102010973" /></p>
-<h2 id="镜像命令"><a class="markdownIt-Anchor" href="#镜像命令"></a> 镜像命令</h2>
-<h3 id="docker-images"><a class="markdownIt-Anchor" href="#docker-images"></a> docker images</h3>
-<p>列出本地主机上的镜像</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker images</span><br></pre></td></tr></table></figure>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311102028775.png" alt="image-20231110102117914" /></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">解释</span></span><br><span class="line">REPOSITORY 镜像的仓库源</span><br><span class="line">TAG 镜像的标签</span><br><span class="line">IMAGE ID 镜像的ID</span><br><span class="line">CREATED 镜像创建时间</span><br><span class="line">SIZE 镜像大小</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">同一个仓库源可以有多个 TAG，代表这个仓库源的不同版本，我们使用REPOSITORY：TAG 定义不同</span></span><br><span class="line">的镜像，如果你不定义镜像的标签版本，docker将默认使用 lastest 镜像！</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">可选项</span></span><br><span class="line">-a： 列出本地所有镜像</span><br><span class="line">-q： 只显示镜像id</span><br><span class="line">--digests： 显示镜像的摘要信息</span><br></pre></td></tr></table></figure>
-<h3 id="docker-search"><a class="markdownIt-Anchor" href="#docker-search"></a> docker search</h3>
-<p>搜索镜像</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker search mysql</span><br></pre></td></tr></table></figure>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311102028862.png" alt="image-20231110102407460" /></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">docker search 某个镜像的名称 对应DockerHub仓库中的镜像</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">可选项</span></span><br><span class="line">--filter=stars=50 ： 列出收藏数不小于指定值的镜像。</span><br></pre></td></tr></table></figure>
-<h3 id="docker-pull"><a class="markdownIt-Anchor" href="#docker-pull"></a> docker pull</h3>
-<p>下载镜像</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull mysql</span><br></pre></td></tr></table></figure>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311102028173.png" alt="image-20231110102532256" /></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"> # </span><span class="language-bash">不写tag，默认是latest</span></span><br><span class="line"> sha256:61a2a33f4b8b4bc93b7b6b9e65e64044aaec594809f818aeffbff69a893d1944 #</span><br><span class="line">签名</span><br><span class="line">Status: Downloaded newer image for mysql:latest</span><br><span class="line">docker.io/library/mysql:latest # 真实位置</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">指定版本下载</span></span><br><span class="line">docker pull mysql:5.7</span><br></pre></td></tr></table></figure>
-<h3 id="docker-rmi"><a class="markdownIt-Anchor" href="#docker-rmi"></a> docker rmi</h3>
-<p>删除镜像</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">删除镜像</span></span><br><span class="line">docker rmi -f 镜像id # 删除单个</span><br><span class="line">docker rmi -f 镜像名:tag 镜像名:tag # 删除多个</span><br><span class="line">docker rmi -f $(docker images -qa) # 删除全部</span><br></pre></td></tr></table></figure>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311102028206.png" alt="image-20231110102733970" /></p>
-<h2 id="容器命令"><a class="markdownIt-Anchor" href="#容器命令"></a> 容器命令</h2>
-<p>有镜像才能创建容器，狂神的是cenos，我这里肯定用ubuntu，线搜索一下ubuntu</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311102028184.png" alt="image-20231110103746806" /></p>
-<p>然后我这里拉取ubuntu20.04的镜像：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull ubuntu:20.04</span><br></pre></td></tr></table></figure>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311102028215.png" alt="image-20231110103933502" /></p>
-<h3 id="docker-run"><a class="markdownIt-Anchor" href="#docker-run"></a> docker run</h3>
-<p>新建容器并启动</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">命令</span></span><br><span class="line">docker run [OPTIONS] IMAGE [COMMAND][ARG...]</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">常用参数说明</span></span><br><span class="line">--name=&quot;Name&quot; # 给容器指定一个名字</span><br><span class="line">-d # 后台方式运行容器，并返回容器的id！</span><br><span class="line">-i # 以交互模式运行容器，通过和 -t 一起使用</span><br><span class="line">-t # 给容器重新分配一个终端，通常和 -i 一起使用</span><br><span class="line">-P # 随机端口映射（大写）</span><br><span class="line">-p # 指定端口映射（小结），一般可以有四种写法</span><br><span class="line">ip:hostPort:containerPort</span><br><span class="line">ip::containerPort</span><br><span class="line">hostPort:containerPort (常用)</span><br><span class="line">containerPort</span><br></pre></td></tr></table></figure>
-<p>先使用 docker images命令查看一下拉取的镜像</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker images</span><br></pre></td></tr></table></figure>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311102028178.png" alt="image-20231110104246665" /></p>
-<p>使用ubuntu进行用交互模式启动容器，在容器内执行/bin/bash命令！</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -it ubuntu:20.04 /bin/bash</span><br></pre></td></tr></table></figure>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311102028212.png" alt="image-20231110104414762" /></p>
-<p>==注意，这里要添加tag标签，不然无法成功==</p>
-<p>最后使用exit退出镜像即可。</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311102028464.png" alt="image-20231110104527685" /></p>
-<h3 id="docker-ps"><a class="markdownIt-Anchor" href="#docker-ps"></a> docker ps</h3>
-<p>列出所有容器</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">命令</span></span><br><span class="line">docker ps [OPTIONS]</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">常用参数说明</span></span><br><span class="line">-a # 列出当前所有正在运行的容器 + 历史运行过的容器</span><br><span class="line">-l # 显示最近创建的容器</span><br><span class="line">-n=? # 显示最近n个创建的容器</span><br><span class="line">-q # 静默模式，只显示容器编号。</span><br></pre></td></tr></table></figure>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311102028606.png" alt="image-20231110104629549" /></p>
-<h3 id="exit"><a class="markdownIt-Anchor" href="#exit"></a> exit</h3>
-<p>退出容器</p>
-<h3 id="docker-start"><a class="markdownIt-Anchor" href="#docker-start"></a> docker start</h3>
-<p>启动容器</p>
-<p>需要注意：==<code>docker run</code>用于创建和启动新的容器，并可以指定要在容器内执行的命令，而<code>docker start</code>仅用于启动已经存在但目前停止的容器。==</p>
-<h3 id="docker-restart"><a class="markdownIt-Anchor" href="#docker-restart"></a> docker restart</h3>
-<p>重启容器</p>
-<h3 id="docker-stop"><a class="markdownIt-Anchor" href="#docker-stop"></a> docker stop</h3>
-<p>停止容器</p>
-<h3 id="docker-kill"><a class="markdownIt-Anchor" href="#docker-kill"></a> docker kill</h3>
-<p>强制停止容器</p>
-<h3 id="docker-rm"><a class="markdownIt-Anchor" href="#docker-rm"></a> docker rm</h3>
-<p>删除容器</p>
-<h2 id="其他常用命令"><a class="markdownIt-Anchor" href="#其他常用命令"></a> 其他常用命令</h2>
-<h3 id="docker-run-d"><a class="markdownIt-Anchor" href="#docker-run-d"></a> docker run -d</h3>
-<p>后台启动容器</p>
-<h3 id="docker-logs-f-t-tail"><a class="markdownIt-Anchor" href="#docker-logs-f-t-tail"></a> docker logs -f -t --tail</h3>
-<p>查看日志</p>
-<h3 id="docker-top"><a class="markdownIt-Anchor" href="#docker-top"></a> docker top</h3>
-<p>查看容器中运行的进程信息</p>
-<h3 id="docker-inspect"><a class="markdownIt-Anchor" href="#docker-inspect"></a> docker inspect</h3>
-<p>查看容器/镜像的元数据</p>
-<h3 id="docker-exec-it"><a class="markdownIt-Anchor" href="#docker-exec-it"></a> docker exec -it</h3>
-<p>进入正在运行的容器</p>
-<h3 id="docker-cp"><a class="markdownIt-Anchor" href="#docker-cp"></a> docker cp</h3>
-<p>从容器内拷贝文件到主机上</p>
-<p>==一般用的不多吧，一般都是直接卷的挂载==</p>
-<h1 id="docker-commit"><a class="markdownIt-Anchor" href="#docker-commit"></a> <strong>docker commit</strong></h1>
-<p>从容器创建一个新的镜像，类似于虚拟机的快照相关的东西，但是后面的dockerfile实现的是一个形同的目的，所以这里直接去到dockerfile</p>
-<h1 id="挂载卷"><a class="markdownIt-Anchor" href="#挂载卷"></a> 挂载卷</h1>
-<p>这个方法很重要，以后的挂载构建镜像以及构系统源码进行编译都要用这个，但是后面的挂载我还不是很懂，这里后面要在看看。</p>
-<h1 id="dockerfile"><a class="markdownIt-Anchor" href="#dockerfile"></a> DockerFile</h1>
-<p>dockerfile是用来构建Docker镜像的构建文件，是由一系列命令和参数构成的脚本。</p>
-<p>构建步骤：</p>
-<p>1、编写DockerFile文件</p>
-<p>2、docker build 构建镜像</p>
-<p>3、docker run</p>
-<p><strong>DockerFile****构建过程</strong></p>
-<p><strong>基础知识：</strong></p>
-<p>1、每条保留字指令都必须为大写字母且后面要跟随至少一个参数</p>
-<p>2、指令按照从上到下，顺序执行</p>
-<p>3、# 表示注释</p>
-<p>4、每条指令都会创建一个新的镜像层，并对镜像进行提交</p>
-<p><strong>流程：</strong></p>
-<p>1、docker从基础镜像运行一个容器</p>
-<p>2、执行一条指令并对容器做出修改</p>
-<p>3、执行类似 docker commit 的操作提交一个新的镜像层</p>
-<p>4、Docker再基于刚提交的镜像运行一个新容器</p>
-<p>5、执行dockerfile中的下一条指令直到所有指令都执行完成！</p>
-<p><strong>说明：</strong></p>
-<p>从应用软件的角度来看，DockerFile，docker镜像与docker容器分别代表软件的三个不同阶段。</p>
-<p>DockerFile 是软件的原材料 （代码）</p>
-<p>Docker 镜像则是软件的交付品 （.apk）</p>
-<p>Docker 容器则是软件的运行状态 （客户下载安装执行）</p>
-<p>DockerFile 面向开发，Docker镜像成为交付标准，Docker容器则涉及部署与运维，三者缺一不可！</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">FROM # 基础镜像，当前新镜像是基于哪个镜像的</span><br><span class="line">MAINTAINER # 镜像维护者的姓名混合邮箱地址</span><br><span class="line">RUN # 容器构建时需要运行的命令</span><br><span class="line">EXPOSE # 当前容器对外保留出的端口</span><br><span class="line">WORKDIR # 指定在创建容器后，终端默认登录的进来工作目录，一个落脚点</span><br><span class="line">ENV # 用来在构建镜像过程中设置环境变量</span><br><span class="line">ADD # 将宿主机目录下的文件拷贝进镜像且ADD命令会自动处理URL和解压tar压缩包</span><br><span class="line">COPY # 类似ADD，拷贝文件和目录到镜像中！</span><br><span class="line">VOLUME # 容器数据卷，用于数据保存和持久化工作</span><br><span class="line">CMD # 指定一个容器启动时要运行的命令，dockerFile中可以有多个CMD指令，但只有最</span><br><span class="line">后一个生效！</span><br><span class="line">ENTRYPOINT # 指定一个容器启动时要运行的命令！和CMD一样</span><br><span class="line">ONBUILD # 当构建一个被继承的DockerFile时运行命令，父镜像在被子镜像继承后，父镜像的</span><br><span class="line">ONBUILD被触发</span><br></pre></td></tr></table></figure>
-<p>编写完一个完整的dockerfile文件如下所示：</p>
-<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> ubuntu:<span class="number">20.04</span></span><br><span class="line"><span class="keyword">ARG</span> DEBIAN_FRONTEND=noninteractive</span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> apt-get update \</span></span><br><span class="line"><span class="language-bash">    &amp;&amp; apt-get install -y --no-install-recommends \</span></span><br><span class="line"><span class="language-bash">       gnupg \</span></span><br><span class="line"><span class="language-bash">       gnupg1 \</span></span><br><span class="line"><span class="language-bash">       gpgv1 \</span></span><br><span class="line"><span class="language-bash">    &amp;&amp; <span class="built_in">rm</span> -rf /var/lib/apt/lists/*</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> dpkg --add-architecture i386</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> apt-get update \</span></span><br><span class="line"><span class="language-bash">    &amp;&amp; apt-get -y upgrade \</span></span><br><span class="line"><span class="language-bash">    &amp;&amp; apt-get install -y --no-install-recommends \</span></span><br><span class="line"><span class="language-bash">       acl \</span></span><br><span class="line"><span class="language-bash">       aptly \</span></span><br><span class="line"><span class="language-bash">       aria2 \</span></span><br><span class="line"><span class="language-bash">       bc \</span></span><br><span class="line"><span class="language-bash">       binfmt-support \</span></span><br><span class="line"><span class="language-bash">       binutils \</span></span><br><span class="line"><span class="language-bash">       bison \</span></span><br><span class="line"><span class="language-bash">       btrfs-progs \</span></span><br><span class="line"><span class="language-bash">       build-essential \</span></span><br><span class="line"><span class="language-bash">       ca-certificates \</span></span><br><span class="line"><span class="language-bash">       ccache \</span></span><br><span class="line"><span class="language-bash">       cpio \</span></span><br><span class="line"><span class="language-bash">       cryptsetup \</span></span><br><span class="line"><span class="language-bash">       cryptsetup-bin \</span></span><br><span class="line"><span class="language-bash">       curl \</span></span><br><span class="line"><span class="language-bash">       debian-archive-keyring \</span></span><br><span class="line"><span class="language-bash">       debian-keyring \</span></span><br><span class="line"><span class="language-bash">       debootstrap \</span></span><br><span class="line"><span class="language-bash">       device-tree-compiler \</span></span><br><span class="line"><span class="language-bash">       dialog \</span></span><br><span class="line"><span class="language-bash">       dosfstools \</span></span><br><span class="line"><span class="language-bash">       f2fs-tools \</span></span><br><span class="line"><span class="language-bash">       fakeroot \</span></span><br><span class="line"><span class="language-bash">       flex \</span></span><br><span class="line"><span class="language-bash">       gawk \</span></span><br><span class="line"><span class="language-bash">       git \</span></span><br><span class="line"><span class="language-bash">       imagemagick \</span></span><br><span class="line"><span class="language-bash">       kmod \</span></span><br><span class="line"><span class="language-bash">       lib32ncurses6 \</span></span><br><span class="line"><span class="language-bash">       lib32stdc++6 \</span></span><br><span class="line"><span class="language-bash">       lib32tinfo6 \</span></span><br><span class="line"><span class="language-bash">       libbison-dev \</span></span><br><span class="line"><span class="language-bash">       libc6-dev-armhf-cross \</span></span><br><span class="line"><span class="language-bash">       libc6-i386 \</span></span><br><span class="line"><span class="language-bash">       libfile-fcntllock-perl \</span></span><br><span class="line"><span class="language-bash">       libfl-dev \</span></span><br><span class="line"><span class="language-bash">       liblz4-tool \</span></span><br><span class="line"><span class="language-bash">       libncurses5-dev \</span></span><br><span class="line"><span class="language-bash">       libpython2.7-dev \</span></span><br><span class="line"><span class="language-bash">       libpython3-dev \</span></span><br><span class="line"><span class="language-bash">       libssl-dev \</span></span><br><span class="line"><span class="language-bash">       libusb-1.0-0-dev \</span></span><br><span class="line"><span class="language-bash">       linux-base \</span></span><br><span class="line"><span class="language-bash">       locales \</span></span><br><span class="line"><span class="language-bash">       lsb-release \</span></span><br><span class="line"><span class="language-bash">       lzop \</span></span><br><span class="line"><span class="language-bash">       ncurses-base \</span></span><br><span class="line"><span class="language-bash">       ncurses-term \</span></span><br><span class="line"><span class="language-bash">       nfs-kernel-server \</span></span><br><span class="line"><span class="language-bash">       ntpdate \</span></span><br><span class="line"><span class="language-bash">       p7zip-full \</span></span><br><span class="line"><span class="language-bash">       parted \</span></span><br><span class="line"><span class="language-bash">       patchutils \</span></span><br><span class="line"><span class="language-bash">       pigz \</span></span><br><span class="line"><span class="language-bash">       pixz \</span></span><br><span class="line"><span class="language-bash">       pkg-config \</span></span><br><span class="line"><span class="language-bash">       psmisc \</span></span><br><span class="line"><span class="language-bash">       pv \</span></span><br><span class="line"><span class="language-bash">       python2 \</span></span><br><span class="line"><span class="language-bash">       python3 \</span></span><br><span class="line"><span class="language-bash">       python3-dev \</span></span><br><span class="line"><span class="language-bash">       python3-distutils \</span></span><br><span class="line"><span class="language-bash">       qemu-user-static \</span></span><br><span class="line"><span class="language-bash">       rsync \</span></span><br><span class="line"><span class="language-bash">       swig \</span></span><br><span class="line"><span class="language-bash">       systemd-container \</span></span><br><span class="line"><span class="language-bash">       tzdata \</span></span><br><span class="line"><span class="language-bash">       u-boot-tools \</span></span><br><span class="line"><span class="language-bash">       udev \</span></span><br><span class="line"><span class="language-bash">       unzip \</span></span><br><span class="line"><span class="language-bash">       uuid-dev \</span></span><br><span class="line"><span class="language-bash">       wget \</span></span><br><span class="line"><span class="language-bash">       whiptail \</span></span><br><span class="line"><span class="language-bash">       xxd \</span></span><br><span class="line"><span class="language-bash">       zip \</span></span><br><span class="line"><span class="language-bash">       zlib1g-dev \</span></span><br><span class="line"><span class="language-bash">       zlib1g:i386 \</span></span><br><span class="line"><span class="language-bash">       sudo \</span></span><br><span class="line"><span class="language-bash">       vim \</span></span><br><span class="line"><span class="language-bash">       uuid \</span></span><br><span class="line"><span class="language-bash">       uuid-dev \</span></span><br><span class="line"><span class="language-bash">       zlib1g-dev \</span></span><br><span class="line"><span class="language-bash">       liblz-dev \</span></span><br><span class="line"><span class="language-bash">       liblzo2-2 \</span></span><br><span class="line"><span class="language-bash">       liblzo2-dev \</span></span><br><span class="line"><span class="language-bash">       lzop \</span></span><br><span class="line"><span class="language-bash">       git \</span></span><br><span class="line"><span class="language-bash">       curl \</span></span><br><span class="line"><span class="language-bash">       u-boot-tools \</span></span><br><span class="line"><span class="language-bash">       mtd-utils \</span></span><br><span class="line"><span class="language-bash">       openjdk-8-jdk \</span></span><br><span class="line"><span class="language-bash">       device-tree-compiler \</span></span><br><span class="line"><span class="language-bash">       gdisk \</span></span><br><span class="line"><span class="language-bash">       m4 \</span></span><br><span class="line"><span class="language-bash">       zlib1g-dev \</span></span><br><span class="line"><span class="language-bash">       git \</span></span><br><span class="line"><span class="language-bash">       gnupg \</span></span><br><span class="line"><span class="language-bash">       flex \</span></span><br><span class="line"><span class="language-bash">       bison \</span></span><br><span class="line"><span class="language-bash">       gperf \</span></span><br><span class="line"><span class="language-bash">       libsdl1.2-dev \</span></span><br><span class="line"><span class="language-bash">       libesd-java \</span></span><br><span class="line"><span class="language-bash">       squashfs-tools \</span></span><br><span class="line"><span class="language-bash">       build-essential \</span></span><br><span class="line"><span class="language-bash">       zip \</span></span><br><span class="line"><span class="language-bash">       curl \</span></span><br><span class="line"><span class="language-bash">       libncurses5-dev \</span></span><br><span class="line"><span class="language-bash">       zlib1g-dev \</span></span><br><span class="line"><span class="language-bash">       pngcrush \</span></span><br><span class="line"><span class="language-bash">       schedtool \</span></span><br><span class="line"><span class="language-bash">       libxml2 \</span></span><br><span class="line"><span class="language-bash">       libxml2-utils \</span></span><br><span class="line"><span class="language-bash">       xsltproc \</span></span><br><span class="line"><span class="language-bash">       lzop \</span></span><br><span class="line"><span class="language-bash">       libc6-dev \</span></span><br><span class="line"><span class="language-bash">       schedtool \</span></span><br><span class="line"><span class="language-bash">       g++-multilib \</span></span><br><span class="line"><span class="language-bash">       lib32z1-dev \</span></span><br><span class="line"><span class="language-bash">       lib32ncurses-dev \</span></span><br><span class="line"><span class="language-bash">       lib32readline-dev \</span></span><br><span class="line"><span class="language-bash">       gcc-multilib \</span></span><br><span class="line"><span class="language-bash">       libswitch-perl \</span></span><br><span class="line"><span class="language-bash">       libssl-dev \</span></span><br><span class="line"><span class="language-bash">       unzip \</span></span><br><span class="line"><span class="language-bash">       zip \</span></span><br><span class="line"><span class="language-bash">       liblz4-tool \</span></span><br><span class="line"><span class="language-bash">       git \</span></span><br><span class="line"><span class="language-bash">       ssh \</span></span><br><span class="line"><span class="language-bash">       make \</span></span><br><span class="line"><span class="language-bash">       gcc \</span></span><br><span class="line"><span class="language-bash">       libssl-dev \</span></span><br><span class="line"><span class="language-bash">       liblz4-tool \</span></span><br><span class="line"><span class="language-bash">       vim \</span></span><br><span class="line"><span class="language-bash">       expect \</span></span><br><span class="line"><span class="language-bash">       g++ \</span></span><br><span class="line"><span class="language-bash">       patchelf \</span></span><br><span class="line"><span class="language-bash">       chrpath \</span></span><br><span class="line"><span class="language-bash">       gawk \</span></span><br><span class="line"><span class="language-bash">       texinfo \</span></span><br><span class="line"><span class="language-bash">       chrpath \</span></span><br><span class="line"><span class="language-bash">       diffstat \</span></span><br><span class="line"><span class="language-bash">       binfmt-support \</span></span><br><span class="line"><span class="language-bash">       qemu-user-static \</span></span><br><span class="line"><span class="language-bash">       live-build \</span></span><br><span class="line"><span class="language-bash">       bison \</span></span><br><span class="line"><span class="language-bash">       flex \</span></span><br><span class="line"><span class="language-bash">       fakeroot \</span></span><br><span class="line"><span class="language-bash">       cmake \</span></span><br><span class="line"><span class="language-bash">       gcc-multilib \</span></span><br><span class="line"><span class="language-bash">       g++-multilib \</span></span><br><span class="line"><span class="language-bash">       unzip \</span></span><br><span class="line"><span class="language-bash">       device-tree-compiler \</span></span><br><span class="line"><span class="language-bash">       python3-pip \</span></span><br><span class="line"><span class="language-bash">       libncurses5-dev \</span></span><br><span class="line"><span class="language-bash">       rsync \</span></span><br><span class="line"><span class="language-bash">       subversion \</span></span><br><span class="line"><span class="language-bash">       sed \</span></span><br><span class="line"><span class="language-bash">       make \</span></span><br><span class="line"><span class="language-bash">       binutils \</span></span><br><span class="line"><span class="language-bash">       build-essential \</span></span><br><span class="line"><span class="language-bash">       gcc \</span></span><br><span class="line"><span class="language-bash">       g++ \</span></span><br><span class="line"><span class="language-bash">       wget \</span></span><br><span class="line"><span class="language-bash">       python-is-python2 \</span></span><br><span class="line"><span class="language-bash">       libncurses5 \</span></span><br><span class="line"><span class="language-bash">       bzr \</span></span><br><span class="line"><span class="language-bash">       cvs \</span></span><br><span class="line"><span class="language-bash">       git \</span></span><br><span class="line"><span class="language-bash">       mercurial \</span></span><br><span class="line"><span class="language-bash">       patch \</span></span><br><span class="line"><span class="language-bash">       gzip \</span></span><br><span class="line"><span class="language-bash">       bzip2 \</span></span><br><span class="line"><span class="language-bash">       perl \</span></span><br><span class="line"><span class="language-bash">       tar \</span></span><br><span class="line"><span class="language-bash">       cpio \</span></span><br><span class="line"><span class="language-bash">       unzip \</span></span><br><span class="line"><span class="language-bash">       rsync \</span></span><br><span class="line"><span class="language-bash">       file \</span></span><br><span class="line"><span class="language-bash">       bc \</span></span><br><span class="line"><span class="language-bash">       wget \</span></span><br><span class="line"><span class="language-bash">       qemu-user-static \</span></span><br><span class="line"><span class="language-bash">       live-build \</span></span><br><span class="line"><span class="language-bash">       android-sdk-libsparse-utils \</span></span><br><span class="line"><span class="language-bash">       android-sdk-ext4-utils \</span></span><br><span class="line"><span class="language-bash">       time \</span></span><br><span class="line"><span class="language-bash">    &amp;&amp; <span class="built_in">rm</span> -rf /var/lib/apt/lists/* \</span></span><br><span class="line"><span class="language-bash">    &amp;&amp; <span class="built_in">rm</span> -rf /usr/bin/python \</span></span><br><span class="line"><span class="language-bash">    &amp;&amp; sudo <span class="built_in">ln</span> -s /usr/bin/python3 /usr/bin/python</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> locale-gen en_US.UTF-8</span></span><br><span class="line"><span class="keyword">ENV</span> LANG=<span class="string">&#x27;en_US.UTF-8&#x27;</span> LANGUAGE=<span class="string">&#x27;en_US:en&#x27;</span> LC_ALL=<span class="string">&#x27;en_US.UTF-8&#x27;</span> TERM=screen</span><br><span class="line"><span class="keyword">WORKDIR</span><span class="language-bash"> /home/topeet</span></span><br><span class="line"><span class="keyword">ENTRYPOINT</span><span class="language-bash"> [ <span class="string">&quot;/bin/bash&quot;</span>]</span></span><br></pre></td></tr></table></figure>
-<p>运行构建docker的命令如下所示：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker build -f Dockerfile -t ubuntu20:1 .</span><br></pre></td></tr></table></figure>
-<p>==注意最后有个.表示当前目录~~我说呢==</p>
-<p>然后运行：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -it ubuntu20:1</span><br></pre></td></tr></table></figure>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311102028618.png" alt="image-20231110130235371" /></p>
-<p>运行成功证明构建的没问题，然后打包ubuntu20：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker save -o image.tar.gz ubuntu20:1</span><br></pre></td></tr></table></figure>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311102028624.png" alt="image-20231110135153759" /></p>
-<p>r然后在其他电脑上只需要使用下面的命令加载镜像即可</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker load -i image.tar.gz</span><br></pre></td></tr></table></figure>
-<p>最后测试挂载然后编译：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --privileged -it -v /home/topeet/Linux/ubuntu20_build:/home/topeet/ubuntu20_build ubuntu20:1</span><br></pre></td></tr></table></figure>
-<p>其中  --privileged是必须要加的，否则构建系统的时候会有权限问题。构建ubuntu20文件系统通过，没有任何问题：<br />
-<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311102028650.png" alt="image-20231110144134276" /></p>
-<p>然后测试编译Linux源码</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --privileged -it -v /home/topeet/Linux/3588-linux:/home/topeet/3588-linux ubuntu20:1</span><br></pre></td></tr></table></figure>
-<p>测试没有什么问题，编译的时间太长了，晚上再测。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --privileged -it -v /home/topeet/Android/3588-android12:/home/topeet/3588-android12 ubuntu20:1</span><br></pre></td></tr></table></figure>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-4 音视频测试"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/10/26/4%20%E9%9F%B3%E8%A7%86%E9%A2%91%E6%B5%8B%E8%AF%95/"
-    >音视频测试</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/10/26/4%20%E9%9F%B3%E8%A7%86%E9%A2%91%E6%B5%8B%E8%AF%95/" class="article-date">
-  <time datetime="2023-10-26T01:55:17.000Z" itemprop="datePublished">2023-10-26</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE/">瑞芯微</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h1 id="1gst-play-10测试"><a class="markdownIt-Anchor" href="#1gst-play-10测试"></a> 1.gst-play-1.0测试</h1>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gst-play-1.0 --videosink=xvimagesink /usr/local/test.mp4</span><br></pre></td></tr></table></figure>
-<p>GStreamer 的 gst-play-1.0 工具会加载指定的视频文件，并使用 xvimagesink 插件将视频渲染到 X Window 系统上的显示设备上，以实现视频的播放效果。</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310260944983.png" alt="image-20231026094404955" /></p>
-<h1 id="2mpv测试"><a class="markdownIt-Anchor" href="#2mpv测试"></a> 2.mpv测试</h1>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mpv --hwdec=rkmpp --vd-lavc-software-fallback=no --vo=xv /usr/local/test.mp4        </span><br></pre></td></tr></table></figure>
-<p>mpv 媒体播放器将使用 Rockchip MPP 硬件解码器进行硬件解码，禁用软件回退以确保只使用硬件解码，并使用 xv 视频输出插件渲染视频，以实现高性能的视频播放效果。</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310260945251.png" alt="image-20231026094504212" /></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mpv --hwdec=rkmpp --vo=opengl --gpu-hwdec-interop=drmprime-drm --gpu-context=x11egl /usr/local/test.mp4</span><br></pre></td></tr></table></figure>
-<p>mpv 媒体播放器将使用 Rockchip MPP 硬件解码器进行硬件解码，使用 OpenGL 作为视频输出，同时启用 DRM Prime 与 DRM 之间的 GPU 硬件解码器互操作性，并使用 X11 EGL 上下文进行 GPU 加速，以实现高性能的视频播放效果。</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310260943085.png" alt="image-20231026094341042" /></p>
-<h1 id="3-gst-launch-10-测试"><a class="markdownIt-Anchor" href="#3-gst-launch-10-测试"></a> 3. gst-launch-1.0 测试</h1>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GST_DEBUG=fps*:7 gst-launch-1.0 uridecodebin uri=file:///usr/local/test.mp4 ! fpsdisplaysink video-sink=xvimagesink text-overlay=false signal-fps-measurements=true</span><br></pre></td></tr></table></figure>
-<p>GStreamer 的 gst-launch-1.0 工具将创建一个简单的流水线，其中包含 <code>uridecodebin</code> 元素用于解码指定的视频文件，并通过 <code>fpsdisplaysink</code> 元素显示视频和帧率信息。帧率信息将以调试输出的形式显示在终端上。</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310261008898.png" alt="image-20231026100859800" /></p>
-<p>测试最大的帧率</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GST_DEBUG=fps*:7 gst-launch-1.0 uridecodebin uri=file:///usr/local/test.mp4 ! fpsdisplaysink video-sink=fakesink text-overlay=false signal-fps-measurements=true sync=false</span><br></pre></td></tr></table></figure>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310261010578.png" alt="image-20231026101009531" /></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gst-launch-1.0 uridecodebin uri=file:///usr/local/test.mp4 ! xvimagesink</span><br></pre></td></tr></table></figure>
-<h1 id="4谷歌浏览器测试"><a class="markdownIt-Anchor" href="#4谷歌浏览器测试"></a> 4.谷歌浏览器测试</h1>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo 0x100 &gt; /sys/module/rk_vcodec/parameters/mpp_dev_debug</span><br><span class="line">chromium --no-sandbox file:///usr/local/test.mp4</span><br></pre></td></tr></table></figure>
-<p>Chromium 浏览器将在没有沙盒的情况下启动，并加载指定路径的 <code>test.mp4</code> 视频文件。这样，您可以在浏览器中直接播放本地视频文件。</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310261014311.png" alt="image-20231026101406276" /></p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310261018085.png" alt="image-20231026101842048" /></p>
-<p>播放视频的时候查看GPU的利用率发现明显的上升，所以判断谷歌浏览器为硬件解码。</p>
-<h1 id="5摄像头测试"><a class="markdownIt-Anchor" href="#5摄像头测试"></a> 5.摄像头测试</h1>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/aarch64-linux-gnu/gstreamer-1.0</span><br><span class="line">gst-launch-1.0 v4l2src device=/dev/video0 ! video/x-raw,format=NV12,width=1920,height=1080, framerate=30/1 ! xvimagesink</span><br><span class="line">gst-launch-1.0 v4l2src device=/dev/video1 ! video/x-raw,format=NV12,width=1920,height=1080, framerate=30/1 ! xvimagesink</span><br></pre></td></tr></table></figure>
-<p>我发现不加上第一句的库的导入会出现发绿的情况，而且是0发绿，1没事，不加第一句的话1的颜色不太对</p>
-<p>gst-launch-1.0 v4l2src device=/dev/video9 ! image/jpeg, width=640, height=480, framerate=30/1 ! jpegparse ! mppjpegdec ! xvimagesink sync=false</p>
-<h1 id="6mpp测试"><a class="markdownIt-Anchor" href="#6mpp测试"></a> 6.mpp测试</h1>
-<p>首先要监控输出：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tail -f /var/log/syslog</span><br></pre></td></tr></table></figure>
-<p>调用mpi_dec_test，解码视频，将<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=h264&amp;spm=1001.2101.3001.7020">h264</a>转为yuv</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mpi_dec_test -i /oem/200frames_count.h264 -t 7 -n 250 -o /home/topeet/test.yuv -w 640 -h 480</span><br></pre></td></tr></table></figure>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310261707707.png" alt="image-20231026170732680" /></p>
-<p>调用mpi_enc_test，编码视频，将yuv转为h264</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mpi_enc_test -i /home/topeet/test.yuv -t 7 -n 250 -o /home/topeet/test.h264 -w 640 -h 480 -fps 25</span><br></pre></td></tr></table></figure>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310261712235.png" alt="image-20231026171223218" /></p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
   </article>
   
 
   
   <nav class="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/2/">上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/">下一页</a>
+    <a class="extend prev" rel="prev" href="/page/2/">上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/4/">下一页</a>
   </nav>
   
 </section>
