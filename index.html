@@ -110,7 +110,7 @@
     
     
     <article
-  id="post-42_反思(三月第3个星期) "
+  id="post-46_反思(三月第4个星期)"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -121,7 +121,7 @@
     <header class="article-header">
        
 <h2 itemprop="name">
-  <a class="article-title" href="/2024/03/25/42_%E5%8F%8D%E6%80%9D(%E4%B8%89%E6%9C%88%E7%AC%AC3%E4%B8%AA%E6%98%9F%E6%9C%9F)%20/"
+  <a class="article-title" href="/2024/03/25/46_%E5%8F%8D%E6%80%9D(%E4%B8%89%E6%9C%88%E7%AC%AC4%E4%B8%AA%E6%98%9F%E6%9C%9F)/"
     >反思(3月第4个星期)</a> 
 </h2>
  
@@ -130,7 +130,7 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2024/03/25/42_%E5%8F%8D%E6%80%9D(%E4%B8%89%E6%9C%88%E7%AC%AC3%E4%B8%AA%E6%98%9F%E6%9C%9F)%20/" class="article-date">
+      <a href="/2024/03/25/46_%E5%8F%8D%E6%80%9D(%E4%B8%89%E6%9C%88%E7%AC%AC4%E4%B8%AA%E6%98%9F%E6%9C%9F)/" class="article-date">
   <time datetime="2024-03-24T22:26:56.000Z" itemprop="datePublished">2024-03-25</time>
 </a> 
   <div class="article-category">
@@ -142,7 +142,7 @@
     <div class="article-entry" itemprop="articleBody">
        
   Here's something encrypted, password is required to continue reading. 
-      <a class="article-more-link" href="/2024/03/25/42_%E5%8F%8D%E6%80%9D(%E4%B8%89%E6%9C%88%E7%AC%AC3%E4%B8%AA%E6%98%9F%E6%9C%9F)%20/"
+      <a class="article-more-link" href="/2024/03/25/46_%E5%8F%8D%E6%80%9D(%E4%B8%89%E6%9C%88%E7%AC%AC4%E4%B8%AA%E6%98%9F%E6%9C%9F)/"
         >阅读更多...</a
       >
        
@@ -280,6 +280,8 @@
 <p>​	==拜托一份幻觉，比发现一个真理更能使人明智==</p>
 <hr />
 <p>​</p>
+<h2 id="案例1-inpath"><a class="markdownIt-Anchor" href="#案例1-inpath"></a> 案例1  inpath</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/sh</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">inpath - 验证指定的程序是否有效或者是否存在于PATH目录列表中。</span></span><br><span class="line"></span><br><span class="line">in_path()</span><br><span class="line">&#123;</span><br><span class="line"><span class="meta prompt_">  # </span><span class="language-bash">给定一个命令和PATH路径，尝试查找该命令。如果找到并且可执行，返回0；否则返回1。</span></span><br><span class="line"><span class="meta prompt_">  # </span><span class="language-bash">需要注意的是，这个函数会临时修改IFS（输入字段分隔符），但在完成后会恢复原值。</span></span><br><span class="line"></span><br><span class="line">  cmd=$1        # 命令</span><br><span class="line">  path=$2       # PATH路径</span><br><span class="line">  retval=1      # 返回值，默认为1</span><br><span class="line">  oldIFS=$IFS   # 保存旧的IFS值</span><br><span class="line">  IFS=&quot;:&quot;       # 设置IFS为冒号，用于分隔路径列表</span><br><span class="line"></span><br><span class="line">  for directory in $path</span><br><span class="line">  do</span><br><span class="line">    if [ -x $directory/$cmd ] ; then</span><br><span class="line">      retval=0      # 如果找到了$cmd在$directory中，将返回值设为0</span><br><span class="line">    fi</span><br><span class="line">  done</span><br><span class="line">  IFS=$oldIFS     # 恢复IFS为旧值</span><br><span class="line">  return $retval  # 返回结果</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">checkForCmdInPath()</span><br><span class="line">&#123;</span><br><span class="line">  var=$1</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">  # </span><span class="language-bash">下面的条件语句中的变量切片表示法需要一些解释：</span></span><br><span class="line"><span class="meta prompt_">  # </span><span class="language-bash"><span class="variable">$&#123;var#expr&#125;</span> 返回变量值中匹配<span class="string">&#x27;expr&#x27;</span>之后的内容（如果有），而</span></span><br><span class="line"><span class="meta prompt_">  # </span><span class="language-bash"><span class="variable">$&#123;var%expr&#125;</span> 返回变量值中不匹配的部分（在本例中只有第一个字符）。</span></span><br><span class="line"><span class="meta prompt_">  # </span><span class="language-bash">在Bash中也可以使用<span class="variable">$&#123;var:0:1&#125;</span>来实现，还可以使用<span class="built_in">cut</span>命令：<span class="built_in">cut</span> -c1</span></span><br><span class="line"></span><br><span class="line">  if [ &quot;$var&quot; != &quot;&quot; ] ; then</span><br><span class="line">    if [ &quot;$&#123;var%$&#123;var#?&#125;&#125;&quot; = &quot;/&quot; ] ; then</span><br><span class="line">      if [ ! -x $var ] ; then</span><br><span class="line">        return 1  # 如果$var不是空字符串且以&#x27;/&#x27;开头，且不可执行，则返回1</span><br><span class="line">      fi</span><br><span class="line">    elif ! in_path $var $PATH ; then</span><br><span class="line">      return 2  # 如果$var不是空字符串且不在PATH中，则返回2</span><br><span class="line">    fi </span><br><span class="line">  fi</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">if [ $# -ne 1 ] ; then  # 检查脚本的参数个数是否为1，如果不是，则输出错误消息并退出脚本。</span><br><span class="line"> echo &quot;Usage: $0 command&quot; &gt;&amp;2 ; exit 1</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">checkForCmdInPath &quot;$1&quot;</span><br><span class="line">case $? in</span><br><span class="line">  0 ) echo &quot;$1 在PATH中找到&quot;			;;</span><br><span class="line">  1 ) echo &quot;$1 未找到或不可执行&quot;	;;</span><br><span class="line">  2 ) echo &quot;$1 未在PATH中找到&quot;		;;</span><br><span class="line">esac</span><br><span class="line"></span><br><span class="line">exit 0</span><br></pre></td></tr></table></figure>
  
       <!-- reward -->
       
@@ -437,7 +439,7 @@
 
     
     <article
-  id="post-46_反思(三月第4个星期)"
+  id="post-42_反思(三月第3个星期) "
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -448,7 +450,7 @@
     <header class="article-header">
        
 <h2 itemprop="name">
-  <a class="article-title" href="/2024/03/18/46_%E5%8F%8D%E6%80%9D(%E4%B8%89%E6%9C%88%E7%AC%AC4%E4%B8%AA%E6%98%9F%E6%9C%9F)/"
+  <a class="article-title" href="/2024/03/18/42_%E5%8F%8D%E6%80%9D(%E4%B8%89%E6%9C%88%E7%AC%AC3%E4%B8%AA%E6%98%9F%E6%9C%9F)%20/"
     >反思(3月第3个星期)</a> 
 </h2>
  
@@ -457,7 +459,7 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2024/03/18/46_%E5%8F%8D%E6%80%9D(%E4%B8%89%E6%9C%88%E7%AC%AC4%E4%B8%AA%E6%98%9F%E6%9C%9F)/" class="article-date">
+      <a href="/2024/03/18/42_%E5%8F%8D%E6%80%9D(%E4%B8%89%E6%9C%88%E7%AC%AC3%E4%B8%AA%E6%98%9F%E6%9C%9F)%20/" class="article-date">
   <time datetime="2024-03-17T22:26:56.000Z" itemprop="datePublished">2024-03-18</time>
 </a> 
   <div class="article-category">
@@ -469,7 +471,7 @@
     <div class="article-entry" itemprop="articleBody">
        
   Here's something encrypted, password is required to continue reading. 
-      <a class="article-more-link" href="/2024/03/18/46_%E5%8F%8D%E6%80%9D(%E4%B8%89%E6%9C%88%E7%AC%AC4%E4%B8%AA%E6%98%9F%E6%9C%9F)/"
+      <a class="article-more-link" href="/2024/03/18/42_%E5%8F%8D%E6%80%9D(%E4%B8%89%E6%9C%88%E7%AC%AC3%E4%B8%AA%E6%98%9F%E6%9C%9F)%20/"
         >阅读更多...</a
       >
        
