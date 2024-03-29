@@ -87,7 +87,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">644</span>
+            <span class="post-count">2.6k</span>
         </span>
     </span>
 
@@ -96,7 +96,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">2 分钟</span>
+            <span class="post-count">10 分钟</span>
         </span>
     </span>
 </div>
@@ -116,9 +116,112 @@
 <p>​	==无论你最终要成为一个怎样的人，但请千万记住，时光在飞逝。==</p>
 <p>​	==拜托一份幻觉，比发现一个真理更能使人明智==</p>
 <hr />
-<p>​</p>
-<h2 id="案例1-inpath"><a class="markdownIt-Anchor" href="#案例1-inpath"></a> 案例1  inpath</h2>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/sh</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">inpath - 验证指定的程序是否有效或者是否存在于PATH目录列表中。</span></span><br><span class="line"></span><br><span class="line">in_path()</span><br><span class="line">&#123;</span><br><span class="line"><span class="meta prompt_">  # </span><span class="language-bash">给定一个命令和PATH路径，尝试查找该命令。如果找到并且可执行，返回0；否则返回1。</span></span><br><span class="line"><span class="meta prompt_">  # </span><span class="language-bash">需要注意的是，这个函数会临时修改IFS（输入字段分隔符），但在完成后会恢复原值。</span></span><br><span class="line"></span><br><span class="line">  cmd=$1        # 命令</span><br><span class="line">  path=$2       # PATH路径</span><br><span class="line">  retval=1      # 返回值，默认为1</span><br><span class="line">  oldIFS=$IFS   # 保存旧的IFS值</span><br><span class="line">  IFS=&quot;:&quot;       # 设置IFS为冒号，用于分隔路径列表</span><br><span class="line"></span><br><span class="line">  for directory in $path</span><br><span class="line">  do</span><br><span class="line">    if [ -x $directory/$cmd ] ; then</span><br><span class="line">      retval=0      # 如果找到了$cmd在$directory中，将返回值设为0</span><br><span class="line">    fi</span><br><span class="line">  done</span><br><span class="line">  IFS=$oldIFS     # 恢复IFS为旧值</span><br><span class="line">  return $retval  # 返回结果</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">checkForCmdInPath()</span><br><span class="line">&#123;</span><br><span class="line">  var=$1</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">  # </span><span class="language-bash">下面的条件语句中的变量切片表示法需要一些解释：</span></span><br><span class="line"><span class="meta prompt_">  # </span><span class="language-bash"><span class="variable">$&#123;var#expr&#125;</span> 返回变量值中匹配<span class="string">&#x27;expr&#x27;</span>之后的内容（如果有），而</span></span><br><span class="line"><span class="meta prompt_">  # </span><span class="language-bash"><span class="variable">$&#123;var%expr&#125;</span> 返回变量值中不匹配的部分（在本例中只有第一个字符）。</span></span><br><span class="line"><span class="meta prompt_">  # </span><span class="language-bash">在Bash中也可以使用<span class="variable">$&#123;var:0:1&#125;</span>来实现，还可以使用<span class="built_in">cut</span>命令：<span class="built_in">cut</span> -c1</span></span><br><span class="line"></span><br><span class="line">  if [ &quot;$var&quot; != &quot;&quot; ] ; then</span><br><span class="line">    if [ &quot;$&#123;var%$&#123;var#?&#125;&#125;&quot; = &quot;/&quot; ] ; then</span><br><span class="line">      if [ ! -x $var ] ; then</span><br><span class="line">        return 1  # 如果$var不是空字符串且以&#x27;/&#x27;开头，且不可执行，则返回1</span><br><span class="line">      fi</span><br><span class="line">    elif ! in_path $var $PATH ; then</span><br><span class="line">      return 2  # 如果$var不是空字符串且不在PATH中，则返回2</span><br><span class="line">    fi </span><br><span class="line">  fi</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">if [ $# -ne 1 ] ; then  # 检查脚本的参数个数是否为1，如果不是，则输出错误消息并退出脚本。</span><br><span class="line"> echo &quot;Usage: $0 command&quot; &gt;&amp;2 ; exit 1</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">checkForCmdInPath &quot;$1&quot;</span><br><span class="line">case $? in</span><br><span class="line">  0 ) echo &quot;$1 在PATH中找到&quot;			;;</span><br><span class="line">  1 ) echo &quot;$1 未找到或不可执行&quot;	;;</span><br><span class="line">  2 ) echo &quot;$1 未在PATH中找到&quot;		;;</span><br><span class="line">esac</span><br><span class="line"></span><br><span class="line">exit 0</span><br></pre></td></tr></table></figure>
+<h1 id="第-1-章-bash入门"><a class="markdownIt-Anchor" href="#第-1-章-bash入门"></a> 第 1 章 bash入门</h1>
+<p>​	shell 无非是另一个程序罢了，它的工作就是为用户执行其他程序。</p>
+<p>​	将 shell 与操作系统自身分离使得软件开发人员（例如 bash 之父 Brian Fox 以及 bash 当前的开发者和维护者 Chet Ramey）更容易编写出更好的 shell，你也可以在不改动操作系统的前提下编写出新的 shell。</p>
+<p>​	<strong>为什么是bash？</strong></p>
+<p>​	GNU 项目旨在创建一款彻头彻尾的 POSIX 系统，这个系统自然需要一个 POSIX shell，bash 最初正是该项目的一部分。</p>
+<p>​	学习 bash 准没错。最常见的默认 shell 就是古老的 Bourne shell和 bash，后者基本上兼容前者。任何现代的主流 Unix 或类 Unix 操作系统肯定安装了其一。</p>
+<p>​	<strong>什么是bash？</strong></p>
+<p>​	bash 其实就是一种用于执行命令的语言，你输入的命令（如 ls、cd、grep、cat）从某种意义上来说就是 bash 命令。这些命令有些是 bash 内建的，有些是独立的程序。就目前而言，这种差异并不重要。</p>
+<p>​	<strong>使用shell引用</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">echo</span> A coffee is <span class="variable">$5</span>?!</span></span><br><span class="line">A coffee is ?!</span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">echo</span> <span class="string">&quot;A coffee is <span class="variable">$5</span>?!&quot;</span></span></span><br><span class="line">-bash: !&quot;: event not found</span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">echo</span> <span class="string">&#x27;A coffee is $5?!&#x27;</span></span></span><br><span class="line">A coffee is $5?!</span><br></pre></td></tr></table></figure>
+<p>第一个例子要对 $5 进行变量扩展，但因为该变量并不存在，所以扩展结果为空。第二个例子要遵循同样的规则，但我们没有看到任何命令输出，这是因为对 ! 进行历史替换时失败了，原因是其不匹配任何历史记录。第三个例子的结果符合我们的预期。</p>
+<p><strong>确定是否处于交互模式</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/usr/bin/env bash</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">文件名: interactive</span></span><br><span class="line">case &quot;$-&quot; in</span><br><span class="line"> *i*) # 在交互式shell中运行的代码位于此处</span><br><span class="line"> ;;</span><br><span class="line"> *) # 在非交互式shell中运行的代码位于此处</span><br><span class="line"> ;;</span><br><span class="line">esac</span><br></pre></td></tr></table></figure>
+<p>变量 $- 中保存了一个字符串，其中列出了当前所有的 shell 选</p>
+<p>项。如果 shell 处于交互模式，则其中会包含 i。</p>
+<h1 id="第-2-章-标准输出"><a class="markdownIt-Anchor" href="#第-2-章-标准输出"></a> 第 2 章 标准输出</h1>
+<p><strong>将输出和错误消息发送到不同文件</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">myprogram 1&gt; messages.out 2&gt; message.err</span><br></pre></td></tr></table></figure>
+<p>在 1&gt; 和 2&gt; 中，数字表示文件 描述符。1 代表标准输出（STDOUT），2 代表标准错误（STDERR）。起始编号 0 对应标准输入（STDIN）。如果不指定数字，则假定为 STDOUT。</p>
+<p><strong>将输出和错误消息发送到同一文件</strong></p>
+<p>首选：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">both &gt;&amp; outfile</span><br></pre></td></tr></table></figure>
+<p>或者：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">both &amp;&gt; outfile</span><br></pre></td></tr></table></figure>
+<p><strong>丢弃输出</strong></p>
+<p>将输出重定向到 /dev/null，如下所示</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">find / -name myfile -print 2&gt; /dev/null</span><br><span class="line">noisy &gt; /dev/null 2&gt;&amp;1</span><br></pre></td></tr></table></figure>
+<h1 id="第-3-章-标准输入"><a class="markdownIt-Anchor" href="#第-3-章-标准输入"></a> 第 3 章 标准输入</h1>
+<p>​	<strong>将数据与脚本存放在一起</strong></p>
+<p>使用 &lt;&lt;（here-document）从命令行而非文件重定向输入文本。如果放在 shell 脚本中，则脚本文件可以同时包含数据与代码。以下是名为 ext 的 shell 脚本示例：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">cat</span> ext</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"></span></span><br><span class="line"><span class="language-bash"><span class="comment"># 下面是here-document</span></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"></span></span><br><span class="line"><span class="language-bash">grep <span class="variable">$1</span> &lt;&lt;<span class="string">EOF</span></span></span><br><span class="line">mike x.123</span><br><span class="line">joe x.234</span><br><span class="line">sue x.555</span><br><span class="line">pete x.818</span><br><span class="line">sara x.822</span><br><span class="line">bill x.919</span><br><span class="line">EOF</span><br><span class="line"><span class="meta prompt_">$</span></span><br></pre></td></tr></table></figure>
+<p><strong>获取用户输入</strong></p>
+<p>使用 read 语句：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">read</span><br></pre></td></tr></table></figure>
+<p>或者：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">read -p &quot;answer me this &quot; ANSWER</span><br></pre></td></tr></table></figure>
+<p>或者：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">read -t 3 -p &quot;answer quickly: &quot; ANSWER</span><br></pre></td></tr></table></figure>
+<p>又或者：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">read PRE MID POST</span><br></pre></td></tr></table></figure>
+<p>不带参数的 read 语句会读取用户输入并将其保存在 shell 变量REPLY 中，这是 read 的最简形式。如果希望 bash 在读取用户输入前先输出提示信息，可以使用 -p 选项。-p 之后的单词就是提示信息，如果想提供多个单词，可以将其引用起来。记住，要在提示信息结尾处加上标点符号或空格，因为光标会停在那里等待输入</p>
+<p><strong>选择选项列表</strong></p>
+<p>​	使用 bash 内建的 select 来生成菜单，随后用户可以输入选项数字进行选择</p>
+<h1 id="第-4-章-执行命令"><a class="markdownIt-Anchor" href="#第-4-章-执行命令"></a> 第 4 章 执行命令</h1>
+<p><strong>运行程序</strong></p>
+<p>bash 使用名为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mi>A</mi><mi>T</mi><mi>H</mi><mtext>的</mtext><mi>s</mi><mi>h</mi><mi>e</mi><mi>l</mi><mi>l</mi><mtext>变量来定位可执行文件。</mtext></mrow><annotation encoding="application/x-tex">PATH 的 shell 变量来定位可执行文件。</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mord mathnormal">A</span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="mord cjk_fallback">的</span><span class="mord mathnormal">s</span><span class="mord mathnormal">h</span><span class="mord mathnormal">e</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord cjk_fallback">变</span><span class="mord cjk_fallback">量</span><span class="mord cjk_fallback">来</span><span class="mord cjk_fallback">定</span><span class="mord cjk_fallback">位</span><span class="mord cjk_fallback">可</span><span class="mord cjk_fallback">执</span><span class="mord cjk_fallback">行</span><span class="mord cjk_fallback">文</span><span class="mord cjk_fallback">件</span><span class="mord cjk_fallback">。</span></span></span></span>PATH 变量包含了一个目录列表。各个目录之间以冒号（:）分隔。bash 在这些目录中查找命令行上指定的可执行文件。目录的顺序很重要：bash按照变量中所列出的目录顺序依次查找，选择所找到的第一个同名的可执行文件。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">echo</span> <span class="variable">$PATH</span></span></span><br><span class="line">/bin:/usr/bin:/usr/local/bin:.</span><br></pre></td></tr></table></figure>
+<p><strong>依次执行多个命令</strong></p>
+<p>将命令一个接一个敲进去即可</p>
+<p>将这些命令写入文件，然后让 bash 执行该文件（简单的 shell 脚本）中的命令。</p>
+<p>第三种是依次执行每个命令，只需要用分号将其隔开</p>
+<p>如果只想在上一个程序成功运行的情况下运行下一个程序，并且所有的程序都正确设置了退出码，那么可以用 &amp;&amp; 将其隔开：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">long &amp;&amp; medium &amp;&amp; short</span><br></pre></td></tr></table></figure>
+<p><strong>同时执行多个命令</strong></p>
+<p>​	在命令末尾添加一个 &amp; 符号，在后台运行该命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">long &amp;</span></span><br><span class="line">[1] 4592</span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">medium &amp;</span></span><br><span class="line">[2] 4593</span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">short</span></span><br><span class="line"><span class="meta prompt_">$</span></span><br></pre></td></tr></table></figure>
+<p>或者，更好的做法是在单个命令行中完成所有操作</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">long &amp; medium &amp; short</span></span><br><span class="line">[1] 4592</span><br><span class="line">[2] 4593</span><br><span class="line"><span class="meta prompt_">$</span></span><br></pre></td></tr></table></figure>
+<p>​	　如果执行某个命令，但发觉其完成时间比预想的更长，那么可以用 Ctrl-Z 暂停该命令，返回到提示符下。接着输入 bg 来恢复作业，并在后台继续运行。这么做的效果相当于事前在命令尾部加上 &amp; 符号</p>
+<p><strong>了解命令是否成功运行</strong></p>
+<p>​	如果编写命令或 shell 脚本的程序员遵循既定约定，那么 shell 变量 $? 会在命令失败时被设置为非 0 值。</p>
+<p><strong>仅当一个命令运行成功后才执行下一个命令</strong></p>
+<p>​	可以用 cd 命令的退出状态（$?）配合 if 语句来实现仅当 cd 命令成功时执行 rm 命令。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd mytmp</span><br><span class="line">if (( $? == 0 )); then rm * ; fi</span><br></pre></td></tr></table></figure>
+<p>以下写法更好，它更清晰地展现并诠释了我们的意图。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">if cd mytmp; then rm * ; fi</span><br></pre></td></tr></table></figure>
+<p><strong>&amp;&amp; 运算符</strong></p>
+<p>​	在 bash 中使用 &amp;&amp; 运算符，根据条件执行命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd mytmp &amp;&amp; rm *</span><br></pre></td></tr></table></figure>
+<p>​	用 &amp;&amp; 分隔两个命令，以此告诉 bash 先执行第一个命令，如果该命令成功（退出状态为 0），再执行第二个命令。这非常类似于用 if语句检查第一个命令的退出状态，从而判断是否执行第二个命令，可以写成这个样子：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd mytmp</span><br><span class="line">if (( $? == 0 )); then rm * ; fi</span><br></pre></td></tr></table></figure>
+<p><strong>set -e</strong></p>
+<p>要想彻底检查错误，但又不想到处出现 if 语句，可以设置 -e 标记，这样的话，只要脚本中有任何命令（排除在 while 循环和 if语句中，因为其本身就要用到退出状态）出现错误（退出状态为非0），bash 就会退出</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">set -e</span><br><span class="line">cd mytmp</span><br><span class="line">rm *</span><br></pre></td></tr></table></figure>
+<p>设置了 -e 标记之后，shell 会在命令失败时退出。如果本例中的cd 命令失败，脚本则直接退出，不再执行 rm * 命令。</p>
+<p><strong>|| 运算符</strong></p>
+<p>|| 告诉 bash 如果第一个表达式为真（成功），则不再评估第二个表达式。</p>
+<h1 id="第-5-章-脚本编程基础shell变量"><a class="markdownIt-Anchor" href="#第-5-章-脚本编程基础shell变量"></a> 第 5 章 脚本编程基础：shell变量</h1>
+<p>​	bash 脚本中的变量名称通常采用全大写，但这并非强制性的，只是一种常见做法而已。变量不用事先声明，直接使用就行了。变量基本上都是字符串类型，不过有些运算符能够将变量内容视为数字。变量的实际用法如下所示。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">使用shell变量的普通脚本</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">（不过好歹也注释过了）</span></span><br><span class="line">MYVAR=&quot;something&quot;</span><br><span class="line">echo $MYVAR</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">写法类似，但没有引号</span></span><br><span class="line">MY_2ND=anotherone</span><br><span class="line">echo $MY_2ND</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">这里需要使用引号：</span></span><br><span class="line">MYOTHER=&quot;more stuff to echo&quot;</span><br><span class="line">echo $MYOTHER</span><br></pre></td></tr></table></figure>
+<p>​	bash 变量的语法有两处要点，但可能不那么一目了然。首先，赋值语法 <em>name=value</em> 看起来相当直观，但 = 两侧不能有任何空白字符。</p>
+<p><strong>导出变量</strong></p>
+<p>有时你的确想在脚本之间传递信息。在这种情况下，你可以导出变量，使变量的值能够传递给脚本所调用的其他程序。</p>
+<p>用 env（或 export -p）命令查看那些被导出的、可用于子 shell的变量。</p>
+<p><strong>在shell脚本中使用参数</strong></p>
+<p>${1}会显示在命令行上被调用时所指定的第一个参数。其他参数的可用形式分别为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mtext>、</mtext></mrow><annotation encoding="application/x-tex">{2}、</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord"><span class="mord">2</span></span><span class="mord cjk_fallback">、</span></span></span></span>{3}、<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>4</mn><mtext>、</mtext></mrow><annotation encoding="application/x-tex">{4}、</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord"><span class="mord">4</span></span><span class="mord cjk_fallback">、</span></span></span></span>{5} 等。单个数位的数字用不着花括号</p>
+<p>$*  表示深入的全部参数列表</p>
+<p>“$@” 得到的不是一个字符串，而是与各个参数对应的带有引号的字符串列表。</p>
+<p>$#：表示输入参数数量</p>
+<h1 id="第-6-章-shell逻辑与算术"><a class="markdownIt-Anchor" href="#第-6-章-shell逻辑与算术"></a> 第 6 章 shell逻辑与算术</h1>
+<p><strong>条件分支</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">if [ $# -lt 3 ]</span><br><span class="line">then</span><br><span class="line"> printf &quot;%b&quot; &quot;Error. Not enough arguments.\n&quot;</span><br><span class="line"> printf &quot;%b&quot; &quot;usage: myscript file1 op file2\n&quot;</span><br><span class="line"> exit 1</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">if (( $# &lt; 3 ))</span><br><span class="line">then</span><br><span class="line"> printf &quot;%b&quot; &quot;Error. Not enough arguments.\n&quot;</span><br><span class="line"> printf &quot;%b&quot; &quot;usage: myscript file1 op file2\n&quot;</span><br><span class="line"> exit 1</span><br><span class="line">elif (( $# &gt; 3 ))</span><br><span class="line">then</span><br><span class="line"> printf &quot;%b&quot; &quot;Error. Too many arguments.\n&quot;</span><br><span class="line"> printf &quot;%b&quot; &quot;usage: myscript file1 op file2\n&quot;</span><br><span class="line"> exit 2</span><br><span class="line">else</span><br><span class="line"> printf &quot;%b&quot; &quot;Argument count correct. Proceeding...\n&quot;</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+<h1 id="第-7-章-中级shell工具"><a class="markdownIt-Anchor" href="#第-7-章-中级shell工具"></a> 第 7 章 中级shell工具</h1>
+<h1 id="第-8-章-中级shell工具续"><a class="markdownIt-Anchor" href="#第-8-章-中级shell工具续"></a> 第 8 章 中级shell工具（续）</h1>
+<h1 id="第-9-章-查找文件find-locate-slocate"><a class="markdownIt-Anchor" href="#第-9-章-查找文件find-locate-slocate"></a> 第 9 章 查找文件：find、locate**、**slocate</h1>
+<h1 id="第-10-章-脚本编程的附加特性"><a class="markdownIt-Anchor" href="#第-10-章-脚本编程的附加特性"></a> 第 10 章 脚本编程的附加特性</h1>
+<h1 id="第-11-章-处理日期和时间"><a class="markdownIt-Anchor" href="#第-11-章-处理日期和时间"></a> 第 11 章 处理日期和时间</h1>
+<h1 id="第-12-章-帮助最终用户完成任务的shell脚本"><a class="markdownIt-Anchor" href="#第-12-章-帮助最终用户完成任务的shell脚本"></a> 第 12 章 帮助最终用户完成任务的shell脚本</h1>
+<h1 id="第-13-章-与解析相关的任务"><a class="markdownIt-Anchor" href="#第-13-章-与解析相关的任务"></a> 第 13 章 与解析相关的任务</h1>
+<h1 id="第-14-章-编写安全的shell脚本"><a class="markdownIt-Anchor" href="#第-14-章-编写安全的shell脚本"></a> 第 14 章 编写安全的shell脚本</h1>
+<h1 id="第-15-章-高级脚本编程"><a class="markdownIt-Anchor" href="#第-15-章-高级脚本编程"></a> 第 15 章 高级脚本编程</h1>
+<h1 id="第-16-章-bash的配置与自定义"><a class="markdownIt-Anchor" href="#第-16-章-bash的配置与自定义"></a> 第 16 章 bash的配置与自定义</h1>
+<h1 id="第-17-章-内务及管理任务"><a class="markdownIt-Anchor" href="#第-17-章-内务及管理任务"></a> 第 17 章 内务及管理任务</h1>
+<h1 id="第-18-章-写得少干得快"><a class="markdownIt-Anchor" href="#第-18-章-写得少干得快"></a> 第 18 章 写得少，干得快</h1>
+<h1 id="第-19-章-窍门与陷阱新手常见错误"><a class="markdownIt-Anchor" href="#第-19-章-窍门与陷阱新手常见错误"></a> 第 19 章 窍门与陷阱：新手常见错误</h1>
  
       <!-- reward -->
       

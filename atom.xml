@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2024-03-26T00:35:30.282Z</updated>
+  <updated>2024-03-27T14:08:36.202Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -17,11 +17,28 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>幻觉</title>
+    <link href="http://example.com/2024/03/27/47_%E5%B9%BB%E8%A7%89/"/>
+    <id>http://example.com/2024/03/27/47_%E5%B9%BB%E8%A7%89/</id>
+    <published>2024-03-26T22:26:56.000Z</published>
+    <updated>2024-03-27T14:08:36.202Z</updated>
+    
+    
+    <summary type="html">Here&#39;s something encrypted, password is required to continue reading.</summary>
+    
+    
+    
+    <category term="生活" scheme="http://example.com/categories/%E7%94%9F%E6%B4%BB/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>反思(3月第4个星期)</title>
     <link href="http://example.com/2024/03/25/46_%E5%8F%8D%E6%80%9D(%E4%B8%89%E6%9C%88%E7%AC%AC4%E4%B8%AA%E6%98%9F%E6%9C%9F)/"/>
     <id>http://example.com/2024/03/25/46_%E5%8F%8D%E6%80%9D(%E4%B8%89%E6%9C%88%E7%AC%AC4%E4%B8%AA%E6%98%9F%E6%9C%9F)/</id>
     <published>2024-03-24T22:26:56.000Z</published>
-    <updated>2024-03-26T00:35:30.282Z</updated>
+    <updated>2024-03-29T00:05:20.579Z</updated>
     
     
     <summary type="html">Here&#39;s something encrypted, password is required to continue reading.</summary>
@@ -61,7 +78,7 @@
     <link href="http://example.com/2024/03/22/44_shell%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A03/"/>
     <id>http://example.com/2024/03/22/44_shell%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A03/</id>
     <published>2024-03-21T22:57:19.000Z</published>
-    <updated>2024-03-25T13:16:38.528Z</updated>
+    <updated>2024-03-29T00:38:22.545Z</updated>
     
     
       
@@ -401,29 +418,6 @@
     
     
     <category term="剪辑" scheme="http://example.com/categories/%E5%89%AA%E8%BE%91/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>C高级学习</title>
-    <link href="http://example.com/2024/01/02/23%20%E5%B5%8C%E5%85%A5%E5%BC%8FC%E8%AF%AD%E8%A8%80%E7%9A%84%E8%87%AA%E6%88%91%E4%BF%AE%E5%85%BB/"/>
-    <id>http://example.com/2024/01/02/23%20%E5%B5%8C%E5%85%A5%E5%BC%8FC%E8%AF%AD%E8%A8%80%E7%9A%84%E8%87%AA%E6%88%91%E4%BF%AE%E5%85%BB/</id>
-    <published>2024-01-01T22:50:19.000Z</published>
-    <updated>2024-01-02T12:57:55.211Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;&#92;assets&#92;css&#92;APlayer.min.css&quot;&gt;&lt;script src=&quot;&#92;assets&#92;js&#92;APlayer.min.js&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="学习" scheme="http://example.com/categories/%E5%AD%A6%E4%B9%A0/"/>
     
     
   </entry>
