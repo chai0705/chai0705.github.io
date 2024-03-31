@@ -87,7 +87,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">2.6k</span>
+            <span class="post-count">3.4k</span>
         </span>
     </span>
 
@@ -96,7 +96,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">10 分钟</span>
+            <span class="post-count">13 分钟</span>
         </span>
     </span>
 </div>
@@ -209,10 +209,169 @@
 <p><strong>条件分支</strong></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">if [ $# -lt 3 ]</span><br><span class="line">then</span><br><span class="line"> printf &quot;%b&quot; &quot;Error. Not enough arguments.\n&quot;</span><br><span class="line"> printf &quot;%b&quot; &quot;usage: myscript file1 op file2\n&quot;</span><br><span class="line"> exit 1</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">if (( $# &lt; 3 ))</span><br><span class="line">then</span><br><span class="line"> printf &quot;%b&quot; &quot;Error. Not enough arguments.\n&quot;</span><br><span class="line"> printf &quot;%b&quot; &quot;usage: myscript file1 op file2\n&quot;</span><br><span class="line"> exit 1</span><br><span class="line">elif (( $# &gt; 3 ))</span><br><span class="line">then</span><br><span class="line"> printf &quot;%b&quot; &quot;Error. Too many arguments.\n&quot;</span><br><span class="line"> printf &quot;%b&quot; &quot;usage: myscript file1 op file2\n&quot;</span><br><span class="line"> exit 2</span><br><span class="line">else</span><br><span class="line"> printf &quot;%b&quot; &quot;Argument count correct. Proceeding...\n&quot;</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+<p><strong>运算符</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">运算符</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">-b</td>
+<td style="text-align:left">块设备文件（如 /dev/hda1）</td>
+</tr>
+<tr>
+<td style="text-align:left">-c</td>
+<td style="text-align:left">字符设备文件（如 /dev/tty）</td>
+</tr>
+<tr>
+<td style="text-align:left">-d</td>
+<td style="text-align:left">目录文件</td>
+</tr>
+<tr>
+<td style="text-align:left">-e</td>
+<td style="text-align:left">文件存在</td>
+</tr>
+<tr>
+<td style="text-align:left">-f</td>
+<td style="text-align:left">普通文件</td>
+</tr>
+<tr>
+<td style="text-align:left">-g</td>
+<td style="text-align:left">文件设置了 set-group-ID（setgid）位</td>
+</tr>
+<tr>
+<td style="text-align:left">-h 或 -L</td>
+<td style="text-align:left">符号链接文件</td>
+</tr>
+<tr>
+<td style="text-align:left">-G</td>
+<td style="text-align:left">有效组 ID（effective group ID）拥有的文件</td>
+</tr>
+<tr>
+<td style="text-align:left">-k</td>
+<td style="text-align:left">文件设置了粘滞位</td>
+</tr>
+<tr>
+<td style="text-align:left">-N</td>
+<td style="text-align:left">文件自上次读取后被修改过</td>
+</tr>
+<tr>
+<td style="text-align:left">-O</td>
+<td style="text-align:left">有效用户 ID（effective user ID）拥有的文件</td>
+</tr>
+<tr>
+<td style="text-align:left">-p</td>
+<td style="text-align:left">具名管道文件</td>
+</tr>
+<tr>
+<td style="text-align:left">-r</td>
+<td style="text-align:left">可读文件</td>
+</tr>
+<tr>
+<td style="text-align:left">-s</td>
+<td style="text-align:left">文件大小不为空</td>
+</tr>
+<tr>
+<td style="text-align:left">-S</td>
+<td style="text-align:left">套接字文件</td>
+</tr>
+<tr>
+<td style="text-align:left">-u</td>
+<td style="text-align:left">文件设置了 set-user-ID（setuid）位</td>
+</tr>
+<tr>
+<td style="text-align:left">-w</td>
+<td style="text-align:left">可写文件</td>
+</tr>
+<tr>
+<td style="text-align:left">-x</td>
+<td style="text-align:left">可执行文件</td>
+</tr>
+</tbody>
+</table>
+<p><strong>数值比较运算符：</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">运算符</th>
+<th style="text-align:left">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">-lt</td>
+<td style="text-align:left">小于</td>
+</tr>
+<tr>
+<td style="text-align:left">-le</td>
+<td style="text-align:left">小于或等于</td>
+</tr>
+<tr>
+<td style="text-align:left">-gt</td>
+<td style="text-align:left">大于</td>
+</tr>
+<tr>
+<td style="text-align:left">-ge</td>
+<td style="text-align:left">大于或等于</td>
+</tr>
+<tr>
+<td style="text-align:left">-eq</td>
+<td style="text-align:left">等于</td>
+</tr>
+<tr>
+<td style="text-align:left">-ne</td>
+<td style="text-align:left">不等于</td>
+</tr>
+</tbody>
+</table>
+<p><strong>字符串比较运算符：</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">运算符</th>
+<th style="text-align:left">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">= 或 ==</td>
+<td style="text-align:left">等于</td>
+</tr>
+<tr>
+<td style="text-align:left">!=</td>
+<td style="text-align:left">不等于</td>
+</tr>
+</tbody>
+</table>
+<p>​	这些运算符用于在条件语句（如if语句）中比较数值或字符串的大小或相等性。例如，您可以使用 <code>-lt</code> 运算符来检查一个数值是否小于另一个数值，并根据结果执行相应的操作。使用字符串比较运算符时，可以使用 <code>=</code> 或 <code>==</code> 来比较字符串是否相等，使用 <code>!=</code> 来比较字符串是否不相等。</p>
+<p>可能最好的办法就是始终在 (( )) 语法中进行数值测试，在 [[ ]]语法中进行字符串比较。</p>
+<p><strong>创建简单的菜单</strong></p>
+<p>用 select 语句创建简单的字符型屏幕菜单</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/usr/bin/env bash</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">实例文件：dbinit.1</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"></span></span><br><span class="line"><span class="language-bash">DBLIST=$(sh ./listdb | <span class="built_in">tail</span> -n +2)</span></span><br><span class="line">select DB in $DBLIST</span><br><span class="line">do</span><br><span class="line"> echo Initializing database: $DB</span><br><span class="line"> mysql -u user -p $DB &lt;myinit.sql</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
 <h1 id="第-7-章-中级shell工具"><a class="markdownIt-Anchor" href="#第-7-章-中级shell工具"></a> 第 7 章 中级shell工具</h1>
 <h1 id="第-8-章-中级shell工具续"><a class="markdownIt-Anchor" href="#第-8-章-中级shell工具续"></a> 第 8 章 中级shell工具（续）</h1>
 <h1 id="第-9-章-查找文件find-locate-slocate"><a class="markdownIt-Anchor" href="#第-9-章-查找文件find-locate-slocate"></a> 第 9 章 查找文件：find、locate**、**slocate</h1>
+<p><strong>查找所有文件</strong></p>
+<p>find 命令可以找出符合要求的所有文件并执行命令，将其移动到指<br />
+定位置。例如：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find . -name &#x27;*.mp3&#x27; -print -exec mv &#x27;&#123;&#125;&#x27; ~/songs \;</span><br></pre></td></tr></table></figure>
 <h1 id="第-10-章-脚本编程的附加特性"><a class="markdownIt-Anchor" href="#第-10-章-脚本编程的附加特性"></a> 第 10 章 脚本编程的附加特性</h1>
+<p><strong>脚本“守护进程化”</strong></p>
+<p>有时候，你希望脚本能像守护进程（daemon）那样在后台永不休止地运行。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">nohup mydaemonscript 0&lt;&amp;-1&gt;/dev/null 2&gt;&amp;1 &amp;</span><br><span class="line"></span><br><span class="line">nohup mydaemonscript &gt;&gt;/var/log/myadmin.log 2&gt;&amp;1 &lt;&amp;- &amp;</span><br></pre></td></tr></table></figure>
+<p><strong>代码重用</strong></p>
+<p>用 bash shell 的 source 命令或 POSIX 的点号（.）读取配置文件的内容。</p>
+<p><strong>使用函数：参数和返回值</strong></p>
+<p>在调用函数时放置参数就和调用 shell 脚本一样。参数无非就是另一种命令行单词罢了。与命令行参数一样，在函数中引用参数也是使用 $1、$2 等。但是，$0 保持不变，其中包含的还是所调用脚本的名称。一旦从函数中返回，$1、$2 等就恢复原状，仍旧引用脚本参数。</p>
+<p><strong>中断陷阱</strong></p>
+<p>使用实用工具 trap 来设置信号处理程序。</p>
+<p><strong>计算已过去的时间</strong></p>
+<p>time 以多种方式报告某个进程或管道所花费的时间。</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202403292201845.png" alt="image-20240329220105798" /></p>
+<p>​	不错，我喜欢。除此之外还学会了一个更好玩的东西，定时重启计算机，这次应该就不会那么卡了，不是很清楚，以后还是尽可能的本地编译，或者再来一个小主机玩玩。</p>
 <h1 id="第-11-章-处理日期和时间"><a class="markdownIt-Anchor" href="#第-11-章-处理日期和时间"></a> 第 11 章 处理日期和时间</h1>
 <h1 id="第-12-章-帮助最终用户完成任务的shell脚本"><a class="markdownIt-Anchor" href="#第-12-章-帮助最终用户完成任务的shell脚本"></a> 第 12 章 帮助最终用户完成任务的shell脚本</h1>
 <h1 id="第-13-章-与解析相关的任务"><a class="markdownIt-Anchor" href="#第-13-章-与解析相关的任务"></a> 第 13 章 与解析相关的任务</h1>

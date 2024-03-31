@@ -110,6 +110,57 @@
     
     
     <article
+  id="post-48_计算机系统架构与ARM汇编语言"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2024/03/31/48_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E4%B8%8EARM%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/"
+    >计算机系统架构与ARM汇编语言</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2024/03/31/48_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E4%B8%8EARM%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/" class="article-date">
+  <time datetime="2024-03-30T22:26:56.000Z" itemprop="datePublished">2024-03-31</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/C%E8%AF%AD%E8%A8%80%E9%AB%98%E7%BA%A7%E5%AD%A6%E4%B9%A0/">C语言高级学习</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+   
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
   id="post-47_幻觉"
   class="article article-type-post"
   itemscope
@@ -427,10 +478,169 @@
 <p><strong>条件分支</strong></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">if [ $# -lt 3 ]</span><br><span class="line">then</span><br><span class="line"> printf &quot;%b&quot; &quot;Error. Not enough arguments.\n&quot;</span><br><span class="line"> printf &quot;%b&quot; &quot;usage: myscript file1 op file2\n&quot;</span><br><span class="line"> exit 1</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">if (( $# &lt; 3 ))</span><br><span class="line">then</span><br><span class="line"> printf &quot;%b&quot; &quot;Error. Not enough arguments.\n&quot;</span><br><span class="line"> printf &quot;%b&quot; &quot;usage: myscript file1 op file2\n&quot;</span><br><span class="line"> exit 1</span><br><span class="line">elif (( $# &gt; 3 ))</span><br><span class="line">then</span><br><span class="line"> printf &quot;%b&quot; &quot;Error. Too many arguments.\n&quot;</span><br><span class="line"> printf &quot;%b&quot; &quot;usage: myscript file1 op file2\n&quot;</span><br><span class="line"> exit 2</span><br><span class="line">else</span><br><span class="line"> printf &quot;%b&quot; &quot;Argument count correct. Proceeding...\n&quot;</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+<p><strong>运算符</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">运算符</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">-b</td>
+<td style="text-align:left">块设备文件（如 /dev/hda1）</td>
+</tr>
+<tr>
+<td style="text-align:left">-c</td>
+<td style="text-align:left">字符设备文件（如 /dev/tty）</td>
+</tr>
+<tr>
+<td style="text-align:left">-d</td>
+<td style="text-align:left">目录文件</td>
+</tr>
+<tr>
+<td style="text-align:left">-e</td>
+<td style="text-align:left">文件存在</td>
+</tr>
+<tr>
+<td style="text-align:left">-f</td>
+<td style="text-align:left">普通文件</td>
+</tr>
+<tr>
+<td style="text-align:left">-g</td>
+<td style="text-align:left">文件设置了 set-group-ID（setgid）位</td>
+</tr>
+<tr>
+<td style="text-align:left">-h 或 -L</td>
+<td style="text-align:left">符号链接文件</td>
+</tr>
+<tr>
+<td style="text-align:left">-G</td>
+<td style="text-align:left">有效组 ID（effective group ID）拥有的文件</td>
+</tr>
+<tr>
+<td style="text-align:left">-k</td>
+<td style="text-align:left">文件设置了粘滞位</td>
+</tr>
+<tr>
+<td style="text-align:left">-N</td>
+<td style="text-align:left">文件自上次读取后被修改过</td>
+</tr>
+<tr>
+<td style="text-align:left">-O</td>
+<td style="text-align:left">有效用户 ID（effective user ID）拥有的文件</td>
+</tr>
+<tr>
+<td style="text-align:left">-p</td>
+<td style="text-align:left">具名管道文件</td>
+</tr>
+<tr>
+<td style="text-align:left">-r</td>
+<td style="text-align:left">可读文件</td>
+</tr>
+<tr>
+<td style="text-align:left">-s</td>
+<td style="text-align:left">文件大小不为空</td>
+</tr>
+<tr>
+<td style="text-align:left">-S</td>
+<td style="text-align:left">套接字文件</td>
+</tr>
+<tr>
+<td style="text-align:left">-u</td>
+<td style="text-align:left">文件设置了 set-user-ID（setuid）位</td>
+</tr>
+<tr>
+<td style="text-align:left">-w</td>
+<td style="text-align:left">可写文件</td>
+</tr>
+<tr>
+<td style="text-align:left">-x</td>
+<td style="text-align:left">可执行文件</td>
+</tr>
+</tbody>
+</table>
+<p><strong>数值比较运算符：</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">运算符</th>
+<th style="text-align:left">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">-lt</td>
+<td style="text-align:left">小于</td>
+</tr>
+<tr>
+<td style="text-align:left">-le</td>
+<td style="text-align:left">小于或等于</td>
+</tr>
+<tr>
+<td style="text-align:left">-gt</td>
+<td style="text-align:left">大于</td>
+</tr>
+<tr>
+<td style="text-align:left">-ge</td>
+<td style="text-align:left">大于或等于</td>
+</tr>
+<tr>
+<td style="text-align:left">-eq</td>
+<td style="text-align:left">等于</td>
+</tr>
+<tr>
+<td style="text-align:left">-ne</td>
+<td style="text-align:left">不等于</td>
+</tr>
+</tbody>
+</table>
+<p><strong>字符串比较运算符：</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">运算符</th>
+<th style="text-align:left">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">= 或 ==</td>
+<td style="text-align:left">等于</td>
+</tr>
+<tr>
+<td style="text-align:left">!=</td>
+<td style="text-align:left">不等于</td>
+</tr>
+</tbody>
+</table>
+<p>​	这些运算符用于在条件语句（如if语句）中比较数值或字符串的大小或相等性。例如，您可以使用 <code>-lt</code> 运算符来检查一个数值是否小于另一个数值，并根据结果执行相应的操作。使用字符串比较运算符时，可以使用 <code>=</code> 或 <code>==</code> 来比较字符串是否相等，使用 <code>!=</code> 来比较字符串是否不相等。</p>
+<p>可能最好的办法就是始终在 (( )) 语法中进行数值测试，在 [[ ]]语法中进行字符串比较。</p>
+<p><strong>创建简单的菜单</strong></p>
+<p>用 select 语句创建简单的字符型屏幕菜单</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/usr/bin/env bash</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">实例文件：dbinit.1</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"></span></span><br><span class="line"><span class="language-bash">DBLIST=$(sh ./listdb | <span class="built_in">tail</span> -n +2)</span></span><br><span class="line">select DB in $DBLIST</span><br><span class="line">do</span><br><span class="line"> echo Initializing database: $DB</span><br><span class="line"> mysql -u user -p $DB &lt;myinit.sql</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
 <h1 id="第-7-章-中级shell工具"><a class="markdownIt-Anchor" href="#第-7-章-中级shell工具"></a> 第 7 章 中级shell工具</h1>
 <h1 id="第-8-章-中级shell工具续"><a class="markdownIt-Anchor" href="#第-8-章-中级shell工具续"></a> 第 8 章 中级shell工具（续）</h1>
 <h1 id="第-9-章-查找文件find-locate-slocate"><a class="markdownIt-Anchor" href="#第-9-章-查找文件find-locate-slocate"></a> 第 9 章 查找文件：find、locate**、**slocate</h1>
+<p><strong>查找所有文件</strong></p>
+<p>find 命令可以找出符合要求的所有文件并执行命令，将其移动到指<br />
+定位置。例如：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find . -name &#x27;*.mp3&#x27; -print -exec mv &#x27;&#123;&#125;&#x27; ~/songs \;</span><br></pre></td></tr></table></figure>
 <h1 id="第-10-章-脚本编程的附加特性"><a class="markdownIt-Anchor" href="#第-10-章-脚本编程的附加特性"></a> 第 10 章 脚本编程的附加特性</h1>
+<p><strong>脚本“守护进程化”</strong></p>
+<p>有时候，你希望脚本能像守护进程（daemon）那样在后台永不休止地运行。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">nohup mydaemonscript 0&lt;&amp;-1&gt;/dev/null 2&gt;&amp;1 &amp;</span><br><span class="line"></span><br><span class="line">nohup mydaemonscript &gt;&gt;/var/log/myadmin.log 2&gt;&amp;1 &lt;&amp;- &amp;</span><br></pre></td></tr></table></figure>
+<p><strong>代码重用</strong></p>
+<p>用 bash shell 的 source 命令或 POSIX 的点号（.）读取配置文件的内容。</p>
+<p><strong>使用函数：参数和返回值</strong></p>
+<p>在调用函数时放置参数就和调用 shell 脚本一样。参数无非就是另一种命令行单词罢了。与命令行参数一样，在函数中引用参数也是使用 $1、$2 等。但是，$0 保持不变，其中包含的还是所调用脚本的名称。一旦从函数中返回，$1、$2 等就恢复原状，仍旧引用脚本参数。</p>
+<p><strong>中断陷阱</strong></p>
+<p>使用实用工具 trap 来设置信号处理程序。</p>
+<p><strong>计算已过去的时间</strong></p>
+<p>time 以多种方式报告某个进程或管道所花费的时间。</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202403292201845.png" alt="image-20240329220105798" /></p>
+<p>​	不错，我喜欢。除此之外还学会了一个更好玩的东西，定时重启计算机，这次应该就不会那么卡了，不是很清楚，以后还是尽可能的本地编译，或者再来一个小主机玩玩。</p>
 <h1 id="第-11-章-处理日期和时间"><a class="markdownIt-Anchor" href="#第-11-章-处理日期和时间"></a> 第 11 章 处理日期和时间</h1>
 <h1 id="第-12-章-帮助最终用户完成任务的shell脚本"><a class="markdownIt-Anchor" href="#第-12-章-帮助最终用户完成任务的shell脚本"></a> 第 12 章 帮助最终用户完成任务的shell脚本</h1>
 <h1 id="第-13-章-与解析相关的任务"><a class="markdownIt-Anchor" href="#第-13-章-与解析相关的任务"></a> 第 13 章 与解析相关的任务</h1>
@@ -1496,312 +1706,6 @@ Shell编程中的函数允许将一系列相关的操作封装为一个可重复
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">错误处理</span></span><br><span class="line">set -e</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">日志记录</span></span><br><span class="line">LOG_FILE=&quot;script.log&quot;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">出错时写入日志</span></span><br><span class="line">function log_error() &#123;</span><br><span class="line">    echo &quot;$(date): $1&quot; &gt;&gt; &quot;$LOG_FILE&quot;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">主逻辑</span></span><br><span class="line">function main() &#123;</span><br><span class="line">    echo &quot;开始执行脚本&quot;</span><br><span class="line">    </span><br><span class="line">    # 假设这里有一些可能出错的操作</span><br><span class="line">    command1 || log_error &quot;command1执行失败&quot;</span><br><span class="line">    command2 || log_error &quot;command2执行失败&quot;</span><br><span class="line">    </span><br><span class="line">    echo &quot;脚本执行完毕&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">main</span><br></pre></td></tr></table></figure>
 <p>在上述示例中，<code>log_error</code> 函数用于在出现错误时将错误消息写入日志文件。使用 <code>set -e</code> 可以让脚本在遇到错误时立即退出。</p>
 <p>以上是一些常用的Shell调试技术和方法。根据需求和复杂性，你可以选择适合你的方式来调试Shell脚本。调试能够帮助你快速定位和解决问题，提高脚本的可靠性和稳定性。</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-38_RK3588 PCB 学习"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2024/02/29/38_RK3588%20PCB%20%E5%AD%A6%E4%B9%A0/"
-    >rk3588 AD学习</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2024/02/29/38_RK3588%20PCB%20%E5%AD%A6%E4%B9%A0/" class="article-date">
-  <time datetime="2024-02-28T22:57:19.000Z" itemprop="datePublished">2024-02-29</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <p>​	==我们要先理性的、冷静的、全面的、谨慎的思考自己的痛苦和快乐，反思自己这辈子应该怎样度过，你至少应该确认一个支点，你这辈子必须要完成的事情，或者想要拥有的品质，你清楚的知道，如果做不到这点，你永远都不会快乐==</p>
-<p>​	==我希望用一生的时间不断学习和深入电子计算机相关的一切知识，并将其整理成网络，并分享出去，与更多志同道合的人共同进步==</p>
-<p>​	==无论你最终要成为一个怎样的人，但请千万记住，时光在飞逝==</p>
-<h1 id="1-rk3588项目介绍"><a class="markdownIt-Anchor" href="#1-rk3588项目介绍"></a> 1 RK3588项目介绍</h1>
-<p>​	本次课程是基于最新的AD23软件设计的，此次项目所用的主控芯片是瑞芯微旗下的RK3588，采用的ARM架构，主要用于PC，边缘计算设备和其他数字多媒体应用。</p>
-<p>​	其中涉及到的高速电路模块有PCIE, LPDDR4,HDMI,MIPI,SATA,千兆网口，USB2.0,USB3.0,FSPI,EMMC,TYPEC等，对于想了解高速PCB设计的工程师来说本次课程是很好的选择，其中涉及到的知识点我们也会做详细的介绍，并应用到布局布线当中。同时也会对高速设计中的重要概念进行讲解，其中就包含阻抗匹配，跨分割概念，3W，包地，蛇形等长等，在此基础上也会站在EMC的角度下对我们的板子做一个优化的处理，认真学习完此课程之后，对于自己的能力会有一个很大的提升，其中的知识也会很快应用到我们工作当中。</p>
-<p>我们在学完本次课程之后可以掌握的知识和技能有：</p>
-<ol>
-<li>常见高速PCB电路模块的设计要点</li>
-<li>多层板的叠层选择</li>
-<li>多层板阻抗计算方法</li>
-<li>高速PCB设计规范</li>
-</ol>
-<p><strong>课程大纲目录</strong></p>
-<p><strong>第一部分：项目介绍及前期准备</strong></p>
-<p>第01课 课程项目介绍</p>
-<p>第02课 AD软件安装与激活</p>
-<p>第03课 AD软件系统参数的一些基本配置</p>
-<p>第04课 PCB工程文件的介绍与创建</p>
-<p>第二部分：PCB封装库的创建规范与方法</p>
-<p>第05课 PCB封装元素的组成与介绍</p>
-<p>第06 实例-FT232RL芯片的PCB封装创建</p>
-<p>第07课 实例-RTL8211F-CG芯片PCB封装创建</p>
-<p>第08课 实例-3D封装的制作</p>
-<p>第09课 常用其他PCB封装的直接调用</p>
-<p><strong>第三部分：PCB布局分析及详细布局实操</strong></p>
-<p>第10课 原理图的介绍</p>
-<p>第11课 第三方网表的导入</p>
-<p>第12课 PCB导入常见绿色报错消除方法</p>
-<p>第13课 PCB板框的导入与叠层设置</p>
-<p>第14课 PCB快捷键的设置及推荐</p>
-<p>第15课 交互式模块化布局规划（1）</p>
-<p>第16课 交互式模块化布局规划（2）</p>
-<p>第17课 交互式模块化布局规划（3）</p>
-<p>第18课LPDDR4的讲解与布局</p>
-<p>第19课 HDMI模块的布局（1）</p>
-<p>第20课 HDMI模块的布局（2）</p>
-<p>第21课 TYPEC模块的讲解与布局</p>
-<p>第22课 RS485,RS232模块的讲解与布局</p>
-<p>第23课 HDMI模块的布局（3）</p>
-<p>第24课 千兆网口的讲解与布局（1）</p>
-<p>第25课 千兆网口的讲解与布局（2）</p>
-<p>第26课 局部电源模块的布局</p>
-<p>第27课 USB模块的讲解与布局</p>
-<p>第28课 PCIE模块的讲解与布局</p>
-<p>第29课 RCA模块的讲解与布局</p>
-<p>第30课 SATA模块的讲解与布局（1）</p>
-<p>第31课 SATA模块的讲解与布局（2）</p>
-<p>第32课 USB模块与其他座子的布局</p>
-<p>第33课 EMMC模块与FSPI模块的讲解与布局</p>
-<p>第34课 电源模块的处理（1）</p>
-<p>第35课 电源模块的处理（2）</p>
-<p>第36课 电源模块的处理（3）</p>
-<p>第37课 整版布局优化处理</p>
-<p><strong>第四部分：PCB规则创建与扇孔</strong></p>
-<p>第38课 class类的介绍与添加（1）</p>
-<p>第39课 class类的介绍与添加（2）</p>
-<p>第40课 跨分割概念的介绍</p>
-<p>第41课 阻抗知识的介绍</p>
-<p>第42课 阻抗计算</p>
-<p>第43课 层叠的设置与20H原则的讲解</p>
-<p>第44课 PCB规则的讲解与设置</p>
-<p>第45课 PCB布线宏观分析与通道评估</p>
-<p>第46课 高速PCB布线规范及EMC知识介绍</p>
-<p>第47课 DDR模块的扇孔（1）</p>
-<p>第48课 DDR模块的扇孔（2）</p>
-<p>第49课 RK3588设计要点阅读</p>
-<p>第50课 HDMI模块的扇孔（1）</p>
-<p>第51课 HDMI模块的扇孔（2）</p>
-<p>第52课 HDMI模块的扇孔（3）</p>
-<p>第53课 Type-C模块的扇孔</p>
-<p>第54课 RS232与RS485电路模块的扇孔</p>
-<p>第55课 HDMI模块的扇孔（4）</p>
-<p>第56课 千兆网口模块的扇孔（1）</p>
-<p>第57课 千兆网口模块的扇孔（2）</p>
-<p>第58课 电源模块的扇孔</p>
-<p>第59课 USB2.0模块的扇孔</p>
-<p>第60课 USB3.0模块的扇孔</p>
-<p>第61课 PCIE模块的扇孔（1）</p>
-<p>第62课 PCIE模块的扇孔（2）</p>
-<p>第63课 RCA模块的扇孔</p>
-<p>第64课 SATA模块的扇孔（1）</p>
-<p>第65课 SATA模块的扇孔（2）</p>
-<p>第66课 USB2.0模块与其他模块的扇孔</p>
-<p>第67课 EMMC模块与FSPI模块的扇孔</p>
-<p>第68课 MIPI模块的扇孔</p>
-<p>第69课 PMU模块的扇孔（1）</p>
-<p>第70课 PMU模块的扇孔（2）</p>
-<p>第71课 PMU模块的扇孔（3）</p>
-<p>第72课 PMU模块的扇孔（4）</p>
-<p>第73课 MCU主控滤波电容的摆放（1）</p>
-<p>第74课 MCU主控滤波电容的摆放（2）</p>
-<p>第75课 MCU主控滤波电容的摆放（3）</p>
-<p>第76课 布局优化调整</p>
-<p>第77课 DDR与主控芯片规则的设置</p>
-<p><strong>第五部分：PCB布线</strong></p>
-<p>第78课 LPDDR数据线的连通（1）</p>
-<p>第79课 LPDDR数据线的连通（2）</p>
-<p>第80课 LPDDR数据线的连通（3）</p>
-<p>第81课 LPDDR数据线的连通（4）</p>
-<p>第82课 LPDDR地址控制时钟线的连通（1）</p>
-<p>第83课 LPDDR数据线的连通（5）</p>
-<p>第84课 LPDDR数据线的连通（6）</p>
-<p>第85课 LPDDR数据线的连通（7）</p>
-<p>第86课 LPDDR地址控制时钟线的连通（2）</p>
-<p>第87课 HDMI模块的布线</p>
-<p>第88课 Type-C模块的与MIPI模块的布线</p>
-<p>第89课 HDMI模块与EMMC,FSPI模块的布线</p>
-<p>第90课 PCIE模块的布线</p>
-<p>第91课 千兆网口模块的布线（1）</p>
-<p>第92课 千兆网口模块的布线（2）</p>
-<p>第93课 USB与PCIE模块信号布线</p>
-<p>第94课 杂线的处理（1）</p>
-<p>第95课 杂线的处理（2）</p>
-<p>第96课 杂线的处理（3）</p>
-<p>第97课 杂线的处理（4）</p>
-<p>第98课 杂线的处理（5）</p>
-<p>第99课 杂线的处理（6）</p>
-<p>第100课 杂线的处理（7）</p>
-<p>第101课 杂线的处理（8）</p>
-<p>第102课 信号的优化处理（1）</p>
-<p>第103课 信号的优化处理（2）</p>
-<p>第104课 信号的优化处理（3）</p>
-<p>第105课 信号的优化处理（4）</p>
-<p>第106课 信号的优化处理（5）</p>
-<p>第107课 采样线的连通与电源处理</p>
-<p>第108课 电源的处理（1）</p>
-<p>第109课 电源的处理（2）</p>
-<p>第110课 电源的处理（3）</p>
-<p>第111课 电源的处理（4）</p>
-<p>第112课 电源的处理（5）</p>
-<p>第113课 电源的处理（6）</p>
-<p>第114课 电源的处理（7）</p>
-<p>第115课 电源的处理（8）</p>
-<p>第116课 电源的处理（9）</p>
-<p>第117课 滤波电容的处理（1）</p>
-<p>第118课 滤波电容的处理（2）</p>
-<p>第119课 滤波电容的处理（3）</p>
-<p>第120课 滤波电容的处理（4）</p>
-<p>第121课 杂线的处理</p>
-<p>第122课 电源信号的优化检查（1）</p>
-<p>第123课 电源信号的优化检查（2）</p>
-<p>第124课 DRC的消除（1）</p>
-<p>第125课 DRC的消除（2）</p>
-<p>第126课 DRC的消除（3）</p>
-<p>第127课 LPDDR4地址控制时钟线的等长处理（1）</p>
-<p>第128课 LPDDR4地址控制时钟线的等长处理（2）</p>
-<p>第129课 LPDDR4数据线的等长处理（1）</p>
-<p>第130课 LPDDR4数据线的等长处理（2）</p>
-<p>第131课 LPDDR4数据线的等长处理（3）</p>
-<p>第132课 LPDDR4数据线的等长处理（4）</p>
-<p>第133课 LPDDR地址控制时钟线的等长（3）</p>
-<p>第134课 LPDDR4数据线的等长处理（5）</p>
-<p>第135课 LPDDR4数据线的等长处理（6）</p>
-<p>第136课 LPDDR4数据线的等长处理（7）</p>
-<p>第137课 EMMC模块信号等长处理</p>
-<blockquote>
-<p>第138课 网口单端等长处理</p>
-</blockquote>
-<p>第139课 差分等长处理（1）</p>
-<p>第140课 差分等长处理（2）</p>
-<p>第141课 差分等长处理（3）</p>
-<p>第142课 差分等长处理（4）</p>
-<p>第143课 差分等长处理（5）</p>
-<p>第144课 差分等长处理（6）</p>
-<p>第145课 差分等长处理（7）</p>
-<p>第146课 USB差分等长处理</p>
-<p>第147课 DRC的消除与整版地铜的添加</p>
-<p>第148课 丝印的规范调节与logo版本号的添加</p>
-<p>第149课 整体优化调整（1）</p>
-<p>第150课 整体优化调整（2）</p>
-<p>第151课 光绘文件的输出</p>
-<p>第152课 DFM的检查</p>
-<h1 id="2ad软件的安装和激活"><a class="markdownIt-Anchor" href="#2ad软件的安装和激活"></a> 2.AD软件的安装和激活</h1>
-<p>​	==这里直接跳过好吧，并没有必要，在这里写==</p>
-<h1 id="3ad系统参数设置"><a class="markdownIt-Anchor" href="#3ad系统参数设置"></a> 3.AD系统参数设置</h1>
-<p>​	在后面的原理图绘制、封装绘制以及PCB的绘制过程中，需要预先修改一些默认的设置，从而更方便后期的布局和布线，具体设置步骤如下所示：<br />
-<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202402290723459.png" alt="image-20240229072302424" /></p>
-<p>​	进入之后如下图所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202402290723612.png" alt="image-20240229072322583" /></p>
-<p>​	然后对这几个菜单分别的作用进行陈述：</p>
-<ol>
-<li>
-<p>System（系统）：这个菜单通常提供系统级的设置和选项，例如语言选择、界面主题、单位设置等。它允许你对软件进行全局配置，以符合你的个人偏好和需求。</p>
-</li>
-<li>
-<p>Data Management（数据管理）：这个菜单用于管理项目中的数据，包括文件的创建、打开、保存、导入和导出等操作。它提供了对项目数据的组织、存储和共享的功能，使你能够有效地管理和处理项目中的各种数据。</p>
-</li>
-<li>
-<p>Schematic（原理图）：这个菜单用于创建、编辑和管理电路原理图。它提供了绘制电路图、添加和连接元件、定义电路属性和规则等功能。通过该菜单，你可以设计和调整电路原理图，以便进行进一步的分析、仿真和布局。</p>
-</li>
-<li>
-<p>PCB Editor（PCB编辑器）：这个菜单用于创建、编辑和管理印制电路板（PCB）。它提供了布局和布线工具，允许你放置和连接电子元件，定义层次结构、规则和约束等。通过该菜单，你可以设计和调整PCB，以实现电路的物理实现。</p>
-</li>
-<li>
-<p>Text Editors（文本编辑器）：这个菜单提供了编辑文本文件的功能。它通常包含代码编辑器，用于编辑和编写程序代码，以及其他文本文件的编辑器，如文档编辑器、日志编辑器等。通过该菜单，你可以对文本文件进行编辑、格式化和保存。</p>
-</li>
-<li>
-<p>Scripting System（脚本系统）：这个菜单用于编写和执行脚本。脚本是一系列预定义的命令和操作，用于自动化任务和批处理。通过脚本系统，你可以编写脚本来执行重复性的任务、自定义软件行为或者扩展软件功能。</p>
-</li>
-<li>
-<p>CAM Editor（CAM编辑器）：这个菜单用于编辑和生成计算机辅助制造（CAM）数据。CAM数据包括用于生产和制造的信息，例如制造工艺、钻孔、切割和焊接等。CAM编辑器提供了对CAM数据的创建、修改和管理的功能。</p>
-</li>
-<li>
-<p>Simulation（仿真）：这个菜单用于进行电路仿真分析。它提供了电路参数设置、信号源定义、仿真器选择和仿真结果展示等功能。通过仿真，你可以评估电路的性能、验证设计的正确性，并进行优化和改进。</p>
-</li>
-<li>
-<p>Draftsman（制图）：这个菜单用于创建和编辑电路图纸和文档。它提供了制图工具，允许你绘制电路图纸、添加标题、符号、注释和尺寸等。通过制图功能，你可以生成专业的电路图纸和文档，以便进行文档化和分享。</p>
-</li>
-<li>
-<p>Multi-board Schematic（多板原理图）：这个菜单用于设计和管理多个板级电路的联合原理图。它提供了连接多个电路板的功能，允许你在一个项目中同时设计和调整多个板级电路的原理图。通过该菜单，你可以确保多个电路板之间的电气连接和信号传输的正确性。</p>
-<p>而一般情况下只需要修改下面两个即可，分别为system和PCB editor</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202402290726300.png" alt="image-20240229072618274" /></p>
-<h2 id="system"><a class="markdownIt-Anchor" href="#system"></a> system</h2>
-<p>​	原理图和PCB进行交互</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202402290733904.png" alt="image-20240229073345874" /></p>
-<p>​	关闭网络，这样会流畅很多</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202402290734770.png" alt="image-20240229073454740" /></p>
-<h2 id="pcb-editor"><a class="markdownIt-Anchor" href="#pcb-editor"></a> PCB Editor</h2>
-<p>在线drc，能处理布线报错相关的：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202402290737571.png" alt="image-20240229073747538" /></p>
-<p>​	颜色层级：</p>
-<p><img src="C:%5CUsers%5CAdministrator%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20240229074722939.png" alt="image-20240229074722939" /></p>
-<p>实时高亮：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202402290749763.png" alt="image-20240229074943734" /></p>
-</li>
-</ol>
-<p>显示抬头信息，有快捷按键 shift + h</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202402290750557.png" alt="image-20240229075022521" /></p>
-<p>​	颜色显示，一般选择实心：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202402292112859.png" alt="image-20240229211212827" /></p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202402292112725.png" alt="image-20240229211231694" /></p>
-<pre><code>AD19默认配置完成的配置文件：
-</code></pre>
-<p>链接：<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1jRcwS93AekzwmfrU42Wwmw?pwd=5rna">https://pan.baidu.com/s/1jRcwS93AekzwmfrU42Wwmw?pwd=5rna</a><br />
-提取码：5rna</p>
-<h1 id="4-工程文件创建"><a class="markdownIt-Anchor" href="#4-工程文件创建"></a> 4 工程文件创建</h1>
-<p>首先进入到AD软件中，进入之后如下所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202402292130031.png" alt="image-20240229213004011" /></p>
-<p>然后依次选择：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202402292130496.png" alt="image-20240229213045475" /></p>
-<p>创建之后如下图所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202402292135548.png" alt="image-20240229213516527" /></p>
-<p>在对应的文件夹中也有了相应的功能文件：<br />
-<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202402292135460.png" alt="image-20240229213545438" /></p>
-<p>​	然后创建原理图：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202402292136620.png" alt="image-20240229213635591" /></p>
-<p>接下来创建PCB图，如下所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202402292137642.png" alt="image-20240229213707619" /></p>
-<p>创建原理图库和PCB库，</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202402292138275.png" alt="image-20240229213829254" /></p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202402292138055.png" alt="image-20240229213846035" /></p>
-<h1 id="5-pcb-封装元素的组成和介绍"><a class="markdownIt-Anchor" href="#5-pcb-封装元素的组成和介绍"></a> 5 PCB 封装元素的组成和介绍</h1>
-<p>​		这个文档已经放在了对应的手册里面如下所示：<br />
-<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202403010728556.png" alt="image-20240301072812512" />	这节课可以直接看手册，视频也只是讲解了一下而已。</p>
  
       <!-- reward -->
       
