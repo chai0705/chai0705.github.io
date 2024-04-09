@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2024-04-06T23:51:16.995Z</updated>
+  <updated>2024-04-09T00:12:38.350Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -17,11 +17,28 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>反思(4月第2个星期)</title>
+    <link href="http://example.com/2024/04/08/50_%E5%8F%8D%E6%80%9D(4%E6%9C%88%E7%AC%AC2%E4%B8%AA%E6%98%9F%E6%9C%9F)%20/"/>
+    <id>http://example.com/2024/04/08/50_%E5%8F%8D%E6%80%9D(4%E6%9C%88%E7%AC%AC2%E4%B8%AA%E6%98%9F%E6%9C%9F)%20/</id>
+    <published>2024-04-08T12:26:56.000Z</published>
+    <updated>2024-04-09T00:12:38.350Z</updated>
+    
+    
+    <summary type="html">Here&#39;s something encrypted, password is required to continue reading.</summary>
+    
+    
+    
+    <category term="生活" scheme="http://example.com/categories/%E7%94%9F%E6%B4%BB/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>反思(4月第1个星期)</title>
     <link href="http://example.com/2024/04/01/49_%E5%8F%8D%E6%80%9D(4%E6%9C%88%E7%AC%AC1%E4%B8%AA%E6%98%9F%E6%9C%9F)/"/>
     <id>http://example.com/2024/04/01/49_%E5%8F%8D%E6%80%9D(4%E6%9C%88%E7%AC%AC1%E4%B8%AA%E6%98%9F%E6%9C%9F)/</id>
     <published>2024-04-01T12:26:56.000Z</published>
-    <updated>2024-04-06T23:51:16.995Z</updated>
+    <updated>2024-04-07T12:35:06.042Z</updated>
     
     
     <summary type="html">Here&#39;s something encrypted, password is required to continue reading.</summary>
@@ -389,29 +406,6 @@
     
     
     <category term="生活" scheme="http://example.com/categories/%E7%94%9F%E6%B4%BB/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Linux基础</title>
-    <link href="http://example.com/2024/01/30/31%20Linux%E5%9F%BA%E7%A1%80/"/>
-    <id>http://example.com/2024/01/30/31%20Linux%E5%9F%BA%E7%A1%80/</id>
-    <published>2024-01-30T13:57:19.000Z</published>
-    <updated>2024-01-31T15:31:51.317Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;&#92;assets&#92;css&#92;APlayer.min.css&quot;&gt;&lt;script src=&quot;&#92;assets&#92;js&#92;APlayer.min.js&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="学习" scheme="http://example.com/categories/%E5%AD%A6%E4%B9%A0/"/>
     
     
   </entry>

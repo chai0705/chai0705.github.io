@@ -110,6 +110,95 @@
     
     
     <article
+  id="post-4 音视频测试"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/10/26/4%20%E9%9F%B3%E8%A7%86%E9%A2%91%E6%B5%8B%E8%AF%95/"
+    >音视频测试</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/10/26/4%20%E9%9F%B3%E8%A7%86%E9%A2%91%E6%B5%8B%E8%AF%95/" class="article-date">
+  <time datetime="2023-10-26T01:55:17.000Z" itemprop="datePublished">2023-10-26</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE/">瑞芯微</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="1gst-play-10测试"><a class="markdownIt-Anchor" href="#1gst-play-10测试"></a> 1.gst-play-1.0测试</h1>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gst-play-1.0 --videosink=xvimagesink /usr/local/test.mp4</span><br></pre></td></tr></table></figure>
+<p>GStreamer 的 gst-play-1.0 工具会加载指定的视频文件，并使用 xvimagesink 插件将视频渲染到 X Window 系统上的显示设备上，以实现视频的播放效果。</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310260944983.png" alt="image-20231026094404955" /></p>
+<h1 id="2mpv测试"><a class="markdownIt-Anchor" href="#2mpv测试"></a> 2.mpv测试</h1>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mpv --hwdec=rkmpp --vd-lavc-software-fallback=no --vo=xv /usr/local/test.mp4        </span><br></pre></td></tr></table></figure>
+<p>mpv 媒体播放器将使用 Rockchip MPP 硬件解码器进行硬件解码，禁用软件回退以确保只使用硬件解码，并使用 xv 视频输出插件渲染视频，以实现高性能的视频播放效果。</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310260945251.png" alt="image-20231026094504212" /></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mpv --hwdec=rkmpp --vo=opengl --gpu-hwdec-interop=drmprime-drm --gpu-context=x11egl /usr/local/test.mp4</span><br></pre></td></tr></table></figure>
+<p>mpv 媒体播放器将使用 Rockchip MPP 硬件解码器进行硬件解码，使用 OpenGL 作为视频输出，同时启用 DRM Prime 与 DRM 之间的 GPU 硬件解码器互操作性，并使用 X11 EGL 上下文进行 GPU 加速，以实现高性能的视频播放效果。</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310260943085.png" alt="image-20231026094341042" /></p>
+<h1 id="3-gst-launch-10-测试"><a class="markdownIt-Anchor" href="#3-gst-launch-10-测试"></a> 3. gst-launch-1.0 测试</h1>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GST_DEBUG=fps*:7 gst-launch-1.0 uridecodebin uri=file:///usr/local/test.mp4 ! fpsdisplaysink video-sink=xvimagesink text-overlay=false signal-fps-measurements=true</span><br></pre></td></tr></table></figure>
+<p>GStreamer 的 gst-launch-1.0 工具将创建一个简单的流水线，其中包含 <code>uridecodebin</code> 元素用于解码指定的视频文件，并通过 <code>fpsdisplaysink</code> 元素显示视频和帧率信息。帧率信息将以调试输出的形式显示在终端上。</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310261008898.png" alt="image-20231026100859800" /></p>
+<p>测试最大的帧率</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GST_DEBUG=fps*:7 gst-launch-1.0 uridecodebin uri=file:///usr/local/test.mp4 ! fpsdisplaysink video-sink=fakesink text-overlay=false signal-fps-measurements=true sync=false</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310261010578.png" alt="image-20231026101009531" /></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gst-launch-1.0 uridecodebin uri=file:///usr/local/test.mp4 ! xvimagesink</span><br></pre></td></tr></table></figure>
+<h1 id="4谷歌浏览器测试"><a class="markdownIt-Anchor" href="#4谷歌浏览器测试"></a> 4.谷歌浏览器测试</h1>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo 0x100 &gt; /sys/module/rk_vcodec/parameters/mpp_dev_debug</span><br><span class="line">chromium --no-sandbox file:///usr/local/test.mp4</span><br></pre></td></tr></table></figure>
+<p>Chromium 浏览器将在没有沙盒的情况下启动，并加载指定路径的 <code>test.mp4</code> 视频文件。这样，您可以在浏览器中直接播放本地视频文件。</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310261014311.png" alt="image-20231026101406276" /></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310261018085.png" alt="image-20231026101842048" /></p>
+<p>播放视频的时候查看GPU的利用率发现明显的上升，所以判断谷歌浏览器为硬件解码。</p>
+<h1 id="5摄像头测试"><a class="markdownIt-Anchor" href="#5摄像头测试"></a> 5.摄像头测试</h1>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/aarch64-linux-gnu/gstreamer-1.0</span><br><span class="line">gst-launch-1.0 v4l2src device=/dev/video0 ! video/x-raw,format=NV12,width=1920,height=1080, framerate=30/1 ! xvimagesink</span><br><span class="line">gst-launch-1.0 v4l2src device=/dev/video1 ! video/x-raw,format=NV12,width=1920,height=1080, framerate=30/1 ! xvimagesink</span><br></pre></td></tr></table></figure>
+<p>我发现不加上第一句的库的导入会出现发绿的情况，而且是0发绿，1没事，不加第一句的话1的颜色不太对</p>
+<p>gst-launch-1.0 v4l2src device=/dev/video9 ! image/jpeg, width=640, height=480, framerate=30/1 ! jpegparse ! mppjpegdec ! xvimagesink sync=false</p>
+<h1 id="6mpp测试"><a class="markdownIt-Anchor" href="#6mpp测试"></a> 6.mpp测试</h1>
+<p>首先要监控输出：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tail -f /var/log/syslog</span><br></pre></td></tr></table></figure>
+<p>调用mpi_dec_test，解码视频，将<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=h264&amp;spm=1001.2101.3001.7020">h264</a>转为yuv</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mpi_dec_test -i /oem/200frames_count.h264 -t 7 -n 250 -o /home/topeet/test.yuv -w 640 -h 480</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310261707707.png" alt="image-20231026170732680" /></p>
+<p>调用mpi_enc_test，编码视频，将yuv转为h264</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mpi_enc_test -i /home/topeet/test.yuv -t 7 -n 250 -o /home/topeet/test.h264 -w 640 -h 480 -fps 25</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310261712235.png" alt="image-20231026171223218" /></p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
   id="post-14 构建deb包.md"
   class="article article-type-post"
   itemscope
@@ -1554,117 +1643,13 @@ node --version</p>
 </article>
 
     
-    <article
-  id="post-1markdown语法学习"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/09/01/1markdown%E8%AF%AD%E6%B3%95%E5%AD%A6%E4%B9%A0/"
-    >markdown语法学习</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/09/01/1markdown%E8%AF%AD%E6%B3%95%E5%AD%A6%E4%B9%A0/" class="article-date">
-  <time datetime="2023-09-01T15:22:33.000Z" itemprop="datePublished">2023-09-01</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <p>MarkDown是什么<br />
-Markdown 是一种轻量级标记语言，它允许人们使用易读易写的纯文本格式编写文档。</p>
-<p>Markdown 语言在 2004 由约翰·格鲁伯（英语：John Gruber）创建。</p>
-<p>Markdown 编写的文档可以导出 HTML 、Word、图像、PDF、Epub 等多种格式的文档。</p>
-<p>Markdown 编写的文档后缀为 .md, .markdown。</p>
-<h1 id="1如何自动生成目录"><a class="markdownIt-Anchor" href="#1如何自动生成目录"></a> 1.如何自动生成目录</h1>
-<p>点击【视图】——【大纲】</p>
-<p>说明：但是此步骤生成的目录，并不是折叠的目录，折叠起来会更美观一些</p>
-<p>设置折叠目录</p>
-<p>点击【文件】——【偏好设置】——【外观】——侧边栏选择打钩，此时已经折叠成功</p>
-<h1 id="2快捷键"><a class="markdownIt-Anchor" href="#2快捷键"></a> 2.快捷键</h1>
-<p>Ctrl+1 ——设置一级标题</p>
-<p>Ctrl+2 ——设置二级标题</p>
-<p>Ctrl+3 ——设置三级标题</p>
-<p>Ctrl+4 ——设置四级标题</p>
-<p>Ctrl+5 ——设置五级标题</p>
-<p>Ctrl+6 ——设置六级标题</p>
-<p>空格 ——引用</p>
-<p>回车、shift + tab ——退出引用</p>
-<p>Ctrl + Shift + ] ——无序列表</p>
-<p>Ctrl + Shift + [ ——有序列</p>
-<p>Ctrl + Shift + ] 、tab——子列表</p>
-<p>Shift + tab ——返回上一级列表、</p>
-<p>Ctrl + B —— 加粗</p>
-<dl>
-<dt>Ctrl + T —— 表格</dt>
-<dd>~ 要删除的内容 ~ ~ ——删除线</dd>
-</dl>
-<h1 id="3创建链接"><a class="markdownIt-Anchor" href="#3创建链接"></a> 3.创建链接</h1>
-<p>格式为[] ()，其中[]内为要展示的内容，()为链接。</p>
-<h1 id="4图片路径管理"><a class="markdownIt-Anchor" href="#4图片路径管理"></a> 4.图片路径管理</h1>
-<p>Typora默认将所有文档的图片都放在一起，但是我们更想每一个文档都有属于自己的一个文件夹，文档中的图片也最好可以自动保存在该文件夹内。解决方法如下：</p>
-<p>点击【文件】——【偏好设置】——【图像】——将该界面内容设置如下:</p>
-<p>此时，该文档所在文件夹中会自动生成一个img文件，该路径为本文档中的图片路径。</p>
-<p><img src="D:%5Chexo%5Cblog%5Csource_posts%5Cimage-20230902072149501.png" alt="" /></p>
-<h1 id="5划重点高亮"><a class="markdownIt-Anchor" href="#5划重点高亮"></a> 5.划重点–高亮</h1>
-<p>高亮</p>
-<p>点击【文件】——【偏好设置】——【Markdown】——高亮处打钩</p>
-<p>编辑高亮内容格式如下：</p>
-<p>== 内容== —— 高亮</p>
-<p>== chai==</p>
-<p>==cccc==</p>
-<p>== key==</p>
-<p>==内容==</p>
-<p><strong>cha</strong></p>
-<p>重启Typora，此时内容处会变成高亮的效果.</p>
-<h1 id="6导入代码块"><a class="markdownIt-Anchor" href="#6导入代码块"></a> 6.导入代码块</h1>
-<p><strong>~~~</strong> ——代码块，点击代码框可选择语言</p>
-<h1 id="7不使用自动拼写检查"><a class="markdownIt-Anchor" href="#7不使用自动拼写检查"></a> 7.不使用自动拼写检查</h1>
-<p>点击右下角[【Spell Check】勾选【不使用拼写检查】</p>
-<h1 id="8设置自动保存"><a class="markdownIt-Anchor" href="#8设置自动保存"></a> 8设置自动保存</h1>
-<p>其实Typora 对文件修改之后并不能自动保存，解决方法：</p>
-<p>点击【文件】——【偏好设置】——【通用】——自动保存处打钩</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
   </article>
   
 
   
   <nav class="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/4/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span>
+    <a class="extend prev" rel="prev" href="/page/4/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/6/">下一页</a>
   </nav>
   
 </section>

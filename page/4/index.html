@@ -110,6 +110,236 @@
     
     
     <article
+  id="post-22 git的学习"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/12/10/22%20git%E7%9A%84%E5%AD%A6%E4%B9%A0/"
+    >git的学习</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/12/10/22%20git%E7%9A%84%E5%AD%A6%E4%B9%A0/" class="article-date">
+  <time datetime="2023-12-10T02:50:19.000Z" itemprop="datePublished">2023-12-10</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>​	前提条件，先来说一下未什么要学习git吧，目前先不考虑远程git和github，我目前只是想要在Linux环境下进行git的使用，说一个最简单的目的，我想让我的Linux目录用到什么就显示什么，而且其他的文件也会进行存档，当我需要这个项目的时候就切换到这个分支进行开发，而不是像我现在这个样子，还要保存，删除等等，这样我也能知道我都做了哪些的修改，目前的需求就这样，学习去。</p>
+<h1 id="1git的安装"><a class="markdownIt-Anchor" href="#1git的安装"></a> 1.git的安装</h1>
+<p>​	关于git的介绍就不再多说了，linus的丰功伟绩，一直是我的指路明灯，也是我为之不断努力的方向， 过多的就不再多说。</p>
+<p>安装需要的插件：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install libcurl4-gnutls-dev libexpat1-dev gettext libz-dev libssl-dev git</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101036140.png" alt="image-20231210103658547" /></p>
+<p>安装完成之后查看git的版本：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git --version</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101038851.png" alt="image-20231210103828814" /></p>
+<h1 id="2-git的配置"><a class="markdownIt-Anchor" href="#2-git的配置"></a> 2. git的配置</h1>
+<p>配置个人的用户名和电子邮箱</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name &quot;chai&quot;</span><br><span class="line">git config --global user.email &quot;1361382269@qq.com&quot;</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101040420.png" alt="image-20231210104002380" /></p>
+<p>查看配置</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --list --global</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101040757.png" alt="image-20231210104018710" /></p>
+<p>配置也可以在 ~/.gitconfig 或 /etc/gitconfig 看到这里加上 --global 是全局的配置， 如果想要在某个特定的配置中使用单独的配置就将–global去掉</p>
+<p>设置颜色差异：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global color.ui true</span><br></pre></td></tr></table></figure>
+<p>设置git命令补全</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://github.com/markgandolfo/git-bash-completion/blob/master/git-completion.bash</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101105829.png" alt="image-20231210110546532" /></p>
+<p>​	然后将</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo mv git-completion.bash /usr/bin/</span><br><span class="line">sudo echo source /usr/bin/git-completion.bash &gt;&gt; /home/topeet/.bashrc</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">root的配置文件需要权限，sudo不顶用，所以要换到root用户</span></span><br><span class="line">sudo echo source /usr/bin/git-completion.bash &gt;&gt; /root/.bashrc</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101110920.png" alt="image-20231210111049872" /></p>
+<p>现在git就可以正常的进行命令的提示了，如下图所示：<br />
+<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101111447.png" alt="image-20231210111136282" /></p>
+<p>==默认情况下ssh连接是不能翻墙的，原因是一些环境变量的问题，所以就需要手动导入一下下面的上网的环境变量==</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">export ftp_proxy=http://127.0.0.1:8889/</span><br><span class="line">export https_proxy=http://127.0.0.1:8889/</span><br><span class="line">export FTP_PROXY=http://127.0.0.1:8889/</span><br><span class="line">export HTTPS_PROXY=http://127.0.0.1:8889/</span><br><span class="line">export HTTP_PROXY=http://127.0.0.1:8889/</span><br><span class="line">export http_proxy=http://127.0.0.1:8889/</span><br></pre></td></tr></table></figure>
+<p>目前还不想用码云和github所以这里的ssh配置就先不配置</p>
+<p>==另一个方法，更简单，使用自带的即可==</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo echo source /usr/share/bash-completion/completions/git &gt;&gt; /home/topeet/.bashrc</span><br><span class="line">sudo echo source /usr/share/bash-completion/completions/git  &gt;&gt; /home/topeet/.bashrc</span><br></pre></td></tr></table></figure>
+<h1 id="3git-基础理论"><a class="markdownIt-Anchor" href="#3git-基础理论"></a> 3.git 基础理论</h1>
+<p>​	我其实早就学习过了一遍git了，但是一直没有用起来，关于理论这里也算是学习过了，而git的核心命令也就在这个地方。我这里就不复制了，凭借我的记忆复述一下。</p>
+<p>​	git有三个工作区域，分别为工作目录（working directory）、暂存区（stage/index）和资源库（repository），而原创git仓库这里先不管，以后再说，大概是长这个样子：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101117006.png" alt="image-20231210111712990" /></p>
+<p>加上各种命令的切换，长这个样子：<br />
+<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101117699.png" alt="在这里插入图片描述" /></p>
+<p>Workspace:工作区，就是平时存放项目代码的地方</p>
+<p>Index/Stage:暂存区，用于临时存放你的改动，事实上它是一个文件，保存即将提交的列表信息</p>
+<p>local Repository:仓库区（或本地仓库），就是安全存放数据的位置，这里有你提交到所有版本的数据，其中HEAD指向最新放入仓库的版本</p>
+<p>Remote Repository:远程仓库，托管代码的服务器，可以简单的认为是你项目组中的一台电脑用于远程数据交换</p>
+<h1 id="4git工作流程"><a class="markdownIt-Anchor" href="#4git工作流程"></a> 4.git工作流程</h1>
+<p>git的工作流程一般是这样的：</p>
+<ol>
+<li>
+<p>在工作中添加，修改文件</p>
+</li>
+<li>
+<p>将需要进行的版本管理的文件放入暂存区域</p>
+</li>
+<li>
+<p>将暂存区域文件提交到git仓库</p>
+<p>因此，git管理的文件有三种状态：已修改（modified）,已暂存（staged）,已提交（committed）</p>
+</li>
+</ol>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101131377.png" alt="在这里插入图片描述" /></p>
+<h1 id="5git项目搭建"><a class="markdownIt-Anchor" href="#5git项目搭建"></a> 5.Git项目搭建</h1>
+<p>工作目录（WorkSpace）一般就是你希望Git帮助你管理的文件夹，可以是你的项目目录，也可以是空目录，建议不要有中文。</p>
+<p>日常使用只需要记住下图6个命令：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101137263.png" alt="在这里插入图片描述" /></p>
+<p>建立一个git仓库</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101139420.png" alt="image-20231210113938373" /></p>
+<p>执行万命令后可以看到，仅仅在项目目录多出了一个.git目录（注意这个默认是隐藏的文件夹，需要手动在查看选项里面去掉隐藏的文件才能显示），关于版本等所有信息都在这个目录里面</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101140306.png" alt="image-20231210114003052" /></p>
+<p>git文件操作</p>
+<p>版本控制就是对文件的版本控制，要对文件进行修改，提交等操作，首先要知道文件当前什么状态，不然可能会提交了现在还不想提交的文件，或者要提交的文件没提交上。</p>
+<p>​	(1):Untracked:未跟踪，此文件在文件夹中，但并没有加入到git仓库，不参与版本控制.通过git add 状态变为Staged.</p>
+<p>​	(2):Unmodify:文件已经入库，未修改，即版本库中的文件快照内容与文件夹完全一致.这种类型的文件有两种去处，如果它被修改，而变为Modified.如果使用git rm 移出版本库，则成为Untracked文件.</p>
+<p>​	(3):Modified:文件已修改，仅仅是修改，并没有进行其他的操作.这个文件也有两个去处，通过git add可进入暂存staged状态，使用git</p>
+<p>checkout，则丢弃修改过，返回unmodify状态，这个git checkout即从库中取出文件，覆盖当前修改！</p>
+<p>​	(4):Staged：暂存状态，执行git commit则将修改同步到库中，这时库中的文件和本地文件又变为一致，文件为Unmodify状态.执行git</p>
+<p>reset</p>
+<p>查看制定文件状态</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git status [文件名]</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101145780.png" alt="image-20231210114548647" /></p>
+<p>查看所有文件状态</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git status</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101146553.png" alt="image-20231210114602428" /></p>
+<p>添加所有文件到暂存区</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add . </span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101147341.png" alt="image-20231210114733202" /></p>
+<p>​	这里也仅仅只是将工作区上传到了暂存区，可以看到status已经变为了绿色。</p>
+<p>提交暂存区中的内容到本地仓库 -m:提交的信息</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m &quot;信息&quot;</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101148098.png" alt="image-20231210114849962" /></p>
+<p>可以看到git status的状态也已经更新了，如下所示：<br />
+<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101149264.png" alt="image-20231210114917210" /></p>
+<h1 id="6忽略文件"><a class="markdownIt-Anchor" href="#6忽略文件"></a> 6.忽略文件</h1>
+<p>有些时候我们不想把某些文件纳入版本控制中，比如数据库文件，临时文件，设计文件等</p>
+<p>在主目录下建立“.gitignore”文件，此文件有如下规则：</p>
+<p>1.忽略文件中的空行或以井号（# ）开始的行将会被忽略。</p>
+<p>2.可以使用Linux通配符。例如∶星号(*)代表任意多个字符，问号(﹖)代表一个字符，方括号([abc] )代表可选字符范围，大括号( {string1,string2……})代表可选的字符串等。</p>
+<p>3.如果名称的最前面有一个感叹号( !)，表示例外规则，将不被忽略。</p>
+<p>4.如果名称的最前面是一个路径分隔符(/ )，表示要忽略的文件在此目录下，而子目录中的文件不忽略。</p>
+<p>5.如果名称的最后面是一个路径分隔符(/ )，表示要忽略的是此目录下该名称的子目录，而非文件（默认文件或目录都忽略）。</p>
+<p>例如以下这些实例:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">*.txt   #忽略所有的.txt结尾的文件</span><br><span class="line">！lib.txt  #但lib.txt除外</span><br><span class="line">/temp  #进忽略项目根目录下的TODO文件，不包括其他目录temp</span><br><span class="line">bulid/  #忽略bulid目录下的所有文件</span><br><span class="line">doc/*.txt #会忽略doc/notes.txt 但是不包括doc/sever/arch.txt</span><br></pre></td></tr></table></figure>
+<h1 id="7查看日志以及恢复版本"><a class="markdownIt-Anchor" href="#7查看日志以及恢复版本"></a> 7.查看日志以及恢复版本</h1>
+<p>在第5小节已经进行了第一次的提交，然后我进行第二次的提交</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101153879.png" alt="image-20231210115334834" /></p>
+<p>上面是进行的修改，接下来进行提交，如下所示：<br />
+<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101154938.png" alt="image-20231210115438817" /></p>
+<p>然后进行提交的查看</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101155808.png" alt="image-20231210115527651" /></p>
+<p>可以看到这是两个提交，现在指向的是第二次提交，而目前的情况是这样的，这一次的提交是错误的我不想要了，我想回退到第一次的提交，可以使用git reset进行回复</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset [哈希值]</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101157577.png" alt="image-20231210115707464" /></p>
+<p>然后查看提交的状态如下所示：<br />
+<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101158910.png" alt="image-20231210115820807" /></p>
+<p>但是仍旧需要手动删除才行，如下所示：<br />
+<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101159755.png" alt="image-20231210115912689" /></p>
+<h1 id="8分支操作"><a class="markdownIt-Anchor" href="#8分支操作"></a> 8.分支操作</h1>
+<p>分支是Git使用过程中非常重要的概念。使用分支意味着你可以把你的工作从开发主线上分离开来，以免影响开发主线。同一个仓库可以有多个分支,各个分支相互独立,互不干扰。通过git init命令创建本地仓库时默认会创建- -个master分支。</p>
+<p>​	==之前还是不懂，对于分支有了不一样的想法，分支并不是一个新的，而是一个当前内容的分支==</p>
+<p>查看分支：</p>
+<p>（1）列出所有本地分支</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101201065.png" alt="image-20231210120127025" /></p>
+<p>列出所有远程分支</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -r</span><br></pre></td></tr></table></figure>
+<p>列出所有本地分支和远程分支</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -a</span><br></pre></td></tr></table></figure>
+<p>我这里并没有涉及到远程分支，所以也就先不用管。</p>
+<p>（2）创建分支</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch name</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101205974.png" alt="image-20231210120516908" /></p>
+<p>（3）删除分支</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -d name</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101205187.png" alt="image-20231210120535123" /></p>
+<p>（4）分支切换</p>
+<p>首先在主分支创建了一个markdown测试文件，并且提交</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101210757.png" alt="image-20231210121055669" /></p>
+<p>然后创建另一个分支</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch test</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101212631.png" alt="image-20231210121207568" /></p>
+<p>切换到新创建的分支</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout name</span><br></pre></td></tr></table></figure>
+<p>这里关于分支的还是不太懂，这里应该是要看一看视频。现在懂了，分支的名称才真正的懂得了。</p>
+<p>（5）分支合并</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101501055.png" alt="image-20231210150127690" /></p>
+<p>可以看到目前head领先了master一个提交，使用下面的命令进行分支合并，将分支上的修改进行合并</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git merge test</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101502556.png" alt="image-20231210150257210" />					可以看到head和master已经是同一个分支了。</p>
+<p>9.scp命令的学习</p>
+<p><code>scp</code>（Secure Copy）命令用于在本地主机和远程主机之间进行文件传输。它使用SSH协议进行安全的文件传输。</p>
+<p><code>scp</code>命令的基本语法如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp [选项] 源文件 目标文件</span><br></pre></td></tr></table></figure>
+<p>其中，<code>源文件</code>是要传输的文件或目录的路径，<code>目标文件</code>是传输到的目标位置的路径。</p>
+<p>以下是一些常用的<code>scp</code>命令选项：</p>
+<ul>
+<li><code>-r</code>：递归复制整个目录。</li>
+<li><code>-P &lt;port&gt;</code>：指定SSH端口号。</li>
+<li><code>-i &lt;identity_file&gt;</code>：指定用于身份验证的私钥文件。</li>
+<li><code>-v</code>：显示详细的调试信息。</li>
+<li><code>-C</code>：开启压缩传输。</li>
+</ul>
+<p>下面是几个示例，演示了如何使用<code>scp</code>命令：</p>
+<ol>
+<li>
+<p>从本地主机复制文件到远程主机：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp /path/to/local/file user@remote:/path/to/destination/</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>从远程主机复制文件到本地主机：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp user@remote:/path/to/remote/file /path/to/destination/</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>从本地主机复制整个目录到远程主机：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp -r /path/to/local/directory user@remote:/path/to/destination/</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>从远程主机复制整个目录到本地主机：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp -r user@remote:/path/to/remote/directory /path/to/destination/</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>这些示例中的<code>user</code>是远程主机上的用户名，<code>remote</code>是远程主机的地址（可以是IP地址或域名），<code>/path/to/</code>是文件或目录的路径。</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
   id="post-11-opencv的学习"
   class="article article-type-post"
   itemscope
@@ -3942,102 +4172,13 @@ dpkg -i xserver-common_1.20.13-1ubuntu1~20.04.9_all.deb</p>
 </article>
 
     
-    <article
-  id="post-4 音视频测试"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/10/26/4%20%E9%9F%B3%E8%A7%86%E9%A2%91%E6%B5%8B%E8%AF%95/"
-    >音视频测试</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/10/26/4%20%E9%9F%B3%E8%A7%86%E9%A2%91%E6%B5%8B%E8%AF%95/" class="article-date">
-  <time datetime="2023-10-26T01:55:17.000Z" itemprop="datePublished">2023-10-26</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE/">瑞芯微</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h1 id="1gst-play-10测试"><a class="markdownIt-Anchor" href="#1gst-play-10测试"></a> 1.gst-play-1.0测试</h1>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gst-play-1.0 --videosink=xvimagesink /usr/local/test.mp4</span><br></pre></td></tr></table></figure>
-<p>GStreamer 的 gst-play-1.0 工具会加载指定的视频文件，并使用 xvimagesink 插件将视频渲染到 X Window 系统上的显示设备上，以实现视频的播放效果。</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310260944983.png" alt="image-20231026094404955" /></p>
-<h1 id="2mpv测试"><a class="markdownIt-Anchor" href="#2mpv测试"></a> 2.mpv测试</h1>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mpv --hwdec=rkmpp --vd-lavc-software-fallback=no --vo=xv /usr/local/test.mp4        </span><br></pre></td></tr></table></figure>
-<p>mpv 媒体播放器将使用 Rockchip MPP 硬件解码器进行硬件解码，禁用软件回退以确保只使用硬件解码，并使用 xv 视频输出插件渲染视频，以实现高性能的视频播放效果。</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310260945251.png" alt="image-20231026094504212" /></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mpv --hwdec=rkmpp --vo=opengl --gpu-hwdec-interop=drmprime-drm --gpu-context=x11egl /usr/local/test.mp4</span><br></pre></td></tr></table></figure>
-<p>mpv 媒体播放器将使用 Rockchip MPP 硬件解码器进行硬件解码，使用 OpenGL 作为视频输出，同时启用 DRM Prime 与 DRM 之间的 GPU 硬件解码器互操作性，并使用 X11 EGL 上下文进行 GPU 加速，以实现高性能的视频播放效果。</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310260943085.png" alt="image-20231026094341042" /></p>
-<h1 id="3-gst-launch-10-测试"><a class="markdownIt-Anchor" href="#3-gst-launch-10-测试"></a> 3. gst-launch-1.0 测试</h1>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GST_DEBUG=fps*:7 gst-launch-1.0 uridecodebin uri=file:///usr/local/test.mp4 ! fpsdisplaysink video-sink=xvimagesink text-overlay=false signal-fps-measurements=true</span><br></pre></td></tr></table></figure>
-<p>GStreamer 的 gst-launch-1.0 工具将创建一个简单的流水线，其中包含 <code>uridecodebin</code> 元素用于解码指定的视频文件，并通过 <code>fpsdisplaysink</code> 元素显示视频和帧率信息。帧率信息将以调试输出的形式显示在终端上。</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310261008898.png" alt="image-20231026100859800" /></p>
-<p>测试最大的帧率</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GST_DEBUG=fps*:7 gst-launch-1.0 uridecodebin uri=file:///usr/local/test.mp4 ! fpsdisplaysink video-sink=fakesink text-overlay=false signal-fps-measurements=true sync=false</span><br></pre></td></tr></table></figure>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310261010578.png" alt="image-20231026101009531" /></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gst-launch-1.0 uridecodebin uri=file:///usr/local/test.mp4 ! xvimagesink</span><br></pre></td></tr></table></figure>
-<h1 id="4谷歌浏览器测试"><a class="markdownIt-Anchor" href="#4谷歌浏览器测试"></a> 4.谷歌浏览器测试</h1>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo 0x100 &gt; /sys/module/rk_vcodec/parameters/mpp_dev_debug</span><br><span class="line">chromium --no-sandbox file:///usr/local/test.mp4</span><br></pre></td></tr></table></figure>
-<p>Chromium 浏览器将在没有沙盒的情况下启动，并加载指定路径的 <code>test.mp4</code> 视频文件。这样，您可以在浏览器中直接播放本地视频文件。</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310261014311.png" alt="image-20231026101406276" /></p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310261018085.png" alt="image-20231026101842048" /></p>
-<p>播放视频的时候查看GPU的利用率发现明显的上升，所以判断谷歌浏览器为硬件解码。</p>
-<h1 id="5摄像头测试"><a class="markdownIt-Anchor" href="#5摄像头测试"></a> 5.摄像头测试</h1>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/aarch64-linux-gnu/gstreamer-1.0</span><br><span class="line">gst-launch-1.0 v4l2src device=/dev/video0 ! video/x-raw,format=NV12,width=1920,height=1080, framerate=30/1 ! xvimagesink</span><br><span class="line">gst-launch-1.0 v4l2src device=/dev/video1 ! video/x-raw,format=NV12,width=1920,height=1080, framerate=30/1 ! xvimagesink</span><br></pre></td></tr></table></figure>
-<p>我发现不加上第一句的库的导入会出现发绿的情况，而且是0发绿，1没事，不加第一句的话1的颜色不太对</p>
-<p>gst-launch-1.0 v4l2src device=/dev/video9 ! image/jpeg, width=640, height=480, framerate=30/1 ! jpegparse ! mppjpegdec ! xvimagesink sync=false</p>
-<h1 id="6mpp测试"><a class="markdownIt-Anchor" href="#6mpp测试"></a> 6.mpp测试</h1>
-<p>首先要监控输出：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tail -f /var/log/syslog</span><br></pre></td></tr></table></figure>
-<p>调用mpi_dec_test，解码视频，将<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=h264&amp;spm=1001.2101.3001.7020">h264</a>转为yuv</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mpi_dec_test -i /oem/200frames_count.h264 -t 7 -n 250 -o /home/topeet/test.yuv -w 640 -h 480</span><br></pre></td></tr></table></figure>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310261707707.png" alt="image-20231026170732680" /></p>
-<p>调用mpi_enc_test，编码视频，将yuv转为h264</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mpi_enc_test -i /home/topeet/test.yuv -t 7 -n 250 -o /home/topeet/test.h264 -w 640 -h 480 -fps 25</span><br></pre></td></tr></table></figure>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310261712235.png" alt="image-20231026171223218" /></p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
   </article>
   
 
   
   <nav class="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/3/">上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/5/">下一页</a>
+    <a class="extend prev" rel="prev" href="/page/3/">上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/5/">下一页</a>
   </nav>
   
 </section>
