@@ -110,6 +110,61 @@
     
     
     <article
+  id="post-35_反思 (24年1月及之前)"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2024/01/31/35_%E5%8F%8D%E6%80%9D%20(24%E5%B9%B41%E6%9C%88%E5%8F%8A%E4%B9%8B%E5%89%8D)/"
+    >反思(24年1月及之前)</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2024/01/31/35_%E5%8F%8D%E6%80%9D%20(24%E5%B9%B41%E6%9C%88%E5%8F%8A%E4%B9%8B%E5%89%8D)/" class="article-date">
+  <time datetime="2024-01-31T13:26:56.000Z" itemprop="datePublished">2024-01-31</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  Here's something encrypted, password is required to continue reading. 
+      <a class="article-more-link" href="/2024/01/31/35_%E5%8F%8D%E6%80%9D%20(24%E5%B9%B41%E6%9C%88%E5%8F%8A%E4%B9%8B%E5%89%8D)/"
+        >阅读更多...</a
+      >
+       
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
   id="post-31 Linux基础"
   class="article article-type-post"
   itemscope
@@ -1616,190 +1671,6 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">validint--验证整数输入，允许负数。</span></span><br><span class="line"></span><br><span class="line">validint()</span><br><span class="line">&#123;</span><br><span class="line"><span class="meta prompt_">  # </span><span class="language-bash">验证第一个字段，并将其与提供的最小值 <span class="variable">$2</span> 和/或最大值 <span class="variable">$3</span> 进行比较：</span></span><br><span class="line"><span class="meta prompt_">  # </span><span class="language-bash">如果值不在范围内或不仅由数字组成，则失败。</span></span><br><span class="line"></span><br><span class="line">  number=&quot;$1&quot;;      min=&quot;$2&quot;;      max=&quot;$3&quot;</span><br><span class="line"></span><br><span class="line">  if [ -z $number ] ; then</span><br><span class="line">    echo &quot;您未输入任何内容。请输入一个数字。&quot; &gt;&amp;2 ; return 1</span><br><span class="line">  fi</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">  # </span><span class="language-bash">第一个字符是否为 <span class="string">&#x27;-&#x27;</span> 符号？</span></span><br><span class="line">  if [ &quot;$&#123;number%$&#123;number#?&#125;&#125;&quot; = &quot;-&quot; ] ; then</span><br><span class="line">    testvalue=&quot;$&#123;number#?&#125;&quot; # 提取除第一个字符外的所有字符进行测试。</span><br><span class="line">  else</span><br><span class="line">    testvalue=&quot;$number&quot;</span><br><span class="line">  fi</span><br><span class="line">  </span><br><span class="line"><span class="meta prompt_">  # </span><span class="language-bash">创建一个没有数字的版本，用于测试。</span></span><br><span class="line">  nodigits=&quot;$(echo $testvalue | sed &#x27;s/[[:digit:]]//g&#x27;)&quot;</span><br><span class="line">  </span><br><span class="line"><span class="meta prompt_">  # </span><span class="language-bash">检查是否存在非数字字符。</span></span><br><span class="line">  if [ ! -z $nodigits ] ; then</span><br><span class="line">    echo &quot;无效的数字格式！只允许数字，不允许逗号、空格等。&quot; &gt;&amp;2</span><br><span class="line">    return 1</span><br><span class="line">  fi</span><br><span class="line">  </span><br><span class="line">  if [ ! -z $min ] ; then</span><br><span class="line">    # 输入值是否小于最小值？</span><br><span class="line">    if [ &quot;$number&quot; -lt &quot;$min&quot; ] ; then</span><br><span class="line">      echo &quot;$number 太小了：最小可接受值为 $min&quot; &gt;&amp;2</span><br><span class="line">      return 1</span><br><span class="line">    fi</span><br><span class="line">  fi</span><br><span class="line">  if [ ! -z $max ] ; then</span><br><span class="line">    # 输入值是否大于最大值？</span><br><span class="line">    if [ &quot;$number&quot; -gt &quot;$max&quot; ] ; then</span><br><span class="line">      echo &quot;您的值太大了：最大可接受值为 $max&quot; &gt;&amp;2</span><br><span class="line">      return 1</span><br><span class="line">    fi</span><br><span class="line">  fi</span><br><span class="line">  return 0</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">输入验证</span></span><br><span class="line">if validint &quot;$1&quot; &quot;$2&quot; &quot;$3&quot; ; then</span><br><span class="line">  echo &quot;输入是一个在您约束条件内的有效整数&quot;</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
 <h2 id="96-验证浮点数输入"><a class="markdownIt-Anchor" href="#96-验证浮点数输入"></a> 9.6 验证浮点数输入</h2>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">validfloat--检测一个数字是否是有效的浮点数。</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">  注意，此脚本无法接受科学计数法（1.304e5）表示的浮点数。</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">为了测试输入值是否是有效的浮点数，我们需要将该值拆分为两部分：整数部分和小数部分。</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">我们可以测试第一部分，看它是否是有效的整数，然后再测试第二部分是否是有效的 &gt;=0 整数。</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">因此，-30.5 被认为是有效的，但 -30.-8 不是。</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">要在此脚本中包含另一个 shell 脚本作为一部分，可以使用 <span class="string">&quot;.&quot;</span> 来源符号。非常简单。</span></span><br><span class="line"></span><br><span class="line">. validint   # Bourne shell 的方式，引入 validint 函数</span><br><span class="line"></span><br><span class="line">validfloat()</span><br><span class="line">&#123;</span><br><span class="line">  fvalue=&quot;$1&quot;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">  # </span><span class="language-bash">检查输入的数字是否有小数点。</span></span><br><span class="line">  if [ ! -z $(echo $fvalue | sed &#x27;s/[^.]//g&#x27;) ] ; then</span><br><span class="line"></span><br><span class="line">    # 提取小数点前的部分（比如 &#x27;3.14&#x27; 中的 &#x27;3&#x27;）。</span><br><span class="line">    decimalPart=&quot;$(echo $fvalue | cut -d. -f1)&quot;</span><br><span class="line"></span><br><span class="line">    # 提取小数点后的数字部分（比如 &#x27;3.14&#x27; 中的 &#x27;14&#x27;）。</span><br><span class="line">    fractionalPart=&quot;$&#123;fvalue#*\.&#125;&quot;</span><br><span class="line"></span><br><span class="line">    # 首先测试小数部分，即小数点左边的部分。</span><br><span class="line"></span><br><span class="line">    if [ ! -z $decimalPart ] ; then</span><br><span class="line">      # &quot;!&quot; 反转了测试逻辑，所以下面的条件表示 &quot;如果不是有效的整数&quot;</span><br><span class="line">      if ! validint &quot;$decimalPart&quot; &quot;&quot; &quot;&quot; ; then</span><br><span class="line">        return 1</span><br><span class="line">      fi </span><br><span class="line">    fi</span><br><span class="line"></span><br><span class="line">    # 现在测试小数部分（小数点右边的值）。</span><br><span class="line">    # 首先，小数点后面不能有负号，比如 33.-11，所以我们要检查小数部分是否包含负号。</span><br><span class="line">    if [ &quot;$&#123;fractionalPart%$&#123;fractionalPart#?&#125;&#125;&quot; = &quot;-&quot; ] ; then</span><br><span class="line">      echo &quot;无效的浮点数：小数点后面不允许有负号&quot; &gt;&amp;2  # &gt;&amp;2 将输出发送到 stderr。</span><br><span class="line">      return 1</span><br><span class="line">    fi </span><br><span class="line">    if [ &quot;$fractionalPart&quot; != &quot;&quot; ] ; then </span><br><span class="line">      # 如果小数部分不是有效的整数...</span><br><span class="line">      if ! validint &quot;$fractionalPart&quot; &quot;0&quot; &quot;&quot; ; then</span><br><span class="line">        return 1</span><br><span class="line">      fi</span><br><span class="line">    fi</span><br><span class="line">  else </span><br><span class="line">    # 如果整个值只是 &quot;-&quot;，也是不允许的。</span><br><span class="line">    if [ &quot;$fvalue&quot; = &quot;-&quot; ] ; then</span><br><span class="line">      echo &quot;无效的浮点格式。&quot; &gt;&amp;2 ; return 1</span><br><span class="line">    fi</span><br><span class="line"></span><br><span class="line">    # 最后，检查剩余的数字是否是有效的整数。</span><br><span class="line">    if ! validint &quot;$fvalue&quot; &quot;&quot; &quot;&quot; ; then</span><br><span class="line">      return 1</span><br><span class="line">    fi</span><br><span class="line">  fi</span><br><span class="line"></span><br><span class="line">  return 0</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">if validfloat $1 ; then</span><br><span class="line">  echo &quot;$1 是一个有效的浮点数&quot;</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">exit 0</span><br></pre></td></tr></table></figure>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-22 tabby的使用"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/12/10/22%20tabby%E7%9A%84%E4%BD%BF%E7%94%A8/"
-    >tabby的使用</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/12/10/22%20tabby%E7%9A%84%E4%BD%BF%E7%94%A8/" class="article-date">
-  <time datetime="2023-12-10T04:50:19.000Z" itemprop="datePublished">2023-12-10</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <p>​	先说一下前提条件，本来我其实挺不爱用终端的，就算使用终端也是用mobaxterm，只能说这个软件很是强大，但是并没有给我一种给经验的感觉，当然肯定比之前的超级终端强得多，但还是不能给我一个十分想用的感觉，而这个tabby的软件就不一样，简洁而且看起来很好用，他的分屏、颜色、背景插件等等一系列的操作都让我很是喜欢，所以下面就简单的讲解一下tabby的使用。</p>
-<h1 id="1tabby简介"><a class="markdownIt-Anchor" href="#1tabby简介"></a> 1.Tabby简介</h1>
-<p>🍀 Tabby是一个无限可定制的跨平台终端应用程序，适用于local shells、serial、SSH和Telnet的连接。<br />
-🍁 Tabby是基于TypeScript开发的终端模拟器，可用于Linux、Windows和Mac OS系统。</p>
-<p>🌺 Tabby (前身是 Terminus) 是一个可高度配置的终端模拟器和 SSH 或串口客户端，支持 Windows，macOS 和 Linux</p>
-<ul>
-<li>集成 SSH，Telnet 客户端和连接管理器</li>
-<li>集成串行终端</li>
-<li>定制主题和配色方案</li>
-<li>完全可配置的快捷键和多键快捷键</li>
-<li>分体式窗格</li>
-<li>自动保存标签页</li>
-<li>支持 PowerShell（和 PS Core）、WSL、Git-Bash、Cygwin、MSYS2、Cmder 和 CMD</li>
-<li>在 SSH 会话中通过 Zmodem 进行直接文件传输</li>
-<li>完整的 Unicode 支持，包括双角字符</li>
-<li>不会因快速的输出而卡住</li>
-<li>Windows 上舒适的 shell 体验，包括 tab 自动补全（通过 Clink）</li>
-<li>为 SSH secrets 和设置集成了加密容器</li>
-<li>SSH、SFTP 和 Telnet 客户端可用作 Web 应用（也可托管）</li>
-</ul>
-<h1 id="2tabby的安装"><a class="markdownIt-Anchor" href="#2tabby的安装"></a> 2.tabby的安装</h1>
-<p>下载地址：<a target="_blank" rel="noopener" href="https://github.com/Eugeny/tabby/releases/tag/v1.0.205">https://github.com/Eugeny/tabby/releases/tag/v1.0.205</a></p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101539329.png" alt="image-20231210153958212" /></p>
-<p>​	有windows macos和linux多种类型的安装包，当然也包括多种架构的，我这里要在windows上进行使用，所以下载了windowd的exe文件，也就是这个<a target="_blank" rel="noopener" href="https://github.com/Eugeny/tabby/releases/download/v1.0.205/tabby-1.0.205-setup-x64.exe">tabby-1.0.205-setup-x64.exe</a>，下载完成之后进行安装。安装完成之后打开该软件</p>
-<p>​	由于我要写markdown，所以我把之前下载的删掉了，但是它仍旧保存了我之前的配置，所以除了删掉软件之外还需要去删掉C盘的配置文件：C:\Users\Administrator\AppData\Roaming。</p>
-<p>​	第一次启动如下所示：<br />
-<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101557259.png" alt="image-20231210155713230" /></p>
-<p>​	这里的语言可以选择中文，选择之后如下所示：<br />
-<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101557342.png" alt="image-20231210155753314" /></p>
-<p>​	而且我比较喜欢黑色的终端，所以就保持默认的黑色的配色方案了。关闭退出之后进入软件界面如下所示：<br />
-<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101558826.png" alt="image-20231210155851798" /></p>
-<p>​	至此，关于tabby的安装就完成了。</p>
-<h1 id="3tabby快捷键的修改"><a class="markdownIt-Anchor" href="#3tabby快捷键的修改"></a> 3.tabby快捷键的修改</h1>
-<p>删除显示配置选择器 ctrl+shift+e，因为我想要让该快捷键改为向右分割窗格。</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101601528.png" alt="image-20231210160101515" /></p>
-<p>然后将ctrl+shift的快捷按键也删除掉，</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101602643.png" alt="image-20231210160223634" /></p>
-<p>这里的关闭标签为ctrl+shift+w，我认为不方便，由于我经常将该快捷按键设置为关闭单一的窗格，所以这里也删除掉</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101605559.png" alt="image-20231210160540547" /></p>
-<p>将向右拆分窗格设置为ctrl+shift+e，将向下拆分窗格设置为ctrl+shift+o</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101607090.png" alt="image-20231210160745073" /></p>
-<p>将关闭已聚焦的窗格设置为ctrl+shift+w</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101608034.png" alt="image-20231210160817023" /></p>
-<p>最后在写几个好用的快捷按键</p>
-<p>1.ctrl+shift+左右按键可以切换不同的==标签页==</p>
-<p>2.alt+数字按键也可以切换不同的==标签页==</p>
-<p>3.ctrl+alt +上下左右可以切换不同的==窗格==</p>
-<p>==上面这些确实不错可以让我解放双手，不需要懂鼠标，只需要键盘即可==</p>
-<p>4.当窗格进行拆分之后，可以通过ctrl+alt+回车最大化当前的==窗格==</p>
-<p>5.ctrl+alt+t 可以切换当前==窗格==的配置（==本来不知道是做啥的后来才知道，但还挺好用==）</p>
-<p>6.ctrl+shift+. 可以将当前的窗格修改为单独的==标签页==</p>
-<p>7.ctrl+shift+， 将所有的==标签页==合并到当前页</p>
-<p>可以看到跟ctrl+shift有关的都是标签页，而跟窗格有关的都是ctrl+alt，反正ctrl是不能少的，而是窗格还是标签就要根据shift和alt来决定了。</p>
-<h1 id="4串口的连接"><a class="markdownIt-Anchor" href="#4串口的连接"></a> 4.串口的连接</h1>
-<p>​	点击右上角的齿轮按钮或者标签页右侧的按钮都可以进行配置。</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101634986.png" alt="image-20231210163447978" /></p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101634116.png" alt="image-20231210163454106" /></p>
-<p>​	我这里是串口5，点击之后可以选择波特率，我这里选择115200，如下图所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101635089.png" alt="image-20231210163551067" /></p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101636546.png" alt="image-20231210163634527" /></p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101636210.png" alt="image-20231210163642195" /></p>
-<p>如果是从齿轮设置打开，则需要先点击配置和连接，再选择串口5，如下所示：<br />
-<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101637283.png" alt="image-20231210163734239" /></p>
-<h1 id="5ssh的连接"><a class="markdownIt-Anchor" href="#5ssh的连接"></a> 5.ssh的连接</h1>
-<p>​	如果仅仅只是上面的串口功能，还并不能吸引我，更重要的是这个ssh功能，ssh功能因为要配置IP和密码，所以不能直接点击，需要从配置和连接中，点击ssh右侧小箭头中的克隆，如下图所示：<br />
-<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101640012.png" alt="image-20231210163959998" /></p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101640130.png" alt="image-20231210164012101" /></p>
-<p>​	然后以此输入名称，连接的主机ip即可，我这里连接的是ip为192.168.1.84的ubuntu20，我们一般情况下加载普通用户，就不要使用root用户了，设置完成如下所示：<br />
-<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101642173.png" alt="image-20231210164206146" /></p>
-<p>​	而ssh的色彩我更喜欢这个名叫Argonaut的，看着还挺好的。</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101653467.png" alt="image-20231210165346454" /></p>
-<p>​	然后点击保存，可以发现刚刚配置的ssh已经在未命名的组内了：<br />
-<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101642152.png" alt="image-20231210164253114" /></p>
-<p>​	然后点击箭头进行连接即可，连接成功如下所示：<br />
-<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101646500.png" alt="image-20231210164609480" /></p>
-<h1 id="6字体设置"><a class="markdownIt-Anchor" href="#6字体设置"></a> 6.字体设置</h1>
-<p>​	现在的字体特别小，而且颜色也并不是很好看，可以通过设置中的外观进行修改，进入之后如下所示：<br />
-<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101648741.png" alt="image-20231210164841697" /></p>
-<p>这里的字体我喜欢设置为Cascadia Code SemiBold，而字体大小设置为20即可</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101656358.png" alt="image-20231210165607329" /></p>
-<p>​	最后的效果如下所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101656926.png" alt="image-20231210165653910" /></p>
-<p>​	对比度鲜艳，让人看着就赏心悦目，工作更加有动力，哈哈。</p>
-<h1 id="7好用的插件"><a class="markdownIt-Anchor" href="#7好用的插件"></a> 7.好用的插件</h1>
-<h2 id="71-background"><a class="markdownIt-Anchor" href="#71-background"></a> 7.1 background</h2>
-<p>​	重点来了，这个是我最最最最推荐的一个插件了，当你的终端背后是一个小姐姐的时候，你是不是想要多看会儿，这样你连摸鱼的时间都会少很多，而且还能适当的放松一下，极大的提高到了工作效率。</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101659617.png" alt="image-20231210165947584" /></p>
-<p>​	获取之后需要重启软件，在菜单中会多出一个背景，如下图所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101700953.png" alt="image-20231210170052921" /></p>
-<p>​	首先启用背景，如下所示：<br />
-<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101701772.png" alt="image-20231210170120756" /></p>
-<p>​	然后选择一个你喜欢的图片，我这里当然是神里凌华了==我是神里凌华的狗==，修改完之后是这个样子</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101702859.png" alt="image-20231210170251409" /></p>
-<p>​	但这也太招摇了，这时候下面的选项就有用了，将背景不透明度设置为6或者7这个样子，我测试最为合适，如下图所示：<br />
-<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101704726.png" alt="image-20231210170443701" /></p>
-<p>​	最后的效果如下所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101705347.png" alt="image-20231210170508231" /></p>
-<p>​	==嘿嘿是不是感觉还不错==</p>
-<p>我发现每次重新启动tabby的时候都会自动打开一个 windows的tabby，我感觉好烦，可以在菜单栏中找到终端如下所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101709443.png" alt="image-20231210170926400" /></p>
-<p>然后取消下面的这个即可</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101709459.png" alt="image-20231210170905398" /></p>
-<h2 id="72trzsz"><a class="markdownIt-Anchor" href="#72trzsz"></a> 7.2.trzsz</h2>
-<p>​	默认情况下可以通过这里右上角的sftp进行文件的传输，但是这里有个问题，只能上传文件，但是不能上传文件夹：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101712233.png" alt="image-20231210171255099" /></p>
-<p>​	而trzsz插件可以解决这个问题</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101713340.png" alt="image-20231210171347327" /></p>
-<p>安装之后重启tabby，测试发现仍旧不行，但我看github有人说这个问题呀，就很奇怪，算了传输文件不行还能接受，就先这样吧。</p>
-<h2 id="73-highlight"><a class="markdownIt-Anchor" href="#73-highlight"></a> 7.3 highlight</h2>
-<p>从名字可以看出这是一个高亮的插件，有时候的一些错误信息是需要查看的，或者调试的时候需要捕获到一些特殊字符，所以这个高亮插件还是很重要的。</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101719770.png" alt="image-20231210171941753" /></p>
-<p>安装完成重启，可以看到多出来了一个高亮的图标如下所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101720547.png" alt="image-20231210172013491" /></p>
-<p>然后点击启动即可：<br />
-<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101720063.png" alt="image-20231210172048815" /></p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101720552.png" alt="image-20231210172058507" /></p>
-<p>​	默认已经给你写好了一些关键字，自己也可以根据需求进行添加。</p>
-<h2 id="74-save-output"><a class="markdownIt-Anchor" href="#74-save-output"></a> 7.4 save-output</h2>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101723396.png" alt="image-20231210172326381" /></p>
-<p>​	有时候需要保存终端的输出，默认情况下该终端软件是没有保存的功能的，所以需要安装一个名为save-output的插件。</p>
-<p>​	安装完成之后会在菜单栏中多出来一个名为save-output的按钮如下所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101726132.png" alt="image-20231210172632938" /></p>
-<p>​	设置为on之后设置要存储的路径即可。然后随意打开一个终端。按右键之后可以发现会有一个save-output to file的选项</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101727627.png" alt="image-20231210172727612" /></p>
-<p>点击保存即可</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101728088.png" alt="image-20231210172814048" /></p>
-<p>在对应的文件中可以看到打印信息，如下图所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312101728121.png" alt="image-20231210172857106" /></p>
-<p>​	到这里，关于tabby的简单设置和使用就介绍完成了，下面说一下感受吧，我之前其实并不是很喜欢这些华丽花哨的东西，感觉简简单单能用就好了，但随着时间的推移，发现有些东西并不是你想的那样的，一个好用的工具确实能给人带来不一样的体验，最后祝看到这里的小伙伴，事事顺心。</p>
-<p>​	为了方便我的后续使用，我将相应的配置进行了打包，以后如果换电脑了只需要将下面网盘的资料放到C:\Users\Administrator\AppData\Roaming目录下解压即可。</p>
-<p>链接：<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1EBBtEmSY9SCBeIlB5YVoWQ">https://pan.baidu.com/s/1EBBtEmSY9SCBeIlB5YVoWQ</a><br />
-提取码：bs5v<br />
-–来自百度网盘超级会员V6的分享</p>
  
       <!-- reward -->
       

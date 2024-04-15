@@ -110,6 +110,68 @@
     
     
     <article
+  id="post-51_rk3562 编译脚本分析"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2024/04/10/51_rk3562%20%E7%BC%96%E8%AF%91%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/"
+    >反思(4月第2个星期)</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2024/04/10/51_rk3562%20%E7%BC%96%E8%AF%91%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/" class="article-date">
+  <time datetime="2024-04-10T12:26:56.000Z" itemprop="datePublished">2024-04-10</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE/">瑞芯微</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>==摆脱一次幻觉比发现一个真理，更能使人明智==</p>
+<p>==我希望用一生的时间不断深入和学习电子计算机相关的全部知识，将其整理成网络并分享出去，与更多志同道合的朋友共同进步，你清楚的知道，如果做不到这一点，你将永远不快乐==</p>
+<hr />
+<h2 id="1bash_source验证"><a class="markdownIt-Anchor" href="#1bash_source验证"></a> 1.BASH_SOURCE验证</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">if [ -z &quot;$BASH_SOURCE&quot; ]; then</span><br><span class="line">	echo &quot;Not in bash, switching to it...&quot;</span><br><span class="line">	case &quot;$&#123;@:-shell&#125;&quot; in</span><br><span class="line">		shell) ./build.sh shell ;;</span><br><span class="line">		*)</span><br><span class="line">			./build.sh $@</span><br><span class="line">			bash</span><br><span class="line">			;;</span><br><span class="line">	esac</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+<p>​	这个脚本很简单，BASH_SOURCE是一个变量名，用来描述文件名，感觉这个和$0一个意思呀</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202404102202677.png" alt="image-20240410220225590" /></p>
+<p>​	既然RK在这里使用肯定是有他的作用的，具体区别如下所示：当一个脚本文件被其他脚本文件通过 <code>source</code> 命令加载时，<code>$BASH_SOURCE</code> 和 <code>$0</code> 的值会有所不同。让我们来看一个实际的例子。</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202404102228053.png" alt="image-20240410222833965" /></p>
+<p>​	使用source命令和使用绝对路径是不一样的，可以看到使用source命令的话$0已经变成了bash，而BASH_SOURCE仍旧是当前脚本名。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">这个脚本检查是否在 Bash shell 中运行。</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">如果不是，则切换到 Bash shell 并在其中执行脚本。</span></span><br><span class="line"></span><br><span class="line">if [ -z &quot;$BASH_SOURCE&quot; ]; then</span><br><span class="line">	echo &quot;不在 Bash 中，切换到 Bash...&quot;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">	# </span><span class="language-bash">检查传递给脚本的命令行参数</span></span><br><span class="line">	case &quot;$&#123;@:-shell&#125;&quot; in</span><br><span class="line">		shell) </span><br><span class="line"><span class="meta prompt_">			# </span><span class="language-bash">如果参数是 <span class="string">&quot;shell&quot;</span>，在一个新的 Bash shell 中执行脚本</span></span><br><span class="line">			./build.sh shell ;;</span><br><span class="line">		*)</span><br><span class="line"><span class="meta prompt_">			# </span><span class="language-bash">如果参数是其他任何值，或者没有提供参数，</span></span><br><span class="line"><span class="meta prompt_">			# </span><span class="language-bash">使用提供的参数执行脚本，然后启动一个新的 Bash shell</span></span><br><span class="line">			./build.sh $@</span><br><span class="line">			bash</span><br><span class="line">			;;</span><br><span class="line">	esac</span><br><span class="line">fi </span><br></pre></td></tr></table></figure>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
   id="post-50_反思(4月第2个星期) "
   class="article article-type-post"
   itemscope
@@ -952,61 +1014,6 @@
        
   Here's something encrypted, password is required to continue reading. 
       <a class="article-more-link" href="/2024/03/18/42_%E5%8F%8D%E6%80%9D(%E4%B8%89%E6%9C%88%E7%AC%AC3%E4%B8%AA%E6%98%9F%E6%9C%9F)%20/"
-        >阅读更多...</a
-      >
-       
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-41_反思(三月第2个星期) "
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2024/03/12/41_%E5%8F%8D%E6%80%9D(%E4%B8%89%E6%9C%88%E7%AC%AC2%E4%B8%AA%E6%98%9F%E6%9C%9F)%20/"
-    >反思(3月第2个星期)</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2024/03/12/41_%E5%8F%8D%E6%80%9D(%E4%B8%89%E6%9C%88%E7%AC%AC2%E4%B8%AA%E6%98%9F%E6%9C%9F)%20/" class="article-date">
-  <time datetime="2024-03-11T22:26:56.000Z" itemprop="datePublished">2024-03-12</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  Here's something encrypted, password is required to continue reading. 
-      <a class="article-more-link" href="/2024/03/12/41_%E5%8F%8D%E6%80%9D(%E4%B8%89%E6%9C%88%E7%AC%AC2%E4%B8%AA%E6%98%9F%E6%9C%9F)%20/"
         >阅读更多...</a
       >
        
