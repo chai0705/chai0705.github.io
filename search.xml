@@ -1,22 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>rk3562 编译脚本分析</title>
-    <url>/2024/04/10/51_rk3562%20%E7%BC%96%E8%AF%91%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>==摆脱一次幻觉比发现一个真理，更能使人明智==</p>
-<p>==我希望用一生的时间不断深入和学习电子计算机相关的全部知识，将其整理成网络并分享出去，与更多志同道合的朋友共同进步，你清楚的知道，如果做不到这一点，你将永远不快乐==</p>
+    <title>程序的编译、链接和运行</title>
+    <url>/2024/04/23/48_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E4%B8%8EARM%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>​	以后就在每次学习前写一个当时想的心路历程吧，这样也能知道自己在做这件事情的时候，当时都在想什么，日后自己再一次想起时候，找到当时自己的所思所想，我想的是我的C语言还很差劲，我认为在学习系统编程之前，需要一个这样的知识来帮我扫清前方的障碍，而且我认为之前的学习真的太差了，并没有真正的将这些东西转换为自己的东西，而且现在心中的方向一直不是很明确，我也希望出现一个东西，让我找一下心中的那个目标，让我知道我这样做是不是对的，为了寻求一个答案，你又能否一往无前呢。</p>
 <hr />
-<h2 id="1bash_source验证"><a class="markdownIt-Anchor" href="#1bash_source验证"></a> 1.BASH_SOURCE验证</h2>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">if [ -z &quot;$BASH_SOURCE&quot; ]; then</span><br><span class="line">	echo &quot;Not in bash, switching to it...&quot;</span><br><span class="line">	case &quot;$&#123;@:-shell&#125;&quot; in</span><br><span class="line">		shell) ./build.sh shell ;;</span><br><span class="line">		*)</span><br><span class="line">			./build.sh $@</span><br><span class="line">			bash</span><br><span class="line">			;;</span><br><span class="line">	esac</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
-<p>​	这个脚本很简单，BASH_SOURCE是一个变量名，用来描述文件名，感觉这个和$0一个意思呀</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202404102202677.png" alt="image-20240410220225590" /></p>
-<p>​	既然RK在这里使用肯定是有他的作用的，具体区别如下所示：当一个脚本文件被其他脚本文件通过 <code>source</code> 命令加载时，<code>$BASH_SOURCE</code> 和 <code>$0</code> 的值会有所不同。让我们来看一个实际的例子。</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202404102228053.png" alt="image-20240410222833965" /></p>
-<p>​	使用source命令和使用绝对路径是不一样的，可以看到使用source命令的话$0已经变成了bash，而BASH_SOURCE仍旧是当前脚本名。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">这个脚本检查是否在 Bash shell 中运行。</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">如果不是，则切换到 Bash shell 并在其中执行脚本。</span></span><br><span class="line"></span><br><span class="line">if [ -z &quot;$BASH_SOURCE&quot; ]; then</span><br><span class="line">	echo &quot;不在 Bash 中，切换到 Bash...&quot;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">	# </span><span class="language-bash">检查传递给脚本的命令行参数</span></span><br><span class="line">	case &quot;$&#123;@:-shell&#125;&quot; in</span><br><span class="line">		shell) </span><br><span class="line"><span class="meta prompt_">			# </span><span class="language-bash">如果参数是 <span class="string">&quot;shell&quot;</span>，在一个新的 Bash shell 中执行脚本</span></span><br><span class="line">			./build.sh shell ;;</span><br><span class="line">		*)</span><br><span class="line"><span class="meta prompt_">			# </span><span class="language-bash">如果参数是其他任何值，或者没有提供参数，</span></span><br><span class="line"><span class="meta prompt_">			# </span><span class="language-bash">使用提供的参数执行脚本，然后启动一个新的 Bash shell</span></span><br><span class="line">			./build.sh $@</span><br><span class="line">			bash</span><br><span class="line">			;;</span><br><span class="line">	esac</span><br><span class="line">fi </span><br></pre></td></tr></table></figure>
+<h1 id="编译过程从源文件到汇编文件"><a class="markdownIt-Anchor" href="#编译过程从源文件到汇编文件"></a> 编译过程：从源文件到汇编文件</h1>
+<p>​	    汇编的过程都做了什么呢？（从高级语言到低级语言的转变），先说一下原因呢？不论是何种高级语言编写的程序，都要经过预处理和汇编这一步，预处理这个步骤要做的不再解释，汇编就是从C程序转换为同样功能的汇编语言，不论是什么类型的芯片，使用什么语言来完成这一功能，他们最终的汇编语言必然都是差不多的，如果每一种语言都写一个编译器，那工作量可真的太大了，所以每个语言的汇编器不一样，这是肯定的，但他们全部必然有一个相同的编译器。</p>
+<p>​	上面也说了，汇编实际上就是将高级语言转变为低级的汇编语言，再具体可以细分为</p>
+<ul>
+<li>程序语句、函数转变为代码段</li>
+<li>变量、常量转变为数据段、BSS段、rodata段</li>
+<li>各种辅助信息也就是符号表和重定位表</li>
+</ul>
+<p>​	上面有一个地方认识错了，从C源文件编译为可执行文件的具体步骤是，预处理、编译、汇编、链接。</p>
+<p>main.c             main.i         main.s         main.o          a.out</p>
+<p>​			预处理                编译             汇编              链接</p>
+<p>我们先来分析编译这一步骤，又可以分为下面这一些零零散散的步骤：</p>
+<p>​	词法分析、语法分析、语义分析、中间代码生成、汇编代码生成、目标代码生成</p>
+<p>​	想去了解一下编译器，目前我的疑惑是同一架构的编译器，到底能不能通用。</p>
+<p>==编译器==</p>
+<blockquote>
+<p>​	分解成一个又一个的token，是不可再分的最小单元，它可能是关键字、可能是符号、可能是字符串，标识符和标点符号。</p>
+</blockquote>
+<p>​	既然编译器是将高级语言编译成可执行程序的一种工具，可是编译器也是一种可执行程序呀，编译器是怎样编译出来的。</p>
+<p>​	最初的编译器通常是手工编写的，使用底层语言（如汇编语言）或其他更低级别的语言来实现。这些早期的编译器可能只支持语言的子集，但足以进行自举过程。</p>
+<p>​	当得到一个基本的编译器后，它可以用于编译更高级别的语言实现，例如用C语言编写的编译器。一旦拥有了使用高级语言编写的编译器，就可以更容易地进行编译器的改进和扩展。</p>
+<blockquote>
+<p>​	第二步骤为将最小的token整合成statement sequence，翻译一下就是语句序列</p>
+<p>​	分解成的token是线性结构，而token整合而来的statement squence 是一个abstract sysntax tree抽象语法树，尽可能的使语法保持完整</p>
+<p>​	每个语句的分类是不同的，就比如可以将变量分为varable-defintion，for循环有一个为for-statement while为while-statement，等等</p>
+</blockquote>
+<p>​</p>
+<blockquote>
+<p>在上一个步骤中已经将全部的token转换为了抽象语法树，这时候其实已经可以执行了，但并不是能让人很好的理解，更好的办法其实还是将其转换回线性结构，</p>
+</blockquote>
+<p>​	==发现并没有什么实际的效果，所以就到这里吧，然后回到老师的课堂上==</p>
+<hr />
+<h2 id="词法分析"><a class="markdownIt-Anchor" href="#词法分析"></a> 词法分析</h2>
+<p>​	从左到右。一个字符一个字符的读入源程序</p>
+<p>​	对源程序的字符流进行扫描，分解成一系列的记号 token(关键字、标识符、字面量、特殊字符、分界符等等)，判断是不是又错误的词法，就比如中文字符，圆角半角字符等等。</p>
+<h2 id="语法分析"><a class="markdownIt-Anchor" href="#语法分析"></a> 语法分析</h2>
+<p>​	将前一阶段产生的token序列进行语法分析，看是否构成一个语法上正确的程序，分解成语短语，用语法树来表示，语法树不再是一个线性结构，而是树状结构，syntax  句法</p>
+<h2 id="语义分析"><a class="markdownIt-Anchor" href="#语义分析"></a> 语义分析</h2>
+<p>​	检查语法分析输出的语句、程序、表达式有没有错误，语义分为动态语义和静态语义，例如不允许使用一个没有声明的变量，在运行期间检测出除数为零。<strong>其实我们大部分错误都是发生在这个地方。</strong></p>
+<h2 id="生成中间代码"><a class="markdownIt-Anchor" href="#生成中间代码"></a> 生成中间代码</h2>
+<p>​		将语法树转换成为中间代码，中间代码是内部表现形式，他非常接近目标代码，类似于伪代码形式，容易生成，容易将其翻译为目标代码。</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202404232153033.png" alt="image-20240423215342912" /></p>
+<p>​	我上面又分析错了，原来他们的中间代码是相同的，哦不对，我上面分析的是对的，我刚刚又理解错了，不同语言的相同功能，他们最终生成的汇编是相同的。</p>
+<h2 id="生成汇编文件"><a class="markdownIt-Anchor" href="#生成汇编文件"></a> 生成汇编文件</h2>
+<p>​	将中间代码翻译为汇编文件</p>
+<h1 id="汇编过程"><a class="markdownIt-Anchor" href="#汇编过程"></a> 汇编过程</h1>
+<p>​		在上一个步骤中已经将经过预处理的原始代码，编译为了.S汇编文件，而汇编文件又会经过汇编器生成.o目标文件。</p>
+<p>​	汇编器动作的基本流程如下所示：</p>
+<ol>
+<li>词法分析</li>
+<li>语法分析</li>
+<li>代码生成</li>
+<li>赋值信息</li>
+</ol>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202404241937033.png" alt="image-20240424193720958" /></p>
+<p>​	他的主要目录就是进行指令翻译，将汇编源文件，翻译为二进制指令，然后呢就是生成各种表的信息，就包括符号表和重定位表。</p>
+<p>​	  <strong>指令生成</strong></p>
+<p>​	我们编写的程序一般包括变量、函数、关键字等等，他们都会被放到不同的section段中，就包括代码段数据段、只读代码段、bss段，初始化的全局变量、静态变量放到数据段，未初始化的全局变量和静态变量放到bss段，而一些函数调用放到代码段，一些字符串放到只读数据段里面。</p>
+<p>​	<strong>符号表</strong></p>
+<p>​	readelf -s ~~~.o</p>
+<p>​	读取一个.o文件的符号表，符号表中的信息就是汇编语言中各个section，以及偏移地址</p>
+<p>​	<strong>重定位表</strong></p>
+<p>​	当然只有符号表肯定是不行的，他们最终肯定会经过链接从而生成可执行文件，符号表只是将汇编程序中的一些符号进行了收集，那他们呢，要重定位到哪一个地址呢？</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202404242006656.png" alt="image-20240424200629507" /></p>
+<p>​	总算是比较清楚了，也终于是知道了symtab是啥了。sym就是symbol tab 就是表，symtab就是符号表，而rel text就是重定位信息，可以通过readelf -r 来查看，而大S readelf -S可以查看各个段的信息，</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202404242010626.png" alt="image-20240424201000384" /></p>
+<h1 id="符号表"><a class="markdownIt-Anchor" href="#符号表"></a> 符号表</h1>
+<p>​	符号表：编译过程中用来来保存源程序中各种符号的信息，主要包括符号的地址值、类型、占用空间的大小。</p>
+<p><strong>ELF文件和BIN文件</strong></p>
+<p>​	文件结构：<br />
+​		BIN文件即raw binary文件</p>
+<p>​			只包含机器码，纯粹的程序文件，即镜像文件</p>
+<p>​			类似的还有HEX文件</p>
+<p>​	ELF文件除了机器码之外还有一些额外的信息</p>
+<p>​			段的加载地址、运行地址</p>
+<p>​			符号表、重定位表等等</p>
+<h1 id="链接过程地址空间分配与链接脚本"><a class="markdownIt-Anchor" href="#链接过程地址空间分配与链接脚本"></a> 链接过程：地址空间分配与链接脚本</h1>
+<p>​	目的：将所有的可重定位目标文件合并组装成可执行目标文件</p>
+<p>​	主要步骤：地址空间分配，强符号和弱符号、重定位</p>
+<p><strong>地址空间的分配</strong></p>
+<p>​	扫描所有的目标文件，从各个文件段表中获取各个文件代码段、数据段信息：大小、地址等</p>
+<p>​	从指定的链接地址开始，按照代码段、数据段、BSS段顺序将各个目标文件的同类型段合并，然后重新计算各个段的长度和位置</p>
+<h1 id="链接过程符号解析-强符号和弱符号"><a class="markdownIt-Anchor" href="#链接过程符号解析-强符号和弱符号"></a> 链接过程：符号解析  强符号和弱符号</h1>
+<p>​		在地址空间分配的过程中，会创建全局符号表，收集目标文件中符号表中的符号，统一放到全局符号表之中，但是可能遇到不同模块中遇到相同符号的情况，那这种情况要怎样解决呢？这时候就有了强符号和弱符号的概念了</p>
+<p>​	强符号：函数名  初始化的全局变量</p>
+<p>​	弱符号：未初始化的全局变量</p>
+<p>==强符号不允许多次定义，但是弱符号可以共存，强弱符号共存的情况，强符号会覆盖弱符号==</p>
 ]]></content>
       <categories>
-        <category>瑞芯微</category>
+        <category>C语言高级学习</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>反思(4月第4个星期)</title>
+    <url>/2024/04/22/52_%E5%8F%8D%E6%80%9D(4%E6%9C%88%E7%AC%AC4%E4%B8%AA%E6%98%9F%E6%9C%9F)%20/</url>
+    <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
+  <script id="hbeData" type="hbeData" data-hmacdigest="27e6b39624a185b635539d5bf329f15229d722edff0d4b78ce6ebbb57d8cef28">b3ce3877181dba7d2dc822c297e3a5e461a588a800d045df3c29113d12bf7cbbb7d0f7661783787c364a123d51c9fbf700082b8c18d8f9e529d57580720f57be8970ca695dc7fbf44a86a874ba1e45b1ee1c2e39ee3b3f5eef2eb21a2a574136ace8821ae5f04c462bc469942411a6763087c3520426f068d9b4d1e7a67aa8fd50cb8809d71a2895d47ddc2cef1ebc35a989bf96ceb363de24fe779f1e2e355d99d847884ed2f20d283657dc072bf44b0b5b3740a2d8277f69a855487eab439895752bdd95d5eb6a2ef7cdbce14358f23a3246cfd2c99bbd4922e00981dad22e91bb88bbfb4d3f46f69aad945fc1befbdf025a42938e2a64065917afd15c21800f7aa6c9fc3c59937403214110f5928490513cbc3ea912522e6dc3d82f9b0136fa87d71a76ffaeac3ab534e93491ce922f950c3425e4666c98562893d33f77dad75b80fb5eaa403ca3a6d921de8649c466d0c8e3cb33ca0bf2895516cb8f05259ddf38e397f7b047862ada3a89dc2944d2ede08f3eb5fad05116c6a6d62d618608aece77957f72a3ee271d169b97900da9c9fa3ad80a71327435db33aa5cae3c922864e17036277688d1a8ea7210c6a096459dc80e31d3f63257736f0bb12ce3d6fa046eacfe14927d5dd4ca1ffb21e911cd9d39b117d370947c894c9782a6c41a3801419c46076dd805b27bba45c97c30abbf31791ba736e7d700d72f03b17a783db9560081c194e4f31cd7045cffba3e6d95a3767d9880ac861ac8333c1bd4fafdcc673ea786aff884d10d3b9e7aa450ca3d4036943866b087c528864b2212cbccb7c38049d40bde28365c4c712a877c5eb9e75cdd225e1268632721793c6cd7d064c0d17a3c0e674f7a26ed6c286ebfe2fe0b3d7b110f415616f397ea0564fbaecbe3e9bbbe796d526ac8dd056b8f98a98e052842afc2af7439a8cdb85282a2421cec3943012f59f20e4fcfb949da7f2a4b7aca2bf867328c61278ceb42cc166d089fa8224e80ddca4f83f4babefe7ec5bcda1994a225dd5d5b7f6274a79890a96d562ed4d870227c9d6330a23ff0de2bb089ebfefc19030a9934166b35d176ac4c3213f739589391eabf6ffa7ef6b64b4a8254b3cf9c7972531b29e57efdeaf6dda38b4a877ade2229d45ac31047444155c55af891a560bca69c42f0301f1524f0a0412d291767fc30544d9e826d3114df39e9c964763d8f3a610c278be1dd477a097d89739b9174356590098475783418cf13f449a117ab9ae12b3cf40ee8f8257138f82161b797758956134eb5c28bba625290096b6e97d42af5f6e6e9febda8ac6b4b4bac623793242a31e7bd3a1a4ce7f9444f2122dd514482748f725e0bc68e366a05450cb5499f0e2e4bb6bae92b71867931ed173fbdfa084eefd1daac80dd3a6fce6d4c209ef6fecf2439c50da10843686ac76881e992ce5e15149a2fdcbaec0e6099ce5244cb99e499bd99e03c57fc88a33241e2b1f28af991a442562e9a48a357be5cd92007dab27a3e64cf4233859478b45d369bb9aa04614073bfd71622cea1f4b048c6769954e84a208672593b90a6ea4b033b7411463505f70e835b6dff0d3ca648cbc17af97c39ca722f63d91348d1bce3784ca0a9c9ab53709c15925ee9f446331fcd4b679b6da9a0a7a7fe77db05139d5299a15e7d0033aef9cd8e251fe0689b98a5749d618ea0ca79af0e0c1475a3318f8635fd8efd8fc47efb0012a6d9e23cdc9859150a6c7e6abaeeb644f94ee18c43ba6076413f380e9e46631b3788c1501990525295fc01f6ed917195bf5ced710c46bfbfc5657b5c9e53843396b2364c0b923cbef85157f4a6b2dec1d68455a3541ec7bc0b5c48a624281d00c740333fa197e619315675e6ac4ccbe866f635163dfe089103c59279b0791468ff09de4337c21f8fac5f04fd79f67bece8c7b4fabb26b73d55c0b8852aee3f2159e426fba257eb7dd5350417a2696ff7e89526d5193f22b0ecec6cdbb21c2887cacff48347876480bd43ad002c1579e8c975d88d81cefa08844d258675dd249176c2277eaf7330385dabfdcf35a716614ca8613c2f95d1ba7d0fffd170f97ab2019140d1afd5dffb0b123983b3377f769d4449a930521ac23a349856199a87bcdd617828861701fb145591d2499c6f533d598d204c5ac90b24a3e8efb8b2d1b2ee592101a872ea8f9468aec870b6b9d7736311ef07d9d9bffe614b549669ce4c9381f36fa35e1eb4bb69d6263bdf9fa4448cac15c5200e49fe73966ea60a15cd8fe9ab730f0b015609a48d49750d4ab46902d0911cb397dcf2f623b9c5d54eea65141b40bf1806b60bd0a2d1618105cf9b1d62dc00eee14d2326f9e2fdca021a0a59521112e41599926d4deab08ef4e1c7eefa379d9d70457b58dbac105947acfedbb1d34233ce34351da7fb936e6e4d9fd4f7193a89961e25021dbcff744cdd60365d16aedbed4549d15232d15de884f62120eb7806443531d5debf8e89f24a3d436d02071cc868703fed39de48e44f3473a3f6687bcc0e6a81c95f5ddbf1364c7a0c32ecee993dbc2eb01f25719f7f8ed73d00970b3b5dc4f7b3589ccc37e5a829a3ef5bce2f778ff55c8495984ff30df7e80578700bd2bd46abebedd3241443890e8891d9ed1a0909a5a9353bb26b2b89f05c990064aee034904ca00213b5d9885237a1fb43fc9319015c56072487d5174d946844d78498ba79bf17932ece954f6909b1b9b726a0526fc6d1b26b371a20ccb56a67d88df18030ca0f05ec887a51253ee8fac02cf2dd157d77fb662e7d9208986f26bf3771c1302dc370b928e82d3e32d6ba7c3669f40bbb204445d417041551fd53eb7103bb5d4df5dd5bf4d3af534d9d7ab790db52070ab382fb32ace7539c445415e6a6fc1c0704a5f5482cc25147e65ae23d4e2119e5ff37e179ca888df79fccec7765557a3e238377aad64f669a94bd71ab415bf6ab78290a9a7c5f418bfa088a9566a9d33d8596b9937ebf517c5b51a00f26f45f0f43848059a4c1fb71a5ee577f634856fbd2339c7ccae30abcabc28e85d60032cbdb086110c195cd47eee10f952f6e680f7541931eac81761438ddff7d68379e533002331c889f3c14c1bb1d5b989a77765e8c27f2b40019bc899acbf366d0d4e8f175a1052ebf714e809a803e81e0a0572cd715be459d79ab9385b99f0af82e05bda2478d5f6934f8e9cd0babae335921c3d7b90d71c59bc526373c01a3c8f348ed6eff9afc7394687d05794d8e192e4254f1402db0df15416ef92cf60d81988aaa1c1947310b80ecbddb57e8298d334c587865c8af05767dbdcadcea1cc2b7df5ef1104364280a0ad059b893b286fff50f6f4f429241c7508844e01c27c1f084c8b8bedd1ec712eb66a59811a96a9d6200f88f01d220750cabd6de1d8bdb1481d0979e60c7f1246bd7db4d3cff99720474bd009f12aed0beb965e5f295089f9deff9131a697646a95aba59d4422940099400795655da304c5a49b6678eddd76f6789114e3167acdd9ac4af5ff93b6e2db24e52d3653486e333fe58ecc90072b4c43612e4fd08f4716a3af88533e60e56618922908d4007266d9a1b1943b6ba1df91fa8c47e7d31ae50797be4816e7e6382bf7a6fb788684450ca89ce8e80e1b533791e160c313801df727113896bc8f791bcf48a7f544e777d8d39810c57e4e3a2b6a8b32b588791cc375ef84ad9ca3dbb0bee7d3621c0f08490654e0cb9ddce2e2ea35a5d090a350fdf4cc8b42a795dd0ec7b5b009cea5864ff8fea7e00338d10e72999b670b302d0c45802c7e0ed0dad73659f28bdcdbfc7c7c1bd7f7685c2f4db139ada85bcce4cb3a603c22df9ccd89104ec13f0a833ef7a63cd3ca05137277ca25833f9eb83f4244e4610a9e6c0090a2812cbb2cf7fbabb41be1e67e93b3ec76957bee63540979140a80f1278b9a8ed68bb4967453c97f437bc49885b161301b1ee7e9b8a1ac5651d6442d63ed31d3c7422f31178ae1fb4c7ad6a3037b32d2b3952e80aa5be409a134eda3f20a493054b466faae146066b3f604ea39f2b3b7ec339fbf95a6c32aaf394aea4281e37a6070d61eded669386fceef28332bb9c317fd7f87ff26f650d1d5c3d258c34df0cb8de19a49193529d5f2cd7d7977f26a55fd545b669ae00a38c90f4b679fec5c72e1efae1a86910ed71c74d83efd4a28b41bed688d3bcc84b24389c88881779c38cd76fd4998ca1c4d748a068da38e6a9177164c41e835eb2fd50f5532b1ed7acfb6a51fcb686c4ba40345e57d374306bd06ad209c4a4e5f713f9e14239df82f94c9ac14cab679e74cec2ae274a9b697b57b602f00ff3a4900db70d773a3938ba7f56186282f2213e593cfb38abef4a437b8d3c1b3f5988443a0b15129756bf8f8a8524a4d2563f476ac16aefcb06da0c1731b25741d9d14af6266aacc9146de71722fabf88d761228c663938485be7b0aa61ae61ca606783805b868fae1da168058459f7cf810e7eb7ac39f0a87e0611d87249ced7b7febee922ab83bef5256691ba3b68b9d0981fe7dcf5397504f26470ecfea1ec052a60c55d1e08a990810b5ea2c0f2df62760307b1eecbe5a126a469d31013c7070e77f949e448</script>
+  <div class="hbe hbe-content">
+    <div class="hbe hbe-input hbe-input-default">
+      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
+      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
+        <span class="hbe hbe-input-label-content hbe-input-label-content-default">非礼勿视</span>
+      </label>
+    </div>
+  </div>
+</div>
+<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
+      <categories>
+        <category>生活</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>反思(4月第3个星期)</title>
+    <url>/2024/04/15/51_%E5%8F%8D%E6%80%9D(4%E6%9C%88%E7%AC%AC3%E4%B8%AA%E6%98%9F%E6%9C%9F)%20/</url>
+    <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
+  <script id="hbeData" type="hbeData" data-hmacdigest="be314aedc7eafd04283496ad4aff190b22c5e4192dd9b172915d2bffde237435">b3ce3877181dba7d2dc822c297e3a5e461a588a800d045df3c29113d12bf7cbbb7d0f7661783787c364a123d51c9fbf700082b8c18d8f9e529d57580720f57be8970ca695dc7fbf44a86a874ba1e45b1ee1c2e39ee3b3f5eef2eb21a2a574136ace8821ae5f04c462bc469942411a6763087c3520426f068d9b4d1e7a67aa8fd50cb8809d71a2895d47ddc2cef1ebc35a989bf96ceb363de24fe779f1e2e355d99d847884ed2f20d283657dc072bf44b0b5b3740a2d8277f69a855487eab439895752bdd95d5eb6a2ef7cdbce14358f23a3246cfd2c99bbd4922e00981dad22eefe59a614e5d87770e9250edb4e1478d0fbc99234de953c0ae57f09f2fd6218815909d849d3b23ef163a044a05f21dce2eacfbaedd536c8c9a040b5a261feebcc5a0defd778461d25a7e429438fae24ff01341badf5060bae05fc858ca6eee9846a5f4b418bd18eca53a82ac4b8597b3e1fc78aec49ab6a944f6eaea0a40d3b36b8bed03c829d080544eddeca44d5a0270e935b19fb0f99f935ec1b92eb10e2b455a23eb043f4b73554b7266c68ebc7a0d88be521be43ea3d3bcbf43dc1cc03928947a5b756f7e24eaed4d576c7f20cc6b13f202e9488d08e75f0cc149efa5e4254d128126257c1a293b68bbc08d99b8d8e7f333db6bf3c2dd11c653abfd827a0e4556a62ec5835144de835bcc31b59c99cd4b1b14e5e52036b9ae6fa5965d4e1b6809c692f3eb9bb1aa93f41a761fb80bfaaf2c1260a20be0e36b1bfca5eab3075deafa7657416631d4ac7cd9d13183751b410d83cdddeaf7ea889ccc2a3dd202f79557b045f9ac224bf94743cb815d5d81d911486b52fe2a27679eed47402cb5edf303ca202cc27755382246ddfb1512a1ad119509ab0c20f2d9469fcd9b0a531adeef5fb4e53ebb060dd004fe34c013d1acccf8fb1ead21091fd14f1f2f732cda5f66b5b2d3468303f49cf30818d6cab7edf90497d0fbd10b04d939f29a181f231f5fb560dfef4276bbd2be731bec01316606f28ae5cdccbe5d1a792c6e65ea180cf1d7da4e0e1899b55ce468ab54ce9999cb4c7753af36b5d1f1b1af05580ed6bce406da9b156e2e37c6f3ef381e5249a0cfba07bdb8aae7dd3b6130686ff9bfaf282c26cfba6476c7755d5319dcd05ecb7cbde86e4c7e7a4a46980712acc31d27b2264b6ba96b15fc7601c5570a13279dafe734e5dc4971e39db917f535e1f77eae0eafdf84b0347470636f93b5e765ee2920f395d560eb93938a1307dec889b4a69b005f2a917dd2714f5524468a7a7206b641648bf1297b7fabe0eee31d8af121c81712d13dbb144d45253498dbb03e0c3032248d8d09a55bedf25a771f6180ec0699a60fa666ffb2b07a08b963cd5484fab0d0684c9e2e72393ba4c35a4500f8e0d485fad05353a104176994085e1e4a90ca0431a57e3c5b126d19eb4796abbd8369b287314cb29e400a2643eab7701e018b29630d94a8658cdc6cee9e92964777e136ea2aa7f09e5d0d5e73aca7d36560bee4812b7451d6c8d9b9c212778635850679ee81253515edeb24abab58aa317f482dc3572666855daf44ffdf365c232e59bd535956369c908b59300f70ac5821465192a7a84f0c4d925a68de482d3c04d92605ef1d2d2b109425ffe9b532e7f8e6a24d83774bdb60d37fcbf83e3207c16ef2fa6076b511d64f7104714cb17f7359b3a7ab344fd1d9c3407cc38b8c484ed0ca7323f47a7ea56ff1003feb0f262e4ec18d0b93cba82e2158cb5f4bf9af952f67b960ef3e91dbae6605caf088ad3ba4496405bf637d9ef313a655a5c54bac24ed718c9277b4cce7c4d4be0edf1a9ce9c98d28d1796be9d6c87f4cae1fba1df4b8d930df6448d929e13262212a59886d2782b1d7ac5048b89d45ebdaf392356e20070d6f3269bbe71fcbc91f99399464ba434b5872b0bb36e3a8905b154ce6e223ac7c9d3a308049404ba11f0168ce9396863d810e19fda1b3cd2716c95084697e9d791d56e30a5908077e7c8f928efd8c452a8f2b4198ab3ffbd1a64e2fa3951678b9bc8273a38dd3d9c6ccad9ec45f5fec4f1cb978e720369df4eb381255892f43343d9a6d5d81f495a5831f1964527dde113e11b683f5c1112c5ae9a9d55895f46f66dd63918d469b99576e98abb98bf26402e738ab0324b87410f94a51d2ad68899728d741bfe1dab6fa4444972647415dacf94a25be72441a30ae68e684ddbb256c24553eace0b8ad9928073b0fe9d77afc04521b59d2db57fec184f8aa00d5bf36c0e7a1c22410b6dc455088c3250548b578cd8c736644bed2d44a27f10ee15f234816530bbb6bf92ab353299f762c19a4ecb3727be3ed24b757bd302eb5e660b701aceae8ada87b121ac6100ff990b0c81a2c23ab069236433441fdabd2d5069236ca1b2b20601f084a96533e99321a87c741c5acda404970f4c05ab526e4f740c9236b21e873043f9597740d60059988d98dfda43ad4637936d2ddff2a16b5b6d53ecc6c0bd368936fab48a02d41775ce3fefd8aeb36e8ad999e76efcf014ab35cd3dfd4946ab06272acc6ed9edc43fc2101f9f0490c13f66b90c6e2b0e1f9ff58c9cb447bceec9edde8aa7a7fbacf8edf3f0d9d95007035eae86b4bc0b2616cd834021243a14f7ed19ce8f41ec4a83753fcee088649bdceffae65750d217806c91a47fb3cdd1d124fdc38b332a8917af724d1368daf424359d49209bffbc841f37dcbe43f5db8924a687b876a54b00a6810468fb4e9580f8235d7e293bcd4b80d12aad35d8f9efed9e990b56ae012f5501bbd679fd39c4bd63b21c21fb23d000174afc9ec0650495ff4db04cd2f904df36c2fadf63b2b21371a1c5cf0c2f8b0feb526ce0c6b2007ee820c460772d977d9de1a6374ffbfad24564f93474bba79f1bc5150da0fb2b046ebec915540115a5063bd8eabc99efb01a6acc0a7b56d6b6810b324adbb0bc94a6690cb3aaf8d945897b3db4ffc2774afd26653aaab021e41a094d5182d42fa37cb14437c93d5b8621f47668bee1456a23feb4ce1774bd0b43163e25f0d74341a37c9910571765e1ab9b7498b2e0b6073aef0c8eb29de55aad5cd1ec34bd3c96478356d612fa3b91004f3b980ae2a5e26e8ec34079ea8e8093649e9287568e2aa4d651a0a875c11214fad6ed21fe2061d9ee9cafe37f23ae12e1a0f6bbfda023cb6310ce04223a35e008f4a680e93831da36c34336591597989277d511615174bb8c40c261bd8b8140fb56a6792f59ccbae778d68ae8c6c64e09d3bb19fcc0b901719658cbf0baa0cb5014e1284f7d9de9779fab538136a5860cf4d9d1728ddbeb5a2b6ce0a466e8e7b92eedd68660685d91f1f77e78b8efd9eaf9a4c832c409239d8ce9703b66a261e1e2cb2b7d7aec52b9228512c1742961e04792dbff4adf17d5b35dafd7ad76eeebe458a78b623b29ba1d82845c1cf16524b5cbb5eedd56b278860223f2e359b09024746a7d8287e367fcbbb3655884573fe59e2e0d8a1859ebf8dcdabae7bcf2704d998d2ad850a198225aa76a55a4e19a9182d54b196c942fc4847536c27fdb43925a63d13bcfa45314b65478e0fa8ab2609293d180825be1eb0a42ce8f2e71cc1c93db2480159c150933b06f5aece4e1efa6287147e357895895bbd9cfb0321f353fe08816960705c0516ad7609f543f88d505d70b0a6d60e3cb3ca58b534c790d04d2bdce32a2d239eceba297dfea808d9046d92bfb4f4abb339a82a68a21f38785e38e8fdc3d82dad2ec3ec708ab9b350a0b4779a8cafb31c1bc71d8aff18e0b81797063e203fa6bdfa6add4dec04acb960589da7dc2934e072cc3e0731ba77db4a5f0c20e0a8333f6a25ce7ef641a4bd323844cceea0c2a2d0db59d83dec9e425c98d2df6ace37626dbf7d56b1d835d239281fe0d330a1ef96e505fd4a20a15db52a41fb8ba121ecceaf118243e9e259b5c4a6ee639f2a5dc084d5013a44fe12992c4feb35135c9f40e3a46ff93dfac270bae3d014852124ffae6b4f54a2544d46639a41a22978eae90774effb9139dd710c8ddb8413ebf95a054224cb1828cd731ec77d8a42672ca71604495c2b550db505bb20e167754459a626381e7d7809d15db333a20034a5eb8c5c4b9e46a5ca34b7979259b8fb03d9307b9156728512870cbd2e3618df6c35710fd414b2527721caf8d4837cdec4239afbc7429bd895b018b5aac9eb06d51967a06ac796efdcb31b2b3f48617b1fe8652a8eea4215cba1549202409c477fc78251d11f526f4b0c370119661361e783dcfb637c843667d201eaca94008a89164c4869eaca03580aec25b8f0a77fd79502072a38f4d12a5f21de20de9c83abe1c40865a92f3a0d875b26de9c12f9f05f49b03a4ddb1ec8384b556fab1e30b0ff77234438fc6003014b3061849c68da0359a062f71fa9fd1c669ba4cb21deb5de8a42de63af3359b31b9c3bce10597143cbb1a16bbc0ff58ba0819e5d28f7bd21a9c35a5843910b07a16ef8932fbad3d6bb809cdf1cece8f0101cd5825cc12f94c661e88e3ab000b24a36a516c7ab448756b829450f7e0a3f0d3a4990ca9cc66407ec7b74b55db9034f2920bc14c54e0efa170417fd54d643ba7ed43bb0e5435cc9c016827a013e6a74e4bedd32132b4b451a745cc3c63b5a70b6b556e73a8c7d2327193c92efb75e75949155017aa9f8da8328f536ba08b2972c6762b9d6ce2896d22e914080f50f01e40984c6bba266943e0d15183b3dda9460ab94bcc6ede17cd1b271d1295061fe8cc3c5b4443429f6149cfe9a93da4f449b887b762980808388e85f0e8b38a27fa43f9df391d5300c01247b3f1fb1fd1186900d13e1c360ccd31839c032dc7ed0d0f532bada36aa7667ddde1f78c6822dbc6bca014763e8703b29dc1c9147c6956689971fe4345db4447388bddc67a42432afacf4a9f20da0bbe4dbee9683ad2d0a3c88fdc7d7a38aee6ed00baa89bf8522d4670accc53149cc692cec191d1664673c957433a1db40a45651d2d076e0cf3595553a2116ab3f167376793d998e95a38aae4b8610ed6e639d21c7bdb358c8bba9fa463d0dea30fc1e27cfc8e413e969d53b7909a9a2f2167c77eed634970b398e8710d6210c69e768cbe3ac804719008ab37d04aa947b95023f41a46c7dfc39d5d5f59ceb00564904261d0310e308ed0e7943d5c41398ad3bd721bb7faf925ea316e4c3dcaaa8c1ee59d81452dbcfdd616910757a19ff442a618348890901d3a212f5b99f8e731785042ced53251c3436458333f6a5ef0099589e6aa96365f50b3471b6334c939acac1c776a42a403d4250d12d282a71e4d6a9b0ce1a832c250e8d81783a4bba5ac68e06837027fef3d731f69fa0943ab9f6fdc0be080b7bc675e2f84be33b3458587ece81731b03b12d4b9c7f94e3f393e0943d4383ec296b22e3d6e157cb28237020b20d12914adcbb20558e1b09c6ba0502dab0268e8da10ed0b2f5be26b7ad37206de4aabaebcd8d6e97d8aa2cacfef1ee54dacb0508882e029c9f59848535ac68d3aedbce6d5df4f9f46ca0531095fdb247c9c68950da0b94a33178fcd22ce80e92f1993ee95435d279958fb53af8519285b34d4bd535335673c1c4235a8af100428fd4196969db12bf175e9936ba64c580fd0b3b4b41d12aefac7e2110c33ff2d518de3f077ad8a32221352b1cadee9f39434d1bbac16718ac4164a99793f33bead31fa986ad6c08ee52e5f64ad69b73f7e812110feebf9f6fda0c47127fd55d1b54022a38fbb983c01d1356176f64b7b1d9bf2b99842503bb455751984d13fc0e54a3eb454cd70f1952713e4282ef814eecd5e4fa02f8e5fcdfd0101f61625be9492407eacbed1328a30ccb3eb90d26d82e4be4aaaa0d6f29460256f97a268c99a28dc1772f32b532dc26ffa1e59d85a111b86973b12858d1a16521bba46a622e9f2f6ba9051401a5c52c1fd53a1b3a59d801ed7152fac5ccd6f887e3a28598d9553eccfa2e21ad7173d7fe809799f397f938d4bd63eca2239117b9f9beec69ed49c95dbba5b44596a590768b0f067f4bc82f3ae138af98d42c7a462fc6acf85b4b456f2fd70ecf1c534b0121d1e700f8fff849ebda6a82332d1f7c0517fe58499c4776f85c9ee0cf11eeb1af21077460c7732e9f4419a931f3b7c98a38d5a83d86deb9839bbc56cf8d2e0c37cb1df86ab2456a87df32485c6f04454c09572f4b7692fdb246f0a7b063f716ca65236c9d4c30f14be4b27c534f22b18ae76969f422121e348187430c963b2563d59dcd2d1b4f7b1f298c5bae7dee33baf8f4dfa50d87627bb67762cc97303ed0eced449a522e751a52b182f217a1f09ff58137958535e1b8b5db862fb22318bc8b151d892e87a91a2cb4b0c58cee15ce5784e369bc637015e791ce1d5eabb481e606cd9ce36ebd83e819f98e3787d2e3c1a212c79d93ecd84dec7db5469914c7ef151950e9e617b86018619c6905e29c0cd33725e7e76336992d1f256dbbfeaa562b72c4e8a44aa1edf6877984229918350eaf835ca9fde6b2afe4594c2c5caf530badd5aaf662f267553e7a458366e639ec64bc64ad064f4a5b908155bd0f8abf4e9cbde66ecf48ffa45a5fdd1c9d99c100764dc20c3c5a091101a83e1da194fe2d6b119138dc80694868aa66c875da80fd99e31dedec4d68ec43b5fd5a8d1c041aea5ef7d0c3e2a3d837f84c88214bb92dcabf677c9aaee82de5c2b562425ec9868d5f582d9dc241060ba70b4b8a6af34cd8a77406063e4187103784fce045ba9991c205145ba9628743920a35d6586ed931b5d987df8f0d0d46a04bfc2f1606b87540776434b895bbb9dda05cc0255644aeb8d880a5928630e8921215a169cd0fb9067469e3ae37b3ccc202dbcfdea3341e8f433f88407ee1005be77aacfce2f4d9fb38a548929f6030a278b9709e6067bc8a55f2e905663d8f55304d13fd74bd05a4fc4ef82f5c69b626cbf0af6e10964c72fb8f8b12b3ffc3c5e883e8edc4c1b61aa747298cc89b431f786cef5c433e01565b29815f9f2faf05a126155369ea0e53183a588b8289e88ec236eb0df57dbbcb2479496d77d5bf4f69447980a12d02088644e2dc5456532ad6471eb0f299fa4ff2519d5e34d32d30932904d22f3061651bea35e0dd5ee4466407cbc08e69b194e63dafae96cae113961fdf6b7d6b68553312d7c1a5ab3847169d5b434330b3f73e05f15a21a582c2a46d74c97ec0a2b401e6782125ca5a73c0c255bb8d8f1b8bfa8242a5452bee5bd03bc9ddd43c3c1e7c7cfeda64faffe71b89ac09e14731380b1eeb386c1467fde4c75a44124f9c8f09136d4eab31b4603dc1c2c3cfc543c07e1e7dec2a418d622d5045c01d4e20730fdfda2cea2220282e981ebad7c5a61d1a869560b92b600e18099b27795fd1d849a74563163d5343e1721e1263affdce755ab7c2c82513bca57f254473bbc78232488ffc1bf30f40d4431a2c271853df28c0248e13ced2c8e1a9ebeda80249ac6551508220fbae343df3d7db52a1caa496976c12815b3697e2fabbbe98e22b28e22d470c6be7718cee22d8dd89d56d5356902cd8eac7ff4814e6399ed2804685f1f61e6f0ddddb398ffdf978b185d4bda14dac880bd7a964480b478c3f92224eae350766484452ea760fb4942a67c251ab12163ad687a7fd2876a4111f39bff45cf551752060ffe7452781a1f860d9e017ac43589aec1ecd4401f0dc70b1ddac8821dae53e5ca9b2e5d5cb55cd9cc841114656aede41104294e975a2b9a6829d766ca243b0d4e917ba19c1957565459c929b8be6bf29cc594f9b2ed06a166ded9a7e26cb71a735d6061a314eb04facc627a56f0c18fb6d7476c2dccf761b7ad0d87138bb82a79d2cb7e4e66c67d6f496dbae5d47a094b98d530bd80ee278363cb372e54016294bd4cb74a9163d8eed5a5c7f70a0796e14f6fc06c308ad6684f9f5c3d0325df1b9257d0362826001afbc7eff5a3b5f902a8e5b88dea50daaa07f8e90d71b81cf2f17c33f18af126aeccf27725fc86e2b9e8e43f323ebf58838e0ddf775459c7c592a7563575cc12f4f09d2e1ce0f1caf889f71442b54b632190fd9a81e606c77e52bbefefb32a1dbe7d9ccba428f9201b0116f974abf801fe03901cd17c4386289c8690cd5efb5922d66954002d47d8b798eed01de027b97be8880284e7b68ef9fef4da3d9a6e301b02932a886d29f71bfad248c7b201d7f5f43ddf545888d61e2fdb7e7887b31d11d40e3cb295fbb3040a3c9b25177899f48e2362c235d692e51ab78e202bb07727671e50d81a0432bf4dade8c0bc3e6e1bc8b3c92c1c39867dff5c41ef6e3200be4785bd9fccf1fe330a7b87b96f035edbed393468d4c49cdd6e882ed8e3f7f79c4b4093706f6756149940e14c094c5c5ce807eec94b4e0959edd3a1fd5c0e6526c2db9f96b06353696a935b928d9dc4c48dc3d35d01f7d7360161f97791b67a608a4f5a273f5725aa8d66108012c53579678bf17cfbc525df647695e2b151dfb45827fa762e7a8ba94a2b54931f793028a0e25ad42ff1e0ce156fcf0471e074958ef8daf182797de7a90ba4ce084adfebafb7486679d2b001f4086cc8c6ca0776d9fb05b5d3307f3e6b124b3c914c8801964b75edc2033a0307594277bb920cf9ec93176f31370b90047df9deec6da04e1157a75d282</script>
+  <div class="hbe hbe-content">
+    <div class="hbe hbe-input hbe-input-default">
+      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
+      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
+        <span class="hbe hbe-input-label-content hbe-input-label-content-default">非礼勿</span>
+      </label>
+    </div>
+  </div>
+</div>
+<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
+      <categories>
+        <category>生活</category>
       </categories>
   </entry>
   <entry>
@@ -55,16 +171,6 @@
 <script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
       <categories>
         <category>生活</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>计算机系统架构与ARM汇编语言</title>
-    <url>/2024/03/31/48_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E4%B8%8EARM%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>​	以后就在每次学习前写一个当时想的心路历程吧，这样也能知道自己在做这件事情的时候，当时都在想什么，日后自己再一次想起时候，找到当时自己的所思所想，我想的是我的C语言还很差劲，我认为在学习系统编程之前，需要一个这样的知识来帮我扫清前方的障碍，而且我认为之前的学习真的太差了，并没有真正的将这些东西转换为自己的东西，而且现在心中的方向一直不是很明确，我也希望出现一个东西，让我找一下心中的那个目标，让我知道我这样做是不是对的，为了寻求一个答案，你又能否一往无前呢。</p>
-<hr />
-]]></content>
-      <categories>
-        <category>C语言高级学习</category>
       </categories>
   </entry>
   <entry>
