@@ -87,7 +87,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">2.3k</span>
+            <span class="post-count">3.7k</span>
         </span>
     </span>
 
@@ -96,7 +96,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">7 分钟</span>
+            <span class="post-count">12 分钟</span>
         </span>
     </span>
 </div>
@@ -200,6 +200,91 @@
 <p>​	强符号：函数名  初始化的全局变量</p>
 <p>​	弱符号：未初始化的全局变量</p>
 <p>==强符号不允许多次定义，但是弱符号可以共存，强弱符号共存的情况，强符号会覆盖弱符号==</p>
+<h1 id="链接过程重定位"><a class="markdownIt-Anchor" href="#链接过程重定位"></a> 链接过程：重定位</h1>
+<pre><code>本质就是修正指令中的符号地址
+</code></pre>
+<p>​	是连接过程中最核心最重要的一步</p>
+<p>​	地址空间分配、符号解析都是为重定位服务的</p>
+<p><strong>修改符号地址</strong></p>
+<p>​	读取各个目标文件中，各个段的重定位信息：重定位表</p>
+<p>​	进行符号重定位、修改指令中的符号地址</p>
+<p>​	确定各个重定位符号的新地址、形成新的符号表</p>
+<p><strong>地址修正</strong></p>
+<p>​	重定位地址=新段基址 + 段内偏移</p>
+<h1 id="程序的运行"><a class="markdownIt-Anchor" href="#程序的运行"></a> 程序的运行</h1>
+<p>​	<strong>加载器</strong></p>
+<p>​		在操作系统环境下执行一个可执行文件，加载器会首先将可执行文件加载到内存中，加载器拷贝数据完毕之后，进行相关操作，然后会跳转到程序入口</p>
+<p>​	<strong>镜像加载地址</strong></p>
+<p>​		程序头表：</p>
+<p>​			指定了可执行文件镜像加载到内存中的地址</p>
+<p>​			链接地址等于加载到内存中的地址</p>
+<p>​		ELF文件头基本信息</p>
+<p>​			文件类型 运行平台  程序入口地址</p>
+<p>Linux内存映像</p>
+<p>​	在Linux环境下，通过调用execve函数来启动加载器，可执行文件的运行通过进程的形式实现，当运行一个可执行文件时，主要工作有三步，创建一个独立的虚拟地址空间，读取可执行文件头，建立虚拟地址空间和可执行文件的映射关系，将PC指针设置为可执行文件的入口地址，启动运行</p>
+<h1 id="bss段的处理"><a class="markdownIt-Anchor" href="#bss段的处理"></a> BSS段的处理</h1>
+<p>​	特点：<br />
+​	未初始化的全局变量、static局部变量放到BSS段</p>
+<p>​	BSS段不占目标文件的空间</p>
+<p>​	可执行文件运行时，在内存中给BSS段分配空间</p>
+<p>​	设置BSS段的目的：早期计算机存储资源贵，节省磁盘空间</p>
+<h1 id="main函数入口"><a class="markdownIt-Anchor" href="#main函数入口"></a> main函数入口</h1>
+<p>​	没啥用</p>
+<h1 id="链接静态库"><a class="markdownIt-Anchor" href="#链接静态库"></a> 链接静态库</h1>
+<p>​	归档文件</p>
+<p>​		目标归档文件</p>
+<p>​	制作静态库</p>
+<p>​	ar rcs libtest.a x.o xx.o</p>
+<p>​	链接静态库</p>
+<p>​	gcc main.c -l ./include -L ./lib -ltest</p>
+<p>链接静态库带来的问题：<br />
+一般定义的函数都会引用到，所以链接的时候会全部组装在一起，就比如C静态库，我们使用了printf，将所有的模块全部连接上了，这就导致可执行文件的体积大大增加。</p>
+<h1 id="动态链接"><a class="markdownIt-Anchor" href="#动态链接"></a> 动态链接</h1>
+<p>​</p>
+<p>静态链接的缺点：</p>
+<p>​	生成的可执行文件体积较大，包含相同的公共代码，浪费存储空间、运行时占用的内存较大</p>
+<p>​	程序运行时需要一次性加载到内存之中</p>
+<p>​	对于内存配置较小的系统可能装载不下，无法运行</p>
+<p>动态链接：</p>
+<p>​	静态链接发生在链接的过程中，动态链接推迟到运行时再进行</p>
+<p>​	动态链接的目标文件也称为动态链接库，运行时除了可执行文件，这些库也要被加载到内存，进行重定位</p>
+<p>好处</p>
+<p>​	解决了空间浪费问题，节省内存</p>
+<p>​	可以运行更大的程序</p>
+<p>​	升级更加容易方便</p>
+<p>ldd 命令可以查看用到的共享库</p>
+<p>​	<strong>与地址无关的代码</strong></p>
+<p>​		放到哪里，都可以执行，无需重定位，无需改变</p>
+<p>​	<strong>实现思想</strong></p>
+<p>​		将指令中需要修改的部分分离出来，跟数据放在一起</p>
+<p>​		剩余指令就能做到与地址无关，被多个进程共享</p>
+<p>​		数据和需要被修改的指令在每个进程中都有一个副本，互不影响</p>
+<p>​	gcc -fPIC -c main.c</p>
+<h1 id="共享库"><a class="markdownIt-Anchor" href="#共享库"></a> 共享库</h1>
+<p>​	三个主要路径：<br />
+​		/lib   存放最关键和最基础的共享库，例如动态链接器、C库、数学库，这些库主要是/bin/sbin下程序运行以及系统启动所需要的库</p>
+<p>​		/usr/lib  非系统运行所需要的关键性的共享库，比如开发时用到的一些共享库</p>
+<p>​		/usr/local/lib 存放第三方应用程序所需要的一些共享库</p>
+<p>​	基本过程</p>
+<p>​		ELF文件执行，动态链接器/bin/ld-linux-so.xvei加载成功，到.dynamic段里面找ELF文件依赖的共享库</p>
+<p>​		若该路径是绝对路径就到绝对路径下面寻找</p>
+<p>​		若该路径是相对路径，就到/lib /usr/lib  /etc/ld.so.conf 配置文件指定的目录中查找共享库</p>
+<p>​	库目录缓存</p>
+<p>​		/etc/ld.so.conf存放共享库的路径，为了避免每次查找，耗费时间，可以使用ldconfig生成一个缓存/etc/ld.so.cache</p>
+<p>​		新增、删除、或者更新共享库路径的时候，需要使用ldconfig更新缓存</p>
+<p>​	环境变量	LD_LIBRARY_PATH</p>
+<p>​		由若干个路径组成的环境变量，每个路径用冒号查找</p>
+<p>​		可以使用该变量临时更改程序依赖的共享库查找路径，而不影响系统中其他程序的运行。</p>
+<h1 id="插件"><a class="markdownIt-Anchor" href="#插件"></a> 插件</h1>
+<p>​	<strong>什么是插件</strong></p>
+<p>​		为了使软件方便扩展，具备通用性，可以采用插件机制</p>
+<p>​		主程序逻辑框架不变，各个业务以动态链接库的形式加载进来</p>
+<p>​		软件发布后，不用重新编译，通过插件形式更新功能、软件增值</p>
+<p>​		插件的本质是共享库，只不过组装形式复杂</p>
+<p>==目前用不到==</p>
+<h1 id="内核模块加载机制"><a class="markdownIt-Anchor" href="#内核模块加载机制"></a> 内核模块加载机制</h1>
+<p>​	内核模块不依赖于C库，所以链接重定位过程要自己完成，运行在内核空间</p>
+<h1 id="linux内核加载实验"><a class="markdownIt-Anchor" href="#linux内核加载实验"></a> Linux内核加载实验</h1>
  
       <!-- reward -->
       
@@ -262,6 +347,15 @@
 
    
   <nav class="article-nav">
+    
+      <a href="/2024/05/06/53_%E5%8F%8D%E6%80%9D(5%E6%9C%88%E7%AC%AC2%E4%B8%AA%E6%98%9F%E6%9C%9F)%20%20(copy)/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            反思(5月第2个星期)
+          
+        </div>
+      </a>
     
     
       <a href="/2024/04/22/52_%E5%8F%8D%E6%80%9D(4%E6%9C%88%E7%AC%AC4%E4%B8%AA%E6%98%9F%E6%9C%9F)%20/" class="article-nav-link">
