@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>bootloader引导流程</title>
+    <title>ubuntu完整构建</title>
     <url>/2024/05/10/54_ubuntu%E6%9E%84%E5%BB%BA%E5%AE%8C%E6%95%B4%E7%B3%BB%E7%BB%9F/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">export BOARD_NAME=&quot;Orange Pi 5&quot;                                                                              </span><br><span class="line">export BOARD_MAKER=&quot;Xulong&quot;                                                                                  </span><br><span class="line">export UBOOT_PACKAGE=&quot;u-boot-orangepi-rk3588&quot;                                                                </span><br><span class="line">export UBOOT_RULES_TARGET=&quot;orangepi_5&quot;                                                                       </span><br><span class="line">export UBOOT_RULES_TARGET_EXTRA=&quot;orangepi_5_sata&quot;      </span><br></pre></td></tr></table></figure>
 <p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202405100822471.png" alt="image-20240509205731107" /></p>
