@@ -3,7 +3,8 @@
   <entry>
     <title>ubuntu完整构建</title>
     <url>/2024/05/15/54_ubuntu%E6%9E%84%E5%BB%BA%E5%AE%8C%E6%95%B4%E7%B3%BB%E7%BB%9F/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">export BOARD_NAME=&quot;Orange Pi 5&quot;                                                                              </span><br><span class="line">export BOARD_MAKER=&quot;Xulong&quot;                                                                                  </span><br><span class="line">export UBOOT_PACKAGE=&quot;u-boot-orangepi-rk3588&quot;                                                                </span><br><span class="line">export UBOOT_RULES_TARGET=&quot;orangepi_5&quot;                                                                       </span><br><span class="line">export UBOOT_RULES_TARGET_EXTRA=&quot;orangepi_5_sata&quot;      </span><br></pre></td></tr></table></figure>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="脚本整理"><a class="markdownIt-Anchor" href="#脚本整理"></a> 脚本整理</h1>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">export BOARD_NAME=&quot;Orange Pi 5&quot;                                                                              </span><br><span class="line">export BOARD_MAKER=&quot;Xulong&quot;                                                                                  </span><br><span class="line">export UBOOT_PACKAGE=&quot;u-boot-orangepi-rk3588&quot;                                                                </span><br><span class="line">export UBOOT_RULES_TARGET=&quot;orangepi_5&quot;                                                                       </span><br><span class="line">export UBOOT_RULES_TARGET_EXTRA=&quot;orangepi_5_sata&quot;      </span><br></pre></td></tr></table></figure>
 <p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202405100822471.png" alt="image-20240509205731107" /></p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">topeet@topeet:~/Linux/ubuntu-rockchip/config/kernels$ cat rockchip-5.10.conf </span><br><span class="line">KERNEL_REPO=https://github.com/Joshua-Riek/linux-rockchip.git</span><br><span class="line">KERNEL_BRANCH=linux-5.10-gen-rkr6</span><br><span class="line">KERNEL_VERSION=5.10.160</span><br><span class="line">KERNEL_CLONE_DIR=linux-rockchip</span><br><span class="line">KERNEL_DEFCONFIG=rockchip_linux_defconfig</span><br><span class="line">DPKG_BUILDPACKAGE=y</span><br><span class="line">topeet@topeet:~/Linux/ubuntu-rockchip/config/kernels$ </span><br></pre></td></tr></table></figure>
 <p>build.sh分析的差不多了，主要就是执行了下面的这四个脚本：<br />
@@ -70,9 +71,75 @@
 <p>sudo dd if=idbloader.img of=/dev/sdc seek=64</p>
 <p>sudo dd if=u-boot.itb of=/dev/sdc  seek=16384 conv=notrunc</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cd ../rkbin</span><br><span class="line">./tools/trust_merger RKTRUST/RK3588TRUST.ini</span><br><span class="line">sudo dd if=trust.img of=/dev/sdc seek=24576</span><br></pre></td></tr></table></figure>
+<p>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</p>
+<h1 id="系统移植"><a class="markdownIt-Anchor" href="#系统移植"></a> 系统移植</h1>
+<h2 id="1构建v2ray"><a class="markdownIt-Anchor" href="#1构建v2ray"></a> 1.构建v2ray</h2>
+<h2 id="2拉取源码"><a class="markdownIt-Anchor" href="#2拉取源码"></a> 2.拉取源码</h2>
+<p>设置http端口</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">export ftp_proxy=http://127.0.0.1:8889/</span><br><span class="line">export https_proxy=http://127.0.0.1:8889/</span><br><span class="line">export FTP_PROXY=http://127.0.0.1:8889/</span><br><span class="line">export HTTPS_PROXY=http://127.0.0.1:8889/</span><br><span class="line">export HTTP_PROXY=http://127.0.0.1:8889/</span><br><span class="line">export http_proxy=http://127.0.0.1:8889/</span><br></pre></td></tr></table></figure>
+<p>拉取orangepi源码</p>
+<p>拉取ubuntu-rockchip源码</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git clone https://github.com/Joshua-Riek/ubuntu-rockchip.git</span><br><span class="line">git clone --single-branch --progress -b v2017.09-rk3588 https://github.com/orangepi-xunlong/u-boot-orangepi.git u-boot-orangepi-rk3588</span><br><span class="line">git -C u-boot-orangepi-rk3588 checkout 7f7ff61a8b79fdb4f2d51dfb8aa643b8bc3ada0c</span><br><span class="line">cp -r ubuntu-rockchip/packages/u-boot-orangepi-rk3588/debian u-boot-orangepi-rk3588</span><br></pre></td></tr></table></figure>
+<p>拉取瑞芯微官方uboot源码和rkbin源码</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git clone https://github.com/rockchip-linux/u-boot.git</span><br><span class="line">git clone https://github.com/rockchip-linux/rkbin.git</span><br></pre></td></tr></table></figure>
+<h2 id="3编译"><a class="markdownIt-Anchor" href="#3编译"></a> 3.编译</h2>
+<p>安装交叉编译器：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo apt install gcc-aarch64-linux-gnu</span><br></pre></td></tr></table></figure>
+<p>修改arch/arm/mach-rockchip/decode_bl31.py文件</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">vim arch/arm/mach-rockchip/decode_bl31.py</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">main</span>():</span><br><span class="line">    <span class="keyword">if</span> <span class="string">&quot;BL31&quot;</span> <span class="keyword">in</span> os.environ:</span><br><span class="line">        bl31_elf=os.getenv(<span class="string">&quot;BL31&quot;</span>);</span><br><span class="line">    <span class="keyword">elif</span> os.path.isfile(<span class="string">&quot;./bl31.elf&quot;</span>):</span><br><span class="line">        bl31_elf = <span class="string">&quot;./bl31.elf&quot;</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        os.system(<span class="string">&quot;echo &#x27;int main()&#123;&#125;&#x27; &gt; bl31.c&quot;</span>)</span><br><span class="line">        os.system(<span class="string">&quot;$&#123;CROSS_COMPILE&#125;gcc -c bl31.c -o bl31.elf&quot;</span>)</span><br><span class="line">        bl31_elf = <span class="string">&quot;./bl31.elf&quot;</span></span><br><span class="line">        logging.basicConfig(<span class="built_in">format</span>=<span class="string">&#x27;%(levelname)s:%(message)s&#x27;</span>, level=logging.DEBUG)</span><br><span class="line">        logging.warning(<span class="string">&#x27; BL31 file bl31.elf NOT found, resulting binary is non-functional&#x27;</span>)</span><br><span class="line">        logging.warning(<span class="string">&#x27; Please read Building section in doc/README.rockchip&#x27;</span>)</span><br><span class="line">    generate_atf_binary(bl31_elf);</span><br></pre></td></tr></table></figure>
+<p>修改arch/arm/mach-rockchip/make_fit_atf.sh 文件注释掉#gen_bl32_node</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">vim arch/arm/mach-rockchip/make_fit_atf.sh</span><br><span class="line"></span><br><span class="line">source ./$&#123;srctree&#125;/arch/arm/mach-rockchip/fit_nodes.sh</span><br><span class="line"></span><br><span class="line">gen_header</span><br><span class="line">gen_uboot_node</span><br><span class="line">gen_bl31_node</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">gen_bl32_node</span></span><br><span class="line">gen_mcu_node</span><br><span class="line">gen_loadable_node</span><br><span class="line">gen_kfdt_node</span><br><span class="line">gen_fdt_node</span><br><span class="line">gen_arm64_configurations</span><br></pre></td></tr></table></figure>
+<p>修改波特率</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">vim configs/rk3588_defconfig</span><br><span class="line">CONFIG_BAUDRATE=115200</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cp /home/topeet/back/01_tmp/decode_bl31.py  arch/arm/mach-rockchip/</span><br><span class="line">cp /home/topeet/back/01_tmp/make_fit_atf.sh  arch/arm/mach-rockchip/</span><br><span class="line">cp /home/topeet/back/01_tmp/rk3588_defconfig configs/</span><br></pre></td></tr></table></figure>
+<p>编译</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">make CROSS_COMPILE=aarch64-linux-gnu- ARCH=arm  -j20  rk3588_defconfig</span><br><span class="line">make CROSS_COMPILE=aarch64-linux-gnu- -j20 </span><br><span class="line">make CROSS_COMPILE=aarch64-linux-gnu- ARCH=arm  -j20 \</span><br><span class="line">BL31=../rkbin/bin/rk35/rk3588_bl31_v1.45.elf \</span><br><span class="line">spl/u-boot-spl.bin u-boot.dtb u-boot.itb</span><br></pre></td></tr></table></figure>
+<p>构建idbloader.img</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">./tools/mkimage -n rk3588 -T rksd -d \</span><br><span class="line">	../rkbin/bin/rk35/rk3588_ddr_lp4_2112MHz_lp5_2400MHz_v1.16.bin:spl/u-boot-spl.bin \</span><br><span class="line">	idbloader.img</span><br></pre></td></tr></table></figure>
+<h2 id="4写入"><a class="markdownIt-Anchor" href="#4写入"></a> 4.写入</h2>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo dd if=idbloader.img of=/dev/sdc seek=64</span><br><span class="line">sudo dd if=u-boot.itb of=/dev/sdc seek=16384 conv=notrunc</span><br><span class="line">sync</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo dd if=/dev/zero of=/dev/sdc count=4096 bs=512 </span><br><span class="line">sudo parted --script /dev/sdc  \</span><br><span class="line">mklabel gpt \</span><br><span class="line">mkpart primary fat32 16MiB 20MiB \</span><br><span class="line">mkpart primary ext4 20MiB 100%</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Create partitions</span></span><br><span class="line">&#123;</span><br><span class="line">    echo &quot;t&quot;</span><br><span class="line">    echo &quot;1&quot;</span><br><span class="line">    echo &quot;EBD0A0A2-B9E5-4433-87C0-68B6B72699C7&quot;</span><br><span class="line">    echo &quot;t&quot;</span><br><span class="line">    echo &quot;2&quot;</span><br><span class="line">    echo &quot;C12A7328-F81F-11D2-BA4B-00A0C93EC93B&quot;</span><br><span class="line">    echo &quot;w&quot;</span><br><span class="line">&#125; | sudo fdisk /dev/sdc  &amp;&gt; /dev/null || true</span><br><span class="line"></span><br><span class="line">sudo partprobe /dev/sdc </span><br><span class="line"></span><br><span class="line">    # Generate random uuid for bootfs</span><br><span class="line">boot_uuid=$(uuidgen | head -c8)</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Generate random uuid <span class="keyword">for</span> rootfs</span></span><br><span class="line">root_uuid=$(uuidgen)</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Create filesystems on partitions</span></span><br><span class="line">sudo mkfs.vfat -i &quot;$&#123;boot_uuid&#125;&quot; -F32 -n CIDATA /dev/sdc1</span><br><span class="line">sudo dd if=/dev/zero of=/dev/sdc2 bs=1KB count=10 &gt; /dev/null</span><br><span class="line">sudo mkfs.ext4 -U &quot;$&#123;root_uuid&#125;&quot; -L cloudimg-rootfs /dev/sdc2</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Mount partitions</span></span><br><span class="line">mkdir -p &#123;system-boot,writable&#125; </span><br><span class="line">mount &quot;sdc1&quot; system-boot</span><br><span class="line">mount &quot;sdc2&quot; writable</span><br></pre></td></tr></table></figure>
+<h1 id="命令学习"><a class="markdownIt-Anchor" href="#命令学习"></a> 命令学习</h1>
+<h2 id="mklabel"><a class="markdownIt-Anchor" href="#mklabel"></a> mklabel</h2>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">parted --script /dev/sdb \</span><br><span class="line">mklabel gpt \</span><br><span class="line">mkpart primary ext4 16MiB 100%</span><br></pre></td></tr></table></figure>
+<ol>
+<li>
+<ul>
+<li><code>mklabel gpt</code>: 创建了一个 GPT（GUID 分区表）磁盘标签。GPT 是一种磁盘分区表标准，支持更大的磁盘容量和更多的分区。</li>
+<li><code>mkpart primary ext4 16MiB 100%</code>: 创建了一个主分区，并将其格式化为 ext4 文件系统。具体的参数解释如下：
+<ul>
+<li><code>primary</code>: 表示创建一个主分区。主分区是可用于安装操作系统或存储数据的分区类型。</li>
+<li><code>ext4</code>: 表示将分区格式化为 ext4 文件系统。ext4 是一种常见的 Linux 文件系统。</li>
+<li><code>16MiB</code>: 表示分区的起始位置。这里的 <code>16MiB</code> 表示分区从磁盘的 16MiB 处开始。</li>
+<li><code>100%</code>: 表示分区的结束位置。这里的 <code>100%</code> 表示分区将占据整个磁盘的剩余空间。</li>
+</ul>
+</li>
+</ul>
+<p><code>--script</code> 参数用于在不需要用户交互的情况下运行 parted 命令。它告诉 parted 不要提示用户进行确认或提供交互式输入。</p>
+</li>
+</ol>
+<h2 id="fdisk"><a class="markdownIt-Anchor" href="#fdisk"></a> fdisk</h2>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Create partitions</span></span><br><span class="line"> &#123;</span><br><span class="line">     echo &quot;t&quot;</span><br><span class="line">     echo &quot;1&quot;</span><br><span class="line">     echo &quot;C12A7328-F81F-11D2-BA4B-00A0C93EC93B&quot;</span><br><span class="line">     echo &quot;w&quot;</span><br><span class="line"> &#125; | fdisk /dev/sdb &amp;&gt; /dev/null || true</span><br></pre></td></tr></table></figure>
+<p>这段代码使用了 <code>fdisk</code> 工具来创建分区。下面是对代码中各个部分的解释：</p>
+<ol>
+<li><code>echo &quot;t&quot;</code>: 发送 “t” 命令给 <code>fdisk</code>，用于更改分区类型。</li>
+<li><code>echo &quot;1&quot;</code>: 发送 “1” 命令给 <code>fdisk</code>，用于选择第一个分区。</li>
+<li><code>echo &quot;C12A7328-F81F-11D2-BA4B-00A0C93EC93B&quot;</code>: 发送 “C12A7328-F81F-11D2-BA4B-00A0C93EC93B” 命令给 <code>fdisk</code>，用于将分区类型更改为 EFI System。</li>
+<li><code>echo &quot;w&quot;</code>: 发送 “w” 命令给 <code>fdisk</code>，用于保存分区表并退出。</li>
+</ol>
+<h2 id="partprobe"><a class="markdownIt-Anchor" href="#partprobe"></a> partprobe</h2>
+<p>​	重新加载分区</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">partprobe /dev/sdb</span><br></pre></td></tr></table></figure>
+<h1 id="文件系统配置"><a class="markdownIt-Anchor" href="#文件系统配置"></a> 文件系统配置</h1>
+<p>​	给文件系统分区设置uuid，创建ext4文件系统分区</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Generate random uuid <span class="keyword">for</span> rootfs</span></span><br><span class="line">root_uuid=$(uuidgen)</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Create filesystems on partitions</span></span><br><span class="line">dd if=/dev/zero of=/dev/sdb1 bs=1KB count=10 </span><br><span class="line">mkfs.ext4 -U &quot;$&#123;root_uuid&#125;&quot; -L desktop-rootfs /dev/sdb1</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Mount partitions</span></span><br><span class="line">mkdir -p writable</span><br><span class="line">mount /dev/sdb1 writable</span><br></pre></td></tr></table></figure>
+<p>​	拷贝文件系统镜像到SD卡分区，并设置fstab</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Copy the rootfs to root partition</span></span><br><span class="line">tar -xpf &quot;$&#123;rootfs&#125;&quot; -C writable</span><br><span class="line">echo &quot;# &lt;file system&gt;     &lt;mount point&gt;  &lt;type&gt;  &lt;options&gt;   &lt;dump&gt;  &lt;fsck&gt;&quot; &gt; writable/etc/fstab</span><br><span class="line">echo &quot;UUID=$&#123;root_uuid,,&#125; /              ext4    defaults,x-systemd.growfs    0       1&quot; &gt;&gt; writable/etc/fstab</span><br></pre></td></tr></table></figure>
+<p>​	写入idbloader 和 uboot</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo dd if=idbloader.img of=/dev/sdb seek=64</span><br><span class="line">sudo dd if=u-boot.itb of=/dev/sdb seek=16384 conv=notrunc</span><br><span class="line">sync</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
-        <category>生活</category>
+        <category>瑞芯微</category>
       </categories>
   </entry>
   <entry>
