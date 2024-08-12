@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title></title>
-    <url>/2024/08/13/02_%E7%91%9E%E8%8A%AF%E5%BE%AE/16_%E9%87%8E%E7%81%ABsdk%E5%AD%A6%E4%B9%A0shell%E8%84%9A%E6%9C%AC%E8%A7%A3%E6%9E%90/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id=""><a class="markdownIt-Anchor" href="#"></a> </h1>
-]]></content>
+    <title>野火SDK解析：shell脚本</title>
+    <url>/2024/08/12/02_%E7%91%9E%E8%8A%AF%E5%BE%AE/16_%E9%87%8E%E7%81%ABsdk%E5%AD%A6%E4%B9%A0shell%E8%84%9A%E6%9C%AC%E8%A7%A3%E6%9E%90/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>瑞芯微</category>
+      </categories>
   </entry>
   <entry>
     <title></title>
@@ -159,11 +161,10 @@
 ]]></content>
   </entry>
   <entry>
-    <title></title>
+    <title>RK内核镜像构建</title>
     <url>/2024/08/09/02_%E7%91%9E%E8%8A%AF%E5%BE%AE/15_rk%20%E5%86%85%E6%A0%B8%E9%95%9C%E5%83%8F%E6%9E%84%E5%BB%BA/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>我只是想到，单纯的看视频并没有什么用，我现在认为实践是检验真理的唯一标准。</p>
-<p>先来看编译的过程：<br />
-<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202408092036465.png" alt="image-20240809203616396" /></p>
+<p>先来看编译的过程：</p>
 <p>实际的编译命令</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">make -C kernel/ -j33 CROSS_COMPILE=/home/topeet/rk3588-linux/prebuilts/gcc/linux-x86/aarch64/gcc-arm-10.3-2021.07-x86_64-aarch64-none-linux-gnu/bin/aarch64-none-linux-gnu- ARCH=arm64 rockchip_linux_defconfig rk3588_linux.config</span><br><span class="line"></span><br><span class="line">make -C kernel/ -j33 CROSS_COMPILE=/home/topeet/rk3588-linux/prebuilts/gcc/linux-x86/aarch64/gcc-arm-10.3-2021.07-x86_64-aarch64-none-linux-gnu/bin/aarch64-none-linux-gnu- ARCH=arm64 topeet-rk3588-linux.img</span><br><span class="line">/home/topeet/rk3588-linux/device/rockchip/common/scripts/mk-fitimage.sh kernel/boot.img /home/topeet/rk3588-linux/kernel/boot.its kernel/arch/arm64/boot/Image</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">make -j33 CROSS_COMPILE=/home/topeet/rk3588-linux/prebuilts/gcc/linux-x86/aarch64/gcc-arm-10.3-2021.07-x86_64-aarch64-none-linux-gnu/bin/aarch64-none-linux-gnu- ARCH=arm64</span><br></pre></td></tr></table></figure>
 <p>内核镜像的生成过程以及后续压缩成 <code>Image.gz</code> 的过程可以分为以下几个步骤：</p>
@@ -223,6 +224,9 @@
 <p>注销Linux发行版</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">wsl --unregister &lt;DistributionName&gt;</span><br></pre></td></tr></table></figure>
 ]]></content>
+      <categories>
+        <category>瑞芯微</category>
+      </categories>
   </entry>
   <entry>
     <title></title>

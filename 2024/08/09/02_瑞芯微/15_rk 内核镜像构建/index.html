@@ -13,7 +13,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
-      <title> 热爱学习的未来酱</title>
+      <title>RK内核镜像构建 |  热爱学习的未来酱</title>
   <meta name="generator" content="hexo-theme-ayer">
       
       <link rel="shortcut icon" href="/favicon.ico" />
@@ -63,11 +63,25 @@
   data-scroll-reveal
 >
   <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  RK内核镜像构建
+</h1>
+ 
+
+      
+    </header>
      
     <div class="article-meta">
       <a href="/2024/08/09/02_%E7%91%9E%E8%8A%AF%E5%BE%AE/15_rk%20%E5%86%85%E6%A0%B8%E9%95%9C%E5%83%8F%E6%9E%84%E5%BB%BA/" class="article-date">
   <time datetime="2024-08-09T12:33:07.200Z" itemprop="datePublished">2024-08-09</time>
-</a>   
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE/">瑞芯微</a>
+  </div>
+  
 <div class="word_count">
     <span class="post-time">
         <span class="post-meta-item-icon">
@@ -98,8 +112,7 @@
     <div class="article-entry" itemprop="articleBody">
        
   <p>我只是想到，单纯的看视频并没有什么用，我现在认为实践是检验真理的唯一标准。</p>
-<p>先来看编译的过程：<br />
-<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202408092036465.png" alt="image-20240809203616396" /></p>
+<p>先来看编译的过程：</p>
 <p>实际的编译命令</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">make -C kernel/ -j33 CROSS_COMPILE=/home/topeet/rk3588-linux/prebuilts/gcc/linux-x86/aarch64/gcc-arm-10.3-2021.07-x86_64-aarch64-none-linux-gnu/bin/aarch64-none-linux-gnu- ARCH=arm64 rockchip_linux_defconfig rk3588_linux.config</span><br><span class="line"></span><br><span class="line">make -C kernel/ -j33 CROSS_COMPILE=/home/topeet/rk3588-linux/prebuilts/gcc/linux-x86/aarch64/gcc-arm-10.3-2021.07-x86_64-aarch64-none-linux-gnu/bin/aarch64-none-linux-gnu- ARCH=arm64 topeet-rk3588-linux.img</span><br><span class="line">/home/topeet/rk3588-linux/device/rockchip/common/scripts/mk-fitimage.sh kernel/boot.img /home/topeet/rk3588-linux/kernel/boot.its kernel/arch/arm64/boot/Image</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">make -j33 CROSS_COMPILE=/home/topeet/rk3588-linux/prebuilts/gcc/linux-x86/aarch64/gcc-arm-10.3-2021.07-x86_64-aarch64-none-linux-gnu/bin/aarch64-none-linux-gnu- ARCH=arm64</span><br></pre></td></tr></table></figure>
 <p>内核镜像的生成过程以及后续压缩成 <code>Image.gz</code> 的过程可以分为以下几个步骤：</p>
