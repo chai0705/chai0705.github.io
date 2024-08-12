@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+  
+
+    <head>
+      <meta charset="utf-8" />
+        
+      <meta name="description" content="永远年轻，永远热泪盈眶" />
+      
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>音视频编解码相关知识学习 |  热爱学习的未来酱</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      
+<link rel="stylesheet" href="/css/fonts/remixicon.css">
+
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    <link rel="alternate" href="/atom.xml" title="热爱学习的未来酱" type="application/atom+xml">
+</head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-03_学习/8 音视频编解码相关知识学习"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  音视频编解码相关知识学习
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/11/19/03_%E5%AD%A6%E4%B9%A0/8%20%E9%9F%B3%E8%A7%86%E9%A2%91%E7%BC%96%E8%A7%A3%E7%A0%81%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E5%AD%A6%E4%B9%A0/" class="article-date">
+  <time datetime="2023-11-19T09:16:56.000Z" itemprop="datePublished">2023-11-19</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">12.4k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">44 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>前些天一直在研究关于GPUi相关的知识，在周六的时候终于是写好了相应的测试手册，周一法师检测出问题的话我再加，其实也没啥可以加的东西了，不管是OPENGL还是OPENCL，只要相应的mali库成功即可，其他的倒是没啥，然后呢我也该去搞一下mpp 音视频编解码相关的东西了，后面其实还有摄像头啥的，这些都是要搞的，至少软件里面是要适配的对吧，还有那个缠绕我好久的buildroot opencv的问题，问题太多了，但是总要一点一点来，问题是一个一个解决的，总不可能一蹴而就，慢慢来呗</p>
+<h1 id="音视频的基本概念"><a class="markdownIt-Anchor" href="#音视频的基本概念"></a> 音视频的基本概念</h1>
+<h2 id="一-视频"><a class="markdownIt-Anchor" href="#一-视频"></a> 一 视频</h2>
+<h3 id="1-码率"><a class="markdownIt-Anchor" href="#1-码率"></a> 1、码率√</h3>
+<p>码率，又叫比特率，单位时间内传输的数据量，单位一般为kbps(千位每秒)。需要注意的是，这里b代表bit，而不是Byte，这里乘以8是Byte转成bit。计算公式：平均码率(kbps)=文件大小(kB)*8/时间(s)。动态码率(kbps)=每秒传输数据量(kB)*8。</p>
+<p>“bps” 是 “bits per second” 的缩写，指的是数据传输速率或比特率，用于测量数据在通信或存储系统中的传输速度。它表示每秒传输的比特数，其中比特是计算机中最小的数据单位。比特率通常用于描述网络带宽、调制解调器速度、数字音频/视频流的传输速度等。</p>
+<p>恒定码率：CBR，码率稳定可控，带宽要求不高，图像变化量比较大时方块效应比较明显。</p>
+<p>动态码率：VBR，码率波动较大，带宽要求较高，图像变化量比较大时方块效应有所改善。发生网络抖动时，比较容易丢包，需要重传，或者FEC前向纠错，从而带来延时。</p>
+<h3 id="2-分辨率"><a class="markdownIt-Anchor" href="#2-分辨率"></a> 2、分辨率</h3>
+<p>分辨率又称为解析度，分辨率越高，像素越多，图像越清晰。</p>
+<p>视频分辨率：又称为图像分辨率，由视频的宽高组成，表示形式宽x高，常见的视频分辨率有480P、720P、1080P、2K(2048x1080/2160x1440)、4K(4096x2160/3840x2160)，具体如下表1所示。</p>
+<p>屏幕分辨率：又称为显示分辨率，描述屏幕分辨率的单位是ppi(pixel per inch，每英寸的像素数)。</p>
+<p>位分辨率：又称为位深(BitDepth)，每个像素点存储信息的位数。常见的有：8位、16位、24位、32位色彩。Android的Bitmap常见的有ALPHA_8、RGB_565、ARGB_4444、ARGB_8888。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">显示模式</th>
+<th style="text-align:left">水平像素x垂直像素</th>
+<th style="text-align:left">宽高比</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">QCIF</td>
+<td style="text-align:left">176x144</td>
+<td style="text-align:left">11:9</td>
+</tr>
+<tr>
+<td style="text-align:left">QVGA</td>
+<td style="text-align:left">320x240</td>
+<td style="text-align:left">4:3</td>
+</tr>
+<tr>
+<td style="text-align:left">CIF</td>
+<td style="text-align:left">352x288</td>
+<td style="text-align:left">11:9</td>
+</tr>
+<tr>
+<td style="text-align:left">nHD</td>
+<td style="text-align:left">640x360</td>
+<td style="text-align:left">16:9</td>
+</tr>
+<tr>
+<td style="text-align:left">VGA</td>
+<td style="text-align:left">640x480</td>
+<td style="text-align:left">4:3</td>
+</tr>
+<tr>
+<td style="text-align:left">HD</td>
+<td style="text-align:left">1280x720</td>
+<td style="text-align:left">16:9</td>
+</tr>
+<tr>
+<td style="text-align:left">Full HD</td>
+<td style="text-align:left">1920x1080</td>
+<td style="text-align:left">16:9</td>
+</tr>
+<tr>
+<td style="text-align:left">2K(FHD+)</td>
+<td style="text-align:left">2048x1080</td>
+<td style="text-align:left">17:9</td>
+</tr>
+<tr>
+<td style="text-align:left">4K(UHD)</td>
+<td style="text-align:left">3840x2160</td>
+<td style="text-align:left">16:9</td>
+</tr>
+</tbody>
+</table>
+<h3 id="3-帧率"><a class="markdownIt-Anchor" href="#3-帧率"></a> 3、帧率</h3>
+<p>视频帧率：测量显示帧数的量度，单位为每秒显示帧数(FPS，全称为Frame Per Second)。一般视频帧率为24fps，P制(PAL，德国提出，中国、印度、巴基斯坦等国家使用)为25fps，也就是每帧显示40ms，N制(NTSC，美国标准委员会提出，美国、日本、韩国等国家使用)为30fps。有些超高帧率的视频达到60fps。</p>
+<p>显示帧率：以帧为单位的位图图像连续出现在显示器的频率，也称为刷新速率。Android设备刷新率一般为60Hz，也就是帧率为60fps，每帧为16ms，超过16ms能给人的肉眼带来延迟卡顿的感觉。做性能优化方面，也就是保证从测量、布局、绘制、上传指令、与GPU交换缓冲区等一系列动作在16ms完成。Android11支持120Hz的更高帧率，一般为对帧率要求极高的应用场景，比如互动游戏。</p>
+<h3 id="4-像素格式"><a class="markdownIt-Anchor" href="#4-像素格式"></a> 4、像素格式</h3>
+<p>像素格式：像素色彩分量的排列，由每个像素使用的总位数以及各分量的位数决定。图像的像素格式一般是RGBA四个分量通道各占8bits，组成一个32位的像素。其中R代表Red、G代表Green、B代表Blue、A代表Alpha。但是，视频压缩存储的像素格式不是RGBA，而是YUV，其中Y代表亮度(Luma)，U代表色度(Chroma)，V代表对比度(Contrast)。</p>
+<h3 id="5-画质"><a class="markdownIt-Anchor" href="#5-画质"></a> 5、画质</h3>
+<p>画质：画面质量，由清晰度、锐度、解析度、色彩纯度、色彩平衡等指标构成。</p>
+<p>清晰度：指图像细节纹理及其边界的清晰程度。</p>
+<p>锐度：反应图像平面清晰程度，以及图像边缘的锐利程度。</p>
+<p>解析度：指像素点的数量，与分辨率对应，分辨率越高，解析度越高。</p>
+<p>色彩纯度：指色彩的鲜艳程度。所有色彩都是三原色组成，其他颜色都是三原色混合而成，理论上可以混合出256种颜色。原色的纯度最高。色彩纯度是指原色在色彩中的百分比。</p>
+<p>色彩平衡：用来控制图像的色彩分布，使得图像整体达到色彩平衡。</p>
+<h3 id="6-色域与hdr"><a class="markdownIt-Anchor" href="#6-色域与hdr"></a> 6、色域与HDR</h3>
+<p>色域：指某种表色模式所能表达的颜色构成的范围区域，色域空间越大，所能表现的颜色越多。</p>
+<p>HDR：High Danamic Range，高动态范围，比普通图像提供更多动态范围和图像细节，能够更好反应真实环境的视觉效果。颜色值经过归一化后，范围一般是[0,1]。而HDR可以表达超出1的颜色值，拥有更大的颜色范围。</p>
+<h3 id="7-旋转角度"><a class="markdownIt-Anchor" href="#7-旋转角度"></a> 7、旋转角度</h3>
+<p>旋转角度：视频的YUV储存方向。一般的视频旋转角度是0°，对应的是横屏显示。后置摄像头竖屏拍的视频，旋转角度为90°，对应的是竖屏显示。Android中可以通过MediaMetaDataRetriever获取旋转角度。</p>
+<h3 id="8-时长"><a class="markdownIt-Anchor" href="#8-时长"></a> 8、时长</h3>
+<p>视频所有图像播放所需要的时间称为视频时长。计算公式：时长(s)=帧数x每帧时长=帧数x(1/帧率)。假设一个视频帧数为1000，帧率为25fps，那么时长为40s。</p>
+<h3 id="9-封装格式"><a class="markdownIt-Anchor" href="#9-封装格式"></a> 9、封装格式</h3>
+<p>封装格式（Container Format），也被称为容器格式、多媒体容器或封装协议，是用于将音频、视频、字幕等多种媒体数据进行封装和存储的文件格式。它将不同类型的媒体数据组合在一起，同时提供了文件结构、元数据、同步信息和索引等，以便播放器或解码器能够正确解析和播放媒体内容。</p>
+<p>封装格式通常由以下几个主要组成部分构成：</p>
+<ol>
+<li>特定格式头（Format Header）：封装格式的文件头部分包含了关于文件本身的重要信息，如文件类型、版本、总体文件大小等。这些信息在解析和处理文件时起到了关键作用。</li>
+<li>媒体信息（Metadata）：封装格式可以包含有关媒体内容的附加信息，例如标题、作者、描述、时长、分辨率、采样率等。这些元数据提供了有关媒体文件的描述和标识，使其能够被正确地识别和分类。</li>
+<li>音视频轨（Track）：封装格式可以容纳多个音频、视频或字幕轨道。每个轨道包含相应媒体数据的编码信息、时间戳和相关参数。例如，一个视频轨道可能包含视频帧的压缩编码数据，而一个音频轨道可能包含音频样本的编码数据。</li>
+<li>索引（Index）：为了快速定位和访问媒体数据，封装格式通常包含一个索引表。索引表记录了文件中各个部分的位置、时间戳和长度等信息，以便播放器能够快速定位到需要的数据位置。通过索引，播放器可以跳转到特定时间点或轨道的特定位置。</li>
+<li>其他数据：除了上述主要组成部分之外，封装格式还可以包含其他数据，如字幕轨道、章节信息、描述文本、封面图像等。这些附加数据提供了更丰富的媒体体验和交互功能。</li>
+</ol>
+<p>不同的封装格式具有不同的特点和功能。一些封装格式具有更广泛的兼容性和流行度，例如MP4（MPEG-4 Part 14）和MKV（Matroska）。这些封装格式支持多种编码格式、多个轨道和广泛的元数据支持。其他封装格式如AVI、MOV、FLV等也有各自的特点和应用领域。</p>
+<p>封装格式在数字媒体的存储、传输和播放中起到了重要的作用。它们提供了一种标准化的方式来组织和管理多媒体数据，使得不同类型的媒体可以在各种设备和平台上进行兼容性播放和交互。。</p>
+<h3 id="10-编码协议"><a class="markdownIt-Anchor" href="#10-编码协议"></a> 10、编码协议</h3>
+<p>编码协议是指用于将原始视频数据进行压缩和编码的特定算法和规范。这些编码协议的目的是减小视频文件的大小并提高传输和存储效率，同时尽量保持较高的视频质量。以下是对几种常见的视频编码协议的详细介绍：</p>
+<ol>
+<li>H.264 / AVC：H.264（也称为高级视频编码，Advanced Video Coding）是一种广泛使用的视频编码协议。它采用了先进的压缩技术，能够提供较高的视频质量和更低的比特率。H.264广泛应用于各种领域，包括互联网视频流媒体、蓝光光盘、视频会议等。</li>
+<li>H.265 / HEVC：H.265（High Efficiency Video Coding）是H.264的后继者，也是一种先进的视频编码协议。相比于H.264，H.265能够进一步减小视频文件大小，并提供更高的视频质量。它在保持相同视频质量的情况下，能够将比特率降低约50%。H.265常用于4K和8K高分辨率视频、流媒体服务等。</li>
+<li>VP8 / VP9：VP8和VP9是由Google开发的开放源代码视频编码协议。它们提供了高效的视频压缩和较高的视频质量，并被广泛应用于WebRTC、WebM等互联网标准中。VP9相比VP8进一步提升了压缩性能，能够在更低的比特率下保持较高的视频质量。</li>
+<li>MPEG-4：MPEG-4是一系列的视频编码协议，包括MPEG-4 Part 2和MPEG-4 Part 10（也称为H.264）。MPEG-4 Part 2常用于视频的存储和传输，而MPEG-4 Part 10（H.264）被广泛使用于各种应用，包括互联网视频、移动视频等。</li>
+<li>MJPEG：MJPEG（Motion JPEG）是一种将视频中的每一帧都作为独立的JPEG图像进行压缩的编码协议。它适用于一些特定应用，如摄像头和视频监控系统。尽管MJPEG在压缩率和存储效率方面比较低，但解码过程相对简单，避免了帧间预测等复杂的算法。</li>
+<li>WMV3：WMV3（Windows Media Video 3）是由微软开发的一种视频编码协议。它广泛用于Windows Media Player和其他微软产品中，提供了较好的视频质量和压缩效率。WMV3支持各种分辨率和比特率，并具有较好的兼容性。</li>
+</ol>
+<p>这些编码协议在视频压缩方面采用了不同的算法和技术，以平衡视频质量、压缩比和解码复杂性。不同的应用场景和设备可能选择不同的编码协议，根据需求和限制来平衡视频质量和性能。</p>
+<h3 id="11-视频播放整体流程"><a class="markdownIt-Anchor" href="#11-视频播放整体流程"></a> 11、视频播放整体流程</h3>
+<p>当您在电脑上打开一个视频文件时，涉及到了多个步骤和组件，以确保视频能够被正确解码和显示。以下是一个详细的视频文件在电脑上显示的典型流程：</p>
+<ol>
+<li>文件读取：计算机首先会读取视频文件的数据。这涉及从硬盘或其他存储设备中读取文件的二进制数据，并将其加载到计算机的内存中以供后续处理。</li>
+<li>封装格式解析：计算机会根据视频文件的封装格式（如MP4、MKV等）来解析文件的结构和元数据。这包括读取文件头部信息、索引表和媒体轨道的描述等。通过解析封装格式，计算机可以了解视频文件的整体结构和内容。</li>
+<li>视频解码：视频解码器开始对视频轨道进行解码。它根据封装格式中存储的视频编码器信息，解码压缩的视频数据并将其转换为原始的像素数据。解码过程涉及对视频帧进行逐帧解压缩和重构，以还原出原始的图像数据。</li>
+<li>音频解码：如果视频文件包含音频轨道，音频解码器将对音频轨道进行解码。类似于视频解码过程，音频解码器根据封装格式中的音频编码器信息，解码压缩的音频数据并将其转换为原始的音频样本数据。</li>
+<li>同步和播放：视频解码器和音频解码器的输出需要进行同步，以确保视频和音频的播放保持一致。计算机使用时间戳、帧率和采样率等信息来确保视频和音频流的同步，并根据显示设备的刷新率来进行适当的帧率调整。</li>
+<li>图像渲染：计算机使用图像渲染器将解码后的视频像素数据转换为适合显示的图像格式。这可能涉及色彩空间转换、调整图像大小、应用滤镜或效果等处理。</li>
+<li>音频渲染：类似地，音频渲染器将解码后的音频样本数据转换为适合音频输出设备的音频格式。这可能包括音频混合、音量调整、空间效果等处理。</li>
+<li>显示输出：最后，计算机将渲染后的视频图像和音频数据发送到显示设备和扬声器，以进行实际的播放。这可能涉及将视频图像传输到显示器，并通过显示器的硬件和软件进行显示。同时，音频数据也会被发送到扬声器或音频输出设备进行播放。</li>
+</ol>
+<h2 id="二-音频"><a class="markdownIt-Anchor" href="#二-音频"></a> 二 音频</h2>
+<h3 id="1-采样率"><a class="markdownIt-Anchor" href="#1-采样率"></a> 1、采样率</h3>
+<p>采样率：对声音信号每秒的采样次数，采样率越高，声音的还原越真实。采样率单位为Hz，常见的采样率有：8000Hz、16000Hz、44100Hz、48000Hz。人类一般能够听到的声音范围：20Hz～20000Hz。根据奈奎斯特采样定理：当采样频率大于信号中最高频率的2倍时，采样后的数字信号能够完整保留原始信号的信息。</p>
+<h3 id="2-声道"><a class="markdownIt-Anchor" href="#2-声道"></a> 2、声道</h3>
+<p>声道：指声音在录制或播放时，在不同空间位置采集或回放的相互独立音频信号。声道数指在录音时的音源数量，或者在播放时的扬声器数量。</p>
+<h3 id="3-声道布局"><a class="markdownIt-Anchor" href="#3-声道布局"></a> 3、声道布局</h3>
+<p>不同声道数对应不同声道布局。常见的声道布局有单声道(mono)、立体声道(stereo)、四声环绕、5.1声道。</p>
+<p>单声道：只有一个声道，优点数据量小，amr_nb和amr_wb默认为单声道，缺点是缺乏对声音位置定位。</p>
+<p>立体声道：一般为两个声道，由左声道、右声道组成，改善对声音位置定位的状况。</p>
+<p>四声环绕：由前左、前右、后左、后右组成，形成立体环绕。4.1声道是在四声环绕基础上，增加一个低音。</p>
+<p>5.1声道：在4.1基础上，增加一个中场声道，杜比AC3就是采用5.1声道，也就是影院宣传的杜比音效。</p>
+<h3 id="4-音质"><a class="markdownIt-Anchor" href="#4-音质"></a> 4、音质</h3>
+<p>音质：声音的质量，经过编码压缩后的音频信号保真度，由音量、音高和音色组成。</p>
+<p>音量：音频的强度，数值范围0-100，静音时为0，最大值为100。Android中有提供音量增强LoudnessEnhancer，调节声音分贝值。</p>
+<p>音高：声音的音调，即音频频率或每秒变化次数。</p>
+<p>音色：音频泛音，又称为音品，不同声音表现在波形方面与众不同的特性。</p>
+<h3 id="5-封装格式"><a class="markdownIt-Anchor" href="#5-封装格式"></a> 5、封装格式</h3>
+<p>音频的封装格式，与视频封装格式类似，由特定格式头+媒体信息+音频轨数据组成。常见的封装格式有：mp3、m4a、ogg、amr、wma、wav、flac、aac、ape等。</p>
+<ol>
+<li>MP3（MPEG Audio Layer III）：MP3 是一种广泛使用的音频封装格式，具有较高的压缩比和音质，适用于音乐和语音的存储和传输。</li>
+<li>M4A（MPEG-4 Audio）：M4A 是苹果公司使用的音频封装格式，它可以包含多种编码格式的音频数据，如 AAC（Advanced Audio Coding）和 ALAC（Apple Lossless Audio Codec）。M4A 格式通常与 iTunes 和 Apple 设备相关联。</li>
+<li>OGG：OGG 是一种自由开放的音频封装格式，支持多种编码格式，如 Vorbis、Opus 等。它具有较好的音质和压缩比，常用于网络流媒体和游戏音效。</li>
+<li>AMR（Adaptive Multi-Rate）：AMR 是一种用于语音编码和封装的格式，主要用于手机通话和语音录制。它具有较高的压缩比，适合在低比特率下传输语音数据。</li>
+<li>WMA（Windows Media Audio）：WMA 是微软开发的音频封装格式，支持多种编码格式，如 WMA 标准、WMA Pro 和 WMA Lossless。它在 Windows 平台上得到广泛应用，常用于音乐和音频流媒体。</li>
+<li>WAV（Waveform Audio File Format）：WAV 是一种无损音频封装格式，它存储原始音频数据，不进行压缩。WAV 格式具有较高的音质，常用于音乐制作和音频编辑。</li>
+<li>FLAC（Free Lossless Audio Codec）：FLAC 是一种无损音频封装格式，它可以实现无损的音频压缩和解压缩，保留了原始音频数据的完整性。FLAC 格式适用于音乐存储和音频传输。</li>
+<li>AAC（Advanced Audio Coding）：AAC 是一种高级音频编码格式，常用于音乐和视频的存储和传输。它具有较高的音质和压缩效率，是目前广泛支持的音频编码格式。</li>
+<li>APE（Monkey’s Audio）：APE 是一种无损音频封装格式，类似于 FLAC，但压缩比略低。它常用于音乐存储和音频传输，提供了较高的音质和文件压缩率。</li>
+</ol>
+<h3 id="6-编码协议"><a class="markdownIt-Anchor" href="#6-编码协议"></a> 6、编码协议</h3>
+<p>音频经过解封装得到的音频轨数据，也是经过编码的。常见的音频编码协议有：mp3、aac、amr_nb、amr_wb、ac3、vorbis、opus、flac、wmav2等。</p>
+<ol>
+<li>MP3（MPEG Audio Layer III）：MP3 是一种常见的有损音频编码格式，它通过移除人耳听不到或对音质影响较小的音频信号，实现了较高的压缩比。MP3 格式广泛用于音乐存储和传输。</li>
+<li>AAC（Advanced Audio Coding）：AAC 是一种先进的音频编码格式，它在音质和压缩效率上优于 MP3。AAC 常用于音乐、视频和流媒体的存储和传输，被广泛支持。</li>
+<li>AMR-NB（Adaptive Multi-Rate Narrowband）：AMR-NB 是一种窄带自适应多速率编码格式，用于语音编码和传输。它在低比特率下实现了较高的语音质量，常用于手机通话。</li>
+<li>AMR-WB（Adaptive Multi-Rate Wideband）：AMR-WB 是一种宽带自适应多速率编码格式，也用于语音编码和传输。相比于 AMR-NB，AMR-WB 在更宽的频率范围内提供了更好的语音质量。</li>
+<li>AC3（Audio Coding 3）：AC3 是一种有损音频编码格式，常用于影片音轨和 DVD 视频中。AC3 格式支持多声道音频，提供了较高的音质和环绕声效果。</li>
+<li>Vorbis：Vorbis 是一种开放的无损音频编码格式，采用了无损压缩算法，可以提供高音质和较小的文件大小。Vorbis 常用于音乐存储和网络流媒体。</li>
+<li>Opus：Opus 是一种开放的音频编码格式，具有低延迟、高音质和较高的压缩效率。Opus 支持多种应用场景，包括音乐、语音通信和网络流媒体。</li>
+<li>FLAC（Free Lossless Audio Codec）：FLAC 是一种开放的无损音频编码格式，可以实现无损的音频压缩和解压缩。FLAC 格式保留了原始音频数据的完整性，提供了较高的音质。</li>
+<li>WMA（Windows Media Audio）：WMA 是微软开发的音频编码格式，支持多种编码配置，如 WMA 标准、WMA Pro 和 WMA Lossless。WMA 常用于 Windows 平台上的音乐和音频流媒体。</li>
+</ol>
+<h3 id="7-采样数"><a class="markdownIt-Anchor" href="#7-采样数"></a> 7、采样数</h3>
+<p>采样数，即每帧采样的数量。在FFmpeg的AVFrame中，定义为nb_samples。</p>
+<h3 id="8-采样位数"><a class="markdownIt-Anchor" href="#8-采样位数"></a> 8、采样位数</h3>
+<p>采样位数，即每个采样占用多少位。在RIFF(Resource Interchange File Format)资源交换文件格式有个字段bits_per_sample表示采样位数，在FFmpeg也是用这个字段表示采样位数。</p>
+<h3 id="9-存储空间"><a class="markdownIt-Anchor" href="#9-存储空间"></a> 9、存储空间</h3>
+<p>音频的每秒存储空间由：采样率、声道数、每个采样位数。假设采样率为44.1k，声道数为2，采样位数为16。那么，每秒所占存储空间字节数=44100 * 2 * 16 / 8</p>
+<h3 id="10-帧时长"><a class="markdownIt-Anchor" href="#10-帧时长"></a> 10、帧时长</h3>
+<p>音频的帧时长=采样数 / 采样率。假设采样率为44.1k，采样数为1024。那么每帧时长约等于23ms。</p>
+<h4 id="11-采样格式"><a class="markdownIt-Anchor" href="#11-采样格式"></a> 11、采样格式</h4>
+<p>音频的采样格式分为大端存储和小端存储。按照符号划分有：有符号与无符号。按照类型划分有：整型与浮点型。按照存储位数划分有：8位、16位、32位、64位，都是8的倍数。在FFmpeg的AVSampleFormat枚举如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">enum</span> <span class="title">AVSampleFormat</span> &#123;</span></span><br><span class="line">    AV_SAMPLE_FMT_NONE = <span class="number">-1</span>,</span><br><span class="line">    AV_SAMPLE_FMT_U8,          <span class="comment">// unsigned 8 bits</span></span><br><span class="line">    AV_SAMPLE_FMT_S16,         <span class="comment">// signed 16 bits</span></span><br><span class="line">    AV_SAMPLE_FMT_S32,         <span class="comment">// signed 32 bits</span></span><br><span class="line">    AV_SAMPLE_FMT_FLT,         <span class="comment">// float</span></span><br><span class="line">    AV_SAMPLE_FMT_DBL,         <span class="comment">// double</span></span><br><span class="line"> </span><br><span class="line">    AV_SAMPLE_FMT_U8P,         <span class="comment">// unsigned 8 bits, planar</span></span><br><span class="line">    AV_SAMPLE_FMT_S16P,        <span class="comment">// signed 16 bits, planar</span></span><br><span class="line">    AV_SAMPLE_FMT_S32P,        <span class="comment">// signed 32 bits, planar</span></span><br><span class="line">    AV_SAMPLE_FMT_FLTP,        <span class="comment">// float, planar</span></span><br><span class="line">    AV_SAMPLE_FMT_DBLP,        <span class="comment">// double, planar</span></span><br><span class="line">    AV_SAMPLE_FMT_S64,         <span class="comment">// signed 64 bits</span></span><br><span class="line">    AV_SAMPLE_FMT_S64P,        <span class="comment">// signed 64 bits, planar</span></span><br><span class="line"> </span><br><span class="line">    AV_SAMPLE_FMT_NB           <span class="comment">// Number of sample formats</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h1 id="视频封装格式"><a class="markdownIt-Anchor" href="#视频封装格式"></a> 视频封装格式</h1>
+<p>音视频的时长怎么获取，音视频的封面怎么获取，音视频的格式怎么获取呢？这些信息都以特定格式存储在文件开头或者结尾，称为多媒体信息或者多媒体元数据。通用的封装格式由：文件标识头+多媒体信息+音视频(字幕)轨+视频帧索引块组成，如果是纯音频，后面可能还有歌词。音视频的封装格式就是通过解析文件标识头进行判断的，然后解析多媒体信息从而获取时长，再解析视频帧索引块，最后根据索引块去获取对应时间戳的视频帧。</p>
+<p>音视频封装格式存储的字段包括：时长、码率、音视频编码器、分辨率(宽x高)、帧率、像素格式、旋转角度、采样率、声道数等等。其中视频专有的字段是分辨率、帧率、像素格式、旋转角度，而音频专有的字段是采样率、声道数。</p>
+<p>常见的视频格式有：mp4、mov、3gp、mkv、webm、flv、avi、mpg、wmv、ts等等。其中mp4、mov、3gp同属一个协议簇，目前mp4最为流行，mp4全称为MPEG-4，由国际标准化组织和国际电工委员会下属的动态图像专家组(Moving Picture Experts Group)制定，具体协议可参考：ISO/IEC14496-14协议；mkv与webm公用封装格式：matroska，对于高清视频而言，mkv/webm最受欢迎；而avi是比较古老的格式，音视频流交错(Audio Video Interleave)，可以封装各种编码格式的音视频流；mpg属于ps的一种封装格式；wmv(Windows Media Video)是微软推出的视频编解码格式统称，采用ASF(Advance System Format)作为容器，基于Object对象进行封装；而ts的全称为MPEG2-TS，即为Transport Stream的缩写，具体可参考ISO/IEC13818-1协议，作用于传输层，主要用于实时传输的节目，HLS直播协议就是基于ts切片来传输视频流的，主要特点是从视频流任一片段都可独立解码播放；ps与ts类似，全称为MPEG-PS，即为Program Stream的缩写，用于存储固定时长的节目。视频格式如下图所示：</p>
+<p>整个解封装流程：从读取文件头判断视频格式开始，然后选择对应的Extractor，解析多媒体信息，再解析视频帧的索引块，最后根据索引去定位并读取音视频数据。如下图所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311192038669.png" alt="20200907235506737 (1)" /></p>
+<ol>
+<li>
+<p>读取文件头：<br />
+读取文件头是为了获取文件的基本信息和标识。文件头通常是文件的前几个字节，它包含了文件的格式信息以及其他元数据。读取文件头可以通过打开文件并读取前几个字节的方式实现。</p>
+</li>
+<li>
+<p>判断文件格式：<br />
+通过读取文件头中的信息，可以判断文件的格式。在提供的文件格式中，常见的文件格式有：</p>
+<ul>
+<li>视频格式：mp4、avi、mkv、flv、wmv</li>
+<li>音频格式：mp3、m4a、flac、amr</li>
+</ul>
+</li>
+<li>
+<p>选择对应的解析器（Extractor）：<br />
+根据判断出的文件格式，选择对应的解析器（Extractor）。解析器是用于解析文件的工具或库，它能够提取出文件中的特定信息。不同的文件格式通常需要使用不同的解析器进行解析。</p>
+</li>
+<li>
+<p>解析多媒体信息：<br />
+使用选择的解析器，对文件进行解析以获取多媒体信息。多媒体信息包括视频的分辨率、帧率、编码格式等，音频的采样率、声道数、编码格式等。解析多媒体信息可以通过解析器提供的函数或方法来实现。</p>
+</li>
+<li>
+<p>解析视频帧索引：<br />
+如果文件是视频文件，可以进一步解析视频的帧索引。视频帧索引包含了视频中每一帧的位置和时间信息。解析视频帧索引可以帮助我们定位和提取特定的视频帧。</p>
+</li>
+<li>
+<p>读取音视频数据：<br />
+最后，通过解析器提供的函数或方法，读取音视频数据。音视频数据是文件中实际存储的音频和视频内容。可以根据需要，逐帧读取视频数据或逐样本读取音频数据。</p>
+<p>mp4作为目前最流行的视频封装格式，也是本篇文章的男一号主角，下面将围绕mp4格式进行展开分析。mp4是由一系列的box组成(在quick time协议中，称为atom)，box又由Header和Data组成，box的结构如图2所示：</p>
+</li>
+</ol>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311192040157.png" alt="img" /></p>
+<p>而Header由size、type、largeSize、extendType组成，其中size和type是必要字段，如表1所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311192040107.png" alt="image-20231119204029085" /></p>
+<p>​    full box的Header多两个字段：version、flag，一般是track box采用full box形式，如表2所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311192040249.png" alt="image-20231119204051236" /></p>
+<p>box分为normal box、full box、large box、extend box。如果size为1，那么表明该box为large box，使用largeSize来存储box的大小；如果size为0，那么表明该box是文件的最后一个box；如果box的类型为uuid，那么表明该box是扩展box。如下面代码段所示：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">aligned(<span class="number">8</span>) class <span class="title function_">Box</span> <span class="params">(<span class="type">unsigned</span> <span class="type">int</span>(<span class="number">32</span>) boxtype,</span></span><br><span class="line"><span class="params">    optional <span class="type">unsigned</span> <span class="type">int</span>(<span class="number">8</span>)[<span class="number">16</span>] extended_type)</span> &#123;</span><br><span class="line">    <span class="type">unsigned</span> <span class="title function_">int</span><span class="params">(<span class="number">32</span>)</span> size;</span><br><span class="line">    <span class="type">unsigned</span> <span class="title function_">int</span><span class="params">(<span class="number">32</span>)</span> type = boxtype;</span><br><span class="line">    <span class="keyword">if</span> (size==<span class="number">1</span>) &#123;</span><br><span class="line">        <span class="type">unsigned</span> <span class="title function_">int</span><span class="params">(<span class="number">64</span>)</span> largesize;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (size==<span class="number">0</span>) &#123;</span><br><span class="line">        <span class="comment">// box extends to end of file</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (boxtype==‘uuid’) &#123;</span><br><span class="line">        <span class="type">unsigned</span> <span class="type">int</span>(<span class="number">8</span>)[<span class="number">16</span>] usertype = extended_type;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>moov box作为mp4格式的重要组成部分，根据moov box与mdat box的相对位置，分为moov前置和moov后置。如下面图3、图4所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311192041850.jpeg" alt="img" /></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311192041782.jpeg" alt="img" /></p>
+<p>通常情况下，mp4的moov都是在mdat前面的；一般只有实时录制的mp4视频，moov才在mdat的后面。</p>
+<p>ftyp box：mp4视频标识头，包含major brand、minor version、compatible brands。其中major brand一般为isom，而compatible brands包括isom、iso2、avc、mp41、mp42等。</p>
+<p>moov box：存储多媒体信息，嵌套着movie box(mvhd)、track box(trak box)、usedata box(udat)；而track box分为视频轨、音频轨、字幕轨，如果有多语言，就会对应有多音轨；trak/mdia/minf/stbl/stsd存储的是音视频编码器信息，比如视频轨的是avc，音频轨是mp4a；trak/mdia/minf/stbl/stsz存储的是视频帧size；trak/mdia/minf/stbl/stco存储的是chunk offset。</p>
+<p>mdat box：音视频数据，根据moov及其嵌套box解析出来的视频帧索引，去定位关键帧，然后根据帧类型读取音视频数据。</p>
+<h1 id="音频封装格式"><a class="markdownIt-Anchor" href="#音频封装格式"></a> 音频封装格式</h1>
+<p>音频封装格式一般由：多媒体信息+音频流+封面流+歌词流组成。有些音乐会包含封面和歌词，则对应有封面流、歌词流。多媒体信息包括：标题、艺术家、专辑、作曲、音乐风格、日期、码率、时长、声道布局、采样率、音频编码器等。而音频封装包括：mp3、m4a、ogg、amr、wma、aac、wav、flac、ape等。前面两篇文章介绍过相关概念：走进音视频的世界——音视频基本概念、走进音视频世界——视频封装格式。音频格式如下图所示：</p>
+<p>以下面问题为出发点，揭开音频封装格式的面纱：</p>
+<p>① 音乐封面如何获取？</p>
+<p>② 音乐歌词如何获取与显示？</p>
+<p>③ 有损格式与无损格式有什么区别？</p>
+<p>④ 不同封装格式有什么联系，又有什么区别？</p>
+<p>先从FFprobe检测到的音频metadata说起，如下图1所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311192045466.jpeg" alt="img" /></p>
+<p>从上图可以看出，前半部分是title标题、artist艺术家、album专辑、album_artist艺术家专辑、composer作曲者、genre音乐风格式；中间部分是lyrics歌词，每句歌词前面有对应的时间戳；后半部分是两个流，第0编号的流是音频轨，包含：音频编码器、采样率、声道布局、码率，第1编号的流是封面，其实是一帧图像，包含：图像编码器、像素格式、分辨率。接下来根据上面提出的问题进行展开分析。</p>
+<p>1、获取音乐的封面<br />
+音乐封面保存在视频图像流中，先解析出图像编码器、像素格式、分辨率等参数，然后根据编码器去寻找对应的解码器，并打开解码器，对图像编码压缩数据进行解码，最终解码出来的图像就是封面了。</p>
+<p>2、音乐歌词的获取与显示<br />
+上面有提及，每句歌词前面有显示的时间戳，以音频时钟为基准，歌词时间戳同步于音频时间戳。也就是根据音频时间戳来同步解析歌词，然后把歌词回调到应用层渲染显示。另外一个问题，当前歌词什么时候该消失呢？歌词没有具体的显示时长，等待下一个歌词的到来，把当前歌词覆盖。</p>
+<p>3、有损格式与无损格式的区别<br />
+(1) 无损音乐格式</p>
+<p>无损音乐格式有ape、wav、flac三种，其中ape、flac都是基于wav进行压缩。而wav是微软专门为Windows开发的一种标准数字音频文件，文件扩展名wav，是WaveForm的缩写，文件大小计算公式：size=(采样率<em>量化位数</em>声道/8)/时间(秒)。一般采样率是44100Hz，量化位数为16位，声道数为2（即立体声道），1分钟的音频占用存储空间约为10M。</p>
+<p>在Windows环境下，大多数媒体文件都是按照资源互换文件格式(Resource Interchange File Format)来储存信息的，简称为RIFF格式。构成RIFF的基本单位成为块(Chunk)，每个RIFF文件由若干块组成，wav基本结构如下表所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311192045766.png" alt="image-20231119204555747" /></p>
+<p>每个块由块标识、长度、数据组成，如下代码段：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">struct chunk &#123;</span><br><span class="line">    u32 id; //块标识</span><br><span class="line">    u32 size; //块大小</span><br><span class="line">    u8 data[size]; //块内容</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>其中fmt块由声道数、采样率、码率、块对齐、量化位数五个参数组成，如下表所示：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Num Channels	         2 Bytes	           小端存储</span><br><span class="line">SampleRate	         4 Bytes	           小端存储</span><br><span class="line">ByteRate	         4 Bytes	           小端存储</span><br><span class="line">Block Align	         2 Bytes	           小端存储</span><br><span class="line">BitsPerSample	         2 Bytes	           小端存储</span><br></pre></td></tr></table></figure>
+<p>(2) 有损音乐格式</p>
+<p>有损音乐格式包括：mp3、m4a、ogg、amr、wma、aac等。目前最为流行的是mp3(MPEG-1 audio layer3)，有着mp3的下一代之称的是aac(Advance Audio Coding)。有损格式压缩率比无损的高，文件占用存储空间小，但是声音还原度不如无损格式。我们下载音乐时，碰到高品质或者无损音质的音乐，通常要VIP会员或按需收费，因为越高品质越接近原声。而无损音乐从理论上能够100%保留声音细节，100%还原原声。无损音质英文简称为SQ(Super Quality，超音质)。关于无损格式与有损格式对比如下表所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311192046184.png" alt="image-20231119204633159" /></p>
+<h4 id="4-不同封装格式的联系与区别"><a class="markdownIt-Anchor" href="#4-不同封装格式的联系与区别"></a> 4、不同封装格式的联系与区别</h4>
+<p>封装格式共同点是基本结构是相同的，都是由多媒体信息+音频流+封面流+歌词流组成。区别是不同封装格式，采用编码方式不一样，压缩率不一样，音频流子结构不一样。下面是不同封装格式的多方位对比，如表4所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311192047768.png" alt="image-20231119204702747" /></p>
+<h1 id="音视频编码"><a class="markdownIt-Anchor" href="#音视频编码"></a> 音视频编码</h1>
+<p>音视频流是通过特定编码器压缩，由一系列的压缩图像/语音帧组成。当然可能存在多种语言多音轨，每个音轨之间的音频流相互独立。还可能存在内置字幕，常见的字幕格式有sub、smi、ssa、srt等。但是，本篇文章讨论的主角是音视频编码，常见的视频编码有h264、h265、vp9、mpeg4、mjpeg、wmv3、av1(Alliance for Open Media Video 1，由开放媒体联盟推出，对标h265，旨在成为下一代视频编码技术标准)，常见的音频编码有mp3、aac、amr_nb、amr_wb、ac3、vorbis、opus、flac、wmav2等等。音视频格式如下图所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311192049496.png" alt="img" /></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311192049324.png" alt="img" /></p>
+<h2 id="一-视频编码"><a class="markdownIt-Anchor" href="#一-视频编码"></a> 一、视频编码</h2>
+<p>视频编码是将原始视频信号进行压缩和编码的过程，以便在存储和传输中减少数据量。下面详细解释为什么需要对视频进行编码以及视频编码的原理和过程。</p>
+<p>为什么需要进行视频编码？<br />
+视频数据通常由连续的图像帧组成，每一帧都包含了大量的像素数据。原始的视频数据以YUV或RGB格式存储，其中Y表示亮度分量，U和V表示色度分量。这些原始数据非常大，特别是对于高分辨率和高帧率的视频来说，它们需要大量的存储空间和传输带宽。为了有效地存储和传输视频，需要对视频进行压缩，而视频编码就是实现视频压缩的一种方式。</p>
+<h3 id="1-变换与量化"><a class="markdownIt-Anchor" href="#1-变换与量化"></a> 1、变换与量化</h3>
+<p>变换：把空间域的图像信号变换到频率域。常见的变换有离散余弦变换、傅里叶变换。其中，离散余弦变换又称为DCT变换，在视频压缩中得到广泛应用。</p>
+<p>量化：人类对图像的低频特性的信息敏感(比如亮度)，对高频特性的信息不敏感(比如色度、对比度)，所以才编码过程中可以少用高频信息，全保留低频信息。量化过程是对低频区进行细量化，对高频区进行粗量化，减少人眼不太敏感的图像信息，从而减小数据量、提高压缩率。量化是有损的，量化参数(Quantization Parameter)越大，图像质量越低。</p>
+<h3 id="2-运动补偿与运动估计"><a class="markdownIt-Anchor" href="#2-运动补偿与运动估计"></a> 2、运动补偿与运动估计</h3>
+<p>运动估计：把图像分割成互不重叠的子块，然后以一定大小的窗口，在前一图像或后一图像去移动搜索相似的图像块，这个搜索过程称为运动估计。</p>
+<p>运动补偿：通过先前的局部图像来预测、补偿当前的局部图像；</p>
+<h3 id="3-熵编码"><a class="markdownIt-Anchor" href="#3-熵编码"></a> 3、熵编码</h3>
+<p>熵编码是基于变长编码，出现概率大的符号采用短码，出现概率小的符号采用长码，最终的平均码长接近信源熵值。其他的变长编码还包括：哈夫曼编码、游程编码、算术编码等。</p>
+<h3 id="4-帧内压缩与帧间压缩"><a class="markdownIt-Anchor" href="#4-帧内压缩与帧间压缩"></a> 4、帧内压缩与帧间压缩</h3>
+<p>帧内压缩：每帧图像内部存在数据冗余。比如一副图像中有一块颜色相同的画布，编码时按照nxn大小的宏块进行划分，那么宏块之间存在相似性，这就使得可以从空间层面进行压缩，即帧内压缩；</p>
+<p>帧间压缩：连续图像之间存在许多相似细节。比如一辆运动中的汽车，从当前时刻到下一时刻发生相对位移，从另外一个角度来说，是周边环境发生相对位移而汽车本身没有变化，这就使得可以从时间层面进行压缩，即帧间压缩；</p>
+<h3 id="5-i帧-p帧-b帧"><a class="markdownIt-Anchor" href="#5-i帧-p帧-b帧"></a> 5、I帧、P帧、B帧</h3>
+<p>I帧：内部编码帧，又称为关键帧，使用I帧编码可以完整还原一副图像，帧的数据量会比较大；</p>
+<p>P帧：前向预测帧，又称为前向参考帧，需要参考前一个I帧进行编码，数据量会比I帧小。同理，解码时也需要参考前一个I帧进行解码；</p>
+<p>B帧：双向内插帧，又称为双向参考帧，需要参考前后的I帧或P帧进行编码，压缩率会比P帧更高，数据量比P帧更小。但是，解码时需要下一个I帧或者P帧的到来，解码时序需要严格控制，解码复杂度也相对高。</p>
+<h3 id="6-gop与关键帧间隔"><a class="markdownIt-Anchor" href="#6-gop与关键帧间隔"></a> 6、GOP与关键帧间隔</h3>
+<p>GOP(全称Group Of Pictures)，图像序列组，由一个关键帧和若干个非关键帧组成。在编码器参数设置中，有一个参数设置GOP大小。以Android的mediacodec为例，设置关键帧间隔时间Key_Frame_Interval，也就是设置多少秒来一个关键帧。另外有一个类似的参数，关键帧间隔：多少帧来一个关键帧。</p>
+<h3 id="7-码率控制"><a class="markdownIt-Anchor" href="#7-码率控制"></a> 7、码率控制</h3>
+<p>码率控制，是指网络请求码流时，根据网络带宽状况来控制码率大小。分为五种控制方式：恒定码率、动态码率、平均码率、恒定质量因子、恒定量化参数。而Youtube请求网络流时，会根据网络拥挤程度来动态调整码率，得益于一种新的多媒体传输控制协议——DASH，全称为Danymic Adaptive Streaming over HTTP，即基于HTTP的动态自适应媒体流。接下来对码率控制方式进行展开分析。</p>
+<p>恒定码率：CBR(Constant Bitrate)，以恒定的码率去编码，波动小，编码质量欠佳；</p>
+<p>动态码率：VBR(Variable Bitrate)，以动态的码率去编码，波动大，编码质量比较稳定；</p>
+<p>平均码率：ABR(Average Bitrate)，以平均的码率去编码，编码质量参差不齐；</p>
+<p>恒定质量因子：CQF(Constant Quality Factor)，又称为CRF(Constant Rate Factor)，在x264和x265编码默认采用CRF，取值范围为[0,51]，数值越大表示视频压缩率越高，编码质量越低；</p>
+<p>恒定量化参数：CQP(Constant Quantization Parameter)，瞬时码率会随场景复杂度有所波动，在H264定义的QP范围为[0,51]，数值越大表示量化步长越大，编码质量越低。当为QP=0时，表示无损编码；</p>
+<h3 id="8-svc分级编码"><a class="markdownIt-Anchor" href="#8-svc分级编码"></a> 8、SVC分级编码</h3>
+<p>SVC(全称Scalable Video Coding)，可扩展的视频编码，也称为分级编码。具有三大特性：时间可分级、空间可分级、质量可分级。</p>
+<p>时间可分级：分为T0、T1、T2、T3，用来设置帧率，丢弃棕、绿、蓝得到不同帧率。如下图所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311192050136.png" alt="img" /></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311192050965.png" alt="img" /></p>
+<p>质量可分级：可以从码流提取不同图像质量的子码流。</p>
+<p>应用领域：视频监控、流媒体直播、视频会议。</p>
+<p>优点：分级码流应用灵活，一次编码多次使用，可得到不同帧率、分辨率、质量；</p>
+<p>缺点：分级码流的解码复杂度增加，比单层码流的压缩率低10%左右；</p>
+<h3 id="9-yuv"><a class="markdownIt-Anchor" href="#9-yuv"></a> 9、YUV</h3>
+<p>视频压缩编码后，是以YUV格式进行存储的，Y代表亮度(Chroma)，U代表色度(Luma)，V代表对比度(Contrast)。常见的YUV排列格式有YUV444、YUV422、YUV420，区别如下表所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311192050879.png" alt="image-20231119205039862" /></p>
+<p>YUV420分为YUV420P和YUV420SP。其中，YUV420P又称为I420，P代表Planar平面，按照Y、U、V顺序排列，存储结构如下图所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311192050280.png" alt="image-20231119205051265" /></p>
+<p>而YUV420SP，其中SP代表Semi Planar半独立平面，U和V是交错存储的，存储结构如下图所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311192050526.png" alt="img" /></p>
+<p>能不能举个例子，经过编码和不应该编码的一部电影他们的大小能差多少？</p>
+<p>当涉及到视频编码的压缩效果时，实际的压缩比例会受到多个因素的影响，包括视频内容、编码参数和压缩算法等。因此，无法给出具体的数字来表示编码前后视频大小的差异，因为结果会因情况而异。然而，我可以通过一个简化的例子来说明视频编码对文件大小的影响。</p>
+<p>假设我们有一部电影，持续时间为2小时，分辨率为1920x1080像素，帧率为24帧/秒。我们将比较原始未经编码的视频（Raw Video）和经过常见有损压缩算法（如H.264）编码后的视频的文件大小。</p>
+<ol>
+<li>原始未经编码的视频（Raw Video）：<br />
+对于每一帧，假设使用RGB颜色空间，每个像素需要3个字节（一个字节用于红色通道，一个字节用于绿色通道，一个字节用于蓝色通道）。因此，每一帧的数据大小为：1920 x 1080 x 3 = 6,220,800字节。考虑到24帧/秒，2小时长的视频将需要非常大的存储空间。</li>
+<li>经过有损压缩编码的视频：<br />
+使用常见的有损压缩算法（如H.264）对视频进行编码时，会应用变换、量化、运动估计、运动补偿和熵编码等技术。这些技术将减少冗余数据和舍弃视觉上较不重要的信息，从而显著减小文件大小。具体的压缩比例将取决于编码参数和视频内容。</li>
+</ol>
+<p>每一帧的数据大小为：1920 x 1080 x 3 = 6,220,800 字节。</p>
+<p>考虑到视频的帧率为 24 帧/秒，接下来我们计算每秒的数据大小：<br />
+每秒的数据大小 = 每帧的数据大小 x 帧率 = 6,220,800 字节 x 24 = 149,299,200 字节= 0.1389636993408203 GB。</p>
+<p>接下来，我们计算整个视频的数据大小。视频的长度为 2 小时，即 2 x 60 x 60 = 7,200 秒：<br />
+视频的数据大小 = 每秒的数据大小 x 视频长度 = 149,299,200 字节 x 7,200 = 1,074,681,600,000 字节。</p>
+<p>将字节转换为更常见的单位，我们可以得到：<br />
+视频的数据大小约为 1.07 TB（1 TB = 1,099,511,627,776 字节）。</p>
+<p>这意味着对于一部持续 2 小时的视频，如果每帧使用 RGB 颜色空间并且每个像素需要 3 个字节来表示，未经过任何编码压缩的视频将需要约 1.07 TB 的存储空间。</p>
+<p>这个数字显示了为什么视频编码在存储和传输视频时非常重要，因为原始视频数据的大小是非常庞大的。视频编码可以显著减小视频文件的大小，从而降低存储成本和传输带宽需求。</p>
+<h2 id="二-音频编码"><a class="markdownIt-Anchor" href="#二-音频编码"></a> 二、音频编码</h2>
+<p>人类的听觉范围为20Hz~20KHz，那么低于20Hz或者高于20KHz，这些低频或高频信号基本听不到，可以作为冗余数据，通过特定采样率进行采样、编码。</p>
+<h3 id="1-采样率-2"><a class="markdownIt-Anchor" href="#1-采样率-2"></a> 1、采样率</h3>
+<p>采样率描述的是每秒对原始声音信号的采样次数，常见的采样率8000Hz、16000Hz、44100Hz、48000Hz，目前使用最广泛的是44100Hz，即44.1KHz。</p>
+<h3 id="2-波形编码"><a class="markdownIt-Anchor" href="#2-波形编码"></a> 2、波形编码</h3>
+<p>直接把时域信号转换为数字编码，不利用任何参数，使得重构后的波形与原始信号的波形形状尽可能保持一致。基本原理是在时间轴对模拟语音信号按照一定速率采样，然后把幅度样本量化，并用代码表示。</p>
+<h3 id="3-参数编码"><a class="markdownIt-Anchor" href="#3-参数编码"></a> 3、参数编码</h3>
+<p>从语音波形信号中提取生成语音的参数，使用这些参数通过语音生成模型重构出语音。音质比较低，但是保密性良好，广泛应用于军事技术中，典型的参数编码为LPC(Linear Predictive Coding)。</p>
+<h3 id="4-混合编码"><a class="markdownIt-Anchor" href="#4-混合编码"></a> 4、混合编码</h3>
+<p>混合编码是指采用两种以上编码技术，比如波形编码与参数编码结合，形成优势互补。</p>
+<h3 id="5-pcm"><a class="markdownIt-Anchor" href="#5-pcm"></a> 5、PCM</h3>
+<p>PCM(Pulse Code Modulation 脉冲编码调制)，是对连续变化的模型信号抽样、量化、编码的过程，最终转换为数字信号。</p>
+<h1 id="音视频解码"><a class="markdownIt-Anchor" href="#音视频解码"></a> 音视频解码</h1>
+<p>音视频文件是经过编码、封装而成的。那么反过来，要播放音视频文件，首先得解封装、解码。上一篇博客讨论到音视频编码：走进音视频的世界——音视频编码，我们来个上下呼应，本文与大家探讨一下音视频解码。本质上，是按照既定的解码协议去解析编码内容，也就是编码的逆过程。常见的视频解码器有：H264、H265、VP8、VP9、MPEG4、MJPEG、WMV3、MSMPEG4V3，常见的音频解码器有：MP3、AAC、FLAC、AC3、OPUS、VORBIS、AMR、WMA。</p>
+<h2 id="一-视频解码"><a class="markdownIt-Anchor" href="#一-视频解码"></a> 一、视频解码</h2>
+<h3 id="1-pts与dts"><a class="markdownIt-Anchor" href="#1-pts与dts"></a> 1、pts与dts</h3>
+<p>dts：Decode Timestamp，解码时间戳，决定什么时候解码该帧数据。</p>
+<p>pts：Presentation Timestamp，显示时间戳，决定什么时候显示该帧图像。以参考时钟为基准，超前参考时钟则等待，落后（在30ms与500ms之间）参考时钟则快速渲染，十分落后（超过500ms）参考时钟则丢弃该帧。参考时钟分为三种：系统时钟、音频时钟、视频时钟。一般以音频时钟作为参考时钟，因为人类对声音更加敏感，相对图像而言。</p>
+<h3 id="2-关键帧与非关键帧"><a class="markdownIt-Anchor" href="#2-关键帧与非关键帧"></a> 2、关键帧与非关键帧</h3>
+<p>关键帧：I帧为关键帧，所以I帧可以直接解码还原出一个图像。</p>
+<p>非关键帧：P帧与B帧为非关键帧，需要依赖关键帧才能解码。而B帧是双向预测帧，还要另外等待下一个I帧或P帧，才可以成功解码出来。B帧压缩率比较高，但是编解码复杂度也相对高。</p>
+<h3 id="3-组包与拼帧"><a class="markdownIt-Anchor" href="#3-组包与拼帧"></a> 3、组包与拼帧</h3>
+<p>有些封装格式会把一帧数据拆成若干包，因为关键帧数据可能比较大；RTP封装数据时，也会把一帧拆成若干包，因为MTU规定网络层最大传输单元为1500bytes。因此，在解封装或者接收网络数据包时，需要根据序号排列，把若干个包组成一个完整包，然后再解码。例如FFmpeg读取一帧数据过程，源码在avformat/utils.c中，如下图所示(参考雷神博客)：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311192115640.png" alt="img" /></p>
+<h3 id="4-特定帧头"><a class="markdownIt-Anchor" href="#4-特定帧头"></a> 4、特定帧头</h3>
+<p>在解析h264/h265编码的视频帧时，需要在帧头添加起始码，一般起始码为0x00 0x00 0x01或者0x00 0x00 0x00 0x01。比如mp4封装格式，一般是以h264为<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E8%A7%86%E9%A2%91%E7%BC%96%E7%A0%81&amp;spm=1001.2101.3001.7020">视频编码</a>、aac为音频编码。</p>
+<h2 id="二-音频解码"><a class="markdownIt-Anchor" href="#二-音频解码"></a> 二、音频解码</h2>
+<h3 id="1-planar与packed存储"><a class="markdownIt-Anchor" href="#1-planar与packed存储"></a> 1、planar与packed存储</h3>
+<p>planar：每个声道数据单独存储。以立体声道为例，L表示左声道，R表示右声道。那么存储格式为LLLLRRRR。在FFmpeg中，第i个声道数据存储在frame-&gt;data[i]。类似视频的像素格式YUV420P，Y、U、V三个分量单独存储，4个Y分量对应一个U分量与一个V分量。</p>
+<p>packed：所有声道数据交错存储。同样地，以立体声道数据为例。那么存储格式为LRLRLRLR。在FFmpeg中，所有声道数据都存储在frame-&gt;data[0]。类似视频的YUV420SP，Y独立存储，UV交错存储，4个Y分量对应一组UV分量。</p>
+<h3 id="2-量化位数"><a class="markdownIt-Anchor" href="#2-量化位数"></a> 2、量化位数</h3>
+<p>量化位数：量化位是对模拟音频信号的幅度轴数字化，它决定了模拟信号数字化的动态范围。量化位数越大，质量越好。bitsPerSample，占2bytes，一般为8bits、16bits、32bits、64bits。在WAVE的Format chunk有定义，如下表所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311192115938.png" alt="image-20231119211557915" /></p>
+<h3 id="3-采样率"><a class="markdownIt-Anchor" href="#3-采样率"></a> 3、采样率</h3>
+<p>音频采样率是指录音设备在1秒时间内对声音信号的采样次数，采样频率越高，那么声音的还原越真实自然。常见的采样率有8000Hz、16000Hz、32000Hz、44100Hz、48000Hz。其中44100Hz可达到CD音质标准，也是目前最为常用的采样率。</p>
+<h3 id="4-声道数与声道布局"><a class="markdownIt-Anchor" href="#4-声道数与声道布局"></a> 4、声道数与声道布局</h3>
+<p>常见声道数有：单声道、立体声道、3声道、4声道、5声道、6声道、7声道、8声道。其中3声道以上，又称为立体环绕声道，其中杜比音效就是采用多声道同时输出，实现立体环绕效果。</p>
+<p>声道布局的各个声道描述如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">FC: front center</span><br><span class="line">BC: back center</span><br><span class="line">FL/FR: front left/right</span><br><span class="line">FCL/FCR: front center left/right</span><br><span class="line">FTL/FTR: front top left/right</span><br><span class="line">SL/SR: back surround left/right</span><br><span class="line">BL/BR: back left/right</span><br><span class="line">LFE: low frequency effects</span><br></pre></td></tr></table></figure>
+<p>声道数与声道布局关系，如下表所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311192116640.png" alt="image-20231119211617624" /></p>
+<h1 id="vpu"><a class="markdownIt-Anchor" href="#vpu"></a> VPU</h1>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2023/11/19/03_%E5%AD%A6%E4%B9%A0/8%20%E9%9F%B3%E8%A7%86%E9%A2%91%E7%BC%96%E8%A7%A3%E7%A0%81%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E5%AD%A6%E4%B9%A0/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2023/11/19/03_%E5%AD%A6%E4%B9%A0/9%20%E6%98%BE%E7%A4%BA%E7%A1%AC%E4%BB%B6%E5%8F%91%E5%B1%95%E4%B8%8E%E8%A7%86%E9%A2%91%E5%BC%80%E5%8F%91%E7%9F%A5%E8%AF%86%E7%82%B9%E6%89%AB%E7%9B%B2/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            显示硬件发展与视频开发知识点扫盲
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2023/11/14/02_%E7%91%9E%E8%8A%AF%E5%BE%AE/02%20rk%20deb%E5%8C%85%E7%9A%84%E5%88%B6%E4%BD%9C/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">rkdeb包的制作</div>
+      </a>
+    
+  </nav>
+
+  
+   
+  
+   
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2015-2024
+        <i class="ri-heart-fill heart_icon"></i> chai
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="热爱学习的未来酱"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/%E7%94%9F%E6%B4%BB">生活</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/%E5%AD%A6%E4%B9%A0">学习</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE">瑞芯微</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/C%E8%AF%AD%E8%A8%80%E9%AB%98%E7%BA%A7%E5%AD%A6%E4%B9%A0">C语言高级学习</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="52"
+        src="//music.163.com/outchain/player?type=2&id=22707008&auto=0&height=32"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
+    
+    
+
+  </div>
+</body>
+
+</html>

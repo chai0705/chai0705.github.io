@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+  
+
+    <head>
+      <meta charset="utf-8" />
+        
+      <meta name="description" content="永远年轻，永远热泪盈眶" />
+      
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>ubuntu和debian文件系统构建详解 |  热爱学习的未来酱</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      
+<link rel="stylesheet" href="/css/fonts/remixicon.css">
+
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    <link rel="alternate" href="/atom.xml" title="热爱学习的未来酱" type="application/atom+xml">
+</head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-02_瑞芯微/01 debian和ubuntu文件系统构建详解"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  ubuntu和debian文件系统构建详解
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/11/20/02_%E7%91%9E%E8%8A%AF%E5%BE%AE/01%20debian%E5%92%8Cubuntu%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%84%E5%BB%BA%E8%AF%A6%E8%A7%A3/" class="article-date">
+  <time datetime="2023-11-20T13:16:57.000Z" itemprop="datePublished">2023-11-20</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE/">瑞芯微</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">10.8k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">47 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="第7章-ubuntu和debian系统构建"><a class="markdownIt-Anchor" href="#第7章-ubuntu和debian系统构建"></a> 第7章 Ubuntu和Debian系统构建</h1>
+<p>在前面的几个章节中，我们利用了busybox，buildroot，yocto工具构建文件系统。我们也可以使用Linux发行版来直接作为文件系统，比如Ubuntu系统和Debian系统。由于Ubuntu和Debian系统的构建方法相同，所以作者将他们两个系统的构建放到了一起。</p>
+<p>注意：必须要在ubuntu20等更高版本的系统上进行本章节的文件系统构建，经测试在ubutnu18上因为一些工具的版本问题，会出现很多意想不到的问题。</p>
+<h2 id="71-安装所需的工具"><a class="markdownIt-Anchor" href="#71-安装所需的工具"></a> 7.1 安装所需的工具</h2>
+<p>使用如下命令安装所需的工具</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install binfmt-support qemu qemu-user-static debootstrap</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311212050842.jpg" alt="img" /></p>
+<p>binfmt-support：提供了对二进制格式解释器的支持。允许在Linux系统中执行非本机二进制文件，例如在ARM架构上运行x86二进制文件。它为Linux内核添加了解释器注册表和执行文件的解析逻辑。</p>
+<p>qemu：是一个开源的硬件虚拟化和仿真软件，允许在一个平台上模拟另一个平台的运行。它支持多种体系结构和硬件设备，并可以用于开发和测试操作系统、应用程序等。</p>
+<p>qemu-user-static：这是QEMU的用户态静态二进制文件。允许在主机平台上运行不同体系结构的可执行文件，而无需运行完整的虚拟机。这对于交叉编译和在本地主机上模拟其他体系结构的应用程序非常有用。</p>
+<p>debootstrap：用于在Linux系统中创建基于Debian的最小文件系统的工具。可以帮助你从零开始构建一个基本的和Ubuntu和Debian系统，并可以用于创建chroot环境或构建自定义的Linux发行版。</p>
+<h2 id="72根文件系统制作"><a class="markdownIt-Anchor" href="#72根文件系统制作"></a> 7.2根文件系统制作</h2>
+<p>首先来学习一下debootstrap命令的基本语法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">debootstrap arch &lt;架构&gt; &lt;发行版&gt; &lt;目标目录&gt; [镜像地址]</span><br></pre></td></tr></table></figure>
+<p>–arch &lt;架构&gt;：指定目标系统的架构，例如 amd64、armhf、arm64 等。根据目标系统的架构选择合适的值。</p>
+<p>&lt;发行版&gt;：指定要创建的Debian发行版，流行系统的版本号如下所示：</p>
+<p>（1）Ubuntu 20.04：focal</p>
+<p>（2）Ubuntu 22.04：jammy</p>
+<p>（3）Debian 10： buster</p>
+<p>（4）Debian 11：bullseye</p>
+<p>&lt;目标目录&gt;：指定要创建的目标文件系统的目录路径。所有的Debian软件包和配置文件将安装到该目录中。</p>
+<p>[镜像地址]（可选）：指定用于下载Ubuntu和Debian软件包的镜像地址。如果不提供镜像地址，将使用默认的镜像地址进行下载,这里建议选择国内源，例如华为源、阿里源等。</p>
+<p>注意：debootstrap 命令的使用需要在root用户下。</p>
+<p>首先创建一个镜像存放的目录，这里作者起名为binary，大家随意即可，创建完成如下图所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311212050838.jpg" alt="img" /></p>
+<p>然后使用以下命令制作根文件系统，每个系统的制作命令都已经列了出来：<br />
+（1）Ubuntu 20.04：focal</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">arch=arm64</span><br><span class="line">release=focal</span><br><span class="line">chroot_dir=binary</span><br><span class="line">mirror=https://mirrors.huaweicloud.com/repository/ubuntu-ports/</span><br><span class="line">debootstrap --arch $&#123;arch&#125; $&#123;release&#125; $&#123;chroot_dir&#125; $&#123;mirror&#125;</span><br></pre></td></tr></table></figure>
+<p>（2）Ubuntu 22.04：jammy</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">arch=arm64</span><br><span class="line">release=jammy</span><br><span class="line">chroot_dir=binary</span><br><span class="line">mirror=https://mirrors.huaweicloud.com/repository/ubuntu-ports/</span><br><span class="line">sudo debootstrap --arch $&#123;arch&#125; $&#123;release&#125; $&#123;chroot_dir&#125; $&#123;mirror&#125;</span><br></pre></td></tr></table></figure>
+<p>（3）Debian 10： buster</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">arch=arm64</span><br><span class="line">release=buster</span><br><span class="line">chroot_dir=</span><br><span class="line">mirror=https://mirrors.huaweicloud.com/repository/debian/</span><br><span class="line">debootstrap --arch $&#123;arch&#125; $&#123;release&#125; $&#123;chroot_dir&#125; $&#123;mirror&#125;</span><br></pre></td></tr></table></figure>
+<p>（4）Debian 11：bullseye</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">arch=arm64</span><br><span class="line">release=bullseye</span><br><span class="line">chroot_dir=binary</span><br><span class="line">mirror=https://mirrors.huaweicloud.com/repository/debian/</span><br><span class="line">debootstrap --arch $&#123;arch&#125; $&#123;release&#125; $&#123;chroot_dir&#125; $&#123;mirror&#125;</span><br></pre></td></tr></table></figure>
+<p>这里作者以ubuntu20为例进行演示，命令输入之后会开始文件系统的构建，构建构成如下所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311212050845.jpg" alt="img" /></p>
+<p>然后等待构建完成，构建完成之后如下图所示：<br />
+<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311212050849.jpg" alt="img" /></p>
+<p>可以看到Linux的一些基本目录就都已经生成了。</p>
+<h2 id="73挂载根文件系统"><a class="markdownIt-Anchor" href="#73挂载根文件系统"></a> 7.3挂载根文件系统</h2>
+<p>在构建Ubuntu和Debian文件系统时，需要将主机的/proc、/sys/、dev/、dev/pts这些虚拟文件系统挂载到要构建的系统中通过挂载这些临时文件系统，构建文件系统的过程中的命令可以正常访问和操作系统的进程、内核、硬件以及临时文件和进程。这些挂载操作为构建过程提供了必要的运行环境和资源。</p>
+<p>挂载操作这里通过mount.sh脚本来完成，该脚本的具体内容如下所示：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line">mnt() &#123;</span><br><span class="line">	echo &quot;MOUNTING&quot;</span><br><span class="line">	sudo mount -t proc /proc $&#123;2&#125;proc</span><br><span class="line">	sudo mount -t sysfs /sys $&#123;2&#125;sys</span><br><span class="line">	sudo mount -o bind /dev $&#123;2&#125;dev</span><br><span class="line">	sudo mount -o bind /dev/pts $&#123;2&#125;dev/pts</span><br><span class="line">&#125;</span><br><span class="line">umnt() &#123;</span><br><span class="line">	echo &quot;UNMOUNTING&quot;</span><br><span class="line">	sudo umount $&#123;2&#125;proc</span><br><span class="line">	sudo umount $&#123;2&#125;sys</span><br><span class="line">	sudo umount $&#123;2&#125;dev/pts</span><br><span class="line">	sudo umount $&#123;2&#125;dev</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">if [ &quot;$1&quot; == &quot;-m&quot; ] &amp;&amp; [ -n &quot;$2&quot; ] ;</span><br><span class="line">then</span><br><span class="line">	mnt $1 $2</span><br><span class="line">elif [ &quot;$1&quot; == &quot;-u&quot; ] &amp;&amp; [ -n &quot;$2&quot; ];</span><br><span class="line">then</span><br><span class="line">	umnt $1 $2</span><br><span class="line">else</span><br><span class="line">	echo &quot;&quot;</span><br><span class="line">	echo &quot;Either 1&#x27;st, 2&#x27;nd or both parameters were missing&quot;</span><br><span class="line">	echo &quot;&quot;</span><br><span class="line">	echo &quot;1&#x27;st parameter can be one of these: -m(mount) OR -u(umount)&quot;</span><br><span class="line">	echo &quot;2&#x27;nd parameter is the full path of rootfs directory(with trailing &#x27;/&#x27;)&quot;</span><br><span class="line">	echo &quot;&quot;</span><br><span class="line">	echo &quot;For example: ch-mount -m /media/sdcard/&quot;</span><br><span class="line">	echo &quot;&quot;</span><br><span class="line">	echo 1st parameter : $&#123;1&#125;</span><br><span class="line">	echo 2nd parameter : $&#123;2&#125;</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+<p>创建该文件，添加相应的内容并赋予可执行权限，具体操作如下图所示：<br />
+<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311212050848.jpg" alt="img" /></p>
+<p>该脚本既可以用来挂载，也可以用来解除挂载，挂载的命令如下所示：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./mount.sh -m binary/</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311212050850.jpg" alt="img" /></p>
+<p>挂载成功之后使用以下命令改变根目录，将根目录修改为刚刚创建好的文件系统中，如下图所示：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chroot binary/</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311212050000.jpg" alt="img" /></p>
+<p>接下来就可以进入下一个小节，开始文件系统的定制了。</p>
+<h2 id="74-定制根文件系统"><a class="markdownIt-Anchor" href="#74-定制根文件系统"></a> 7.4 定制根文件系统</h2>
+<h3 id="741-apt换源"><a class="markdownIt-Anchor" href="#741-apt换源"></a> <strong>7.4.1 apt换源</strong></h3>
+<p>由于构建出系统的软件源在国外，因为网络问题而不稳定导致下载速度缓慢，所以这里先将默认源更换为国内源。</p>
+<p>Ubuntu和Debian系统的软件源文件为“/etc/apt/sources.list”，而不同的文件系统他们的软件源也各不相同，所以这里罗列了不同系统的国内软件源，如下所示：<br />
+（1）Ubuntu 20.04：focal</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">deb https://mirrors.ustc.edu.cn/ubuntu-ports/ focal main restricted universe multiverse</span><br><span class="line">deb-src https://mirrors.ustc.edu.cn/ubuntu-ports/ focal main main restricted universe multiverse</span><br><span class="line">deb https://mirrors.ustc.edu.cn/ubuntu-ports/ focal-updates main restricted universe multiverse</span><br><span class="line">deb-src https://mirrors.ustc.edu.cn/ubuntu-ports/ focal-updates main restricted universe multiverse</span><br><span class="line">deb https://mirrors.ustc.edu.cn/ubuntu-ports/ focal-backports main restricted universe multiverse</span><br><span class="line">deb-src https://mirrors.ustc.edu.cn/ubuntu-ports/ focal-backports main restricted universe multiverse</span><br><span class="line">deb https://mirrors.ustc.edu.cn/ubuntu-ports/ focal-security main restricted universe multiverse</span><br><span class="line">deb-src https://mirrors.ustc.edu.cn/ubuntu-ports/ focal-security main restricted universe multiverse</span><br></pre></td></tr></table></figure>
+<p>（2）Ubuntu 22.04：jammy</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">deb https://mirrors.huaweicloud.com/repository/ubuntu-ports/ jammy main restricted universe multiverse</span><br><span class="line">deb-src https://mirrors.huaweicloud.com/repository/ubuntu-ports/ jammy main restricted universe multiverse</span><br><span class="line">deb https://mirrors.huaweicloud.com/repository/ubuntu-ports/ jammy-updates main restricted universe multiverse</span><br><span class="line">deb-src https://mirrors.huaweicloud.com/repository/ubuntu-ports/ jammy-updates main restricted universe multiverse</span><br><span class="line">deb https://mirrors.huaweicloud.com/repository/ubuntu-ports/ jammy-backports main restricted universe multiverse</span><br><span class="line">deb-src https://mirrors.huaweicloud.com/repository/ubuntu-ports/ jammy-backports main restricted universe multiverse</span><br><span class="line">deb https://mirrors.huaweicloud.com/repository/ubuntu-ports/ jammy-security main restricted universe multiverse</span><br><span class="line">deb-src https://mirrors.huaweicloud.com/repository/ubuntu-ports/ jammy-security main restricted universe multiverse</span><br></pre></td></tr></table></figure>
+<p>（3）Debian 10： buster</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">deb https://mirrors.huaweicloud.com/repository/debian/ buster main contrib non-free</span><br><span class="line">deb-src https://mirrors.tuna.tsinghua.edu.cn/debian/ buster main contrib non-free</span><br><span class="line">deb https://mirrors.huaweicloud.com/repository/debian/ buster-updates main contrib non-free</span><br><span class="line">deb-src https://mirrors.tuna.tsinghua.edu.cn/debian/ buster-updates main contrib non-free</span><br><span class="line">deb https://mirrors.huaweicloud.com/repository/debian/ buster-backports main contrib non-free</span><br><span class="line">deb-src https://mirrors.tuna.tsinghua.edu.cn/debian/ buster-backports main contrib non-free</span><br><span class="line">deb https://mirrors.huaweicloud.com/repository/debian-security buster/updates main contrib non-free</span><br><span class="line">deb-src https://mirrors.tuna.tsinghua.edu.cn/debian-security buster/updates main contrib non-free</span><br></pre></td></tr></table></figure>
+<p>（4）Debian 11：bullseye</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">deb https://mirrors.huaweicloud.com/debian/ bullseye main non-free contrib</span><br><span class="line">deb-src https://mirrors.huaweicloud.com/debian/ bullseye main non-free contrib</span><br><span class="line">deb https://mirrors.huaweicloud.com/debian-security/ bullseye-security main</span><br><span class="line">deb-src https://mirrors.huaweicloud.com/debian-security/ bullseye-security main</span><br><span class="line">deb https://mirrors.huaweicloud.com/debian/ bullseye-updates main non-free contrib</span><br><span class="line">deb-src https://mirrors.huaweicloud.com/debian/ bullseye-updates main non-free contrib</span><br><span class="line">deb https://mirrors.huaweicloud.com/debian/ bullseye-backports main non-free contrib</span><br><span class="line">deb-src https://mirrors.huaweicloud.com/debian/ bullseye-backports main non-free contrib</span><br></pre></td></tr></table></figure>
+<p>然后使用vim命令修改/etc/apt/sources.list为上面提供的国内源，修改完成如下所示：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/apt/sources.list</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311212050010.jpg" alt="img" /></p>
+<p>然后使用以下命令进行软件源的更新，更新过程如下图所示：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt update </span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311212050017.jpg" alt="img" /></p>
+<p>等待更新完成即可。默认的dns源在烧写到开发板之后可能也无法正常解析域名，所以需要使用以下命令更换镜像的dns源，如下图所示：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rm -rf /etc/resolv.conf</span><br><span class="line">echo &quot;nameserver 8.8.8.8&quot; &gt; /etc/resolv.conf</span><br><span class="line">echo &quot;nameserver 114.114.114.114&quot; &gt;&gt; /etc/resolv.conf</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311220745228.png" alt="image-20231122074527194" /></p>
+<h3 id="742安装常用工具"><a class="markdownIt-Anchor" href="#742安装常用工具"></a> <strong>7.4.2安装常用工具</strong></h3>
+<p>然后使用以下命令安装必备的软件包，安装过程如下所示：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">apt-get -y install dmidecode mtd-utils i2c-tools u-boot-tools \</span><br><span class="line">bash-completion man-db manpages nano gnupg initramfs-tools sudo \</span><br><span class="line">dosfstools mtools parted ntfs-3g zip atop \</span><br><span class="line">p7zip-full htop iotop pciutils lshw lsof exfat-fuse hwinfo \</span><br><span class="line">net-tools wireless-tools openssh-client openssh-server wpasupplicant ifupdown \</span><br><span class="line">pigz wget curl lm-sensors bluez gdisk usb-modeswitch usb-modeswitch-data make \</span><br><span class="line">gcc libc6-dev bison libssl-dev flex  fake-hwclock rfkill wireless-regdb toilet cmake locales \</span><br><span class="line">openssh-server openssh-client network-manager fonts-wqy-zenhei xfonts-intl-chinese alsa-utils vim blueman </span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311212050030.jpg" alt="img" /></p>
+<p>等待安装完成即可，每个安装包的具体作用如下所示：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">dmidecode：用于获取系统的DMI（Desktop Management Interface）信息，包括硬件设备、BIOS和固件等。</span><br><span class="line">mtd-utils：提供对嵌入式闪存设备（MTD）的管理和操作工具，用于读取、擦除和编程闪存芯片。</span><br><span class="line">i2c-tools：用于配置和调试I2C总线设备的工具集。</span><br><span class="line">u-boot-tools：提供与U-Boot引导加载程序相关的工具，用于配置和管理嵌入式系统的引导过程。</span><br><span class="line">bash-completion：为Bash shell提供自动补全功能，可以快速补全命令、选项和文件名。</span><br><span class="line">man-db和manpages：man-db是一个用于管理和浏览man页面（Linux帮助文档）的工具，manpages则是包含常见命令和函数的man页面集合。</span><br><span class="line">nano：一个简单易用的文本编辑器，适用于终端环境。</span><br><span class="line">gnupg：GNU隐私保护工具，用于加密、签名和认证数据和通信。</span><br><span class="line">initramfs-tools：用于创建和管理初始内存文件系统（initramfs），通常用于启动Linux系统前的初始化过程。</span><br><span class="line">sudo：允许普通用户以超级用户（root）权限执行命令的工具。</span><br><span class="line">dosfstools：用于创建、检查和维护DOS/Windows文件系统（FAT）的工具集。</span><br><span class="line">mtools：用于在Linux系统上管理DOS/Windows文件系统（FAT）的工具。</span><br><span class="line">parted：磁盘分区工具，用于创建、调整和管理磁盘分区。</span><br><span class="line">ntfs-3g：用于在Linux系统上读写NTFS文件系统的驱动程序。</span><br><span class="line">zip和p7zip-full：用于创建和提取ZIP和7z等压缩文件的工具。</span><br><span class="line">htop和iotop：用于监视系统资源使用情况的命令行工具，分别监视进程和磁盘I/O的情况。</span><br><span class="line">pciutils：用于查询和配置PCI总线设备的工具。</span><br><span class="line">lshw：显示系统硬件信息的工具。</span><br><span class="line">lsof：列出打开的文件和进程的工具。</span><br><span class="line">exfat-fuse：用于在Linux系统上访问exFAT文件系统的驱动程序。</span><br><span class="line">hwinfo：用于获取和显示硬件信息的工具。</span><br><span class="line">net-tools：包含一些基本的网络工具，如ifconfig和netstat。</span><br><span class="line">wireless-tools：用于配置和管理无线网络接口的工具。</span><br><span class="line">openssh-client和openssh-server：提供SSH客户端和服务器，用于远程安全登录和文件传输。</span><br><span class="line">wpasupplicant：用于配置和连接无线网络的工具。</span><br><span class="line">ifupdown：用于配置和管理网络接口的工具。</span><br><span class="line">pigz：并行压缩/解压缩工具，用于加快压缩速度。</span><br><span class="line">wget和curl：用于从网络上下载文件的命令行工具。</span><br><span class="line">lm-sensors：用于监测硬件传感器（如温度、风扇速度）的工具。</span><br><span class="line">bluez：提供蓝牙协议栈的工具和库。</span><br><span class="line">gdisk：用于创建和管理GUID分区表（GPT）的工具。</span><br><span class="line">usb-modeswitch和usb-modeswitch-data：用于在Linux系统上切换和配置USB移动宽带设备的工具和数据。</span><br><span class="line">make和gcc：编译和构建软件的工具和编译器。</span><br><span class="line">libc6-dev：C语言标准库的开发文件，用于编译和链接C语言程序。</span><br><span class="line">bison和flex：用于生成词法分析器和语法分析器的生成工具。</span><br><span class="line">fake-hwclock：用于在系统没有硬件时钟的情况下，模拟保存和恢复时间的工具。</span><br><span class="line">rfkill：用于管理射频设备的软件屏蔽开关状态的工具。</span><br><span class="line">wireless-regdb：无线电设备的法规数据库，用于配置无线电频率和功率限制。</span><br><span class="line">toilet：用于在终端中生成彩色的ASCII艺术字的工具。</span><br><span class="line">cmake：一个跨平台的开源构建工具，用于管理软件项目的构建过程。</span><br><span class="line">locales：用于配置系统的本地化设置，包括语言、日期、时间等。</span><br><span class="line">network-manager：用于配置和管理网络连接的工具。</span><br><span class="line">fonts-wqy-zenhei和xfonts-intl-chinese：提供中文字体支持，用于显示中文字符。</span><br><span class="line">alsa-utils：用于配置和管理Advanced Linux Sound Architecture (ALSA)的工具。</span><br><span class="line">vim：一个功能强大的文本编辑器，适用于终端环境</span><br></pre></td></tr></table></figure>
+<h3 id="743配置root密码"><a class="markdownIt-Anchor" href="#743配置root密码"></a> <strong>7.4.3配置root密码</strong></h3>
+<p>输入“passwd root”命令，然后连续输入两次root 用户密码，如图所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311212050040.jpg" alt="img" /></p>
+<h3 id="744添加topeet用户"><a class="markdownIt-Anchor" href="#744添加topeet用户"></a> <strong>7.4.4添加topeet用户</strong></h3>
+<p>然后输入以下命令添加名字为topeet的用户，并将topeet用户的登录密码设置为topeet，并授予该用户以管理员（root）权限执行所有命令，如下图所示：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">adduser topeet --gecos &quot;First Last,RoomNumber,WorkPhone,HomePhone&quot; --disabled-password</span><br><span class="line">echo &quot;topeet:topeet&quot; |  chpasswd</span><br><span class="line">echo &quot;topeet ALL=(ALL:ALL) ALL&quot; &gt;&gt; /etc/sudoers</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311212050045.jpg" alt="img" /></p>
+<p>至此，topeet用户就创建完成了，如果想要修改创建的用户修改命令中的topeet即可。</p>
+<h3 id="745配置主机名"><a class="markdownIt-Anchor" href="#745配置主机名"></a> <strong>7.4.5配置主机名</strong></h3>
+<p>接下来使用如下命令设置主机名称和本机 IP：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">export HOST=topeet</span><br><span class="line">echo $HOST &gt; /etc/hostname</span><br><span class="line">echo &quot;127.0.0.1 localhost.localdomain localhost&quot; &gt;&gt; /etc/hosts</span><br><span class="line">echo &quot;127.0.0.1 $HOST&quot; &gt;&gt; /etc/hosts</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311212050162.jpg" alt="img" /></p>
+<h3 id="746中文设置"><a class="markdownIt-Anchor" href="#746中文设置"></a> <strong>7.4.6中文设置</strong></h3>
+<p>目前的终端交互仍旧使用的是英文，为了便于交互和查看打印信息，可以根据以下步骤修改为中文。</p>
+<p>首先使用sed 工具修改 /etc/locale.gen 文件的内容，将以 zh_CN.UTF-8 开头的行中的注释符号 # 去除。</p>
+<p>然后设置系统的默认语言环境为中文（中国），如下图所示：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sed -i &#x27;s/^# *\(zh_CN.UTF-8\)/\1/&#x27; /etc/locale.gen</span><br><span class="line">echo &quot;LANG=zh_CN.UTF-8&quot; &gt;&gt; /etc/default/locale</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311212050190.jpg" alt="img" /></p>
+<p>然后使用以下命令生成 zh_CN.UTF-8 语言环境所需的配置文件，执行过程如下所示：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">locale-gen zh_CN.UTF-8</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311212050196.jpg" alt="img" /><br />
+最后执行以下命令将LC_ALL 、LANG和LANGUAGE追加到root和topeet用户的环境变量中，如下图所示：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;export LC_ALL=zh_CN.UTF-8&quot; &gt;&gt; ~/.bashrc</span><br><span class="line">echo &quot;export LANG=zh_CN.UTF-8&quot; &gt;&gt; ~/.bashrc</span><br><span class="line">echo &quot;export LANGUAGE=zh_CN.UTF-8&quot; &gt;&gt; ~/.bashrc</span><br><span class="line"></span><br><span class="line">echo &quot;export LC_ALL=zh_CN.UTF-8&quot; &gt;&gt; /home/topeet/.bashrc</span><br><span class="line">echo &quot;export LANG=zh_CN.UTF-8&quot; &gt;&gt; /home/topeet/.bashrc</span><br><span class="line">echo &quot;export LANGUAGE=zh_CN.UTF-8&quot; &gt;&gt; /home/topeet/.bashrc</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311212050210.jpg" alt="img" /></p>
+<p>至此，中文环境就设置完成了，可以使用apt-get update命令来查看中文是否设置成功，设置成功如下所示：<br />
+<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311212050231.jpg" alt="img" /></p>
+<p>可以看到打印信息已经设置为了中文。</p>
+<h3 id="747安装桌面"><a class="markdownIt-Anchor" href="#747安装桌面"></a> 7.4.7安装桌面</h3>
+<p>上面只是对系统进行了一些基本设置，本小节将进行桌面系统的安装，在Linux的发行版中以GNOME、KDE、Xfce和LXQt的使用最为广泛，考虑到3568的性能这里选用Xfce桌面进行安装，如果想要安装其他桌面可以自行搜索其他桌面的安装命令。Xfce桌面及一些其他的配置软件安装命令如下所示：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get install -y xubuntu-core lightdm</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311212050239.jpg" alt="img" /></p>
+<p>在安装过程中可能要选择默认显示管理器，选择lightmd即可，如下图所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311212050316.jpg" alt="img" /></p>
+<p>安装完成之后使用以下命令删除gdm3 ubuntu-session两个软件，如下图所示：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get remove -y gdm3 ubuntu-session</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311212050334.jpg" alt="img" /></p>
+<p>至此，关于桌面的安装就完成了。</p>
+<h3 id="748配置硬盘自动扩展"><a class="markdownIt-Anchor" href="#748配置硬盘自动扩展"></a> 7.4.8配置硬盘自动扩展</h3>
+<p>为了尽可能的让烧写的镜像小，所以在构建烧写镜像的时候只是在原有的基础上扩大了300M（后面讲到），但系统烧写进去之后，会因为空间所以无法启动桌面环境等，所以硬盘自动扩展也是必不可少的一个步骤。</p>
+<p>首先在usr/bin目录下创建一个名为disk-helper的文件，该文件内容如下所示：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd usr/bin</span><br><span class="line">vim disk-helper</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br><span class="line">341</span><br><span class="line">342</span><br><span class="line">343</span><br><span class="line">344</span><br><span class="line">345</span><br><span class="line">346</span><br><span class="line">347</span><br><span class="line">348</span><br><span class="line">349</span><br><span class="line">350</span><br><span class="line">351</span><br><span class="line">352</span><br><span class="line">353</span><br><span class="line">354</span><br><span class="line">355</span><br><span class="line">356</span><br><span class="line">357</span><br><span class="line">358</span><br><span class="line">359</span><br><span class="line">360</span><br><span class="line">361</span><br><span class="line">362</span><br><span class="line">363</span><br><span class="line">364</span><br><span class="line">365</span><br><span class="line">366</span><br><span class="line">367</span><br><span class="line">368</span><br><span class="line">369</span><br><span class="line">370</span><br><span class="line">371</span><br><span class="line">372</span><br><span class="line">373</span><br><span class="line">374</span><br><span class="line">375</span><br><span class="line">376</span><br><span class="line">377</span><br><span class="line">378</span><br><span class="line">379</span><br><span class="line">380</span><br><span class="line">381</span><br><span class="line">382</span><br><span class="line">383</span><br><span class="line">384</span><br><span class="line">385</span><br><span class="line">386</span><br><span class="line">387</span><br><span class="line">388</span><br><span class="line">389</span><br><span class="line">390</span><br><span class="line">391</span><br><span class="line">392</span><br><span class="line">393</span><br><span class="line">394</span><br><span class="line">395</span><br><span class="line">396</span><br><span class="line">397</span><br><span class="line">398</span><br><span class="line">399</span><br><span class="line">400</span><br><span class="line">401</span><br><span class="line">402</span><br><span class="line">403</span><br><span class="line">404</span><br><span class="line">405</span><br><span class="line">406</span><br><span class="line">407</span><br><span class="line">408</span><br><span class="line">409</span><br><span class="line">410</span><br><span class="line">411</span><br><span class="line">412</span><br><span class="line">413</span><br><span class="line">414</span><br><span class="line">415</span><br><span class="line">416</span><br><span class="line">417</span><br><span class="line">418</span><br><span class="line">419</span><br><span class="line">420</span><br><span class="line">421</span><br><span class="line">422</span><br><span class="line">423</span><br><span class="line">424</span><br><span class="line">425</span><br><span class="line">426</span><br><span class="line">427</span><br><span class="line">428</span><br><span class="line">429</span><br><span class="line">430</span><br><span class="line">431</span><br><span class="line">432</span><br><span class="line">433</span><br><span class="line">434</span><br><span class="line">435</span><br><span class="line">436</span><br><span class="line">437</span><br><span class="line">438</span><br><span class="line">439</span><br><span class="line">440</span><br><span class="line">441</span><br><span class="line">442</span><br><span class="line">443</span><br><span class="line">444</span><br><span class="line">445</span><br><span class="line">446</span><br><span class="line">447</span><br><span class="line">448</span><br><span class="line">449</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/sh</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Uncomment below to see more logs</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="built_in">set</span> -x</span></span><br><span class="line"></span><br><span class="line">MISC_DEV=$(realpath /dev/block/by-name/misc 2&gt;/dev/null)</span><br><span class="line"></span><br><span class="line">BUSYBOX_MOUNT_OPTS=&quot;loop (a|)sync (no|)atime (no|)diratime (no|)relatime (no|)dev (no|)exec (no|)suid (r|)shared (r|)slave (r|)private (un|)bindable (r|)bind move remount ro&quot;</span><br><span class="line">NTFS_3G_MOUNT_OPTS=&quot;ro uid=[0-9]* gid=[0-9]* umask=[0-9]* fmask=[0-9]* dmask=[0-9]*&quot;</span><br><span class="line"></span><br><span class="line">check_tool()</span><br><span class="line">&#123;</span><br><span class="line">	TOOL=$(echo $1 | grep -o &quot;^[^ ]*&quot;)</span><br><span class="line">	BR2_CONFIG=$2</span><br><span class="line"></span><br><span class="line">	type $TOOL &gt;/dev/null &amp;&amp; return 0</span><br><span class="line"></span><br><span class="line">	if grep -wq &quot;ID=buildroot&quot; /etc/os-release 2&gt;/dev/null; then</span><br><span class="line">		[ -n &quot;$BR2_CONFIG&quot; ] &amp;&amp; \</span><br><span class="line">			echo &quot;You may need to enable $BR2_CONFIG&quot;</span><br><span class="line">	else</span><br><span class="line">		echo &quot;Missing tool: $TOOL&quot;</span><br><span class="line">	fi</span><br><span class="line">	return 1</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">prepare_ubi()</span><br><span class="line">&#123;</span><br><span class="line"><span class="meta prompt_">	# </span><span class="language-bash">Only support ubi <span class="keyword">for</span> mtd device</span></span><br><span class="line">	if echo $DEV | grep -vq /dev/mtd; then</span><br><span class="line">		echo &quot;$DEV is not a mtd device!&quot;</span><br><span class="line">		return 1</span><br><span class="line">	fi</span><br><span class="line"></span><br><span class="line">	[ &quot;$PART_NO&quot; ] || &#123; echo &quot;No valid part number!&quot; &amp;&amp; return 1; &#125;</span><br><span class="line"></span><br><span class="line">	if [ &quot;$FSGROUP&quot; = ubifs ]; then</span><br><span class="line">		DEV=/dev/ubi$&#123;PART_NO&#125;_0</span><br><span class="line">	else</span><br><span class="line">		DEV=/dev/ubiblock$&#123;PART_NO&#125;_0</span><br><span class="line">	fi</span><br><span class="line"></span><br><span class="line">	MTDDEV=/dev/mtd$&#123;PART_NO&#125;</span><br><span class="line"></span><br><span class="line">	echo &quot;Preparing $DEV from $MTDDEV&quot;</span><br><span class="line"></span><br><span class="line">	echo &quot;Remove ubi block device&quot;</span><br><span class="line">	if echo $DEV | grep -q ubiblock; then</span><br><span class="line">		check_tool ubiblock BR2_PACKAGE_MTD_UBIBLOCK || return 1</span><br><span class="line">		ubiblock -r /dev/ubi$&#123;PART_NO&#125;_0 &amp;&gt;/dev/null</span><br><span class="line">	fi</span><br><span class="line"></span><br><span class="line">	echo &quot;Detach ubi device&quot;</span><br><span class="line">	check_tool ubidetach BR2_PACKAGE_MTD_UBIDETACH || return 1</span><br><span class="line">	ubidetach -p $MTDDEV &amp;&gt;/dev/null</span><br><span class="line"></span><br><span class="line">	echo &quot;Attach ubi device&quot;</span><br><span class="line">	check_tool ubiattach BR2_PACKAGE_MTD_UBIATTACH || return 1</span><br><span class="line">	ubiattach /dev/ubi_ctrl -m $PART_NO -d $PART_NO || return 1</span><br><span class="line"></span><br><span class="line">	echo &quot;Check for valid volume&quot;</span><br><span class="line">	if [ ! -e /dev/ubi$&#123;PART_NO&#125;_0 ]; then</span><br><span class="line">		echo &quot;No valid ubi volume&quot;</span><br><span class="line">		return 1</span><br><span class="line">	fi</span><br><span class="line"></span><br><span class="line">	echo &quot;Create ubi block device&quot;</span><br><span class="line">	if echo $DEV | grep -q ubiblock; then</span><br><span class="line">		check_tool ubiblock BR2_PACKAGE_MTD_UBIBLOCK || return 1</span><br><span class="line">		ubiblock -c /dev/ubi$&#123;PART_NO&#125;_0 || return 1</span><br><span class="line">	fi</span><br><span class="line"></span><br><span class="line">	return 0</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">format_ubifs()</span><br><span class="line">&#123;</span><br><span class="line">	echo &quot;Formatting $MTDDEV for $DEV&quot;</span><br><span class="line"></span><br><span class="line">	echo &quot;Remove ubi block device&quot;</span><br><span class="line">	if echo $DEV | grep -q ubiblock; then</span><br><span class="line">		check_tool ubiblock BR2_PACKAGE_MTD_UBIBLOCK || return 1</span><br><span class="line">		ubiblock -r /dev/ubi$&#123;PART_NO&#125;_0 &amp;&gt;/dev/null</span><br><span class="line">	fi</span><br><span class="line"></span><br><span class="line">	echo &quot;Detach ubi device&quot;</span><br><span class="line">	check_tool ubidetach BR2_PACKAGE_MTD_UBIDETACH || return 1</span><br><span class="line">	ubidetach -p $MTDDEV &amp;&gt;/dev/null</span><br><span class="line"></span><br><span class="line">	echo &quot;Format device&quot;</span><br><span class="line">	check_tool ubiformat BR2_PACKAGE_MTD_UBIFORMAT || return 1</span><br><span class="line">	ubiformat -yq $MTDDEV || return 1</span><br><span class="line"></span><br><span class="line">	echo &quot;Attach ubi device&quot;</span><br><span class="line">	ubiattach /dev/ubi_ctrl -m $PART_NO -d $PART_NO || return 1</span><br><span class="line"></span><br><span class="line">	echo &quot;Create ubi volume&quot;</span><br><span class="line">	check_tool ubimkvol BR2_PACKAGE_MTD_UBIMKVOL || return 1</span><br><span class="line">	ubimkvol /dev/ubi$PART_NO -N $PART_NAME -m || return 1</span><br><span class="line"></span><br><span class="line">	echo &quot;Create ubi block device&quot;</span><br><span class="line">	if echo $DEV | grep -q ubiblock; then</span><br><span class="line">		check_tool ubiblock BR2_PACKAGE_MTD_UBIBLOCK || return 1</span><br><span class="line">		ubiblock -c /dev/ubi$&#123;PART_NO&#125;_0 || return 1</span><br><span class="line">	fi</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">is_rootfs()</span><br><span class="line">&#123;</span><br><span class="line">	[ $MOUNT_POINT = &quot;/&quot; ]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">remount_part()</span><br><span class="line">&#123;</span><br><span class="line">	mountpoint -q $MOUNT_POINT || return</span><br><span class="line"></span><br><span class="line">	if touch $MOUNT_POINT &amp;&gt;/dev/null; then</span><br><span class="line">		[ &quot;$1&quot; = ro ] &amp;&amp; mount -o remount,ro $MOUNT_POINT</span><br><span class="line">	else</span><br><span class="line">		[ &quot;$1&quot; = rw ] &amp;&amp; mount -o remount,rw $MOUNT_POINT</span><br><span class="line">	fi</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">format_part()</span><br><span class="line">&#123;</span><br><span class="line">	echo &quot;Formatting $DEV($FSTYPE)&quot;</span><br><span class="line"></span><br><span class="line">	case $FSGROUP in</span><br><span class="line">		ext2)</span><br><span class="line"><span class="meta prompt_">			# </span><span class="language-bash">Set max-mount-counts to 0, and <span class="built_in">disable</span> the time-dependent checking.</span></span><br><span class="line">			check_tool mke2fs BR2_PACKAGE_E2FSPROGS &amp;&amp; \</span><br><span class="line">			mke2fs -F -L $PART_NAME $DEV &amp;&amp; \</span><br><span class="line">			tune2fs -c 0 -i 0 $DEV</span><br><span class="line">			;;</span><br><span class="line">		vfat)</span><br><span class="line"><span class="meta prompt_">			# </span><span class="language-bash">Use fat32 by default</span></span><br><span class="line">			check_tool mkfs.vfat BR2_PACKAGE_DOSFSTOOLS_MKFS_FAT &amp;&amp; \</span><br><span class="line">			mkfs.vfat -I -F 32 -n $PART_NAME $DEV</span><br><span class="line">			;;</span><br><span class="line">		ntfs)</span><br><span class="line"><span class="meta prompt_">			# </span><span class="language-bash">Enable compression</span></span><br><span class="line">			check_tool mkntfs BR2_PACKAGE_NTFS_3G_NTFSPROGS &amp;&amp; \</span><br><span class="line">			mkntfs -FCQ -L $PART_NAME $DEV</span><br><span class="line">			;;</span><br><span class="line">		ubifs)</span><br><span class="line">			format_ubifs</span><br><span class="line">			;;</span><br><span class="line">		squashfs)</span><br><span class="line"><span class="meta prompt_">			# </span><span class="language-bash">check_tool mksquashfs BR2_PACKAGE_SQUASHFS &amp;&amp; \</span></span><br><span class="line"><span class="language-bash">			<span class="comment"># mksquashfs $DEV</span></span></span><br><span class="line">			echo &quot;It&#x27;s pointness to format a squashfs partition...&quot;</span><br><span class="line">			;;</span><br><span class="line">		jffs2)</span><br><span class="line">			echo &quot;It&#x27;s pointness to format a jffs2 partition...&quot;</span><br><span class="line">			;;</span><br><span class="line">		auto)</span><br><span class="line">			echo &quot;Unable to format a auto partition...&quot;</span><br><span class="line">			;;</span><br><span class="line">		*)</span><br><span class="line">			echo Unsupported file system $FSTYPE for $DEV</span><br><span class="line">			false</span><br><span class="line">			;;</span><br><span class="line">	esac</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">format_resize()</span><br><span class="line">&#123;</span><br><span class="line">	BACKUP=$1</span><br><span class="line">	SRC=$(realpath $MOUNT_POINT)</span><br><span class="line"></span><br><span class="line">	echo &quot;Format-resizing $DEV($FSTYPE)&quot;</span><br><span class="line"></span><br><span class="line">	echo &quot;Backup original data&quot;</span><br><span class="line">	cp -a &quot;$SRC&quot; &quot;$BACKUP/&quot; || return 1</span><br><span class="line">	umount &quot;$SRC&quot; || return 1</span><br><span class="line"></span><br><span class="line">	echo &quot;Format and mount rw&quot;</span><br><span class="line">	format_part || return 1</span><br><span class="line">	mount_part || return 1</span><br><span class="line">	remount_part rw</span><br><span class="line"></span><br><span class="line">	echo &quot;Restore backup data&quot;</span><br><span class="line">	cp -a &quot;$BACKUP/$SRC&quot; $(dirname &quot;$SRC&quot;) || return 1</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">resize_ext2()</span><br><span class="line">&#123;</span><br><span class="line">	check_tool resize2fs BR2_PACKAGE_E2FSPROGS_RESIZE2FS || return 1</span><br><span class="line"></span><br><span class="line">	resize2fs $DEV</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">resize_vfat()</span><br><span class="line">&#123;</span><br><span class="line">	check_tool fatresize BR2_PACKAGE_FATRESIZE || return 1</span><br><span class="line"></span><br><span class="line">	SIZE=$(fatresize -i $DEV | grep &quot;Size:&quot; | grep -o &quot;[0-9]*$&quot;)</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">	# </span><span class="language-bash">Somehow fatresize only works <span class="keyword">for</span> 256M+ fat</span></span><br><span class="line">	[ &quot;$SIZE&quot; -gt $((256 * 1024 * 1024)) ] &amp;&amp; return 1</span><br><span class="line"></span><br><span class="line">	MAX_SIZE=$(( $(cat $SYS_PATH/size) * 512))</span><br><span class="line">	MIN_SIZE=$(($MAX_SIZE - 16 * 1024 * 1024))</span><br><span class="line">	[ $MIN_SIZE -lt $SIZE ] &amp;&amp; return 0 # Large enough!</span><br><span class="line">	while [ $MAX_SIZE -gt $MIN_SIZE ];do</span><br><span class="line"><span class="meta prompt_">		# </span><span class="language-bash">Somehow fatresize cannot resize to max size</span></span><br><span class="line">		MAX_SIZE=$(($MAX_SIZE - 512 * 1024))</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">		# </span><span class="language-bash">Try to resize with fatresize, not always work</span></span><br><span class="line">		fatresize -s $MAX_SIZE $DEV &amp;&amp; return</span><br><span class="line">	done</span><br><span class="line">	return 1</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">resize_ntfs()</span><br><span class="line">&#123;</span><br><span class="line">	check_tool ntfsresize BR2_PACKAGE_NTFS_3G_NTFSPROGS || return 1</span><br><span class="line"></span><br><span class="line">	echo y | ntfsresize -f $DEV</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">resize_part()</span><br><span class="line">&#123;</span><br><span class="line"><span class="meta prompt_">	# </span><span class="language-bash">Fixed size or already resized</span></span><br><span class="line">	[ -f $MOUNT_POINT/.fixed -o -f $MOUNT_POINT/.resized ] &amp;&amp; return</span><br><span class="line"></span><br><span class="line">	if [ -z &quot;$FSRESIZE&quot; ]; then</span><br><span class="line">		echo &quot;No resize for $FSTYPE&quot;</span><br><span class="line">		return</span><br><span class="line">	fi</span><br><span class="line"></span><br><span class="line">	echo &quot;Resizing $DEV($FSTYPE)&quot;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">	# </span><span class="language-bash">Online resize needs read-write</span></span><br><span class="line">	remount_part rw</span><br><span class="line">	if eval $FSRESIZE; then</span><br><span class="line">		touch $MOUNT_POINT/.resized</span><br><span class="line">		return</span><br><span class="line">	fi</span><br><span class="line"></span><br><span class="line">	echo &quot;Done with rootfs&quot;</span><br><span class="line">	is_rootfs &amp;&amp; return</span><br><span class="line"></span><br><span class="line">	echo &quot;Fallback to format resize&quot;</span><br><span class="line">	TEMP_BACKUP=$(mktemp -d)</span><br><span class="line">	format_resize $TEMP_BACKUP &amp;&amp; touch $MOUNT_POINT/.resized</span><br><span class="line">	rm -rf $TEMP_BACKUP</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">erase_oem_command()</span><br><span class="line">&#123;</span><br><span class="line">	CMD=$1</span><br><span class="line">	FILE=$2</span><br><span class="line"></span><br><span class="line">	echo &quot;OEM: Erasing $CMD in $FILE&quot;</span><br><span class="line"></span><br><span class="line">	COUNT=$(echo $CMD | wc -c)</span><br><span class="line">	OFFSETS=$(strings -t d $FILE | grep -w &quot;$CMD&quot; | awk &#x27;&#123; print $1 &#125;&#x27;)</span><br><span class="line"></span><br><span class="line">	for offset in $OFFSETS; do</span><br><span class="line">		dd if=/dev/zero of=$FILE bs=1 count=$COUNT seek=$offset conv=notrunc 2&gt;/dev/null</span><br><span class="line">	done</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">done_oem_command()</span><br><span class="line">&#123;</span><br><span class="line">	CMD=$1</span><br><span class="line"></span><br><span class="line">	echo &quot;OEM: Done with $CMD&quot;</span><br><span class="line"></span><br><span class="line">	if [ -b &quot;$MISC_DEV&quot; ]; then</span><br><span class="line">		erase_oem_command $CMD $MISC_DEV</span><br><span class="line">	else</span><br><span class="line">		echo &quot;OEM: Erase $CMD from mtd device&quot;</span><br><span class="line"></span><br><span class="line">		check_tool nanddump BR2_PACKAGE_MTD_NANDDUMP || return</span><br><span class="line">		check_tool nandwrite BR2_PACKAGE_MTD_NANDWRITE || return</span><br><span class="line">		check_tool flash_erase BR2_PACKAGE_MTD_FLASH_ERASE || return</span><br><span class="line"></span><br><span class="line">		TEMP=$(mktemp)</span><br><span class="line">		nanddump $MISC_DEV -f $TEMP</span><br><span class="line">		erase_oem_command $CMD $TEMP</span><br><span class="line">		flash_erase $MISC_DEV 0 0</span><br><span class="line">		nandwrite $MISC_DEV $TEMP</span><br><span class="line">	fi</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">handle_oem_command()</span><br><span class="line">&#123;</span><br><span class="line">	[ &quot;$OEM_CMD&quot; ] || return</span><br><span class="line"></span><br><span class="line">	for cmd in $OEM_CMD; do</span><br><span class="line">		case $cmd in</span><br><span class="line"><span class="meta prompt_">			cmd_wipe_$</span><span class="language-bash">PART_NAME)</span></span><br><span class="line">				is_rootfs &amp;&amp; continue</span><br><span class="line"></span><br><span class="line">				echo &quot;OEM: $cmd - Wiping $DEV&quot;</span><br><span class="line">				format_part &amp;&amp; done_oem_command $cmd</span><br><span class="line">				;;</span><br><span class="line">		esac</span><br><span class="line">	done</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">convert_mount_opts()</span><br><span class="line">&#123;</span><br><span class="line"><span class="meta prompt_">	# </span><span class="language-bash">Accept all opts by default <span class="keyword">for</span> standard mount tool</span></span><br><span class="line">	if [ -z &quot;$@&quot; ] &amp;&amp; [ &quot;$(readlink $(which mount))&quot; != busybox ]; then</span><br><span class="line">		echo $OPTS</span><br><span class="line">		return</span><br><span class="line">	fi</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">	# </span><span class="language-bash">Filter out unsupported opts</span></span><br><span class="line">	for opt in $&#123;@:-$BUSYBOX_MOUNT_OPTS&#125;; do</span><br><span class="line">		echo $&#123;OPTS//,/ &#125; | xargs -n 1 | grep -oE &quot;^$opt$&quot;</span><br><span class="line">	done | tr &quot;\n&quot; &quot;,&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">prepare_part()</span><br><span class="line">&#123;</span><br><span class="line"><span class="meta prompt_">	# </span><span class="language-bash">Ignore external storages</span></span><br><span class="line">	echo $MOUNT_POINT | grep -q &quot;^\/mnt\/&quot; &amp;&amp; return 1</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">	# </span><span class="language-bash">Find real dev <span class="keyword">for</span> root dev</span></span><br><span class="line">	if is_rootfs; then</span><br><span class="line">		DEV=$(findmnt -n -o source /)</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">		# </span><span class="language-bash">Fallback to the by-name <span class="built_in">link</span></span></span><br><span class="line">		[ &quot;$DEV&quot; ] || DEV=/dev/block/by-name/rootfs</span><br><span class="line">	fi</span><br><span class="line"></span><br><span class="line">	DEV=$(realpath $DEV 2&gt;/dev/null)</span><br><span class="line">	PART_NO=$(echo $DEV | grep -oE &quot;[0-9]*$&quot;)</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">	# </span><span class="language-bash">Unknown device</span></span><br><span class="line">	[ -b &quot;$DEV&quot; -o -c &quot;$DEV&quot; ] || return 1</span><br><span class="line"></span><br><span class="line">	SYS_PATH=$(echo /sys/class/*/$&#123;DEV##*/&#125;)</span><br><span class="line">	if [ -f &quot;$SYS_PATH/name&quot; ]; then</span><br><span class="line">		PART_NAME=$(cat $SYS_PATH/name)</span><br><span class="line">	else</span><br><span class="line">		PART_NAME=$(grep PARTNAME $&#123;SYS_PATH&#125;/uevent | cut -d &#x27;=&#x27; -f 2)</span><br><span class="line">	fi</span><br><span class="line">	PART_NAME=$&#123;PART_NAME:-$&#123;DEV##*/&#125;&#125;</span><br><span class="line"></span><br><span class="line">	case $FSTYPE in</span><br><span class="line">		ext[234])</span><br><span class="line">			FSGROUP=ext2</span><br><span class="line">			FSCK=&quot;fsck.$FSTYPE -y&quot;</span><br><span class="line">			FSCK_CONFIG=BR2_PACKAGE_E2FSPROGS_FSCK</span><br><span class="line">			FSRESIZE=resize_ext2</span><br><span class="line">			;;</span><br><span class="line">		msdos|fat|vfat)</span><br><span class="line">			FSGROUP=vfat</span><br><span class="line">			FSCK=&quot;fsck.vfat -y&quot;</span><br><span class="line">			FSCK_CONFIG=BR2_PACKAGE_DOSFSTOOLS_FSCK_FAT</span><br><span class="line">			FSRESIZE=resize_vfat</span><br><span class="line">			;;</span><br><span class="line">		ntfs)</span><br><span class="line">			FSGROUP=ntfs</span><br><span class="line">			FSCK=ntfsfix</span><br><span class="line">			FSCK_CONFIG=BR2_PACKAGE_NTFS_3G_NTFSPROGS</span><br><span class="line">			FSRESIZE=resize_ntfs</span><br><span class="line">			;;</span><br><span class="line">		ubi|ubifs)</span><br><span class="line">			FSGROUP=ubifs</span><br><span class="line">			unset FSCK</span><br><span class="line">			unset FSRESIZE</span><br><span class="line">			;;</span><br><span class="line">		squashfs)</span><br><span class="line">			FSGROUP=squashfs</span><br><span class="line">			unset FSCK</span><br><span class="line">			unset FSRESIZE</span><br><span class="line">			;;</span><br><span class="line">		jffs2)</span><br><span class="line">			FSGROUP=jffs2</span><br><span class="line">			unset FSCK</span><br><span class="line">			unset FSRESIZE</span><br><span class="line">			;;</span><br><span class="line">		auto)</span><br><span class="line">			FSGROUP=auto</span><br><span class="line">			echo &quot;Running fsck on a random fs is dangerous&quot;</span><br><span class="line">			unset FSCK</span><br><span class="line">			unset FSRESIZE</span><br><span class="line">			;;</span><br><span class="line">		*)</span><br><span class="line">			echo &quot;Unsupported file system $FSTYPE for $DEV&quot;</span><br><span class="line">			return</span><br><span class="line">	esac</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">	# </span><span class="language-bash">Setup mount tool and opts</span></span><br><span class="line">	case $FSGROUP in</span><br><span class="line">		ntfs)</span><br><span class="line">			MOUNT=ntfs-3g</span><br><span class="line">			check_tool ntfs-3g BR2_PACKAGE_NTFS_3G || return 1</span><br><span class="line">			OPTS=$(convert_mount_opts &quot;$NTFS_3G_MOUNT_OPTS&quot;)</span><br><span class="line">			;;</span><br><span class="line">		ubifs)</span><br><span class="line">			MOUNT=&quot;mount -t ubifs&quot;</span><br><span class="line">			OPTS=$(convert_mount_opts)</span><br><span class="line">			;;</span><br><span class="line">		*)</span><br><span class="line">			MOUNT=mount</span><br><span class="line">			OPTS=$(convert_mount_opts)</span><br><span class="line">			;;</span><br><span class="line">	esac</span><br><span class="line">	MOUNT_OPTS=$&#123;OPTS:+&quot; -o $&#123;OPTS%,&#125;&quot;&#125;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">	# </span><span class="language-bash">Prepare <span class="keyword">for</span> ubi (consider /dev/mtdX as ubiblock)</span></span><br><span class="line">	if [ &quot;$FSGROUP&quot; = ubifs ] || echo $DEV | grep -q &quot;/dev/mtd[0-9]&quot;;then</span><br><span class="line">		if ! prepare_ubi; then</span><br><span class="line">			echo &quot;Failed to prepare ubi for $DEV&quot;</span><br><span class="line">			[ &quot;$AUTO_MKFS&quot; ] || return</span><br><span class="line"></span><br><span class="line">			echo &quot;Auto formatting&quot;</span><br><span class="line">			format_ubifs || return</span><br><span class="line">		fi</span><br><span class="line">	fi</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">check_part()</span><br><span class="line">&#123;</span><br><span class="line">	[ &quot;$SKIP_FSCK&quot; -o &quot;$PASS&quot; -eq 0 ] &amp;&amp; return</span><br><span class="line"></span><br><span class="line">	if [ -z &quot;$FSCK&quot; ]; then</span><br><span class="line">		echo &quot;No fsck for $FSTYPE&quot;</span><br><span class="line">		return</span><br><span class="line">	fi</span><br><span class="line"></span><br><span class="line">	echo &quot;Checking $DEV($FSTYPE)&quot;</span><br><span class="line"></span><br><span class="line">	check_tool &quot;$FSCK&quot; $FSCK_CONFIG || return</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">	# </span><span class="language-bash">Fsck needs read-only</span></span><br><span class="line">	remount_part ro</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">	$</span><span class="language-bash">FSCK <span class="variable">$DEV</span></span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">mount_part()</span><br><span class="line">&#123;</span><br><span class="line">	echo &quot;Mounting $DEV($FSTYPE) on $MOUNT_POINT $&#123;MOUNT_OPTS:+with$MOUNT_OPTS&#125;&quot;</span><br><span class="line"><span class="meta prompt_">	$</span><span class="language-bash">MOUNT <span class="variable">$DEV</span> <span class="variable">$MOUNT_POINT</span> <span class="variable">$MOUNT_OPTS</span> &amp;&amp; <span class="built_in">return</span></span></span><br><span class="line">	[ &quot;$AUTO_MKFS&quot; ] || return</span><br><span class="line"></span><br><span class="line">	echo &quot;Failed to mount $DEV, try to format it&quot;</span><br><span class="line">	format_part &amp;&amp; \</span><br><span class="line"><span class="meta prompt_">		$</span><span class="language-bash">MOUNT <span class="variable">$DEV</span> <span class="variable">$MOUNT_POINT</span> <span class="variable">$MOUNT_OPTS</span></span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>​	然后继续创建一个名为resize-helper的脚本文件，向该文件添加以下内容：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim resize-helper</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/sh</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment">## BEGIN INIT INFO</span></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Provides:       resize-all</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Default-Start:  S</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Default-Stop:</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Description:    调整所有已挂载的内部分区的大小</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment">## END INIT INFO</span></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">不在错误状态下退出</span></span><br><span class="line">set +e</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">取消以下注释以查看更多日志</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="built_in">set</span> -x</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">包含 disk-helper 脚本</span></span><br><span class="line">. $(dirname $0)/disk-helper</span><br><span class="line"></span><br><span class="line">LOGFILE=/tmp/resize-all.log</span><br><span class="line"></span><br><span class="line">do_part()</span><br><span class="line">&#123;</span><br><span class="line">    DEV=$1</span><br><span class="line">    MOUNT_POINT=$2</span><br><span class="line">    FSTYPE=$3</span><br><span class="line">    OPTS=$4</span><br><span class="line"></span><br><span class="line">    echo &quot;处理 $DEV $MOUNT_POINT $FSTYPE $OPTS&quot;</span><br><span class="line"></span><br><span class="line">    # 设置检查/挂载工具并进行一些准备工作</span><br><span class="line">    prepare_part || return</span><br><span class="line"></span><br><span class="line">    # 存储 ro/rw</span><br><span class="line">    MOUNTED_RO_RW=$(touch $MOUNT_POINT &amp;&gt;/dev/null &amp;&amp; echo rw || echo ro)</span><br><span class="line"></span><br><span class="line">    # 如果需要，调整分区大小</span><br><span class="line">    resize_part</span><br><span class="line"></span><br><span class="line">    # 恢复 ro/rw</span><br><span class="line">    remount_part $MOUNTED_RO_RW</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">resize_all()</span><br><span class="line">&#123;</span><br><span class="line">    echo &quot;将调整 /proc/mounts 中的所有分区大小&quot;</span><br><span class="line"></span><br><span class="line">    while read LINE; do</span><br><span class="line">        do_part $LINE</span><br><span class="line">    done &lt; /proc/mounts</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">case &quot;$1&quot; in</span><br><span class="line">    start|&quot;&quot;)</span><br><span class="line">        resize_all 2&gt;&amp;1 | tee $LOGFILE</span><br><span class="line">        echo &quot;日志保存至 $LOGFILE&quot;</span><br><span class="line">        ;;</span><br><span class="line">    *)</span><br><span class="line">        echo &quot;用法: resize-helper start&quot; &gt;&amp;2</span><br><span class="line">        exit 3</span><br><span class="line">        ;;</span><br><span class="line">esac</span><br></pre></td></tr></table></figure>
+<p>​	该脚本的主要功能是在系统引导时调整所有已挂载的内部分区的大小，保存退出之后，使用以下命令给予两个脚本的可执行权限，如下图所示：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod 777 resize-helper disk-helper</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311212254933.png" alt="image-20231121225448900" /></p>
+<p>然后在etc/init.d目录下创建一个名为resize-disk.sh的开机启动项，内容如下所示：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash -e</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Description:  调整 Rockchip 平台环境下的磁盘大小</span></span><br><span class="line">PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin</span><br><span class="line"></span><br><span class="line">case &quot;$1&quot; in</span><br><span class="line">    start)</span><br><span class="line">        if [ ! -e /var/lib/misc/firstrun ]; then</span><br><span class="line">            /usr/bin/resize-helper  # 调用 resize-helper 脚本来调整磁盘大小</span><br><span class="line">            mkdir -p /var/lib/misc  # 创建目录 /var/lib/misc</span><br><span class="line">            touch /var/lib/misc/firstrun  # 创建文件 /var/lib/misc/firstrun</span><br><span class="line">        fi</span><br><span class="line">        ;;</span><br><span class="line">    stop)</span><br><span class="line">        ;;</span><br><span class="line">    restart|reload)</span><br><span class="line">        ;;</span><br><span class="line">    *)</span><br><span class="line">        echo &quot;用法: $0 &#123;start|stop|restart&#125;&quot;</span><br><span class="line">        exit 1</span><br><span class="line">esac</span><br><span class="line"></span><br><span class="line">exit $?</span><br></pre></td></tr></table></figure>
+<p>该脚本是一个初始化脚本（init script），用于在第一次启动系统时，运行/usr/bin/resize-helper调整磁盘大小。现在只是创建了该脚本，接下来向系统中添加相应的服务，让该脚本开机自动运行，首先来到/usr/lib/systemd/system目录下，创建一个名为resize-disk.service的服务，然后向该服务中添加以下内容</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/lib/systemd/system</span><br><span class="line">vi resize-disk.service</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">start</span></span><br><span class="line">[Unit]</span><br><span class="line">Description=Resize disk for rockchcip platform</span><br><span class="line">After=lighdm.service</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=simple</span><br><span class="line">ExecStart=/etc/init.d/resize-disk.sh start</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">end</span></span><br></pre></td></tr></table></figure>
+<p>该服务会运行/etc/init.d/resize-disk.sh脚本，该脚本</p>
+<p>保存退出之后，使用以下命令创建该文件的软链接到/etc/systemd/system/sysinit.target.wants/目录下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln -s /usr/lib/systemd/system/resize-disk.service /etc/systemd/system/sysinit.target.wants/resize-disk.service</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311220732603.png" alt="image-20231122073214553" /></p>
+<p>​	至此，关于自动扩容相关的配置也就完成了，这时候如果制作烧写镜像进入系统之后会自动扩容，最终效果如下所示：<br />
+<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311220734847.png" alt="image-20231122073421803" /></p>
+<h3 id="749配置adb"><a class="markdownIt-Anchor" href="#749配置adb"></a> 7.4.9配置ADB</h3>
+<p>瑞芯微在很多地方要用到adb服务，例如在RKNPU中要用到的连扳推理，PC端向开发板传输文件都要使用adb服务，所以在本小节将对adb服务进行适配。</p>
+<p>本小节要用到了文件已经放在了“iTOP-3568开发板\03_【iTOP-RK3568开发板】指南教程\03_文件系统构建配套资料\04_Ubuntu和Debian系统构建配套资料\02_配置ADB”目录下，如下图所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023023.jpg" alt="img" /></p>
+<p>首先进入/usr/lib/systemd/system/目录，创建一个名为usbdevice.service的服务，该服务的内容如下所示：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=Manage USB device functions</span><br><span class="line">DefaultDependencies=no</span><br><span class="line">After=local-fs.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=forking</span><br><span class="line">ExecStart=/usr/bin/usbdevice start </span><br><span class="line">ExecStop=/usr/bin/usbdevice stop</span><br><span class="line">[Install]</span><br><span class="line">WantedBy=sysinit.target</span><br></pre></td></tr></table></figure>
+<p>保存退出之后，继续使用以下命令创建该文件的软链接到/etc/systemd/system/sysinit.target.wants/目录下，如下图所示</p>
+<p>ln -s /usr/lib/systemd/system/usbdevice.service /etc/systemd/system/sysinit.target.wants/usbdevice.service</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023029.jpg" alt="img" /></p>
+<p>然后进入/usr/lib/udev/rules.d目录下，创建一个名为61-usbdevice.rules的规格，具体内容如下所示：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SUBSYSTEM==&quot;android_usb&quot;,ACTION==&quot;change&quot;,RUN+=&quot;/usr/bin/usbdevice update&quot;  </span><br></pre></td></tr></table></figure>
+<p>这个规则定义了一个触发条件，即当系统中的Android USB设备发生更改时（例如插入或拔出设备），将运行一个特定的命令/usr/bin/usbdevice update，然后将提供资料里的usbdevice脚本和adbd拷贝到/usr/bin目录下（需要打开一个终端进行操作），拷贝完成如下图所示：<br />
+<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023030.jpg" alt="img" /></p>
+<p>然后使用以下命令赋予两个文件可执行权限，如下图所示：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod 777 adbd usbdevice</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023031.jpg" alt="img" /></p>
+<p>最后来到/etc/profile.d/目录下创建一个名为usbdevice.sh的文件，/etc/profile.d/目录是用于存放系统级别的配置文件的目录。当用户登录时，系统会自动执行/etc/profile文件，然后向usbdevice.sh文件写入以下内容：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/sh</span></span><br><span class="line"><span class="meta prompt_">  </span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">The <span class="built_in">env</span> variables below can be overridden</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">option: adb acm hid mtp ntb rndis uac1 uac2 ums uvc</span></span><br><span class="line">export USB_FUNCS=&quot;adb&quot;       </span><br><span class="line">export UMS_FILE=/userdata/ums_shared.img</span><br><span class="line">export UMS_SIZE=256M</span><br><span class="line">export UMS_FSTYPE=vfat</span><br><span class="line">export UMS_MOUNT=0</span><br><span class="line">export UMS_MOUNTPOINT=/mnt/ums</span><br><span class="line">export UMS_RO=0</span><br></pre></td></tr></table></figure>
+<p>其中要注意的是第6行的内容，表示默认模式为ADB，也有其他的几种模式，如果后续用到会进行说明，至此，关于adb的配置就完成了，镜像打包之后烧写到开发板上，在RK的烧写软件中会显示“发现了一个ADB设备”，如下图所示：<br />
+<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023035.jpg" alt="img" /></p>
+<p>然后将ADB设备连接到虚拟机ubuntu上，连接成功之在左侧后会有一个手机的图标，如下图所示：<br />
+<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023033.jpg" alt="img" /></p>
+<p>首先输入“adb devices”命令查看adb设备如下图所示：<br />
+<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023203.jpg" alt="img" /></p>
+<p>然后使用以下命令将测试文件test通过adb传输到开发板的根目录，传输过程如下所示：<br />
+<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023212.jpg" alt="img" /></p>
+<p>然后查看开发板的根目录，可以看到test文件已经成功传输，如下图所示：<br />
+<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023222.jpg" alt="img" /></p>
+<p>至此，关于adb的测试就完成了。</p>
+<h3 id="7410配置终端和桌面自动登录"><a class="markdownIt-Anchor" href="#7410配置终端和桌面自动登录"></a> 7.4.10配置终端和桌面自动登录</h3>
+<p>本小节要用到的文件路径为“iTOP-3568开发板\03_【iTOP-RK3568开发板】指南教程\03_文件系统构建配套资料\04_Ubuntu和Debian系统构建配套资料\03_终端和桌面自动登录”，如下图所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023229.jpg" alt="img" /></p>
+<p>为了方便，本小节将取消ubuntu启动时的终端登录和桌面的登录，默认让终端登录进root用户，桌面默认登录topeet用户，首先输入以下命令修改终端设置选项：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /lib/systemd/system/serial-getty\@.service</span><br></pre></td></tr></table></figure>
+<p>然后将ExecStart选项修改为以下内容，修改完成如下图所示：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ExecStart= -/sbin/agetty --autologin root --noclear %I $TERM</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023238.jpg" alt="img" /></p>
+<p>至此，串口终端自动登录root用户就设置完成了，然后设置桌面自动登录，在安装桌面章节默认显示管理器使用的是lightdm，所以这里需要将提供资料里面的lightdm.conf拷贝到/etc/lightdm目录下，拷贝完成如下图所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023246.jpg" alt="img" /></p>
+<p>涉及到自动登录的内容为该配置文件的126行和127行，具体内容如下所示：<br />
+<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023348.jpg" alt="img" /></p>
+<p>这里默认登录的为topeet用户，如果想要自动登录其他用户自行修改即可，打包镜像，烧写到开发板上之后，可以看到终端已经自动登录进入了系统，如下图所示：<br />
+<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023362.jpg" alt="img" /></p>
+<p>在图形界面也跳过了登录界面，自动进入了桌面，进入桌面之后如下图所示：<br />
+<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023376.png" alt="img" /></p>
+<p>至此终端和桌面自动登录的设置就完成了。</p>
+<h3 id="7411配置以太网络"><a class="markdownIt-Anchor" href="#7411配置以太网络"></a> 7.4.11配置以太网络</h3>
+<p>本小节要用到的文件路径为“iTOP-3568开发板\03_【iTOP-RK3568开发板】指南教程\03_文件系统构建配套资料\04_Ubuntu和Debian系统构建配套资料\05_以太网配置”，如下图所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023386.jpg" alt="img" /></p>
+<p>现在系统启动之后如果使用“ifconfig”命令查看网络可以发现只有一个本地回环生效了，其他的并未生效，如下图所示：<br />
+<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023392.jpg" alt="img" /></p>
+<p>所以需要对网络进行一些配置，首先对“/etc/NetworkManager/NetworkManager.conf”文件进行修改，将ifupdown从false设置为true，修改完成如下图所示：<br />
+<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023399.jpg" alt="img" /></p>
+<p>通过将[ifupdown]部分中的managed选项设置为true，可以启用 NetworkManager 对 ifupdown 工具的集成。这意味着 NetworkManager 将读取和解释 /etc/network/interfaces 文件中的配置，并使用自己的机制来管理这些网络接口。</p>
+<p>然后修改/usr/lib/NetworkManager/conf.d/10-globally-managed-devices.conf配置文件，修改为以下内容</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[keyfile] </span><br><span class="line">unmanaged-devices=*,except:type:wifi,except:type:ethernet,except:type:gsm,except:type:cdma</span><br></pre></td></tr></table></figure>
+<p>这个规则的作用是告诉 NetworkManager 不要自动管理除了Wi-Fi、以太网、GSM 和 CDMA 设备之外的其他类型的网络设备。这样可以确保这些设备不受 NetworkManager 的干预，并允许其他工具或配置来处理它们。</p>
+<p>至此关于网络相关的配置就完成了。打包镜像重新烧写之后，重新使用“ifconfig”命令查看网络配置，可以看到eth0和eth1已经出现了，由于现在只是插着一根网线，所以只有eth1获取到了ip，如下图所示：<br />
+<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023546.jpg" alt="img" /></p>
+<p>当使用“apt-get update”命令进行软件源更新的时候可能出现以下打印，这是因为证书过期所导致的：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023562.jpg" alt="img" /></p>
+<p>该问题可以通过输入下面两条命令来解决，如下图所示：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">touch /etc/apt/apt.conf.d/99verify-peer.conf</span><br><span class="line"></span><br><span class="line">echo &gt;&gt;/etc/apt/apt.conf.d/99verify-peer.conf &quot;Acquire &#123; https::Verify-Peer false &#125;&quot;</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023572.jpg" alt="img" /></p>
+<p>至此，关于网络相关的配置就完成了。</p>
+<h3 id="7412配置蓝牙wifi"><a class="markdownIt-Anchor" href="#7412配置蓝牙wifi"></a> 7.4.12配置蓝牙WIFI</h3>
+<p>本小节要用到的文件路径为“iTOP-3568开发板\03_【iTOP-RK3568开发板】指南教程\03_文件系统构建配套资料\04_Ubuntu和Debian系统构建配套资料\06_配置蓝牙WIFI”，如下图所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023578.jpg" alt="img" /></p>
+<p>由于迅为使用的蓝牙WIFI模块为8723du，该模块若想正常使用，需要在系统启动之后通过ko的形式进行加载，所以本小节将会讲解如何让模块开机之后自动被加载。</p>
+<p>首先进入到/usr/local/bin目录下，创建一个名为wifi_blue.sh的脚本文件，然后向该脚本中添加以下内容：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line">insmod /usr/local/modules/8723du.ko</span><br><span class="line">insmod /usr/local/modules/rtk_btusb.ko    </span><br><span class="line">rfkill unblock bluetooth</span><br><span class="line">hciconfig hci0 up</span><br></pre></td></tr></table></figure>
+<p>该脚本的作用就是加载蓝牙和WIFI两个KO模块，保存退出之后使用chmod命令给予该脚本可执行权限，如下图所示：<br />
+<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023584.jpg" alt="img" /></p>
+<p>这时候只是有了可以加载驱动的脚本，然后来到/usr/lib/systemd/system目录下创建一个名为wifibt.service的开机自动运行服务，向该服务中添加以下内容</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">#start</span><br><span class="line">[Unit]</span><br><span class="line">Description=insmod topeet wifi_blue modules</span><br><span class="line">After=lighdm.service</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=forking</span><br><span class="line">ExecStart=/usr/local/bin/wifi_blue.sh</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br><span class="line">#end</span><br></pre></td></tr></table></figure>
+<p>该服务的目的就是开机运行/usr/local/bin/wifi_blue.sh脚本，从而加载WIFI和蓝牙模块，让两个功能正常使用，然后使用以下命令创建该服务的软链接，创建完成如下图所示：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln -s /usr/lib/systemd/system/wifibt.service /etc/systemd/system/sysinit.target.wants/</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023685.jpg" alt="img" /></p>
+<p>接下来需要在/usr/local/目录下创建一个名为modules的目录，然后将提供资料里的两个ko文件拷贝到该目录下，拷贝完成如下图所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023716.jpg" alt="img" /></p>
+<p>需要注意的是，在资料中提供的这两个ko文件只适用于内核版本为4.19的系统，如果是其他版本的系统可以自行替换对应的ko文件。</p>
+<p>初次之外蓝牙的正常运行还需要相应的固件，所以还需要资料中提供的rtl8723du_config和rtl8723du_fw两个固件拷贝到/usr/lib/firmware目录下，拷贝完成如下图所示：<br />
+<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023722.jpg" alt="img" /></p>
+<p>至此，关于蓝牙WIFI相关的配置就完成了。打包镜像并烧写到开发板上，来到图形界面，可以看到蓝牙已经可以正常的搜索到设备了，如下图所示：<br />
+<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023728.png" alt="img" /></p>
+<p>在右上角的网络设置中也可以搜索到相应的WIFI，如下图所示：<br />
+<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023739.png" alt="img" /></p>
+<p>至此，关于蓝牙WIFI 的相关配置就完成了。</p>
+<h3 id="7413配置ssh允许root登录"><a class="markdownIt-Anchor" href="#7413配置ssh允许root登录"></a> 7.4.13配置ssh允许root登录</h3>
+<p>本小节要用到的文件路径为“iTOP-3568开发板\03_【iTOP-RK3568开发板】指南教程\03_文件系统构建配套资料\04_Ubuntu和Debian系统构建配套资料\04_ssh 允许root登录”，如下图所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023770.jpg" alt="img" /></p>
+<p>默认情况下ssh是不能root用户登录的，为了方便调试，可以通过修改sshd的配置文件来允许ssh root登录。</p>
+<p>sshd的配置文件为“/etc/ssh/sshd_config”，打开该文件找到下图所示的内容：<br />
+<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023832.jpg" alt="img" /></p>
+<p>然后修改为以下内容，修改完成如下图所示：】</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PermitRootLogin yes</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023859.jpg" alt="img" /></p>
+<p>至此，关于ssh有关的配置就修改完成了。然后打包镜像烧写到开发板，进入系统之后查看开发板的ip地址为192.168.1.168，如下图所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023871.jpg" alt="img" /></p>
+<p>然后通过ssh软件通过root用户连接，连接设置如下所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023943.jpg" alt="img" /></p>
+<p>连接成功如下图所示：<br />
+<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023992.jpg" alt="img" /></p>
+<p>至此，关于ssh允许root登录的设置就完成了。</p>
+<h3 id="7414安装rga-deb包"><a class="markdownIt-Anchor" href="#7414安装rga-deb包"></a> 7.4.14安装rga deb包</h3>
+<p>本小节要用到的文件路径为“iTOP-3568开发板\03_【iTOP-RK3568开发板】指南教程\03_文件系统构建配套资料\04_Ubuntu和Debian系统构建配套资料\07_rga”，如下图所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023026.jpg" alt="img" /></p>
+<p>注：这里提供的仅仅只是ubuntu20 rga相关的deb包，如果是其他系统并不适用。</p>
+<p>RGA是Rockchip（瑞芯微电子）公司开发的图像处理技术，主要应用于他们的系统芯片中。RGA技术在Rockchip的芯片中集成了一个专门的硬件模块，用于加速2D图形操作。这个硬件模块通常被称为RGA硬件加速器。</p>
+<p>RGA会对图形界面有一定的加速效果，而且后面在安装GPU相关库的部分也会用到RGA，所以这里先来安装一下RGA相关的deb包。</p>
+<p>首先将deb包拷贝到构建的ubuntu文件系统中，拷贝完成如下图所示：<br />
+<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023034.jpg" alt="img" /></p>
+<p>然后使用以下命令进行安装,安装过程如下所示：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dpkg -i librga-dev_2.2.0-1_arm64.deb</span><br><span class="line">dpkg -i librga2_2.2.0-1_arm64.deb</span><br><span class="line">dpkg -i librga2-dbgsym_2.2.0-1_arm64.deb</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222023053.jpg" alt="img" /></p>
+<p>至此，RGA相关的库就安装完成了。</p>
+<h3 id="7415-安装mpp-deb包"><a class="markdownIt-Anchor" href="#7415-安装mpp-deb包"></a> 7.4.15 安装mpp deb包</h3>
+<p>本小节要用到的文件路径为“iTOP-3568开发板\03_【iTOP-RK3568开发板】指南教程\03_文件系统构建配套资料\04_Ubuntu和Debian系统构建配套资料\08_mpp”，如下图所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222226972.jpg" alt="img" /></p>
+<p>注：这里提供的仅仅只是ubuntu20 mpp相关的deb包，如果是其他系统并不适用。</p>
+<p>MPP（Media Processing Platform）是一种多媒体处理平台，用于实现音频和视频数据的处理、编解码和处理。MPP 提供了一组丰富的功能和算法，用于处理各种多媒体数据，并且能够在硬件加速的环境下提供高效的处理性能。</p>
+<p>以下是 MPP 的主要作用：</p>
+<p>（1）视频编解码：MPP 提供了各种视频编解码器，如 H.264、H.265、MPEG-2 等。这些编解码器能够将视频数据进行压缩（编码）和解压缩（解码），以满足不同应用场景对视频数据的存储和传输需求。通过硬件加速，MPP 可以提供高效的视频编解码性能，减轻 CPU 的负担。</p>
+<p>（2）图像处理：MPP 包含了一系列图像处理算法，如图像缩放、旋转、裁剪、色彩空间转换等。这些算法可以对图像进行各种操作和转换，以满足不同应用场景对图像处理的需求。MPP 的硬件加速能力可以加快图像处理的速度，并提供更高的效率。</p>
+<p>（3）音频编解码：除了视频编解码，MPP 还提供了音频编解码的功能。它支持常见的音频编码格式，如 AAC、MP3、AC3 等。通过 MPP，可以对音频数据进行高效的压缩和解压缩，实现音频的存储、传输和处理。</p>
+<p>（4）多媒体处理流程管理：MPP 提供了一个统一的框架和接口，用于管理和控制多媒体处理流程。它可以对多个媒体处理单元进行调度和协调，实现复杂的多媒体处理任务。MPP 还提供了丰富的配置选项和参数设置，以满足不同应用场景的需求。</p>
+<p>MPP包的安装方法跟上面RGA包的安装方法相同，首先将资料中提供的MPP包拷贝到构建的ubuntu文件系统中，拷贝完成如下图所示：<br />
+<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222226970.jpg" alt="img" /></p>
+<p>然后使用以下命令进行安装,安装过程如下所示：</p>
+<p>dpkg -i librockchip-mpp1_1.5.0-1_arm64.deb</p>
+<p>dpkg -i librockchip-mpp-dev_1.5.0-1_arm64.deb</p>
+<p>dpkg -i librockchip-vpu0_1.5.0-1_arm64.deb</p>
+<p>dpkg -i rockchip-mpp-demos_1.5.0-1_arm64.deb</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222226980.jpg" alt="img" /></p>
+<p>至此，MPP相关的库就安装完成了，打包镜像，然后烧写到开发板，开发板启动之后，在开发板终端输入以下命令用来监控系统打印，如下图所示：</p>
+<p>tail -f /var/log/syslog &amp;</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222226975.jpg" alt="img" /></p>
+<p>然后输入以下命令通过mpi_dec_test命令调用mpp进行视频的解码，将<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=h264&amp;spm=1001.2101.3001.7020">h264</a>转为yuv，解码过程如下图所示：</p>
+<p>mpi_dec_test -i /oem/200frames_count.h264 -t 7 -n 250 -o /home/topeet/test.yuv -w 640 -h 480</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222226973.jpg" alt="img" /></p>
+<p>解码完成之后在/home/topeet/目录下生成了解码为yuv格式的test.yuv文件，如下图所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222226987.jpg" alt="img" /></p>
+<p>然后继续使用mpi_enc_test命令进行视频的编码，将上面解码出来的yuv转为h264格式，编码过程如下图所示：</p>
+<p>mpi_enc_test -i /home/topeet/test.yuv -t 7 -n 250 -o /home/topeet/test.h264 -w 640 -h 480 -fps 25</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222226355.jpg" alt="img" /></p>
+<p>编码完成之后在/home/topeet/目录下生成了编码为h264格式的test.h26文件，如下图所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222226373.jpg" alt="img" /></p>
+<p>至此，关于MPP的相关测试就完成了。</p>
+<h3 id="7416-安装gpu-deb包"><a class="markdownIt-Anchor" href="#7416-安装gpu-deb包"></a> 7.4.16 安装gpu deb包</h3>
+<p>本小节要用到的文件路径为“iTOP-3568开发板\03_【iTOP-RK3568开发板】指南教程\03_文件系统构建配套资料\04_Ubuntu和Debian系统构建配套资料\09_gpu”，如下图所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222226388.jpg" alt="img" /></p>
+<p>注：这里提供的仅仅只是ubuntu20 gpu相关的deb包，如果是其他系统并不适用。</p>
+<p>首先将上面提供资料里的xserver相关deb包拷贝到要构建的ubuntu系统中，拷贝完成如下图所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222226397.jpg" alt="img" /></p>
+<p>然后使用以下命令进行deb包的安装，安装过程如下所示：<br />
+dpkg -i xserver-common_1.20.13-1ubuntu1~20.04.9_all.deb</p>
+<p>dpkg -i xserver-xorg-core_1.20.13-1ubuntu1~20.04.9_arm64.deb</p>
+<p>dpkg -i xserver-xorg-dev_1.20.13-1ubuntu1~20.04.9_arm64.deb</p>
+<p>dpkg -i xserver-xorg-legacy_1.20.13-1ubuntu1~20.04.9_arm64.deb</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222226407.jpg" alt="img" /></p>
+<p>中间在安装xserver-xorg-core_1.20.13-1ubuntu1~20.04.9_arm64.deb包时出现了错误，这里我们使用“apt-get install -f”命令进行修复即可，修复过程如下所示：<br />
+<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222226421.jpg" alt="img" /></p>
+<p>修复完成之后将提供资料中的libmali库同样拷贝构建的ubuntu系统中，拷贝完成如下图所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222226522.jpg" alt="img" /></p>
+<p>然后使用以下命令进行安装，安装过程如下所示：</p>
+<p>dpkg -i libmali-bifrost-g52-g13p0-x11-gbm_1.9-1_arm64.deb</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222226531.jpg" alt="img" /></p>
+<p>至此，关于GPU 相关库的安装就完成了，</p>
+<h3 id="7417-清除安装的软件包"><a class="markdownIt-Anchor" href="#7417-清除安装的软件包"></a> 7.4.17 清除安装的软件包</h3>
+<p>经过了上面的一些步骤已经对构建的ubuntu进行了简单的配置，但在配置的过程中也下载了很多的软件包，这些软件包会占用很多的空间，所以在配置完成之后运行下面的命令清除安装的软件包，如下图所示：</p>
+<p>apt-get -y clean &amp;&amp; apt-get -y autoclean</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222226543.jpg" alt="img" /></p>
+<h3 id="7418-退出chroot环境"><a class="markdownIt-Anchor" href="#7418-退出chroot环境"></a> 7.4.18 退出chroot环境</h3>
+<p>设置好以后就可以退出根文件系统了，输入命令“exit”退出。如下图所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222226565.jpg" alt="img" /></p>
+<p>然后通过以下命令取消binary目录的挂载，如下图所示：</p>
+<p>./mount.sh -u binary/</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222226608.jpg" alt="img" /></p>
+<h2 id="75-文件系统镜像的制作"><a class="markdownIt-Anchor" href="#75-文件系统镜像的制作"></a> 7.5 文件系统镜像的制作</h2>
+<p>本小节要用到的文件路径为“iTOP-3568开发板\03_【iTOP-RK3568开发板】指南教程\03_文件系统构建配套资料\04_Ubuntu和Debian系统构建配套资料\10_制作烧写镜像”，如下图所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222226627.jpg" alt="img" /></p>
+<p>首先将上述资料中提供的mk-image.sh和post-build.sh脚本拷贝到虚拟机ubutnu上，而且要跟构建的binary目录放到同一目录下，拷贝完成如下所示：<br />
+<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222226706.jpg" alt="img" /><br />
+然后使用以下命令赋予两个脚本可执行权限，如下图所示：</p>
+<p>chmod 777 <a target="_blank" rel="noopener" href="http://mk-image.sh">mk-image.sh</a> <a target="_blank" rel="noopener" href="http://post-build.sh">post-build.sh</a><br />
+<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222226714.jpg" alt="img" /></p>
+<p>然后运行mk-image.sh脚本即可完成烧写镜像的制作了，制作过程如下图所示：<br />
+<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222226722.jpg" alt="img" /></p>
+<p>制作完成之后会在当前目录生成一个名为rootfs.img的烧写镜像，只需要根据烧写手册进行单独烧写即可。至此，关于Ubuntu和Debian文件系统的构建就讲解完成了。</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2023/11/20/02_%E7%91%9E%E8%8A%AF%E5%BE%AE/01%20debian%E5%92%8Cubuntu%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%84%E5%BB%BA%E8%AF%A6%E8%A7%A3/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2023/12/02/02_%E7%91%9E%E8%8A%AF%E5%BE%AE/07-%E9%A6%99%E6%A9%99%E6%B4%BE%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%84%E5%BB%BA%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            香橙派文件系统构建脚本分析
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2023/11/19/03_%E5%AD%A6%E4%B9%A0/9%20%E6%98%BE%E7%A4%BA%E7%A1%AC%E4%BB%B6%E5%8F%91%E5%B1%95%E4%B8%8E%E8%A7%86%E9%A2%91%E5%BC%80%E5%8F%91%E7%9F%A5%E8%AF%86%E7%82%B9%E6%89%AB%E7%9B%B2/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">显示硬件发展与视频开发知识点扫盲</div>
+      </a>
+    
+  </nav>
+
+  
+   
+  
+   
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2015-2024
+        <i class="ri-heart-fill heart_icon"></i> chai
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="热爱学习的未来酱"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/%E7%94%9F%E6%B4%BB">生活</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/%E5%AD%A6%E4%B9%A0">学习</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE">瑞芯微</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/C%E8%AF%AD%E8%A8%80%E9%AB%98%E7%BA%A7%E5%AD%A6%E4%B9%A0">C语言高级学习</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="52"
+        src="//music.163.com/outchain/player?type=2&id=22707008&auto=0&height=32"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
+    
+    
+
+  </div>
+</body>
+
+</html>
