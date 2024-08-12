@@ -161,6 +161,117 @@
 
     
     <article
+  id="post-02_瑞芯微/15_rk 内核镜像构建"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2024/08/11/02_%E7%91%9E%E8%8A%AF%E5%BE%AE/15_rk%20%E5%86%85%E6%A0%B8%E9%95%9C%E5%83%8F%E6%9E%84%E5%BB%BA/"
+    >RK内核镜像构建</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2024/08/11/02_%E7%91%9E%E8%8A%AF%E5%BE%AE/15_rk%20%E5%86%85%E6%A0%B8%E9%95%9C%E5%83%8F%E6%9E%84%E5%BB%BA/" class="article-date">
+  <time datetime="2024-08-11T09:17:03.000Z" itemprop="datePublished">2024-08-11</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE/">瑞芯微</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>我只是想到，单纯的看视频并没有什么用，我现在认为实践是检验真理的唯一标准。</p>
+<p>先来看编译的过程：</p>
+<p>实际的编译命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">make -C kernel/ -j33 CROSS_COMPILE=/home/topeet/rk3588-linux/prebuilts/gcc/linux-x86/aarch64/gcc-arm-10.3-2021.07-x86_64-aarch64-none-linux-gnu/bin/aarch64-none-linux-gnu- ARCH=arm64 rockchip_linux_defconfig rk3588_linux.config</span><br><span class="line"></span><br><span class="line">make -C kernel/ -j33 CROSS_COMPILE=/home/topeet/rk3588-linux/prebuilts/gcc/linux-x86/aarch64/gcc-arm-10.3-2021.07-x86_64-aarch64-none-linux-gnu/bin/aarch64-none-linux-gnu- ARCH=arm64 topeet-rk3588-linux.img</span><br><span class="line">/home/topeet/rk3588-linux/device/rockchip/common/scripts/mk-fitimage.sh kernel/boot.img /home/topeet/rk3588-linux/kernel/boot.its kernel/arch/arm64/boot/Image</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">make -j33 CROSS_COMPILE=/home/topeet/rk3588-linux/prebuilts/gcc/linux-x86/aarch64/gcc-arm-10.3-2021.07-x86_64-aarch64-none-linux-gnu/bin/aarch64-none-linux-gnu- ARCH=arm64</span><br></pre></td></tr></table></figure>
+<p>内核镜像的生成过程以及后续压缩成 <code>Image.gz</code> 的过程可以分为以下几个步骤：</p>
+<h3 id="image-生成过程"><a class="markdownIt-Anchor" href="#image-生成过程"></a> Image 生成过程</h3>
+<ol>
+<li><strong>配置内核</strong>
+<ul>
+<li>使用 <code>make menuconfig</code> 或其他配置工具选择适当的内核选项。</li>
+<li>配置文件通常保存为 <code>.config</code>。</li>
+</ul>
+</li>
+<li><strong>编译内核</strong>
+<ul>
+<li>运行 <code>make</code> 命令，开始编译内核。</li>
+<li>编译过程主要包括：
+<ul>
+<li><strong>预处理</strong>：解析头文件和宏定义。</li>
+<li><strong>编译</strong>：将 C 语言代码编译为汇编。</li>
+<li><strong>汇编</strong>：将汇编代码转换为目标代码。</li>
+<li><strong>链接</strong>：将目标文件链接为单个内核镜像 <code>vmlinux</code>。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>生成 Image</strong>
+<ul>
+<li><code>vmlinux</code> 是一个未压缩的 ELF 格式文件。</li>
+<li>通过 <code>objcopy</code> 工具，将 <code>vmlinux</code> 转换为可加载的 <code>Image</code> 格式（通常是裸数据格式）。</li>
+</ul>
+</li>
+</ol>
+<h3 id="imagegz-生成过程"><a class="markdownIt-Anchor" href="#imagegz-生成过程"></a> Image.gz 生成过程</h3>
+<ol>
+<li><strong>压缩内核</strong>
+<ul>
+<li>使用 <code>gzip</code> 工具压缩 <code>Image</code> 文件，生成 <code>Image.gz</code>。</li>
+<li>压缩后的文件更小，方便传输和存储。</li>
+</ul>
+</li>
+<li><strong>安装内核（可选）</strong>
+<ul>
+<li>将 <code>Image.gz</code> 复制到引导加载程序可访问的目录。</li>
+<li>更新引导加载程序配置以加载新的内核。</li>
+</ul>
+</li>
+</ol>
+<h3 id="总结"><a class="markdownIt-Anchor" href="#总结"></a> 总结</h3>
+<ul>
+<li><strong>Image</strong> 是内核的未压缩版本，适合直接加载。</li>
+<li><strong>Image.gz</strong> 是压缩版本，适合节省空间。</li>
+</ul>
+<p>这种流程适用于大多数 Linux 内核的构建和压缩过程。具体步骤可能根据不同的硬件平台和配置选项有所调整。</p>
+<p>wsl.exe --system -d Ubuntu-22.04 df -h /mnt/wslg/distro</p>
+<p>列出已经安装的发行版镜像</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsl --list --verbose</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202408092111207.png" alt="image-20240809211103188" /></p>
+<p>注销Linux发行版</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsl --unregister &lt;DistributionName&gt;</span><br></pre></td></tr></table></figure>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
   id="post-05_驱动学习/打扫卫生"
   class="article article-type-post"
   itemscope
@@ -324,117 +435,6 @@
 </tr>
 </tbody>
 </table>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-02_瑞芯微/15_rk 内核镜像构建"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2024/08/09/02_%E7%91%9E%E8%8A%AF%E5%BE%AE/15_rk%20%E5%86%85%E6%A0%B8%E9%95%9C%E5%83%8F%E6%9E%84%E5%BB%BA/"
-    >RK内核镜像构建</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2024/08/09/02_%E7%91%9E%E8%8A%AF%E5%BE%AE/15_rk%20%E5%86%85%E6%A0%B8%E9%95%9C%E5%83%8F%E6%9E%84%E5%BB%BA/" class="article-date">
-  <time datetime="2024-08-09T12:33:07.200Z" itemprop="datePublished">2024-08-09</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE/">瑞芯微</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <p>我只是想到，单纯的看视频并没有什么用，我现在认为实践是检验真理的唯一标准。</p>
-<p>先来看编译的过程：</p>
-<p>实际的编译命令</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">make -C kernel/ -j33 CROSS_COMPILE=/home/topeet/rk3588-linux/prebuilts/gcc/linux-x86/aarch64/gcc-arm-10.3-2021.07-x86_64-aarch64-none-linux-gnu/bin/aarch64-none-linux-gnu- ARCH=arm64 rockchip_linux_defconfig rk3588_linux.config</span><br><span class="line"></span><br><span class="line">make -C kernel/ -j33 CROSS_COMPILE=/home/topeet/rk3588-linux/prebuilts/gcc/linux-x86/aarch64/gcc-arm-10.3-2021.07-x86_64-aarch64-none-linux-gnu/bin/aarch64-none-linux-gnu- ARCH=arm64 topeet-rk3588-linux.img</span><br><span class="line">/home/topeet/rk3588-linux/device/rockchip/common/scripts/mk-fitimage.sh kernel/boot.img /home/topeet/rk3588-linux/kernel/boot.its kernel/arch/arm64/boot/Image</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">make -j33 CROSS_COMPILE=/home/topeet/rk3588-linux/prebuilts/gcc/linux-x86/aarch64/gcc-arm-10.3-2021.07-x86_64-aarch64-none-linux-gnu/bin/aarch64-none-linux-gnu- ARCH=arm64</span><br></pre></td></tr></table></figure>
-<p>内核镜像的生成过程以及后续压缩成 <code>Image.gz</code> 的过程可以分为以下几个步骤：</p>
-<h3 id="image-生成过程"><a class="markdownIt-Anchor" href="#image-生成过程"></a> Image 生成过程</h3>
-<ol>
-<li><strong>配置内核</strong>
-<ul>
-<li>使用 <code>make menuconfig</code> 或其他配置工具选择适当的内核选项。</li>
-<li>配置文件通常保存为 <code>.config</code>。</li>
-</ul>
-</li>
-<li><strong>编译内核</strong>
-<ul>
-<li>运行 <code>make</code> 命令，开始编译内核。</li>
-<li>编译过程主要包括：
-<ul>
-<li><strong>预处理</strong>：解析头文件和宏定义。</li>
-<li><strong>编译</strong>：将 C 语言代码编译为汇编。</li>
-<li><strong>汇编</strong>：将汇编代码转换为目标代码。</li>
-<li><strong>链接</strong>：将目标文件链接为单个内核镜像 <code>vmlinux</code>。</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><strong>生成 Image</strong>
-<ul>
-<li><code>vmlinux</code> 是一个未压缩的 ELF 格式文件。</li>
-<li>通过 <code>objcopy</code> 工具，将 <code>vmlinux</code> 转换为可加载的 <code>Image</code> 格式（通常是裸数据格式）。</li>
-</ul>
-</li>
-</ol>
-<h3 id="imagegz-生成过程"><a class="markdownIt-Anchor" href="#imagegz-生成过程"></a> Image.gz 生成过程</h3>
-<ol>
-<li><strong>压缩内核</strong>
-<ul>
-<li>使用 <code>gzip</code> 工具压缩 <code>Image</code> 文件，生成 <code>Image.gz</code>。</li>
-<li>压缩后的文件更小，方便传输和存储。</li>
-</ul>
-</li>
-<li><strong>安装内核（可选）</strong>
-<ul>
-<li>将 <code>Image.gz</code> 复制到引导加载程序可访问的目录。</li>
-<li>更新引导加载程序配置以加载新的内核。</li>
-</ul>
-</li>
-</ol>
-<h3 id="总结"><a class="markdownIt-Anchor" href="#总结"></a> 总结</h3>
-<ul>
-<li><strong>Image</strong> 是内核的未压缩版本，适合直接加载。</li>
-<li><strong>Image.gz</strong> 是压缩版本，适合节省空间。</li>
-</ul>
-<p>这种流程适用于大多数 Linux 内核的构建和压缩过程。具体步骤可能根据不同的硬件平台和配置选项有所调整。</p>
-<p>wsl.exe --system -d Ubuntu-22.04 df -h /mnt/wslg/distro</p>
-<p>列出已经安装的发行版镜像</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsl --list --verbose</span><br></pre></td></tr></table></figure>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202408092111207.png" alt="image-20240809211103188" /></p>
-<p>注销Linux发行版</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsl --unregister &lt;DistributionName&gt;</span><br></pre></td></tr></table></figure>
  
       <!-- reward -->
       
