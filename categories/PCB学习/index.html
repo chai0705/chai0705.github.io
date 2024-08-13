@@ -13,7 +13,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
-      <title>ubuntu环境搭建 |  热爱学习的未来酱</title>
+      <title>PCB学习 |  热爱学习的未来酱</title>
   <meta name="generator" content="hexo-theme-ayer">
       
       <link rel="shortcut icon" href="/favicon.ico" />
@@ -55,193 +55,96 @@
       
     <main class="content on">
       <section class="outer">
-  <article
-  id="post-03_Linux学习/15 ubuntu环境搭建"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
+  
+  
+  <article class="articles">
     
-    <header class="article-header">
+    
+    <h1 class="page-type-title">PCB学习</h1>
+    
+    
+  
+  
+  
+  
+  
+  
+  <div class="archives-wrap">
+    <div class="archive-year-wrap">
+      <a href="/archives/2024" class="archive-year">2024</a>
+    </div>
+    <div class="archives">
+      
+      <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2024/02/29/09_PCB%E5%AD%A6%E4%B9%A0/2%20RK3588%20PCB%20%E5%AD%A6%E4%B9%A0/" class="archive-article-date">
+  <time datetime="2024-02-28T22:57:19.000Z" itemprop="datePublished">02/29</time>
+</a>
        
-<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  ubuntu环境搭建
-</h1>
+<h2 itemprop="name">
+  <a class="archive-article-title" href="/2024/02/29/09_PCB%E5%AD%A6%E4%B9%A0/2%20RK3588%20PCB%20%E5%AD%A6%E4%B9%A0/"
+    >rk3588 AD学习</a> 
+</h2>
  
 
-      
     </header>
-     
-    <div class="article-meta">
-      <a href="/2023/12/25/03_Linux%E5%AD%A6%E4%B9%A0/15%20ubuntu%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" class="article-date">
-  <time datetime="2023-12-24T22:50:19.000Z" itemprop="datePublished">2023-12-25</time>
-</a> 
+    
+      
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Linux%E5%AD%A6%E4%B9%A0/">Linux学习</a>
-  </div>
-  
-<div class="word_count">
-    <span class="post-time">
-        <span class="post-meta-item-icon">
-            <i class="ri-quill-pen-line"></i>
-            <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">672</span>
-        </span>
-    </span>
-
-    <span class="post-time">
-        &nbsp; | &nbsp;
-        <span class="post-meta-item-icon">
-            <i class="ri-book-open-line"></i>
-            <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">2 分钟</span>
-        </span>
-    </span>
-</div>
- 
-    </div>
-      
-    <div class="tocbot"></div>
-
-
-
-
-  
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h1 id="1ubuntu22环境搭建"><a class="markdownIt-Anchor" href="#1ubuntu22环境搭建"></a> 1.ubuntu22环境搭建</h1>
-<h2 id="11-ubuntu22-镜像源下载"><a class="markdownIt-Anchor" href="#11-ubuntu22-镜像源下载"></a> 1.1 ubuntu22 镜像源下载</h2>
-<p>​	清华源 <a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/ubuntu-releases/">https://mirrors.tuna.tsinghua.edu.cn/ubuntu-releases/</a></p>
-<p>​	中科大源 <a target="_blank" rel="noopener" href="https://mirrors.ustc.edu.cn/ubuntu-releases/">https://mirrors.ustc.edu.cn/ubuntu-releases/</a></p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312252052418.png" alt="image-20231225205248378" /></p>
-<p>​	我这里就直接下载ubuntu22了，vmware虚拟机安装ubuntu22的步骤就不再多说，这里就根据步骤来进行就好了。</p>
-<h2 id="2设置中文"><a class="markdownIt-Anchor" href="#2设置中文"></a> 2.设置中文</h2>
-<p>​	对于一打印信息还是中文更加友好，所以这里将系统的环境更换为中文。首先来到设置，如下所示：<br />
-<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312252107402.png" alt="image-20231225210703377" /></p>
-<p>​	找到Region and Language，点击语言管理：<br />
-<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312252108180.png" alt="image-20231225210811158" /></p>
-<p>​	将汉语(中国)移动到最上面，移动完成如下所示：<br />
-<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312252109085.png" alt="image-20231225210931069" /></p>
-<p>​	然后点击应用到系统：<br />
-<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312252109436.png" alt="image-20231225210958420" /></p>
-<p>​	重启系统就是中文了。如下所示：<br />
-<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312252111623.png" alt="image-20231225211128599" /></p>
-<h2 id="3设置不休眠"><a class="markdownIt-Anchor" href="#3设置不休眠"></a> 3.设置不休眠</h2>
-<p>​	默认情况下都是五分钟休眠，这里时间太短了，所以需要在设置里的电源中改为无休眠。</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312252112513.png" alt="image-20231225211252490" /></p>
-<h2 id="4其他配置"><a class="markdownIt-Anchor" href="#4其他配置"></a> 4.其他配置</h2>
-<p>​	安装一些软件和依赖，确保编译和一些工具能成功</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install -y uuid uuid-dev zlib1g-dev liblz-dev liblzo2-2 liblzo2-dev lzop \</span><br><span class="line">git curl u-boot-tools mtd-utils openjdk-8-jdk device-tree-compiler \</span><br><span class="line">gdisk m4 git gnupg flex bison gperf libsdl1.2-dev libesd-java \</span><br><span class="line">squashfs-tools build-essential zip libncurses5-dev pngcrush schedtool \</span><br><span class="line">libxml2 libxml2-utils xsltproc lzop libc6-dev g++-multilib lib32z1-dev \</span><br><span class="line">lib32ncurses-dev lib32readline-dev libswitch-perl libssl-dev unzip \</span><br><span class="line">liblz4-tool ssh make gcc libssl-dev vim expect \</span><br><span class="line">patchelf chrpath gawk texinfo diffstat binfmt-support \</span><br><span class="line">qemu-user-static live-build fakeroot cmake rsync subversion \</span><br><span class="line">sed binutils wget bzr cvs git mercurial \</span><br><span class="line">patch gzip bzip2 perl tar cpio file bc python3-pip \</span><br><span class="line">rsync android-sdk-libsparse-utils python2 net-tools vim</span><br></pre></td></tr></table></figure>
-<p>​	然后禁止掉wayland，不禁掉不能正常拖动文件。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/gdm3/custom.conf</span><br></pre></td></tr></table></figure>
-<p>打开WaylandEnable=false的注释，然后重启系统，果然修改了之后，可以直接拖动了，不错。然后修改一下虚拟机配置：<br />
-<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312252115362.png" alt="image-20231225105730434" /></p>
-<p>​	上面的这三个没啥用，直接关掉，启动时连接也取消掉。然后备份一下系统，中文输入法也不用安装，反正一般都是用ssh来连接的。</p>
-<p>​	重启之后先来设置ssh，我还是喜欢用ssh，设置的步骤如下所示：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">使能root用户登录</span></span><br><span class="line">vim /etc/ssh/sshd_config</span><br><span class="line">PermitRootLogin yes</span><br></pre></td></tr></table></figure>
-<p>到这里该安装的就差不多了，剩下的就让tabby来，为了确保传输速度，先加一个nat的网卡：<br />
-<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312252115313.png" alt="image-20231225112113607" /></p>
-<p>在编译内核的时候遇到了的第一个问题：<br />
-<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312252115336.png" alt="image-20231225134018868" />需要将python3链接到python，具体命令如下所示：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ln -s /usr/bin/python3 /usr/bin/python</span><br></pre></td></tr></table></figure>
-<p>修改之后内核编译成功。编译recovery成功。编译文件系统成功、打包完整的update镜像成功，皆大欢喜，莫得问题，编译整体时间大约为两个小时，13：30开始编译，15：30编译结束时间.</p>
-<p>随后又测试了安卓，同样可以编译成功。</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-<div class="share-btn">
-      <span class="share-sns share-outer">
-        <i class="ri-share-forward-line"></i>
-        分享
-      </span>
-      <div class="share-wrap">
-        <i class="arrow"></i>
-        <div class="share-icons">
-          
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="ri-weibo-fill"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="ri-wechat-fill"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="ri-qq-fill"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="ri-douban-line"></i>
-          </a>
-          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a> -->
-          
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="ri-facebook-circle-fill"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="ri-twitter-fill"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="ri-google-fill"></i>
-          </a>
-        </div>
-      </div>
-</div>
-
-<div class="wx-share-modal">
-    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2023/12/25/03_Linux%E5%AD%A6%E4%B9%A0/15%20ubuntu%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div id="share-mask"></div>  
-    </footer>
+    <a class="article-category-link" href="/categories/PCB%E5%AD%A6%E4%B9%A0/">PCB学习</a>
   </div>
 
-   
-  <nav class="article-nav">
-    
-      <a href="/2023/12/25/07_%E5%B0%8F%E6%8A%80%E5%B7%A7/8_vim%E5%AD%A6%E4%B9%A0/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            vim学习
-          
-        </div>
-      </a>
     
     
-      <a href="/2023/12/23/07_%E5%B0%8F%E6%8A%80%E5%B7%A7/4%20VScode%E5%AD%A6%E4%B9%A0/" class="article-nav-link">
-        <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">VScode学习</div>
-      </a>
-    
-  </nav>
-
-  
-   
-  
-   
-    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
-    <div id="twikoo" class="twikoo"></div>
-    <script>
-        twikoo.init({
-            envId: ""
-        })
-    </script>
- 
+  </div>
 </article>
+      
+  
+  
+  
+  </div>
+  </div>
+  
+  
+  <div class="archives-wrap">
+    <div class="archive-year-wrap">
+      <a href="/archives/2023" class="archive-year">2023</a>
+    </div>
+    <div class="archives">
+      
+      <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2023/11/12/09_PCB%E5%AD%A6%E4%B9%A0/1%20ad%E5%AD%A6%E4%B9%A0/" class="archive-article-date">
+  <time datetime="2023-11-12T13:55:17.000Z" itemprop="datePublished">11/12</time>
+</a>
+       
+<h2 itemprop="name">
+  <a class="archive-article-title" href="/2023/11/12/09_PCB%E5%AD%A6%E4%B9%A0/1%20ad%E5%AD%A6%E4%B9%A0/"
+    >PCB学习</a> 
+</h2>
+ 
 
+    </header>
+    
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/PCB%E5%AD%A6%E4%B9%A0/">PCB学习</a>
+  </div>
+
+    
+    
+  </div>
+</article>
+      
+      
+    </div>
+  </div>
+  
+  
+
+  
 </section>
       <footer class="footer">
   <div class="outer">
@@ -403,22 +306,6 @@
 <script src="/js/lazyload.min.js"></script>
 
 <!-- Tocbot -->
- 
-<script src="/js/tocbot.min.js"></script>
-
-<script>
-  tocbot.init({
-    tocSelector: ".tocbot",
-    contentSelector: ".article-entry",
-    headingSelector: "h1, h2, h3, h4, h5, h6",
-    hasInnerContainers: true,
-    scrollSmooth: true,
-    scrollContainer: "main",
-    positionFixedSelector: ".tocbot",
-    positionFixedClass: "is-position-fixed",
-    fixedSidebarOffset: "auto",
-  });
-</script>
 
 <script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
 <link

@@ -2990,7 +2990,7 @@ Shell编程中的函数允许将一系列相关的操作封装为一个可重复
 <img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202403010728556.png" alt="image-20240301072812512" />	这节课可以直接看手册，视频也只是讲解了一下而已。</p>
 ]]></content>
       <categories>
-        <category>学习</category>
+        <category>PCB学习</category>
       </categories>
   </entry>
   <entry>
@@ -3969,7 +3969,7 @@ Shell编程中的函数允许将一系列相关的操作封装为一个可重复
 <p>随后又测试了安卓，同样可以编译成功。</p>
 ]]></content>
       <categories>
-        <category>游戏</category>
+        <category>Linux学习</category>
       </categories>
   </entry>
   <entry>
@@ -7936,7 +7936,7 @@ dpkg -i xserver-common_1.20.13-1ubuntu1~20.04.9_all.deb</p>
 <p>==11月12日 21：48学习完成，下一次学习就是下个周日了，希望不会忘记==</p>
 ]]></content>
       <categories>
-        <category>学习</category>
+        <category>PCB学习</category>
       </categories>
   </entry>
   <entry>
@@ -8402,7 +8402,7 @@ make O=dir - 将所有输出文件定位在&quot;dir&quot;中，包括.config文
 <p>有关更多详细信息，请参阅README，生成Buildroot手册或在线查阅它，网址为<a href="http://buildroot.org/docs.html">http://buildroot.org/docs.html</a></p>
 ]]></content>
       <categories>
-        <category>瑞芯微</category>
+        <category>Linux学习</category>
       </categories>
   </entry>
   <entry>
