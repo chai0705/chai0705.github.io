@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+  
+
+    <head>
+      <meta charset="utf-8" />
+        
+      <meta name="description" content="永远年轻，永远热泪盈眶" />
+      
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>C高级学习 |  热爱学习的未来酱</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      
+<link rel="stylesheet" href="/css/fonts/remixicon.css">
+
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    <link rel="alternate" href="/atom.xml" title="热爱学习的未来酱" type="application/atom+xml">
+</head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-06_C语言高级学习/02 嵌入式C语言的自我修养"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  C高级学习
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2024/01/02/06_C%E8%AF%AD%E8%A8%80%E9%AB%98%E7%BA%A7%E5%AD%A6%E4%B9%A0/02%20%E5%B5%8C%E5%85%A5%E5%BC%8FC%E8%AF%AD%E8%A8%80%E7%9A%84%E8%87%AA%E6%88%91%E4%BF%AE%E5%85%BB/" class="article-date">
+  <time datetime="2024-01-01T22:50:19.000Z" itemprop="datePublished">2024-01-02</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/C%E8%AF%AD%E8%A8%80%E9%AB%98%E7%BA%A7%E5%AD%A6%E4%B9%A0/">C语言高级学习</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">12.7k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">44 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>​	先说一下前提条件，在五年前的大一下学期，我第一次系统的学习了C语言，但那也仅仅只是一个初步的入门，并且在学校中的学习呀，大家懂的都懂，没有深究、没有思考、一切呀都是为了考试，然而如今的我不一样了，相对而言，我更喜欢研究研究研究这些，或者在小说的世界里躲避一下生活，这些都是类似的，只不过研究研究这些更让我有成就感，晚上就慢慢的来吧。</p>
+<h1 id="1计算机理论基石"><a class="markdownIt-Anchor" href="#1计算机理论基石"></a> 1.计算机理论基石</h1>
+<p>​	前面的关于二极管、三极管以及cmos管的原理这里就不深究了，等我以后再更深层次的学习的时候再说，现在就直接从CPU直接的工作原理开始。</p>
+<p>​	计算机的核心：==任何复杂的运算都可以分解为有限个的基本指令运算==。这句话其实我好久好久之前就听说过了，但其实呀一直不解其意这个原理被称为图灵完备性，它表明只要有足够的基本指令，就可以执行任何可计算的任务。</p>
+<p>​	在现代计算机上，也是采用这个原理。计算机的中央处理器（CPU）通过执行一系列的基本指令来完成各种复杂的任务。这些基本指令包括算术操作（如加法、减法、乘法）、逻辑操作（如与、或、非）、条件分支（如if语句）和循环（如for循环）等。</p>
+<p>​	下面是一个简单的例子，展示了如何使用基本指令来执行一个较复杂的任务，即计算一个整数的阶乘：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">factorial</span>(<span class="params">n</span>):</span><br><span class="line">    result = <span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, n+<span class="number">1</span>):</span><br><span class="line">        result *= i</span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(factorial(<span class="number">5</span>))  <span class="comment"># 输出 120</span></span><br></pre></td></tr></table></figure>
+<p>​	在这个例子中，我们使用了基本的乘法和循环指令来计算给定整数的阶乘。通过多次执行乘法操作和循环迭代，实现了一个复杂的计算任务。</p>
+<p>​	即使是电脑上的按键操作和视频播放这样的高级任务，也可以通过分解为基本指令运算来实现。</p>
+<p>​	例如，当你在电脑上按下一个键时，操作系统会通过底层的指令来检测按键的状态。这可能涉及到读取硬件设备的输入状态、处理中断信号和执行相应的操作。这些底层指令可能包括读取寄存器、执行条件分支、更新内存等等。通过组合这些基本指令，操作系统可以捕捉到按键事件，并触发相应的操作，如打开应用程序、输入字符等。</p>
+<p>​	类似地，视频播放也可以通过基本指令来实现。当你打开一个视频文件时，视频播放器会解码视频数据、渲染图像、播放音频等。这些操作涉及到复杂的算法和数据处理，但它们可以分解为基本指令的执行。例如，视频解码可能包括读取文件、解析视频编码、处理图像数据、渲染图像等。通过执行这些基本指令的组合，视频播放器可以实现流畅的视频播放。</p>
+<p>​	因此，无论是按键操作还是视频播放，都可以通过将复杂的任务分解为基本指令运算来实现，并且现代计算机提供了这些基本指令的支持。</p>
+<p>​	==电脑上的一切操作都可以分解为上面所说的算术操作、逻辑操作、条件分支等一系列基本指令==</p>
+<p>​	当然你要懂得的肯定不止上面这些，还有一些跟深层次的分解，就比如复杂的操作是如何被分解为一个个基本指令的、CPU是如何识别这些基本指令的、CPU如何确定这条指令是否运行完成，以及这些基本指令是如何一条条的排序逐次运行的呢？</p>
+<p>​	指令集：CPU的加减乘除、与或非、load、store等基本指令一般称之为指令集，任何复杂的运算都可以分解为指令集中的基本指令</p>
+<p>​	程序：这种由基本指令组成的不同组合就称之程序。</p>
+<p>​	汇编语言：为了变成方便，我们给每个二进制的指令起了一个别名，也可以称之为助记符，也就是我们常说的汇编指令。</p>
+<p>​	高级语言：虽然汇编语言的出现给人们带来了极大的便利，人们不需要面对不懂含义的101010，但是当工程更为复杂的时候，汇编的维护也会变得极为艰难，所以为了迎合人们的开发和阅读，人们在汇编的基础上做了一系列的高级语言，就比如python、C、c++和java。</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312112059025.png" alt="image-20231211205948001" /></p>
+<p>​	然后用一个最简单的C语言程序和C++程序来验证</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> <span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="number">2</span> </span><br><span class="line"><span class="number">3</span> <span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">4 &#123;</span><br><span class="line"><span class="number">5</span>     <span class="built_in">printf</span>(<span class="string">&quot;hello world \r\n&quot;</span>);           </span><br><span class="line"><span class="number">6</span>     <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"><span class="number">7</span> &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;hello world&quot;</span> &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;                                    </span><br></pre></td></tr></table></figure>
+<p>​	上面是两个最简单的C语言和C++语言的helloworld编程示例，而且最终的实现效果相同都是打印出来helloworld，如下所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312112103692.png" alt="image-20231211210339665" /></p>
+<p>​	这个a.out是编译过后的可执行文件，中间的编译过程又是怎么样的呢？</p>
+<p>​	就像上面图示绘制的那样，高级语言都有对应的编译器，C语言又gcc,C<ins>有g</ins>，如果只是通过下面的命令进行编译的话只会得到最后的可执行文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gcc test.c</span><br><span class="line">g++ test.cpp</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312112133800.png" alt="image-20231211213317748" /></p>
+<p>​	当然因为上面两个命令生成的都是a.out所以就覆盖了，也可以通过-o命令进行执行生成的可执行文件名称</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gcc test.c -o test_c</span><br><span class="line">g++ test.cpp -o test_c++</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312112134585.png" alt="image-20231211213439536" /></p>
+<p>一个高级语言编译成可执行文件，更详细的过程为预处理、编译、汇编、链接</p>
+<p>(1)预处理指的是将头文件、函数、恒定义等都展开，可以通过-E参数来实现</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gcc -E test.c</span><br><span class="line">g++ -E test.cpp</span><br></pre></td></tr></table></figure>
+<p>(2)编译指的是通过编译器将高级语言编译为汇编语言，可以通过-S参数来完成</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gcc -S test.c -o test_c.s</span><br><span class="line">g++ -S test.cpp -o test_cpp.s</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312112140031.png" alt="image-20231211214028969" /></p>
+<p>以s结尾的就是汇编文件，现在对于汇编语言的理解可以不用过深，以后再说。</p>
+<p>(3)汇编指的是将汇编程序通过汇编器编译为二进制的.o文件，可以通过参数-c来完成。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gcc -c test.c -o test_c.o</span><br><span class="line">g++ -c test.cpp -o test_cpp.o</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312112144517.png" alt="image-20231211214409461" /></p>
+<p>(4)链接，可以将多个.o文件链接到一起从而生成可执行文件，没有命令，直接gcc编译即可。</p>
+<p>​	==我这里有个疑问，我这个程序是最简单那的hello world，也没有多个文件，那他未什么要进行链接呢，我这个地方不是很懂，希望下面的学习能解答我这个疑惑==</p>
+<h1 id="2cpu的频率指的是什么"><a class="markdownIt-Anchor" href="#2cpu的频率指的是什么"></a> 2.CPU的频率指的是什么</h1>
+<p>​	我先说一下，这个我确实是不知道，我学了这么多年的计算机，我第一台电脑是18年大学，我爸给买的戴尔G3，那时候是一个8300的CPU，后来电脑烧了，我爸又给我买了一个洋垃圾台式机，CPU是2690,虽然现在知道了他是洋垃圾，但之前是不知道的呀，其实就也还好吧，每一段时间都有一段时间的感悟，再后来我工作了，自己花实习的一个月工资高了一台小主机，5900hx的CPU，一年之后没有笔记本，又搞了一台联想的笔记本，笔记本的CPU是6800hx，总体跟我的5900hx差不多，再后来不满足需求了，又因为我的4070ti显卡一直在闲置，我也不想卖掉，所以两个月前又买了一个13900kf的无核显主机，买了这么多电脑，终于是对电脑有了一些基本的认识，但是对于CPU的频率依然是一知半解，趁着这个机会学习一下。</p>
+<p>​	<strong>频率的概念</strong></p>
+<p>​	在CPU这个复杂的数字系统中，为了确保内部所有硬件单元能够协同快速工作，CPU架构工程师们往往会设计一套时钟信号与系统同步进行操作。时钟信号是由一系列的脉冲信号构成，并且总是按一定电压幅度、时间间隔连续发出的方波信号，它周期性地在0与1之间往复变化。在第一脉冲和第二个脉冲之间的时间间隔称之为周期，它的单位是秒（s）。但单位时间1s内所产生的脉冲个数称之为频率，频率的最基本计量单位就是赫兹Hz。</p>
+<p>​	以Intel Core i3-8350k为例，它的默频是4GHz，意味着它内部时钟频率为4GHz，一秒钟可以产生40亿个脉冲信号，换句话说每一个脉冲信号仅仅用时0.25ns（时钟周期）。这是多么令人震惊的时钟，可以想象到CPU内部结构是多么精妙，可以处理如此之短的信号，整套系统协同有序地运行，所以才会说CPU是全人类智慧的结晶，极大地提升了我们的科技水平进步。</p>
+<p>​	时钟周期作为CPU操作的最小时间单位，内部的所有操作都是以这个时钟周期作为基准。一般来说CPU都是以时钟脉冲的上升沿作为执行指令的基准，频率越高，CPU执行的指令数越多，工作速度越快。</p>
+<p>​	那么CPU频率是由什么决定的呢？其实这个是一个非常复杂的问题，因为决定这个频率是一个系统学的东西，影响到频率高度的因素非常之多，诸如CPU的架构、流水线设计、内部寄存器设计、支持的指令甚至是功耗、温度这些物理因素，所以说CPU出厂频率就是综合多种考虑，以木桶效应下的最小值作为CPU的最高频率。</p>
+<p>​	G是十的9次方也就是十亿，M是10的6次方也就是百万，K是10的3次方，</p>
+<p><strong>外频</strong></p>
+<p>​	CPU在诞生后不久，各大CPU巨头为了追求高性能，开启了频率大战（有没有效果这个我们先不提），但是这样一来，CPU虽然跑得更换了（主频更高），但是外部的主板芯片组、内存、外部接口（PCIe、Sata）可还是处于旧有标准，而且这些设备的运行频率早就固定下来了，并且远低于CPU工作频率。</p>
+<p>​	这样一来CPU就无法很好与之交流，Intel就机智地提出了倍频的概念（下面讲述），并且提出了影响至今的一个CPU主频计算公式：主频=外频 X 倍频，外频的提出可以让主板外部的设备工作在较低的频率下，并且还能正确地CPU进行交流。</p>
+<p>​	但总是有很多网友将前端总线频率和外频混为一谈，其实他们不太一样。在以前有北桥的时代，前端总线是CPU总线接口单元和北桥芯片之间的数据交换通道，曾经在AMD雷鸟系列、Intel奔腾 4处理器以前，前端总线与外频是一致的，但后来有了四倍数据传输率技术或者是八倍数据传输率技术，前端总线频率就极大地提高了。</p>
+<p>​	举个例子，如果一个处理器的频率是2GHz，外频为100MHz，使用四倍数据传输率技术时，前端总线频率就变成400MHz；如果是八倍，那么就是800MHz。前端总线频率越大, 代表着CPU与北桥芯片之间的数据传输能力越大, 更能充分发挥出CPU的功能。<br />
+目前处理器的默认外频基本上都是100MHz</p>
+<p><strong>倍频</strong></p>
+<p>​	目前的CPU设计的外频都相当低，只有100MHz，CPU要获得更快运算速度，我们就需要获得一个超高速的频率来支撑更快运算速度。而CPU通常就是在内部设计有一个锁相环频率发生器，对于输入的时钟信号进行分频处理，按照一定比例提高输入的外频频率，从而得到CPU的实际工作频率，这个比例就称之为倍频系数（简称倍频）。</p>
+<p>​	利用倍频技术, 较为完美地解决了CPU和内存等数据中转站的异步运行问题。为CPU后来向更高频率方向发展打下了扎实的基础。</p>
+<p>​	倍频系数是指CPU主频与外频之间的相对比例关系。在相同的外频下，倍频越高CPU的频率也越高。但实际上，在相同外频的前提下，高倍频的CPU本身意义并不大。这是因为CPU与系统之间数据传输速度是有限的，一味追求高主频而得到高倍频的CPU就会出现明显的“瓶颈”效应－CPU从系统中得到数据的极限速度不能够满足CPU运算的速度。</p>
+<p>​	我有个问题，我的13900KF的CPU频率是5.8GHZ ,我的内存频率是6000M的DDR5内存，这么算的话我的内存比CPU频率高呀，但理论来说不是呀，那问题出在哪？</p>
+<p>​	时间的单位是纳秒（ns，十亿分之一秒），毫秒（ms，千分之一秒），和秒（s）。吞吐量的单位是兆字节（MB）和千兆字节（GB）。让我们先从CPU和内存开始，下图是北桥部分：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312112227283.webp" alt="img" /></p>
+<p>​	第一个令人惊叹的事实是：CPU快得离谱。在Core 2 3.0GHz上，大部分简单指令的执行只需要一个时钟周期，也就是<strong>1/3纳秒</strong>。即使是真空中传播的光，在这段时间内也只能走10厘米（约4英寸）。把上述事实记在心中是有好处的。当你要对程序做优化的时候就会想到，执行指令的开销对于当今的CPU而言是多么的微不足道。</p>
+<p>​	当CPU运转起来以后，它便会通过L1 cache和L2 cache对系统中的主存进行读写访问。cache使用的是静态存储器(SRAM)。相对于系统主存中使用的动态存储器（DRAM），cache读写速度快得多、造价也高昂得多。cache一般被放置在CPU芯片的内部，加之使用昂贵高速的存储器，使其给CPU带来的延迟非常低。在指令层次上的优化（instruction-level optimization），其效果是与优化后代码的大小息息相关。由于使用了高速缓存技术（caching），那些能够整体放入L1/L2 cache中的代码，和那些在运行时需要不断调入/调出（marshall into/out of）cache的代码，在性能上会产生非常明显的差异。</p>
+<p>​	正常情况下，当CPU操作一块内存区域时，其中的信息要么已经保存在L1/L2 cache，要么就需要将之从系统主存中调入cache，然后再处理。如果是后一种情况，我们就碰到了第一个瓶颈，一个大约250个时钟周期的延迟。在此期间如果CPU没有其他事情要做，则往往是处在停机状态的（stall）。为了给大家一个直观的印象，我们把CPU的一个时钟周期看作一秒。那么，从L1 cache读取信息就好像是拿起桌上的一张草稿纸（3秒）；从L2 cache读取信息则是从身边的书架上取出一本书（14秒）；而从主存中读取信息则相当于走到办公楼下去买个零食（4分钟）。</p>
+<p>​	主存操作的准确延迟是不固定的，与具体的应用以及其他许多因素有关。比如，它依赖于列选通延迟(CAS)以及内存条的型号，它还依赖于CPU指令预取的成功率。指令预取可以根据当前执行的代码来猜测主存中哪些部分即将被使用，从而提前将这些信息载入cache。</p>
+<p>看看L1/L2 cache的性能，再对比主存，就会发现：配置更大的cache或者编写能更好的利用cache的应用程序，会使系统的性能得到多么显著的提高。</p>
+<p>​	人们通常把CPU与内存之间的瓶颈叫做<strong>冯·诺依曼瓶颈（von Neumann bottleneck）</strong>。当今系统的前端总线带宽约为10GB/s，看起来很令人满意。在这个速度下，你可以在1秒内从内存中读取8GB的信息，或者10纳秒内读取100字 节。遗憾的是，这个吞吐量只是理论最大值（图中其他数据为实际值），而且是根本不可能达到的，因为主存控制电路会引入延迟。在做内存访问时，会遇到很多零 散的等待周期。比如电平协议要求，在选通一行、选通一列、取到可靠的数据之前，需要有一定的信号稳定时间。由于主存中使用电容来存储信息，为了防止因自然 放电而导致的信息丢失，就需要周期性的刷新它所存储的内容，这也带来额外的等待时间。某些连续的内存访问方式可能会比较高效，但仍然具有延时。而那些随机 的内存访问则消耗更多时间。所以延迟是不可避免的。</p>
+<p>图中下方的南桥连接了很多其他总线（如：PCI-E, USB）和外围设备：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312112229804.webp" alt="img" /></p>
+<p>​	令人沮丧的是，南桥管理了一些反应相当迟钝的设备，比如硬盘。就算是缓慢的系统主存，和硬盘相比也可谓速度如飞了。继续拿办公室做比喻，等待硬盘寻道的时间相当于离开办公大楼并开始长达<strong>一年零三个月</strong>的环球旅行。这就解释了为何电脑的大部分工作都受制于磁盘I/O，以及为何数据库的性能在内存缓冲区被耗尽后会陡然下降。同时也解释了为何充足的RAM（用于缓冲）和高速的磁盘驱动器对系统的整体性能如此重要。</p>
+<p>虽然磁盘的&quot;连续&quot;存取速度确实可以在实际使用中达到，但这并非故事的全部。真正令人头疼的瓶颈在于寻道操作，也就是在磁盘表面移动读写磁头到正确的磁道上，然后再等待磁盘旋转到正确的位置上，以便读取指定扇区内的信息。RPM（每分钟绕转次数）用来指示磁盘的旋转速度：RPM越大，耽误在寻道上的时间就越少，所以越高的RPM意味着越快的磁盘。</p>
+<p>当 磁盘驱动器读取一个大的、连续存储的文件时会达到更高的持续读取速度，因为省去了寻道的时间。文件系统的碎片整理器就是用来把文件信息重组在连续的数据块 中，通过尽可能减少寻道来提高数据吞吐量。然而，说到计算机实际使用时的感受，磁盘的连续存取速度就不那么重要了，反而应该关注驱动器在单位时间内可以完 成的寻道和随机I/O操作的次数。对此，固态硬盘可以成为一个很棒的选择。</p>
+<p>硬盘的cache也有助于改进性能。虽然16MB的cache只能覆盖整个磁盘容量的0.002%，可别看cache只有这么一点大，其效果十分明显。它可以把一组零散的写入操作合成一个，也就是使磁盘能够控制写入操作的顺序，从而减少寻道的次数。同样的，为了提高效率，一系列读取操作也可以被重组，而且操作系统和驱动器固件(firmware)都会参与到这类优化中来。</p>
+<p>最后，图中还列出了网络和其他总线的实际数据吞吐量。火线(fireware)仅供参考，Intel X48芯片组并不直接支持火线。我们可以把Internet看作是计算机之间的总线。去访问那些速度很快的网站（比如<a href="https://link.zhihu.com/?target=http%3A//google.com">http://google.com</a>），延迟大约45毫秒，与硬盘驱动器带来的延迟相当。事实上，尽管硬盘比内存慢了5个数量级，它的速度与Internet是在同一数量级上的。目前，一般家用网络的带宽还是要落后于硬盘连续读取速度的，但&quot;网络就是计算机&quot;这句话可谓名符其实。如果将来Internet比硬盘还快了，那会是个什么景象呢？</p>
+<p>==内存频率（6000 MHz）指的是内存模块的时钟速度，它表示内存模块每秒钟能够完成的数据传输次数。它通常用于衡量内存模块的性能，较高的内存频率可以提供更快的数据传输速度。==</p>
+<p>==CPU频率（5.8 GHz）指的是中央处理器（CPU）的时钟速度，它表示CPU每秒钟执行指令的次数。CPU频率是衡量CPU性能的指标之一，较高的CPU频率通常表示更高的计算能力和处理速度。==</p>
+<h1 id="3cache"><a class="markdownIt-Anchor" href="#3cache"></a> 3.cache</h1>
+<p>​	cache是sram是静态随机存储器，而内存是sram是动态随机存储器，静态是比动态速度更快的，但是呢，更快意味着更贵。我之前一直对cache了解的不多，知道一级cache、二级cache、三级cache，但并不明白他们的作用，如今学习到这里了，就认识一下。找了一段cdsn大佬的讲解，很生动，这里记录一下。</p>
+<p>对于没有接触过底层技术的朋友来说，或许从未听说过cache。毕竟cache的存在对程序员来说是透明的。在接触cache之前，先为你准备段code分析：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> arr[<span class="number">10</span>][<span class="number">128</span>];</span><br><span class="line"> </span><br><span class="line"><span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++)</span><br><span class="line">        <span class="keyword">for</span> (j = <span class="number">0</span>; j &lt; <span class="number">128</span>; j++)</span><br><span class="line">                arr[i][j] = <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+<p>如果你曾经学习过C/C++语言，这段code自然不会陌生。如此简单的将<code>arr</code><a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E6%95%B0%E7%BB%84&amp;spm=1001.2101.3001.7020">数组</a>所有元素置1。 你有没有想过这段code还有下面的一种写法：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> arr[<span class="number">10</span>][<span class="number">128</span>];</span><br><span class="line"> </span><br><span class="line"><span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">128</span>; i++)</span><br><span class="line">        <span class="keyword">for</span> (j = <span class="number">0</span>; j &lt; <span class="number">10</span>; j++)</span><br><span class="line">                arr[j][i] = <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+<p>​	功能完全一样，但是我们一直在重复着第一种写法（或许很多的书中也是建议这么编码），你是否想过这其中的缘由？文章的主角是cache，所以你一定猜到了答案。那么cache是如何影响这2段code的呢？</p>
+<h2 id="为什么需要cache"><a class="markdownIt-Anchor" href="#为什么需要cache"></a> 为什么需要cache</h2>
+<p>在思考为什么需要cache之前，我们首先先来思考另一个问题：我们的程序是如何运行起来的？</p>
+<p>我们应该知道程序是运行在 <strong>RAM</strong>之中，RAM 就是我们常说的DDR（例如： <strong>DDR3、DDR4</strong>等）。我们称之为<strong>main memory（主存）</strong>。当我们需要运行一个进程的时候，首先会从<strong>磁盘设备</strong>（例如，eMMC、UFS、SSD等）中将可执行程序load到主存中，然后开始执行。在CPU内部存在一堆的<strong>通用寄存器（register）</strong>。如果CPU需要将一个变量（假设地址是A）加1，一般分为以下3个步骤：</p>
+<ol>
+<li>CPU 从主存中读取地址A的数据到内部通用寄存器 x0（ARM64架构的通用寄存器之一）</li>
+<li>通用寄存器 x0 加1</li>
+<li>CPU 将通用寄存器 x0 的值写入<strong>主存</strong></li>
+</ol>
+<p>我们将这个过程可以表示如下：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312112220988.png" alt="img" /></p>
+<p>其实现实中，CPU<strong>通用寄存器的速度和主存之间存在着太大的差异</strong>。两者之间的速度大致如下关系：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312112220339.png" alt="img" /></p>
+<p>​	CPU register的速度一般小于1ns，主存的速度一般是65ns左右。速度差异近百倍。因此，上面举例的3个步骤中，<strong>步骤1和步骤3实际上速度很慢</strong>。当CPU试图从主存中load/store 操作时，由于主存的速度限制，CPU不得不等待这漫长的65ns时间。如果我们可以提升主存的速度，那么系统将会获得很大的性能提升。如今的DDR存储设备，动不动就是几个GB，容量很大。如果我们采用更快材料制作更快速度的主存，并且拥有几乎差不多的容量。其成本将会大幅度上升。我们试图提升主存的速度和容量，又期望其成本很低，这就有点难为人了。因此，我们有一种折中的方法，那就是制作一块速度极快但是容量极小的存储设备。那么其成本也不会太高。这块存储设备我们称之为<strong>cache memory</strong>。在硬件上，我们<strong>将cache放置在CPU和主存之间</strong>，作为主存数据的缓存。 <strong>当CPU试图从主存中load/store数据的时候， CPU会首先从cache中查找对应地址的数据是否缓存在cache 中。如果其数据缓存在cache中，直接从cache中拿到数据并返回给CPU</strong>。当存在cache的时候，以上程序如何运行的例子的流程将会变成如下：</p>
+<p><img src="https://img-blog.csdnimg.cn/20200830230817392.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JsZWF1Y2hhdA==,size_16,color_FFFFFF,t_70" alt="img" /></p>
+<p>CPU和主存之间直接数据传输的方式转变成CPU和cache之间直接数据传输，cache负责和主存之间数据传输。</p>
+<h2 id="多级cache存储结构"><a class="markdownIt-Anchor" href="#多级cache存储结构"></a> <strong>多级cache存储结构</strong></h2>
+<p>cahe的速度在一定程度上同样影响着系统的性能。一般情况cache的速度可以达到1ns，几乎可以和CPU寄存器速度媲美。但是，这就满足人们对性能的追求了吗？并没有。当cache中没有缓存我们想要的数据的时候，依然需要漫长的等待从主存中load数据。为了进一步提升性能，引入多级cache。前面提到的cache，称之为<strong>L1 cache</strong>（第一级cache）。我们在L1 cache 后面连接<strong>L2 cache</strong>，在L2 cache 和主存之间连接<strong>L3 cache</strong>。等<strong>级越高，速度越慢，容量越大</strong>。但是速度相比较主存而言，依然很快。不同等级cache速度之间关系如下：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312120658651.png" alt="img" /></p>
+<p>经过3级cache的缓冲，各级cache和主存之间的速度最萌差也逐级减小。在一个真实的系统上，各级cache之间硬件上是如何关联的呢？我们看下Cortex-A53架构上各级cache之间的硬件抽象框图如下：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312120659396.png" alt="img" /></p>
+<p>​	在Cortex-A53架构上，<strong>L1 cache分为单独的instruction cache（ICache）和data cache（DCache），指令和数据分开</strong>。L1 cache是每个CPU私有的，<strong>每个CPU都有一个L1 cache</strong>。一个cluster 内的所有CPU共享一个L2 cache，<strong>L2 cache不区分指令和数据，都可以缓存</strong>。所有cluster之间共享L3 cache，L3 cache通过总线和主存相连</p>
+<p>​	关于cache就学习到这里，如果想要学习更多相关的可以看这个<a target="_blank" rel="noopener" href="https://blog.csdn.net/bleauchat/article/details/108312753?ops_request_misc=%7B%22request%5Fid%22%3A%22170230386216800225597418%22%2C%22scm%22%3A%2220140713.130102334..%22%7D&amp;request_id=170230386216800225597418&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-1-108312753-null-null.142%5Ev96%5Epc_search_result_base2&amp;utm_term=cache&amp;spm=1018.2226.3001.4187">博客</a>.</p>
+<h1 id="4总线和地址"><a class="markdownIt-Anchor" href="#4总线和地址"></a> 4.总线和地址</h1>
+<p>​	先来阐述一个疑惑<strong>32位的CPU和64位的CPU这里的32和64指的什么</strong>？</p>
+<p>​	32位CPU：指的是处理器的寻址能力或数据总线宽度为32位。这意味着该处理器可以在单个时钟周期内处理32位（4字节）的数据或地址。它最大支持的物理内存容量通常限制在4GB左右。</p>
+<p>​	64位CPU：指的是处理器的寻址能力或数据总线宽度为64位。这意味着该处理器可以在单个时钟周期内处理64位（8字节）的数据或地址。它的寻址能力更大，可以支持更大的物理内存容量，通常可以支持数TB（1TB = 1024GB）的内存。</p>
+<p>​	因此，32位和64位CPU主要区别在于它们的寻址能力和数据总线宽度，这直接影响到它们在处理数据和内存方面的能力和限制。64位CPU相对于32位CPU具有更高的处理能力和更大的内存扩展性。</p>
+<p>​	CPU和内存以及各种外部设备是通过总线连接在一起的，那CPU是如何访问内存或者控制各个外部设备的呢？在CPU内部，存在一系列的寄存器，这些寄存器是没有地址的，只需要寄存器的名称去访问即可，而内存以及各个外部设备就需要地址去访问了。那这里的地址是什么，这里的地址又是如何分配的呢？</p>
+<p>​	地址的本质实际上就是由CPU管教发出的一组地址控制信号，因为这些信号是由CPU管教直接发出的，因此也被称之为物理地址。在带有MMU的CPU平台下 ，程序的运行一般使用的是虚拟地址，MMU会把虚拟地址转换为物理地址，然后通过CPU的管教发送出去。</p>
+<p>​	所谓总线（Bus），是指计算机设备和设备之间传输信息的公共数据通道。总线是连接计算机硬件系统内多种设备的通信线路，它的一个重要特征是由总线上的所有设备共享，可以将计算机系统内的多种设备连接到总线上。如果是某两个设备或设备之间专用的信号连线，就不能称之为总线。</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312120727706.png" alt="9bb1a43e2e0140128d3e1e35f1bf0096.png" /></p>
+<p>​	一些总线标准：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312120726170.png" alt="770540885ce04b5a83ef5b49f5fc9546.png" /></p>
+<h1 id="5指令集和微架构"><a class="markdownIt-Anchor" href="#5指令集和微架构"></a> 5.指令集和微架构</h1>
+<p>​	在第一节提到过，任何一个复杂的程序都可以分解位=为有限个基本指令的组合，而这些是在CPU设计的时候就已经确定了的，他的内部只允许对应指令的完成，而不同架构的处理器，他们的指令是不一样的，哪怕是同样的指令，他们的内部电路实现也是不一样的，所以不同架构的可执行程序是不能混用的。ARM架构的处理器只能运行ARM架构的程序，X86架构的处理器只允许运行X86架构的程序。上面提到的这些指令的集合就被称之为指令集。</p>
+<p>​	在芯片工程师设计CPU的时候，要根据指令集中规定的格式指令作为标准，实现那不同的译码电路来支持指令集各种指令的运行（==这里你不用管如何译码的，这里目前不需要深究==），指令集的最终实现就是微架构，也就是CPU内部的各种译码和执行电路。</p>
+<p>​	就比如a7核心 a9核心等就是微架构，而RK3568的四核心A55就是指的微架构。</p>
+<p>​	这里目前认识到这个程度就可以了，不做过多的深究，以及后面有需要再去学习了解一下汇编语言。</p>
+<h1 id="6可执行文件的组成"><a class="markdownIt-Anchor" href="#6可执行文件的组成"></a> 6.可执行文件的组成</h1>
+<p>​	在上面已经讲解过了，编译完成之后会生成一个二进制的可执行文件，这个可执行文件只能在对应架构的机器上才能运行，那这个可执行程序都是由什么组成的呢？这时候就要提到一个命令了，也就是readelf，从名字就可以看出他的作用是读取一个可执行文件，先来用file命令查看一下可执行程序，如下所示：<br />
+<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312122103556.png" alt="image-20231212210354485" /></p>
+<ul>
+<li>“test_c:”: 这是文件的名称。</li>
+<li>“ELF 64-bit LSB shared object, x86-64”: 这是文件的类型和架构。它是一个64位的LSB（Linux Standard Base）共享对象，针对x86-64架构。</li>
+<li>“version 1 (SYSV)”: 这是ELF文件的版本，采用SYSV格式。</li>
+<li>“dynamically linked”: 这表示该文件是动态链接的，它依赖于其他共享库来提供其所需的功能。</li>
+<li>“interpreter /lib64/ld-linux-x86-64.so.2”: 这是解释器路径，指示系统在执行该文件时使用的动态链接器。</li>
+<li>“BuildID[sha1]=cad02772db45e07867103cc6069ae544863b9ebc”: 这是文件的构建ID，用于唯一标识该文件的构建版本。它是使用SHA1算法计算的哈希值。</li>
+<li>“for GNU/Linux 3.2.0”: 这表示该文件是为GNU/Linux 3.2.0版本编译的。</li>
+<li>“not stripped”: 这表示该文件没有被剥离（stripped），即没有从文件中移除调试信息和符号表。</li>
+</ul>
+<p>Executable and Linkable Format  可执行和可链接的格式。</p>
+<p>可以通过readelf -h命令查看可执行文件的文件头（header）信息，例如查看上面编译的hellloworld文件，具体内容如下所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312122111923.png" alt="image-20231212211112738" /></p>
+<p>​	这里了解到的信息其实并没有什么用，唯一有用的就是最下面的section header数量，section header用来主要用来描述可执行文件的section信息，一个可执行文件通常由不同的section来组成，包括代码段、数据段、BSS段、只读数据段，每个section由section header来描述。这里的文件头其实也就是指的文件最开始的那几个字节的信息，然后通过readelf -S 查看可执行文件的节头表（section header）。仍旧以helloworld为里，查看到的节头表内容如下所示：<br />
+<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312122118128.png" alt="image-20231212211818864" /></p>
+<p>​	通过节头表的信息可以窥探到一个可执行文件的组成，上面我比较熟悉的其实并不多，其实也就知道代码段 text ，数据段 data，。bss段，其他知道的并不多，函数翻译成二级制指令放在代码段之中，初始化的全局变量和静态局部变量放在数据段之中，未初始化的全局变量和静态局部变量放在BSS段当中，其他就没了。</p>
+<h1 id="7汇编过程"><a class="markdownIt-Anchor" href="#7汇编过程"></a> 7.汇编过程</h1>
+<p>​	先说一下我的想法，本来我是不想学习这个的，后来我感觉这个东西与后面的链接、与动态库静态库有很深的联系，所以我还是回来看这个了。</p>
+<p>​	预处理之后就是编译，汇编的过程就是将程序代码转换为一个个的汇编指令，再后面才是真正的汇编过程，汇编依靠汇编器，汇编器会将汇编语言转换为二进制语言。</p>
+<p>​	每个重定位的目标文件都是以零地址为基地址进行的代码段的组装，但是后面的链接过程需要将好多个目标文件链接为一个可执行文件，而每个文件都是以零地址进行偏移的，所以在链接的时候需要更新目标文件中的变量或者函数的地址，这个被称之为重定义。那链接器如何知道哪些函数或者变量需要重定位呢？很简单将需要重定位的符号收集起来，生成一个重定位表，以section的形式保存到每个可重定位目标文件即可。</p>
+<p>​	上面提到符号表和重定位表都是很重要的概念。符号表可以通过readelf -s命令来获取，注意这里是小s</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312122209612.png" alt="image-20231212220932369" /></p>
+<p>使用readelf -r可以获得该重定位目标文件的重定位表，如下所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312122214971.png" alt="image-20231212221407848" /></p>
+<h1 id="8静态链接库"><a class="markdownIt-Anchor" href="#8静态链接库"></a> 8.静态链接库</h1>
+<p>​	仍旧先说一下我的理解和看法，无论是静态链接库还是动态链接库，他们实际上就是可重定位的目标文件，即汇编过程之后生成的文件，当然也不对，可以是由一个目标文件生成的库文件也可以是由好几个目标文件生成库文件。很多时候人们会将函数的实现给封装起来，我们只需要调用相应的函数即可，而很多不开源的项目，也会提供封装好的库，让人们只需要使用头文件中定义的相应函数即可。</p>
+<p>​	静态库会在编译程序的时候将引用的函数代码或者变量链接到可执行文件里，和在可执行程序组装到一起，而动态库不会和可执行文件组装到一起，而是在程序运行的时候加载到内存参与链接。</p>
+<p>​	所以静态库的本质就是一个可重定位的目标文件，与上面经过汇编编译出来的.o文件没什么不同，只是多了一个归档的过程。静态库的制作使用ar归档命令来实现，ar是一个用于创建和管理静态库（Archive）的命令行工具。它的名称是&quot;ar&quot;，代表&quot;archive&quot;，可以在Unix和Unix-like系统上使用。ar命令可以用于创建静态库、向静态库中添加对象文件、从静态库中提取对象文件以及执行其他与静态库相关的操作。下面是对ar命令的一些常见用法的详细解释：</p>
+<p>1.创建静态库</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ar -rcs libexample.a file1.o file2.o file3.o</span><br></pre></td></tr></table></figure>
+<p>这个命令将创建一个名为&quot;libexample.a&quot;的静态库，并将文件&quot;file1.o&quot;、&quot;file2.o&quot;和&quot;file3.o&quot;添加到该库中。选项&quot;r&quot;表示替换库中的现有文件，选项&quot;c&quot;表示创建库，选项&quot;s&quot;用于在库中添加索引信息。</p>
+<ul>
+<li><code>-r</code>：将指定的文件插入或替换到归档文件中。</li>
+<li><code>-s</code>：创建索引表。</li>
+<li><code>-c</code>:   不在必须创建库的时候给出警告</li>
+</ul>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312130724504.png" alt="" /></p>
+<p>2.向静态库中添加对象文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ar -r libexample.a newfile.o</span><br></pre></td></tr></table></figure>
+<p>这个命令将向现有的静态库&quot;libexample.a&quot;中添加新的对象文件&quot;newfile.o&quot;。选项&quot;r&quot;表示替换库中的现有文件。</p>
+<p>3.从静态库中提取对象文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ar -x libexample.a newfile.o</span><br></pre></td></tr></table></figure>
+<p>这个命令将从静态库&quot;libexample.a&quot;中提取出对象文件&quot;file1.o&quot;。选项&quot;x&quot;表示提取</p>
+<p>4.列出静态库中的对象文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ar -t libexample.a</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312130727529.png" alt="image-20231213072726515" /></p>
+<p>5.替换静态库中的对象文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ar -d libexample.a file1.o</span><br><span class="line">ar -r libexample.a newfile.o</span><br></pre></td></tr></table></figure>
+<p>这两个命令分别用于从静态库中删除对象文件&quot;file1.o&quot;和向静态库中添加新的对象文件&quot;newfile.o&quot;。选项&quot;d&quot;表示删除。</p>
+<p>​	编译器是以源文件为单位进行程序编译的，链接器在连接的过程中逐个对目标文件进行分解和组装，但这样很容易产生一个问题，如果一个源文件中我们定义了一百个函数，但是只使用了其中的一个，链接器在连接的过程中会将这一百个函数都组装到可执行文件中，这会让最终生成的可执行文件大大增加，那要如何解决这个问题呢，只需要将每一个函数单独使用一个源文件来实现，最终将多个目标文件打包即可。而我们最常用的libc库就是这样实现的，可以通过上面学习的ar -t命令来查看对象文件列表</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312130742069.png" alt="image-20231213074253042" /></p>
+<p>​	可以看到libc将每个函数都搞成了一个目标文件，从而解决了上面提到的问题。这时候又出现了另一个问题，就比如我们经常用到printf进行字段的打印，可能很多个程序都调用了它，链接器在链接的时候就要将多个printf指令添加到多个可执行文件中，在一个多任务的环境中，多个进程并发运行的时候，你会发现内存中有大量重复的printf指令代码，从而浪费了很多的资源，那这个问题要如何解决呢，聪明的工程师们想出来了动态库的方法。</p>
+<p>​	==今天就学习到这个地方了，其实上面的这些东西你都不配说难，因为已经有先人替你踩过坑了，也有更厉害的先人提出来了这些理论，并且用到了实践中，计算机当中的一切都不再属于新鲜事，我们已经站在了巨人的肩膀上，没有理由后人比前人笨，也没有道理学不会，学不会只能证明你没有用心==</p>
+<h1 id="9动态链接库"><a class="markdownIt-Anchor" href="#9动态链接库"></a> 9.动态链接库</h1>
+<p>​		在讲解静态链接库的最后面也提到了静态链接库现有的一些问题，所以人们就提出了动态链接库，动态链接库在程序运行时进行加载，而且不同的可执行文件可以共用动态链接库，所以可以极大的节省内存，动态链接库的编译方式如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -fPIC -shared C文件 -o 库文件</span><br></pre></td></tr></table></figure>
+<p>​		在Linux环境下，当我们运行一个程序时，操作系统首先会在给程序fork一个子进程，接着动态连接器加载到内存，操作系统将控制器权交给动态链接器，让动态链接器完成动态库的加载和重定位搞作，最后跳转到要运行的程序。动态链接器在C标准库中实现，是glibc的一部分，主要完成程序运行前的动态链接工作，在可执行文件的.interp段中存放的有动态链接器的加载路径，可以通过objdump命令查看。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">objdump -j .interp -s a.out</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312132058333.png" alt="" /></p>
+<p><code>objdump</code>是一个用于分析目标文件（object file）的常用命令行工具。它在各种操作系统和编程环境中都有提供，例如Linux和Windows。</p>
+<p><code>objdump</code>的主要作用是提供目标文件的反汇编、符号表、节（section）信息等相关信息。以下是一些常见的用途：</p>
+<ol>
+<li>反汇编目标文件：<code>objdump</code>可以将目标文件中的机器码转换为可读的汇编代码，以便进行代码分析、调试和优化。这对于理解代码的执行流程、查找问题和进行二进制分析非常有用。</li>
+<li>显示符号表：<code>objdump</code>可以列出目标文件中的符号表，包括函数、变量和其他符号的信息。这对于了解代码的结构、查找特定符号、检查符号的可见性和解决符号冲突非常有帮助。</li>
+<li>显示节信息：<code>objdump</code>可以显示目标文件中各个节（section）的信息，例如代码段、数据段、符号表、重定位表等。这对于了解目标文件的布局、存储的数据、链接信息和其他元数据非常有用。</li>
+<li>检查目标文件的属性：<code>objdump</code>可以提供有关目标文件的一些属性，例如目标文件格式、目标架构、入口点等。这对于验证目标文件的正确性和兼容性非常有帮助。</li>
+</ol>
+<p>​		动态链接器本身也是一个动态库，即lib/ld-linux.so文件，动态链接器被加载到内存后，会首先给自己重定位，然后才能运行，像这种给自己重定位然后自动运行的行为，我们称之为自举，在嵌入式系统中Uboot也有自举功能，它在系统上电启动之后会完成代码的自我复制和重定位操作，然后加载到Linux内核镜像中运行。</p>
+<p>​	动态链接器解析解析可执行文件中未确定的符号以及需要链接的动态库信息，将对应的动态库加载到内存，并进行重定位操作，这个过程其实和静态链接的重定位过程相同，只不过推迟到了运行阶段，重定位结束之后，程序中要引用的符号都有了地址和定义，动态链接器要将控制权交给可执行程序，跳转到该程序运行。</p>
+<p>​	静态链接的可执行程序在运行时，一般加载地址等于链接地址，而且这个地址是固定的，可执行文件是操作系统帮我们创建一个子进程之后第一个被加载到内存空间的文件，此时进程的地址一马平川，还未被占用，所以不用考虑地址资源的问题，而动态链接库加载到内存的地址是随机的，因为每一个可执行文件的带线啊哦不同，所以加载到内存后剩余的地址空间也不相同，动态链接库的地址要根据进程地址空间的实际空间的情况随机分配。</p>
+<p>​	so文件是在加载时进行的重定位，虽然解决了可执行文件中对绝对地址的引用问题，但也带来了另外的问题，那就是对于每个进行，动态库加载到内存的不同地址，只能被进程自身共享，无法再多个进程间共享，无法节约内存，但这也又违背了动态库设计的初衷，跟静态库是一样的效果，要如何解决这个问题呢。</p>
+<p>​	如果想要让动态库放到内存的任何位置都可以运行，都可以被多个进行共享，那就是将动态库设计成与位置无关的代码，上面的gcc的-fPIC参数就是指与位置无关，最终的设计思路为，将指令中需要修改的部分分离出来，剩余的部分就与地址无关了，放在哪里都能执行，而且可以被多个进程共享，需要被修改的指令和数据在每个进行中都有一个副本，互不影响各自的运行。</p>
+<p>​	对于同一个程序，我们很容易通过相对寻址来实现代码和地址无关，但是当动态库作为第三方模块被不同的应用程序引用的时候，库中的一些绝对地址符号，如何能做到同时被不同的应用程序引用的呢，解决这个问题的方法其实也很简单，那就是将应用程序引用的动态库符号收集起来，保存到一个表之中买这个表用来记录各个引用符号的地址，这个表被称之为全局偏移表。</p>
+<p>​	现在大部分软件都是通过动态链接的方式开发的，不仅可以节省内存空间，升级维护也比较方便。动态链接器会在系统默认的路径下查找，即lib usr/lib，也回到系统指定的一些路径下查找，用户可以在/etc/ld.so.conf文件中添加自己的共享库路径，修改之后可以使用ldconbfig重新生成一个缓存的/etc/ld.so.chche，每次增加或者删除共享库的路径时，都需要使用ldconfig更新缓存。除此之外也可以使用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export LD_LIBRARY_PATH=库的路径</span><br></pre></td></tr></table></figure>
+<p>​	临时改变共享库的查找路径。</p>
+<h1 id="10堆栈"><a class="markdownIt-Anchor" href="#10堆栈"></a> 10.堆栈</h1>
+<p>​	在一个进程的地址空间中，代码段、数据段、BSS段在内存加载程序运行之后，地址就已经被确定了，在整个此程序的运行期间不在发生变化，这部分内存就被称之为静态内存，而在程序中使用malloc申请的内存、函数调用过程中的栈在程序运行期间是不断进行变化的，这部i分内存被称之为动态内存，用户使用malloc申请的内存一般被称之为堆内存，函数调用过程中使用的内存被称之为栈内存，</p>
+<p>​	堆内存一般在BSS的后面，随着用户使用malloc申请的内存越来越多，堆空间并不断地往高地址增长。栈空间则紧挨着内核空间，arm使用的是满递减堆栈，栈指针会从用户空间的高地址向低地址不断增长。</p>
+<p>​	栈是C语言运行的基础，一个函数内定义的局部变量、传递的实参都是保存在栈中，每个函数都会有专门的栈空间来保存这些数据，每个函数的栈空间都被称之为栈帧。</p>
+<p>==只是感觉目前堆和栈对于我并没有什么作用，下次真的有需求再来吧。==</p>
+<h1 id="11数据对齐"><a class="markdownIt-Anchor" href="#11数据对齐"></a> 11.数据对齐</h1>
+<p>​	仍旧先来说一下我的看法，数据对齐其实我听过很多次了，无论是在NPU学习里接触到的数据对其，还是在这里遇到的数据对其，他们都说数据对齐可以极大的加速程序运行时间、我不知道这个说法是不是对的，但我还是比较奇怪，不是很懂，这样加速的原理，今天就来真正的理解一下。</p>
+<p>​	为什么非要进行地址对齐呢，这是由CPU的硬件决定的，为了简化CPU的电路设计，有些CPU在设计师简化了地址的访问，只支持边界对齐的访问方式，就比如有0-7这八个地址，CPU只能读取0和4这俩，0-3、4-7为两组，如果有一个数据存储在了2-5，这四个地址，那么CPU就需要读取两次，而如果单独放在每个组里那也就只需要一次。</p>
+<p>​	我可能知道为什么要用指针了，上面也说过了堆栈相关的东西，我之前还疑惑那些值传递和地址的传递，现在可能是懂得了，函数的形参和实参。</p>
+<p>​	如果将一个很庞大的值传递到函数中，该函数会有一个专门的栈空间，而那些值同样也会重新复制一份，但是如果是地址的话，就不会如此，只需要传递相应的地址即可，省去了拷贝的步骤，从而大大提升运行的速度。</p>
+<p>​</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2024/01/02/06_C%E8%AF%AD%E8%A8%80%E9%AB%98%E7%BA%A7%E5%AD%A6%E4%B9%A0/02%20%E5%B5%8C%E5%85%A5%E5%BC%8FC%E8%AF%AD%E8%A8%80%E7%9A%84%E8%87%AA%E6%88%91%E4%BF%AE%E5%85%BB/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2024/01/18/07_%E5%B0%8F%E6%8A%80%E5%B7%A7/5_%E5%BF%85%E5%89%AA/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            必剪学习
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2024/01/02/06_C%E8%AF%AD%E8%A8%80%E9%AB%98%E7%BA%A7%E5%AD%A6%E4%B9%A0/03%20CPU%E9%87%8C%E7%9A%84C%E5%92%8CC++/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">计算机眼里的C和C++</div>
+      </a>
+    
+  </nav>
+
+  
+   
+  
+   
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2015-2024
+        <i class="ri-heart-fill heart_icon"></i> chai
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="热爱学习的未来酱"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/%E7%94%9F%E6%B4%BB">生活</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE">瑞芯微</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/Linux%E5%AD%A6%E4%B9%A0">Linux学习</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/%E8%AF%BB%E4%B9%A6">读书</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/%E9%A9%B1%E5%8A%A8%E5%AD%A6%E4%B9%A0">驱动学习</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/C%E8%AF%AD%E8%A8%80%E9%AB%98%E7%BA%A7%E5%AD%A6%E4%B9%A0">C语言高级学习</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/%E5%B0%8F%E6%8A%80%E5%B7%A7">小技巧</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/shell%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0">shell编程学习</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/PCB%E5%AD%A6%E4%B9%A0">PCB学习</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/%E9%9F%B3%E8%A7%86%E9%A2%91%E5%AD%A6%E4%B9%A0">音视频学习</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="52"
+        src="//music.163.com/outchain/player?type=2&id=22707008&auto=0&height=32"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
+    
+    
+
+  </div>
+</body>
+
+</html>

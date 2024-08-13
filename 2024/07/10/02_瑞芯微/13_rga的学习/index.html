@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+  
+
+    <head>
+      <meta charset="utf-8" />
+        
+      <meta name="description" content="永远年轻，永远热泪盈眶" />
+      
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>rga的学习 |  热爱学习的未来酱</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      
+<link rel="stylesheet" href="/css/fonts/remixicon.css">
+
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    <link rel="alternate" href="/atom.xml" title="热爱学习的未来酱" type="application/atom+xml">
+</head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-02_瑞芯微/13_rga的学习"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  rga的学习
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2024/07/10/02_%E7%91%9E%E8%8A%AF%E5%BE%AE/13_rga%E7%9A%84%E5%AD%A6%E4%B9%A0/" class="article-date">
+  <time datetime="2024-07-10T09:17:03.000Z" itemprop="datePublished">2024-07-10</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE/">瑞芯微</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">2.2k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">9 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="rga源码获取"><a class="markdownIt-Anchor" href="#rga源码获取"></a> RGA源码获取</h1>
+<p><a target="_blank" rel="noopener" href="https://meta.zbox.filez.com/v/link/view/c3559cbbf1514464bf109b44901db9fa">https://meta.zbox.filez.com/v/link/view/c3559cbbf1514464bf109b44901db9fa</a>  提取码rkrga</p>
+<h1 id="rga源码编译"><a class="markdownIt-Anchor" href="#rga源码编译"></a> RGA源码编译</h1>
+<p>​	其实源码的编译很简单，总共是需要安装三个工具分别为gcc g++和cmake</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install cmake g++ gcc </span><br><span class="line">sudo apt install g++-9-aarch64-linux-gnu gcc-9-aarch64-linux-gnu </span><br></pre></td></tr></table></figure>
+<p>然后链接一下</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo ln -s /usr/bin/aarch64-linux-gnu-g++-9 /usr/bin/aarch64-linux-gnu-g++</span><br><span class="line">sudo ln -s /usr/bin/aarch64-linux-gnu-g++-9 /usr/bin/aarch64-linux-gnu-g++</span><br></pre></td></tr></table></figure>
+<p>然后修改源码目录的cmake交叉编译器设置文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim toolchains/toolchain_linux.cmake</span><br></pre></td></tr></table></figure>
+<p>修改完成之后如下所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202407102042549.png" alt="image-20240710204241524" /></p>
+<p>​	然后直接运行cmake-linux.sh编译即可，编译完成如下所示：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">SCRIPT_DIR=$PWD</span><br><span class="line">SOURCE_PATH=$&#123;SCRIPT_DIR&#125;</span><br><span class="line">TOOLCHAIN_PATH=$&#123;SOURCE_PATH&#125;/toolchains/toolchain_linux.cmake</span><br><span class="line"></span><br><span class="line">cmake 	-DBUILD_TOOLCHAINS_PATH=$&#123;TOOLCHAIN_PATH&#125; .</span><br><span class="line"></span><br><span class="line">make -j8</span><br><span class="line"></span><br><span class="line">popd</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202407102055766.png" alt="image-20240710205510721" /></p>
+<p>​	会在源码目录下的build/build_linux/install目录中生成后续使用的头文件和库，可以看到lib库不仅提供了so动态库还提供了.a静态库</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202407102055622.png" alt="image-20240710205553582" /></p>
+<p>​	使用file命令也可以得到他的架构类型：<br />
+<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202407102057202.png" alt="image-20240710205752179" /></p>
+<p>​	还有第二种meson的编译方法，其实还挺简单，但是我还是很喜欢cmake 的方式的，方便，只需要改一下cross/cross_file_aarch64.txt文件，修改以下几个地方，还挺简单，</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">c = &#x27;/usr/bin/aarch64-linux-gnu-gcc&#x27;</span><br><span class="line">cpp = &#x27;/usr/bin/aarch64-linux-gnu-g++&#x27;</span><br><span class="line">ar = &#x27;/usr/bin/aarch64-linux-gnu-ar&#x27;</span><br><span class="line">strip = &#x27;/usr/bin/aarch64-linux-gnu-strip&#x27;</span><br></pre></td></tr></table></figure>
+<p>​	然后运行./meson.sh脚本即可，具体步骤如下所示：<br />
+<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202407102151221.png" alt="image-20240710215119171" /></p>
+<p>​	会将要用到的包放到build/meson_aarch64/install目录下，具体如下所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202407102152895.png" alt="image-20240710215203845" /></p>
+<p>​	行了，就先到这里。</p>
+<h1 id="开发板上rga的使用"><a class="markdownIt-Anchor" href="#开发板上rga的使用"></a> 开发板上RGA的使用</h1>
+<p>​	上面的编译步骤直接在开发板上试了一下，然后替换对应的rga库，然后来测试rga Demo，首先获取RGA属性，具体如下所示：<br />
+<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202407122110073.png" alt="image-20240712211025031" /></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">项目</th>
+<th style="text-align:left">内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">选择模式</td>
+<td style="text-align:left">0</td>
+</tr>
+<tr>
+<td style="text-align:left">im2d querystring</td>
+<td style="text-align:left">…</td>
+</tr>
+<tr>
+<td style="text-align:left">RGA 演示模式</td>
+<td style="text-align:left">0x0</td>
+</tr>
+<tr>
+<td style="text-align:left">RGA API 版本</td>
+<td style="text-align:left">1.10.1_[0]</td>
+</tr>
+<tr>
+<td style="text-align:left">RGA 供应商</td>
+<td style="text-align:left">Rockchip Electronics Co.,Ltd.</td>
+</tr>
+<tr>
+<td style="text-align:left">RGA API 版本</td>
+<td style="text-align:left">v1.10.1_[0]</td>
+</tr>
+<tr>
+<td style="text-align:left">RGA 版本</td>
+<td style="text-align:left">RGA_2_Enhance RGA_3</td>
+</tr>
+<tr>
+<td style="text-align:left">最大输入分辨率</td>
+<td style="text-align:left">8192x8192</td>
+</tr>
+<tr>
+<td style="text-align:left">最大输出分辨率</td>
+<td style="text-align:left">8128x8128</td>
+</tr>
+<tr>
+<td style="text-align:left">字节对齐</td>
+<td style="text-align:left">16 byte</td>
+</tr>
+<tr>
+<td style="text-align:left">缩放比例范围</td>
+<td style="text-align:left">0.0625 ~ 16</td>
+</tr>
+<tr>
+<td style="text-align:left">输入格式</td>
+<td style="text-align:left">RGBA/ARGB_8888, RGB_888, RGB_565, ARGB_4444, ARGB_5551, YUV420_sp_8bit, YUV420_sp_10bit, YUV420_p_8bit, YUV420_p_10bit, YUV422_sp_8bit, YUV422_sp_10bit, YUV422_p_8bit, YUV422_p_10bit, YUYV422, YUV400</td>
+</tr>
+<tr>
+<td style="text-align:left">输出格式</td>
+<td style="text-align:left">RGBA/ARGB_8888, RGB_888, RGB_565, ARGB_4444, ARGB_5551, RGBA_4444, RGBA_5551, YUV420_sp_8bit, YUV420_sp_10bit, YUV420_p_8bit, YUV422_sp_8bit, YUV422_sp_10bit, YUV422_p_8bit, YUYV420, YUYV422, YUV400, Y4</td>
+</tr>
+<tr>
+<td style="text-align:left">RGA 功能</td>
+<td style="text-align:left">color_fill, color_palette, ROP, quantize, src1_r2y_csc, dst_full_csc, FBC_mode, blend_in_YUV, BT.2020</td>
+</tr>
+<tr>
+<td style="text-align:left">预期性能</td>
+<td style="text-align:left">最大 4 像素/周期</td>
+</tr>
+</tbody>
+</table>
+<p>以下是整理后的<code>rgaImDemo</code>使用说明：</p>
+<h3 id="用法"><a class="markdownIt-Anchor" href="#用法"></a> 用法：</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sh复制代码rgaImDemo [--help/-h] [--while/-w=(time)] [--querystring/--querystring=&lt;options&gt;]</span><br><span class="line">          [--copy] [--resize=&lt;up/down&gt;] [--crop] [--rotate=90/180/270]</span><br><span class="line">          [--flip=H/V] [--translate] [--blend] [--cvtcolor]</span><br><span class="line">          [--fill=blue/green/red]</span><br></pre></td></tr></table></figure>
+<h3 id="参数说明"><a class="markdownIt-Anchor" href="#参数说明"></a> 参数说明：</h3>
+<h4 id="基本选项"><a class="markdownIt-Anchor" href="#基本选项"></a> 基本选项：</h4>
+<ul>
+<li><code>--help</code> / <code>-h</code>: 显示帮助信息。</li>
+<li><code>--while</code> / <code>-w=(time)</code>: 设置循环模式，用户可以自行设定循环次数。</li>
+</ul>
+<h4 id="查询信息"><a class="markdownIt-Anchor" href="#查询信息"></a> 查询信息：</h4>
+<ul>
+<li>
+<pre><code class="shell">--querystring
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"> / </span><br><span class="line"></span><br><span class="line">```shell</span><br><span class="line">--querystring=&lt;options&gt;</span><br></pre></td></tr></table></figure>
+
+: 根据选项打印当前版本的RGA的版本或支持信息。如果没有输入选项，则打印所有版本和支持信息。
+
+&lt;options&gt;
+
+- `vendor`: 打印厂商信息。
+- `version`: 打印RGA版本和librga/im2d_api版本。
+- `maxinput`: 打印最大输入分辨率。
+- `maxoutput`: 打印最大输出分辨率。
+- `scalelimit`: 打印缩放限制。
+- `inputformat`: 打印支持的输入格式。
+- `outputformat`: 打印支持的输出格式。
+- `expected`: 打印预期性能。
+- `all`: 打印所有信息（默认）。
+
+</code></pre>
+</li>
+</ul>
+<h4 id="图像处理选项"><a class="markdownIt-Anchor" href="#图像处理选项"></a> 图像处理选项：</h4>
+<ul>
+<li>
+<p><code>--copy</code>: 使用RGA复制图像，默认是720p到720p。</p>
+</li>
+<li>
+<p><code>--resize</code>: 使用RGA调整图像大小，可以选择放大或缩小。</p>
+<options>
+<ul>
+<li><code>up</code>: 放大720p (1280x720) -&gt; 1080p (1920x1080)。</li>
+<li><code>down</code>: 缩小720p (1280x720) -&gt; 480p (720x480)。</li>
+</ul>
+</li>
+<li>
+<p><code>--crop</code>: 使用RGA裁剪图像，默认从(100,100)位置裁剪300x300大小的图像。</p>
+</li>
+<li>
+<p><code>--rotate</code>: 使用RGA旋转图像，可以选择旋转角度。</p>
+<options>
+<ul>
+<li><code>90</code>: 旋转90度。</li>
+<li><code>180</code>: 旋转180度。</li>
+<li><code>270</code>: 旋转270度。</li>
+</ul>
+</li>
+<li>
+<p><code>--flip</code>: 使用RGA翻转图像，可以选择水平或垂直翻转。</p>
+<options>
+<ul>
+<li><code>H</code>: 水平镜像。</li>
+<li><code>V</code>: 垂直镜像。</li>
+</ul>
+</li>
+<li>
+<p><code>--translate</code>: 使用RGA平移图像，默认平移(300,300)。</p>
+</li>
+<li>
+<p><code>--blend</code>: 使用RGA混合图像，默认是Porter-Duff的’SRC over DST’模式。</p>
+<options>
+<ul>
+<li><code>src</code>: Porter-Duff SRC模式。</li>
+<li><code>dst</code>: Porter-Duff DST模式。</li>
+<li><code>src-over</code>: Porter-Duff SRC-OVER模式（默认）。</li>
+<li><code>dst-over</code>: Porter-Duff DST-OVER模式。</li>
+<li><code>src-in</code>: Porter-Duff SRC-IN模式。</li>
+<li><code>dst-in</code>: Porter-Duff DST-IN模式。</li>
+<li><code>src-out</code>: Porter-Duff SRC-OUT模式。</li>
+<li><code>dst-out</code>: Porter-Duff DST-OUT模式。</li>
+<li><code>src-atop</code>: Porter-Duff SRC-ATOP模式。</li>
+<li><code>dst-atop</code>: Porter-Duff DST-ATOP模式。</li>
+<li><code>xor</code>: Porter-Duff XOR模式。</li>
+</ul>
+</li>
+<li>
+<p><code>--cvtcolor</code>: 使用RGA修改图像格式和颜色空间，默认是RGBA8888到NV12。</p>
+</li>
+<li>
+<p><code>--fill</code>: 使用RGA填充图像颜色，可以选择填充为蓝色、绿色或红色。</p>
+<options>
+<ul>
+<li><code>red</code>: 填充为红色。</li>
+<li><code>blue</code>: 填充为蓝色。</li>
+<li><code>green</code>: 填充为绿色。</li>
+<li><code>&lt;value&gt;</code>: 填充颜色值，格式为红[0:7]绿[8:15]蓝[16:23] alpha[24:31]。</li>
+</ul>
+</li>
+</ul>
+<h3 id="示例用法"><a class="markdownIt-Anchor" href="#示例用法"></a> 示例用法：</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">sh复制代码# 显示帮助信息</span><br><span class="line">rgaImDemo --help</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">设置循环模式，循环次数为10</span></span><br><span class="line">rgaImDemo --while=10</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">打印RGA版本和支持信息</span></span><br><span class="line">rgaImDemo --querystring=all</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">复制图像</span></span><br><span class="line">rgaImDemo --copy</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">放大图像</span></span><br><span class="line">rgaImDemo --resize=up</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">旋转图像90度</span></span><br><span class="line">rgaImDemo --rotate=90</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">水平翻转图像</span></span><br><span class="line">rgaImDemo --flip=H</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">混合图像，使用Porter-Duff的SRC模式</span></span><br><span class="line">rgaImDemo --blend=src</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">填充图像为蓝色</span></span><br><span class="line">rgaImDemo --fill=blue</span><br></pre></td></tr></table></figure>
+<p>以上是整理后的<code>rgaImDemo</code>使用说明，以便更好地理解和使用该工具。</p>
+<p>终于显示出来了正常的图片，有点问题：<br />
+<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202407122201709.png" alt="image-20240712220110651" /></p>
+<p>​	 现在可以了，这是我的代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># 读取 RGBA 数据</span></span><br><span class="line">img_data = np.fromfile(<span class="string">&#x27;out0w1920-h1080-rgba8888.bin&#x27;</span>, dtype=np.uint8)</span><br><span class="line">img = img_data.reshape((<span class="number">1080</span>, <span class="number">1920</span>, <span class="number">4</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 转换为 BGR 格式</span></span><br><span class="line">img_bgr = cv2.cvtColor(img, cv2.COLOR_RGBA2BGR)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 保存图像为 JPG 格式</span></span><br><span class="line">cv2.imwrite(<span class="string">&#x27;output.jpg&#x27;</span>, img_bgr)</span><br></pre></td></tr></table></figure>
+<p>​	终于算是能读取出来了，行了现在去研究一下RGA的代码吧，其实也没啥，这个RGA的程序跟oepncv是一样的，这一点毋庸置疑，只要学过opencv这个就不是问题。</p>
+<h1 id="rga_resize_demo"><a class="markdownIt-Anchor" href="#rga_resize_demo"></a> rga_resize_demo</h1>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 版权所有 (C) 2022  Rockchip Electronics Co., Ltd.</span></span><br><span class="line"><span class="comment"> * 作者:</span></span><br><span class="line"><span class="comment"> *     YuQiaowei &lt;cerf.yu@rock-chips.com&gt;</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * 根据 Apache 许可证，版本 2.0（“许可证”）授权；</span></span><br><span class="line"><span class="comment"> * 您不能根据许可证使用此文件，除非符合许可证。</span></span><br><span class="line"><span class="comment"> * 您可以在以下网址获取许可证副本：</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> *      http://www.apache.org/licenses/LICENSE-2.0</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * 除非适用法律要求或书面同意，按照许可证分发的软件</span></span><br><span class="line"><span class="comment"> * 是按“原样”分发的，没有任何明示或暗示的担保或条件。</span></span><br><span class="line"><span class="comment"> * 请参阅许可证以了解管理权限和限制的特定语言。</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> LOG_NDEBUG 0</span></span><br><span class="line"><span class="meta">#<span class="keyword">undef</span> LOG_TAG</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> LOG_TAG <span class="string">&quot;rga_resize_demo&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdint.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;errno.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;time.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/time.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/mman.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;fcntl.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;signal.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;linux/stddef.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;RgaUtils.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;im2d.hpp&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;utils.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> LOCAL_FILE_PATH <span class="string">&quot;/data&quot;</span>  <span class="comment">// 本地文件路径</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">int</span> ret = <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> src_width, src_height, src_format;  <span class="comment">// 源图像的宽度、高度和格式</span></span><br><span class="line">    <span class="type">int</span> dst_width, dst_height, dst_format;  <span class="comment">// 目标图像的宽度、高度和格式</span></span><br><span class="line">    <span class="type">char</span> *src_buf, *dst_buf;  <span class="comment">// 源图像和目标图像的缓冲区</span></span><br><span class="line">    <span class="type">int</span> src_buf_size, dst_buf_size;  <span class="comment">// 源图像和目标图像的缓冲区大小</span></span><br><span class="line"></span><br><span class="line">    <span class="type">rga_buffer_t</span> src_img, dst_img;  <span class="comment">// RGA 缓冲区类型</span></span><br><span class="line">    <span class="type">rga_buffer_handle_t</span> src_handle, dst_handle;  <span class="comment">// RGA 缓冲区句柄</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">memset</span>(&amp;src_img, <span class="number">0</span>, <span class="keyword">sizeof</span>(src_img));  <span class="comment">// 初始化源图像缓冲区</span></span><br><span class="line">    <span class="built_in">memset</span>(&amp;dst_img, <span class="number">0</span>, <span class="keyword">sizeof</span>(dst_img));  <span class="comment">// 初始化目标图像缓冲区</span></span><br><span class="line"></span><br><span class="line">    src_width = <span class="number">1280</span>;  <span class="comment">// 设置源图像宽度</span></span><br><span class="line">    src_height = <span class="number">720</span>;  <span class="comment">// 设置源图像高度</span></span><br><span class="line">    src_format = RK_FORMAT_RGBA_8888;  <span class="comment">// 设置源图像格式</span></span><br><span class="line"></span><br><span class="line">    dst_width = <span class="number">1920</span>;  <span class="comment">// 设置目标图像宽度</span></span><br><span class="line">    dst_height = <span class="number">1080</span>;  <span class="comment">// 设置目标图像高度</span></span><br><span class="line">    dst_format = RK_FORMAT_RGBA_8888;  <span class="comment">// 设置目标图像格式</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 计算源图像和目标图像缓冲区大小</span></span><br><span class="line">    src_buf_size = src_width * src_height * get_bpp_from_format(src_format);</span><br><span class="line">    dst_buf_size = dst_width * dst_height * get_bpp_from_format(dst_format);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 为源图像和目标图像分配缓冲区</span></span><br><span class="line">    src_buf = (<span class="type">char</span> *)<span class="built_in">malloc</span>(src_buf_size);</span><br><span class="line">    dst_buf = (<span class="type">char</span> *)<span class="built_in">malloc</span>(dst_buf_size);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* 填充图像数据 */</span></span><br><span class="line">    <span class="comment">// 从文件读取源图像数据，如果读取失败则绘制RGBA图像</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="number">0</span> != read_image_from_file(src_buf, LOCAL_FILE_PATH, src_width, src_height, src_format, <span class="number">0</span>)) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;src image read err\n&quot;</span>);</span><br><span class="line">        draw_rgba(src_buf, src_width, src_height);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">memset</span>(dst_buf, <span class="number">0x80</span>, dst_buf_size);  <span class="comment">// 初始化目标图像缓冲区</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 导入虚拟地址缓冲区</span></span><br><span class="line">    src_handle = importbuffer_virtualaddr(src_buf, src_buf_size);</span><br><span class="line">    dst_handle = importbuffer_virtualaddr(dst_buf, dst_buf_size);</span><br><span class="line">    <span class="keyword">if</span> (src_handle == <span class="number">0</span> || dst_handle == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;importbuffer failed!\n&quot;</span>);</span><br><span class="line">        <span class="keyword">goto</span> release_buffer;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 包装缓冲区句柄为RGA缓冲区</span></span><br><span class="line">    src_img = wrapbuffer_handle(src_handle, src_width, src_height, src_format);</span><br><span class="line">    dst_img = wrapbuffer_handle(dst_handle, dst_width, dst_height, dst_format);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * 将源图像放大到1920*1080。</span></span><br><span class="line"><span class="comment">        --------------    ---------------------</span></span><br><span class="line"><span class="comment">        |            |    |                   |</span></span><br><span class="line"><span class="comment">        |  src_img   |    |     dst_img       |</span></span><br><span class="line"><span class="comment">        |            | =&gt; |                   |</span></span><br><span class="line"><span class="comment">        --------------    |                   |</span></span><br><span class="line"><span class="comment">                          |                   |</span></span><br><span class="line"><span class="comment">                          ---------------------</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 检查源图像和目标图像的合法性</span></span><br><span class="line">    ret = imcheck(src_img, dst_img, &#123;&#125;, &#123;&#125;);</span><br><span class="line">    <span class="keyword">if</span> (IM_STATUS_NOERROR != ret) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d, check error! %s&quot;</span>, __LINE__, imStrError((IM_STATUS)ret));</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 调用RGA库进行图像缩放</span></span><br><span class="line">    ret = imresize(src_img, dst_img);</span><br><span class="line">    <span class="keyword">if</span> (ret == IM_STATUS_SUCCESS) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%s running success!\n&quot;</span>, LOG_TAG);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%s running failed, %s\n&quot;</span>, LOG_TAG, imStrError((IM_STATUS)ret));</span><br><span class="line">        <span class="keyword">goto</span> release_buffer;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 将目标图像写入文件</span></span><br><span class="line">    write_image_to_file(dst_buf, LOCAL_FILE_PATH, dst_width, dst_height, dst_format, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">release_buffer:</span><br><span class="line">    <span class="comment">// 释放RGA缓冲区句柄</span></span><br><span class="line">    <span class="keyword">if</span> (src_handle)</span><br><span class="line">        releasebuffer_handle(src_handle);</span><br><span class="line">    <span class="keyword">if</span> (dst_handle)</span><br><span class="line">        releasebuffer_handle(dst_handle);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 释放缓冲区内存</span></span><br><span class="line">    <span class="keyword">if</span> (src_buf)</span><br><span class="line">        <span class="built_in">free</span>(src_buf);</span><br><span class="line">    <span class="keyword">if</span> (dst_buf)</span><br><span class="line">        <span class="built_in">free</span>(dst_buf);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>​</p>
+<p>deb安装依赖</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">apt-get install -y sudo locales git fakeroot devscripts cmake vim qemu-user-static:arm64 binfmt-support \</span><br><span class="line">        dh-make dh-exec pkg-kde-tools device-tree-compiler:arm64 bc cpio parted dosfstools mtools libssl-dev:arm64 \</span><br><span class="line">        g++-aarch64-linux-gnu dpkg-dev meson debhelper pkgconf</span><br></pre></td></tr></table></figure>
+<p>编译deb包</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo DEB_BUILD_OPTIONS=nocheck dpkg-buildpackage -b -d -uc -us -aarm64</span><br></pre></td></tr></table></figure>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2024/07/10/02_%E7%91%9E%E8%8A%AF%E5%BE%AE/13_rga%E7%9A%84%E5%AD%A6%E4%B9%A0/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2024/07/14/02_%E7%91%9E%E8%8A%AF%E5%BE%AE/14_mpp%E5%AD%A6%E4%B9%A0/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            mpp的学习
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2024/07/04/02_%E7%91%9E%E8%8A%AF%E5%BE%AE/12_uboot%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">uboot启动流程</div>
+      </a>
+    
+  </nav>
+
+  
+   
+  
+   
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2015-2024
+        <i class="ri-heart-fill heart_icon"></i> chai
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="热爱学习的未来酱"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/%E7%94%9F%E6%B4%BB">生活</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE">瑞芯微</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/Linux%E5%AD%A6%E4%B9%A0">Linux学习</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/%E8%AF%BB%E4%B9%A6">读书</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/%E9%A9%B1%E5%8A%A8%E5%AD%A6%E4%B9%A0">驱动学习</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/C%E8%AF%AD%E8%A8%80%E9%AB%98%E7%BA%A7%E5%AD%A6%E4%B9%A0">C语言高级学习</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/%E5%B0%8F%E6%8A%80%E5%B7%A7">小技巧</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/shell%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0">shell编程学习</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/PCB%E5%AD%A6%E4%B9%A0">PCB学习</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/%E9%9F%B3%E8%A7%86%E9%A2%91%E5%AD%A6%E4%B9%A0">音视频学习</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="52"
+        src="//music.163.com/outchain/player?type=2&id=22707008&auto=0&height=32"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
+    
+    
+
+  </div>
+</body>
+
+</html>
