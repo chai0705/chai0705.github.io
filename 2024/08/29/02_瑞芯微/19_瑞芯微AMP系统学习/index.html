@@ -1,0 +1,1226 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+  
+
+    <head>
+      <meta charset="utf-8" />
+        
+      <meta name="description" content="永远年轻，永远热泪盈眶" />
+      
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>瑞芯微AMP系统学习 |  热爱学习的未来酱</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      
+<link rel="stylesheet" href="/css/fonts/remixicon.css">
+
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    <link rel="alternate" href="/atom.xml" title="热爱学习的未来酱" type="application/atom+xml">
+</head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-02_瑞芯微/19_瑞芯微AMP系统学习"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  瑞芯微AMP系统学习
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2024/08/29/02_%E7%91%9E%E8%8A%AF%E5%BE%AE/19_%E7%91%9E%E8%8A%AF%E5%BE%AEAMP%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/" class="article-date">
+  <time datetime="2024-08-29T09:17:03.000Z" itemprop="datePublished">2024-08-29</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE/">瑞芯微</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">12k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">45 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <blockquote>
+<p>AMP之前是田田搞的，我认为这个东西很高级，反正听起来是这样的，之前对这个一直很感兴趣，但是并没有真正了解过，正好趁这个机会好好的研究看看。</p>
+</blockquote>
+<hr />
+<h1 id="rockchip平台的amp架构概述"><a class="markdownIt-Anchor" href="#rockchip平台的amp架构概述"></a> <strong>Rockchip平台的AMP架构概述</strong>。</h1>
+<hr />
+<h2 id="rockchip平台的amp架构概述-2"><a class="markdownIt-Anchor" href="#rockchip平台的amp架构概述-2"></a> Rockchip平台的AMP架构概述</h2>
+<h3 id="什么是ampasymmetric-multiprocessing架构"><a class="markdownIt-Anchor" href="#什么是ampasymmetric-multiprocessing架构"></a> 什么是AMP（Asymmetric Multiprocessing）架构？</h3>
+<p>在Rockchip平台上，AMP（非对称多处理）架构指的是一种包含多个不同类型处理器核的系统架构。这些核可能运行不同的操作系统或执行不同的任务，从而实现高效的资源利用和任务优化。与对称多处理（SMP）不同，AMP架构中的核并不对称，它们各自负责不同的任务，且具备不同的计算能力和功能特性。</p>
+<h3 id="rockchip平台中的amp架构"><a class="markdownIt-Anchor" href="#rockchip平台中的amp架构"></a> Rockchip平台中的AMP架构</h3>
+<p>Rockchip平台支持多种组合形式的AMP架构，包括：</p>
+<ul>
+<li><strong>全Baremetal系统</strong>：基于HAL（Hardware Abstraction Layer）的独立运行部分，是一种简单的低级软件层，用于直接访问处理器特性和外设接口。</li>
+<li><strong>RTOS + Baremetal组合</strong>：在这种组合中，RTOS（如RT-Thread）负责管理实时任务，而Baremetal部分则处理底层硬件交互。</li>
+<li><strong>Linux + Baremetal组合</strong>：Linux系统负责复杂的应用和系统管理，Baremetal部分则处理特定的低级任务。</li>
+<li><strong>Linux + RTOS组合</strong>：Linux系统与RTOS结合使用，前者负责高层次的任务管理，后者则处理时间敏感的任务。</li>
+</ul>
+<h3 id="amp架构的主要组件"><a class="markdownIt-Anchor" href="#amp架构的主要组件"></a> AMP架构的主要组件</h3>
+<ol>
+<li><strong>处理器核</strong>
+<ul>
+<li>Rockchip平台中的处理器核可以分为高性能核和低功耗核。高性能核负责复杂的计算任务，而低功耗核则用于处理简单的、节能型任务。</li>
+</ul>
+</li>
+<li><strong>硬件抽象层（HAL）</strong>
+<ul>
+<li>HAL是AMP架构中的核心组件之一，它提供对处理器的基本特性（如缓存、 中断和异常）的访问，以及对基础外设（如GPIO、UART、I2C、SPI、CAN、GMAC等）的驱动支持。</li>
+</ul>
+</li>
+<li><strong>操作系统层</strong>
+<ul>
+<li>在RTOS与Baremetal或Linux与Baremetal的组合中，不同的操作系统（RTOS、Linux、Baremetal）在各自的处理器核上运行。RTOS通常用于处理实时性要求较高的任务，而Linux系统负责资源密集型的任务。</li>
+</ul>
+</li>
+<li><strong>通信机制</strong>
+<ul>
+<li>在AMP架构下，不同核之间需要有效的通信机制以协调任务和共享资源。这可以通过共享内存、消息传递、中断等方式实现。</li>
+</ul>
+</li>
+</ol>
+<h3 id="amp架构的优势"><a class="markdownIt-Anchor" href="#amp架构的优势"></a> AMP架构的优势</h3>
+<ol>
+<li><strong>性能优化</strong>：通过将任务分配给最适合的处理器核，AMP架构能够显著提高系统的整体性能。例如，实时任务可以分配给RTOS，而复杂的计算任务可以由Linux处理。</li>
+<li><strong>节能</strong>：AMP架构可以根据任务需求动态调整处理器核的状态，例如让高性能核在空闲时进入低功耗模式，从而优化能耗。</li>
+<li><strong>灵活性</strong>：由于不同的处理器核可以运行不同的操作系统或任务，AMP架构在处理多样化的任务时具有极高的灵活性，能够满足不同应用场景的需求。</li>
+</ol>
+<h3 id="amp架构的应用场景"><a class="markdownIt-Anchor" href="#amp架构的应用场景"></a> AMP架构的应用场景</h3>
+<p>在Rockchip平台上，AMP架构被广泛应用于以下领域：</p>
+<ul>
+<li><strong>电力物联网</strong>：AMP架构可以实现对电力系统数据的实时监控与处理，确保系统的稳定运行。</li>
+<li><strong>电网继电保护</strong>：通过AMP架构中的实时操作系统来处理关键任务，确保继电保护系统的响应速度和可靠性。</li>
+<li><strong>工业自动化</strong>：在工业控制系统中，AMP架构允许不同的处理器核处理不同的控制任务，提升系统的灵活性和稳定性。</li>
+</ul>
+<hr />
+<p>这就是Rockchip平台AMP架构的概述！如果你有任何问题或需要更深入的解释，请随时告诉我。你也可以使用**/continue**来继续下一个主题的学习。🦌</p>
+<p>我们将继续学习下一个主题：<strong>基于HAL的Baremetal开发</strong>。</p>
+<hr />
+<h2 id="基于hal的baremetal开发"><a class="markdownIt-Anchor" href="#基于hal的baremetal开发"></a> 基于HAL的Baremetal开发</h2>
+<h3 id="什么是baremetal开发"><a class="markdownIt-Anchor" href="#什么是baremetal开发"></a> 什么是Baremetal开发？</h3>
+<p>Baremetal开发是一种直接在硬件上运行软件的开发方式，没有操作系统的介入。程序直接与硬件交互，这种方式通常用于对性能要求极高或者资源极度有限的系统。Baremetal开发的一个重要特点是其高度的灵活性和高效性，但也意味着开发者需要处理所有底层硬件的细节。</p>
+<h3 id="硬件抽象层hal的作用"><a class="markdownIt-Anchor" href="#硬件抽象层hal的作用"></a> 硬件抽象层（HAL）的作用</h3>
+<p>在Rockchip平台上，HAL（Hardware Abstraction Layer，硬件抽象层）是Baremetal开发的核心组件之一。HAL提供了一组API，用于直接访问处理器的基本功能（如缓存管理、中断处理、异常处理）以及基础外设的驱动支持（如GPIO、UART、I2C、SPI、CAN、GMAC等）。</p>
+<p>HAL的主要作用包括：</p>
+<ol>
+<li><strong>简化硬件操作</strong>：HAL为开发者提供了对硬件的抽象接口，简化了直接访问硬件的复杂性，使得开发者无需处理底层硬件的细节。</li>
+<li><strong>提高代码的可移植性</strong>：通过使用HAL，开发者可以编写与特定硬件无关的代码，从而提高代码的可移植性。当硬件平台发生变化时，只需修改HAL层的实现，而应用层代码几乎无需改动。</li>
+<li><strong>统一的硬件接口</strong>：HAL为不同的外设提供了统一的接口，使得开发者可以通过一致的方式控制不同类型的硬件设备。</li>
+</ol>
+<h3 id="baremetal开发的关键要点"><a class="markdownIt-Anchor" href="#baremetal开发的关键要点"></a> Baremetal开发的关键要点</h3>
+<ol>
+<li><strong>初始化处理器</strong>
+<ul>
+<li>在Baremetal环境中，首先需要初始化处理器的基本功能，包括设置时钟频率、配置缓存、初始化堆栈指针和异常向量表等。</li>
+</ul>
+</li>
+<li><strong>中断管理</strong>
+<ul>
+<li>中断处理是Baremetal开发中的一个重要部分。需要设置中断向量表，并编写中断服务程序（ISR）来响应和处理各种中断请求。</li>
+</ul>
+</li>
+<li><strong>外设控制</strong>
+<ul>
+<li>使用HAL API控制和管理外设，例如GPIO用于控制输入输出引脚，UART用于串口通信，I2C和SPI用于与其他设备通信，CAN用于车载网络通信，GMAC用于以太网通信等。</li>
+</ul>
+</li>
+<li><strong>内存管理</strong>
+<ul>
+<li>在Baremetal开发中，需要手动管理内存。这包括静态内存分配（如全局变量）和动态内存分配（如果需要的话）。</li>
+</ul>
+</li>
+<li><strong>调试与测试</strong>
+<ul>
+<li>在没有操作系统的情况下，调试Baremetal代码可能会更加困难。通常需要借助硬件调试工具（如JTAG）来调试代码，并通过串口或其他通信接口输出调试信息。</li>
+</ul>
+</li>
+</ol>
+<h3 id="baremetal开发的实际应用"><a class="markdownIt-Anchor" href="#baremetal开发的实际应用"></a> Baremetal开发的实际应用</h3>
+<p>Baremetal开发通常应用于以下场景：</p>
+<ul>
+<li><strong>实时性要求高的系统</strong>：由于没有操作系统的开销，Baremetal程序可以实现更快的响应时间，适合对实时性要求极高的应用，例如工业控制系统和嵌入式实时系统。</li>
+<li><strong>资源受限的设备</strong>：在资源非常有限的设备（如一些传感器节点或简单的物联网设备）上，Baremetal开发可以最大化地利用硬件资源。</li>
+<li><strong>特定功能模块</strong>：在一些复杂系统中，Baremetal开发可以用于实现特定的功能模块，如在RTOS或Linux系统之外的独立任务处理。</li>
+</ul>
+<h3 id="开发示例gpio控制"><a class="markdownIt-Anchor" href="#开发示例gpio控制"></a> 开发示例：GPIO控制</h3>
+<p>以下是一个简单的Baremetal开发示例，使用HAL控制GPIO引脚：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">COPY#include &quot;hal_gpio.h&quot;</span><br><span class="line"></span><br><span class="line">int main(void) &#123;</span><br><span class="line">    // 初始化GPIO引脚</span><br><span class="line">    hal_gpio_init(GPIO_PIN_0);</span><br><span class="line"></span><br><span class="line">    // 设置GPIO引脚为输出模式</span><br><span class="line">    hal_gpio_set_mode(GPIO_PIN_0, GPIO_MODE_OUTPUT);</span><br><span class="line"></span><br><span class="line">    while (1) &#123;</span><br><span class="line">        // 设置GPIO引脚电平为高</span><br><span class="line">        hal_gpio_write(GPIO_PIN_0, GPIO_PIN_SET);</span><br><span class="line">        </span><br><span class="line">        // 等待一段时间</span><br><span class="line">        hal_delay(1000);</span><br><span class="line">        </span><br><span class="line">        // 设置GPIO引脚电平为低</span><br><span class="line">        hal_gpio_write(GPIO_PIN_0, GPIO_PIN_RESET);</span><br><span class="line">        </span><br><span class="line">        // 等待一段时间</span><br><span class="line">        hal_delay(1000);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个代码示例展示了如何在Baremetal环境下使用HAL控制一个GPIO引脚，实现简单的LED闪烁功能。</p>
+<hr />
+<p>这就是基于HAL的Baremetal开发的基础知识！如果你有任何问题，或者想要进一步探讨某个具体部分，请随时告诉我。如果你准备好继续下一个主题，可以使用**/continue**命令。🦌</p>
+<p>我们将继续学习下一个主题：<strong>RTOS + Baremetal架构开发</strong>。</p>
+<hr />
+<h2 id="rtos-baremetal架构开发"><a class="markdownIt-Anchor" href="#rtos-baremetal架构开发"></a> RTOS + Baremetal架构开发</h2>
+<h3 id="什么是rtos-baremetal架构"><a class="markdownIt-Anchor" href="#什么是rtos-baremetal架构"></a> 什么是RTOS + Baremetal架构？</h3>
+<p>在RTOS（实时操作系统）和Baremetal架构的组合中，系统利用RTOS来管理和调度时间敏感的任务，同时使用Baremetal来直接控制硬件和处理低级任务。这种架构的优点是可以同时利用RTOS的实时性和Baremetal的高效性，适合需要实时响应和低级硬件控制的应用场景。</p>
+<h3 id="rtos与baremetal的协作机制"><a class="markdownIt-Anchor" href="#rtos与baremetal的协作机制"></a> RTOS与Baremetal的协作机制</h3>
+<p>在这种架构下，RTOS通常运行在一个或多个处理器核上，用于管理复杂的多任务环境。Baremetal代码则运行在独立的核上，直接控制特定的硬件资源或执行特定的任务。</p>
+<ol>
+<li><strong>任务管理</strong>
+<ul>
+<li>RTOS负责管理和调度多个任务，确保关键任务按时执行。它通常包含一个调度器来决定哪个任务在任何给定时间运行。</li>
+<li>Baremetal代码独立于RTOS运行，通常负责特定的低级硬件操作，不参与多任务调度。</li>
+</ul>
+</li>
+<li><strong>硬件抽象层（HAL）</strong>
+<ul>
+<li>在这种架构中，HAL仍然是关键组件。它为Baremetal部分提供了访问硬件的接口，也可以被RTOS使用来简化硬件控制。</li>
+</ul>
+</li>
+<li><strong>通信机制</strong>
+<ul>
+<li>RTOS和Baremetal之间的通信通常通过共享内存、中断或消息队列来实现。例如，Baremetal部分可以通过触发中断来通知RTOS某个任务已经完成，或者通过共享内存区域传递数据。</li>
+</ul>
+</li>
+</ol>
+<h3 id="rtos-baremetal架构的优点"><a class="markdownIt-Anchor" href="#rtos-baremetal架构的优点"></a> RTOS + Baremetal架构的优点</h3>
+<ol>
+<li><strong>实时性与高效性结合</strong>：RTOS提供了对时间敏感任务的有效管理，而Baremetal部分则可以高效地执行直接的硬件操作，减少延迟。</li>
+<li><strong>灵活性</strong>：这种架构允许开发者在同一系统中灵活使用RTOS和Baremetal，以应对不同类型的任务需求。</li>
+<li><strong>资源优化</strong>：通过将不同的任务分配给RTOS和Baremetal部分，可以更好地利用系统资源。例如，RTOS可以处理复杂的多任务调度，而Baremetal部分则处理简单且需要快速响应的任务。</li>
+</ol>
+<h3 id="实际应用中的rtos-baremetal架构"><a class="markdownIt-Anchor" href="#实际应用中的rtos-baremetal架构"></a> 实际应用中的RTOS + Baremetal架构</h3>
+<p>这种架构广泛应用于需要高实时性和高效硬件控制的领域，例如：</p>
+<ul>
+<li><strong>工业自动化</strong>：在工业控制系统中，RTOS管理着系统的整体运行和任务调度，而Baremetal部分直接控制工业设备的传感器和执行器。</li>
+<li><strong>电力系统</strong>：在电力继电保护和电网控制系统中，RTOS用于管理系统的正常运行和故障处理，而Baremetal部分则实时监控电力线路状态，确保系统的稳定性。</li>
+<li><strong>嵌入式设备</strong>：在一些嵌入式设备中，RTOS负责设备的主控逻辑和用户界面管理，而Baremetal部分则处理与传感器和外设的低级通信。</li>
+</ul>
+<h3 id="开发示例rtos任务与baremetal硬件控制"><a class="markdownIt-Anchor" href="#开发示例rtos任务与baremetal硬件控制"></a> 开发示例：RTOS任务与Baremetal硬件控制</h3>
+<p>以下是一个简单的示例，展示如何在RTOS中管理任务，并使用Baremetal部分控制硬件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">COPY// RTOS任务管理部分</span><br><span class="line">#include &quot;rtos.h&quot;</span><br><span class="line">#include &quot;hal_gpio.h&quot;</span><br><span class="line"></span><br><span class="line">void task_blink_led(void *pvParameters) &#123;</span><br><span class="line">    while (1) &#123;</span><br><span class="line">        hal_gpio_toggle(GPIO_PIN_0);</span><br><span class="line">        rtos_delay(1000);  // 延时1秒</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main(void) &#123;</span><br><span class="line">    rtos_init();  // 初始化RTOS</span><br><span class="line"></span><br><span class="line">    // 创建LED闪烁任务</span><br><span class="line">    rtos_create_task(task_blink_led, &quot;Blink LED&quot;, configMINIMAL_STACK_SIZE, NULL, 1, NULL);</span><br><span class="line"></span><br><span class="line">    rtos_start_scheduler();  // 启动RTOS调度器</span><br><span class="line"></span><br><span class="line">    while (1) &#123;</span><br><span class="line">        // 在这里可以执行Baremetal代码</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// Baremetal硬件控制部分</span><br><span class="line">#include &quot;hal_gpio.h&quot;</span><br><span class="line"></span><br><span class="line">int baremetal_init(void) &#123;</span><br><span class="line">    hal_gpio_init(GPIO_PIN_0);  // 初始化GPIO引脚</span><br><span class="line">    hal_gpio_set_mode(GPIO_PIN_0, GPIO_MODE_OUTPUT);  // 设置为输出模式</span><br><span class="line"></span><br><span class="line">    // 可以在这里添加更多Baremetal硬件控制代码</span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在这个示例中，RTOS管理一个简单的任务来控制LED的闪烁，而Baremetal部分负责初始化硬件。RTOS与Baremetal部分相互独立运行，共同实现系统的功能。</p>
+<hr />
+<p>这就是RTOS + Baremetal架构开发的基础知识！如果你有任何问题，或者想要进一步探讨某个具体部分，请随时告诉我。如果你准备好继续下一个主题，可以使用**/continue**命令。🦌</p>
+<p>我们将继续学习下一个主题：<strong>Linux + Baremetal架构开发</strong>。</p>
+<hr />
+<h2 id="linux-baremetal架构开发"><a class="markdownIt-Anchor" href="#linux-baremetal架构开发"></a> Linux + Baremetal架构开发</h2>
+<h3 id="什么是linux-baremetal架构"><a class="markdownIt-Anchor" href="#什么是linux-baremetal架构"></a> 什么是Linux + Baremetal架构？</h3>
+<p>在Linux + Baremetal架构中，系统中的一部分处理器核运行完整的Linux操作系统，用于处理复杂的多任务环境和资源密集型应用程序；同时，另一部分处理器核以Baremetal方式运行，直接控制特定硬件或执行时间敏感的任务。此架构在需要同时满足高级系统管理和低级硬件控制需求的场景中非常有用。</p>
+<h3 id="linux与baremetal的协作机制"><a class="markdownIt-Anchor" href="#linux与baremetal的协作机制"></a> Linux与Baremetal的协作机制</h3>
+<p>在这种架构中，Linux系统通常运行在高性能核上，管理应用程序、系统服务和外围设备。Baremetal部分则运行在低功耗核或专用核上，负责处理实时性要求较高或需要直接硬件访问的任务。</p>
+<ol>
+<li><strong>任务分配</strong>
+<ul>
+<li><strong>Linux核</strong>：负责复杂任务，如文件系统管理、网络通信、多任务调度等。</li>
+<li><strong>Baremetal核</strong>：处理特定任务，如实时传感器数据采集、信号处理或关键任务的执行。</li>
+</ul>
+</li>
+<li><strong>通信机制</strong>
+<ul>
+<li>Linux和Baremetal部分之间的通信可以通过多种机制实现，例如共享内存、消息传递、中断通知等。</li>
+<li>常见的方式是在Linux侧设置一个内核模块或用户空间程序，通过共享内存区域与Baremetal核交换数据。</li>
+</ul>
+</li>
+<li><strong>硬件资源管理</strong>
+<ul>
+<li>Linux和Baremetal通常会各自管理部分硬件资源。例如，Linux管理通用外设（如存储、网络接口），而Baremetal管理特定的外设（如高速传感器接口、专用处理单元）。</li>
+</ul>
+</li>
+</ol>
+<h3 id="linux-baremetal架构的优点"><a class="markdownIt-Anchor" href="#linux-baremetal架构的优点"></a> Linux + Baremetal架构的优点</h3>
+<ol>
+<li><strong>复杂任务和实时任务的分离</strong>：Linux系统擅长处理复杂、非实时任务，而Baremetal部分则专注于时间敏感的任务，两者结合可以优化整体系统性能。</li>
+<li><strong>资源优化</strong>：这种架构允许在同一平台上高效利用硬件资源。Linux系统可以执行复杂的任务，同时Baremetal部分处理低级硬件控制，避免资源浪费。</li>
+<li><strong>灵活性与定制化</strong>：开发者可以根据应用需求灵活配置Linux和Baremetal的职责范围，从而满足多样化的需求。</li>
+</ol>
+<h3 id="实际应用中的linux-baremetal架构"><a class="markdownIt-Anchor" href="#实际应用中的linux-baremetal架构"></a> 实际应用中的Linux + Baremetal架构</h3>
+<p>这种架构在以下领域得到广泛应用：</p>
+<ul>
+<li><strong>电力系统</strong>：在电力物联网和电网控制中，Linux系统用于管理和分析大规模数据，而Baremetal部分则实时监控电力设备状态，确保系统的快速响应。</li>
+<li><strong>汽车电子</strong>：在汽车电子系统中，Linux用于运行复杂的娱乐和导航系统，而Baremetal部分控制实时性要求高的传感器和执行器。</li>
+<li><strong>工业控制</strong>：在工业自动化中，Linux系统管理高层次的控制任务，如网络通信和数据处理，而Baremetal部分执行实时控制任务，如传感器数据采集和机器控制。</li>
+</ul>
+<h3 id="开发示例linux与baremetal的通信"><a class="markdownIt-Anchor" href="#开发示例linux与baremetal的通信"></a> 开发示例：Linux与Baremetal的通信</h3>
+<p>以下是一个简单的示例，展示如何通过共享内存实现Linux和Baremetal部分之间的通信：</p>
+<h4 id="baremetal部分"><a class="markdownIt-Anchor" href="#baremetal部分"></a> Baremetal部分：</h4>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">COPY#include &quot;hal_shared_memory.h&quot;</span><br><span class="line">#include &quot;hal_interrupt.h&quot;</span><br><span class="line"></span><br><span class="line">#define SHARED_MEMORY_BASE 0x80000000  // 假设的共享内存地址</span><br><span class="line">volatile uint32_t *shared_memory = (uint32_t *)SHARED_MEMORY_BASE;</span><br><span class="line"></span><br><span class="line">void baremetal_task(void) &#123;</span><br><span class="line">    // 读取共享内存中的数据</span><br><span class="line">    uint32_t data = shared_memory[0];</span><br><span class="line"></span><br><span class="line">    // 处理数据</span><br><span class="line">    data = data + 1;</span><br><span class="line"></span><br><span class="line">    // 将处理后的数据写回共享内存</span><br><span class="line">    shared_memory[1] = data;</span><br><span class="line"></span><br><span class="line">    // 触发中断通知Linux</span><br><span class="line">    hal_interrupt_trigger(LINUX_INTERRUPT);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main(void) &#123;</span><br><span class="line">    while (1) &#123;</span><br><span class="line">        baremetal_task();</span><br><span class="line">    &#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="linux部分内核模块示例"><a class="markdownIt-Anchor" href="#linux部分内核模块示例"></a> Linux部分（内核模块示例）：</h4>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">COPY#include &lt;linux/module.h&gt;</span><br><span class="line">#include &lt;linux/kernel.h&gt;</span><br><span class="line">#include &lt;linux/init.h&gt;</span><br><span class="line">#include &lt;linux/io.h&gt;</span><br><span class="line">#include &lt;linux/interrupt.h&gt;</span><br><span class="line"></span><br><span class="line">#define SHARED_MEMORY_BASE 0x80000000  // 与Baremetal部分共享的内存地址</span><br><span class="line">volatile uint32_t *shared_memory;</span><br><span class="line"></span><br><span class="line">static irqreturn_t baremetal_irq_handler(int irq, void *dev_id) &#123;</span><br><span class="line">    uint32_t data = shared_memory[1];</span><br><span class="line">    printk(KERN_INFO &quot;Received data from Baremetal: %u\n&quot;, data);</span><br><span class="line">    return IRQ_HANDLED;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">static int __init linux_baremetal_init(void) &#123;</span><br><span class="line">    shared_memory = ioremap(SHARED_MEMORY_BASE, sizeof(uint32_t) * 2);</span><br><span class="line"></span><br><span class="line">    // 注册中断处理程序</span><br><span class="line">    request_irq(LINUX_INTERRUPT, baremetal_irq_handler, IRQF_SHARED, &quot;baremetal_irq&quot;, NULL);</span><br><span class="line"></span><br><span class="line">    printk(KERN_INFO &quot;Linux + Baremetal module initialized\n&quot;);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">static void __exit linux_baremetal_exit(void) &#123;</span><br><span class="line">    free_irq(LINUX_INTERRUPT, NULL);</span><br><span class="line">    iounmap(shared_memory);</span><br><span class="line">    printk(KERN_INFO &quot;Linux + Baremetal module exited\n&quot;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">module_init(linux_baremetal_init);</span><br><span class="line">module_exit(linux_baremetal_exit);</span><br><span class="line"></span><br><span class="line">MODULE_LICENSE(&quot;GPL&quot;);</span><br><span class="line">MODULE_AUTHOR(&quot;Developer&quot;);</span><br><span class="line">MODULE_DESCRIPTION(&quot;Linux + Baremetal Communication Example&quot;);</span><br></pre></td></tr></table></figure>
+<p>在这个示例中，Baremetal部分通过共享内存将处理过的数据传递给Linux，并通过中断机制通知Linux读取数据。Linux侧通过内核模块接收中断并读取共享内存中的数据，从而实现了两个系统之间的协作。</p>
+<hr />
+<p>这就是Linux + Baremetal架构开发的基础知识！如果你有任何问题，或者想要进一步探讨某个具体部分，请随时告诉我。如果你准备好继续下一个主题，可以使用**/continue**命令。🦌</p>
+<p>我们将继续学习下一个主题：<strong>Linux + RTOS架构开发</strong>。</p>
+<hr />
+<h2 id="linux-rtos架构开发"><a class="markdownIt-Anchor" href="#linux-rtos架构开发"></a> Linux + RTOS架构开发</h2>
+<h3 id="什么是linux-rtos架构"><a class="markdownIt-Anchor" href="#什么是linux-rtos架构"></a> 什么是Linux + RTOS架构？</h3>
+<p>在Linux + RTOS（实时操作系统）架构中，系统的部分处理器核运行完整的Linux操作系统，而其他处理器核运行RTOS。这个架构结合了Linux强大的多任务处理能力和RTOS的实时性能，适用于需要同时处理复杂应用和实时任务的场景。</p>
+<h3 id="linux与rtos的协作机制"><a class="markdownIt-Anchor" href="#linux与rtos的协作机制"></a> Linux与RTOS的协作机制</h3>
+<p>在这种架构中，Linux系统通常负责管理和运行复杂的应用程序，如网络通信、文件系统、用户界面等。而RTOS则负责执行需要严格时间控制的任务，如实时数据处理、紧急控制任务等。</p>
+<ol>
+<li><strong>任务分配</strong>
+<ul>
+<li><strong>Linux核</strong>：负责资源密集型的任务，如处理大数据、运行复杂算法、网络通信和用户界面管理。</li>
+<li><strong>RTOS核</strong>：处理实时性要求高的任务，如传感器数据采集、控制系统和时间敏感的计算任务。</li>
+</ul>
+</li>
+<li><strong>通信机制</strong>
+<ul>
+<li>Linux和RTOS之间的通信通常通过共享内存、消息队列或中断等机制实现。共享内存是一种常见的方式，它允许两个系统快速交换数据。</li>
+<li>中断机制可以用于Linux通知RTOS某个任务需要立即执行，或反过来通知Linux某个事件已经发生。</li>
+</ul>
+</li>
+<li><strong>资源管理</strong>
+<ul>
+<li>在这种架构中，Linux和RTOS通常管理各自独立的硬件资源。例如，Linux管理网络接口、存储设备，而RTOS管理时间敏感的I/O接口，如传感器和执行器。</li>
+</ul>
+</li>
+</ol>
+<h3 id="linux-rtos架构的优点"><a class="markdownIt-Anchor" href="#linux-rtos架构的优点"></a> Linux + RTOS架构的优点</h3>
+<ol>
+<li><strong>实时性与复杂任务处理的结合</strong>：这种架构允许同时处理复杂的多任务应用（通过Linux）和严格的实时任务（通过RTOS），提供了灵活性和强大的功能。</li>
+<li><strong>系统稳定性</strong>：通过将实时任务与复杂的非实时任务分离开来，可以提高系统的稳定性。即使Linux系统负载很高，RTOS仍能确保关键任务按时执行。</li>
+<li><strong>灵活性</strong>：开发者可以根据需求灵活地配置系统，选择将哪些任务放在Linux上运行，哪些任务放在RTOS上运行。</li>
+</ol>
+<h3 id="实际应用中的linux-rtos架构"><a class="markdownIt-Anchor" href="#实际应用中的linux-rtos架构"></a> 实际应用中的Linux + RTOS架构</h3>
+<p>这种架构广泛应用于以下领域：</p>
+<ul>
+<li><strong>汽车电子</strong>：在汽车控制系统中，RTOS负责处理实时的车载传感器数据和控制任务，而Linux则用于运行导航、娱乐系统等复杂应用。</li>
+<li><strong>工业自动化</strong>：在工业控制系统中，RTOS负责时间敏感的控制任务，如机械臂的实时控制，而Linux负责高层次的监控和数据处理。</li>
+<li><strong>医疗设备</strong>：在医疗设备中，RTOS管理实时监控和控制功能，如患者生命体征的实时监测，而Linux处理数据存储、用户界面和远程通信。</li>
+</ul>
+<h3 id="开发示例linux与rtos的通信"><a class="markdownIt-Anchor" href="#开发示例linux与rtos的通信"></a> 开发示例：Linux与RTOS的通信</h3>
+<p>以下是一个简单的示例，展示如何通过共享内存实现Linux与RTOS之间的通信：</p>
+<h4 id="rtos部分基于rt-thread的示例"><a class="markdownIt-Anchor" href="#rtos部分基于rt-thread的示例"></a> RTOS部分（基于RT-Thread的示例）：</h4>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">COPY#include &quot;rtthread.h&quot;</span><br><span class="line">#include &quot;hal_shared_memory.h&quot;</span><br><span class="line">#include &quot;hal_interrupt.h&quot;</span><br><span class="line"></span><br><span class="line">#define SHARED_MEMORY_BASE 0x80000000  // 假设的共享内存地址</span><br><span class="line">volatile uint32_t *shared_memory = (uint32_t *)SHARED_MEMORY_BASE;</span><br><span class="line"></span><br><span class="line">void rt_thread_entry(void *parameter) &#123;</span><br><span class="line">    while (1) &#123;</span><br><span class="line">        // 读取共享内存中的数据</span><br><span class="line">        uint32_t data = shared_memory[0];</span><br><span class="line">        </span><br><span class="line">        // 处理数据</span><br><span class="line">        data = data + 1;</span><br><span class="line">        </span><br><span class="line">        // 将处理后的数据写回共享内存</span><br><span class="line">        shared_memory[1] = data;</span><br><span class="line">        </span><br><span class="line">        // 触发中断通知Linux</span><br><span class="line">        hal_interrupt_trigger(LINUX_INTERRUPT);</span><br><span class="line">        </span><br><span class="line">        rt_thread_mdelay(1000);  // 延时1秒</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main(void) &#123;</span><br><span class="line">    // 创建RTOS线程</span><br><span class="line">    rt_thread_t thread = rt_thread_create(&quot;rt_thread&quot;, rt_thread_entry, RT_NULL, 1024, 10, 10);</span><br><span class="line">    </span><br><span class="line">    if (thread != RT_NULL) &#123;</span><br><span class="line">        rt_thread_startup(thread);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="linux部分内核模块示例-2"><a class="markdownIt-Anchor" href="#linux部分内核模块示例-2"></a> Linux部分（内核模块示例）：</h4>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">COPY#include &lt;linux/module.h&gt;</span><br><span class="line">#include &lt;linux/kernel.h&gt;</span><br><span class="line">#include &lt;linux/init.h&gt;</span><br><span class="line">#include &lt;linux/io.h&gt;</span><br><span class="line">#include &lt;linux/interrupt.h&gt;</span><br><span class="line"></span><br><span class="line">#define SHARED_MEMORY_BASE 0x80000000  // 与RTOS部分共享的内存地址</span><br><span class="line">volatile uint32_t *shared_memory;</span><br><span class="line"></span><br><span class="line">static irqreturn_t rtos_irq_handler(int irq, void *dev_id) &#123;</span><br><span class="line">    uint32_t data = shared_memory[1];</span><br><span class="line">    printk(KERN_INFO &quot;Received data from RTOS: %u\n&quot;, data);</span><br><span class="line">    return IRQ_HANDLED;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">static int __init linux_rtos_init(void) &#123;</span><br><span class="line">    shared_memory = ioremap(SHARED_MEMORY_BASE, sizeof(uint32_t) * 2);</span><br><span class="line"></span><br><span class="line">    // 注册中断处理程序</span><br><span class="line">    request_irq(LINUX_INTERRUPT, rtos_irq_handler, IRQF_SHARED, &quot;rtos_irq&quot;, NULL);</span><br><span class="line"></span><br><span class="line">    printk(KERN_INFO &quot;Linux + RTOS module initialized\n&quot;);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">static void __exit linux_rtos_exit(void) &#123;</span><br><span class="line">    free_irq(LINUX_INTERRUPT, NULL);</span><br><span class="line">    iounmap(shared_memory);</span><br><span class="line">    printk(KERN_INFO &quot;Linux + RTOS module exited\n&quot;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">module_init(linux_rtos_init);</span><br><span class="line">module_exit(linux_rtos_exit);</span><br><span class="line"></span><br><span class="line">MODULE_LICENSE(&quot;GPL&quot;);</span><br><span class="line">MODULE_AUTHOR(&quot;Developer&quot;);</span><br><span class="line">MODULE_DESCRIPTION(&quot;Linux + RTOS Communication Example&quot;);</span><br></pre></td></tr></table></figure>
+<p>在这个示例中，RTOS线程通过共享内存与Linux交换数据，并通过中断机制通知Linux某个事件已完成。Linux通过内核模块接收中断并读取共享内存中的数据。</p>
+<hr />
+<p>这就是Linux + RTOS架构开发的基础知识！如果你有任何问题，或者想要进一步探讨某个具体部分，请随时告诉我。如果你准备好继续下一个主题，可以使用**/continue**命令。🦌</p>
+<p>我们将继续学习下一个主题：<strong>AMP系统在电力和工业自动化中的应用</strong>。</p>
+<hr />
+<h2 id="amp系统在电力和工业自动化中的应用"><a class="markdownIt-Anchor" href="#amp系统在电力和工业自动化中的应用"></a> AMP系统在电力和工业自动化中的应用</h2>
+<h3 id="什么是amp系统"><a class="markdownIt-Anchor" href="#什么是amp系统"></a> 什么是AMP系统？</h3>
+<p>AMP（Asymmetric Multiprocessing）系统是一种利用异构处理器核的计算架构，系统中的不同核可能运行不同的操作系统或执行不同类型的任务。AMP系统通过合理分配任务给最合适的处理器核来优化整体性能和能效，尤其适合需要高实时性和多任务处理的场景。</p>
+<h3 id="amp系统在电力行业的应用"><a class="markdownIt-Anchor" href="#amp系统在电力行业的应用"></a> AMP系统在电力行业的应用</h3>
+<h4 id="1-电力物联网"><a class="markdownIt-Anchor" href="#1-电力物联网"></a> 1. <strong>电力物联网</strong></h4>
+<ul>
+<li><strong>数据采集与处理</strong>：在电力物联网（IoT）中，AMP系统可用于实时采集和处理来自电力设备的传感器数据。低功耗核可能运行Baremetal或RTOS，专门处理数据采集任务，而高性能核则运行Linux，负责数据分析和通信。</li>
+<li><strong>远程监控与控制</strong>：AMP系统支持在高性能核上运行复杂的监控软件，同时在实时核上执行关键控制任务。例如，RTOS核可以直接控制电网设备，而Linux核则管理监控和通信。</li>
+</ul>
+<h4 id="2-电网继电保护"><a class="markdownIt-Anchor" href="#2-电网继电保护"></a> 2. <strong>电网继电保护</strong></h4>
+<ul>
+<li><strong>实时故障检测</strong>：AMP系统可以在RTOS核上实现快速的故障检测和继电保护响应，确保电力系统在出现故障时能够迅速隔离故障区，防止故障扩散。</li>
+<li><strong>安全与可靠性</strong>：通过AMP架构的分离处理机制，系统能够在Linux核上执行复杂的数据分析和日志记录，而RTOS核则负责实时的安全监控，保证系统的高可靠性。</li>
+</ul>
+<h4 id="3-电力系统安全控制"><a class="markdownIt-Anchor" href="#3-电力系统安全控制"></a> 3. <strong>电力系统安全控制</strong></h4>
+<ul>
+<li><strong>多层次控制</strong>：在电力系统中，AMP架构允许不同层次的控制任务在不同核上独立运行。例如，高层次的控制任务在Linux系统中执行，而实时性要求较高的低层次控制任务则由RTOS处理。</li>
+<li><strong>系统冗余</strong>：AMP系统可以设计成冗余结构，确保即使部分处理器核出现故障，其他核仍然可以接管关键控制任务，保持系统稳定运行。</li>
+</ul>
+<h3 id="amp系统在工业自动化中的应用"><a class="markdownIt-Anchor" href="#amp系统在工业自动化中的应用"></a> AMP系统在工业自动化中的应用</h3>
+<h4 id="1-实时控制系统"><a class="markdownIt-Anchor" href="#1-实时控制系统"></a> 1. <strong>实时控制系统</strong></h4>
+<ul>
+<li><strong>机械控制</strong>：在工业自动化中，RTOS核可以负责机械臂、传送带等设备的实时控制，确保精确的操作时序和快速响应。而Linux核则可以运行高级任务，如生产线管理、质量监控和数据分析。</li>
+<li><strong>传感器集成</strong>：AMP系统可以集成各种传感器数据，并通过不同的处理器核进行分类处理。例如，温度传感器数据可以由Baremetal核处理，确保低延迟响应，而视觉传感器数据则可以由Linux核进行复杂的图像处理。</li>
+</ul>
+<h4 id="2-工业网络与通信"><a class="markdownIt-Anchor" href="#2-工业网络与通信"></a> 2. <strong>工业网络与通信</strong></h4>
+<ul>
+<li><strong>实时数据交换</strong>：AMP系统可以通过实时核（运行RTOS）处理工业通信协议（如CAN、EtherCAT），确保实时性和数据传输的可靠性。同时，Linux核可以负责管理网络堆栈和处理来自其他系统的数据流。</li>
+<li><strong>边缘计算</strong>：在工业物联网（IIoT）中，AMP系统可用于边缘计算，将部分数据处理和分析任务放在本地RTOS核上执行，减少数据传输延迟，而复杂的决策任务则交由Linux核处理。</li>
+</ul>
+<h4 id="3-故障诊断与维护"><a class="markdownIt-Anchor" href="#3-故障诊断与维护"></a> 3. <strong>故障诊断与维护</strong></h4>
+<ul>
+<li><strong>预防性维护</strong>：AMP系统可以在RTOS核上实现对设备的实时监控和诊断，及时发现潜在的故障风险。同时，Linux核可以进行历史数据分析，预测设备的维护需求。</li>
+<li><strong>远程故障处理</strong>：在出现故障时，AMP系统能够通过Linux核提供远程访问和控制，而RTOS核则执行本地的紧急处理任务，确保系统的持续运行。</li>
+</ul>
+<h3 id="实际案例分析"><a class="markdownIt-Anchor" href="#实际案例分析"></a> 实际案例分析</h3>
+<ul>
+<li><strong>智能电网</strong>：在智能电网中，AMP架构被用来管理大量的分布式能源资源，实时监控电网状态，并在检测到异常时迅速做出响应。Linux核管理高级调度和通信，RTOS核处理关键的继电保护任务。</li>
+<li><strong>工业4.0生产线</strong>：在工业4.0的智能生产线中，AMP系统通过实时监控设备状态和控制生产流程，提高了生产效率和产品质量。RTOS核负责设备的实时控制，而Linux核则管理整个生产线的调度和优化。</li>
+</ul>
+<hr />
+<p>这就是AMP系统在电力和工业自动化中的应用的基础知识！如果你有任何问题，或者想要进一步探讨某个具体部分，请随时告诉我。如果你准备好继续下一个主题，可以使用**/continue**命令。🦌</p>
+<h1 id="rt-thread学习"><a class="markdownIt-Anchor" href="#rt-thread学习"></a> RT-Thread学习</h1>
+<p>RT-Thread是一个开源的嵌入式实时操作系统，广泛应用于物联网、工业控制、消费电子等领域。它以其轻量级、高效和模块化的特点而著称。RT-Thread提供了一个丰富的组件库，包括线程管理、内存管理、设备框架、网络栈和GUI系统，这些组件使开发者能够快速构建复杂的嵌入式系统。</p>
+<h2 id="主题-rt-thread简介"><a class="markdownIt-Anchor" href="#主题-rt-thread简介"></a> <strong>主题</strong>: RT-Thread简介</h2>
+<h3 id="历史与发展"><a class="markdownIt-Anchor" href="#历史与发展"></a> 历史与发展</h3>
+<p>RT-Thread于2006年首次发布，旨在为资源有限的嵌入式设备提供一个灵活的操作系统。随着时间的推移，RT-Thread逐渐发展壮大，社区贡献者也越来越多。如今，RT-Thread已经成为全球最受欢迎的开源RTOS之一，被广泛用于各种嵌入式应用中。</p>
+<h3 id="rt-thread的特点"><a class="markdownIt-Anchor" href="#rt-thread的特点"></a> RT-Thread的特点</h3>
+<ul>
+<li><strong>模块化设计</strong>: RT-Thread采用模块化设计，开发者可以根据需求裁剪系统，从而在资源受限的设备上运行。</li>
+<li><strong>丰富的组件库</strong>: 提供了从基础功能到高级功能的一系列组件，涵盖了嵌入式开发的各个方面。</li>
+<li><strong>支持多种架构</strong>: RT-Thread支持多种处理器架构，如ARM Cortex-M系列、RISC-V等。</li>
+<li><strong>广泛的应用场景</strong>: RT-Thread被应用于物联网设备、智能家居、工业自动化等多个领域。</li>
+</ul>
+<h3 id="主要应用领域"><a class="markdownIt-Anchor" href="#主要应用领域"></a> 主要应用领域</h3>
+<ol>
+<li><strong>物联网（IoT）</strong>: RT-Thread在物联网设备中得到了广泛应用，特别是在需要低功耗和高效实时性能的场景下。</li>
+<li><strong>工业控制</strong>: 在工业控制系统中，RT-Thread以其稳定性和高效性得到了认可，成为了众多工业设备的操作系统选择。</li>
+<li><strong>消费电子</strong>: RT-Thread在智能家居设备、可穿戴设备等消费电子产品中也有着广泛的应用。</li>
+</ol>
+<h2 id="主题-rt-thread内核架构"><a class="markdownIt-Anchor" href="#主题-rt-thread内核架构"></a> <strong>主题</strong>: RT-Thread内核架构</h2>
+<p>RT-Thread的内核架构是其性能和灵活性的基础。了解内核的设计理念和实现细节对于深入掌握RT-Thread非常重要。我们将从内核的关键组成部分开始，逐步探讨其设计与功能。</p>
+<h4 id="1-内核概述"><a class="markdownIt-Anchor" href="#1-内核概述"></a> 1. 内核概述</h4>
+<p>RT-Thread的内核是一个微内核，具有简洁、高效和可移植的特点。它主要负责以下几个方面的功能：</p>
+<ul>
+<li><strong>线程管理</strong>: 负责线程的创建、调度、销毁以及状态管理。</li>
+<li><strong>内存管理</strong>: 提供动态内存分配、堆栈管理以及内存池的支持。</li>
+<li><strong>中断处理</strong>: 处理外部中断，并将中断服务例程（ISR）与线程切换无缝集成。</li>
+<li><strong>定时器管理</strong>: 提供硬件和软件定时器支持，实现周期性任务调度。</li>
+</ul>
+<h4 id="2-线程管理"><a class="markdownIt-Anchor" href="#2-线程管理"></a> 2. 线程管理</h4>
+<p>线程管理是RT-Thread内核的核心功能之一。线程（或称任务）是RT-Thread中的基本执行单元。以下是RT-Thread的线程管理机制：</p>
+<ul>
+<li><strong>优先级调度</strong>: RT-Thread采用优先级调度算法，支持多级优先级，确保高优先级任务优先执行。</li>
+<li><strong>时间片轮转</strong>: 对于同一优先级的线程，RT-Thread使用时间片轮转的方式调度线程，以实现公平性。</li>
+<li><strong>线程状态</strong>: 每个线程可以处于以下状态之一：就绪（Ready）、运行（Running）、挂起（Suspended）、阻塞（Blocked）等。</li>
+<li><strong>线程控制块（TCB）</strong>: RT-Thread通过线程控制块（TCB）来管理每个线程的状态、优先级、堆栈等信息。</li>
+</ul>
+<h4 id="3-内存管理"><a class="markdownIt-Anchor" href="#3-内存管理"></a> 3. 内存管理</h4>
+<p>RT-Thread的内存管理模块支持多种内存管理方式，以满足不同应用场景的需求：</p>
+<ul>
+<li><strong>静态内存分配</strong>: 在编译时分配固定大小的内存区域，适用于资源受限的系统。</li>
+<li><strong>动态内存分配</strong>: 使用堆（heap）来动态分配和释放内存，提供更大的灵活性。</li>
+<li><strong>内存池</strong>: 通过预先分配的内存块（memory block）来提高内存分配和释放的效率。</li>
+</ul>
+<h4 id="4-中断处理"><a class="markdownIt-Anchor" href="#4-中断处理"></a> 4. 中断处理</h4>
+<p>中断是嵌入式系统中非常重要的机制，用于响应外部事件。RT-Thread的中断处理机制包括：</p>
+<ul>
+<li><strong>中断服务例程（ISR）</strong>: 当中断发生时，RT-Thread调用对应的中断服务例程来处理事件。</li>
+<li><strong>中断嵌套</strong>: 支持中断嵌套，允许更高优先级的中断在低优先级的中断处理中打断。</li>
+<li><strong>中断线程化</strong>: RT-Thread允许将中断服务例程的处理推迟到线程上下文中执行，以减少中断处理的延迟。</li>
+</ul>
+<h4 id="5-定时器管理"><a class="markdownIt-Anchor" href="#5-定时器管理"></a> 5. 定时器管理</h4>
+<p>RT-Thread提供硬件和软件定时器来支持实时任务调度：</p>
+<ul>
+<li><strong>硬件定时器</strong>: 直接依赖于处理器的硬件计时器，通常用于精确的时间管理。</li>
+<li><strong>软件定时器</strong>: 基于系统时钟实现的软件定时器，适用于不太严格的时间要求。</li>
+</ul>
+<hr />
+<p>RT-Thread的内核架构为其在嵌入式系统中的高效运行提供了坚实的基础。了解这些核心机制将帮助您在实际开发中更好地利用RT-Thread的功能。</p>
+<p>请问您是否有任何问题？如果没有，我们可以继续学习下一节课内容：<strong>任务与线程管理</strong>。</p>
+<h2 id="主题如何让rt-thread跑在rockchip上"><a class="markdownIt-Anchor" href="#主题如何让rt-thread跑在rockchip上"></a> 主题：如何让RT-Thread跑在Rockchip上</h2>
+<p>要让RT-Thread运行在Rockchip的处理器上，需要经过几个关键步骤，包括环境搭建、内核移植、驱动程序开发和应用程序编写。以下是一个详细的指南，帮助您在Rockchip平台上成功运行RT-Thread。</p>
+<h3 id="1-环境搭建"><a class="markdownIt-Anchor" href="#1-环境搭建"></a> 1. 环境搭建</h3>
+<h4 id="11-获取开发板和芯片支持"><a class="markdownIt-Anchor" href="#11-获取开发板和芯片支持"></a> 1.1 获取开发板和芯片支持</h4>
+<p>首先，您需要获取一个支持Rockchip处理器的开发板，如RK3288、RK3399等。确保开发板的硬件文档和驱动支持能够获取到。</p>
+<h4 id="12-安装交叉编译工具链"><a class="markdownIt-Anchor" href="#12-安装交叉编译工具链"></a> 1.2 安装交叉编译工具链</h4>
+<p>为了在ARM架构的Rockchip处理器上编译RT-Thread，您需要安装一个交叉编译工具链。通常使用的工具链是<strong>GNU ARM Toolchain</strong>，您可以在以下链接下载：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/gnu-rm">GNU ARM Toolchain 下载地址</a></li>
+</ul>
+<p>安装完成后，确认工具链路径已经正确配置到环境变量中。</p>
+<h3 id="2-移植rt-thread到rockchip平台"><a class="markdownIt-Anchor" href="#2-移植rt-thread到rockchip平台"></a> 2. 移植RT-Thread到Rockchip平台</h3>
+<h4 id="21-获取rt-thread源码"><a class="markdownIt-Anchor" href="#21-获取rt-thread源码"></a> 2.1 获取RT-Thread源码</h4>
+<p>从RT-Thread的官方GitHub仓库克隆最新的RT-Thread源码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">COPYgit clone https://github.com/RT-Thread/rt-thread.git</span><br></pre></td></tr></table></figure>
+<h4 id="22-配置rt-thread"><a class="markdownIt-Anchor" href="#22-配置rt-thread"></a> 2.2 配置RT-Thread</h4>
+<p>进入RT-Thread源码目录，并使用<code>menuconfig</code>或<code>Kconfig</code>工具配置RT-Thread内核。配置过程中，您需要根据Rockchip的硬件特点选择合适的内核选项和驱动支持。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">COPYcd rt-thread</span><br><span class="line">scons --menuconfig</span><br></pre></td></tr></table></figure>
+<p>在配置中，确保选择了ARM架构，并配置了与Rockchip处理器对应的CPU选项。</p>
+<h4 id="23-添加硬件抽象层hal"><a class="markdownIt-Anchor" href="#23-添加硬件抽象层hal"></a> 2.3 添加硬件抽象层（HAL）</h4>
+<p>如果RT-Thread官方没有提供对特定Rockchip芯片的支持，您需要自己编写或移植硬件抽象层（HAL）。HAL需要处理的部分包括：</p>
+<ul>
+<li><strong>时钟管理</strong></li>
+<li><strong>中断控制</strong></li>
+<li><strong>存储器映射</strong></li>
+<li><strong>外设初始化</strong></li>
+</ul>
+<p>您可以参考RT-Thread对其他ARM Cortex-A系列芯片的移植来进行修改。</p>
+<h3 id="3-驱动程序开发"><a class="markdownIt-Anchor" href="#3-驱动程序开发"></a> 3. 驱动程序开发</h3>
+<p>为了让RT-Thread充分利用Rockchip的硬件功能，可能需要开发或移植一些驱动程序。关键驱动包括：</p>
+<ul>
+<li><strong>UART驱动</strong>：用于串口调试输出。</li>
+<li><strong>定时器驱动</strong>：用于实现系统时钟和定时器功能。</li>
+<li><strong>GPIO驱动</strong>：支持通用输入输出控制。</li>
+<li><strong>其他外设驱动</strong>：如I2C、SPI、网络接口等。</li>
+</ul>
+<p>这些驱动程序通常在<code>drivers</code>目录下实现，您可以参考RT-Thread的标准驱动框架进行开发。</p>
+<h3 id="4-编译与烧写"><a class="markdownIt-Anchor" href="#4-编译与烧写"></a> 4. 编译与烧写</h3>
+<h4 id="41-编译rt-thread"><a class="markdownIt-Anchor" href="#41-编译rt-thread"></a> 4.1 编译RT-Thread</h4>
+<p>使用SCons编译RT-Thread内核及相关组件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">COPYscons</span><br></pre></td></tr></table></figure>
+<p>编译完成后，生成的固件文件通常为<code>rtthread.bin</code>或<code>rtthread.elf</code>。</p>
+<h4 id="42-烧写固件"><a class="markdownIt-Anchor" href="#42-烧写固件"></a> 4.2 烧写固件</h4>
+<p>将生成的固件通过烧写工具烧录到Rockchip开发板中。对于Rockchip芯片，您可以使用工具如<code>rkflashtool</code>或<code>RKDevelopTool</code>来进行固件烧写。</p>
+<h3 id="5-调试与运行"><a class="markdownIt-Anchor" href="#5-调试与运行"></a> 5. 调试与运行</h3>
+<p>通过UART接口连接开发板，打开串口终端（如<code>minicom</code>或<code>Putty</code>），并重启开发板。您应该能够在终端中看到RT-Thread的启动日志。</p>
+<h3 id="6-应用程序开发"><a class="markdownIt-Anchor" href="#6-应用程序开发"></a> 6. 应用程序开发</h3>
+<p>在RT-Thread成功运行后，您可以开始编写自己的应用程序，充分利用RT-Thread的线程管理、内存管理等功能。应用程序可以直接在<code>application</code>目录下开发，编写完成后通过编译生成新的固件。</p>
+<h3 id="7-优化与调试"><a class="markdownIt-Anchor" href="#7-优化与调试"></a> 7. 优化与调试</h3>
+<p>最后，根据应用需求和性能目标，您可以进一步优化RT-Thread的配置和代码。使用RT-Thread的调试工具，进行性能分析、内存检测等工作，确保系统的稳定性和高效性。</p>
+<hr />
+<p>通过上述步骤，您应该能够成功地在Rockchip平台上运行RT-Thread。这个过程需要对嵌入式系统、操作系统移植和驱动开发有一定的了解。如果在移植过程中遇到问题，欢迎继续讨论或咨询相关的开发社区。</p>
+<h1 id="amp源码编译"><a class="markdownIt-Anchor" href="#amp源码编译"></a> AMP源码编译</h1>
+<h2 id="开发环境搭建"><a class="markdownIt-Anchor" href="#开发环境搭建"></a> 开发环境搭建</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">COPYsudo apt-get update</span><br><span class="line">sudo apt-get install clang-format astyle libncurses5-dev build-essential scons</span><br></pre></td></tr></table></figure>
+<h2 id="sdk-编译"><a class="markdownIt-Anchor" href="#sdk-编译"></a> SDK 编译</h2>
+<p>整体编译</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">COPY./build.sh all</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409051029337.png" alt="image-20240831130909780" />image-20240831130909780</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409051029639.png" alt="image-20240831131002361" />image-20240831131002361</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409051029218.png" alt="image-20240831131107616" />image-20240831131107616</p>
+<p>进行单独编译前需进行过全编译，各个镜像单独编译命令如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">COPY./build.sh uboot  //单独编译 uboot</span><br><span class="line">./build.sh kernel  //单独编译 内核</span><br><span class="line">./build.sh amp  //单独编译 amp</span><br><span class="line">./build.sh updateimg  //打包整体 update.img 镜像</span><br></pre></td></tr></table></figure>
+<p>烧写就正常的烧写即可。</p>
+<h1 id="裸机和linux核心修改"><a class="markdownIt-Anchor" href="#裸机和linux核心修改"></a> 裸机和Linux核心修改</h1>
+<p>然后现在用的是三个A55内核跑Linux一个A55内核跑裸机，具体现象是这样的，这是裸机核心：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409051029243.png" alt="image-20240831131931925" />image-20240831131931925</p>
+<p>这是那一个Linux核心内容：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409051029544.png" alt="image-20240831132009133" />image-20240831132009133</p>
+<p>可以看到现在只有三个核心被打印了出来。然后来看一下具体的修改，是怎样实现让这一个核心跑裸机的呢？</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">COPYvi device/rockchip/rk3568/rk3568_amp_linux.its</span><br></pre></td></tr></table></figure>
+<p>文件内容如下所示：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><span class="line">COPY</span><br><span class="line">/dts-v1/;</span><br><span class="line">/ &#123;</span><br><span class="line">        description = &quot;FIT source file for rockchip AMP&quot;;</span><br><span class="line">        #address-cells = &lt;1&gt;;</span><br><span class="line"></span><br><span class="line">        images &#123;</span><br><span class="line">                /*amp1 &#123;</span><br><span class="line">                        description  = &quot;bare-mental-core1&quot;;</span><br><span class="line">                        data         = /incbin/(&quot;cpu1.bin&quot;);</span><br><span class="line">                        type         = &quot;firmware&quot;;</span><br><span class="line">                        compression  = &quot;none&quot;;</span><br><span class="line">                        arch         = &quot;arm&quot;;</span><br><span class="line">                        cpu          = &lt;0x100&gt;;</span><br><span class="line">                        thumb        = &lt;0&gt;;</span><br><span class="line">                        hyp          = &lt;0&gt;;</span><br><span class="line">                        load         = &lt;0x01800000&gt;;</span><br><span class="line">                        udelay       = &lt;10000&gt;;</span><br><span class="line">                        hash &#123;</span><br><span class="line">                                algo = &quot;sha256&quot;;</span><br><span class="line">                        &#125;;</span><br><span class="line">                &#125;;</span><br><span class="line"></span><br><span class="line">                amp2 &#123;</span><br><span class="line">                        description  = &quot;bare-mental-core2&quot;;</span><br><span class="line">                        data         = /incbin/(&quot;cpu2.bin&quot;);</span><br><span class="line">                        type         = &quot;firmware&quot;;</span><br><span class="line">                        compression  = &quot;none&quot;;</span><br><span class="line">                        arch         = &quot;arm&quot;;</span><br><span class="line">                        cpu          = &lt;0x200&gt;;</span><br><span class="line">                        thumb        = &lt;0&gt;;</span><br><span class="line">                        hyp          = &lt;0&gt;;</span><br><span class="line">                        load         = &lt;0x02000000&gt;;</span><br><span class="line">                        udelay       = &lt;10000&gt;;</span><br><span class="line">                        hash &#123;</span><br><span class="line">                                algo = &quot;sha256&quot;;</span><br><span class="line">                        &#125;;</span><br><span class="line">                &#125;;*/</span><br><span class="line"></span><br><span class="line">                amp3 &#123;</span><br><span class="line">                        description  = &quot;bare-mental-core3&quot;;</span><br><span class="line">                        data         = /incbin/(&quot;cpu3.bin&quot;);</span><br><span class="line">                        type         = &quot;firmware&quot;;</span><br><span class="line">                        compression  = &quot;none&quot;;</span><br><span class="line">                        arch         = &quot;arm&quot;;</span><br><span class="line">                        cpu          = &lt;0x300&gt;;</span><br><span class="line">                        thumb        = &lt;0&gt;;</span><br><span class="line">                        hyp          = &lt;0&gt;;</span><br><span class="line">                        load         = &lt;0x02800000&gt;;</span><br><span class="line">                        udelay       = &lt;10000&gt;;</span><br><span class="line">                        hash &#123;</span><br><span class="line">                                algo = &quot;sha256&quot;;</span><br><span class="line">                        &#125;;</span><br><span class="line">                &#125;;</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">        configurations &#123;</span><br><span class="line">                default = &quot;conf&quot;;</span><br><span class="line">                conf &#123;</span><br><span class="line">                        description = &quot;Rockchip AMP images&quot;;</span><br><span class="line">                        rollback-index = &lt;0x0&gt;;</span><br><span class="line">                        //loadables = &quot;amp1&quot;, &quot;amp2&quot;, &quot;amp3&quot;;</span><br><span class="line">                        loadables = &quot;amp3&quot;;</span><br><span class="line"></span><br><span class="line">                        signature &#123;</span><br><span class="line">                                algo = &quot;sha256,rsa2048&quot;;</span><br><span class="line">                                padding = &quot;pss&quot;;</span><br><span class="line">                                key-name-hint = &quot;dev&quot;;</span><br><span class="line">                                sign-images = &quot;loadables&quot;;</span><br><span class="line">                        &#125;;</span><br><span class="line"></span><br><span class="line">                        /* - run linux on cpu0</span><br><span class="line">                         * - it is brought up by amp(that run on U-Boot)</span><br><span class="line">                         * - it is boot entry depends on U-Boot</span><br><span class="line">                         */</span><br><span class="line">                        linux &#123;</span><br><span class="line">                                description  = &quot;linux-os&quot;;</span><br><span class="line">                                arch         = &quot;arm64&quot;;</span><br><span class="line">                                cpu          = &lt;0x000&gt;;</span><br><span class="line">                                thumb        = &lt;0&gt;;</span><br><span class="line">                                hyp          = &lt;0&gt;;</span><br><span class="line">                                udelay       = &lt;0&gt;;</span><br><span class="line">                        &#125;;</span><br><span class="line">                &#125;;</span><br><span class="line">        &#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>这个设备树描述文件用于生成一个 FIT（Flattened Image Tree）格式的映像文件，该文件可以包含多个固件、配置和元数据。FIT 文件格式通常用于嵌入式系统中，特别是在使用 U-Boot 引导加载器的系统中，以便管理多核处理器或多个固件的加载和执行。让我们详细解释一下这个设备树的结构和每个部分的作用。</p>
+<h3 id="1-文件头部"><a class="markdownIt-Anchor" href="#1-文件头部"></a> 1. 文件头部</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">COPY/dts-v1/;</span><br><span class="line">/ &#123;</span><br><span class="line">    description = &quot;FIT source file for rockchip AMP&quot;;</span><br><span class="line">    #address-cells = &lt;1&gt;;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>/dts-v1/</strong>: 声明设备树的版本。</li>
+<li><strong>description</strong>: 提供这个 FIT 文件的简要描述，表明它是为 Rockchip AMP（Asymmetric Multiprocessing）使用的。</li>
+<li><strong>#address-cells = &lt;1&gt;;</strong>: 定义地址单元的大小为 1，通常在定义节点的地址时使用。</li>
+</ul>
+<h3 id="2-images-节点"><a class="markdownIt-Anchor" href="#2-images-节点"></a> 2. <code>images</code> 节点</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">COPYimages &#123;</span><br><span class="line">    /*amp1 &#123;</span><br><span class="line">        description  = &quot;bare-mental-core1&quot;;</span><br><span class="line">        data         = /incbin/(&quot;cpu1.bin&quot;);</span><br><span class="line">        type         = &quot;firmware&quot;;</span><br><span class="line">        compression  = &quot;none&quot;;</span><br><span class="line">        arch         = &quot;arm&quot;;</span><br><span class="line">        cpu          = &lt;0x100&gt;;</span><br><span class="line">        thumb        = &lt;0&gt;;</span><br><span class="line">        hyp          = &lt;0&gt;;</span><br><span class="line">        load         = &lt;0x01800000&gt;;</span><br><span class="line">        udelay       = &lt;10000&gt;;</span><br><span class="line">        hash &#123;</span><br><span class="line">            algo = &quot;sha256&quot;;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>images</strong>: 包含所有固件映像的节点，每个映像表示要加载到特定处理器核心的一个固件。</li>
+<li><strong>amp1, amp2, amp3</strong>: 这三个节点（其中 amp1 和 amp2 被注释掉了）代表三个不同的固件映像，分别用于不同的处理器核心。
+<ul>
+<li><strong>description</strong>: 对应映像的描述。</li>
+<li><strong>data</strong>: 通过 <code>/incbin/(&quot;filename&quot;)</code> 指令包含一个二进制文件，这里是 <code>cpu1.bin</code>、<code>cpu2.bin</code> 和 <code>cpu3.bin</code>。</li>
+<li><strong>type</strong>: 映像的类型，这里是 <code>&quot;firmware&quot;</code>，表示这是一个固件映像。</li>
+<li><strong>compression</strong>: 指定映像的压缩类型，这里为 <code>&quot;none&quot;</code>，即未压缩。</li>
+<li><strong>arch</strong>: 目标架构，这里是 <code>&quot;arm&quot;</code>。</li>
+<li><strong>cpu</strong>: 指定目标 CPU 核心，这里 <code>0x100</code>、<code>0x200</code>、<code>0x300</code> 表示不同的 CPU 核心。</li>
+<li><strong>thumb</strong>: 指定是否使用 ARM 的 Thumb 模式，这里为 <code>&lt;0&gt;</code> 表示不使用。</li>
+<li><strong>hyp</strong>: 指定是否使用 Hypervisor 模式，这里为 <code>&lt;0&gt;</code> 表示不使用。</li>
+<li><strong>load</strong>: 指定映像在内存中的加载地址，例如 <code>0x01800000</code>。</li>
+<li><strong>udelay</strong>: 延迟加载时间，单位是微秒。</li>
+<li><strong>hash</strong>: 包含一个哈希节点，用于校验数据的完整性，<code>algo</code> 指定了使用的哈希算法，比如 <code>sha256</code>。</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-configurations-节点"><a class="markdownIt-Anchor" href="#3-configurations-节点"></a> 3. <code>configurations</code> 节点</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">COPYconfigurations &#123;</span><br><span class="line">    default = &quot;conf&quot;;</span><br><span class="line">    conf &#123;</span><br><span class="line">        description = &quot;Rockchip AMP images&quot;;</span><br><span class="line">        rollback-index = &lt;0x0&gt;;</span><br><span class="line">        loadables = &quot;amp3&quot;;</span><br><span class="line"></span><br><span class="line">        signature &#123;</span><br><span class="line">            algo = &quot;sha256,rsa2048&quot;;</span><br><span class="line">            padding = &quot;pss&quot;;</span><br><span class="line">            key-name-hint = &quot;dev&quot;;</span><br><span class="line">            sign-images = &quot;loadables&quot;;</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">        linux &#123;</span><br><span class="line">            description  = &quot;linux-os&quot;;</span><br><span class="line">            arch         = &quot;arm64&quot;;</span><br><span class="line">            cpu          = &lt;0x000&gt;;</span><br><span class="line">            thumb        = &lt;0&gt;;</span><br><span class="line">            hyp          = &lt;0&gt;;</span><br><span class="line">            udelay       = &lt;0&gt;;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>
+<dl>
+<dt>configurations</dt>
+<dd>包含配置的节点，用于定义如何加载和管理多个映像。</dd>
+</dl>
+<ul>
+<li><strong>default = “conf”;</strong>: 指定默认的配置节点是 <code>conf</code>。</li>
+<li><strong>conf</strong>: 这是一个配置节点，定义了如何加载和管理映像。
+<ul>
+<li><strong>description</strong>: 配置的描述，这里为 “Rockchip AMP images”。</li>
+<li><strong>rollback-index</strong>: 回滚索引，用于版本管理，通常用于确定是否需要回滚到以前的配置。</li>
+<li><strong>loadables</strong>: 指定要加载的映像列表，当前仅加载 <code>amp3</code>，但注释部分显示也可以加载 <code>amp1</code> 和 <code>amp2</code>。</li>
+<li><strong>signature</strong>: 包含签名信息，用于验证映像的完整性和来源。
+<ul>
+<li><strong>algo</strong>: 指定签名算法，这里是 <code>&quot;sha256,rsa2048&quot;</code>，表示使用 SHA-256 和 RSA 2048 位的组合。</li>
+<li><strong>padding</strong>: 指定签名的填充方式，这里是 <code>&quot;pss&quot;</code>。</li>
+<li><strong>key-name-hint</strong>: 签名使用的密钥名称提示，这里是 <code>&quot;dev&quot;</code>。</li>
+<li><strong>sign-images</strong>: 指定要签名的映像，这里签名的是 <code>&quot;loadables&quot;</code>，即 amp3 映像。</li>
+</ul>
+</li>
+<li><strong>linux</strong>: 定义了关于 Linux 操作系统的配置信息。
+<ul>
+<li><strong>description</strong>: 描述是 <code>&quot;linux-os&quot;</code>。</li>
+<li><strong>arch</strong>: 指定目标架构，这里是 <code>&quot;arm64&quot;</code>。</li>
+<li><strong>cpu</strong>: 指定运行 Linux 的 CPU 核心，这里是 <code>&lt;0x000&gt;</code>。</li>
+<li><strong>thumb</strong>: 指定是否使用 ARM 的 Thumb 模式，这里为 <code>&lt;0&gt;</code> 表示不使用。</li>
+<li><strong>hyp</strong>: 指定是否使用 Hypervisor 模式，这里为 <code>&lt;0&gt;</code> 表示不使用。</li>
+<li><strong>udelay</strong>: 加载后的延迟时间，通常为 0。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="总结"><a class="markdownIt-Anchor" href="#总结"></a> 总结</h3>
+<ul>
+<li><strong>FIT 文件</strong> 通过 <code>images</code> 节点打包多个固件或映像文件，并通过 <code>configurations</code> 节点指定如何加载和管理这些映像。</li>
+<li><strong>多核管理</strong>: 这类配置特别适用于多核系统（AMP），每个核心可以加载和运行不同的固件或裸机程序。</li>
+<li><strong>签名和安全性</strong>: 使用 <code>signature</code> 节点来签名和验证加载的映像，以确保安全性和完整性。</li>
+<li><strong>灵活的配置</strong>: <code>configurations</code> 节点允许用户根据不同需求配置和加载不同的映像。</li>
+</ul>
+<p>通过上述解释，你可以理解 FIT 文件如何用于多核处理器的固件加载和管理，以及如何通过设备树描述这种复杂的启动场景。</p>
+<p>上面的fit 设备树总共有三个节点，分别对应amp0、amp1和amp2，默认情况下打开的是amp3这一个核心，如果想要打开另外两个只需要打开对应的注释即可。</p>
+<p>除此之外还有另外一个内核设备树要改，不能只打开这里的注释，还需要关掉Linux CPU，不然也是无法生效的，具体的设备树为</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">COPYvi kernel/arch/arm64/boot/dts/rockchip/rk3568-evb1-ddr4-v10-linux-amp.dts</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409051029277.png" alt="image-20240831133651193" />image-20240831133651193</p>
+<p>默认情况下是打开了三个Linux核心，分别为CPU0 1 2，而CPU3被用在裸机，所以应用了delete node，删掉了cpu3，如果想要改为1个Linux核心，三个裸机核心，可以改成这个样子：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409051029187.png" alt="image-20240831134320679" />image-20240831134320679</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409051029108.png" alt="image-20240831134306646" />image-20240831134306646</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409051029471.png" alt="image-20240831134245402" />image-20240831134245402</p>
+<p>现在已经确认裸机核心和Linux核心如何修改了，那他具体是如何运转的呢？我该如何利用这个裸机核心呢？这个裸机核心都能用来做什么呢？</p>
+<h1 id="裸机核心开发"><a class="markdownIt-Anchor" href="#裸机核心开发"></a> 裸机核心开发</h1>
+<p>在这段文档中，开发板上的各种硬件外设被测试和验证，包括GPIO、PWM、UART、SPI、以及多核控制。这些测试主要用于确保嵌入式系统中的不同外设功能正常工作。以下是对文档中各个部分的整理和简要说明：</p>
+<h3 id="1-gpio-测试"><a class="markdownIt-Anchor" href="#1-gpio-测试"></a> 1. GPIO 测试</h3>
+<ul>
+<li>
+<p><strong>目的</strong>: 测试GPIO的功能，通过控制LED灯的亮灭来验证。</p>
+</li>
+<li>
+<p>关键代码</p>
+<p>:</p>
+<ul>
+<li><code>HAL_PINCTRL_SetParam</code>: 配置GPIO引脚的复用功能。</li>
+<li><code>HAL_GPIO_SetPinDirection</code>: 设置GPIO引脚为输出模式。</li>
+<li><code>HAL_GPIO_GetPinLevel</code> 和 <code>HAL_GPIO_SetPinLevel</code>: 获取和设置GPIO引脚的电平状态。</li>
+<li><strong>循环逻辑</strong>: 每隔1秒读取GPIO引脚的状态并翻转其电平状态，达到闪烁LED的效果。</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-pwm-测试"><a class="markdownIt-Anchor" href="#2-pwm-测试"></a> 2. PWM 测试</h3>
+<ul>
+<li>
+<p><strong>目的</strong>: 使用PWM控制LED灯实现呼吸灯效果。</p>
+</li>
+<li>
+<p>关键代码</p>
+<p>:</p>
+<ul>
+<li><code>HAL_PWM_Init</code>: 初始化PWM控制器。</li>
+<li><code>HAL_IOMUX_PWM0_Config</code>: 配置PWM0的IOMUX。</li>
+<li><code>HAL_PWM_SetConfig</code> 和 <code>HAL_PWM_Enable</code>: 配置PWM信号的周期和占空比，并使能PWM输出。</li>
+<li><strong>呼吸灯效果</strong>: 通过增加和减少PWM的占空比，实现灯光的渐亮和渐暗效果。</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-uart-测试"><a class="markdownIt-Anchor" href="#3-uart-测试"></a> 3. UART 测试</h3>
+<ul>
+<li>
+<p><strong>目的</strong>: 测试UART9的发送和接收功能。</p>
+</li>
+<li>
+<p><strong>硬件连接</strong>: 使用两块开发板进行串口通信，或者使用USB转TTL模块进行电脑与开发板间的通信。</p>
+</li>
+<li>
+<p>关键代码</p>
+<p>:</p>
+<ul>
+<li><code>HAL_UART_Init</code>: 初始化UART9配置。</li>
+<li><code>HAL_UART_SerialOut</code> 和 <code>HAL_UART_SerialIn</code>: 通过UART发送和接收数据。</li>
+<li><code>uart9_isr</code>: 中断处理函数，处理UART接收数据的中断。</li>
+<li><strong>测试逻辑</strong>: 定期发送数据并接收返回的数据，进行显示和验证。</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-spi-测试"><a class="markdownIt-Anchor" href="#4-spi-测试"></a> 4. SPI 测试</h3>
+<ul>
+<li>
+<p><strong>目的</strong>: 通过回环测试验证SPI0的发送和接收功能。</p>
+</li>
+<li>
+<p><strong>硬件连接</strong>: 短接SPI0的MOSI和MISO引脚。</p>
+</li>
+<li>
+<p>关键代码</p>
+<p>:</p>
+<ul>
+<li><code>HAL_SPI_Init</code>: 初始化SPI设备。</li>
+<li><code>demo_spi_transfer</code>: 进行SPI数据的发送和接收。</li>
+<li><strong>回环测试</strong>: 发送一组数据，然后通过MISO接收并验证数据的正确性。</li>
+</ul>
+</li>
+</ul>
+<h3 id="5-开关核测试"><a class="markdownIt-Anchor" href="#5-开关核测试"></a> 5. 开关核测试</h3>
+<ul>
+<li>
+<p><strong>目的</strong>: 通过控制Linux中的命令，启用或关闭特定的CPU核，运行或停止裸机程序。</p>
+</li>
+<li>
+<p>关键配置</p>
+<p>:</p>
+<ul>
+<li><code>boot-on</code>: 设置为1时，系统启动时自动运行裸机程序；设置为0时，开机不启动裸机程序。</li>
+</ul>
+</li>
+<li>
+<p>操作命令</p>
+<p>:</p>
+<ul>
+<li><code>echo off 0x300 &gt; /sys/rk_amp/boot_cpu</code>: 关闭已启动的核。</li>
+<li><code>echo on 0x300 &gt; /sys/rk_amp/boot_cpu</code>: 启动已关闭的核。</li>
+<li><code>echo status 0x300 &gt; /sys/rk_amp/boot_cpu</code>: 查看核的当前状态。</li>
+</ul>
+</li>
+</ul>
+<p>这些测试和操作演示了如何在iTOP-3568开发板上使用HAL库与硬件外设交互。这些代码片段和步骤为开发人员提供了调试和验证开发板功能的基础工具。</p>
+<h3 id="6总结"><a class="markdownIt-Anchor" href="#6总结"></a> 6.总结</h3>
+<p>每个裸机代码测试其实就是写了一个库而已，具体在/home/topeet/rk356x_amp/hal/project/rk3568/src目录，这里田创建了一个topeet_demo文件夹，具体如下所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409051029222.png" alt="image-20240831140057163" />image-20240831140057163</p>
+<p>而在/home/topeet/rk356x_amp/hal/project/common/GCC/Cortex-A.mk配置文件中，加入了对应的目录，具体如下所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409051029213.png" alt="image-20240831140026103" />image-20240831140026103</p>
+<p>然后来看这个主程序：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409051029403.png" alt="image-20240831140240178" />image-20240831140240178</p>
+<p>这个主程序其实就是裸机核心要运行的，我们要看的代码呢，在这六行：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409051029722.png" alt="image-20240831140447549" />image-20240831140447549</p>
+<p>这里的四个测试是田自己加的，取消注释就代表着启动对应得测试，行了，AMP裸机运行的框架就讲解到这里，然后来思考一下RTT，RTT算是一个实时系统，当然他肯定也是运行在裸机核心上面的，但他的运行效果是怎样的呢，他这个系统又能有什么功能呢，这个不是很清楚，先去哔哩哔哩上学习一下具体的现象，对他有个大致的认识。</p>
+<h1 id="rt-thread编译"><a class="markdownIt-Anchor" href="#rt-thread编译"></a> RT-Thread编译</h1>
+<p>首先要确保一个CPU核心跑裸机核心，另外三个跑Linux，也就是默认的SDK配置，然后编译</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">COPY./build.sh rtthread 3</span><br><span class="line">./build.sh ampimg</span><br><span class="line">./build.sh updateimg</span><br></pre></td></tr></table></figure>
+<p>编译完成之后，然后在裸机的Uart4打印具体如下所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409051029869.png" alt="image-20240831143351828" />image-20240831143351828</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">COPYscons --exec-path=&quot;aarch64-linux-gnu-&quot;</span><br></pre></td></tr></table></figure>
+<p>风火轮测试视频：</p>
+<p><a target="_blank" rel="noopener" href="https://www.douyin.com/video/7343275757080153356">https://www.douyin.com/video/7343275757080153356</a></p>
+<p>rtthread官方推文</p>
+<p><a target="_blank" rel="noopener" href="https://www.elecfans.com/d/2408719.html">https://www.elecfans.com/d/2408719.html</a></p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2024/08/29/02_%E7%91%9E%E8%8A%AF%E5%BE%AE/19_%E7%91%9E%E8%8A%AF%E5%BE%AEAMP%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2024/08/30/07_%E5%B0%8F%E6%8A%80%E5%B7%A7/16_%E8%AE%BE%E5%A4%87%E6%A0%91overlay/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            设备树overlay
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2024/08/29/07_%E5%B0%8F%E6%8A%80%E5%B7%A7/15_Linux%E7%B3%BB%E7%BB%9F%E8%87%AA%E5%8A%A8%E6%8D%A2%E6%BA%90/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">Linux系统自动换源</div>
+      </a>
+    
+  </nav>
+
+  
+   
+  
+   
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2015-2024
+        <i class="ri-heart-fill heart_icon"></i> chai
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="热爱学习的未来酱"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/%E7%94%9F%E6%B4%BB">生活</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE">瑞芯微</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/Linux%E5%AD%A6%E4%B9%A0">Linux学习</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/%E8%AF%BB%E4%B9%A6">读书</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/%E9%A9%B1%E5%8A%A8%E5%AD%A6%E4%B9%A0">驱动学习</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/C%E8%AF%AD%E8%A8%80%E9%AB%98%E7%BA%A7%E5%AD%A6%E4%B9%A0">C语言高级学习</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/%E5%B0%8F%E6%8A%80%E5%B7%A7">小技巧</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/shell%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0">shell编程学习</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/PCB%E5%AD%A6%E4%B9%A0">PCB学习</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/%E9%9F%B3%E8%A7%86%E9%A2%91%E5%AD%A6%E4%B9%A0">音视频学习</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="52"
+        src="//music.163.com/outchain/player?type=2&id=22707008&auto=0&height=32"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
+    
+    
+
+  </div>
+</body>
+
+</html>

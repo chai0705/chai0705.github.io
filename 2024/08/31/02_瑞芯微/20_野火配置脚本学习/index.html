@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+  
+
+    <head>
+      <meta charset="utf-8" />
+        
+      <meta name="description" content="永远年轻，永远热泪盈眶" />
+      
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>野火配置脚本学习 |  热爱学习的未来酱</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      
+<link rel="stylesheet" href="/css/fonts/remixicon.css">
+
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    <link rel="alternate" href="/atom.xml" title="热爱学习的未来酱" type="application/atom+xml">
+</head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-02_瑞芯微/20_野火配置脚本学习"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  野火配置脚本学习
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2024/08/31/02_%E7%91%9E%E8%8A%AF%E5%BE%AE/20_%E9%87%8E%E7%81%AB%E9%85%8D%E7%BD%AE%E8%84%9A%E6%9C%AC%E5%AD%A6%E4%B9%A0/" class="article-date">
+  <time datetime="2024-08-31T09:17:03.000Z" itemprop="datePublished">2024-08-31</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE/">瑞芯微</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">6.5k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">27 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="函数内容解析"><a class="markdownIt-Anchor" href="#函数内容解析"></a> 函数内容解析</h1>
+<h2 id="board_info函数"><a class="markdownIt-Anchor" href="#board_info函数"></a> board_info函数</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br></pre></td><td class="code"><pre><span class="line">COPYboard_info() &#123;</span><br><span class="line">    case $1 in</span><br><span class="line">        # 如果输入参数为 &#x27;0000&#x27;</span><br><span class="line">        0000)</span><br><span class="line">            # 设置板子的名称为 &#x27;LubanCat-1&#x27;</span><br><span class="line">            BOARD_NAME=&#x27;LubanCat-1&#x27;</span><br><span class="line">            # 设置设备树二进制文件名称</span><br><span class="line">            BOARD_DTB=&#x27;rk3566-lubancat-1.dtb&#x27;</span><br><span class="line">            # 设置环境变量文件名称</span><br><span class="line">            UENV_TXT=&#x27;uEnvLubanCat1.txt&#x27;</span><br><span class="line">            # 设置CPU类型</span><br><span class="line">            BOARD_CPU=&#x27;rk3566&#x27;</span><br><span class="line">            # 设置板子的描述信息</span><br><span class="line">            BOARD_MESSAGE=&quot;LubanCat-1是野火科技推出的基于RockChip-RK3566设计的一款低功耗、高性能单板电脑，保留了完善的硬件资源，充分考虑了用户的使用需求，在成本优化的同时，引出了尽可能多的外设功能。\n\n\</span><br><span class="line">BOARD_NAME : $BOARD_NAME\n\</span><br><span class="line">BOARD_DTB : $BOARD_DTB\n\</span><br><span class="line">UENV_TXT : $UENV_TXT\n\</span><br><span class="line">BOARD_CPU : $BOARD_CPU\n\</span><br><span class="line">            &quot;</span><br><span class="line">            ;;</span><br><span class="line">        # 如果输入参数为 &#x27;0100&#x27;</span><br><span class="line">        0100)</span><br><span class="line">            BOARD_NAME=&#x27;LubanCat-1N&#x27;</span><br><span class="line">            BOARD_DTB=&#x27;rk3566-lubancat-1n.dtb&#x27;</span><br><span class="line">            UENV_TXT=&#x27;uEnvLubanCat1N.txt&#x27;</span><br><span class="line">            BOARD_CPU=&#x27;rk3566&#x27;</span><br><span class="line">            BOARD_MESSAGE=&quot;LubanCat-1N是野火科技推出的基于RockChip RK3566设计的一款低功耗、高性能单板电脑， 保留了完善的硬件资源，充分考虑了用户的使用需求，在成本优化的同时，引出了尽可能多的外设功能\n\n\</span><br><span class="line">BOARD_NAME : $BOARD_NAME\n\</span><br><span class="line">BOARD_DTB : $BOARD_DTB\n\</span><br><span class="line">UENV_TXT : $UENV_TXT\n\</span><br><span class="line">BOARD_CPU : $BOARD_CPU\n\</span><br><span class="line">            &quot;</span><br><span class="line">            ;;</span><br><span class="line">        # 如果输入参数为 &#x27;0200&#x27;</span><br><span class="line">        0200)</span><br><span class="line">            BOARD_NAME=&#x27;LubanCat-0N&#x27;</span><br><span class="line">            BOARD_DTB=&#x27;rk3566-lubancat-0.dtb&#x27;</span><br><span class="line">            UENV_TXT=&#x27;uEnvLubanCatZN.txt&#x27;</span><br><span class="line">            BOARD_CPU=&#x27;rk3566&#x27;</span><br><span class="line">            BOARD_MESSAGE=&quot;LubanCat-Zero 是野火科技推出的基于RockChip RK3566设计的一款低功耗、高性能Mini板卡， 在保留的硬件资源优中选优，充分考虑了用户的使用需求，极致成本优化，保留核心功能\n\n\</span><br><span class="line">BOARD_NAME : $BOARD_NAME\n\</span><br><span class="line">BOARD_DTB : $BOARD_DTB\n\</span><br><span class="line">UENV_TXT : $UENV_TXT\n\</span><br><span class="line">BOARD_CPU : $BOARD_CPU\n\</span><br><span class="line">            &quot;</span><br><span class="line">            ;;</span><br><span class="line">        # 如果输入参数为 &#x27;0300&#x27;</span><br><span class="line">        0300)</span><br><span class="line">            BOARD_NAME=&#x27;LubanCat-0W&#x27;</span><br><span class="line">            BOARD_DTB=&#x27;rk3566-lubancat-0.dtb&#x27;</span><br><span class="line">            UENV_TXT=&#x27;uEnvLubanCatZW.txt&#x27;</span><br><span class="line">            BOARD_CPU=&#x27;rk3566&#x27;</span><br><span class="line">            BOARD_MESSAGE=&quot;LubanCat-Zero 是野火科技推出的基于RockChip RK3566设计的一款低功耗、高性能Mini板卡， 在保留的硬件资源优中选优，充分考虑了用户的使用需求，极致成本优化，保留核心功能\n\n\</span><br><span class="line">BOARD_NAME : $BOARD_NAME\n\</span><br><span class="line">BOARD_DTB : $BOARD_DTB\n\</span><br><span class="line">UENV_TXT : $UENV_TXT\n\</span><br><span class="line">BOARD_CPU : $BOARD_CPU\n\</span><br><span class="line">            &quot;</span><br><span class="line">            ;;</span><br><span class="line">        # 如果输入参数为 &#x27;0400&#x27;</span><br><span class="line">        0400)</span><br><span class="line">            BOARD_NAME=&#x27;LubanCat-2&#x27;</span><br><span class="line">            BOARD_DTB=&#x27;rk3568-lubancat-2.dtb&#x27;</span><br><span class="line">            UENV_TXT=&#x27;uEnvLubanCat2.txt&#x27;</span><br><span class="line">            BOARD_CPU=&#x27;rk3568&#x27;</span><br><span class="line">            BOARD_MESSAGE=&quot;LubanCat-2是野火科技基于RockChip RK3568设计的一款低功耗、高性能单板电脑,在引出高使用率较高接口的同时删减了部分使用率较低的接口和外设， 使板卡面积显著减小，而预留的USB、MINI PCI-E、M.2等通用接口，又进一步扩大了板卡的使用场景， 小小身躯也能迸发出极大的性能\n\n\</span><br><span class="line">BOARD_NAME : $BOARD_NAME\n\</span><br><span class="line">BOARD_DTB : $BOARD_DTB\n\</span><br><span class="line">UENV_TXT : $UENV_TXT\n\</span><br><span class="line">BOARD_CPU : $BOARD_CPU\n\</span><br><span class="line">            &quot;</span><br><span class="line">            ;;</span><br><span class="line">        # 如果输入参数为 &#x27;0402&#x27;</span><br><span class="line">        0402)</span><br><span class="line">            BOARD_NAME=&#x27;LubanCat-2-V1&#x27;</span><br><span class="line">            BOARD_DTB=&#x27;rk3568-lubancat-2-v1.dtb&#x27;</span><br><span class="line">            UENV_TXT=&#x27;uEnvLubanCat2-V1.txt&#x27;</span><br><span class="line">            BOARD_CPU=&#x27;rk3568&#x27;</span><br><span class="line">            BOARD_MESSAGE=&quot;LubanCat-2(V1)是野火科技基于RockChip RK3568设计的一款低功耗、高性能单板电脑,在引出高使用率较高接口的同时删减了部分使用率较低的接口和外设， 使板卡面积显著减小，而预留的USB、MINI PCI-E、M.2等通用接口，又进一步扩大了板卡的使用场景， 小小身躯也能迸发出极大的性能,与原版本改进了休眠唤醒的功能\n\n\</span><br><span class="line">BOARD_NAME : $BOARD_NAME\n\</span><br><span class="line">BOARD_DTB : $BOARD_DTB\n\</span><br><span class="line">UENV_TXT : $UENV_TXT\n\</span><br><span class="line">BOARD_CPU : $BOARD_CPU\n\</span><br><span class="line">            &quot;</span><br><span class="line">            ;;</span><br><span class="line">        # 如果输入参数为 &#x27;0403&#x27;</span><br><span class="line">        0403)</span><br><span class="line">            BOARD_NAME=&#x27;LubanCat-2-V2&#x27;</span><br><span class="line">            BOARD_DTB=&#x27;rk3568-lubancat-2-v2.dtb&#x27;</span><br><span class="line">            UENV_TXT=&#x27;uEnvLubanCat2-V2.txt&#x27;</span><br><span class="line">            BOARD_CPU=&#x27;rk3568&#x27;</span><br><span class="line">            BOARD_MESSAGE=&quot;LubanCat-2-V2是野火科技基于RockChip RK3568设计的一款低功耗、高性能单板电脑,在引出高使用率较高接口的同时删减了部分使用率较低的接口和外设， 使板卡面积显著减小，而预留的USB、MINI PCI-E、M.2等通用接口，又进一步扩大了板卡的使用场景， 小小身躯也能迸发出极大的性能,与原版本改进了休眠唤醒的功能\n\n\</span><br><span class="line">BOARD_NAME : $BOARD_NAME\n\</span><br><span class="line">BOARD_DTB : $BOARD_DTB\n\</span><br><span class="line">UENV_TXT : $UENV_TXT\n\</span><br><span class="line">BOARD_CPU : $BOARD_CPU\n\</span><br><span class="line">            &quot;</span><br><span class="line">            ;;</span><br><span class="line">        # 如果输入参数为 &#x27;0500&#x27; 或 &#x27;0600&#x27;</span><br><span class="line">        0500 |\</span><br><span class="line">        0600)</span><br><span class="line">            BOARD_NAME=&#x27;LubanCat-2N&#x27;</span><br><span class="line">            BOARD_DTB=&#x27;rk3568-lubancat-2n.dtb&#x27;</span><br><span class="line">            UENV_TXT=&#x27;uEnvLubanCat2N.txt&#x27;</span><br><span class="line">            BOARD_CPU=&#x27;rk3568&#x27;</span><br><span class="line">            BOARD_MESSAGE=&quot;LubanCat-2N是野火科技基于RockChip RK3568设计的一款低功耗、高性能单板电脑,在引出高使用率较高接口的同时删减了部分使用率较低的接口和外设， 使板卡面积显著减小，而预留的USB、MINI PCI-E、M.2等通用接口，又进一步扩大了板卡的使用场景， 小小身躯也能迸发出极大的性能\n\n\</span><br><span class="line">BOARD_NAME : $BOARD_NAME\n\</span><br><span class="line">BOARD_DTB : $BOARD_DTB\n\</span><br><span class="line">UENV_TXT : $UENV_TXT\n\</span><br><span class="line">BOARD_CPU : $BOARD_CPU\n\</span><br><span class="line">            &quot;</span><br><span class="line">            ;;</span><br><span class="line">        # 如果输入参数为 &#x27;0700&#x27;</span><br><span class="line">        0700)</span><br><span class="line">            BOARD_NAME=&#x27;LubanCat-2IO&#x27;</span><br><span class="line">            BOARD_DTB=&#x27;rk3568-lubancat-2io.dtb&#x27;</span><br><span class="line">            UENV_TXT=&#x27;uEnvLubanCat2IO.txt&#x27;</span><br><span class="line">            BOARD_CPU=&#x27;rk3568&#x27;</span><br><span class="line">            BOARD_MESSAGE=&quot;LubanCat-2IO 是野火科技推出的基于RockChip RK3566设计的一款低功耗、高性能单板电脑， 保留了完善的硬件资源，充分考虑了用户的使用需求，在成本优化的同时，引出了尽可能多的外设功能\n\n\</span><br><span class="line">BOARD_NAME : $BOARD_NAME\n\</span><br><span class="line">BOARD_DTB : $BOARD_DTB\n\</span><br><span class="line">UENV_TXT : $UENV_TXT\n\</span><br><span class="line">BOARD_CPU : $BOARD_CPU\n\</span><br><span class="line">            &quot;</span><br><span class="line">            ;;</span><br><span class="line">    esac</span><br><span class="line"></span><br><span class="line">    # 将选择的板子信息输出到调试文件中</span><br><span class="line">    echo &quot;BOARD_NAME:&quot;$BOARD_NAME &gt;&gt; $debug_file</span><br><span class="line">    echo &quot;BOARD_DTB:&quot;$BOARD_DTB &gt;&gt; $debug_file</span><br><span class="line">    echo &quot;UENV_TXT:&quot;$UENV_TXT &gt;&gt; $debug_file</span><br><span class="line">    echo &quot;BOARD_CPU:&quot;$BOARD_CPU &gt;&gt; $debug_file</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="详细解析"><a class="markdownIt-Anchor" href="#详细解析"></a> 详细解析</h3>
+<ol>
+<li>
+<p><strong><code>board_info()</code> 函数</strong>: 这个函数用于根据输入的参数选择不同的板卡配置。每个配置都包括板卡的名称、设备树二进制文件、环境变量文件名和CPU类型。</p>
+</li>
+<li>
+<p><strong><code>case $1 in</code> 语句</strong>: 根据传入的参数 <code>$1</code>，执行不同的分支。不同的参数值代表不同的板卡类型。</p>
+</li>
+<li>
+<p>各个分支的设置</p>
+<p>:</p>
+<ul>
+<li>每个分支代表一种特定型号的板卡。</li>
+<li>在每个分支中，设置对应板卡的名称 (<code>BOARD_NAME</code>)、设备树文件 (<code>BOARD_DTB</code>)、环境变量文件 (<code>UENV_TXT</code>)、CPU类型 (<code>BOARD_CPU</code>) 以及相关描述信息 (<code>BOARD_MESSAGE</code>)。</li>
+</ul>
+</li>
+<li>
+<p><strong>调试信息输出</strong>: 函数的最后，选择的板卡信息会被写入到 <code>debug_file</code> 中，方便调试和日志记录。</p>
+</li>
+</ol>
+<h3 id="用法"><a class="markdownIt-Anchor" href="#用法"></a> 用法</h3>
+<p>当你需要根据不同的板卡选择配置时，只需调用 <code>board_info()</code> 函数，并传入相应的参数（如 <code>0000</code>、<code>0100</code> 等），函数会自动设置对应的配置，并输出调试信息到文件中。</p>
+<h2 id="函数get_index"><a class="markdownIt-Anchor" href="#函数get_index"></a> 函数get_index</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">COPYget_index()&#123;</span><br><span class="line">    # 接收第一个参数作为ADC的原始值</span><br><span class="line">    ADC_RAW=$1</span><br><span class="line">    # 初始化INDEX变量为0xff，表示一个默认的无效值</span><br><span class="line">    INDEX=0xff</span><br><span class="line"></span><br><span class="line">    # 判断全局变量ADC_voltage_scale是否大于1</span><br><span class="line">    if [ $(echo &quot;$ADC_voltage_scale &gt; 1&quot; | bc) -eq 1 ] ; then</span><br><span class="line">        # 如果大于1，设置一组ADC索引数组，表示较低的电压范围</span><br><span class="line">        declare -a ADC_INDEX=(229 344 460 595 732 858 975 1024)</span><br><span class="line">    else</span><br><span class="line">        # 如果小于等于1，设置另一组ADC索引数组，表示较高的电压范围</span><br><span class="line">        declare -a ADC_INDEX=(916 1376 1840 2380 2928 3432 3900 4096)</span><br><span class="line">    fi</span><br><span class="line"></span><br><span class="line">    # 遍历索引数组中的每个元素</span><br><span class="line">    for i in 00 01 02 03 04 05 06 07; do</span><br><span class="line">        # 如果ADC的原始值小于当前索引数组中的值</span><br><span class="line">        if [ $ADC_RAW -lt $&#123;ADC_INDEX[$i]&#125; ]; then</span><br><span class="line">            # 将INDEX设置为当前的索引值</span><br><span class="line">            INDEX=$i</span><br><span class="line">            # 退出循环，因为已经找到对应的范围</span><br><span class="line">            break</span><br><span class="line">        fi	</span><br><span class="line">    done </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="详细解析-2"><a class="markdownIt-Anchor" href="#详细解析-2"></a> 详细解析</h3>
+<ol>
+<li>
+<p><strong><code>get_index()</code> 函数</strong>: 这个函数的作用是根据传入的ADC原始值 <code>ADC_RAW</code>，计算并返回对应的索引值 <code>INDEX</code>。</p>
+</li>
+<li>
+<p><strong><code>ADC_RAW=$1</code></strong>: 从函数的第一个参数中获取ADC的原始值。</p>
+</li>
+<li>
+<p><strong><code>INDEX=0xff</code></strong>: 初始化索引值为0xff，通常用来表示一个无效或未定义的值。</p>
+</li>
+<li>
+<p><code>if [ $(echo &quot;$ADC_voltage_scale &gt; 1&quot; | bc) -eq 1 ]</code></p>
+<p>:</p>
+<ul>
+<li>这段代码判断一个全局变量 <code>ADC_voltage_scale</code> 是否大于1。</li>
+<li>使用 <code>bc</code> 进行浮点数比较，如果 <code>ADC_voltage_scale</code> 大于1，则返回1，否则返回0。</li>
+</ul>
+</li>
+<li>
+<p><code>declare -a ADC_INDEX=...</code></p>
+<p>:</p>
+<ul>
+<li>根据 <code>ADC_voltage_scale</code> 的值，选择不同的ADC索引范围。</li>
+<li>这些索引值表示了ADC原始值和电压之间的对应关系。</li>
+</ul>
+</li>
+<li>
+<p><code>for i in 00 01 02 03 04 05 06 07</code></p>
+<p>:</p>
+<ul>
+<li>遍历预定义的8个索引值，从00到07。</li>
+</ul>
+</li>
+<li>
+<p><code>if [ $ADC_RAW -lt $&#123;ADC_INDEX[$i]&#125; ]; then</code></p>
+<p>:</p>
+<ul>
+<li>这部分代码检查 <code>ADC_RAW</code> 是否小于当前的 <code>ADC_INDEX</code> 值。</li>
+<li>如果是，则设置 <code>INDEX</code> 为当前的索引值，并退出循环。</li>
+</ul>
+</li>
+<li>
+<p><strong><code>break</code></strong>: 一旦找到合适的索引范围，立即退出循环，不再继续检查后续的索引。</p>
+</li>
+</ol>
+<h3 id="用法-2"><a class="markdownIt-Anchor" href="#用法-2"></a> 用法</h3>
+<p>这个函数通常用于将ADC的原始值转换为一个索引值，这个索引值可以代表某种状态或等级（例如电压等级）。函数内部的索引数组 <code>ADC_INDEX</code> 根据 <code>ADC_voltage_scale</code> 的值选择不同的范围，以适应不同的电压测量范围。</p>
+<h2 id="board_id"><a class="markdownIt-Anchor" href="#board_id"></a> board_id</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">COPYboard_id() &#123;</span><br><span class="line">    # 从系统文件中读取ADC的电压比例，并存储在ADC_voltage_scale变量中</span><br><span class="line">    ADC_voltage_scale=$(cat /sys/bus/iio/devices/iio\:device0/in_voltage_scale)</span><br><span class="line">    # 将ADC电压比例的值记录到调试文件中</span><br><span class="line">    echo &quot;ADC_voltage_scale:&quot;$ADC_voltage_scale &gt;&gt; $debug_file</span><br><span class="line"></span><br><span class="line">    # 读取通道2的ADC原始值，并存储在ADC_CH2_RAW变量中</span><br><span class="line">    ADC_CH2_RAW=$(cat /sys/bus/iio/devices/iio\:device0/in_voltage2_raw)</span><br><span class="line">    # 将通道2的ADC原始值记录到调试文件中</span><br><span class="line">    echo &quot;ADC_CH2_RAW:&quot;$ADC_CH2_RAW &gt;&gt; $debug_file</span><br><span class="line"></span><br><span class="line">    # 读取通道3的ADC原始值，并存储在ADC_CH3_RAW变量中</span><br><span class="line">    ADC_CH3_RAW=$(cat /sys/bus/iio/devices/iio\:device0/in_voltage3_raw)</span><br><span class="line">    # 将通道3的ADC原始值记录到调试文件中</span><br><span class="line">    echo &quot;ADC_CH3_RAW:&quot;$ADC_CH3_RAW &gt;&gt; $debug_file</span><br><span class="line"></span><br><span class="line">    # 调用get_index函数，通过传入通道2的ADC原始值来获取对应的索引值</span><br><span class="line">    get_index $ADC_CH2_RAW</span><br><span class="line">    # 将通道2的索引值存储在ADC_CH2_INDEX变量中</span><br><span class="line">    ADC_CH2_INDEX=$INDEX</span><br><span class="line"></span><br><span class="line">    # 调用get_index函数，通过传入通道3的ADC原始值来获取对应的索引值</span><br><span class="line">    get_index $ADC_CH3_RAW</span><br><span class="line">    # 将通道3的索引值存储在ADC_CH3_INDEX变量中</span><br><span class="line">    ADC_CH3_INDEX=$INDEX</span><br><span class="line"></span><br><span class="line">    # 将通道2和通道3的索引值拼接起来，生成一个板子ID，并存储在BOARD_ID变量中</span><br><span class="line">    BOARD_ID=$ADC_CH2_INDEX$ADC_CH3_INDEX</span><br><span class="line">    # 将生成的板子ID记录到调试文件中</span><br><span class="line">    echo &quot;BOARD_ID:&quot;$BOARD_ID &gt;&gt; $debug_file</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="详细解析-3"><a class="markdownIt-Anchor" href="#详细解析-3"></a> 详细解析</h3>
+<ol>
+<li>
+<p><code>ADC_voltage_scale=$(cat /sys/bus/iio/devices/iio:device0/in_voltage_scale)</code></p>
+<p>:</p>
+<ul>
+<li>读取系统中的ADC电压比例（<code>in_voltage_scale</code>），这表示每个ADC单位对应的实际电压值。</li>
+<li>通过读取 <code>/sys/bus/iio/devices/iio:device0/in_voltage_scale</code> 文件来获取该值。</li>
+</ul>
+</li>
+<li>
+<p><code>echo &quot;ADC_voltage_scale:&quot;$ADC_voltage_scale &gt;&gt; $debug_file</code></p>
+<p>:</p>
+<ul>
+<li>将获取到的 <code>ADC_voltage_scale</code> 值记录到调试文件中，以便后续调试和分析。</li>
+</ul>
+</li>
+<li>
+<p><code>ADC_CH2_RAW=$(cat /sys/bus/iio/devices/iio:device0/in_voltage2_raw)</code></p>
+<p>:</p>
+<ul>
+<li>读取ADC通道2的原始数值，表示未经过处理的ADC值。</li>
+</ul>
+</li>
+<li>
+<p><code>ADC_CH3_RAW=$(cat /sys/bus/iio/devices/iio:device0/in_voltage3_raw)</code></p>
+<p>:</p>
+<ul>
+<li>读取ADC通道3的原始数值，和通道2的操作类似。</li>
+</ul>
+</li>
+<li>
+<p><code>get_index $ADC_CH2_RAW</code></p>
+<p>:</p>
+<ul>
+<li>调用 <code>get_index</code> 函数，将通道2的ADC原始值作为参数传入。<code>get_index</code> 函数将计算出对应的索引值。</li>
+<li><code>get_index</code> 函数通过比较 <code>ADC_RAW</code> 值与预定义的ADC索引数组，确定 <code>INDEX</code> 的值。</li>
+</ul>
+</li>
+<li>
+<p><code>ADC_CH2_INDEX=$INDEX</code></p>
+<p>:</p>
+<ul>
+<li>将 <code>get_index</code> 函数计算出来的索引值（<code>INDEX</code>）赋值给 <code>ADC_CH2_INDEX</code>，这个索引值表示通道2的状态或等级。</li>
+</ul>
+</li>
+<li>
+<p><code>get_index $ADC_CH3_RAW</code></p>
+<p>:</p>
+<ul>
+<li>同样的操作对通道3的ADC原始值进行处理，计算出其对应的索引值。</li>
+</ul>
+</li>
+<li>
+<p><code>ADC_CH3_INDEX=$INDEX</code></p>
+<p>:</p>
+<ul>
+<li>将 <code>get_index</code> 函数计算出来的索引值（<code>INDEX</code>）赋值给 <code>ADC_CH3_INDEX</code>，这个索引值表示通道3的状态或等级。</li>
+</ul>
+</li>
+<li>
+<p><code>BOARD_ID=$ADC_CH2_INDEX$ADC_CH3_INDEX</code></p>
+<p>:</p>
+<ul>
+<li>将通道2和通道3的索引值拼接起来，生成一个板子ID <code>BOARD_ID</code>。</li>
+<li>这个ID可以用于标识不同的板子或配置，以适应不同的硬件环境。</li>
+</ul>
+</li>
+<li>
+<p><code>echo &quot;BOARD_ID:&quot;$BOARD_ID &gt;&gt; $debug_file</code></p>
+<p>:</p>
+<ul>
+<li>将生成的板子ID记录到调试文件中，以便后续的调试和确认。</li>
+</ul>
+</li>
+</ol>
+<h3 id="用途"><a class="markdownIt-Anchor" href="#用途"></a> 用途</h3>
+<p>这段代码的主要作用是通过读取ADC通道的原始值，并根据电压比例和预定义的索引数组计算出板子的唯一ID。这在嵌入式系统中非常常见，用于根据硬件配置自动生成配置文件或调试信息。</p>
+<h2 id="get_board_type"><a class="markdownIt-Anchor" href="#get_board_type"></a> get_board_type</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">COPYget_board_type()&#123;</span><br><span class="line">    # 从设备树文件中读取SOC信息，并去除字符串中的空字符（\0）</span><br><span class="line">    SOC=$(cat /proc/device-tree/compatible | tr -d &#x27;\0&#x27;)</span><br><span class="line">    # 从设备树文件中读取板子型号信息，并去除字符串中的空字符（\0）</span><br><span class="line">    BOARD=$(cat /proc/device-tree/model | tr -d &#x27;\0&#x27; )</span><br><span class="line"></span><br><span class="line">    # 判断SOC中是否包含&quot;rk3588s&quot;并且板子型号中包含&quot;LubanCat-4&quot;</span><br><span class="line">    if [[ $SOC == *&quot;rk3588s&quot;* &amp;&amp; $BOARD == *&quot;LubanCat-4&quot;* ]]; then</span><br><span class="line">        # 如果条件满足，设置板子的相关信息</span><br><span class="line">        BOARD_NAME=&#x27;LubanCat-4&#x27;  # 设置板子的名称</span><br><span class="line">        BOARD_DTB=&#x27;rk3588s-lubancat-4.dtb&#x27;  # 设置对应的设备树文件名</span><br><span class="line">        UENV_TXT=&#x27;uEnvLubanCat4.txt&#x27;  # 设置对应的uEnv.txt文件名</span><br><span class="line">        BOARD_CPU=&#x27;rk3588s&#x27;  # 设置板子所使用的CPU型号</span><br><span class="line"></span><br><span class="line">        # 设置板子的详细信息描述，包括名称、设备树文件、uEnv.txt文件以及CPU型号</span><br><span class="line">        BOARD_MESSAGE=&quot;LubanCat-4 是野火科技推出的基于RockChip RK3588S设计的一款低功耗、高性能单板电脑，保留了完善的硬件资源，充分考虑了用户的使用需求，在成本优化的同时，引出了尽可能多的外设功能\n\n\</span><br><span class="line">BOARD_NAME : $BOARD_NAME\n\</span><br><span class="line">BOARD_DTB : $BOARD_DTB\n\</span><br><span class="line">UENV_TXT : $UENV_TXT\n\</span><br><span class="line">BOARD_CPU : $BOARD_CPU\n\</span><br><span class="line">    &quot;</span><br><span class="line">    fi</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="详细解析-4"><a class="markdownIt-Anchor" href="#详细解析-4"></a> 详细解析</h3>
+<ol>
+<li>
+<p><strong><code>SOC=$(cat /proc/device-tree/compatible | tr -d '\0')</code></strong>:</p>
+<ul>
+<li>读取 <code>/proc/device-tree/compatible</code> 文件中的内容，这个文件通常包含当前系统的SoC（系统级芯片）的兼容性信息。</li>
+<li><code>tr -d '\0'</code> 命令用于删除字符串中的所有空字符（<code>\0</code>），以便后续处理。</li>
+</ul>
+</li>
+<li>
+<p><strong><code>BOARD=$(cat /proc/device-tree/model | tr -d '\0' )</code></strong>:</p>
+<ul>
+<li>读取 <code>/proc/device-tree/model</code> 文件中的内容，这个文件通常包含当前设备的型号信息。</li>
+<li>同样使用 <code>tr -d '\0'</code> 命令删除所有空字符。</li>
+</ul>
+</li>
+<li>
+<p><strong><code>if [[ $SOC == \*&quot;rk3588s&quot;\* &amp;&amp; $BOARD == \*&quot;LubanCat-4&quot;\* ]]; then</code></strong>:</p>
+<ul>
+<li>
+<p>这行代码使用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">COPYif</span><br></pre></td></tr></table></figure>
+<p>条件语句判断：</p>
+<ul>
+<li><code>SOC</code> 字符串中是否包含 <code>&quot;rk3588s&quot;</code>。</li>
+<li><code>BOARD</code> 字符串中是否包含 <code>&quot;LubanCat-4&quot;</code>。</li>
+</ul>
+</li>
+<li>
+<p>如果上述两个条件都满足，则执行以下的代码块。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong><code>BOARD_NAME='LubanCat-4'</code></strong>:</p>
+<ul>
+<li>设置板子的名称为 <code>&quot;LubanCat-4&quot;</code>。</li>
+</ul>
+</li>
+<li>
+<p><strong><code>BOARD_DTB='rk3588s-lubancat-4.dtb'</code></strong>:</p>
+<ul>
+<li>设置对应的设备树文件名为 <code>&quot;rk3588s-lubancat-4.dtb&quot;</code>。</li>
+</ul>
+</li>
+<li>
+<p><strong><code>UENV_TXT='uEnvLubanCat4.txt'</code></strong>:</p>
+<ul>
+<li>设置对应的 <code>uEnv.txt</code> 文件名为 <code>&quot;uEnvLubanCat4.txt&quot;</code>。</li>
+</ul>
+</li>
+<li>
+<p><strong><code>BOARD_CPU='rk3588s'</code></strong>:</p>
+<ul>
+<li>设置板子所使用的CPU型号为 <code>&quot;rk3588s&quot;</code>。</li>
+</ul>
+</li>
+<li>
+<p><strong><code>BOARD_MESSAGE=&quot;...&quot;</code></strong>:</p>
+<ul>
+<li>设置板子的详细信息描述，包括板子的名称、设备树文件、uEnv.txt文件以及CPU型号。这个信息通常用于调试输出或用户提示。</li>
+</ul>
+</li>
+</ol>
+<h3 id="用途-2"><a class="markdownIt-Anchor" href="#用途-2"></a> 用途</h3>
+<p>这段代码的主要作用是通过读取系统中的设备树信息，判断当前系统的板子类型和SoC型号，然后根据判断结果设置相应的板子配置。这在嵌入式开发中非常有用，可以根据不同的硬件平台自动选择合适的配置文件和设备树文件，从而使系统适配多种硬件平台。</p>
+<h2 id="do_show_board"><a class="markdownIt-Anchor" href="#do_show_board"></a> do_show_board</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">COPYdo_show_board()&#123;</span><br><span class="line">    # 使用 whiptail 命令创建一个带有标题为 &quot;板卡信息&quot; 的消息框</span><br><span class="line">    # 消息框内容为 BOARD_MESSAGE 变量中的内容</span><br><span class="line">    # 消息框的大小设置为20行高，60列宽</span><br><span class="line">    whiptail --title &quot;板卡信息&quot; --msgbox &quot;$BOARD_MESSAGE&quot; 20 60</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="详细解析-5"><a class="markdownIt-Anchor" href="#详细解析-5"></a> 详细解析</h3>
+<ol>
+<li>
+<p><code>do_show_board()</code></p>
+<p>:</p>
+<ul>
+<li>这是一个函数定义，函数名为 <code>do_show_board</code>，没有参数。当调用此函数时，函数内部的代码将被执行。</li>
+</ul>
+</li>
+<li>
+<p><code>whiptail --title &quot;板卡信息&quot; --msgbox &quot;$BOARD_MESSAGE&quot; 20 60</code></p>
+<p>:</p>
+<ul>
+<li><code>whiptail</code> 是一个在终端中创建对话框的工具，用于在脚本中与用户进行交互。它可以生成消息框、输入框、菜单等。</li>
+<li><code>--title &quot;板卡信息&quot;</code> 指定对话框的标题为 <code>&quot;板卡信息&quot;</code>。</li>
+<li><code>--msgbox &quot;$BOARD_MESSAGE&quot;</code> 创建一个消息框，并显示变量 <code>BOARD_MESSAGE</code> 中的内容。<code>$BOARD_MESSAGE</code> 是之前在脚本中设置的，包含了板卡的详细信息。</li>
+<li><code>20 60</code> 设置消息框的大小，其中 <code>20</code> 是消息框的高度（以行数计），<code>60</code> 是宽度（以字符计）。</li>
+</ul>
+</li>
+</ol>
+<h3 id="用途-3"><a class="markdownIt-Anchor" href="#用途-3"></a> 用途</h3>
+<ul>
+<li><strong>显示板卡信息</strong>：这个函数的主要作用是显示当前板卡的详细信息，例如名称、设备树文件、uEnv.txt文件以及CPU型号。这些信息已经在前面被设置在变量 <code>BOARD_MESSAGE</code> 中。</li>
+<li><strong>用户交互</strong>：<code>whiptail</code> 提供了一种简单的方式在终端中与用户交互，用户通过这个消息框可以阅读板卡的相关信息。</li>
+</ul>
+<h3 id="总结"><a class="markdownIt-Anchor" href="#总结"></a> 总结</h3>
+<p><code>do_show_board</code> 函数通过 <code>whiptail</code> 工具在终端中显示一个带有标题和板卡详细信息的消息框。这个函数在需要向用户展示设备信息时非常有用，尤其是在安装或配置过程中，通过这种方式可以方便用户获取设备的详细信息。</p>
+<h2 id="get_dt_status"><a class="markdownIt-Anchor" href="#get_dt_status"></a> get_dt_status</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">COPYget_dt_status() &#123;</span><br><span class="line">    # 使用 grep 搜索 /boot/uEnv/$UENV_TXT 文件中包含 &quot;lubancat-$1-overlay.&quot; 的行</span><br><span class="line">    # 然后使用 cut 命令提取该行的第一个字符</span><br><span class="line">    DT_STATUS=$(grep &quot;lubancat-$1-overlay.&quot; &quot;/boot/uEnv/$UENV_TXT&quot; | cut -c1)</span><br><span class="line">    </span><br><span class="line">    # 检查 DT_STATUS 是否为 &quot;#&quot;（表示该行被注释掉）或者是否为空</span><br><span class="line">    if [ &quot;$DT_STATUS&quot; == &quot;#&quot; ] || [ -z &quot;$DT_STATUS&quot; ]; then</span><br><span class="line">        # 如果是注释掉的或者为空，表示设备树覆盖配置未启用，设置 flag 为 &quot;OFF&quot;</span><br><span class="line">        flag=&quot;OFF&quot;</span><br><span class="line">        # 输出 0，表示未启用</span><br><span class="line">        echo 0</span><br><span class="line">    else</span><br><span class="line">        # 如果不是注释掉的并且不为空，表示设备树覆盖配置已启用，设置 flag 为 &quot;ON&quot;</span><br><span class="line">        flag=&quot;ON&quot;</span><br><span class="line">        # 输出 1，表示已启用</span><br><span class="line">        echo 1</span><br><span class="line">    fi</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="详细解析-6"><a class="markdownIt-Anchor" href="#详细解析-6"></a> 详细解析</h3>
+<ol>
+<li>
+<p><strong>函数定义</strong>：</p>
+<ul>
+<li><code>get_dt_status() &#123;&#125;</code> 定义了一个名为 <code>get_dt_status</code> 的函数。</li>
+</ul>
+</li>
+<li>
+<p><strong>参数处理</strong>：</p>
+<ul>
+<li><code>&quot;$1&quot;</code> 代表传递给函数的第一个参数，这个参数一般是表示某个具体的设备树覆盖配置的标识符（例如 <code>1</code>, <code>2</code>, <code>3</code> 等）。</li>
+</ul>
+</li>
+<li>
+<p><strong>DT_STATUS=$(grep “lubancat-1−overlay.“”/boot/uEnv/1−overlay.“”/boot/uEnv/UENV_TXT” | cut -c1)</strong>:</p>
+<ul>
+<li><code>grep &quot;lubancat-$1-overlay.&quot; &quot;/boot/uEnv/$UENV_TXT&quot;</code>：在 <code>/boot/uEnv/$UENV_TXT</code> 文件中搜索包含 <code>&quot;lubancat-$1-overlay.&quot;</code> 的行。</li>
+<li><code>cut -c1</code>：提取找到的行的第一个字符。通常，uEnv.txt 文件中某一行如果被注释掉，行首会有一个 <code>#</code>，否则行首字符会是其它字符。</li>
+<li><code>DT_STATUS</code> 变量保存这个第一个字符。</li>
+</ul>
+</li>
+<li>
+<p><strong>判断 <code>DT_STATUS</code> 的值</strong>：</p>
+<ul>
+<li>
+<p>COPY<code>if [ &quot;$DT_STATUS&quot; == &quot;#&quot; ] || [ -z &quot;$DT_STATUS&quot; ]; then COPY：检查  DT_STATUS COPY是否等于  # COPY      或者是否为空。     - 如果 </code>DT_STATUS<code>为</code>#<code>，说明这个设备树覆盖配置被注释掉了，未启用。     - 如果 </code>DT_STATUS<code>为空，说明在</code>uEnv.txt<code>中没有找到相关的设备树覆盖配置，视为未启用。5. **设置</code>flag<code>变量和输出结果**：   - 如果</code>DT_STATUS<code>是</code>#<code>或者为空，设置</code>flag=“OFF”<code>，并且函数输出 </code>0<code>，表示设备树覆盖配置未启用。   - 否则，设置 </code>flag=“ON”<code>，并且函数输出 </code>1<code>，表示设备树覆盖配置已启用。### 总结- **用途**：</code>get_dt_status<code>函数用于检查特定的设备树覆盖配置在</code>uEnv.txt<code>文件中的启用状态。- **工作原理**：它通过读取</code>uEnv.txt<code>文件的内容，判断与设备树覆盖配置相关的行是否被注释掉或是否存在，从而判断该配置是否启用。- **返回值**：函数返回</code>1<code>表示设备树覆盖配置已启用，返回</code>0<code>表示未启用。## set_dt~~~shellset_dt() &#123;    # 检查第二个参数 $2 是否为 &quot;OFF&quot;    if [ $2 == &quot;OFF&quot; ]; then        # 如果为 &quot;OFF&quot;，使用 sed 命令在 uEnv.txt 文件中注释掉与指定设备树覆盖相关的行        sed -i -e &quot;s/^dtoverlay=\(.*-$1-overlay.*\)/#dtoverlay=\1/g&quot; &quot;/boot/uEnv/$UENV_TXT&quot;    # 检查第二个参数 $2 是否为 &quot;ON&quot;    elif [ $2 == &quot;ON&quot; ]; then        # 如果为 &quot;ON&quot;，使用 sed 命令在 uEnv.txt 文件中取消注释与指定设备树覆盖相关的行        sed -i -e &quot;s/^#dtoverlay=\(.*-$1-overlay.*\)/dtoverlay=\1/g&quot; &quot;/boot/uEnv/$UENV_TXT&quot;    else        # 如果第二个参数既不是 &quot;OFF&quot; 也不是 &quot;ON&quot;，则输出 &quot;wrong data&quot; 错误信息        echo &quot;wrong data&quot;    fi&#125;~~~### 详细解析1. **函数定义**：   -</code>set_dt() {}<code>定义了一个名为</code>set_dt<code>的函数。2. **参数处理**：   -</code>“$1&quot;<code>代表传递给函数的第一个参数，通常用于表示设备树覆盖配置的标识符（例如</code>1<code>, </code>2<code>, </code>3<code>等）。   -</code>”$2&quot;<code> 代表传递给函数的第二个参数，用于指定操作模式，是启用 (</code>ON<code>) 还是禁用 (</code>OFF<code>) 设备树覆盖配置。3. **检查参数值并执行相应操作**：   - **if [ $2 == &quot;OFF&quot; ]**:     - 如果第二个参数的值是 </code>“OFF”<code>，表示需要禁用指定的设备树覆盖配置。     - 使用 </code>sed<code>命令将</code>uEnv.txt<code>文件中以</code>dtoverlay=<code>开头，并且包含</code>-$1-overlay<code>的行注释掉，即在行首加上</code>#<code>。   - **elif [ $2 == &quot;ON&quot; ]**:     - 如果第二个参数的值是 </code>“ON”<code>，表示需要启用指定的设备树覆盖配置。     - 使用 </code>sed<code>命令将</code>uEnv.txt<code>文件中以</code>#dtoverlay=<code>开头，并且包含</code>-$1-overlay<code>的行取消注释，即去掉行首的</code>#<code>。   - **else**:     - 如果第二个参数的值既不是 </code>“OFF&quot;<code>也不是</code>&quot;ON”<code>，输出错误信息 </code>“wrong data”<code>。4. **sed 命令解释**：   - </code>sed -i -e &quot;s/^dtoverlay=(.<em>-<span class='katex-error' title='ParseError: KaTeX parse error: Can&#039;t use function &#039;\)&#039; in math mode at position 12: 1-overlay.*\̲)̲/#dtoverlay=\1/…'>1-overlay.*\)/#dtoverlay=\1/g&quot; &quot;/boot/uEnv/</span>UENV_TXT&quot;<code>：     - </code>-i<code>选项表示直接修改文件内容。     -</code>-e<code>选项表示后面的字符串是一个表达式。     - ```       s/^dtoverlay=\(.*-$1-overlay.*\)/#dtoverlay=\1/g    是一个替换表达式：   -</code>^dtoverlay=(.</em>-$1-overlay.*)<code>匹配以</code>dtoverlay=<code>开头，并且包含</code>-$1-overlay<code>的行。  -</code>#dtoverlay=\1<code>表示将匹配到的内容替换为在前面加上</code>#<code>的内容，即注释掉该行。</code></p>
+</li>
+<li>
+<p><code>sed -i -e &quot;s/^#dtoverlay=\(.*-$1-overlay.*\)/dtoverlay=\1/g&quot; &quot;/boot/uEnv/$UENV_TXT&quot;</code>：</p>
+<ul>
+<li>
+<pre><code>COPYs/^#dtoverlay=\(.*-$1-overlay.*\)/dtoverlay=\1/g
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">       是一个替换表达式：</span><br><span class="line"></span><br><span class="line">       - `^#dtoverlay=\(.*-$1-overlay.*\)` 匹配以 `#dtoverlay=` 开头，并且包含 `-$1-overlay` 的行。</span><br><span class="line">       - `dtoverlay=\1` 表示将匹配到的内容替换为去掉 `#` 的内容，即取消注释该行。</span><br><span class="line"></span><br><span class="line">### 总结</span><br><span class="line"></span><br><span class="line">- **用途**：`set_dt` 函数用于在 `uEnv.txt` 文件中启用或禁用特定的设备树覆盖配置。</span><br><span class="line"></span><br><span class="line">- **工作原理**：它通过 `sed` 命令对 `uEnv.txt` 文件中的相关行进行注释或取消注释，以达到启用或禁用设备树覆盖的目的。</span><br><span class="line"></span><br><span class="line">- 输入参数</span><br><span class="line"></span><br><span class="line">  ：</span><br><span class="line"></span><br><span class="line">  - 第一个参数是设备树覆盖配置的标识符。</span><br><span class="line">  - 第二个参数是操作模式，`ON` 表示启用，`OFF` 表示禁用。</span><br><span class="line"></span><br><span class="line">- **错误处理**：如果第二个参数既不是 `ON` 也不是 `OFF`，函数会输出 `&quot;wrong data&quot;` 提示错误。</span><br><span class="line"></span><br><span class="line">## do_set_pin_menu</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p>COPYdo_set_pin_menu() {<br />
+# 获取包含 “#overlay_start” 的行号，用于确定引脚复用功能的起始行<br />
+PIN_FUN_START=<span class='katex-error' title='ParseError: KaTeX parse error: Expected &#039;EOF&#039;, got &#039;#&#039; at position 11: (grep -n &quot;#̲overlay_start&quot; …'>(grep -n &quot;#overlay_start&quot; /boot/uEnv/</span>UENV_TXT | cut -d ‘:’ -f 1)</p>
+<pre><code># 获取包含 &quot;#display&quot; 或 &quot;# Display&quot; 的行号，用于确定引脚复用功能的结束行
+PIN_FUN_END=$(grep -n &quot;#display&quot; /boot/uEnv/$UENV_TXT | cut -d ':' -f 1)
+if [ -z &quot;$PIN_FUN_END&quot; ]; then
+    PIN_FUN_END=$(grep -n &quot;# Display&quot; /boot/uEnv/$UENV_TXT | cut -d ':' -f 1)
+fi
+
+# 提取在 overlay 起始行和结束行之间的所有引脚复用功能，并将其过滤为复用功能名称
+PIN_FUN=$(sed -n &quot;$&#123;PIN_FUN_START&#125;,$&#123;PIN_FUN_END&#125;p&quot; /boot/uEnv/$UENV_TXT | sed -n 's/^.*lubancat-\(.*\)-overlay.dtbo$/\1/p')
+
+# 计算复用功能的数量
+PIN_FUN_COUNT=$(sed -n &quot;$&#123;PIN_FUN_START&#125;,$&#123;PIN_FUN_END&#125;p&quot; /boot/uEnv/$UENV_TXT | sed -n 's/^.*lubancat-\(.*\)-overlay.dtbo$/\1/p' | wc -l)
+
+# 输出起始行、结束行和复用功能信息到调试文件
+echo $PIN_FUN_START $PIN_FUN_END &gt;&gt; $debug_file
+echo $PIN_FUN &gt;&gt; $debug_file
+echo $PIN_FUN_COUNT &gt;&gt; $debug_file
+
+# 定义最大的复用功能数量
+MAX_COUNT=&quot;30&quot;
+
+# 声明关联数组 PIN_STATUS 来保存每个复用功能的状态（开启/关闭）
+declare -A PIN_STATUS &gt; /dev/null
+# 声明数组 PIN_FUN_ARR 来保存所有的复用功能
+declare -a PIN_FUN_ARR=($PIN_FUN) &gt; /dev/null
+
+# 初始化循环变量
+int=&quot;0&quot;
+while (( $int &lt; $PIN_FUN_COUNT ))
+do
+    # 调用 get_dt_status 函数获取每个复用功能的状态，并存储在 PIN_STATUS 数组中
+    get_dt_status $&#123;PIN_FUN_ARR[$int]&#125; &gt; /dev/null
+    PIN_STATUS[$int]=&quot;$flag&quot;
+    int=$(expr $int + 1)
+done
+
+# 如果复用功能的数量不足 MAX_COUNT，补全数组
+int=&quot;$PIN_FUN_COUNT&quot;
+while (( $int &lt; $MAX_COUNT ))
+do
+    PIN_FUN_ARR[$int]=&quot;NULL&quot;
+    PIN_STATUS[$int]=&quot;OFF&quot;
+    int=$(expr $int + 1)
+done
+
+# 使用 whiptail 显示引脚复用功能的选择菜单
+D2=$(whiptail --title &quot;配置你的板卡引脚的复用功能&quot; --checklist  --ok-button &quot;空格键选中&quot; --cancel-button &quot;Enter键设置&quot;\
+&quot;配置你的板卡引脚的复用功能(完成后-reboot-应用配置)&quot; 20 60 12 \
+&quot;0&quot; &quot;$&#123;PIN_FUN_ARR[0]&#125;&quot;        $&#123;PIN_STATUS[0]&#125; \
+&quot;1&quot; &quot;$&#123;PIN_FUN_ARR[1]&#125;&quot;        $&#123;PIN_STATUS[1]&#125;  \
+&quot;2&quot; &quot;$&#123;PIN_FUN_ARR[2]&#125;&quot;        $&#123;PIN_STATUS[2]&#125;  \
+&quot;3&quot; &quot;$&#123;PIN_FUN_ARR[3]&#125;&quot;        $&#123;PIN_STATUS[3]&#125;  \
+&quot;4&quot; &quot;$&#123;PIN_FUN_ARR[4]&#125;&quot;        $&#123;PIN_STATUS[4]&#125;  \
+&quot;5&quot; &quot;$&#123;PIN_FUN_ARR[5]&#125;&quot;        $&#123;PIN_STATUS[5]&#125; \
+&quot;6&quot; &quot;$&#123;PIN_FUN_ARR[6]&#125;&quot;        $&#123;PIN_STATUS[6]&#125; \
+&quot;7&quot; &quot;$&#123;PIN_FUN_ARR[7]&#125;&quot;        $&#123;PIN_STATUS[7]&#125; \
+&quot;8&quot; &quot;$&#123;PIN_FUN_ARR[8]&#125;&quot;        $&#123;PIN_STATUS[8]&#125; \
+&quot;9&quot; &quot;$&#123;PIN_FUN_ARR[9]&#125;&quot;        $&#123;PIN_STATUS[9]&#125; \
+&quot;10&quot; &quot;$&#123;PIN_FUN_ARR[10]&#125;&quot;      $&#123;PIN_STATUS[10]&#125; \
+&quot;11&quot; &quot;$&#123;PIN_FUN_ARR[11]&#125;&quot;      $&#123;PIN_STATUS[11]&#125; \
+&quot;12&quot; &quot;$&#123;PIN_FUN_ARR[12]&#125;&quot;      $&#123;PIN_STATUS[12]&#125; \
+&quot;13&quot; &quot;$&#123;PIN_FUN_ARR[13]&#125;&quot;      $&#123;PIN_STATUS[13]&#125;  \
+&quot;14&quot; &quot;$&#123;PIN_FUN_ARR[14]&#125;&quot;      $&#123;PIN_STATUS[14]&#125;  \
+&quot;15&quot; &quot;$&#123;PIN_FUN_ARR[15]&#125;&quot;      $&#123;PIN_STATUS[15]&#125;  \
+&quot;16&quot; &quot;$&#123;PIN_FUN_ARR[16]&#125;&quot;      $&#123;PIN_STATUS[16]&#125;  \
+&quot;17&quot; &quot;$&#123;PIN_FUN_ARR[17]&#125;&quot;      $&#123;PIN_STATUS[17]&#125; \
+&quot;18&quot; &quot;$&#123;PIN_FUN_ARR[18]&#125;&quot;      $&#123;PIN_STATUS[18]&#125; \
+&quot;19&quot; &quot;$&#123;PIN_FUN_ARR[19]&#125;&quot;      $&#123;PIN_STATUS[19]&#125; \
+&quot;20&quot; &quot;$&#123;PIN_FUN_ARR[20]&#125;&quot;      $&#123;PIN_STATUS[20]&#125; \
+&quot;21&quot; &quot;$&#123;PIN_FUN_ARR[21]&#125;&quot;      $&#123;PIN_STATUS[21]&#125; \
+&quot;22&quot; &quot;$&#123;PIN_FUN_ARR[22]&#125;&quot;      $&#123;PIN_STATUS[22]&#125; \
+&quot;23&quot; &quot;$&#123;PIN_FUN_ARR[23]&#125;&quot;      $&#123;PIN_STATUS[23]&#125; \
+&quot;24&quot; &quot;$&#123;PIN_FUN_ARR[24]&#125;&quot;      $&#123;PIN_STATUS[24]&#125;  \
+&quot;25&quot; &quot;$&#123;PIN_FUN_ARR[25]&#125;&quot;      $&#123;PIN_STATUS[25]&#125; \
+&quot;26&quot; &quot;$&#123;PIN_FUN_ARR[26]&#125;&quot;      $&#123;PIN_STATUS[26]&#125; \
+&quot;27&quot; &quot;$&#123;PIN_FUN_ARR[27]&#125;&quot;      $&#123;PIN_STATUS[27]&#125; \
+&quot;28&quot; &quot;$&#123;PIN_FUN_ARR[28]&#125;&quot;      $&#123;PIN_STATUS[28]&#125; \
+&quot;29&quot; &quot;$&#123;PIN_FUN_ARR[29]&#125;&quot;      $&#123;PIN_STATUS[29]&#125; \
+3&gt;&amp;1 1&gt;&amp;2 2&gt;&amp;3)
+
+# 获取菜单的退出状态
+exitstatus=$?
+echo $exitstatus &gt; /dev/null
+
+# 如果用户按下确认按钮
+if [ $exitstatus = 0 ]; then
+    echo $D2 &gt;&gt; $debug_file
+
+    # 将所有复用功能状态设置为 OFF
+    int=&quot;0&quot;
+    while (( $int&lt;$PIN_FUN_COUNT ))
+    do
+        PIN_STATUS[$int]=&quot;OFF&quot;
+        set_dt &quot;$&#123;PIN_FUN_ARR[$int]&#125;&quot; &quot;OFF&quot;
+        int=$(expr $int + 1)
+    done
+
+    # 处理用户在菜单中选择的选项
+    declare -a D2_ARR=($D2)
+    D2_SIZE=$
+</code></pre>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2024/08/31/02_%E7%91%9E%E8%8A%AF%E5%BE%AE/20_%E9%87%8E%E7%81%AB%E9%85%8D%E7%BD%AE%E8%84%9A%E6%9C%AC%E5%AD%A6%E4%B9%A0/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2024/09/01/02_%E7%91%9E%E8%8A%AF%E5%BE%AE/21_%E7%91%9E%E8%8A%AF%E5%BE%AElogo%E6%98%BE%E7%A4%BA/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            瑞芯微logo显示
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2024/08/30/07_%E5%B0%8F%E6%8A%80%E5%B7%A7/16_%E8%AE%BE%E5%A4%87%E6%A0%91overlay/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">设备树overlay</div>
+      </a>
+    
+  </nav>
+
+  
+   
+  
+   
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2015-2024
+        <i class="ri-heart-fill heart_icon"></i> chai
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="热爱学习的未来酱"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/%E7%94%9F%E6%B4%BB">生活</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE">瑞芯微</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/Linux%E5%AD%A6%E4%B9%A0">Linux学习</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/%E8%AF%BB%E4%B9%A6">读书</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/%E9%A9%B1%E5%8A%A8%E5%AD%A6%E4%B9%A0">驱动学习</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/C%E8%AF%AD%E8%A8%80%E9%AB%98%E7%BA%A7%E5%AD%A6%E4%B9%A0">C语言高级学习</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/%E5%B0%8F%E6%8A%80%E5%B7%A7">小技巧</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/shell%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0">shell编程学习</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/PCB%E5%AD%A6%E4%B9%A0">PCB学习</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/%E9%9F%B3%E8%A7%86%E9%A2%91%E5%AD%A6%E4%B9%A0">音视频学习</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="52"
+        src="//music.163.com/outchain/player?type=2&id=22707008&auto=0&height=32"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
+    
+    
+
+  </div>
+</body>
+
+</html>

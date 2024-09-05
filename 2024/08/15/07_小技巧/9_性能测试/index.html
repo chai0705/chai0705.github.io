@@ -1,0 +1,1227 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+  
+
+    <head>
+      <meta charset="utf-8" />
+        
+      <meta name="description" content="永远年轻，永远热泪盈眶" />
+      
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>性能测试 |  热爱学习的未来酱</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      
+<link rel="stylesheet" href="/css/fonts/remixicon.css">
+
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    <link rel="alternate" href="/atom.xml" title="热爱学习的未来酱" type="application/atom+xml">
+</head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-07_小技巧/9_性能测试"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  性能测试
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2024/08/15/07_%E5%B0%8F%E6%8A%80%E5%B7%A7/9_%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/" class="article-date">
+  <time datetime="2024-08-14T22:50:19.000Z" itemprop="datePublished">2024-08-15</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%B0%8F%E6%8A%80%E5%B7%A7/">小技巧</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">9.9k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">52 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h2 id="1综合性能测试unixbench"><a class="markdownIt-Anchor" href="#1综合性能测试unixbench"></a> 1综合性能测试(unixbench)</h2>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409051045325.png" alt="image-20240524145726916" /></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409051045331.png" alt="image-20240524145738191" /></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./Run</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line">------------------------------------------------------------------------                                                                                                                                                      </span><br><span class="line">Benchmark Run: 六 5月 25 2024 09:26:51 - 09:54:51                                                                                                                                                                             </span><br><span class="line">8 CPUs in system; running 1 parallel copy of tests                                                                                                                                                                            </span><br><span class="line">                                                                                                                                                                                                                              </span><br><span class="line">Dhrystone 2 using register variables       31539593.3 lps   (10.0 s, 7 samples)                                                                                                                                               </span><br><span class="line">Double-Precision Whetstone                     6482.1 MWIPS (9.9 s, 7 samples)                                                                                                                                                </span><br><span class="line">Execl Throughput                               5137.7 lps   (29.9 s, 2 samples)                                                                                                                                               </span><br><span class="line">File Copy 1024 bufsize 2000 maxblocks        734469.9 KBps  (30.0 s, 2 samples)                                                                                                                                               </span><br><span class="line">File Copy 256 bufsize 500 maxblocks          265982.6 KBps  (30.0 s, 2 samples)                                                                                                                                               </span><br><span class="line">File Copy 4096 bufsize 8000 maxblocks       2000659.6 KBps  (30.0 s, 2 samples)                                                                                                                                               </span><br><span class="line">Pipe Throughput                             1664325.7 lps   (10.0 s, 7 samples)                                                                                                                                               </span><br><span class="line">Pipe-based Context Switching                 211808.0 lps   (10.0 s, 7 samples)                                                                                                                                               </span><br><span class="line">Process Creation                               4083.5 lps   (30.0 s, 2 samples)                                                                                                                                               </span><br><span class="line">Shell Scripts (1 concurrent)                   3877.1 lpm   (60.0 s, 2 samples)                                                                                                                                               </span><br><span class="line">Shell Scripts (8 concurrent)                   3437.1 lpm   (60.0 s, 2 samples)                                                                                                                                               </span><br><span class="line">System Call Overhead                        1331518.3 lps   (10.0 s, 7 samples)                                                                                                                                               </span><br><span class="line">                                                                                                                                                                                                                              </span><br><span class="line">System Benchmarks Index Values               BASELINE       RESULT    INDEX                                                                                                                                                   </span><br><span class="line">Dhrystone 2 using register variables         116700.0   31539593.3   2702.6                                                                                                                                                   </span><br><span class="line">Double-Precision Whetstone                       55.0       6482.1   1178.6                                                                                                                                                   </span><br><span class="line">Execl Throughput                                 43.0       5137.7   1194.8                                                                                                                                                   </span><br><span class="line">File Copy 1024 bufsize 2000 maxblocks          3960.0     734469.9   1854.7                                                                                                                                                   </span><br><span class="line">File Copy 256 bufsize 500 maxblocks            1655.0     265982.6   1607.1                                                                                                                                                   </span><br><span class="line">File Copy 4096 bufsize 8000 maxblocks          5800.0    2000659.6   3449.4                                                                                                                                                   </span><br><span class="line">Pipe Throughput                               12440.0    1664325.7   1337.9                                                                                                                                                   </span><br><span class="line">Pipe-based Context Switching                   4000.0     211808.0    529.5                                                                                                                                                   </span><br><span class="line">Process Creation                                126.0       4083.5    324.1                                                                                                                                                   </span><br><span class="line">Shell Scripts (1 concurrent)                     42.4       3877.1    914.4                                                                                                                                                   </span><br><span class="line">Shell Scripts (8 concurrent)                      6.0       3437.1   5728.5                                                                                                                                                   </span><br><span class="line">System Call Overhead                          15000.0    1331518.3    887.7                                                                                                                                                   </span><br><span class="line">                                                                   ========                                                                                                                                                   </span><br><span class="line">System Benchmarks Index Score                                        1364.8                                                                                                                                                   </span><br><span class="line">                                                                                                                                                                                                                              </span><br><span class="line">------------------------------------------------------------------------                                                                                                                                                      </span><br><span class="line">Benchmark Run: 六 5月 25 2024 09:54:51 - 10:23:04                                                                                                                                                                             </span><br><span class="line">8 CPUs in system; running 8 parallel copies of tests                                                                                                                                                                          </span><br><span class="line">                                                                                                                                                                                                                              </span><br><span class="line">Dhrystone 2 using register variables      157812940.0 lps   (10.0 s, 7 samples)                                                                                                                                               </span><br><span class="line">Double-Precision Whetstone                    37250.0 MWIPS (9.6 s, 7 samples)                                                                                                                                                </span><br><span class="line">Execl Throughput                              17709.4 lps   (29.8 s, 2 samples)                                                                                                                                               </span><br><span class="line">File Copy 1024 bufsize 2000 maxblocks       2846650.5 KBps  (30.0 s, 2 samples)                                                                                                                                               </span><br><span class="line">File Copy 256 bufsize 500 maxblocks          902894.4 KBps  (30.0 s, 2 samples)                                                                                                                                               </span><br><span class="line">File Copy 4096 bufsize 8000 maxblocks       5776203.7 KBps  (30.0 s, 2 samples)                                                                                                                                               </span><br><span class="line">Pipe Throughput                             8112803.3 lps   (10.0 s, 7 samples)                                                                                                                                               </span><br><span class="line">Pipe-based Context Switching                1139800.0 lps   (10.0 s, 7 samples)                                                                                                                                               </span><br><span class="line">Process Creation                              32554.8 lps   (30.0 s, 2 samples)                                                                                                                                               </span><br><span class="line">Shell Scripts (1 concurrent)                  29022.0 lpm   (60.0 s, 2 samples)                                                                                                                                               </span><br><span class="line">Shell Scripts (8 concurrent)                   4265.4 lpm   (60.1 s, 2 samples)                                                                                                                                               </span><br><span class="line">System Call Overhead                        8171571.9 lps   (10.0 s, 7 samples)                                                                                                                                               </span><br><span class="line">                                                                                                                                                                                                                              </span><br><span class="line">System Benchmarks Index Values               BASELINE       RESULT    INDEX                                                                                                                                                   </span><br><span class="line">Dhrystone 2 using register variables         116700.0  157812940.0  13523.0                                                                                                                                                   </span><br><span class="line">Double-Precision Whetstone                       55.0      37250.0   6772.7                                                                                                                                                   </span><br><span class="line">Execl Throughput                                 43.0      17709.4   4118.5                                                                                                                                                   </span><br><span class="line">File Copy 1024 bufsize 2000 maxblocks          3960.0    2846650.5   7188.5                                                                                                                                                   </span><br><span class="line">File Copy 256 bufsize 500 maxblocks            1655.0     902894.4   5455.6                                                                                                                                                   </span><br><span class="line">File Copy 4096 bufsize 8000 maxblocks          5800.0    5776203.7   9959.0                                                                                                                                                   </span><br><span class="line">Pipe Throughput                               12440.0    8112803.3   6521.5                                                                                                                                                   </span><br><span class="line">Pipe-based Context Switching                   4000.0    1139800.0   2849.5                                                                                                                                                   </span><br><span class="line">Process Creation                                126.0      32554.8   2583.7                                                                                                                                                   </span><br><span class="line">Shell Scripts (1 concurrent)                     42.4      29022.0   6844.8                                                                                                                                                   </span><br><span class="line">Shell Scripts (8 concurrent)                      6.0       4265.4   7109.1                                                                                                                                                   </span><br><span class="line">System Call Overhead                          15000.0    8171571.9   5447.7                                                                                                                                                   </span><br><span class="line">                                                                   ========                                                                                                                                                   </span><br><span class="line">System Benchmarks Index Score                                        5925.9                                                                                                                                                   </span><br><span class="line">                                                                                                                                                                                                                              </span><br><span class="line">root@topeet:/test/01_unixbench/byte-unixbench-master/UnixBench$   </span><br></pre></td></tr></table></figure>
+<h2 id="2cpu性能speccpu2006"><a class="markdownIt-Anchor" href="#2cpu性能speccpu2006"></a> 2.CPU性能(speccpu2006)</h2>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409051045327.png" alt="image-20240524150847095" /></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409051045355.png" alt="image-20240524151335344" /></p>
+<p>安装编译工具</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt install build-essential gfortran</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409051045346.png" alt="image-20240524151435285" /></p>
+<p>问题解决：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim src/make-3.80/glob/glob.c </span><br></pre></td></tr></table></figure>
+<p>注释209 232行</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409051045341.png" alt="image-20240524152454164" /></p>
+<p>然后运行根目录下的安装脚本</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./install.sh</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409051045640.png" alt="image-20240524165154844" /></p>
+<p>安装完成之后加载环境变量：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">. ./shrc</span><br></pre></td></tr></table></figure>
+<p>然后输入以下命令确定是否安装成功：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">runspec -V</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409051045771.png" alt="image-20240524165323929" /></p>
+<p>测试命令和说明：</p>
+<ol>
+<li>
+<p><code>runspec --reportable -c arm64.cfg -n 1 -r 1 --tune=base all</code></p>
+<ul>
+<li><code>--reportable</code>: 表示可以展示为 SPEC 官方可报告的测试结果</li>
+<li><code>-c rk3588.cfg</code>: 指定使用 <code>rk3588.cfg</code> 这个配置文件</li>
+<li><code>-n 1</code>: 测试次数为 1 次</li>
+<li><code>-r 1</code>: 运行 1 线程(默认 1 线程,speed 模式)</li>
+<li><code>--tune=base</code>: 使用 base 基准测试模式</li>
+<li><code>all</code>: 表示测试所有的整数和浮点测试项</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">                                  Estimated                       Estimated                                  </span><br><span class="line">                Base     Base       Base        Peak     Peak       Peak                                     </span><br><span class="line">Benchmarks     Copies  Run Time     Rate       Copies  Run Time     Rate                                     </span><br><span class="line">-------------- ------  ---------  ---------    ------  ---------  ---------                                  </span><br><span class="line">400.perlbench       1        420       23.3 *                                                                </span><br><span class="line">401.bzip2           1        588       16.4 *                                                                </span><br><span class="line">403.gcc             1        404       19.9 *                                                                </span><br><span class="line">429.mcf             1        475       19.2 *                                                                </span><br><span class="line">445.gobmk           1        474       22.1 *                                                                </span><br><span class="line">456.hmmer           1        253       36.9 *                                                                </span><br><span class="line">458.sjeng           1        628       19.3 *                                                                </span><br><span class="line">462.libquantum      1        207      100   *                                                                </span><br><span class="line">464.h264ref         1        533       41.5 *                                                                </span><br><span class="line">471.omnetpp         1        561       11.1 *                                                                </span><br><span class="line">473.astar           1        479       14.6 *                                                                </span><br><span class="line">483.xalancbmk       1        417       16.5 *                                                                </span><br><span class="line"> Est. SPECint_rate_base2006            23.3                                                                  </span><br><span class="line"> Est. SPECint_rate2006                                              Not Run                                  </span><br><span class="line">                                                                                                             </span><br><span class="line">      set: fp                                                                                                </span><br><span class="line">        format: raw -&gt; /test/02_spec2006/speccpu2006-v1.0.1/result/CFP2006.002.rsf                           </span><br><span class="line">        format: flags -&gt; /test/02_spec2006/speccpu2006-v1.0.1/result/CFP2006.002.flags.html                  </span><br><span class="line">        format: ASCII -&gt; /test/02_spec2006/speccpu2006-v1.0.1/result/CFP2006.002.txt                         </span><br><span class="line">        format: PDF -&gt; /test/02_spec2006/speccpu2006-v1.0.1/result/CFP2006.002.pdf                           </span><br><span class="line">        format: Submission Check -&gt; PASSED syntax check                                                      </span><br><span class="line">        format: Screen -&gt;                                                                                    </span><br><span class="line">                                                                                                             </span><br><span class="line">                                  Estimated                       Estimated                                  </span><br><span class="line">                Base     Base       Base        Peak     Peak       Peak                                     </span><br><span class="line">Benchmarks     Copies  Run Time     Rate       Copies  Run Time     Rate                                     </span><br><span class="line">-------------- ------  ---------  ---------    ------  ---------  ---------                                  </span><br><span class="line">410.bwaves          1        320       42.4 *                                                                </span><br><span class="line">416.gamess          1        674       29.1 *                                                                </span><br><span class="line">433.milc            1        327       28.1 *                                                                </span><br><span class="line">434.zeusmp          1        459       19.8 *                                                                </span><br><span class="line">435.gromacs         1        308       23.2 *                                                                </span><br><span class="line">436.cactusADM       1        812       14.7 *                                                                </span><br><span class="line">437.leslie3d        1        306       30.8 *                                                                </span><br><span class="line">444.namd            1        387       20.7 *                                                                </span><br><span class="line">447.dealII          1        270       42.4 *                                                                </span><br><span class="line">450.soplex          1        308       27.1 *                                                                </span><br><span class="line">453.povray          1        131       40.6 *                                                                </span><br><span class="line">454.calculix        1        317       26.0 *                                                                </span><br><span class="line">459.GemsFDTD        1        388       27.3 *                                                                </span><br><span class="line">465.tonto           1        304       32.4 *                                                                </span><br><span class="line">470.lbm             1        350       39.2 *                                                                </span><br><span class="line">481.wrf             1        287       38.9 *                                                                </span><br><span class="line">482.sphinx3         1        825       23.6 *                                                                </span><br><span class="line"> Est. SPECfp_rate_base2006             28.6                                                                  </span><br><span class="line"> Est. SPECfp_rate2006                                               Not Run       </span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p><code>runspec --reportable -c arm64.cfg -n 1 -r N --tune=base all</code></p>
+<ul>
+<li><code>--reportable</code>: 表示可以展示为 SPEC 官方可报告的测试结果</li>
+<li><code>-n 1</code>: 测试次数为 1 次</li>
+<li><code>-r N</code>: 运行 N 线程(rate 模式,测试吞吐量)</li>
+<li><code>--tune=base</code>: 使用 base 基准测试模式</li>
+<li><code>all</code>: 表示测试所有的整数和浮点测试项</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">                                  Estimated                       Estimated</span><br><span class="line">                Base     Base       Base        Peak     Peak       Peak</span><br><span class="line">Benchmarks     Copies  Run Time     Rate       Copies  Run Time     Rate </span><br><span class="line">-------------- ------  ---------  ---------    ------  ---------  ---------</span><br><span class="line">400.perlbench       1        417       23.4 *                                  </span><br><span class="line">401.bzip2           1        591       16.3 *                                  </span><br><span class="line">403.gcc             1        409       19.7 *                                  </span><br><span class="line">429.mcf             1        442       20.6 *                                  </span><br><span class="line">445.gobmk           1        474       22.1 *                                  </span><br><span class="line">456.hmmer           1        254       36.8 *                                  </span><br><span class="line">458.sjeng           1        629       19.2 *                                  </span><br><span class="line">462.libquantum      1        207       99.9 *                                  </span><br><span class="line">464.h264ref         1        534       41.4 *                                  </span><br><span class="line">471.omnetpp         1        569       11.0 *                                  </span><br><span class="line">473.astar           1        471       14.9 *                                  </span><br><span class="line">483.xalancbmk       1        408       16.9 *                                  </span><br><span class="line"> Est. SPECint_rate_base2006            23.5</span><br><span class="line"> Est. SPECint_rate2006                                              Not Run</span><br><span class="line"></span><br><span class="line">      set: fp</span><br><span class="line">        format: raw -&gt; /test/02_spec2006/speccpu2006-v1.0.1/result/CFP2006.003.rsf</span><br><span class="line">        format: flags -&gt; /test/02_spec2006/speccpu2006-v1.0.1/result/CFP2006.003.flags.html</span><br><span class="line">        format: ASCII -&gt; /test/02_spec2006/speccpu2006-v1.0.1/result/CFP2006.003.txt</span><br><span class="line">        format: PDF -&gt; /test/02_spec2006/speccpu2006-v1.0.1/result/CFP2006.003.pdf</span><br><span class="line">        format: Submission Check -&gt; PASSED syntax check</span><br><span class="line">        format: Screen -&gt; </span><br><span class="line"></span><br><span class="line">                                  Estimated                       Estimated</span><br><span class="line">                Base     Base       Base        Peak     Peak       Peak</span><br><span class="line">Benchmarks     Copies  Run Time     Rate       Copies  Run Time     Rate </span><br><span class="line">-------------- ------  ---------  ---------    ------  ---------  ---------</span><br><span class="line">410.bwaves          1        326       41.7 *                                  </span><br><span class="line">416.gamess          1        674       29.0 *                                  </span><br><span class="line">433.milc            1        331       27.7 *                                  </span><br><span class="line">434.zeusmp          1        450       20.2 *                                  </span><br><span class="line">435.gromacs         1        308       23.1 *                                  </span><br><span class="line">436.cactusADM       1        814       14.7 *                                  </span><br><span class="line">437.leslie3d        1        306       30.7 *                                  </span><br><span class="line">444.namd            1        387       20.7 *                                  </span><br><span class="line">447.dealII          1        268       42.7 *                                  </span><br><span class="line">450.soplex          1        322       25.9 *                                  </span><br><span class="line">453.povray          1        131       40.5 *                                  </span><br><span class="line">454.calculix        1        317       26.0 *                                  </span><br><span class="line">459.GemsFDTD        1        390       27.2 *                                  </span><br><span class="line">465.tonto           1        304       32.3 *                                  </span><br><span class="line">470.lbm             1        351       39.2 *                                  </span><br><span class="line">481.wrf             1        287       39.0 *                                  </span><br><span class="line">482.sphinx3         1        813       24.0 *                                  </span><br><span class="line"> Est. SPECfp_rate_base2006             28.5</span><br><span class="line"> Est. SPECfp_rate2006                                               Not Run</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th style="text-align:left"></th>
+<th style="text-align:left"></th>
+<th style="text-align:left"></th>
+<th style="text-align:left"></th>
+<th style="text-align:left"></th>
+<th style="text-align:left"></th>
+<th style="text-align:left"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Benchmarks</td>
+<td style="text-align:left">Estimated Base</td>
+<td style="text-align:left">Estimated Base</td>
+<td style="text-align:left">Estimated Base</td>
+<td style="text-align:left">Estimated Peak</td>
+<td style="text-align:left">Estimated Peak</td>
+<td style="text-align:left">Estimated Peak</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">Copies</td>
+<td style="text-align:left">Run Time</td>
+<td style="text-align:left">Rate</td>
+<td style="text-align:left">Copies</td>
+<td style="text-align:left">Run Time</td>
+<td style="text-align:left">Rate</td>
+</tr>
+<tr>
+<td style="text-align:left">400.perlbench</td>
+<td style="text-align:left">1</td>
+<td style="text-align:left">420</td>
+<td style="text-align:left">23.3 *</td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">401.bzip2</td>
+<td style="text-align:left">1</td>
+<td style="text-align:left">588</td>
+<td style="text-align:left">16.4 *</td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">403.gcc</td>
+<td style="text-align:left">1</td>
+<td style="text-align:left">404</td>
+<td style="text-align:left">19.9 *</td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">429.mcf</td>
+<td style="text-align:left">1</td>
+<td style="text-align:left">475</td>
+<td style="text-align:left">19.2 *</td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">445.gobmk</td>
+<td style="text-align:left">1</td>
+<td style="text-align:left">474</td>
+<td style="text-align:left">22.1 *</td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">456.hmmer</td>
+<td style="text-align:left">1</td>
+<td style="text-align:left">253</td>
+<td style="text-align:left">36.9 *</td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">458.sjeng</td>
+<td style="text-align:left">1</td>
+<td style="text-align:left">628</td>
+<td style="text-align:left">19.3 *</td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">462.libquantum</td>
+<td style="text-align:left">1</td>
+<td style="text-align:left">207</td>
+<td style="text-align:left">100 *</td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">464.h264ref</td>
+<td style="text-align:left">1</td>
+<td style="text-align:left">533</td>
+<td style="text-align:left">41.5 *</td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">471.omnetpp</td>
+<td style="text-align:left">1</td>
+<td style="text-align:left">561</td>
+<td style="text-align:left">11.1 *</td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">473.astar</td>
+<td style="text-align:left">1</td>
+<td style="text-align:left">479</td>
+<td style="text-align:left">14.6 *</td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">483.xalancbmk</td>
+<td style="text-align:left">1</td>
+<td style="text-align:left">417</td>
+<td style="text-align:left">16.5 *</td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">Est. SPECint_rate_base2006</td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left">23.3</td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">Est. SPECint_rate2006</td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left">Not Run</td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">410.bwaves</td>
+<td style="text-align:left">1</td>
+<td style="text-align:left">320</td>
+<td style="text-align:left">42.4 *</td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">416.gamess</td>
+<td style="text-align:left">1</td>
+<td style="text-align:left">674</td>
+<td style="text-align:left">29.1 *</td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">433.milc</td>
+<td style="text-align:left">1</td>
+<td style="text-align:left">327</td>
+<td style="text-align:left">28.1 *</td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">434.zeusmp</td>
+<td style="text-align:left">1</td>
+<td style="text-align:left">459</td>
+<td style="text-align:left">19.8 *</td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">435.gromacs</td>
+<td style="text-align:left">1</td>
+<td style="text-align:left">308</td>
+<td style="text-align:left">23.2 *</td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">436.cactusADM</td>
+<td style="text-align:left">1</td>
+<td style="text-align:left">812</td>
+<td style="text-align:left">14.7 *</td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">437.leslie3d</td>
+<td style="text-align:left">1</td>
+<td style="text-align:left">306</td>
+<td style="text-align:left">30.8 *</td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">444.namd</td>
+<td style="text-align:left">1</td>
+<td style="text-align:left">387</td>
+<td style="text-align:left">20.7 *</td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">447.dealII</td>
+<td style="text-align:left">1</td>
+<td style="text-align:left">270</td>
+<td style="text-align:left">42.4 *</td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">450.soplex</td>
+<td style="text-align:left">1</td>
+<td style="text-align:left">308</td>
+<td style="text-align:left">27.1 *</td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">453.povray</td>
+<td style="text-align:left">1</td>
+<td style="text-align:left">131</td>
+<td style="text-align:left">40.6 *</td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">454.calculix</td>
+<td style="text-align:left">1</td>
+<td style="text-align:left">317</td>
+<td style="text-align:left">26.0 *</td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">459.GemsFDTD</td>
+<td style="text-align:left">1</td>
+<td style="text-align:left">388</td>
+<td style="text-align:left">27.3 *</td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">465.tonto</td>
+<td style="text-align:left">1</td>
+<td style="text-align:left">304</td>
+<td style="text-align:left">32.4 *</td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">470.lbm</td>
+<td style="text-align:left">1</td>
+<td style="text-align:left">350</td>
+<td style="text-align:left">39.2 *</td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">481.wrf</td>
+<td style="text-align:left">1</td>
+<td style="text-align:left">287</td>
+<td style="text-align:left">38.9 *</td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">482.sphinx3</td>
+<td style="text-align:left">1</td>
+<td style="text-align:left">825</td>
+<td style="text-align:left">23.6 *</td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">Est. SPECfp_rate_base2006</td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left">28.6</td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">Est. SPECfp_rate2006</td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left">Not Run</td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+</tr>
+</tbody>
+</table>
+<h2 id="3系统综合性能lmbench"><a class="markdownIt-Anchor" href="#3系统综合性能lmbench"></a> <strong>3.系统综合性能(Lmbench)</strong></h2>
+<h3 id="一-引言"><a class="markdownIt-Anchor" href="#一-引言"></a> 一、引言</h3>
+<p>Lmbench 是一套简易可移植的，符合ANSI/C 标准为UNIX/POSIX 而制定的微型测评工具。一般来说，它衡量两个关键特征：反应时间和带宽。Lmbench 旨在使系统开发者深入了解关键操作的基础成本。（百度Lmbench了解详情）</p>
+<h3 id="二-软件说明和下载"><a class="markdownIt-Anchor" href="#二-软件说明和下载"></a> 二、软件说明和下载</h3>
+<p>软件说明：</p>
+<p>lmbench是个用于评价系统综合性能的多平台开源benchmark，能够测试包括文档读写、内存操作、进程创建销毁开销、网络等性能，测试 方法简单。<br />
+Lmbench是个多平台软件，因此能够对同级别的系统进行比较测试，反映不同系统的优劣势，通过选择不同的库函数我们就能够比较库函数的性能；更为重要的是，作为一个开源软件， lmbench提供一个测试框架，假如测试者对测试项目有更高的测试需要，能够通过少量的修改源代码达到目的（比如现在只能评测进程创建、终止的性能和进程转换的开销，通过修改部分代码即可实现线程级别的性能测试）</p>
+<p>下载：</p>
+<p>方式一：百度网盘为本人的一个工具，带有编写好的脚本，可直接运行脚本进行测试。</p>
+<p>链接：<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1GJ7iOSTYQa4THAjjiD4TXQ">https://pan.baidu.com/s/1GJ7iOSTYQa4THAjjiD4TXQ</a><br />
+提取码：jayn</p>
+<p>方式二：<a target="_blank" rel="noopener" href="http://www.bitmover.com/">www.bitmover.com/</a> lmbench  （进入该网站下载）</p>
+<h3 id="三-测试步骤"><a class="markdownIt-Anchor" href="#三-测试步骤"></a> 三、测试步骤</h3>
+<h4 id="31上传安装包到home路径解压文件并赋予权限"><a class="markdownIt-Anchor" href="#31上传安装包到home路径解压文件并赋予权限"></a> 3.1上传安装包到/home路径，解压文件并赋予权限</h4>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409051045728.png" alt="image-20240524143848374" /></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409051045712.png" alt="image-20240524143902227" /></p>
+<p>​	然后赋予权限</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod -R 777 *</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409051045798.png" alt="image-20240524143945906" /></p>
+<h4 id="32-测试执行"><a class="markdownIt-Anchor" href="#32-测试执行"></a> 3.2、测试执行</h4>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash lmbench-test.sh </span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409051045011.png" alt="image-20240524144003996" /></p>
+<p>==要改一下存储容量大小，我改为了6000==</p>
+<h3 id="4-查看结果"><a class="markdownIt-Anchor" href="#4-查看结果"></a> 4 查看结果</h3>
+<p>执行 make see 查看运行结果，若只出现两行命令，显示运行结果输出到了 summary.out 文件中，则直接查看该文件即可。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat ./results/summary.out</span><br></pre></td></tr></table></figure>
+<p>将会看到如下输出：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br></pre></td><td class="code"><pre><span class="line">make[1]: Entering directory &#x27;/test/03_lmbench/lmbench-3.0-a9/results&#x27;</span><br><span class="line"></span><br><span class="line">                 L M B E N C H  3 . 0   S U M M A R Y</span><br><span class="line">                 ------------------------------------</span><br><span class="line">                 (Alpha software, do not distribute)</span><br><span class="line"></span><br><span class="line">Basic system parameters</span><br><span class="line">------------------------------------------------------------------------------</span><br><span class="line">Host                 OS Description              Mhz  tlb  cache  mem   scal</span><br><span class="line">                                                     pages line   par   load</span><br><span class="line">                                                           bytes  </span><br><span class="line">--------- ------------- ----------------------- ---- ----- ----- ------ ----</span><br><span class="line">topeet    Linux 5.10.19       aarch64-linux-gnu 2279    48   128   22.3    1</span><br><span class="line">topeet    Linux 5.10.19       aarch64-linux-gnu 2279    48   128   22.4    1</span><br><span class="line"></span><br><span class="line">Processor, Processes - times in microseconds - smaller is better</span><br><span class="line">------------------------------------------------------------------------------</span><br><span class="line">Host                 OS  Mhz null null      open slct sig  sig  fork exec sh  </span><br><span class="line">                             call  I/O stat clos TCP  inst hndl proc proc proc</span><br><span class="line">--------- ------------- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----</span><br><span class="line">topeet    Linux 5.10.19 2279 0.13 0.16 0.56 4.07 2.84 0.17 0.88 356. 870. 2189</span><br><span class="line">topeet    Linux 5.10.19 2279 0.13 0.16 0.57 1.63 2.81 0.17 0.89 347. 879. 2123</span><br><span class="line"></span><br><span class="line">Basic integer operations - times in nanoseconds - smaller is better</span><br><span class="line">-------------------------------------------------------------------</span><br><span class="line">Host                 OS  intgr intgr  intgr  intgr  intgr  </span><br><span class="line">                          bit   add    mul    div    mod   </span><br><span class="line">--------- ------------- ------ ------ ------ ------ ------ </span><br><span class="line">topeet    Linux 5.10.19 0.3300 0.2200 0.8900 3.5100 3.6200</span><br><span class="line">topeet    Linux 5.10.19 0.3300 0.2200 0.8900 3.5100 3.6200</span><br><span class="line"></span><br><span class="line">Basic uint64 operations - times in nanoseconds - smaller is better</span><br><span class="line">------------------------------------------------------------------</span><br><span class="line">Host                 OS int64  int64  int64  int64  int64  </span><br><span class="line">                         bit    add    mul    div    mod   </span><br><span class="line">--------- ------------- ------ ------ ------ ------ ------ </span><br><span class="line">topeet    Linux 5.10.19  0.330        1.7900 2.8500 4.5000</span><br><span class="line">topeet    Linux 5.10.19  0.330        1.7900 2.8500 4.5000</span><br><span class="line"></span><br><span class="line">Basic float operations - times in nanoseconds - smaller is better</span><br><span class="line">-----------------------------------------------------------------</span><br><span class="line">Host                 OS  float  float  float  float</span><br><span class="line">                         add    mul    div    bogo</span><br><span class="line">--------- ------------- ------ ------ ------ ------ </span><br><span class="line">topeet    Linux 5.10.19 0.8800 1.3200 3.5100 1.2100</span><br><span class="line">topeet    Linux 5.10.19 0.8800 1.3200 3.5100 1.2100</span><br><span class="line"></span><br><span class="line">Basic double operations - times in nanoseconds - smaller is better</span><br><span class="line">------------------------------------------------------------------</span><br><span class="line">Host                 OS  double double double double</span><br><span class="line">                         add    mul    div    bogo</span><br><span class="line">--------- ------------- ------  ------ ------ ------ </span><br><span class="line">topeet    Linux 5.10.19 0.8800 1.3200 5.2600 2.4200</span><br><span class="line">topeet    Linux 5.10.19 0.8800 1.3200 5.2700 2.4200</span><br><span class="line"></span><br><span class="line">Context switching - times in microseconds - smaller is better</span><br><span class="line">-------------------------------------------------------------------------</span><br><span class="line">Host                 OS  2p/0K 2p/16K 2p/64K 8p/16K 8p/64K 16p/16K 16p/64K</span><br><span class="line">                         ctxsw  ctxsw  ctxsw ctxsw  ctxsw   ctxsw   ctxsw</span><br><span class="line">--------- ------------- ------ ------ ------ ------ ------ ------- -------</span><br><span class="line">topeet    Linux 5.10.19 1.2600 1.2700 1.4100 8.9200 9.0500 7.48000    13.8</span><br><span class="line">topeet    Linux 5.10.19 1.2400 1.3000        5.2900 0.5600 6.36000 2.83000</span><br><span class="line"></span><br><span class="line">*Local* Communication latencies in microseconds - smaller is better</span><br><span class="line">---------------------------------------------------------------------</span><br><span class="line">Host                 OS 2p/0K  Pipe AF     UDP  RPC/   TCP  RPC/ TCP</span><br><span class="line">                        ctxsw       UNIX         UDP         TCP conn</span><br><span class="line">--------- ------------- ----- ----- ---- ----- ----- ----- ----- ----</span><br><span class="line">topeet    Linux 5.10.19 1.260 4.775 25.0 8.477        10.7        99.</span><br><span class="line">topeet    Linux 5.10.19 1.240 4.753 5.26 8.399        10.6        79.</span><br><span class="line"></span><br><span class="line">*Remote* Communication latencies in microseconds - smaller is better</span><br><span class="line">---------------------------------------------------------------------</span><br><span class="line">Host                 OS   UDP  RPC/  TCP   RPC/ TCP</span><br><span class="line">                               UDP         TCP  conn</span><br><span class="line">--------- ------------- ----- ----- ----- ----- ----</span><br><span class="line">topeet    Linux 5.10.19                             </span><br><span class="line">topeet    Linux 5.10.19                             </span><br><span class="line"></span><br><span class="line">File &amp; VM system latencies in microseconds - smaller is better</span><br><span class="line">-------------------------------------------------------------------------------</span><br><span class="line">Host                 OS   0K File      10K File     Mmap    Prot   Page   100fd</span><br><span class="line">                        Create Delete Create Delete Latency Fault  Fault  selct</span><br><span class="line">--------- ------------- ------ ------ ------ ------ ------- ----- ------- -----</span><br><span class="line">topeet    Linux 5.10.19 9.0826 5.9360   21.8   11.7  8992.0 0.162 0.10570 1.325</span><br><span class="line">topeet    Linux 5.10.19 9.3983 6.2696   21.8   11.2  8695.0 0.162 0.11910 1.300</span><br><span class="line"></span><br><span class="line">*Local* Communication bandwidths in MB/s - bigger is better</span><br><span class="line">-----------------------------------------------------------------------------</span><br><span class="line">Host                OS  Pipe AF    TCP  File   Mmap  Bcopy  Bcopy  Mem   Mem</span><br><span class="line">                             UNIX      reread reread (libc) (hand) read write</span><br><span class="line">--------- ------------- ---- ---- ---- ------ ------ ------ ------ ---- -----</span><br><span class="line">topeet    Linux 5.10.19 2384 6458 2027 5744.7  17.4K  11.8K 8924.8 10.K 17.9K</span><br><span class="line">topeet    Linux 5.10.19 2448 6468 3177 5695.6  17.5K  12.0K 8938.3 10.K 17.8K</span><br><span class="line"></span><br><span class="line">Memory latencies in nanoseconds - smaller is better</span><br><span class="line">    (WARNING - may not be correct, check graphs)</span><br><span class="line">------------------------------------------------------------------------------</span><br><span class="line">Host                 OS   Mhz   L1 $   L2 $    Main mem    Rand mem    Guesses</span><br><span class="line">--------- -------------   ---   ----   ----    --------    --------    -------</span><br><span class="line">topeet    Linux 5.10.19  2279 1.7630 2.6940    6.965000       441.6</span><br><span class="line">topeet    Linux 5.10.19  2279 1.7640 2.6870    6.889000       408.4</span><br><span class="line">make[1]: Leaving directory &#x27;/test/03_lmbench/lmbench-3.0-a9/results&#x27;</span><br></pre></td></tr></table></figure>
+<h4 id="41-系统基本信息"><a class="markdownIt-Anchor" href="#41-系统基本信息"></a> 4.1. 系统基本信息</h4>
+<p>输出结果中开始显示系统的基本参数信息。</p>
+<p>其中：</p>
+<p>tlb: 表示转换后备缓存的页面数；</p>
+<p>cache line bytes: 高速缓存行字节数</p>
+<p>mem par: 存储器分层并行化；</p>
+<p>scal load: 并行执行的 Lmbench 数目。</p>
+<h4 id="42-处理器-processor-性能"><a class="markdownIt-Anchor" href="#42-处理器-processor-性能"></a> 4.2. 处理器 Processor 性能</h4>
+<p>如下输出结果单位均为 us，数值越小表示性能越好。</p>
+<p>null call: 执行 getppid 需要的时间；</p>
+<p>null I/O: 从 /dev/zero 读取一个字节的时长 t1，写一个字节到 /dev/null 的时长 t2，t1、t2 取平均值即为该项结果；</p>
+<p>stat: stat 一个文件（即得到一个文件的信息）所需时长；</p>
+<p>open clos: open 一个文件接着再 close 掉该文件一共所用时间（不包含读目录和节点的时间）；</p>
+<p>slct TCP: 通过 TCP 网络连接选择 100 个文件描述符所消耗的时间；</p>
+<p>sig inst: install signal 所耗时长；</p>
+<p>sig hndl: handler signal 所耗时长；</p>
+<p>fork proc: fork 一个完全相同的 process，并把原来的 process 关掉一共所消耗的时间；</p>
+<p>exec proc: 模拟一个 shell 进程的工作过程：fork 一个新进程执行新命令消耗的时间。</p>
+<p>sh proc: fork 一个进程，同时询问系统 shell 来找到并运行一个新程序所用时间。</p>
+<h4 id="43-数学运算"><a class="markdownIt-Anchor" href="#43-数学运算"></a> 4.3. 数学运算</h4>
+<p>如下输出结果单位均为 ns，数值越小表示性能越好。</p>
+<p>(1) 整型计算</p>
+<p>(2) 无符号整型计算</p>
+<p>(3) 浮点型计算</p>
+<p>(4) 双精度浮点型计算</p>
+<h4 id="44-上下文切换"><a class="markdownIt-Anchor" href="#44-上下文切换"></a> 4.4. 上下文切换</h4>
+<p>如下输出结果单位均为 us，数值越小表示性能越好。</p>
+<p>多个进程用 unix pipe 环连接起来，每个进程从自己的管道中读取 token，执行任务，然后将 token 写给下一个进程。</p>
+<p>context swithing 时间包括：切换进程的时间，加上恢复进程所有状态所用的时间（包含恢复 cache 状态）。</p>
+<p>2p/0k: 每个进程的 size 为 0（不执行任何任务），进程数为 2 时上下文切换所消耗的时间；</p>
+<p>2p/16k: 每个进程 size 为 16K（执行任务），进程数为 2 时上下文切换所消耗的时间；</p>
+<p>之后的测试项以此类推。</p>
+<h4 id="45-本地通讯时延"><a class="markdownIt-Anchor" href="#45-本地通讯时延"></a> 4.5. 本地通讯时延</h4>
+<p>如下输出结果单位均为 us，数值越小表示性能越好。</p>
+<p>2p/0k: 每个进程的 size 为 0（不执行任何任务），进程数为 2 时上下文切换所消耗的时间；</p>
+<p>Pipe: 即所谓的 hot potato 测试，两个没有具体任务的进程之间使用 pipe 通信，一个 token 在两个进程间来回传递，传递一个来回所消耗时长的平均值；</p>
+<p>AF UNIX: 同 Pipe 测试项，但进程间通信使用的是 socket 通信；</p>
+<p>UDP: 同 Pipe 测试项，但进程间通信使用的是 UDP/IP 通信；</p>
+<p>RPC/UDP: 同 Pipe 测试项，但进程间通信使用的是 sun RPC 通信，默认情况下，RPC 采用 UDP 协议传输；</p>
+<p>TCP: 同 Pipe 测试项，但进程间通信使用的是 TCP/IP 通信；</p>
+<p>RPC/TCP: 同 Pipe 测试项，但进程间通信使用的是 sun RPC 通信，指定 RPC 采用 TCP 协议传输；</p>
+<p>TCP conn: 创建 socket 描述符和建立连接所用时间。</p>
+<h4 id="46-文件-内存延时"><a class="markdownIt-Anchor" href="#46-文件-内存延时"></a> 4.6. 文件、内存延时</h4>
+<p>如下输出结果单位均为 us，数值越小表示性能越好。</p>
+<p>0K File Create: 0K 文件创建所用时间；</p>
+<p>0K File Delete: 0K 文件删除所用时间；</p>
+<p>10K File Create: 10K 文件创建所用时间；</p>
+<p>10K File Delete: 10K 文件删除所用时间；</p>
+<p>Mmap Latency: 将指定文件的开头 n 个字节 mmap 到内存，然后 unmap，并记录每次 mmap 和 unmap 共消耗的时间，去每次消耗时间的最大值；</p>
+<p>Port Fault: 保护页延时时间；</p>
+<p>Page Faule: 缺页延时时间；</p>
+<p>100fd selct: 对 100 个文件描述符配置 select 的时间。</p>
+<h4 id="47-本地通信带宽"><a class="markdownIt-Anchor" href="#47-本地通信带宽"></a> 4.7. 本地通信带宽</h4>
+<p>如下输出结果单位均为 MB/s，数值越大表示性能越好。</p>
+<p>Pipe: 在两个进程建立 pipe，pipe 的每个 chunk 为 64K，通过该管道移动 50MB 数据所消耗的时间；</p>
+<p>AF UNIX: 两个进程之间建立 unix stream socket 连接，每个 chunk 为 64K，通过该 socket 传输 10MB 数据所用的时间；</p>
+<p>TCP: 同 Pipe 测试项，但进程间使用 TCP/IP socket 通信，传输数据量为 3MB；</p>
+<p>File reread: 读文件并将其汇总一起所用的时间；</p>
+<p>Mmap reread: 将文件 mmap 到内存中，从内存中读文件并将其汇总一起所用时间；</p>
+<p>Bcopy(libc):dobw_mem i bcopy，从指定内存区域拷贝指定数量的字节内容到另一个指定内存区域的速度；</p>
+<p>Bcopy(hand): do bw_mem %i fcp，把数据从磁盘的一个位置拷贝到另一个位置所用的时间；</p>
+<p>Mem read: bw_mem i frd，累加数组中的整数值，测试把数据读入 processor 的带宽；</p>
+<p>Mem write: do bw_mem fwr，把整数数组的每个成员设置为 1，测试写数据到内存的带宽。</p>
+<h4 id="48-内存操作延时"><a class="markdownIt-Anchor" href="#48-内存操作延时"></a> 4.8. 内存操作延时</h4>
+<p>如下输出结果单位均为 ns，数值越小表示性能越好。</p>
+<p>本地测试执行 lat_mem_rd，将整数数组中每第 4 个元素的值累加起来；测试的是读数据到 processor 的带宽。</p>
+<p>L1： 缓存1</p>
+<p>L2： 缓存2</p>
+<p>Main Mem： 连续内存</p>
+<p>Rand Mem： 内存随机访问延时</p>
+<p>Guesses:</p>
+<p>假如 L1 和 L2 近似，会显示 “No L1 cache?”</p>
+<p>假如 L2 和 Main Mem 近似，会显示 “No L2 cache?”</p>
+<h2 id="4内存带宽性能stream"><a class="markdownIt-Anchor" href="#4内存带宽性能stream"></a> <strong>4.内存带宽性能(stream)</strong></h2>
+<p>1.安装gfortran：</p>
+<p>apt-get install gfortran</p>
+<p>2.解压stream工具包</p>
+<p>tar xvf stream-5.9-1.tar.bz2</p>
+<p>3.进入到解压目录执行编译：</p>
+<p>cd stream-5.9-1</p>
+<p>make<br />
+4.同时运行单线程和多线程测试</p>
+<p>./Run.sh -n 1 -n 4 -n 8</p>
+<p>注：这里的-n参数的值根据实际CPU核数设定,如只有4核，只跑./Run -n 1 -n 4，以此类推；</p>
+<p>5.执行完后到results目录查看结果</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409051045131.png" alt="image-20240527131621866" /></p>
+<h2 id="5硬盘读写性能iozone"><a class="markdownIt-Anchor" href="#5硬盘读写性能iozone"></a> <strong>5.硬盘读写性能(iozone)</strong></h2>
+<p>解压之后进入源码目录/iozone3_430/src/current下，如下图所示：<br />
+<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409051045120.png" alt="image-20240524171745999" /></p>
+<p>编译make CFLAGS=-fcommon linux-arm</p>
+<p>编译完成如下所示：<br />
+<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409051045208.png" alt="image-20240524172141636" /></p>
+<p>测试：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">./iozone -s 4g -i 0 -i 1 -i 2 -a -y 4k -q 16384k -f /iozonefile -Rb /home/iozonefile_rk3588.xls</span><br><span class="line">./iozone -s 8g -i 0 -i 1 -i 2 -a -y 4k -q 16384k -f /iozonefile -Rb /home/iozonefile_rk3588_8.xls</span><br><span class="line">./iozone -s 16g -i 0 -i 1 -i 2 -a -y 4k -q 16384k -f /iozonefile -Rb /home/iozonefile_rk3588_16.xls</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">                                                              random    random     bkwd    record    stride                                    </span><br><span class="line">              kB  reclen    write  rewrite    read    reread    read     write     read   rewrite      read   fwrite frewrite    fread  freread</span><br><span class="line">         4194304       4   436116   358158  5174402  4094807  2270951   252551                                                          </span><br><span class="line">         4194304       8   483751   256332  6320444  4891630  3472364   269135                                                          </span><br><span class="line">         4194304      16   552179   684541  6972783  5524091  5331936   191062                                                          </span><br><span class="line">         4194304      32   559849   265827  7379428  5821622  6585738   586108                                                          </span><br><span class="line">         4194304      64   568082   280172  7673710  6031385  7545110   585944                                                          </span><br><span class="line">         4194304     128   573306   500080  9033916  6142411  8316207   190163                                                          </span><br><span class="line">         4194304     256   573799   354331  7653196  6182861  8500953   381861                                                          </span><br><span class="line">         4194304     512   576573   457535  7674945  6020641  8491712   281622                                                          </span><br><span class="line">         4194304    1024   610564   252042  7706394  5969902  8495998   205003                                                          </span><br><span class="line">         4194304    2048   562769   698420  6728767  5158486  6865677   337050                                                          </span><br><span class="line">         4194304    4096   539499   365094  4529862  3965179  4768454   339728                                                          </span><br><span class="line">         4194304    8192   532515   545150  3921947  3663390  4292595   368336                                                          </span><br><span class="line">         4194304   16384   567006   310780  3897468  3539879  4119894   285764                                                          </span><br><span class="line"></span><br><span class="line">iozone test complete.</span><br><span class="line">Excel output is below:</span><br><span class="line"></span><br><span class="line">&quot;Writer report&quot;</span><br><span class="line">        &quot;4&quot;  &quot;8&quot;  &quot;16&quot;  &quot;32&quot;  &quot;64&quot;  &quot;128&quot;  &quot;256&quot;  &quot;512&quot;  &quot;1024&quot;  &quot;2048&quot;  &quot;4096&quot;  &quot;8192&quot;  &quot;16384&quot;</span><br><span class="line">&quot;4194304&quot;   436116  483751  552179  559849  568082  573306  573799  576573  610564  562769  539499  532515  567006 </span><br><span class="line"></span><br><span class="line">&quot;Re-writer report&quot;</span><br><span class="line">        &quot;4&quot;  &quot;8&quot;  &quot;16&quot;  &quot;32&quot;  &quot;64&quot;  &quot;128&quot;  &quot;256&quot;  &quot;512&quot;  &quot;1024&quot;  &quot;2048&quot;  &quot;4096&quot;  &quot;8192&quot;  &quot;16384&quot;</span><br><span class="line">&quot;4194304&quot;   358158  256332  684541  265827  280172  500080  354331  457535  252042  698420  365094  545150  310780 </span><br><span class="line"></span><br><span class="line">&quot;Reader report&quot;</span><br><span class="line">        &quot;4&quot;  &quot;8&quot;  &quot;16&quot;  &quot;32&quot;  &quot;64&quot;  &quot;128&quot;  &quot;256&quot;  &quot;512&quot;  &quot;1024&quot;  &quot;2048&quot;  &quot;4096&quot;  &quot;8192&quot;  &quot;16384&quot;</span><br><span class="line">&quot;4194304&quot;   5174402  6320444  6972783  7379428  7673710  9033916  7653196  7674945  7706394  6728767  4529862  3921947  3897468 </span><br><span class="line"></span><br><span class="line">&quot;Re-Reader report&quot;</span><br><span class="line">        &quot;4&quot;  &quot;8&quot;  &quot;16&quot;  &quot;32&quot;  &quot;64&quot;  &quot;128&quot;  &quot;256&quot;  &quot;512&quot;  &quot;1024&quot;  &quot;2048&quot;  &quot;4096&quot;  &quot;8192&quot;  &quot;16384&quot;</span><br><span class="line">&quot;4194304&quot;   4094807  4891630  5524091  5821622  6031385  6142411  6182861  6020641  5969902  5158486  3965179  3663390  3539879 </span><br><span class="line"></span><br><span class="line">&quot;Random read report&quot;</span><br><span class="line">        &quot;4&quot;  &quot;8&quot;  &quot;16&quot;  &quot;32&quot;  &quot;64&quot;  &quot;128&quot;  &quot;256&quot;  &quot;512&quot;  &quot;1024&quot;  &quot;2048&quot;  &quot;4096&quot;  &quot;8192&quot;  &quot;16384&quot;</span><br><span class="line">&quot;4194304&quot;   2270951  3472364  5331936  6585738  7545110  8316207  8500953  8491712  8495998  6865677  4768454  4292595  4119894 </span><br><span class="line"></span><br><span class="line">&quot;Random write report&quot;</span><br><span class="line">        &quot;4&quot;  &quot;8&quot;  &quot;16&quot;  &quot;32&quot;  &quot;64&quot;  &quot;128&quot;  &quot;256&quot;  &quot;512&quot;  &quot;1024&quot;  &quot;2048&quot;  &quot;4096&quot;  &quot;8192&quot;  &quot;16384&quot;</span><br><span class="line">&quot;4194304&quot;   252551  269135  191062  586108  585944  190163  381861  281622  205003  337050  339728  368336  285764 </span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">./iozone -i 0 -i 1  -i 2 -f /iozonefile　-s 16G -Rb iozonefile_rk3588_16.xls</span><br><span class="line">./iozone -i 0 -i 1  -i 2 -f /iozonefile　 -s 8G  -Rb iozonefile_rk3588_8.xls</span><br><span class="line">./iozone -i 0 -i 1  -i 2 -f /iozonefile　 -s 4G  -Rb iozonefile_rk3588_4.xls</span><br></pre></td></tr></table></figure>
+<h2 id="6网络传输性能netperf"><a class="markdownIt-Anchor" href="#6网络传输性能netperf"></a> <strong>6.网络传输性能(netperf)</strong></h2>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409051045197.png" alt="image-20240524173321029" /></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">./configure -build=alpha</span><br><span class="line">make CFLAGS=-fcommon </span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409051045342.png" alt="image-20240524173812947" /></p>
+<p>在另一台机器上安装：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install netperf</span><br></pre></td></tr></table></figure>
+<p>然后执行netserver命令启动监听服务</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">netperf -H 192.168.1.221 -t TCP_STREAM -l 60 &gt; netperf.txt</span><br><span class="line">netperf -H 192.168.1.221 -t UDP_STREAM -l 60 &gt;&gt; netperf.txt</span><br><span class="line">netperf -H 192.168.1.221 -t TCP_RR -l 60 &gt;&gt; netperf.txt</span><br><span class="line">netperf -H 192.168.1.221 -t UDP_RR -l 60 &gt;&gt; netperf.txt</span><br><span class="line">netperf -H 192.168.1.221 -t TCP_CRR -l 60 &gt;&gt; netperf.txt</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">MIGRATED TCP STREAM TEST from 0.0.0.0 (0.0.0.0) port 0 AF_INET to 192.168.1.221 () port 0 AF_INET</span><br><span class="line">Recv   Send    Send                          </span><br><span class="line">Socket Socket  Message  Elapsed              </span><br><span class="line">Size   Size    Size     Time     Throughput  </span><br><span class="line">bytes  bytes   bytes    secs.    10^6bits/sec  </span><br><span class="line"></span><br><span class="line">131072  16384  16384    60.00    44262.95   </span><br><span class="line">MIGRATED UDP STREAM TEST from 0.0.0.0 (0.0.0.0) port 0 AF_INET to 192.168.1.221 () port 0 AF_INET</span><br><span class="line">Socket  Message  Elapsed      Messages                </span><br><span class="line">Size    Size     Time         Okay Errors   Throughput</span><br><span class="line">bytes   bytes    secs            #      #   10^6bits/sec</span><br><span class="line"></span><br><span class="line">212992   65507   60.00     7031396      0    61413.95</span><br><span class="line">212992           60.00     7016613           61284.84</span><br><span class="line"></span><br><span class="line">MIGRATED TCP REQUEST/RESPONSE TEST from 0.0.0.0 (0.0.0.0) port 0 AF_INET to 192.168.1.221 () port 0 AF_INET : first burst 0</span><br><span class="line">Local /Remote</span><br><span class="line">Socket Size   Request  Resp.   Elapsed  Trans.</span><br><span class="line">Send   Recv   Size     Size    Time     Rate         </span><br><span class="line">bytes  Bytes  bytes    bytes   secs.    per sec   </span><br><span class="line"></span><br><span class="line">16384  131072 1        1       60.00    93255.47   </span><br><span class="line">16384  131072</span><br><span class="line">MIGRATED UDP REQUEST/RESPONSE TEST from 0.0.0.0 (0.0.0.0) port 0 AF_INET to 192.168.1.221 () port 0 AF_INET : first burst 0</span><br><span class="line">Local /Remote</span><br><span class="line">Socket Size   Request  Resp.   Elapsed  Trans.</span><br><span class="line">Send   Recv   Size     Size    Time     Rate         </span><br><span class="line">bytes  Bytes  bytes    bytes   secs.    per sec   </span><br><span class="line"></span><br><span class="line">212992 212992 1        1       60.00    95949.79   </span><br><span class="line">212992 212992</span><br><span class="line">MIGRATED TCP Connect/Request/Response TEST from 0.0.0.0 (0.0.0.0) port 0 AF_INET to 192.168.1.221 () port 0 AF_INET</span><br><span class="line">Local /Remote</span><br><span class="line">Socket Size   Request  Resp.   Elapsed  Trans.</span><br><span class="line">Send   Recv   Size     Size    Time     Rate         </span><br><span class="line">bytes  Bytes  bytes    bytes   secs.    per sec   </span><br><span class="line"></span><br><span class="line">16384  131072 1        1       60.00    23631.47   </span><br><span class="line">16384  131072</span><br></pre></td></tr></table></figure>
+<ol>
+<li>
+<p>TCP STREAM<br />
+1） 远端系统（即server）使用大小为87380字节的socket接收缓冲<br />
+2） 本地系统（即client）使用大小为16384字节的socket发送缓冲<br />
+3） 向远端系统发送的测试分组大小为16384字节<br />
+4） 测试经历的时间为60.03秒<br />
+5） 吞吐量的测试结果为941.47Mbits/秒</p>
+</li>
+<li>
+<p>UDP_STREAM<br />
+UDP_STREAM方式的结果中有两行测试数据，第一行显示的是本地系统的发送统计，这里的吞吐量表示netperf向本地socket发送分组的能力。第二行显示的就是远端系统接收的情况。</p>
+</li>
+<li>
+<p>TCP_RR<br />
+TCP_RR方式的测试对象是多次TCP request和response的交易过程，但是它们发生在同一个TCP连接中，这种模式常常出现在数据库应用中。数据库的client程序与server程序建立一个TCP连接以后，就在这个连接中传送数据库的多次交易过程。<br />
+Netperf输出的结果也是由两行组成。第一行显示本地系统的情况，第二行显示的是远端系统的信息。平均的交易率（transaction rate）为3094.64次/秒。注意到这里每次交易中的request和response分组的大小都为1个字节，不具有很大的实际意义。用户可以通过测试相关的参数来改变request和response分组的大小，TCP_RR方式下的参数如下表所示：<br />
+参数说明：<br />
+-r req,resp 设置request和reponse分组的大小<br />
+-s size 设置本地系统的socket发送与接收缓冲大小<br />
+-S size 设置远端系统的socket发送与接收缓冲大小<br />
+-D 对本地与远端系统的socket设置TCP_NODELAY选项</p>
+</li>
+<li>
+<p>UDP_RR<br />
+UDP_RR方式使用UDP分组进行request/response的交易过程。没有TCP连接所带来的负担。<br />
+可能会受到网络中路由器或其它的网络设备对UDP采用了与TCP不同的缓冲区空间和处理技术影响,正常情况下会高于TCP_RR的值。本次测试结果为3136.53次/秒。</p>
+</li>
+<li>
+<p>TCP_CRR<br />
+与TCP_RR不同，TCP_CRR为每次交易建立一个新的TCP连接。最典型的应用就是HTTP，每次HTTP交易是在一条单独的TCP连接中进行的。因此，由于需要不停地建立新的TCP连接，并且在交易结束后拆除TCP连接，交易率一定会受到很大的影响。</p>
+</li>
+</ol>
+<p>这里交易率明显的降低了，只有1422.23次/秒。</p>
+<h2 id="7数据盘读写性能fio"><a class="markdownIt-Anchor" href="#7数据盘读写性能fio"></a> 7.数据盘读写性能(fio)</h2>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409051045589.png" alt="image-20240524175402485" /></p>
+<p>测试方法<br />
+安装libaio：（注意：顺序不能反，一定要先安装libaio，再编译）<br />
+桌面版本：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get -y install libaio1 libaio-dev libraw-dev</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd fio-2.1.10</span><br><span class="line"> ./configure --cpu=aarch64</span><br><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409051045567.png" alt="image-20240524181017554" /></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">fio -filename=/test.4k -direct=1 -iodepth 16 -thread -rw=read -ioengine=libaio -bs=4k -size=2G -numjobs=8 -group_reporting -name=/test/07_fio/4k_read.result &gt; /test/07_fio/result </span><br><span class="line"></span><br><span class="line">fio -filename=/test.4k -direct=1 -iodepth 16 -thread -rw=write -ioengine=libaio -bs=4k -size=2G -numjobs=8 -group_reporting -name=/test/07_fio/4k_write.result &gt;&gt; /test/07_fio/result </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">fio -filename=/test.1M -direct=1 -iodepth 16 -thread -rw=read -ioengine=libaio -bs=1M -size=2G -numjobs=8 -group_reporting -name=/test/07_fio/1M_read.result &gt;&gt; /test/07_fio/result </span><br><span class="line"></span><br><span class="line">fio -filename=/test.1M -direct=1 -iodepth 16 -thread -rw=write -ioengine=libaio -bs=1M -size=2G -numjobs=8 -group_reporting -name=/test/07_fio/1M_write.result &gt;&gt; /test/07_fio/result </span><br><span class="line"></span><br><span class="line">fio -filename=/test.4k -direct=1 -iodepth 16 -thread -rw=randread -ioengine=libaio -bs=4k -size=2G -numjobs=8 -group_reporting -name=/test/07_fio/4k_randread.result &gt;&gt; /test/07_fio/result </span><br><span class="line"></span><br><span class="line">fio -filename=/test.4k -direct=1 -iodepth 16 -thread -rw=randwrite -ioengine=libaio -bs=4k -size=2G -numjobs=8 -group_reporting -name=/test/07_fio/4k_randwrite.result &gt;&gt; /test/07_fio/result </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>测试完成后可查看result文件看结果：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br></pre></td><td class="code"><pre><span class="line">/test/07_fio/4k_read.result: (g=0): rw=read, bs=(R) 4096B-4096B, (W) 4096B-4096B, (T) 4096B-4096B, ioengine=libaio, iodepth=16</span><br><span class="line">...</span><br><span class="line">fio-3.20</span><br><span class="line">Starting 8 threads</span><br><span class="line"></span><br><span class="line">/test/07_fio/4k_read.result: (groupid=0, jobs=8): err= 0: pid=207001: Mon May 27 14:54:47 2024</span><br><span class="line">  read: IOPS=47.3k, BW=185MiB/s (194MB/s)(16.0GiB/88745msec)</span><br><span class="line">    slat (nsec): min=875, max=2133.2k, avg=7007.83, stdev=5016.92</span><br><span class="line">    clat (usec): min=199, max=3487.5k, avg=2610.55, stdev=15493.93</span><br><span class="line">     lat (usec): min=233, max=3487.5k, avg=2617.91, stdev=15493.93</span><br><span class="line">    clat percentiles (usec):</span><br><span class="line">     |  1.00th=[  1045],  5.00th=[  1614], 10.00th=[  1778], 20.00th=[  1958],</span><br><span class="line">     | 30.00th=[  2073], 40.00th=[  2180], 50.00th=[  2311], 60.00th=[  2376],</span><br><span class="line">     | 70.00th=[  2507], 80.00th=[  2638], 90.00th=[  2933], 95.00th=[  3818],</span><br><span class="line">     | 99.00th=[  6390], 99.50th=[  9110], 99.90th=[ 28181], 99.95th=[ 38536],</span><br><span class="line">     | 99.99th=[425722]</span><br><span class="line">   bw (  KiB/s): min=23890, max=376878, per=100.00%, avg=199714.24, stdev=5507.16, samples=1309</span><br><span class="line">   iops        : min= 5969, max=94219, avg=49926.62, stdev=1376.75, samples=1309</span><br><span class="line">  lat (usec)   : 250=0.01%, 500=0.07%, 750=0.28%, 1000=0.51%</span><br><span class="line">  lat (msec)   : 2=22.73%, 4=72.24%, 10=3.75%, 20=0.25%, 50=0.14%</span><br><span class="line">  lat (msec)   : 100=0.02%, 250=0.01%, 500=0.01%, 750=0.01%, 1000=0.01%</span><br><span class="line">  lat (msec)   : 2000=0.01%, &gt;=2000=0.01%</span><br><span class="line">  cpu          : usr=2.13%, sys=4.20%, ctx=558488, majf=0, minf=137</span><br><span class="line">  IO depths    : 1=0.1%, 2=0.1%, 4=0.1%, 8=0.1%, 16=100.0%, 32=0.0%, &gt;=64=0.0%</span><br><span class="line">     submit    : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, &gt;=64=0.0%</span><br><span class="line">     complete  : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.1%, 32=0.0%, 64=0.0%, &gt;=64=0.0%</span><br><span class="line">     issued rwts: total=4194304,0,0,0 short=0,0,0,0 dropped=0,0,0,0</span><br><span class="line">     latency   : target=0, window=0, percentile=100.00%, depth=16</span><br><span class="line"></span><br><span class="line">Run status group 0 (all jobs):</span><br><span class="line">   READ: bw=185MiB/s (194MB/s), 185MiB/s-185MiB/s (194MB/s-194MB/s), io=16.0GiB (17.2GB), run=88745-88745msec</span><br><span class="line"></span><br><span class="line">Disk stats (read/write):</span><br><span class="line">  mmcblk0: ios=246678/1475, merge=3945401/195, ticks=623046/25558, in_queue=648640, util=100.00%</span><br><span class="line">/test/07_fio/4k_write.result: (g=0): rw=write, bs=(R) 4096B-4096B, (W) 4096B-4096B, (T) 4096B-4096B, ioengine=libaio, iodepth=16</span><br><span class="line">...</span><br><span class="line">fio-3.20</span><br><span class="line">Starting 8 threads</span><br><span class="line"></span><br><span class="line">/test/07_fio/4k_write.result: (groupid=0, jobs=8): err= 0: pid=207097: Mon May 27 15:04:35 2024</span><br><span class="line">  write: IOPS=7147, BW=27.9MiB/s (29.3MB/s)(16.0GiB/586796msec); 0 zone resets</span><br><span class="line">    slat (nsec): min=1166, max=523153k, avg=24597.05, stdev=1700976.31</span><br><span class="line">    clat (usec): min=43, max=2624.1k, avg=17410.51, stdev=63041.08</span><br><span class="line">     lat (usec): min=72, max=2624.1k, avg=17435.47, stdev=63131.39</span><br><span class="line">    clat percentiles (usec):</span><br><span class="line">     |  1.00th=[   1483],  5.00th=[   2835], 10.00th=[   3195],</span><br><span class="line">     | 20.00th=[   3589], 30.00th=[   3720], 40.00th=[   3916],</span><br><span class="line">     | 50.00th=[   4178], 60.00th=[   4293], 70.00th=[   4490],</span><br><span class="line">     | 80.00th=[   5276], 90.00th=[   9241], 95.00th=[ 125305],</span><br><span class="line">     | 99.00th=[ 227541], 99.50th=[ 329253], 99.90th=[ 926942],</span><br><span class="line">     | 99.95th=[1199571], 99.99th=[1501561]</span><br><span class="line">   bw (  KiB/s): min=   64, max=222744, per=100.00%, avg=30970.62, stdev=4675.11, samples=8583</span><br><span class="line">   iops        : min=   16, max=55686, avg=7741.70, stdev=1168.75, samples=8583</span><br><span class="line">  lat (usec)   : 50=0.01%, 100=0.01%, 250=0.03%, 500=0.10%, 750=0.65%</span><br><span class="line">  lat (usec)   : 1000=0.07%</span><br><span class="line">  lat (msec)   : 2=0.34%, 4=41.87%, 10=47.66%, 20=1.25%, 50=0.63%</span><br><span class="line">  lat (msec)   : 100=0.69%, 250=5.88%, 500=0.58%, 750=0.10%, 1000=0.05%</span><br><span class="line">  lat (msec)   : 2000=0.08%, &gt;=2000=0.01%</span><br><span class="line">  cpu          : usr=0.38%, sys=0.75%, ctx=576754, majf=0, minf=10</span><br><span class="line">  IO depths    : 1=0.1%, 2=0.1%, 4=0.1%, 8=0.1%, 16=100.0%, 32=0.0%, &gt;=64=0.0%</span><br><span class="line">     submit    : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, &gt;=64=0.0%</span><br><span class="line">     complete  : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.1%, 32=0.0%, 64=0.0%, &gt;=64=0.0%</span><br><span class="line">     issued rwts: total=0,4194304,0,0 short=0,0,0,0 dropped=0,0,0,0</span><br><span class="line">     latency   : target=0, window=0, percentile=100.00%, depth=16</span><br><span class="line"></span><br><span class="line">Run status group 0 (all jobs):</span><br><span class="line">  WRITE: bw=27.9MiB/s (29.3MB/s), 27.9MiB/s-27.9MiB/s (29.3MB/s-29.3MB/s), io=16.0GiB (17.2GB), run=586796-586796msec</span><br><span class="line"></span><br><span class="line">Disk stats (read/write):</span><br><span class="line">  mmcblk0: ios=0/286936, merge=0/3916379, ticks=0/8454187, in_queue=8462460, util=99.50%</span><br><span class="line">/test/07_fio/1M_read.result: (g=0): rw=read, bs=(R) 1024KiB-1024KiB, (W) 1024KiB-1024KiB, (T) 1024KiB-1024KiB, ioengine=libaio, iodepth=16</span><br><span class="line">...</span><br><span class="line">fio-3.20</span><br><span class="line">Starting 8 threads</span><br><span class="line"></span><br><span class="line">/test/07_fio/1M_read.result: (groupid=0, jobs=8): err= 0: pid=207618: Mon May 27 15:05:35 2024</span><br><span class="line">  read: IOPS=275, BW=275MiB/s (288MB/s)(16.0GiB/59550msec)</span><br><span class="line">    slat (usec): min=38, max=512225, avg=25893.10, stdev=42143.54</span><br><span class="line">    clat (msec): min=11, max=2415, avg=430.93, stdev=146.16</span><br><span class="line">     lat (msec): min=11, max=2415, avg=456.82, stdev=152.57</span><br><span class="line">    clat percentiles (msec):</span><br><span class="line">     |  1.00th=[  105],  5.00th=[  213], 10.00th=[  264], 20.00th=[  317],</span><br><span class="line">     | 30.00th=[  355], 40.00th=[  388], 50.00th=[  418], 60.00th=[  451],</span><br><span class="line">     | 70.00th=[  493], 80.00th=[  542], 90.00th=[  609], 95.00th=[  684],</span><br><span class="line">     | 99.00th=[  844], 99.50th=[  902], 99.90th=[ 1083], 99.95th=[ 1183],</span><br><span class="line">     | 99.99th=[ 1552]</span><br><span class="line">   bw (  KiB/s): min=104448, max=669573, per=100.00%, avg=285587.80, stdev=11325.53, samples=924</span><br><span class="line">   iops        : min=  102, max=  653, avg=278.80, stdev=11.05, samples=924</span><br><span class="line">  lat (msec)   : 20=0.11%, 50=0.24%, 100=0.48%, 250=7.28%, 500=63.64%</span><br><span class="line">  lat (msec)   : 750=25.52%, 1000=2.52%, 2000=0.21%, &gt;=2000=0.01%</span><br><span class="line">  cpu          : usr=0.03%, sys=0.38%, ctx=18042, majf=0, minf=32777</span><br><span class="line">  IO depths    : 1=0.1%, 2=0.1%, 4=0.2%, 8=0.4%, 16=99.3%, 32=0.0%, &gt;=64=0.0%</span><br><span class="line">     submit    : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, &gt;=64=0.0%</span><br><span class="line">     complete  : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.1%, 32=0.0%, 64=0.0%, &gt;=64=0.0%</span><br><span class="line">     issued rwts: total=16384,0,0,0 short=0,0,0,0 dropped=0,0,0,0</span><br><span class="line">     latency   : target=0, window=0, percentile=100.00%, depth=16</span><br><span class="line"></span><br><span class="line">Run status group 0 (all jobs):</span><br><span class="line">   READ: bw=275MiB/s (288MB/s), 275MiB/s-275MiB/s (288MB/s-288MB/s), io=16.0GiB (17.2GB), run=59550-59550msec</span><br><span class="line"></span><br><span class="line">Disk stats (read/write):</span><br><span class="line">  mmcblk0: ios=32674/725, merge=0/110, ticks=6973292/412111, in_queue=7385454, util=100.00%</span><br><span class="line">/test/07_fio/1M_write.result: (g=0): rw=write, bs=(R) 1024KiB-1024KiB, (W) 1024KiB-1024KiB, (T) 1024KiB-1024KiB, ioengine=libaio, iodepth=16</span><br><span class="line">...</span><br><span class="line">fio-3.20</span><br><span class="line">Starting 8 threads</span><br><span class="line"></span><br><span class="line">/test/07_fio/1M_write.result: (groupid=0, jobs=8): err= 0: pid=207681: Mon May 27 15:15:17 2024</span><br><span class="line">  write: IOPS=28, BW=28.2MiB/s (29.6MB/s)(16.0GiB/581311msec); 0 zone resets</span><br><span class="line">    slat (usec): min=93, max=4919.9k, avg=252152.23, stdev=625406.54</span><br><span class="line">    clat (msec): min=8, max=17001, avg=4129.88, stdev=2203.68</span><br><span class="line">     lat (msec): min=12, max=17001, avg=4382.04, stdev=2254.09</span><br><span class="line">    clat percentiles (msec):</span><br><span class="line">     |  1.00th=[   84],  5.00th=[  451], 10.00th=[ 1653], 20.00th=[ 2366],</span><br><span class="line">     | 30.00th=[ 2702], 40.00th=[ 3205], 50.00th=[ 4279], 60.00th=[ 4597],</span><br><span class="line">     | 70.00th=[ 4933], 80.00th=[ 6141], 90.00th=[ 6879], 95.00th=[ 8154],</span><br><span class="line">     | 99.00th=[10402], 99.50th=[10939], 99.90th=[12818], 99.95th=[13087],</span><br><span class="line">     | 99.99th=[14832]</span><br><span class="line">   bw (  KiB/s): min=13635, max=463331, per=100.00%, avg=79465.91, stdev=9160.13, samples=3318</span><br><span class="line">   iops        : min=    8, max=  449, avg=75.27, stdev= 8.92, samples=3318</span><br><span class="line">  lat (msec)   : 10=0.04%, 20=0.12%, 50=0.46%, 100=0.48%, 250=2.11%</span><br><span class="line">  lat (msec)   : 500=2.25%, 750=2.20%, 1000=0.84%, 2000=2.95%, &gt;=2000=88.54%</span><br><span class="line">  cpu          : usr=0.08%, sys=0.04%, ctx=17511, majf=0, minf=9</span><br><span class="line">  IO depths    : 1=0.1%, 2=0.1%, 4=0.2%, 8=0.4%, 16=99.3%, 32=0.0%, &gt;=64=0.0%</span><br><span class="line">     submit    : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, &gt;=64=0.0%</span><br><span class="line">     complete  : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.1%, 32=0.0%, 64=0.0%, &gt;=64=0.0%</span><br><span class="line">     issued rwts: total=0,16384,0,0 short=0,0,0,0 dropped=0,0,0,0</span><br><span class="line">     latency   : target=0, window=0, percentile=100.00%, depth=16</span><br><span class="line"></span><br><span class="line">Run status group 0 (all jobs):</span><br><span class="line">  WRITE: bw=28.2MiB/s (29.6MB/s), 28.2MiB/s-28.2MiB/s (29.6MB/s-29.6MB/s), io=16.0GiB (17.2GB), run=581311-581311msec</span><br><span class="line"></span><br><span class="line">Disk stats (read/write):</span><br><span class="line">  mmcblk0: ios=0/38767, merge=0/1043, ticks=0/64664224, in_queue=64667302, util=99.27%</span><br><span class="line">/test/07_fio/4k_randread.result: (g=0): rw=randread, bs=(R) 4096B-4096B, (W) 4096B-4096B, (T) 4096B-4096B, ioengine=libaio, iodepth=16</span><br><span class="line">...</span><br><span class="line">fio-3.20</span><br><span class="line">Starting 8 threads</span><br><span class="line"></span><br><span class="line">/test/07_fio/4k_randread.result: (groupid=0, jobs=8): err= 0: pid=208207: Mon May 27 15:23:33 2024</span><br><span class="line">  read: IOPS=8483, BW=33.1MiB/s (34.7MB/s)(16.0GiB/494420msec)</span><br><span class="line">    slat (usec): min=2, max=201706, avg=36.93, stdev=428.22</span><br><span class="line">    clat (usec): min=88, max=533254, avg=15039.17, stdev=10664.59</span><br><span class="line">     lat (usec): min=292, max=533276, avg=15076.65, stdev=10688.75</span><br><span class="line">    clat percentiles (usec):</span><br><span class="line">     |  1.00th=[   807],  5.00th=[  1958], 10.00th=[  3359], 20.00th=[  6128],</span><br><span class="line">     | 30.00th=[  8848], 40.00th=[ 11600], 50.00th=[ 14353], 60.00th=[ 17171],</span><br><span class="line">     | 70.00th=[ 20055], 80.00th=[ 22676], 90.00th=[ 25822], 95.00th=[ 27657],</span><br><span class="line">     | 99.00th=[ 45876], 99.50th=[ 66847], 99.90th=[111674], 99.95th=[130548],</span><br><span class="line">     | 99.99th=[177210]</span><br><span class="line">   bw (  KiB/s): min= 8035, max=48720, per=99.97%, avg=33923.78, stdev=237.61, samples=7886</span><br><span class="line">   iops        : min= 2006, max=12180, avg=8477.79, stdev=59.39, samples=7886</span><br><span class="line">  lat (usec)   : 100=0.01%, 250=0.01%, 500=0.06%, 750=0.75%, 1000=0.85%</span><br><span class="line">  lat (msec)   : 2=3.51%, 4=7.18%, 10=21.64%, 20=36.19%, 50=28.96%</span><br><span class="line">  lat (msec)   : 100=0.70%, 250=0.15%, 500=0.01%, 750=0.01%</span><br><span class="line">  cpu          : usr=0.75%, sys=2.16%, ctx=8332454, majf=0, minf=137</span><br><span class="line">  IO depths    : 1=0.1%, 2=0.1%, 4=0.1%, 8=0.1%, 16=100.0%, 32=0.0%, &gt;=64=0.0%</span><br><span class="line">     submit    : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, &gt;=64=0.0%</span><br><span class="line">     complete  : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.1%, 32=0.0%, 64=0.0%, &gt;=64=0.0%</span><br><span class="line">     issued rwts: total=4194304,0,0,0 short=0,0,0,0 dropped=0,0,0,0</span><br><span class="line">     latency   : target=0, window=0, percentile=100.00%, depth=16</span><br><span class="line"></span><br><span class="line">Run status group 0 (all jobs):</span><br><span class="line">   READ: bw=33.1MiB/s (34.7MB/s), 33.1MiB/s-33.1MiB/s (34.7MB/s-34.7MB/s), io=16.0GiB (17.2GB), run=494420-494420msec</span><br><span class="line"></span><br><span class="line">Disk stats (read/write):</span><br><span class="line">  mmcblk0: ios=4181430/7450, merge=12740/996, ticks=62631284/343162, in_queue=62974566, util=100.00%</span><br><span class="line">/test/07_fio/4k_randwrite.result: (g=0): rw=randwrite, bs=(R) 4096B-4096B, (W) 4096B-4096B, (T) 4096B-4096B, ioengine=libaio, iodepth=16</span><br><span class="line">...</span><br><span class="line">fio-3.20</span><br><span class="line">Starting 8 threads</span><br><span class="line"></span><br><span class="line">/test/07_fio/4k_randwrite.result: (groupid=0, jobs=8): err= 0: pid=208657: Mon May 27 15:41:42 2024</span><br><span class="line">  write: IOPS=3855, BW=15.1MiB/s (15.8MB/s)(16.0GiB/1087918msec); 0 zone resets</span><br><span class="line">    slat (usec): min=2, max=2778.7k, avg=352.85, stdev=13919.64</span><br><span class="line">    clat (nsec): min=1458, max=5634.7M, avg=32836509.68, stdev=162686262.13</span><br><span class="line">     lat (usec): min=91, max=5634.8k, avg=33190.01, stdev=163925.97</span><br><span class="line">    clat percentiles (usec):</span><br><span class="line">     |  1.00th=[    249],  5.00th=[    627], 10.00th=[   1123],</span><br><span class="line">     | 20.00th=[   2073], 30.00th=[   2966], 40.00th=[   3949],</span><br><span class="line">     | 50.00th=[   4883], 60.00th=[   5866], 70.00th=[   6849],</span><br><span class="line">     | 80.00th=[   7898], 90.00th=[  28181], 95.00th=[  48497],</span><br><span class="line">     | 99.00th=[ 801113], 99.50th=[1182794], 99.90th=[2105541],</span><br><span class="line">     | 99.95th=[2365588], 99.99th=[3103785]</span><br><span class="line">   bw (  KiB/s): min=   56, max=85966, per=100.00%, avg=15926.41, stdev=3214.43, samples=16811</span><br><span class="line">   iops        : min=    8, max=21488, avg=3980.73, stdev=803.57, samples=16811</span><br><span class="line">  lat (usec)   : 2=0.01%, 4=0.01%, 50=0.01%, 100=0.01%, 250=1.00%</span><br><span class="line">  lat (usec)   : 500=2.63%, 750=2.62%, 1000=2.55%</span><br><span class="line">  lat (msec)   : 2=10.38%, 4=21.28%, 10=46.67%, 20=1.69%, 50=6.22%</span><br><span class="line">  lat (msec)   : 100=0.51%, 250=1.12%, 500=1.43%, 750=0.81%, 1000=0.40%</span><br><span class="line">  lat (msec)   : 2000=0.56%, &gt;=2000=0.14%</span><br><span class="line">  cpu          : usr=0.35%, sys=1.10%, ctx=7577659, majf=0, minf=11</span><br><span class="line">  IO depths    : 1=0.1%, 2=0.1%, 4=0.1%, 8=0.1%, 16=100.0%, 32=0.0%, &gt;=64=0.0%</span><br><span class="line">     submit    : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, &gt;=64=0.0%</span><br><span class="line">     complete  : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.1%, 32=0.0%, 64=0.0%, &gt;=64=0.0%</span><br><span class="line">     issued rwts: total=0,4194304,0,0 short=0,0,0,0 dropped=0,0,0,0</span><br><span class="line">     latency   : target=0, window=0, percentile=100.00%, depth=16</span><br><span class="line"></span><br><span class="line">Run status group 0 (all jobs):</span><br><span class="line">  WRITE: bw=15.1MiB/s (15.8MB/s), 15.1MiB/s-15.1MiB/s (15.8MB/s-15.8MB/s), io=16.0GiB (17.2GB), run=1087918-1087918msec</span><br><span class="line"></span><br><span class="line">Disk stats (read/write):</span><br><span class="line">  mmcblk0: ios=0/4191578, merge=0/13549, ticks=0/133093101, in_queue=133097231, util=99.99%</span><br></pre></td></tr></table></figure>
+<p>参数说明</p>
+<p>filename=/data/test 测试文件名称，通常选择需要测试的盘的data目录；</p>
+<p>direct=1 是否使用directIO，测试过程绕过OS自带的buffer。Linux读写的时候，内核维护了缓存，数据先写到缓存，后面再后台写到SSD。读的时候也优先读缓存里的数据。这样速度可以加快，但是一旦掉电缓存里的数据就没了。所以有一种模式叫做directIO，跳过缓存，直接读写SSD，使测试结果更真实；</p>
+<p>rw=read 测试顺序读的I/O；</p>
+<p>rw=write 测试顺序写的I/O；</p>
+<p>rw=randread 测试随机读的I/O；</p>
+<p>rw=write rw=randwrite 测试随机写的I/O；</p>
+<p>rw=write rw=randrw 测试随机混合读和写的I/O；</p>
+<p>bs=4k 单次io的块文件大小为4k；</p>
+<p>size=5G 本次的测试文件大小为5g，以每次4k的io进行测试；</p>
+<p>numjobs=8 测试线程为8；（需要根据测试的cpu线程数做对应修改）</p>
+<p>name=job1 一个任务的名字，重复了也没关系；</p>
+<p>thread 使用pthread_create创建线程，另一种是fork创建进程。进程的开销比线程要大，一般都采用thread测试；</p>
+<p>group_reporting 关于显示结果的，汇总每个进程的信息；</p>
+<p>runtime=120 测试时间为120秒，如果不写则一直将5g文件分4k每次写完为止；</p>
+<p>time_based 如果设置的话，即使file已被完全读写或写完，也要执行完runtime规定的时间，它是通过循环执行相同的负载来实现的；</p>
+<p>ioengine=libaio 指定io引擎使用libaio方式。<br />
+libaio：Linux本地异步I/O。请注意，Linux可能只支持具有非缓冲I/O的排队行为（设置为“direct=1”或“buffered=0”）；</p>
+<p>iodepth=32 队列的深度为32。<br />
+  同步的IO：一次只能发出一个IO请求，等待内核完成才返回，这样对于单个线程iodepth总是小于1。（电梯算法：假如一部电梯一次只能搭乘一人，那么每个人一但乘上电梯，就能快速达到目的地（响应时间），但需要耗费较长的等待时间（队列长度）。虽然响应时间较短，但系统的吞吐量很小。）<br />
+  异步情况下：一次提交一批，然后等待一批的完成，减少交互的次数，会更有效率。加大磁盘队列深度就是让磁盘不断工作，减少磁盘的空闲时间。（电梯算法：32个人等电梯，一次上满32人，只需等一次电梯即可）。</p>
+<blockquote>
+<p>各项参数说明<br />
+io 执行了多少M的IO<br />
+bw 平均IO带宽<br />
+iops IOPS 即I/O per second，即每秒进行读写（I/O）操作的次数，是衡量磁盘性能的主要指标之一。<br />
+runt 线程运行时间（单位毫秒）<br />
+slat 提交延迟<br />
+clat 完成延迟<br />
+lat 响应时间<br />
+cpu 利用率<br />
+IO depths io队列<br />
+IO submit 单个IO提交要提交的IO数<br />
+IO complete 与上面的提交编号一样，但改为填写<br />
+IO issued 发出的读/写请求数，以及短请求数。<br />
+IO latencies IO延迟的分布<br />
+下面的io 总共执行了多少size的IO<br />
+aggrb group总带宽<br />
+minb 最小平均带宽.<br />
+maxb 最大平均带宽.<br />
+mint group中线程的最短运行时间.<br />
+maxt group中线程的最长运行时间.<br />
+ios 所有group总共执行的IO数.<br />
+merge 总共发生的IO合并数.<br />
+ticks Number of ticks we kept the disk busy.<br />
+in_queue 花费在队列上的总共时间.<br />
+util 磁盘利用率</p>
+</blockquote>
+<h2 id="82d-图形性能graphics"><a class="markdownIt-Anchor" href="#82d-图形性能graphics"></a> 8.2D 图形性能(graphics)</h2>
+<p>修改unixbench的第52行，从-lGL -lXext -lX11修改为GL_LIBS = -lGL -lXext -lX11 -lm  ，解开第49行的注释，如下图所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409051045547.png" alt="image-20240524181919729" /></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">apt-get install glade  mesa-common-dev  libxext-dev   libx11-dev pkg-config libxmuu-dev libxrender-dev</span><br><span class="line">sudo apt-get install libxft-dev libfreetype6-dev</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">配置x11perf</span></span><br><span class="line">./configure --build=arm-linux</span><br><span class="line"></span><br><span class="line">make</span><br><span class="line"></span><br><span class="line">make install</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">编译unixbench</span></span><br><span class="line">make </span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"> 进行测试</span></span><br><span class="line">./Run graphics </span><br></pre></td></tr></table></figure>
+<p>结果</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">Benchmark Run: 一 5月 27 2024 16:12:44 - 16:30:55</span><br><span class="line">8 CPUs in system; running 1 parallel copy of tests</span><br><span class="line"></span><br><span class="line">2D graphics: aa polygons                       5973.2 score (50.8 s, 2 samples)</span><br><span class="line">2D graphics: ellipses                          3633.5 score (50.8 s, 2 samples)</span><br><span class="line">2D graphics: images and blits                174032.7 score (53.8 s, 2 samples)</span><br><span class="line">2D graphics: rectangles                        4501.6 score (58.9 s, 2 samples)</span><br><span class="line">2D graphics: text                            120825.3 score (50.2 s, 2 samples)</span><br><span class="line">2D graphics: windows                           1361.1 score (50.8 s, 2 samples)</span><br><span class="line">3D graphics: gears                              888.6 fps   (20.0 s, 2 samples)</span><br><span class="line"></span><br><span class="line">3D Graphics Benchmarks Index Values          BASELINE       RESULT    INDEX</span><br><span class="line">3D graphics: gears                               33.4        888.6    266.0</span><br><span class="line">                                                                   ========</span><br><span class="line">3D Graphics Benchmarks Index Score                                    266.0</span><br><span class="line"></span><br><span class="line">2D Graphics Benchmarks Index Values          BASELINE       RESULT    INDEX</span><br><span class="line">2D graphics: aa polygons                         15.0       5973.2   3982.1</span><br><span class="line">2D graphics: ellipses                            15.0       3633.5   2422.3</span><br><span class="line">2D graphics: images and blits                    15.0     174032.7 116021.8</span><br><span class="line">2D graphics: rectangles                          15.0       4501.6   3001.1</span><br><span class="line">2D graphics: text                                15.0     120825.3  80550.2</span><br><span class="line">2D graphics: windows                             15.0       1361.1    907.4</span><br><span class="line">                                                                   ========</span><br><span class="line">2D Graphics Benchmarks Index Score                                   7913.0</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="93d-图形性能glmark2-es"><a class="markdownIt-Anchor" href="#93d-图形性能glmark2-es"></a> 9.<strong>3D 图形性能(glmark2-es)</strong></h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">apt install glmark2-es</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">测试</span></span><br><span class="line">glmark2-es --fullscreen</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://www.bilibili.com/video/BV1ZN411D7V8/</span><br></pre></td></tr></table></figure>
+<h2 id="1010g-文件性能"><a class="markdownIt-Anchor" href="#1010g-文件性能"></a> 10.10G 文件性能</h2>
+<p>没空间了，改为了5G</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">root@topeet:/$ dd if=/dev/zero of=/test10 bs=1M count=5120 conv=fdatasync</span><br><span class="line">5120+0 records in</span><br><span class="line">5120+0 records out</span><br><span class="line">5368709120 bytes (5.4 GB, 5.0 GiB) copied, 64.2663 s, 83.5 MB/s</span><br><span class="line">root@topeet:/$ </span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">root@topeet:/$ dd if=/test10 of=/home/kylin/testduxie1 bs=1M count=10240 conv=fdatasync</span><br><span class="line">5120+0 records in</span><br><span class="line">5120+0 records out</span><br><span class="line">5368709120 bytes (5.4 GB, 5.0 GiB) copied, 69.4213 s, 77.3 MB/s</span><br></pre></td></tr></table></figure>
+<h2 id="11usb-存储设备性能"><a class="markdownIt-Anchor" href="#11usb-存储设备性能"></a> 11.USB 存储设备性能</h2>
+<p>2.0</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">root@topeet:/$ dd if=/test10 of=/media/kylin/新加卷/testduxie2 bs=1M count=1024  conv=fdatasync </span><br><span class="line"></span><br><span class="line">1024+0 records in</span><br><span class="line">1024+0 records out</span><br><span class="line">1073741824 bytes (1.1 GB, 1.0 GiB) copied, 32.3505 s, 33.2 MB/s</span><br></pre></td></tr></table></figure>
+<p>3.0</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dd if=/test10 of=/media/kylin/新加卷/testduxie2 bs=1M count=1024  conv=fdatasync </span><br><span class="line">1024+0 records in</span><br><span class="line">1024+0 records out</span><br><span class="line">1073741824 bytes (1.1 GB, 1.0 GiB) copied, 11.8471 s, 90.6 MB/s</span><br></pre></td></tr></table></figure>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2024/08/15/07_%E5%B0%8F%E6%8A%80%E5%B7%A7/9_%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2024/08/18/07_%E5%B0%8F%E6%8A%80%E5%B7%A7/10_%E5%90%84%E7%B1%BB%E4%BB%BB%E5%8A%A1%E8%80%97%E6%97%B6/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            各类任务耗时
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2024/08/12/02_%E7%91%9E%E8%8A%AF%E5%BE%AE/16_%E9%87%8E%E7%81%ABsdk%E5%AD%A6%E4%B9%A0shell%E8%84%9A%E6%9C%AC%E8%A7%A3%E6%9E%90/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">开放麒麟shell脚本解析</div>
+      </a>
+    
+  </nav>
+
+  
+   
+  
+   
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2015-2024
+        <i class="ri-heart-fill heart_icon"></i> chai
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="热爱学习的未来酱"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/%E7%94%9F%E6%B4%BB">生活</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE">瑞芯微</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/Linux%E5%AD%A6%E4%B9%A0">Linux学习</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/%E8%AF%BB%E4%B9%A6">读书</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/%E9%A9%B1%E5%8A%A8%E5%AD%A6%E4%B9%A0">驱动学习</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/C%E8%AF%AD%E8%A8%80%E9%AB%98%E7%BA%A7%E5%AD%A6%E4%B9%A0">C语言高级学习</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/%E5%B0%8F%E6%8A%80%E5%B7%A7">小技巧</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/shell%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0">shell编程学习</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/PCB%E5%AD%A6%E4%B9%A0">PCB学习</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/%E9%9F%B3%E8%A7%86%E9%A2%91%E5%AD%A6%E4%B9%A0">音视频学习</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="52"
+        src="//music.163.com/outchain/player?type=2&id=22707008&auto=0&height=32"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
+    
+    
+
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+  
+
+    <head>
+      <meta charset="utf-8" />
+        
+      <meta name="description" content="永远年轻，永远热泪盈眶" />
+      
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>repo的学习 |  热爱学习的未来酱</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      
+<link rel="stylesheet" href="/css/fonts/remixicon.css">
+
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    <link rel="alternate" href="/atom.xml" title="热爱学习的未来酱" type="application/atom+xml">
+</head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-07_小技巧/11_repo学习"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  repo的学习
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2024/08/19/07_%E5%B0%8F%E6%8A%80%E5%B7%A7/11_repo%E5%AD%A6%E4%B9%A0/" class="article-date">
+  <time datetime="2024-08-18T22:50:19.000Z" itemprop="datePublished">2024-08-19</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%B0%8F%E6%8A%80%E5%B7%A7/">小技巧</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">5.4k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">23 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <blockquote>
+<p>说一下前因后果，之前学了一段时间的git，但是无论如何也没用起来，这一点让我很是不爽,为了实现能常用git我甚至还搞了一个完全的Linux系统，但还是没有用起来，这还是让我很不爽，最近开始研究野火的SDK了，发现野火是用repo来进行代码管理的，其实更上层的瑞芯微也是这样管理代码的，但我们也不知道为了什么起见，可能对应的客户不同吧，就一个板子一套镜像，我认为这是有问题的，但我并没有什么话语权，只能听安排，但是我可以自己维护一个主线，我甚至可以搞一个千兆的宽带，这一点在理，但让我搞一个新机器我又不愿意，这个以后再说，先来研究理论基础。</p>
+</blockquote>
+<h1 id="repo理论基础"><a class="markdownIt-Anchor" href="#repo理论基础"></a> repo理论基础</h1>
+<h2 id="repo是什么"><a class="markdownIt-Anchor" href="#repo是什么"></a> repo是什么？</h2>
+<p><strong>Repo是一个高级的版本库管理工具，主要用于管理Android项目的多个Git仓库</strong>。下面将非常详细地讲解Repo的各个方面：</p>
+<ol>
+<li><strong>起源与用途</strong>：
+<ul>
+<li>Repo是由Google开发并广泛使用于Android开源项目（AOSP）中的工具。</li>
+<li>它旨在简化对包含多个Git仓库的大型项目的管理工作。</li>
+<li>在Android项目中，Repo帮助开发者同步、管理和更新分布在多个Git仓库中的代码。</li>
+</ul>
+</li>
+<li><strong>核心功能与特点</strong>：
+<ul>
+<li><strong>仓库管理</strong>：Repo能够初始化一个仓库清单（manifest），该清单描述了项目所需的所有Git仓库的位置和分支信息。</li>
+<li><strong>同步操作</strong>：通过<code>repo sync</code>命令，Repo可以自动地克隆或更新所有列在清单中的Git仓库。</li>
+<li><strong>分支管理</strong>：Repo支持在多个仓库之间切换分支，确保整个项目的一致性。</li>
+<li><strong>状态查看</strong>：使用<code>repo status</code>可以查看所有仓库的当前状态，包括哪些文件被修改、新增或删除。</li>
+<li><strong>上传与审查</strong>：Repo集成了Git的上传（<code>git push</code>）和代码审查（Gerrit）的功能，便于开发者提交更改并进行代码审查。</li>
+</ul>
+</li>
+<li><strong>工作原理</strong>：
+<ul>
+<li>Repo本身是一个Python脚本，它利用Git命令来管理多个Git仓库。</li>
+<li>当Repo初始化一个项目时，它会首先克隆一个特殊的Git仓库（通常称为manifest仓库），该仓库包含了项目的manifest文件。</li>
+<li>Manifest文件是一个XML文件，它定义了项目中所有其他Git仓库的位置、分支和复制条件。</li>
+<li>随后，Repo根据manifest文件的信息，逐一克隆或更新每个Git仓库到本地工作目录。</li>
+</ul>
+</li>
+<li><strong>优势</strong>：
+<ul>
+<li><strong>简化管理</strong>：对于包含数百个Git仓库的大型项目来说，手动管理这些仓库将非常繁琐且容易出错。Repo提供了自动化的管理工具，大大简化了这一过程。</li>
+<li><strong>保持一致性</strong>：Repo确保所有仓库都按照manifest文件的规定处于正确的分支和版本，从而保证了整个项目的一致性。</li>
+<li><strong>提高开发效率</strong>：通过集成代码上传和审查的功能，Repo帮助开发者更快地完成开发流程。</li>
+</ul>
+</li>
+<li><strong>使用场景</strong>：
+<ul>
+<li>Repo特别适用于大型、复杂且包含多个相互依赖的组件或模块的项目。</li>
+<li>在Android开源项目中，Repo是不可或缺的工具，用于管理数以百计的Git仓库。</li>
+<li>类似的项目，如Chrome OS和Linux内核项目，也可能使用Repo或其类似工具来管理多个Git仓库。</li>
+</ul>
+</li>
+<li><strong>安装与配置</strong>：
+<ul>
+<li>Repo通常需要通过特定的脚本来安装，因为它本身是一个Python脚本。</li>
+<li>安装后，需要通过Repo的<code>init</code>命令来初始化一个项目，该命令会克隆manifest仓库并设置项目的本地环境。</li>
+<li>配置Repo通常涉及编辑manifest文件，以更改项目的仓库列表、分支和复制条件。</li>
+</ul>
+</li>
+</ol>
+<p>通过以上详细的讲解，你应该对Repo有了全面而深入的理解。Repo是一个强大的工具，它简化了大型项目中多个Git仓库的管理，提高了开发效率和项目一致性。</p>
+<h2 id="repo的安装"><a class="markdownIt-Anchor" href="#repo的安装"></a> repo的安装</h2>
+<p>repo 其实就是个python脚本，所以只需要拉取下来放到某个路径就好了，但在此之前需要先安装git，git的安装方法不再讲解，可以看前面的文档。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">COPYwget https://storage.googleapis.com/git-repo-downloads/repo .</span><br><span class="line">wget https://raw.githubusercontent.com/esrlabs/git-repo/stable/repo .</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409051043063.png" alt="image-20240817170916119" />image-20240817170916119</p>
+<p>然后赋予可执行权限，拷贝到/usr/bin/目录：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409051043962.png" alt="image-20240817171016635" />image-20240817171016635</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409051043016.png" alt="image-20240817171038551" />image-20240817171038551</p>
+<h2 id="repo常用命令"><a class="markdownIt-Anchor" href="#repo常用命令"></a> repo常用命令</h2>
+<h3 id="repo常用命令-2"><a class="markdownIt-Anchor" href="#repo常用命令-2"></a> repo常用命令</h3>
+<ol>
+<li>
+<p><strong>初始化repo</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">COPYrepo --trace init -u https://android.googlesource.com/platform/manifest -b branch_name -m default.xml</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p><strong>同步代码</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">COPYrepo sync</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p><strong>上传代码到远程仓库</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">COPYrepo upload dev</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p><strong>列出分支</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">COPYrepo branch  # 或者 repo branches</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p><strong>状态查询</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">COPYrepo status</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p><strong>查看修改</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">COPYrepo diff</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p><strong>撤销整个工程的本地修改</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">COPYrepo forall -c &#x27;git reset --hard HEAD; git clean -df; git rebase --abort&#x27;</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p><strong>切换整个工程模块的分支</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">COPYrepo forall -c &#x27;git branch master&#x27;</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p><strong>更新整个工程模块的代码</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">COPYrepo forall -c &#x27;git pull projectname&#x27;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="repo与git命令对照表"><a class="markdownIt-Anchor" href="#repo与git命令对照表"></a> repo与git命令对照表</h3>
+<table>
+<thead>
+<tr>
+<th>repo命令</th>
+<th>等同git命令</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>repo init -u</td>
+<td>无</td>
+<td>初始化</td>
+</tr>
+<tr>
+<td>repo sync</td>
+<td>git pull</td>
+<td>同步代码</td>
+</tr>
+<tr>
+<td>repo upload</td>
+<td>git push</td>
+<td>上传代码</td>
+</tr>
+<tr>
+<td>repo forall</td>
+<td>无</td>
+<td>多仓执行</td>
+</tr>
+<tr>
+<td>repo start</td>
+<td>git checkout -b</td>
+<td>创建并切换分支</td>
+</tr>
+<tr>
+<td>repo checkout</td>
+<td>git checkout</td>
+<td>切换分支</td>
+</tr>
+<tr>
+<td>repo status</td>
+<td>git status</td>
+<td>状态查询</td>
+</tr>
+<tr>
+<td>repo branches</td>
+<td>git branch</td>
+<td>分支查询</td>
+</tr>
+<tr>
+<td>repo diff</td>
+<td>git diff</td>
+<td>文件对比</td>
+</tr>
+<tr>
+<td>repo prune</td>
+<td>git remote prune origin</td>
+<td>删除合并分支</td>
+</tr>
+<tr>
+<td>repo stage –i</td>
+<td>git add --interactive</td>
+<td>添加文件到暂存区</td>
+</tr>
+<tr>
+<td>repo abandon</td>
+<td>git branch -D</td>
+<td>删除分支</td>
+</tr>
+<tr>
+<td>repo version</td>
+<td>无</td>
+<td>查看版本号</td>
+</tr>
+</tbody>
+</table>
+<h3 id="repo-脚本参数"><a class="markdownIt-Anchor" href="#repo-脚本参数"></a> repo 脚本参数</h3>
+<ul>
+<li><code>--repo-url=URL</code>: repo 工具本身的 git 库地址。缺省为：<code>git://android.git.kernel.org/tools/repo.git</code></li>
+<li><code>--repo-branch=REVISION</code>: 使用repo的版本库，即repo git库的分支或者里程碑名称。缺省为<code>caf-stable</code></li>
+<li><code>--no-repo-verify</code>: 设定不要对repo的里程碑签名进行严格的验证。</li>
+<li><code>-u</code> 或 <code>--manifest-url</code>: 设定清单库的Git服务器地址。</li>
+<li><code>-b</code> 或 <code>--manifest-branch</code>: 检出清单库的特定分支。</li>
+<li><code>--mirror</code>: 只在repo第一次初始化的时候使用，建立本地镜像。</li>
+<li><code>-m</code> 或 <code>--manifest-name</code>: 指定清单库中的某个清单为有效的清单文件。默认为<code>default.xml</code>。</li>
+<li><code>--no-tags</code>: 不获取标签（tags）。</li>
+<li><code>--trace</code>: 显示repo命令的执行过程。</li>
+</ul>
+<h3 id="repo-help"><a class="markdownIt-Anchor" href="#repo-help"></a> repo help</h3>
+<ul>
+<li><code>repo help</code>：查看 <code>repo</code> 的帮助文档。</li>
+<li><code>repo help sync</code>：查看 <code>sync</code> 命令的帮助文档。</li>
+</ul>
+<h3 id="repo-init"><a class="markdownIt-Anchor" href="#repo-init"></a> repo init</h3>
+<ul>
+<li><code>repo init</code> 主要用于初始化 <code>repo</code> 工具，执行的 <code>repo</code> 脚本是一个引导工具，而非下载代码的脚本。</li>
+<li>该命令会克隆 <code>manifest.git</code> 到 <code>.repo/manifests/</code> 目录下（地址由 <code>-u</code> 参数指定），并在 <code>.repo/</code> 目录中生成符号链接 <code>manifest.xml</code>，指向 <code>.repo/manifests/default.xml</code>。</li>
+<li>如果 <code>.repo/manifests/</code> 目录中有多个 <code>xml</code> 文件，可通过 <code>repo init -m</code> 参数指定要使用的 <code>manifest</code> 文件，默认是 <code>default.xml</code>。</li>
+</ul>
+<p><strong>示例：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">COPYbash</span><br><span class="line">复制代码</span><br><span class="line">repo --trace init -u https://android.googlesource.com/platform/manifest -b branch_name -m default.xml &amp;&amp; repo sync &amp;&amp; repo start branch_name --all</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>--trace</code>：查看 <code>repo</code> 背后的具体操作。</li>
+<li><code>-u</code>：指定 <code>Manifest</code> 库的 Git 访问路径。</li>
+<li><code>-m</code>：指定使用的 <code>Manifest</code> 文件。</li>
+<li><code>-b</code>：指定使用 <code>Manifest</code> 仓库中的某个特定分支。</li>
+</ul>
+<p><strong>初始化完成后生成的 <code>.repo</code> 目录结构：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">COPYbash复制代码tree .repo -L 1</span><br><span class="line">.repo</span><br><span class="line">├── manifest.xml -&gt; manifests/default.xml</span><br><span class="line">├── manifests</span><br><span class="line">├── manifests.git</span><br><span class="line">├── project-objects</span><br><span class="line">├── project.list</span><br><span class="line">├── projects</span><br><span class="line">└── repo</span><br></pre></td></tr></table></figure>
+<p><strong>各文件夹的用途：</strong></p>
+<ul>
+<li><code>manifests</code>：清单文件的仓库。</li>
+<li><code>manifests.git</code>：清单文件的 Git 裸仓库，不带工作区。</li>
+<li><code>manifest.xml</code>：符号链接，指向用于初始化工作区的清单文件。</li>
+<li><code>project.list</code>：包含所有项目名称的列表。</li>
+<li><code>projects</code>：包含所有 <code>git project</code> 的裸仓库，文件夹的层次结构与工作区布局一致。</li>
+<li><code>repo</code>：<code>repo</code> 命令的主体，推荐使用其中的 <code>repo</code> 命令。</li>
+</ul>
+<h3 id="repo-sync"><a class="markdownIt-Anchor" href="#repo-sync"></a> repo sync</h3>
+<ul>
+<li><strong>首次运行</strong>：相当于 <code>git clone</code>，会将服务器的内容完全拷贝到本地。</li>
+<li><strong>后续运行</strong>：若项目已同步，则相当于执行 <code>git remote update &amp;&amp; git rebase origin/&lt;branch&gt;</code>。</li>
+</ul>
+<p><code>repo sync</code> 不会更新 <code>.repo/repo</code> 仓库。</p>
+<p><strong>参数说明：</strong></p>
+<ul>
+<li><code>-j</code>：开启多线程同步，加快同步速度，默认使用4个线程。</li>
+<li><code>-c, --current-branch</code>：仅同步指定的远程分支，默认同步所有远程分支。</li>
+<li><code>-d, --detach</code>：脱离当前本地分支，切换到 <code>manifest.xml</code> 中设定的分支。第一次 <code>sync</code> 后通常会切换到 <code>dev</code> 分支开发，若不带此参数，可能导致本地 <code>dev</code> 分支与 <code>manifest</code> 远程分支合并，可能引发同步失败。</li>
+<li><code>-f, --force-broken</code>：当某些 <code>git</code> 库同步失败时，不中断同步操作，继续同步其他 <code>git</code> 库。</li>
+</ul>
+<h3 id="repo-upload"><a class="markdownIt-Anchor" href="#repo-upload"></a> repo upload</h3>
+<ul>
+<li>类似于 <code>git push</code>。</li>
+<li><strong>用法</strong>：<code>repo upload [--re --cc] [项目列表]</code></li>
+<li>若无参数，<code>repo upload</code> 会搜索所有项目中的更改以进行上传。</li>
+</ul>
+<h3 id="repo-start"><a class="markdownIt-Anchor" href="#repo-start"></a> repo start</h3>
+<ul>
+<li><code>repo start</code> 是 <code>git checkout -b</code> 的封装，但 <code>repo start</code> 是基于 <code>manifest</code> 中设定的分支创建特性分支。</li>
+</ul>
+<p><strong>示例：</strong></p>
+<ul>
+<li><code>repo start stable --all</code>：假设 <code>manifest</code> 文件中设定的分支为 <code>gingerbread-stable</code>，则会在所有项目上基于该分支创建特性分支 <code>stable</code>。</li>
+<li><code>repo start stable platform/build platform/bionic</code>：可以指定项目。</li>
+</ul>
+<h3 id="repo-forall"><a class="markdownIt-Anchor" href="#repo-forall"></a> repo forall</h3>
+<ul>
+<li><code>repo forall [&lt;PROJECT_LIST&gt;] -c &lt;COMMAND&gt;</code>：在每个项目中运行指定的 Shell 命令。</li>
+</ul>
+<p><strong>可用的环境变量：</strong></p>
+<ul>
+<li><code>REPO_PROJECT</code>：项目的唯一名称。</li>
+<li><code>REPO_PATH</code>：客户端根目录的相对路径。</li>
+<li><code>REPO_REMOTE</code>：清单中远程系统的名称。</li>
+<li><code>REPO_LREV</code>：清单中的修订版本名称，已转换为本地跟踪分支。</li>
+<li><code>REPO_RREV</code>：清单中的修订版本名称，与清单中的名称一致。</li>
+</ul>
+<p><strong>常用参数：</strong></p>
+<ul>
+<li><code>-c</code>：运行指定的命令。</li>
+<li><code>-p</code>：输出命令结果前显示项目标头。</li>
+<li><code>-v</code>：显示命令向 <code>stderr</code> 写入的消息。</li>
+</ul>
+<h3 id="manifest-文件"><a class="markdownIt-Anchor" href="#manifest-文件"></a> manifest 文件</h3>
+<ul>
+<li><code>manifest</code> 文件是 <code>repo</code> 工具的核心，记录所有 <code>git</code> 仓库的地址和分支。</li>
+<li>官方文档参考：<a target="_blank" rel="noopener" href="https://github.com/GerritCodeReview/git-repo/blob/main/docs/manifest-format.md">manifest 文件格式</a>。</li>
+</ul>
+<p><strong>manifest 文件示例：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">COPY&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;manifest&gt;</span><br><span class="line">    &lt;remote /&gt;</span><br><span class="line">    &lt;default remote=&quot;origin&quot; revision=&quot;master&quot; sync-j=&quot;4&quot; /&gt;</span><br><span class="line">    &lt;project /&gt;</span><br><span class="line">    &lt;project /&gt;</span><br><span class="line">    &lt;project /&gt;</span><br><span class="line">&lt;/manifest&gt;</span><br></pre></td></tr></table></figure>
+<p><strong>元素说明：</strong></p>
+<ul>
+<li><code>remote</code>：指定使用 <code>repo upload</code> 时提交到哪个服务器，可定义一个或多个 <code>remote</code>。</li>
+<li>default：包含一些缺省属性，如果 project中未指定，则使用这些属性。
+<ul>
+<li><code>revision</code>：Git 分支的名称，可为 <code>branch</code>、<code>tag</code> 或 <code>commit id</code>。</li>
+<li><code>sync-j</code>：同步时并行任务数。</li>
+<li><code>sync-c</code>：为 <code>true</code> 时，仅同步 <code>project</code> 中指定的分支。</li>
+</ul>
+</li>
+<li>project：定义一个或多个 git 仓库。
+<ul>
+<li><code>name</code>：<code>git project</code> 的名字。</li>
+<li><code>path</code>：本地工作区路径。</li>
+<li><code>revision</code>：与 <code>default</code> 标签中的 <code>revision</code> 含义相同。</li>
+</ul>
+</li>
+</ul>
+<h1 id="repo实际用法"><a class="markdownIt-Anchor" href="#repo实际用法"></a> repo实际用法</h1>
+<blockquote>
+<p>我之前只用过野火的repo，今天就继续用野火的repo，使用一下</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">COPY# 创建目录</span><br><span class="line">mkdir ~/LubanCat_SDK</span><br><span class="line"></span><br><span class="line">cd ~/LubanCat_SDK</span><br><span class="line"></span><br><span class="line"># 配置姓名和邮箱</span><br><span class="line">git config --global user.email &quot;you@example.com&quot;</span><br><span class="line">git config --global user.name &quot;Your Name&quot;</span><br><span class="line">  </span><br><span class="line"># 拉取LubanCat-RK356x系列Linux_SDK</span><br><span class="line">repo init --depth=1 -u https://github.com/LubanCat/manifests.git -b linux -m rk356x_linux_release.xml</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 拉取LubanCat-RK3588系列Linux_SDK</span><br><span class="line">repo init --depth=1 -u https://github.com/LubanCat/manifests.git -b linux -m rk3588_linux_release.xml</span><br><span class="line"></span><br><span class="line">#如果运行以上命令失败，提示：fatal: Cannot get https://gerrit.googlesource.com/git-repo/clone.bundle</span><br><span class="line">#则可以在以上命令中添加选项 --repo-url https://mirrors.tuna.tsinghua.edu.cn/git/git-repo</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409051043976.png" alt="image-20240819093048396" />image-20240819093048396</p>
+<blockquote>
+<ul>
+<li><code>repo init</code>: 初始化 Repo 客户端。</li>
+<li><code>--depth=1</code>: 进行浅克隆（shallow clone），即只克隆最近的提交历史。这可以加速克隆过程，因为你不会获取整个项目的历史记录，只会获取最近的提交。这对于大型项目特别有用，可以节省时间和带宽。</li>
+<li><code>-u https://github.com/LubanCat/manifests.git</code>: 指定清单仓库（manifest repository）的 URL。这是包含项目清单文件的 Git 仓库，清单文件定义了项目中包含的所有其他仓库。</li>
+<li><code>-b linux</code>: 指定要检出的分支名。在这个例子中，<code>linux</code> 是清单仓库中的一个分支名，该分支包含了特定于该项目的清单文件。</li>
+<li><code>-m rk3588_linux_release.xml</code>: 指定要使用的清单文件名。在这个例子中，<code>rk3588_linux_release.xml</code> 是清单仓库中的一个文件，它定义了项目的具体结构和配置。</li>
+</ul>
+<p>这个命令的作用是初始化一个 Repo 工作环境，从指定的 URL 克隆清单仓库的 <code>linux</code> 分支，并使用 <code>rk3588_linux_release.xml</code> 清单文件来配置项目。这个清单文件将包含项目中所有其他 Git 仓库的信息，以及这些仓库应该如何被检出和配置。在 <code>repo init</code> 完成之后，你通常会使用 <code>repo sync</code> 命令来同步（即克隆或更新）清单文件中定义的所有仓库。</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">COPY.repo/repo/repo sync -c -j20</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409051043968.png" alt="image-20240819100404978" />image-20240819100404978</p>
+<p>这个命令主要做了以下几件事情：</p>
+<ol>
+<li><strong>同步代码</strong>：<code>repo sync</code> 命令的主要目的是从远程仓库同步代码到本地。它会拉取所有在 <code>manifest</code> 文件中定义的项目的最新代码。</li>
+<li><strong>-c 选项</strong>：这个选项表示只同步当前分支。也就是说，它只会同步 manifest 文件中定义的当前分支的最新代码，而不会同步其他分支的代码。</li>
+<li><strong>-j20 选项</strong>：这个选项指定了同步过程中的并发任务数。<code>-j20</code> 表示会同时运行 20 个任务来同步代码，这可以加速同步过程，但也可能增加网络和 CPU 的负载。你需要根据你的机器和网络环境来合理设置这个值。</li>
+</ol>
+<p>同步完成之后如下图所示：<br />
+<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409051043001.png" alt="image-20240819100736704" />image-20240819100736704</p>
+<p>而实际的代码同步凭靠的是这个rk3588_linux5.10_stable.xml文件，该文件的内容如下所示：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">COPY&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;manifest&gt;</span><br><span class="line">  &lt;!-- &lt;remote name=&quot;origin&quot; fetch=&quot;ssh://git@gitlab.ebf.local/rockchip/linux/&quot;/&gt; --&gt;</span><br><span class="line">  &lt;remote name=&quot;origin&quot; fetch=&quot;https://github.com/LubanCat&quot;/&gt;  </span><br><span class="line"></span><br><span class="line">  &lt;default remote=&quot;origin&quot; sync-j=&quot;4&quot;/&gt;</span><br><span class="line">  </span><br><span class="line">  &lt;project name=&quot;debian11&quot; path=&quot;debian&quot; revision=&quot;refs/tags/stable-5.10.160&quot; clone-depth=&quot;1&quot;/&gt;</span><br><span class="line">  &lt;project name=&quot;device_rockchip&quot; path=&quot;device/rockchip&quot; revision=&quot;a85039a1513b2debd79f8e7ecc59c5cca01d1530&quot; upstream=&quot;master&quot; dest-branch=&quot;master&quot;&gt;</span><br><span class="line">    &lt;linkfile src=&quot;common/mkfirmware.sh&quot; dest=&quot;mkfirmware.sh&quot;/&gt;</span><br><span class="line">    &lt;linkfile src=&quot;common/build.sh&quot; dest=&quot;build.sh&quot;/&gt;</span><br><span class="line">    &lt;linkfile src=&quot;common/rkflash.sh&quot; dest=&quot;rkflash.sh&quot;/&gt;</span><br><span class="line">    &lt;linkfile src=&quot;rk3588&quot; dest=&quot;device/rockchip/.target_product&quot;/&gt;</span><br><span class="line">  &lt;/project&gt;</span><br><span class="line">  &lt;project name=&quot;gcc-arm-10.3-2021.07-x86_64-aarch64-none-linux-gnu&quot; path=&quot;prebuilts/gcc/linux-x86/aarch64/gcc-arm-10.3-2021.07-x86_64-aarch64-none-linux-gnu&quot; revision=&quot;adbb295a970c4b39dc487c95226fe84d2c460072&quot; upstream=&quot;master&quot; dest-branch=&quot;master&quot;/&gt;</span><br><span class="line">  &lt;project name=&quot;kernel&quot; revision=&quot;4124065a2763eb8097806289b4825c8933b82efc&quot; upstream=&quot;stable-5.10-rk3588&quot; dest-branch=&quot;stable-5.10-rk3588&quot;/&gt;</span><br><span class="line">  &lt;project name=&quot;lubancat-bin&quot; revision=&quot;da4446576b196334590e59a9ec4cb2a094980bdf&quot; upstream=&quot;rk3588&quot; dest-branch=&quot;rk3588&quot;/&gt;</span><br><span class="line">  &lt;project name=&quot;rkbin&quot; revision=&quot;2dde28de6e47f5003683cd3a20b4243c63e6b2fb&quot; upstream=&quot;main&quot; dest-branch=&quot;main&quot;/&gt;</span><br><span class="line">  &lt;project name=&quot;tools&quot; revision=&quot;210be81d659a6bc4e7a648744ae77837f394be0f&quot; upstream=&quot;master&quot; dest-branch=&quot;master&quot;&gt;</span><br><span class="line">    &lt;linkfile src=&quot;windows/RKDevTool/RKDevTool_Release/rk3588-config.cfg&quot; dest=&quot;tools/windows/RKDevTool/RKDevTool_Release/config.cfg&quot;/&gt;</span><br><span class="line">    &lt;linkfile src=&quot;windows/RKDevTool/rockdev/rk3588-package-file&quot; dest=&quot;tools/windows/RKDevTool/rockdev/package-file&quot;/&gt;</span><br><span class="line">    &lt;linkfile src=&quot;windows/RKDevTool/rockdev/rk3588-mkupdate.bat&quot; dest=&quot;tools/windows/RKDevTool/rockdev/mkupdate.bat&quot;/&gt;</span><br><span class="line">    &lt;linkfile src=&quot;linux/Linux_Pack_Firmware/rockdev/rk3588-mkupdate.sh&quot; dest=&quot;tools/linux/Linux_Pack_Firmware/rockdev/mkupdate.sh&quot;/&gt;</span><br><span class="line">    &lt;linkfile src=&quot;linux/Linux_Pack_Firmware/rockdev/rk3588-package-file&quot; dest=&quot;tools/linux/Linux_Pack_Firmware/rockdev/package-file&quot;/&gt;</span><br><span class="line">  &lt;/project&gt;</span><br><span class="line">  &lt;project name=&quot;u-boot&quot; revision=&quot;refs/tags/lbc-gen-rkr7.1&quot; clone-depth=&quot;1&quot;/&gt;</span><br><span class="line">  &lt;project name=&quot;ubuntu&quot; revision=&quot;refs/tags/stable-5.10-rk3588&quot; clone-depth=&quot;1&quot;/&gt;</span><br><span class="line">&lt;/manifest&gt;</span><br></pre></td></tr></table></figure>
+<p>在这个 <code>XML</code> 文件中，包含了一个 Android <code>repo</code> 工具所使用的 <code>manifest</code> 文件。它定义了多个项目的来源、分支、路径、文件链接等关键信息。下面我会详细解释这个 XML 文件的结构及各个元素的作用。</p>
+<p><strong>整体结构</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">COPY&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;manifest&gt;</span><br><span class="line">  ...</span><br><span class="line">&lt;/manifest&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</code>: 这是 XML 文件的声明，表示该文件是 XML 1.0 版本，字符编码是 <code>UTF-8</code>。</li>
+<li><code>&lt;manifest&gt;</code>: 这是 XML 文件的根元素，所有项目的配置信息都在这个根元素之内。Manifest 是 <code>repo</code> 工具的核心配置文件，用于描述多 Git 仓库如何被同步、管理。</li>
+</ul>
+<p><strong>元素</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">COPY&lt;remote name=&quot;origin&quot; fetch=&quot;https://github.com/LubanCat&quot;/&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>
+<p><strong>作用</strong>：定义远程仓库的位置。</p>
+</li>
+<li>
+<p><strong>属性</strong>：</p>
+<ul>
+<li><code>name</code>: 为远程仓库命名为 <code>origin</code>，这个名字将在其他地方引用到，比如 <code>&lt;default&gt;</code> 和 <code>&lt;project&gt;</code>。</li>
+<li><code>fetch</code>: 指定远程仓库的 URL。在这个例子中，代码会从 <code>https://github.com/LubanCat</code> 获取。</li>
+</ul>
+<blockquote>
+<p>注释 <code>&lt;!-- ... --&gt;</code> 表示注释掉的部分，实际上在文件解析时会被忽略。这里可以看到原本使用的是 <code>ssh://</code> 的 URL 被注释掉，改用了 <code>https</code> 的 URL。</p>
+</blockquote>
+</li>
+</ul>
+<p><strong><code>&lt;default&gt;</code> 元素</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">COPY&lt;default remote=&quot;origin&quot; sync-j=&quot;4&quot;/&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>
+<p><strong>作用</strong>：设置默认的同步和远程仓库配置，适用于该清单中所有项目（除非项目本身有覆盖配置）。</p>
+</li>
+<li>
+<p>属性</p>
+<p>：</p>
+<ul>
+<li><code>remote</code>: 使用前面定义的 <code>origin</code> 作为默认远程仓库。</li>
+<li><code>sync-j</code>: 指定在同步代码时使用的并行线程数。在这个例子中，使用 <code>4</code> 个线程并发同步，可以提高同步速度。</li>
+</ul>
+</li>
+</ul>
+<p><strong>元素</strong></p>
+<p>项目的核心定义，描述要同步的 Git 仓库。可以有多个 <code>&lt;project&gt;</code> 元素，每一个都代表一个独立的 Git 仓库。</p>
+<p>示例 1:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">COPY&lt;project name=&quot;debian11&quot; path=&quot;debian&quot; revision=&quot;refs/tags/stable-5.10.160&quot; clone-depth=&quot;1&quot;/&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>
+<p><strong>作用</strong>：定义一个名为 <code>debian11</code> 的项目，这个项目是一个 Git 仓库。</p>
+</li>
+<li>
+<p>属性</p>
+<p>：</p>
+<ul>
+<li><code>name</code>: 仓库名，指向仓库的名称为 <code>debian11</code>。</li>
+<li><code>path</code>: 项目的本地路径。在这个例子中，同步的代码将存放在 <code>debian/</code> 目录下。</li>
+<li><code>revision</code>: 指定要检出的特定分支、标签或提交 ID。这里使用的是 <code>refs/tags/stable-5.10.160</code>，这意味着会同步 <code>stable-5.10.160</code> 标签的内容。</li>
+<li><code>clone-depth</code>: 指定浅克隆的深度（即保留最近的 n 个提交）。这里是 <code>1</code>，表示只克隆最近一次提交历史。</li>
+</ul>
+</li>
+</ul>
+<p>示例 2:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">COPY&lt;project name=&quot;device_rockchip&quot; path=&quot;device/rockchip&quot; revision=&quot;a85039a1513b2debd79f8e7ecc59c5cca01d1530&quot; upstream=&quot;master&quot; dest-branch=&quot;master&quot;&gt;</span><br><span class="line">  &lt;linkfile src=&quot;common/mkfirmware.sh&quot; dest=&quot;mkfirmware.sh&quot;/&gt;</span><br><span class="line">  &lt;linkfile src=&quot;common/build.sh&quot; dest=&quot;build.sh&quot;/&gt;</span><br><span class="line">  &lt;linkfile src=&quot;common/rkflash.sh&quot; dest=&quot;rkflash.sh&quot;/&gt;</span><br><span class="line">  &lt;linkfile src=&quot;rk3588&quot; dest=&quot;device/rockchip/.target_product&quot;/&gt;</span><br><span class="line">&lt;/project&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>
+<p><strong>作用</strong>：定义名为 <code>device_rockchip</code> 的项目，并为其指定多个文件的链接（<code>linkfile</code> 元素）。</p>
+</li>
+<li>
+<p><strong>属性</strong>：</p>
+<ul>
+<li><code>name</code>: 仓库名 <code>device_rockchip</code>。</li>
+<li><code>path</code>: 项目的本地路径为 <code>device/rockchip</code>。</li>
+<li><code>revision</code>: 同步到特定的提交，这里是 <code>a85039a1513b2debd79f8e7ecc59c5cca01d1530</code>。</li>
+<li><code>upstream</code>: 指定该项目的上游分支是 <code>master</code>。</li>
+<li><code>dest-branch</code>: 指定目标分支为 <code>master</code>。</li>
+</ul>
+</li>
+<li>
+<p><strong><code>&lt;linkfile&gt;</code> 元素</strong>：为本地项目中的某些文件创建符号链接。</p>
+<ul>
+<li><code>src</code>: 链接的源文件位置（在仓库中的路径）。</li>
+<li><code>dest</code>: 链接的目标文件位置（在本地项目中的路径）。</li>
+</ul>
+<p>例如，<code>&lt;linkfile src=&quot;common/mkfirmware.sh</code></p>
+</li>
+</ul>
+<h1 id="搭建自己的repo仓库"><a class="markdownIt-Anchor" href="#搭建自己的repo仓库"></a> 搭建自己的repo仓库</h1>
+<blockquote>
+<p>v2ray wsl翻墙</p>
+<p><a target="_blank" rel="noopener" href="https://ivpsr.com/2484.html">https://ivpsr.com/2484.html</a></p>
+</blockquote>
+<p>首先，在服务端只需要建立一个仓库名为<code>manifest</code>，构建完成如下图所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409051043339.png" alt="image-20240819162611044" />image-20240819162611044</p>
+<p>然后在本地拉取该仓库，拉取完成如下所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409051043360.png" alt="image-20240819162649607" />image-20240819162649607</p>
+<p>然后创建一个xml文件，这个文件名可以随意取例如rk3588_linux_release.xml，内容填充如下所示：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">COPY&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;manifest&gt;</span><br><span class="line">  &lt;remote  name=&quot;origin&quot; fetch=&quot;https://github.com/chai0705&quot; /&gt;</span><br><span class="line">  &lt;default remote=&quot;origin&quot; sync-j=&quot;8&quot; /&gt;</span><br><span class="line">  &lt;project name=&quot;rootfs-build&quot; path=&quot;rootfs-build&quot; revision=&quot;main&quot; /&gt;</span><br><span class="line">&lt;/manifest&gt;</span><br></pre></td></tr></table></figure>
+<p>remote: 远程服务端，name为repo仓库名称，fetch 为 仓库url</p>
+<p>default:设置每个项目默认的仓库和分支，remote指定了使用哪一个远程服务端</p>
+<p>project: 每个项目的git仓库，path会指向下载后的仓库放在那个路径</p>
+<p>name: 服务端git仓库名称，指向的是在fetch在已有的仓库名。</p>
+<p>revision: 分支名称或者commit id</p>
+<p>然后推送出去，即可，如下图所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409051043547.png" alt="image-20240819163952002" />image-20240819163952002</p>
+<p>到这里就关于repo就搭建完成了，然后开始测试，输入以下命令，这里的repo可以指定一下国内源，不然太慢了，或者使用本地的repo也是可以的。</p>
+<blockquote>
+<p>–repo-url <a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/git/git-repo">https://mirrors.tuna.tsinghua.edu.cn/git/git-repo</a></p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">COPYrepo init -u https://github.com/chai0705/manifest -b master -m rk3588_linux_release.xml --repo-url https://mirrors.tuna.tsinghua.edu.cn/git/git-repo</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409051043403.png" alt="image-20240819165255782" />image-20240819165255782</p>
+<p>这样就初始化成功了，然后就可以进行同步了，同步过程如下所示：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">COPYrepo sync -j20</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409051043455.png" alt="image-20240819165407859" />image-20240819165407859</p>
+<p>同步完成如下所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409051043610.png" alt="image-20240819165611921" />image-20240819165611921</p>
+<p>不错啊，这个，我感觉很不错，</p>
+<p>小修改</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">COPY&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;manifest&gt;</span><br><span class="line">  &lt;remote  name=&quot;origin&quot; fetch=&quot;https://github.com/chai0705&quot; /&gt;</span><br><span class="line">  &lt;default remote=&quot;origin&quot; sync-j=&quot;8&quot; /&gt;</span><br><span class="line">  &lt;project name=&quot;rootfs-build&quot; path=&quot;rootfs-build&quot; revision=&quot;master&quot; /&gt;</span><br><span class="line">  &lt;project name=&quot;u-boot&quot; path=&quot;u-boot&quot; revision=&quot;master&quot; /&gt;</span><br><span class="line">  &lt;project name=&quot;kernel&quot; path=&quot;kernel&quot; revision=&quot;master&quot; /&gt;</span><br><span class="line">  &lt;project name=&quot;rkbin&quot; path=&quot;rkbin&quot; revision=&quot;master&quot; /&gt;</span><br><span class="line">  &lt;project name=&quot;gcc-arm-10.3-2021.07-x86_64-aarch64-none-linux-gnu&quot; path=&quot;prebuilts/gcc/linux-x86/aarch64/gcc-arm-10.3-2021.07-x86_64-aarch64-none-linux-gnu&quot; revision=&quot;adbb295a970c4b39dc487c95226fe84d2c460072&quot; upstream=&quot;master&quot; dest-branch=&quot;master&quot;/&gt;</span><br><span class="line">&lt;/manifest&gt;</span><br><span class="line">COPY</span><br><span class="line">git remote add origin https://github.com/chai0705/u-boot.git</span><br><span class="line">git clone https://github.com/chai0705/kernel.git</span><br><span class="line">git push -u origin master</span><br><span class="line">COPYgit branch -m main master</span><br><span class="line">git fetch origin</span><br><span class="line">git branch -u origin/master master</span><br><span class="line">git remote set-head origin -a</span><br><span class="line">COPYexport windows_host=`cat /etc/resolv.conf|grep nameserver|awk &#x27;&#123;print $2&#125;&#x27;`</span><br><span class="line">export ALL_PROXY=socks5://$windows_host:10810</span><br><span class="line">export HTTP_PROXY=$ALL_PROXY</span><br><span class="line">export http_proxy=$ALL_PROXY</span><br><span class="line">export HTTPS_PROXY=$ALL_PROXY</span><br><span class="line">export https_proxy=$ALL_PROXY</span><br><span class="line"></span><br><span class="line">if [ &quot;`git config --global --get proxy.https`&quot; != &quot;socks5://$windows_host:10810&quot; ]; then</span><br><span class="line">            git config --global proxy.https socks5://$windows_host:10810</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2024/08/19/07_%E5%B0%8F%E6%8A%80%E5%B7%A7/11_repo%E5%AD%A6%E4%B9%A0/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2024/08/19/02_%E7%91%9E%E8%8A%AF%E5%BE%AE/18_%E7%91%9E%E8%8A%AF%E5%BE%AE%E9%95%9C%E5%83%8F%E6%8B%89%E5%8F%96%E5%92%8C%E5%90%8C%E6%AD%A5/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            瑞芯微镜像拉取和同步
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2024/08/18/07_%E5%B0%8F%E6%8A%80%E5%B7%A7/10_%E5%90%84%E7%B1%BB%E4%BB%BB%E5%8A%A1%E8%80%97%E6%97%B6/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">各类任务耗时</div>
+      </a>
+    
+  </nav>
+
+  
+   
+  
+   
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2015-2024
+        <i class="ri-heart-fill heart_icon"></i> chai
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="热爱学习的未来酱"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/%E7%94%9F%E6%B4%BB">生活</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE">瑞芯微</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/Linux%E5%AD%A6%E4%B9%A0">Linux学习</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/%E8%AF%BB%E4%B9%A6">读书</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/%E9%A9%B1%E5%8A%A8%E5%AD%A6%E4%B9%A0">驱动学习</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/C%E8%AF%AD%E8%A8%80%E9%AB%98%E7%BA%A7%E5%AD%A6%E4%B9%A0">C语言高级学习</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/%E5%B0%8F%E6%8A%80%E5%B7%A7">小技巧</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/shell%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0">shell编程学习</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/PCB%E5%AD%A6%E4%B9%A0">PCB学习</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/%E9%9F%B3%E8%A7%86%E9%A2%91%E5%AD%A6%E4%B9%A0">音视频学习</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="52"
+        src="//music.163.com/outchain/player?type=2&id=22707008&auto=0&height=32"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
+    
+    
+
+  </div>
+</body>
+
+</html>
