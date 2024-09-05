@@ -110,6 +110,209 @@
     
     
     <article
+  id="post-02_瑞芯微/14_mpp学习"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2024/07/14/02_%E7%91%9E%E8%8A%AF%E5%BE%AE/14_mpp%E5%AD%A6%E4%B9%A0/"
+    >mpp的学习</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2024/07/14/02_%E7%91%9E%E8%8A%AF%E5%BE%AE/14_mpp%E5%AD%A6%E4%B9%A0/" class="article-date">
+  <time datetime="2024-07-14T09:17:03.000Z" itemprop="datePublished">2024-07-14</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE/">瑞芯微</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="mpp源码获取"><a class="markdownIt-Anchor" href="#mpp源码获取"></a> mpp源码获取</h1>
+<p><a target="_blank" rel="noopener" href="https://github.com/rockchip-linux/mpp">https://github.com/rockchip-linux/mpp</a></p>
+<h1 id="mpp-readme介绍"><a class="markdownIt-Anchor" href="#mpp-readme介绍"></a> mpp readme介绍</h1>
+<h2 id="媒体处理平台-media-process-platform-mpp-模块目录说明"><a class="markdownIt-Anchor" href="#媒体处理平台-media-process-platform-mpp-模块目录说明"></a> 媒体处理平台 (Media Process Platform, MPP) 模块目录说明：</h2>
+<h3 id="mpp-目录说明"><a class="markdownIt-Anchor" href="#mpp-目录说明"></a> MPP 目录说明：</h3>
+<ul>
+<li><strong>MPP</strong>：媒体处理平台   Media Process Platform</li>
+<li><strong>MPI</strong>：媒体处理接口   Media Process Interface</li>
+<li><strong>HAL</strong>：硬件抽象层  Hardware Abstract Layer</li>
+<li><strong>OSAL</strong>：操作系统抽象层  Operation System Abstract Layer</li>
+</ul>
+<h3 id="规则"><a class="markdownIt-Anchor" href="#规则"></a> 规则：</h3>
+<ol>
+<li><strong>头文件安排规则</strong>
+<ul>
+<li>每个模块文件夹中的 <code>inc</code> 目录用于外部模块使用。</li>
+<li>模块内部头文件应与实现文件一起放置。</li>
+<li>头文件不应包含任何相对路径或绝对路径，所有包含路径应在 <code>Makefile</code> 中指定。</li>
+</ul>
+</li>
+<li><strong>编译系统规则</strong>
+<ul>
+<li>使用 CMake 作为跨平台编译管理系统。</li>
+<li>使用 CMake 的 out-of-source build，最终的二进制文件和库将安装到 <code>out/</code> 目录。</li>
+</ul>
+</li>
+<li><strong>头文件包含顺序</strong>
+<ul>
+<li>MODULE_TAG</li>
+<li>系统头文件</li>
+<li>OSAL 头文件</li>
+<li>模块头文件</li>
+</ul>
+</li>
+</ol>
+<h3 id="注意事项"><a class="markdownIt-Anchor" href="#注意事项"></a> 注意事项：</h3>
+<ol>
+<li>
+<p>不再维护 Windows 支持。</p>
+</li>
+<li>
+<p>MPP 现在支持所有 Rockchip 芯片，包括：</p>
+<ul>
+<li>RK29XX/RK30XX/RK31XX</li>
+<li>RK3288/RK3368/RK3399</li>
+<li>RK3228/RK3229/RK3228H/RK3328</li>
+<li>RK3528/RK3528A</li>
+<li>RK3562</li>
+<li>RK3566/RK3568</li>
+<li>RK3588</li>
+<li>RV1108/RV1107</li>
+<li>RV1109/RV1126</li>
+</ul>
+</li>
+<li>
+<p>MPP 支持硬件支持的所有格式，除了 VC1。</p>
+</li>
+<li>
+<p>可以在 Linux 和 Android 上获取 MPP 的应用示例：</p>
+<ul>
+<li>Linux: <a target="_blank" rel="noopener" href="https://github.com/WainDing/mpp_linux_cpp">mpp_linux_cpp</a>, <a target="_blank" rel="noopener" href="https://github.com/MUZLATAN/ffmpeg_rtsp_mpp">ffmpeg_rtsp_mpp</a></li>
+<li>Android: <a target="_blank" rel="noopener" href="https://github.com/c-xh/RKMediaCodecDemo">RKMediaCodecDemo</a></li>
+</ul>
+</li>
+<li>
+<p>官方 GitHub:</p>
+<p>rockchip-linux/mpp</p>
+<ul>
+<li>开发版 GitHub: <a target="_blank" rel="noopener" href="https://github.com/HermanChen/mpp">HermanChen/mpp</a></li>
+<li>开发版 Gitee: <a target="_blank" rel="noopener" href="https://gitee.com/hermanchen82/mpp">hermanchen82/mpp</a></li>
+</ul>
+</li>
+<li>
+<p>提交消息格式应基于 <a target="_blank" rel="noopener" href="https://keepachangelog.com/en/1.0.0/">Keep a Changelog</a></p>
+</li>
+</ol>
+<p>更多文档可在 <a target="_blank" rel="noopener" href="http://opensource.rock-chips.com/wiki_Mpp">Rockchips 开源平台</a> 找到。</p>
+<h3 id="mpp-目录结构"><a class="markdownIt-Anchor" href="#mpp-目录结构"></a> MPP 目录结构：</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">csharp复制代码  top</span><br><span class="line">   ├── build                  // CMake out-of-source build 目录</span><br><span class="line">   │   ├── cmake              // cmake 脚本目录</span><br><span class="line">   │   ├── android            // android build 目录</span><br><span class="line">   │   ├── linux              // linux build 目录</span><br><span class="line">   │   ├── vc10-x86_64        // Visual Studio 2010 on x86_64 build 目录</span><br><span class="line">   │   ├── vc12-x86_64        // Visual Studio 2013 on x86_64 build 目录</span><br><span class="line">   ├── doc                    // MPP 设计文档</span><br><span class="line">   ├── inc                    // 外部使用的头文件，包括平台头文件和 MPI 头文件</span><br><span class="line">   ├── mpp                    // 媒体处理平台: MPI 功能私有实现和 MPP 基础结构</span><br><span class="line">   │   ├── base               // 基本组件，包括 MppBuffer、MppFrame、MppPacket、MppTask、MppMeta 等</span><br><span class="line">   │   ├── common             // 视频编解码协议语法接口，供编解码器解析器和 HAL 使用</span><br><span class="line">   │   ├── codec              // 所有视频编解码器解析器，将流转换为协议结构</span><br><span class="line">   │   │   ├── inc            // 编解码器模块提供的外部使用头文件</span><br><span class="line">   │   │   ├── dec            // 解码器解析器工作流示例</span><br><span class="line">   │   │   ├── enc            // 编码器控制器工作流示例</span><br><span class="line">   │   ├── hal                // 硬件抽象层 (HAL)：MPI 中使用的模块</span><br><span class="line">   │   │   ├── inc            // HAL 提供的外部使用头文件</span><br><span class="line">   │   │   ├── iep            // IEP 用户库</span><br><span class="line">   │   │   ├── pp             // 后处理器用户库</span><br><span class="line">   │   │   ├── rga            // RGA 用户库</span><br><span class="line">   │   │   ├── deinter        // 去交错功能模块，包括 PP/IEP/RGA</span><br><span class="line">   │   │   ├── rkdec          // Rockchip 硬件解码器寄存器生成</span><br><span class="line">   │   │   ├── vpu            // VPU 寄存器生成库</span><br><span class="line">   │   ├── legacy             // 生成新的 libvpu，包括旧的 vpuapi 路径和新的 mpp 路径</span><br><span class="line">   │   ├── test               // MPP 内部视频协议单元测试和演示</span><br><span class="line">   ├── test                   // MPP 缓冲区/包组件单元测试和 MPP/MPI/VPU_API 演示</span><br><span class="line">   ├── out                    // 最终发布的二进制输出目录</span><br><span class="line">   │   ├── bin                // 可执行二进制文件输出目录</span><br><span class="line">   │   ├── inc                // 头文件输出目录</span><br><span class="line">   │   ├── lib                // 库文件输出目录</span><br><span class="line">   ├── osal                   // 操作系统抽象层：不同操作系统的抽象层</span><br><span class="line">   │   ├── allocator          // 支持的分配器，包括 Android 的 ion 和 Linux 的 drm</span><br><span class="line">   │   ├── android            // Google&#x27;s Android</span><br><span class="line">   │   ├── inc                // MPP 模块的 OSAL 头文件</span><br><span class="line">   │   ├── linux              // 主线 Linux 内核</span><br><span class="line">   │   ├── windows            // Microsoft&#x27;s Windows</span><br><span class="line">   │   ├── test               // OSAL 单元测试</span><br><span class="line">   ├── tools                  // 代码风格格式化工具</span><br><span class="line">   ├── utils                  // 小工具函数</span><br></pre></td></tr></table></figure>
+<h3 id="mpp-实现整体框架"><a class="markdownIt-Anchor" href="#mpp-实现整体框架"></a> MPP 实现整体框架：</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">    +---------------------------------------+</span><br><span class="line">    |                                       |</span><br><span class="line">    | ffmpeg / OpenMax / gstreamer / libva  |</span><br><span class="line">    |                                       |</span><br><span class="line">    +---------------------------------------+</span><br><span class="line"></span><br><span class="line">+-------------------- MPP ----------------------+</span><br><span class="line">|                                               |</span><br><span class="line">|   +-------------------------+    +--------+   |</span><br><span class="line">|   |                         |    |        |   |</span><br><span class="line">|   |        MPI / MPP        |    |        |   |</span><br><span class="line">|   |   buffer queue manage   |    |        |   |</span><br><span class="line">|   |                         |    |        |   |</span><br><span class="line">|   +-------------------------+    |        |   |</span><br><span class="line">|                                  |        |   |</span><br><span class="line">|   +-------------------------+    |        |   |</span><br><span class="line">|   |                         |    |        |   |</span><br><span class="line">|   |          codec          |    |  OSAL  |   |</span><br><span class="line">|   |    decoder / encoder    |    |        |   |</span><br><span class="line">|   |                         |    |        |   |</span><br><span class="line">|   +-------------------------+    |        |   |</span><br><span class="line">|                                  |        |   |</span><br><span class="line">|   +-----------+ +-----------+    |        |   |</span><br><span class="line">|   |           | |           |    |        |   |</span><br><span class="line">|   |  parser   | |    HAL    |    |        |   |</span><br><span class="line">|   |  recoder  | |  reg_gen  |    |        |   |</span><br><span class="line">|   |           | |           |    |        |   |</span><br><span class="line">|   +-----------+ +-----------+    +--------|   |</span><br><span class="line">|                                               |</span><br><span class="line">+-------------------- MPP ----------------------+</span><br><span class="line"></span><br><span class="line">    +---------------------------------------+</span><br><span class="line">    |                                       |</span><br><span class="line">    |                kernel                 |</span><br><span class="line">    |       RK vcodec_service / v4l2        |</span><br><span class="line">    |                                       |</span><br><span class="line">    +---------------------------------------+</span><br></pre></td></tr></table></figure>
+<h3 id="媒体处理接口-media-process-interface-分层结构"><a class="markdownIt-Anchor" href="#媒体处理接口-media-process-interface-分层结构"></a> 媒体处理接口 (Media Process Interface) 分层结构：</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">            +-------------------+</span><br><span class="line">            |                   |</span><br><span class="line">            |        MPI        |</span><br><span class="line">            |                   |</span><br><span class="line">            +---------+---------+</span><br><span class="line">                      |</span><br><span class="line">                      |</span><br><span class="line">                      v</span><br><span class="line">            +---------+---------+</span><br><span class="line">            |                   |</span><br><span class="line">        +---+        ctx        +---+</span><br><span class="line">        |   |                   |   |</span><br><span class="line">        |   +-------------------+   |</span><br><span class="line">        |                           |</span><br><span class="line">        v                           v</span><br><span class="line">+-------+-------+           +-------+-------+</span><br><span class="line">|               |           |               |</span><br><span class="line">|     packet    |           |     frame     |</span><br><span class="line">|               |           |               |</span><br><span class="line">+---------------+           +-------+-------+</span><br><span class="line">        |                           |</span><br><span class="line">        |                           |</span><br><span class="line">        |                           |</span><br><span class="line">        |     +---------------+     |</span><br><span class="line">        |     |               |     |</span><br><span class="line">        +----&gt;+     buffer    +&lt;----+</span><br><span class="line">              |               |</span><br><span class="line">              +---------------+</span><br></pre></td></tr></table></figure>
+<h2 id="h264-解码器示例工作流程"><a class="markdownIt-Anchor" href="#h264-解码器示例工作流程"></a> H.264 解码器示例工作流程：</h2>
+<p>视频流首先由 MPI/MPP 层排队，MPP 将流发送到 codec 层，codec 层解析流头并生成协议标准输出。此输出将发送到 HAL 生成寄存器文件集并与硬件通信。硬件完成任务并发送回信息。MPP 通知 codec 硬件结果，codec 按显示顺序输出解码帧。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line">               MPP              decoder             parser              HAL</span><br><span class="line"></span><br><span class="line">+                  +                  +                  +                  +</span><br><span class="line">|                  |                  |                  |                  |</span><br><span class="line">|   open context   |                  |                  |                  |</span><br><span class="line">+----------------&gt; |                  |                  |                  |</span><br><span class="line">|                  |                  |                  |                  |</span><br><span class="line">|       init       |                  |                  |                  |</span><br><span class="line">+----------------&gt; |                  |                  |                  |</span><br><span class="line">|                  |                  |                  |                  |</span><br><span class="line">|                  |       init       |                  |                  |</span><br><span class="line">|                  +----------------&gt; |                  |                  |</span><br><span class="line">|                  |                  |                  |                  |</span><br><span class="line">|                  |                  |       init       |                  |</span><br><span class="line">|                  |                  +----------------&gt; |                  |</span><br><span class="line">|                  |                  |                  |                  |</span><br><span class="line">|                  |                  |                  |       open       |</span><br><span class="line">|                  |                  +-----------------------------------&gt; |</span><br><span class="line">|                  |                  |                  |                  |</span><br><span class="line">|      decode      |                  |                  |                  |</span><br><span class="line">+----------------&gt; |                  |                  |                  |</span><br><span class="line">|                  |                  |                  |                  |</span><br><span class="line">|                  |   send_stream    |                  |                  |</span><br><span class="line">|                  +----------------&gt; |                  |                  |</span><br><span class="line">|                  |                  |                  |                  |</span><br><span class="line">|                  |                  |   parse_stream   |                  |</span><br><span class="line">|                  |                  +----------------&gt; |                  |</span><br><span class="line">|                  |                  |                  |                  |</span><br><span class="line">|                  |                  |                  |  reg generation  |</span><br><span class="line">|                  |                  +-----------------------------------&gt; |</span><br><span class="line">|                  |                  |                  |                  |</span><br><span class="line">|                  |                  |                  |    send_regs     |</span><br><span class="line">|                  |                  +-----------------------------------&gt; |</span><br><span class="line">|                  |                  |                  |                  |</span><br><span class="line">|                  |                  |                  |    wait_regs     |</span><br><span class="line">|                  |                  +-----------------------------------&gt; |</span><br><span class="line">|                  |                  |                  |                  |</span><br><span class="line">|                  |                  |  notify_hw_end   |                  |</span><br><span class="line">|                  |                  +----------------&gt; |                  |</span><br><span class="line">|                  |                  |                  |                  |</span><br><span class="line">|                  |   get_picture    |                  |                  |</span><br><span class="line">|                  +----------------&gt; |                  |                  |</span><br><span class="line">|                  |                  |                  |                  |</span><br><span class="line">|                  |                  |   get_picture    |                  |</span><br><span class="line">|                  |                  +----------------&gt; |                  |</span><br><span class="line">|                  |                  |                  |                  |</span><br><span class="line">|      flush       |                  |                  |                  |</span><br><span class="line">+----------------&gt; |                  |                  |                  |</span><br><span class="line">|                  |                  |                  |                  |</span><br><span class="line">|                  |      flush       |                  |                  |</span><br><span class="line">|                  +----------------&gt; |                  |                  |</span><br><span class="line">|                  |                  |                  |                  |</span><br><span class="line">|                  |                  |      reset       |                  |</span><br><span class="line">|                  |                  +----------------&gt; |                  |</span><br><span class="line">|                  |                  |                  |                  |</span><br><span class="line">|      close       |                  |                  |                  |</span><br><span class="line">+----------------&gt; |                  |                  |                  |</span><br><span class="line">|                  |                  |                  |                  |</span><br><span class="line">|                  |      close       |                  |                  |</span><br><span class="line">|                  +----------------&gt; |                  |                  |</span><br><span class="line">|                  |                  |                  |                  |</span><br><span class="line">|                  |                  |      close       |                  |</span><br><span class="line">|                  |                  +----------------&gt; |                  |</span><br><span class="line">|                  |                  |                  |                  |</span><br><span class="line">|                  |                  |                  |      close       |</span><br><span class="line">|                  |                  +-----------------------------------&gt; |</span><br><span class="line">+                  +                  +                  +                  +</span><br></pre></td></tr></table></figure>
+<ol>
+<li>
+<p>解码器支持三种内存使用模式：</p>
+<h3 id="模式1纯内部模式"><a class="markdownIt-Anchor" href="#模式1纯内部模式"></a> 模式1：纯内部模式</h3>
+<p>在这种模式下，用户不会调用 <code>MPP_DEC_SET_EXT_BUF_GROUP</code> 控制解码器，只需调用 <code>MPP_DEC_SET_INFO_CHANGE_READY</code> 让解码器继续运行。解码器会在内部创建缓冲区，用户需要释放每一帧获取到的缓冲区。</p>
+<p><strong>优点</strong>：</p>
+<ul>
+<li>简单易用，快速获得示例。</li>
+</ul>
+<p><strong>缺点</strong>：</p>
+<ol>
+<li>解码器的缓冲区在解码器关闭前可能无法返回，可能导致内存泄漏或崩溃。</li>
+<li>无法控制解码器的内存使用，解码器处于自由运行状态，会消耗所有可用内存。</li>
+<li>实现零拷贝显示路径较为困难。</li>
+</ol>
+<h3 id="模式2半内部模式"><a class="markdownIt-Anchor" href="#模式2半内部模式"></a> 模式2：半内部模式</h3>
+<p>这种模式是当前 <code>mpi_dec_test</code> 代码使用的模式。用户需要根据返回的信息变化创建 <code>MppBufferGroup</code>，并使用 <code>mpp_buffer_group_limit_config</code> 限制解码器的内存使用。</p>
+<p><strong>优点</strong>：</p>
+<ol>
+<li>简单易用。</li>
+<li>用户可以在解码器关闭后释放 <code>MppBufferGroup</code>，内存可以更安全地保留更长时间。</li>
+<li>可以通过 <code>mpp_buffer_group_limit_config</code> 限制内存使用。</li>
+</ol>
+<p><strong>缺点</strong>：</p>
+<ol>
+<li>缓冲区限制仍不准确，内存使用是100%固定的。</li>
+<li>实现零拷贝显示路径仍然困难。</li>
+</ol>
+<h3 id="模式3纯外部模式"><a class="markdownIt-Anchor" href="#模式3纯外部模式"></a> 模式3：纯外部模式</h3>
+<p>在这种模式下，用户需要创建空的 <code>MppBufferGroup</code> 并通过文件句柄从外部分配器导入内存。在 Android 上，surfaceflinger 将创建缓冲区，mediaserver 从 surfaceflinger 获取文件句柄并提交到解码器的 <code>MppBufferGroup</code>。</p>
+<p><strong>优点</strong>：</p>
+<ul>
+<li>最有效的零拷贝显示方式。</li>
+</ul>
+<p><strong>缺点</strong>：</p>
+<ol>
+<li>学习和使用较为困难。</li>
+<li>播放器工作流可能限制这种使用方式。</li>
+<li>可能需要外部解析器来获取外部分配器所需的正确缓冲区大小。</li>
+</ol>
+<h3 id="所需缓冲区大小计算"><a class="markdownIt-Anchor" href="#所需缓冲区大小计算"></a> 所需缓冲区大小计算：</h3>
+<ul>
+<li>像素数据：<code>hor_stride * ver_stride * 3 / 2</code></li>
+<li>额外信息：<code>hor_stride * ver_stride / 2</code></li>
+<li>总计：<code>hor_stride * ver_stride * 2</code></li>
+</ul>
+<p>对于 H.264/H.265 编码器，20+ 个缓冲区足够；对于其他编解码器，10 个缓冲区足够。</p>
+<h1 id="源码的编译"><a class="markdownIt-Anchor" href="#源码的编译"></a> 源码的编译</h1>
+<p>其实源码的编译很简单，总共是需要安装三个工具分别为gcc g++和cmake</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install g++-9-aarch64-linux-gnu gcc-9-aarch64-linux-gnu </span><br></pre></td></tr></table></figure>
+<p>然后链接一下</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo ln -s /usr/bin/aarch64-linux-gnu-g++-9 /usr/bin/aarch64-linux-gnu-g++</span><br><span class="line">sudo ln -s /usr/bin/aarch64-linux-gnu-g++-9 /usr/bin/aarch64-linux-gnu-g++</span><br></pre></td></tr></table></figure>
+<p>然后进入源码目录下的mpp/build/linux/aarch64文件如下所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202407142150341.png" alt="image-20240714215012311" /></p>
+<p>然后运行make-Makefiles.bash可执行程序，在此之前需要加一下-DCMAKE_INSTALL_PREFIX=install \在make-Makefiles.bash的cmake中，添加完成如下图所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202407142156183.png" alt="image-20240714215615158" /></p>
+<p>​	生成Makefile如下所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202407142150861.png" alt="image-20240714215058817" /></p>
+<p>​	然后运行make -j32 &amp;&amp; make install 编译安装如下图所示</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202407142202549.png" alt="image-20240714220256505" /></p>
+<p>​	然后会在当前目录下生成install目录，如下图所示：<br />
+<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202407142203966.png" alt="image-20240714220326941" /></p>
+</li>
+</ol>
+<p>而在install目录下有对应的二进制测试文件和头文件以及对应的vpu库，</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202407142203977.png" alt="image-20240714220351911" /></p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
   id="post-02_瑞芯微/13_rga的学习"
   class="article article-type-post"
   itemscope
@@ -4746,313 +4949,13 @@
 </article>
 
     
-    <article
-  id="post-06_工作记录/15_工作记录(六月第1个星期)"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2024/06/01/06_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/15_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95(%E5%85%AD%E6%9C%88%E7%AC%AC1%E4%B8%AA%E6%98%9F%E6%9C%9F)/"
-    >工作记录((6月第1个星期)</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2024/06/01/06_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/15_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95(%E5%85%AD%E6%9C%88%E7%AC%AC1%E4%B8%AA%E6%98%9F%E6%9C%9F)/" class="article-date">
-  <time datetime="2024-06-01T13:26:56.000Z" itemprop="datePublished">2024-06-01</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/">工作记录</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h1 id="工作记录星期一"><a class="markdownIt-Anchor" href="#工作记录星期一"></a> 工作记录(星期一)</h1>
-<p>==摆脱一份幻觉比发现一个真理更能使人明智==</p>
-<p>==当你在凝视深渊的时候深渊也在凝视你==</p>
-<hr />
-<p>问题依然是很大，但还行，至少又认识到自己的问题了，不是吗，我其实发现，我的人生目标并不是之前想的那样也就是==我希望用一生的时间不断深入和学习电子计算机相关的全部知识，将其整理成网络并分享出去，与更多志同道合的朋友共同进步==</p>
-<p>经过这几个月我发现这并不是我人生的终极追求，我发现我想要的是按照自己的意愿过好生活的每一天，正是因为电子计算机与现在的生活契合了，所以才会有了上面的这个人生追求的错觉，但我的意愿也是会变的，所以读书，是一件很重要的事情，丰富自己的意识，在做任何一件事情的时候都用丰富的知识储备，有道理的事情就应该去做，所以我认为每天晚上将明天一天的事情规划出来是一件非常不容易的事情，当然也是一个非常又意义的事情，事实上，你要规划的事情并不多，无非是几点起床，明天吃什么，要学习的东西是啥，以及一下非常具体的安排罢了，都很简单，手机也都不要带入卧室了，其他一切的电子设备都不要带进去了，当然手表也是，以后的起床就靠小爱同学了</p>
-<h1 id="531工作记录星期五"><a class="markdownIt-Anchor" href="#531工作记录星期五"></a> 5.31工作记录（星期五）</h1>
-<p>==摆脱一份幻觉比发现一个真理更能使人明智==</p>
-<p>==当你在凝视深渊的时候，深渊也在凝视你==</p>
-<p>还是要写一些东西来反思自己一下，如果不反思自己，都不知道自己会走歪路到哪里，问题真的太大了，即使晚上吃饭的问题解决了，但是与之而来的又是新的问题，即使换上了ubuntu操作系统，有了很大的便利特性，但是与windows相比，仍旧是出现了很多其他的问题，但仍旧需要努力和专精，不能因为一点问题就放弃，今天肯定是要继续的去看驱动视频的，但是对自己还是要进行一些改变。</p>
-<p>至少不能再这样下去了，早起换来的早睡，而且信心太不坚定了，看到什么就做什么，随心所欲其实并不适合你，太高估你自己了，其实，晚上吃饭仍旧是按照当前的吃饭来,电脑屏蔽一些该屏蔽的网站，然后就是按照自己的想法去做喜欢的事情了，bilbili也要禁用掉，我认为确实需要将自己保持在一个心流的状态里。</p>
-<p>今天下午的任务就是整理总结I2C的视频逻辑了。</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">序号</th>
-<th style="text-align:left">章节名称</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">1</td>
-<td style="text-align:left">自动连播</td>
-</tr>
-<tr>
-<td style="text-align:left">2</td>
-<td style="text-align:left">什么是I2C以及I2C基础知识</td>
-</tr>
-<tr>
-<td style="text-align:left">3</td>
-<td style="text-align:left">iTOP-RK3568开发板都有哪些I2C接口</td>
-</tr>
-<tr>
-<td style="text-align:left">4</td>
-<td style="text-align:left">为什么I2C要接上拉电阻</td>
-</tr>
-<tr>
-<td style="text-align:left">5</td>
-<td style="text-align:left">I2C上拉电阻阻值计算</td>
-</tr>
-<tr>
-<td style="text-align:left">6</td>
-<td style="text-align:left">I2C通信时序介绍</td>
-</tr>
-<tr>
-<td style="text-align:left">7</td>
-<td style="text-align:left">实验准备：I2C实验外设介绍</td>
-</tr>
-<tr>
-<td style="text-align:left">8</td>
-<td style="text-align:left">框架学习法：I2C子系统框架学习（一）</td>
-</tr>
-<tr>
-<td style="text-align:left">9</td>
-<td style="text-align:left">框架学习法：I2C子系统框架学习（二）</td>
-</tr>
-<tr>
-<td style="text-align:left">10</td>
-<td style="text-align:left">编写i2c_client代码</td>
-</tr>
-<tr>
-<td style="text-align:left">11</td>
-<td style="text-align:left">编写i2c_driver程序框架</td>
-</tr>
-<tr>
-<td style="text-align:left">12</td>
-<td style="text-align:left">编写和用设备树实现的i2c_client的匹配的匹配规则</td>
-</tr>
-<tr>
-<td style="text-align:left">13</td>
-<td style="text-align:left">使用C文件编写i2c_client代码</td>
-</tr>
-<tr>
-<td style="text-align:left">14</td>
-<td style="text-align:left">编写和用C实现的i2c_client的匹配的匹配规则</td>
-</tr>
-<tr>
-<td style="text-align:left">15</td>
-<td style="text-align:left">编写FT5X06对应的设备节点</td>
-</tr>
-<tr>
-<td style="text-align:left">16</td>
-<td style="text-align:left">编写FT5X06对应的驱动程序</td>
-</tr>
-<tr>
-<td style="text-align:left">17</td>
-<td style="text-align:left">编写FT5X06驱动程序的I2C通信部分（API函数讲解）</td>
-</tr>
-<tr>
-<td style="text-align:left">18</td>
-<td style="text-align:left">编写FT5X06驱动程序的I2C通信部分（代码编写）</td>
-</tr>
-<tr>
-<td style="text-align:left">19</td>
-<td style="text-align:left">i2c_transfer函数解析</td>
-</tr>
-<tr>
-<td style="text-align:left">20</td>
-<td style="text-align:left">通过逻辑分析仪认识I2C波形</td>
-</tr>
-<tr>
-<td style="text-align:left">21</td>
-<td style="text-align:left">编写FT5X06驱动程序的数据上报部分代码（一）</td>
-</tr>
-<tr>
-<td style="text-align:left">22</td>
-<td style="text-align:left">编写FT5X06驱动程序的数据上报部分代码（二）</td>
-</tr>
-<tr>
-<td style="text-align:left">23</td>
-<td style="text-align:left">分析触摸芯片上报数据</td>
-</tr>
-<tr>
-<td style="text-align:left">24</td>
-<td style="text-align:left">编写FT5X06驱动程序测试APP</td>
-</tr>
-<tr>
-<td style="text-align:left">25</td>
-<td style="text-align:left">扩展：探究i2c_client结构体（一）</td>
-</tr>
-<tr>
-<td style="text-align:left">26</td>
-<td style="text-align:left">扩展：探究i2c_client结构体（二）</td>
-</tr>
-<tr>
-<td style="text-align:left">27</td>
-<td style="text-align:left">如何在应用程序中使用I2C</td>
-</tr>
-<tr>
-<td style="text-align:left">28</td>
-<td style="text-align:left">为什么在应用程序中可以使用I2C（i2c-dev驱动讲解）</td>
-</tr>
-<tr>
-<td style="text-align:left">29</td>
-<td style="text-align:left">课后作业讲解</td>
-</tr>
-<tr>
-<td style="text-align:left">30</td>
-<td style="text-align:left">I2C调试神器：i2c-tools工具讲解</td>
-</tr>
-<tr>
-<td style="text-align:left">31</td>
-<td style="text-align:left">I2C调试神器：i2c-tools工具讲解（二）</td>
-</tr>
-<tr>
-<td style="text-align:left">32</td>
-<td style="text-align:left">使用GPIO模拟I2C-驱动框架编写</td>
-</tr>
-<tr>
-<td style="text-align:left">33</td>
-<td style="text-align:left">使用GPIO模拟I2C-编写起始和终止信号代码</td>
-</tr>
-<tr>
-<td style="text-align:left">34</td>
-<td style="text-align:left">使用逻辑分析器查看模拟I2C时序（一）</td>
-</tr>
-<tr>
-<td style="text-align:left">35</td>
-<td style="text-align:left">使用GPIO模拟I2C-编写接收和发送应答信号代码</td>
-</tr>
-<tr>
-<td style="text-align:left">36</td>
-<td style="text-align:left">使用GPIO模拟I2C-编写I2C接收和发送数据代码</td>
-</tr>
-<tr>
-<td style="text-align:left">37</td>
-<td style="text-align:left">使用GPIO模拟I2C-编写FT5X06读取和发送函数</td>
-</tr>
-<tr>
-<td style="text-align:left">38</td>
-<td style="text-align:left">使用逻辑分析器查看模拟I2C时序（二）</td>
-</tr>
-<tr>
-<td style="text-align:left">39</td>
-<td style="text-align:left">如何使用Linux中默认的模拟I2C驱动程序</td>
-</tr>
-<tr>
-<td style="text-align:left">40</td>
-<td style="text-align:left">扩展：SMBus总线介绍</td>
-</tr>
-</tbody>
-</table>
-<h1 id="61-工作记录"><a class="markdownIt-Anchor" href="#61-工作记录"></a> 6.1  工作记录</h1>
-<p>==摆脱一份幻觉比发现一个真理更能使人明智==</p>
-<p>==当你在凝视深渊的时候，深渊也在凝视你==</p>
-<hr />
-<p>今天起床的时间也确实是早了，但是感觉也没啥用呀，将那个手机带来了，以后应该也不会带回去了，以后还是安安心心、一点一点的改变吧，问题究竟是出在哪里呢，对于我来说，诱惑、欲望带来的影响真的很大，最好的方法就是断绝，现在做到的也就是不看手机的直播了，但对于其他的仍旧是不行，知道了一些东西的坏处，以及带来的影响，但仍旧是无法克制你自己，甚至有的时候我感觉是耳朵的问题，因为外界的声音纷繁杂乱，乱了你的心绪，又因为看到的东西太过迷人眼，从而也是乱了心绪，所以我一直在想，如果没了听觉会不会好一点，所以我在尝试一直戴着耳塞的情况，戴着耳塞之后，一些杂乱细小的声音也就没了，从而让思绪也安静下来，好像也确实是这样，唯一有问题的地方在于声音，这样的话确实是听到的外界的声音小了，但是如果想要看一个视频，视频必然也没有声音了，这要如何呢，本意是买一个骨传导耳机，目前看来是没机会的，买了也是浪费罢了，这个就不再想了。</p>
-<p>目前的话就一直带着耳塞了，我发现将耳塞放到最里面，然后顶住就会好很多，耳朵也不疼，倒也还好，然后看视频的话就通过字幕了，尽可能的摆脱听觉，除了一些必要的时刻，行了一些总结就到这里吧，然后开始今天的工作，今天肯定是要写前面的这几部分的手册的，可以先不在pdf里写，更重要的是typora，markdown，这里一定是要写的，当然在此之前需要整理完第一部分的大体内容，以及各个章节名称。</p>
-<p>我发现电脑换成Linux之后，我还是会情不自禁的看QQ，这当然是不对的，与其这样，我还不如用回windows呢，对吧，没有任何意义，而且之前是有光标闪烁提醒的，而现在就什么都没有了，所以我以后还是要戴着手环，这样可以提醒我有没有人跟我说话，一直持续不停的看群聊，真的是一件非常干扰思绪的一件事情，以后注意。</p>
-<p>突然想到了一个想法，能不能将工作与回家之后的内容进行替换与重叠呢，这样上班的时候可以很快乐的做自己想做的事情，而回家之后也可以有目标去做自己愿意做的事情，两者就可以很好的重合在了一起，不是吗，我想是对的，说做就做呗，但有一点可以确定，不能只有回报而没有付出，没有人想去做不开心的事情，但岁月静好，负重前行，本来也就是相辅相成的不是吗。</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/image-20240601105940937.png" alt="image-20240601105940937" /></p>
-<blockquote>
-<p>第1章 初步认识i2c</p>
-<p>​	（1）什么是I2C</p>
-<p>​	（2）I2C基础知识</p>
-<p>​	（3）iTOP-RK3568开发板上的I2C接口(==这里可以介绍一下要用到的实验外设==)</p>
-<p>第2章 I2C上拉电阻</p>
-<p>​	（1）为什么要接上拉电阻</p>
-<p>​	（2）I2C上拉电阻阻值计算</p>
-<p>第3章 I2C通信时序介绍</p>
-<p>第4章 I2C子系统框架学习</p>
-</blockquote>
-<p>前九节的内容可以分成这四章，目前在思考，是先写这四章的内容还是继续看后面的视频，理性告诉我，需要先来搞这几个章节的内容。</p>
-<h1 id="63-工作记录"><a class="markdownIt-Anchor" href="#63-工作记录"></a> 6.3 工作记录</h1>
-<p>昨天的行为很有问题，问题还很大，那就是突然之间又不知道自己要做什么了，可能我也从来没有明白过，我真正想要的是什么，有一段时间之后就忧郁，再然后失去自我，我并不是真的热爱电子计算机，他也只是我路上众多过客里的一个而已，并不是最终的目标，其实最好的一生其实就是在老年将死之际，回顾自己的一生，不因蹉跎岁月而悔恨，也不因碌碌无为而羞愧，如果有再来一次的机会，我会希望能按照今生这辈子再来一遍，而分配到每一年、每一个月、每一星期、每一天，那就是在晚上闭眼入梦前的想象中，对自己说，今天一天过的真不错呀，我希望明天将会有同样美好的一天等着我，而我如今对现在过的一天并不满意，我会因为早起不成功而悔恨，会因多看很长时间的小说而羞愧，会因为QQ分心而焦虑，会因自己做的事情没有意义而感觉忧郁，正如之前想的那样，没有什么事情是可以一蹴而就的，就连历史都是螺旋上升的，短期可能并看不见成果，但持之以恒，遇到问题就解决问题，终究还是向前的，不是吗。</p>
-<p>对于小说，其实就是低趣味性太多了，让你看的不解其意，认为自己的时间就这样飘忽的没了，让你感到不值得，但是呢，如果是看一些其他类型的书籍，就例如心流、贫穷等等，这些也会花费很多的时间，但是在你的心里上就认为没有浪费时间，但其实对于那些值得思考的书，也一样的，主要是你看的书太劣质了，失去了自己的耐心，所以我加入了那些小说群，低质量和高质量的小说真的不一样，以后就尽可能的花钱去看小说了，行了对于小说的整理和总结就结束了。</p>
-<p>然后是电脑问题，windows确实是真的不错，以后仍旧是以windwos为主了，原神还是要windows才行，应该也只是用来玩原神了，其他的应该都不会了，也仅仅只有这一个需求了，晚上回家装一下就行了，也挺简单的。我装windows系统的原因只有原神，做任何事情其实都不能着急，尽可能地做到最好，有理有据，有因有果，行了，开始今天的工作吧。</p>
-<h1 id="64-工作记录"><a class="markdownIt-Anchor" href="#64-工作记录"></a> 6.4 工作记录</h1>
-<p>==认清一份幻觉比发现一个真理更能使人明智==</p>
-<p>==当你在凝视深渊的时候深渊也在凝视你==</p>
-<p>==人生苦难重重==</p>
-<hr />
-<p>先来思考一下昨天晚上的问题，你觉得问题在哪个地方呢？我其实问题在原神上，原神之后就非常的浮躁，然后就静不下心来，从而导致了最终的夜不能寐，除此之外，小说也有问题，但归根结底是原神的问题，以后呢就是完成每日任务，然后将树脂刷完即可，至少这一周的规划是这样的，其他的问题不重要，然后继续看视频了。</p>
-<h1 id="65-工作记录"><a class="markdownIt-Anchor" href="#65-工作记录"></a> 6.5 工作记录</h1>
-<p>==认清一份幻觉比发现一个真理更能使人明智==</p>
-<p>==当你在凝视深渊的时候深渊也在凝视你==</p>
-<hr />
-<p>昨天晚上的行为做的真不错，虽然还是没能做到最好，但依然是有了一个极大的进步，睡眠是一切的基础，只有睡眠足够了，第二天的精力才能充沛，与之相对的，就是自身的抵抗力，自制力，以昨天为例，因为前天的时候没有睡好，只有六个小时的睡眠时间，这就导致了昨天的精力极差，所以在白天工作的时候，很大程度的时间就都浪费了，忍不住的想要去看小说，但这个小说也是真的不错，文笔是真的好，但这样的小说值的自己细细品味，天下大同，为天地立心，为生民立命，当然好了，但更重要的是千里之行，始于足下，我在现实中也应该做到，而不是只停留在小说这种精神故事里，精神诚可贵，现实同样如此，以后看这些文章，不可避免的要准备纸张，记录一些有用的东西，有了朱玉在前，那些上不了台面的东西，就只能消失了，不是吗，至少在你的心里面是认同的，不是吗，如果一个月的时间做到了，就可以考虑买个ipad，也不是不行，专门来看书的。行了，关于书籍相关的内容就先看陈述到这里，然后是原神，这个行为不错，以后就这样了，只需要完成固定的任务和体力，其他不管，一切都等周日了，也不会有太多的起伏波动，一切顺心而已，行了，开始继续看视频，下午开始就写手册了。</p>
-<p>上午的时候终于是将视频看完了，先来将章节分一下</p>
-<blockquote>
-<p>第167章 初步认识i2c</p>
-<p>​	（1）什么是I2C</p>
-<p>​	（2）I2C基础知识</p>
-<p>​	（3）iTOP-RK3568开发板上的I2C接口(==这里可以介绍一下要用到的实验外设==)</p>
-<p>第168章 I2C上拉电阻</p>
-<p>​	（1）为什么要接上拉电阻</p>
-<p>​	（2）I2C上拉电阻阻值计算</p>
-<p>第169章 I2C通信时序介绍</p>
-<p>第170章 I2C子系统框架学习</p>
-<p>第171章 I2C client代码编写(设备树)</p>
-<p>第172章 I2C 驱动框架编写</p>
-<p>第173章 I2C client代码编写(C程序)</p>
-<p>第174章 FT5X06设备树节点编写</p>
-<p>第175章 FT5X06驱动程序编写</p>
-<p>第176章 FT5X06驱动程序I2C通信部分编写</p>
-<p>第177章 i2c_transfer函数解析</p>
-<p>第178章 通过逻辑分析仪认识I2C波形</p>
-<p>第179章 FT5X06驱动程序数据上报部分编写(包括数据分析和app编写)</p>
-<p>第180章 i2c_client结构体分析</p>
-<p>第181章 在应用程序中使用I2C(为什么？怎么用)</p>
-<p>第182章 i2c-tools工具讲解</p>
-<p>第183章 使用GPIO模拟I2C驱动</p>
-<p>第184章 使用Linux中默认的模拟I2C驱动程序</p>
-<p>第185章 SMBus总线介绍</p>
-</blockquote>
-<h1 id="67-工作记录"><a class="markdownIt-Anchor" href="#67-工作记录"></a> 6.7 工作记录</h1>
-<p>没有内耗的日子可真的太好了，而且按时睡觉，睡到自然醒也很爽，每一天都是精神满满的，这样子也就有了更多的精力去抵制那些不对的事情，就比如大前天的时候，因为睡眠不够，导致一天都不是很精神，然后就偷偷的看小说，这极大的影响了积极性，现在算是知道了具体的原因了，还行吧，认清一份幻觉，比发现一个真理更能使人明智。</p>
-<p>再然后是另一个实际的问题，也是与之做斗争很久的问题，那就是QQ，感觉现在的方法还行，就是早上的时候一劳永逸，设置QQ群的消息通知权限，将技术支持的时候和平常的时候分开来，一般的时候我就将它收进群助手，而技术支持的时候就将他们放出来，然后只有有消息通知才去看群，行了，开始今天的学习了。</p>
-<p>不对，还是有个问题要解决，那就是回家之后的电脑问题，以后我的台式机的职责就是打原神还有学习，其他的事情都放在小笔记本上了，这个地方要注意，行了，开始今天的学习了，加油。</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
   </article>
   
 
   
   <nav class="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/2/">上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/4/">下一页</a>
+    <a class="extend prev" rel="prev" href="/page/2/">上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/4/">下一页</a>
   </nav>
   
 </section>

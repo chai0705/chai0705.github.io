@@ -167,7 +167,7 @@
 <p>通过以上详细的讲解，你应该对Repo有了全面而深入的理解。Repo是一个强大的工具，它简化了大型项目中多个Git仓库的管理，提高了开发效率和项目一致性。</p>
 <h2 id="repo的安装"><a class="markdownIt-Anchor" href="#repo的安装"></a> repo的安装</h2>
 <p>repo 其实就是个python脚本，所以只需要拉取下来放到某个路径就好了，但在此之前需要先安装git，git的安装方法不再讲解，可以看前面的文档。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">COPYwget https://storage.googleapis.com/git-repo-downloads/repo .</span><br><span class="line">wget https://raw.githubusercontent.com/esrlabs/git-repo/stable/repo .</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget https://storage.googleapis.com/git-repo-downloads/repo .</span><br><span class="line">wget https://raw.githubusercontent.com/esrlabs/git-repo/stable/repo .</span><br></pre></td></tr></table></figure>
 <p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409051043063.png" alt="image-20240817170916119" />image-20240817170916119</p>
 <p>然后赋予可执行权限，拷贝到/usr/bin/目录：</p>
 <p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409051043962.png" alt="image-20240817171016635" />image-20240817171016635</p>
@@ -177,11 +177,11 @@
 <ol>
 <li>
 <p><strong>初始化repo</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">COPYrepo --trace init -u https://android.googlesource.com/platform/manifest -b branch_name -m default.xml</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">repo --trace init -u https://android.googlesource.com/platform/manifest -b branch_name -m default.xml</span><br></pre></td></tr></table></figure>
 </li>
 <li>
 <p><strong>同步代码</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">COPYrepo sync</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">repo sync</span><br></pre></td></tr></table></figure>
 </li>
 <li>
 <p><strong>上传代码到远程仓库</strong></p>
@@ -418,7 +418,7 @@
 </ul>
 <p>这个命令的作用是初始化一个 Repo 工作环境，从指定的 URL 克隆清单仓库的 <code>linux</code> 分支，并使用 <code>rk3588_linux_release.xml</code> 清单文件来配置项目。这个清单文件将包含项目中所有其他 Git 仓库的信息，以及这些仓库应该如何被检出和配置。在 <code>repo init</code> 完成之后，你通常会使用 <code>repo sync</code> 命令来同步（即克隆或更新）清单文件中定义的所有仓库。</p>
 </blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">COPY.repo/repo/repo sync -c -j20</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.repo/repo/repo sync -c -j20</span><br></pre></td></tr></table></figure>
 <p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409051043968.png" alt="image-20240819100404978" />image-20240819100404978</p>
 <p>这个命令主要做了以下几件事情：</p>
 <ol>
