@@ -455,7 +455,7 @@
 </li>
 </ul>
 <p><strong><code>&lt;default&gt;</code> 元素</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">COPY&lt;default remote=&quot;origin&quot; sync-j=&quot;4&quot;/&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;default remote=&quot;origin&quot; sync-j=&quot;4&quot;/&gt;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>
 <p><strong>作用</strong>：设置默认的同步和远程仓库配置，适用于该清单中所有项目（除非项目本身有覆盖配置）。</p>
@@ -472,7 +472,7 @@
 <p><strong>元素</strong></p>
 <p>项目的核心定义，描述要同步的 Git 仓库。可以有多个 <code>&lt;project&gt;</code> 元素，每一个都代表一个独立的 Git 仓库。</p>
 <p>示例 1:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">COPY&lt;project name=&quot;debian11&quot; path=&quot;debian&quot; revision=&quot;refs/tags/stable-5.10.160&quot; clone-depth=&quot;1&quot;/&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;project name=&quot;debian11&quot; path=&quot;debian&quot; revision=&quot;refs/tags/stable-5.10.160&quot; clone-depth=&quot;1&quot;/&gt;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>
 <p><strong>作用</strong>：定义一个名为 <code>debian11</code> 的项目，这个项目是一个 Git 仓库。</p>
@@ -535,10 +535,10 @@
 <blockquote>
 <p>–repo-url <a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/git/git-repo">https://mirrors.tuna.tsinghua.edu.cn/git/git-repo</a></p>
 </blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">COPYrepo init -u https://github.com/chai0705/manifest -b master -m rk3588_linux_release.xml --repo-url https://mirrors.tuna.tsinghua.edu.cn/git/git-repo</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">repo init -u https://github.com/chai0705/manifest -b master -m rk3588_linux_release.xml --repo-url https://mirrors.tuna.tsinghua.edu.cn/git/git-repo</span><br></pre></td></tr></table></figure>
 <p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409051043403.png" alt="image-20240819165255782" />image-20240819165255782</p>
 <p>这样就初始化成功了，然后就可以进行同步了，同步过程如下所示：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">COPYrepo sync -j20</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">repo sync -j32</span><br></pre></td></tr></table></figure>
 <p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409051043455.png" alt="image-20240819165407859" />image-20240819165407859</p>
 <p>同步完成如下所示：</p>
 <p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409051043610.png" alt="image-20240819165611921" />image-20240819165611921</p>

@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+  
+
+    <head>
+      <meta charset="utf-8" />
+        
+      <meta name="description" content="永远年轻，永远热泪盈眶" />
+      
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>电脑超频 |  热爱学习的未来酱</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      
+<link rel="stylesheet" href="/css/fonts/remixicon.css">
+
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    <link rel="alternate" href="/atom.xml" title="热爱学习的未来酱" type="application/atom+xml">
+</head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-07_小技巧/17_电脑超频"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  电脑超频
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2024/09/07/07_%E5%B0%8F%E6%8A%80%E5%B7%A7/17_%E7%94%B5%E8%84%91%E8%B6%85%E9%A2%91/" class="article-date">
+  <time datetime="2024-09-06T22:50:19.000Z" itemprop="datePublished">2024-09-07</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%B0%8F%E6%8A%80%E5%B7%A7/">小技巧</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">4.7k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">16 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>==这两天因为电脑的问题，都不好好的工作了，所以一直在维持一个很低很低的效率，在昨天晚上发现了es版本的处理器，也正好适应了我当前的状态，能做到目前的最好了，后来又因为水冷的问题，又迟疑了一会儿，就业还行吧，大约是大后天到，就还行吧，找一天晚上进行装机，行了，研究研究如何超频，不能白买啊，之前因为麻烦，并没有咋超频过，现在不超都对不起我。==</p>
+<p>最重要的一个工具：图吧工具箱下载地址</p>
+<p><a target="_blank" rel="noopener" href="https://www.tbtool.cn/download/202408.html">https://www.tbtool.cn/download/202408.html</a></p>
+<h1 id="z790吹雪更新bios"><a class="markdownIt-Anchor" href="#z790吹雪更新bios"></a> Z790吹雪更新bios</h1>
+<p>​	首先进入ROG官网，找到当前的主板型号，我家里的电脑是Z790吹雪</p>
+<p><a target="_blank" rel="noopener" href="https://rog.asus.com.cn/search/explore/?searchkeyword=%E5%90%B9%E9%9B%AA">https://rog.asus.com.cn/search/explore/?searchkeyword=吹雪</a></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409071614124.png" alt="image-20240907161421102" /></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409071614968.png" alt="image-20240907161445925" /></p>
+<p>找到bios</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409071615180.png" alt="image-20240907161527114" /></p>
+<ol>
+<li>新的 BIOS 包含了 Intel 微代码 0x129，以增强 Intel 第 13 代和第 14 代处理器的稳定性。</li>
+<li>出厂默认设置已更改为 Intel 默认设置，且现在包含了非 K 系列处理器（K 系列处理器已经在之前的版本中包括）。</li>
+</ol>
+<p>更新此 BIOS 的同时会将相应的 Intel ME 更新至版本 16.1.30.2307。 请注意，更新 BIOS 后，即使回滚至旧版本，ME 版本仍将保持为已更新的版本。 在运行 USB BIOS 回写工具之前，请将 BIOS 文件（SZ790A.CAP）重命名为 BIOSRenamer。</p>
+<p>​	解决了最近爆的CPU缩肛的问题，然后将这个bios放到U盘上：<br />
+<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409071623641.png" alt="image-20240907162322606" /></p>
+<p>然后进入bios，点击工具，选择升级bios。升级即可，我发现也不用给要用U盘。</p>
+<h1 id="超频原理"><a class="markdownIt-Anchor" href="#超频原理"></a> 超频原理</h1>
+<p>​	<strong>电脑超频</strong>（Overclocking）是指通过手动调整电脑硬件的运行参数，使其在高于默认设定的频率下工作，以提高性能的过程。通常，超频主要涉及 <strong>CPU</strong>（中央处理器）、<strong>GPU</strong>（图形处理器）、<strong>RAM</strong>（内存）等硬件组件。</p>
+<h3 id="超频的原理"><a class="markdownIt-Anchor" href="#超频的原理"></a> 超频的原理：</h3>
+<p>电脑硬件在出厂时会设置一个默认的运行频率（即主频或时钟频率），这个频率由厂商根据硬件的稳定性、发热量和功耗等因素来设定。超频通过手动提高硬件的运行频率，使其执行更多的指令，从而提升计算性能。</p>
+<p>例如，某个处理器的默认主频是 3.5GHz，通过超频，你可以将其频率提升到 4.0GHz 或更高，以此增加计算速度。</p>
+<h3 id="主要超频的硬件"><a class="markdownIt-Anchor" href="#主要超频的硬件"></a> 主要超频的硬件：</h3>
+<ol>
+<li>
+<p><strong>CPU 超频</strong>：</p>
+<ul>
+<li><strong>CPU 主频</strong>：调整 CPU 的工作频率，即通过更高的时钟频率来提高其处理速度。</li>
+<li><strong>CPU 电压</strong>：为了支持更高的频率，通常还需要增加 CPU 的工作电压。这可以增强稳定性，但会增加功耗和发热量。</li>
+<li><strong>倍频和外频</strong>：现代 CPU 主要通过调整倍频（Multiplier）进行超频，外频（Base Clock）超频相对较少。</li>
+</ul>
+</li>
+<li>
+<p><strong>GPU 超频</strong>：</p>
+<ul>
+<li><strong>核心频率</strong>：提高显卡 GPU 核心的工作频率来提升图形处理能力。</li>
+<li><strong>显存频率</strong>：提升显存的频率可以增加显卡对数据的读取和写入速度，从而提高整体性能。</li>
+</ul>
+</li>
+<li>
+<p><strong>内存（RAM）超频</strong>：</p>
+<ul>
+<li><strong>内存频率</strong>：提高内存的工作频率可以加快数据的访问速度，提高系统响应能力。</li>
+<li><strong>内存时序</strong>：内存时序决定了数据传输的延迟，通过优化时序可以提高内存效率。</li>
+</ul>
+</li>
+</ol>
+<h3 id="超频的好处"><a class="markdownIt-Anchor" href="#超频的好处"></a> 超频的好处：</h3>
+<ol>
+<li><strong>提高性能</strong>：通过提高硬件的工作频率，可以显著提高系统的整体性能，尤其是在处理大型数据或运行复杂计算时，性能提升更为明显。</li>
+<li><strong>延长硬件使用周期</strong>：在硬件性能不满足需求时，通过超频可以延长硬件的使用寿命，延迟升级硬件的需求。</li>
+<li><strong>更好地发挥硬件潜力</strong>：部分高端硬件出厂时已经有很强的超频潜力，但厂商为了保持稳定性没有使用最大化频率，通过超频可以释放硬件的全部潜力。</li>
+</ol>
+<h3 id="超频的风险"><a class="markdownIt-Anchor" href="#超频的风险"></a> 超频的风险：</h3>
+<ol>
+<li><strong>稳定性问题</strong>：超频可能导致系统不稳定，出现蓝屏、死机、程序崩溃等问题。尤其是当电压和频率调整过高时，硬件可能无法稳定工作。</li>
+<li><strong>温度上升</strong>：超频会增加硬件的功耗，从而导致硬件温度上升。如果散热不足，可能会引发过热、性能下降，甚至硬件损坏。</li>
+<li><strong>缩短硬件寿命</strong>：高电压和高频率运行可能会缩短硬件的寿命，因为硬件会长期处于更高的压力环境中。</li>
+<li><strong>保修问题</strong>：很多厂商对超频后的硬件不提供保修支持，因此超频可能导致硬件失去保修。</li>
+</ol>
+<h1 id="如何超频"><a class="markdownIt-Anchor" href="#如何超频"></a> 如何超频</h1>
+<p>超频是提高电脑硬件性能的一种方式，通过调整 CPU、GPU、内存等硬件的工作频率，使它们在高于出厂设置的速度下运行。虽然超频可以带来性能提升，但需要谨慎进行，以避免过热、系统不稳定或损坏硬件。</p>
+<p>下面是常见硬件的超频方法，尤其是针对 CPU、GPU 和内存的具体步骤。</p>
+<h3 id="准备工作"><a class="markdownIt-Anchor" href="#准备工作"></a> 准备工作：</h3>
+<ol>
+<li><strong>检查硬件的超频能力</strong>：确保你的 CPU、主板、GPU 支持超频。Intel 的 K 系列处理器（如 i7-9700K）和 AMD 的 Ryzen 系列处理器支持超频。部分高端显卡和内存也支持超频。</li>
+<li><strong>升级散热系统</strong>：超频会增加硬件的发热量，确保你的电脑有足够的散热能力。推荐使用优质的风冷或水冷散热系统。</li>
+<li><strong>备份数据</strong>：超频可能会导致系统不稳定甚至崩溃，因此在超频前建议备份重要数据。</li>
+<li><strong>安装硬件监控工具</strong>：使用软件如 <strong>CPU-Z</strong>、<strong>HWMonitor</strong>、<strong>MSI Afterburner</strong> 来监控 CPU 和 GPU 的温度、频率和电压。</li>
+</ol>
+<h4 id="bios-超频主板设置"><a class="markdownIt-Anchor" href="#bios-超频主板设置"></a> BIOS 超频（主板设置）</h4>
+<p>通过 BIOS 进行 CPU 超频是最常见的方式，大多数主板都支持该功能。</p>
+<p><strong>步骤：</strong></p>
+<ol>
+<li><strong>进入 BIOS</strong>：
+<ul>
+<li>重启电脑，在启动时按下 <code>DEL</code>、<code>F2</code>、<code>ESC</code> 或其他键（具体按键取决于主板），进入 BIOS 设置界面。</li>
+</ul>
+</li>
+<li><strong>进入超频设置（OC 设置）</strong>：
+<ul>
+<li>在 BIOS 中找到 “Overclocking” 或 “OC Settings” 菜单。</li>
+</ul>
+</li>
+<li><strong>调整 CPU 倍频（Multiplier）</strong>：
+<ul>
+<li>CPU 的工作频率是由外频（Base Clock, BCLK）和倍频（Multiplier）相乘得出的。为了超频，你可以先增加 CPU 的倍频，通常可以逐步增加 1 或 2 来提高频率。</li>
+<li>例如，如果外频是 100 MHz，倍频为 40，那么 CPU 的频率就是 4.0GHz。你可以把倍频从 40 增加到 42，得到 4.2GHz。</li>
+</ul>
+</li>
+<li><strong>调整 CPU 电压（Vcore）</strong>：
+<ul>
+<li>为了让 CPU 在更高频率下稳定运行，你可能需要适当提高 CPU 的核心电压（Vcore）。注意，电压过高会增加温度，影响硬件寿命。建议小幅增加电压（如增加 0.01V 到 0.05V）。</li>
+<li>在 BIOS 中，找到 CPU 电压设置，将其设置为手动模式，然后逐步增加。</li>
+</ul>
+</li>
+<li><strong>保存设置并退出 BIOS</strong>：
+<ul>
+<li>完成超频设置后，保存并退出 BIOS。重启电脑，并进入操作系统。</li>
+</ul>
+</li>
+<li><strong>压力测试和温度监控</strong>：
+<ul>
+<li>使用软件如 <strong>Prime95</strong> 或 <strong>AIDA64</strong> 进行压力测试，监控 CPU 温度。如果系统在负载下稳定且温度正常（建议温度不超过 85°C），可以继续微调倍频和电压。否则，降低倍频或电压。</li>
+</ul>
+</li>
+</ol>
+<h4 id="自动超频"><a class="markdownIt-Anchor" href="#自动超频"></a> 自动超频</h4>
+<p>部分主板（如 ASUS、MSI）提供了一键超频功能（如 “AI Overclocking” 或 “Game Boost”），可以自动根据硬件情况调整超频设置。虽然方便，但手动调整通常能更精确地控制性能和稳定性。</p>
+<h1 id="实际操作"><a class="markdownIt-Anchor" href="#实际操作"></a> 实际操作</h1>
+<p>​	进入BIOS，如下图所示：<br />
+<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409071653683.png" alt="image-20240907165350427" /></p>
+<p>​		找到CPU倍频选项，修改即可，这里有个AVX需要解释一下</p>
+<p>​	在超频中，<strong>AVX</strong> 是指 <strong>Advanced Vector Extensions</strong>（高级矢量扩展），这是由 Intel 和 AMD 处理器所支持的一种 <strong>CPU 指令集扩展</strong>。AVX 能够加速处理某些类型的计算密集型任务，特别是在 <strong>浮点运算</strong> 和 <strong>矢量运算</strong> 方面，因此在科学计算、3D 渲染、加密解密、音视频处理等领域表现突出。</p>
+<h2 id="avx"><a class="markdownIt-Anchor" href="#avx"></a> AVX</h2>
+<h3 id="什么是-avx"><a class="markdownIt-Anchor" href="#什么是-avx"></a> 什么是 AVX？</h3>
+<p>AVX 是一个 <strong>SIMD</strong>（单指令多数据）指令集扩展，它允许 CPU 在一个时钟周期内对多个数据进行并行处理。它特别适合于需要大量浮点计算的应用程序，比如图形处理、科学模拟、机器学习等。与常规的指令集相比，AVX 能够处理更大的数据宽度和更多的数据包。</p>
+<h3 id="avx-在超频中的影响"><a class="markdownIt-Anchor" href="#avx-在超频中的影响"></a> AVX 在超频中的影响</h3>
+<p>在超频过程中，AVX 指令集对于 CPU 的影响比较大，尤其是在 <strong>高负载的计算任务</strong> 中。因为 AVX 指令集能够让 CPU 执行大量的计算，因此它会增加 CPU 的功耗和发热。具体来说，当 CPU 运行 AVX 指令时，它的负载会比执行非 AVX 指令更高，进而导致更高的温度和功耗。</p>
+<p>为了应对这种情况，许多主板在 BIOS 中提供了 <strong>AVX 偏移（AVX offset）</strong> 的选项。这是因为当 CPU 运行 AVX 指令时，其高负载状态可能会导致系统的不稳定，而为了保持系统稳定性，主板允许用户设置在运行 AVX 指令时降低 CPU 频率。</p>
+<h3 id="avx-偏移avx-offset"><a class="markdownIt-Anchor" href="#avx-偏移avx-offset"></a> <strong>AVX 偏移（AVX Offset）</strong></h3>
+<p>AVX 偏移是 CPU 的一个调节机制，允许用户在运行 AVX 指令时自动降低 CPU 的频率。这个频率降低通常以倍频（Multiplier）为单位调整。例如：</p>
+<ul>
+<li>如果你的 CPU 运行在 5.0GHz，但你设置了 <code>AVX Offset = 2</code>，那么当 CPU 运行 AVX 指令时，频率会降低 2 倍频，即降到 4.8GHz。</li>
+</ul>
+<p>这可以帮助 CPU 在处理 AVX 指令时避免过热和不稳定的情况，同时也允许你在非 AVX 工作负载下保持较高的超频频率。</p>
+<h3 id="超频时如何处理-avx-负载"><a class="markdownIt-Anchor" href="#超频时如何处理-avx-负载"></a> 超频时如何处理 AVX 负载</h3>
+<ol>
+<li>
+<p><strong>使用 AVX 偏移</strong>：<br />
+在 BIOS 中设置 AVX 偏移，可以根据你的需求和系统的散热能力决定降多少倍频。通常，AVX 偏移可以设置为 1 或 2，这样当 AVX 指令执行时，CPU 的频率会自动降低，确保系统稳定。</p>
+</li>
+<li>
+<p><strong>降低全局频率</strong>：<br />
+如果你没有使用 AVX 偏移，而是想让 CPU 以同样的频率处理所有任务，你可以直接降低超频后的全局频率，但这会影响所有的任务，而不仅仅是 AVX 负载。</p>
+</li>
+<li>
+<p><strong>测试不同的负载</strong>：<br />
+在超频过程中，测试 CPU 在不同类型的负载下的稳定性是至关重要的。AVX 指令集的负载比常规负载更高，因此使用支持 AVX 的压力测试软件（如 <strong>Prime95</strong>）可以帮助你检测 CPU 在执行 AVX 指令时的稳定性。</p>
+</li>
+</ol>
+<h3 id="avx-的应用领域"><a class="markdownIt-Anchor" href="#avx-的应用领域"></a> AVX 的应用领域</h3>
+<ol>
+<li>
+<p><strong>科学计算</strong>：科学研究中的复杂计算，比如模拟、建模、机器学习等，需要大量的浮点运算，因此 AVX 能够显著提高计算效率。</p>
+</li>
+<li>
+<p><strong>图形渲染与视频处理</strong>：AVX 能够加速图形和视频渲染任务，特别是在多媒体文件的编码、解码和转换时，AVX 能够显著提高性能。</p>
+</li>
+<li>
+<p><strong>加密和解密</strong>：AVX 能够加速一些加密算法，使得 CPU 在处理安全性相关任务时更加高效。</p>
+</li>
+</ol>
+<h3 id="超频与-avx-的兼容性"><a class="markdownIt-Anchor" href="#超频与-avx-的兼容性"></a> 超频与 AVX 的兼容性</h3>
+<p>对于经常执行 AVX 工作负载的用户（如从事视频编辑、3D 渲染或科学计算的人），在超频时需要特别考虑 AVX 的影响。超频后的 CPU 频率和电压必须能够稳定处理 AVX 负载，否则系统可能会变得不稳定甚至崩溃。合理设置 AVX 偏移和超频参数能够帮助用户在性能和稳定性之间取得平衡。</p>
+<h2 id="电压"><a class="markdownIt-Anchor" href="#电压"></a> 电压</h2>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409071659354.png" alt="image-20240907165908290" /></p>
+<p>​	由于一系列原因，CPU会自动掉压，所以需要手动进行防掉压，</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409071701080.png" alt="image-20240907170109036" /></p>
+<p>​	这里的负载线矫正就是防掉压</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409071701818.png" alt="image-20240907170124776" /></p>
+<p>​	要找到一个平衡，不能太高也不能太低。等级4就行</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409071704164.png" alt="image-20240907170402015" /></p>
+<p>​	缓存频率，也要设置，也有很大的影响：<br />
+<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409071705457.png" alt="image-20240907170538405" /></p>
+<h2 id="xpu超频"><a class="markdownIt-Anchor" href="#xpu超频"></a> XPU超频</h2>
+<p><strong>Intel Extreme Tuning Utility (XTU)</strong> 是由 Intel 提供的一款超频和性能监控软件，专为支持超频的 Intel 处理器设计。它可以帮助用户在 Windows 环境下安全地调整 CPU 和内存的设置，监控温度、电压等关键参数，同时进行压力测试，确保系统稳定性。XTU 提供了一个直观的界面，适合初学者和有经验的用户使用。</p>
+<h3 id="xtu-的主要功能"><a class="markdownIt-Anchor" href="#xtu-的主要功能"></a> XTU 的主要功能：</h3>
+<ol>
+<li><strong>CPU 超频</strong>：允许调整 CPU 的倍频、外频（BCLK）、电压等参数。</li>
+<li><strong>内存超频</strong>：支持内存频率、时序调整。</li>
+<li><strong>温度监控</strong>：实时显示 CPU 温度、功耗、频率等关键信息。</li>
+<li><strong>电压调整</strong>：允许手动调整 CPU 核心电压（Vcore）以提高稳定性。</li>
+<li><strong>压力测试</strong>：集成了压力测试功能，帮助用户检测超频后的系统稳定性。</li>
+</ol>
+<h3 id="如何使用-intel-xtu-进行超频"><a class="markdownIt-Anchor" href="#如何使用-intel-xtu-进行超频"></a> 如何使用 Intel XTU 进行超频</h3>
+<h4 id="1-下载并安装-intel-xtu"><a class="markdownIt-Anchor" href="#1-下载并安装-intel-xtu"></a> 1. <strong>下载并安装 Intel XTU</strong></h4>
+<ul>
+<li>前往 Intel 官方网站 <a target="_blank" rel="noopener" href="https://www.intel.com/content/www/us/en/download/17881/intel-extreme-tuning-utility-intel-xtu.html">Intel XTU 下载页面</a>。</li>
+<li>下载并安装最新版本的 Intel XTU，按照安装向导的指示进行操作。</li>
+</ul>
+<h4 id="2-启动-intel-xtu"><a class="markdownIt-Anchor" href="#2-启动-intel-xtu"></a> 2. <strong>启动 Intel XTU</strong></h4>
+<ul>
+<li>安装完成后，启动 Intel XTU。程序会显示当前 CPU 的信息，包括处理器型号、频率、温度、电压等。</li>
+</ul>
+<h4 id="3-调整-cpu-设置"><a class="markdownIt-Anchor" href="#3-调整-cpu-设置"></a> 3. <strong>调整 CPU 设置</strong></h4>
+<p>XTU 提供了多种 CPU 调节选项，用户可以根据需求手动调整。</p>
+<h5 id="1倍频multiplier调整"><a class="markdownIt-Anchor" href="#1倍频multiplier调整"></a> （1）<strong>倍频（Multiplier）调整</strong></h5>
+<ul>
+<li><strong>CPU 核心倍频</strong>：调整 CPU 的倍频值以提升 CPU 频率。例如，如果当前外频为 100 MHz，倍频为 40，则 CPU 运行频率为 4.0 GHz。通过增加倍频，CPU 频率会提升，达到更高的性能。</li>
+<li>在 XTU 的 “Core” 页面中，找到 <strong>“Core Multipliers”</strong> 选项，手动增加倍频。例如，尝试将倍频从 40 增加到 42（提高到 4.2GHz）。</li>
+</ul>
+<h5 id="2电压voltage调整"><a class="markdownIt-Anchor" href="#2电压voltage调整"></a> （2）<strong>电压（Voltage）调整</strong></h5>
+<ul>
+<li><strong>CPU 核心电压（Vcore）</strong>：增加 CPU 频率后，如果系统不稳定，可以适当提高 CPU 电压以确保稳定性。通常建议逐步增加电压，每次增加 0.01V 到 0.05V，并监控温度。</li>
+<li>在 XTU 的 “Core Voltage” 部分，找到 <strong>“Core Voltage Offset”</strong>，这里可以增加电压。建议从小幅度开始调整。</li>
+</ul>
+<h5 id="3bclk-调整"><a class="markdownIt-Anchor" href="#3bclk-调整"></a> （3）<strong>BCLK 调整</strong></h5>
+<ul>
+<li><strong>Base Clock (BCLK)</strong>：外频可以影响整个系统的频率（包括 CPU 和内存），调高 BCLK 会增加整体频率，但风险较高，一般用户可以仅调整倍频。</li>
+</ul>
+<h4 id="4-内存超频"><a class="markdownIt-Anchor" href="#4-内存超频"></a> 4. <strong>内存超频</strong></h4>
+<p>XTU 还支持调整内存的频率和时序，特别适用于那些希望通过内存超频来获得更高性能的用户。</p>
+<ul>
+<li>在 XTU 的 <strong>“Memory”</strong> 选项卡中，你可以调整内存的时钟频率和延迟（时序）。使用 XMP 配置文件可以让你轻松选择经过验证的超频设置。</li>
+</ul>
+<h4 id="5-监控温度和系统信息"><a class="markdownIt-Anchor" href="#5-监控温度和系统信息"></a> 5. <strong>监控温度和系统信息</strong></h4>
+<ul>
+<li>在 XTU 的主界面中，用户可以实时监控 CPU 的温度、功耗、频率和电压等重要参数。超频后应密切关注温度，确保温度保持在安全范围内，通常不应超过 85°C。</li>
+<li>XTU 会提供 CPU 包温度（Package Temperature）和每个核心的温度。</li>
+</ul>
+<h4 id="6-压力测试stress-test"><a class="markdownIt-Anchor" href="#6-压力测试stress-test"></a> 6. <strong>压力测试（Stress Test）</strong></h4>
+<p>超频后必须进行压力测试，以验证系统是否稳定。</p>
+<ul>
+<li>XTU 提供了集成的 <strong>压力测试功能</strong>，可以选择不同的测试时长（如 5 分钟、30 分钟或自定义时长）。该功能会在满负载下运行 CPU 和内存，帮助检测系统的稳定性。</li>
+<li>在 XTU 中，点击 <strong>“Stress Test”</strong> 选项卡，然后选择要测试的组件（如 CPU 或内存），点击 <strong>“Start Testing”</strong> 开始测试。</li>
+<li>如果测试过程中没有出现崩溃或温度过高，说明系统超频稳定。</li>
+</ul>
+<h4 id="7-保存和导入配置"><a class="markdownIt-Anchor" href="#7-保存和导入配置"></a> 7. <strong>保存和导入配置</strong></h4>
+<p>XTU 允许用户保存超频配置文件，也可以导入其他用户或自己之前保存的配置文件。</p>
+<ul>
+<li>在 <strong>“Profiles”</strong> 页面中，你可以创建并保存当前的超频设置，方便以后快速应用。</li>
+</ul>
+<h3 id="xtu-的注意事项"><a class="markdownIt-Anchor" href="#xtu-的注意事项"></a> XTU 的注意事项：</h3>
+<ol>
+<li><strong>逐步调整频率和电压</strong>：超频时不要一次性调整太多参数。建议逐步增加频率，并监控温度和稳定性，确保系统不会过热或崩溃。</li>
+<li><strong>监控温度</strong>：超频会增加 CPU 的功耗和发热，确保有足够的散热能力（如高效风冷或水冷系统）。一般来说，CPU 温度不应超过 85°C。</li>
+<li><strong>电压增加要谨慎</strong>：提高电压有助于稳定性，但也会增加功耗和发热，过高的电压可能导致硬件损坏，建议尽量在安全电压范围内进行超频。</li>
+<li><strong>备份数据</strong>：超频可能导致系统不稳定，因此在开始超频前，建议备份重要数据，以防系统崩溃导致数据丢失。</li>
+</ol>
+<h3 id="xtu-的优势"><a class="markdownIt-Anchor" href="#xtu-的优势"></a> XTU 的优势：</h3>
+<ul>
+<li><strong>直观界面</strong>：XTU 提供了简单、直观的用户界面，让初学者和有经验的用户都能轻松超频。</li>
+<li><strong>集成压力测试</strong>：无需使用第三方工具，XTU 自带的压力测试功能能够快速检测系统超频后的稳定性。</li>
+<li><strong>实时监控</strong>：实时的温度、电压、频率监控让用户可以随时调整设置，确保系统稳定。</li>
+</ul>
+<h3 id="总结"><a class="markdownIt-Anchor" href="#总结"></a> 总结：</h3>
+<p><strong>Intel XTU</strong> 是一款功能强大的超频工具，允许用户在 Windows 环境下安全、方便地调整 CPU 和内存的频率和电压设置。通过合适的超频设置和测试，用户可以显著提升系统性能，但超频需要谨慎操作，尤其是对于电压和温度的控制。XTU 提供了丰富的工具来帮助用户在超频过程中监控和管理硬件状态，是一款非常适合 Intel 处理器用户的工具。</p>
+<h1 id="测试"><a class="markdownIt-Anchor" href="#测试"></a> 测试</h1>
+<h2 id="r23测试"><a class="markdownIt-Anchor" href="#r23测试"></a> R23测试</h2>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409071727862.png" alt="image-20240907172739809" /></p>
+<p>​	我的360水冷其实就还行，现在还能接受，但是CPU频率确实不高，具体如下所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409071730080.png" alt="image-20240907173008013" /></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409071732825.png" alt="image-20240907173207804" /></p>
+<p>​	我发现只能达到大核心4.8，小核心3.7的水平，这可太低了，然后简单的修改一下BIOS内容</p>
+<h2 id="cpuz得分"><a class="markdownIt-Anchor" href="#cpuz得分"></a> CPUZ得分</h2>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409071732654.png" alt="image-20240907173242614" /></p>
+<p>sp体制分</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409071647921.png" alt="image-20240907164700797" /></p>
+<p>​	分数越高，代表越好超频。</p>
+<p>​	散热，散热越好，可超的频率越高</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2024/09/07/07_%E5%B0%8F%E6%8A%80%E5%B7%A7/17_%E7%94%B5%E8%84%91%E8%B6%85%E9%A2%91/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+    
+      <a href="/2024/09/06/01_%E7%94%9F%E6%B4%BB/16_%E5%8F%8D%E6%80%9D(9%E6%9C%88%E7%AC%AC1%E4%B8%AA%E6%98%9F%E6%9C%9F)/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">反思(9月第1个星期）</div>
+      </a>
+    
+  </nav>
+
+  
+   
+  
+   
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2015-2024
+        <i class="ri-heart-fill heart_icon"></i> chai
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="热爱学习的未来酱"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/%E7%94%9F%E6%B4%BB">生活</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE">瑞芯微</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/Linux%E5%AD%A6%E4%B9%A0">Linux学习</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/%E8%AF%BB%E4%B9%A6">读书</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/C%E8%AF%AD%E8%A8%80%E9%AB%98%E7%BA%A7%E5%AD%A6%E4%B9%A0">C语言高级学习</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95">工作记录</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/%E5%B0%8F%E6%8A%80%E5%B7%A7">小技巧</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/shell%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0">shell编程学习</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/PCB%E5%AD%A6%E4%B9%A0">PCB学习</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/%E9%9F%B3%E8%A7%86%E9%A2%91%E5%AD%A6%E4%B9%A0">音视频学习</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="52"
+        src="//music.163.com/outchain/player?type=2&id=22707008&auto=0&height=32"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
+    
+    
+
+  </div>
+</body>
+
+</html>
