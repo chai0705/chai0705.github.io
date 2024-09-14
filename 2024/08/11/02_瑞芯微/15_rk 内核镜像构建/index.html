@@ -111,7 +111,7 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <p>我只是想到，单纯的看视频并没有什么用，我现在认为实践是检验真理的唯一标准。</p>
+  <link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>我只是想到，单纯的看视频并没有什么用，我现在认为实践是检验真理的唯一标准。</p>
 <p>先来看编译的过程：</p>
 <p>实际的编译命令</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">make -C kernel/ -j33 CROSS_COMPILE=/home/topeet/rk3588-linux/prebuilts/gcc/linux-x86/aarch64/gcc-arm-10.3-2021.07-x86_64-aarch64-none-linux-gnu/bin/aarch64-none-linux-gnu- ARCH=arm64 rockchip_linux_defconfig rk3588_linux.config</span><br><span class="line"></span><br><span class="line">make -C kernel/ -j33 CROSS_COMPILE=/home/topeet/rk3588-linux/prebuilts/gcc/linux-x86/aarch64/gcc-arm-10.3-2021.07-x86_64-aarch64-none-linux-gnu/bin/aarch64-none-linux-gnu- ARCH=arm64 topeet-rk3588-linux.img</span><br><span class="line">/home/topeet/rk3588-linux/device/rockchip/common/scripts/mk-fitimage.sh kernel/boot.img /home/topeet/rk3588-linux/kernel/boot.its kernel/arch/arm64/boot/Image</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">make -j33 CROSS_COMPILE=/home/topeet/rk3588-linux/prebuilts/gcc/linux-x86/aarch64/gcc-arm-10.3-2021.07-x86_64-aarch64-none-linux-gnu/bin/aarch64-none-linux-gnu- ARCH=arm64</span><br></pre></td></tr></table></figure>
@@ -244,7 +244,7 @@
       </a>
     
     
-      <a href="/2024/08/03/06_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/24_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95(%E5%85%AB%E6%9C%88%E7%AC%AC%E4%BA%8C%E4%B8%AA%E6%98%9F%E6%9C%9F)%20/" class="article-nav-link">
+      <a href="/2024/08/03/06_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/24_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95(%E5%85%AB%E6%9C%88%E7%AC%AC%E4%BA%8C%E4%B8%AA%E6%98%9F%E6%9C%9F)/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
         <div class="article-nav-title">工作记录((8月第2个星期)</div>
       </a>

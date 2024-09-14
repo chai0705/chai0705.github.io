@@ -110,6 +110,629 @@
     
     
     <article
+  id="post-06_工作记录/14_工作记录(5月的第4个星期)"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2024/05/04/06_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/14_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95(5%E6%9C%88%E7%9A%84%E7%AC%AC4%E4%B8%AA%E6%98%9F%E6%9C%9F)/"
+    >工作记录((5月第4个星期)</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2024/05/04/06_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/14_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95(5%E6%9C%88%E7%9A%84%E7%AC%AC4%E4%B8%AA%E6%98%9F%E6%9C%9F)/" class="article-date">
+  <time datetime="2024-05-04T13:26:56.000Z" itemprop="datePublished">2024-05-04</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/">工作记录</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="520-工作记录星期一"><a class="markdownIt-Anchor" href="#520-工作记录星期一"></a> 5.20 工作记录(星期一)</h1>
+<p>==当你在凝视深渊的时候，深渊也在凝视你==</p>
+<p>==摆脱一份幻觉比发现一份真理更能使人明智==</p>
+<p>==我希望用一生的时间学习和深入电子计算机相关的全部知识，将其整理成网络并分享出去，与更多志同道合的朋友共同进步，你清楚的知道，如果做不到这一点，你将永远不快乐==</p>
+<hr />
+<p>昨天算是迈出了第一步，没有看直播睡觉，是听着书睡的， 就还行吧，以后还是尽可能的克制基因的本能，而且我发现中午的时候问题也是很大的，总是看哔哩哔哩，然后被那些简单的娱乐视频蒙蔽了双眼、思想和精神，带了一本书来，以后中午吃饭之前就关机吧，中午的时间一直也就关机即可，然后安安静静的看书就好了，保持一个安静的心，行了，开始今天的任务了。</p>
+<p>周六的时候，又一次更新了镜像，现在的Linux系统可以说 已经全部更新了一个遍了，不错，我很喜欢，以后呢尽可能的按照时间来进行，有些东西并不是你看着他过的就快，你不看他，过的就慢，只要摆脱不掉这个情节，就必然大幅度降低最终的效率，不是吗，然后开始看驱动视频了，等着客户提出问题，如果出现了问题之后，再积极的去修改就行了，ok，新的一天加油。</p>
+<h1 id="522-工作记录星期三"><a class="markdownIt-Anchor" href="#522-工作记录星期三"></a> 5.22 工作记录(星期三)</h1>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">sudo debootstrap --no-check-gpg --variant=minbase --arch=arm64 --components=main --include=openkylin-keyring,systemd-sysv yangtze openKylin-1.0.2-rpi4b-arm64 http://archive.build.openkylin.top/openkylin gutsy</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">---&gt; </span><span class="language-bash">args</span></span><br><span class="line">VK_ARCH=arm64</span><br><span class="line">VK_BOARD=rpi4b</span><br><span class="line">VK_KEEP_IMAGE_DIR=n</span><br><span class="line">VK_MIRROR=http://archive.build.openkylin.top/openkylin</span><br><span class="line">VK_ORDER=order_rpi4b</span><br><span class="line">VK_SUITE=yangtze</span><br><span class="line">VK_TASKS=rootfs,config,img_rpi4b</span><br><span class="line">VK_UPDATE=y</span><br><span class="line">VK_VERSION=1.0.2</span><br><span class="line">ii  binfmt-support                             2.2.0-2                             amd64        Support for extra binary formats</span><br><span class="line">ii  qemu-user-static                           1:4.2-3ubuntu6.28                   amd64        QEMU user mode emulation binaries (static version)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>do_rootfs</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">制作基础根文件系统</span></span><br><span class="line">function do_rootfs() &#123;</span><br><span class="line">    # 先删除 原有 rootfs 目录</span><br><span class="line">    if [ ! -f &quot;$&#123;ROOTFS_DIR&#125;.done&quot; ]; then</span><br><span class="line">        umount_target &quot;$&#123;ROOTFS_DIR&#125;&quot;</span><br><span class="line">        MY_LOG_EXEC &quot;sudo rm -rf $&#123;ROOTFS_DIR&#125;&quot;</span><br><span class="line"></span><br><span class="line">        # debootstrap 参数</span><br><span class="line">        DEBOOTSTRAP_ARGS=&quot;--no-check-gpg --variant=minbase --arch=$&#123;VK_ARCH&#125; --components=main --include=openkylin-keyring,systemd-sysv $&#123;VK_SUITE&#125; $&#123;ROOTFS_DIR&#125; $&#123;VK_MIRROR&#125; gutsy&quot;</span><br><span class="line"></span><br><span class="line">        # 制作 rootfs</span><br><span class="line">        MY_LOG_EXEC &quot;sudo debootstrap $&#123;DEBOOTSTRAP_ARGS&#125;&quot;</span><br><span class="line"></span><br><span class="line">        # 记录基础rootfs的包列表，给第2步升级包版本用</span><br><span class="line">        # sudo chroot &quot;$&#123;ROOTFS_DIR&#125;&quot; bash -c &quot;dpkg-query -W --showformat=&#x27;\$&#123;Package&#125; \$&#123;Version&#125;\n&#x27; &gt; /rootfs.deblist&quot;</span><br><span class="line">        # cp &quot;$&#123;ROOTFS_DIR&#125;&quot;/rootfs.deblist &quot;$&#123;ROOTFS_DIR&#125;&quot;.rootfs.deblist</span><br><span class="line">        sudo chroot &quot;$&#123;ROOTFS_DIR&#125;&quot; bash -c &quot;dpkg-query -W --showformat=&#x27;\$&#123;Package&#125; \$&#123;Version&#125;\n&#x27;&quot; &gt;&quot;$&#123;ROOTFS_DIR&#125;&quot;.rootfs.deblist</span><br><span class="line"></span><br><span class="line">        sudo rm -rf $&#123;ROOTFS_DIR&#125;/var/cache/apt/archives/*.deb</span><br><span class="line">        if (: &quot;$&#123;VK_KEEP_VAR_LIB_APT_LISTS&#125;&quot;) 2&gt;/dev/null &amp;&amp; [ &quot;$&#123;VK_KEEP_VAR_LIB_APT_LISTS&#125;&quot; = &quot;y&quot; ]; then</span><br><span class="line">            sudo rm -rf $&#123;ROOTFS_DIR&#125;/var/cache/apt/*.bin</span><br><span class="line">            sudo rm -rf $&#123;ROOTFS_DIR&#125;/var/lib/apt/lists/*_Packages</span><br><span class="line">            sudo rm -rf $&#123;ROOTFS_DIR&#125;/var/lib/apt/lists/*_InRelease</span><br><span class="line">            sudo rm -rf $&#123;ROOTFS_DIR&#125;/var/lib/apt/lists/*_Translation*</span><br><span class="line">            sudo rm -rf $&#123;ROOTFS_DIR&#125;/root/.bash_history</span><br><span class="line">            sudo rm -rf $&#123;ROOTFS_DIR&#125;/tmp/*</span><br><span class="line">        fi</span><br><span class="line"></span><br><span class="line">        # rootfs制作完成</span><br><span class="line">        MY_LOG_EXEC &quot;touch $&#123;ROOTFS_DIR&#125;.done&quot;</span><br><span class="line">    fi</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>do_config</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">function do_config() &#123;</span><br><span class="line">    # 需要升级基础rootfs</span><br><span class="line">    if (: &quot;$&#123;VK_UPDATE&#125;&quot;) 2&gt;/dev/null &amp;&amp; [ &quot;$&#123;VK_UPDATE&#125;&quot; = &quot;y&quot; ] &amp;&amp; [ &quot;$&#123;VK_CURRENT_TASK&#125;&quot; = &quot;config&quot; ] &amp;&amp; [ ! -f &quot;$&#123;ROOTFS_DIR&#125;.rootfs-update.deblist&quot; ]; then</span><br><span class="line">        MY_LOG_EXEC &quot;sudo cp -v $&#123;ROOTFS_DIR&#125;.rootfs.deblist $&#123;ROOTFS_DIR&#125;/rootfs.deblist&quot;</span><br><span class="line">    fi</span><br><span class="line"></span><br><span class="line">    # 挂载</span><br><span class="line">    umount_target &quot;$&#123;ROOTFS_DIR&#125;&quot;</span><br><span class="line">    mount_host_to_target $&#123;ROOTFS_DIR&#125;</span><br><span class="line"></span><br><span class="line">    # 拷贝配置到 $&#123;ROOTFS_DIR&#125;/config</span><br><span class="line">    sudo rm -rf $&#123;ROOTFS_DIR&#125;/config</span><br><span class="line">    sudo mkdir -p $&#123;ROOTFS_DIR&#125;/config</span><br><span class="line">    sudo cp -v $&#123;CURRENT_DIR&#125;/config/*.sh $&#123;ROOTFS_DIR&#125;/config/</span><br><span class="line">    if [ -d &quot;$&#123;CURRENT_DIR&#125;/config/$&#123;CONF&#125;&quot; ]; then</span><br><span class="line">        sudo cp -r $&#123;CURRENT_DIR&#125;/config/$&#123;CONF&#125;/. $&#123;ROOTFS_DIR&#125;/config/</span><br><span class="line">        # 制作</span><br><span class="line">        sudo chroot $&#123;ROOTFS_DIR&#125; /usr/bin/env -i \</span><br><span class="line">            PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \</span><br><span class="line">            HOME=/root \</span><br><span class="line">            LC_ALL=C \</span><br><span class="line">            DEBIAN_FRONTEND=noninteractive \</span><br><span class="line">            APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=DontWarn \</span><br><span class="line">            bash -euo pipefail /config/main.sh &quot;$(set | grep &quot;^VK_&quot; | xargs)&quot;</span><br><span class="line">    else</span><br><span class="line">        echo &quot;&#x27;config/$&#123;CONF&#125;&#x27; not exits!&quot;</span><br><span class="line">    fi</span><br><span class="line"></span><br><span class="line">    # 卸载</span><br><span class="line">    umount_target $&#123;ROOTFS_DIR&#125;</span><br><span class="line"></span><br><span class="line">    # 参考分析用</span><br><span class="line">    sudo rm -rf $&#123;ROOTFS_DIR&#125;-config</span><br><span class="line">    # sudo cp -rf -a $&#123;ROOTFS_DIR&#125;/config $&#123;ROOTFS_DIR&#125;-config</span><br><span class="line">    sudo rm -rf $&#123;ROOTFS_DIR&#125;/config</span><br><span class="line"></span><br><span class="line">    # 记录包列表</span><br><span class="line">    if [ &quot;$&#123;VK_CURRENT_TASK&#125;&quot; == &quot;config&quot; ]; then</span><br><span class="line">        sudo chroot $&#123;ROOTFS_DIR&#125; dpkg -l | grep ^i | awk &#x27;&#123;print $2,$3&#125;&#x27; &gt;$&#123;ROOTFS_DIR&#125;.deblist</span><br><span class="line">    fi</span><br><span class="line"></span><br><span class="line">    # 删除 update 包列表</span><br><span class="line">    if [ -f &quot;$&#123;ROOTFS_DIR&#125;&quot;/rootfs-update.deblist ] &amp;&amp; [ ! -f &quot;$&#123;ROOTFS_DIR&#125;&quot;.rootfs-update.deblist ]; then</span><br><span class="line">        cp -v &quot;$&#123;ROOTFS_DIR&#125;&quot;/rootfs-update.deblist &quot;$&#123;ROOTFS_DIR&#125;&quot;.rootfs-update.deblist</span><br><span class="line">    fi</span><br><span class="line">    sudo rm -v -rf &quot;$&#123;ROOTFS_DIR&#125;&quot;/rootfs*.deblist</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>没有什么意思，这个麒麟也就这样吧，让田润雨自己努力吧，其实跟ubuntu、debian没有区别，搞一个银河麒麟就行了，昨天试了一下，发现果然。</p>
+<h1 id="工作记录-星期四"><a class="markdownIt-Anchor" href="#工作记录-星期四"></a> 工作记录 星期四</h1>
+<p>==摆脱一份幻觉比发现一个真理更能使人明智==</p>
+<p>==当你在凝视深渊的时候，深渊也在凝视你==</p>
+<hr />
+<p>这个银河麒麟的认证是真的想不到，我认为是得不偿失，根本没有相应的价值，这又有什么用呢，不是很懂</p>
+<h1 id="工作记录-星期五"><a class="markdownIt-Anchor" href="#工作记录-星期五"></a> 工作记录 星期五</h1>
+<p>==当你在凝视深渊的时候深渊也在凝视你==</p>
+<p>==摆脱一份幻觉比发现一个真理更能使人明智==</p>
+<p>今天就是研究如何进行那些性能测试即可，其他的先让田田试试水。</p>
+<p>``</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-06_工作记录/13_工作记录(5月的第3个星期)"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2024/05/03/06_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/13_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95(5%E6%9C%88%E7%9A%84%E7%AC%AC3%E4%B8%AA%E6%98%9F%E6%9C%9F)/"
+    >工作记录((5月第3个星期)</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2024/05/03/06_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/13_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95(5%E6%9C%88%E7%9A%84%E7%AC%AC3%E4%B8%AA%E6%98%9F%E6%9C%9F)/" class="article-date">
+  <time datetime="2024-05-03T13:26:56.000Z" itemprop="datePublished">2024-05-03</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/">工作记录</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="514工作记录"><a class="markdownIt-Anchor" href="#514工作记录"></a> 5.14工作记录</h1>
+<p>花了差不多两天的时间，终于算是搞完了这些，目前就差摄像头了，更新源码的初衷是为了提高性能，适配LPDDR5，我倒是认为这个不重要，重要的是我终于算是将这些基本上都统一了，就还行，现在就是等瑞芯微的json文件，这个肯定不是那么简单的。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make -C kernel/ -j17 CROSS_COMPILE=/home/topeet/04_rk3562/rk3562-linux/prebuilts/gcc/linux-x86/aarch64/gcc-arm-10.3-2021.07-x86_64-aarch64-none-linux-gnu/bin/aarch64-none-linux-gnu-  ARCH=arm64 bindeb-pkg</span><br></pre></td></tr></table></figure>
+<p>以后3588的东西就统一了，3588S这个后续待定，目前可以先不管，目前还行吧。然后来搞一搞晚上没搞完的东西了，反正现在是闲着也是闲着，对吧。</p>
+<h1 id="515-工作记录"><a class="markdownIt-Anchor" href="#515-工作记录"></a> 5.15 工作记录</h1>
+<h1 id="516工作记录"><a class="markdownIt-Anchor" href="#516工作记录"></a> 5.16工作记录</h1>
+<p>​	找不到具体的问题所在地呀，现在来研究看看，先来陈述一下问题所在，具体的现象就是摄像头显示不正常。</p>
+<p>最开始的时候我以为是</p>
+<h1 id="518工作记录"><a class="markdownIt-Anchor" href="#518工作记录"></a> 5.18工作记录</h1>
+<p>==当你在凝视深渊的时候，深渊也在凝视你==</p>
+<p>==认清一份幻觉比发现一个真理更能使人明智==</p>
+<p>==我希望用一生的时间不断深入和学习电子计算机相关的全部知识，将其整理成网络并分享出去，与更多志同道合的朋友共同进步，你清楚的知道，如果做不到这一点，你将永远不快乐==</p>
+<hr />
+<p>从五一回来之后，其实也不止，可以算上之前的，这是问题最大的地方，那就是之前看的书都没有任何作用了，不管是美丽新世界、是心流还是什么，都没有任何意义了，像是被束缚在思想上的肉欲和束缚在身体上的肉欲，于是我就发现这是不对的，虽然我能认识到不对，但是并不能改变什么，痛苦的是哪些人呢，不是那些没有觉醒的人，也不是那些觉醒之后知行合一的人，恰恰是我这种高不成、低不就。思想解放了一部分但不能完全解放，身体又完全跟不上思想，就导致了我现在的问题，现在每天早晨都无法起床了，这就是最大的问题，问题其实是出在看直播这件事情上，本来其实已经算是搞定了，经历了也差不多四个星期一个月，而现在就发现了问题，有问题就要改，早上现在必须要起床，早晨起床的前提是早睡，而早睡的前提又是早起，一定有一个开始，以后每天晚上就是九点半进屋睡觉了，然后能不看直播就不看，手机也尽可能的收起来，以后仍旧是放到铁盒里面，然后留有第二个手机当闹钟，以后仍旧是五点起床，多看看那些促进思想的书，晚上的时候宁可睡不着，也不能看直播和手机了，电脑直播的阶段到这里也就结束了，目前是度过了抛弃手机的初级阶段，第二个步骤是保持宁静，看书的话能保持宁静，而且必须是纸质书，不能是电子书，从简单的开始看起，今天就继续看择天记，从零开始，学习一下长生，看完之后，再去看剑来，就一步一步的慢慢来吧。</p>
+<p>行了，具体的总结到这里就结束了，现在来进行今天的工作了。</p>
+<p>终于是将</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-06_工作记录/12_工作记录(5月的第2个星期)"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2024/05/02/06_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/12_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95(5%E6%9C%88%E7%9A%84%E7%AC%AC2%E4%B8%AA%E6%98%9F%E6%9C%9F)/"
+    >工作记录((5月第2个星期)</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2024/05/02/06_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/12_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95(5%E6%9C%88%E7%9A%84%E7%AC%AC2%E4%B8%AA%E6%98%9F%E6%9C%9F)/" class="article-date">
+  <time datetime="2024-05-02T13:26:56.000Z" itemprop="datePublished">2024-05-02</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/">工作记录</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>==认清一份幻觉比发现一个真理更能使人明智==</p>
+<p>==当你在凝视深渊的时候，深渊也在凝视你==</p>
+<p>==我希望用一生的时间不断深入和学习电子计算机相关的全部知识，将其整理成网络，并分享出去，与更多志同道合的朋友共同进步，==</p>
+<h1 id="56-日工作记录"><a class="markdownIt-Anchor" href="#56-日工作记录"></a> 5.6 日工作记录</h1>
+<p>又是连着两天的技术支持，其实就也还行吧,能帮我静心，至少不是无事可干对吧，现在最大的问题是什么呢，还是不能聚集注意力去做自己要做的事情，做那些你认为正确的事情，所以问题挺大的，不是吗，这个问题已经在你的世界出现很多次了呀，顺其自然当然是不可能的，随波逐流的东西必然不可能，必须要加以限制，虽然现在的作为确实是可以，但总不可能不想着进步了吧，这必然是不可能的，QQ这个东西其实还是定时来看一下不错，不能持续不断的看，这肯定是不对的，而且这只能是技术支持的时间，如果没有技术支持，那就是别人给我发消息我就看一下，如果没人给我发消息我就一直不看，甚至我应该QQ都不上，手机上来上一下QQ这就对了，以后就先这样试试，还是那句话，将各种任务和行为分开就是对自己最大的救赎。</p>
+<p>上午来的时候我也想到了，为什么效率这么低呢？归根结底不还是在家和在公司方向不一样吗，这也是如今最着急解决的问题，在上上个星期研究出来了奖励法，后来发现太伤身体了，得不偿失，还是尽可能的找到自己的问题才对，现在看电脑直播睡觉这一行为也持续了很长的时间了，不能说这个行为不好，相较于之前看手机这种行为必然是有了很大的进步，但是呢， 有些时候会出现一些你不愿意经历的问题，就比如上次的失眠，你感觉是外部原因所引起的，而实际上呢，不应该吧，上面这些可以总结成一个点，就是如何进入心流状态，而且我发现现在早晨起来都没办法醒了，这其实是一个很严重很严重的问题，那些时候，早起的感觉真的令人陶醉，遵循科学的睡眠法，以后我还是戴着手环吧，虽然在你的想法中，现在手环给你的感觉就是没啥用，但实际上并不是这样，还是要回归主线，以后还是要起床才对，还是将手机拿回家比较正确，以后我也就是六个小时的睡眠了，有40分钟的这个时间，仍旧是十点半上床，大约也就是五点半那个时候起床，其实是挺好的，时间其实你绝大多数情况下都是在浪费的，我的小手机就不拿来了，本来想的是手机用来看看最终的消息通知的，现在来看的话就没这个必要了，这一个月就先继续在电脑上看直播，小说就不看了，没有任何意义，再然后就是早上要做的事情，早上要是知道能做什么，就必然不会像现在这样，不知道啥时候起床，起床也没有动力了，不是吗，目前想的是一定要跟工作的事情相吻合，转来转去，发现还是工作中学习到的东西最适合我，不是吗，无论是学习Linux基础、还是Shell编程最终对我都有所收获，而且再后续的工作中，也的确做了一些有帮助的事情，做任何事情也都是应该的。</p>
+<p>刚刚想的是，是不是能够升级一下呢，刚刚看了一下应该是不行的，就算可以，也只能是我的小机器和本机电脑来连接，而不能是nas，这个想法还是算了</p>
+<h1 id="57-工作日志"><a class="markdownIt-Anchor" href="#57-工作日志"></a> 5.7 工作日志</h1>
+<p>目前仍旧是存在问题，所以要不要折腾一下呢，还是算了吧，现在这样其实也挺好的。现在就还行吧，目前的问题是在硬盘上，这没办法，我先保证最基础的速度就行了，行了，今天的技术支持就到这里吧，我发现呀，技术支持的时候，最好的办法就是改改源码，和客户交流一下，其他的就这样了，</p>
+<h1 id="58-工作日志"><a class="markdownIt-Anchor" href="#58-工作日志"></a> 5.8 工作日志</h1>
+<p>==摆脱一份幻觉比发现一个真理更能使人明智==</p>
+<p>==当你在凝视深渊的时候，深渊也在凝视你==</p>
+<p>==我希望用一生的时间不断深入和学习电子计算机相关的全部知识，将其整理成网络并分享出去，与更多志同道合的朋友共同进步，你清楚的知道，如果做不到这一点，你将永远不快乐。==</p>
+<hr />
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp -c aes128-ctr rk3562-linux_20240508.tar.xz topeet@192.168.1.229:/home/topeet</span><br></pre></td></tr></table></figure>
+<p>行了，终于是将2.5G的交换机搞得差不多了，以后的效率和时间大概是提高了两倍多，我认为这是值得的，一般情况下仍旧按之前的行为进行操作，我的那个硬盘目前用处不大吧，或者小更新可以用那个硬盘，这样也可以吧，目前认为不错，一定要走上正确的道路。</p>
+<p>昨天更新了一下镜像，我发现无论是在传输的过程中还是编译的过程中，都会严重影响我的注意力，还是要想一个最合适的方法，nohub和time一定要经常普遍的使用，不然等待的时间真的太长了，中间能做的事情太多了，如果以后有那种长时间的任务就nohub，根据具体的时间表格来，然后定一个计时闹钟，这样也比你这样一窝蜂的乱撞好得多，行了，总结完成了，该开始3562的内容总结了。</p>
+<hr />
+<h2 id="目录"><a class="markdownIt-Anchor" href="#目录"></a> 目录</h2>
+<p>启动模式以及引导顺序                                                          ==不讲==</p>
+<p>Linux源码包介绍</p>
+<p>编译Linux源码说明</p>
+<p>Linux源码包编译-获取Linux源码</p>
+<p>Linux系统编译-整体编译buildroot，ubuntu、debian系统</p>
+<p>Linux系统编译-单独编译uboot</p>
+<p>Linux系统编译-单独编译内核和设备树</p>
+<p>Linux系统编译-单独编译recovery</p>
+<p>Linux系统编译-单独编译Linux文件系统</p>
+<p>Linux系统编译-打包buuldroot、ubuntu、debian文件系统</p>
+<p>系统镜像烧写-安装RKTool驱动</p>
+<p>完整固件update.img拆包和解包方法</p>
+<p>Linux系统镜像烧写-烧写完整固件update.img</p>
+<p>Linux系统镜像烧写-单独烧写uboot内核设备树等镜像</p>
+<p>TF卡烧写（适用Linux和Android系统）</p>
+<p>使用虚拟机ubuntu系统给开发板</p>
+<p>救砖模式</p>
+<hr />
+<blockquote>
+<p>安卓的一切都向后靠，先来讲Linux，一切都要以Linux的为基础,因为没用TRM手册所以启动顺序就不讲了，但是他这里讲不讲不影响我的学习，我肯定是搞明白这个的。</p>
+</blockquote>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202405081312597.png" alt="image-20240508131251536" /></p>
+<p>上面的图片是RK3568的，我找了一下3588的TRM手册，我发现并没有这个图，只有下面这一个简单的介绍，具体如下所示：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202405081335357.png" alt="image-20240508133515318" /></p>
+<p>​	经过对比发现3568和3588这里的文字描述是一样的，所以同理由推测，rk3562也是一样</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br></pre></td><td class="code"><pre><span class="line">root@topeet:/# DDR V1.04 bae1baa081 typ 23/02/15-15:05:39</span><br><span class="line">LP4/4x derate en, other dram:1x trefi</span><br><span class="line">ddrconfig:0</span><br><span class="line">LP4 MR14:0x4d</span><br><span class="line">LPDDR4, 324MHz</span><br><span class="line">BW=32 Col=10 Bk=8 CS0 Row=16 CS=1 Die BW=16 Size=2048MB</span><br><span class="line">tdqss: cs0 dqs0: 72ps, dqs1: -48ps, dqs2: -48ps, dqs3: -96ps, </span><br><span class="line"></span><br><span class="line">change to: 324MHz</span><br><span class="line">PHY drv:clk:39,ca:39,DQ:31,odt:0</span><br><span class="line">vrefinner:41%, vrefout:41%</span><br><span class="line">dram drv:40,odt:0</span><br><span class="line">clk skew:0x60</span><br><span class="line"></span><br><span class="line">change to: 528MHz</span><br><span class="line">PHY drv:clk:39,ca:39,DQ:31,odt:0</span><br><span class="line">vrefinner:41%, vrefout:41%</span><br><span class="line">dram drv:40,odt:0</span><br><span class="line">clk skew:0x58</span><br><span class="line"></span><br><span class="line">change to: 780MHz</span><br><span class="line">PHY drv:clk:39,ca:39,DQ:31,odt:0</span><br><span class="line">vrefinner:41%, vrefout:41%</span><br><span class="line">dram drv:40,odt:0</span><br><span class="line">clk skew:0x58</span><br><span class="line"></span><br><span class="line">change to: 1332MHz(final freq)</span><br><span class="line">PHY drv:clk:39,ca:39,DQ:31,odt:60</span><br><span class="line">vrefinner:16%, vrefout:29%</span><br><span class="line">dram drv:40,odt:80</span><br><span class="line">vref_ca:00000068</span><br><span class="line">clk skew:0x33</span><br><span class="line">cs 0:</span><br><span class="line">the read training result:</span><br><span class="line">DQS0:0x38, DQS1:0x37, DQS2:0x38, DQS3:0x37, </span><br><span class="line">min  : 0xc  0xc  0xe  0xd  0x1  0x9  0x9  0x8 , 0x6  0x3  0x3  0x2  0x9  0xa  0x8  0xc ,</span><br><span class="line">       0xb  0xf  0xd  0xd  0x2  0x7  0x9  0x9 , 0x7  0x3  0x7  0x2  0xa  0xc  0x9  0xa ,</span><br><span class="line">mid  :0x23 0x24 0x26 0x25 0x18 0x1e 0x20 0x20 ,0x1f 0x1a 0x1a 0x1a 0x22 0x22 0x20 0x23 ,</span><br><span class="line">      0x22 0x26 0x24 0x26 0x1a 0x1f 0x20 0x21 ,0x1e 0x1a 0x1e 0x1a 0x22 0x22 0x20 0x22 ,</span><br><span class="line">max  :0x3a 0x3d 0x3e 0x3d 0x30 0x33 0x37 0x39 ,0x38 0x32 0x32 0x32 0x3b 0x3a 0x38 0x3b ,</span><br><span class="line">      0x3a 0x3d 0x3b 0x3f 0x32 0x37 0x37 0x39 ,0x36 0x32 0x36 0x32 0x3b 0x38 0x37 0x3b ,</span><br><span class="line">range:0x2e 0x31 0x30 0x30 0x2f 0x2a 0x2e 0x31 ,0x32 0x2f 0x2f 0x30 0x32 0x30 0x30 0x2f ,</span><br><span class="line">      0x2f 0x2e 0x2e 0x32 0x30 0x30 0x2e 0x30 ,0x2f 0x2f 0x2f 0x30 0x31 0x2c 0x2e 0x31 ,</span><br><span class="line">the write training result:</span><br><span class="line">DQS0:0x3f, DQS1:0x2b, DQS2:0x2b, DQS3:0x23, </span><br><span class="line">min  :0x6c 0x6d 0x6d 0x6d 0x5e 0x66 0x67 0x66 0x6c ,0x52 0x4d 0x4d 0x4d 0x55 0x55 0x52 0x56 0x53 ,</span><br><span class="line">      0x55 0x58 0x57 0x58 0x4b 0x51 0x51 0x54 0x57 ,0x48 0x46 0x49 0x43 0x4c 0x4c 0x4a 0x4c 0x4b ,</span><br><span class="line">mid  :0x85 0x87 0x87 0x88 0x78 0x7e 0x80 0x80 0x86 ,0x6d 0x68 0x68 0x67 0x6f 0x6f 0x6d 0x71 0x6f ,</span><br><span class="line">      0x70 0x73 0x73 0x74 0x66 0x6b 0x6d 0x6e 0x71 ,0x63 0x60 0x63 0x5e 0x67 0x67 0x65 0x67 0x66 ,</span><br><span class="line">max  :0x9e 0xa2 0xa2 0xa4 0x93 0x97 0x9a 0x9b 0xa1 ,0x88 0x83 0x83 0x82 0x8a 0x8a 0x88 0x8d 0x8b ,</span><br><span class="line">      0x8b 0x8f 0x8f 0x90 0x81 0x85 0x89 0x89 0x8b ,0x7e 0x7b 0x7e 0x79 0x82 0x82 0x81 0x83 0x81 ,</span><br><span class="line">range:0x32 0x35 0x35 0x37 0x35 0x31 0x33 0x35 0x35 ,0x36 0x36 0x36 0x35 0x35 0x35 0x36 0x37 0x38 ,</span><br><span class="line">      0x36 0x37 0x38 0x38 0x36 0x34 0x38 0x35 0x34 ,0x36 0x35 0x35 0x36 0x36 0x36 0x37 0x37 0x36 ,</span><br><span class="line">CA Training result:</span><br><span class="line">cs:0 min  :0x46 0x45 0x3b 0x3b 0x3b 0x39 0x41 ,0x44 0x46 0x3c 0x3e 0x3e 0x3e 0x41 ,</span><br><span class="line">cs:0 mid  :0x82 0x81 0x77 0x77 0x77 0x76 0x7c ,0x80 0x82 0x79 0x7a 0x7a 0x7a 0x6c ,</span><br><span class="line">cs:0 max  :0xbe 0xbd 0xb4 0xb4 0xb4 0xb4 0xb8 ,0xbd 0xbf 0xb6 0xb6 0xb6 0xb6 0x98 ,</span><br><span class="line">cs:0 range:0x78 0x78 0x79 0x79 0x79 0x7b 0x77 ,0x79 0x79 0x7a 0x78 0x78 0x78 0x57 ,</span><br><span class="line">out</span><br><span class="line">U-Boot SPL board init</span><br><span class="line">U-Boot SPL 2017.09 (Apr 17 2024 - 22:01:49)</span><br><span class="line">unknown raw ID 0 0 0</span><br><span class="line">unrecognized JEDEC id bytes: 00, 00, 00</span><br><span class="line">Trying to boot from MMC2</span><br><span class="line">SPL: A/B-slot: _a, successful: 0, tries-remain: 7</span><br><span class="line">Trying fit image at 0x4000 sector</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># Verified-boot: 0</span></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># Checking atf-1 0x00040000 ... sha256(337f2bdc0a...) + OK</span></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># Checking uboot 0x00200000 ... sha256(2a64e6fe51...) + OK</span></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># Checking fdt 0x00310648 ... sha256(e7ffa453e5...) + OK</span></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># Checking atf-2 0xfe481000 ... sha256(8857274472...) + OK</span></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># Checking atf-3 0xfe490000 ... sha256(8da74bc229...) + OK</span></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># Checking optee 0x08400000 ... sha256(415d696ff6...) + OK</span></span></span><br><span class="line">Jumping to U-Boot(0x00200000) via ARM Trusted Firmware(0x00040000)</span><br><span class="line">Total: 324.45/620.917 ms</span><br><span class="line"></span><br><span class="line">UINFO:    Preloader serial: 0</span><br><span class="line">NOTICE:  BL31: v2.3():v2.3-602-ga394bf0a3:xsf</span><br><span class="line">NOTICE:  BL31: Built : 01:06:53, May 26 2023</span><br><span class="line">INFO:    rk_otp_init finish!</span><br><span class="line">NOTICE:  BL31: Rockchip release version: v1.0</span><br><span class="line">INFO:    ARM GICv2 driver initialized</span><br><span class="line">INFO:    nonboot cpus st-ee0</span><br><span class="line">INFO:    dfs DDR fsp_param[0].freq_mhz= 1332MHz</span><br><span class="line">INFO:    dfs DDR fsp_param[1].freq_mhz= 324MHz</span><br><span class="line">INFO:    dfs DDR fsp_param[2].freq_mhz= 528MHz</span><br><span class="line">INFO:    dfs DDR fsp_param[3].freq_mhz= 780MHz</span><br><span class="line">INFO:    BL31: Initializing runtime services</span><br><span class="line">INFO:    BL31: Initializing BL32</span><br><span class="line">I/TC: </span><br><span class="line">I/TC: OP-TEE version: 3.13.0-689-gc73fd5531 #troy.lin (gcc version 10.2.1 20201103 (GNU Toolchain for the A-profile Architecture 10.2-2020.11 (arm-10.16))) #1 Wed Apr 12 14:49:58 CST 2023 aarch64</span><br><span class="line">I/TC: Primary CPU initializing</span><br><span class="line">I/TC: Primary CPU switching to normal world boot</span><br><span class="line">INFO:    BL31: Preparing for EL3 exit to normal world</span><br><span class="line">INFO:    Entry point address = 0x200000</span><br><span class="line">INFO:    SPSR = 0x3c9</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">U-Boot 2017.09 (Apr 22 2024 - 02:40:06 -0700)</span><br><span class="line"></span><br><span class="line">Model: Rockchip RK3562 Evaluation Board</span><br><span class="line">MPIDR: 0x80000000</span><br><span class="line">PreSerial: 0, raw, 0xff210000</span><br><span class="line">DRAM:  2 GiB</span><br><span class="line">Sysmem: init</span><br><span class="line">Relocation Offset: 7da4f000</span><br><span class="line">Relocation fdt: 7b9fa330 - 7b9fece8</span><br><span class="line">CR: M/C/I</span><br><span class="line">DM: v2</span><br><span class="line">no mmc device at slot 1</span><br><span class="line">mmc@ff870000: 0, mmc@ff880000: 1 (SD)</span><br><span class="line">Bootdev(atags): mmc 1</span><br><span class="line">MMC1: Legacy, 52Mhz</span><br><span class="line">PartType: EFI</span><br><span class="line">boot mode: None</span><br><span class="line">RESC: &#x27;boot&#x27;, blk@0x0001b26e</span><br><span class="line">resource: sha256+</span><br><span class="line">FIT: no signed, no conf required</span><br><span class="line">DTB: rk-kernel.dtb</span><br><span class="line">HASH(c): OK</span><br><span class="line">I2c0 speed: 100000Hz</span><br><span class="line">PMIC:  RK8090 (on=0x40, off=0x00)</span><br><span class="line">vdd_logic init 900000 uV</span><br><span class="line">vdd_cpu init 900000 uV</span><br><span class="line">vdd_gpu init 900000 uV</span><br><span class="line">vdd_npu init 900000 uV</span><br><span class="line">*** Warning - bad CRC, using default environment</span><br><span class="line"></span><br><span class="line">Could not find baseparameter partition</span><br><span class="line">Model: TOPEET RK3562 EVB2 DDR4 Board</span><br><span class="line">MPIDR: 0x80000000</span><br><span class="line">Rockchip UBOOT DRM driver version: v1.0.1</span><br><span class="line">VOP have 1 active VP</span><br><span class="line">vp0 have layer nr:4[2 3 8 9 ], primary plane: 2</span><br><span class="line">vp1 have layer nr:0[], primary plane: 0</span><br><span class="line">Using display timing dts</span><br><span class="line">dsi@ffb10000:  detailed mode clock 60000 kHz, flags[a]</span><br><span class="line">    H: 0800 0880 0900 0980</span><br><span class="line">    V: 1280 1300 1304 1316</span><br><span class="line">bus_format: 100e</span><br><span class="line">VOP update mode to: 800x1280p47, type: MIPI0 for VP0</span><br><span class="line">VP0 set crtc_clock to 60000KHz</span><br><span class="line">VOP VP0 enable Esmart0[654x270-&gt;654x270@73x505] fmt[1] addr[0x7df82000]</span><br><span class="line">final DSI-Link bandwidth: 396 Mbps x 4</span><br><span class="line">CLK: (uboot. arm: enter 600000 KHz, init 1008000 KHz, kernel 0N/A)</span><br><span class="line">  apll 600000 KHz</span><br><span class="line">  gpll 1188000 KHz</span><br><span class="line">  vpll 600000 KHz</span><br><span class="line">  hpll 1000000 KHz</span><br><span class="line">  cpll 1000000 KHz</span><br><span class="line">  dpll 666000 KHz</span><br><span class="line">  aclk_bus 198000 KHz</span><br><span class="line">  hclk_bus 198000 KHz</span><br><span class="line">  pclk_bus 99000 KHz</span><br><span class="line">  aclk_peri 198000 KHz</span><br><span class="line">  hclk_peri 148500 KHz</span><br><span class="line">  pclk_peri 99000 KHz</span><br><span class="line">Net:   eth0: ethernet@ffa80000</span><br><span class="line">Hit key to stop autoboot(&#x27;CTRL+C&#x27;):  0 </span><br><span class="line">ANDROID: reboot reason: &quot;(none)&quot;</span><br><span class="line">optee api revision: 2.0</span><br><span class="line">TEEC: Waring: Could not find security partition</span><br><span class="line">Not AVB images, AVB skip</span><br><span class="line">No valid android hdr</span><br><span class="line">Android image load failed</span><br><span class="line">Android boot failed, error -1.</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># Booting FIT Image at 0x791ab700 with size 0x0264dc00</span></span></span><br><span class="line">Fdt Ramdisk skip relocation</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># Loading kernel from FIT Image at 791ab700 ...</span></span></span><br><span class="line">   Using &#x27;conf&#x27; configuration</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># Verified-boot: 0</span></span></span><br><span class="line">   Trying &#x27;kernel&#x27; kernel subimage</span><br><span class="line">     Description:  unavailable</span><br><span class="line">     Type:         Kernel Image</span><br><span class="line">     Compression:  uncompressed</span><br><span class="line">     Data Start:   0x791bf100</span><br><span class="line">     Data Size:    40083968 Bytes = 38.2 MiB</span><br><span class="line">     Architecture: AArch64</span><br><span class="line">     OS:           Linux</span><br><span class="line">     Load Address: 0x00400000</span><br><span class="line">     Entry Point:  0x00400000</span><br><span class="line">     Hash algo:    sha256</span><br><span class="line">     Hash value:   8f9e344532b3d09334f42f3e92eb8bdf050233dfbfc7e4dbbd13af8676b7fd6a</span><br><span class="line">   Verifying Hash Integrity ... sha256+ OK</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># Loading fdt from FIT Image at 791ab700 ...</span></span></span><br><span class="line">   Using &#x27;conf&#x27; configuration</span><br><span class="line">   Trying &#x27;fdt&#x27; fdt subimage</span><br><span class="line">     Description:  unavailable</span><br><span class="line">     Type:         Flat Device Tree</span><br><span class="line">     Compression:  uncompressed</span><br><span class="line">     Data Start:   0x791abf00</span><br><span class="line">     Data Size:    78158 Bytes = 76.3 KiB</span><br><span class="line">     Architecture: AArch64</span><br><span class="line">     Load Address: 0x08300000</span><br><span class="line">     Hash algo:    sha256</span><br><span class="line">     Hash value:   11069da2ed770857d4e4ebb31c2660c42fde736d6fc0a1d1ca00f3a12c18d4d3</span><br><span class="line">   Verifying Hash Integrity ... sha256+ OK</span><br><span class="line">   Loading fdt from 0x08300000 to 0x08300000</span><br><span class="line">   Booting using the fdt blob at 0x08300000</span><br><span class="line">   Loading Kernel Image from 0x791bf100 to 0x00400000 ... OK</span><br><span class="line">   kernel loaded at 0x00400000, end = 0x02a3a200</span><br><span class="line">   Using Device Tree in place at 0000000008300000, end 000000000831614d</span><br><span class="line">vp0, plane_mask:0x30c, primary-id:2, curser-id:-1</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># reserved-memory:</span></span></span><br><span class="line">  drm-logo@00000000: addr=7df00000 size=208000</span><br><span class="line">  vendor-storage-rm@00000000: addr=7bda4000 size=10000</span><br><span class="line">  ramoops@110000: addr=110000 size=e0000</span><br><span class="line">Adding bank: 0x00200000 - 0x08400000 (size: 0x08200000)</span><br><span class="line">Adding bank: 0x08c00000 - 0x80000000 (size: 0x77400000)</span><br><span class="line">Total: 4990.875/5727.69 ms</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br></pre></td><td class="code"><pre><span class="line">DDR V1.04 bae1baa081 typ 23/02/15-15:05:39</span><br><span class="line">LP4/4x derate en, other dram:1x trefi</span><br><span class="line">ddrconfig:0</span><br><span class="line">LP4 MR14:0x4d</span><br><span class="line">LPDDR4, 324MHz</span><br><span class="line">BW=32 Col=10 Bk=8 CS0 Row=16 CS=1 Die BW=16 Size=2048MB</span><br><span class="line">tdqss: cs0 dqs0: 48ps, dqs1: -48ps, dqs2: -48ps, dqs3: -96ps, </span><br><span class="line"></span><br><span class="line">change to: 324MHz</span><br><span class="line">PHY drv:clk:39,ca:39,DQ:31,odt:0</span><br><span class="line">vrefinner:41%, vrefout:41%</span><br><span class="line">dram drv:40,odt:0</span><br><span class="line">clk skew:0x60</span><br><span class="line"></span><br><span class="line">change to: 528MHz</span><br><span class="line">PHY drv:clk:39,ca:39,DQ:31,odt:0</span><br><span class="line">vrefinner:41%, vrefout:41%</span><br><span class="line">dram drv:40,odt:0</span><br><span class="line">clk skew:0x58</span><br><span class="line"></span><br><span class="line">change to: 780MHz</span><br><span class="line">PHY drv:clk:39,ca:39,DQ:31,odt:0</span><br><span class="line">vrefinner:41%, vrefout:41%</span><br><span class="line">dram drv:40,odt:0</span><br><span class="line">clk skew:0x58</span><br><span class="line"></span><br><span class="line">change to: 1332MHz(final freq)</span><br><span class="line">PHY drv:clk:39,ca:39,DQ:31,odt:60</span><br><span class="line">vrefinner:16%, vrefout:29%</span><br><span class="line">dram drv:40,odt:80</span><br><span class="line">vref_ca:00000068</span><br><span class="line">clk skew:0x33</span><br><span class="line">cs 0:</span><br><span class="line">the read training result:</span><br><span class="line">DQS0:0x38, DQS1:0x36, DQS2:0x38, DQS3:0x37, </span><br><span class="line">min  : 0xc  0xc  0xd  0xd  0x2  0x9  0xa  0x8 , 0x5  0x2  0x2  0x1  0x8  0x9  0x7  0xa ,</span><br><span class="line">       0xb  0xe  0xe  0xd  0x2  0x6  0x9  0x9 , 0x7  0x3  0x7  0x2  0xa  0xc  0x9  0xa ,</span><br><span class="line">mid  :0x23 0x24 0x25 0x25 0x18 0x1e 0x20 0x20 ,0x1d 0x19 0x18 0x18 0x21 0x21 0x1e 0x22 ,</span><br><span class="line">      0x22 0x25 0x24 0x26 0x1a 0x1e 0x20 0x21 ,0x1e 0x1a 0x1e 0x1a 0x22 0x21 0x20 0x22 ,</span><br><span class="line">max  :0x3a 0x3d 0x3e 0x3d 0x2f 0x33 0x36 0x39 ,0x36 0x30 0x2f 0x30 0x3a 0x39 0x36 0x3a ,</span><br><span class="line">      0x3a 0x3c 0x3b 0x3f 0x32 0x37 0x37 0x39 ,0x36 0x32 0x36 0x32 0x3b 0x37 0x37 0x3b ,</span><br><span class="line">range:0x2e 0x31 0x31 0x30 0x2d 0x2a 0x2c 0x31 ,0x31 0x2e 0x2d 0x2f 0x32 0x30 0x2f 0x30 ,</span><br><span class="line">      0x2f 0x2e 0x2d 0x32 0x30 0x31 0x2e 0x30 ,0x2f 0x2f 0x2f 0x30 0x31 0x2b 0x2e 0x31 ,</span><br><span class="line">the write training result:</span><br><span class="line">DQS0:0x3b, DQS1:0x2b, DQS2:0x2b, DQS3:0x23, </span><br><span class="line">min  :0x68 0x69 0x69 0x69 0x5a 0x62 0x63 0x63 0x69 ,0x52 0x4d 0x4d 0x4d 0x55 0x55 0x52 0x56 0x53 ,</span><br><span class="line">      0x55 0x58 0x58 0x58 0x4b 0x51 0x51 0x54 0x57 ,0x49 0x46 0x49 0x43 0x4c 0x4c 0x4a 0x4c 0x4c ,</span><br><span class="line">mid  :0x81 0x83 0x83 0x83 0x74 0x7a 0x7c 0x7d 0x82 ,0x6d 0x68 0x68 0x67 0x6f 0x6f 0x6d 0x71 0x6f ,</span><br><span class="line">      0x70 0x73 0x73 0x74 0x66 0x6b 0x6d 0x6e 0x71 ,0x63 0x60 0x63 0x5e 0x67 0x67 0x65 0x67 0x66 ,</span><br><span class="line">max  :0x9a 0x9d 0x9d 0x9e 0x8f 0x92 0x95 0x98 0x9c ,0x88 0x83 0x83 0x82 0x8a 0x8a 0x88 0x8c 0x8b ,</span><br><span class="line">      0x8b 0x8e 0x8f 0x90 0x81 0x85 0x89 0x89 0x8b ,0x7e 0x7b 0x7e 0x79 0x82 0x82 0x81 0x83 0x81 ,</span><br><span class="line">range:0x32 0x34 0x34 0x35 0x35 0x30 0x32 0x35 0x33 ,0x36 0x36 0x36 0x35 0x35 0x35 0x36 0x36 0x38 ,</span><br><span class="line">      0x36 0x36 0x37 0x38 0x36 0x34 0x38 0x35 0x34 ,0x35 0x35 0x35 0x36 0x36 0x36 0x37 0x37 0x35 ,</span><br><span class="line">CA Training result:</span><br><span class="line">cs:0 min  :0x46 0x45 0x3c 0x3b 0x3b 0x3a 0x41 ,0x45 0x46 0x3c 0x3e 0x3d 0x3e 0x41 ,</span><br><span class="line">cs:0 mid  :0x82 0x81 0x78 0x78 0x77 0x77 0x7c ,0x81 0x82 0x79 0x7a 0x79 0x7a 0x6d ,</span><br><span class="line">cs:0 max  :0xbe 0xbd 0xb5 0xb5 0xb3 0xb4 0xb8 ,0xbd 0xbf 0xb7 0xb7 0xb5 0xb7 0x99 ,</span><br><span class="line">cs:0 range:0x78 0x78 0x79 0x7a 0x78 0x7a 0x77 ,0x78 0x79 0x7b 0x79 0x78 0x79 0x58 ,</span><br><span class="line">out</span><br><span class="line">U-Boot SPL board init</span><br><span class="line">U-Boot SPL 2017.09 (Apr 17 2024 - 22:01:49)</span><br><span class="line">unknown raw ID 0 0 0</span><br><span class="line">unrecognized JEDEC id bytes: 00, 00, 00</span><br><span class="line">Trying to boot from MMC2</span><br><span class="line">Card did not respond to voltage select!</span><br><span class="line">mmc_init: -95, time 15</span><br><span class="line">spl: mmc init failed with error: -95</span><br><span class="line">Trying to boot from MMC1</span><br><span class="line">SPL: A/B-slot: _a, successful: 0, tries-remain: 7</span><br><span class="line">Trying fit image at 0x4000 sector</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># Verified-boot: 0</span></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># Checking atf-1 0x00040000 ... sha256(337f2bdc0a...) + OK</span></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># Checking uboot 0x00200000 ... sha256(2a64e6fe51...) + OK</span></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># Checking fdt 0x00310648 ... sha256(e7ffa453e5...) + OK</span></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># Checking atf-2 0xfe481000 ... sha256(8857274472...) + OK</span></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># Checking atf-3 0xfe490000 ... sha256(8da74bc229...) + OK</span></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># Checking optee 0x08400000 ... sha256(415d696ff6...) + OK</span></span></span><br><span class="line">Jumping to U-Boot(0x00200000) via ARM Trusted Firmware(0x00040000)</span><br><span class="line">Total: 147.391/445.253 ms</span><br><span class="line"></span><br><span class="line">UINFO:    Preloader serial: 0</span><br><span class="line">NOTICE:  BL31: v2.3():v2.3-602-ga394bf0a3:xsf</span><br><span class="line">NOTICE:  BL31: Built : 01:06:53, May 26 2023</span><br><span class="line">INFO:    rk_otp_init finish!</span><br><span class="line">NOTICE:  BL31: Rockchip release version: v1.0</span><br><span class="line">INFO:    ARM GICv2 driver initialized</span><br><span class="line">INFO:    nonboot cpus st-ee0</span><br><span class="line">INFO:    dfs DDR fsp_param[0].freq_mhz= 1332MHz</span><br><span class="line">INFO:    dfs DDR fsp_param[1].freq_mhz= 324MHz</span><br><span class="line">INFO:    dfs DDR fsp_param[2].freq_mhz= 528MHz</span><br><span class="line">INFO:    dfs DDR fsp_param[3].freq_mhz= 780MHz</span><br><span class="line">INFO:    BL31: Initializing runtime services</span><br><span class="line">INFO:    BL31: Initializing BL32</span><br><span class="line">I/TC: </span><br><span class="line">I/TC: OP-TEE version: 3.13.0-689-gc73fd5531 #troy.lin (gcc version 10.2.1 20201103 (GNU Toolchain for the A-profile Architecture 10.2-2020.11 (arm-10.16))) #1 Wed Apr 12 14:49:58 CST 2023 aarch64</span><br><span class="line">I/TC: Primary CPU initializing</span><br><span class="line">I/TC: Primary CPU switching to normal world boot</span><br><span class="line">INFO:    BL31: Preparing for EL3 exit to normal world</span><br><span class="line">INFO:    Entry point address = 0x200000</span><br><span class="line">INFO:    SPSR = 0x3c9</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">U-Boot 2017.09 (Apr 22 2024 - 02:40:06 -0700)</span><br><span class="line"></span><br><span class="line">Model: Rockchip RK3562 Evaluation Board</span><br><span class="line">MPIDR: 0x80000000</span><br><span class="line">PreSerial: 0, raw, 0xff210000</span><br><span class="line">DRAM:  2 GiB</span><br><span class="line">Sysmem: init</span><br><span class="line">Relocation Offset: 7da4f000</span><br><span class="line">Relocation fdt: 7b9fa330 - 7b9fece8</span><br><span class="line">CR: M/C/I</span><br><span class="line">DM: v2</span><br><span class="line">mmc@ff870000: 0, mmc@ff880000: 1</span><br><span class="line">Bootdev(atags): mmc 0</span><br><span class="line">MMC0: HS400 Enhanced Strobe, 200Mhz</span><br><span class="line">PartType: EFI</span><br><span class="line">boot mode: None</span><br><span class="line">RESC: &#x27;boot&#x27;, blk@0x0001b26c</span><br><span class="line">resource: sha256+</span><br><span class="line">FIT: no signed, no conf required</span><br><span class="line">DTB: rk-kernel.dtb</span><br><span class="line">HASH(c): OK</span><br><span class="line">I2c0 speed: 100000Hz</span><br><span class="line">PMIC:  RK8090 (on=0x40, off=0x00)</span><br><span class="line">vdd_logic init 900000 uV</span><br><span class="line">vdd_cpu init 900000 uV</span><br><span class="line">vdd_gpu init 900000 uV</span><br><span class="line">vdd_npu init 900000 uV</span><br><span class="line">*** Warning - bad CRC, using default environment</span><br><span class="line"></span><br><span class="line">Could not find baseparameter partition</span><br><span class="line">Model: TOPEET RK3562 EVB2 DDR4 Board</span><br><span class="line">MPIDR: 0x80000000</span><br><span class="line">Rockchip UBOOT DRM driver version: v1.0.1</span><br><span class="line">VOP have 1 active VP</span><br><span class="line">vp0 have layer nr:4[2 3 8 9 ], primary plane: 2</span><br><span class="line">vp1 have layer nr:0[], primary plane: 0</span><br><span class="line">Using display timing dts</span><br><span class="line">lvds:  detailed mode clock 71900 kHz, flags[a]</span><br><span class="line">    H: 0800 0872 0896 0920</span><br><span class="line">    V: 1280 1292 1294 1304</span><br><span class="line">bus_format: 1010</span><br><span class="line">VOP update mode to: 800x1280p60, type: LVDS0 for VP0</span><br><span class="line">VP0 set crtc_clock to 71888KHz</span><br><span class="line">VOP VP0 enable Esmart0[654x270-&gt;654x270@73x505] fmt[1] addr[0x7df82000]</span><br><span class="line">CLK: (uboot. arm: enter 600000 KHz, init 1008000 KHz, kernel 0N/A)</span><br><span class="line">  apll 600000 KHz</span><br><span class="line">  gpll 1188000 KHz</span><br><span class="line">  vpll 647000 KHz</span><br><span class="line">  hpll 1000000 KHz</span><br><span class="line">  cpll 1000000 KHz</span><br><span class="line">  dpll 666000 KHz</span><br><span class="line">  aclk_bus 198000 KHz</span><br><span class="line">  hclk_bus 198000 KHz</span><br><span class="line">  pclk_bus 99000 KHz</span><br><span class="line">  aclk_peri 198000 KHz</span><br><span class="line">  hclk_peri 148500 KHz</span><br><span class="line">  pclk_peri 99000 KHz</span><br><span class="line">Net:   eth0: ethernet@ffa80000</span><br><span class="line">Hit key to stop autoboot(&#x27;CTRL+C&#x27;):  0 </span><br><span class="line">ANDROID: reboot reason: &quot;(none)&quot;</span><br><span class="line">optee api revision: 2.0</span><br><span class="line">TEEC: Waring: Could not find security partition</span><br><span class="line">Not AVB images, AVB skip</span><br><span class="line">No valid android hdr</span><br><span class="line">Android image load failed</span><br><span class="line">Android boot failed, error -1.</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># Booting FIT Image at 0x791abb00 with size 0x0264d800</span></span></span><br><span class="line">Fdt Ramdisk skip relocation</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># Loading kernel from FIT Image at 791abb00 ...</span></span></span><br><span class="line">   Using &#x27;conf&#x27; configuration</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># Verified-boot: 0</span></span></span><br><span class="line">   Trying &#x27;kernel&#x27; kernel subimage</span><br><span class="line">     Description:  unavailable</span><br><span class="line">     Type:         Kernel Image</span><br><span class="line">     Compression:  uncompressed</span><br><span class="line">     Data Start:   0x791bf100</span><br><span class="line">     Data Size:    40083968 Bytes = 38.2 MiB</span><br><span class="line">     Architecture: AArch64</span><br><span class="line">     OS:           Linux</span><br><span class="line">     Load Address: 0x00400000</span><br><span class="line">     Entry Point:  0x00400000</span><br><span class="line">     Hash algo:    sha256</span><br><span class="line">     Hash value:   01a8d97c4c740775a345c5784af7f44a03d9f88f299a187f7fa627dc50797aab</span><br><span class="line">   Verifying Hash Integrity ... sha256+ OK</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># Loading fdt from FIT Image at 791abb00 ...</span></span></span><br><span class="line">   Using &#x27;conf&#x27; configuration</span><br><span class="line">   Trying &#x27;fdt&#x27; fdt subimage</span><br><span class="line">     Description:  unavailable</span><br><span class="line">     Type:         Flat Device Tree</span><br><span class="line">     Compression:  uncompressed</span><br><span class="line">     Data Start:   0x791ac300</span><br><span class="line">     Data Size:    77117 Bytes = 75.3 KiB</span><br><span class="line">     Architecture: AArch64</span><br><span class="line">     Load Address: 0x08300000</span><br><span class="line">     Hash algo:    sha256</span><br><span class="line">     Hash value:   e65cccda2f168d5338a32be3f6fe5c09002a56f8e6741c9d988796bd598b4a25</span><br><span class="line">   Verifying Hash Integrity ... sha256+ OK</span><br><span class="line">   Loading fdt from 0x08300000 to 0x08300000</span><br><span class="line">   Booting using the fdt blob at 0x08300000</span><br><span class="line">   Loading Kernel Image from 0x791bf100 to 0x00400000 ... OK</span><br><span class="line">   kernel loaded at 0x00400000, end = 0x02a3a200</span><br><span class="line">   Using Device Tree in place at 0000000008300000, end 0000000008315d3c</span><br><span class="line">vp0, plane_mask:0x30c, primary-id:2, curser-id:-1</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># reserved-memory:</span></span></span><br><span class="line">  drm-logo@00000000: addr=7df00000 size=208000</span><br><span class="line">  vendor-storage-rm@00000000: addr=7bda3000 size=10000</span><br><span class="line">  ramoops@110000: addr=110000 size=e0000</span><br><span class="line">Adding bank: 0x00200000 - 0x08400000 (size: 0x08200000)</span><br><span class="line">Adding bank: 0x08c00000 - 0x80000000 (size: 0x77400000)</span><br><span class="line">Total: 889.284/1450.193 ms</span><br><span class="line"></span><br><span class="line">Starting kernel ...</span><br></pre></td></tr></table></figure>
+<p>上面是两种不同启动模式下的打印信息，我发现在SPL、TPL里面都是TF卡优先，那这里的先后顺序还有什么用呢？它上面的启动顺序肯定就不对了呀，至少在我的认知里面是不对的，我也懒的跟法师说了，等他以后自己发现吧，有很多东西，他讲的都是有问题的，我保证我自己不犯错就行了，其他的爱咋咋，我最开始以为的是SD卡和EMMC都是同一种介质，后来发现不是，那是不是就证明上面的那个流程图是错的呢？</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202405081415777.png" alt="image-20240508141551730" /></p>
+<p>问题大概是解决了，瑞芯微的板子其实都是SD卡优先的，上面的那个图我认为没啥用，可以忽略了。归根结底是由U-BOOT来决定的，优先级就到这里了。</p>
+<h2 id="linux源码包介绍"><a class="markdownIt-Anchor" href="#linux源码包介绍"></a> Linux源码包介绍</h2>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202405081509799.png" alt="image-20240508150903744" /></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202405081509423.png" alt="image-20240508150937322" /></p>
+<p>​	这里肯定是我要讲解的第一节的，在逻辑上我要讲解什么呢，讲解sdk包,这个有必要讲解一下</p>
+<p>在嵌入式系统开发中，SDK（Software Development Kit）通常指的是软件开发工具包，它是为特定的嵌入式平台或硬件设备提供的一组软件工具、库和文档集合。SDK旨在帮助开发者在特定的嵌入式平台上进行应用程序或固件的开发。</p>
+<p>SDK通常包含以下内容：</p>
+<ol>
+<li><strong>编译器和工具链</strong>：SDK提供适用于目标嵌入式平台的交叉编译器和工具链，用于将源代码编译为目标平台可执行的二进制文件。</li>
+<li><strong>库文件</strong>：SDK提供一系列的库文件，其中包括操作系统抽象层（例如，操作系统API、文件系统、网络协议栈等）、硬件驱动程序、常用函数库等。这些库文件可以帮助开发者简化开发过程，提供常用功能的封装和接口。</li>
+<li><strong>示例代码和示例项目</strong>：SDK通常提供一些示例代码和示例项目，展示如何使用SDK的功能和接口。这些示例可以作为开发者学习和参考的范例，帮助他们更快地上手和理解SDK的使用方法。</li>
+<li><strong>文档和参考资料</strong>：SDK通常附带详细的文档和参考资料，包括开发者指南、API文档、硬件规格说明等。这些文档提供了SDK的使用说明、API接口的说明和示例等信息，帮助开发者理解和使用SDK提供的功能。</li>
+</ol>
+<p>通过使用SDK，嵌入式系统开发者可以更方便地进行应用程序或固件的开发，利用SDK提供的工具和库来访问硬件功能、处理外设、执行操作系统功能等。SDK的目标是提供一个简化和加速嵌入式开发过程的工具集，使开发者能够更高效地开发出高质量的嵌入式软件。</p>
+<hr />
+<p>关于编译和烧写的相关步骤还是很简单的，对于我来说就是有些地方要明辨一下，所以最后我还是要加注释，我应该是不会像法师那样用PPT的，我最终的演示形式必然也是markdown的形式，而且必然要比法师讲解的通用，其实也是，这个Linux绝大多数的地方都是我改的，我也能知道应该要改哪些地方，这是毋庸置疑的，站在了巨人的肩膀上，但你不能去嘲笑在你之前的那些巨人，仍旧是从零开始，环境的搭建这个就不再讲解，我这里肯定也要使用tabby的，而且要使用ubuntu，这里可以提一下无论是使用ubuntu20 ubuntu22 还是ubuntu24都是可以编译成功的，这一点毋庸置疑，所以我的第一节课是编译前的准备？那必然不会，我这里应该只是在用的时候简单提一下而已，实际上应该是不会从零开始讲环境搭建的，并且也轮不到我，而且我必然不会有PPT的，只能还是我之前的markdown，但这时候我使用的必然还是网盘资料，所以网盘资料是一定要有的。嗯就这样搞，而且我必然要讲解成那种通用的形式，也就是说我们所有的板子、所有的系统都支持，具有很强的通用性。还是那句话，可以先不用管安卓，就先讲好Linux系统即可。行了，总结就先到这里，然后开始第一节视频的录制了。</p>
+<hr />
+<blockquote>
+<p>1.内容介绍</p>
+<p>2.Linux源码获取和目录结构讲解</p>
+<p>3.Linux系统整体编译(图形化)</p>
+<p>4.Linux系统整体编译(命令行)</p>
+<p>5.Linux系统单独编译(图形化)</p>
+<p>6.Linux系统单独编译(命令行)</p>
+<p>7.烧写完整固件update.img(==windows和Linux都讲解==)</p>
+<p>8.单独烧写uboot内核设备树等镜像(==windows和Linux都讲解==)</p>
+<p>9.TF卡烧写</p>
+<p>10.救砖模式</p>
+<p>11.安卓源码获取和前提条件</p>
+<p>12.安卓系统整体编译</p>
+<p>13.安卓系统单独编译</p>
+</blockquote>
+<h1 id="59工作日志"><a class="markdownIt-Anchor" href="#59工作日志"></a> 5.9工作日志</h1>
+<p>在写介绍的时候，是不是应该有详细的介绍，否则我发现在你自己写的时候都会出现问题，在最开始的时候已经想好了，但是真正执行的时候又出现了另外的插曲，这肯定是不对的。</p>
+<p>我刚刚突然有了想法，那就是法师讲了的部分，我就不讲了，然后思考了一小下的时间，发现不能这样，还是要用我自己的方式重新复现一遍的，他讲的也只能算是它的，也不对，我可以不讲这些，没有道理的，根据我自己的逻辑来就可以了，只要最终的逻辑是对的，那就没有任何问题，我当然可以这样讲解，尽可能的不涉及那些东西，用到什么就讲解什么，对吧，目前我认为我的逻辑很正确，一切都已Linux的编译烧写为基础，安卓向后放。</p>
+<h2 id="1linux源码获取"><a class="markdownIt-Anchor" href="#1linux源码获取"></a> 1.Linux源码获取</h2>
+<h2 id="2linux系统整体编译命令行"><a class="markdownIt-Anchor" href="#2linux系统整体编译命令行"></a> 2.Linux系统整体编译(命令行)</h2>
+<h2 id="3linux系统单独编译"><a class="markdownIt-Anchor" href="#3linux系统单独编译"></a> 3.Linux系统单独编译</h2>
+<h2 id="4烧写完整固件updateimg"><a class="markdownIt-Anchor" href="#4烧写完整固件updateimg"></a> 4.烧写完整固件update.img</h2>
+<h2 id="5单独烧写uboot内核等镜像"><a class="markdownIt-Anchor" href="#5单独烧写uboot内核等镜像"></a> 5.单独烧写uboot内核等镜像</h2>
+<h2 id="6tf卡烧写"><a class="markdownIt-Anchor" href="#6tf卡烧写"></a> 6.TF卡烧写</h2>
+<h2 id="7救砖模式"><a class="markdownIt-Anchor" href="#7救砖模式"></a> 7.救砖模式</h2>
+<hr />
+<p>问题还是很大，就是控制不住自己想要看QQ的哪种，问题很大，而且也确实不该这样，如何能一直静心呢，亦或者说如何保持心流状态呢？昨天晚上的行为仍旧是历历在目，说是给自己找理由，找借口，事实上仍旧是一地鸡毛，真的就挺让人失望的，以后就摆在明面上吧，算了，这些都无用，最重要的是如何一直保持内心的宁静，就像现在这样就挺好的，现在如果有人给我发消息就会有弹窗，就靠弹窗其实就挺好的，右下角也不用那么多东西，该删掉的就删掉就好了，留有几个最基本的东西即可，其他的就没了，现在的这种精神状态挺好的，然后继续去写内容概况了。</p>
+<p>还是尽可能的屏蔽掉青苹果吧，有点水水的，笨笨的，以人为镜可以明得失，以后每次看到青苹果就能想到真的笨呀，不是很理解，做的都是一些无用功，静下心来，比什么都强，不对吗。</p>
+<p>关于总结就到这个地方了，手册肯定是需要重新写一个的，适用于这个视频的单独的手册，甚至安卓系统还有必要录制吗，我甚至认为没必要录制了，完全可以看rk3568的视频就行了。经过缩减现在就剩下了7节的视频，不错呀，这应该就很快了，不错，我喜欢，尽可能的缩减出去。</p>
+<h1 id="510-工作记录"><a class="markdownIt-Anchor" href="#510-工作记录"></a> 5.10 工作记录</h1>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-05_C语言高级学习/05_计算机系统架构与ARM汇编语言"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2024/04/23/05_C%E8%AF%AD%E8%A8%80%E9%AB%98%E7%BA%A7%E5%AD%A6%E4%B9%A0/05_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E4%B8%8EARM%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/"
+    >程序的编译、链接和运行</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2024/04/23/05_C%E8%AF%AD%E8%A8%80%E9%AB%98%E7%BA%A7%E5%AD%A6%E4%B9%A0/05_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E4%B8%8EARM%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/" class="article-date">
+  <time datetime="2024-04-22T22:26:56.000Z" itemprop="datePublished">2024-04-23</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/C%E8%AF%AD%E8%A8%80%E9%AB%98%E7%BA%A7%E5%AD%A6%E4%B9%A0/">C语言高级学习</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>​	以后就在每次学习前写一个当时想的心路历程吧，这样也能知道自己在做这件事情的时候，当时都在想什么，日后自己再一次想起时候，找到当时自己的所思所想，我想的是我的C语言还很差劲，我认为在学习系统编程之前，需要一个这样的知识来帮我扫清前方的障碍，而且我认为之前的学习真的太差了，并没有真正的将这些东西转换为自己的东西，而且现在心中的方向一直不是很明确，我也希望出现一个东西，让我找一下心中的那个目标，让我知道我这样做是不是对的，为了寻求一个答案，你又能否一往无前呢。</p>
+<hr />
+<h1 id="编译过程从源文件到汇编文件"><a class="markdownIt-Anchor" href="#编译过程从源文件到汇编文件"></a> 编译过程：从源文件到汇编文件</h1>
+<p>​	    汇编的过程都做了什么呢？（从高级语言到低级语言的转变），先说一下原因呢？不论是何种高级语言编写的程序，都要经过预处理和汇编这一步，预处理这个步骤要做的不再解释，汇编就是从C程序转换为同样功能的汇编语言，不论是什么类型的芯片，使用什么语言来完成这一功能，他们最终的汇编语言必然都是差不多的，如果每一种语言都写一个编译器，那工作量可真的太大了，所以每个语言的汇编器不一样，这是肯定的，但他们全部必然有一个相同的编译器。</p>
+<p>​	上面也说了，汇编实际上就是将高级语言转变为低级的汇编语言，再具体可以细分为</p>
+<ul>
+<li>程序语句、函数转变为代码段</li>
+<li>变量、常量转变为数据段、BSS段、rodata段</li>
+<li>各种辅助信息也就是符号表和重定位表</li>
+</ul>
+<p>​	上面有一个地方认识错了，从C源文件编译为可执行文件的具体步骤是，预处理、编译、汇编、链接。</p>
+<p>main.c             main.i         main.s         main.o          a.out</p>
+<p>​			预处理                编译             汇编              链接</p>
+<p>我们先来分析编译这一步骤，又可以分为下面这一些零零散散的步骤：</p>
+<p>​	词法分析、语法分析、语义分析、中间代码生成、汇编代码生成、目标代码生成</p>
+<p>​	想去了解一下编译器，目前我的疑惑是同一架构的编译器，到底能不能通用。</p>
+<p>==编译器==</p>
+<blockquote>
+<p>​	分解成一个又一个的token，是不可再分的最小单元，它可能是关键字、可能是符号、可能是字符串，标识符和标点符号。</p>
+</blockquote>
+<p>​	既然编译器是将高级语言编译成可执行程序的一种工具，可是编译器也是一种可执行程序呀，编译器是怎样编译出来的。</p>
+<p>​	最初的编译器通常是手工编写的，使用底层语言（如汇编语言）或其他更低级别的语言来实现。这些早期的编译器可能只支持语言的子集，但足以进行自举过程。</p>
+<p>​	当得到一个基本的编译器后，它可以用于编译更高级别的语言实现，例如用C语言编写的编译器。一旦拥有了使用高级语言编写的编译器，就可以更容易地进行编译器的改进和扩展。</p>
+<blockquote>
+<p>​	第二步骤为将最小的token整合成statement sequence，翻译一下就是语句序列</p>
+<p>​	分解成的token是线性结构，而token整合而来的statement squence 是一个abstract sysntax tree抽象语法树，尽可能的使语法保持完整</p>
+<p>​	每个语句的分类是不同的，就比如可以将变量分为varable-defintion，for循环有一个为for-statement while为while-statement，等等</p>
+</blockquote>
+<p>​</p>
+<blockquote>
+<p>在上一个步骤中已经将全部的token转换为了抽象语法树，这时候其实已经可以执行了，但并不是能让人很好的理解，更好的办法其实还是将其转换回线性结构，</p>
+</blockquote>
+<p>​	==发现并没有什么实际的效果，所以就到这里吧，然后回到老师的课堂上==</p>
+<hr />
+<h2 id="词法分析"><a class="markdownIt-Anchor" href="#词法分析"></a> 词法分析</h2>
+<p>​	从左到右。一个字符一个字符的读入源程序</p>
+<p>​	对源程序的字符流进行扫描，分解成一系列的记号 token(关键字、标识符、字面量、特殊字符、分界符等等)，判断是不是又错误的词法，就比如中文字符，圆角半角字符等等。</p>
+<h2 id="语法分析"><a class="markdownIt-Anchor" href="#语法分析"></a> 语法分析</h2>
+<p>​	将前一阶段产生的token序列进行语法分析，看是否构成一个语法上正确的程序，分解成语短语，用语法树来表示，语法树不再是一个线性结构，而是树状结构，syntax  句法</p>
+<h2 id="语义分析"><a class="markdownIt-Anchor" href="#语义分析"></a> 语义分析</h2>
+<p>​	检查语法分析输出的语句、程序、表达式有没有错误，语义分为动态语义和静态语义，例如不允许使用一个没有声明的变量，在运行期间检测出除数为零。<strong>其实我们大部分错误都是发生在这个地方。</strong></p>
+<h2 id="生成中间代码"><a class="markdownIt-Anchor" href="#生成中间代码"></a> 生成中间代码</h2>
+<p>​		将语法树转换成为中间代码，中间代码是内部表现形式，他非常接近目标代码，类似于伪代码形式，容易生成，容易将其翻译为目标代码。</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202404232153033.png" alt="image-20240423215342912" /></p>
+<p>​	我上面又分析错了，原来他们的中间代码是相同的，哦不对，我上面分析的是对的，我刚刚又理解错了，不同语言的相同功能，他们最终生成的汇编是相同的。</p>
+<h2 id="生成汇编文件"><a class="markdownIt-Anchor" href="#生成汇编文件"></a> 生成汇编文件</h2>
+<p>​	将中间代码翻译为汇编文件</p>
+<h1 id="汇编过程"><a class="markdownIt-Anchor" href="#汇编过程"></a> 汇编过程</h1>
+<p>​		在上一个步骤中已经将经过预处理的原始代码，编译为了.S汇编文件，而汇编文件又会经过汇编器生成.o目标文件。</p>
+<p>​	汇编器动作的基本流程如下所示：</p>
+<ol>
+<li>词法分析</li>
+<li>语法分析</li>
+<li>代码生成</li>
+<li>赋值信息</li>
+</ol>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202404241937033.png" alt="image-20240424193720958" /></p>
+<p>​	他的主要目录就是进行指令翻译，将汇编源文件，翻译为二进制指令，然后呢就是生成各种表的信息，就包括符号表和重定位表。</p>
+<p>​	  <strong>指令生成</strong></p>
+<p>​	我们编写的程序一般包括变量、函数、关键字等等，他们都会被放到不同的section段中，就包括代码段数据段、只读代码段、bss段，初始化的全局变量、静态变量放到数据段，未初始化的全局变量和静态变量放到bss段，而一些函数调用放到代码段，一些字符串放到只读数据段里面。</p>
+<p>​	<strong>符号表</strong></p>
+<p>​	readelf -s ~~~.o</p>
+<p>​	读取一个.o文件的符号表，符号表中的信息就是汇编语言中各个section，以及偏移地址</p>
+<p>​	<strong>重定位表</strong></p>
+<p>​	当然只有符号表肯定是不行的，他们最终肯定会经过链接从而生成可执行文件，符号表只是将汇编程序中的一些符号进行了收集，那他们呢，要重定位到哪一个地址呢？</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202404242006656.png" alt="image-20240424200629507" /></p>
+<p>​	总算是比较清楚了，也终于是知道了symtab是啥了。sym就是symbol tab 就是表，symtab就是符号表，而rel text就是重定位信息，可以通过readelf -r 来查看，而大S readelf -S可以查看各个段的信息，</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202404242010626.png" alt="image-20240424201000384" /></p>
+<h1 id="符号表"><a class="markdownIt-Anchor" href="#符号表"></a> 符号表</h1>
+<p>​	符号表：编译过程中用来来保存源程序中各种符号的信息，主要包括符号的地址值、类型、占用空间的大小。</p>
+<p><strong>ELF文件和BIN文件</strong></p>
+<p>​	文件结构：<br />
+​		BIN文件即raw binary文件</p>
+<p>​			只包含机器码，纯粹的程序文件，即镜像文件</p>
+<p>​			类似的还有HEX文件</p>
+<p>​	ELF文件除了机器码之外还有一些额外的信息</p>
+<p>​			段的加载地址、运行地址</p>
+<p>​			符号表、重定位表等等</p>
+<h1 id="链接过程地址空间分配与链接脚本"><a class="markdownIt-Anchor" href="#链接过程地址空间分配与链接脚本"></a> 链接过程：地址空间分配与链接脚本</h1>
+<p>​	目的：将所有的可重定位目标文件合并组装成可执行目标文件</p>
+<p>​	主要步骤：地址空间分配，强符号和弱符号、重定位</p>
+<p><strong>地址空间的分配</strong></p>
+<p>​	扫描所有的目标文件，从各个文件段表中获取各个文件代码段、数据段信息：大小、地址等</p>
+<p>​	从指定的链接地址开始，按照代码段、数据段、BSS段顺序将各个目标文件的同类型段合并，然后重新计算各个段的长度和位置</p>
+<h1 id="链接过程符号解析-强符号和弱符号"><a class="markdownIt-Anchor" href="#链接过程符号解析-强符号和弱符号"></a> 链接过程：符号解析  强符号和弱符号</h1>
+<p>​		在地址空间分配的过程中，会创建全局符号表，收集目标文件中符号表中的符号，统一放到全局符号表之中，但是可能遇到不同模块中遇到相同符号的情况，那这种情况要怎样解决呢？这时候就有了强符号和弱符号的概念了</p>
+<p>​	强符号：函数名  初始化的全局变量</p>
+<p>​	弱符号：未初始化的全局变量</p>
+<p>==强符号不允许多次定义，但是弱符号可以共存，强弱符号共存的情况，强符号会覆盖弱符号==</p>
+<h1 id="链接过程重定位"><a class="markdownIt-Anchor" href="#链接过程重定位"></a> 链接过程：重定位</h1>
+<pre><code>本质就是修正指令中的符号地址
+</code></pre>
+<p>​	是连接过程中最核心最重要的一步</p>
+<p>​	地址空间分配、符号解析都是为重定位服务的</p>
+<p><strong>修改符号地址</strong></p>
+<p>​	读取各个目标文件中，各个段的重定位信息：重定位表</p>
+<p>​	进行符号重定位、修改指令中的符号地址</p>
+<p>​	确定各个重定位符号的新地址、形成新的符号表</p>
+<p><strong>地址修正</strong></p>
+<p>​	重定位地址=新段基址 + 段内偏移</p>
+<h1 id="程序的运行"><a class="markdownIt-Anchor" href="#程序的运行"></a> 程序的运行</h1>
+<p>​	<strong>加载器</strong></p>
+<p>​		在操作系统环境下执行一个可执行文件，加载器会首先将可执行文件加载到内存中，加载器拷贝数据完毕之后，进行相关操作，然后会跳转到程序入口</p>
+<p>​	<strong>镜像加载地址</strong></p>
+<p>​		程序头表：</p>
+<p>​			指定了可执行文件镜像加载到内存中的地址</p>
+<p>​			链接地址等于加载到内存中的地址</p>
+<p>​		ELF文件头基本信息</p>
+<p>​			文件类型 运行平台  程序入口地址</p>
+<p>Linux内存映像</p>
+<p>​	在Linux环境下，通过调用execve函数来启动加载器，可执行文件的运行通过进程的形式实现，当运行一个可执行文件时，主要工作有三步，创建一个独立的虚拟地址空间，读取可执行文件头，建立虚拟地址空间和可执行文件的映射关系，将PC指针设置为可执行文件的入口地址，启动运行</p>
+<h1 id="bss段的处理"><a class="markdownIt-Anchor" href="#bss段的处理"></a> BSS段的处理</h1>
+<p>​	特点：<br />
+​	未初始化的全局变量、static局部变量放到BSS段</p>
+<p>​	BSS段不占目标文件的空间</p>
+<p>​	可执行文件运行时，在内存中给BSS段分配空间</p>
+<p>​	设置BSS段的目的：早期计算机存储资源贵，节省磁盘空间</p>
+<h1 id="main函数入口"><a class="markdownIt-Anchor" href="#main函数入口"></a> main函数入口</h1>
+<p>​	没啥用</p>
+<h1 id="链接静态库"><a class="markdownIt-Anchor" href="#链接静态库"></a> 链接静态库</h1>
+<p>​	归档文件</p>
+<p>​		目标归档文件</p>
+<p>​	制作静态库</p>
+<p>​	ar rcs libtest.a x.o xx.o</p>
+<p>​	链接静态库</p>
+<p>​	gcc main.c -l ./include -L ./lib -ltest</p>
+<p>链接静态库带来的问题：<br />
+一般定义的函数都会引用到，所以链接的时候会全部组装在一起，就比如C静态库，我们使用了printf，将所有的模块全部连接上了，这就导致可执行文件的体积大大增加。</p>
+<h1 id="动态链接"><a class="markdownIt-Anchor" href="#动态链接"></a> 动态链接</h1>
+<p>​</p>
+<p>静态链接的缺点：</p>
+<p>​	生成的可执行文件体积较大，包含相同的公共代码，浪费存储空间、运行时占用的内存较大</p>
+<p>​	程序运行时需要一次性加载到内存之中</p>
+<p>​	对于内存配置较小的系统可能装载不下，无法运行</p>
+<p>动态链接：</p>
+<p>​	静态链接发生在链接的过程中，动态链接推迟到运行时再进行</p>
+<p>​	动态链接的目标文件也称为动态链接库，运行时除了可执行文件，这些库也要被加载到内存，进行重定位</p>
+<p>好处</p>
+<p>​	解决了空间浪费问题，节省内存</p>
+<p>​	可以运行更大的程序</p>
+<p>​	升级更加容易方便</p>
+<p>ldd 命令可以查看用到的共享库</p>
+<p>​	<strong>与地址无关的代码</strong></p>
+<p>​		放到哪里，都可以执行，无需重定位，无需改变</p>
+<p>​	<strong>实现思想</strong></p>
+<p>​		将指令中需要修改的部分分离出来，跟数据放在一起</p>
+<p>​		剩余指令就能做到与地址无关，被多个进程共享</p>
+<p>​		数据和需要被修改的指令在每个进程中都有一个副本，互不影响</p>
+<p>​	gcc -fPIC -c main.c</p>
+<h1 id="共享库"><a class="markdownIt-Anchor" href="#共享库"></a> 共享库</h1>
+<p>​	三个主要路径：<br />
+​		/lib   存放最关键和最基础的共享库，例如动态链接器、C库、数学库，这些库主要是/bin/sbin下程序运行以及系统启动所需要的库</p>
+<p>​		/usr/lib  非系统运行所需要的关键性的共享库，比如开发时用到的一些共享库</p>
+<p>​		/usr/local/lib 存放第三方应用程序所需要的一些共享库</p>
+<p>​	基本过程</p>
+<p>​		ELF文件执行，动态链接器/bin/ld-linux-so.xvei加载成功，到.dynamic段里面找ELF文件依赖的共享库</p>
+<p>​		若该路径是绝对路径就到绝对路径下面寻找</p>
+<p>​		若该路径是相对路径，就到/lib /usr/lib  /etc/ld.so.conf 配置文件指定的目录中查找共享库</p>
+<p>​	库目录缓存</p>
+<p>​		/etc/ld.so.conf存放共享库的路径，为了避免每次查找，耗费时间，可以使用ldconfig生成一个缓存/etc/ld.so.cache</p>
+<p>​		新增、删除、或者更新共享库路径的时候，需要使用ldconfig更新缓存</p>
+<p>​	环境变量	LD_LIBRARY_PATH</p>
+<p>​		由若干个路径组成的环境变量，每个路径用冒号查找</p>
+<p>​		可以使用该变量临时更改程序依赖的共享库查找路径，而不影响系统中其他程序的运行。</p>
+<h1 id="插件"><a class="markdownIt-Anchor" href="#插件"></a> 插件</h1>
+<p>​	<strong>什么是插件</strong></p>
+<p>​		为了使软件方便扩展，具备通用性，可以采用插件机制</p>
+<p>​		主程序逻辑框架不变，各个业务以动态链接库的形式加载进来</p>
+<p>​		软件发布后，不用重新编译，通过插件形式更新功能、软件增值</p>
+<p>​		插件的本质是共享库，只不过组装形式复杂</p>
+<p>==目前用不到==</p>
+<h1 id="内核模块加载机制"><a class="markdownIt-Anchor" href="#内核模块加载机制"></a> 内核模块加载机制</h1>
+<p>​	内核模块不依赖于C库，所以链接重定位过程要自己完成，运行在内核空间</p>
+<h1 id="linux内核加载实验"><a class="markdownIt-Anchor" href="#linux内核加载实验"></a> Linux内核加载实验</h1>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-01_生活/12_反思(4月第4个星期)"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2024/04/22/01_%E7%94%9F%E6%B4%BB/12_%E5%8F%8D%E6%80%9D(4%E6%9C%88%E7%AC%AC4%E4%B8%AA%E6%98%9F%E6%9C%9F)/"
+    >反思(4月第4个星期</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2024/04/22/01_%E7%94%9F%E6%B4%BB/12_%E5%8F%8D%E6%80%9D(4%E6%9C%88%E7%AC%AC4%E4%B8%AA%E6%98%9F%E6%9C%9F)/" class="article-date">
+  <time datetime="2024-04-22T12:26:56.000Z" itemprop="datePublished">2024-04-22</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  Here's something encrypted, password is required to continue reading. 
+      <a class="article-more-link" href="/2024/04/22/01_%E7%94%9F%E6%B4%BB/12_%E5%8F%8D%E6%80%9D(4%E6%9C%88%E7%AC%AC4%E4%B8%AA%E6%98%9F%E6%9C%9F)/"
+        >阅读更多...</a
+      >
+       
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-01_生活/11_反思(4月第3个星期"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2024/04/15/01_%E7%94%9F%E6%B4%BB/11_%E5%8F%8D%E6%80%9D(4%E6%9C%88%E7%AC%AC3%E4%B8%AA%E6%98%9F%E6%9C%9F/"
+    >反思(4月第3个星期</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2024/04/15/01_%E7%94%9F%E6%B4%BB/11_%E5%8F%8D%E6%80%9D(4%E6%9C%88%E7%AC%AC3%E4%B8%AA%E6%98%9F%E6%9C%9F/" class="article-date">
+  <time datetime="2024-04-15T12:26:56.000Z" itemprop="datePublished">2024-04-15</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  Here's something encrypted, password is required to continue reading. 
+      <a class="article-more-link" href="/2024/04/15/01_%E7%94%9F%E6%B4%BB/11_%E5%8F%8D%E6%80%9D(4%E6%9C%88%E7%AC%AC3%E4%B8%AA%E6%98%9F%E6%9C%9F/"
+        >阅读更多...</a
+      >
+       
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
   id="post-01_生活/10_反思(4月第2个星期)"
   class="article article-type-post"
   itemscope
@@ -165,7 +788,7 @@
 
     
     <article
-  id="post-06_工作记录/11_工作记录(4月的第4个星期) "
+  id="post-06_工作记录/11_工作记录(4月的第4个星期)"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -176,7 +799,7 @@
     <header class="article-header">
        
 <h2 itemprop="name">
-  <a class="article-title" href="/2024/04/04/06_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/11_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95(4%E6%9C%88%E7%9A%84%E7%AC%AC4%E4%B8%AA%E6%98%9F%E6%9C%9F)%20/"
+  <a class="article-title" href="/2024/04/04/06_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/11_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95(4%E6%9C%88%E7%9A%84%E7%AC%AC4%E4%B8%AA%E6%98%9F%E6%9C%9F)/"
     >工作记录((4月第4个星期)</a> 
 </h2>
  
@@ -185,7 +808,7 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2024/04/04/06_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/11_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95(4%E6%9C%88%E7%9A%84%E7%AC%AC4%E4%B8%AA%E6%98%9F%E6%9C%9F)%20/" class="article-date">
+      <a href="/2024/04/04/06_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/11_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95(4%E6%9C%88%E7%9A%84%E7%AC%AC4%E4%B8%AA%E6%98%9F%E6%9C%9F)/" class="article-date">
   <time datetime="2024-04-04T13:26:56.000Z" itemprop="datePublished">2024-04-04</time>
 </a> 
   <div class="article-category">
@@ -196,7 +819,7 @@
       
     <div class="article-entry" itemprop="articleBody">
        
-  <p>==认清一份幻觉比发现一个真理更能使人明智==</p>
+  <link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>==认清一份幻觉比发现一个真理更能使人明智==</p>
 <p>==当你在凝视深渊的时候，深渊也在凝视你==</p>
 <p>==我希望用一生的时间不断深入和学习电子计算机相关的全部知识，将其整理成网络，并分享出去，与更多志同道合的朋友共同进步，==</p>
 <h1 id="422-工作记录星期一"><a class="markdownIt-Anchor" href="#422-工作记录星期一"></a> 4.22 工作记录(星期一)</h1>
@@ -448,7 +1071,7 @@
       
     <div class="article-entry" itemprop="articleBody">
        
-  <p>==认清一份幻觉比发现一个真理更能使人明智==</p>
+  <link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>==认清一份幻觉比发现一个真理更能使人明智==</p>
 <p>==我希望用一生的时间不断深入和学习电子信息相关的全部知识，将其整理成网络并分享出去，与更多志同道合的朋友共同进步，你清楚的知道，如果做不到这一点，你将永远不快乐==</p>
 <p>==当你在凝视深渊的时候，深渊也在凝视你==</p>
 <h1 id="415-工作记录星期一"><a class="markdownIt-Anchor" href="#415-工作记录星期一"></a> 4.15 工作记录（星期一）</h1>
@@ -626,7 +1249,7 @@
       
     <div class="article-entry" itemprop="articleBody">
        
-  <h1 id="49-工作记录星期二"><a class="markdownIt-Anchor" href="#49-工作记录星期二"></a> 4.9 工作记录（星期二）</h1>
+  <link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="49-工作记录星期二"><a class="markdownIt-Anchor" href="#49-工作记录星期二"></a> 4.9 工作记录（星期二）</h1>
 <p>==认清一份幻觉比发现一个真理更能使人明智。==</p>
 <p>==我希望用一生的时间不断深入和学习电子计算机相关的全部知识，将其整理成网络并分享出去，与更多志同道合的朋友共同进步，你清楚的直到，如果做不到这一点你将永远不快乐。==</p>
 <hr />
@@ -715,448 +1338,6 @@
 #include &lt;dt-bindings/pinctrl/rockchip.h&gt;<br />
 #include &lt;dt-bindings/sensor-dev.h&gt;</p>
 </blockquote>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-06_工作记录/08_工作记录(4月第1个星期)"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2024/04/01/06_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/08_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95(4%E6%9C%88%E7%AC%AC1%E4%B8%AA%E6%98%9F%E6%9C%9F)/"
-    >工作记录((4月第1个星期)</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2024/04/01/06_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/08_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95(4%E6%9C%88%E7%AC%AC1%E4%B8%AA%E6%98%9F%E6%9C%9F)/" class="article-date">
-  <time datetime="2024-04-01T13:26:56.000Z" itemprop="datePublished">2024-04-01</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/">工作记录</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h1 id="41-工作记录星期一"><a class="markdownIt-Anchor" href="#41-工作记录星期一"></a> 4.1 工作记录（星期一）</h1>
-<p>==摆脱一份幻觉比发现一个真理更能使人明智==</p>
-<p>==我希望花费一生的时间不断深入和学习电子计算机相关的全部知识，将其整理成网络并分享出去，与更多志同道合的朋友共同进步，你清楚的知道如果做不到这一点你将永远不快乐==</p>
-<hr />
-<p>又发现了一场幻觉，昨天晚上的问题可以简单的分析一下，没有想到吃饭也会成为了一场幻觉，这是我没有想到的，昨天可以说是一环扣一环，只要里面有一个步骤断了，就不会有昨天晚上的三点睡觉的结果，如果昨天下午没有喝那一瓶可乐，如果昨天晚上喝了酸枣仁膏，如果昨天晚上吃饭的时候没有看小说，当然事情已经发生了，也不存在重新再来一次的机会，我能做的就只有尽可能的反思自己，当下一次遇到同样选择的时候，做出你认为正确的选择，以后一定以及肯定的不会再做出这样的选择，对吗。</p>
-<p>昨天录完了两节的Shell视频，其实到也还行，至少今天的任务不用管了，但时间其实是不够的，变量。去写手册吧。</p>
-<hr />
-<p>还是要分析一下青苹果和QQ的事情，今天本就不是我技术支持，但我还是花费了心力在这个上面，最终造成了我心神不宁，提醒之后反而还遭到了埋怨，这谁受得了呢。</p>
-<hr />
-<p>还是要我来分析一下关于Shell变量都要讲解什么知识，在第一个章节中讲解了什么是shell?如何更改默认的shell，以及shell的内置变量，后面要学习的四五个小节，其实全部都是对shell内建命令的讲解，就比如命令执行过程中的source命令 .命令，变量相关章节里面的export，unset，循环里面的for和while，条件判断里的if case []，以及最后的function函数。</p>
-<p>后面的内容后面再说，先来看最近要学习的内容，也就是shell环境变量，今天肯定是效率极其低下了，也幸好昨天的时候做了一些东西，所以昨天就算是为今天赎罪了，到也还行，我不是很介意，但今天也有安排好的任务呀，昨天赎了今天的罪，那明天或者以后的罪又有谁能替你承受呢，没有人，没有任何人可以替你承担，所以今天你仍旧是要承担自己的责任的，懂了吗。</p>
-<p>这样看起来我的键盘还是很不错的，现在算是懂了为什么~按键跑到了右边，因为有esc按键要在左上脚，这一点倒是很不错，下午的时候也可以去那个屋子录课，反正就是不在这个屋子了，但是这样听着音乐写写感想倒也是挺好的，然后再来思考一下shell编程，录课肯定是要录课的，象征性的去录制一下吧，明天下午再去录两节，或者这两天写三小节的稿子，其实我感觉内容挺简单的，就是我自己的惰性太大了，我甚至感觉可以在清明节之前解决这些问题，就也还好吧，行了就总结到这里吧，现在回到shell变量小节的讲解。</p>
-<p>在之前的讲解中讲解了如何查看系统默认的SHELL，这里使用的echo $SHELL，实际上就是变量，可以根据这个为突破点，开始变量的相关学习，第一小节我本来想的是讲解三个符号，也就是’ ’  &quot; &quot;,还有一个美元符号，</p>
-<hr />
-<p>去那个屋子里研究了一下，虽然最终的效率跟这个屋子里也差不多，但是结果不一样，应该是录不完了，但肯定是可以写得完稿子的，大体内容应该是有了</p>
-<p>在三月下旬，瑞芯微推出了RKLLM 工具套件可以帮助用户快速将 AI 模型部署到 Rockchip 芯片上：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202404011521690.png" alt="image-20240401152109650" /></p>
-<p>​	支持的版本特性如下所示：</p>
-<ul>
-<li>支持在RK3588/RK3576平台上进行LLM（大型语言模型）模型的转换和部署。</li>
-<li>它与Hugging Face模型架构兼容，Hugging Face是广泛用于自然语言处理任务的模型架构。</li>
-<li>目前，该系统支持以下模型：LLaMA、Qwen、Qwen2和Phi-2。</li>
-<li>支持量化技术，即使用w8a8（8位权重，8位激活）和w4a16（4位权重，16位激活）精度进行模型量化。这可以在目标平台上更高效地存储和计算模型，减小内存占用。</li>
-</ul>
-<p>​	为了让用户更快速的体验RKLLM ，迅为首先对Linux内核源码中的NPU版本进行了升级，升级到了最新的0.9.6版本，具体如下所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202404011526774.jpg" alt="img" /></p>
-<p>​	并且默认将RKLLM动态库集成在了Ubuntu和Debian系统中，用户可以直接拷贝转换完成的RKLLM大预言模型和推理程序进行测试。除此之外迅为也更新了对应的NPU开发手册，详细的讲解了RKLLM模型转换和测试相关步骤，更新具体章节如下所示：</p>
-<h1 id="42-工作记录星期二"><a class="markdownIt-Anchor" href="#42-工作记录星期二"></a> 4.2 工作记录（星期二）</h1>
-<p>==摆脱一份幻觉比发现一个真理更能使人明智==</p>
-<p>==我希望用一生的时间不断深入和学习电子计算机相关的全部知识，将其整理成网络并分享出去，与更多志同道合的朋友共同进步，你清楚的知道，如果做不到这一点，你将永远不快乐==</p>
-<hr />
-<p>我无可否认，睡眠真的真的很重要，除此之外，我的一个心态也很重要，昨天的那种情况，我认为很大一部分情况就是心态引起的，昨天在工作的时候不停的翻看手机就是一个最大的问题，所以这次就让他关机吧，但是QQ该看还是要看的，只不过尽可能的少看就行了，一味的追求断绝当然也不是一件好事情，最重要的是你自己真正的认识到了哪些事情是对的，哪些事情是不对的，从而真正的摆脱幻觉，行了，今天的任务还真的不简单，去学习吧。</p>
-<p>今天的任务算是差不多了，录完了第19节的视频，计划中的任务是挺难的，但是在我实际做出来的时候也就不困难了，其实很多东西都是这样的，本来没有发生的东西是最困难的，在你的思想中会不自觉的抬高做成一件事情的困难程度，而正在做的东西都充满了期待，已经做好的东西就开始埋怨为什么之前的时候就没有认识到问题所在呢，然后感觉之前做的东西都挺简单的，陷入自责，其实完全不必这样的，不对吗。今天晚上可能有心情去写稿子了，还行吧，我倒是挺喜欢的。</p>
-<p>加油吧。</p>
-<h1 id="43日-星期三"><a class="markdownIt-Anchor" href="#43日-星期三"></a> 4.3日 星期三</h1>
-<p>==认清一份幻觉比发现一个真理更能使人明智==</p>
-<p>我从来都不吝啬于试错，所以在昨天的时候又发现了一场幻觉，我发现身体还是会冷，腿依然是暖和不过来，如果这一点不解决，那肯定是睡不着的，我发现这个东西不管是暖宝宝还是电热毯都没有什么用，这时候我就在想锻炼身体有没有什么用呢，是不是可以考虑试试呢，我认为挺有必要的还是，发了工资研究一下看看好吧，现在就买吧，感觉有用，用花呗，分三期，目前还能接受。</p>
-<p>第二点就是绝对不能早睡了，这一点问题可真的太大了，以后无论如何都要坚持10点半睡觉了，你突然发现，除非是前一天坚持不住、没有抵挡住的诱惑，导致睡觉睡的很晚，其他时候都能正常的起床，其实看小说的问题并不大，至少没有生理上的不适，如果有选择的话，其实看小说也还行了，两者相遇取其轻，就还可以吧。</p>
-<p>现在还剩下三节的内容等着我来写稿子，目测应该是搞不完了，不好搞呀，今天晚上和明天白天，看看能不能写完，如果正常的话，应该就还行，慢慢来吧。</p>
-<p>其实应该认识一下耳机的幻觉的，而且也应该理所当然，清澈入耳，净化心灵，确实挺好的，给人一种轻灵的感觉，其实这个也跟当时的心境有关，有些时候就挺好的，挺安静的，但有些时候就不行，反正有一些奇怪，到现在为止也没找到这个度，喜怒无常，人果然是这个世界上最复杂的一种生物,其实最好的是要做的每一件事情都进行反思就好了，可是做到这点真的好难呀，其实你做的任何事情都有迹可循，甚至都有因果，正是因为你在某段时间做了某件事，才导致了另一个时刻的自己的经受了那样的结果，一切都有迹可循，过往的无数个我汇聚成了现在的我，而现在的我又何尝不是未来的过往。昨天的那种情况，从最开始的时候就是错的，你都不应该有那种想法,本来我想的是认清楚这是一个幻觉足矣，但是现在我发现并不可以这样，要做的不仅仅应该如此，而是应该补全后面的问题，这个待定了。</p>
-<h1 id="47日-星期日"><a class="markdownIt-Anchor" href="#47日-星期日"></a> 4.7日 星期日</h1>
-<p>==摆脱一份幻觉比发现一个真理更能使人明智==</p>
-<p>==我希望用一生的时间不断深入和学习电子计算机相关的全部知识，将其整理成网络并分享出去，与更多志同道合的朋友共同进步，你清楚的知道，如果做不到这一点你将永远不快乐==</p>
-<p>今天上午做的就还行，目前来看的话仍旧保持着理智，而至于下午的时间，我想你应该会努力的吧，正如你所说的那样，时间真的不多了，很急迫，现在在家里一些幻觉逐渐被认识到了，然后呢，就属于是工作中的幻觉了，其实这些幻觉的最终影响都是让我分心,工作效率大幅度下降，包括但是不限于技术支持、QQ问的问题，帮客户解决的问题，我的心理生理原因等等，但最终的效果是固定的，目前想到的办法仍旧是按时间来看QQ，当然这是在正常技术支持的时间，而其他情况下就是没有信息就不看QQ，尽可能的摆脱这一份幻觉，要如何摆脱这一份幻觉呢，其实最终也是心理上的、思想的一个转换，不清楚自己正前方最需要的是什么，你连身体的本能、连最深层次的多巴胺都克制住了，难道QQ这个最简单的幻觉克制不住吗，不应该吧，还是要分析一下QQ所带来的坏处，QQ现在也恰似是一个毒品，时刻的在撩拨你，正如前面所提到的，当你在凝视深渊 的时候，深渊也在凝视你，但还不一样，在家的时候我是找到了一个替代品，要想除掉旷野里的杂草，最好的方法是种上麦田，可在工作途中的麦田又在哪里呢？其实也正是写工作反思，写稿子，写手册等等，我不否认QQ带来的也有好处，但终究已经不适合现在的我了，认识到了广阔的天空，又怎肯拘泥于这一种地方，是吗。</p>
-<p>目前的解决办法，直接关闭QQ吧，不在乎谁给你聊QQ，十五分钟的时间还是可以等的，最终其实也要转到工作效率中来，难道不是吗，只要工作效率提了上来，那其他其实也都不是问题了，不管是技术支持，还是什么，不过是浮云罢了。</p>
-<p>行了，今天的幻觉认知就到这里了，新的一天加油。</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-01_生活/09_反思(4月第1个星期)"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2024/04/01/01_%E7%94%9F%E6%B4%BB/09_%E5%8F%8D%E6%80%9D(4%E6%9C%88%E7%AC%AC1%E4%B8%AA%E6%98%9F%E6%9C%9F)/"
-    >反思(4月第1个星期</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2024/04/01/01_%E7%94%9F%E6%B4%BB/09_%E5%8F%8D%E6%80%9D(4%E6%9C%88%E7%AC%AC1%E4%B8%AA%E6%98%9F%E6%9C%9F)/" class="article-date">
-  <time datetime="2024-04-01T12:26:56.000Z" itemprop="datePublished">2024-04-01</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  Here's something encrypted, password is required to continue reading. 
-      <a class="article-more-link" href="/2024/04/01/01_%E7%94%9F%E6%B4%BB/09_%E5%8F%8D%E6%80%9D(4%E6%9C%88%E7%AC%AC1%E4%B8%AA%E6%98%9F%E6%9C%9F)/"
-        >阅读更多...</a
-      >
-       
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-06_工作记录/05_工作记录(3月第2个星期)"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2024/03/31/06_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/05_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95(3%E6%9C%88%E7%AC%AC2%E4%B8%AA%E6%98%9F%E6%9C%9F)/"
-    >工作记录((3月第2个星期)</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2024/03/31/06_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/05_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95(3%E6%9C%88%E7%AC%AC2%E4%B8%AA%E6%98%9F%E6%9C%9F)/" class="article-date">
-  <time datetime="2024-03-31T13:26:56.000Z" itemprop="datePublished">2024-03-31</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/">工作记录</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <p>==我希望用一生的时间不断深入和学习计算机相关的一切知识，将其整理成网络，并分享出去，与更多志同道合的朋友共同进步，你清楚的知道，如果做不到这一点，你将永远不快乐。==</p>
-<h1 id="310星期日工作记录"><a class="markdownIt-Anchor" href="#310星期日工作记录"></a> 3.10星期日工作记录</h1>
-<p>​	人生就是无数道选择题，没有命运，只有选择。</p>
-<hr />
-<p>好像就算我每天晚上或者早上不学习，只要周日一天的时间充分利用了，也是一个不错的选择，周日一天的时间完全可以顶替很多很多的正常日子，这些东西都是慢慢来的，都是一步一步的得到的，今天的想法是录完三节视频，加油。</p>
-<hr />
-<h1 id="311-工作记录星期一"><a class="markdownIt-Anchor" href="#311-工作记录星期一"></a> 3.11 工作记录（星期一）</h1>
-<p>昨天的时候我很高兴，高兴的是前天晚上很早很早的就去睡觉了，第二天也是正点起床的，我就说，只要早上正点起床，其他的问题其实都不是问题，希望下一个星期仍旧能这样，昨天录完了三节的视频，算是完成了今天的任务，这两天还不是我技术支持，我很高兴，我目前想的是在明天的下午的时候，讲解完全部命令相关的知识，接下来就是继续规划后面的章节内容了。</p>
-<p>其实目前又一次陷入了自我怀疑了，究竟什么是对的，什么是错的，你的选择是什么，你的追求又是什么，这些都留有问题，你到底喜欢什么呢？这个问题其实已经伴你好久了，你想的是正确的时间做正确的事情，但是在事实上你并没有做到，利用工作的时间来重新看一遍老岁月的视频吧，但好像也用不到，首先对于一些视频的观点你也已经认可了，世界观的建立不是一朝一夕的事情，你也确定老岁月说的这个世界观是对的，随机性，论据的很对，而世界观和价值观呢，你也知道了，未来的自己和现在的自己，囚徒困境，假如现在的时间已经效率很低了，那你又那么多的睡眠又有什么作用的，满足自己的私欲，满足自己的幻想？本来你想的是充分利用时间，提高自己的效率，但是现在看来，一切都是徒劳的，不如多花一些时间，即使效率低下，但那又如何呢？终究还是在做，总比现在惶惶度日好多了吧。买了歌咖啡，这以后就是早上五点要喝的了，早上喝咖啡早起，晚上喝酸枣仁早睡，倒也是个好主意，算了吧，好像也根本没有意义，现在我想的是如何规范住你自己，目前来看的话bilibli这个有着非常非常大的问题，刚刚将一些东西又禁掉了，希望这次不会再出问题，我发现当手机上的这些购物软件消失之后确实好多了，但是呢我发现我仍旧是抵抗不了，就比如早上不停的呓语，无穷的睡梦，不停的扰乱自己思绪的手机，现在认为想法很正确，在技术支持的时候允许有两个屏幕，我认为第二个屏幕是让我转移注意力的一个很重要的原因，现在就是有三个东西来共同帮我约束看QQ的次数了，手机的定时，电脑上的时间，以及QQ自身的锁定，当规定的时间到了之后，就可以拿出来手机看看有没有需要回复的问题，如果个人问题就回复一下，如果是在手机上回复不了的问题，再打开电脑的QQ进行回复，好像第二个屏幕在公司也确实没有什么用处，感觉一个屏幕就够了呀，而且还能将注意力集中在一个屏幕上，目前是这样感觉的，就先这样来继续吧。晚上再进行后续的规划，现在开始进行真正的任务。</p>
-<p>我认为这是值得的，花费一些时间来去试错，当你知道这一件事情是错误的时候，那自然而然的就不会再去做同样的傻事了，就比如来看大道朝天的时候，你就发现这个东西并不能给你带来什么，或许看的时候很入神，但是呢，当你摆脱这件事情之后，就发现陷入的是一片虚无，你所消耗的也仅仅只是时间罢了，尽可能的将事情不放到电脑上，但是放到手机上又会又有一些其他的东西来妨碍我，所以se3有必要买吗，当然我认为是没必要，就先这样吧，其实就也挺困难的，目前这样的话，既不会有信息到你的眼中，这样计时器也就仅仅只是计时器，不会僭越，有了新手机之后你又会有不一样的想法，所以还是算了吧，现在这个样子就也挺好的。</p>
-<hr />
-<p>昨天录完了三节的视频，现在还差大约四节视频吧，但是这四节应该很简单，虽然现在这个权限相关的章节你认为挺难的，可实际上，也不过如此而已，前面做那些事情的时候，你也说过只要一步一步走，那终究只是会成为过眼云，我说的对吗。所以加油呀，孩子。</p>
-<h1 id="312-工作记录星期二"><a class="markdownIt-Anchor" href="#312-工作记录星期二"></a> 3.12 工作记录（星期二）</h1>
-<p>我希望用一生的时间不断深入和学习计算机相关的一切知识，将其整理成网络，并分享出去，与更多志同道合的朋友共同进步，你清楚的知道，如果做不到这一点，你将永远不快乐。</p>
-<p>昨天的时间荒废了全部，不管是用来写反思的时间、亦或者摸鱼、玩乐的时间都是在浪费时间，并且你向自己内心问一句你快乐吗，不论是在摸鱼亦或者工作时间玩乐的过程中，还是之后的时间，你发现自己并不快乐，是两者都不快乐，这些乐趣甚至比不过你看小说、比不过你打游戏，多么的可笑呀，认清楚了这份幻觉，现在再让你重复昨天的一天，你愿意吗，你当然是不愿的，当清醒之后又有谁会再一次陷入迷失的混乱呢。</p>
-<p>今天一天的任务是两节视频的录制，当这两节视频录制完成之后，我的计划也就完成了，当然我知道这个手册也有要改的地方，但这些都会是在写稿子的过程中来完善的。</p>
-<p>之前的做法或者不完全对，但也是有可取之处的，就比如关于第一次的讨论，做任何事情都要看第一次，如果第一次一直在坚守，那么后续都会一直坚持下去，而如果第一次不在了，后面也会越来越容易放弃。</p>
-<p>行了，新的一天加油。</p>
-<hr />
-<h1 id="313-工作记录星期三"><a class="markdownIt-Anchor" href="#313-工作记录星期三"></a> 3.13 工作记录（星期三）</h1>
-<p>​	今天技术支持感觉就还行，也不知道是我修改的方法恰好契合了今天的这段时光，还是我的心变又有了一些感受，反正目前看来今天的一天我认为过的极其有意义，只因有了约束、有了反思、有了静心得意，中午的时候没有因为哔哩哔哩而乱心，下午倒显得也不是很急迫，反正就感觉挺好的，我能以肯定的心态，我宁愿以后的一天天、一年年，都如今天这样，原我的心境，永远四季如春。</p>
-<p>上午和下午的一小段时间，将字幕差不多加完了，目前在考虑要不要添加进度条，分析一下这个的得与失</p>
-<p>110 高度</p>
-<p>60 的底高</p>
-<p>50的小人高</p>
-<p>上面是4K屏幕的值，现如今我是1080p的视频，所以值肯定也要降低一半，那也就是</p>
-<p>55的高度</p>
-<p>30的底高</p>
-<p>25的小人高</p>
-<p>最终属性：</p>
-<p>3840 -1050</p>
-<p>0 -1050</p>
-<p>添加的间隔</p>
-<p>​	用文本竖线来代替间隔，缩放22%，</p>
-<p>添加的字体</p>
-<p>​	同样缩放22%，</p>
-<hr />
-<p>目前认为苏醒说的不太对的样子，这个先不管了，一个一个来吧。</p>
-<h1 id="314-工作记录星期四"><a class="markdownIt-Anchor" href="#314-工作记录星期四"></a> 3.14 工作记录（星期四）</h1>
-<p>​	昨天一天过的还行呀，我比较喜欢，所以今天的我仍旧尝试去重复昨天的心境和感受，昨天的时候可以说大部分的时间都处在心流的状态，无论是上午添加字幕的片刻光影、亦或者是下午寻找分隔的那段岁月，都过的很开心，但当然，并不是所有的岁月都是静好，也总会有砥砺前行的时刻，就比如今天，要如何将写稿子的时间、整理手册的时间，变的相对快乐一点呢，也可能就是这个样子，总是有时间要砥砺风雨，这样想是对的，现在继续向后写稿子吧。</p>
-<p>今天要写完的是压缩和解压的操作、以及磁盘管理和挂载相关的内容，有没有必要讲解一下Ubuntu扩容的知识呢，目前来看不需要，现在指定一个章程，目前我对于压缩和解压命令其实并不是很熟悉，就比如各种格式，tar格式、tar.gz 格式  tar.bz2 格式、tar.xz格式等等，除了以tar开始的格式，还有zip格式，其他在Linux中用的应该就不多了，但我还是需要去学习一下其他人是咋讲解的，先去看看视频。</p>
-<p>视频算是看完了，没有什么要注意的地方，根据我的想法来做呗。</p>
-<h1 id="315-工作记录星期五"><a class="markdownIt-Anchor" href="#315-工作记录星期五"></a> 3.15 工作记录（星期五）</h1>
-<p>​		昨天浪费了一天的时间，今天说什么也不会这个样子了，冷静的慢慢的努力呗，昨天的已然过去，新的一天加油。</p>
-<h1 id="316-工作记录星期六"><a class="markdownIt-Anchor" href="#316-工作记录星期六"></a> 3.16 工作记录（星期六）</h1>
-<p>​	昨天录制完了压缩和解压缩的那节课，目前想的是上午写完三节的稿子，主要是真的挺简单的，然后下午苹果录课的话我就不录了，明天也没事再来录，然后写一下最近的感受，在第一天的时候倒是挺好的，但是慢慢的就被一些其他的事情冲昏了头脑，你也知道第一次和无数次的区别，其实只要第一次不被触碰，那后面的无数次也肯定永远不会到来，所以就永远不要多想，只需要关心第一次就行了，无论是上班时候的乱心、亦或者是在家里面的哔哩哔哩都是一些必要的行为，那么我有必要买那个东西吗，突然认为很有必要，主要还是想要摆脱bilbili，那我要如何做呢，bilibli真的是害人不浅，主要是那些东西也并不能给我带来很好的帮助不是吗，我认识到了这是一份幻觉，但是我并没有一个很好的方法来摆脱掉这份幻觉，所以我应该怎么做呢？本来想的是通过书来帮助我解决这些困境，但是目前看来，并没有做到其实，亦或者我真的需要吗，我先来搞清楚我的需求是什么，我想的其实就是一个存储的地方，用来存储我视频的那些东西，以后在家里的bilibli就用笔记本了，将这个盘设置为共享磁盘，这样的话我需要简单的改一下盘位，应该也不难挺简单的，以后这些都放到存储盘里面，先将百度网盘里的那些学习资料放进去，这些是毋庸置疑的，然后呢是学习的一些视频，并且以后学习的shell的一些视频，都放到那里面，这个想法肯定是对的，目前就先这个样子。明天上午肯定也就到了，希望不要出问题，有没有必要买个nas呢，目前来说是没啥必要了，就先这个样子吧，明天肯定是要录制几节视频的，今天下午应该要做的就是写接下来三个视频的稿子，当然也该向下学习了，但是后面课程的内容其实也不是很好规划的，要讲解的内容其实挺多的，但是有些内容好像我也不是很懂，如果这个东西不思考清楚那么即使去做事情，也会非常的不顺心。</p>
-<p>我倒是认为，顺心意真的很适合我，我所做的事情都是我认为对的事情，难道不是吗。</p>
-<p>后面要讲解的肯定是shell编程，但是在此之前呢，shell编程要以怎样的方式去讲解，能不能有第一部分，第二部分，第三部分呢，我认为肯定是可以的，但是具体是以一种怎样的形式呢，这一点有些伤脑筋，可以放到哔哩哔哩那个地方，用分层的方式来进行，第一部分，也就是环境的搭建，第二部分是Linux命令的学习，第三部分是shell编程的学习，但是具体的编号仍旧是根据之前的来，唯有上传的时候有些区别，当然这些呢只是一些细节，更重要的是具体的内容，我只是在第二小节中讲解了一些命令，我认为经过这些简单命令的学习已经算是对Linux迈进了半只脚，但实际上一些更深层次的东西，确实很难，需要深入，仍旧是那句话，不论要讲的是什么，咱们一定要有逻辑，因因果果，果果因因，先从整体上来入局，第三部分的shell编程就是讲解shell的一些基本语法，对shell有一个基本的认识，除此之外就比如环境变量等等，这里不应该涉及到的是开发板相关的知识，就比如交叉编译器、就比如架构等等，这些都应该是在系统编程里面要讲解的东西，我说的对吗，很对，没有问题，而shell知识的学习大体步骤仍旧跟之前一样，广泛学习其他家的讲解，目前大概是五六个，然后总结一些经验，思考如何跟我前面讲解的知识连接起来，这大概就是后面我要做的事情了，等shell编程部分讲解完成，我的第一期视频应该也就结束了。现在还是回归主线任务，也就是写下面的这三个视频的稿子。</p>
-<p>磁盘管理的这个肯定是要讲解的，后来发现好像并没有必要呀，但是上节课已经明确说明了要讲解.</p>
-<hr />
-<p>行吧，大体的内容算是搞完了，现在已经去掉了scp命令，突然感觉没有啥必要呀，现在还没用到这里面的传输呢，如果现在就讲解传输那岂不是不对，就应该等有需要用到之后再来讲解，这样才是对的，也符合我的风格，然后就是两个小节的内容了，这两个小节的内容已经写完了，现在来整理一下稿子吧，我也确实想要明天来录个视频，那稿子啥时候写呢？今天晚上？有这个打算。感觉花费的时间应该不是很多，看看情况吧现在开始写。</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-01_生活/15_幻觉"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2024/03/27/01_%E7%94%9F%E6%B4%BB/15_%E5%B9%BB%E8%A7%89/"
-    >幻觉</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2024/03/27/01_%E7%94%9F%E6%B4%BB/15_%E5%B9%BB%E8%A7%89/" class="article-date">
-  <time datetime="2024-03-26T22:26:56.000Z" itemprop="datePublished">2024-03-27</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  Here's something encrypted, password is required to continue reading. 
-      <a class="article-more-link" href="/2024/03/27/01_%E7%94%9F%E6%B4%BB/15_%E5%B9%BB%E8%A7%89/"
-        >阅读更多...</a
-      >
-       
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-01_生活/08_反思(三月第4个星期)"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2024/03/25/01_%E7%94%9F%E6%B4%BB/08_%E5%8F%8D%E6%80%9D(%E4%B8%89%E6%9C%88%E7%AC%AC4%E4%B8%AA%E6%98%9F%E6%9C%9F)/"
-    >反思(3月第4个星期)</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2024/03/25/01_%E7%94%9F%E6%B4%BB/08_%E5%8F%8D%E6%80%9D(%E4%B8%89%E6%9C%88%E7%AC%AC4%E4%B8%AA%E6%98%9F%E6%9C%9F)/" class="article-date">
-  <time datetime="2024-03-24T22:26:56.000Z" itemprop="datePublished">2024-03-25</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  Here's something encrypted, password is required to continue reading. 
-      <a class="article-more-link" href="/2024/03/25/01_%E7%94%9F%E6%B4%BB/08_%E5%8F%8D%E6%80%9D(%E4%B8%89%E6%9C%88%E7%AC%AC4%E4%B8%AA%E6%98%9F%E6%9C%9F)/"
-        >阅读更多...</a
-      >
-       
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-07_小技巧/6 Xmind学习"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2024/03/24/07_%E5%B0%8F%E6%8A%80%E5%B7%A7/6%20Xmind%E5%AD%A6%E4%B9%A0/"
-    >xmind学习</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2024/03/24/07_%E5%B0%8F%E6%8A%80%E5%B7%A7/6%20Xmind%E5%AD%A6%E4%B9%A0/" class="article-date">
-  <time datetime="2024-03-23T22:57:19.000Z" itemprop="datePublished">2024-03-24</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%B0%8F%E6%8A%80%E5%B7%A7/">小技巧</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <p>​	==我们要先理性的、冷静的、全面的、谨慎的思考自己的痛苦和快乐，反思自己这辈子应该怎样度过，你至少应该确认一个支点，你这辈子必须要完成的事情，或者想要拥有的品质，你清楚的知道，如果做不到这点，你永远都不会快乐==</p>
-<p>​	==我希望用一生的时间不断学习和深入电子计算机相关的一切知识，并将其整理成网络，并分享出去，与更多志同道合的人共同进步==</p>
-<p>​	==无论你最终要成为一个怎样的人，但请千万记住，时光在飞逝。==</p>
-<p>​	==拜托一份幻觉，比发现一个真理更能使人明智==</p>
-<hr />
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202403241657641.png" alt="image-20240324165626710" /></p>
-<p>​	<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202403241657439.png" alt="image-20240324165712329" /></p>
-<h2 id="1基本操作"><a class="markdownIt-Anchor" href="#1基本操作"></a> 1.基本操作</h2>
-<ul>
-<li>TAB按键：置入项目</li>
-<li>ENTER：置入平级项目</li>
-<li>ctrl+alt+F：专注模式</li>
-</ul>
-<h2 id="2进阶操作"><a class="markdownIt-Anchor" href="#2进阶操作"></a> 2.进阶操作</h2>
-<ul>
-<li>联系：CTRL+SHIFT+R</li>
-<li>概要：通过括号简单扼要概括要点</li>
-<li>外框：ctrl+shift+b</li>
-<li>笔记：ctrl+shift+n</li>
-<li>标签：外显内容tag</li>
-</ul>
-<h2 id="3视觉优化"><a class="markdownIt-Anchor" href="#3视觉优化"></a> 3.视觉优化</h2>
-<ul>
-<li>图标</li>
-<li>贴纸</li>
-</ul>
-<hr />
  
       <!-- reward -->
       

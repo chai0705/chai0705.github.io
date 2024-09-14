@@ -87,7 +87,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">704</span>
+            <span class="post-count">730</span>
         </span>
     </span>
 
@@ -111,7 +111,9 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h1 id="1gst-play-10测试"><a class="markdownIt-Anchor" href="#1gst-play-10测试"></a> 1.gst-play-1.0测试</h1>
+  <link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>摄像头测试</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gst-launch-1.0 v4l2src device=/dev/video11 ! \video/x-raw,format=NV12,width=640,height=480,framerate=30/1 ! autovideosink </span><br></pre></td></tr></table></figure>
+<h1 id="1gst-play-10测试"><a class="markdownIt-Anchor" href="#1gst-play-10测试"></a> 1.gst-play-1.0测试</h1>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gst-play-1.0 --videosink=xvimagesink /usr/local/test.mp4</span><br></pre></td></tr></table></figure>
 <p>GStreamer 的 gst-play-1.0 工具会加载指定的视频文件，并使用 xvimagesink 插件将视频渲染到 X Window 系统上的显示设备上，以实现视频的播放效果。</p>
 <p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310260944983.png" alt="image-20231026094404955" /></p>

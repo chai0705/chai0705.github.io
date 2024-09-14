@@ -87,7 +87,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">5.4k</span>
+            <span class="post-count">5.5k</span>
         </span>
     </span>
 
@@ -111,7 +111,7 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <blockquote>
+  <link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><blockquote>
 <p>说一下前因后果，之前学了一段时间的git，但是无论如何也没用起来，这一点让我很是不爽,为了实现能常用git我甚至还搞了一个完全的Linux系统，但还是没有用起来，这还是让我很不爽，最近开始研究野火的SDK了，发现野火是用repo来进行代码管理的，其实更上层的瑞芯微也是这样管理代码的，但我们也不知道为了什么起见，可能对应的客户不同吧，就一个板子一套镜像，我认为这是有问题的，但我并没有什么话语权，只能听安排，但是我可以自己维护一个主线，我甚至可以搞一个千兆的宽带，这一点在理，但让我搞一个新机器我又不愿意，这个以后再说，先来研究理论基础。</p>
 </blockquote>
 <h1 id="repo理论基础"><a class="markdownIt-Anchor" href="#repo理论基础"></a> repo理论基础</h1>
@@ -535,7 +535,7 @@
 <blockquote>
 <p>–repo-url <a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/git/git-repo">https://mirrors.tuna.tsinghua.edu.cn/git/git-repo</a></p>
 </blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">repo init -u https://github.com/chai0705/manifest -b master -m rk3588_linux_release.xml --repo-url https://mirrors.tuna.tsinghua.edu.cn/git/git-repo</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">repo init -u https://github.com/chai0705/manifest -b master -m rk3588_linux_release.xml --repo-url https://mirrors.tuna.tsinghua.edu.cn/git/git-repo</span><br><span class="line"></span><br><span class="line">repo init -u git@github.com:chai0705/manifest.git -b master -m rk3588_linux_release.xml --repo-url https://mirrors.tuna.tsinghua.edu.cn/git/git-repo</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409051043403.png" alt="image-20240819165255782" />image-20240819165255782</p>
 <p>这样就初始化成功了，然后就可以进行同步了，同步过程如下所示：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">repo sync -j32</span><br></pre></td></tr></table></figure>

@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2024-09-07T16:06:16.056Z</updated>
+  <updated>2024-09-13T16:07:50.000Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -17,11 +17,91 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>ubuntu一键配置</title>
+    <link href="http://example.com/2024/09/13/07_%E5%B0%8F%E6%8A%80%E5%B7%A7/18_ubuntu%E4%B8%80%E9%94%AE%E9%85%8D%E7%BD%AE/"/>
+    <id>http://example.com/2024/09/13/07_%E5%B0%8F%E6%8A%80%E5%B7%A7/18_ubuntu%E4%B8%80%E9%94%AE%E9%85%8D%E7%BD%AE/</id>
+    <published>2024-09-12T22:50:19.000Z</published>
+    <updated>2024-09-13T16:07:50.000Z</updated>
+    
+    
+    <summary type="html">Here&#39;s something encrypted, password is required to continue reading.</summary>
+    
+    
+    
+    <category term="小技巧" scheme="http://example.com/categories/%E5%B0%8F%E6%8A%80%E5%B7%A7/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>瑞芯微TF卡烧写大于4G容量镜像的方法</title>
+    <link href="http://example.com/2024/09/12/02_%E7%91%9E%E8%8A%AF%E5%BE%AE/23_%E7%91%9E%E8%8A%AF%E5%BE%AETF%E5%8D%A1%E7%83%A7%E5%86%99%E5%A4%A7%E4%BA%8E4G%E5%AE%B9%E9%87%8F%E9%95%9C%E5%83%8F%E7%9A%84%E6%96%B9%E6%B3%95/"/>
+    <id>http://example.com/2024/09/12/02_%E7%91%9E%E8%8A%AF%E5%BE%AE/23_%E7%91%9E%E8%8A%AF%E5%BE%AETF%E5%8D%A1%E7%83%A7%E5%86%99%E5%A4%A7%E4%BA%8E4G%E5%AE%B9%E9%87%8F%E9%95%9C%E5%83%8F%E7%9A%84%E6%96%B9%E6%B3%95/</id>
+    <published>2024-09-12T09:17:03.000Z</published>
+    <updated>2024-09-12T08:16:27.123Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;&#92;assets&#92;css&#92;APlayer.min.css&quot;&gt;&lt;script src=&quot;&#92;assets&#92;js&#92;APlayer.min.js&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="瑞芯微" scheme="http://example.com/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>反思(9月第2个星期）</title>
+    <link href="http://example.com/2024/09/09/01_%E7%94%9F%E6%B4%BB/17_%E5%8F%8D%E6%80%9D(9%E6%9C%88%E7%AC%AC2%E4%B8%AA%E6%98%9F%E6%9C%9F)/"/>
+    <id>http://example.com/2024/09/09/01_%E7%94%9F%E6%B4%BB/17_%E5%8F%8D%E6%80%9D(9%E6%9C%88%E7%AC%AC2%E4%B8%AA%E6%98%9F%E6%9C%9F)/</id>
+    <published>2024-09-09T12:26:56.000Z</published>
+    <updated>2024-09-13T00:32:26.000Z</updated>
+    
+    
+    <summary type="html">Here&#39;s something encrypted, password is required to continue reading.</summary>
+    
+    
+    
+    <category term="生活" scheme="http://example.com/categories/%E7%94%9F%E6%B4%BB/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>反思(九月第二个星期)</title>
+    <link href="http://example.com/2024/09/08/06_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/28_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95(%E4%B9%9D%E6%9C%88%E7%AC%AC%E4%BA%8C%E4%B8%AA%E6%98%9F%E6%9C%9F)/"/>
+    <id>http://example.com/2024/09/08/06_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/28_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95(%E4%B9%9D%E6%9C%88%E7%AC%AC%E4%BA%8C%E4%B8%AA%E6%98%9F%E6%9C%9F)/</id>
+    <published>2024-09-08T13:26:56.000Z</published>
+    <updated>2024-09-13T10:20:40.734Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;&#92;assets&#92;css&#92;APlayer.min.css&quot;&gt;&lt;script src=&quot;&#92;assets&#92;js&#92;APlayer.min.js&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="工作记录" scheme="http://example.com/categories/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>电脑超频</title>
     <link href="http://example.com/2024/09/07/07_%E5%B0%8F%E6%8A%80%E5%B7%A7/17_%E7%94%B5%E8%84%91%E8%B6%85%E9%A2%91/"/>
     <id>http://example.com/2024/09/07/07_%E5%B0%8F%E6%8A%80%E5%B7%A7/17_%E7%94%B5%E8%84%91%E8%B6%85%E9%A2%91/</id>
     <published>2024-09-06T22:50:19.000Z</published>
-    <updated>2024-09-07T16:06:16.056Z</updated>
+    <updated>2024-09-12T15:39:37.000Z</updated>
     
     
       
@@ -41,10 +121,10 @@
   
   <entry>
     <title>反思(9月第1个星期）</title>
-    <link href="http://example.com/2024/09/06/01_%E7%94%9F%E6%B4%BB/16_%E5%8F%8D%E6%80%9D(9%E6%9C%88%E7%AC%AC1%E4%B8%AA%E6%98%9F%E6%9C%9F)/"/>
-    <id>http://example.com/2024/09/06/01_%E7%94%9F%E6%B4%BB/16_%E5%8F%8D%E6%80%9D(9%E6%9C%88%E7%AC%AC1%E4%B8%AA%E6%98%9F%E6%9C%9F)/</id>
+    <link href="http://example.com/2024/09/06/01_%E7%94%9F%E6%B4%BB/16_%E5%8F%8D%E6%80%9D(9%E6%9C%88%E7%AC%AC1%E4%B8%AA%E6%98%9F%E6%9C%9F)%20/"/>
+    <id>http://example.com/2024/09/06/01_%E7%94%9F%E6%B4%BB/16_%E5%8F%8D%E6%80%9D(9%E6%9C%88%E7%AC%AC1%E4%B8%AA%E6%98%9F%E6%9C%9F)%20/</id>
     <published>2024-09-06T12:26:56.000Z</published>
-    <updated>2024-09-07T02:47:32.679Z</updated>
+    <updated>2024-09-09T22:57:52.000Z</updated>
     
     
     <summary type="html">Here&#39;s something encrypted, password is required to continue reading.</summary>
@@ -81,10 +161,10 @@
   
   <entry>
     <title>反思(九月第一个星期)</title>
-    <link href="http://example.com/2024/09/01/06_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/28_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95(%E4%B9%9D%E6%9C%88%E7%AC%AC%E4%B8%80%E4%B8%AA%E6%98%9F%E6%9C%9F)/"/>
-    <id>http://example.com/2024/09/01/06_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/28_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95(%E4%B9%9D%E6%9C%88%E7%AC%AC%E4%B8%80%E4%B8%AA%E6%98%9F%E6%9C%9F)/</id>
+    <link href="http://example.com/2024/09/01/06_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/27_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95(%E4%B9%9D%E6%9C%88%E7%AC%AC%E4%B8%80%E4%B8%AA%E6%98%9F%E6%9C%9F)/"/>
+    <id>http://example.com/2024/09/01/06_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/27_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95(%E4%B9%9D%E6%9C%88%E7%AC%AC%E4%B8%80%E4%B8%AA%E6%98%9F%E6%9C%9F)/</id>
     <published>2024-09-01T13:26:56.000Z</published>
-    <updated>2024-09-06T14:33:10.079Z</updated>
+    <updated>2024-09-08T05:22:32.154Z</updated>
     
     
       
@@ -127,8 +207,8 @@
   
   <entry>
     <title>工作记录(8月第3个星期)</title>
-    <link href="http://example.com/2024/08/31/06_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/26_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95(8%E6%9C%88%E7%AC%AC%E4%B8%89%E4%B8%AA%E6%98%9F%E6%9C%9F)%20/"/>
-    <id>http://example.com/2024/08/31/06_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/26_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95(8%E6%9C%88%E7%AC%AC%E4%B8%89%E4%B8%AA%E6%98%9F%E6%9C%9F)%20/</id>
+    <link href="http://example.com/2024/08/31/06_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/26_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95(8%E6%9C%88%E7%AC%AC%E4%B8%89%E4%B8%AA%E6%98%9F%E6%9C%9F)/"/>
+    <id>http://example.com/2024/08/31/06_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/26_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95(8%E6%9C%88%E7%AC%AC%E4%B8%89%E4%B8%AA%E6%98%9F%E6%9C%9F)/</id>
     <published>2024-08-31T13:26:56.000Z</published>
     <updated>2024-09-05T05:48:20.332Z</updated>
     
@@ -222,7 +302,7 @@
     <link href="http://example.com/2024/08/29/07_%E5%B0%8F%E6%8A%80%E5%B7%A7/15_Linux%E7%B3%BB%E7%BB%9F%E8%87%AA%E5%8A%A8%E6%8D%A2%E6%BA%90/"/>
     <id>http://example.com/2024/08/29/07_%E5%B0%8F%E6%8A%80%E5%B7%A7/15_Linux%E7%B3%BB%E7%BB%9F%E8%87%AA%E5%8A%A8%E6%8D%A2%E6%BA%90/</id>
     <published>2024-08-28T22:50:19.000Z</published>
-    <updated>2024-09-06T14:36:11.583Z</updated>
+    <updated>2024-09-06T14:36:11.000Z</updated>
     
     
       
@@ -264,11 +344,11 @@
   </entry>
   
   <entry>
-    <title>WSL代理</title>
-    <link href="http://example.com/2024/08/20/07_%E5%B0%8F%E6%8A%80%E5%B7%A7/12_WSL%E4%BB%A3%E7%90%86/"/>
-    <id>http://example.com/2024/08/20/07_%E5%B0%8F%E6%8A%80%E5%B7%A7/12_WSL%E4%BB%A3%E7%90%86/</id>
+    <title>WSL使用小技巧</title>
+    <link href="http://example.com/2024/08/20/07_%E5%B0%8F%E6%8A%80%E5%B7%A7/12_WSL%E4%BD%BF%E7%94%A8%E5%B0%8F%E6%8A%80%E5%B7%A7/"/>
+    <id>http://example.com/2024/08/20/07_%E5%B0%8F%E6%8A%80%E5%B7%A7/12_WSL%E4%BD%BF%E7%94%A8%E5%B0%8F%E6%8A%80%E5%B7%A7/</id>
     <published>2024-08-19T22:50:19.000Z</published>
-    <updated>2024-09-05T02:44:35.660Z</updated>
+    <updated>2024-09-13T09:01:34.608Z</updated>
     
     
       
@@ -337,7 +417,7 @@
     <link href="http://example.com/2024/08/19/07_%E5%B0%8F%E6%8A%80%E5%B7%A7/11_repo%E5%AD%A6%E4%B9%A0/"/>
     <id>http://example.com/2024/08/19/07_%E5%B0%8F%E6%8A%80%E5%B7%A7/11_repo%E5%AD%A6%E4%B9%A0/</id>
     <published>2024-08-18T22:50:19.000Z</published>
-    <updated>2024-09-06T13:06:17.484Z</updated>
+    <updated>2024-09-11T12:39:00.000Z</updated>
     
     
       
@@ -360,7 +440,7 @@
     <link href="http://example.com/2024/08/18/07_%E5%B0%8F%E6%8A%80%E5%B7%A7/10_%E5%90%84%E7%B1%BB%E4%BB%BB%E5%8A%A1%E8%80%97%E6%97%B6/"/>
     <id>http://example.com/2024/08/18/07_%E5%B0%8F%E6%8A%80%E5%B7%A7/10_%E5%90%84%E7%B1%BB%E4%BB%BB%E5%8A%A1%E8%80%97%E6%97%B6/</id>
     <published>2024-08-17T22:50:19.000Z</published>
-    <updated>2024-09-06T15:25:49.255Z</updated>
+    <updated>2024-09-11T05:22:19.855Z</updated>
     
     
       
@@ -374,98 +454,6 @@
     
     
     <category term="小技巧" scheme="http://example.com/categories/%E5%B0%8F%E6%8A%80%E5%B7%A7/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>性能测试</title>
-    <link href="http://example.com/2024/08/15/07_%E5%B0%8F%E6%8A%80%E5%B7%A7/9_%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/"/>
-    <id>http://example.com/2024/08/15/07_%E5%B0%8F%E6%8A%80%E5%B7%A7/9_%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/</id>
-    <published>2024-08-14T22:50:19.000Z</published>
-    <updated>2024-09-05T02:45:23.879Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;&#92;assets&#92;css&#92;APlayer.min.css&quot;&gt;&lt;script src=&quot;&#92;assets&#92;js&#92;APlayer.min.js&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="小技巧" scheme="http://example.com/categories/%E5%B0%8F%E6%8A%80%E5%B7%A7/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>开放麒麟shell脚本解析</title>
-    <link href="http://example.com/2024/08/12/02_%E7%91%9E%E8%8A%AF%E5%BE%AE/16_%E9%87%8E%E7%81%ABsdk%E5%AD%A6%E4%B9%A0shell%E8%84%9A%E6%9C%AC%E8%A7%A3%E6%9E%90/"/>
-    <id>http://example.com/2024/08/12/02_%E7%91%9E%E8%8A%AF%E5%BE%AE/16_%E9%87%8E%E7%81%ABsdk%E5%AD%A6%E4%B9%A0shell%E8%84%9A%E6%9C%AC%E8%A7%A3%E6%9E%90/</id>
-    <published>2024-08-12T09:17:03.000Z</published>
-    <updated>2024-09-05T02:26:58.668Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;&#92;assets&#92;css&#92;APlayer.min.css&quot;&gt;&lt;script src=&quot;&#92;assets&#92;js&#92;APlayer.min.js&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="瑞芯微" scheme="http://example.com/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>RK内核镜像构建</title>
-    <link href="http://example.com/2024/08/11/02_%E7%91%9E%E8%8A%AF%E5%BE%AE/15_rk%20%E5%86%85%E6%A0%B8%E9%95%9C%E5%83%8F%E6%9E%84%E5%BB%BA/"/>
-    <id>http://example.com/2024/08/11/02_%E7%91%9E%E8%8A%AF%E5%BE%AE/15_rk%20%E5%86%85%E6%A0%B8%E9%95%9C%E5%83%8F%E6%9E%84%E5%BB%BA/</id>
-    <published>2024-08-11T09:17:03.000Z</published>
-    <updated>2024-08-12T23:50:23.000Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;&#92;assets&#92;css&#92;APlayer.min.css&quot;&gt;&lt;script src=&quot;&#92;assets&#92;js&#92;APlayer.min.js&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="瑞芯微" scheme="http://example.com/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>工作记录((8月第2个星期)</title>
-    <link href="http://example.com/2024/08/03/06_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/24_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95(%E5%85%AB%E6%9C%88%E7%AC%AC%E4%BA%8C%E4%B8%AA%E6%98%9F%E6%9C%9F)%20/"/>
-    <id>http://example.com/2024/08/03/06_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/24_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95(%E5%85%AB%E6%9C%88%E7%AC%AC%E4%BA%8C%E4%B8%AA%E6%98%9F%E6%9C%9F)%20/</id>
-    <published>2024-08-03T13:26:56.000Z</published>
-    <updated>2024-09-05T05:48:16.214Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;&#92;assets&#92;css&#92;APlayer.min.css&quot;&gt;&lt;script src=&quot;&#92;assets&#92;js&#92;APlayer.min.js&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="工作记录" scheme="http://example.com/categories/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/"/>
     
     
   </entry>

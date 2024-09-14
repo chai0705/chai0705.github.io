@@ -1,0 +1,2069 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+  
+
+    <head>
+      <meta charset="utf-8" />
+        
+      <meta name="description" content="永远年轻，永远热泪盈眶" />
+      
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>嵌入式Linux入门篇演示内容 |  热爱学习的未来酱</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      
+<link rel="stylesheet" href="/css/fonts/remixicon.css">
+
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    <link rel="alternate" href="/atom.xml" title="热爱学习的未来酱" type="application/atom+xml">
+</head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-03_Linux学习/4 演示内容"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  嵌入式Linux入门篇演示内容
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2024/06/25/03_Linux%E5%AD%A6%E4%B9%A0/4%20%E6%BC%94%E7%A4%BA%E5%86%85%E5%AE%B9/" class="article-date">
+  <time datetime="2024-06-24T22:50:19.000Z" itemprop="datePublished">2024-06-25</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux%E5%AD%A6%E4%B9%A0/">Linux学习</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">14.5k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">52 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="1初识linux"><a class="markdownIt-Anchor" href="#1初识linux"></a> 1.初识Linux</h1>
+<blockquote>
+<p>1.Unix的诞生（如果没有Unix，那Linux也不会出现。Linux之父林纳斯.托瓦兹正是借鉴了Unix的设计原则和功能从而开发出来的Linux。）</p>
+<p>2.GNU和Linux的发展（GNU是一个开源项目，它旨在创建一个自由、开源的类Unix操作系统。正是Linux内核的加入，才真正形成了我们今天所熟知的GNU/Linux操作系统。）</p>
+<p>3.Linux的优势（学习Linux操作系统最主要的原因）</p>
+</blockquote>
+<h2 id="11-unix的诞生"><a class="markdownIt-Anchor" href="#11-unix的诞生"></a> 1.1 Unix的诞生</h2>
+<p>时间：上个世纪60年代</p>
+<p>地点：美国贝尔实验室</p>
+<p>目的：开发一个多用户多任务的操作系统</p>
+<p>结果：由于该项目过于复杂，进展十分缓慢，贝尔实验室就退出了该项目。</p>
+<hr />
+<p>人物：肯.汤姆森和丹尼斯.里奇</p>
+<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202401292058910.png" alt="image-20240127150722157" style="zoom:200%;" />
+<p>目的：重新设计一个更简单、更实用的操作系统</p>
+<p>结果：在1969年成功开发出了第一版的UNIX操作系统。</p>
+<p>后续发展：而在20世纪70年代，由于半导体和集成电路技术的普及，大大拉低了内存制造成本，这使得C语言等高级语言的应用成为了可能，丹尼斯·里奇又着手B语言的改进，就这样直到今天仍被我们使用的C语言就诞生了，于是在C语言的基础上肯·汤姆森和丹尼斯·里奇又对Unix不断更新迭代，最终于1975年发布了Unix第6版本，第6版本的unix内核由9000行的C语言和700行的汇编语言所实现，让Unix系统的维护和修改变的容易，也让其可以方便的移植到不同的计算机上。</p>
+<h2 id="12-gnu和linux的发展"><a class="markdownIt-Anchor" href="#12-gnu和linux的发展"></a> 1.2 GNU和Linux的发展</h2>
+<p>时间：20世纪70年代末</p>
+<p>事情的起因：贝尔实验室的总公司AT&amp;T对UNIX操作系统源代码使用做出了限制，禁止将其供给学生使用，并不在开源。</p>
+<hr />
+<p>人物：理查德.斯托曼（==对当时UNIX操作系统的私有化和限制使用感到担忧==)</p>
+<p>行为：决定创建一个完全由免费软件按组成的类Unix计算机操作系统，</p>
+<p>名称：GNU项目（GNU意味着&quot;GNU’s not Unix&quot;，强调了GNU和Unix的区别）</p>
+<p>核心：开发一系列自由软件工具，如GNU编译器（GCC）、GNU调试器（GDB）、命令行解释器GNU bash等。</p>
+<p>挑战：缺少操作系统内核这一核心组件。</p>
+<hr />
+<p>时间：1991年</p>
+<p>人物：林纳斯.拖瓦兹</p>
+<p>事件：发布了一个名为Linux的操作系统内核（采用了Unix的设计理念，具有高度的可移植性和可扩展性）</p>
+<p>最终结果：Linux内核与GNU项目相结合，为用户提供了一个完整而自由的操作系统（<strong>GNU/Linux操作系统</strong>）。</p>
+<hr />
+<p>==Linux可以分为内核版本和发行版本。==</p>
+<ul>
+<li>内核版本：是操作系统的核心、负责管理硬件资源并提供进程管理、内存管理等操作系统的核心功能。</li>
+<li>发行版本：是基于GNU/Linx构建的完整操作系统，包含了内核、源代码以及相关应用程序，常见的发行版本有<strong>Ubuntu</strong>、red hat、debian等。</li>
+</ul>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202401292059512.png" alt="image-20240127161852653" /></p>
+<p>==由于Ubuntu的图形化界面相对于初学者更加友好，所以本套课程选用ubuntu进行Linux的学习==。</p>
+<hr />
+<p>早期：Linux只适用于386处理器</p>
+<p>发展：后来经过全世界的网友的帮助，使得Linux最终能够兼容多种架构，包括x86、ARM、PowerPC等。</p>
+<p>结果：Linux服务器占据了如今整个服务器市场的高达85% – 90%的份额，而数以十亿计个人手机所运行的安卓系统使用的也是Linux内核。</p>
+<h2 id="13-linux的优势"><a class="markdownIt-Anchor" href="#13-linux的优势"></a> 1.3 Linux的优势</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">优势</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">开源免费</td>
+<td style="text-align:left">Linux是开源软件，用户可以免费获取和使用，无需支付额外的费用。同时，用户可以自由地修改和定制Linux的源代码，满足个性化需求。</td>
+</tr>
+<tr>
+<td style="text-align:left">稳定性、可靠性和安全性</td>
+<td style="text-align:left">由于Linux的开源特性，Linux得到了广泛的测试、审查和改进，可以长时间运行而且不容易崩溃或故障，并且具有极高的安全性</td>
+</tr>
+<tr>
+<td style="text-align:left">硬件兼容性</td>
+<td style="text-align:left">Linux可以运行在多种硬件平台上，具有很好的硬件兼容性。与传统的UNIX系统相比，Linux更容易安装和运行在各种硬件设备上。</td>
+</tr>
+<tr>
+<td style="text-align:left">高度可定制性</td>
+<td style="text-align:left">用户可以根据自己的需求和偏好进行自定义配置。这使得Linux适用于各种不同的应用场景，无论是服务器、嵌入式设备还是个人桌面。</td>
+</tr>
+<tr>
+<td style="text-align:left">应用生态系统和支持</td>
+<td style="text-align:left">Linux拥有庞大而活跃的应用生态系统，提供了各种开源软件和工具。用户可以充分利用已有的软件资源，无需从头开发。同时，Linux社区提供了广泛的支持和文档，用户可以轻松获取帮助和解决问题。</td>
+</tr>
+</tbody>
+</table>
+<h1 id="2虚拟机介绍"><a class="markdownIt-Anchor" href="#2虚拟机介绍"></a> 2.虚拟机介绍</h1>
+<p>而虚拟机的作用就是在windows操作系统下通过软件的方式创建一个Linux系统环境</p>
+<blockquote>
+<p>2.1 什么是虚拟性？</p>
+<p>2.2 为什么使用虚拟机（虚拟机的优点）？</p>
+</blockquote>
+<h2 id="21-什么是虚拟机"><a class="markdownIt-Anchor" href="#21-什么是虚拟机"></a> 2.1 什么是虚拟机？</h2>
+<p>虚拟机：一台虚拟出来的机器（与之对应的为物理计算机）。</p>
+<p>==一台物理机可以虚拟出来多台虚拟计算机，每台虚拟计算机都有自己的CPU、内存和操作系统。==</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202401292057545.png" alt="image-20240129132317444" /></p>
+<h2 id="22-为什么使用虚拟机"><a class="markdownIt-Anchor" href="#22-为什么使用虚拟机"></a> 2.2 为什么使用虚拟机？</h2>
+<p>Windows操作系统凭借其简单易用的特点，占据了桌面端绝大多数的市场</p>
+<p>方法1（最简单的方法）：有两台物理计算机，一台装有windows操作系统、一台装有Linux操作系统。</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202401292104227.png" alt="image-20240129135830588" /></p>
+<p>​	缺点：成本高，劝退学生党和初学者。</p>
+<hr />
+<p>方法2:双系统，在一台物理计算机中装有两个不同的系统，在开机的时候通过BIOS进行系统之间的切换。</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202401292104224.png" alt="image-20240129140744139" /></p>
+<p>​	缺点：但在实际使用中两个系统之间的切换是非常消耗时间的，其工作效率远远比不上windows系统+Linux虚拟机。</p>
+<hr />
+<p>方法3:物理机安装windows操作系统，通过虚拟机软件安装运行Linux操作系统的虚拟机（因为ui和易用性这里选择ubuntu操作系统）</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202401292104255.png" alt="image-20240129141357264" /></p>
+<h1 id="3下载和安装虚拟机软件vmware-workstation-pro"><a class="markdownIt-Anchor" href="#3下载和安装虚拟机软件vmware-workstation-pro"></a> 3.下载和安装虚拟机软件：Vmware Workstation pro</h1>
+<p>Vmware Workstation pro 官方网址：</p>
+<p><a target="_blank" rel="noopener" href="https://www.vmware.com/products/workstation-pro/workstation-pro-evaluation.html">https://www.vmware.com/products/workstation-pro/workstation-pro-evaluation.html</a></p>
+<p><img src="C:%5CUsers%5CAdministrator%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20240220143908988.png" alt="image-20240220143908988" /></p>
+<p><img src="C:%5CUsers%5CAdministrator%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20240220145329348.png" alt="image-20240220145329348" /></p>
+<h1 id="4-获取并安装ubuntu操作系统"><a class="markdownIt-Anchor" href="#4-获取并安装ubuntu操作系统"></a> 4 获取并安装ubuntu操作系统</h1>
+<p>GNU/Linux有非常多的发行版（==Debian、Red hat、Centos==）</p>
+<p>为什么选用ubuntu来学习Linux？<br />
+Ubuntu是初学者最容易上手的一个Linux发行版。它提供了直观、美观与现代化的图形界面，同时又具有可定制性和丰富的内置应用程序</p>
+<blockquote>
+<p>4.1 ubuntu版本选择及下载（==Ubuntu有着多个版本，那我们要选择哪个版本开始学习呢？==）</p>
+<p>4.2 安装Ubuntu操作系统</p>
+</blockquote>
+<h2 id="41-ubuntu版本选择及下载"><a class="markdownIt-Anchor" href="#41-ubuntu版本选择及下载"></a> 4.1 ubuntu版本选择及下载</h2>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202402211104324.png" alt="image-20240221110416276" /></p>
+<p>LTS的英文全称是&quot;Long Term Support&quot;，意为长期支持版本。</p>
+<p>清华大学开源软件镜像站：<a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/ubuntu-releases/">https://mirrors.tuna.tsinghua.edu.cn/ubuntu-releases/</a></p>
+<p>中科大的开源软件镜像站：<a target="_blank" rel="noopener" href="https://mirrors.ustc.edu.cn/ubuntu-releases/">https://mirrors.ustc.edu.cn/ubuntu-releases/</a></p>
+<p><img src="C:%5CUsers%5CAdministrator%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20240221143548625.png" alt="image-20240221143548625" /></p>
+<blockquote>
+<p>对于入门学习阶段，我们的首要目的是熟悉和了解Linux的一些常用操作和相关命令。所以选择最新版本的Ubuntu镜像即可。</p>
+<p>然而，在某些情况下，最新版本的Ubuntu系统并不能满足我们的需求，就比如源码的编译会用到许多的工具和依赖，但是不同版本的ubuntu它对应工具和依赖版本也不同，就比如在ubuntu20上可以编译成功，同样的源码放在ubuntu22上编译就不成功。</p>
+</blockquote>
+<p><img src="C:%5CUsers%5CAdministrator%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20240221143723838.png" alt="image-20240221143723838" /></p>
+<h2 id="42-安装ubuntu操作系统"><a class="markdownIt-Anchor" href="#42-安装ubuntu操作系统"></a> 4.2 安装Ubuntu操作系统</h2>
+<p><img src="C:%5CUsers%5CAdministrator%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20240221152209383.png" alt="image-20240221152209383" /></p>
+<p>桥接模式：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202402211338525.png" alt="image-20240221133832497" /></p>
+<p>NAT模式</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202402211349341.png" alt="image-20240221134941313" /></p>
+<h1 id="5-修改ubuntu系统语言"><a class="markdownIt-Anchor" href="#5-修改ubuntu系统语言"></a> 5 修改ubuntu系统语言</h1>
+<p><img src="C:%5CUsers%5CAdministrator%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20240221161506947.png" alt="image-20240221161506947" /></p>
+<p><img src="C:%5CUsers%5CAdministrator%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20240221161531729.png" alt="image-20240221161531729" /></p>
+<h1 id="6-tabby终端软件的安装和使用"><a class="markdownIt-Anchor" href="#6-tabby终端软件的安装和使用"></a> 6 tabby终端软件的安装和使用</h1>
+<p>==什么是终端？==</p>
+<p>==我们为什么要使用终端软件呢？==</p>
+<blockquote>
+<p>6.1 什么是终端？</p>
+<p>6.2 tabby的获取和安装</p>
+<p>6.3 ssh远程连接ubuntu</p>
+<p>6.4 串口连接开发板</p>
+<p>6.5 字体调节和快捷键的使用</p>
+</blockquote>
+<h2 id="61-什么是终端"><a class="markdownIt-Anchor" href="#61-什么是终端"></a> 6.1 什么是终端？</h2>
+<p>计算机由运算器、控制器、存储器、输入设备和输出设备五个核心组件构成。</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202402221038106.png" alt="image-20240222103818017" /></p>
+<blockquote>
+<p>​	输入设备用于将外部信息输入到计算机中，例如键盘、鼠标等。</p>
+<p>​	输出设备用于将计算机处理的结果呈现给用户，例如显示器、打印机、扬声器等。</p>
+</blockquote>
+<p>在计算机发展的早期，人们使用一种叫“计算机终端机”（Computer Terminal 简称“终端”Terminal）的输入输出集成设备与计算机的运算核心进行交互。</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202402221045083.png" alt="image-20240222104530059" /></p>
+<p>​	终端：==是一种用于与计算机运算核心进行交互的输入输出设备==</p>
+<p>​	为什么要使用这种终端 输入输出集成设备呢？</p>
+<p>​	早期的计算机都是大型机，造假昂贵，所以一台大型机需要同时连接多台终端机，从而实现多人的共同使用。</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202402221053797.png" alt="image-20240222105337718" /></p>
+<blockquote>
+<p>方法1：ctrl + alt + t  快捷键 打开终端</p>
+<p>方法2：鼠标右击，选择“在终端中打开”</p>
+<p>方法3：在应用栏中选择终端进行打开。</p>
+</blockquote>
+<h2 id="62-tabby的获取和安装"><a class="markdownIt-Anchor" href="#62-tabby的获取和安装"></a> 6.2 tabby的获取和安装</h2>
+<p>Tabby是一个无限可定制的跨平台终端应用程序，适用于本地的 shell终端、串口终端、SSH终端的连接，tabby终端具有更美观的窗口分割以及字体，所以相较于其他终端软件看起来更舒服。</p>
+<p>tabby软件的下载地址：<a target="_blank" rel="noopener" href="https://github.com/Eugeny/tabby/releases/tag/v1.0.205">https://github.com/Eugeny/tabby/releases/tag/v1.0.205</a></p>
+<p><img src="C:%5CUsers%5CAdministrator%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20240222144742713.png" alt="image-20240222144742713" /></p>
+<h2 id="63-ssh远程连接ubuntu"><a class="markdownIt-Anchor" href="#63-ssh远程连接ubuntu"></a> 6.3 ssh远程连接ubuntu</h2>
+<p>SSH（Secure Shell，安全外壳）是一种网络安全协议，通过加密和认证机制实现安全的访问和文件传输</p>
+<p>前提条件：ubuntu有ssh的server服务</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install openssh-server net-tools</span><br></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li><code>sudo</code>：用于以超级用户或管理员权限来执行后续的命令。</li>
+<li>`apt：这是一个用于管理 Ubuntu和Debian 系统软件包的命令行工具。它可以用来搜索、安装、更新和删除软件包。Advanced Package Tool</li>
+<li><code>install</code>：这是 <code>apt-get</code> 命令的一个参数，指示它要执行的操作是安装软件包。</li>
+<li><code>openssh-server</code>：这是要安装的软件包的名称。在这个例子中，<code>openssh-server</code> 是一个用于安装 OpenSSH 服务器的软件包。OpenSSH 是一个用于安全远程登录和文件传输的工具，它允许您通过网络远程连接到系统，并进行安全的数据传输。</li>
+<li><code>net-tools</code>：这是另一个要安装的软件包的名称。<code>net-tools</code> 包含了一些用于网络配置和诊断的工具，比如 <code>ifconfig</code> 和 <code>netstat</code>。</li>
+</ul>
+</blockquote>
+<p>终端放大：ctrl+shift+“+”</p>
+<p>终端缩小：通过ctrl+“-”</p>
+<p>ifconfig命令：看ubuntu 的网络设备信息。</p>
+<p>192.168.1.248</p>
+<h2 id="64-串口连接开发板"><a class="markdownIt-Anchor" href="#64-串口连接开发板"></a> 6.4 串口连接开发板</h2>
+<h2 id="65-字体调节和窗口分割"><a class="markdownIt-Anchor" href="#65-字体调节和窗口分割"></a> 6.5 字体调节和窗口分割</h2>
+<p><img src="C:%5CUsers%5CAdministrator%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20240222163854793.png" alt="image-20240222163854793" /></p>
+<h1 id="7-linux目录相关命令"><a class="markdownIt-Anchor" href="#7-linux目录相关命令"></a> 7 Linux目录相关命令</h1>
+<p>==主要目的：就是学习和熟悉Linux一系列命令的使用。==</p>
+<blockquote>
+<p>7.1 命令的基本格式</p>
+<p>7.2 列出文件和目录：ls命令</p>
+<p>7.3 打印当前工作目录：pwd命令</p>
+<p>7.4 切换目录：cd命令</p>
+<p>7.5 Linux目录结构</p>
+</blockquote>
+<h2 id="71-命令的基本格式"><a class="markdownIt-Anchor" href="#71-命令的基本格式"></a> 7.1 命令的基本格式</h2>
+<p>在Linux中，命令的格式通常遵循以下结构：</p>
+<blockquote>
+<p>command [options] [arguments]</p>
+</blockquote>
+<ol>
+<li>命令（command）：表示要执行的具体命令或程序。命令可以是系统自带的内置命令，也可以是可执行程序或脚本文件。</li>
+<li>选项（options）：表示对命令的配置，可选的。选项通常以短格式（单个字母前缀，如 <code>-a</code>）或长格式（完整的单词前缀，如 <code>--all</code>）提供。</li>
+<li>参数（arguments）：参数通常紧跟在选项之后，用于命令的输入或操作对象。参数是命令的操作数，可以是文件、目录、文本、数字等。</li>
+</ol>
+<p>==注：这里的选项和参数用[]进行描述，表示可选、非必填==</p>
+<p><strong>示例1：</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -la /home/topeet</span><br></pre></td></tr></table></figure>
+<ul>
+<li>命令：ls</li>
+<li>选项：-la</li>
+<li>参数：/home/topeet</li>
+</ul>
+<p>这个命令的含义是列出<code>/home/topeet</code>目录下包括隐藏文件的所有文件和目录，并显示它们的详细信息。</p>
+<p><strong>示例2：</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd /home/topeet</span><br></pre></td></tr></table></figure>
+<ul>
+<li>命令：cd</li>
+<li>参数：/home/topeet</li>
+</ul>
+<p>这个命令的含义是将当前工作目录切换到<code>/home/topeet</code>目录。</p>
+<h2 id="72-列出文件和目录ls命令"><a class="markdownIt-Anchor" href="#72-列出文件和目录ls命令"></a> 7.2 列出文件和目录：ls命令</h2>
+<blockquote>
+<p>命令：ls</p>
+<p>英文：list</p>
+<p>命令功能：列出指定目录下的文件和子目录</p>
+<p>基本格式：ls [options] [file(s) or directory]</p>
+<p>详细解释：</p>
+<ul>
+<li><code>options</code>：选项用于控制 <code>ls</code> 命令的行为和输出格式。以下是常用的选项：</li>
+<li><code>-l</code>：以长格式（详细信息）显示文件和目录。输出包括文件的权限、所属用户和组、大小、创建日期等详细信息。</li>
+<li><code>-a</code>：显示所有文件和目录，包括以 <code>.</code> 开头的隐藏文件（默认情况下，隐藏文件不会显示）。</li>
+<li><code>-h</code>：以人类可读的格式显示文件大小，例如以 KB、MB、GB 等单位显示。</li>
+<li><code>-r</code>：以相反的顺序显示文件和目录。</li>
+<li><code>-t</code>：按修改时间排序，最近修改的文件或目录显示在前面。</li>
+<li><code>file(s) or directory</code>：可以指定一个或多个文件或目录作为参数。如果不指定参数，则默认为当前目录。</li>
+</ul>
+</blockquote>
+<h2 id="73-打印当前工作目录pwd命令"><a class="markdownIt-Anchor" href="#73-打印当前工作目录pwd命令"></a> 7.3 打印当前工作目录：pwd命令</h2>
+<blockquote>
+<p>命令：pwd</p>
+<p>英文：print working directory</p>
+<p>命令功能：显示当前工作目录的路径</p>
+</blockquote>
+<p><img src="C:%5CUsers%5CAdministrator%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20240305145020458.png" alt="image-20240305145020458" /></p>
+<blockquote>
+<ol>
+<li><code>/</code>：第一个斜杠代表根目录，根目录是 Linux 文件系统的最顶层目录，所有其他目录和文件都是从根目录开始的</li>
+<li><code>home</code>：<code>home</code> 是根目录下的一个目录，用于存放用户的主目录。</li>
+<li><code>/</code>：第二个斜杠代表层次结构，代表<code>topeet</code> 是 <code>home</code> 目录下的一个子目录。</li>
+<li><code>topeet</code>：表示用户名。每个用户都有一个主目录，通常以其用户名命名，用于存放用户的个人文件和配置。</li>
+</ol>
+</blockquote>
+<h2 id="74-切换目录cd命令"><a class="markdownIt-Anchor" href="#74-切换目录cd命令"></a> 7.4 切换目录：cd命令</h2>
+<blockquote>
+<p>命令：cd</p>
+<p>英文：change directory</p>
+<p>命令功能：显示当前工作目录的路径</p>
+<p>基本格式：cd [directory]</p>
+<p>详细解释：<br />
+directory：要切换到的目录。可以是绝对路径（从根目录开始的完整路径）或相对路径（相对于当前目录的路径）</p>
+<p>​	==相对路径：是相对于当前工作目录或参考位置的路径。==</p>
+<p>​	==绝对路径：是从文件系统的根目录（通常是 <code>/</code>）开始的完整路径。==</p>
+<p>特殊目录：</p>
+<ul>
+<li><code>.</code>：表示当前目录。</li>
+<li><code>..</code>：表示当前目录的父目录。</li>
+<li><code>~</code>：表示当前用户的主目录。</li>
+</ul>
+</blockquote>
+<h2 id="75-linux目录结构"><a class="markdownIt-Anchor" href="#75-linux目录结构"></a> 7.5 Linux目录结构</h2>
+<blockquote>
+<p>Linux 目录结构:层次化的树状结构</p>
+<p>详细说明：在Linux目录的最上层是根目录，根目录是整个目录结构的起点，所有其他目录和文件都是从根目录开始的</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">目录</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">/bin</td>
+<td style="text-align:left">存放基本命令的二进制文件</td>
+</tr>
+<tr>
+<td style="text-align:left">/boot</td>
+<td style="text-align:left">包含系统引导相关的文件</td>
+</tr>
+<tr>
+<td style="text-align:left">/cdrom</td>
+<td style="text-align:left">光盘设备的挂载点（可能在一些系统中不使用）</td>
+</tr>
+<tr>
+<td style="text-align:left">/dev</td>
+<td style="text-align:left">存放设备文件，用于与硬件设备进行通信</td>
+</tr>
+<tr>
+<td style="text-align:left">/etc</td>
+<td style="text-align:left">包含系统的配置文件</td>
+</tr>
+<tr>
+<td style="text-align:left">/home</td>
+<td style="text-align:left">用户的主目录所在位置</td>
+</tr>
+<tr>
+<td style="text-align:left">/lib</td>
+<td style="text-align:left">存放系统所需的共享库文件</td>
+</tr>
+<tr>
+<td style="text-align:left">/lib32</td>
+<td style="text-align:left">存放32位系统共享库文件</td>
+</tr>
+<tr>
+<td style="text-align:left">/lib64</td>
+<td style="text-align:left">存放64位系统共享库文件</td>
+</tr>
+<tr>
+<td style="text-align:left">/libx32</td>
+<td style="text-align:left">存放x32 ABI系统共享库文件</td>
+</tr>
+<tr>
+<td style="text-align:left">/lost+found</td>
+<td style="text-align:left">由文件系统恢复工具保留的文件和目录</td>
+</tr>
+<tr>
+<td style="text-align:left">/media</td>
+<td style="text-align:left">用于挂载可移动媒体设备</td>
+</tr>
+<tr>
+<td style="text-align:left">/mnt</td>
+<td style="text-align:left">用于挂载临时文件系统</td>
+</tr>
+<tr>
+<td style="text-align:left">/opt</td>
+<td style="text-align:left">用于安装可选的第三方软件</td>
+</tr>
+<tr>
+<td style="text-align:left">/proc</td>
+<td style="text-align:left">包含有关系统和进程的动态信息</td>
+</tr>
+<tr>
+<td style="text-align:left">/root</td>
+<td style="text-align:left">系统管理员的主目录</td>
+</tr>
+<tr>
+<td style="text-align:left">/run</td>
+<td style="text-align:left">存放在系统引导过程中创建的临时文件和运行时数据</td>
+</tr>
+<tr>
+<td style="text-align:left">/sbin</td>
+<td style="text-align:left">存放系统管理员使用的系统命令</td>
+</tr>
+<tr>
+<td style="text-align:left">/snap</td>
+<td style="text-align:left">存放基于 Snap 包管理器安装的应用程序</td>
+</tr>
+<tr>
+<td style="text-align:left">/srv</td>
+<td style="text-align:left">存放系统提供的服务数据</td>
+</tr>
+<tr>
+<td style="text-align:left">/swapfile</td>
+<td style="text-align:left">交换文件，用于虚拟内存的扩展</td>
+</tr>
+<tr>
+<td style="text-align:left">/sys</td>
+<td style="text-align:left">提供与内核和硬件相关的信息</td>
+</tr>
+<tr>
+<td style="text-align:left">/tmp</td>
+<td style="text-align:left">存放临时文件</td>
+</tr>
+<tr>
+<td style="text-align:left">/usr</td>
+<td style="text-align:left">包含系统的大部分应用程序和文件</td>
+</tr>
+<tr>
+<td style="text-align:left">/var</td>
+<td style="text-align:left">包含经常变化的文件和目录，如日志文件、缓存文件、临时文件等</td>
+</tr>
+</tbody>
+</table>
+<p><img src="C:%5CUsers%5CAdministrator%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20240305154011500.png" alt="image-20240305154011500" /></p>
+<h1 id="8-文件和文件夹操作命令"><a class="markdownIt-Anchor" href="#8-文件和文件夹操作命令"></a> 8 文件和文件夹操作命令</h1>
+<blockquote>
+<p>8.1创建目录：mkdir 命令</p>
+<p>8.2 创建文件：touch命令</p>
+<p>8.3 删除目录和文件：rm 命令</p>
+<p>8.4 复制文件和目录：cp命令</p>
+<p>8.5 移动文件和目录：mv命令</p>
+</blockquote>
+<h2 id="81创建目录mkdir-命令"><a class="markdownIt-Anchor" href="#81创建目录mkdir-命令"></a> 8.1创建目录：mkdir 命令</h2>
+<blockquote>
+<p>​	命令：mkdir</p>
+<p>​	英文：make directory</p>
+<p>​	命令功能：用于创建单个或者多级目录</p>
+<p>​	基本格式：mkdir [选项] 目录名…</p>
+<p>​	详细解释：</p>
+<ul>
+<li><code>-p</code>：创建多级目录，如果上级目录不存在，则一并创建。</li>
+<li><code>-m</code>：设置目录的权限模式。</li>
+</ul>
+</blockquote>
+<h2 id="82-创建文件touch命令"><a class="markdownIt-Anchor" href="#82-创建文件touch命令"></a> 8.2 创建文件：touch命令</h2>
+<blockquote>
+<p>​	命令：touch</p>
+<p>​	命令功能：用于创建单个或者多个文件</p>
+<p>​	基本格式：touch [选项] 文件名…</p>
+<p>​	详细解释：</p>
+<ul>
+<li><code>-a</code>：仅更新访问时间。</li>
+<li><code>-c</code>：不创建文件。</li>
+<li><code>-m</code>：仅更新修改时间。</li>
+<li><code>-r, --reference=参考文件</code>：使用参考文件的时间戳。</li>
+<li><code>-t, --time=时间</code>：使用指定的时间戳。</li>
+</ul>
+</blockquote>
+<h2 id="83-删除目录和文件rm-命令"><a class="markdownIt-Anchor" href="#83-删除目录和文件rm-命令"></a> 8.3 删除目录和文件：rm 命令</h2>
+<blockquote>
+<p>​	命令：rm</p>
+<p>​	英文: remove</p>
+<p>​	命令功能：用来删除单个文件、多个文件以及整个目录</p>
+<p>​	基本格式：rm [选项] 文件名…</p>
+<p>​	详细解释：</p>
+<ul>
+<li><code>-f, --force</code>：强制删除文件而不提示。</li>
+<li><code>-r, --recursive</code>：递归地删除目录及其内容。</li>
+<li><code>-i, --interactive</code>：交互式地询问是否删除文件。</li>
+<li><code>-v, --verbose</code>：显示删除过程中的详细信息。</li>
+</ul>
+</blockquote>
+<p>==注：Linux中有一个专门的删除文件夹的命令为rmdir，但是由于rmdir命令只能删除空目录，所以实际作用并不大==</p>
+<h2 id="84-复制文件和目录cp命令"><a class="markdownIt-Anchor" href="#84-复制文件和目录cp命令"></a> 8.4 复制文件和目录：cp命令</h2>
+<blockquote>
+<p>​	命令：cp</p>
+<p>​	英文: copy</p>
+<p>​	命令功能：用来复制单个文件、多个文件以及整个目录</p>
+<p>​	基本格式：cp [选项] 源文件 目标文件</p>
+<p>​	详细解释：</p>
+<ul>
+<li><code>-r, --recursive</code>：递归地复制目录及其内容。</li>
+<li><code>-i, --interactive</code>：交互式地询问是否覆盖已存在的目标文件。</li>
+<li><code>-v, --verbose</code>：显示复制过程中的详细信息。</li>
+<li><code>-u, --update</code>：仅复制比目标文件新或不存在的文件。</li>
+</ul>
+</blockquote>
+<h2 id="85-移动文件和目录mv命令"><a class="markdownIt-Anchor" href="#85-移动文件和目录mv命令"></a> 8.5 移动文件和目录：mv命令</h2>
+<blockquote>
+<p>​	命令：mv</p>
+<p>​	英文: move</p>
+<p>​	命令功能：用于移动文件和目录，除此之外<code>mv</code> 命令还可以用于重命名文件和目录</p>
+<p>​	基本格式：mv [选项] 源文件 目标文件</p>
+<p>​	详细解释：</p>
+<ul>
+<li><code>-i, --interactive</code>：交互式地询问是否覆盖已存在的目标文件。</li>
+<li><code>-u, --update</code>：仅移动比目标文件新或不存在的文件。</li>
+<li><code>-v, --verbose</code>：显示移动过程中的详细信息。</li>
+</ul>
+</blockquote>
+<h1 id="9vim编辑器的使用"><a class="markdownIt-Anchor" href="#9vim编辑器的使用"></a> 9.vim编辑器的使用</h1>
+<p>vi编辑器：Linux系统下标准的编辑器，在任何Linux系统中，都可以使用vi进行文件的编辑。</p>
+<p>Vim编辑器：Vi IMproved，是Vi编辑器的增强版本，在保留Vi快速和高效的操作方式前提下，提供了更多的功能和改进</p>
+<blockquote>
+<p>9.1 vim的安装</p>
+<p>9.2 vim的三种模式</p>
+<p>9.3 vim光标移动</p>
+<p>9.4 vim文本插入</p>
+<p>9.5 vim的保存和退出</p>
+<p>9.6 vim文本删除</p>
+<p>9.7 vim的复制、粘贴和剪切</p>
+<p>9.8 撤消类命令</p>
+<p>9.9 搜索类命令</p>
+<p>9.10 替换类命令</p>
+</blockquote>
+<h2 id="91-vim的安装"><a class="markdownIt-Anchor" href="#91-vim的安装"></a> 9.1 vim的安装</h2>
+<p>ubuntu默认是没有安装vim的，所以需要先输入以下命令安装vim</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install vim</span><br></pre></td></tr></table></figure>
+<h2 id="92-vim的三种模式"><a class="markdownIt-Anchor" href="#92-vim的三种模式"></a> 9.2 vim的三种模式</h2>
+<p>Vim中有三种常用的工作模式，分别为命令模式、编辑模式和末行模式。</p>
+<p>（1）命令模式: 使用vim打开文件之后默认进入的就是命令模式，在命令模式可以通过一些快捷键来完成光标移动、插入、删除、复制、粘贴等操作；</p>
+<p>（2）编辑模式: 在命令模式下通过i、a、A、o等按键进入编辑模式，进入插入模式之后会在左下角显示“插入”，在该模式下可以对文件的内容进行编辑;</p>
+<p>==在编辑模式可以通过esc按键退回到命令模式==</p>
+<p>（3）末行模式: 在命令模式下通过输入冒号：进入末行模式，在末行模式下通过输入命令可以进行搜索、替换、保存、退出等操作;</p>
+<p><img src="C:%5CUsers%5CAdministrator%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20240307164631587.png" alt="image-20240307164631587" /></p>
+<h2 id="93-vim光标的移动"><a class="markdownIt-Anchor" href="#93-vim光标的移动"></a> 9.3 vim光标的移动</h2>
+<p>在vim中有两种基础光标移动方式：</p>
+<ul>
+<li>
+<p>第一种方式是使用键盘上的方向键来进行光标的移动，这种方式无论是在命令模式还是在编辑模式都可以命令的移动光标。</p>
+</li>
+<li>
+<p>第二种方式是在命令模式下使用h、j、k、l四个字母来进行移动，具体匹配如下所示：</p>
+<pre><code>       		^
+       	         	         	         	         	         	         	         	         	         	         		k              提示： h 的键位于左边，每次按下就会向左移动。
+  &lt; h              l &gt;           l 的键位于右边，每次按下就会向右移动。
+           j                     j 键看起来很象一支尖端方向朝下的箭头。    
+</code></pre>
+</li>
+</ul>
+<p>** 作者更喜欢使用上下左右方向键。**</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">分类</th>
+<th style="text-align:left">快捷键</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">单词之间的跳转</td>
+<td style="text-align:left">w</td>
+<td style="text-align:left">将光标移动到下一个单词的开头。</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">b</td>
+<td style="text-align:left">将光标移动到前一个单词的开头。</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">e</td>
+<td style="text-align:left">将光标移动到下一个单词的词末。</td>
+</tr>
+<tr>
+<td style="text-align:left">行内定位</td>
+<td style="text-align:left">$</td>
+<td style="text-align:left">将光标移动到当前行的行尾。</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">0</td>
+<td style="text-align:left">将光标移动到当前行的行首。</td>
+</tr>
+<tr>
+<td style="text-align:left">行之间的跳转</td>
+<td style="text-align:left">ctrl + g</td>
+<td style="text-align:left">显示当前光标位置及文件状态。</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">gg</td>
+<td style="text-align:left">将光标移动到文件的开头。</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">G</td>
+<td style="text-align:left">将光标移动到文件的末尾。</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">行号+gg/G</td>
+<td style="text-align:left">将光标跳转到指定行。</td>
+</tr>
+<tr>
+<td style="text-align:left">括号匹配</td>
+<td style="text-align:left">%</td>
+<td style="text-align:left">匹配大括号、小括号、中括号，让光标跳转到相应的匹配括号处。</td>
+</tr>
+<tr>
+<td style="text-align:left">半屏滚动</td>
+<td style="text-align:left">ctrl+u</td>
+<td style="text-align:left">向上滚动半屏。</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">ctrl+d</td>
+<td style="text-align:left">向下滚动半屏。</td>
+</tr>
+<tr>
+<td style="text-align:left">全屏滚动</td>
+<td style="text-align:left">ctrl+f</td>
+<td style="text-align:left">向下滚动一屏。</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">ctrl+b</td>
+<td style="text-align:left">向上滚动一屏。</td>
+</tr>
+<tr>
+<td style="text-align:left">定位光标的位置</td>
+<td style="text-align:left">zz</td>
+<td style="text-align:left">将光标置于屏幕的中间。</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">zt</td>
+<td style="text-align:left">将光标移动到屏幕的顶部。</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">zb</td>
+<td style="text-align:left">将光标移动到屏幕的底部。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="94-vim文本插入"><a class="markdownIt-Anchor" href="#94-vim文本插入"></a> 9.4 vim文本插入</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">快捷键</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">i</td>
+<td style="text-align:left">将光标定位到当前位置，并进入插入模式，在当前位置之前插入文本。</td>
+</tr>
+<tr>
+<td style="text-align:left">a</td>
+<td style="text-align:left">将光标定位到当前字符的下一个位置，并进入插入模式，在当前位置之后插入文本。</td>
+</tr>
+<tr>
+<td style="text-align:left">A</td>
+<td style="text-align:left">将光标定位到当前行的行尾，并进入插入模式，在行尾插入文本。</td>
+</tr>
+<tr>
+<td style="text-align:left">o</td>
+<td style="text-align:left">在当前行的下方插入一个新行，并进入插入模式，在新行中输入文本。</td>
+</tr>
+<tr>
+<td style="text-align:left">O</td>
+<td style="text-align:left">在当前行的上方插入一个新行，并进入插入模式，在新行中输入文本。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="95-vim的保存和退出"><a class="markdownIt-Anchor" href="#95-vim的保存和退出"></a> 9.5 vim的保存和退出。</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">快捷键</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">q</td>
+<td style="text-align:left">未修改内容的情况下，在末行模式下输入 q &lt;回车&gt; 退出 Vim。</td>
+</tr>
+<tr>
+<td style="text-align:left">q!</td>
+<td style="text-align:left">在修改内容之后，如果想不保存修改内容并退出，输入 q! &lt;回车&gt; 退出 Vim，表示强制退出。</td>
+</tr>
+<tr>
+<td style="text-align:left">w</td>
+<td style="text-align:left">当文件为非只读文件时，在末行模式下输入 w &lt;回车&gt; 保存修改的内容。</td>
+</tr>
+<tr>
+<td style="text-align:left">w!</td>
+<td style="text-align:left">当文件为只读文件时，在末行模式下输入 w! &lt;回车&gt; 保存修改的内容，表示强制写入。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="96-vim文本删除"><a class="markdownIt-Anchor" href="#96-vim文本删除"></a> 9.6 vim文本删除</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">序号</th>
+<th style="text-align:left">快捷键</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">删除单个字符</td>
+<td style="text-align:left">x</td>
+<td style="text-align:left">在命令模式下，删除光标所在位置的字符。</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">Backspace</td>
+<td style="text-align:left">在插入模式下，删除光标所在位置的字符。</td>
+</tr>
+<tr>
+<td style="text-align:left">删除单词</td>
+<td style="text-align:left">dw</td>
+<td style="text-align:left">删除一个单词（从光标处到下一个空格）。</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">dnw</td>
+<td style="text-align:left">删除从当前光标开始处的 n 个单词（n 为任意数字）。</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">d0</td>
+<td style="text-align:left">删除从光标到一行开头的所有字符（包括空白字符）。</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">d$</td>
+<td style="text-align:left">删除从光标到本行末尾的所有字符。</td>
+</tr>
+<tr>
+<td style="text-align:left">删除行</td>
+<td style="text-align:left">dd</td>
+<td style="text-align:left">删除当前光标所在行。</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">数字n + dd</td>
+<td style="text-align:left">删除从光标开始处的后 n 行代码。</td>
+</tr>
+<tr>
+<td style="text-align:left">删除文本范围</td>
+<td style="text-align:left">dgg</td>
+<td style="text-align:left">删除从光标到文本开头的所有字符。</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">dG</td>
+<td style="text-align:left">删除从光标到文本结尾的所有字符。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="97-vim的复制-粘贴和剪切"><a class="markdownIt-Anchor" href="#97-vim的复制-粘贴和剪切"></a> 9.7 vim的复制、粘贴和剪切</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">分类</th>
+<th style="text-align:left">快捷键</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">复制文本</td>
+<td style="text-align:left">yy</td>
+<td style="text-align:left">复制当前行。</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">数字n + yy</td>
+<td style="text-align:left">复制当前行及其下面的 n 行。</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">y$</td>
+<td style="text-align:left">复制从光标位置到当前行末尾的文本。</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">yiw</td>
+<td style="text-align:left">复制当前光标所在单词。</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">v</td>
+<td style="text-align:left">进入可视模式，通过移动光标选择要复制的文本，然后按下 y 进行复制。</td>
+</tr>
+<tr>
+<td style="text-align:left">粘贴文本</td>
+<td style="text-align:left">p</td>
+<td style="text-align:left">粘贴剪贴板中的文本在光标的下方（行粘贴）。</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">P</td>
+<td style="text-align:left">粘贴剪贴板中的文本在光标的上方（行粘贴）。</td>
+</tr>
+<tr>
+<td style="text-align:left">剪切（删除）文本</td>
+<td style="text-align:left">dd</td>
+<td style="text-align:left">剪切（删除）当前行。</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">数字n + dd</td>
+<td style="text-align:left">剪切（删除）当前行及其下面的 n 行。</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">d$</td>
+<td style="text-align:left">剪切（删除）从光标位置到当前行末尾的文本。</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">diw</td>
+<td style="text-align:left">剪切（删除）当前光标所在单词。</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">v</td>
+<td style="text-align:left">进入可视模式，使用光标键选择要剪切（删除）的文本，然后按下 d。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="98-撤消类命令"><a class="markdownIt-Anchor" href="#98-撤消类命令"></a> 9.8 撤消类命令</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">分类</th>
+<th style="text-align:left">快捷键</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">撤销上一次编辑操作</td>
+<td style="text-align:left">u</td>
+<td style="text-align:left">按下 u 键会撤销最近的编辑操作，将文本恢复到上一个状态。</td>
+</tr>
+<tr>
+<td style="text-align:left">恢复撤销的操作</td>
+<td style="text-align:left">ctrl + r</td>
+<td style="text-align:left">按下 Ctrl 键和 r 键组合可以恢复上一次撤销的操作，将文本恢复到撤销之前的状态。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="99-搜索类命令"><a class="markdownIt-Anchor" href="#99-搜索类命令"></a> 9.9 搜索类命令</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">分类</th>
+<th style="text-align:left">快捷键</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">向前搜索</td>
+<td style="text-align:left">/pattern</td>
+<td style="text-align:left">在正文中向前搜索与指定模式匹配的文本。例如，/example 将搜索下一个出现的 “example”。</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">n</td>
+<td style="text-align:left">按下 n 键可以跳到下一个匹配项。</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">N</td>
+<td style="text-align:left">按下 N 键可以跳到上一个匹配项。</td>
+</tr>
+<tr>
+<td style="text-align:left">向后搜索</td>
+<td style="text-align:left">?pattern</td>
+<td style="text-align:left">在正文中向后搜索与指定模式匹配的文本。例如，?example 将搜索上一个出现的 “example”。</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">n</td>
+<td style="text-align:left">按下 n 键可以跳到下一个匹配项。</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">N</td>
+<td style="text-align:left">按下 N 键可以跳到上一个匹配项。</td>
+</tr>
+<tr>
+<td style="text-align:left">搜索时忽略大小写和设置高亮</td>
+<td style="text-align:left">:set ignorecase</td>
+<td style="text-align:left">在末行模式下输入 <code>set ignorecase</code> 命令可以设置搜索时忽略大小写。</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">:set hlsearch</td>
+<td style="text-align:left">在末行模式下输入 <code>set hlsearch</code> 命令可以设置搜索内容高亮显示。</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">:set number</td>
+<td style="text-align:left">在末行模式下输入 <code>set number</code>命令可以显示行号</td>
+</tr>
+</tbody>
+</table>
+<h2 id="910-替换类命令"><a class="markdownIt-Anchor" href="#910-替换类命令"></a> 9.10 替换类命令</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">分类</th>
+<th style="text-align:left">快捷键/命令</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">替换单个匹配项</td>
+<td style="text-align:left">😒/old/new/g</td>
+<td style="text-align:left">在末行模式下，通过输入 <code>s/old/new/g</code> 可以替换当前行中的所有匹配项 old 为 new。</td>
+</tr>
+<tr>
+<td style="text-align:left">替换全部匹配项</td>
+<td style="text-align:left">:%s/old/new/g</td>
+<td style="text-align:left">在末行模式下，通过输入 <code>%s/old/new/g</code> 可以替换整个文件中的每个匹配项 old 为 new。</td>
+</tr>
+<tr>
+<td style="text-align:left">替换全部匹配项并要求确认</td>
+<td style="text-align:left">:%s/old/new/gc</td>
+<td style="text-align:left">在末行模式下，通过输入 <code>%s/old/new/gc</code> 可以找到整个文件中的每个匹配项 old，并且对每个匹配项进行提示是否进行替换。</td>
+</tr>
+</tbody>
+</table>
+<h1 id="10-文件内容查看和搜索"><a class="markdownIt-Anchor" href="#10-文件内容查看和搜索"></a> 10 文件内容查看和搜索</h1>
+<blockquote>
+<p>10.1 终端打印输出：echo命令</p>
+<p>10.2 文件内容查看：cat命令</p>
+<p>10.3 文件内容搜索：grep命令</p>
+<p>10.4 查找文件：find命令</p>
+</blockquote>
+<h2 id="101-终端打印输出echo命令"><a class="markdownIt-Anchor" href="#101-终端打印输出echo命令"></a> 10.1 终端打印输出：echo命令</h2>
+<blockquote>
+<p>​	命令：echo</p>
+<p>​	命令功能：将文本或字符串输出到标准输出（通常是终端窗口）</p>
+<p>​	基本格式：echo [选项] [字符串]</p>
+<p>​	详细解释：</p>
+<ul>
+<li><code>-n</code>：不换行。默认情况下，<code>echo</code> 输出完指定的字符串后会自动换行，使用 <code>-n</code> 选项可以禁止换行，使输出保持在同一行上。</li>
+</ul>
+<p>注：==当将 <code>echo</code> 命令与重定向符号 (<code>&gt;&gt;</code> 和 <code>&gt;</code>) 结合使用时，可以将 <code>echo</code> 命令的输出内容追加到文件中或覆盖文件的内容。==</p>
+</blockquote>
+<h2 id="102-文件内容查看cat命令"><a class="markdownIt-Anchor" href="#102-文件内容查看cat命令"></a> 10.2 文件内容查看：cat命令</h2>
+<blockquote>
+<p>命令：cat</p>
+<p>​	英文：concatenate</p>
+<p>​	命令功能：将一个或多个文件的内容连接起来并输出到标准输出</p>
+<p>​	基本格式：cat [选项] [文件1 文件2 ]</p>
+<p>​	详细解释：</p>
+<ul>
+<li><code>-n</code>：对输出的所有行编号</li>
+</ul>
+</blockquote>
+<h2 id="103-文件内容搜索grep命令"><a class="markdownIt-Anchor" href="#103-文件内容搜索grep命令"></a> 10.3 文件内容搜索：grep命令</h2>
+<blockquote>
+<p>命令：grep</p>
+<p>英文：Global Regular Expression Print</p>
+<p>命令功能：用于在文本文件中查找符合特定模式的行，并将匹配的行输出到标准输出</p>
+<p>命令格式：grep [选项] 模式 [文件]</p>
+<p>常用选项：</p>
+<ul>
+<li><code>-i</code>：不区分大小写地匹配模式。</li>
+<li><code>-n</code>：显示匹配模式的行及其行号。</li>
+<li><code>-r</code>：递归地搜索指定目录及其子目录下的文件。</li>
+<li><code>-c</code>：统计匹配模式的行数。</li>
+<li><code>-v</code>：显示不匹配模式的行。</li>
+</ul>
+<p>正则表达式相关选项：</p>
+<ul>
+<li><code>-E</code>：启用扩展正则表达式。</li>
+<li><code>-F</code>：将模式视为固定字符串而不是正则表达式。</li>
+</ul>
+<p>其他常用选项：</p>
+<ul>
+<li><code>-w</code>：匹配整个单词而不是部分匹配。</li>
+<li><code>-l</code>：只显示匹配模式的文件名。</li>
+<li><code>-q</code>：静默模式，不显示任何输出。</li>
+</ul>
+</blockquote>
+<h2 id="104-查找文件find命令"><a class="markdownIt-Anchor" href="#104-查找文件find命令"></a> 10.4 查找文件：find命令</h2>
+<blockquote>
+<p>命令：find</p>
+<p>命令功能：按照指定的条件在指定的路径下递归地搜索文件，并根据条件对搜索结果进行操作</p>
+<p>命令格式：find [路径] [表达式]</p>
+<ul>
+<li><code>路径</code>：指定要搜索的起始路径。如果未指定路径，则默认从当前目录开始搜索。</li>
+<li><code>表达式</code>：指定搜索的条件和操作。表达式可以包括各种选项和用于匹配文件属性的测试条件，以及对搜索结果执行的操作。</li>
+</ul>
+<p>常用选项：</p>
+<ul>
+<li><code>-name pattern</code>：按文件名模式匹配文件。可以使用通配符（如 <code>*</code> 和 <code>?</code>）进行模式匹配。</li>
+<li><code>-type type</code>：按文件类型查找。常见的类型包括普通文件 (<code>f</code>)、目录 (<code>d</code>)、符号链接 (<code>l</code>) 等。</li>
+<li><code>-size n</code>：按文件大小查找，<code>n</code> 表示文件大小。可以使用 <code>c</code> 表示字节，<code>k</code> 表示千字节，<code>M</code> 表示兆字节，<code>G</code> 表示吉字节。</li>
+<li><code>-mtime n</code>：按文件的修改时间查找，<code>n</code> 表示天数。<code>-n</code> 表示在过去 <code>n</code> 天内修改过的文件，<code>+n</code> 表示在 <code>n</code> 天之前修改过的文件。</li>
+<li><code>-ctime n</code>：按文件的创建时间查找，<code>n</code> 表示天数。</li>
+<li><code>-atime n</code>：按文件的访问时间查找，<code>n</code> 表示天数。</li>
+</ul>
+</blockquote>
+<h1 id="11-链接命令ln"><a class="markdownIt-Anchor" href="#11-链接命令ln"></a> 11 链接命令:ln</h1>
+<p>链接：链接是文件系统中的一个概念，它允许一个文件或目录引用另一个文件或目录，使得多个文件名指向同一个实际的文件或目录。</p>
+<blockquote>
+<p>命令：ln</p>
+<p>英文：link</p>
+<p>命令功能：用于在Linux系统中创建硬链接或软链接</p>
+<blockquote>
+<p>硬链接：硬链接与原始文件有相同的 inode 号，它们共享文件的内容和属性。因此，对于用户来说，硬链接看起来就像是原始文件的另一个名称。删除原始文件不会影响硬链接，只有当所有指向该文件的硬链接和原始文件都被删除时，文件的内容才会被释放。</p>
+<p>软链接：是一个特殊类型的文件，它包含了指向另一个文件或目录的路径。软链接实际上是一个指向目标文件或目录的快捷方式，类似于 Windows 系统中的快捷方式。删除原始文件或目录不会影响符号链接，但如果删除了符号链接所指向的目标文件或目录，则符号链接将变为坏链接。</p>
+</blockquote>
+<p>语法：ln [选项] &lt;目标文件&gt; [链接文件]</p>
+<p>常用选项：</p>
+<ul>
+<li><code>-s</code>：创建符号链接。如果不指定该选项，则创建硬链接。</li>
+</ul>
+</blockquote>
+<h1 id="12-用户和权限管理"><a class="markdownIt-Anchor" href="#12-用户和权限管理"></a> 12 用户和权限管理</h1>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202403120930588.png" alt="image-20240312093050526" /></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202403120931674.png" alt="image-20240312093130620" /></p>
+<blockquote>
+<p>12.1 普通用户和root用户</p>
+<p>12.2 获取root权限：sudo 命令</p>
+<p>12.3 用户切换：su 和exit命令</p>
+<p>12.4 文件权限介绍</p>
+<p>12.5 权限修改：chmod命令</p>
+</blockquote>
+<h2 id="121-普通用户和root用户"><a class="markdownIt-Anchor" href="#121-普通用户和root用户"></a> 12.1 普通用户和root用户</h2>
+<p>普通用户:指在Linux 系统中具有==有限权限==和==资源访问权限==的用户。普通用户在登录时会获得一个独立的用户账号，该账号有一个用户名和密码。普通用户可以在自己的主目录中创建和管理文件，运行属于自己的进程，但无法修改系统级别的配置文件和进行敏感操作，如安装软件、更改系统设置等。普通用户通常使用命令行终端或图形界面登录，并使用自己的用户名和密码进行身份验证。<br />
+root用户: 指Linux 系统中具有完全访问权限和控制权的特殊用户。root 用户(也称系统管理员用户 )具有对系统的完全控制权，可以执行系统级别的操作，如修改配置文件、安装软件包、创建和删除用户账号等。</p>
+<h2 id="122-获取root权限sudo-命令"><a class="markdownIt-Anchor" href="#122-获取root权限sudo-命令"></a> 12.2 获取root权限：sudo 命令</h2>
+<blockquote>
+<p>命令:sudo</p>
+<p>英文：superuser do</p>
+<p>功能命令：允许普通用户以临时的方式获取 root 权限执行特权操作</p>
+<p>命令格式：sudo command</p>
+</blockquote>
+<h2 id="123-用户切换su-和exit命令"><a class="markdownIt-Anchor" href="#123-用户切换su-和exit命令"></a> 12.3 用户切换：su 和exit命令</h2>
+<p>由于我们之前并没有使用过root用户，第一次使用root用户需要输入以下命令设置一下root用户密码</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo passwd root</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>命令:su</p>
+<p>英文：switch user</p>
+<p>功能命令：让当前用户切换到其他用户</p>
+<p>命令格式：su [选项] [目标用户]</p>
+<p>常用选项：<br />
+<code>-</code>：以目标用户的身份登录，加载目标用户的环境变量和配置文件。</p>
+</blockquote>
+<blockquote>
+<p>命令：exit</p>
+<p>功能命令：可以退出当前用户并返回到上一个用户或登录界面</p>
+</blockquote>
+<h2 id="124-文件权限介绍"><a class="markdownIt-Anchor" href="#124-文件权限介绍"></a> 12.4 文件权限介绍</h2>
+<p><img src="C:%5CUsers%5CAdministrator%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20240312171303208.png" alt="image-20240312171303208" /></p>
+<p><strong>文件权限组：</strong></p>
+<ul>
+<li>所有者权限：所有者权限适用于文件或目录的所有者。文件的所有者通常是创建该文件的用户。所有者权限控制着对文件的读、写和执行操作。</li>
+<li>用户组权限：组权限适用于文件或目录所属的用户组。用户组是一组用户的集合，可以在创建文件时指定。组权限控制着属于同一用户组的成员对文件的读、写和执行操作。</li>
+<li>其他用户权限：其他用户权限适用于除了文件所有者和所属用户组之外的其他用户。其他用户权限控制着非所有者和非所属用户组成员对文件的读、写和执行操作。</li>
+</ul>
+<p><strong>文件权限状态：</strong></p>
+<ul>
+<li>读权限（r）：允许用户查看文件内容、目录中的文件列表和文件属性。</li>
+<li>写权限（w）：允许用户修改文件内容、创建、重命名或删除文件。</li>
+<li>执行权限（x）：对于文件，允许用户执行文件（如果是脚本或可执行程序）。对于目录，允许用户进入目录并访问其中的文件。</li>
+</ul>
+<h2 id="125-权限修改chmod命令"><a class="markdownIt-Anchor" href="#125-权限修改chmod命令"></a> 12.5 权限修改：chmod命令</h2>
+<blockquote>
+<p>命令:chmod</p>
+<p>英文：change mode</p>
+<p>功能命令：用于更改文件或目录的读取、写入和执行权限</p>
+<p>命令格式：chmod [选项] 要设置的权限 文件或目录名</p>
+<p>​	==权限有两种表示方法，分别为符号表示法和数字表示法==</p>
+<p>常用选项：</p>
+<p>​	-R：递归地修改目录及其子目录中的文件和目录的权限</p>
+</blockquote>
+<p><strong>符号表示法：</strong><br />
+<code>chmod</code> 命令可以使用符号表示法来指定要设置的权限，符号表示法由三部分组成分别为要操作的权限组、操作符以及要指定的权限，具体如下所示：</p>
+<p><strong>权限组：</strong></p>
+<ul>
+<li><code>u</code>：表示文件所有者。</li>
+<li><code>g</code>：表示文件所属用户组。</li>
+<li><code>o</code>：表示其他用户。</li>
+<li><code>a</code>：表示所有用户，相当于 <code>u + g + o</code>。</li>
+</ul>
+<p><strong>操作符：</strong></p>
+<ul>
+<li><code>+</code>：添加指定权限。</li>
+<li><code>-</code>：移除指定权限。</li>
+<li><code>=</code>：设置指定权限，覆盖所有其他权限。</li>
+</ul>
+<p><strong>指定权限：</strong></p>
+<ul>
+<li><code>r</code>：读权限</li>
+<li><code>w</code>：写权限</li>
+<li><code>x</code>：执行权限</li>
+</ul>
+<p><strong>数字表示法：</strong><br />
+每个权限用一个数字表示，读权限为 4，写权限为 2，执行权限为 1。将所需权限的数字相加，即可表示权限组的数字。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">权限项</th>
+<th style="text-align:left">字符表示</th>
+<th style="text-align:left">数字表示</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">读权限</td>
+<td style="text-align:left">r</td>
+<td style="text-align:left">4</td>
+</tr>
+<tr>
+<td style="text-align:left">写权限</td>
+<td style="text-align:left">w</td>
+<td style="text-align:left">2</td>
+</tr>
+<tr>
+<td style="text-align:left">执行权限</td>
+<td style="text-align:left">x</td>
+<td style="text-align:left">1</td>
+</tr>
+<tr>
+<td style="text-align:left">没有权限</td>
+<td style="text-align:left">-</td>
+<td style="text-align:left">0</td>
+</tr>
+</tbody>
+</table>
+<h1 id="13-压缩和解压缩"><a class="markdownIt-Anchor" href="#13-压缩和解压缩"></a> 13 压缩和解压缩</h1>
+<blockquote>
+<p>13.1 zip unzip命令</p>
+<p>13.2 tar命令(tar.gz  tar.bz2 tar.xz )</p>
+</blockquote>
+<h2 id="131-zip-unzip命令"><a class="markdownIt-Anchor" href="#131-zip-unzip命令"></a> 13.1 zip unzip命令</h2>
+<blockquote>
+<p>命令：zip</p>
+<p>功能命令：创建 ZIP 压缩文件</p>
+<p>命令格式：zip [选项] 压缩文件 文件…</p>
+<p>常用选项：<code>-r</code>：递归地将目录和其内容添加到压缩文件中。</p>
+</blockquote>
+<blockquote>
+<p>命令：unzip</p>
+<p>功能命令：用于从 ZIP 压缩文件中提取文件</p>
+<p>命令格式：unzip [选项] 压缩文件</p>
+<p>常用选项：<code>-d 目标目录</code>：指定要解压到的目标目录。</p>
+</blockquote>
+<h2 id="132-tar命令"><a class="markdownIt-Anchor" href="#132-tar命令"></a> 13.2 tar命令</h2>
+<p>Linux中的常用压缩格式：tar、tar.gz、 tar.bz2、tar.xz</p>
+<ol>
+<li>tar：是一种在Linux系统中广泛使用的一种归档格式，是将多个文件或目录组合在一起，形成一个单独的文件，并不会对文件进行压缩。</li>
+<li>gzip：是Linux系统下的一种文件压缩方式，它可以将数据压缩成只有原来大小的一半，通常伴随tar打包使用。</li>
+<li>bzip2：也是一种常用的文件压缩格式，相比gzip，它的压缩率更高，通常也伴随tar打包使用。</li>
+<li>xz：也是一种常用的文件压缩格式，它的压缩率相比bzip2更高，但解压时间会相对长一些。</li>
+</ol>
+<blockquote>
+<p>命令：tar</p>
+<p>功能命令：可以将多个文件和目录打包成一个单独的文件，也可以从归档文件中提取文件和目录</p>
+<p>命令格式：tar [选项] [归档文件] [文件/目录列表]</p>
+<p>常用选项：</p>
+<p>(1):通用选项</p>
+<p>​	<code>-v</code>：显示详细的操作过程。</p>
+<p>​	<code>-f</code>：指定归档文件的名称。</p>
+<p>(2):压缩选项</p>
+<p>​	<code>-c</code>：创建归档文件。</p>
+<p>​	<code>-z</code>：使用 gzip 压缩归档文件。</p>
+<p>​	<code>-j</code>：使用 bzip2 压缩归档文件。</p>
+<p>​	<code>-J</code>：使用 xz 压缩归档文件。</p>
+<p>(3):解压选项</p>
+<p>​	<code>-x</code>：从归档文件中提取文件。</p>
+<p>​	<code>-C</code>：切换到指定的目录后执行操作。</p>
+</blockquote>
+<h1 id="14-磁盘管理和挂载"><a class="markdownIt-Anchor" href="#14-磁盘管理和挂载"></a> 14 磁盘管理和挂载</h1>
+<blockquote>
+<p>14.1 磁盘空间使用情况：df命令(==整个Linux系统==)</p>
+<p>14.2 磁盘使用情况：du命令(==某个文件或文件夹==)</p>
+<p>14.3 磁盘分区：fdisk命令</p>
+<p>14.4 磁盘挂载和移除：mount 和umount 命令</p>
+</blockquote>
+<h2 id="141-磁盘空间使用情况df命令"><a class="markdownIt-Anchor" href="#141-磁盘空间使用情况df命令"></a> 14.1 磁盘空间使用情况：df命令</h2>
+<blockquote>
+<p>命令：df</p>
+<p>英文：disk free</p>
+<p>命令功能：用于显示文件系统的磁盘空间使用情况。它可以列出磁盘的大小、已用空间、可用空间和使用百分比等信息。</p>
+<p>命令格式：df [选项] [文件或目录]</p>
+<p>常用的选项包括：</p>
+<ul>
+<li><code>-h</code>：以人类可读的格式显示磁盘空间，例如以KB、MB、GB为单位，更易于阅读。</li>
+<li><code>-T</code>：显示文件系统类型。</li>
+</ul>
+<p>如果不指定文件或目录参数，<code>df</code>命令将显示系统中所有已挂载文件系统的磁盘空间使用情况。</p>
+</blockquote>
+<h2 id="142-磁盘使用情况du命令"><a class="markdownIt-Anchor" href="#142-磁盘使用情况du命令"></a> 14.2 磁盘使用情况：du命令</h2>
+<blockquote>
+<p>命令：du</p>
+<p>英文：disk usage</p>
+<p>命令功能：用于显示目录或文件的磁盘使用情况。它可以递归地计算目录及其子目录的大小，并提供各个目录和文件的磁盘空间使用情况。</p>
+<p>命令格式：du [选项] [目录或文件]</p>
+<p>常用的选项包括：</p>
+<ul>
+<li><code>-h</code>：以人类可读的格式显示磁盘使用情况，例如以K、M、G为单位，更易于阅读。</li>
+<li><code>-s</code>：仅显示总计信息，而不显示每个目录和文件的详细情况。</li>
+</ul>
+<p>如果不指定目录或文件参数，默认情况下 <code>du</code> 命令将显示当前目录的磁盘使用情况。</p>
+</blockquote>
+<h2 id="143-磁盘分区fdisk命令"><a class="markdownIt-Anchor" href="#143-磁盘分区fdisk命令"></a> 14.3 磁盘分区：fdisk命令</h2>
+<blockquote>
+<p>命令：fdisk</p>
+<p>命令功能：用于分区磁盘的命令行工具，可用于创建、修改和删除磁盘分区。</p>
+<p>命令格式：fdisk [选项] &lt;设备&gt;</p>
+<p>常用的选项包括：</p>
+<ul>
+<li><code>-l</code>：列出指定设备的分区表信息，而不进行修改。可以使用<code>fdisk -l</code>来查看系统中所有磁盘和分区的信息。</li>
+<li><code>-n</code>：创建一个新的分区。使用该选项可以进入分区创建模式，按照提示逐步创建新的分区。</li>
+<li><code>-d</code>：删除指定的分区。根据提示选择要删除的分区序号，然后确认删除操作。</li>
+<li><code>-p</code>：打印指定设备的分区表信息，包括分区的起始扇区、大小、文件系统类型等。</li>
+</ul>
+</blockquote>
+<h2 id="144-磁盘挂载和移除mount-和umount-命令"><a class="markdownIt-Anchor" href="#144-磁盘挂载和移除mount-和umount-命令"></a> 14.4 磁盘挂载和移除：mount 和umount 命令</h2>
+<blockquote>
+<p>命令：mount</p>
+<p>命令功能：用于将磁盘或文件系统挂载到指定的挂载点（目录）上，使得磁盘中的数据可在该挂载点处访问</p>
+<p>命令格式：mount [选项] &lt;设备&gt; &lt;挂载点&gt;</p>
+<p>常用的选项包括：</p>
+<ul>
+<li><code>-t &lt;文件系统类型&gt;</code>：指定要挂载的文件系统类型，如ext4、ntfs、vfat等。如果未指定该选项，则<code>mount</code>命令会尝试自动检测文件系统类型。</li>
+<li><code>-o &lt;选项列表&gt;</code>：指定文件系统的挂载选项，如读写权限、访问控制等。选项列表以逗号分隔，常见的选项包括<code>ro</code>（只读）、<code>rw</code>（读写）、<code>noexec</code>（禁止执行程序）等。具体的选项取决于文件系统类型和操作系统。</li>
+</ul>
+</blockquote>
+<blockquote>
+<p>命令：umount</p>
+<p>命令功能：用于卸载（解除挂载）已挂载的磁盘和文件系统</p>
+<p>命令格式：umount [选项] &lt;挂载点&gt;</p>
+</blockquote>
+<h1 id="15-软件包管理apt命令"><a class="markdownIt-Anchor" href="#15-软件包管理apt命令"></a> 15 软件包管理：apt命令</h1>
+<blockquote>
+<p>​	命令：apt</p>
+<p>英文：Advanced Package Tool</p>
+<p>命令功能：用于管理软件包，包括安装、升级、删除和搜索软件包，以及处理软件包之间的依赖关系</p>
+<p>命令格式：apt &lt;命令&gt;   [选项] [软件包]</p>
+<p>常用的命令包括：</p>
+<ul>
+<li>
+<p><code>update</code>：更新本地软件包列表。它会从软件源中获取最新的软件包信息，以便后续的软件包管理操作。</p>
+</li>
+<li>
+<p><code>upgrade</code>：升级系统中所有已安装的软件包到最新版本。</p>
+</li>
+<li>
+<p><code>install</code>：安装一个或多个软件包。可以同时安装多个软件包，软件包的名称由空格分隔。</p>
+</li>
+<li>
+<p><code>remove</code>：移除一个或多个已安装的软件包。与<code>install</code>命令类似，可以同时移除多个软件包。</p>
+</li>
+<li>
+<p><code>autoremove</code>：自动移除不再被其他软件包所依赖的已安装软件包。</p>
+</li>
+</ul>
+</blockquote>
+<blockquote>
+<p>15.1 更换软件源</p>
+<p>15.2 软件安装：apt install</p>
+<p>15.3 软件卸载：apt remove</p>
+</blockquote>
+<h2 id="151-更换软件源"><a class="markdownIt-Anchor" href="#151-更换软件源"></a> 15.1 更换软件源</h2>
+<p>ubuntu的官方源可能因为地理位置或网络环境的原因，导致下载速度较慢，从而影响软件包的更新和安装速度</p>
+<p>阿里云ubuntu源：<a target="_blank" rel="noopener" href="https://developer.aliyun.com/mirror/ubuntu?spm=a2c6h.13651102.0.0.3e221b11TblmXK">https://developer.aliyun.com/mirror/ubuntu?spm=a2c6h.13651102.0.0.3e221b11TblmXK</a></p>
+<p>清华大学ubuntu源：<a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/help/ubuntu/">https://mirrors.tuna.tsinghua.edu.cn/help/ubuntu/</a></p>
+<p>华为云ubuntu源：<a target="_blank" rel="noopener" href="https://mirrors.huaweicloud.com/mirrorDetail/5ea14ecab05943f36fb75ee7?mirrorName=ubuntu&amp;catalog=os">https://mirrors.huaweicloud.com/mirrorDetail/5ea14ecab05943f36fb75ee7?mirrorName=ubuntu&amp;catalog=os</a></p>
+<h2 id="152-软件安装apt-install"><a class="markdownIt-Anchor" href="#152-软件安装apt-install"></a> 15.2 软件安装：apt install</h2>
+<blockquote>
+<p>命令：apt install</p>
+<p>命令功能：从软件仓库中下载并安装指定的软件包及其依赖项</p>
+<p>命令结构：apt install [选项] 软件包</p>
+<p>常用选项：</p>
+<ul>
+<li><code>-y</code>或<code>--yes</code>：自动回答&quot;是&quot;，省去确认安装的提示，适合自动化脚本。</li>
+</ul>
+</blockquote>
+<h2 id="153-软件卸载apt-remove"><a class="markdownIt-Anchor" href="#153-软件卸载apt-remove"></a> 15.3 软件卸载：apt remove</h2>
+<blockquote>
+<p>命令：apt remove</p>
+<p>命令功能：从系统中移除指定的软件包及其相关的配置文件</p>
+<p>命令结构：apt remove [选项] 软件包</p>
+<p>常用选项：</p>
+<ul>
+<li><code>-y</code>或<code>--yes</code>：自动回答&quot;是&quot;，省去确认安装的提示，适合自动化脚本。</li>
+</ul>
+</blockquote>
+<h1 id="16-认识shell编程"><a class="markdownIt-Anchor" href="#16-认识shell编程"></a> 16 认识shell编程</h1>
+<blockquote>
+<p>16,1 什么是shell？</p>
+<p>16.2 更改默认的 Shell</p>
+<p>16.3 Shell内建命令</p>
+</blockquote>
+<h2 id="161-什么是shell"><a class="markdownIt-Anchor" href="#161-什么是shell"></a> 16,1 什么是shell？</h2>
+<p>Shell（外壳）是Linux操作系统的一种命令行解释器，它提供了用户与操作系统内核进行交互的接口。</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202403271314211.png" alt="image-20240327131440158" /></p>
+<p>Shell 两种常见的工作模式：交互式模式和批处理模式。</p>
+<p>交互式模式（Interactive Mode）：用户可以逐行输入命令，并立即查看和处理命令的输出结果。Shell 在接收到用户输入后会立即解释和执行相应的命令，并将结果输出到终端。</p>
+<p>批处理模式（Batch Mode）：Shell 从一个脚本文件中逐行读取并执行命令，而不需要用户的实时输入和交互。用户事先编写好一系列的命令，并将它们保存在一个脚本文件中。然后，用户可以通过执行脚本文件来自动运行其中的命令。批处理模式适用于用户需要自动化执行一系列命令、进行批量处理或重复性或逻辑判断任务的情况。</p>
+<h2 id="162-更改默认的-shell"><a class="markdownIt-Anchor" href="#162-更改默认的-shell"></a> 16.2 更改默认的 Shell</h2>
+<p>可以通过以下命令打印当前系统所使用的shell解析器：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo $SHELL</span><br></pre></td></tr></table></figure>
+<p>查看系统中全部的shell解析器</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /etc/shells</span><br></pre></td></tr></table></figure>
+<p>可以通过以下命令安装zsh 解析器：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install zsh</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>命令：chsh</p>
+<p>英文：Change Shell</p>
+<p>命令功能：更改用户的默认登录 Shell（解析器）</p>
+<p>命令格式：chsh -s [shell路径]</p>
+<p><strong>常用选项：</strong></p>
+<ul>
+<li><code>-s, --shell SHELL</code>: 指定要更改为的新 Shell。可以提供 Shell 的完整路径或简单的 Shell 名称。例如，<code>-s /bin/zsh</code> 或 <code>-s zsh</code>。</li>
+</ul>
+</blockquote>
+<h2 id="163-shell内置命令"><a class="markdownIt-Anchor" href="#163-shell内置命令"></a> 16.3 Shell内置命令</h2>
+<p>在Shell中，存在两种类型的命令：内置命令（Built-in Commands）和外部命令（External Commands）。</p>
+<p>内置命令：直接嵌入在 Shell 解释器中的命令。这意味着 Shell 解释器本身提供了这些命令的实现，无需调用外部程序。</p>
+<p>外部命令：由独立的可执行程序提供的命令。外部命令可以是系统自带的工具，也可以是用户自己安装的软件。在执行外部命令时，Shell 会搜索系统的可执行文件路径，以找到并执行相应的命令。用户可以通过指定命令的完整路径或将可执行文件所在的目录添加到 PATH 环境变量中来执行外部命令。</p>
+<p>区分内置命令和外部命令的一个简单方法是使用 <code>type</code> 命令。例如，<code>type cd</code> 将显示 “cd is a shell builtin”，而 <code>type ls</code> 将显示 “ls is /bin/ls”，表明 <code>cd</code> 是一个内置命令，而 <code>ls</code> 是一个外部命令。</p>
+<h1 id="17-shell脚本的执行"><a class="markdownIt-Anchor" href="#17-shell脚本的执行"></a> 17 Shell脚本的执行</h1>
+<blockquote>
+<p>17.1 Shell脚本文件编写规范</p>
+<p>17.2 运行脚本的四种方式</p>
+</blockquote>
+<h2 id="171-shell脚本文件编写规范"><a class="markdownIt-Anchor" href="#171-shell脚本文件编写规范"></a> 17.1 Shell脚本文件编写规范</h2>
+<blockquote>
+<p>（1）脚本文件命名规范</p>
+<p>​	shell脚本文件就是一个文本文件, 后缀名建议使用 <code>.sh</code> 结尾，例如01_first.sh</p>
+<p>（2）首行格式规范</p>
+<p>​	在脚本文件的第一行通常需要添加脚本文件的声明，指定使用哪种 Shell 解释器执行该脚本。例如，使用 Bash 解释器的声明为：<code>#!/bin/bash</code>。这个声明称为 shebang，用于告诉系统应该使用指定的解释器来执行脚本。</p>
+<p>（3）注释格式</p>
+<p>​	注释用于提供对脚本的说明和解释，不会被解释器执行。在 Shell 脚本中，注释可以以 <code>#</code> 开头。</p>
+</blockquote>
+<h2 id="172-运行脚本的四种方式"><a class="markdownIt-Anchor" href="#172-运行脚本的四种方式"></a> 17.2 运行脚本的四种方式</h2>
+<blockquote>
+<p>（1）添加可执行权限后，通过绝对路径或者相对路径执行脚本</p>
+<p>（2）使用解释器执行脚本</p>
+<p>（3）使用source 命令执行脚本</p>
+<p>（4）使用. 命令执行脚本</p>
+</blockquote>
+<p><img src="C:%5CUsers%5CAdministrator%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20240331165140805.png" alt="image-20240331165140805" /></p>
+<h1 id="18-shell变量"><a class="markdownIt-Anchor" href="#18-shell变量"></a> 18 Shell变量</h1>
+<blockquote>
+<p>18.1 变量的组成和使用</p>
+<p>18.2 变量的分类（本地变量和环境变量和特殊变量）</p>
+<p>18.3 命令代换（==将shell命令的结果作为字符串嵌入到变量中==）</p>
+</blockquote>
+<h2 id="181-变量的组成和使用"><a class="markdownIt-Anchor" href="#181-变量的组成和使用"></a> 18.1 变量的组成和使用</h2>
+<blockquote>
+<p>变量：用于存储和表示数据的一种命名实体，包含各种类型的数据，如字符串、数字、命令输出等</p>
+<p>命名规范：</p>
+<ul>
+<li>变量必须以字母或下划线开头，并由字母、数字和下划线组成</li>
+<li>变量名对大小写敏感。</li>
+<li>建议使用大写字母来表示常量或全局变量，使用小写字母来表示局部变量。</li>
+</ul>
+<p>变量的赋值：使用等号（=）将值赋给变量。需要注意的是，等号两边不能有空格，否则空格会被解释成命令和参数的一部分。例如：<code>var=Hello, World!</code></p>
+<p>变量的使用：在Shell脚本中，可以通过在变量名前加<code>$</code>符号来引用变量的值。例如：<code>echo $var</code>。</p>
+</blockquote>
+<blockquote>
+<p>界定符：<br />
+（1）单引号:单引号用于创建保持字符串的字面值的字符串。在单引号字符串中，所有字符都被视为普通字符，不进行变量扩展、命令替换或特殊字符转义。</p>
+<p>(2）双引号:双引号用于创建字符串，并支持变量扩展和特殊字符转义。</p>
+</blockquote>
+<h2 id="182-变量的分类"><a class="markdownIt-Anchor" href="#182-变量的分类"></a> 18.2 变量的分类</h2>
+<blockquote>
+<p>（1）本地变量：在Shell脚本中定义和使用的变量</p>
+<p>​		全局变量:在Shell的解析环境中存在的变量，不需要任何修饰符进行声明。无论是在函数内部还是函数外部，全局变量的作用范围都是整个Shell进程。全局变量的生命周期从声明语句开始，一直持续到bash进程结束。</p>
+<p>​		局部变量:使用<code>local</code>关键字进行修饰，只能在函数内部声明。局部变量的作用范围仅限于声明它的函数内部，在函数结束后，局部变量将不再可用。局部变量的生命周期从声明语句开始，一直持续到函数执行结束。</p>
+<p>（2）环境变量：是操作系统自带的变量，每个bash进程都有自己的环境变量集合。当启动一个bash子进程时，子进程会从父进程继承一份相同的环境变量副本。这意味着子进程拥有与父进程相同的初始环境变量。</p>
+<p>使用<code>env</code>打印当前bash进程的环境变量。</p>
+<p>使用<code>export</code>命令将一个本地变量导出为环境变量</p>
+<p>（3）特殊变量:是环境变量中的一组预定义的特殊变量。特殊变量提供了对脚本执行环境、命令行参数、退出状态等信息的访问。</p>
+<ol>
+<li><code>$0</code>：表示当前脚本的名称。在脚本中使用<code>$0</code>可以获取脚本的名称，包括路径。</li>
+<li><code>$1</code>、<code>$2</code>、<code>$3</code>…：表示脚本的位置参数或命令行参数。当脚本被调用时，可以通过<code>$1</code>、<code>$2</code>等来获取传递给脚本的参数值。<code>$1</code>表示第一个参数，<code>$2</code>表示第二个参数，以此类推。</li>
+<li><code>$#</code>：表示命令行参数的个数。<code>$#</code>用于获取传递给脚本的参数的总数。</li>
+<li><code>$*</code>：表示所有命令行参数的列表。<code>$*</code>将所有命令行参数作为单个字符串返回。</li>
+<li><code>$@</code>：表示所有命令行参数的列表。与<code>$*</code>不同，<code>$@</code>将命令行参数作为多个独立的字符串返回。</li>
+<li><code>$?</code>：表示上一个命令的退出状态。当命令执行完毕后，可以使用<code>$?</code>来获取其退出状态。通常，如果命令成功执行，则<code>$?</code>的值为0，否则为非零值。</li>
+</ol>
+</blockquote>
+<h2 id="183-命令代换"><a class="markdownIt-Anchor" href="#183-命令代换"></a> 18.3 命令代换</h2>
+<blockquote>
+<p>命令代换:将命令的输出作为字符串嵌入到变量中</p>
+<p>可以使用反引号 ` 或美元符号加圆括号 $() 来表示命令代换。</p>
+</blockquote>
+<h1 id="19-条件判断"><a class="markdownIt-Anchor" href="#19-条件判断"></a> 19 条件判断</h1>
+<blockquote>
+<p>19.1 条件测试(==[  ]、 test==)</p>
+<p>19.2 if分支结构</p>
+<p>19.3 case 分支结构</p>
+</blockquote>
+<h2 id="191-条件测试"><a class="markdownIt-Anchor" href="#191-条件测试"></a> 19.1 条件测试</h2>
+<p>方括号的基本语法为：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[ 条件表达式 ]</span><br></pre></td></tr></table></figure>
+<p>test的基本语法为：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">test 条件表达式</span><br></pre></td></tr></table></figure>
+<p>​	条件表达式：用于进行条件判断的关键部分，可以是各种条件测试的组合，主要为字符串的比较、整数的比较、文件属性和权限判断。</p>
+<p><strong>字符串的比较</strong></p>
+<blockquote>
+<p><code>=</code>：判断两个字符串是否相等。</p>
+<p><code>!=</code>：判断两个字符串是否不相等。</p>
+<p><code>-z</code>：判断字符串是否为空。</p>
+<p><code>-n</code>：判断字符串长度是否非零。</p>
+</blockquote>
+<p><strong>整数的比较</strong></p>
+<blockquote>
+<p><code>-eq</code>：英文：Equal，判断两个整数是否相等。</p>
+<p><code>-ne</code>：英文：Not equal ，判断两个整数是否不相等。</p>
+<p><code>-gt</code>：英文：Greater than，判断第一个整数是否大于第二个整数。</p>
+<p><code>-lt</code>：英文：Less than，判断第一个整数是否小于第二个整数。</p>
+<p><code>-ge</code>：英文：Greater than or equal，判断第一个整数是否大于等于第二个整数。</p>
+<p><code>-le</code>：英文：Less than or equal，判断第一个整数是否小于等于第二个整数。</p>
+</blockquote>
+<p><strong>文件属性和权限判断</strong></p>
+<blockquote>
+<p><code>-e</code>：判断文件是否存在。</p>
+<p><code>-f</code>：判断文件是否为普通文件。</p>
+<p><code>-d</code>：判断文件是否为目录。</p>
+<p><code>-r</code>：判断文件是否可读。</p>
+<p><code>-w</code>：判断文件是否可写。</p>
+<p><code>-x</code>：判断文件是否可执行。</p>
+</blockquote>
+<h2 id="192-if分支结构"><a class="markdownIt-Anchor" href="#192-if分支结构"></a> 19.2 if分支结构</h2>
+<blockquote>
+<p>​	分支结构名称：<code>if</code> 分支结构</p>
+<p>​	适用范围：用于根据条件的真假执行不同的代码块，处理复杂的条件逻辑和数值/字符串比较。</p>
+</blockquote>
+<p>基本语法1：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">if condition</span><br><span class="line">then</span><br><span class="line">    # 代码块1，条件为真时执行的代码</span><br><span class="line">else</span><br><span class="line">    # 代码块2，条件为假时执行的代码（可选）</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+<p>基本语法2：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">if condition1</span><br><span class="line">then</span><br><span class="line">    # 代码块1，条件1为真时执行的代码</span><br><span class="line">elif condition2</span><br><span class="line">then</span><br><span class="line">    # 代码块2，条件2为真时执行的代码</span><br><span class="line">else</span><br><span class="line">    # 代码块3，以上条件都为假时执行的代码（可选）</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+<p>​</p>
+<p>示例：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">编写一个成绩判断的脚本，将脚本的第一个参数作为要判断的分数</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">如果分数大于等于90则为优秀</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">如果分数大于等于80则为良好</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">如果分数大于等于60则为及格</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">如果分数小于60则为不及格</span></span><br><span class="line">score=$1</span><br><span class="line">if [ $score -ge 90 ]</span><br><span class="line">then</span><br><span class="line">        echo 优秀</span><br><span class="line">elif [ $score -ge 80 ]</span><br><span class="line">then</span><br><span class="line">        echo 良好</span><br><span class="line">elif [ $score -ge 60 ]</span><br><span class="line">then    </span><br><span class="line">        echo 及格</span><br><span class="line">else </span><br><span class="line">        echo 不及格</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+<h2 id="193-case-分支结构"><a class="markdownIt-Anchor" href="#193-case-分支结构"></a> 19.3 case 分支结构</h2>
+<blockquote>
+<p>​	分支结构名称：<code>case</code> 分支结构</p>
+<p>​	使用范围：适用于根据模式匹配执行不同的操作，可以根据不同的条件执行不同的代码块。</p>
+</blockquote>
+<p>​	基本语法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">case expression in</span><br><span class="line">    模式1)</span><br><span class="line">        # 匹配 模式1 时执行的代码块</span><br><span class="line">        ;;</span><br><span class="line">    模式2)</span><br><span class="line">        # 匹配 模式2 时执行的代码块</span><br><span class="line">        ;;</span><br><span class="line">    模式3)</span><br><span class="line">        # 匹配 模式3 时执行的代码块</span><br><span class="line">        ;;</span><br><span class="line">    *)</span><br><span class="line">        # 默认情况下执行的代码块</span><br><span class="line">        ;;</span><br><span class="line">esac</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">编写一个选择水果的脚本，将脚本的第一个参数作为要选择的水果</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">有三种水果可选，分别为苹果、香蕉和橘子</span></span><br><span class="line"></span><br><span class="line">fruit=$1</span><br><span class="line"></span><br><span class="line">case $fruit in</span><br><span class="line">    apple)</span><br><span class="line">        echo 选择的水果为苹果</span><br><span class="line">        ;;</span><br><span class="line">    banana)</span><br><span class="line">        echo 选择的水果为香蕉</span><br><span class="line">        ;;</span><br><span class="line">    orange)</span><br><span class="line">        echo 选择的水果为橘子</span><br><span class="line">        ;;</span><br><span class="line">    *)</span><br><span class="line">        echo 选择了其他的水果</span><br><span class="line">        ;;</span><br><span class="line">esac</span><br></pre></td></tr></table></figure>
+<h1 id="20-循环结构"><a class="markdownIt-Anchor" href="#20-循环结构"></a> 20 循环结构</h1>
+<blockquote>
+<p>20.1 for循环(==用于遍历列表或遍历范围，并执行一系列的操作==)</p>
+<p>20.2 while 循环（==用于重复执行一系列操作，直到给定的条件不再满足为止==）</p>
+</blockquote>
+<h2 id="201-for循环"><a class="markdownIt-Anchor" href="#201-for循环"></a> 20.1 for循环</h2>
+<blockquote>
+<p>循环结构名称：for循环</p>
+<p>适用范围：是一种常用的控制流程结构，用于重复执行相同或类似的任务。</p>
+<p>语法形式：遍历列表、遍历范围和遍历命令输出</p>
+</blockquote>
+<p><strong>（1）遍历列表</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for 变量 in 值列表</span><br><span class="line">do</span><br><span class="line">    # 执行循环体操作</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<p><strong>（2）遍历范围</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for 变量 in &#123;start..end&#125;</span><br><span class="line">do</span><br><span class="line">    # 执行循环体操作</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<p><strong>（3）遍历命令输出</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for 变量 in $(command)</span><br><span class="line">do</span><br><span class="line">    # 执行循环体操作</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<h2 id="202-while-循环"><a class="markdownIt-Anchor" href="#202-while-循环"></a> 20.2 while 循环</h2>
+<blockquote>
+<p>循环结构名称：while循环</p>
+<p>适用范围：<code>while</code>循环是一种常见的控制流程结构，用于重复执行一系列操作，直到给定的条件不再满足为止</p>
+</blockquote>
+<p>语法形式：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">while 条件表达式</span><br><span class="line">do</span><br><span class="line">    # 执行循环体操作</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<h1 id="21-函数"><a class="markdownIt-Anchor" href="#21-函数"></a> 21 函数</h1>
+<blockquote>
+<p>​	函数：是一种用于封装一组相关操作的代码块</p>
+<p>​	特点：可以被调用多次，并且可以接受参数和返回值</p>
+<p>​	优势：合理地使用函数，可以将复杂的脚本逻辑分解为可重用和可维护的模块，提高Shell脚本的可读性、可维护性和可扩展性。</p>
+</blockquote>
+<blockquote>
+<p>​	21.1 函数定义和调用</p>
+<p>​	21.2 函数参数</p>
+<p>​	21.3 函数返回值</p>
+<p>​	21.4 局部变量</p>
+</blockquote>
+<h2 id="211-函数定义和调用"><a class="markdownIt-Anchor" href="#211-函数定义和调用"></a> 21.1 函数定义和调用</h2>
+<p>​	函数定义的基本语法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function name() </span><br><span class="line">&#123;</span><br><span class="line">    # 函数体，包含一系列的命令和逻辑</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>​	要调用函数，只需使用函数名即可：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">name</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">构造函数，通过函数打印hello world</span></span><br><span class="line">function hello()</span><br><span class="line">&#123;</span><br><span class="line">        echo &quot;hello world&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">hello</span><br></pre></td></tr></table></figure>
+<h2 id="212-函数参数"><a class="markdownIt-Anchor" href="#212-函数参数"></a> 21.2 函数参数</h2>
+<p>函数可以接受参数，以便在函数内部使用。在函数定义中使用<code>$1</code>、<code>$2</code>等特殊变量来引用传递给函数的参数。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">打印函数传递的第一个、第二个参数</span></span><br><span class="line">function hello()</span><br><span class="line">&#123;</span><br><span class="line">        echo 传入的第一个参数为$1</span><br><span class="line">        echo 传入的第一个参数为$2</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">hello 1 2 </span><br></pre></td></tr></table></figure>
+<h2 id="213-函数返回值"><a class="markdownIt-Anchor" href="#213-函数返回值"></a> 21.3 函数返回值</h2>
+<p>函数可以通过<code>return</code>语句返回一个退出状态码，范围为0-255。在函数中使用<code>return</code>语句后，将退出函数并返回指定的状态码，可以通过$?得到返回值</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">打印函数的返回值</span></span><br><span class="line">function hello()</span><br><span class="line">&#123;</span><br><span class="line">        return 10</span><br><span class="line">&#125;</span><br><span class="line">hello</span><br><span class="line">echo 函数返回值为$?</span><br></pre></td></tr></table></figure>
+<h2 id="214-局部变量"><a class="markdownIt-Anchor" href="#214-局部变量"></a> 21.4 局部变量</h2>
+<p>在函数内部定义的变量默认是全局的，可以在函数外部访问。如果希望在函数内部创建局部变量，可以使用<code>local</code>关键字</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">演示局部变量</span></span><br><span class="line">function hello()</span><br><span class="line">&#123;</span><br><span class="line">    local var=topeet</span><br><span class="line">    echo 局部变量值为$var</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">hello  </span><br><span class="line">echo 局部变量值为$var</span><br></pre></td></tr></table></figure>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2024/06/25/03_Linux%E5%AD%A6%E4%B9%A0/4%20%E6%BC%94%E7%A4%BA%E5%86%85%E5%AE%B9/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2024/07/01/06_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/19_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95(%E4%B8%83%E6%9C%88%E7%AC%AC1%E4%B8%AA%E6%98%9F%E6%9C%9F)/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            工作记录((7月第1个星期)
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2024/06/25/03_Linux%E5%AD%A6%E4%B9%A0/3%20%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%85%A5%E9%97%A8%E7%AF%87/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">嵌入式Linux入门篇</div>
+      </a>
+    
+  </nav>
+
+  
+   
+  
+   
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2015-2024
+        <i class="ri-heart-fill heart_icon"></i> chai
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="热爱学习的未来酱"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/%E7%94%9F%E6%B4%BB">生活</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE">瑞芯微</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/Linux%E5%AD%A6%E4%B9%A0">Linux学习</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/%E8%AF%BB%E4%B9%A6">读书</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/C%E8%AF%AD%E8%A8%80%E9%AB%98%E7%BA%A7%E5%AD%A6%E4%B9%A0">C语言高级学习</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95">工作记录</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/%E5%B0%8F%E6%8A%80%E5%B7%A7">小技巧</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/shell%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0">shell编程学习</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/PCB%E5%AD%A6%E4%B9%A0">PCB学习</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/%E9%9F%B3%E8%A7%86%E9%A2%91%E5%AD%A6%E4%B9%A0">音视频学习</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="52"
+        src="//music.163.com/outchain/player?type=2&id=22707008&auto=0&height=32"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
+    
+    
+
+  </div>
+</body>
+
+</html>

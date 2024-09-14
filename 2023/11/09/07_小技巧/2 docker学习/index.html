@@ -111,7 +111,7 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <p>这是我学习docker的一个前提条件，在之前的一些时间，我也是简单的看了一下docker，当时我是想用docker来进行deb包的构建的，为什么想到用docker了呢，这是因为我看大佬的github和瑞芯微的指导手册里都使用的docker，其实这个就跟开发板直接编译的效果是一样的，只是docker是在本机上，所以操作更流畅一些，而且开发板的编译速度以及方便程度，是有些区别的，所以docker就出现了，再然后我发现源码的编译里也是可以用到docker的，毕竟也就仅仅是一些环境而已，所以我又萌发了用docker编译源码的想法，所以docker的学习正式开始。</p>
+  <link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>这是我学习docker的一个前提条件，在之前的一些时间，我也是简单的看了一下docker，当时我是想用docker来进行deb包的构建的，为什么想到用docker了呢，这是因为我看大佬的github和瑞芯微的指导手册里都使用的docker，其实这个就跟开发板直接编译的效果是一样的，只是docker是在本机上，所以操作更流畅一些，而且开发板的编译速度以及方便程度，是有些区别的，所以docker就出现了，再然后我发现源码的编译里也是可以用到docker的，毕竟也就仅仅是一些环境而已，所以我又萌发了用docker编译源码的想法，所以docker的学习正式开始。</p>
 <p><strong>弱小和无知不是生存的障碍，傲慢才是</strong></p>
 <p><strong>唯有出现需求，你的目标和需求相匹配，才是学习最快速的路径。</strong></p>
 <h1 id="docker为什么出现"><a class="markdownIt-Anchor" href="#docker为什么出现"></a> Docker为什么出现</h1>
@@ -140,7 +140,7 @@
 <h1 id="docker安装"><a class="markdownIt-Anchor" href="#docker安装"></a> Docker安装</h1>
 <p>我这里就直接使用ubuntu20 ，也就是3588的虚拟机了，我要虚拟一个ubuntu20的docker容器，这是我的第一个目的。</p>
 <p>1.安装gcc g++相关环境</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get -y install gcc g++</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get -y install gcc g++</span><br></pre></td></tr></table></figure>
 <p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311102028310.png" alt="image-20231110095659265" /></p>
 <p>确保之前的docker删除掉：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do sudo apt-get remove $pkg; done</span><br></pre></td></tr></table></figure>
