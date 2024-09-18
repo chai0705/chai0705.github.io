@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2024-09-13T16:07:50.000Z</updated>
+  <updated>2024-09-18T00:33:03.000Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -17,11 +17,28 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>反思(9月第3个星期）</title>
+    <link href="http://example.com/2024/09/18/01_%E7%94%9F%E6%B4%BB/18_%E5%8F%8D%E6%80%9D(9%E6%9C%88%E7%AC%AC3%E4%B8%AA%E6%98%9F%E6%9C%9F)/"/>
+    <id>http://example.com/2024/09/18/01_%E7%94%9F%E6%B4%BB/18_%E5%8F%8D%E6%80%9D(9%E6%9C%88%E7%AC%AC3%E4%B8%AA%E6%98%9F%E6%9C%9F)/</id>
+    <published>2024-09-18T12:26:56.000Z</published>
+    <updated>2024-09-18T00:33:03.000Z</updated>
+    
+    
+    <summary type="html">Here&#39;s something encrypted, password is required to continue reading.</summary>
+    
+    
+    
+    <category term="生活" scheme="http://example.com/categories/%E7%94%9F%E6%B4%BB/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>ubuntu一键配置</title>
     <link href="http://example.com/2024/09/13/07_%E5%B0%8F%E6%8A%80%E5%B7%A7/18_ubuntu%E4%B8%80%E9%94%AE%E9%85%8D%E7%BD%AE/"/>
     <id>http://example.com/2024/09/13/07_%E5%B0%8F%E6%8A%80%E5%B7%A7/18_ubuntu%E4%B8%80%E9%94%AE%E9%85%8D%E7%BD%AE/</id>
     <published>2024-09-12T22:50:19.000Z</published>
-    <updated>2024-09-13T16:07:50.000Z</updated>
+    <updated>2024-09-16T13:03:29.838Z</updated>
     
     
     <summary type="html">Here&#39;s something encrypted, password is required to continue reading.</summary>
@@ -61,7 +78,7 @@
     <link href="http://example.com/2024/09/09/01_%E7%94%9F%E6%B4%BB/17_%E5%8F%8D%E6%80%9D(9%E6%9C%88%E7%AC%AC2%E4%B8%AA%E6%98%9F%E6%9C%9F)/"/>
     <id>http://example.com/2024/09/09/01_%E7%94%9F%E6%B4%BB/17_%E5%8F%8D%E6%80%9D(9%E6%9C%88%E7%AC%AC2%E4%B8%AA%E6%98%9F%E6%9C%9F)/</id>
     <published>2024-09-09T12:26:56.000Z</published>
-    <updated>2024-09-13T00:32:26.000Z</updated>
+    <updated>2024-09-14T13:47:58.000Z</updated>
     
     
     <summary type="html">Here&#39;s something encrypted, password is required to continue reading.</summary>
@@ -74,11 +91,34 @@
   </entry>
   
   <entry>
-    <title>反思(九月第二个星期)</title>
+    <title>工作记录(九月第二个星期)</title>
     <link href="http://example.com/2024/09/08/06_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/28_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95(%E4%B9%9D%E6%9C%88%E7%AC%AC%E4%BA%8C%E4%B8%AA%E6%98%9F%E6%9C%9F)/"/>
     <id>http://example.com/2024/09/08/06_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/28_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95(%E4%B9%9D%E6%9C%88%E7%AC%AC%E4%BA%8C%E4%B8%AA%E6%98%9F%E6%9C%9F)/</id>
     <published>2024-09-08T13:26:56.000Z</published>
-    <updated>2024-09-13T10:20:40.734Z</updated>
+    <updated>2024-09-14T07:24:05.785Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;&#92;assets&#92;css&#92;APlayer.min.css&quot;&gt;&lt;script src=&quot;&#92;assets&#92;js&#92;APlayer.min.js&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="工作记录" scheme="http://example.com/categories/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>工作记录(九月第二个星期)</title>
+    <link href="http://example.com/2024/09/08/06_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/29_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95(%E4%B9%9D%E6%9C%88%E7%AC%AC%E4%B8%89%E4%B8%AA%E6%98%9F%E6%9C%9F)/"/>
+    <id>http://example.com/2024/09/08/06_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/29_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95(%E4%B9%9D%E6%9C%88%E7%AC%AC%E4%B8%89%E4%B8%AA%E6%98%9F%E6%9C%9F)/</id>
+    <published>2024-09-08T13:26:56.000Z</published>
+    <updated>2024-09-18T07:23:56.077Z</updated>
     
     
       
@@ -101,7 +141,7 @@
     <link href="http://example.com/2024/09/07/07_%E5%B0%8F%E6%8A%80%E5%B7%A7/17_%E7%94%B5%E8%84%91%E8%B6%85%E9%A2%91/"/>
     <id>http://example.com/2024/09/07/07_%E5%B0%8F%E6%8A%80%E5%B7%A7/17_%E7%94%B5%E8%84%91%E8%B6%85%E9%A2%91/</id>
     <published>2024-09-06T22:50:19.000Z</published>
-    <updated>2024-09-12T15:39:37.000Z</updated>
+    <updated>2024-09-16T14:42:08.000Z</updated>
     
     
       
@@ -120,11 +160,11 @@
   </entry>
   
   <entry>
-    <title>反思(9月第1个星期）</title>
-    <link href="http://example.com/2024/09/06/01_%E7%94%9F%E6%B4%BB/16_%E5%8F%8D%E6%80%9D(9%E6%9C%88%E7%AC%AC1%E4%B8%AA%E6%98%9F%E6%9C%9F)%20/"/>
-    <id>http://example.com/2024/09/06/01_%E7%94%9F%E6%B4%BB/16_%E5%8F%8D%E6%80%9D(9%E6%9C%88%E7%AC%AC1%E4%B8%AA%E6%98%9F%E6%9C%9F)%20/</id>
+    <title>反思(9月第1个星期)</title>
+    <link href="http://example.com/2024/09/06/01_%E7%94%9F%E6%B4%BB/16_%E5%8F%8D%E6%80%9D(9%E6%9C%88%E7%AC%AC1%E4%B8%AA%E6%98%9F%E6%9C%9F)/"/>
+    <id>http://example.com/2024/09/06/01_%E7%94%9F%E6%B4%BB/16_%E5%8F%8D%E6%80%9D(9%E6%9C%88%E7%AC%AC1%E4%B8%AA%E6%98%9F%E6%9C%9F)/</id>
     <published>2024-09-06T12:26:56.000Z</published>
-    <updated>2024-09-09T22:57:52.000Z</updated>
+    <updated>2024-09-18T07:26:45.585Z</updated>
     
     
     <summary type="html">Here&#39;s something encrypted, password is required to continue reading.</summary>
@@ -160,11 +200,11 @@
   </entry>
   
   <entry>
-    <title>反思(九月第一个星期)</title>
+    <title>工作记录(九月第一个星期)</title>
     <link href="http://example.com/2024/09/01/06_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/27_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95(%E4%B9%9D%E6%9C%88%E7%AC%AC%E4%B8%80%E4%B8%AA%E6%98%9F%E6%9C%9F)/"/>
     <id>http://example.com/2024/09/01/06_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/27_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95(%E4%B9%9D%E6%9C%88%E7%AC%AC%E4%B8%80%E4%B8%AA%E6%98%9F%E6%9C%9F)/</id>
     <published>2024-09-01T13:26:56.000Z</published>
-    <updated>2024-09-08T05:22:32.154Z</updated>
+    <updated>2024-09-14T01:31:19.603Z</updated>
     
     
       
@@ -348,7 +388,7 @@
     <link href="http://example.com/2024/08/20/07_%E5%B0%8F%E6%8A%80%E5%B7%A7/12_WSL%E4%BD%BF%E7%94%A8%E5%B0%8F%E6%8A%80%E5%B7%A7/"/>
     <id>http://example.com/2024/08/20/07_%E5%B0%8F%E6%8A%80%E5%B7%A7/12_WSL%E4%BD%BF%E7%94%A8%E5%B0%8F%E6%8A%80%E5%B7%A7/</id>
     <published>2024-08-19T22:50:19.000Z</published>
-    <updated>2024-09-13T09:01:34.608Z</updated>
+    <updated>2024-09-17T04:33:18.814Z</updated>
     
     
       
@@ -408,52 +448,6 @@
     
     
     <category term="瑞芯微" scheme="http://example.com/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>repo的学习</title>
-    <link href="http://example.com/2024/08/19/07_%E5%B0%8F%E6%8A%80%E5%B7%A7/11_repo%E5%AD%A6%E4%B9%A0/"/>
-    <id>http://example.com/2024/08/19/07_%E5%B0%8F%E6%8A%80%E5%B7%A7/11_repo%E5%AD%A6%E4%B9%A0/</id>
-    <published>2024-08-18T22:50:19.000Z</published>
-    <updated>2024-09-11T12:39:00.000Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;&#92;assets&#92;css&#92;APlayer.min.css&quot;&gt;&lt;script src=&quot;&#92;assets&#92;js&#92;APlayer.min.js&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="小技巧" scheme="http://example.com/categories/%E5%B0%8F%E6%8A%80%E5%B7%A7/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>各类任务耗时</title>
-    <link href="http://example.com/2024/08/18/07_%E5%B0%8F%E6%8A%80%E5%B7%A7/10_%E5%90%84%E7%B1%BB%E4%BB%BB%E5%8A%A1%E8%80%97%E6%97%B6/"/>
-    <id>http://example.com/2024/08/18/07_%E5%B0%8F%E6%8A%80%E5%B7%A7/10_%E5%90%84%E7%B1%BB%E4%BB%BB%E5%8A%A1%E8%80%97%E6%97%B6/</id>
-    <published>2024-08-17T22:50:19.000Z</published>
-    <updated>2024-09-11T05:22:19.855Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;&#92;assets&#92;css&#92;APlayer.min.css&quot;&gt;&lt;script src=&quot;&#92;assets&#92;js&#92;APlayer.min.js&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="小技巧" scheme="http://example.com/categories/%E5%B0%8F%E6%8A%80%E5%B7%A7/"/>
     
     
   </entry>

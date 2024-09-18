@@ -110,6 +110,259 @@
     
     
     <article
+  id="post-02_瑞芯微/11_ubuntu构建完整系统"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2024/05/15/02_%E7%91%9E%E8%8A%AF%E5%BE%AE/11_ubuntu%E6%9E%84%E5%BB%BA%E5%AE%8C%E6%95%B4%E7%B3%BB%E7%BB%9F/"
+    >ubuntu完整构建</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2024/05/15/02_%E7%91%9E%E8%8A%AF%E5%BE%AE/11_ubuntu%E6%9E%84%E5%BB%BA%E5%AE%8C%E6%95%B4%E7%B3%BB%E7%BB%9F/" class="article-date">
+  <time datetime="2024-05-15T09:17:03.000Z" itemprop="datePublished">2024-05-15</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE/">瑞芯微</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="脚本整理"><a class="markdownIt-Anchor" href="#脚本整理"></a> 脚本整理</h1>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">export BOARD_NAME=&quot;Orange Pi 5&quot;                                                                              </span><br><span class="line">export BOARD_MAKER=&quot;Xulong&quot;                                                                                  </span><br><span class="line">export UBOOT_PACKAGE=&quot;u-boot-orangepi-rk3588&quot;                                                                </span><br><span class="line">export UBOOT_RULES_TARGET=&quot;orangepi_5&quot;                                                                       </span><br><span class="line">export UBOOT_RULES_TARGET_EXTRA=&quot;orangepi_5_sata&quot;      </span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202405100822471.png" alt="image-20240509205731107" /></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">topeet@topeet:~/Linux/ubuntu-rockchip/config/kernels$ cat rockchip-5.10.conf </span><br><span class="line">KERNEL_REPO=https://github.com/Joshua-Riek/linux-rockchip.git</span><br><span class="line">KERNEL_BRANCH=linux-5.10-gen-rkr6</span><br><span class="line">KERNEL_VERSION=5.10.160</span><br><span class="line">KERNEL_CLONE_DIR=linux-rockchip</span><br><span class="line">KERNEL_DEFCONFIG=rockchip_linux_defconfig</span><br><span class="line">DPKG_BUILDPACKAGE=y</span><br><span class="line">topeet@topeet:~/Linux/ubuntu-rockchip/config/kernels$ </span><br></pre></td></tr></table></figure>
+<p>build.sh分析的差不多了，主要就是执行了下面的这四个脚本：<br />
+<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202405100822066.png" alt="image-20240509210304254" /></p>
+<p>当然这些脚本里面肯定是用到了相应的环境变量的，这一点毋庸置疑。从上往下慢慢来，<a target="_blank" rel="noopener" href="http://xn--build-kernel-fq3te7fyw3kyta.sh">先来分析build-kernel.sh</a>。</p>
+<h2 id="build-kernelsh"><a class="markdownIt-Anchor" href="#build-kernelsh"></a> <a target="_blank" rel="noopener" href="http://build-kernel.sh">build-kernel.sh</a></h2>
+<p>source …/config/kernels/“${KERNEL_TARGET}.conf”</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">KERNEL_REPO=https://github.com/Joshua-Riek/linux-rockchip.git</span><br><span class="line">KERNEL_BRANCH=linux-5.10-gen-rkr6</span><br><span class="line">KERNEL_VERSION=5.10.160</span><br><span class="line">KERNEL_CLONE_DIR=linux-rockchip</span><br><span class="line">KERNEL_DEFCONFIG=rockchip_linux_defconfig</span><br><span class="line">DPKG_BUILDPACKAGE=y</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>git clone --progress -b “<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi>K</mi><mi>E</mi><mi>R</mi><mi>N</mi><mi>E</mi><msub><mi>L</mi><mi>B</mi></msub><mi>R</mi><mi>A</mi><mi>N</mi><mi>C</mi><mi>H</mi></mrow><mi mathvariant="normal">&quot;</mi><mi mathvariant="normal">&quot;</mi></mrow><annotation encoding="application/x-tex">{KERNEL_BRANCH}&quot; &quot;</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.84444em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">K</span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mord mathnormal" style="margin-right:0.10903em;">N</span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="mord"><span class="mord mathnormal">L</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.05017em;">B</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mord mathnormal">A</span><span class="mord mathnormal" style="margin-right:0.10903em;">N</span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span></span><span class="mord">&quot;</span><span class="mord">&quot;</span></span></span></span>{KERNEL_REPO}” “${KERNEL_CLONE_DIR}” --depth=2</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">export ftp_proxy=http://127.0.0.1:8889/</span><br><span class="line">export https_proxy=http://127.0.0.1:8889/</span><br><span class="line">export FTP_PROXY=http://127.0.0.1:8889/</span><br><span class="line">export HTTPS_PROXY=http://127.0.0.1:8889/</span><br><span class="line">export HTTP_PROXY=http://127.0.0.1:8889/</span><br><span class="line">export http_proxy=http://127.0.0.1:8889/</span><br><span class="line"></span><br><span class="line"> git clone --progress -b linux-5.10-gen-rkr6 https://github.com/Joshua-Riek/linux-rockchip.git linux-rockchip --depth=2</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202405100822488.png" alt="image-20240509210716946" /></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd linux-rockchip</span><br><span class="line">git checkout linux-5.10-gen-rkr6</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202405100822548.png" alt="image-20240509210951189" /></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">构建二进制软件包</span></span><br><span class="line">sudo dpkg-buildpackage -a &quot;$(cat debian/arch)&quot; -d -b -nc -uc</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">设置默认配置文件</span></span><br><span class="line">make rockchip_linux_defconfig CROSS_COMPILE=aarch64-linux-gnu- ARCH=arm64 </span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">设置内核编译数字</span></span><br><span class="line">    echo &quot;1&quot; &gt; .version</span><br><span class="line">    touch .scmversion</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">编译内核到一个deb包当中</span></span><br><span class="line">sudo make bindeb-pkg \</span><br><span class="line">    KBUILD_IMAGE=&quot;arch/arm64/boot/Image&quot; \</span><br><span class="line">    KDEB_PKGVERSION=&quot;$(make kernelversion)-rockchip-1&quot; \</span><br><span class="line">    KERNELRELEASE=&quot;$(make kernelversion)-rockchip&quot; \</span><br><span class="line">    CROSS_COMPILE=aarch64-linux-gnu- \</span><br><span class="line">    ARCH=arm64 \</span><br><span class="line">    -j &quot;$(nproc)&quot;</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202405100822409.png" alt="image-20240509213751095" /></p>
+<p>​	编译完成是这俩重要的deb文件,一个是用来存放内核头，一个是用来存放镜像例如设备树、内核、驱动文件等。具体的使用以后再说，然后开始看uboot的编译。</p>
+<h2 id="build-u-bootsh"><a class="markdownIt-Anchor" href="#build-u-bootsh"></a> <a target="_blank" rel="noopener" href="http://build-u-boot.sh">build-u-boot.sh</a></h2>
+<p>UBOOT_PACKAGE是在board里面配置的时候设置的，具体如下所示：<br />
+<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202405100822437.png" alt="image-20240509215108602" /></p>
+<p>我这里就继续以香橙派为例进行说明：</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202405100822658.png" alt="" /></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202405092152376.png" alt="image-20240509215244172" /></p>
+<p>具体就是upstream 文件的内容，具体如下所示：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">GIT=https://github.com/orangepi-xunlong/u-boot-orangepi.git</span><br><span class="line">COMMIT=7f7ff61a8b79fdb4f2d51dfb8aa643b8bc3ada0c</span><br><span class="line">BRANCH=v2017.09-rk3588</span><br><span class="line">VERSION=2017.09+20240401.git7f7ff61a</span><br></pre></td></tr></table></figure>
+<p>最终的整合命令为:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git clone --single-branch --progress -b v2017.09-rk3588 https://github.com/orangepi-xunlong/u-boot-orangepi.git u-boot-orangepi-rk3588</span><br><span class="line">git -C u-boot-orangepi-rk3588 checkout 7f7ff61a8b79fdb4f2d51dfb8aa643b8bc3ada0c</span><br><span class="line">cp -r ubuntu-rockchip/packages/u-boot-orangepi-rk3588/debian u-boot-orangepi-rk3588</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202405100822916.png" alt="image-20240509215535488" /></p>
+<p>​	果然每家都有每家的uboot，算是又强了一点点，这个地方我直接用我家的uboot应该也是可以的，当然我家的uboot是基本没改过的，就也还行吧。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">rules=orangepi_5,package-orangepi_5</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">前处理，就是打了一些补丁</span></span><br><span class="line">dpkg-source --before-build .</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"> 编译uboot，这里不是这么简单</span></span><br><span class="line">dpkg-buildpackage -a &quot;$(cat debian/arch)&quot; -d -b -nc -uc --rules-target=&quot;$&#123;rules&#125;&quot;</span><br><span class="line">dpkg-source --after-build .</span><br><span class="line"></span><br><span class="line">rm -f ../*.buildinfo ../*.changes</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202405100822890.png" alt="image-20240509220655758" /></p>
+<p>​	可以看到最后生成了uboot的deb包。</p>
+<h2 id="build-rootfssh"><a class="markdownIt-Anchor" href="#build-rootfssh"></a> <a target="_blank" rel="noopener" href="http://build-rootfs.sh">build-rootfs.sh</a></h2>
+<p>​	设置几个相关环境变量</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">export RELASE_NAME=&quot;Ubuntu 22.04 LTS (Jammy Jellyfish)&quot;</span><br><span class="line">export RELASE_VERSION=&quot;22.04&quot;</span><br><span class="line">if [ -z &quot;$&#123;KERNEL_TARGET&#125;&quot; ]; then</span><br><span class="line">    export KERNEL_TARGET=&quot;rockchip-5.10&quot;</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/Joshua-Riek/ubuntu-live-build.git</span><br><span class="line"></span><br><span class="line">cd ubuntu-live-build</span><br><span class="line">bash ./docker/build-livecd-rootfs.sh</span><br><span class="line">bash ./build.sh &quot;--desktop&quot; &quot;--jammy&quot;</span><br><span class="line">mv &quot;./build/ubuntu-$&#123;RELASE_VERSION&#125;-preinstalled-$&#123;PROJECT&#125;-arm64.rootfs.tar.xz&quot; ../</span><br></pre></td></tr></table></figure>
+<h2 id="config-imagesh"><a class="markdownIt-Anchor" href="#config-imagesh"></a> <a target="_blank" rel="noopener" href="http://config-image.sh">config-image.sh</a></h2>
+<p>​	导入两个文件的环境变量</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">shellcheck shell=bash</span></span><br><span class="line"></span><br><span class="line">export BOARD_NAME=&quot;Orange Pi 5B&quot;</span><br><span class="line">export BOARD_MAKER=&quot;Xulong&quot;</span><br><span class="line">export UBOOT_PACKAGE=&quot;u-boot-orangepi-rk3588&quot;</span><br><span class="line">export UBOOT_RULES_TARGET=&quot;orangepi_5b&quot;</span><br><span class="line"></span><br><span class="line">function config_image_hook__orangepi-5b() &#123;</span><br><span class="line">    local rootfs=&quot;$1&quot;</span><br><span class="line">    local overlay=&quot;$2&quot;</span><br><span class="line"></span><br><span class="line">    # Install panfork</span><br><span class="line">    chroot &quot;$&#123;rootfs&#125;&quot; add-apt-repository -y ppa:jjriek/panfork-mesa</span><br><span class="line">    chroot &quot;$&#123;rootfs&#125;&quot; apt-get update</span><br><span class="line">    chroot &quot;$&#123;rootfs&#125;&quot; apt-get -y install mali-g610-firmware</span><br><span class="line">    chroot &quot;$&#123;rootfs&#125;&quot; apt-get -y dist-upgrade</span><br><span class="line"></span><br><span class="line">    # Enable bluetooth for AP6275P</span><br><span class="line">    mkdir -p &quot;$&#123;rootfs&#125;/usr/lib/scripts&quot;</span><br><span class="line">    cp &quot;$&#123;overlay&#125;/usr/lib/systemd/system/ap6275p-bluetooth.service&quot; &quot;$&#123;rootfs&#125;/usr/lib/systemd/system/ap6275p-bluetooth.service&quot;</span><br><span class="line">    cp &quot;$&#123;overlay&#125;/usr/lib/scripts/ap6275p-bluetooth.sh&quot; &quot;$&#123;rootfs&#125;/usr/lib/scripts/ap6275p-bluetooth.sh&quot;</span><br><span class="line">    cp &quot;$&#123;overlay&#125;/usr/bin/brcm_patchram_plus&quot; &quot;$&#123;rootfs&#125;/usr/bin/brcm_patchram_plus&quot;</span><br><span class="line">    chroot &quot;$&#123;rootfs&#125;&quot; systemctl enable ap6275p-bluetooth</span><br><span class="line"></span><br><span class="line">    # Enable USB 2.0 port</span><br><span class="line">    cp &quot;$&#123;overlay&#125;/usr/lib/systemd/system/enable-usb2.service&quot; &quot;$&#123;rootfs&#125;/usr/lib/systemd/system/enable-usb2.service&quot;</span><br><span class="line">    chroot &quot;$&#123;rootfs&#125;&quot; systemctl --no-reload enable enable-usb2</span><br><span class="line"></span><br><span class="line">    # Install wiring orangepi package </span><br><span class="line">    chroot &quot;$&#123;rootfs&#125;&quot; apt-get -y install wiringpi-opi libwiringpi2-opi libwiringpi-opi-dev</span><br><span class="line">    echo &quot;BOARD=orangepi5&quot; &gt; &quot;$&#123;rootfs&#125;/etc/orangepi-release&quot;</span><br><span class="line"></span><br><span class="line">    return 0</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">export RELASE_NAME=&quot;Ubuntu 22.04 LTS (Jammy Jellyfish)&quot;</span><br><span class="line">export RELASE_VERSION=&quot;22.04&quot;</span><br><span class="line">if [ -z &quot;$&#123;KERNEL_TARGET&#125;&quot; ]; then</span><br><span class="line">    export KERNEL_TARGET=&quot;rockchip-5.10&quot;</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+<p><code>update-initramfs -u</code>命令用于更新Linux系统的初始化内存文件系统（initramfs）。</p>
+<p>initramfs是一个临时的文件系统，位于Linux启动过程的早期阶段。它包含了用于引导系统的必要文件、驱动程序和工具。initramfs在系统引导时被加载到内存中，并在完成引导过程之前提供必要的资源。</p>
+<p><code>update-initramfs -u</code>命令的作用是重新生成和更新initramfs文件。它会根据当前系统配置和安装的软件包，重新打包和生成initramfs文件，以确保其与当前系统环境保持同步。</p>
+<p>在更新initramfs时，该命令会扫描系统上已安装的内核和相关的驱动程序，将其添加到initramfs文件中，以便在引导过程中正确加载所需的模块和驱动程序。</p>
+<p>通常，在更新内核或修改了与引导相关的配置文件后，需要运行<code>update-initramfs -u</code>命令来确保initramfs文件与系统的变更保持同步。这样可以确保系统能够正确引导，并正确加载所需的模块和驱动程序。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd $&#123;chroot_dir&#125; &amp;&amp; tar -cpf &quot;../ubuntu-$&#123;RELASE_VERSION&#125;-preinstalled-$&#123;PROJECT&#125;-arm64-$&#123;BOARD&#125;.rootfs.tar&quot; . &amp;&amp; cd .. &amp;&amp; rm -rf $&#123;chroot_dir&#125;</span><br><span class="line">../scripts/build-image.sh &quot;ubuntu-$&#123;RELASE_VERSION&#125;-preinstalled-$&#123;PROJECT&#125;-arm64-$&#123;BOARD&#125;.rootfs.tar&quot;</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">if [ -z &quot;$&#123;img##*server*&#125;&quot; ]; then</span><br><span class="line">    # Setup partition table</span><br><span class="line">    dd if=/dev/zero of=&quot;$&#123;disk&#125;&quot; count=4096 bs=512</span><br><span class="line">    parted --script &quot;$&#123;disk&#125;&quot; \</span><br><span class="line">    mklabel gpt \</span><br><span class="line">    mkpart primary fat32 16MiB 20MiB \</span><br><span class="line">    mkpart primary ext4 20MiB 100%</span><br><span class="line"></span><br><span class="line">    # Create partitions</span><br><span class="line">    &#123;</span><br><span class="line">        echo &quot;t&quot;</span><br><span class="line">        echo &quot;1&quot;</span><br><span class="line">        echo &quot;EBD0A0A2-B9E5-4433-87C0-68B6B72699C7&quot;</span><br><span class="line">        echo &quot;t&quot;</span><br><span class="line">        echo &quot;2&quot;</span><br><span class="line">        echo &quot;C12A7328-F81F-11D2-BA4B-00A0C93EC93B&quot;</span><br><span class="line">        echo &quot;w&quot;</span><br><span class="line">    &#125; | fdisk &quot;$&#123;disk&#125;&quot; &amp;&gt; /dev/null || true</span><br><span class="line"></span><br><span class="line">    partprobe &quot;$&#123;disk&#125;&quot;</span><br><span class="line"></span><br><span class="line">    partition_char=&quot;$(if [[ $&#123;disk: -1&#125; == [0-9] ]]; then echo p; fi)&quot;</span><br><span class="line"></span><br><span class="line">    sleep 1</span><br><span class="line"></span><br><span class="line">    wait_loopdev &quot;$&#123;disk&#125;$&#123;partition_char&#125;2&quot; 60 || &#123;</span><br><span class="line">        echo &quot;Failure to create $&#123;disk&#125;$&#123;partition_char&#125;1 in time&quot;</span><br><span class="line">        exit 1</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    sleep 1</span><br><span class="line"></span><br><span class="line">    wait_loopdev &quot;$&#123;disk&#125;$&#123;partition_char&#125;1&quot; 60 || &#123;</span><br><span class="line">        echo &quot;Failure to create $&#123;disk&#125;$&#123;partition_char&#125;1 in time&quot;</span><br><span class="line">        exit 1</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    sleep 1</span><br><span class="line"></span><br><span class="line">    # Generate random uuid for bootfs</span><br><span class="line">    boot_uuid=$(uuidgen | head -c8)</span><br><span class="line"></span><br><span class="line">    # Generate random uuid for rootfs</span><br><span class="line">    root_uuid=$(uuidgen)</span><br><span class="line"></span><br><span class="line">    # Create filesystems on partitions</span><br><span class="line">    mkfs.vfat -i &quot;$&#123;boot_uuid&#125;&quot; -F32 -n CIDATA &quot;$&#123;disk&#125;$&#123;partition_char&#125;1&quot;</span><br><span class="line">    dd if=/dev/zero of=&quot;$&#123;disk&#125;$&#123;partition_char&#125;2&quot; bs=1KB count=10 &gt; /dev/null</span><br><span class="line">    mkfs.ext4 -U &quot;$&#123;root_uuid&#125;&quot; -L cloudimg-rootfs &quot;$&#123;disk&#125;$&#123;partition_char&#125;2&quot;</span><br><span class="line"></span><br><span class="line">    # Mount partitions</span><br><span class="line">    mkdir -p $&#123;mount_point&#125;/&#123;system-boot,writable&#125; </span><br><span class="line">    mount &quot;$&#123;disk&#125;$&#123;partition_char&#125;1&quot; $&#123;mount_point&#125;/system-boot</span><br><span class="line">    mount &quot;$&#123;disk&#125;$&#123;partition_char&#125;2&quot; $&#123;mount_point&#125;/writable</span><br><span class="line"></span><br><span class="line">    # Cloud init config for server image</span><br><span class="line">    cp ../overlay/boot/firmware/&#123;meta-data,user-data,network-config&#125; $&#123;mount_point&#125;/system-boot</span><br></pre></td></tr></table></figure>
+<p>现在源码和镜像肯定是有了，晚上应该看看佐大的视频，还是需要再研究看看</p>
+<h1 id="mycode"><a class="markdownIt-Anchor" href="#mycode"></a> mycode</h1>
+<p>rkbin</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">export ftp_proxy=http://127.0.0.1:8889/</span><br><span class="line">export https_proxy=http://127.0.0.1:8889/</span><br><span class="line">export FTP_PROXY=http://127.0.0.1:8889/</span><br><span class="line">export HTTPS_PROXY=http://127.0.0.1:8889/</span><br><span class="line">export HTTP_PROXY=http://127.0.0.1:8889/</span><br><span class="line">export http_proxy=http://127.0.0.1:8889/</span><br><span class="line"></span><br><span class="line">git clone --depth 1 https://github.com/rockchip-linux/rkbin</span><br></pre></td></tr></table></figure>
+<p>官方uboot</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">git clone --depth 1 https://source.denx.de/u-boot/u-boot.git</span><br><span class="line">cd u-boot</span><br><span class="line">export BL31=../rkbin/bin/rk35/rk3588_bl31_v1.45.elf</span><br><span class="line">export ROCKCHIP_TPL=../rkbin/bin/rk35/rk3588_ddr_lp4_2112MHz_lp5_2736MHz_eyescan_v1.11.bin</span><br><span class="line">make evb-rk3588_defconfig</span><br><span class="line">make CROSS_COMPILE=aarch64-linux-gnu-</span><br></pre></td></tr></table></figure>
+<p>RK uboot</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/rockchip-linux/u-boot.git</span><br><span class="line">cd u-boot</span><br><span class="line">export BL31=../rkbin/bin/rk35/rk3588_bl31_v1.45.elf</span><br><span class="line">export ROCKCHIP_TPL=../rkbin/bin/rk35/rk3588_ddr_lp4_2112MHz_lp5_2736MHz_eyescan_v1.11.bin</span><br><span class="line">make rk3588_defconfig</span><br><span class="line">make CROSS_COMPILE=aarch64-linux-gnu- -j32</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rules=orangepi_5,package-orangepi_5</span><br><span class="line">make mrproper</span><br><span class="line">dpkg-buildpackage -a &quot;$(cat debian/arch)&quot; -d -b -nc -uc --rules-target=&quot;$&#123;rules&#125;&quot;</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">make mrproper</span><br><span class="line">rules=rk3588,package-rk3588</span><br><span class="line">dpkg-buildpackage -a &quot;$(cat debian/arch)&quot; -d -b -nc -uc --rules-target=&quot;$&#123;rules&#125;&quot;</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">make CROSS_COMPILE=aarch64-linux-gnu- orangepi_5_defconfig -j32 </span><br><span class="line">make CROSS_COMPILE=aarch64-linux-gnu-  -j32 </span><br><span class="line">make ARCH=arm \</span><br><span class="line">	CROSS_COMPILE=aarch64-linux-gnu- \</span><br><span class="line">	BL31=../rkbin/bin/rk35/rk3588_bl31_v1.38.elf \</span><br><span class="line">	spl/u-boot-spl.bin u-boot.dtb u-boot.itb \</span><br><span class="line">	-j32</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">make CROSS_COMPILE=aarch64-linux-gnu- rk3588_defconfig -j32 </span><br><span class="line">make CROSS_COMPILE=aarch64-linux-gnu-  -j32 </span><br><span class="line">make ARCH=arm \</span><br><span class="line">	CROSS_COMPILE=aarch64-linux-gnu- \</span><br><span class="line">	BL31=../rkbin/bin/rk35/rk3588_bl31_v1.38.elf \</span><br><span class="line">	spl/u-boot-spl.bin u-boot.dtb u-boot.itb \</span><br><span class="line">	-j32</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">decode_bl31.py</span><br><span class="line">def main():</span><br><span class="line">    if &quot;BL31&quot; in os.environ:</span><br><span class="line">        bl31_elf=os.getenv(&quot;BL31&quot;);</span><br><span class="line">    elif os.path.isfile(&quot;./bl31.elf&quot;):</span><br><span class="line">        bl31_elf = &quot;./bl31.elf&quot;</span><br><span class="line">    else:</span><br><span class="line">        os.system(&quot;echo &#x27;int main()&#123;&#125;&#x27; &gt; bl31.c&quot;)</span><br><span class="line">        os.system(&quot;$&#123;CROSS_COMPILE&#125;gcc -c bl31.c -o bl31.elf&quot;)</span><br><span class="line">        bl31_elf = &quot;./bl31.elf&quot;</span><br><span class="line">        logging.basicConfig(format=&#x27;%(levelname)s:%(message)s&#x27;, level=logging.DEBUG)</span><br><span class="line">        logging.warning(&#x27; BL31 file bl31.elf NOT found, resulting binary is non-functional&#x27;)</span><br><span class="line">        logging.warning(&#x27; Please read Building section in doc/README.rockchip&#x27;)</span><br><span class="line">    generate_atf_binary(bl31_elf);</span><br><span class="line">    </span><br><span class="line">make_fit_atf.sh</span><br><span class="line">	注释掉BL32</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">./tools/mkimage -n rk3588 -T rksd -d \</span><br><span class="line">  ../rkbin/bin/rk35/rk3588_ddr_lp4_2112MHz_lp5_2736MHz_v1.11.bin:spl/u-boot-spl.bin \</span><br><span class="line">  idbloader.img</span><br></pre></td></tr></table></figure>
+<p>sudo dd if=idbloader.img of=/dev/sdc seek=64</p>
+<p>sudo dd if=u-boot.itb of=/dev/sdc  seek=16384 conv=notrunc</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd ../rkbin</span><br><span class="line">./tools/trust_merger RKTRUST/RK3588TRUST.ini</span><br><span class="line">sudo dd if=trust.img of=/dev/sdc seek=24576</span><br></pre></td></tr></table></figure>
+<p>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</p>
+<h1 id="系统移植"><a class="markdownIt-Anchor" href="#系统移植"></a> 系统移植</h1>
+<h2 id="1构建v2ray"><a class="markdownIt-Anchor" href="#1构建v2ray"></a> 1.构建v2ray</h2>
+<h2 id="2拉取源码"><a class="markdownIt-Anchor" href="#2拉取源码"></a> 2.拉取源码</h2>
+<p>设置http端口</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">export ftp_proxy=http://127.0.0.1:8889/</span><br><span class="line">export https_proxy=http://127.0.0.1:8889/</span><br><span class="line">export FTP_PROXY=http://127.0.0.1:8889/</span><br><span class="line">export HTTPS_PROXY=http://127.0.0.1:8889/</span><br><span class="line">export HTTP_PROXY=http://127.0.0.1:8889/</span><br><span class="line">export http_proxy=http://127.0.0.1:8889/</span><br></pre></td></tr></table></figure>
+<p>拉取orangepi源码</p>
+<p>拉取ubuntu-rockchip源码</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/Joshua-Riek/ubuntu-rockchip.git</span><br><span class="line">git clone --single-branch --progress -b v2017.09-rk3588 https://github.com/orangepi-xunlong/u-boot-orangepi.git u-boot-orangepi-rk3588</span><br><span class="line">git -C u-boot-orangepi-rk3588 checkout 7f7ff61a8b79fdb4f2d51dfb8aa643b8bc3ada0c</span><br><span class="line">cp -r ubuntu-rockchip/packages/u-boot-orangepi-rk3588/debian u-boot-orangepi-rk3588</span><br></pre></td></tr></table></figure>
+<p>拉取瑞芯微官方uboot源码和rkbin源码</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/rockchip-linux/u-boot.git</span><br><span class="line">git clone https://github.com/rockchip-linux/rkbin.git</span><br></pre></td></tr></table></figure>
+<h2 id="3编译"><a class="markdownIt-Anchor" href="#3编译"></a> 3.编译</h2>
+<p>安装交叉编译器：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install gcc-aarch64-linux-gnu</span><br></pre></td></tr></table></figure>
+<p>修改arch/arm/mach-rockchip/decode_bl31.py文件</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">vim arch/arm/mach-rockchip/decode_bl31.py</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">main</span>():</span><br><span class="line">    <span class="keyword">if</span> <span class="string">&quot;BL31&quot;</span> <span class="keyword">in</span> os.environ:</span><br><span class="line">        bl31_elf=os.getenv(<span class="string">&quot;BL31&quot;</span>);</span><br><span class="line">    <span class="keyword">elif</span> os.path.isfile(<span class="string">&quot;./bl31.elf&quot;</span>):</span><br><span class="line">        bl31_elf = <span class="string">&quot;./bl31.elf&quot;</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        os.system(<span class="string">&quot;echo &#x27;int main()&#123;&#125;&#x27; &gt; bl31.c&quot;</span>)</span><br><span class="line">        os.system(<span class="string">&quot;$&#123;CROSS_COMPILE&#125;gcc -c bl31.c -o bl31.elf&quot;</span>)</span><br><span class="line">        bl31_elf = <span class="string">&quot;./bl31.elf&quot;</span></span><br><span class="line">        logging.basicConfig(<span class="built_in">format</span>=<span class="string">&#x27;%(levelname)s:%(message)s&#x27;</span>, level=logging.DEBUG)</span><br><span class="line">        logging.warning(<span class="string">&#x27; BL31 file bl31.elf NOT found, resulting binary is non-functional&#x27;</span>)</span><br><span class="line">        logging.warning(<span class="string">&#x27; Please read Building section in doc/README.rockchip&#x27;</span>)</span><br><span class="line">    generate_atf_binary(bl31_elf);</span><br></pre></td></tr></table></figure>
+<p>修改arch/arm/mach-rockchip/make_fit_atf.sh 文件注释掉#gen_bl32_node</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">vim arch/arm/mach-rockchip/make_fit_atf.sh</span><br><span class="line"></span><br><span class="line">source ./$&#123;srctree&#125;/arch/arm/mach-rockchip/fit_nodes.sh</span><br><span class="line"></span><br><span class="line">gen_header</span><br><span class="line">gen_uboot_node</span><br><span class="line">gen_bl31_node</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">gen_bl32_node</span></span><br><span class="line">gen_mcu_node</span><br><span class="line">gen_loadable_node</span><br><span class="line">gen_kfdt_node</span><br><span class="line">gen_fdt_node</span><br><span class="line">gen_arm64_configurations</span><br></pre></td></tr></table></figure>
+<p>修改波特率</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vim configs/rk3588_defconfig</span><br><span class="line">CONFIG_BAUDRATE=115200</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cp /home/topeet/back/01_tmp/decode_bl31.py  arch/arm/mach-rockchip/</span><br><span class="line">cp /home/topeet/back/01_tmp/make_fit_atf.sh  arch/arm/mach-rockchip/</span><br><span class="line">cp /home/topeet/back/01_tmp/rk3588_defconfig configs/</span><br></pre></td></tr></table></figure>
+<p>编译</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">make CROSS_COMPILE=aarch64-linux-gnu- ARCH=arm  -j20  rk3588_defconfig</span><br><span class="line">make CROSS_COMPILE=aarch64-linux-gnu- -j20 </span><br><span class="line">make CROSS_COMPILE=aarch64-linux-gnu- ARCH=arm  -j20 \</span><br><span class="line">BL31=../rkbin/bin/rk35/rk3588_bl31_v1.45.elf \</span><br><span class="line">spl/u-boot-spl.bin u-boot.dtb u-boot.itb</span><br></pre></td></tr></table></figure>
+<p>构建idbloader.img</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">./tools/mkimage -n rk3588 -T rksd -d \</span><br><span class="line">	../rkbin/bin/rk35/rk3588_ddr_lp4_2112MHz_lp5_2400MHz_v1.16.bin:spl/u-boot-spl.bin \</span><br><span class="line">	idbloader.img</span><br></pre></td></tr></table></figure>
+<h2 id="4写入"><a class="markdownIt-Anchor" href="#4写入"></a> 4.写入</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo dd if=idbloader.img of=/dev/sdc seek=64</span><br><span class="line">sudo dd if=u-boot.itb of=/dev/sdc seek=16384 conv=notrunc</span><br><span class="line">sync</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">sudo dd if=/dev/zero of=/dev/sdc count=4096 bs=512 </span><br><span class="line">sudo parted --script /dev/sdc  \</span><br><span class="line">mklabel gpt \</span><br><span class="line">mkpart primary fat32 16MiB 20MiB \</span><br><span class="line">mkpart primary ext4 20MiB 100%</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Create partitions</span></span><br><span class="line">&#123;</span><br><span class="line">    echo &quot;t&quot;</span><br><span class="line">    echo &quot;1&quot;</span><br><span class="line">    echo &quot;EBD0A0A2-B9E5-4433-87C0-68B6B72699C7&quot;</span><br><span class="line">    echo &quot;t&quot;</span><br><span class="line">    echo &quot;2&quot;</span><br><span class="line">    echo &quot;C12A7328-F81F-11D2-BA4B-00A0C93EC93B&quot;</span><br><span class="line">    echo &quot;w&quot;</span><br><span class="line">&#125; | sudo fdisk /dev/sdc  &amp;&gt; /dev/null || true</span><br><span class="line"></span><br><span class="line">sudo partprobe /dev/sdc </span><br><span class="line"></span><br><span class="line">    # Generate random uuid for bootfs</span><br><span class="line">boot_uuid=$(uuidgen | head -c8)</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Generate random uuid <span class="keyword">for</span> rootfs</span></span><br><span class="line">root_uuid=$(uuidgen)</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Create filesystems on partitions</span></span><br><span class="line">sudo mkfs.vfat -i &quot;$&#123;boot_uuid&#125;&quot; -F32 -n CIDATA /dev/sdc1</span><br><span class="line">sudo dd if=/dev/zero of=/dev/sdc2 bs=1KB count=10 &gt; /dev/null</span><br><span class="line">sudo mkfs.ext4 -U &quot;$&#123;root_uuid&#125;&quot; -L cloudimg-rootfs /dev/sdc2</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Mount partitions</span></span><br><span class="line">mkdir -p &#123;system-boot,writable&#125; </span><br><span class="line">mount &quot;sdc1&quot; system-boot</span><br><span class="line">mount &quot;sdc2&quot; writable</span><br></pre></td></tr></table></figure>
+<h1 id="命令学习"><a class="markdownIt-Anchor" href="#命令学习"></a> 命令学习</h1>
+<h2 id="mklabel"><a class="markdownIt-Anchor" href="#mklabel"></a> mklabel</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">parted --script /dev/sdb \</span><br><span class="line">mklabel gpt \</span><br><span class="line">mkpart primary ext4 16MiB 100%</span><br></pre></td></tr></table></figure>
+<ol>
+<li>
+<ul>
+<li><code>mklabel gpt</code>: 创建了一个 GPT（GUID 分区表）磁盘标签。GPT 是一种磁盘分区表标准，支持更大的磁盘容量和更多的分区。</li>
+<li><code>mkpart primary ext4 16MiB 100%</code>: 创建了一个主分区，并将其格式化为 ext4 文件系统。具体的参数解释如下：
+<ul>
+<li><code>primary</code>: 表示创建一个主分区。主分区是可用于安装操作系统或存储数据的分区类型。</li>
+<li><code>ext4</code>: 表示将分区格式化为 ext4 文件系统。ext4 是一种常见的 Linux 文件系统。</li>
+<li><code>16MiB</code>: 表示分区的起始位置。这里的 <code>16MiB</code> 表示分区从磁盘的 16MiB 处开始。</li>
+<li><code>100%</code>: 表示分区的结束位置。这里的 <code>100%</code> 表示分区将占据整个磁盘的剩余空间。</li>
+</ul>
+</li>
+</ul>
+<p><code>--script</code> 参数用于在不需要用户交互的情况下运行 parted 命令。它告诉 parted 不要提示用户进行确认或提供交互式输入。</p>
+</li>
+</ol>
+<h2 id="fdisk"><a class="markdownIt-Anchor" href="#fdisk"></a> fdisk</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Create partitions</span></span><br><span class="line"> &#123;</span><br><span class="line">     echo &quot;t&quot;</span><br><span class="line">     echo &quot;1&quot;</span><br><span class="line">     echo &quot;C12A7328-F81F-11D2-BA4B-00A0C93EC93B&quot;</span><br><span class="line">     echo &quot;w&quot;</span><br><span class="line"> &#125; | fdisk /dev/sdb &amp;&gt; /dev/null || true</span><br></pre></td></tr></table></figure>
+<p>这段代码使用了 <code>fdisk</code> 工具来创建分区。下面是对代码中各个部分的解释：</p>
+<ol>
+<li><code>echo &quot;t&quot;</code>: 发送 “t” 命令给 <code>fdisk</code>，用于更改分区类型。</li>
+<li><code>echo &quot;1&quot;</code>: 发送 “1” 命令给 <code>fdisk</code>，用于选择第一个分区。</li>
+<li><code>echo &quot;C12A7328-F81F-11D2-BA4B-00A0C93EC93B&quot;</code>: 发送 “C12A7328-F81F-11D2-BA4B-00A0C93EC93B” 命令给 <code>fdisk</code>，用于将分区类型更改为 EFI System。</li>
+<li><code>echo &quot;w&quot;</code>: 发送 “w” 命令给 <code>fdisk</code>，用于保存分区表并退出。</li>
+</ol>
+<h2 id="partprobe"><a class="markdownIt-Anchor" href="#partprobe"></a> partprobe</h2>
+<p>​	重新加载分区</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">partprobe /dev/sdb</span><br></pre></td></tr></table></figure>
+<h1 id="文件系统配置"><a class="markdownIt-Anchor" href="#文件系统配置"></a> 文件系统配置</h1>
+<p>​	给文件系统分区设置uuid，创建ext4文件系统分区</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Generate random uuid <span class="keyword">for</span> rootfs</span></span><br><span class="line">root_uuid=$(uuidgen)</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Create filesystems on partitions</span></span><br><span class="line">dd if=/dev/zero of=/dev/sdb1 bs=1KB count=10 </span><br><span class="line">mkfs.ext4 -U &quot;$&#123;root_uuid&#125;&quot; -L desktop-rootfs /dev/sdb1</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Mount partitions</span></span><br><span class="line">mkdir -p writable</span><br><span class="line">mount /dev/sdb1 writable</span><br></pre></td></tr></table></figure>
+<p>​	拷贝文件系统镜像到SD卡分区，并设置fstab</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Copy the rootfs to root partition</span></span><br><span class="line">tar -xpf &quot;$&#123;rootfs&#125;&quot; -C writable</span><br><span class="line">echo &quot;# &lt;file system&gt;     &lt;mount point&gt;  &lt;type&gt;  &lt;options&gt;   &lt;dump&gt;  &lt;fsck&gt;&quot; &gt; writable/etc/fstab</span><br><span class="line">echo &quot;UUID=$&#123;root_uuid,,&#125; /              ext4    defaults,x-systemd.growfs    0       1&quot; &gt;&gt; writable/etc/fstab</span><br></pre></td></tr></table></figure>
+<p>​	写入idbloader 和 uboot</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo dd if=idbloader.img of=/dev/sdb seek=64</span><br><span class="line">sudo dd if=u-boot.itb of=/dev/sdb seek=16384 conv=notrunc</span><br><span class="line">sync</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir boot</span><br><span class="line">sudo mkdir boot/extlinux </span><br><span class="line">sudo vim boot/extlinux/extlinux.conf</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># /boot/extlinux/extlinux.conf</span></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment">#</span></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># IMPORTANT WARNING</span></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment">#</span></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># The configuration of this file is generated automatically.</span></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># Do not edit this file manually, use: u-boot-update</span></span></span><br><span class="line"></span><br><span class="line">default l0</span><br><span class="line">menu title U-Boot menu</span><br><span class="line">prompt 1</span><br><span class="line">timeout 20</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">label l0</span><br><span class="line">        menu label Ubuntu 22.04.4 LTS 5.10.0-1004-rockchip</span><br><span class="line">        linux /boot/vmlinuz-5.10.0-1004-rockchip</span><br><span class="line">        initrd /boot/initrd.img-5.10.0-1004-rockchip</span><br><span class="line">        fdtdir /lib/firmware/5.10.0-1004-rockchip/device-tree/</span><br><span class="line"></span><br><span class="line">        append root=/dev/mmcblk1p1 rootwait rw console=ttyS2,1500000 console=tty1 cgroup_enable=cpuset cgroup_memory=1 cgroup_enable=memory</span><br><span class="line"></span><br><span class="line">label l0r</span><br><span class="line">        menu label Ubuntu 22.04.4 LTS 5.10.0-1004-rockchip (rescue target)</span><br><span class="line">        linux /boot/vmlinuz-5.10.0-1004-rockchip</span><br><span class="line">        initrd /boot/initrd.img-5.10.0-1004-rockchip</span><br><span class="line">        fdtdir /lib/firmware/5.10.0-1004-rockchip/device-tree/</span><br><span class="line">        append root=UUID=ad3b52b5-62aa-4f25-95fc-796d6126a268 rootwait rw console=ttyS2,1500000 console=tty1 cgroup_enable=cpuset cgroup_memory=1 cgroup_enable=memory single</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">&lt;file system&gt;     &lt;mount point&gt;  &lt;<span class="built_in">type</span>&gt;  &lt;options&gt;   &lt;dump&gt;  &lt;fsck&gt;</span></span><br><span class="line">/dev/mmcblk1p1 / ext4 defaults 0 1</span><br></pre></td></tr></table></figure>
+<h1 id="最终步骤"><a class="markdownIt-Anchor" href="#最终步骤"></a> 最终步骤</h1>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">export ftp_proxy=http://127.0.0.1:8889/</span><br><span class="line">export https_proxy=http://127.0.0.1:8889/</span><br><span class="line">export FTP_PROXY=http://127.0.0.1:8889/</span><br><span class="line">export HTTPS_PROXY=http://127.0.0.1:8889/</span><br><span class="line">export HTTP_PROXY=http://127.0.0.1:8889/</span><br><span class="line">export http_proxy=http://127.0.0.1:8889/</span><br><span class="line"></span><br><span class="line">git clone https://github.com/Joshua-Riek/ubuntu-rockchip.git</span><br><span class="line">git clone --single-branch --progress -b v2017.09-rk3588 https://github.com/orangepi-xunlong/u-boot-orangepi.git u-boot-orangepi-rk3588</span><br><span class="line">git -C u-boot-orangepi-rk3588 checkout 7f7ff61a8b79fdb4f2d51dfb8aa643b8bc3ada0c</span><br><span class="line">cp -r ubuntu-rockchip/packages/u-boot-orangepi-rk3588/debian u-boot-orangepi-rk3588</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>修改uboot波特率为115200</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+<pre><code>  make CROSS_COMPILE=aarch64-linux-gnu- ARCH=arm  -j32  orangepi_5_defconfig
+  make CROSS_COMPILE=aarch64-linux-gnu- -j32 
+  make CROSS_COMPILE=aarch64-linux-gnu- ARCH=arm  -j32 \
+  BL31=../rkbin/bin/rk35/rk3588_bl31_v1.45.elf \
+  spl/u-boot-spl.bin u-boot.dtb u-boot.itb
+</code></pre>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-01_生活/13_反思(5月第2个星期"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2024/05/06/01_%E7%94%9F%E6%B4%BB/13_%E5%8F%8D%E6%80%9D(5%E6%9C%88%E7%AC%AC2%E4%B8%AA%E6%98%9F%E6%9C%9F/"
+    >反思(5月第2个星期</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2024/05/06/01_%E7%94%9F%E6%B4%BB/13_%E5%8F%8D%E6%80%9D(5%E6%9C%88%E7%AC%AC2%E4%B8%AA%E6%98%9F%E6%9C%9F/" class="article-date">
+  <time datetime="2024-05-06T12:26:56.000Z" itemprop="datePublished">2024-05-06</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  Here's something encrypted, password is required to continue reading. 
+      <a class="article-more-link" href="/2024/05/06/01_%E7%94%9F%E6%B4%BB/13_%E5%8F%8D%E6%80%9D(5%E6%9C%88%E7%AC%AC2%E4%B8%AA%E6%98%9F%E6%9C%9F/"
+        >阅读更多...</a
+      >
+       
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
   id="post-06_工作记录/14_工作记录(5月的第4个星期)"
   class="article article-type-post"
   itemscope
@@ -1019,324 +1272,6 @@
 <p>TF卡烧写（适用Linux和Android系统）_-_38.flv</p>
 <p>使用虚拟机ubuntu系统给开发板_-_39.flv</p>
 <p>救砖模式_-_40.flv</p>
-</blockquote>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-06_工作记录/10_工作记录(4月的第3个星期)"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2024/04/03/06_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/10_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95(4%E6%9C%88%E7%9A%84%E7%AC%AC3%E4%B8%AA%E6%98%9F%E6%9C%9F)/"
-    >工作记录((4月第3个星期)</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2024/04/03/06_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/10_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95(4%E6%9C%88%E7%9A%84%E7%AC%AC3%E4%B8%AA%E6%98%9F%E6%9C%9F)/" class="article-date">
-  <time datetime="2024-04-03T13:26:56.000Z" itemprop="datePublished">2024-04-03</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/">工作记录</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>==认清一份幻觉比发现一个真理更能使人明智==</p>
-<p>==我希望用一生的时间不断深入和学习电子信息相关的全部知识，将其整理成网络并分享出去，与更多志同道合的朋友共同进步，你清楚的知道，如果做不到这一点，你将永远不快乐==</p>
-<p>==当你在凝视深渊的时候，深渊也在凝视你==</p>
-<h1 id="415-工作记录星期一"><a class="markdownIt-Anchor" href="#415-工作记录星期一"></a> 4.15 工作记录（星期一）</h1>
-<p>==我希望用一生的时间不断深入和学习电子计算机相关的全部知识，将其整理成网络并分享出去，与更多志同道合的朋友共同进步，你清楚的知道，如果做不到这一点你将永远不快乐。==</p>
-<p>==当你在凝视深渊的时候，深渊也在凝视你==</p>
-<p>==摆脱一份幻觉比发现一个真理更能使人明智==</p>
-<hr />
-<p>昨天一天过的还行，有两次走在了悬崖边，然后都被拉了回来，没有犯下大错，不然会非常有问题的，就也还好吧，同时也就证明喝酒真的会耽误事情，以后还是尽可能的少喝酒，本来昨天还想着看一看老岁月的视频呢，好的视频值得多次观看，其他的感悟就没了，但我感觉今天晚上很有可能管不住自己。</p>
-<p>今天把屏幕配置完成了，将编译脚本也都简单的写了一下注释,然后列举一下还要搞的东西，</p>
-<blockquote>
-<p>1.蓝牙 WIFI</p>
-<p>2.buildroot优化</p>
-</blockquote>
-<h1 id="416-日工作记录星期二"><a class="markdownIt-Anchor" href="#416-日工作记录星期二"></a> 4.16 日工作记录(星期二)</h1>
-<p>==我想要用一生的时间不断深入和学习电子计算机相关全部的知识，将其整理成网络，并分享出去，与更多志同道合的朋友共同进步，你清楚的指导，如果做不到这一点，你将永远不快乐==</p>
-<p>==当你在凝视深渊的时候，深渊也在凝视你==</p>
-<p>==摆脱一份幻觉，比发现一个真理更能使人明智==</p>
-<hr />
-<p>昨天晚上在电脑上看了一会儿唐砖，作者的文笔写的确实是很可以，也确实是我所喜欢的哪一种，但是在看了之后呢，依然是什么都没有留下，不如归去，对吧。一切都是幻觉，上一个星期做的挺好的，这一个星期也就继续重复上一周的所作所为就行了，然后陈述今天的任务和问题，</p>
-<p>今天开始研究了一下ubuntu24，也还行再去掉nodejs就能编译过了，这个nodejs也不知道具体的作用是什么，就先这样把，列举一下今天完成的东西：</p>
-<blockquote>
-<p>1.ubuntu24 编译 修改build.sh脚本，添加版本判断</p>
-<p>2.adb 问题的解决</p>
-<p>3.蓝牙 WIFI移植测试</p>
-<p>4.终端颜色 自动扩容</p>
-<p>5.topeet用户名密码</p>
-<p>6.摄像头测试</p>
-<p>7.修改桌面测试</p>
-<p>8.添加我们的测试 去掉RK官方的测试</p>
-<p>其他应该就没了吧，现在开始搞一下ubuntu啥的系统吧，其实也挺简单的。</p>
-</blockquote>
-<p>确实是没了，就也还行吧，可以接受，然后是先改ubuntu20和ubuntu22吧，用3568的来替换，3568要换的好像只有ko文件其他的没啥吧。</p>
-<h1 id="417-工作记录星期三"><a class="markdownIt-Anchor" href="#417-工作记录星期三"></a> 4.17 工作记录(星期三)</h1>
-<p>==摆脱一份幻觉比发现一个真理更能使人明智==</p>
-<p>==我希望用一生的时间不断深入和学习电子计算机相关的全部知识，将其整理成网络并分享出去，与更多志同道合的朋友共同进步，你清楚的知道，如果做不到这一点，你将永远不快乐==</p>
-<p>==当你在凝视深渊的时候，深渊也在凝视你==</p>
-<hr />
-<p>昨天的时候算是初步搞完了buildroot，目前还剩下的就只有一个13850的摄像头，这个应该也仅仅只是替换一个iq文件的问题了，这个不急，我先来将其他的测试完成。</p>
-<blockquote>
-<p>1.ubuntu脚本测试和修改√</p>
-<p>​	==修改iq文件==</p>
-<p>​	==修改rkaiq的包和对应的编译脚本==</p>
-<p>​	==修改logo和GPU 性能模式==</p>
-<p>​	==修改KO文件==</p>
-<p>​	==修改挂载分区==</p>
-<p>​	==开关机网络检索时间改为3秒==</p>
-<p>​	==设置桌面和文件夹单击和双击==</p>
-<p>2.debian11脚本测试和修改√</p>
-<p>3.debian12 脚本构建和测试√</p>
-<p>4.替换SDK源码包√</p>
-<p>5.制作打包脚本√</p>
-</blockquote>
-<h1 id="418-工作记录"><a class="markdownIt-Anchor" href="#418-工作记录"></a> 4.18 工作记录</h1>
-<p>==摆脱一份幻觉比发现一个真理更能使人明智==</p>
-<p>==当你在凝视深渊的时候，深渊也在凝视你==</p>
-<p>==我希望用一生的时间不断深入和学习电子计算机相关的全部知识，将其整理成网络，并分享出去，与更多志同道合的朋友共同进步，你清楚的知道如果做不到这一点，你将永远不快乐==</p>
-<p>scp <a href="mailto:topeet@192.168.1.117">topeet@192.168.1.117</a>:/home/topeet/04_rk3562/07_version_06/01_update/debian11/debian11_build.tar.xz ./</p>
-<p>scp <a href="mailto:topeet@192.168.1.117">topeet@192.168.1.117</a>:/home/topeet/04_rk3562/07_version_06/01_update/debian12/debian12_build.tar.xz ./</p>
-<p>scp <a href="mailto:topeet@192.168.1.117">topeet@192.168.1.117</a>:/home/topeet/04_rk3562/07_version_06/01_update/ubuntu20/ubuntu20_build.tar.xz ./</p>
-<p>scp <a href="mailto:topeet@192.168.1.117">topeet@192.168.1.117</a>:/home/topeet/04_rk3562/07_version_06/01_update/ubuntu22/ubuntu22_build.tar.xz ./</p>
-<h1 id="419-工作记录"><a class="markdownIt-Anchor" href="#419-工作记录"></a> 4.19 工作记录</h1>
-<p>==摆脱一份幻觉比发现一个真理更能使人明智==</p>
-<p>==当你在凝视深渊的时候，深渊也在凝视你==</p>
-<p>==我希望用一生的时间不断深入和学习电子计算机相关的全部知识，将其整理成网络并分享出去，与更多志同道合的朋友共同进步，你清楚的知道，如果做不到这一点，你将永远不快乐==</p>
-<hr />
-<p>断绝就彻底一点，其实这些都没有什么用，徒增伤悲罢了，昨天晚上和今天早上的代价已经付出了，而后面要做的就是重新开始好吧，认识到自己出现了问题就好，现在来写测试手册，应该都是完全相同的。</p>
-<blockquote>
-<p>1.修改3568 3588 编译源码，要求第一次编译要安装一系列的依赖</p>
-<p>​	3588源码修改完成√</p>
-<p>​	3568待修改</p>
-<p>2.修改3568吧3588镜像，去掉oem分区</p>
-<p>3.写测试手册√</p>
-<p>4.加上看门狗，所以要重新编译镜像</p>
-<p>5.网络手册重新截图</p>
-</blockquote>
-<h1 id="420-工作记录"><a class="markdownIt-Anchor" href="#420-工作记录"></a> 4.20 工作记录</h1>
-<p>==摆脱一份幻觉比发现一个真理更能使人明智==</p>
-<p>==当你在凝视深渊的时候，深渊也在凝视你==</p>
-<p>==我希望用一生的时间不断深入和学习电子计算机相关的全部知识，将其整理成网络，并分享出去，与更多志同道合的朋友共同进步，你清楚的指导，如果做不到这一点，你将永远不快乐==</p>
-<hr />
-<p>昨天晚上这不是又出问题了，现在已经算是认知到了问题所在了，问题的原因在于昨天中午看的那一条知乎，如果是假的，我希望他是真的，可怜之人，必然有可恨之处，但是错误不是一瞬间的，而是从那一刻开始就已经开始犯错了，其实这个问题是具有迷惑性的，它的问题是切除了管道，而我的问题不是，当时间到了之后，自然而然即可，所以后面的路知道要怎样走了吗，或许吧，也算是又认清楚了一个幻觉，其实倒也还行</p>
-<blockquote>
-<p>测试3568 源码 编译</p>
-<p>3562 添加4G 5G模块</p>
-<p>​	1.修改内核</p>
-<p>​	2.修改文件系统</p>
-<p>​	3.添加网络热插拔文件</p>
-<p>​	4.修改debian系统的打印等级</p>
-<p>​		echo 4 4 1 7 &gt; /proc/sys/kernel/printk</p>
-<p>​	5.添加测试程序</p>
-<p>​	6.安装busybox</p>
-</blockquote>
-<p>sudo chroot binary/</p>
-<p>mkdir -p /usr/share/udhcpc</p>
-<p>mkdir -p  /etc/udhcpc</p>
-<p>cp default.script /usr/share/udhcpc/</p>
-<p>cp default.script /etc/udhcpc/</p>
-<p>chmod 755 /usr/share/udhcpc/default.script</p>
-<p>chmod 755 /etc/udhcpc/default.script</p>
-<p>rm -rf default.script</p>
-<p>sudo XZ_OPT=-T0 tar -cpJvf ubuntu-focal-arm64.tar.xz binary</p>
-<blockquote>
-<p>修改构建脚本</p>
-</blockquote>
-<h1 id="421工作记录"><a class="markdownIt-Anchor" href="#421工作记录"></a> 4.21工作记录</h1>
-<blockquote>
-<p>1.修改3562的构建源码</p>
-<p>​	（1）修改最终的xz压缩包</p>
-<p>​	（2）修改overlay</p>
-<p>​		(1)分区规则</p>
-<p>​		(2)default。script</p>
-<p>​		(3)打印等级</p>
-<p>​	 （4）安装busybox</p>
-<p>​		（5）测试文件夹</p>
-<p>​	（3）<a target="_blank" rel="noopener" href="http://xn--build-3u3h158j.sh">修改build.sh</a></p>
-<p>​	==修改挂载分区==</p>
-<p>==设置桌面和文件夹单击和双击===</p>
-</blockquote>
-<p>sudo mkdir -p usr/share/udhcpc</p>
-<p>sudo mkdir -p  etc/udhcpc</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"># 网络设备命名规则</span><br><span class="line">mkdir -p $&#123;chroot_dir&#125;/etc/udev/rules.d</span><br><span class="line">cp $&#123;overlay_dir&#125;/etc/udev/rules.d/75-net-description.rules $&#123;chroot_dir&#125;/etc/udev/rules.d/</span><br><span class="line"></span><br><span class="line"># 一些测试脚本</span><br><span class="line">cp $&#123;overlay_dir&#125;/topeet_test $&#123;chroot_dir&#125;/ -r</span><br><span class="line"></span><br><span class="line"># udhcpc 获取规则(5G要用到)</span><br><span class="line">mkdir -p $&#123;chroot_dir&#125;/usr/share/udhcpc</span><br><span class="line">mkdir -p $&#123;chroot_dir&#125;/etc/udhcpc</span><br><span class="line">cp $&#123;overlay_dir&#125;/usr/share/udhcpc/default.script $&#123;chroot_dir&#125;/usr/share/udhcpc/</span><br><span class="line">cp $&#123;overlay_dir&#125;/etc/udhcpc/ $&#123;chroot_dir&#125;/usr/share/udhcpc/</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 配置文件夹单击</span><br><span class="line">mkdir -p $&#123;chroot_dir&#125;/etc/xdg/xfce4/xfconf/xfce-perchannel-xml</span><br><span class="line">cp $&#123;overlay_dir&#125;/etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml $&#123;chroot_dir&#125;/etc/xdg/xfce4/xfconf/xfce-perchannel-xml/</span><br><span class="line">cp $&#123;overlay_dir&#125;/etc/xdg/xfce4/xfconf/xfce-perchannel-xml/thunar.xml $&#123;chroot_dir&#125;/etc/xdg/xfce4/xfconf/xfce-perchannel-xml/</span><br><span class="line"></span><br><span class="line">XZ_OPT=-T0 tar -cpJvf debian10_build.tar.xz debian10_build</span><br><span class="line">XZ_OPT=-T0 tar -cpJvf debian11_build.tar.xz debian11_build</span><br><span class="line">XZ_OPT=-T0 tar -cpJvf ubuntu20_build.tar.xz ubuntu20_build</span><br><span class="line">XZ_OPT=-T0 tar -cpJvf ubuntu22_build.tar.xz ubuntu22_build</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">sudo  mkdir -p etc/udhcpc/</span><br><span class="line">sudo  mkdir -p usr/share/udhcpc/</span><br><span class="line">sudo cp default.script 02_rk3588/02_Debian和Ubuntu系统构建源码/02_debian11构建源码/debian11_build/overlay/etc/udhcpc/</span><br><span class="line">sudo cp default.script 02_rk3588/02_Debian和Ubuntu系统构建源码/02_debian11构建源码/debian11_build/overlay/usr/share/udhcpc/</span><br><span class="line"></span><br><span class="line">sudo cp default.script 02_rk3588/02_Debian和Ubuntu系统构建源码/03_debian12构建源码/debian12_build/overlay/etc/udhcpc/</span><br><span class="line">sudo cp default.script 02_rk3588/02_Debian和Ubuntu系统构建源码/03_debian12构建源码/debian12_build/overlay/usr/share/udhcpc/</span><br><span class="line"></span><br><span class="line">sudo cp default.script 02_rk3588/02_Debian和Ubuntu系统构建源码/04_ubuntu20构建源码/ubuntu20_build/overlay/etc/udhcpc/</span><br><span class="line">sudo cp default.script 02_rk3588/02_Debian和Ubuntu系统构建源码/04_ubuntu20构建源码/ubuntu20_build/overlay/usr/share/udhcpc/</span><br><span class="line"></span><br><span class="line">cp default.script 02_rk3588/02_Debian和Ubuntu系统构建源码/05_ubuntu22构建源码/ubuntu22_build/overlay/etc/udhcpc/</span><br><span class="line">cp default.script 02_rk3588/02_Debian和Ubuntu系统构建源码/05_ubuntu22构建源码/ubuntu22_build/overlay/usr/share/udhcpc/</span><br></pre></td></tr></table></figure>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">cp thunar.xml xfce4-desktop.xml 03_Debian和Ubuntu系统构建源码/02_debian10构建源码/debian10_build/overlay/etc/xdg/xfce4/xfconf/xfce-perchannel-xml/</span><br><span class="line"></span><br><span class="line">cp thunar.xml xfce4-desktop.xml 03_Debian和Ubuntu系统构建源码/03_debian11构建源码/debian11_build/overlay/etc/xdg/xfce4/xfconf/xfce-perchannel-xml/</span><br><span class="line"></span><br><span class="line">cp thunar.xml xfce4-desktop.xml 03_Debian和Ubuntu系统构建源码/04_ubuntu20构建源码/ubuntu20_build/overlay/etc/xdg/xfce4/xfconf/xfce-perchannel-xml/</span><br><span class="line"></span><br><span class="line">cp thunar.xml xfce4-desktop.xml 03_Debian和Ubuntu系统构建源码/05_ubuntu22构建源码/ubuntu22_build/overlay/etc/xdg/xfce4/xfconf/xfce-perchannel-xml/</span><br></pre></td></tr></table></figure>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p 03_Debian和Ubuntu系统构建源码/02_debian10构建源码/debian10_build/overlay/usr/share/udhcpc</span><br><span class="line">mkdir -p 03_Debian和Ubuntu系统构建源码/02_debian10构建源码/debian10_build/overlay/usr/etc/udhcpc</span><br><span class="line">cp default.script 03_Debian和Ubuntu系统构建源码/02_debian10构建源码/debian10_build/overlay/usr/share/udhcpc</span><br><span class="line">cp default.script 03_Debian和Ubuntu系统构建源码/02_debian10构建源码/debian10_build/overlay/usr/etc/udhcpc</span><br><span class="line"></span><br><span class="line">mkdir -p 03_Debian和Ubuntu系统构建源码/03_debian11构建源码/debian11_build/overlay/usr/share/udhcpc</span><br><span class="line">mkdir -p 03_Debian和Ubuntu系统构建源码/03_debian11构建源码/debian11_build/overlay/usr/etc/udhcpc</span><br><span class="line">cp default.script 03_Debian和Ubuntu系统构建源码/03_debian11构建源码/debian11_build/overlay/usr/share/udhcpc</span><br><span class="line">cp default.script 03_Debian和Ubuntu系统构建源码/03_debian11构建源码/debian11_build/overlay/usr/etc/udhcpc</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">mkdir -p 03_Debian和Ubuntu系统构建源码/04_ubuntu20构建源码/ubuntu20_build/overlay/usr/share/udhcpc</span><br><span class="line">mkdir -p 03_Debian和Ubuntu系统构建源码/04_ubuntu20构建源码/ubuntu20_build/overlay/usr/etc/udhcpc</span><br><span class="line">cp default.script 03_Debian和Ubuntu系统构建源码/04_ubuntu20构建源码/ubuntu20_build/overlay/usr/share/udhcpc</span><br><span class="line">cp default.script 03_Debian和Ubuntu系统构建源码/04_ubuntu20构建源码/ubuntu20_build/overlay/usr/etc/udhcpc</span><br><span class="line"></span><br><span class="line">mkdir -p 03_Debian和Ubuntu系统构建源码/05_ubuntu22构建源码/ubuntu22_build/overlay/usr/share/udhcpc</span><br><span class="line">mkdir -p 03_Debian和Ubuntu系统构建源码/05_ubuntu22构建源码/ubuntu22_build/overlay/usr/etc/udhcpc</span><br><span class="line">cp default.script 03_Debian和Ubuntu系统构建源码/05_ubuntu22构建源码/ubuntu22_build/overlay/usr/share/udhcpc</span><br><span class="line">cp default.script 03_Debian和Ubuntu系统构建源码/05_ubuntu22构建源码/ubuntu22_build/overlay/usr/etc/udhcpc</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cp  75-net-description.rules 03_Debian和Ubuntu系统构建源码/02_debian10构建源码/debian10_build/overlay/etc/udev/rules.d</span><br><span class="line">cp  75-net-description.rules 03_Debian和Ubuntu系统构建源码/03_debian11构建源码/debian11_build/overlay/etc/udev/rules.d</span><br><span class="line">cp  75-net-description.rules 03_Debian和Ubuntu系统构建源码/04_ubuntu20构建源码/ubuntu20_build/overlay/etc/udev/rules.d</span><br><span class="line">cp  75-net-description.rules 03_Debian和Ubuntu系统构建源码/05_ubuntu22构建源码/ubuntu22_build/overlay/etc/udev/rules.d</span><br></pre></td></tr></table></figure>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cp -r *ko 03_Debian和Ubuntu系统构建源码/02_debian10构建源码/debian10_build/overlay/usr/local/modules/</span><br><span class="line">cp -r *ko 03_Debian和Ubuntu系统构建源码/03_debian11构建源码/debian11_build/overlay/usr/local/modules/</span><br><span class="line">cp -r *ko 03_Debian和Ubuntu系统构建源码/04_ubuntu20构建源码/ubuntu20_build/overlay/usr/local/modules/</span><br><span class="line">cp -r *ko 03_Debian和Ubuntu系统构建源码/05_ubuntu22构建源码/ubuntu22_build/overlay/usr/local/modules/</span><br></pre></td></tr></table></figure>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-06_工作记录/09_工作记录(4月第2个星期)"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2024/04/02/06_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/09_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95(4%E6%9C%88%E7%AC%AC2%E4%B8%AA%E6%98%9F%E6%9C%9F)/"
-    >工作记录((4月第2个星期)</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2024/04/02/06_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/09_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95(4%E6%9C%88%E7%AC%AC2%E4%B8%AA%E6%98%9F%E6%9C%9F)/" class="article-date">
-  <time datetime="2024-04-02T13:26:56.000Z" itemprop="datePublished">2024-04-02</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/">工作记录</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="49-工作记录星期二"><a class="markdownIt-Anchor" href="#49-工作记录星期二"></a> 4.9 工作记录（星期二）</h1>
-<p>==认清一份幻觉比发现一个真理更能使人明智。==</p>
-<p>==我希望用一生的时间不断深入和学习电子计算机相关的全部知识，将其整理成网络并分享出去，与更多志同道合的朋友共同进步，你清楚的直到，如果做不到这一点你将永远不快乐。==</p>
-<hr />
-<p>完结撒花，终于是搞完了全部的Linux基础相关的内容了，不容易，真的不容易，并不能说这些东西简单就好做，他们可以这样认为，但你不行，唯有真的做出了行动，才有评价的权力，其实这里可以代换，你认为果姐姐的视频也不是那么难，可能也是方向的问题，每个人站立的方向，所处的位置不同，就必然有不同的所作所为，任何一件事情都是有原因的。</p>
-<p>昨天晚上也有了不同的想法，我突然感觉录视频、写稿子花费的时间并不是很多，但收获却远远大于付出的时间，对于这件东西的理解层次就都不一样了，当然这还仅仅只是一个设想，要想实现其实也并不容易，因为有很多知识，在学习的时候并不知道它的作用是什么，很多时候是后面用到了，才知道它真正的作用，所以一步一回首也是有冲突的，最好的方式其实就是先用自己的方式学一遍，中间的过程中记上笔记，等学完一遍之后开始写稿子、录视频。</p>
-<p>搞完了这个之后，就不知道要做什么了，我想想还剩下的任务，3562的源码、资料、还有I2C，SPI视频，思考一下都要怎么做，</p>
-<p>遇到的问题：</p>
-<p>（1）AD版本转换的问题</p>
-<p>转原理图的时候没有任何问题，但是在转PCB的时候，我发现不能直接转17.4的亦或者16.6的，还需要再向下降低版本</p>
-<p>（2）BOM表转换</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202404091414300.png" alt="image-20240409141428256" /></p>
-<p>tPCB Footprint</p>
-<p>t{PCB Footprint}</p>
-<p>没有横线</p>
-<p>（3）没有的东西</p>
-<h1 id="410-工作记录星期三"><a class="markdownIt-Anchor" href="#410-工作记录星期三"></a> 4.10 工作记录（星期三）</h1>
-<p>==摆脱一份幻觉比发现一个真理更能使人明智==</p>
-<p>==我希望用一生的时间不断深入和学习电子计算机相关的全部知识，将其整理成网络，并分享出去，与更多志同道合的朋友共同进步，你清楚的知道，如果做不到这一点，你将永远不快乐。==</p>
-<p>==当你在凝视深渊的时候深渊也在凝视你==</p>
-<hr />
-<p>路要一步一步走，不能好高骛远，我发现技术支持这个东西确实会影响我的注意力，这跟平常的时候有区别的，下午的时候就听听音乐吧，倒也挺好的，昨天没有将手册搞完，今天继续搞吧。</p>
-<hr />
-<p>手册搞完了，也不难，现在开始搞源码了，但是也不能盲目的搞源码，做任何事情都要有目的，昨天先看了一下触觉的，触觉有个选择的，这里我认为还行，先去了解一下具体是怎样操作的吧，了解一下触觉都是怎样搞的，目前来看的话触觉的内容有点小问题，但不失为一种方法，本来想的是能不能手动改一下Linux的屏幕选择，现在来看的话，应该是不行的，所以就先这样，放弃掉，还是根据当前的手动修改即可，然后来思考下一步以及后面的步骤要怎么做</p>
-<p>服务器两个人用的时候也太卡了，但是我又不想放出去服务器，靠，这该死的掌控欲，算了，算了，那个电脑，根本就不是你想像中的问题，而是磁盘速度，让给田润雨吧，其实也就差在了这个地方，无奈，坑坑的，慢慢来吧</p>
-<p>感觉一次传一个的速度，是比一次传两个的速度快的多的，这是为啥呢？不是很理解呢，以后传输是不是应该有个脚本，传输完一个再传第二个，这样倒也挺好的。</p>
-<ol>
-<li>先来研究最新版本的5.10内核的编译脚本，实际上应该跟3588差不多，但是呢，我记得之前为啥有人说不一样呢，有些奇怪，这个问题不大，先来研究脚本吧。可以跟3588的做对照，除此之外，就比如那些ubuntu和debian的镜像是不是可以直接用3568的呢，或者说3568可不可以搞个debian12呢，我想还是算了吧，还是只再3568上搞个debian12吧，有两个系统，一个是debian11 一个是debian12 ，这样就对了。</li>
-<li>看了一下之后发现这个3562的构建脚本已经非常非常不一样了，正好刚刚学习过了shell脚本，趁这个机会，再对RK的这个脚本进行分析一遍，使用Vscode，回家之后应该也会看，所以我先打包一下，回家直接解压缩。</li>
-</ol>
-<h1 id="411-工作记录"><a class="markdownIt-Anchor" href="#411-工作记录"></a> 4.11 工作记录</h1>
-<p>==我希望用一生的时间不断深入和学习电子计算机相关的全部知识，将其整理成网络，并分享出去，与更多志同道合的朋友共同进步，你清楚的知道，如果做不到这一点，你将永远不快乐。==</p>
-<p>==摆脱一份幻觉比发现一个真理更能使人明智==</p>
-<p>==当你在凝视深渊的时候，深渊也在凝视你==</p>
-<p>今天的任务就是看脚本了，将瑞芯微的脚本好好的研究一下，写个手册。至少要给我自己整明白对吧，</p>
-<hr />
-<p>行了，就先到这里吧，现在开始搞移植了，<a target="_blank" rel="noopener" href="http://xn--build-e31h1e54w86z6st3mm6p3cpt9c.sh">移植完了再搞那些build.sh</a>。</p>
-<p>顶级设备树</p>
-<blockquote>
-<p>rk3562-evb1-lp4x-v10-linux.dts</p>
-</blockquote>
-<p>一级设备树：</p>
-<blockquote>
-<p>#include “rk3562-evb1-lp4x-v10.dtsi”<br />
-#include “rk3562-linux.dtsi”<br />
-#include “rk3562-rk817.dtsi”</p>
-</blockquote>
-<p>二级设备树</p>
-<p>“rk3562-evb1-lp4x-v10.dtsi”</p>
-<blockquote>
-<p>#include “dt-bindings/usb/pd.h”<br />
-#include “rk3562.dtsi”<br />
-#include “rk3562-evb.dtsi”<br />
-#include “rk3562-evb1-cam.dtsi”<br />
-#include &lt;dt-bindings/gpio/gpio.h&gt;<br />
-#include &lt;dt-bindings/pinctrl/rockchip.h&gt;<br />
-#include &lt;dt-bindings/sensor-dev.h&gt;</p>
-</blockquote>
-<p>改了串口波特率还是这个现象，现在先改一下对应的loader看看打印</p>
-<p>RK3562MINIALL.ini</p>
-<p>内容如下所示：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">[CHIP_NAME]</span><br><span class="line">NAME=RK3562</span><br><span class="line">[VERSION]</span><br><span class="line">MAJOR=1</span><br><span class="line">MINOR=4</span><br><span class="line">[CODE471_OPTION]</span><br><span class="line">NUM=1</span><br><span class="line">Path1=bin/rk35/rk3562_ddr_1332MHz_v1.04.bin</span><br><span class="line">Sleep=1</span><br><span class="line">[CODE472_OPTION]</span><br><span class="line">NUM=1</span><br><span class="line">Path1=bin/rk35/rk3562_usbplug_v1.04.bin</span><br><span class="line">[LOADER_OPTION]</span><br><span class="line">NUM=2</span><br><span class="line">LOADER1=FlashData</span><br><span class="line">LOADER2=FlashBoot</span><br><span class="line">FlashData=bin/rk35/rk3562_ddr_1332MHz_v1.04.bin</span><br><span class="line">FlashBoot=bin/rk35/rk3562_spl_v1.03.bin</span><br><span class="line">[OUTPUT]</span><br><span class="line">PATH=rk3562_spl_loader_v1.04.103.bin</span><br><span class="line">[SYSTEM]</span><br><span class="line">NEWIDB=true</span><br><span class="line">[FLAG]</span><br><span class="line">471_RC4_OFF=true</span><br><span class="line">RC4_OFF=true</span><br><span class="line">CREATE_IDB=true</span><br></pre></td></tr></table></figure>
-<p>问题解决，原来是我用错了设备树，这是小问题，现在可以正常启动了，然后开始研究脚本的修改</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rk3562-evb2-ddr4-v10-linux.dts</span><br></pre></td></tr></table></figure>
-<h1 id="413-工作记录星期六"><a class="markdownIt-Anchor" href="#413-工作记录星期六"></a> 4.13 工作记录（星期六）</h1>
-<p>==我希望用一生的事件不断深入和学习电子计算机相关的全部知识，将其整理成网络并分享出去，与更多志同道合的朋友共同进步，你清楚的知道，如果做不到这一点，你将永远不快乐==</p>
-<p>==认清一份幻觉，比发现一个真理更能使人明智==</p>
-<p>==当你在凝视深渊的时候，深渊也在凝视你==</p>
-<hr />
-<p>现在初步的雏形算是有了，倒是还行，然后开始第二步，先来搞系统，确保系统没问题之后，然后再来研究那些花里胡哨的东西，先来来适配源码了，先整理设备树。</p>
-<p>顶级设备树</p>
-<blockquote>
-<p>rk3562-evb2-ddr4-v10-linux.dts</p>
-</blockquote>
-<p>一级设备树：</p>
-<blockquote>
-<p>rk3562-evb2-ddr4-v10.dtsi</p>
-<p>rk3562-linux.dtsi</p>
-<p>rk3562-rk809.dtsi</p>
-<p>rk3562-evb2-cam.dtsi</p>
-</blockquote>
-<p>二级设备树</p>
-<blockquote>
-<p>#include “rk3562.dtsi”<br />
-#include “rk3562-evb.dtsi”<br />
-#include &lt;dt-bindings/gpio/gpio.h&gt;<br />
-#include &lt;dt-bindings/pinctrl/rockchip.h&gt;<br />
-#include &lt;dt-bindings/sensor-dev.h&gt;</p>
 </blockquote>
  
       <!-- reward -->

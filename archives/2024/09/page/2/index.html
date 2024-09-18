@@ -13,7 +13,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
-      <title>WSL使用小技巧 |  热爱学习的未来酱</title>
+      <title>归档: 2024/9 |  热爱学习的未来酱</title>
   <meta name="generator" content="hexo-theme-ayer">
       
       <link rel="shortcut icon" href="/favicon.ico" />
@@ -55,205 +55,57 @@
       
     <main class="content on">
       <section class="outer">
-  <article
-  id="post-07_小技巧/12_WSL使用小技巧"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
+  
+  
+  <article class="articles">
     
-    <header class="article-header">
+    
+    <h1 class="page-type-title">2024/9</h1>
+    
+    
+  
+  
+  
+  
+  
+  
+  <div class="archives-wrap">
+    <div class="archive-year-wrap">
+      <a href="/archives/2024" class="archive-year">2024</a>
+    </div>
+    <div class="archives">
+      
+      <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2024/09/01/02_%E7%91%9E%E8%8A%AF%E5%BE%AE/21_%E7%91%9E%E8%8A%AF%E5%BE%AElogo%E6%98%BE%E7%A4%BA/" class="archive-article-date">
+  <time datetime="2024-09-01T09:17:03.000Z" itemprop="datePublished">09/01</time>
+</a>
        
-<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  WSL使用小技巧
-</h1>
+<h2 itemprop="name">
+  <a class="archive-article-title" href="/2024/09/01/02_%E7%91%9E%E8%8A%AF%E5%BE%AE/21_%E7%91%9E%E8%8A%AF%E5%BE%AElogo%E6%98%BE%E7%A4%BA/"
+    >瑞芯微logo显示</a> 
+</h2>
  
 
-      
     </header>
-     
-    <div class="article-meta">
-      <a href="/2024/08/20/07_%E5%B0%8F%E6%8A%80%E5%B7%A7/12_WSL%E4%BD%BF%E7%94%A8%E5%B0%8F%E6%8A%80%E5%B7%A7/" class="article-date">
-  <time datetime="2024-08-19T22:50:19.000Z" itemprop="datePublished">2024-08-20</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%B0%8F%E6%8A%80%E5%B7%A7/">小技巧</a>
+    
+    
   </div>
-  
-<div class="word_count">
-    <span class="post-time">
-        <span class="post-meta-item-icon">
-            <i class="ri-quill-pen-line"></i>
-            <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">752</span>
-        </span>
-    </span>
-
-    <span class="post-time">
-        &nbsp; | &nbsp;
-        <span class="post-meta-item-icon">
-            <i class="ri-book-open-line"></i>
-            <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">3 分钟</span>
-        </span>
-    </span>
-</div>
- 
-    </div>
-      
-    <div class="tocbot"></div>
-
-
-
-
-  
-    <div class="article-entry" itemprop="articleBody">
-       
-  <link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="wsl代理"><a class="markdownIt-Anchor" href="#wsl代理"></a> WSL代理</h1>
-<p>现在不用v2ray ，而是用clash，感觉clash比v2ray强一点，下载地址和简单教程为：<a target="_blank" rel="noopener" href="https://igghelper.com/helper/?p=535">https://igghelper.com/helper/?p=535</a></p>
-<p>安装之后导入代理，接下来的就是下面的一些设置了。</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409051043950.png" alt="image-20240819203759228" /></p>
-<p>系统代理和开机自启要设置一下，如下所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409051043025.png" alt="image-20240819204149507" />image-20240819204149507</p>
-<p>然后打开Tun模式，我测试就可以了</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409051043043.png" alt="image-20240819205233715" />image-20240819205233715</p>
-<p>==这个tun模式指的是虚拟一个网卡，但这样的话会导致网络发生变化，从而导致一系列的问题，例如无法正常拉取==</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409051043016.png" alt="image-20240819213826540" />image-20240819213826540</p>
-<p>所以现在正确的设置是这个地方：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409051043030.png" alt="image-20240819214845649" />image-20240819214845649</p>
-<p>其他的就不用设置了，行了，去洗澡。</p>
-<p>Clash 是一种代理工具，它可以根据配置文件的规则将网络流量通过不同的代理服务器或直接连接到目标服务器。<strong>本地直连</strong>（通常称为 “DIRECT”）是一种规则配置，意味着流量将不通过代理服务器，而是直接从你的设备连接到目标服务器。</p>
-<p>选clash代理的时候尽量选美国，其他的好慢啊。</p>
-<p>更新wsl内核版本：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">COPYsudo apt install linux-image-generic-hwe-22.04</span><br></pre></td></tr></table></figure>
-<h1 id="windows商店打不开的解决方法"><a class="markdownIt-Anchor" href="#windows商店打不开的解决方法"></a> windows商店打不开的解决方法</h1>
-<p>打开“运行”输入 inetcpl.cpl 或者“WINDOWS”+“R”键，输入 inetcpl.cpl亦可。<br />
-点开高级往下拉，勾上&quot;使用TLS 1.2&quot;选项，或者点还原高级设置。</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409121422525.png" alt="在这里插入图片描述" /></p>
-<h1 id="wsl压缩方法"><a class="markdownIt-Anchor" href="#wsl压缩方法"></a> WSL压缩方法</h1>
-<p>PS C:\Users\Administrator\AppData\Local\Packages\CanonicalGroupLimited.Ubuntu22.04LTS_79rhkp1fndgsc\LocalState&gt; Optimize-VHD -Path .\ext4.vhdx  -Mode Full</p>
-<h1 id="wsl移动到其他盘"><a class="markdownIt-Anchor" href="#wsl移动到其他盘"></a> WSL移动到其他盘</h1>
-<p>你可以按以下步骤将你的 <code>Ubuntu-22.04</code> 发行版导入到 <code>G:\</code> 盘：</p>
-<h3 id="1-导出-wsl-发行版"><a class="markdownIt-Anchor" href="#1-导出-wsl-发行版"></a> 1. 导出 WSL 发行版</h3>
-<p>首先，导出你的 <code>Ubuntu-22.04</code> WSL 发行版为 <code>.tar</code> 文件（如果尚未导出），例如：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsl --<span class="built_in">export</span> Ubuntu-22.04 G:\ubuntu-22.04-backup.tar</span><br></pre></td></tr></table></figure>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409151359184.png" alt="image-20240915135926150" /></p>
-<p>这个命令会将你的 <code>Ubuntu-22.04</code> 版本导出到 <code>G:</code> 文件夹中，文件名为 <code>ubuntu-22.04-backup.tar</code>。你可以根据需要更改路径和文件名。</p>
-<h3 id="2-删除原-wsl-发行版"><a class="markdownIt-Anchor" href="#2-删除原-wsl-发行版"></a> 2. 删除原 WSL 发行版</h3>
-<p>如果确认导出成功，可以使用以下命令从 WSL 中删除原来的 <code>Ubuntu-22.04</code> 版本：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsl --unregister Ubuntu-22.04</span><br></pre></td></tr></table></figure>
-<p>这样做会从 WSL 中删除现有的 <code>Ubuntu-22.04</code>，但不会影响你导出的 <code>.tar</code> 文件。</p>
-<h3 id="3-导入到-g-盘"><a class="markdownIt-Anchor" href="#3-导入到-g-盘"></a> 3. 导入到 G:\ 盘</h3>
-<p>现在你可以将导出的 WSL 发行版安装到 <code>G:\</code> 盘。运行以下命令将 <code>Ubuntu-22.04</code> 版本导入到 <code>G:\wsl\ubuntu-22.04</code> 文件夹：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsl --import Ubuntu-22.04 G:\ubuntu-22.04 G:\ubuntu-22.04-backup.tar</span><br></pre></td></tr></table></figure>
-<p>这会将你的 <code>Ubuntu-22.04</code> 发行版安装到 <code>G:\wsl\ubuntu-22.04</code> 目录。</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409151400503.png" alt="image-20240915140014438" /></p>
-<h3 id="4-启动新位置的-wsl"><a class="markdownIt-Anchor" href="#4-启动新位置的-wsl"></a> 4. 启动新位置的 WSL</h3>
-<p>导入完成后，你可以使用以下命令启动新的 <code>Ubuntu-22.04</code> 发行版：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsl -d Ubuntu-22.04</span><br></pre></td></tr></table></figure>
-<p>这样，你的 <code>Ubuntu-22.04</code> 就会在 <code>G:\</code> 盘上运行了。</p>
-<p>如果有任何问题或进一步的帮助需求，请随时告知！</p>
-<h1 id="设置默认用户"><a class="markdownIt-Anchor" href="#设置默认用户"></a> 设置默认用户</h1>
-<p>wsl -d Ubuntu-22.04 --user topeet</p>
-<p>ubuntu2204 config --default-user topeet</p>
-<p>wsl -d Ubuntu-20.04 --user topeet</p>
-<p>ubuntu2004 config --default-user topeet</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-<div class="share-btn">
-      <span class="share-sns share-outer">
-        <i class="ri-share-forward-line"></i>
-        分享
-      </span>
-      <div class="share-wrap">
-        <i class="arrow"></i>
-        <div class="share-icons">
-          
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="ri-weibo-fill"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="ri-wechat-fill"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="ri-qq-fill"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="ri-douban-line"></i>
-          </a>
-          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a> -->
-          
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="ri-facebook-circle-fill"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="ri-twitter-fill"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="ri-google-fill"></i>
-          </a>
-        </div>
-      </div>
-</div>
-
-<div class="wx-share-modal">
-    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2024/08/20/07_%E5%B0%8F%E6%8A%80%E5%B7%A7/12_WSL%E4%BD%BF%E7%94%A8%E5%B0%8F%E6%8A%80%E5%B7%A7/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div id="share-mask"></div>  
-    </footer>
-  </div>
-
-   
-  <nav class="article-nav">
-    
-      <a href="/2024/08/25/07_%E5%B0%8F%E6%8A%80%E5%B7%A7/14_repo%E5%AD%A6%E4%B9%A02/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            vim学习
-          
-        </div>
-      </a>
-    
-    
-      <a href="/2024/08/20/07_%E5%B0%8F%E6%8A%80%E5%B7%A7/13_readme%E7%9A%84%E4%BD%BF%E7%94%A8/" class="article-nav-link">
-        <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">readme的使用</div>
-      </a>
-    
-  </nav>
-
-  
-   
-  
-   
-    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
-    <div id="twikoo" class="twikoo"></div>
-    <script>
-        twikoo.init({
-            envId: ""
-        })
-    </script>
- 
 </article>
+      
+      
+    </div>
+  </div>
+  
+  
 
+  
+  <nav class="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/archives/2024/09/">上一页</a><a class="page-number" href="/archives/2024/09/">1</a><span class="page-number current">2</span>
+  </nav>
+  
 </section>
       <footer class="footer">
   <div class="outer">
@@ -415,22 +267,6 @@
 <script src="/js/lazyload.min.js"></script>
 
 <!-- Tocbot -->
- 
-<script src="/js/tocbot.min.js"></script>
-
-<script>
-  tocbot.init({
-    tocSelector: ".tocbot",
-    contentSelector: ".article-entry",
-    headingSelector: "h1, h2, h3, h4, h5, h6",
-    hasInnerContainers: true,
-    scrollSmooth: true,
-    scrollContainer: "main",
-    positionFixedSelector: ".tocbot",
-    positionFixedClass: "is-position-fixed",
-    fixedSidebarOffset: "auto",
-  });
-</script>
 
 <script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
 <link

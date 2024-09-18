@@ -110,6 +110,61 @@
     
     
     <article
+  id="post-01_生活/18_反思(9月第3个星期)"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2024/09/18/01_%E7%94%9F%E6%B4%BB/18_%E5%8F%8D%E6%80%9D(9%E6%9C%88%E7%AC%AC3%E4%B8%AA%E6%98%9F%E6%9C%9F)/"
+    >反思(9月第3个星期）</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2024/09/18/01_%E7%94%9F%E6%B4%BB/18_%E5%8F%8D%E6%80%9D(9%E6%9C%88%E7%AC%AC3%E4%B8%AA%E6%98%9F%E6%9C%9F)/" class="article-date">
+  <time datetime="2024-09-18T12:26:56.000Z" itemprop="datePublished">2024-09-18</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  Here's something encrypted, password is required to continue reading. 
+      <a class="article-more-link" href="/2024/09/18/01_%E7%94%9F%E6%B4%BB/18_%E5%8F%8D%E6%80%9D(9%E6%9C%88%E7%AC%AC3%E4%B8%AA%E6%98%9F%E6%9C%9F)/"
+        >阅读更多...</a
+      >
+       
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
   id="post-07_小技巧/18_ubuntu一键配置"
   class="article article-type-post"
   itemscope
@@ -301,7 +356,7 @@
        
 <h2 itemprop="name">
   <a class="article-title" href="/2024/09/08/06_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/28_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95(%E4%B9%9D%E6%9C%88%E7%AC%AC%E4%BA%8C%E4%B8%AA%E6%98%9F%E6%9C%9F)/"
-    >反思(九月第二个星期)</a> 
+    >工作记录(九月第二个星期)</a> 
 </h2>
  
 
@@ -396,6 +451,107 @@
 <p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409131752628.png" alt="image-20240913175238294" /></p>
 <p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409131804060.png" alt="image-20240913180404992" /></p>
 <p>没啥意思</p>
+<h1 id="914工作记录星期六"><a class="markdownIt-Anchor" href="#914工作记录星期六"></a> 9.14工作记录(星期六)</h1>
+<p>==摆脱一份幻觉比发现一个真理更能使人明智==</p>
+<p>==当你在凝视深渊的时候，深渊也在凝视你==</p>
+<p>==我希望用一生的时间不断深入和学习电子计算机相关的全部知识，将其整理成网络并分享出去，与更多志同道合的朋友共同进步，你清楚的知道，如果做不到这一点你将永远不快乐==</p>
+<hr />
+<p>先来更新镜像，要更新的镜像有两个一个是4.19的，一个是5.10的，我先把5.10的搞定</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find . -type f -name &quot;*.Identifier&quot; -exec rm -f &#123;&#125; \;</span><br></pre></td></tr></table></figure>
+<p>要使用 <code>tree</code> 命令打印二级目录（即只显示当前目录和它的直接子目录），可以使用 <code>-L</code> 选项来限制目录树的深度。对于二级目录树，命令如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tree -L 3</span><br></pre></td></tr></table></figure>
+<p>如果你想解压到原始 <code>4.19</code> 目录下，命令可以改为：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo find . -path <span class="string">&quot;*/4.19/*.tar.xz&quot;</span> -execdir tar -xvf &#123;&#125; \;</span><br></pre></td></tr></table></figure>
+<p><code>-execdir</code> 会在找到的 <code>.tar.xz</code> 文件所在的目录下解压文件。</p>
+<p>为了将 <code>overlay_4_19</code> 目录中的内容复制到当前目录下每个 <code>4.19</code> 目录中的 <code>binary</code> 目录中，并使用 <code>sudo</code> 权限执行，你可以使用以下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo find . -path <span class="string">&quot;*/4.19/binary&quot;</span> -<span class="built_in">exec</span> <span class="built_in">cp</span> -r overlay_4_19/* &#123;&#125; \;</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo find . -path &quot;*/4.19/binary&quot; -exec rm  &#123;&#125; \;</span><br></pre></td></tr></table></figure>
+<p>将binary打包回去</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo find . -path &quot;*/4.19/binary&quot; -type d -execdir sh -c &#x27;XZ_OPT=&quot;-T0 -1&quot; tar -cpJvf ../new_binary.tar.xz binary &amp;&amp; rm -f ../*.tar.xz &amp;&amp; mv ../new_binary.tar.xz ../$(basename $(pwd)).tar.xz&#x27; \;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查找所有的4.19目录</span></span><br><span class="line">find . -path <span class="string">&quot;*/4.19/binary&quot;</span> | <span class="keyword">while</span> <span class="built_in">read</span> binary_dir; <span class="keyword">do</span></span><br><span class="line">    <span class="comment"># 获取binary所在的目录路径</span></span><br><span class="line">    base_dir=$(<span class="built_in">dirname</span> <span class="string">&quot;<span class="variable">$binary_dir</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 查找4.19目录下的.tar.xz文件作为参考打包名称</span></span><br><span class="line">    tar_file=$(find <span class="string">&quot;<span class="variable">$base_dir</span>&quot;</span> -maxdepth 1 -name <span class="string">&quot;*.tar.xz&quot;</span> | <span class="built_in">head</span> -n 1)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 提取参考.tar.xz文件的名称部分</span></span><br><span class="line">    <span class="keyword">if</span> [ -n <span class="string">&quot;<span class="variable">$tar_file</span>&quot;</span> ]; <span class="keyword">then</span></span><br><span class="line">        tar_name=$(<span class="built_in">basename</span> <span class="string">&quot;<span class="variable">$tar_file</span>&quot;</span>)</span><br><span class="line">        <span class="built_in">echo</span> <span class="string">&quot;正在将 <span class="variable">$binary_dir</span> 打包为 <span class="variable">$base_dir</span>/<span class="variable">$tar_name</span>&quot;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 使用XZ_OPT=-T0进行多线程打包</span></span><br><span class="line">        XZ_OPT=-T0 tar -cpJvf <span class="string">&quot;<span class="variable">$base_dir</span>/<span class="variable">$tar_name</span>&quot;</span> -C <span class="string">&quot;<span class="variable">$binary_dir</span>&quot;</span> .</span><br><span class="line">        <span class="built_in">echo</span> <span class="string">&quot;打包完成：<span class="variable">$base_dir</span>/<span class="variable">$tar_name</span>&quot;</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">&quot;未找到参考.tar.xz文件，跳过目录 <span class="variable">$base_dir</span>&quot;</span></span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查找4.19目录下的所有rootfs.img</span></span><br><span class="line">sudo find . -path <span class="string">&quot;*/4.19/rootfs.img&quot;</span> | <span class="keyword">while</span> <span class="built_in">read</span> img; <span class="keyword">do</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">&quot;挂载 <span class="variable">$img</span> 到 /mnt&quot;</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># 挂载rootfs.img到/mnt</span></span><br><span class="line">  sudo mount <span class="string">&quot;<span class="variable">$img</span>&quot;</span> /mnt</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> [ $? -eq 0 ]; <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;挂载成功，开始复制overlay_4_19内容到 <span class="variable">$img</span>&quot;</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 复制overlay_4_19内容到挂载的目录</span></span><br><span class="line">    sudo <span class="built_in">cp</span> -r overlay_4_19/* /mnt/</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;复制完成，取消挂载 <span class="variable">$img</span>&quot;</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 取消挂载</span></span><br><span class="line">    sudo umount /mnt</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;<span class="variable">$img</span> 已成功取消挂载&quot;</span></span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;挂载失败： <span class="variable">$img</span>&quot;</span></span><br><span class="line">  <span class="keyword">fi</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查找所有的binary目录，并将deb包拷贝进去</span></span><br><span class="line">sudo find . -path &quot;*/4.19/binary&quot; | while read binary_dir; do</span><br><span class="line">  echo &quot;将 camera_engine_rkaiq_rk3568_arm64.deb 拷贝到 $binary_dir&quot;</span><br><span class="line">  </span><br><span class="line"><span class="meta prompt_">  # </span><span class="language-bash">拷贝deb包到每个binary目录下</span></span><br><span class="line">  sudo cp camera_engine_rkaiq_rk3568_arm64.deb &quot;$binary_dir/&quot;</span><br><span class="line">  </span><br><span class="line">  echo &quot;进入 $binary_dir 使用 chroot 并安装 deb 包&quot;</span><br><span class="line">  </span><br><span class="line"><span class="meta prompt_">  # </span><span class="language-bash">进入<span class="built_in">chroot</span>环境并安装deb包</span></span><br><span class="line">  sudo chroot &quot;$binary_dir&quot; dpkg -i /camera_engine_rkaiq_rk3568_arm64.deb</span><br><span class="line">  </span><br><span class="line">  echo &quot;安装完成&quot;</span><br><span class="line">  sudo rm -rf $binary_dir/*deb</span><br><span class="line">done</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查找4.19目录下的所有rootfs.img</span></span><br><span class="line">sudo find . -path &quot;*/4.19/rootfs.img&quot; | while read img; do</span><br><span class="line">  echo &quot;挂载 $img 到 /mnt&quot;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">  # </span><span class="language-bash">挂载rootfs.img到/mnt</span></span><br><span class="line">  sudo mount -o loop &quot;$img&quot; /mnt</span><br><span class="line"></span><br><span class="line">  if [ $? -eq 0 ]; then</span><br><span class="line">    echo &quot;挂载成功，将 camera_engine_rkaiq_rk3568_arm64.deb 拷贝到 /mnt&quot;</span><br><span class="line"></span><br><span class="line">    # 将deb包拷贝到/mnt</span><br><span class="line">    sudo cp camera_engine_rkaiq_rk3568_arm64.deb /mnt/</span><br><span class="line"></span><br><span class="line">    echo &quot;进入chroot环境并安装deb包&quot;</span><br><span class="line">    </span><br><span class="line">    # 进入chroot环境并安装deb包</span><br><span class="line">    sudo chroot /mnt dpkg -i /camera_engine_rkaiq_rk3568_arm64.deb</span><br><span class="line"></span><br><span class="line">    echo &quot;安装完成，删除 /mnt 中的 deb 包&quot;</span><br><span class="line">    </span><br><span class="line">    # 删除拷贝进去的 deb 包</span><br><span class="line">    sudo rm /mnt/camera_engine_rkaiq_rk3568_arm64.deb</span><br><span class="line">    </span><br><span class="line">    echo &quot;取消挂载 $img&quot;</span><br><span class="line">    </span><br><span class="line">    # 取消挂载</span><br><span class="line">    sudo umount /mnt</span><br><span class="line">    </span><br><span class="line">    echo &quot;$img 已取消挂载&quot;</span><br><span class="line">  else</span><br><span class="line">    echo &quot;挂载失败: $img&quot;</span><br><span class="line">  fi</span><br><span class="line">done</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt install gstreamer1.0-plugins-bad gstreamer1.0-plugins-base gstreamer1.0-tools gstreamer1.0-alsa  gstreamer1.0-plugins-base-apps qtmultimedia5-examples gstreamer1.0-plugins-good gstreamer1.0-libav           gstreamer1.0-plugins-ugly</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rk3568_linux_5.10_20240822.tar.xz   rk356x_linux_20240911.tar.xz</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cp ~/rk3568/rk3568/debian10/4.19/debian-buster-xfce-arm64.tar.xz linaro-bullseye-arm64.tar.xz</span><br><span class="line">cp ~/rk3568/rk3568/debian11/4.19/linaro-bullseye-xfce-arm64.tar.xz linaro-bullseye-arm64.tar.xz       </span><br><span class="line">cp ~/rk3568/rk3568/ubuntu20/4.19/ubuntu-focal-xfce-arm64.tar.xz ubuntu-focal-arm64.tar.xz</span><br><span class="line">cp ~/rk3568/rk3568/ubuntu22/4.19/ubuntu-jammy-xfce-arm64.tar.xz ubuntu-jammy-arm64.tar.xz</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cp ~/rk3568/rk3568/debian10/5.10/debian-buster-xfce-arm64.tar.xz linaro-bullseye-arm64.tar.xz</span><br><span class="line">cp ~/rk3568/rk3568/debian11/5.10/linaro-bullseye-xfce-arm64.tar.xz linaro-bullseye-arm64.tar.xz       </span><br><span class="line">cp ~/rk3568/rk3568/ubuntu20/5.10/ubuntu-focal-xfce-arm64.tar.xz ubuntu-focal-arm64.tar.xz</span><br><span class="line">cp ~/rk3568/rk3568/ubuntu22/5.10/ubuntu-jammy-xfce-arm64.tar.xz ubuntu-jammy-arm64.tar.xz</span><br></pre></td></tr></table></figure>
+<hr />
+<p>2024年9月14日<br />
+更新ubuntu debian系统源码<br />
+更新rkbin</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">cp ~/rk3568/rk3568/debian10/5.10/rootfs.img ./02_Debian10镜像/rootfs.img</span><br><span class="line">cp ~/rk3568/rk3568/debian11/5.10/rootfs.img ./03_Debian11镜像/rootfs.img</span><br><span class="line">cp ~/rk3568/rk3568/ubuntu20/5.10/rootfs.img ./04_Ubuntu20镜像/rootfs.img</span><br><span class="line">cp ~/rk3568/rk3568/ubuntu22/5.10/rootfs.img ./05_Ubuntu22镜像/rootfs.img</span><br><span class="line"></span><br><span class="line">XZ_OPT=&quot;-T0 -1&quot; tar -cpJvf 03_update_rk3568_mini_20240914.tar.xz 03_update_rk3568_mini &amp;</span><br><span class="line">XZ_OPT=&quot;-T0 -1&quot; tar -cpJvf 04_update_rk3568_mini_5.10_20240914.tar.xz 04_update_rk3568_mini_5.10</span><br><span class="line"></span><br><span class="line">XZ_OPT=&quot;-T0 -1&quot; tar -cpJvf rk356x_linux_mini_20240914.tar.xz rk356x_linux</span><br><span class="line">XZ_OPT=&quot;-T0 -1&quot; tar -cpJvf rk3568_linux_5.10_mini_20240914.tar.xz rk3568_linux_5.10</span><br></pre></td></tr></table></figure>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-06_工作记录/29_工作记录(九月第三个星期)"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2024/09/08/06_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/29_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95(%E4%B9%9D%E6%9C%88%E7%AC%AC%E4%B8%89%E4%B8%AA%E6%98%9F%E6%9C%9F)/"
+    >工作记录(九月第二个星期)</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2024/09/08/06_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/29_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95(%E4%B9%9D%E6%9C%88%E7%AC%AC%E4%B8%89%E4%B8%AA%E6%98%9F%E6%9C%9F)/" class="article-date">
+  <time datetime="2024-09-08T13:26:56.000Z" itemprop="datePublished">2024-09-08</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/">工作记录</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="918-工作记录星期三"><a class="markdownIt-Anchor" href="#918-工作记录星期三"></a> 9.18 工作记录(星期三)</h1>
+<p>==摆脱一份幻觉比发现一个真理更能使人明智==</p>
+<p>==当你在凝视深渊的时候，深渊也在凝视你==</p>
+<p>==我希望用一生的时间不断深入和学习电子计算机相关的全部知识将其整理成网络并分享出去，与更多志同道合的朋友共同进步，你清楚的知道，如果做不到这一点，你将永远不快乐==</p>
+<hr />
+<p>一切都该结束了，关于电脑性能的提升到这里也该结束了，不能说失去了什么，只能说我有一次更清楚的认识到了自己，这大约一个星期的时间，确实认识到了很多很多的东西，其他也就看个热闹罢了，现在也算是升无可升，要想再去提高也就只有下一代了，其他都是微乎其微罢了，像上面说的那样到此为止了，对这一个星期的行为进行一下总结：</p>
+<blockquote>
+<p>1.更换13900k es2 ，用一个相对较低的价钱获得更高的性能</p>
+<p>2.更换水冷，因为散热原因，水冷是必须的</p>
+<p>3.CPU跑分上去了，但是最终的编译速度还是达不到的我的预期，然后我就更换了主板，更换为了DDR5的主板</p>
+<p>4.主板更换之后，发现仍旧与我预想的有些差距，就继续找问题，发现内存的频率和时许都会对性能产生很大的影响，所以又研究了一天的内容超频，最终将2X32的 5200内存超到了6000M，时许缩到了C32，这是一个很不错的成绩了。</p>
+<p>5.做了上面一系列操作之后，发现还是有问题，经过和家里电脑极其详细的对比之后，发现是系统的问题，公司电脑并没有打开性能模式，不能让CPU长时间的保持高频率，这属于系统调度问题，这个问题就导致我编译buildroot、recovery会很慢，CPU会降低到一般水平，所以就默认让他打开了极致模式，到这里问题就基本解决了。</p>
+<p>6.最重要的一点是，昨天发现了tar 命令解压的一个命令可以调用pixz来多核心解压，这个解压命令确实是我的福星，之前三四分钟的一个任务，现在能缩减到十秒，三十四倍时间的缩短。</p>
+<p>7.除了上面的一系列操作之外，我还将我全部的固态整合到了一起，组建了raid0，raid0让读写性能进行了叠加，非常适合现在这种情况，也并不害怕有数据损失，不错</p>
+<p>==这就是我这七天内容的总结，还行，以后的效率大约是能提升三倍，花的这三千多还是很值得的，行了，然后研究后续的任务==</p>
+</blockquote>
+<hr />
+<p>后续的任务分为两个方向，一个是在公司的任务，一个是在家的任务，在家的任务肯定是继续的去维护我的repo，现在的话是只能RK3588可以用的uboot和内核，当然文件系统现在确实是可以了，虽然还没测试过RK3562，不过也都差不多，先把大体的基调定一下，我认为是可以直接搬迁过来的，直接将备份里之前搞好的放过来就好了，亦或者我来搞不同的分支，就像现在Ubuntu、debian这个样子。这个不急，先跑通，这才是一切的前提，然后终于迎来正事了，也就是在工作中真正要做的事情。</p>
+<p>虽然我确实是想做我更喜欢的事情，但你也知道那是不可能的，现在录课是当前的主旋律，而且也确实应该有些不一样的经历，每次经历都是一场提升，我的第一想法是又要浪费我的时间了，但实际上不是的，法师给你机会，让你去录课，给你时间让你去学习，本身也就是一种信任，对吗，在这个过程中，我能学到很多之前遇到过，但是躲避开来的问题，其实吧，很多问题，经历之前感觉很难，经历之后又感觉这也没啥，所以就这样定了，沉下心来，开始另一段旅程。</p>
+<p>先来分析一下我认为有问题的地方，法师最严重的问题是不打草稿，在我看来这当然是不对的，自己都不知道要讲什么，然后直接就开始，这对吗，我认为不对，但也是有可取之处的</p>
  
       <!-- reward -->
       
@@ -706,6 +862,30 @@
 <p>​	R23跑分三万八，就还行吧,明天早上总结一下，上班搞我的电脑去。</p>
 <h1 id="内存得分"><a class="markdownIt-Anchor" href="#内存得分"></a> 内存得分</h1>
 <p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409122339841.png" alt="image-20240912233928804" /></p>
+<h1 id="windows性能模式设置"><a class="markdownIt-Anchor" href="#windows性能模式设置"></a> windows性能模式设置</h1>
+<blockquote>
+<p>C:\Windows\System32\powercfg.exe /list</p>
+<p>C:\Windows\System32\powercfg.exe /setactive ff7b48b4-72b2-4437-9d66-ffe6246299a1</p>
+<p>C:\Windows\System32\powercfg.exe /setactive 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c</p>
+</blockquote>
+<p><code>powercfg.exe</code> 是 Windows 中一个非常强大的命令行工具，用来管理和配置电源计划及电源相关的设置。通过它，你可以查看、修改、创建、删除和导入导出电源计划，诊断电源问题，以及管理睡眠、休眠等电源设置。</p>
+<p>以下是详细介绍 <code>powercfg.exe</code> 命令及其常见选项的使用方法。</p>
+<h3 id="常用选项"><a class="markdownIt-Anchor" href="#常用选项"></a> 常用选项</h3>
+<ol>
+<li>
+<p><strong><code>/list</code></strong>：列出系统中所有的电源计划及其 GUID。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">powercfg /list</span><br></pre></td></tr></table></figure>
+<p>输出示例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Power Scheme GUID: 381b4222-f694-41f0-9685-ff5bb260df2e  (Balanced) *</span><br><span class="line">Power Scheme GUID: a1841308-3541-4fab-bc81-f71556f20b4a  (Power saver)</span><br><span class="line">Power Scheme GUID: 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c  (High performance)</span><br></pre></td></tr></table></figure>
+<p>带星号 <code>*</code> 的是当前启用的电源计划。</p>
+</li>
+<li>
+<p><strong><code>/setactive &lt;GUID&gt;</code></strong>：设置指定的电源计划为当前激活的电源计划。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">powercfg /setactive &lt;GUID&gt;</span><br></pre></td></tr></table></figure>
+<p>例如，要设置高性能模式，可以这样做：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">powercfg /setactive 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
  
       <!-- reward -->
       
@@ -726,7 +906,7 @@
 
     
     <article
-  id="post-01_生活/16_反思(9月第1个星期) "
+  id="post-01_生活/16_反思(9月第1个星期)"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -737,8 +917,8 @@
     <header class="article-header">
        
 <h2 itemprop="name">
-  <a class="article-title" href="/2024/09/06/01_%E7%94%9F%E6%B4%BB/16_%E5%8F%8D%E6%80%9D(9%E6%9C%88%E7%AC%AC1%E4%B8%AA%E6%98%9F%E6%9C%9F)%20/"
-    >反思(9月第1个星期）</a> 
+  <a class="article-title" href="/2024/09/06/01_%E7%94%9F%E6%B4%BB/16_%E5%8F%8D%E6%80%9D(9%E6%9C%88%E7%AC%AC1%E4%B8%AA%E6%98%9F%E6%9C%9F)/"
+    >反思(9月第1个星期)</a> 
 </h2>
  
 
@@ -746,7 +926,7 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2024/09/06/01_%E7%94%9F%E6%B4%BB/16_%E5%8F%8D%E6%80%9D(9%E6%9C%88%E7%AC%AC1%E4%B8%AA%E6%98%9F%E6%9C%9F)%20/" class="article-date">
+      <a href="/2024/09/06/01_%E7%94%9F%E6%B4%BB/16_%E5%8F%8D%E6%80%9D(9%E6%9C%88%E7%AC%AC1%E4%B8%AA%E6%98%9F%E6%9C%9F)/" class="article-date">
   <time datetime="2024-09-06T12:26:56.000Z" itemprop="datePublished">2024-09-06</time>
 </a> 
   <div class="article-category">
@@ -758,7 +938,7 @@
     <div class="article-entry" itemprop="articleBody">
        
   Here's something encrypted, password is required to continue reading. 
-      <a class="article-more-link" href="/2024/09/06/01_%E7%94%9F%E6%B4%BB/16_%E5%8F%8D%E6%80%9D(9%E6%9C%88%E7%AC%AC1%E4%B8%AA%E6%98%9F%E6%9C%9F)%20/"
+      <a class="article-more-link" href="/2024/09/06/01_%E7%94%9F%E6%B4%BB/16_%E5%8F%8D%E6%80%9D(9%E6%9C%88%E7%AC%AC1%E4%B8%AA%E6%98%9F%E6%9C%9F)/"
         >阅读更多...</a
       >
        
@@ -926,7 +1106,7 @@
        
 <h2 itemprop="name">
   <a class="article-title" href="/2024/09/01/06_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/27_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95(%E4%B9%9D%E6%9C%88%E7%AC%AC%E4%B8%80%E4%B8%AA%E6%98%9F%E6%9C%9F)/"
-    >反思(九月第一个星期)</a> 
+    >工作记录(九月第一个星期)</a> 
 </h2>
  
 
@@ -977,248 +1157,6 @@
 <p><code>.repo</code> 文件中的 <code>linkfile</code> 是表示在多个项目间创建符号链接。你可以使用 <code>ln -s</code> 命令来手动创建这些符号链接。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在 device_rockchip 目录下创建符号链接</span></span><br><span class="line"><span class="built_in">ln</span> -s device/rockchip/common/mkfirmware.sh mkfirmware.sh</span><br><span class="line"><span class="built_in">ln</span> -s device/rockchip/common/build.sh build.sh</span><br><span class="line"><span class="built_in">ln</span> -s device/rockchip/common/rkflash.sh rkflash.sh</span><br><span class="line"><span class="built_in">ln</span> -s rk3588 device/rockchip/.target_product</span><br><span class="line"></span><br><span class="line"><span class="comment"># 在 tools/windows 目录下创建符号链接</span></span><br><span class="line"><span class="built_in">ln</span> -s tools/windows/RKDevTool/RKDevTool_Release/rk3588-config.cfg tools/windows/RKDevTool/RKDevTool_Release/config.cfg</span><br><span class="line"><span class="built_in">ln</span> -s tools/windows/RKDevTool/rockdev/rk3588-package-file tools/windows/RKDevTool/rockdev/package-file</span><br><span class="line"><span class="built_in">ln</span> -s tools/windows/RKDevTool/rockdev/rk3588-mkupdate.bat tools/windows/RKDevTool/rockdev/mkupdate.bat</span><br><span class="line"></span><br><span class="line"><span class="comment"># 在 tools/linux 目录下创建符号链接</span></span><br><span class="line"><span class="built_in">ln</span> -s tools/linux/Linux_Pack_Firmware/rockdev/rk3588-mkupdate.sh tools/linux/Linux_Pack_Firmware/rockdev/mkupdate.sh</span><br><span class="line"><span class="built_in">ln</span> -s tools/linux/Linux_Pack_Firmware/rockdev/rk3588-package-file tools/linux/Linux_Pack_Firmware/rockdev/package-file</span><br></pre></td></tr></table></figure>
 <hr />
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-02_瑞芯微/21_瑞芯微logo显示"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2024/09/01/02_%E7%91%9E%E8%8A%AF%E5%BE%AE/21_%E7%91%9E%E8%8A%AF%E5%BE%AElogo%E6%98%BE%E7%A4%BA/"
-    >瑞芯微logo显示</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2024/09/01/02_%E7%91%9E%E8%8A%AF%E5%BE%AE/21_%E7%91%9E%E8%8A%AF%E5%BE%AElogo%E6%98%BE%E7%A4%BA/" class="article-date">
-  <time datetime="2024-09-01T09:17:03.000Z" itemprop="datePublished">2024-09-01</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE/">瑞芯微</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="寻找orangepi主题地址"><a class="markdownIt-Anchor" href="#寻找orangepi主题地址"></a> 寻找orangepi主题地址</h1>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409051030729.png" alt="image-20240901085802755" />image-20240901085802755</p>
-<p><strong>选择默认主题</strong>：设置默认的Plymouth主题。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">COPYsudo update-alternatives --config default.plymouth</span><br></pre></td></tr></table></figure>
-<p>sudo update-initramfs -u</p>
-<p>mkimage -A arm -T ramdisk -C gzip -n ‘Initrd Image’ -d /boot/initrd.img-5.10.198 /boot/initrd.img-5.10.198</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">COPYrootfstype=ext4 rootwait rw console=ttyFIQ0 console=tty1 console=ttyFIQ0 cgroup_enable=cpuset cgroup_memory=1 cgroup_enable=memory swapaccount=1 systemd.unified_cgroup_hierarchy=0 quiet splash plymouth.ignore-serial-consoles earlycon=uart8250,mmio32,0xfeb50000 coherent_pool=1m irqchip.gicv3_pseudo_nmi=0</span><br></pre></td></tr></table></figure>
-<h1 id="添加新的-plymouth-主题"><a class="markdownIt-Anchor" href="#添加新的-plymouth-主题"></a> 添加新的 Plymouth 主题</h1>
-<p>要添加和启用你已经在 <code>/usr/share/plymouth/themes/orangepi</code> 目录下的 Plymouth 主题，可以按照以下步骤操作：</p>
-<h3 id="1-验证主题文件"><a class="markdownIt-Anchor" href="#1-验证主题文件"></a> 1. <strong>验证主题文件</strong></h3>
-<ul>
-<li>
-<p>首先，确保 <code>orangepi</code> 主题目录中至少包含以下两个文件：</p>
-<ul>
-<li><strong><code>orangepi.plymouth</code></strong>：主题的主配置文件。</li>
-<li><strong><code>orangepi.script</code></strong> 或其他必要资源文件（如背景图片 <code>background.png</code>、动画文件等）。</li>
-</ul>
-</li>
-<li>
-<p>例如，你可以检查文件是否存在：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">COPYls /usr/share/plymouth/themes/orangepi/</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="2-更新-plymouth-主题列表"><a class="markdownIt-Anchor" href="#2-更新-plymouth-主题列表"></a> 2. <strong>更新 Plymouth 主题列表</strong></h3>
-<ul>
-<li>
-<p>将 <code>orangepi.plymouth</code> 主题添加到系统的 Plymouth 主题列表中：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">COPYsudo update-alternatives --install /usr/share/plymouth/themes/default.plymouth default.plymouth /usr/share/plymouth/themes/orangepi/orangepi.plymouth 100</span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>你可以验证是否成功添加主题，并选择它作为默认主题：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">COPYsudo update-alternatives --config default.plymouth</span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>在提示中，选择 <code>orangepi</code> 主题对应的数字。</p>
-</li>
-</ul>
-<h3 id="3-更新-initramfs"><a class="markdownIt-Anchor" href="#3-更新-initramfs"></a> 3. <strong>更新 initramfs</strong></h3>
-<ul>
-<li>
-<p>每次更改 Plymouth 主题后，都需要更新</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">initramfs</span><br></pre></td></tr></table></figure>
-<p>以使更改生效：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">COPYsudo update-initramfs -u</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="4-测试主题"><a class="markdownIt-Anchor" href="#4-测试主题"></a> 4. <strong>测试主题</strong></h3>
-<ul>
-<li>
-<p>重启系统以测试新 Plymouth 主题：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">COPYsudo reboot</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="5-手动预览主题可选"><a class="markdownIt-Anchor" href="#5-手动预览主题可选"></a> 5. <strong>手动预览主题（可选）</strong></h3>
-<ul>
-<li>
-<p>如果你想在不重启的情况下快速预览主题，可以运行以下命令：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">COPYsudo plymouthd</span><br><span class="line">sudo plymouth --show-splash</span><br><span class="line">sudo plymouth quit</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="6-检查日志和调试"><a class="markdownIt-Anchor" href="#6-检查日志和调试"></a> 6. <strong>检查日志和调试</strong></h3>
-<ul>
-<li>
-<p>如果主题没有正常显示，你可以检查 Plymouth 的日志或确保你的 framebuffer 设置正确。调试时，可以通过以下方式获取更多信息：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">COPYsudo journalctl -b | grep plymouth</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="7-恢复默认主题可选"><a class="markdownIt-Anchor" href="#7-恢复默认主题可选"></a> 7. <strong>恢复默认主题（可选）</strong></h3>
-<ul>
-<li>
-<p>如果需要恢复到系统的默认 Plymouth 主题，可以运行：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">COPYsudo update-alternatives --auto default.plymouth</span><br><span class="line">sudo update-initramfs -u</span><br><span class="line">sudo reboot</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>通过以上步骤，你应该可以成功将 <code>orangepi</code> 主题添加并设置为系统启动时显示的 Plymouth 主题。</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-06_工作记录/26_工作记录(8月第三个星期)"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2024/08/31/06_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/26_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95(8%E6%9C%88%E7%AC%AC%E4%B8%89%E4%B8%AA%E6%98%9F%E6%9C%9F)/"
-    >工作记录(8月第3个星期)</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2024/08/31/06_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/26_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95(8%E6%9C%88%E7%AC%AC%E4%B8%89%E4%B8%AA%E6%98%9F%E6%9C%9F)/" class="article-date">
-  <time datetime="2024-08-31T13:26:56.000Z" itemprop="datePublished">2024-08-31</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/">工作记录</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="819工作记录星期一"><a class="markdownIt-Anchor" href="#819工作记录星期一"></a> 8.19工作记录(星期一)</h1>
-<p>==其实一切都不重要，唯顺心意而已==</p>
-<hr />
-<p>上午的时候研究了一下野火的SDK镜像，就挺不错的，野火目前是怎么做的呢，他确实是用了一个repo，但是呢他完全是依照github来进行的，当然在他的本地也用上了gitlab，这一点是毋庸置疑的，在他的本地和远程都有各自对应的一份镜像，这种方法是不错的，我先说一下我的诉求，我想的是如何能够学习到更多的东西，而青苹果呢，无所谓了，反正笨死了，也没啥，最终呢，就是如何将我的方向和公司的方向相统一，从而达到最高的效率以及最高的积极性。</p>
-<p>先来研究一下北京是如何获取源码的。</p>
-<h1 id="820-工作记录星期二"><a class="markdownIt-Anchor" href="#820-工作记录星期二"></a> 8.20 工作记录(星期二)</h1>
-<p>==其实一切都不重要，唯顺心意而已==</p>
-<hr />
-<p>今天算是初步学习了一下repo的操作和使用，我的最终目的是搞成野火那样子的层次框架，其实这些跟香橙派是差不多的，但是呢野火就很好的帮我分开了，这一点做的确实可以，很不错，上午的时候我不是很想学习，就研究一下野火的内核 extlinux的编译吧。</p>
-<h1 id="821工作记录星期三"><a class="markdownIt-Anchor" href="#821工作记录星期三"></a> 8.21工作记录(星期三)</h1>
-<p>==其实一切都不重要，唯顺心意而已==</p>
-<hr />
-<p>昨天晚上其实就也还行，最主要的问题就是旁边有个人很难学习下去，这一带你问题是最大的，但是以后又难免会这样，又不可能真的一个人一直这样过小区，虽然我现在感觉确实也还可以，算了以后的事情以后再说，现在就尝试一下，只求无愧于心，照顾好小弟即可。</p>
-<p>今天上午就研究研究野火SDK的extlinux的编译步骤。</p>
-<p>行了，上午就研究的差不多了，然后下午继续研究补丁的添加，其实还是不懂。</p>
-<p>默认在这</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409051034486.png" alt="image-20240821142623194" /></p>
-<p>然后</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409051034435.png" alt="image-20240821142650382" /></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">failed_patches=()  </span><br><span class="line">  </span><br><span class="line">for patch in $(ls ~/patch/*.patch | sort -V); do  </span><br><span class="line">    echo &quot;Applying patch: $patch&quot;  </span><br><span class="line">    git am &quot;$patch&quot;  </span><br><span class="line">    if [ $? -ne 0 ]; then  </span><br><span class="line">        echo &quot;Patch $patch failed to apply, skipping...&quot;  </span><br><span class="line">        git am --skip  </span><br><span class="line">        failed_patches+=(&quot;$patch&quot;)  </span><br><span class="line">    fi  </span><br><span class="line">done  </span><br><span class="line">  </span><br><span class="line">echo &quot;The following patches failed to apply:&quot;  </span><br><span class="line">for failed_patch in &quot;$&#123;failed_patches[@]&#125;&quot;; do  </span><br><span class="line">    echo &quot;$failed_patch&quot;  </span><br><span class="line">done</span><br></pre></td></tr></table></figure>
-<h1 id="822工作记录星期四"><a class="markdownIt-Anchor" href="#822工作记录星期四"></a> 8.22工作记录(星期四)</h1>
-<p>今天或者明天小弟肯定就回家了，有好处也有坏处，虽然我还是喜欢一个人清净无为，行了这些事情之后再说，先来看今天的任务了，现在先来整理各家的更新方法。</p>
-<h2 id="野火"><a class="markdownIt-Anchor" href="#野火"></a> 野火</h2>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">cd ~/LubanCat_SDK</span><br><span class="line"></span><br><span class="line"># 拉取LubanCat-RK356x系列Linux_SDK</span><br><span class="line">repo init --depth=1 -u https://github.com/LubanCat/manifests.git -b linux -m rk356x_linux_release.xml</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 拉取LubanCat-RK3588系列Linux_SDK</span><br><span class="line">repo init  -u https://github.com/LubanCat/manifests.git -b linux -m rk3588_linux_release.xml</span><br><span class="line"></span><br><span class="line">#如果运行以上命令失败，提示：fatal: Cannot get https://gerrit.googlesource.com/git-repo/clone.bundle</span><br><span class="line">#则可以在以上命令中添加选项 --repo-url https://mirrors.tuna.tsinghua.edu.cn/git/git-repo</span><br><span class="line"></span><br><span class="line">.repo/repo/repo sync -c -j4</span><br></pre></td></tr></table></figure>
-<p>野火镜像拉取完成是这样的，具体如下所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409051034464.png" alt="image-20240822100536496" /></p>
-<p>从野火的内核开始看，可以看到他的更新也是不多的，也还停留在5.10.160的内核上，具体如下所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409051034457.png" alt="image-20240822100718242" /></p>
-<p>然后来到野火的github，他的内核仓库地址为：<a target="_blank" rel="noopener" href="https://github.com/LubanCat/kernel%EF%BC%8C%E5%86%8D%E6%9F%A5%E7%9C%8B%E4%BB%96%E7%9A%84%E6%8F%90%E4%BA%A4%EF%BC%8C%E4%BC%9A%E5%8F%91%E7%8E%B0%E6%9C%BA%E4%BC%9A%E4%B9%9F%E6%B2%A1%E6%9C%89RK%E7%9B%B8%E5%85%B3%E7%9A%84%E6%8F%90%E4%BA%A4%EF%BC%8C%E5%85%B7%E4%BD%93%E5%A6%82%E4%B8%8B%E6%89%80%E7%A4%BA%EF%BC%9A">https://github.com/LubanCat/kernel，再查看他的提交，会发现机会也没有RK相关的提交，具体如下所示：</a><br />
-<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409051034560.png" alt="image-20240822100933505" /></p>
-<p>也只是添加了他自己的一些东西，所以他们也是单独维护了一套自己的仓库，并不能很好及时的更新。</p>
-<h2 id="firefly"><a class="markdownIt-Anchor" href="#firefly"></a> firefly</h2>
-<p>方法一</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 解压</span><br><span class="line">mkdir -p ~/proj/rk3588_sdk</span><br><span class="line">cd ~/proj/rk3588_sdk</span><br><span class="line">cat path/to/rk3588_linux_release_20230114_v1.0.6c_0* | tar -xv</span><br><span class="line"></span><br><span class="line"># 导出数据</span><br><span class="line">.repo/repo/repo sync -l</span><br></pre></td></tr></table></figure>
-<p>方法二</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mkdir ~/proj/rk3588_sdk/</span><br><span class="line">cd ~/proj/rk3588_sdk/</span><br><span class="line"></span><br><span class="line">## 完整 SDK</span><br><span class="line">repo init --no-clone-bundle --repo-url https://gitlab.com/firefly-linux/git-repo.git -u https://gitlab.com/firefly-linux/manifests.git -b master -m rk3588_linux_release.xml</span><br><span class="line"></span><br><span class="line">## BSP （ 只包含基础仓库和编译工具 ）</span><br><span class="line">## BSP 包括 device/rockchip 、docs 、 kernel 、 u-boot 、 rkbin 、 tools 和交叉编译链</span><br><span class="line">repo init --no-clone-bundle --repo-url https://gitlab.com/firefly-linux/git-repo.git -u https://gitlab.com/firefly-linux/manifests.git -b master -m rk3588_linux_bsp_release.xml</span><br></pre></td></tr></table></figure>
-<p>firefly是搭建了一个自己的gitlab的，具体如下所示：<br />
-<img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409051034446.png" alt="image-20240822103830901" /></p>
-<p>因为他们的产品很多，有着非常多的分支，具体如下所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409051034837.png" alt="image-20240822103920626" /></p>
-<p>可以看到他们的维护也不是很及时，也并不是瑞芯微更新到哪里，就跟到哪里，但是他的一些补丁跟瑞芯微的连起来了，具体如下所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409051034925.png" alt="image-20240822104829631" /></p>
-<p>但是我们的代码并不行。</p>
-<h2 id="正点原子"><a class="markdownIt-Anchor" href="#正点原子"></a> 正点原子</h2>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409051034908.png" alt="image-20240822131031354" /></p>
-<p>他们的代码实际上也是使用的repo的形式，但跟firefly比起来就有点差别了， 他的这个属于本地个gitlab，换一个局域网就不行了，所以才会有上面的报错，而要想更新源码同样不简单，最终仍旧是需要更新对应的repo。</p>
-<h2 id="总结"><a class="markdownIt-Anchor" href="#总结"></a> 总结</h2>
-<p>我认为其实还是我们自己改的太多了，就比如修改rga、修改了mpp、修改了ISP等等文件夹里面的内容，这就导致很多东西不好更新，我上面的shell脚本对于更改的少的东西是可以的,但内核我们改的太多了，这种方式就不行了。</p>
-<p>就比如像uboot我们这种改的很少的东西，是可以直接通过上面的命令直接打补丁的，具体如下所示</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409051034974.png" alt="image-20240822103509917" /></p>
-<p>可以看到六七百个补丁，这些补丁只有十个没打上，但是内核呢，三百多个补丁只能打上十几个，这就很有问题了，但是如果要一个个改的话，那就很费时，所以现在还是找不到一个很好的方法，对吧。</p>
-<hr />
-<p>我先说一下现在为什么更新难，其实这个才是重点：</p>
-<blockquote>
-<p>1.要编译的镜像太多，由于现在RK这种分区模式就导致只能一个屏幕提供一个镜像，就以Linux系统为例，就有buildroot、Debian、ubuntu 、yocto六种镜像，而在这六种系统镜像下，又有着六种屏幕，这就导致总共有36种镜像，这没办法，分区模式不改变，就只能编译这么多镜像，然而分区模式是不可能变得</p>
-<p>2.补丁难打，瑞芯微更新太快了，上面也提到了，如果对于我们没改的东西，那更新确实简单，用我上面的脚本即可，例如uboot，但是像内核源码这种我们改了很多东西，就不行了，一些代码的行数和位置变化了，对应的补丁也就打不上了</p>
-<p>3.更新方式，现在所有的板子、所有的系统都没有使用git的方式更新，现在就算加上也已经来不及了，除非全部的代码都要重新适配，当然这是个大工程，肯定会遇到很多以意想不到的情况~</p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">repo init --repo-url ssh://git@www.rockchip.com.cn/repo/rk/tools/repo \</span><br><span class="line">-u ssh://git@www.rockchip.com.cn/linux/rockchip/platform/manifests \</span><br><span class="line">-b linux -m rk356x_linux_release.xml</span><br><span class="line"></span><br><span class="line">.repo/repo/repo sync -j20</span><br></pre></td></tr></table></figure>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409051034012.png" alt="image-20240822150436687" /></p>
-<p>其实这个3568的压力测试是一切要更新的源头，stressapptest压力测试会报错，这个不是很理解</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install stressant</span><br><span class="line">stressapptest -M 2048 -m 4 -s 100 -W</span><br><span class="line">stressapptest -M 1048 -m 4 -s 900 -W</span><br><span class="line">stressapptest -M 1048 -m 4 -s 3600 -W</span><br></pre></td></tr></table></figure>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409051034191.png" alt="image-20240822153212984" /></p>
-<p>我测试倒是没啥</p>
-<h1 id="824工作记录星期六"><a class="markdownIt-Anchor" href="#824工作记录星期六"></a> 8.24工作记录(星期六)</h1>
  
       <!-- reward -->
       

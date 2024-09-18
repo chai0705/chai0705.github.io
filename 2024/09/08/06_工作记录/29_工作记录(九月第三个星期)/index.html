@@ -13,7 +13,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
-      <title>WSL使用小技巧 |  热爱学习的未来酱</title>
+      <title>工作记录(九月第二个星期) |  热爱学习的未来酱</title>
   <meta name="generator" content="hexo-theme-ayer">
       
       <link rel="shortcut icon" href="/favicon.ico" />
@@ -56,7 +56,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-07_小技巧/12_WSL使用小技巧"
+  id="post-06_工作记录/29_工作记录(九月第三个星期)"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -67,7 +67,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  WSL使用小技巧
+  工作记录(九月第二个星期)
 </h1>
  
 
@@ -75,11 +75,11 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2024/08/20/07_%E5%B0%8F%E6%8A%80%E5%B7%A7/12_WSL%E4%BD%BF%E7%94%A8%E5%B0%8F%E6%8A%80%E5%B7%A7/" class="article-date">
-  <time datetime="2024-08-19T22:50:19.000Z" itemprop="datePublished">2024-08-20</time>
+      <a href="/2024/09/08/06_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/29_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95(%E4%B9%9D%E6%9C%88%E7%AC%AC%E4%B8%89%E4%B8%AA%E6%98%9F%E6%9C%9F)/" class="article-date">
+  <time datetime="2024-09-08T13:26:56.000Z" itemprop="datePublished">2024-09-08</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%B0%8F%E6%8A%80%E5%B7%A7/">小技巧</a>
+    <a class="article-category-link" href="/categories/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/">工作记录</a>
   </div>
   
 <div class="word_count">
@@ -87,7 +87,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">752</span>
+            <span class="post-count">1.2k</span>
         </span>
     </span>
 
@@ -96,7 +96,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">3 分钟</span>
+            <span class="post-count">4 分钟</span>
         </span>
     </span>
 </div>
@@ -111,55 +111,26 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="wsl代理"><a class="markdownIt-Anchor" href="#wsl代理"></a> WSL代理</h1>
-<p>现在不用v2ray ，而是用clash，感觉clash比v2ray强一点，下载地址和简单教程为：<a target="_blank" rel="noopener" href="https://igghelper.com/helper/?p=535">https://igghelper.com/helper/?p=535</a></p>
-<p>安装之后导入代理，接下来的就是下面的一些设置了。</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409051043950.png" alt="image-20240819203759228" /></p>
-<p>系统代理和开机自启要设置一下，如下所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409051043025.png" alt="image-20240819204149507" />image-20240819204149507</p>
-<p>然后打开Tun模式，我测试就可以了</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409051043043.png" alt="image-20240819205233715" />image-20240819205233715</p>
-<p>==这个tun模式指的是虚拟一个网卡，但这样的话会导致网络发生变化，从而导致一系列的问题，例如无法正常拉取==</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409051043016.png" alt="image-20240819213826540" />image-20240819213826540</p>
-<p>所以现在正确的设置是这个地方：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409051043030.png" alt="image-20240819214845649" />image-20240819214845649</p>
-<p>其他的就不用设置了，行了，去洗澡。</p>
-<p>Clash 是一种代理工具，它可以根据配置文件的规则将网络流量通过不同的代理服务器或直接连接到目标服务器。<strong>本地直连</strong>（通常称为 “DIRECT”）是一种规则配置，意味着流量将不通过代理服务器，而是直接从你的设备连接到目标服务器。</p>
-<p>选clash代理的时候尽量选美国，其他的好慢啊。</p>
-<p>更新wsl内核版本：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">COPYsudo apt install linux-image-generic-hwe-22.04</span><br></pre></td></tr></table></figure>
-<h1 id="windows商店打不开的解决方法"><a class="markdownIt-Anchor" href="#windows商店打不开的解决方法"></a> windows商店打不开的解决方法</h1>
-<p>打开“运行”输入 inetcpl.cpl 或者“WINDOWS”+“R”键，输入 inetcpl.cpl亦可。<br />
-点开高级往下拉，勾上&quot;使用TLS 1.2&quot;选项，或者点还原高级设置。</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409121422525.png" alt="在这里插入图片描述" /></p>
-<h1 id="wsl压缩方法"><a class="markdownIt-Anchor" href="#wsl压缩方法"></a> WSL压缩方法</h1>
-<p>PS C:\Users\Administrator\AppData\Local\Packages\CanonicalGroupLimited.Ubuntu22.04LTS_79rhkp1fndgsc\LocalState&gt; Optimize-VHD -Path .\ext4.vhdx  -Mode Full</p>
-<h1 id="wsl移动到其他盘"><a class="markdownIt-Anchor" href="#wsl移动到其他盘"></a> WSL移动到其他盘</h1>
-<p>你可以按以下步骤将你的 <code>Ubuntu-22.04</code> 发行版导入到 <code>G:\</code> 盘：</p>
-<h3 id="1-导出-wsl-发行版"><a class="markdownIt-Anchor" href="#1-导出-wsl-发行版"></a> 1. 导出 WSL 发行版</h3>
-<p>首先，导出你的 <code>Ubuntu-22.04</code> WSL 发行版为 <code>.tar</code> 文件（如果尚未导出），例如：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsl --<span class="built_in">export</span> Ubuntu-22.04 G:\ubuntu-22.04-backup.tar</span><br></pre></td></tr></table></figure>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409151359184.png" alt="image-20240915135926150" /></p>
-<p>这个命令会将你的 <code>Ubuntu-22.04</code> 版本导出到 <code>G:</code> 文件夹中，文件名为 <code>ubuntu-22.04-backup.tar</code>。你可以根据需要更改路径和文件名。</p>
-<h3 id="2-删除原-wsl-发行版"><a class="markdownIt-Anchor" href="#2-删除原-wsl-发行版"></a> 2. 删除原 WSL 发行版</h3>
-<p>如果确认导出成功，可以使用以下命令从 WSL 中删除原来的 <code>Ubuntu-22.04</code> 版本：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsl --unregister Ubuntu-22.04</span><br></pre></td></tr></table></figure>
-<p>这样做会从 WSL 中删除现有的 <code>Ubuntu-22.04</code>，但不会影响你导出的 <code>.tar</code> 文件。</p>
-<h3 id="3-导入到-g-盘"><a class="markdownIt-Anchor" href="#3-导入到-g-盘"></a> 3. 导入到 G:\ 盘</h3>
-<p>现在你可以将导出的 WSL 发行版安装到 <code>G:\</code> 盘。运行以下命令将 <code>Ubuntu-22.04</code> 版本导入到 <code>G:\wsl\ubuntu-22.04</code> 文件夹：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsl --import Ubuntu-22.04 G:\ubuntu-22.04 G:\ubuntu-22.04-backup.tar</span><br></pre></td></tr></table></figure>
-<p>这会将你的 <code>Ubuntu-22.04</code> 发行版安装到 <code>G:\wsl\ubuntu-22.04</code> 目录。</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409151400503.png" alt="image-20240915140014438" /></p>
-<h3 id="4-启动新位置的-wsl"><a class="markdownIt-Anchor" href="#4-启动新位置的-wsl"></a> 4. 启动新位置的 WSL</h3>
-<p>导入完成后，你可以使用以下命令启动新的 <code>Ubuntu-22.04</code> 发行版：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsl -d Ubuntu-22.04</span><br></pre></td></tr></table></figure>
-<p>这样，你的 <code>Ubuntu-22.04</code> 就会在 <code>G:\</code> 盘上运行了。</p>
-<p>如果有任何问题或进一步的帮助需求，请随时告知！</p>
-<h1 id="设置默认用户"><a class="markdownIt-Anchor" href="#设置默认用户"></a> 设置默认用户</h1>
-<p>wsl -d Ubuntu-22.04 --user topeet</p>
-<p>ubuntu2204 config --default-user topeet</p>
-<p>wsl -d Ubuntu-20.04 --user topeet</p>
-<p>ubuntu2004 config --default-user topeet</p>
+  <link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="918-工作记录星期三"><a class="markdownIt-Anchor" href="#918-工作记录星期三"></a> 9.18 工作记录(星期三)</h1>
+<p>==摆脱一份幻觉比发现一个真理更能使人明智==</p>
+<p>==当你在凝视深渊的时候，深渊也在凝视你==</p>
+<p>==我希望用一生的时间不断深入和学习电子计算机相关的全部知识将其整理成网络并分享出去，与更多志同道合的朋友共同进步，你清楚的知道，如果做不到这一点，你将永远不快乐==</p>
+<hr />
+<p>一切都该结束了，关于电脑性能的提升到这里也该结束了，不能说失去了什么，只能说我有一次更清楚的认识到了自己，这大约一个星期的时间，确实认识到了很多很多的东西，其他也就看个热闹罢了，现在也算是升无可升，要想再去提高也就只有下一代了，其他都是微乎其微罢了，像上面说的那样到此为止了，对这一个星期的行为进行一下总结：</p>
+<blockquote>
+<p>1.更换13900k es2 ，用一个相对较低的价钱获得更高的性能</p>
+<p>2.更换水冷，因为散热原因，水冷是必须的</p>
+<p>3.CPU跑分上去了，但是最终的编译速度还是达不到的我的预期，然后我就更换了主板，更换为了DDR5的主板</p>
+<p>4.主板更换之后，发现仍旧与我预想的有些差距，就继续找问题，发现内存的频率和时许都会对性能产生很大的影响，所以又研究了一天的内容超频，最终将2X32的 5200内存超到了6000M，时许缩到了C32，这是一个很不错的成绩了。</p>
+<p>5.做了上面一系列操作之后，发现还是有问题，经过和家里电脑极其详细的对比之后，发现是系统的问题，公司电脑并没有打开性能模式，不能让CPU长时间的保持高频率，这属于系统调度问题，这个问题就导致我编译buildroot、recovery会很慢，CPU会降低到一般水平，所以就默认让他打开了极致模式，到这里问题就基本解决了。</p>
+<p>6.最重要的一点是，昨天发现了tar 命令解压的一个命令可以调用pixz来多核心解压，这个解压命令确实是我的福星，之前三四分钟的一个任务，现在能缩减到十秒，三十四倍时间的缩短。</p>
+<p>7.除了上面的一系列操作之外，我还将我全部的固态整合到了一起，组建了raid0，raid0让读写性能进行了叠加，非常适合现在这种情况，也并不害怕有数据损失，不错</p>
+<p>==这就是我这七天内容的总结，还行，以后的效率大约是能提升三倍，花的这三千多还是很值得的，行了，然后研究后续的任务==</p>
+</blockquote>
+<hr />
+<p>后续的任务分为两个方向，一个是在公司的任务，一个是在家的任务，在家的任务肯定是继续的去维护我的repo，现在的话是只能RK3588可以用的uboot和内核，当然文件系统现在确实是可以了，虽然还没测试过RK3562，不过也都差不多，先把大体的基调定一下，我认为是可以直接搬迁过来的，直接将备份里之前搞好的放过来就好了，亦或者我来搞不同的分支，就像现在Ubuntu、debian这个样子。这个不急，先跑通，这才是一切的前提，然后终于迎来正事了，也就是在工作中真正要做的事情。</p>
+<p>虽然我确实是想做我更喜欢的事情，但你也知道那是不可能的，现在录课是当前的主旋律，而且也确实应该有些不一样的经历，每次经历都是一场提升，我的第一想法是又要浪费我的时间了，但实际上不是的，法师给你机会，让你去录课，给你时间让你去学习，本身也就是一种信任，对吗，在这个过程中，我能学到很多之前遇到过，但是躲避开来的问题，其实吧，很多问题，经历之前感觉很难，经历之后又感觉这也没啥，所以就这样定了，沉下心来，开始另一段旅程。</p>
+<p>先来分析一下我认为有问题的地方，法师最严重的问题是不打草稿，在我看来这当然是不对的，自己都不知道要讲什么，然后直接就开始，这对吗，我认为不对，但也是有可取之处的</p>
  
       <!-- reward -->
       
@@ -212,7 +183,7 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2024/08/20/07_%E5%B0%8F%E6%8A%80%E5%B7%A7/12_WSL%E4%BD%BF%E7%94%A8%E5%B0%8F%E6%8A%80%E5%B7%A7/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2024/09/08/06_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/29_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95(%E4%B9%9D%E6%9C%88%E7%AC%AC%E4%B8%89%E4%B8%AA%E6%98%9F%E6%9C%9F)/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -223,19 +194,19 @@
    
   <nav class="article-nav">
     
-      <a href="/2024/08/25/07_%E5%B0%8F%E6%8A%80%E5%B7%A7/14_repo%E5%AD%A6%E4%B9%A02/" class="article-nav-link">
+      <a href="/2024/09/08/06_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/28_%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95(%E4%B9%9D%E6%9C%88%E7%AC%AC%E4%BA%8C%E4%B8%AA%E6%98%9F%E6%9C%9F)/" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            vim学习
+            工作记录(九月第二个星期)
           
         </div>
       </a>
     
     
-      <a href="/2024/08/20/07_%E5%B0%8F%E6%8A%80%E5%B7%A7/13_readme%E7%9A%84%E4%BD%BF%E7%94%A8/" class="article-nav-link">
+      <a href="/2024/09/07/07_%E5%B0%8F%E6%8A%80%E5%B7%A7/17_%E7%94%B5%E8%84%91%E8%B6%85%E9%A2%91/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">readme的使用</div>
+        <div class="article-nav-title">电脑超频</div>
       </a>
     
   </nav>

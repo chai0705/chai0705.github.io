@@ -13,7 +13,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
-      <title>WSL使用小技巧 |  热爱学习的未来酱</title>
+      <title>反思(9月第1个星期) |  热爱学习的未来酱</title>
   <meta name="generator" content="hexo-theme-ayer">
       
       <link rel="shortcut icon" href="/favicon.ico" />
@@ -56,7 +56,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-07_小技巧/12_WSL使用小技巧"
+  id="post-01_生活/16_反思(9月第1个星期)"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -67,7 +67,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  WSL使用小技巧
+  反思(9月第1个星期)
 </h1>
  
 
@@ -75,11 +75,11 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2024/08/20/07_%E5%B0%8F%E6%8A%80%E5%B7%A7/12_WSL%E4%BD%BF%E7%94%A8%E5%B0%8F%E6%8A%80%E5%B7%A7/" class="article-date">
-  <time datetime="2024-08-19T22:50:19.000Z" itemprop="datePublished">2024-08-20</time>
+      <a href="/2024/09/06/01_%E7%94%9F%E6%B4%BB/16_%E5%8F%8D%E6%80%9D(9%E6%9C%88%E7%AC%AC1%E4%B8%AA%E6%98%9F%E6%9C%9F)/" class="article-date">
+  <time datetime="2024-09-06T12:26:56.000Z" itemprop="datePublished">2024-09-06</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%B0%8F%E6%8A%80%E5%B7%A7/">小技巧</a>
+    <a class="article-category-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a>
   </div>
   
 <div class="word_count">
@@ -87,7 +87,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">752</span>
+            <span class="post-count">5</span>
         </span>
     </span>
 
@@ -96,71 +96,31 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">3 分钟</span>
+            <span class="post-count">1 分钟</span>
         </span>
     </span>
 </div>
  
     </div>
       
-    <div class="tocbot"></div>
-
 
 
 
   
     <div class="article-entry" itemprop="articleBody">
        
-  <link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="wsl代理"><a class="markdownIt-Anchor" href="#wsl代理"></a> WSL代理</h1>
-<p>现在不用v2ray ，而是用clash，感觉clash比v2ray强一点，下载地址和简单教程为：<a target="_blank" rel="noopener" href="https://igghelper.com/helper/?p=535">https://igghelper.com/helper/?p=535</a></p>
-<p>安装之后导入代理，接下来的就是下面的一些设置了。</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409051043950.png" alt="image-20240819203759228" /></p>
-<p>系统代理和开机自启要设置一下，如下所示：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409051043025.png" alt="image-20240819204149507" />image-20240819204149507</p>
-<p>然后打开Tun模式，我测试就可以了</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409051043043.png" alt="image-20240819205233715" />image-20240819205233715</p>
-<p>==这个tun模式指的是虚拟一个网卡，但这样的话会导致网络发生变化，从而导致一系列的问题，例如无法正常拉取==</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409051043016.png" alt="image-20240819213826540" />image-20240819213826540</p>
-<p>所以现在正确的设置是这个地方：</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409051043030.png" alt="image-20240819214845649" />image-20240819214845649</p>
-<p>其他的就不用设置了，行了，去洗澡。</p>
-<p>Clash 是一种代理工具，它可以根据配置文件的规则将网络流量通过不同的代理服务器或直接连接到目标服务器。<strong>本地直连</strong>（通常称为 “DIRECT”）是一种规则配置，意味着流量将不通过代理服务器，而是直接从你的设备连接到目标服务器。</p>
-<p>选clash代理的时候尽量选美国，其他的好慢啊。</p>
-<p>更新wsl内核版本：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">COPYsudo apt install linux-image-generic-hwe-22.04</span><br></pre></td></tr></table></figure>
-<h1 id="windows商店打不开的解决方法"><a class="markdownIt-Anchor" href="#windows商店打不开的解决方法"></a> windows商店打不开的解决方法</h1>
-<p>打开“运行”输入 inetcpl.cpl 或者“WINDOWS”+“R”键，输入 inetcpl.cpl亦可。<br />
-点开高级往下拉，勾上&quot;使用TLS 1.2&quot;选项，或者点还原高级设置。</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409121422525.png" alt="在这里插入图片描述" /></p>
-<h1 id="wsl压缩方法"><a class="markdownIt-Anchor" href="#wsl压缩方法"></a> WSL压缩方法</h1>
-<p>PS C:\Users\Administrator\AppData\Local\Packages\CanonicalGroupLimited.Ubuntu22.04LTS_79rhkp1fndgsc\LocalState&gt; Optimize-VHD -Path .\ext4.vhdx  -Mode Full</p>
-<h1 id="wsl移动到其他盘"><a class="markdownIt-Anchor" href="#wsl移动到其他盘"></a> WSL移动到其他盘</h1>
-<p>你可以按以下步骤将你的 <code>Ubuntu-22.04</code> 发行版导入到 <code>G:\</code> 盘：</p>
-<h3 id="1-导出-wsl-发行版"><a class="markdownIt-Anchor" href="#1-导出-wsl-发行版"></a> 1. 导出 WSL 发行版</h3>
-<p>首先，导出你的 <code>Ubuntu-22.04</code> WSL 发行版为 <code>.tar</code> 文件（如果尚未导出），例如：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsl --<span class="built_in">export</span> Ubuntu-22.04 G:\ubuntu-22.04-backup.tar</span><br></pre></td></tr></table></figure>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409151359184.png" alt="image-20240915135926150" /></p>
-<p>这个命令会将你的 <code>Ubuntu-22.04</code> 版本导出到 <code>G:</code> 文件夹中，文件名为 <code>ubuntu-22.04-backup.tar</code>。你可以根据需要更改路径和文件名。</p>
-<h3 id="2-删除原-wsl-发行版"><a class="markdownIt-Anchor" href="#2-删除原-wsl-发行版"></a> 2. 删除原 WSL 发行版</h3>
-<p>如果确认导出成功，可以使用以下命令从 WSL 中删除原来的 <code>Ubuntu-22.04</code> 版本：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsl --unregister Ubuntu-22.04</span><br></pre></td></tr></table></figure>
-<p>这样做会从 WSL 中删除现有的 <code>Ubuntu-22.04</code>，但不会影响你导出的 <code>.tar</code> 文件。</p>
-<h3 id="3-导入到-g-盘"><a class="markdownIt-Anchor" href="#3-导入到-g-盘"></a> 3. 导入到 G:\ 盘</h3>
-<p>现在你可以将导出的 WSL 发行版安装到 <code>G:\</code> 盘。运行以下命令将 <code>Ubuntu-22.04</code> 版本导入到 <code>G:\wsl\ubuntu-22.04</code> 文件夹：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsl --import Ubuntu-22.04 G:\ubuntu-22.04 G:\ubuntu-22.04-backup.tar</span><br></pre></td></tr></table></figure>
-<p>这会将你的 <code>Ubuntu-22.04</code> 发行版安装到 <code>G:\wsl\ubuntu-22.04</code> 目录。</p>
-<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409151400503.png" alt="image-20240915140014438" /></p>
-<h3 id="4-启动新位置的-wsl"><a class="markdownIt-Anchor" href="#4-启动新位置的-wsl"></a> 4. 启动新位置的 WSL</h3>
-<p>导入完成后，你可以使用以下命令启动新的 <code>Ubuntu-22.04</code> 发行版：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsl -d Ubuntu-22.04</span><br></pre></td></tr></table></figure>
-<p>这样，你的 <code>Ubuntu-22.04</code> 就会在 <code>G:\</code> 盘上运行了。</p>
-<p>如果有任何问题或进一步的帮助需求，请随时告知！</p>
-<h1 id="设置默认用户"><a class="markdownIt-Anchor" href="#设置默认用户"></a> 设置默认用户</h1>
-<p>wsl -d Ubuntu-22.04 --user topeet</p>
-<p>ubuntu2204 config --default-user topeet</p>
-<p>wsl -d Ubuntu-20.04 --user topeet</p>
-<p>ubuntu2004 config --default-user topeet</p>
- 
+  <div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
+  <script id="hbeData" type="hbeData" data-hmacdigest="d63070e532c2fd58511bf8ba84a366d11a9cc87ad10a83a4848893847d881063">b3ce3877181dba7d2dc822c297e3a5e461a588a800d045df3c29113d12bf7cbbb7d0f7661783787c364a123d51c9fbf700082b8c18d8f9e529d57580720f57be8970ca695dc7fbf44a86a874ba1e45b1ee1c2e39ee3b3f5eef2eb21a2a574136ace8821ae5f04c462bc469942411a6763087c3520426f068d9b4d1e7a67aa8fd50cb8809d71a2895d47ddc2cef1ebc35a989bf96ceb363de24fe779f1e2e355d99d847884ed2f20d283657dc072bf44b0b5b3740a2d8277f69a855487eab439895752bdd95d5eb6a2ef7cdbce14358f2eefc9064db4030b991d7308f6f05e8bf0455c24c37a9e1bfd75f9b71ad82abdecdf7888ad87bc4e91de105ded3a18339b524b2b5735fe9c0a4ce8909d21f38c3abdfb474a0f3f68a8833b1a6a68023c1fcaaf8d290a447d6b801319cf2cf9fe1937231fd49961f1fa7578e43536191d18948d62a38f4ae7915caa24aed7608abbd746fb692574c1b53245f6cc3e693e40e93d1cd791400088b40e16b0ebece909f037cb32a1564959b22cba8652efb5b91cd198856514157f50365c57fde164853b29009144a14284c77ab94419b8ad1075a1ab7ffe19b3c216920e058dff04e2108747e84cbf44f46fa9655bd4ea5a85321422f08a2d7c75634e0d447808899500eb665f8a4bac672e07adba40dcfa29f32245b9bb88599034bb41e147d2f98b56b609b18858becea734b2dd6389e8b6a6d8f29d33eb6789bd8341e3df8db5fc541fb2a18bb7c3b3ab9004d75eb1f55b98fe50b9285ac71a7c72a4315ae62117aac343eec071c0fe80ba1e3ebc37c6769c6273d8afab12bdf4c6835ea421588ede02014e558da190aadc08174d9106efc85e302d56e071bda84a66f6f3a68252300adf9080167955da434d79f84efed8e68c6df01d180b1eef85ad3973e007535a3429bc4f9d3b7e47b9cf5a9c6df36cee366ea319cbc1cd0086ec794a1611f158187e5e6d7fd8df8152088037073cba40ff1d6081b93d00e4d866268c6397ad1ad443a1facbc7ab90963078a571d67ec7968e537ee93235582dc8766a8258aa0829c0b741557b802be7b00764709ea91d0cae0d51ae99492d4a4451e8551ca81c629978ac931132705235622ff9bc3d28557798655e1c194ce7cecd9f7585ae8c1e7ce001fb7036a6605c9852713ac21cbe342218b31e8854e7421955a9de33b124983b6272c9f4623ab60f3eadc20c5075036653476ee6bb8288bba6e983d2821d4c83acc47ba47650e2c6ec49cb92e273920e99440e7d0159ae03976ac6a91d1f01564b068d024ce04ec002220b624156efda8721dcba44c1ef5582005690b3484e3c71b6f2d08f9785f9ba8854cd701f53d9b904b147b1e198052e736dc7e90865d63d197f0ab5c0b8eade3a0edd5c55f657ef543fb1567fbb3177d302de366a93e5030534cfcdfffa6ae9f75069bfe331bfeb3e483939e859ffa3ab2ac740e698a65d3ebb88b3408516239f990f0b4e843954405a5a94b79c3069d9f732437e23330ba3649c81c38739459a5f800c6cc291916abd5e0dea5995231276654793320e9acb15ff8dcee643daf71df7af2db61a80f5513abe82f1c3cd68c1f64e7ab4ee3d552fd248f2c30b939d2eff0d692f4017b2be5e294484ae77a5d24227e83a35cf9f7d03bd1514613ba76f618504d18e0e646bbc55a9754ccc36cea206fe34edf644fb735b3f3c86552d8ad70763a5b59d86604911bcf7a8163e127de1493637418cfaf705dad892209e2dbfa377005c826bdd89540e37b332cdb6c208cebd5c60a3cef0d3fef97327ab14b46611357ec4244e0b4eea8cd5bbba313dbee52df5058320238a260448b0ee2d6a4c7185a2b6bdb9fca76b812744d2b97a88ef650efb56bb4b17bb5c3af300e71de1fbba6a3f36b0d7b0e8675bca7c67aaf0c97ea0c0f2cfecb470c54863752967c532f2692b6fc6bde9971328f5710c105ec3beb3196f00cc5cbe07aeedc4394db351c3265f7149b95e7802c2305454ba6e1d822f971114685a2ad4db0833ae5b0fcfa4e5a5e638043bb9d24eb70a73782d94f5d20deb1830e11825d727f414c8532005ac307ed43b5d44f508dcb83ba32516ba6d678abc8dd9c236f2d59fa2da0d83de4654d5b3959e67a0fe10559c23b20b13b3f1f4ee28a8253795f2006302bbb2e1f8c8e4c6dbd0bb32f10c9cf3877aa1bd9b22708d3a6b424a39d59a650312c463ce7961496697bfcc38219cc0c6dc295690308cc7a4a4439e6c69696d0412bb787079e7eab10e4bc1dcc6a86bd53777ccd93e96a62997f88a1b103fa2450ebdfc25efdd62b85d99780ad4328b473f9b9717d2e0d74a68741a810ad2b924fd764bf61c73c1c5156cef5adb6d67040bb188d755273a5b61346d55b19da764f726f138491636abbe2aafd3d7f97f764eba7f82e274da927d1143815a4ab0a45dd6aeedac3f50be31e694b4f8cc0f7875d007e622c4d6b35b51f03b0936e8d62e42777d2bad99100aa77aed5ab21ed56ab233bf1293d38de25038c9e4e75f62c21c16fd6321f2d0471d36732cc1f29155ed24505e19325235b62a15b5ed6aaf7b996e146555548573661b66ec0669cbc6752ed7944a4d89614d4ee95272b15fdc4cd687bebff52445323846943d074fc1a62114cda9dd3cb5daf46ea631719875a41ce2208a615194cdf1ee15958bf9a7a88dfdab578e9495ad966963afd257d189fe69709bd10e8bd04bdea4f32f27a68bf4962c13f990069c3016813307619dba6a6dde86404199e6a819afd8d7fa2eef3d125640ca496a8213cb770f0d2</script>
+  <div class="hbe hbe-content">
+    <div class="hbe hbe-input hbe-input-default">
+      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
+      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
+        <span class="hbe hbe-input-label-content hbe-input-label-content-default">非礼勿视</span>
+      </label>
+    </div>
+  </div>
+</div>
+<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css"> 
       <!-- reward -->
       
     </div>
@@ -212,7 +172,7 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2024/08/20/07_%E5%B0%8F%E6%8A%80%E5%B7%A7/12_WSL%E4%BD%BF%E7%94%A8%E5%B0%8F%E6%8A%80%E5%B7%A7/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2024/09/06/01_%E7%94%9F%E6%B4%BB/16_%E5%8F%8D%E6%80%9D(9%E6%9C%88%E7%AC%AC1%E4%B8%AA%E6%98%9F%E6%9C%9F)/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -223,19 +183,19 @@
    
   <nav class="article-nav">
     
-      <a href="/2024/08/25/07_%E5%B0%8F%E6%8A%80%E5%B7%A7/14_repo%E5%AD%A6%E4%B9%A02/" class="article-nav-link">
+      <a href="/2024/09/07/07_%E5%B0%8F%E6%8A%80%E5%B7%A7/17_%E7%94%B5%E8%84%91%E8%B6%85%E9%A2%91/" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            vim学习
+            电脑超频
           
         </div>
       </a>
     
     
-      <a href="/2024/08/20/07_%E5%B0%8F%E6%8A%80%E5%B7%A7/13_readme%E7%9A%84%E4%BD%BF%E7%94%A8/" class="article-nav-link">
+      <a href="/2024/09/02/02_%E7%91%9E%E8%8A%AF%E5%BE%AE/22_%E9%87%8E%E7%81%AB%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%84%E5%BB%BA%E8%84%9A%E6%9C%AC%E5%88%86%E6%9E%90/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">readme的使用</div>
+        <div class="article-nav-title">野火文件系统构建脚本分析</div>
       </a>
     
   </nav>

@@ -110,6 +110,208 @@
     
     
     <article
+  id="post-02_瑞芯微/17 uuid问题的解决"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/10/19/02_%E7%91%9E%E8%8A%AF%E5%BE%AE/17%20uuid%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E5%86%B3/"
+    >uuid问题的解决</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/10/19/02_%E7%91%9E%E8%8A%AF%E5%BE%AE/17%20uuid%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E5%86%B3/" class="article-date">
+  <time datetime="2023-10-19T12:47:53.000Z" itemprop="datePublished">2023-10-19</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%91%9E%E8%8A%AF%E5%BE%AE/">瑞芯微</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>先说一下目前的问题，由于目前文件系统的挂载采用的都是uuid的形式，所以这就导致了不论是TF卡启动还是EMMC启动都会启动emmc分区的，除非将emmc分区中的内容擦除掉，但这明显是不对的，为什么不能一起用，所以我在uboot的代码中添加了以下代码</p>
+<p>u-boot/arch/arm/mach-rockchip/boot_rkimg.c</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(!<span class="built_in">strcmp</span>(boot_media, <span class="string">&quot;emmc&quot;</span>))</span><br><span class="line">        <span class="built_in">snprintf</span>(boot_options, <span class="keyword">sizeof</span>(boot_options),<span class="string">&quot;%s root=/dev/mmcblk0p6&quot;</span>,boot_options);</span><br><span class="line">        </span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span>(!<span class="built_in">strcmp</span>(boot_media, <span class="string">&quot;sd&quot;</span>))</span><br><span class="line">        <span class="built_in">snprintf</span>(boot_options, <span class="keyword">sizeof</span>(boot_options),<span class="string">&quot;%s root=/dev/mmcblk1p6&quot;</span>,boot_options);</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311071323891.png" alt="image-20231107132358783" /></p>
+<p>添加了之后就可以进行判断了，然后要修改内核设备树，在内核设备树中指定了uuid，3588和3568对应的设备树文件如下所示：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">arch/arm64/boot/dts/rockchip/rk3588-linux.dtsi</span><br><span class="line">arch/arm64/boot/dts/rockchip/rk3568-linux.dtsi</span><br></pre></td></tr></table></figure>
+<p>修改chose节点，现在的内容如下所示：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">chosen: chosen &#123;</span><br><span class="line">        bootargs = &quot;earlycon=uart8250,mmio32,0xfeb50000 console=ttyFIQ0 irqchip.gicv3_pseudo_nmi=0 root=PARTUUID=614e0000-0000 rw rootwait&quot;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>现在去掉其中的root相关的内容，修改完成如下所示：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">chosen: chosen &#123;</span><br><span class="line">        bootargs = &quot;earlycon=uart8250,mmio32,0xfeb50000 console=ttyFIQ0 irqchip.gicv3_pseudo_nmi=0 rw rootwait&quot;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-03_Linux学习/1 buildroot的学习"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/10/16/03_Linux%E5%AD%A6%E4%B9%A0/1%20buildroot%E7%9A%84%E5%AD%A6%E4%B9%A0/"
+    >buildroot的学习</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/10/16/03_Linux%E5%AD%A6%E4%B9%A0/1%20buildroot%E7%9A%84%E5%AD%A6%E4%B9%A0/" class="article-date">
+  <time datetime="2023-10-16T13:55:17.000Z" itemprop="datePublished">2023-10-16</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux%E5%AD%A6%E4%B9%A0/">Linux学习</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>buildroot官网地址：<a target="_blank" rel="noopener" href="https://buildroot.org/">https://buildroot.org/</a></p>
+<p>github链接：<a target="_blank" rel="noopener" href="https://github.com/buildroot/buildroot">https://github.com/buildroot/buildroot</a></p>
+<p>两个指导文档</p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310162227581.png" alt="image-20231016222739549" /></p>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310162227750.png" alt="image-20231016222749732" /></p>
+<h1 id="1拉取buildroot"><a class="markdownIt-Anchor" href="#1拉取buildroot"></a> 1.拉取buildroot</h1>
+<p>拉取下载buildroot</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/buildroot/buildroot</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310170757701.png" alt="image-20231017075747677" /></p>
+<p>建议以普通用户来进行操作，buildroot管饭极力推荐普通用户</p>
+<h1 id="2help帮助菜单"><a class="markdownIt-Anchor" href="#2help帮助菜单"></a> 2.help帮助菜单</h1>
+<p>所有的交互都是通过在主构建根源目录中调用make来实现的，可以通过make help来获取帮助，具体内容如下所示：</p>
+<p><strong>清理：</strong><br />
+clean - 删除构建生成的所有文件<br />
+distclean - 删除所有非源代码文件（包括.config文件）</p>
+<p><strong>构建：</strong><br />
+all - 构建整个系统<br />
+toolchain - 构建工具链<br />
+sdk - 构建可移植的SDK</p>
+<p><strong>配置：</strong><br />
+menuconfig - 交互式基于curses的配置工具<br />
+nconfig - 交互式基于ncurses的配置工具<br />
+xconfig - 交互式基于Qt的配置工具<br />
+gconfig - 交互式基于GTK的配置工具<br />
+oldconfig - 解决.config文件中的未解决符号<br />
+syncconfig - 与oldconfig相同，但静默执行，并更新依赖关系<br />
+olddefconfig - 与syncconfig相同，但将新符号设置为默认值<br />
+randconfig - 随机回答所有选项的新配置<br />
+<strong>defconfig - 所有选项都使用默认答案的新配置；如果在命令行上设置了BR2_DEFCONFIG，则使用其作为输入</strong><br />
+<strong>savedefconfig - 将当前配置保存到BR2_DEFCONFIG（最小配置）</strong></p>
+<p>​		上面的这两个应该是在配置里面最有用的那一个，默认情况下这个BR2_DEFCONFIG并不会被设置，所以只能是配置完成之后，第一次是一定要设置的。特殊记忆一下。</p>
+<p>​	update-defconfig - 与savedefconfig相同<br />
+​	allyesconfig - 所有选项都接受yes答案的新配置<br />
+​	allnoconfig - 所有选项都使用no答案的新配置<br />
+​	alldefconfig - 所有选项都设置为默认值的新配置<br />
+​	randpackageconfig - 随机回答包选项的新配置<br />
+​	allyespackageconfig - 所有包选项都接受yes答案的新配置<br />
+​	allnopackageconfig - 所有包选项都使用no答案的新配置</p>
+<p><strong>针对特定软件包：</strong><br />
+<pkg> - 构建并安装<pkg>及其所有依赖项<br />
+<pkg>-source - 仅下载<pkg>的源代码文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make opencv4-source</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310170818453.png" alt="image-20231017081853414" /></p>
+<p>​	<pkg>-extract - 提取<pkg>的源代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make opencv4-extract</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310170819393.png" alt="image-20231017081936374" /></p>
+<p>​	<pkg>-patch - 对<pkg>应用补丁</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make opencv4-patch</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310170821298.png" alt="image-20231017082105272" />	<pkg>-depends - 构建<pkg>的依赖项</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make opencv4-depends</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310170821715.png" alt="image-20231017082141682" /></p>
+<p>​	<pkg>-configure - 构建<pkg>到配置阶段</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make opencv4-configure</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310170830641.png" alt="image-20231017083044583" /></p>
+<p>​	<pkg>-build - 构建<pkg>到编译阶段</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make opencv4-build</span><br></pre></td></tr></table></figure>
+<p><img src="https://chai-1301855619.cos.ap-beijing.myqcloud.com/202310170831059.png" alt="image-20231017083149028" /></p>
+<p>​	<pkg>-show-info - 生成关于<pkg>的信息，以JSON格式呈现<br />
+​	<pkg>-show-depends - 列出<pkg>依赖的软件包<br />
+​	<pkg>-show-rdepends - 列出以<pkg>为依赖的软件包<br />
+​	<pkg>-show-recursive-depends 递归列出<pkg>依赖的软件包<br />
+​	<pkg>-show-recursive-rdepends  递归列出以<pkg>为依赖的软件包<br />
+​	<pkg>-graph-depends - 生成<pkg>依赖关系的图形<br />
+​	<pkg>-graph-rdepends - 生成<pkg>反向依赖关系的图形<br />
+​	<pkg>-dirclean - 删除<pkg>的构建目录<br />
+​	<pkg>-reconfigure - 从配置阶段重新开始构建<br />
+​	<pkg>-rebuild - 从编译阶段重新开始构建<br />
+​	<pkg>-reinstall - 从安装阶段重新开始构建</p>
+<p><strong>文档：</strong><br />
+manual - 构建所有格式的手册<br />
+manual-html - 构建HTML格式的手册<br />
+manual-split-html - 构建拆分的HTML格式的手册<br />
+manual-pdf - 构建PDF格式的手册<br />
+manual-text - 构建文本格式的手册<br />
+manual-epub - 构建ePub格式的手册<br />
+graph-build - 生成构建时间的图表<br />
+graph-depends - 生成依赖树的图表<br />
+graph-size - 生成文件系统大小的统计信息<br />
+list-defconfigs - 列出所有预配置的最小系统</p>
+<p><strong>杂项：</strong><br />
+source - 下载离线构建所需的所有源代码<br />
+external-deps - 列出使用的外部软件包<br />
+legal-info - 生成有关许可证合规性的信息<br />
+show-info - 生成关于软件包的信息，以JSON格式呈现<br />
+pkg-stats - 以JSON和HTML格式生成有关软件包的信息<br />
+printvars - 导出通过VARS=…选择的内部变量<br />
+show-vars - 以JSON格式呈现所有内部变量；使用VARS=…限制列表以匹配该模式</p>
+<p>make V=0|1 - 0 =&gt; 静默构建（默认），1 =&gt; 详细构建<br />
+make O=dir - 将所有输出文件定位在&quot;dir&quot;中，包括.config文件</p>
+<p>有关更多详细信息，请参阅README，生成Buildroot手册或在线查阅它，网址为<a target="_blank" rel="noopener" href="http://buildroot.org/docs.html">http://buildroot.org/docs.html</a></p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
   id="post-02_瑞芯微/09 挂载镜像文件"
   class="article article-type-post"
   itemscope
@@ -1099,7 +1301,7 @@ make ARCH=arm64 -j32  CROSS_COMPILE=aarch64-linux-gnu- rk3588-evb7-lp4-v10-linux
 
     
     <article
-  id="post-07_小技巧/0 windows搭建hexo"
+  id="post-07_小技巧/0 搭建hexo"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -1110,8 +1312,8 @@ make ARCH=arm64 -j32  CROSS_COMPILE=aarch64-linux-gnu- rk3588-evb7-lp4-v10-linux
     <header class="article-header">
        
 <h2 itemprop="name">
-  <a class="article-title" href="/2023/09/03/07_%E5%B0%8F%E6%8A%80%E5%B7%A7/0%20windows%E6%90%AD%E5%BB%BAhexo/"
-    >windows搭建hexo</a> 
+  <a class="article-title" href="/2023/09/03/07_%E5%B0%8F%E6%8A%80%E5%B7%A7/0%20%E6%90%AD%E5%BB%BAhexo/"
+    >搭建hexo</a> 
 </h2>
  
 
@@ -1119,7 +1321,7 @@ make ARCH=arm64 -j32  CROSS_COMPILE=aarch64-linux-gnu- rk3588-evb7-lp4-v10-linux
     </header>
      
     <div class="article-meta">
-      <a href="/2023/09/03/07_%E5%B0%8F%E6%8A%80%E5%B7%A7/0%20windows%E6%90%AD%E5%BB%BAhexo/" class="article-date">
+      <a href="/2023/09/03/07_%E5%B0%8F%E6%8A%80%E5%B7%A7/0%20%E6%90%AD%E5%BB%BAhexo/" class="article-date">
   <time datetime="2023-09-03T01:55:17.000Z" itemprop="datePublished">2023-09-03</time>
 </a> 
   <div class="article-category">
@@ -1130,8 +1332,24 @@ make ARCH=arm64 -j32  CROSS_COMPILE=aarch64-linux-gnu- rk3588-evb7-lp4-v10-linux
       
     <div class="article-entry" itemprop="articleBody">
        
-  <link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 [Markdown]Daring Fireball: Markdown )（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p>
-<p>Hexo 官方中文网站: Hexo</p>
+  <p>Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 [Markdown]Daring Fireball: Markdown )（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p>
+<h1 id="linux-安装hexo"><a class="markdownIt-Anchor" href="#linux-安装hexo"></a> Linux 安装hexo</h1>
+<p>==以后尽可能地用Linux的hexo，使用wsl之后能非常轻松的部署上==</p>
+<blockquote>
+<h3 id="1-安装-hexo-所需的环境"><a class="markdownIt-Anchor" href="#1-安装-hexo-所需的环境"></a> 1. 安装 Hexo 所需的环境</h3>
+<p>Hexo 基于 Node.js 运行，因此需要安装 Node.js 和 Git。</p>
+<h4 id="11-安装-nodejs"><a class="markdownIt-Anchor" href="#11-安装-nodejs"></a> 1.1 安装 Node.js</h4>
+<p>你可以通过 NodeSource 安装 Node.js，或者使用包管理工具来安装。建议安装最新的稳定版本。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">bash复制代码# 更新包管理器</span><br><span class="line">sudo apt update</span><br><span class="line"></span><br><span class="line"># 安装 Node.js 和 npm</span><br><span class="line">sudo apt install -y nodejs npm</span><br></pre></td></tr></table></figure>
+<h4 id="12-安装-git"><a class="markdownIt-Anchor" href="#12-安装-git"></a> 1.2 安装 Git</h4>
+<p>Git 是 Hexo 部署到 GitHub 等平台的必备工具。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install -y git</span><br></pre></td></tr></table></figure>
+<h3 id="2-全局安装-hexo"><a class="markdownIt-Anchor" href="#2-全局安装-hexo"></a> 2. 全局安装 Hexo</h3>
+<p>安装 Hexo 的命令行工具 <code>hexo-cli</code>。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;sudo npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
+<p>安装完成后，你可以检查是否安装成功：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo -v</span><br></pre></td></tr></table></figure>
+</blockquote>
 <h1 id="第一章-前期准备"><a class="markdownIt-Anchor" href="#第一章-前期准备"></a> 第一章 前期准备</h1>
 <h2 id="11-安装前所需环境介绍"><a class="markdownIt-Anchor" href="#11-安装前所需环境介绍"></a> 1.1 安装前所需环境介绍</h2>
 <p>安装 Hexo 之前，需要确保您的 PC 中已经安装以下工具:</p>
@@ -1139,7 +1357,7 @@ make ARCH=arm64 -j32  CROSS_COMPILE=aarch64-linux-gnu- rk3588-evb7-lp4-v10-linux
 Git    <a target="_blank" rel="noopener" href="https://git-scm.com/">https://git-scm.com/</a><br />
 如果您的电脑已经具备所需工具，那么您可以直接进入第二章开始安装 Hexo 了。</p>
 <p>如果您还未安装这两款工具，那么请按照以下步骤进行安装。</p>
-<h2 id="12-安装-git"><a class="markdownIt-Anchor" href="#12-安装-git"></a> 1.2 安装 Git</h2>
+<h2 id="12-安装-git-2"><a class="markdownIt-Anchor" href="#12-安装-git-2"></a> 1.2 安装 Git</h2>
 <p>官方下载地址: <a target="_blank" rel="noopener" href="https://git-scm.com/">https://git-scm.com/</a><br />
 注意事项: 建议选择 64-bit Git for Windows Setup，并且安装时要勾选 Add to PATH 选项</p>
 <p>win + R 在命令行输入cmd进入终端模式，输入下面指令，当显示版本则安装成功<br />
