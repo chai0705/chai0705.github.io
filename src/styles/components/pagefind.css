@@ -76,6 +76,17 @@
   background: rgba(255, 255, 255, 0.05);
 }
 
+/* Keyboard navigation selected state */
+.pagefind-ui__result[data-selected='true'],
+.pagefind-ui__button[data-selected='true'] {
+  @apply ring-2 ring-primary/50 bg-primary/5;
+}
+
+.dark .pagefind-ui__result[data-selected='true'],
+.dark .pagefind-ui__button[data-selected='true'] {
+  @apply bg-primary/10;
+}
+
 .pagefind-ui__result-inner {
   @apply !mt-0;
 }
