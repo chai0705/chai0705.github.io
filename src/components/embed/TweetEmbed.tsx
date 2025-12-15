@@ -5,6 +5,7 @@
 
 import { Tweet } from 'react-tweet';
 import { useEffect, useState } from 'react';
+import { useIsDarkTheme } from '@hooks/index';
 
 interface TweetEmbedProps {
   tweetId: string;
@@ -12,28 +13,13 @@ interface TweetEmbedProps {
 
 export function TweetEmbed({ tweetId }: TweetEmbedProps) {
   const [mounted, setMounted] = useState(false);
-  const [theme, setTheme] = useState<'light' | 'dark'>('light');
+  const isDark = useIsDarkTheme();
 
   useEffect(() => {
     setMounted(true);
-
-    // Read theme from document
-    const updateTheme = () => {
-      const isDark = document.documentElement.classList.contains('dark');
-      setTheme(isDark ? 'dark' : 'light');
-    };
-
-    updateTheme();
-
-    // Listen for theme changes
-    const observer = new MutationObserver(updateTheme);
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ['class'],
-    });
-
-    return () => observer.disconnect();
   }, []);
+
+  const theme = isDark ? 'dark' : 'light';
 
   if (!mounted) {
     return (

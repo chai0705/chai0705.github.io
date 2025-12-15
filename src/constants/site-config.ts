@@ -8,7 +8,6 @@ type SiteConfig = {
   showLogo?: boolean; // 是否显示 logo，否则用 alternate 当·logo
   author?: string; // 文章作者
   // theme
-  enableJSGridCover?: boolean; // 是否启用 color4bg 的背景 (写了不舍得扔)
   site: string; // 站点线上域名 用于 RSS 生成等
   startYear?: number; // 站点创建年份
   keywords?: string[]; // 站点关键词 SEO
@@ -75,7 +74,6 @@ export const siteConfig: SiteConfig = {
   avatar: '/img/avatar.webp', // 站点头像 logo.png or url
   showLogo: true, // 是否显示 logo 否则用 title
   author: 'cos', // 作者名称
-  enableJSGridCover: false, // 是否启用 color4bg 的背景
   site: 'https://blog.cosine.ren/',
   startYear: 2020,
   keywords: ['cos', 'cosine', '博客', '个人空间', '技术', '前端'],

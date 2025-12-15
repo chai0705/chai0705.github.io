@@ -14,6 +14,7 @@ import { remarkLinkEmbed } from './src/lib/markdown/remark-link-embed.ts';
 // https://astro.build/config
 export default defineConfig({
   site: siteConfig.site,
+  compressHTML: true,
   markdown: {
     // Enable GitHub Flavored Markdown
     gfm: true,

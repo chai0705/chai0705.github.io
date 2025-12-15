@@ -129,10 +129,25 @@ export interface Props {
   });
 
   // Theme synchronization: Watch for theme changes and update Remark42
-  function setupThemeSync() {
-    let themeChangeTimeout: ReturnType<typeof setTimeout> | null = null;
+  let themeObserver: MutationObserver | null = null;
+  let themeChangeTimeout: ReturnType<typeof setTimeout> | null = null;
 
-    const observer = new MutationObserver((mutations) => {
+  function cleanupThemeSync() {
+    if (themeObserver) {
+      themeObserver.disconnect();
+      themeObserver = null;
+    }
+    if (themeChangeTimeout) {
+      clearTimeout(themeChangeTimeout);
+      themeChangeTimeout = null;
+    }
+  }
+
+  function setupThemeSync() {
+    // 先清理旧的观察器，防止内存泄漏
+    cleanupThemeSync();
+
+    themeObserver = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
         if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
           // Clear previous timeout to debounce rapid changes
@@ -156,7 +171,7 @@ export interface Props {
     });
 
     // Observe class changes on documentElement
-    observer.observe(document.documentElement, {
+    themeObserver.observe(document.documentElement, {
       attributes: true,
       attributeFilter: ['class'],
     });
@@ -177,4 +192,7 @@ export interface Props {
   document.addEventListener('astro:page-load', () => {
     setupThemeSync();
   });
+
+  // 页面切换前清理观察器
+  document.addEventListener('astro:before-swap', cleanupThemeSync);
 </script>

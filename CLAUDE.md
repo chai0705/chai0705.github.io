@@ -180,6 +180,182 @@ document.addEventListener('astro:page-load', init);
 
 For components with cleanup needs, use an `initialized` flag or `controller?.destroy()` pattern to prevent double initialization.
 
+**Event listener and Observer cleanup pattern:**
+
+```typescript
+let scrollHandler = null;
+let themeObserver = null;
+
+function init() {
+  // 清理旧的监听器（防止重复绑定）
+  if (scrollHandler) window.removeEventListener('scroll', scrollHandler);
+  if (themeObserver) themeObserver.disconnect();
+
+  // 创建新的监听器
+  scrollHandler = throttle(handleScroll, 80);
+  window.addEventListener('scroll', scrollHandler, { passive: true });
+
+  themeObserver = new MutationObserver(handleThemeChange);
+  themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+}
+
+// 首次加载
+if (document.readyState !== 'loading') init();
+document.addEventListener('astro:page-load', init);
+
+// 页面切换前清理（防止内存泄漏）
+document.addEventListener('astro:before-swap', () => {
+  if (scrollHandler) { window.removeEventListener('scroll', scrollHandler); scrollHandler = null; }
+  if (themeObserver) { themeObserver.disconnect(); themeObserver = null; }
+});
+```
+
+## Code Style
+
+Biome handles both linting and formatting (line width: 128, single quotes, trailing commas). Tailwind classes must be sorted (`useSortedClasses` rule enforced).
+
+- Avoid code duplication - extract common types and components.
+- Keep components focused - use hooks and component composition.
+- Follow React best practices - proper Context usage, state management.
+- Use TypeScript strictly - leverage type safety throughout.
+- Build React features out of small, atomic components. Push data fetching, stores, and providers down to the feature or tab that actually needs them so switching views unmounts unused logic and prevents runaway updates instead of centralizing everything in a mega component.
+
+### React Best Practices
+
+#### Avoid useCallback Overuse
+
+Only use `useCallback` when:
+
+- The callback is passed to a memoized child component
+- The callback has dependencies that genuinely need to be tracked
+
+**DON'T** wrap callbacks with empty dependencies or callbacks that aren't passed to memoized components:
+
+```typescript
+// ❌ Bad: Unnecessary useCallback
+const handleClose = useCallback(() => {
+  window.api.mainPanel.close();
+}, []);
+
+// ✅ Good: Regular function
+const handleClose = () => {
+  window.api.mainPanel.close();
+};
+```
+
+#### Fix Circular Dependencies in useEffect
+
+When event handlers need to access latest state without re-subscribing, use refs:
+
+```typescript
+// ❌ Bad: Circular dependency causes re-subscription every state change
+const handleMouseMove = useCallback((e: MouseEvent) => {
+  if (!isDragging) return;
+  // ... logic
+}, [isDragging]);
+
+useEffect(() => {
+  if (isDragging) {
+    window.addEventListener('mousemove', handleMouseMove);
+  }
+  return () => window.removeEventListener('mousemove', handleMouseMove);
+}, [isDragging, handleMouseMove]); // Circular dependency!
+
+// ✅ Good: Use ref and define handler inside effect
+const isDraggingRef = useRef(isDragging);
+isDraggingRef.current = isDragging;
+
+useEffect(() => {
+  const handleMouseMove = (e: MouseEvent) => {
+    if (!isDraggingRef.current) return;
+    // ... logic
+  };
+
+  if (isDragging) {
+    window.addEventListener('mousemove', handleMouseMove);
+  }
+  return () => window.removeEventListener('mousemove', handleMouseMove);
+}, [isDragging]); // No circular dependency
+```
+
+#### IPC Subscriptions Should Subscribe Once
+
+IPC listeners should subscribe once on mount, not re-subscribe on state changes:
+
+```typescript
+// ❌ Bad: Re-subscribes every time isHovering changes
+useEffect(() => {
+  const cleanup = window.api.menu.onCheckMousePosition(() => {
+    if (!isHovering) { window.api.menu.hide(); }
+  });
+  return cleanup;
+}, [isHovering]); // Re-subscribes unnecessarily
+
+// ✅ Good: Subscribe once, access state via ref
+const isHoveringRef = useRef(isHovering);
+isHoveringRef.current = isHovering;
+
+useEffect(() => {
+  const cleanup = window.api.menu.onCheckMousePosition(() => {
+    if (!isHoveringRef.current) { window.api.menu.hide(); }
+  });
+  return cleanup;
+}, []); // Subscribe once
+```
+
+#### Avoid useState for Static Values
+
+Don't use `useState` for values that never change:
+
+```typescript
+// ❌ Bad: useState for static value
+const [versions] = useState(window.electron.process.versions);
+
+// ✅ Good: Direct constant
+const versions = window.electron.process.versions;
+```
+
+#### Extract Custom Hooks for Reusable Logic
+
+When the same `useState` + `useRef` + `useEffect` pattern appears 2+ times, extract it into a custom hook:
+
+**Signs you need a custom hook:**
+
+- Same state management pattern repeated across components
+- Logic involves event listeners with cleanup
+- State synchronization with refs (e.g., `isDraggingRef.current = isDragging`)
+
+**Example: `useDrag` hook** (see `src/renderer/src/hooks/use-drag.ts`)
+
+```typescript
+// ❌ Bad: Duplicated drag logic in each component (30+ lines)
+const [isDragging, setIsDragging] = useState(false);
+const isDraggingRef = useRef(isDragging);
+isDraggingRef.current = isDragging;
+const dragStartPos = useRef({ x: 0, y: 0 });
+
+useEffect(() => {
+  const handleMouseMove = (e: MouseEvent) => { /* ... */ };
+  const handleMouseUp = () => { /* ... */ };
+  if (isDragging) {
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mouseup', handleMouseUp);
+  }
+  return () => { /* cleanup */ };
+}, [isDragging]);
+
+// ✅ Good: Extract to reusable hook
+const { isDragging, onMouseDown } = useDrag({
+  onDrag: ({ x, y }) => window.api.panel.drag(x, y),
+});
+```
+
+**Hook naming conventions:**
+
+- `use` prefix (required by React)
+- Descriptive verb: `useDrag`, `useResize`, `useHover`
+- Return object with clear properties
+
 #### Scroll Event Subscription in React
 
 When subscribing to scroll events in React components, **use `useSyncExternalStore`** instead of `useState` + `useEffect` to avoid excessive re-renders:
@@ -280,6 +456,12 @@ const { isDragging, onMouseDown } = useDrag({
 - `use` prefix (required by React)
 - Descriptive verb: `useDrag`, `useResize`, `useHover`
 - Return object with clear properties
+
+## IMPORTANT
+
+- Avoid feature flags and backwards compatibility shims - directly modify code since the app is unreleased.
+- When you need to check the official documentation, use Context 7 to get the latest information, or search for it if you can't get it.
+- When making major changes involving architectural alterations, etc., please request an update to CLAUDE.md at the end by yourself
 
 #### Error Handling
 

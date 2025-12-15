@@ -151,6 +151,8 @@ const { className } = Astro.props;
   }
 </style>
 <script>
+  let collapseMutationObserver: MutationObserver | null = null;
+
   function initCollapsible() {
     // 找到所有 HomeInfo 容器
     const containers = document.querySelectorAll('[data-home-info-container]');
@@ -194,27 +196,49 @@ const { className } = Astro.props;
     });
   }
 
+  function cleanupObserver() {
+    if (collapseMutationObserver) {
+      collapseMutationObserver.disconnect();
+      collapseMutationObserver = null;
+    }
+  }
+
+  function setupObserver() {
+    // 先清理旧的观察器
+    cleanupObserver();
+
+    // 支持 MobileDrawer 延迟加载
+    collapseMutationObserver = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.addedNodes.length) {
+          setTimeout(initCollapsible, 100);
+        }
+      });
+    });
+
+    collapseMutationObserver.observe(document.body, {
+      childList: true,
+      subtree: true,
+    });
+  }
+
   // 初始化
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initCollapsible);
+    document.addEventListener('DOMContentLoaded', () => {
+      initCollapsible();
+      setupObserver();
+    });
   } else {
     initCollapsible();
+    setupObserver();
   }
 
   // 支持 Astro 的视图过渡
-  document.addEventListener('astro:page-load', initCollapsible);
-
-  // 支持 MobileDrawer 延迟加载
-  const observer = new MutationObserver((mutations) => {
-    mutations.forEach((mutation) => {
-      if (mutation.addedNodes.length) {
-        setTimeout(initCollapsible, 100);
-      }
-    });
+  document.addEventListener('astro:page-load', () => {
+    initCollapsible();
+    setupObserver();
   });
 
-  observer.observe(document.body, {
-    childList: true,
-    subtree: true,
-  });
+  // 页面切换前清理观察器
+  document.addEventListener('astro:before-swap', cleanupObserver);
 </script>

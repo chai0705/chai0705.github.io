@@ -8,6 +8,11 @@ interface FriendCardProps {
   index: number;
 }
 
+/** CSS 自定义属性类型扩展 */
+interface CSSCustomProperties extends React.CSSProperties {
+  '--card-color'?: string;
+}
+
 const DEFAULT_COLOR = '#ffc0cb';
 // Cute SVG Avatar Data URI (Pink Theme)
 const DEFAULT_AVATAR = `data:image/svg+xml;utf8,${encodeURIComponent(`
@@ -80,7 +85,7 @@ export default function FriendCard({ friend, index }: FriendCardProps) {
       onMouseLeave={handleMouseLeave}
     >
       <motion.div
-        className="relative h-full w-full rounded-2xl bg-white p-3 ring-1 shadow-xl ring-gray-900/5 dark:bg-gray-800 dark:ring-white/10"
+        className="relative h-full w-full rounded-2xl bg-white p-3 shadow-xl ring-1 ring-gray-900/5 dark:bg-gray-800 dark:ring-white/10"
         style={{
           transformStyle: 'preserve-3d',
           rotateX,
@@ -110,8 +115,8 @@ export default function FriendCard({ friend, index }: FriendCardProps) {
           {/* Content */}
           <div className="mt-24 flex h-full flex-col px-2 pb-3 text-center">
             <h3
-              className="truncate text-sm font-bold text-gray-900 transition-colors group-hover:text-[var(--card-color)] dark:text-white"
-              style={{ '--card-color': cardColor } as any}
+              className="truncate text-sm font-bold text-gray-900 transition-colors group-hover:text-(--card-color) dark:text-white"
+              style={{ '--card-color': cardColor } as CSSCustomProperties}
             >
               {friend.owner}
             </h3>

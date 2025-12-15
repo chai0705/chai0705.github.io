@@ -40,12 +40,13 @@ color: "${formData.color || '#ffc0cb'}"`;
 
   const handleChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-      setFormData({
-        ...formData,
-        [e.target.name]: e.target.value,
-      });
+      const { name, value } = e.target;
+      setFormData((prev) => ({
+        ...prev,
+        [name]: value,
+      }));
     },
-    [formData],
+    [], // 空依赖 - 使用函数式更新
   );
 
   return (

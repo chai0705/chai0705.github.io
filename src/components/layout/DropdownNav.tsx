@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo, useCallback } from 'react';
 import Popover from '@components/ui/popover';
 import { type Router } from '@constants/router';
 import { useToggle } from '@hooks/useToggle';
@@ -15,16 +15,11 @@ const DropdownNavComponent = ({ item, className }: DropdownNavProps) => {
   const { isOpen, setIsOpen } = useToggle({ defaultOpen: false });
   const { name, icon, children } = item;
 
-  return (
-    <Popover
-      open={isOpen}
-      onOpenChange={setIsOpen}
-      placement="bottom-start"
-      trigger="hover"
-      render={() => (
-        <div className="nav-dropdown flex flex-col items-center">
-          {children?.length &&
-            children.map((child: Router, index) => (
+  const renderDropdownContent = useCallback(
+    () => (
+      <div className="nav-dropdown flex flex-col items-center">
+        {children?.length
+          ? children.map((child: Router, index) => (
               <a
                 key={child.path}
                 href={child.path}
@@ -42,10 +37,15 @@ const DropdownNavComponent = ({ item, className }: DropdownNavProps) => {
                   {child.name}
                 </div>
               </a>
-            ))}
-        </div>
-      )}
-    >
+            ))
+          : null}
+      </div>
+    ),
+    [children],
+  );
+
+  return (
+    <Popover open={isOpen} onOpenChange={setIsOpen} placement="bottom-start" trigger="hover" render={renderDropdownContent}>
       <button
         className={cn(
           'inline-flex h-10 items-center px-4 py-2 text-base tracking-wider',

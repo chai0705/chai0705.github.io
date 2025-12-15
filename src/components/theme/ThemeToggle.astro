@@ -100,8 +100,10 @@
     toggleBtn.dataset.listenerAttached = 'true';
   }
 
-  // 首次加载时运行
-  setupThemeToggle();
+  // 首次加载时立即初始化（处理 script 加载晚于 DOM ready 的情况）
+  if (document.readyState !== 'loading') {
+    setupThemeToggle();
+  }
 
   // 在每次Astro页面加载后运行 (处理客户端路由)
   document.addEventListener('astro:page-load', setupThemeToggle);

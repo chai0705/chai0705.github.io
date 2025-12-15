@@ -49,6 +49,7 @@ import SearchWithDialog from './SearchWithDialog.astro';
   let lastScrollY = 0;
   let scrollEndTimer = null;
   let isScrolling = false;
+  let scrollHandler = null;
   const SCROLL_END_DELAY = 800; // 滚动停止后延迟恢复自动隐藏的时间
 
   // 检查是否在文章页面且是移动端
@@ -138,5 +139,44 @@ import SearchWithDialog from './SearchWithDialog.astro';
     };
   }
 
-  window.addEventListener('scroll', throttle(handleScroll, 80), { passive: true });
+  function initNavigator() {
+    // 清理旧的监听器
+    if (scrollHandler) {
+      window.removeEventListener('scroll', scrollHandler);
+    }
+    if (scrollEndTimer) {
+      clearTimeout(scrollEndTimer);
+      scrollEndTimer = null;
+    }
+
+    // 重置状态
+    firstScroll = true;
+    triggerDistance = window.innerHeight * 0.45;
+    lastScrollY = 0;
+    isScrolling = false;
+
+    // 添加新监听器
+    scrollHandler = throttle(handleScroll, 80);
+    window.addEventListener('scroll', scrollHandler, { passive: true });
+  }
+
+  // 首次加载时立即初始化
+  if (document.readyState !== 'loading') {
+    initNavigator();
+  }
+
+  // 监听后续页面导航
+  document.addEventListener('astro:page-load', initNavigator);
+
+  // 页面切换前清理
+  document.addEventListener('astro:before-swap', () => {
+    if (scrollHandler) {
+      window.removeEventListener('scroll', scrollHandler);
+      scrollHandler = null;
+    }
+    if (scrollEndTimer) {
+      clearTimeout(scrollEndTimer);
+      scrollEndTimer = null;
+    }
+  });
 </script>

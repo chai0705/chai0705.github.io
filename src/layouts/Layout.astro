@@ -36,6 +36,36 @@ const isPostPage = Astro.url.pathname.startsWith('/post/');
     <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+
+    <!-- Preconnect to third-party origins for faster resource loading -->
+    <link rel="preconnect" href="https://ik.imagekit.io" crossorigin />
+    <link rel="dns-prefetch" href="https://ik.imagekit.io" />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
+
+    <!-- Preload LCP image for faster rendering -->
+    <link rel="preload" as="image" href="/img/site_header.webp" fetchpriority="high" />
+
+    <!-- Async load Chinese fonts to avoid render-blocking -->
+    <link
+      rel="stylesheet"
+      href="https://chinese-font.netlify.app/font-cdn/packages/hcqyt/dist/ChillRoundFBold/result.css"
+      media="print"
+      onload="this.media='all'"
+    />
+    <link
+      rel="stylesheet"
+      href="https://chinese-font.netlify.app/font-cdn/packages/hcqyt/dist/ChillRoundFRegular/result.css"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link rel="stylesheet" href="https://chinese-font.netlify.app/font-cdn/packages/hcqyt/dist/ChillRoundFBold/result.css" />
+      <link
+        rel="stylesheet"
+        href="https://chinese-font.netlify.app/font-cdn/packages/hcqyt/dist/ChillRoundFRegular/result.css"
+      />
+    </noscript>
     <ClientRouter />
     <LoadingIndicator color="#e9536a" />
     <Tooltips />

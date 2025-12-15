@@ -17,6 +17,9 @@ export { useFloatingUI, type UseFloatingUIOptions } from './useFloatingUI';
 // Media query hooks
 export { useMediaQuery, useIsMobile, useIsTablet, usePrefersColorSchemeDark, usePrefersReducedMotion } from './useMediaQuery';
 
+// Theme state hook (monitors actual page theme, not system preference)
+export { useIsDarkTheme } from './useIsDarkTheme';
+
 // TableOfContents-specific hooks
 export { useHeadingTree, findHeadingById, getParentIds, getSiblingIds, type Heading } from './useHeadingTree';
 

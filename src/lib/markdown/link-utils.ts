@@ -12,6 +12,29 @@ export interface LinkInfo {
   };
 }
 
+/** Markdown AST 节点类型定义 */
+interface MarkdownTextNode {
+  type: 'text';
+  value: string;
+}
+
+interface MarkdownLinkNode {
+  type: 'link';
+  url: string;
+  children?: MarkdownTextNode[];
+}
+
+interface MarkdownParagraphNode {
+  type: 'paragraph';
+  children?: Array<MarkdownLinkNode | MarkdownTextNode>;
+}
+
+/** 通用 Markdown AST 节点类型 */
+export interface MarkdownNode {
+  type: string;
+  children?: Array<{ type: string; url?: string; value?: string; children?: Array<{ type: string; value?: string }> }>;
+}
+
 /**
  * Extract Tweet ID from Twitter/X URL
  * Supports formats:
@@ -122,7 +145,7 @@ export function classifyLink(url: string): LinkInfo {
  * Check if a node is a standalone paragraph with only a link
  * Used in remark plugin to detect links that should be embedded
  */
-export function isStandaloneLinkParagraph(node: any): boolean {
+export function isStandaloneLinkParagraph(node: MarkdownNode): boolean {
   // Check if node is a paragraph
   if (node.type !== 'paragraph') {
     return false;
@@ -146,8 +169,8 @@ export function isStandaloneLinkParagraph(node: any): boolean {
     const textNode = child.children[0];
     if (textNode.type === 'text') {
       // Allow the link if text is the URL itself or very similar
-      const text = textNode.value.trim();
-      const url = child.url.trim();
+      const text = textNode.value?.trim() ?? '';
+      const url = child.url?.trim() ?? '';
       return text === url || url.endsWith(text) || text.endsWith(url);
     }
   }
