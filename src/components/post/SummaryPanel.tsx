@@ -9,6 +9,7 @@
 import { useState, useEffect, useCallback, useRef, memo, type ReactNode, type RefObject } from 'react';
 import { cn } from '@lib/utils';
 import { usePrefersReducedMotion } from '@hooks/index';
+import { ErrorBoundary, InlineErrorFallback } from '@components/common';
 import { MingcuteAiFillSvg } from '../svg/MingcuteAiFillSvg.tsx';
 import { RiBook2Fill } from 'react-icons/ri';
 
@@ -159,37 +160,39 @@ export function SummaryPanel({ summary, source = 'ai', typingSpeed = 25, classNa
   }, [clearAnimation]);
 
   return (
-    <div className={cn('overflow-hidden rounded-lg', className)}>
-      {/* 触发按钮 */}
-      <button
-        onClick={handleToggle}
-        className={cn(
-          'bg-foreground/5 flex w-full cursor-pointer items-center justify-between px-4 py-3 transition-all duration-250',
-          'hover:bg-foreground/10',
-          isExpanded && 'bg-foreground/10 rounded-t-lg',
-          !isExpanded && 'rounded-lg',
-        )}
-        aria-expanded={isExpanded}
-        aria-controls="summary-panel-content"
-      >
-        <div className="text-muted-foreground flex items-center gap-1.5 text-sm font-medium">
-          <span className={cn('transition-transform duration-300', isExpanded && source === 'ai' && 'rotate-10')}>
-            {config.icon}
-          </span>
-          {config.label}
-        </div>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="currentColor"
-          className={cn('text-muted-foreground size-4 transition-transform duration-300', isExpanded && 'rotate-180')}
-          aria-hidden="true"
+    <ErrorBoundary FallbackComponent={InlineErrorFallback}>
+      <div className={cn('overflow-hidden rounded-lg', className)}>
+        {/* 触发按钮 */}
+        <button
+          onClick={handleToggle}
+          className={cn(
+            'bg-foreground/5 flex w-full cursor-pointer items-center justify-between px-4 py-3 transition-all duration-250',
+            'hover:bg-foreground/10',
+            isExpanded && 'bg-foreground/10 rounded-t-lg',
+            !isExpanded && 'rounded-lg',
+          )}
+          aria-expanded={isExpanded}
+          aria-controls="summary-panel-content"
         >
-          <path d="M12 16L6 10H18L12 16Z" />
-        </svg>
-      </button>
-      <SummaryPanelContent isExpanded={isExpanded} summary={summary} isTyping={isTyping} textRef={textRef} />
-    </div>
+          <div className="text-muted-foreground flex items-center gap-1.5 text-sm font-medium">
+            <span className={cn('transition-transform duration-300', isExpanded && source === 'ai' && 'rotate-10')}>
+              {config.icon}
+            </span>
+            {config.label}
+          </div>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            className={cn('text-muted-foreground size-4 transition-transform duration-300', isExpanded && 'rotate-180')}
+            aria-hidden="true"
+          >
+            <path d="M12 16L6 10H18L12 16Z" />
+          </svg>
+        </button>
+        <SummaryPanelContent isExpanded={isExpanded} summary={summary} isTyping={isTyping} textRef={textRef} />
+      </div>
+    </ErrorBoundary>
   );
 }
 

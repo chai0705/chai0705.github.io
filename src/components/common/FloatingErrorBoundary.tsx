@@ -12,75 +12,48 @@
  * ```
  */
 
-import React, { Component, type ErrorInfo, type ReactNode } from 'react';
+import type { FC, PropsWithChildren, ReactNode } from 'react';
+import { ErrorBoundary, type FallbackProps } from 'react-error-boundary';
 
-interface FloatingErrorBoundaryProps {
-  /** Content to render inside error boundary */
-  children: ReactNode;
-  /** Optional fallback UI to display on error */
+export interface FloatingErrorBoundaryProps extends PropsWithChildren {
+  /** Optional fallback UI to display on error (default: null for graceful degradation) */
   fallback?: ReactNode;
   /** Callback when error is caught */
-  onError?: (error: Error, errorInfo: ErrorInfo) => void;
+  onError?: (error: Error, info: React.ErrorInfo) => void;
   /** Optional component name for better error messages */
   componentName?: string;
 }
 
-interface FloatingErrorBoundaryState {
-  hasError: boolean;
-  error: Error | null;
-}
+/**
+ * Fallback component that renders nothing by default
+ * Floating UI components failing should not block the main content
+ */
+const FloatingFallback: FC<FallbackProps & { fallback?: ReactNode }> = ({ fallback }) => {
+  return fallback ? <>{fallback}</> : null;
+};
 
 /**
  * Error boundary for floating UI components.
  * Gracefully handles errors without breaking the main UI.
  */
-class FloatingErrorBoundary extends Component<FloatingErrorBoundaryProps, FloatingErrorBoundaryState> {
-  constructor(props: FloatingErrorBoundaryProps) {
-    super(props);
-    this.state = {
-      hasError: false,
-      error: null,
-    };
-  }
-
-  static getDerivedStateFromError(error: Error): FloatingErrorBoundaryState {
-    return {
-      hasError: true,
-      error,
-    };
-  }
-
-  componentDidCatch(error: Error, errorInfo: ErrorInfo): void {
-    // Log error to console in development
-    if (process.env.NODE_ENV !== 'production') {
-      console.error('FloatingErrorBoundary caught an error:', error, errorInfo);
-      if (this.props.componentName) {
-        console.error(`Component: ${this.props.componentName}`);
-      }
-    }
-
-    // Call optional error callback
-    this.props.onError?.(error, errorInfo);
-
-    // TODO: Send to error reporting service (e.g., Sentry)
-    // Example: Sentry.captureException(error, { contexts: { react: { componentStack: errorInfo.componentStack } } });
-  }
-
-  render(): ReactNode {
-    if (this.state.hasError) {
-      // Use custom fallback if provided
-      if (this.props.fallback) {
-        return this.props.fallback;
-      }
-
-      // Default fallback: render nothing (graceful degradation)
-      // Floating UI components failing should not block the main content
-      return null;
-    }
-
-    return this.props.children;
-  }
-}
+const FloatingErrorBoundary: FC<FloatingErrorBoundaryProps> = ({ children, fallback, onError, componentName }) => {
+  return (
+    <ErrorBoundary
+      fallbackRender={(props) => <FloatingFallback {...props} fallback={fallback} />}
+      onError={(error, info) => {
+        if (import.meta.env.DEV) {
+          console.error('[FloatingErrorBoundary] caught an error:', error, info);
+          if (componentName) {
+            console.error(`Component: ${componentName}`);
+          }
+        }
+        onError?.(error, info);
+      }}
+    >
+      {children}
+    </ErrorBoundary>
+  );
+};
 
 /**
  * HOC to wrap components with FloatingErrorBoundary
@@ -91,11 +64,8 @@ class FloatingErrorBoundary extends Component<FloatingErrorBoundaryProps, Floati
  * <SafePopover>...</SafePopover>
  * ```
  */
-export function withFloatingErrorBoundary<P extends object>(
-  Component: React.ComponentType<P>,
-  componentName?: string,
-): React.FC<P> {
-  const WrappedComponent: React.FC<P> = (props) => (
+export function withFloatingErrorBoundary<P extends object>(Component: React.ComponentType<P>, componentName?: string): FC<P> {
+  const WrappedComponent: FC<P> = (props) => (
     <FloatingErrorBoundary componentName={componentName}>
       <Component {...props} />
     </FloatingErrorBoundary>

@@ -1,7 +1,7 @@
+import { microDampingPreset } from '@constants/anim/spring';
+import type { FriendLink } from '@constants/friends-config';
 import { motion, useMotionTemplate, useMotionValue, useSpring, useTransform } from 'motion/react';
 import { useRef, type MouseEvent } from 'react';
-import type { FriendLink } from '@constants/friends-config';
-import { microDampingPreset } from '@constants/anim/spring';
 
 interface FriendCardProps {
   friend: FriendLink;

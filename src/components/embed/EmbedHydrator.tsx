@@ -4,6 +4,7 @@
  * Note: Link previews are now server-rendered, only tweets need client hydration
  */
 
+import { ErrorBoundary, ErrorFallback } from '@components/common';
 import { useEffect } from 'react';
 import { createRoot, type Root } from 'react-dom/client';
 import TweetEmbed from './TweetEmbed';
@@ -22,9 +23,13 @@ export function EmbedHydrator() {
       // Check if already hydrated
       if (element.getAttribute('data-hydrated') === 'true') return;
 
-      // Create a root and render the TweetEmbed component
+      // Create a root and render the TweetEmbed component with error boundary
       const root = createRoot(element);
-      root.render(<TweetEmbed tweetId={tweetId} />);
+      root.render(
+        <ErrorBoundary fallbackRender={(props) => <ErrorFallback {...props} title="TweetEmbed Error" />}>
+          <TweetEmbed tweetId={tweetId} />
+        </ErrorBoundary>,
+      );
       roots.push(root);
 
       // Mark as hydrated
