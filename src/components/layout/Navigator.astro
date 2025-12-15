@@ -47,6 +47,16 @@ import SearchWithDialog from './SearchWithDialog.astro';
   let firstScroll = true;
   let triggerDistance = window.innerHeight * 0.45;
   let lastScrollY = 0;
+  let scrollEndTimer = null;
+  let isScrolling = false;
+  const SCROLL_END_DELAY = 800; // 滚动停止后延迟恢复自动隐藏的时间
+
+  // 检查是否在文章页面且是移动端
+  const isPostPageMobile = () => {
+    const isMobile = window.innerWidth <= 992;
+    const isPostPage = window.location.pathname.startsWith('/post/');
+    return isMobile && isPostPage;
+  };
 
   const handleScroll = () => {
     const siteHeader = document.getElementById('site-header');
@@ -67,6 +77,28 @@ import SearchWithDialog from './SearchWithDialog.astro';
       return;
     }
 
+    // 文章页面移动端：滚动时保持 header 显示
+    if (isPostPageMobile()) {
+      // 清除之前的定时器
+      if (scrollEndTimer) {
+        clearTimeout(scrollEndTimer);
+      }
+      isScrolling = true;
+
+      // 滚动时确保 header 显示
+      if (siteHeader) siteHeader.classList.remove('-translate-y-full');
+      if (mobileMenuContainer) mobileMenuContainer.classList.remove('-translate-y-full');
+
+      // 滚动停止后一段时间才恢复自动隐藏行为
+      scrollEndTimer = setTimeout(() => {
+        isScrolling = false;
+      }, SCROLL_END_DELAY);
+
+      lastScrollY = currentScrollY;
+      return;
+    }
+
+    // 非文章页面或桌面端：正常的隐藏/显示逻辑
     if (currentScrollY > 0) {
       if (currentScrollY > lastScrollY) {
         // 向下滚动

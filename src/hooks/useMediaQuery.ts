@@ -24,14 +24,9 @@ import { useEffect, useState } from 'react';
  * @returns Whether the media query matches
  */
 export function useMediaQuery(query: string): boolean {
-  // Initialize with undefined to handle SSR
-  const [matches, setMatches] = useState<boolean>(() => {
-    // Check if we're in browser environment
-    if (typeof window !== 'undefined' && window.matchMedia) {
-      return window.matchMedia(query).matches;
-    }
-    return false;
-  });
+  // Always initialize with false to avoid hydration mismatch
+  // The actual value will be set in useEffect after mount
+  const [matches, setMatches] = useState(false);
 
   useEffect(() => {
     // Ensure we're in browser environment
@@ -72,19 +67,14 @@ export function useMediaQuery(query: string): boolean {
  * Predefined breakpoint hooks based on Tailwind defaults
  */
 
-/** Mobile (max-width: 640px) */
+/** Mobile (max-width: 768px) */
 export function useIsMobile(): boolean {
-  return useMediaQuery('(max-width: 640px)');
+  return useMediaQuery('(max-width: 768px)');
 }
 
-/** Tablet (min-width: 641px and max-width: 1024px) */
+/** Tablet (max-width: 992px) */
 export function useIsTablet(): boolean {
-  return useMediaQuery('(min-width: 641px) and (max-width: 1024px)');
-}
-
-/** Desktop (min-width: 1025px) */
-export function useIsDesktop(): boolean {
-  return useMediaQuery('(min-width: 1025px)');
+  return useMediaQuery('(max-width: 992px)');
 }
 
 /** User prefers dark color scheme */

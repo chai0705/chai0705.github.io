@@ -23,6 +23,9 @@ import '@styles/index.css';
 
 const { title = seoConfig.title, description = seoConfig.description, siderType, post } = Astro.props;
 // TODO: siderType should be custom in router file, not in layout
+
+// Detect if current page is a post page for mobile header
+const isPostPage = Astro.url.pathname.startsWith('/post/');
 ---
 
 <!doctype html>
@@ -148,7 +151,7 @@ const { title = seoConfig.title, description = seoConfig.description, siderType,
   </head>
   <body>
     <div class="flex min-h-screen flex-col text-black dark:text-white">
-      <Header />
+      <Header isPostPage={isPostPage} />
       <main class="relative flex grow flex-col gap-4">
         {(<slot />)}
       </main>

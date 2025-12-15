@@ -180,6 +180,107 @@ document.addEventListener('astro:page-load', init);
 
 For components with cleanup needs, use an `initialized` flag or `controller?.destroy()` pattern to prevent double initialization.
 
+#### Scroll Event Subscription in React
+
+When subscribing to scroll events in React components, **use `useSyncExternalStore`** instead of `useState` + `useEffect` to avoid excessive re-renders:
+
+```typescript
+// ❌ Bad: Causes re-render on every scroll event
+function useScrollPosition() {
+  const [scrollY, setScrollY] = useState(0);
+  useEffect(() => {
+    const handleScroll = () => setScrollY(window.scrollY); // Re-render every time!
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+  return scrollY;
+}
+
+// ✅ Good: Only re-renders when snapshot value changes
+function createScrollStore() {
+  let scrollY = 0;
+  let listeners = new Set<() => void>();
+
+  const handleScroll = () => {
+    const newScrollY = window.scrollY;
+    if (scrollY !== newScrollY) {
+      scrollY = newScrollY;
+      listeners.forEach(l => l());
+    }
+  };
+
+  return {
+    subscribe: (listener: () => void) => {
+      if (listeners.size === 0) {
+        window.addEventListener('scroll', handleScroll, { passive: true });
+      }
+      listeners.add(listener);
+      return () => {
+        listeners.delete(listener);
+        if (listeners.size === 0) {
+          window.removeEventListener('scroll', handleScroll);
+        }
+      };
+    },
+    getSnapshot: () => scrollY,
+    getServerSnapshot: () => 0,
+  };
+}
+
+function useScrollPosition() {
+  const store = useMemo(() => createScrollStore(), []);
+  return useSyncExternalStore(store.subscribe, store.getSnapshot, store.getServerSnapshot);
+}
+```
+
+Key benefits:
+
+- Only triggers re-render when the tracked value actually changes
+- Properly handles React concurrent mode and SSR
+- Automatic cleanup when no components are subscribed
+- See `src/hooks/useCurrentHeading.ts` for a real-world example
+
+#### Extract Custom Hooks for Reusable Logic
+
+When the same `useState` + `useRef` + `useEffect` pattern appears 2+ times, extract it into a custom hook:
+
+**Signs you need a custom hook:**
+
+- Same state management pattern repeated across components
+- Logic involves event listeners with cleanup
+- State synchronization with refs (e.g., `isDraggingRef.current = isDragging`)
+
+**Example: `useDrag` hook** (see `src/renderer/src/hooks/use-drag.ts`)
+
+```typescript
+// ❌ Bad: Duplicated drag logic in each component (30+ lines)
+const [isDragging, setIsDragging] = useState(false);
+const isDraggingRef = useRef(isDragging);
+isDraggingRef.current = isDragging;
+const dragStartPos = useRef({ x: 0, y: 0 });
+
+useEffect(() => {
+  const handleMouseMove = (e: MouseEvent) => { /* ... */ };
+  const handleMouseUp = () => { /* ... */ };
+  if (isDragging) {
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mouseup', handleMouseUp);
+  }
+  return () => { /* cleanup */ };
+}, [isDragging]);
+
+// ✅ Good: Extract to reusable hook
+const { isDragging, onMouseDown } = useDrag({
+  onDrag: ({ x, y }) => window.api.panel.drag(x, y),
+});
+```
+
+**Hook naming conventions:**
+
+- `use` prefix (required by React)
+- Descriptive verb: `useDrag`, `useResize`, `useHover`
+- Return object with clear properties
+
 #### Error Handling
 
 - `ErrorBoundary` component wraps interactive sections

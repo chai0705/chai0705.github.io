@@ -1,26 +1,34 @@
 ---
 import LogoSvg from '@assets/svg/logo.svg?react';
+import logoSrc from '@assets/svg/logo.svg?url';
+import { MobilePostHeader } from '@components/layout/MobilePostHeader';
 import { MenuIcon } from '@components/ui/MenuIcon';
+import { MAX_WIDTH } from '@constants/layout';
 import { siteConfig } from 'constants/site-config';
-import { HEADER_SPACING, MAX_WIDTH } from '@constants/layout';
 import Navigator from './Navigator.astro';
 
+interface Props {
+  isPostPage?: boolean;
+}
+
+const { isPostPage = false } = Astro.props;
 const { alternate, title, showLogo } = siteConfig;
 ---
 
 <div
   id="site-header"
-  class={`shadow-text fixed tablet:backdrop-blur inset-x-0 top-0 z-10 gap-4 py-2.5 text-white select-none tablet:py-2 ${HEADER_SPACING.outer}`}
+  class={`shadow-text fixed tablet:backdrop-blur inset-x-0 top-0 z-10 gap-4 py-2.5 text-white select-none tablet:py-2 px-6 md:px-3`}
   transition:name="site-header"
 >
-  <div class={`mx-auto flex items-center justify-between tablet:w-full ${MAX_WIDTH.content} ${HEADER_SPACING.inner}`}>
+  <div class={`mx-auto flex items-center gap-2 justify-between tablet:w-full px-6 md:pl-0 md:pr-0 ${MAX_WIDTH.content}`}>
     <!-- 移动端菜单按钮 占位符 -->
-    <div class="tablet:block hidden size-11">
+    <div class="tablet:block hidden size-10 shrink-0">
       <!-- PlaceHolder -->
     </div>
+    <!-- Desktop: Always show logo -->
     <a
       transition:persist="page-header-avatar"
-      class="-my-4 mr-4 flex cursor-pointer items-center justify-center gap-1 text-sm font-bold whitespace-nowrap"
+      class="tablet:hidden -my-4 mr-4 flex cursor-pointer items-center justify-center gap-1 text-sm font-bold whitespace-nowrap"
       href="/"
       target="_self"
     >
@@ -32,6 +40,16 @@ const { alternate, title, showLogo } = siteConfig;
         )
       }
     </a>
+    <!-- Mobile: MobilePostHeader (shows heading on post pages, logo otherwise) -->
+    <div class="tablet:flex tablet:grow hidden items-center justify-center">
+      <MobilePostHeader
+        client:load
+        isPostPage={isPostPage}
+        logoElement={showLogo ? 'svg' : 'text'}
+        logoText={alternate || title}
+        logoSrc={logoSrc}
+      />
+    </div>
     <Navigator transition:name="page-header" />
   </div>
 </div>

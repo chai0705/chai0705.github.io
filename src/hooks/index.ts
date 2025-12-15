@@ -15,14 +15,7 @@ export { useControlledState, type UseControlledStateOptions } from './useControl
 export { useFloatingUI, type UseFloatingUIOptions } from './useFloatingUI';
 
 // Media query hooks
-export {
-  useMediaQuery,
-  useIsMobile,
-  useIsTablet,
-  useIsDesktop,
-  usePrefersColorSchemeDark,
-  usePrefersReducedMotion,
-} from './useMediaQuery';
+export { useMediaQuery, useIsMobile, useIsTablet, usePrefersColorSchemeDark, usePrefersReducedMotion } from './useMediaQuery';
 
 // TableOfContents-specific hooks
 export { useHeadingTree, findHeadingById, getParentIds, getSiblingIds, type Heading } from './useHeadingTree';
@@ -30,6 +23,8 @@ export { useHeadingTree, findHeadingById, getParentIds, getSiblingIds, type Head
 export { useActiveHeading, type UseActiveHeadingOptions } from './useActiveHeading';
 
 export { useExpandedState, type UseExpandedStateOptions, type UseExpandedStateReturn } from './useExpandedState';
+
+export { useCurrentHeading, type CurrentHeading, type UseCurrentHeadingOptions } from './useCurrentHeading';
 
 // Utility hooks
 export { useIsMounted } from './useIsMounted';
