@@ -6,22 +6,13 @@
  */
 
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
-import { useCallback } from 'react';
 import { animation } from '@constants/design-tokens';
-import {
-  useMediaQuery,
-  useHeadingTree,
-  useActiveHeading,
-  useExpandedState,
-  findHeadingById,
-  getParentIds,
-  getSiblingIds,
-} from '@hooks/index';
+import { useMediaQuery, useHeadingTree, useActiveHeading, useExpandedState, useHeadingClickHandler } from '@hooks/index';
 import { useCurrentHeading } from '@hooks/useCurrentHeading';
 import { HeadingTitle } from './HeadingTitle';
 import { ProgressCircle } from './ProgressCircle';
 import { MobileTOCDropdown } from './MobileTOCDropdown';
-import { seoConfig, siteConfig } from '@/constants/site-config';
+import { siteConfig } from '@/constants/site-config';
 
 interface MobilePostHeaderProps {
   /** Whether the current page is a post page */
@@ -63,58 +54,7 @@ export function MobilePostHeader({ isPostPage, logoElement, logoText, logoSrc }:
   const showHeadingMode = isPostPage && isMobile && headings.length > 0 && currentHeading !== null;
 
   // Handle heading click in TOC dropdown
-  const handleHeadingClick = useCallback(
-    (id: string) => {
-      const element = document.getElementById(id);
-      if (!element) return;
-
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-
-      // Trigger expand logic for this heading
-      const clickedHeading = findHeadingById(headings, id);
-      if (!clickedHeading) return;
-
-      const parentIds = getParentIds(clickedHeading);
-      if (clickedHeading.children.length > 0) {
-        parentIds.unshift(id);
-      }
-
-      if (parentIds.length === 0) return;
-
-      setExpandedIds((prev) => {
-        const newSet = new Set(prev);
-
-        const parentsByLevel: { [level: number]: string[] } = {};
-
-        parentIds.forEach((parentId) => {
-          const parentHeading = findHeadingById(headings, parentId);
-          if (parentHeading) {
-            if (!parentsByLevel[parentHeading.level]) {
-              parentsByLevel[parentHeading.level] = [];
-            }
-            parentsByLevel[parentHeading.level].push(parentId);
-          }
-        });
-
-        Object.keys(parentsByLevel).forEach((levelStr) => {
-          const level = parseInt(levelStr, 10);
-          const parentsAtLevel = parentsByLevel[level];
-
-          parentsAtLevel.forEach((parentId) => {
-            const parentHeading = findHeadingById(headings, parentId);
-            if (parentHeading) {
-              const siblingIds = getSiblingIds(parentHeading, headings);
-              siblingIds.forEach((siblingId) => newSet.delete(siblingId));
-              newSet.add(parentId);
-            }
-          });
-        });
-
-        return newSet;
-      });
-    },
-    [headings, setExpandedIds],
-  );
+  const handleHeadingClick = useHeadingClickHandler({ headings, setExpandedIds });
 
   // Logo component
   const Logo = () => (

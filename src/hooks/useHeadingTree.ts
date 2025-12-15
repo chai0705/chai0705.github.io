@@ -106,10 +106,21 @@ function buildHeadingTree(flatHeadings: Array<{ id: string; text: string; level:
  */
 export function useHeadingTree(): Heading[] {
   const [headings, setHeadings] = useState<Heading[]>([]);
+  const [pageKey, setPageKey] = useState(0);
+
+  // 监听 Astro 页面切换，触发重新构建 heading tree
+  useEffect(() => {
+    const handlePageLoad = () => setPageKey((k) => k + 1);
+    document.addEventListener('astro:page-load', handlePageLoad);
+    return () => document.removeEventListener('astro:page-load', handlePageLoad);
+  }, []);
 
   useEffect(() => {
     const articleContent = document.querySelector('article');
-    if (!articleContent) return;
+    if (!articleContent) {
+      setHeadings([]);
+      return;
+    }
 
     // Get all heading elements, excluding those inside .link-preview-block
     // Using :not() pseudo-class for better performance (single DOM traversal)
@@ -158,7 +169,7 @@ export function useHeadingTree(): Heading[] {
     // Calculate numbering for each heading
     calculateHeadingNumbers(headingTree);
     setHeadings(headingTree);
-  }, []);
+  }, [pageKey]); // pageKey 变化时重新构建 heading tree
 
   return headings;
 }

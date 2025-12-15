@@ -5,8 +5,7 @@
  * Uses custom hooks for state management and sub-components for better organization.
  */
 
-import { useCallback } from 'react';
-import { findHeadingById, getParentIds, getSiblingIds, useActiveHeading, useExpandedState, useHeadingTree } from '@hooks/index';
+import { useActiveHeading, useExpandedState, useHeadingTree, useHeadingClickHandler } from '@hooks/index';
 import { HeadingList } from './HeadingList';
 
 // Constants
@@ -33,69 +32,8 @@ export function TableOfContents({ defaultExpanded = false }: TableOfContentsProp
     defaultExpanded,
   });
 
-  /**
-   * Handle heading click - scroll to heading and update expand state with accordion behavior
-   * Memoized to prevent unnecessary re-renders of child components
-   */
-  const handleHeadingClick = useCallback(
-    (id: string) => {
-      const element = document.getElementById(id);
-      if (!element) return;
-
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-
-      // Trigger expand logic for this heading
-      const clickedHeading = findHeadingById(headings, id);
-      if (!clickedHeading) return;
-
-      const parentIds = getParentIds(clickedHeading);
-      // Include the clicked heading itself if it has children
-      if (clickedHeading.children.length > 0) {
-        parentIds.unshift(id);
-      }
-
-      if (parentIds.length === 0) return;
-
-      setExpandedIds((prev) => {
-        const newSet = new Set(prev);
-
-        // For each parent level, apply accordion effect
-        const parentsByLevel: { [level: number]: string[] } = {};
-
-        // Group parents by level
-        parentIds.forEach((parentId) => {
-          const parentHeading = findHeadingById(headings, parentId);
-          if (parentHeading) {
-            if (!parentsByLevel[parentHeading.level]) {
-              parentsByLevel[parentHeading.level] = [];
-            }
-            parentsByLevel[parentHeading.level].push(parentId);
-          }
-        });
-
-        // For each level, close siblings and open the required parent
-        Object.keys(parentsByLevel).forEach((levelStr) => {
-          const level = parseInt(levelStr, 10);
-          const parentsAtLevel = parentsByLevel[level];
-
-          parentsAtLevel.forEach((parentId) => {
-            const parentHeading = findHeadingById(headings, parentId);
-            if (parentHeading) {
-              // Close siblings at this level
-              const siblingIds = getSiblingIds(parentHeading, headings);
-              siblingIds.forEach((siblingId) => newSet.delete(siblingId));
-
-              // Open this parent
-              newSet.add(parentId);
-            }
-          });
-        });
-
-        return newSet;
-      });
-    },
-    [headings, setExpandedIds],
-  );
+  // Handle heading click - scroll to heading and update expand state with accordion behavior
+  const handleHeadingClick = useHeadingClickHandler({ headings, setExpandedIds });
 
   // Empty state
   if (headings.length === 0) {

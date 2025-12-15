@@ -1,5 +1,6 @@
 import { friendsIntro } from '@constants/friends-config';
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
+import { useClipboard } from 'foxact/use-clipboard';
 import SakuraSVG from '../svg/SakuraSvg';
 
 interface FormData {
@@ -21,7 +22,7 @@ export default function FriendRequestForm() {
     color: '#ffc0cb',
   });
 
-  const [copied, setCopied] = useState(false);
+  const { copied, copy } = useClipboard({ timeout: 2000 });
 
   const generateText = () => {
     return `site: ${formData.site || '站点名称'}
@@ -32,19 +33,20 @@ image: ${formData.image || 'https://example.com/avatar.jpg'}
 color: "${formData.color || '#ffc0cb'}"`;
   };
 
-  const handleCopy = async () => {
+  const handleCopy = useCallback(() => {
     const yaml = generateText();
-    await navigator.clipboard.writeText(yaml);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
+    copy(yaml);
+  }, [copy]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
+  const handleChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      setFormData({
+        ...formData,
+        [e.target.name]: e.target.value,
+      });
+    },
+    [formData],
+  );
 
   return (
     <div className="mb-4 w-full">

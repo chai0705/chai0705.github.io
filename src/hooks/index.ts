@@ -24,6 +24,8 @@ export { useActiveHeading, type UseActiveHeadingOptions } from './useActiveHeadi
 
 export { useExpandedState, type UseExpandedStateOptions, type UseExpandedStateReturn } from './useExpandedState';
 
+export { useHeadingClickHandler, type UseHeadingClickHandlerOptions } from './useHeadingClickHandler';
+
 export { useCurrentHeading, type CurrentHeading, type UseCurrentHeadingOptions } from './useCurrentHeading';
 
 // Utility hooks

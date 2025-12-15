@@ -8,6 +8,7 @@
 
 import { useState, useEffect, useCallback, useRef, memo, type ReactNode, type RefObject } from 'react';
 import { cn } from '@lib/utils';
+import { usePrefersReducedMotion } from '@hooks/index';
 import { MingcuteAiFillSvg } from '../svg/MingcuteAiFillSvg.tsx';
 import { RiBook2Fill } from 'react-icons/ri';
 
@@ -94,9 +95,8 @@ export function SummaryPanel({ summary, source = 'ai', typingSpeed = 25, classNa
 
   const config = SOURCE_CONFIG[source];
 
-  // 检测用户是否偏好减少动画
-  const prefersReducedMotion =
-    typeof window !== 'undefined' ? window.matchMedia('(prefers-reduced-motion: reduce)').matches : false;
+  // 检测用户是否偏好减少动画 (响应式，用户切换系统偏好后会自动更新)
+  const prefersReducedMotion = usePrefersReducedMotion();
 
   // 清理动画
   const clearAnimation = useCallback(() => {

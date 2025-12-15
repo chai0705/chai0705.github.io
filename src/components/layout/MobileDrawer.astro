@@ -146,10 +146,17 @@ const { type = HomeSiderType.HOME, post } = Astro.props;
 
   let drawerController: DrawerController;
 
-  document.addEventListener('astro:page-load', () => {
+  function init() {
     drawerController?.destroy();
     drawerController = new DrawerController();
-  });
+  }
+
+  // 首次加载时立即初始化（处理 script 加载晚于 astro:page-load 的情况）
+  if (document.readyState !== 'loading') {
+    init();
+  }
+  // 监听后续页面导航
+  document.addEventListener('astro:page-load', init);
 
   // Close drawer before page navigation to prevent it from staying open
   document.addEventListener('astro:before-preparation', () => {
