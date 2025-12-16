@@ -14,6 +14,8 @@ const SCROLL_OFFSET_TOP = 120; // Offset for header height when detecting active
 interface TableOfContentsProps {
   /** Whether headings should be expanded by default */
   defaultExpanded?: boolean;
+  /** Whether to enable CSS counter numbering (default: true) */
+  enableNumbering?: boolean;
 }
 
 /**
@@ -22,7 +24,7 @@ interface TableOfContentsProps {
  * Main container for the table of contents. Manages heading state and
  * delegates rendering to HeadingList sub-component.
  */
-export function TableOfContents({ defaultExpanded = false }: TableOfContentsProps = {}) {
+export function TableOfContents({ defaultExpanded = false, enableNumbering = true }: TableOfContentsProps = {}) {
   // Use custom hooks for heading tree, active heading, and expand/collapse state
   const headings = useHeadingTree();
   const activeId = useActiveHeading({ offsetTop: SCROLL_OFFSET_TOP });
@@ -45,7 +47,10 @@ export function TableOfContents({ defaultExpanded = false }: TableOfContentsProp
   }
 
   return (
-    <nav className="toc-container max-h-[90dvh] overflow-auto" aria-label="文章目录">
+    <nav
+      className={`toc-container max-h-[90dvh] overflow-auto ${enableNumbering ? '' : 'toc-no-numbering'}`}
+      aria-label="文章目录"
+    >
       <div className="space-y-1 pr-2">
         <HeadingList
           headings={headings}

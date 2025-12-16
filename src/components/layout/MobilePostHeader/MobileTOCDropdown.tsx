@@ -29,6 +29,8 @@ interface MobileTOCDropdownProps {
   open?: boolean;
   /** Callback when open state changes */
   onOpenChange?: (open: boolean) => void;
+  /** Whether to enable CSS counter numbering (default: true) */
+  enableNumbering?: boolean;
 }
 
 export function MobileTOCDropdown({
@@ -39,6 +41,7 @@ export function MobileTOCDropdown({
   trigger,
   open: passedOpen,
   onOpenChange,
+  enableNumbering = true,
 }: MobileTOCDropdownProps) {
   const [isOpen, setIsOpen] = useControlledState({
     value: passedOpen,
@@ -82,7 +85,7 @@ export function MobileTOCDropdown({
                 transition={animation.spring.popoverContent}
                 {...getFloatingProps()}
               >
-                <nav aria-label="文章目录">
+                <nav className={enableNumbering ? '' : 'toc-no-numbering'} aria-label="文章目录">
                   <div className="space-y-1">
                     <HeadingList
                       headings={headings}

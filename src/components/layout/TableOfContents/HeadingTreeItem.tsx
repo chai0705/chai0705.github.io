@@ -7,6 +7,7 @@
 
 import { memo } from 'react';
 import type { Heading } from '@hooks/useHeadingTree';
+import { cn } from '@/lib/utils';
 
 // Constants
 const INDENT_BASE = 0.75; // Base left padding in rem
@@ -41,36 +42,38 @@ const HeadingTreeItemComponent = ({
   const hasChildren = heading.children.length > 0;
 
   return (
-    <>
-      <div key={heading.id} className="relative">
-        <a
-          href={`#${heading.id}`}
-          onClick={(e) => {
-            e.preventDefault();
-            onHeadingClick(heading.id);
-          }}
-          className={`group hover:bg-muted/60 hover:text-foreground relative flex items-center rounded-md py-2 text-sm transition-all duration-200 ${
-            isActive
-              ? 'bg-primary/10 text-primary border-l-primary hover:text-primary hover:bg-primary/10 border-l-2 font-medium'
-              : 'text-muted-foreground hover:border-l-primary/40 hover:border-l-2'
-          } `}
-          style={{
-            paddingLeft: `${INDENT_BASE + depth * INDENT_PER_LEVEL}rem`,
-            paddingRight: hasChildren ? '0.5rem' : '0.75rem',
-          }}
-          aria-label={heading.text}
-          aria-current={isActive ? 'location' : undefined}
-        >
-          {/* Heading text */}
-          <span className="block flex-1 truncate leading-relaxed">{heading.text}</span>
-          {/* Active state indicator */}
-          {isActive && <span className="text-primary ml-2 text-xs">•</span>}
-        </a>
-      </div>
+    <div key={heading.id} className="heading-tree-item relative">
+      <a
+        href={`#${heading.id}`}
+        onClick={(e) => {
+          e.preventDefault();
+          onHeadingClick(heading.id);
+        }}
+        className={cn(
+          'heading-link group hover:bg-foreground/5 relative flex items-center rounded-md py-2 text-sm transition-all duration-200 hover:border-l-2',
+          {
+            'bg-primary/10 text-primary border-l-primary hover:text-primary hover:bg-primary/10 font-medium': isActive,
+          },
+        )}
+        style={{
+          paddingLeft: `${INDENT_BASE + depth * INDENT_PER_LEVEL}rem`,
+          paddingRight: hasChildren ? '0.5rem' : '0.75rem',
+        }}
+        data-level={heading.level}
+        aria-label={heading.text}
+        aria-current={isActive ? 'location' : undefined}
+      >
+        {/* Heading text - numbering will be added via CSS ::before */}
+        <span className="heading-text block flex-1 truncate leading-relaxed">{heading.text}</span>
+        {/* Active state indicator */}
+        {isActive && <span className="text-primary ml-2 text-xs">•</span>}
+      </a>
 
-      {/* Render children if expanded */}
-      {hasChildren && isExpanded && renderChildren && renderChildren(heading.children, depth + 1)}
-    </>
+      {/* Render children nested within this item */}
+      {hasChildren && isExpanded && renderChildren && (
+        <div className="heading-children">{renderChildren(heading.children, depth + 1)}</div>
+      )}
+    </div>
   );
 };
 

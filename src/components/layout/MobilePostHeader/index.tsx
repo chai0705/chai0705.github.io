@@ -23,12 +23,20 @@ interface MobilePostHeaderProps {
   logoText?: string;
   /** Logo image URL (for svg type) */
   logoSrc?: string;
+  /** Whether to enable CSS counter numbering in TOC (default: true) */
+  enableNumbering?: boolean;
 }
 
 // Scroll offset for detecting active heading
 const SCROLL_OFFSET_TOP = 80;
 
-export function MobilePostHeader({ isPostPage, logoElement, logoText, logoSrc }: MobilePostHeaderProps) {
+export function MobilePostHeader({
+  isPostPage,
+  logoElement,
+  logoText,
+  logoSrc,
+  enableNumbering = true,
+}: MobilePostHeaderProps) {
   const shouldReduceMotion = useReducedMotion();
 
   // Check if we're on mobile (tablet breakpoint: max-width 992px)
@@ -89,6 +97,7 @@ export function MobilePostHeader({ isPostPage, logoElement, logoText, logoSrc }:
               activeId={activeId}
               expandedIds={expandedIds}
               onHeadingClick={handleHeadingClick}
+              enableNumbering={enableNumbering}
               trigger={
                 <button
                   className="bg-foreground/10 hover:bg-foreground/20 flex w-[calc(100vw-10.5rem)] items-center gap-2.5 rounded-full py-1 pr-3 pl-1.5 backdrop-blur-sm transition-colors"

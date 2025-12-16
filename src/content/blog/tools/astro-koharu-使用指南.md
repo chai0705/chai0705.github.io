@@ -232,6 +232,7 @@ categories: # 分类（见下方详细说明）
   - 笔记
 subtitle: 副标题 # 文章副标题
 catalog: true # 是否显示目录（默认 true）
+tocNumbering: true # 是否显示目录编号（默认 true）
 draft: false # 是否为草稿（默认 false）
 sticky: false # 是否置顶（默认 false）
 ---
@@ -364,10 +365,26 @@ categories:
 
 **目录导航 (Table of Contents)：**
 
-- 自动提取文章标题（h2-h4）生成目录
+- 自动提取文章标题（h2-h6）生成目录
+- 使用 CSS 计数器自动为标题添加层级编号（如 1., 1.1., 1.1.1.）
+- 支持通过 frontmatter 的 `tocNumbering: false` 字段关闭编号显示
 - 点击目录项跳转到对应章节
 - 滚动时自动高亮当前章节
 - 桌面端显示在右侧边栏，移动端折叠
+
+**目录编号控制：**
+
+```yaml
+---
+title: 我的文章
+tocNumbering: false # 关闭目录编号（默认为 true）
+---
+```
+
+- 默认情况下，所有文章的目录都会显示层级编号
+- 设置 `tocNumbering: false` 可以关闭特定文章的编号显示
+- 编号通过 CSS 计数器实现，零运行时开销
+- 同时适用于桌面端侧边栏和移动端下拉目录
 
 **阅读进度条：**
 

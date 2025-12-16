@@ -31,41 +31,6 @@ export interface Heading {
 }
 
 /**
- * Calculate hierarchical numbering for headings (e.g., "1.2.3.")
- */
-function calculateHeadingNumbers(headings: Heading[]): void {
-  const counters: number[] = [0, 0, 0, 0, 0, 0]; // counters for h1-h6
-
-  function processHeading(heading: Heading) {
-    const level = heading.level;
-
-    // Increment current level counter
-    counters[level - 1]++;
-
-    // Reset all deeper level counters
-    for (let i = level; i < 6; i++) {
-      counters[i] = 0;
-    }
-
-    // Generate number string (e.g., "1.2.3.")
-    const numberParts = [];
-    for (let i = 0; i < level; i++) {
-      if (counters[i] > 0) {
-        numberParts.push(counters[i]);
-      }
-    }
-    const numberStr = numberParts.join('.') + '. ';
-
-    heading.text = numberStr + heading.text;
-
-    // Process children
-    heading.children.forEach(processHeading);
-  }
-
-  headings.forEach(processHeading);
-}
-
-/**
  * Build hierarchical structure from flat heading list
  */
 function buildHeadingTree(flatHeadings: Array<{ id: string; text: string; level: number }>): Heading[] {
@@ -166,8 +131,7 @@ export function useHeadingTree(): Heading[] {
     // Build hierarchical structure
     const headingTree = buildHeadingTree(flatHeadings);
 
-    // Calculate numbering for each heading
-    calculateHeadingNumbers(headingTree);
+    // Numbering is now handled by CSS counters (see post.css)
     setHeadings(headingTree);
   }, [pageKey]); // pageKey 变化时重新构建 heading tree
 

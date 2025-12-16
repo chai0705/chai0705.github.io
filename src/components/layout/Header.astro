@@ -9,9 +9,10 @@ import Navigator from './Navigator.astro';
 
 interface Props {
   isPostPage?: boolean;
+  tocNumbering?: boolean;
 }
 
-const { isPostPage = false } = Astro.props;
+const { isPostPage = false, tocNumbering = true } = Astro.props;
 const { alternate, title, showLogo } = siteConfig;
 ---
 
@@ -45,6 +46,7 @@ const { alternate, title, showLogo } = siteConfig;
       <MobilePostHeader
         client:load
         isPostPage={isPostPage}
+        enableNumbering={tocNumbering}
         logoElement={showLogo ? 'svg' : 'text'}
         logoText={alternate || title}
         logoSrc={logoSrc}
