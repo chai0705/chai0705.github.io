@@ -55,6 +55,8 @@ const categoryPosts: CategoryWithPosts[] = await Promise.all(
             <img
               src={category.image}
               alt={category.label}
+              loading="lazy"
+              decoding="async"
               class="absolute inset-0 -z-10 h-full w-full rounded-md object-cover"
             />
             <div class="bg-shoka-card-mask absolute inset-0 -z-10 h-full w-full rounded-md opacity-25" />

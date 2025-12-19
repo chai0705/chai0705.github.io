@@ -76,6 +76,12 @@ export const colors = {
     foreground: 'hsl(var(--popover-foreground))',
   },
 
+  badge: {
+    primary: {
+      // WCAG
+      DEFAULT: 'hsl(var(--badge-primary))',
+    },
+  },
   // Backgrounds and foregrounds
   background: 'hsl(var(--background))',
   foreground: 'hsl(var(--foreground))',

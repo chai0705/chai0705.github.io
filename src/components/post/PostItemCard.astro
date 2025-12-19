@@ -50,7 +50,7 @@ const postDescription = getPostDescriptionWithSummary(data);
 ---
 
 <div
-  class="hover:shadow-card-darker group text-card-foreground shadow-card relative flex gap-2 rounded-lg transition-shadow md:flex-col"
+  class="hover:shadow-card-darker group text-card-foreground shadow-card relative flex gap-2 rounded-lg bg-white transition-shadow md:flex-col dark:bg-transparent"
 >
   {
     !hideCover && (
@@ -66,7 +66,8 @@ const postDescription = getPostDescriptionWithSummary(data);
         <img
           src={finalCover}
           loading="lazy"
-          alt="post"
+          decoding="async"
+          alt="post cover"
           class="h-full w-full cursor-pointer object-cover transition duration-500 group-hover:scale-110 group-hover:rotate-3"
         />
       </a>
@@ -102,22 +103,26 @@ const postDescription = getPostDescriptionWithSummary(data);
           <Icon name="fa6-solid:pen-nib" />
           {readState?.words} 字
         </p>
-        <p class="flex-center gap-1 md:hidden" title={`预计阅读时长: ${readState?.minutes} min`} data-tooltip-placement="top">
+        <button
+          class="flex-center gap-1 md:hidden"
+          title={`预计阅读时长: ${readState?.minutes} min`}
+          data-tooltip-placement="top"
+        >
           <Icon name="fa6-solid:clock" />
           {readState?.text}
-        </p>
+        </button>
       </div>
     </div>
     <div class="mt-1 flex flex-col space-y-1.5 p-0">
       <div class="flex items-center gap-2">
         <a href={href} aria-label="post-link" class="min-w-0 flex-1"
-          ><h3 class="text-primary hover:text-blue line-clamp-1 truncate text-xl font-bold transition-colors duration-300">
+          ><h1 class="text-primary hover:text-blue line-clamp-1 truncate text-xl font-bold transition-colors duration-300">
             {title}
-          </h3>
+          </h1>
         </a>
         {
           isDraft && (
-            <Badge className="bg-yellow-500 border border-yellow-600/20 gap-1 text-white shrink-0 hover:bg-yellow-500 whitespace-nowrap transition-colors duration-300 ">
+            <Badge className="bg-yellow-700 border border-yellow-600/20 gap-1 text-white shrink-0 hover:bg-yellow-500 whitespace-nowrap transition-colors duration-300 ">
               <Icon name="fa6-solid:file-pen" class="h-3 w-3" />
               草稿
             </Badge>
@@ -144,10 +149,14 @@ const postDescription = getPostDescriptionWithSummary(data);
           {data?.data.tags?.length
             ? data?.data.tags.map((tag: string, index: number) => (
                 <Badge
-                  className={cn('hidden cursor-pointer gap-0.5 text-xs whitespace-nowrap @md:flex', {
-                    '@xs:flex': index < 2,
-                    '@sm:flex': index < 3,
-                  })}
+                  className={cn(
+                    'hover:text-badge-primary/80 hidden cursor-pointer gap-0.5 border-none px-1 text-xs font-bold whitespace-nowrap transition-colors duration-300 @md:flex',
+                    {
+                      '@xs:flex': index < 2,
+                      '@sm:flex': index < 3,
+                    },
+                  )}
+                  variant="outline"
                 >
                   <Icon name="fa6-solid:tags" /> {tag}
                 </Badge>

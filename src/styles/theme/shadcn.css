@@ -17,7 +17,7 @@
     --secondary-foreground: 240 5.9% 10%;
 
     --muted: 240 4.8% 95.9%;
-    --muted-foreground: 0 0% 20% / 0.5;
+    --muted-foreground: 0 0% 35%;
 
     --accent: 240 4.8% 95.9%;
     --accent-foreground: 240 5.9% 10%;
@@ -28,6 +28,8 @@
     --border: 240 5.9% 90%;
     --input: 240 5.9% 90%;
     --ring: 346.8 77.2% 49.8%;
+
+    --badge-primary: 351 49% 50%;
 
     --radius: 0.5rem;
   }
@@ -49,7 +51,7 @@
     --secondary-foreground: 0 0% 98%;
 
     --muted: 0 0% 15%;
-    --muted-foreground: 0 0% 67%;
+    --muted-foreground: 0 0% 63%;
 
     --accent: 12 6.5% 15.1%;
     --accent-foreground: 0 0% 98%;
@@ -60,6 +62,10 @@
     --border: 240 3.7% 15.9%;
     --input: 240 3.7% 15.9%;
     --ring: 346.8 77.2% 49.8%;
+
+    --badge-primary: 350 77% 70%;
+
+    --radius: 0.5rem;
   }
 }
 

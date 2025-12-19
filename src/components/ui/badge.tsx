@@ -32,10 +32,10 @@ const badgeVariants = cva(
   {
     variants: {
       variant: {
-        default: 'border-transparent bg-primary/80 text-primary-foreground hover:bg-primary',
+        default: 'border-transparent bg-badge-primary text-primary-foreground hover:bg-badge-primary/90',
         secondary: 'border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80',
         destructive: 'border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80',
-        outline: 'text-foreground',
+        outline: 'text-badge-primary border-badge-primary',
         'shoka-tag': 'bg-black/50 border-none',
       },
     },

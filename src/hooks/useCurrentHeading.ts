@@ -2,6 +2,7 @@
  * useCurrentHeading Hook
  *
  * Tracks the current H2/H3 heading for the mobile post header.
+ * Uses Intersection Observer to avoid forced reflows.
  * Uses useSyncExternalStore to avoid unnecessary re-renders.
  *
  * @example
@@ -24,99 +25,146 @@ export interface CurrentHeading {
 export interface UseCurrentHeadingOptions {
   /** Offset from top of viewport for detecting active heading (default: 80px) */
   offsetTop?: number;
-  /** Throttle delay for scroll event (ms) */
-  throttleDelay?: number;
 }
 
 /**
- * Creates a scroll store for tracking current heading
- * Uses the external store pattern to minimize re-renders
+ * Creates a scroll store for tracking current heading using Intersection Observer
+ * This avoids forced reflows by using async intersection callbacks
  */
-function createHeadingStore(offsetTop: number, throttleDelay: number) {
+function createHeadingStore(offsetTop: number) {
   let currentHeading: CurrentHeading | null = null;
-  let headingElements: HTMLElement[] = [];
   let listeners = new Set<() => void>();
-  let timeoutId: ReturnType<typeof setTimeout> | null = null;
+  let observer: IntersectionObserver | null = null;
+  let visibleHeadings = new Map<string, { top: number; element: HTMLElement }>(); // id -> { top, element }
 
-  // Query heading elements from article
-  const queryHeadings = () => {
-    const article = document.querySelector('article');
-    if (!article) {
-      headingElements = [];
-      updateHeading(null);
-      return;
-    }
-
-    headingElements = Array.from(
-      article.querySelectorAll<HTMLElement>('h2:not(.link-preview-block h2), h3:not(.link-preview-block h3)'),
-    );
-
-    // Recalculate current heading after querying
-    calculateCurrentHeading();
-  };
-
-  // Calculate current heading based on scroll position
-  const calculateCurrentHeading = () => {
-    if (headingElements.length === 0) {
-      updateHeading(null);
-      return;
-    }
-
-    let newHeading: CurrentHeading | null = null;
-
-    for (const heading of headingElements) {
-      const rect = heading.getBoundingClientRect();
-
-      if (rect.top <= offsetTop) {
-        const level = parseInt(heading.tagName.substring(1), 10) as 2 | 3;
-        newHeading = {
-          id: heading.id,
-          text: heading.textContent?.trim() || '',
-          level,
-        };
-      } else {
-        break;
-      }
-    }
-
-    updateHeading(newHeading);
+  const notifyListeners = () => {
+    listeners.forEach((listener) => listener());
   };
 
   // Update heading and notify listeners only if changed
   const updateHeading = (newHeading: CurrentHeading | null) => {
-    // Only notify if heading actually changed (compare by id)
     if (currentHeading?.id !== newHeading?.id) {
       currentHeading = newHeading;
-      listeners.forEach((listener) => listener());
+      notifyListeners();
     }
   };
 
-  // Throttled scroll handler
-  const handleScroll = () => {
-    if (timeoutId) return;
+  // Determine current heading from visible headings
+  const updateCurrentHeading = () => {
+    if (visibleHeadings.size === 0) {
+      // No visible headings in the intersection zone
+      return;
+    }
 
-    timeoutId = setTimeout(() => {
-      calculateCurrentHeading();
-      timeoutId = null;
-    }, throttleDelay);
+    // Find the heading with the smallest top position (closest to top of viewport)
+    let closestId = '';
+    let closestTop = Number.POSITIVE_INFINITY;
+    let closestElement: HTMLElement | null = null;
+
+    visibleHeadings.forEach(({ top, element }, id) => {
+      if (top < closestTop) {
+        closestTop = top;
+        closestId = id;
+        closestElement = element;
+      }
+    });
+
+    if (closestElement && closestId) {
+      const level = parseInt((closestElement as HTMLElement).tagName.substring(1), 10) as 2 | 3;
+      updateHeading({
+        id: closestId,
+        text: (closestElement as HTMLElement).textContent?.trim() || '',
+        level,
+      });
+    }
+  };
+
+  // Setup Intersection Observer
+  const setupObserver = () => {
+    if (observer) {
+      observer.disconnect();
+    }
+
+    visibleHeadings.clear();
+    currentHeading = null;
+
+    const article = document.querySelector('article');
+    if (!article) return;
+
+    // Root margin: negative top margin to account for header offset
+    const rootMargin = `-${offsetTop}px 0px -70% 0px`;
+
+    observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          const element = entry.target as HTMLElement;
+          const id = element.id;
+          if (!id) continue;
+
+          if (entry.isIntersecting) {
+            visibleHeadings.set(id, {
+              top: entry.boundingClientRect.top,
+              element,
+            });
+          } else {
+            visibleHeadings.delete(id);
+          }
+        }
+        updateCurrentHeading();
+      },
+      {
+        rootMargin,
+        threshold: 0,
+      },
+    );
+
+    // Observe H2/H3 headings in article (excluding link preview blocks)
+    const headings = article.querySelectorAll<HTMLElement>('h2:not(.link-preview-block h2), h3:not(.link-preview-block h3)');
+
+    headings.forEach((heading) => {
+      if (heading.id) {
+        observer?.observe(heading);
+      }
+    });
+
+    // Initial check for headings already above viewport
+    if (headings.length > 0 && visibleHeadings.size === 0) {
+      requestAnimationFrame(() => {
+        const headingArray = Array.from(headings);
+        for (let i = headingArray.length - 1; i >= 0; i--) {
+          const heading = headingArray[i];
+          const rect = heading.getBoundingClientRect();
+          if (rect.top < offsetTop && heading.id) {
+            const level = parseInt(heading.tagName.substring(1), 10) as 2 | 3;
+            updateHeading({
+              id: heading.id,
+              text: heading.textContent?.trim() || '',
+              level,
+            });
+            break;
+          }
+        }
+      });
+    }
   };
 
   // Handle Astro page transitions
   const handlePageLoad = () => {
-    queryHeadings();
+    visibleHeadings.clear();
+    currentHeading = null;
+    requestAnimationFrame(() => {
+      setupObserver();
+    });
   };
 
   return {
     subscribe: (listener: () => void) => {
-      // First listener - set up event listeners
+      // First listener - set up observer
       if (listeners.size === 0) {
-        window.addEventListener('scroll', handleScroll, { passive: true });
-        document.addEventListener('astro:page-load', handlePageLoad);
-
-        // Initial query
         if (document.readyState !== 'loading') {
-          queryHeadings();
+          setupObserver();
         }
+        document.addEventListener('astro:page-load', handlePageLoad);
       }
 
       listeners.add(listener);
@@ -126,12 +174,12 @@ function createHeadingStore(offsetTop: number, throttleDelay: number) {
 
         // Last listener - clean up
         if (listeners.size === 0) {
-          window.removeEventListener('scroll', handleScroll);
-          document.removeEventListener('astro:page-load', handlePageLoad);
-          if (timeoutId) {
-            clearTimeout(timeoutId);
-            timeoutId = null;
+          if (observer) {
+            observer.disconnect();
+            observer = null;
           }
+          document.removeEventListener('astro:page-load', handlePageLoad);
+          visibleHeadings.clear();
         }
       };
     },
@@ -145,17 +193,15 @@ function createHeadingStore(offsetTop: number, throttleDelay: number) {
 
 /**
  * Hook to track the current H2/H3 heading based on scroll position
- * Uses useSyncExternalStore for optimal performance - only re-renders when heading changes
+ * Uses Intersection Observer for optimal performance - avoids forced reflows
+ * Uses useSyncExternalStore - only re-renders when heading changes
  *
  * @param options - Options for heading detection
  * @returns Current heading info or null if not scrolled past any heading
  */
-export function useCurrentHeading({
-  offsetTop = 80,
-  throttleDelay = 100,
-}: UseCurrentHeadingOptions = {}): CurrentHeading | null {
+export function useCurrentHeading({ offsetTop = 80 }: UseCurrentHeadingOptions = {}): CurrentHeading | null {
   // Memoize store creation to avoid recreating on every render
-  const store = useMemo(() => createHeadingStore(offsetTop, throttleDelay), [offsetTop, throttleDelay]);
+  const store = useMemo(() => createHeadingStore(offsetTop), [offsetTop]);
 
   return useSyncExternalStore(store.subscribe, store.getSnapshot, store.getServerSnapshot);
 }

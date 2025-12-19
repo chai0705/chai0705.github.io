@@ -32,6 +32,8 @@ const { alternate, title, showLogo } = siteConfig;
       class="tablet:hidden -my-4 mr-4 flex cursor-pointer items-center justify-center gap-1 text-sm font-bold whitespace-nowrap"
       href="/"
       target="_self"
+      title={alternate || title}
+      aria-label={alternate || title}
     >
       {
         showLogo ? (
