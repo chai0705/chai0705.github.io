@@ -30,10 +30,11 @@ const { className } = Astro.props;
 
 <div class={cn('flex flex-col items-center', className)} data-home-info-container={uniqueId}>
   <img
-    transition:persist="page-home-sider-avatar"
-    src={siteConfig.avatar}
-    alt={`${siteConfig.name}'s avatar`}
     class="shadow-card-darker hover:animate-shake h-40 w-40 rounded-full transition"
+    src={siteConfig.avatar ?? '/img/avatar.webp'}
+    alt={`${siteConfig.name ?? ''} avatar`}
+    decoding="async"
+    loading="lazy"
   />
 
   <p class="mt-2">{siteConfig?.name}</p>

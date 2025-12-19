@@ -29,7 +29,6 @@
     background: linear-gradient(to top, var(--gradient-bg-end) 0, var(--gradient-bg-start) 30%) no-repeat bottom;
     scroll-behavior: smooth;
     letter-spacing: 0.02em;
-    @apply tablet:bg-gradient-start tablet:bg-none;
   }
   h1,
   h2,
