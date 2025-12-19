@@ -40,12 +40,11 @@ import { Icon } from 'astro-icon/components';
 </div>
 
 <script>
-  import { throttle } from 'es-toolkit';
   import { drawerOpen } from '@store/ui';
 
   function initFloatingNav() {
-    const scrollToTop = document.getElementById('scroll-to-top');
-    const scrollToBottom = document.getElementById('scroll-to-bottom');
+    const scrollToTopEle = document.getElementById('scroll-to-top');
+    const scrollToBottomEle = document.getElementById('scroll-to-bottom');
     const floatingNav = document.getElementById('floating-nav');
     const toggleNav = document.getElementById('toggle-nav');
     const menuNavIcon = toggleNav?.querySelector('.menu-nav-icon');
@@ -87,29 +86,29 @@ import { Icon } from 'astro-icon/components';
     });
 
     // 回到顶部
-    const throttledScrollToTop = throttle(() => {
+    const scrollToTop = () => {
       window.scrollTo({
         top: 0,
         behavior: 'smooth',
       });
-    }, 300);
+    };
 
-    scrollToTop?.addEventListener('click', throttledScrollToTop);
+    scrollToTopEle?.addEventListener('click', scrollToTop);
 
     // 滚动到底部
-    const throttledScrollToBottom = throttle(() => {
+    const scrollToBottom = () => {
       window.scrollTo({
         top: document.documentElement.scrollHeight,
         behavior: 'smooth',
       });
-    }, 300);
+    };
 
-    scrollToBottom?.addEventListener('click', throttledScrollToBottom);
+    scrollToBottomEle?.addEventListener('click', scrollToBottom);
 
     // 清理函数
     return () => {
-      scrollToTop?.removeEventListener('click', throttledScrollToTop);
-      scrollToBottom?.removeEventListener('click', throttledScrollToBottom);
+      scrollToTopEle?.removeEventListener('click', scrollToTop);
+      scrollToBottomEle?.removeEventListener('click', scrollToBottom);
       toggleNav?.removeEventListener('click', handleToggleNav);
       unsubscribe(); // Unsubscribe from drawer state
     };
