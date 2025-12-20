@@ -449,10 +449,201 @@
   background-color: hsl(var(--muted));
 }
 
-/* 图片加载完成状态 - 使用实际尺寸 */
+/* 图片加载完成状态 - 使用实际尺寸，限制最大高度 */
 .prose .markdown-image.loaded {
   opacity: 1;
   aspect-ratio: auto;
+  max-height: 70vh;
+  object-fit: contain;
+}
+
+/* 全屏按钮样式 */
+.prose .markdown-image-fullscreen {
+  position: absolute;
+  bottom: 0.5rem;
+  right: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  border: none;
+  border-radius: 0.375rem;
+  background: hsl(var(--background) / 0.8);
+  color: hsl(var(--muted-foreground));
+  cursor: pointer;
+  opacity: 0;
+  backdrop-filter: blur(4px);
+  transition:
+    opacity 0.2s ease,
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.1s ease;
+}
+
+.prose .markdown-image-fullscreen:hover {
+  background: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+}
+
+.prose .markdown-image-fullscreen:active {
+  transform: scale(0.95);
+}
+
+/* 悬停时显示按钮 */
+.prose .markdown-image-wrapper:hover .markdown-image-fullscreen {
+  opacity: 1;
+}
+
+/* ========== 竖图并排显示 ========== */
+
+.prose .markdown-image-row {
+  display: flex;
+  gap: 0.75rem;
+  margin: 1.5rem 0;
+}
+
+.prose .markdown-image-row .markdown-image-wrapper {
+  flex: 1;
+  margin: 0;
+  min-width: 0;
+}
+
+.prose .markdown-image-row .markdown-image.loaded {
+  max-height: 60vh;
+}
+
+/* ========== 图片全屏 Lightbox ========== */
+
+.markdown-image-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: hsl(0 0% 0% / 0.9);
+  backdrop-filter: blur(8px);
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.3s ease,
+    visibility 0.3s ease;
+}
+
+.markdown-image-lightbox.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* 关闭按钮 */
+.markdown-image-lightbox-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: hsl(var(--background) / 0.2);
+  color: white;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    transform 0.1s ease;
+}
+
+.markdown-image-lightbox-close:hover {
+  background: hsl(var(--background) / 0.4);
+}
+
+.markdown-image-lightbox-close:active {
+  transform: scale(0.95);
+}
+
+/* 图片容器 */
+.markdown-image-lightbox-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 90vw;
+  max-height: 90vh;
+  padding: 1rem;
+  /* 禁止浏览器默认触摸行为，让我们自己处理手势 */
+  touch-action: none;
+  /* 禁止选中图片 */
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Lightbox 图片 */
+.markdown-image-lightbox-img {
+  max-width: 100%;
+  max-height: 85vh;
+  object-fit: contain;
+  border-radius: 0.5rem;
+  box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.5);
+
+  /* 加载前隐藏，防止显示上一张图片 */
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+
+  /* 默认缩放光标 */
+  cursor: zoom-in;
+
+  /* 允许 transform 动画 */
+  transform-origin: center center;
+  will-change: transform;
+}
+
+.markdown-image-lightbox-img.loaded {
+  opacity: 1;
+}
+
+/* 缩放提示 */
+.markdown-image-lightbox::after {
+  content: '双击放大 · 滚轮/双指缩放';
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0.5rem 1rem;
+  background: hsl(0 0% 0% / 0.5);
+  color: hsl(0 0% 100% / 0.7);
+  font-size: 0.75rem;
+  border-radius: 1rem;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* 触屏设备显示不同提示 */
+@media (pointer: coarse) {
+  .markdown-image-lightbox::after {
+    content: '双击放大 · 双指缩放';
+  }
+}
+
+.markdown-image-lightbox.active::after {
+  opacity: 1;
+  animation: fade-out-hint 3s ease forwards;
+  animation-delay: 2s;
+}
+
+@keyframes fade-out-hint {
+  to {
+    opacity: 0;
+  }
+}
+
+/* Lightbox 打开时禁止背景滚动 */
+body.lightbox-open {
+  overflow: hidden;
 }
 
 /* 图片加载失败状态 - 隐藏损坏图片 */
