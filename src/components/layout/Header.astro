@@ -18,26 +18,20 @@ const { alternate, title, showLogo } = siteConfig;
 
 <div
   id="site-header"
-  class={`shadow-text fixed tablet:backdrop-blur inset-x-0 top-0 z-10 gap-4 py-2.5 text-white select-none tablet:py-2 px-6 tablet:pl-3 tablet:pr-0`}
+  class={`shadow-text fixed tablet:backdrop-blur inset-x-0 top-0 z-10 gap-4 py-2.5 text-white select-none tablet:py-2 tablet:pl-3 tablet:pr-0`}
   transition:name="site-header"
 >
   <div class={`mx-auto flex items-center justify-between tablet:w-full px-6 tablet:pl-10 tablet:pr-3 ${MAX_WIDTH.content}`}>
     <!-- Desktop: Always show logo -->
     <a
       transition:persist="page-header-avatar"
-      class="tablet:hidden -my-4 mr-4 flex cursor-pointer items-center justify-center gap-1 text-sm font-bold whitespace-nowrap"
+      class="tablet:hidden -my-4 mr-4 flex cursor-pointer items-center justify-center gap-1 whitespace-nowrap"
       href="/"
       target="_self"
       title={alternate || title}
       aria-label={alternate || title}
     >
-      {
-        showLogo ? (
-          <LogoSvg className="h-8" />
-        ) : (
-          <p class="logo-text text-primary text-2xl font-light tracking-widest capitalize">{alternate || title}</p>
-        )
-      }
+      {showLogo ? <LogoSvg className="h-8" /> : <p class="logo-text text-primary">{alternate || title}</p>}
     </a>
     <!-- Mobile: MobilePostHeader (shows heading on post pages, logo otherwise) -->
     <div class="tablet:flex tablet:grow hidden items-center justify-center">

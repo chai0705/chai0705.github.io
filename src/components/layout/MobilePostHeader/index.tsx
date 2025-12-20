@@ -13,7 +13,6 @@ import { HeadingTitle } from './HeadingTitle';
 import { ProgressCircle } from './ProgressCircle';
 import { MobileTOCDropdown } from './MobileTOCDropdown';
 import { siteConfig } from '@/constants/site-config';
-import { Image } from 'astro:assets';
 
 interface MobilePostHeaderProps {
   /** Whether the current page is a post page */
@@ -67,11 +66,11 @@ export function MobilePostHeader({
 
   // Logo component
   const Logo = () => (
-    <a href="/" className="flex items-center gap-1 text-sm font-bold whitespace-nowrap">
+    <a href="/" className="flex items-center gap-1">
       {logoElement === 'svg' && logoSrc ? (
-        <Image src={logoSrc} alt={siteConfig?.alternate ?? siteConfig?.name} class="h-8" width={32} height={32} sizes="32px" />
+        <img src={logoSrc} alt={siteConfig?.alternate ?? siteConfig?.name} className="h-8" height={32} />
       ) : (
-        <span className="logo-text text-primary text-2xl font-light tracking-widest capitalize">{logoText}</span>
+        <span className="logo-text text-primary">{logoText}</span>
       )}
     </a>
   );

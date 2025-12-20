@@ -3,6 +3,12 @@
 @config '../../../tailwind.config.mjs';
 @import './utils.css';
 
+@font-face {
+  font-family: 'Bear Days';
+  src: url('/fonts/bear-days.woff2') format('woff2');
+  font-display: swap;
+}
+
 /*
   The default border color has changed to `currentColor` in Tailwind CSS v4,
   so we've added these compatibility styles to make sure everything still
@@ -91,5 +97,17 @@
   }
   .clip-path-post-img-right {
     clip-path: polygon(0 0%, 100% 0%, 100% 100%, 8% 100%);
+  }
+  .logo-text {
+    font-size: 2rem;
+    text-shadow:
+      3px 4px 2px #060000,
+      -1px -1px 0px #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    line-height: 0.95;
+    text-align: center;
+    font-family: 'Bear Days', sans-serif;
+    font-weight: 700;
   }
 }
