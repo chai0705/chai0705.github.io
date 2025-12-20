@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 ---
+## [1.2.0](https://github.com/cosZone/astro-koharu/compare/v1.1.0..v1.2.0) - 2025-12-20
+
+### Documentation
+
+- update README - ([945a467](https://github.com/cosZone/astro-koharu/commit/945a4673ba167656cb6b30aef03b29a1076e7486)) - yusixian
+
+### Features
+
+- add LQIP with gradient - ([9f2ceee](https://github.com/cosZone/astro-koharu/commit/9f2ceeec274ba6884e89d46e11d55f08004d2933)) - yusixian
+- add Bear Days font when no logo - ([c967a97](https://github.com/cosZone/astro-koharu/commit/c967a974fa7094d5b8c61f78cfffc78c0ec645fe)) - yusixian
+- add mobile post header with dynamic heading display and scroll tracking - ([2fcf782](https://github.com/cosZone/astro-koharu/commit/2fcf782128f2432d45986a2c04c1e3de4fd559c8)) - yusixian
+- enhance search dialog with keyboard navigation - ([b29d144](https://github.com/cosZone/astro-koharu/commit/b29d1445639232b30a3aee7a74aef590a38d08ef)) - yusixian
+
+### Performance
+
+- optimize font & image - ([de1d6e9](https://github.com/cosZone/astro-koharu/commit/de1d6e91519a155a2f79b323c55bdcefb2abd133)) - yusixian
+
+---
 ## [1.1.0](https://github.com/cosZone/astro-koharu/compare/v1.0.1..v1.1.0) - 2025-12-13
 
 ### Bug Fixes
