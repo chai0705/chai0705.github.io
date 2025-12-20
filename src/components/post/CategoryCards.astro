@@ -52,8 +52,9 @@ const categoryPosts: CategoryWithPosts[] = await Promise.all(
       const posts = category?.posts?.slice(0, 6 - (childrenLen ?? 0));
       return (
         <FlippedCard>
-          <div slot="front" class="flex-center relative h-full rounded-md px-2 py-4" style={getLqipStyle(category.image)}>
+          <div slot="front" class="flex-center relative h-full rounded-md px-2 py-4">
             <img
+              style={getLqipStyle(category.image)}
               src={category.image}
               alt={category.label}
               loading="lazy"
