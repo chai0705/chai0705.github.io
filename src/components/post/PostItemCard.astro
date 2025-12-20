@@ -11,6 +11,7 @@ import { cn } from '@lib/utils';
 import { Icon } from 'astro-icon/components';
 import readingTime from 'reading-time';
 import type { BlogPost } from 'types/blog';
+import { Image } from 'astro:assets';
 
 export interface PostItemCardProps {
   data: BlogPost;
@@ -58,13 +59,15 @@ const postDescription = getPostDescriptionWithSummary(data);
         aria-label="post-link"
         href={href}
         class={cn(
-          'md:clip-path-none relative h-[11.625rem] max-h-[11.625rem] w-[calc(50%-2rem)] overflow-hidden rounded-lg md:w-auto',
+          'md:clip-path-none relative h-46.5 max-h-46.5 w-[calc(50%-2rem)] overflow-hidden rounded-lg md:w-auto',
           leftClip ? 'clip-path-post-img-left order-1' : 'clip-path-post-img-right order-2',
-          'md:clip-path-none md:order-none',
+          'md:clip-path-none md:order-0',
         )}
       >
-        <img
+        <Image
           src={finalCover}
+          width={600}
+          height={186}
           loading="lazy"
           decoding="async"
           alt="post cover"

@@ -6,6 +6,7 @@ import readingTime from 'reading-time';
 import type { BlogPost } from 'types/blog';
 import WaveSvg from './wave';
 import { MAX_WIDTH } from '@/constants/layout';
+import { Image } from 'astro:assets';
 
 export interface CoverProps {
   data?: BlogPost;
@@ -74,8 +75,15 @@ const isDraft = import.meta.env.DEV && draft === true;
       )
     }
   </div>
-  <div class="relative -z-10 h-full min-h-[15rem] w-full" transition:persist="page-cover-banner" id="banner-box">
-    <img src="/img/site_header.webp" alt="cover" decoding="async" class="h-full w-full object-cover" />
+  <div class="relative -z-10 h-full min-h-60 w-full" transition:persist="page-cover-banner" id="banner-box">
+    <Image
+      src="/img/site_header.webp"
+      width={1920}
+      height={1080}
+      alt="cover"
+      class="h-full w-full object-cover"
+      sizes="100vw"
+    />
   </div>
   <WaveSvg />
 </div>

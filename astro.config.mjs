@@ -10,6 +10,7 @@ import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import pagefind from 'astro-pagefind';
 import { remarkLinkEmbed } from './src/lib/markdown/remark-link-embed.ts';
+import { imageService } from '@unpic/astro/service';
 
 // https://astro.build/config
 export default defineConfig({
@@ -65,6 +66,10 @@ export default defineConfig({
     }),
     pagefind(),
   ],
+  // https://unpic.pics/img/astro/
+  image: {
+    service: imageService(),
+  },
   devToolbar: {
     enabled: true,
   },
