@@ -1,6 +1,7 @@
 ---
 import { siteConfig } from '@constants/site-config';
 import { parseDate } from '@lib/datetime';
+import { getLqipStyle } from '@lib/lqip';
 import { Icon } from 'astro-icon/components';
 import readingTime from 'reading-time';
 import type { BlogPost } from 'types/blog';
@@ -19,6 +20,9 @@ const { date, title: dataTitle, draft } = data?.data ?? {};
 
 const readState = readingTime(data?.body ?? '');
 const isDraft = import.meta.env.DEV && draft === true;
+
+// 获取横幅图片的 LQIP 样式
+const bannerLqipStyle = getLqipStyle('/img/site_header_1920.webp');
 ---
 
 <div class="relative flex h-[60dvh] max-h-200 overflow-hidden">
@@ -75,7 +79,12 @@ const isDraft = import.meta.env.DEV && draft === true;
       )
     }
   </div>
-  <div class="relative -z-10 h-full min-h-60 w-full" transition:persist="page-cover-banner" id="banner-box">
+  <div
+    class="relative -z-10 h-full min-h-60 w-full"
+    transition:persist="page-cover-banner"
+    id="banner-box"
+    style={bannerLqipStyle}
+  >
     <Image
       width={1920}
       height={1080}

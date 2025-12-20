@@ -7,6 +7,7 @@ import { siteConfig } from '@constants/site-config';
 import { getCategoryByLink, getCategoryList, getParentCategory, getPostsByCategory, type Category } from '@lib/content';
 import { routeBuilder } from '@lib/route';
 import { cn } from '@lib/utils';
+import { getLqipStyle } from '@lib/lqip';
 import type { CollectionEntry } from 'astro:content';
 import FlippedCard from './FlippedCard.astro';
 import { Icon } from 'astro-icon/components';
@@ -51,7 +52,7 @@ const categoryPosts: CategoryWithPosts[] = await Promise.all(
       const posts = category?.posts?.slice(0, 6 - (childrenLen ?? 0));
       return (
         <FlippedCard>
-          <div slot="front" class="flex-center relative h-full rounded-md px-2 py-4">
+          <div slot="front" class="flex-center relative h-full rounded-md px-2 py-4" style={getLqipStyle(category.image)}>
             <img
               src={category.image}
               alt={category.label}

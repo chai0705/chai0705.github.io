@@ -4,6 +4,7 @@ import { Icon } from 'astro-icon/components';
 import WaveSvg from './wave';
 import { MAX_WIDTH } from '@/constants/layout';
 import { marked } from 'marked';
+import { getLqipStyle } from '@lib/lqip';
 
 const weeklyConfig = siteConfig.featuredSeries;
 
@@ -16,7 +17,7 @@ const descriptionHtml = weeklyConfig?.description ? marked.parse(weeklyConfig.de
   <!-- 周刊封面图 -->
   {
     weeklyConfig?.cover && (
-      <div class="absolute inset-0 -z-10 h-full w-full">
+      <div class="absolute inset-0 -z-10 h-full w-full" style={getLqipStyle(weeklyConfig.cover)}>
         <img src={weeklyConfig.cover} alt={weeklyConfig.fullName ?? weeklyConfig.label} class="h-full w-full object-cover" />
       </div>
     )

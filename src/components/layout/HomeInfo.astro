@@ -6,6 +6,7 @@ import { routers } from '@constants/router';
 import { siteConfig } from '@constants/site-config';
 import { getAllTags, getCategoryList, getPostCount, getSortedPosts } from '@lib/content';
 import { cn } from '@lib/utils';
+import { getLqipStyle } from '@lib/lqip';
 import { Icon } from 'astro-icon/components';
 import Social from './Social.astro';
 
@@ -29,13 +30,15 @@ const { className } = Astro.props;
 ---
 
 <div class={cn('flex flex-col items-center', className)} data-home-info-container={uniqueId}>
-  <img
-    class="shadow-card-darker hover:animate-shake h-40 w-40 rounded-full transition"
-    src={siteConfig.avatar ?? '/img/avatar.webp'}
-    alt={`${siteConfig.name ?? ''} avatar`}
-    loading="eager"
-    fetchpriority="high"
-  />
+  <div class="h-40 w-40 rounded-full" style={getLqipStyle(siteConfig.avatar ?? '/img/avatar.webp')}>
+    <img
+      class="shadow-card-darker hover:animate-shake h-full w-full rounded-full transition"
+      src={siteConfig.avatar ?? '/img/avatar.webp'}
+      alt={`${siteConfig.name ?? ''} avatar`}
+      loading="eager"
+      fetchpriority="high"
+    />
+  </div>
 
   <p class="mt-2">{siteConfig?.name}</p>
   <p class="text-muted-foreground mt-3 text-center">{siteConfig?.description}</p>

@@ -4,6 +4,7 @@
   "version": "1.1.0",
   "scripts": {
     "dev": "astro dev",
+    "generate:lqips": "npx tsx src/scripts/generateLqips.ts",
     "generate:similarities": "npx tsx src/scripts/generateSimilarities.ts",
     "generate:summaries": "npx tsx src/scripts/generateSummaries.ts",
     "generate:summaries:force": "npx tsx src/scripts/generateSummaries.ts --force",
@@ -102,6 +103,7 @@
     "prettier-plugin-lint-md": "^1.0.1",
     "prettier-plugin-tailwindcss": "^0.6.14",
     "remark": "^15.0.1",
+    "sharp": "^0.34.5",
     "strip-markdown": "^6.0.0",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3",
