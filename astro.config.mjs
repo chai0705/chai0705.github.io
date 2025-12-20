@@ -11,6 +11,7 @@ import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import pagefind from 'astro-pagefind';
 import mermaid from 'astro-mermaid';
 import { remarkLinkEmbed } from './src/lib/markdown/remark-link-embed.ts';
+import { rehypeImagePlaceholder } from './src/lib/markdown/rehype-image-placeholder.ts';
 
 // https://astro.build/config
 export default defineConfig({
@@ -41,6 +42,7 @@ export default defineConfig({
           },
         },
       ],
+      rehypeImagePlaceholder,
     ],
     syntaxHighlight: {
       type: 'shiki',

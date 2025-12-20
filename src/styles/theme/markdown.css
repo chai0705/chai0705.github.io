@@ -419,6 +419,81 @@
   margin-top: 1rem;
 }
 
+/* ========== Markdown 图片占位符和加载样式 ========== */
+
+/* 图片容器 */
+.prose .markdown-image-wrapper {
+  position: relative;
+  display: block;
+  margin: 1.5rem 0;
+  overflow: hidden;
+  border-radius: 0.5rem;
+  background-color: hsl(var(--muted));
+}
+
+/* 图片样式 - 16:9 默认占位比例 */
+.prose .markdown-image {
+  display: block;
+  width: 100%;
+  height: auto;
+
+  /* 默认 16:9 比例防止布局抖动 */
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+
+  /* 淡入动画 */
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+
+  /* 加载时的背景色 */
+  background-color: hsl(var(--muted));
+}
+
+/* 图片加载完成状态 - 使用实际尺寸 */
+.prose .markdown-image.loaded {
+  opacity: 1;
+  aspect-ratio: auto;
+}
+
+/* 图片加载失败状态 - 隐藏损坏图片 */
+.prose .markdown-image.error {
+  display: none;
+}
+
+/* 图片加载失败占位符 */
+.prose .markdown-image-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  min-height: 200px;
+  padding: 2rem;
+  color: hsl(var(--muted-foreground));
+}
+
+/* 错误图标 */
+.prose .markdown-image-error-icon {
+  display: block;
+  width: 3rem;
+  height: 3rem;
+  --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='none' stroke='%23888' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z'/%3E%3C/svg%3E");
+  background-color: currentColor;
+  opacity: 0.5;
+  -webkit-mask-image: var(--svg);
+  mask-image: var(--svg);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+}
+
+/* 错误文字 */
+.prose .markdown-image-error-text {
+  font-size: 0.875rem;
+  opacity: 0.7;
+}
+
 /* ========== 深色模式样式 ========== */
 
 /* 深色模式 - 行内代码 */
