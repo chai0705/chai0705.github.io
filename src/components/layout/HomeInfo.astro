@@ -33,8 +33,8 @@ const { className } = Astro.props;
     class="shadow-card-darker hover:animate-shake h-40 w-40 rounded-full transition"
     src={siteConfig.avatar ?? '/img/avatar.webp'}
     alt={`${siteConfig.name ?? ''} avatar`}
-    decoding="async"
-    loading="lazy"
+    loading="eager"
+    fetchpriority="high"
   />
 
   <p class="mt-2">{siteConfig?.name}</p>

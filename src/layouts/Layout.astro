@@ -43,12 +43,10 @@ const isPostPage = Astro.url.pathname.startsWith('/post/');
     <link rel="preconnect" href="https://chinese-font.netlify.app" crossorigin />
     <link rel="dns-prefetch" href="https://chinese-font.netlify.app" />
 
-    <!-- Preload LCP image for faster rendering -->
-    <link rel="preload" as="image" href="/img/site_header.webp" fetchpriority="high" />
-
     <!-- Async load Chinese fonts to avoid render-blocking -->
     <link rel="stylesheet" href="/fonts/ChillRoundFRegular/result.css" media="print" onload="this.media='all'" />
     <link rel="stylesheet" href="/fonts/ChillRoundFBold/result.css" media="print" onload="this.media='all'" />
+
     <ClientRouter />
     <LoadingIndicator color="#e9536a" />
     <Tooltips />
