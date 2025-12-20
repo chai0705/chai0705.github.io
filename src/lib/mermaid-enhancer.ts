@@ -5,6 +5,10 @@
 
 import { copyToClipboard } from './code-block-enhancer';
 
+// Track active observers and timeouts for cleanup
+let activeObservers: MutationObserver[] = [];
+let activeTimeouts: ReturnType<typeof setTimeout>[] = [];
+
 /**
  * Create toolbar HTML for mermaid diagram
  */
@@ -66,11 +70,18 @@ function createCheckmarkSvg(): string {
 }
 
 /**
+ * Check if mermaid element is already wrapped
+ */
+function isAlreadyWrapped(mermaidElement: HTMLElement): boolean {
+  return mermaidElement.parentElement?.classList.contains('mermaid-wrapper') ?? false;
+}
+
+/**
  * Enhance a single mermaid diagram with toolbar
  */
 function enhanceMermaidDiagram(mermaidElement: HTMLElement): void {
-  // Skip if already enhanced
-  if (mermaidElement.dataset.toolbarEnhanced === 'true') {
+  // Skip if already enhanced or wrapped
+  if (mermaidElement.dataset.toolbarEnhanced === 'true' || isAlreadyWrapped(mermaidElement)) {
     return;
   }
 
@@ -126,6 +137,23 @@ function enhanceMermaidDiagram(mermaidElement: HTMLElement): void {
 }
 
 /**
+ * Clean up all active observers and timeouts
+ */
+function cleanup(): void {
+  // Disconnect all observers
+  for (const observer of activeObservers) {
+    observer.disconnect();
+  }
+  activeObservers = [];
+
+  // Clear all timeouts
+  for (const timeout of activeTimeouts) {
+    clearTimeout(timeout);
+  }
+  activeTimeouts = [];
+}
+
+/**
  * Wait for mermaid diagrams to be processed and enhance them
  */
 function waitAndEnhance(): void {
@@ -133,6 +161,11 @@ function waitAndEnhance(): void {
 
   mermaidElements.forEach((element) => {
     const mermaidElement = element as HTMLElement;
+
+    // Skip if already enhanced or wrapped
+    if (mermaidElement.dataset.toolbarEnhanced === 'true' || isAlreadyWrapped(mermaidElement)) {
+      return;
+    }
 
     // If already processed (has SVG content), enhance immediately
     if (mermaidElement.getAttribute('data-processed') === 'true') {
@@ -148,6 +181,11 @@ function waitAndEnhance(): void {
           ) {
             enhanceMermaidDiagram(mermaidElement);
             obs.disconnect();
+            // Remove from active observers
+            const index = activeObservers.indexOf(obs);
+            if (index > -1) {
+              activeObservers.splice(index, 1);
+            }
             return;
           }
         }
@@ -158,13 +196,29 @@ function waitAndEnhance(): void {
         attributeFilter: ['data-processed'],
       });
 
+      // Track observer for cleanup
+      activeObservers.push(observer);
+
       // Timeout fallback - if not processed in 5 seconds, enhance anyway
-      setTimeout(() => {
+      const timeout = setTimeout(() => {
         observer.disconnect();
-        if (mermaidElement.dataset.toolbarEnhanced !== 'true') {
+        // Remove from active observers
+        const obsIndex = activeObservers.indexOf(observer);
+        if (obsIndex > -1) {
+          activeObservers.splice(obsIndex, 1);
+        }
+        // Remove from active timeouts
+        const timeoutIndex = activeTimeouts.indexOf(timeout);
+        if (timeoutIndex > -1) {
+          activeTimeouts.splice(timeoutIndex, 1);
+        }
+        if (mermaidElement.dataset.toolbarEnhanced !== 'true' && !isAlreadyWrapped(mermaidElement)) {
           enhanceMermaidDiagram(mermaidElement);
         }
       }, 5000);
+
+      // Track timeout for cleanup
+      activeTimeouts.push(timeout);
     }
   });
 }
@@ -173,6 +227,15 @@ function waitAndEnhance(): void {
  * Initialize mermaid enhancer
  */
 export function initMermaidEnhancer(): void {
+  // Clean up any previous observers/timeouts
+  cleanup();
+
   // Small delay to let astro-mermaid start processing
-  setTimeout(waitAndEnhance, 100);
+  const timeout = setTimeout(waitAndEnhance, 100);
+  activeTimeouts.push(timeout);
+}
+
+// Clean up on page transitions
+if (typeof document !== 'undefined') {
+  document.addEventListener('astro:before-swap', cleanup);
 }
