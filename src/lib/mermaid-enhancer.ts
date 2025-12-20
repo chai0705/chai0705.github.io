@@ -8,6 +8,7 @@ import { copyToClipboard } from './code-block-enhancer';
 // Track active observers and timeouts for cleanup
 let activeObservers: MutationObserver[] = [];
 let activeTimeouts: ReturnType<typeof setTimeout>[] = [];
+let mermaidRenderedHandler: (() => void) | null = null;
 
 /**
  * Create toolbar HTML for mermaid diagram
@@ -151,6 +152,12 @@ function cleanup(): void {
     clearTimeout(timeout);
   }
   activeTimeouts = [];
+
+  // Remove mermaid:rendered listener
+  if (mermaidRenderedHandler) {
+    window.removeEventListener('mermaid:rendered', mermaidRenderedHandler);
+    mermaidRenderedHandler = null;
+  }
 }
 
 /**
@@ -233,6 +240,12 @@ export function initMermaidEnhancer(): void {
   // Small delay to let astro-mermaid start processing
   const timeout = setTimeout(waitAndEnhance, 100);
   activeTimeouts.push(timeout);
+
+  // Also listen for custom event from navigation fix script
+  mermaidRenderedHandler = () => {
+    setTimeout(waitAndEnhance, 50);
+  };
+  window.addEventListener('mermaid:rendered', mermaidRenderedHandler);
 }
 
 // Clean up on page transitions
