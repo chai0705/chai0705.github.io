@@ -11,7 +11,6 @@ import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import pagefind from 'astro-pagefind';
 import mermaid from 'astro-mermaid';
 import { remarkLinkEmbed } from './src/lib/markdown/remark-link-embed.ts';
-import { imageService } from '@unpic/astro/service';
 
 // https://astro.build/config
 export default defineConfig({
@@ -74,10 +73,6 @@ export default defineConfig({
       autoTheme: true,
     }),
   ],
-  // https://unpic.pics/img/astro/
-  image: {
-    service: imageService(),
-  },
   devToolbar: {
     enabled: true,
   },

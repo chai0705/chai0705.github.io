@@ -6,13 +6,12 @@ import { Routes } from '@constants/router';
 import { defaultCoverList } from '@constants/site-config';
 import { buildCategoryPath, getCategoryArr, getPostDescriptionWithSummary } from '@lib/content';
 import { parseDate } from '@lib/datetime';
+import { getLqipProps } from '@lib/lqip';
 import { routeBuilder } from '@lib/route';
 import { cn } from '@lib/utils';
-import { getLqipProps } from '@lib/lqip';
 import { Icon } from 'astro-icon/components';
 import readingTime from 'reading-time';
 import type { BlogPost } from 'types/blog';
-import { Image } from 'astro:assets';
 
 export interface PostItemCardProps {
   data: BlogPost;
@@ -70,10 +69,8 @@ const lqipProps = getLqipProps(finalCover);
           lqipProps.class,
         )}
       >
-        <Image
+        <img
           src={finalCover}
-          width={600}
-          height={186}
           loading="lazy"
           alt="post cover"
           class="h-full w-full cursor-pointer object-cover transition duration-500 group-hover:scale-110 group-hover:rotate-3"
@@ -86,7 +83,7 @@ const lqipProps = getLqipProps(finalCover);
       'flex flex-col gap-2 px-4 pb-2 md:pb-4 pt-4 md:pt-1',
       hideCover ? 'w-full' : 'w-[calc(50%+2rem)] md:w-full',
       !hideCover && (leftClip ? 'order-2' : 'order-1'),
-      'md:order-none',
+      'md:order-0',
     )}
   >
     <div class={cn('flex w-full justify-between', { 'order-2 justify-start gap-4 pb-3 md:pb-0': isSimple })}>
