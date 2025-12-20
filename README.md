@@ -61,6 +61,8 @@ pnpm dev
 
 ## 🙏 鸣谢
 
+使用字体[寒蝉全圆体](https://chinese-font.netlify.app/zh-cn/fonts/hcqyt/ChillRoundFRegular)
+
 感谢以下项目对 astro-koharu 的开发提供的灵感及参考：
 
 - [mx-space](https://github.com/mx-space)
@@ -69,4 +71,5 @@ pnpm dev
 - [yfi.moe](https://github.com/yy4382/yfi.moe)
 - [4ark.me](https://github.com/gd4Ark/gd4Ark.github.io)
 - [纸鹿摸鱼处](https://blog.zhilu.site/)
-- ...
+
+...
