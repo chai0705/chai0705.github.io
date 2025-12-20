@@ -14,6 +14,7 @@ import Header from '@components/layout/Header.astro';
 import MobileDrawer from '@components/layout/MobileDrawer.astro';
 import SearchDialog from '@components/layout/SearchDialog.astro';
 import CodeBlockFullscreen from '@components/markdown/CodeBlockFullscreen.astro';
+import MermaidFullscreen from '@components/markdown/MermaidFullscreen.astro';
 import { seoConfig, siteConfig } from '@constants/site-config';
 import LoadingIndicator from 'astro-loading-indicator/component';
 import { Tooltips } from 'astro-tooltips';
@@ -77,9 +78,11 @@ const isPostPage = Astro.url.pathname.startsWith('/post/');
       ) {
         document.documentElement.classList.add('dark');
         document.documentElement.classList.remove('light');
+        document.documentElement.dataset.theme = 'dark';
       } else {
         document.documentElement.classList.remove('dark');
         document.documentElement.classList.add('light');
+        document.documentElement.dataset.theme = 'light';
       }
     </script>
     <script>
@@ -90,9 +93,11 @@ const isPostPage = Astro.url.pathname.startsWith('/post/');
         ) {
           document.documentElement.classList.add('dark');
           document.documentElement.classList.remove('light'); // 本来是没有 light 的，这样是为了触发 MutationObserver
+          document.documentElement.dataset.theme = 'dark';
         } else {
           document.documentElement.classList.remove('dark');
           document.documentElement.classList.add('light');
+          document.documentElement.dataset.theme = 'light';
         }
       }
       // 在每次页面加载时检查
@@ -169,6 +174,7 @@ const isPostPage = Astro.url.pathname.startsWith('/post/');
       <MobileDrawer type={siderType} post={post} />
       <SearchDialog />
       <CodeBlockFullscreen />
+      <MermaidFullscreen />
     </div>
   </body>
 </html>

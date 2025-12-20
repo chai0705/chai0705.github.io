@@ -23,6 +23,7 @@ const finalConfig = { ...defaultContentConfig, ...config };
 <script>
   import type { ContentConfig } from '@constants/content-config';
   import { enhanceAllCodeBlocks } from '@lib/code-block-enhancer';
+  import { initMermaidEnhancer } from '@lib/mermaid-enhancer';
 
   // Custom content enhancement script
   function enhanceContent() {
@@ -115,6 +116,9 @@ const finalConfig = { ...defaultContentConfig, ...config };
           );
         },
       });
+
+      // Enhance mermaid diagrams with toolbar (runs after astro-mermaid renders)
+      initMermaidEnhancer();
     }
 
     // Mark as enhanced

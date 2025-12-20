@@ -78,6 +78,19 @@ export interface CodeBlockData {
 export const codeFullscreenData = atom<CodeBlockData | null>(null);
 
 /**
+ * Mermaid fullscreen data
+ *
+ * Contains the data for the mermaid diagram fullscreen dialog.
+ * When set to non-null, the dialog opens with zoom/pan support.
+ */
+export interface MermaidFullscreenData {
+  svg: string; // Rendered SVG HTML
+  source: string; // Original mermaid source code
+}
+
+export const mermaidFullscreenData = atom<MermaidFullscreenData | null>(null);
+
+/**
  * Helper functions for common operations
  */
 
@@ -149,4 +162,18 @@ export function openCodeFullscreen(data: CodeBlockData): void {
  */
 export function closeCodeFullscreen(): void {
   codeFullscreenData.set(null);
+}
+
+/**
+ * Open mermaid fullscreen dialog with data
+ */
+export function openMermaidFullscreen(data: MermaidFullscreenData): void {
+  mermaidFullscreenData.set(data);
+}
+
+/**
+ * Close mermaid fullscreen dialog
+ */
+export function closeMermaidFullscreen(): void {
+  mermaidFullscreenData.set(null);
 }

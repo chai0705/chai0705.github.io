@@ -9,6 +9,7 @@ import tailwindcss from '@tailwindcss/vite';
 import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import pagefind from 'astro-pagefind';
+import mermaid from 'astro-mermaid';
 import { remarkLinkEmbed } from './src/lib/markdown/remark-link-embed.ts';
 import { imageService } from '@unpic/astro/service';
 
@@ -42,6 +43,10 @@ export default defineConfig({
         },
       ],
     ],
+    syntaxHighlight: {
+      type: 'shiki',
+      excludeLangs: ['mermaid'],
+    },
     shikiConfig: {
       themes: {
         light: 'github-light',
@@ -65,6 +70,9 @@ export default defineConfig({
       hostUrl: 'https://stats.cosine.ren',
     }),
     pagefind(),
+    mermaid({
+      autoTheme: true,
+    }),
   ],
   // https://unpic.pics/img/astro/
   image: {

@@ -758,6 +758,35 @@ const PROMPT_TEMPLATE = (title: string, content: string) =>
   - 删除线
   - 自动链接
 
+**Mermaid 图表：**
+
+支持在 Markdown 中使用 Mermaid 语法绘制流程图、时序图、架构图等。
+
+````markdown
+```mermaid
+flowchart LR
+    A[构建时脚本] --> B[JSON 数据文件] --> C[运行时工具函数]
+```
+````
+
+```mermaid
+flowchart LR
+    A[构建时脚本] --> B[JSON 数据文件] --> C[运行时工具函数]
+```
+
+支持的图表类型：
+
+- `flowchart` / `graph` - 流程图
+- `sequenceDiagram` - 时序图
+- `classDiagram` - 类图
+- `stateDiagram` - 状态图
+- `erDiagram` - ER 图
+- `gantt` - 甘特图
+- `pie` - 饼图
+- `mindmap` - 思维导图
+
+图表会自动跟随深色/浅色主题切换。更多语法参考 [Mermaid 官方文档](https://mermaid.js.org/)。
+
 **代码高亮：**
 
 - 基于 Shiki

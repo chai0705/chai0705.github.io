@@ -24,6 +24,12 @@ export interface CodeBlockInfo {
  * 从 Shiki 生成的代码块中提取语言
  */
 export function extractLanguage(preElement: HTMLElement): string {
+  // Check for mermaid class (astro-mermaid uses this)
+  // Mermaid blocks are handled separately by mermaid-enhancer.ts
+  if (preElement.classList.contains('mermaid')) {
+    return 'mermaid';
+  }
+
   // Primary method: Check for data-language attribute on pre element
   // This is the standard way Shiki adds language information in Astro
   // Shiki 会在 pre 标签的 data-language 属性中添加语言信息
@@ -178,6 +184,11 @@ export function enhanceCodeBlock(preElement: HTMLElement, options: ToolbarOption
   }
 
   const language = extractLanguage(preElement);
+
+  // 跳过 mermaid 图表（由 astro-mermaid 处理）
+  if (language === 'mermaid') {
+    return null;
+  }
   const code = extractCode(preElement);
   const codeHTML = extractCodeHTML(preElement);
   const preClassName = extractPreClassName(preElement);
