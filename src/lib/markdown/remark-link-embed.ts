@@ -195,9 +195,12 @@ function generateLinkPreviewHTML(ogData: OGData): string {
     }
 
     // Sanitize all user-generated content
-    const safeUrl = sanitizeUrl(url);
+    // Use originUrl to preserve the original URL path (metascraper may incorrectly normalize og:url)
+    const safeUrl = sanitizeUrl(originUrl);
     const safeDisplayText = sanitizeText(displayText);
-    const safeSubtitle = subtitle ? sanitizeText(subtitle) : sanitizeText(url.length > 60 ? url.substring(0, 60) + '...' : url);
+    const safeSubtitle = subtitle
+      ? sanitizeText(subtitle)
+      : sanitizeText(originUrl.length > 60 ? originUrl.substring(0, 60) + '...' : originUrl);
 
     return `<div class="link-preview-block not-prose" data-state="error">
   <a href="${safeUrl}" target="_blank" class="hover:border-primary/50 group block rounded-lg border bg-card p-4 transition-all hover:shadow-md" aria-label="${safeDisplayText}">
@@ -220,7 +223,8 @@ function generateLinkPreviewHTML(ogData: OGData): string {
   }
 
   // Sanitize all content using sanitize-html
-  const safeUrl = sanitizeUrl(url);
+  // Use originUrl to preserve the original URL path (metascraper may incorrectly normalize og:url)
+  const safeUrl = sanitizeUrl(originUrl);
   const safeTitle = sanitizeText(title);
   const safeDescription = description ? sanitizeText(description) : '';
   const safeDomain = sanitizeText(domain);
