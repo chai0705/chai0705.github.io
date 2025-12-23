@@ -9,13 +9,14 @@ interface Props {
   post?: BlogPost;
 }
 
+import ChristmasEffects from '@components/christmas/ChristmasEffects.astro';
 import FloatingGroup from '@components/layout/FloatingGroup.astro';
 import Header from '@components/layout/Header.astro';
 import MobileDrawer from '@components/layout/MobileDrawer.astro';
 import SearchDialog from '@components/layout/SearchDialog.astro';
 import CodeBlockFullscreen from '@components/markdown/CodeBlockFullscreen.astro';
 import MermaidFullscreen from '@components/markdown/MermaidFullscreen.astro';
-import { seoConfig, siteConfig } from '@constants/site-config';
+import { christmasConfig, seoConfig, siteConfig } from '@constants/site-config';
 import LoadingIndicator from 'astro-loading-indicator/component';
 import { Tooltips } from 'astro-tooltips';
 import { ClientRouter } from 'astro:transitions';
@@ -30,7 +31,11 @@ const isPostPage = Astro.url.pathname.startsWith('/post/');
 ---
 
 <!doctype html>
-<html transition:name="root" lang="zh-CN" class="vertical-scrollbar">
+<html
+  transition:name="root"
+  lang="zh-CN"
+  class:list={['vertical-scrollbar', { christmas: christmasConfig.enabled && christmasConfig.features.christmasColorScheme }]}
+>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
@@ -241,6 +246,7 @@ const isPostPage = Astro.url.pathname.startsWith('/post/');
     </script>
   </head>
   <body>
+    <ChristmasEffects transition:persist="christmas-snowfall" />
     <div class="flex min-h-screen flex-col text-black dark:text-white">
       <Header isPostPage={isPostPage} tocNumbering={post?.data.tocNumbering ?? true} />
       <main class="relative flex grow flex-col gap-4">

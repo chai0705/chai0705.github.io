@@ -1,0 +1,17 @@
+---
+import { christmasConfig } from '@constants/site-config';
+import { SnowfallCanvas } from './SnowfallCanvas';
+
+const { snowfall } = christmasConfig;
+---
+
+{
+  christmasConfig.enabled && christmasConfig.features.snowfall && (
+    <SnowfallCanvas
+      client:only="react"
+      speed={snowfall.speed}
+      intensity={snowfall.intensity}
+      mobileIntensity={snowfall.mobileIntensity}
+    />
+  )
+}
