@@ -14,6 +14,17 @@ export function rehypeImagePlaceholder() {
       // Skip if already wrapped (e.g., in a figure or custom component)
       if (parent.type === 'element' && parent.tagName === 'figure') return;
 
+      // Skip wrapping if image is inside a link (e.g., [![alt](img)](url))
+      // Only add lazy loading attributes, don't wrap with figure
+      if (parent.type === 'element' && parent.tagName === 'a') {
+        node.properties = {
+          ...node.properties,
+          loading: 'lazy',
+          decoding: 'async',
+        };
+        return;
+      }
+
       // Get existing class (handle both string and array formats per HAST spec)
       const existingClass = Array.isArray(node.properties?.class)
         ? node.properties.class.join(' ')
