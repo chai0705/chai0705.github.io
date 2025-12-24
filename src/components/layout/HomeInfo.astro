@@ -1,9 +1,10 @@
 ---
 import type { BlogSchema } from '@/types/blog';
 import ButtonLink from '@components/control/ButtonLink.astro';
+import ChristmasHat from '@components/christmas/ChristmasHat.astro';
 import { HomeSiderType } from '@constants/enum';
 import { routers } from '@constants/router';
-import { siteConfig } from '@constants/site-config';
+import { christmasConfig, siteConfig } from '@constants/site-config';
 import { getAllTags, getCategoryList, getPostCount, getSortedPosts } from '@lib/content';
 import { cn } from '@lib/utils';
 import { getLqipStyle } from '@lib/lqip';
@@ -30,7 +31,7 @@ const { className } = Astro.props;
 ---
 
 <div class={cn('flex flex-col items-center', className)} data-home-info-container={uniqueId}>
-  <div class="h-40 w-40 rounded-full" style={getLqipStyle(siteConfig.avatar ?? '/img/avatar.webp')}>
+  <div class="relative h-40 w-40 rounded-full" style={getLqipStyle(siteConfig.avatar ?? '/img/avatar.webp')}>
     <img
       class="shadow-card-darker hover:animate-shake h-full w-full rounded-full transition"
       src={siteConfig.avatar ?? '/img/avatar.webp'}
@@ -38,6 +39,7 @@ const { className } = Astro.props;
       loading="eager"
       fetchpriority="high"
     />
+    {christmasConfig.enabled && christmasConfig.features.christmasHat && <ChristmasHat />}
   </div>
 
   <p class="mt-2">{siteConfig?.name}</p>

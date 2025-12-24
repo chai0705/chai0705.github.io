@@ -34,6 +34,8 @@
     "@radix-ui/react-accordion": "^1.2.12",
     "@radix-ui/react-avatar": "^1.1.11",
     "@radix-ui/react-slot": "^1.2.4",
+    "@react-three/drei": "^10.7.7",
+    "@react-three/fiber": "^9.4.2",
     "@tailwindcss/vite": "^4.1.17",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
@@ -74,6 +76,7 @@
     "tailwind-merge": "^2.6.0",
     "tailwindcss": "^4.1.17",
     "tailwindcss-animate": "^1.0.7",
+    "three": "^0.182.0",
     "unist-util-visit": "^5.0.0"
   },
   "devDependencies": {
@@ -86,6 +89,7 @@
     "@types/mdast": "^4.0.4",
     "@types/node": "^24.10.1",
     "@types/sanitize-html": "^2.16.0",
+    "@types/three": "^0.182.0",
     "@types/unist": "^3.0.3",
     "@typescript-eslint/parser": "^8.48.1",
     "@xsai/generate-text": "0.4.0-beta.10",

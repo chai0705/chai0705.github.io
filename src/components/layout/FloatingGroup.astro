@@ -1,9 +1,25 @@
 ---
 import { Icon } from 'astro-icon/components';
+import { christmasConfig } from '@constants/site-config';
 ---
 
 <div id="floating-nav" class="text-primary fixed right-4 bottom-4 z-50 flex flex-col gap-2" data-expanded="true">
   <div id="nav-content" class="flex scale-y-100 flex-col gap-2 opacity-100">
+    {
+      christmasConfig.enabled && (
+        <button
+          id="toggle-christmas"
+          class="bg-background/80 hover:bg-background rounded-full p-2 shadow-lg backdrop-blur-sm transition-colors duration-200"
+          aria-label="切换圣诞特效"
+          title="切换圣诞特效"
+          data-tooltip-interactive="false"
+          data-tooltip-placement="left"
+        >
+          <Icon name="ri:snowy-fill" class="christmas-on-icon h-5 w-5" />
+          <Icon name="ri:snowy-line" class="christmas-off-icon hidden h-5 w-5" />
+        </button>
+      )
+    }
     <button
       id="scroll-to-top"
       class="bg-background/80 hover:bg-background rounded-full p-2 shadow-lg backdrop-blur-sm transition-colors duration-200"
@@ -40,6 +56,7 @@ import { Icon } from 'astro-icon/components';
 </div>
 
 <script>
+  import { christmasEnabled, initChristmasState, toggleChristmas } from '@store/christmas';
   import { drawerOpen } from '@store/ui';
 
   function initFloatingNav() {
@@ -50,6 +67,11 @@ import { Icon } from 'astro-icon/components';
     const menuNavIcon = toggleNav?.querySelector('.menu-nav-icon');
     const closeNavIcon = toggleNav?.querySelector('.close-nav-icon');
 
+    // 圣诞开关按钮
+    const toggleChristmasBtn = document.getElementById('toggle-christmas');
+    const christmasOnIcon = toggleChristmasBtn?.querySelector('.christmas-on-icon');
+    const christmasOffIcon = toggleChristmasBtn?.querySelector('.christmas-off-icon');
+
     let isExpanded = true; // 默认展开
 
     const syncToggleState = () => {
@@ -59,6 +81,28 @@ import { Icon } from 'astro-icon/components';
       menuNavIcon?.classList.toggle('hidden', isExpanded);
       closeNavIcon?.classList.toggle('hidden', !isExpanded);
     };
+
+    // 同步圣诞按钮图标状态
+    const syncChristmasIconState = (enabled: boolean) => {
+      christmasOnIcon?.classList.toggle('hidden', !enabled);
+      christmasOffIcon?.classList.toggle('hidden', enabled);
+    };
+
+    // 初始化圣诞状态
+    initChristmasState();
+    syncChristmasIconState(christmasEnabled.get());
+
+    // 监听圣诞状态变化
+    const unsubscribeChristmas = christmasEnabled.subscribe((enabled) => {
+      syncChristmasIconState(enabled);
+    });
+
+    // 圣诞开关点击事件
+    const handleToggleChristmas = () => {
+      toggleChristmas();
+    };
+
+    toggleChristmasBtn?.addEventListener('click', handleToggleChristmas);
 
     // 展开/收起功能
     const handleToggleNav = () => {
@@ -110,7 +154,9 @@ import { Icon } from 'astro-icon/components';
       scrollToTopEle?.removeEventListener('click', scrollToTop);
       scrollToBottomEle?.removeEventListener('click', scrollToBottom);
       toggleNav?.removeEventListener('click', handleToggleNav);
+      toggleChristmasBtn?.removeEventListener('click', handleToggleChristmas);
       unsubscribe(); // Unsubscribe from drawer state
+      unsubscribeChristmas(); // Unsubscribe from christmas state
     };
   }
 
@@ -123,8 +169,8 @@ import { Icon } from 'astro-icon/components';
     cleanup = initFloatingNav();
   });
 
-  // 在页面卸载时清理
-  document.addEventListener('astro:before-preparation', () => {
+  // 在页面切换前清理（防止内存泄漏）
+  document.addEventListener('astro:before-swap', () => {
     if (cleanup) cleanup();
   });
 </script>

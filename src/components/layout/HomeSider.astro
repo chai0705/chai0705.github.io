@@ -1,14 +1,14 @@
 ---
-import { HomeSiderType, HomeSiderSegmentType } from '@constants/enum';
-import { cn } from '@lib/utils';
-import HomeInfo from './HomeInfo.astro';
-import { TableOfContents } from './TableOfContents/index';
-import HomeSiderSegmented from '@components/ui/segmented/HomeSiderSegmented';
-import { SeriesPostList } from '@components/post/SeriesPostList';
 import { SeriesNavigation } from '@components/post/SeriesNavigation';
-import { ScrollProgress } from './ScrollProgress';
-import { getSeriesPosts, getAdjacentSeriesPosts } from '@lib/content/posts';
+import { SeriesPostList } from '@components/post/SeriesPostList';
+import HomeSiderSegmented from '@components/ui/segmented/HomeSiderSegmented';
+import { HomeSiderSegmentType, HomeSiderType } from '@constants/enum';
+import { getAdjacentSeriesPosts, getSeriesPosts } from '@lib/content/posts';
+import { cn } from '@lib/utils';
 import type { BlogPost } from 'types/blog';
+import HomeInfo from './HomeInfo.astro';
+import { ScrollProgress } from './ScrollProgress';
+import { TableOfContents } from './TableOfContents/index';
 
 interface Props {
   type?: HomeSiderType;
@@ -201,6 +201,11 @@ const { prevPost, nextPost } =
 </script>
 
 <style>
+  /* 圣诞模式下调整 z-index，让装饰效果正确显示 */
+  :global(html.christmas) .page-home-sider {
+    z-index: 5;
+  }
+
   sider-content {
     position: relative;
   }

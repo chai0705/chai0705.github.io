@@ -1,0 +1,31 @@
+---
+import { christmasConfig } from '@constants/site-config';
+import { SnowfallCanvas } from './SnowfallCanvas';
+
+const { snowfall } = christmasConfig;
+---
+
+{
+  christmasConfig.enabled && christmasConfig.features.snowfall && (
+    <>
+      {/* 背景雪 - 在内容后面 */}
+      <SnowfallCanvas
+        client:idle
+        speed={snowfall.speed}
+        intensity={snowfall.intensity}
+        mobileIntensity={snowfall.mobileIntensity}
+        zIndex={1}
+        layerRange={[0, 2]}
+      />
+      {/* 前景雪 - 在内容前面 */}
+      <SnowfallCanvas
+        client:idle
+        speed={snowfall.speed}
+        intensity={snowfall.intensity}
+        mobileIntensity={snowfall.mobileIntensity}
+        zIndex={50}
+        layerRange={[3, 5]}
+      />
+    </>
+  )
+}

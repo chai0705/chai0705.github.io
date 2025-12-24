@@ -416,6 +416,61 @@ Key benefits:
 - Automatic cleanup when no components are subscribed
 - See `src/hooks/useCurrentHeading.ts` for a real-world example
 
+#### Media Query Hooks
+
+Use the existing `useMediaQuery` hook from `@hooks/useMediaQuery` instead of creating custom media query detection:
+
+```typescript
+// ❌ Bad: Custom media query detection
+const [isMobile, setIsMobile] = useState(false);
+useEffect(() => {
+  const mql = window.matchMedia('(max-width: 768px)');
+  setIsMobile(mql.matches);
+  // ...
+}, []);
+
+// ✅ Good: Use existing hooks
+import { useIsMobile, useMediaQuery } from '@hooks/useMediaQuery';
+
+function Component() {
+  const isMobile = useIsMobile();
+  const isLargeScreen = useMediaQuery('(min-width: 1024px)');
+}
+```
+
+Available hooks in `src/hooks/useMediaQuery.ts`:
+- `useMediaQuery(query)` - Generic media query hook
+- `useIsMobile()` - `(max-width: 768px)`
+- `useIsTablet()` - `(max-width: 992px)`
+- `usePrefersColorSchemeDark()` - Dark mode preference
+- `usePrefersReducedMotion()` - Reduced motion preference
+
+#### Use Motion's useReducedMotion for Animations
+
+For animation-related components, prefer Motion's `useReducedMotion` hook over the generic `usePrefersReducedMotion`:
+
+```typescript
+// For animation components using Motion library
+import { useReducedMotion } from 'motion/react';
+
+function AnimatedComponent() {
+  const shouldReduceMotion = useReducedMotion();
+
+  if (shouldReduceMotion) {
+    return null; // or static version
+  }
+  return <AnimatedVersion />;
+}
+
+// For non-Motion components, use the existing hook
+import { usePrefersReducedMotion } from '@hooks/useMediaQuery';
+```
+
+Benefits of Motion's hook for animations:
+- Consistent with Motion library patterns
+- Better integration with Motion's animation system
+- See `src/components/christmas/SnowfallCanvas.tsx` for example
+
 #### Extract Custom Hooks for Reusable Logic
 
 When the same `useState` + `useRef` + `useEffect` pattern appears 2+ times, extract it into a custom hook:

@@ -3,7 +3,7 @@
 import { Badge } from '@components/ui/badge';
 import { Button } from '@components/ui/button';
 import { Routes } from '@constants/router';
-import { defaultCoverList } from '@constants/site-config';
+import { christmasConfig, defaultCoverList } from '@constants/site-config';
 import { buildCategoryPath, getCategoryArr, getPostDescriptionWithSummary } from '@lib/content';
 import { parseDate } from '@lib/datetime';
 import { getLqipProps } from '@lib/lqip';
@@ -54,7 +54,10 @@ const lqipProps = getLqipProps(finalCover);
 ---
 
 <div
-  class="hover:shadow-card-darker group text-card-foreground shadow-card relative flex gap-2 rounded-lg bg-white transition-shadow md:flex-col dark:bg-transparent"
+  class:list={[
+    'hover:shadow-card-darker group text-card-foreground shadow-card relative flex gap-2 rounded-lg bg-white transition-shadow md:flex-col dark:bg-transparent',
+    { 'z-5': christmasConfig.enabled && christmasConfig.features.snowfall },
+  ]}
 >
   {
     !hideCover && (

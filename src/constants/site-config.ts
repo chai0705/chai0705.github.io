@@ -1,3 +1,20 @@
+// 圣诞特效配置类型
+type ChristmasConfig = {
+  enabled: boolean;
+  features: {
+    snowfall: boolean;
+    christmasColorScheme: boolean;
+    christmasCoverDecoration: boolean;
+    christmasHat: boolean;
+    readingTimeSnow: boolean;
+  };
+  snowfall: {
+    speed: number;
+    intensity: number;
+    mobileIntensity: number;
+  };
+};
+
 type SiteConfig = {
   title: string; // 网站标题名称（banner 上）
   alternate?: string; // 网站英文短名
@@ -206,3 +223,20 @@ export const seoConfig = {
 };
 
 export const defaultCoverList = Array.from({ length: 13 }, (_, index) => index + 1).map((item) => `/img/cover/${item}.webp`);
+
+// 圣诞特效配置
+export const christmasConfig: ChristmasConfig = {
+  enabled: true,
+  features: {
+    snowfall: true,
+    christmasColorScheme: true,
+    christmasCoverDecoration: true,
+    christmasHat: true,
+    readingTimeSnow: true,
+  },
+  snowfall: {
+    speed: 1,
+    intensity: 0.6,
+    mobileIntensity: 0.4,
+  },
+};
