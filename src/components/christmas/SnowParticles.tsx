@@ -1,5 +1,5 @@
 import { useFrame, useThree } from '@react-three/fiber';
-import { useMemo, useRef } from 'react';
+import { useMemo, useRef, type MutableRefObject } from 'react';
 import * as THREE from 'three';
 
 /**
@@ -20,6 +20,9 @@ const SnowShaderMaterial = {
     uniform vec2 uResolution;
     uniform float uSpeed;
     uniform float uIntensity;
+    uniform vec2 uMouse;  // 鼠标视差偏移
+    uniform int uLayerStart;  // 渲染层范围起始
+    uniform int uLayerEnd;    // 渲染层范围结束
 
     varying vec2 vUv;
 
@@ -32,13 +35,18 @@ const SnowShaderMaterial = {
 
       float time = uTime * uSpeed;
 
-      // 6层雪花，每层12次迭代
+      // 6层雪花，每层12次迭代，根据 layerRange 过滤
       for(int k = 0; k < 6; k++) {
+        if(k < uLayerStart || k > uLayerEnd) continue;
         for(int i = 0; i < 12; i++) {
           float cellSize = 2.0 + (float(i) * 3.0);
           float downSpeed = 0.3 + (sin(time * 0.4 + float(k + i * 20)) + 1.0) * 0.00008;
 
-          vec2 uv = (fragCoord.xy / uResolution.x) + vec2(
+          // 视差偏移：不同层使用不同强度，近景层(k大)偏移更多
+          float parallaxFactor = 0.5 + float(k) * 0.1;
+          vec2 mouseOffset = uMouse * parallaxFactor;
+
+          vec2 uv = (fragCoord.xy / uResolution.x) + mouseOffset + vec2(
             0.01 * sin((time + float(k * 6185)) * 0.6 + float(i)) * (5.0 / float(i)),
             downSpeed * (time + float(k * 1352)) * (1.0 / float(i))
           );
@@ -72,9 +80,13 @@ const SnowShaderMaterial = {
 interface SnowParticlesProps {
   speed?: number;
   intensity?: number;
+  /** 视差位置 ref，由父组件通过 Motion spring 更新 */
+  parallaxRef?: MutableRefObject<{ x: number; y: number }>;
+  /** 渲染的层范围 [start, end]，默认 [0, 5] 全部渲染 */
+  layerRange?: [number, number];
 }
 
-export function SnowParticles({ speed = 1, intensity = 0.6 }: SnowParticlesProps) {
+export function SnowParticles({ speed = 1, intensity = 0.6, parallaxRef, layerRange = [0, 5] }: SnowParticlesProps) {
   const shaderMaterial = useRef<THREE.ShaderMaterial>(null);
   const { size } = useThree();
 
@@ -84,15 +96,23 @@ export function SnowParticles({ speed = 1, intensity = 0.6 }: SnowParticlesProps
       uResolution: { value: new THREE.Vector2(size.width, size.height) },
       uSpeed: { value: speed },
       uIntensity: { value: intensity },
+      uMouse: { value: new THREE.Vector2(0, 0) },
+      uLayerStart: { value: layerRange[0] },
+      uLayerEnd: { value: layerRange[1] },
     }),
-    [size.width, size.height, speed, intensity],
+    [size.width, size.height, speed, intensity, layerRange],
   );
 
-  // 更新时间和分辨率
+  // 更新时间、分辨率和鼠标视差
   useFrame((state) => {
     if (shaderMaterial.current) {
       shaderMaterial.current.uniforms.uTime.value = state.clock.getElapsedTime();
       shaderMaterial.current.uniforms.uResolution.value.set(size.width, size.height);
+
+      // 更新鼠标视差
+      if (parallaxRef) {
+        shaderMaterial.current.uniforms.uMouse.value.set(parallaxRef.current.x, parallaxRef.current.y);
+      }
     }
   });
 
