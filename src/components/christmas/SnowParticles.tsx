@@ -96,14 +96,14 @@ export function SnowParticles({ speed = 1, intensity = 0.6, parallaxRef, layerRa
   const uniforms = useMemo(
     () => ({
       uTime: { value: 0 },
-      uResolution: { value: new THREE.Vector2(size.width, size.height) },
+      uResolution: { value: new THREE.Vector2(1, 1) }, // 初始值，useFrame 首帧更新
       uSpeed: { value: speed },
       uIntensity: { value: intensity },
       uMouse: { value: new THREE.Vector2(0, 0) },
       uLayerStart: { value: layerStart },
       uLayerEnd: { value: layerEnd },
     }),
-    [size.width, size.height, speed, intensity, layerStart, layerEnd],
+    [speed, intensity, layerStart, layerEnd],
   );
 
   // 更新时间、分辨率和鼠标视差
