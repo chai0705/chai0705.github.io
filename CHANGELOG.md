@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 ---
+## [1.3.0](https://github.com/cosZone/astro-koharu/compare/v1.2.0..v1.3.0) - 2025-12-24
+
+### Bug Fixes
+
+- add lazy loading and decoding attributes for images inside links - ([98ddcbc](https://github.com/cosZone/astro-koharu/commit/98ddcbccb20c5804c0044253cefb42235740a6a0)) - yusixian
+- update link preview sanitization to use originUrl for accurate URL representation - ([8c2db02](https://github.com/cosZone/astro-koharu/commit/8c2db024d67abf547f6a038d1f139d60730f91bd)) - yusixian
+- font resource split - ([e07dbda](https://github.com/cosZone/astro-koharu/commit/e07dbdace920e230992fff63081df201317fdebf)) - yusixian
+- apply LQIP style directly to image in CategoryCards - ([c2f5e8d](https://github.com/cosZone/astro-koharu/commit/c2f5e8ddf37233a3021037c9aae332fb82351387)) - yusixian
+- mermaid navigation fix for client-side navigation - ([fc9b0d7](https://github.com/cosZone/astro-koharu/commit/fc9b0d77d4c86ccdfbb81065e7df8d6f6b4c6d6a)) - yusixian
+
+### Features
+
+- add Christmas lights and ornament toggle components for festive decoration - ([fea95df](https://github.com/cosZone/astro-koharu/commit/fea95df1af9f2e19d6497ac8f85b1f5834b8224a)) - yusixian
+- enhance snowfall effects with layered rendering and parallax support - ([6218b98](https://github.com/cosZone/astro-koharu/commit/6218b98c8e903d47320e9951d7fa3df607802751)) - yusixian
+- add Christmas effects including snowfall, hat, and color scheme customization - ([d355d5a](https://github.com/cosZone/astro-koharu/commit/d355d5a64c9d4b07a3f400bd78ed02bd2ef0a125)) - yusixian
+- implement lightbox functionality with zoom and portrait image grouping - ([db8179f](https://github.com/cosZone/astro-koharu/commit/db8179f7210020d1650fafc043169d890f1771e0)) - yusixian
+- enhance image handling with lazy loading, error placeholders - ([51d2a13](https://github.com/cosZone/astro-koharu/commit/51d2a13b8a56f9d372a0deb1ab0b056f8b3b6963)) - yusixian
+- enhance Mermaid diagram handling - ([57a7611](https://github.com/cosZone/astro-koharu/commit/57a76112b504a125fb577026db095018bf679497)) - yusixian
+- integrate Mermaid support for enhanced diagram rendering and interaction - ([55e7501](https://github.com/cosZone/astro-koharu/commit/55e75018113d5e87dd15c3de9a006fe821a585b7)) - yusixian
+
+---
 ## [1.2.0](https://github.com/cosZone/astro-koharu/compare/v1.1.0..v1.2.0) - 2025-12-20
 
 ### Documentation

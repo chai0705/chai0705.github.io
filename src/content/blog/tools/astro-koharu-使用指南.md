@@ -38,6 +38,7 @@ astro-koharu 是一个基于 Astro 5.x 构建的现代化博客系统，从 Hexo
 - 友链系统与归档页面
 - RSS 订阅支持
 - LQIP（低质量图片占位符）
+- 圣诞特辑（可开关）
 
 ### 本地开发
 
@@ -747,6 +748,58 @@ const PROMPT_TEMPLATE = (title: string, content: string) =>
 2. **选择性生成摘要**：为了节省时间，脚本会跳过已有 `description` 的文章
 
 3. **提交到版本控制**：将生成的 JSON 文件提交到 git，避免在 CI/CD 环境重复生成
+
+### 圣诞特辑
+
+节日限定的圣诞氛围特效系统，包含多种可独立开关的视觉效果，为博客增添节日气氛。
+
+**特性：**
+
+- 雪花飘落 —— Canvas 实现的雪花动画，分前景和背景两层，支持视差效果
+- 圣诞配色 —— 红绿金主题色替换默认粉蓝配色，支持深色/浅色模式
+- 圣诞帽装饰 —— 侧边栏头像上的圣诞帽
+- 圣诞灯串 —— Header 顶部的装饰灯串动画
+- 圣诞饰品切换 —— 导航栏的装饰饰品
+- 运行时开关 —— 右下角浮动按钮可随时切换特效，设置自动保存
+
+**配置方式：**
+
+编辑 `src/constants/site-config.ts` 中的 `christmasConfig`：
+
+```typescript
+export const christmasConfig: ChristmasConfig = {
+  enabled: true,           // 总开关
+  features: {
+    snowfall: true,        // 雪花飘落
+    christmasColorScheme: true,  // 圣诞配色
+    christmasCoverDecoration: true,  // 灯串装饰
+    christmasHat: true,    // 圣诞帽
+    readingTimeSnow: true, // 阅读时间旁的雪花图标
+  },
+  snowfall: {
+    speed: 1,              // 飘落速度（默认 1）
+    intensity: 0.6,        // 桌面端雪花密度（0-1）
+    mobileIntensity: 0.4,  // 移动端雪花密度（0-1）
+  },
+};
+```
+
+**用户控制：**
+
+- 页面右下角悬浮按钮（雪花图标）可切换圣诞特效开关
+- 用户偏好自动保存到 localStorage，跨会话保持
+- 支持 `prefers-reduced-motion` 偏好，自动禁用动画
+
+**技术实现：**
+
+- 雪花使用 Canvas 2D 渲染，分层实现视差效果
+- 配色通过 CSS 变量覆盖，零运行时开销
+- 状态管理使用 nanostores，支持跨组件同步
+- 完全响应式，移动端自动降低雪花密度
+
+**关闭圣诞特效：**
+
+设置 `christmasConfig.enabled = false` 即可完全关闭所有圣诞特效。
 
 ### Markdown 增强
 
