@@ -1,4 +1,7 @@
 ---
+import { cn } from '@/lib/utils';
+import { christmasEnabled } from '@/store/christmas';
+
 declare global {
   interface Window {
     remark_config: {
@@ -38,7 +41,7 @@ export interface Props {
 }
 ---
 
-<div class="comments" class="w-full pb-12">
+<div class={cn('comments', { 'z-5': christmasEnabled.get() })} class="w-full pb-12">
   <p class="text-muted-foreground text-center text-sm">先使用 Remark42 作为临时评论系统，样式等有待优化</p>
   <div id="remark42" class="mx-auto"></div>
 </div>

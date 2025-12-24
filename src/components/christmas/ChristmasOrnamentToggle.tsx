@@ -195,7 +195,7 @@ export function ChristmasOrnamentToggle() {
       {/* 球体 - 位置跟随绳子底部 */}
       <motion.button
         className={cn(
-          'absolute z-101 cursor-grab touch-none select-none active:cursor-grabbing',
+          'absolute cursor-grab touch-none select-none active:cursor-grabbing',
           'rounded-full outline-none focus-visible:ring-4 focus-visible:ring-yellow-400/50',
         )}
         style={{

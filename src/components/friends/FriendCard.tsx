@@ -1,3 +1,5 @@
+import { cn } from '@/lib/utils';
+import { christmasEnabled } from '@/store/christmas';
 import { microDampingPreset } from '@constants/anim/spring';
 import type { FriendLink } from '@constants/friends-config';
 import { motion, useMotionTemplate, useMotionValue, useSpring, useTransform } from 'motion/react';
@@ -74,7 +76,10 @@ export default function FriendCard({ friend, index }: FriendCardProps) {
       href={friend.url}
       target="_blank"
       ref={cardRef}
-      className="friend-card ease-easeOut group relative block h-[200px] w-full cursor-pointer transition-transform duration-300 select-none"
+      className={cn(
+        'friend-card ease-easeOut group relative block h-[200px] w-full cursor-pointer transition-transform duration-300 select-none',
+        { 'z-5': christmasEnabled.get() },
+      )}
       style={{ perspective: '1000px' }}
       transition={{
         duration: 0.5,

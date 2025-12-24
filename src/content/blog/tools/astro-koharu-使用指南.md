@@ -774,7 +774,6 @@ export const christmasConfig: ChristmasConfig = {
     christmasColorScheme: true,  // 圣诞配色
     christmasCoverDecoration: true,  // 灯串装饰
     christmasHat: true,    // 圣诞帽
-    readingTimeSnow: true, // 阅读时间旁的雪花图标
   },
   snowfall: {
     speed: 1,              // 飘落速度（默认 1）
