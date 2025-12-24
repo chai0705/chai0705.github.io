@@ -88,7 +88,10 @@ interface SnowParticlesProps {
 
 export function SnowParticles({ speed = 1, intensity = 0.6, parallaxRef, layerRange = [0, 5] }: SnowParticlesProps) {
   const shaderMaterial = useRef<THREE.ShaderMaterial>(null);
+  const prevSize = useRef({ width: 0, height: 0 });
   const { size } = useThree();
+
+  const [layerStart, layerEnd] = layerRange;
 
   const uniforms = useMemo(
     () => ({
@@ -97,17 +100,22 @@ export function SnowParticles({ speed = 1, intensity = 0.6, parallaxRef, layerRa
       uSpeed: { value: speed },
       uIntensity: { value: intensity },
       uMouse: { value: new THREE.Vector2(0, 0) },
-      uLayerStart: { value: layerRange[0] },
-      uLayerEnd: { value: layerRange[1] },
+      uLayerStart: { value: layerStart },
+      uLayerEnd: { value: layerEnd },
     }),
-    [size.width, size.height, speed, intensity, layerRange],
+    [size.width, size.height, speed, intensity, layerStart, layerEnd],
   );
 
   // 更新时间、分辨率和鼠标视差
   useFrame((state) => {
     if (shaderMaterial.current) {
       shaderMaterial.current.uniforms.uTime.value = state.clock.getElapsedTime();
-      shaderMaterial.current.uniforms.uResolution.value.set(size.width, size.height);
+
+      // 仅在尺寸变化时更新分辨率，避免每帧重复设置
+      if (prevSize.current.width !== size.width || prevSize.current.height !== size.height) {
+        shaderMaterial.current.uniforms.uResolution.value.set(size.width, size.height);
+        prevSize.current = { width: size.width, height: size.height };
+      }
 
       // 更新鼠标视差
       if (parallaxRef) {

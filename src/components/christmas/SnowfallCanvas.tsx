@@ -64,7 +64,8 @@ export function SnowfallCanvas({
       window.removeEventListener('mousemove', handleMouseMove);
       document.removeEventListener('mouseleave', handleMouseLeave);
     };
-  }, [isMobile, shouldReduceMotion, mouseX, mouseY]);
+    // mouseX/mouseY are stable refs from useMotionValue, no need in deps
+  }, [isMobile, shouldReduceMotion]);
 
   const finalIntensity = isMobile ? mobileIntensity : intensity;
   const finalParallaxStrength = isMobile ? 0 : parallaxStrength;

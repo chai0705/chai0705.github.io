@@ -184,9 +184,23 @@ const isPostPage = Astro.url.pathname.startsWith('/post/');
         return document.querySelectorAll('pre.mermaid:not([data-processed])').length > 0;
       }
 
-      function getCurrentTheme() {
+      function getCurrentTheme(): 'default' | 'dark' | 'forest' | 'neutral' | 'base' | 'null' | undefined {
         const dataTheme = document.documentElement.getAttribute('data-theme') || document.body?.getAttribute('data-theme');
-        return themeMap[dataTheme || ''] || 'default';
+        // Explicitly restrict mapping to supported values
+        switch (dataTheme) {
+          case 'default':
+          case 'dark':
+          case 'forest':
+          case 'neutral':
+          case 'base':
+          case 'null':
+            return dataTheme;
+          case 'light':
+            // Map any explicit "light" to "default"
+            return 'default';
+          default:
+            return 'default';
+        }
       }
 
       async function initMermaidDiagrams() {
