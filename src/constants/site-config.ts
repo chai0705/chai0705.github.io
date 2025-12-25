@@ -12,6 +12,14 @@ type ChristmasConfig = {
     speed: number;
     intensity: number;
     mobileIntensity: number;
+    /** 桌面端最大层数，默认 4 */
+    maxLayers: number;
+    /** 桌面端每层最大迭代次数，默认 6 */
+    maxIterations: number;
+    /** 移动端最大层数，默认 2 */
+    mobileMaxLayers: number;
+    /** 移动端每层最大迭代次数，默认 3 */
+    mobileMaxIterations: number;
   };
 };
 
@@ -235,8 +243,13 @@ export const christmasConfig: ChristmasConfig = {
     readingTimeSnow: true,
   },
   snowfall: {
-    speed: 1,
-    intensity: 0.6,
+    speed: 0.5,
+    intensity: 0.7,
     mobileIntensity: 0.4,
+    // 密度配置：层数 × 迭代次数 = 总迭代次数（原始值为 6×12=72）
+    maxLayers: 6,
+    maxIterations: 8,
+    mobileMaxLayers: 4,
+    mobileMaxIterations: 6,
   },
 };

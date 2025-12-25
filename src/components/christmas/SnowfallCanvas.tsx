@@ -1,8 +1,9 @@
 import { useIsMobile } from '@hooks/useMediaQuery';
 import { useStore } from '@nanostores/react';
 import { Canvas } from '@react-three/fiber';
+import { throttle } from 'es-toolkit';
 import { useMotionValue, useReducedMotion, useSpring, type MotionValue } from 'motion/react';
-import { useEffect, useRef } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { christmasEnabled } from '@store/christmas';
 import { SnowParticles } from './SnowParticles';
 
@@ -14,8 +15,16 @@ interface SnowfallCanvasProps {
   parallaxStrength?: number;
   /** z-index，默认 50 */
   zIndex?: number;
-  /** 渲染的层范围 [start, end]，默认 [0, 5] 全部渲染 */
-  layerRange?: [number, number];
+  /** 层位置：'background' 渲染前半层，'foreground' 渲染后半层，会自动根据 maxLayers 计算 layerRange */
+  layerPosition?: 'background' | 'foreground';
+  /** 桌面端最大层数 */
+  maxLayers?: number;
+  /** 桌面端每层最大迭代次数 */
+  maxIterations?: number;
+  /** 移动端最大层数 */
+  mobileMaxLayers?: number;
+  /** 移动端每层最大迭代次数 */
+  mobileMaxIterations?: number;
 }
 
 export function SnowfallCanvas({
@@ -24,11 +33,25 @@ export function SnowfallCanvas({
   mobileIntensity = 0.4,
   parallaxStrength = 0.15,
   zIndex = 50,
-  layerRange = [0, 5],
+  layerPosition = 'foreground',
+  maxLayers: desktopMaxLayers = 4,
+  maxIterations: desktopMaxIterations = 6,
+  mobileMaxLayers = 2,
+  mobileMaxIterations = 3,
 }: SnowfallCanvasProps) {
   const isChristmasEnabled = useStore(christmasEnabled);
   const shouldReduceMotion = useReducedMotion();
   const isMobile = useIsMobile();
+
+  // Tab visibility detection - pause rendering when tab is not visible
+  const [isVisible, setIsVisible] = useState(true);
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      setIsVisible(document.visibilityState === 'visible');
+    };
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
+  }, []);
 
   // 鼠标位置 motion values (标准化到 -0.5 ~ 0.5)
   const mouseX = useMotionValue(0);
@@ -38,18 +61,22 @@ export function SnowfallCanvas({
   const smoothMouseX = useSpring(mouseX, { stiffness: 50, damping: 20 });
   const smoothMouseY = useSpring(mouseY, { stiffness: 50, damping: 20 });
 
+  // Throttled mouse move handler (~30fps)
+  const throttledMouseMove = useMemo(
+    () =>
+      throttle((e: MouseEvent) => {
+        const x = e.clientX / window.innerWidth - 0.5;
+        const y = e.clientY / window.innerHeight - 0.5;
+        mouseX.set(x);
+        mouseY.set(y);
+      }, 32),
+    [mouseX, mouseY],
+  );
+
   // 鼠标追踪 - 仅在桌面端启用
   useEffect(() => {
     // 移动端或减少动画时不需要鼠标视差
     if (isMobile || shouldReduceMotion) return;
-
-    const handleMouseMove = (e: MouseEvent) => {
-      // 标准化到 -0.5 ~ 0.5 范围
-      const x = e.clientX / window.innerWidth - 0.5;
-      const y = e.clientY / window.innerHeight - 0.5;
-      mouseX.set(x);
-      mouseY.set(y);
-    };
 
     const handleMouseLeave = () => {
       // 鼠标离开窗口时缓慢回到中心
@@ -57,21 +84,30 @@ export function SnowfallCanvas({
       mouseY.set(0);
     };
 
-    window.addEventListener('mousemove', handleMouseMove, { passive: true });
+    window.addEventListener('mousemove', throttledMouseMove, { passive: true });
     document.addEventListener('mouseleave', handleMouseLeave);
 
     return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mousemove', throttledMouseMove);
       document.removeEventListener('mouseleave', handleMouseLeave);
     };
     // mouseX/mouseY are stable refs from useMotionValue, no need in deps
-  }, [isMobile, shouldReduceMotion]);
+  }, [isMobile, shouldReduceMotion, throttledMouseMove]);
 
   const finalIntensity = isMobile ? mobileIntensity : intensity;
   const finalParallaxStrength = isMobile ? 0 : parallaxStrength;
 
-  // 如果用户偏好减少动画或圣诞特效被关闭，不渲染雪花
-  if (shouldReduceMotion || !isChristmasEnabled) {
+  // 性能优化：根据设备类型调整迭代次数（可在 site-config.ts 中配置）
+  const maxLayers = isMobile ? mobileMaxLayers : desktopMaxLayers;
+  const maxIterations = isMobile ? mobileMaxIterations : desktopMaxIterations;
+
+  // 根据 layerPosition 和 maxLayers 自动计算 layerRange
+  // 背景层渲染前半部分，前景层渲染后半部分
+  const halfLayers = Math.floor(maxLayers / 2);
+  const layerRange: [number, number] = layerPosition === 'background' ? [0, halfLayers - 1] : [halfLayers, maxLayers - 1];
+
+  // 如果用户偏好减少动画、圣诞特效被关闭、或标签页不可见，不渲染雪花
+  if (shouldReduceMotion || !isChristmasEnabled || !isVisible) {
     return null;
   }
 
@@ -96,7 +132,8 @@ export function SnowfallCanvas({
           alpha: true,
           powerPreference: 'low-power',
         }}
-        dpr={[1, 1.5]}
+        // 性能优化：移动端用稍高 DPR 避免模糊，桌面端用低 DPR
+        dpr={isMobile ? 1 : 0.7}
         style={{
           background: 'transparent',
           pointerEvents: 'none',
@@ -111,6 +148,8 @@ export function SnowfallCanvas({
           smoothMouseY={smoothMouseY}
           parallaxStrength={finalParallaxStrength}
           layerRange={layerRange}
+          maxLayers={maxLayers}
+          maxIterations={maxIterations}
         />
       </Canvas>
     </div>
@@ -125,6 +164,8 @@ function SnowParticlesWithParallax({
   smoothMouseY,
   parallaxStrength,
   layerRange,
+  maxLayers,
+  maxIterations,
 }: {
   speed: number;
   intensity: number;
@@ -132,6 +173,8 @@ function SnowParticlesWithParallax({
   smoothMouseY: MotionValue<number>;
   parallaxStrength: number;
   layerRange: [number, number];
+  maxLayers: number;
+  maxIterations: number;
 }) {
   const parallaxRef = useRef({ x: 0, y: 0 });
 
@@ -149,5 +192,14 @@ function SnowParticlesWithParallax({
     };
   }, [smoothMouseX, smoothMouseY, parallaxStrength]);
 
-  return <SnowParticles speed={speed} intensity={intensity} parallaxRef={parallaxRef} layerRange={layerRange} />;
+  return (
+    <SnowParticles
+      speed={speed}
+      intensity={intensity}
+      parallaxRef={parallaxRef}
+      layerRange={layerRange}
+      maxLayers={maxLayers}
+      maxIterations={maxIterations}
+    />
+  );
 }
