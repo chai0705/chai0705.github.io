@@ -244,12 +244,12 @@ export const christmasConfig: ChristmasConfig = {
   },
   snowfall: {
     speed: 0.5,
-    intensity: 0.6,
+    intensity: 0.7,
     mobileIntensity: 0.4,
     // 密度配置：层数 × 迭代次数 = 总迭代次数（原始值为 6×12=72）
-    maxLayers: 4,
-    maxIterations: 6,
-    mobileMaxLayers: 2,
-    mobileMaxIterations: 3,
+    maxLayers: 6,
+    maxIterations: 8,
+    mobileMaxLayers: 4,
+    mobileMaxIterations: 6,
   },
 };
