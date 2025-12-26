@@ -3,7 +3,7 @@
 import { Badge } from '@components/ui/badge';
 import { Button } from '@components/ui/button';
 import { Routes } from '@constants/router';
-import { christmasConfig, defaultCoverList } from '@constants/site-config';
+import { defaultCoverList } from '@constants/site-config';
 import { buildCategoryPath, getCategoryArr, getPostDescriptionWithSummary } from '@lib/content';
 import { parseDate } from '@lib/datetime';
 import { getLqipProps } from '@lib/lqip';
@@ -56,7 +56,7 @@ const lqipProps = getLqipProps(finalCover);
 <div
   class={cn(
     'hover:shadow-card-darker group text-card-foreground shadow-card relative flex gap-2 rounded-lg bg-white transition-shadow md:flex-col dark:bg-transparent',
-    { 'relative z-5 dark:bg-[#1a1512]': christmasConfig.enabled && christmasConfig.features.snowfall },
+    'post-item-card',
   )}
 >
   {
@@ -194,3 +194,15 @@ const lqipProps = getLqipProps(finalCover);
     </a>
   </div>
 </div>
+
+<style>
+  /* 圣诞特效开启时的卡片样式 */
+  :global(html.christmas) .post-item-card {
+    position: relative;
+    z-index: 5;
+  }
+
+  :global(html.christmas.dark) .post-item-card {
+    background-color: #1a1512;
+  }
+</style>

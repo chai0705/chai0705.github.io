@@ -56,7 +56,7 @@ import { christmasConfig } from '@constants/site-config';
 </div>
 
 <script>
-  import { christmasEnabled, initChristmasState, toggleChristmas } from '@store/christmas';
+  import { christmasEnabled, disableChristmasCompletely, enableChristmas, initChristmasState } from '@store/christmas';
   import { drawerOpen } from '@store/ui';
 
   function initFloatingNav() {
@@ -98,8 +98,13 @@ import { christmasConfig } from '@constants/site-config';
     });
 
     // 圣诞开关点击事件
+    // 浮动按钮使用"彻底关闭"模式：关闭时同时隐藏装饰球
     const handleToggleChristmas = () => {
-      toggleChristmas();
+      if (christmasEnabled.get()) {
+        disableChristmasCompletely();
+      } else {
+        enableChristmas();
+      }
     };
 
     toggleChristmasBtn?.addEventListener('click', handleToggleChristmas);
@@ -160,18 +165,28 @@ import { christmasConfig } from '@constants/site-config';
     };
   }
 
-  // 初始化时执行
-  let cleanup = initFloatingNav();
+  // 清理函数引用
+  let cleanup: (() => void) | null = null;
 
-  // 在每次页面加载时重新初始化
-  document.addEventListener('astro:page-load', () => {
+  function init() {
     if (cleanup) cleanup();
     cleanup = initFloatingNav();
-  });
+  }
+
+  // 初始化：检查 DOM 是否已加载
+  if (document.readyState !== 'loading') {
+    init();
+  }
+
+  // 在每次页面加载时重新初始化（Astro 页面导航）
+  document.addEventListener('astro:page-load', init);
 
   // 在页面切换前清理（防止内存泄漏）
   document.addEventListener('astro:before-swap', () => {
-    if (cleanup) cleanup();
+    if (cleanup) {
+      cleanup();
+      cleanup = null;
+    }
   });
 </script>
 

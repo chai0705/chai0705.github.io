@@ -16,7 +16,7 @@ import MobileDrawer from '@components/layout/MobileDrawer.astro';
 import SearchDialog from '@components/layout/SearchDialog.astro';
 import CodeBlockFullscreen from '@components/markdown/CodeBlockFullscreen.astro';
 import MermaidFullscreen from '@components/markdown/MermaidFullscreen.astro';
-import { christmasConfig, seoConfig, siteConfig } from '@constants/site-config';
+import { seoConfig, siteConfig } from '@constants/site-config';
 import LoadingIndicator from 'astro-loading-indicator/component';
 import { Tooltips } from 'astro-tooltips';
 import { ClientRouter } from 'astro:transitions';
@@ -31,11 +31,7 @@ const isPostPage = Astro.url.pathname.startsWith('/post/');
 ---
 
 <!doctype html>
-<html
-  transition:name="root"
-  lang="zh-CN"
-  class:list={['vertical-scrollbar', { christmas: christmasConfig.enabled && christmasConfig.features.christmasColorScheme }]}
->
+<html transition:name="root" lang="zh-CN" class="vertical-scrollbar">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
@@ -89,6 +85,12 @@ const isPostPage = Astro.url.pathname.startsWith('/post/');
         document.documentElement.classList.add('light');
         document.documentElement.dataset.theme = 'light';
       }
+      // 立即执行圣诞状态检查 否则彩灯等会闪烁
+      (function () {
+        var stored = localStorage.getItem('christmas-enabled');
+        var enabled = stored !== 'false'; // 默认启用
+        document.documentElement.classList.toggle('christmas', enabled);
+      })();
     </script>
     <script>
       function checkTheme() {
