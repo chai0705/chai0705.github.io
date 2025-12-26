@@ -85,7 +85,7 @@ export function MobileTOCDropdown({
                 transition={animation.spring.popoverContent}
                 {...getFloatingProps()}
               >
-                <nav className={enableNumbering ? '' : 'toc-no-numbering'} aria-label="文章目录">
+                <nav className={`toc-container${enableNumbering ? '' : 'toc-no-numbering'}`} aria-label="文章目录">
                   <div className="space-y-1">
                     <HeadingList
                       headings={headings}
