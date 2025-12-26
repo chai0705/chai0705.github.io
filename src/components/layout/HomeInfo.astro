@@ -33,6 +33,7 @@ const { className } = Astro.props;
 <div class={cn('flex flex-col items-center', className)} data-home-info-container={uniqueId}>
   <div class="relative h-40 w-40 rounded-full" style={getLqipStyle(siteConfig.avatar ?? '/img/avatar.webp')}>
     <img
+      transition:persist="page-home-info-avatar"
       class="shadow-card-darker hover:animate-shake h-full w-full rounded-full transition"
       src={siteConfig.avatar ?? '/img/avatar.webp'}
       alt={`${siteConfig.name ?? ''} avatar`}

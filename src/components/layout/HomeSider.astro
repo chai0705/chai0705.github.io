@@ -33,7 +33,7 @@ const { prevPost, nextPost } =
     'page-home-sider shadow-home-sider sticky top-0 self-start flex min-w-64 max-w-64 flex-col tablet:hidden overflow-auto h-screen items-center px-2',
     className,
   )}
-  {...!isDrawer && { 'transition:name': 'page-home-sider' }}
+  transition:name={isDrawer ? 'page-home-sider-drawer' : 'page-home-sider'}
 >
   {
     type === HomeSiderType.POST && (

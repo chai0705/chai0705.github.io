@@ -25,11 +25,11 @@
   ::file-selector-button {
     border-color: var(--color-gray-200, currentColor);
   }
+
   button {
     @apply cursor-pointer;
   }
-}
-@layer base {
+
   body {
     overscroll-behavior-y: none;
     background: linear-gradient(to top, var(--gradient-bg-end) 0, var(--gradient-bg-start) 30%) no-repeat bottom;
