@@ -1,8 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
-import { parseDate } from '@lib/datetime';
 import { CONTENT_PADDING } from '@constants/layout';
+import { formatInTimeZone } from 'date-fns-tz';
 import { siteConfig } from '@constants/site-config';
 import TwoColumnLayout from '@layouts/TwoColumnLayout.astro';
 import Cover from '@components/ui/cover/Cover.astro';
@@ -52,7 +52,9 @@ const years = Object.keys(postsByYear).sort((a, b) => Number(b) - Number(a));
               <div class="mt-2">
                 {postsByYear[Number(year)].map((post) => (
                   <p class="shoka-decoration-circle group text-primary hover:text-blue relative px-6 py-2 text-base/9 md:flex md:flex-col md:items-stretch md:text-sm/9">
-                    <span class="text-muted-foreground mr-2 text-xs">{parseDate(post.data.date, 'YYYY-MM-DD')}</span>
+                    <span class="text-muted-foreground mr-2 text-xs">
+                      {formatInTimeZone(post.data.date, 'UTC', 'yyyy-MM-dd')}
+                    </span>
                     <a
                       href={`/post/${post.data?.link ?? post.slug}`}
                       class="dashed-border text-primary hover:text-blue truncate transition-colors"

@@ -6,7 +6,7 @@ import { siteConfig } from '@constants/site-config';
 import Layout from '@layouts/Layout.astro';
 import TwoColumnLayout from '@layouts/TwoColumnLayout.astro';
 import { getPostLastCategory, getSortedPosts } from '@lib/content';
-import { parseDate } from '@lib/datetime';
+import { formatInTimeZone } from 'date-fns-tz';
 
 export async function getStaticPaths() {
   const posts = await getSortedPosts();
@@ -51,7 +51,7 @@ const { tag, posts } = Astro.props;
               return (
                 <p class="shoka-decoration-circle group text-primary relative px-6 py-2 text-base/9 md:overflow-visible">
                   <span class="text-muted-foreground inline-block w-15 text-xs md:relative md:-top-1">
-                    {parseDate(post?.data?.date, 'YY-MM-DD')}
+                    {formatInTimeZone(post.data.date, 'UTC', 'yy-MM-dd')}
                   </span>
                   <a
                     href={Astro.url.origin + link}

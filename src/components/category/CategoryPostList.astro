@@ -1,9 +1,9 @@
 ---
 import { CONTENT_PADDING } from '@constants/layout';
 import { getPostsByCategory, type Category } from '@lib/content';
-import SubCategory from './SubCategory.astro';
 import { cn } from '@lib/utils';
-import { parseDate } from '@lib/datetime';
+import { formatInTimeZone } from 'date-fns-tz';
+import SubCategory from './SubCategory.astro';
 
 interface Props {
   categories: Category[];
@@ -46,7 +46,7 @@ const posts = await getPostsByCategory(rootCategory?.name ?? '');
         <div class="category-second-level-container flex flex-col">
           {posts.map((post) => (
             <p class="shoka-decoration-circle group text-primary hover:text-blue relative px-6 py-2 text-base/9">
-              <span class="text-muted-foreground mr-2 text-xs">{parseDate(post?.data?.date, 'YY-MM-DD')}</span>
+              <span class="text-muted-foreground mr-2 text-xs">{formatInTimeZone(post.data.date, 'UTC', 'yy-MM-dd')}</span>
               <a href={'/post/' + post?.data?.link} class="dashed-border">
                 {post?.data?.title}
               </a>

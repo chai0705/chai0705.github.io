@@ -5,11 +5,11 @@ import { Button } from '@components/ui/button';
 import { Routes } from '@constants/router';
 import { defaultCoverList } from '@constants/site-config';
 import { buildCategoryPath, getCategoryArr, getPostDescriptionWithSummary } from '@lib/content';
-import { parseDate } from '@lib/datetime';
 import { getLqipProps } from '@lib/lqip';
 import { routeBuilder } from '@lib/route';
 import { cn } from '@lib/utils';
 import { Icon } from 'astro-icon/components';
+import { formatInTimeZone } from 'date-fns-tz';
 import readingTime from 'reading-time';
 import type { BlogPost } from 'types/blog';
 
@@ -103,7 +103,7 @@ const lqipProps = getLqipProps(finalCover);
           date ? (
             <p class="flex-center gap-1">
               <Icon name="fa6-solid:calendar-days" />
-              {parseDate(date, 'YYYY-MM-DD')}
+              {formatInTimeZone(date, 'UTC', 'yyyy-MM-dd')}
             </p>
           ) : null
         }
