@@ -1,9 +1,9 @@
 ---
-import { getRandomPosts, getSortedPosts } from '@lib/content';
+import { getPostLastCategory, getSortedPosts } from '@lib/content';
 import { getRelatedPosts, hasSimilarityData } from '@lib/content/similarities';
 import type { BlogPost } from 'types/blog';
-import RandomPostList from './RandomPostList.astro';
-import RelatedPostList from './RelatedPostList.astro';
+import RandomPostList from './RandomPostList';
+import RelatedPostList from './RelatedPostList';
 
 interface Props {
   post?: BlogPost;
@@ -11,19 +11,32 @@ interface Props {
 
 const { post } = Astro.props;
 
+// Helper to convert BlogPost to serializable format
+const toPostItem = (p: BlogPost) => ({
+  slug: p.slug,
+  link: p.data.link,
+  title: p.data.title,
+  categoryName: getPostLastCategory(p).name,
+});
+
 // Check if similarity data is available
 const hasData = hasSimilarityData();
 
-// Get all posts for mapping related posts (only if we have similarity data)
-const allPosts = hasData ? await getSortedPosts() : [];
+// Get all posts
+const allPosts = await getSortedPosts();
 
-// Get random posts (always needed for left column)
-const randomPosts = await getRandomPosts(10);
+// Prepare posts for random selection (client-side)
+// Pass a larger pool so client can randomly pick from it
+const randomPostsPool = allPosts.slice(0, 20).map(toPostItem);
+
 // Get related posts if current post is provided and similarity data exists
-const relatedPosts = hasData && post ? getRelatedPosts(post, allPosts, 5) : [];
+const relatedPosts = hasData && post ? getRelatedPosts(post, allPosts, 5).map(toPostItem) : [];
+
+// Fallback posts pool for related section (client will randomly pick from this)
+const fallbackPostsPool = allPosts.slice(20, 40).map(toPostItem);
 ---
 
 <div class="tablet:grid-cols-1 grid grid-cols-2 gap-4 px-10 md:px-6">
-  <RandomPostList posts={randomPosts.slice(0, 5)} />
-  {hasData && <RelatedPostList posts={relatedPosts} fallbackPosts={randomPosts.slice(5)} />}
+  <RandomPostList client:load posts={randomPostsPool} count={5} />
+  {hasData && <RelatedPostList client:load posts={relatedPosts} fallbackPosts={fallbackPostsPool} fallbackCount={5} />}
 </div>
