@@ -1,5 +1,6 @@
 ---
 import HomeSider from '@components/layout/HomeSider.astro';
+import { CollapsibleTags } from '@components/tag/CollapsibleTags';
 import { TagItem } from '@components/tag/TagItem';
 import Cover from '@components/ui/cover/Cover.astro';
 import { CONTENT_PADDING } from '@constants/layout';
@@ -31,80 +32,7 @@ const singleTags = sortedTags.filter(({ count }) => count === 1);
       <div class="flex flex-wrap gap-3 px-4 md:px-0">
         {mainTags.map((props) => <TagItem {...props} />)}
       </div>
-      {
-        singleTags.length > 0 && (
-          <>
-            <button
-              id="toggle-single-tags"
-              class="text-muted-foreground hover:text-blue mx-4 mt-4 flex cursor-pointer items-center gap-1 text-sm transition-colors md:mx-0"
-            >
-              <span id="toggle-text">展开全部</span>
-              <span class="rounded-full bg-white/10 px-1.5 text-xs">{singleTags.length}</span>
-              <svg id="toggle-icon" class="h-4 w-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-              </svg>
-            </button>
-            <div id="single-tags-container" data-collapse-content class="collapse-hidden">
-              <div class="flex flex-wrap gap-3 px-4 pt-3 md:px-0">
-                {singleTags.map((props) => (
-                  <TagItem {...props} />
-                ))}
-              </div>
-            </div>
-          </>
-        )
-      }
+      <CollapsibleTags tags={singleTags} client:load />
     </div>
   </TwoColumnLayout>
 </Layout>
-
-<style>
-  [data-collapse-content] {
-    display: grid;
-    grid-template-rows: 1fr;
-  }
-
-  [data-collapse-content] > div {
-    min-height: 0;
-    overflow: hidden;
-  }
-
-  [data-collapse-content].collapse-hidden {
-    grid-template-rows: 0fr;
-  }
-
-  @media (prefers-reduced-motion: no-preference) {
-    [data-collapse-content] {
-      transition: grid-template-rows 0.3s ease;
-    }
-  }
-</style>
-
-<script>
-  function init() {
-    const toggleBtn = document.getElementById('toggle-single-tags');
-    const container = document.getElementById('single-tags-container');
-    const toggleText = document.getElementById('toggle-text');
-    const toggleIcon = document.getElementById('toggle-icon');
-
-    if (!toggleBtn || !container) return;
-
-    toggleBtn.addEventListener('click', () => {
-      const isHidden = container.classList.contains('collapse-hidden');
-      if (isHidden) {
-        container.classList.remove('collapse-hidden');
-        toggleText!.textContent = '收起';
-        toggleIcon?.classList.add('rotate-180');
-      } else {
-        container.classList.add('collapse-hidden');
-        toggleText!.textContent = '展开全部';
-        toggleIcon?.classList.remove('rotate-180');
-      }
-    });
-  }
-
-  if (document.readyState !== 'loading') {
-    init();
-  }
-  document.addEventListener('astro:page-load', init);
-</script>
