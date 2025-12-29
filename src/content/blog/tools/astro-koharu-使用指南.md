@@ -2,26 +2,27 @@
 title: astro-koharu 使用指南
 link: astro-koharu-guide
 catalog: true
-date: 2025-12-07 01:18:00
-description: astro-koharu 博客系统完整使用指南，包含快速开始、配置说明、文章系统、界面功能等详细介绍
+date: 2025-12-29 21:55:00
+description: astro-koharu 博客的完整使用指南，包含快速开始、配置说明、文章系统、界面功能等详细介绍
 tags:
   - Astro
   - 博客
   - 教程
 categories:
   - 工具
-draft: true
 ---
 
-本文基本由 AI 制作，还处于 WIP 阶段。
+本文基本由 AI 制作，还处于 WIP 阶段，随时修改～
 
 一份完整的 astro-koharu 博客系统使用指南，帮助你快速上手并充分利用所有功能特性。
+
+https://github.com/cosZone/astro-koharu
 
 ## 快速开始
 
 ### 项目简介
 
-astro-koharu 是一个基于 Astro 5.x 构建的现代化博客系统，从 Hexo 迁移而来，设计灵感来自 [Shoka](https://github.com/amehime/hexo-theme-shoka) 主题。
+astro-koharu 是一个基于 Astro 5.x 构建的现代化博客系统，从 Hexo 迁移而来，设计灵感和初衷都来自 [Shoka](https://github.com/amehime/hexo-theme-shoka) 主题。欢迎 [fork](https://github.com/cosZone/astro-koharu/fork) 出来制作自己的主题。
 
 **核心特点：**
 
@@ -29,7 +30,7 @@ astro-koharu 是一个基于 Astro 5.x 构建的现代化博客系统，从 Hexo
 - 优雅的深色/浅色主题切换
 - 基于 Pagefind 的无后端全站搜索
 - 完整的 Markdown 增强功能（GFM、代码高亮、自动目录）
-- 灵活的多级分类与标签系统
+- 灵活的多级分类与标签系统（从 Shoka 主题迁移，后续会考虑将其改为可关闭的）
 - 特色周刊/系列文章支持
 - 响应式设计
 - 草稿与置顶功能
@@ -1116,7 +1117,7 @@ import { fadeIn } from '@constants/anim/variants';
 
 ## 常见问题
 
-### 1. 如何修改封面图片？
+### 如何修改封面图片？
 
 在文章 frontmatter 中设置 `cover` 字段：
 
@@ -1126,25 +1127,25 @@ cover: /img/cover/1.webp
 
 图片放在 `public/img/` 目录。如果不设置，会使用默认封面。
 
-### 2. 如何自定义域名？
+### 如何自定义域名？
 
 部署到 Vercel 后，在 Vercel 项目设置中添加自定义域名，然后更新 `src/constants/site-config.ts` 中的 `site` 字段。
 
-### 3. 如何添加评论功能？
+### 如何添加评论功能？
 
 项目预留了评论组件位置（`src/components/comment/`），你可以集成 Giscus、Waline 等评论系统。
 
-### 4. 草稿文章如何预览？
+### 草稿文章如何预览？
 
 运行 `pnpm dev` 本地开发模式，草稿会自动显示（带 DRAFT 标识）。
 
-### 5. 如何关闭某些功能？
+### 如何关闭某些功能？
 
 - **关闭周刊**：设置 `featuredSeries.enabled = false`
 - **关闭搜索**：移除 `astro.config.mjs` 中的 `pagefind()` 集成
 - **关闭统计**：移除 `umami()` 集成
 
-### 6. 如何更改文章 URL 格式？
+### 如何更改文章 URL 格式？
 
 默认使用文件名作为 URL。可以通过 `link` 字段自定义：
 
