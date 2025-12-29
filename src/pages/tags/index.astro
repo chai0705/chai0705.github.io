@@ -1,5 +1,6 @@
 ---
 import HomeSider from '@components/layout/HomeSider.astro';
+import { TagItem } from '@components/tag/TagItem';
 import Cover from '@components/ui/cover/Cover.astro';
 import { CONTENT_PADDING } from '@constants/layout';
 import { siteConfig } from '@constants/site-config';
@@ -7,18 +8,14 @@ import Layout from '@layouts/Layout.astro';
 import TwoColumnLayout from '@layouts/TwoColumnLayout.astro';
 import { getAllTags, getSortedPosts } from '@lib/content';
 
-const TAG_COLORS = [
-  'from-blue-400/10 to-indigo-300/10 hover:from-blue-400/80 hover:to-indigo-300/80 text-blue-400/70 hover:text-blue-50',
-  'from-pink-300/10 to-rose-200/10 hover:from-pink-300/80 hover:to-rose-200/80 text-pink-400/70 hover:text-pink-50',
-  'from-violet-400/10 to-purple-300/10 hover:from-violet-400/80 hover:to-purple-300/80 text-violet-400/70 hover:text-violet-50',
-  'from-sky-400/10 to-blue-300/10 hover:from-sky-400/80 hover:to-blue-300/80 text-sky-400/70 hover:text-sky-50',
-];
-
 const posts = await getSortedPosts();
 const tags = getAllTags(posts);
 const sortedTags = Object.entries(tags)
   .sort(([, a], [, b]) => b - a)
-  .map(([tag, count]) => ({ tag, count }));
+  .map(([tag, count], index) => ({ tag, count, colorIndex: index % 4 }));
+
+const mainTags = sortedTags.filter(({ count }) => count > 1);
+const singleTags = sortedTags.filter(({ count }) => count === 1);
 ---
 
 <Layout title={`标签 | ${siteConfig.title}`} description="所有文章标签">
@@ -32,23 +29,82 @@ const sortedTags = Object.entries(tags)
         共 {sortedTags.length} 个标签
       </h2>
       <div class="flex flex-wrap gap-3 px-4 md:px-0">
-        {
-          sortedTags.map(({ tag, count }, index) => (
-            <div class="group relative">
-              {/* 防止闪烁 */}
-              <a
-                href={`/tags/${tag.replace(/\//g, '-')}`}
-                class={`group relative flex items-center rounded-lg bg-linear-to-r px-3 py-1.5 text-sm transition-all duration-300 group-hover:-translate-y-0.5 group-hover:shadow-lg ${
-                  TAG_COLORS[index % TAG_COLORS.length]
-                }`}
-              >
-                <span class="font-medium">{tag}</span>
-                <span class="ml-1.5 truncate rounded-full bg-white/10 px-1.5 text-xs">{count}</span>
-              </a>
-            </div>
-          ))
-        }
+        {mainTags.map((props) => <TagItem {...props} />)}
       </div>
+      {
+        singleTags.length > 0 && (
+          <>
+            <button
+              id="toggle-single-tags"
+              class="text-muted-foreground hover:text-blue mx-4 mt-4 flex cursor-pointer items-center gap-1 text-sm transition-colors md:mx-0"
+            >
+              <span id="toggle-text">展开全部</span>
+              <span class="rounded-full bg-white/10 px-1.5 text-xs">{singleTags.length}</span>
+              <svg id="toggle-icon" class="h-4 w-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div id="single-tags-container" data-collapse-content class="collapse-hidden">
+              <div class="flex flex-wrap gap-3 px-4 pt-3 md:px-0">
+                {singleTags.map((props) => (
+                  <TagItem {...props} />
+                ))}
+              </div>
+            </div>
+          </>
+        )
+      }
     </div>
   </TwoColumnLayout>
 </Layout>
+
+<style>
+  [data-collapse-content] {
+    display: grid;
+    grid-template-rows: 1fr;
+  }
+
+  [data-collapse-content] > div {
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  [data-collapse-content].collapse-hidden {
+    grid-template-rows: 0fr;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    [data-collapse-content] {
+      transition: grid-template-rows 0.3s ease;
+    }
+  }
+</style>
+
+<script>
+  function init() {
+    const toggleBtn = document.getElementById('toggle-single-tags');
+    const container = document.getElementById('single-tags-container');
+    const toggleText = document.getElementById('toggle-text');
+    const toggleIcon = document.getElementById('toggle-icon');
+
+    if (!toggleBtn || !container) return;
+
+    toggleBtn.addEventListener('click', () => {
+      const isHidden = container.classList.contains('collapse-hidden');
+      if (isHidden) {
+        container.classList.remove('collapse-hidden');
+        toggleText!.textContent = '收起';
+        toggleIcon?.classList.add('rotate-180');
+      } else {
+        container.classList.add('collapse-hidden');
+        toggleText!.textContent = '展开全部';
+        toggleIcon?.classList.remove('rotate-180');
+      }
+    });
+  }
+
+  if (document.readyState !== 'loading') {
+    init();
+  }
+  document.addEventListener('astro:page-load', init);
+</script>

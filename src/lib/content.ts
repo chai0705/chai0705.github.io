@@ -41,4 +41,4 @@ export {
 } from './content/posts';
 
 // Export tag utilities
-export { getAllTags } from './content/tags';
+export { getAllTags, normalizeTag } from './content/tags';
