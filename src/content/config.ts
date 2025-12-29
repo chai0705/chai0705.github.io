@@ -7,6 +7,7 @@ const blogCollection = defineCollection({
     description: z.string().optional(),
     link: z.string().optional(),
     date: z.date(),
+    updated: z.date().optional(),
     cover: z.string().optional(),
     tags: z.array(z.string()).optional(),
     // 兼容老 Hexo 博客

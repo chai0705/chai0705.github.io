@@ -7,6 +7,7 @@ export interface BlogSchema {
   description?: string; // 文章描述
   link?: string; // 文章短链接
   date: Date;
+  updated?: Date; // 最近更新时间
   cover?: string;
   tags?: string[];
   /**

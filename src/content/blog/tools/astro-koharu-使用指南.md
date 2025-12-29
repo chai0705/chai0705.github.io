@@ -224,6 +224,7 @@ date: 2024-12-06 # 必填，发布日期
 ---
 title: 文章标题
 date: 2024-12-06
+updated: 2024-12-15 # 最近更新时间（可选，存在时会在文章页显示）
 description: 文章摘要描述 # 用于 SEO 和列表展示，如不填写会自动使用 AI 摘要或提取正文前 150 字
 link: custom-url-slug # 自定义 URL（默认使用文件名）
 cover: /img/cover/1.webp # 封面图片
