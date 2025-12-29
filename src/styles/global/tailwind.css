@@ -79,7 +79,14 @@
     }
   }
   #site-header {
-    @apply translate-y-0 text-white transition-transform duration-300;
+    @apply relative translate-y-0 text-white transition-transform duration-300;
+
+    /* Pseudo-element for gradient background with opacity transition */
+    &::before {
+      content: '';
+      @apply pointer-events-none absolute inset-0 -z-1 bg-gradient-header opacity-0 transition-opacity duration-300 ease-out;
+    }
+
     button,
     a {
       @apply shadow-text;

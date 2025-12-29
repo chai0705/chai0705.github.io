@@ -152,8 +152,18 @@ import SearchWithDialog from './SearchWithDialog.astro';
     // 重置状态
     firstScroll = true;
     triggerDistance = window.innerHeight * 0.45;
-    lastScrollY = 0;
+    lastScrollY = window.scrollY;
     isScrolling = false;
+
+    // 检查初始滚动位置，设置背景状态
+    const siteHeader = document.getElementById('site-header');
+    if (siteHeader) {
+      if (window.scrollY > triggerDistance) {
+        siteHeader.classList.add('with-background');
+      } else {
+        siteHeader.classList.remove('with-background');
+      }
+    }
 
     // 添加新监听器
     scrollHandler = throttle(handleScroll, 80);

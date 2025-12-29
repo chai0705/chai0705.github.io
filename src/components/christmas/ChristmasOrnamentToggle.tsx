@@ -13,7 +13,7 @@ const STRING_HEIGHT = 80;
 
 function TopDecoration() {
   return (
-    <div className="pointer-events-none absolute top-10 left-1/2 z-100 -translate-x-1/2 -translate-y-[15%] drop-shadow-lg filter">
+    <div className="pointer-events-none absolute top-10 left-1/2 z-100 -translate-x-1/2 -translate-y-[15%] drop-shadow">
       <svg width="60" height="50" viewBox="0 0 60 50" className="overflow-visible">
         <defs>
           <radialGradient id="bow-red-grad" cx="30%" cy="30%" r="80%">
@@ -65,7 +65,7 @@ function SnowflakePattern() {
 
 function OrnamentSvg({ isEnabled }: { isEnabled: boolean }) {
   return (
-    <svg viewBox="0 0 100 110" className="size-full overflow-visible drop-shadow-2xl">
+    <svg viewBox="0 0 100 110" className="size-full overflow-visible drop-shadow-lg">
       <defs>
         <radialGradient id="ornament-red" cx="35%" cy="35%" r="65%">
           <stop offset="0%" stopColor="#ff8a80" />
@@ -97,7 +97,7 @@ function OrnamentSvg({ isEnabled }: { isEnabled: boolean }) {
       <circle cx="50" cy="6" r="4" fill="none" stroke="#ffd700" strokeWidth="2" />
 
       {/* Main Ball Body */}
-      <g className="transition-all duration-700 ease-in-out">
+      <g className="transition-[fill,stroke] duration-500 ease-out">
         <circle
           cx="50"
           cy="60"
@@ -108,14 +108,14 @@ function OrnamentSvg({ isEnabled }: { isEnabled: boolean }) {
         />
 
         {/* Shadow Overlay */}
-        <circle cx="50" cy="60" r="38" fill="black" fillOpacity="0.15" className="mix-blend-overlay" pointerEvents="none" />
+        <circle cx="50" cy="60" r="38" fill="black" fillOpacity="0.1" pointerEvents="none" />
 
         {/* Decoration */}
         <g
-          className="origin-center transition-all duration-500"
+          className="origin-center transition-[opacity,transform] duration-300 ease-out"
           style={{
             opacity: isEnabled ? 1 : 0,
-            transform: isEnabled ? 'scale(1)' : 'scale(0.9)',
+            transform: isEnabled ? 'scale(1)' : 'scale(0.95)',
           }}
         >
           <SnowflakePattern />
@@ -139,7 +139,7 @@ function OrnamentSvg({ isEnabled }: { isEnabled: boolean }) {
         )}
 
         {/* Highlight */}
-        <ellipse cx="35" cy="45" rx="10" ry="6" transform="rotate(-45 35 45)" fill="white" opacity="0.5" filter="blur(1px)" />
+        <ellipse cx="35" cy="45" rx="10" ry="6" transform="rotate(-45 35 45)" fill="white" opacity="0.4" />
         <circle cx="32" cy="40" r="2" fill="white" opacity="0.9" />
       </g>
     </svg>
@@ -205,22 +205,26 @@ export function ChristmasOrnamentToggle() {
         <motion.div
           className="fixed top-0 right-20 z-90 flex w-[100px] justify-center md:right-0"
           initial={{ opacity: 0, y: -50 }}
-          animate={{ opacity: 1, y: 0 }}
+          animate={{
+            opacity: isEnabled ? 1 : 0.5,
+            y: 0,
+          }}
+          whileHover={{ opacity: 1 }}
           exit={{ opacity: 0, y: -50 }}
-          transition={{ type: 'spring', stiffness: 300, damping: 25 }}
+          transition={{ duration: 0.3, ease: 'easeOut' }}
         >
           <TopDecoration />
 
           {/* 绳子 - 顶部固定，高度随拖拽变化 */}
           <motion.div
-            className="pointer-events-none absolute top-0 z-99 w-[2px] origin-top bg-linear-to-b from-yellow-700 via-yellow-500 to-yellow-400 shadow-sm"
+            className="pointer-events-none absolute top-0 z-99 w-[2px] origin-top bg-linear-to-b from-yellow-700 via-yellow-500 to-yellow-400 will-change-[height]"
             style={{ height: stringHeight }}
           />
 
           {/* 球体 - 位置跟随绳子底部 */}
           <motion.button
             className={cn(
-              'absolute cursor-grab touch-none select-none active:cursor-grabbing',
+              'absolute cursor-grab touch-none will-change-transform select-none active:cursor-grabbing',
               'rounded-full outline-none focus-visible:ring-4 focus-visible:ring-yellow-400/50',
             )}
             style={{
@@ -258,8 +262,8 @@ export function ChristmasOrnamentToggle() {
                   exit={{ opacity: 0 }}
                   className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2"
                 >
-                  <div className="rounded-full border border-white/10 bg-red-950/90 px-3 py-1 text-[10px] font-medium whitespace-nowrap text-white shadow-xl">
-                    下拉关闭
+                  <div className="rounded-full border border-white/10 bg-red-950/90 px-3 py-1 text-[10px] font-medium whitespace-nowrap text-white shadow-md">
+                    {isEnabled ? '下拉关闭' : '下拉开启'}
                   </div>
                 </motion.div>
               )}
