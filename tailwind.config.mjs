@@ -15,7 +15,6 @@ export default {
       xs: { max: '480px' },
       md: { max: '768px' },
       lg: { max: '1440px' },
-      '2xl': '1440px',
       tablet: { max: '992px' },
       desktop: { min: '1480px' },
     },

@@ -13,7 +13,7 @@ const STRING_HEIGHT = 80;
 
 function TopDecoration() {
   return (
-    <div className="pointer-events-none absolute top-10 left-1/2 z-100 -translate-x-1/2 -translate-y-[15%] drop-shadow">
+    <div className="pointer-events-none absolute top-10 left-1/2 z-100 -translate-x-1/2 -translate-y-[15%] cursor-none drop-shadow">
       <svg width="60" height="50" viewBox="0 0 60 50" className="overflow-visible">
         <defs>
           <radialGradient id="bow-red-grad" cx="30%" cy="30%" r="80%">
@@ -203,7 +203,7 @@ export function ChristmasOrnamentToggle() {
     <AnimatePresence>
       {shouldShowOrnament && (
         <motion.div
-          className="fixed top-0 right-20 z-90 flex w-[100px] justify-center md:right-0"
+          className="tablet:right-12 fixed top-0 right-0 z-90 flex w-[100px] justify-center lg:right-40"
           initial={{ opacity: 0, y: -50 }}
           animate={{
             opacity: isEnabled ? 1 : 0.5,
@@ -249,7 +249,7 @@ export function ChristmasOrnamentToggle() {
             aria-pressed={isEnabled}
             type="button"
           >
-            <div className="-mt-2 size-full">
+            <div className="pointer-events-none -mt-2 size-full">
               <OrnamentSvg isEnabled={isEnabled} />
             </div>
 
