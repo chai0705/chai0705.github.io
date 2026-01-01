@@ -1,9 +1,8 @@
 ---
-import { extractTextFromMarkdown } from '@/lib/sanitize';
 import CustomContent from '@components/common/CustomContent.astro';
 import Remark from '@components/common/Remark.astro';
 import HomeSider from '@components/layout/HomeSider.astro';
-import { SummaryPanel, type SummarySource } from '@components/post/SummaryPanel';
+import SummaryPanel, { type SummarySource } from '@components/post/SummaryPanel';
 import Cover from '@components/ui/cover/Cover.astro';
 import { HomeSiderType } from '@constants/enum';
 import { CONTENT_PADDING } from '@constants/layout';
@@ -13,6 +12,7 @@ import TwoColumnLayout from '@layouts/TwoColumnLayout.astro';
 import { buildCategoryPath, getCategoryArr, getPostDescription, getPostSummary, getSortedPosts } from '@lib/content';
 import { Icon } from 'astro-icon/components';
 import { formatInTimeZone } from 'date-fns-tz';
+import { extractTextFromMarkdown } from '@/lib/sanitize';
 
 export async function getStaticPaths() {
   const postCollections = await getSortedPosts();

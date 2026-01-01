@@ -1,20 +1,19 @@
+import { animation } from '@constants/design-tokens';
 import {
   FloatingFocusManager,
   FloatingPortal,
+  type Placement,
   useClick,
   useDismiss,
   useHover,
   useInteractions,
   useRole,
-  type Placement,
 } from '@floating-ui/react';
 import { useControlledState } from '@hooks/useControlledState';
 import { useFloatingUI } from '@hooks/useFloatingUI';
 import { cn } from '@lib/utils';
-import { AnimatePresence, motion, type MotionProps } from 'motion/react';
+import { AnimatePresence, type MotionProps, motion } from 'motion/react';
 import React, { cloneElement } from 'react';
-import { animation } from '@constants/design-tokens';
-import { withFloatingErrorBoundary } from '@components/common/FloatingErrorBoundary';
 
 type PopoverProps = {
   open?: boolean;
@@ -93,7 +92,4 @@ function Popover({
   );
 }
 
-// Wrap with error boundary for graceful error handling
-const PopoverWithErrorBoundary = withFloatingErrorBoundary(Popover, 'Popover');
-
-export default React.memo(PopoverWithErrorBoundary);
+export default React.memo(Popover);

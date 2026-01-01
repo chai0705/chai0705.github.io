@@ -1,17 +1,12 @@
 ---
+/**
+ * SearchPortal Component
+ *
+ * Provides the Pagefind search UI that gets portal'd into SearchDialog.
+ * Listens for search-dialog-open/close events to move the search component.
+ */
 import Search from 'astro-pagefind/components/Search';
-import { Icon } from 'astro-icon/components';
 ---
-
-<!-- Search trigger button -->
-<button
-  id="search-trigger"
-  class="group cursor-pointer transition duration-300 hover:scale-125"
-  aria-label="搜索"
-  title="搜索 (⌘K)"
->
-  <Icon name="ri:search-line" class="size-8" />
-</button>
 
 <!-- Search Component - will be portal'd into dialog -->
 <div id="search-component-portal">
@@ -21,7 +16,6 @@ import { Icon } from 'astro-icon/components';
     uiOptions={{
       showImages: false,
       resetStyles: false,
-      // TODO i18n support
       translations: {
         placeholder: '请输入关键词搜索',
         clear_search: '清空',
@@ -40,14 +34,6 @@ import { Icon } from 'astro-icon/components';
 </div>
 
 <script>
-  import { openSearch } from '@store/ui';
-
-  let triggerElement: HTMLElement | null = null;
-
-  function handleTriggerClick() {
-    openSearch();
-  }
-
   function moveSearchToDialog() {
     const dialogContainer = document.getElementById('search-dialog-container');
     const searchPortal = document.getElementById('search-component-portal');
@@ -88,37 +74,29 @@ import { Icon } from 'astro-icon/components';
 
   let initialized = false;
 
-  function initSearchDialog() {
-    // Prevent double initialization
+  function initSearchPortal() {
     if (initialized) return;
     initialized = true;
 
-    // Init trigger button
-    triggerElement = document.getElementById('search-trigger');
-    triggerElement?.addEventListener('click', handleTriggerClick);
-    // Listen for custom events from Astro component
     window.addEventListener('search-dialog-open', handleDialogOpen);
     window.addEventListener('search-dialog-close', handleDialogClose);
   }
 
-  function cleanupSearchDialog() {
+  function cleanupSearchPortal() {
     if (!initialized) return;
 
-    triggerElement?.removeEventListener('click', handleTriggerClick);
-    triggerElement = null;
     window.removeEventListener('search-dialog-open', handleDialogOpen);
     window.removeEventListener('search-dialog-close', handleDialogClose);
     initialized = false;
   }
 
-  // Initialize immediately if DOM is ready (handles race condition on first load)
+  // Initialize immediately if DOM is ready
   if (document.readyState !== 'loading') {
-    initSearchDialog();
+    initSearchPortal();
   }
 
-  // Also listen for astro:page-load for subsequent navigations
-  document.addEventListener('astro:page-load', initSearchDialog);
-  document.addEventListener('astro:before-swap', cleanupSearchDialog);
+  document.addEventListener('astro:page-load', initSearchPortal);
+  document.addEventListener('astro:before-swap', cleanupSearchPortal);
 </script>
 
 <style>
@@ -130,27 +108,11 @@ import { Icon } from 'astro-icon/components';
     visibility: hidden;
   }
 </style>
-<style is:global is:inline>
-  /* https://github.com/parcel-bundler/lightningcss/issues/887 */
-  .scroll-feather-mask {
-    container-type: scroll-state;
-  }
-  @container scroll-state(scrollable: bottom) {
-    .scroll-feather-mask::before {
-      content: '';
-      background: linear-gradient(
-        to bottom,
-        transparent 0%,
-        var(--gradient-bg-start) var(--scroll-mask-middle, 70%),
-        var(--gradient-bg-start) var(--scroll-mask-end, 100%)
-      );
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      z-index: 10;
-      display: block;
-      height: var(--scroll-mask-height, 5rem);
-    }
+<style is:global>
+  /* Ensure search is visible when in dialog */
+  #search-dialog-container #search-for-dialog {
+    display: block !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
   }
 </style>

@@ -1,6 +1,7 @@
 ---
+// This import is aliased in astro.config.mjs - will be replaced with Noop when christmas disabled
+import { SnowfallCanvas } from '@components/christmas/SnowfallCanvas';
 import { christmasConfig } from '@constants/site-config';
-import { SnowfallCanvas } from './SnowfallCanvas';
 
 const { snowfall } = christmasConfig;
 ---
@@ -10,7 +11,7 @@ const { snowfall } = christmasConfig;
     <>
       {/* 背景雪 - 在内容后面 */}
       <SnowfallCanvas
-        client:idle
+        client:only="react"
         speed={snowfall.speed}
         intensity={snowfall.intensity}
         mobileIntensity={snowfall.mobileIntensity}
@@ -23,7 +24,7 @@ const { snowfall } = christmasConfig;
       />
       {/* 前景雪 - 在内容前面 */}
       <SnowfallCanvas
-        client:idle
+        client:only="react"
         speed={snowfall.speed}
         intensity={snowfall.intensity}
         mobileIntensity={snowfall.mobileIntensity}

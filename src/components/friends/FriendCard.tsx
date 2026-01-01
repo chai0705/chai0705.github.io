@@ -1,9 +1,11 @@
-import { cn } from '@/lib/utils';
-import { christmasEnabled } from '@/store/christmas';
 import { microDampingPreset } from '@constants/anim/spring';
 import type { FriendLink } from '@constants/friends-config';
+import { useIsMounted } from '@hooks/useIsMounted';
+import { useStore } from '@nanostores/react';
 import { motion, useMotionTemplate, useMotionValue, useSpring, useTransform } from 'motion/react';
-import { useRef, type MouseEvent } from 'react';
+import { type MouseEvent, useRef } from 'react';
+import { cn } from '@/lib/utils';
+import { christmasEnabled } from '@/store/christmas';
 
 interface FriendCardProps {
   friend: FriendLink;
@@ -30,6 +32,8 @@ const DEFAULT_AVATAR = `data:image/svg+xml;utf8,${encodeURIComponent(`
 
 export default function FriendCard({ friend, index }: FriendCardProps) {
   const cardRef = useRef<HTMLAnchorElement>(null);
+  const isMounted = useIsMounted();
+  const isChristmasEnabled = useStore(christmasEnabled);
 
   // Motion values for magnetic hover
   const x = useMotionValue(0);
@@ -77,8 +81,8 @@ export default function FriendCard({ friend, index }: FriendCardProps) {
       target="_blank"
       ref={cardRef}
       className={cn(
-        'friend-card ease-easeOut group relative block h-[200px] w-full cursor-pointer transition-transform duration-300 select-none',
-        { 'z-5': christmasEnabled.get() },
+        'friend-card group relative block h-[200px] w-full cursor-pointer select-none transition-transform duration-300 ease-easeOut',
+        { 'z-5': isMounted && isChristmasEnabled },
       )}
       style={{ perspective: '1000px' }}
       transition={{
@@ -120,12 +124,12 @@ export default function FriendCard({ friend, index }: FriendCardProps) {
           {/* Content */}
           <div className="mt-24 flex h-full flex-col px-2 pb-3 text-center">
             <h3
-              className="truncate text-sm font-bold text-gray-900 transition-colors group-hover:text-(--card-color) dark:text-white"
+              className="truncate font-bold text-gray-900 text-sm transition-colors group-hover:text-(--card-color) dark:text-white"
               style={{ '--card-color': cardColor } as CSSCustomProperties}
             >
               {friend.owner}
             </h3>
-            <p className="mb-1 truncate text-[10px] font-medium tracking-wider text-gray-400 uppercase">{friend.site}</p>
+            <p className="mb-1 truncate font-medium text-[10px] text-gray-400 uppercase tracking-wider">{friend.site}</p>
             <p className="line-clamp-2 text-[10px] text-gray-600 dark:text-gray-300">{friend.desc}</p>
           </div>
         </div>

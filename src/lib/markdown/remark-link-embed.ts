@@ -2,20 +2,103 @@
  * Remark plugin to automatically embed standalone links as rich components
  * Detects Twitter/X links and other standalone links in paragraphs
  * Uses metascraper to fetch OG data at build time for link previews (SSG approach)
+ * Implements file-based caching to speed up subsequent builds
  */
 
-import { visit } from 'unist-util-visit';
-import type { Root, Paragraph, Link } from 'mdast';
-import type { Parent } from 'unist';
-import { classifyLink, isStandaloneLinkParagraph } from './link-utils';
+import fs from 'node:fs';
+import path from 'node:path';
+import type { Link, Paragraph, Root } from 'mdast';
 import metascraper from 'metascraper';
 import metascraperDescription from 'metascraper-description';
 import metascraperImage from 'metascraper-image';
 import metascraperLogo from 'metascraper-logo';
+import metascraperLogoFavicon from 'metascraper-logo-favicon';
 import metascraperTitle from 'metascraper-title';
 import metascraperUrl from 'metascraper-url';
 import sanitizeHtml from 'sanitize-html';
-import metascraperLogoFavicon from 'metascraper-logo-favicon';
+import type { Parent } from 'unist';
+import { visit } from 'unist-util-visit';
+import { classifyLink, isStandaloneLinkParagraph } from './link-utils';
+
+// ============================================================================
+// OG Data Cache Implementation
+// ============================================================================
+
+const CACHE_DIR = path.join(process.cwd(), '.cache');
+const CACHE_FILE = path.join(CACHE_DIR, 'og-data.json');
+const CACHE_TTL = 7 * 24 * 60 * 60 * 1000; // 7 days in milliseconds
+
+interface CacheEntry {
+  data: OGData;
+  timestamp: number;
+}
+
+interface CacheData {
+  [url: string]: CacheEntry;
+}
+
+let memoryCache: CacheData | null = null;
+
+/**
+ * Load cache from file system
+ */
+function loadCache(): CacheData {
+  if (memoryCache) return memoryCache;
+
+  try {
+    if (fs.existsSync(CACHE_FILE)) {
+      const content = fs.readFileSync(CACHE_FILE, 'utf-8');
+      memoryCache = JSON.parse(content);
+      return memoryCache ?? {};
+    }
+  } catch (error) {
+    console.warn('[Link Embed] Failed to load cache:', error);
+  }
+
+  memoryCache = {};
+  return memoryCache;
+}
+
+/**
+ * Save cache to file system
+ */
+function saveCache(cache: CacheData): void {
+  try {
+    if (!fs.existsSync(CACHE_DIR)) {
+      fs.mkdirSync(CACHE_DIR, { recursive: true });
+    }
+    fs.writeFileSync(CACHE_FILE, JSON.stringify(cache, null, 2));
+    memoryCache = cache;
+  } catch (error) {
+    console.warn('[Link Embed] Failed to save cache:', error);
+  }
+}
+
+/**
+ * Get cached OG data if valid
+ */
+function getCachedOGData(url: string): OGData | null {
+  const cache = loadCache();
+  const entry = cache[url];
+
+  if (entry && Date.now() - entry.timestamp < CACHE_TTL) {
+    return entry.data;
+  }
+
+  return null;
+}
+
+/**
+ * Set OG data in cache
+ */
+function setCachedOGData(url: string, data: OGData): void {
+  const cache = loadCache();
+  cache[url] = {
+    data,
+    timestamp: Date.now(),
+  };
+  saveCache(cache);
+}
 
 interface OGData {
   originUrl: string;
@@ -200,7 +283,7 @@ function generateLinkPreviewHTML(ogData: OGData): string {
     const safeDisplayText = sanitizeText(displayText);
     const safeSubtitle = subtitle
       ? sanitizeText(subtitle)
-      : sanitizeText(originUrl.length > 60 ? originUrl.substring(0, 60) + '...' : originUrl);
+      : sanitizeText(originUrl.length > 60 ? `${originUrl.substring(0, 60)}...` : originUrl);
 
     return `<div class="link-preview-block not-prose" data-state="error">
   <a href="${safeUrl}" target="_blank" class="hover:border-primary/50 group block rounded-lg border bg-card p-4 transition-all hover:shadow-md" aria-label="${safeDisplayText}">
@@ -274,7 +357,7 @@ function generateCodePenEmbedHTML(user: string, penId: string, url: string): str
 export function remarkLinkEmbed(options: RemarkLinkEmbedOptions = {}) {
   const { enableTweetEmbed = true, enableCodePenEmbed = true, enableOGPreview = true } = options;
 
-  return async function (tree: Root) {
+  return async (tree: Root) => {
     const nodesToReplace: Array<{
       node: Paragraph;
       index: number;
@@ -324,8 +407,21 @@ export function remarkLinkEmbed(options: RemarkLinkEmbedOptions = {}) {
           value: html,
         };
       } else if (type === 'general' && enableOGPreview) {
+        // Check cache first
+        const cachedData = getCachedOGData(url);
+        if (cachedData) {
+          console.log(`[Link Embed] Using cached OG data for: ${url}`);
+          const html = generateLinkPreviewHTML(cachedData);
+          return {
+            type: 'html' as const,
+            value: html,
+          };
+        }
+
+        // Fetch and cache
         console.log(`[Link Embed] Fetching OG data for: ${url}`);
         const ogData = await fetchOGData(url);
+        setCachedOGData(url, ogData);
         const html = generateLinkPreviewHTML(ogData);
         return {
           type: 'html' as const,
@@ -339,7 +435,7 @@ export function remarkLinkEmbed(options: RemarkLinkEmbedOptions = {}) {
     const embedNodes = await Promise.all(fetchPromises);
 
     // Replace nodes with their embed counterparts
-    nodesToReplace.forEach(({ node, index, parent }, i) => {
+    nodesToReplace.forEach(({ index, parent }, i) => {
       const embedNode = embedNodes[i];
       if (embedNode) {
         parent.children[index] = embedNode;
@@ -347,5 +443,3 @@ export function remarkLinkEmbed(options: RemarkLinkEmbedOptions = {}) {
     });
   };
 }
-
-export default remarkLinkEmbed;

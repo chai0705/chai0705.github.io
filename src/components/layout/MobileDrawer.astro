@@ -1,8 +1,8 @@
 ---
-import { Icon } from 'astro-icon/components';
-import HomeSider from './HomeSider.astro';
 import { HomeSiderType } from '@constants/enum';
+import { Icon } from 'astro-icon/components';
 import type { BlogPost } from 'types/blog';
+import HomeSider from './HomeSider.astro';
 
 interface Props {
   type?: HomeSiderType;
@@ -32,7 +32,7 @@ const { type = HomeSiderType.HOME, post } = Astro.props;
 </div>
 
 <script>
-  import { drawerOpen, closeDrawer } from '@store/ui';
+  import { drawerOpen, closeDrawer } from '@store/modal';
 
   interface DrawerElements {
     drawer: HTMLElement | null;

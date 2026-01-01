@@ -1,5 +1,5 @@
 ---
-import { HomeSiderType } from '@constants/enum';
+import type { HomeSiderType } from '@constants/enum';
 import type { BlogPost } from 'types/blog';
 
 interface Props {
@@ -9,17 +9,18 @@ interface Props {
   post?: BlogPost;
 }
 
+import { ClientRouter } from 'astro:transitions';
 import ChristmasEffects from '@components/christmas/ChristmasEffects.astro';
-import FloatingGroup from '@components/layout/FloatingGroup.astro';
+import FloatingGroup from '@components/layout/FloatingGroup';
 import Header from '@components/layout/Header.astro';
 import MobileDrawer from '@components/layout/MobileDrawer.astro';
-import SearchDialog from '@components/layout/SearchDialog.astro';
-import CodeBlockFullscreen from '@components/markdown/CodeBlockFullscreen.astro';
+import SearchDialog from '@components/layout/SearchDialog';
+import SearchPortal from '@components/layout/SearchPortal.astro';
+import CodeBlockFullscreen from '@components/markdown/CodeBlockFullscreen';
 import MermaidFullscreen from '@components/markdown/MermaidFullscreen.astro';
-import { seoConfig, siteConfig } from '@constants/site-config';
+import { christmasConfig, seoConfig, siteConfig } from '@constants/site-config';
 import LoadingIndicator from 'astro-loading-indicator/component';
 import { Tooltips } from 'astro-tooltips';
-import { ClientRouter } from 'astro:transitions';
 
 import '@styles/index.css';
 
@@ -85,8 +86,16 @@ const isPostPage = Astro.url.pathname.startsWith('/post/');
         document.documentElement.classList.add('light');
         document.documentElement.dataset.theme = 'light';
       }
+    </script>
+    <script is:inline define:vars={{ christmasFeatureEnabled: christmasConfig.enabled }}>
       // 立即执行圣诞状态检查 否则彩灯等会闪烁
       (function () {
+        // 如果构建时配置关闭，则始终不启用
+        if (!christmasFeatureEnabled) {
+          document.documentElement.classList.remove('christmas');
+          return;
+        }
+        // 否则使用用户偏好
         var stored = localStorage.getItem('christmas-enabled');
         var enabled = stored !== 'false'; // 默认启用
         document.documentElement.classList.toggle('christmas', enabled);
@@ -268,11 +277,36 @@ const isPostPage = Astro.url.pathname.startsWith('/post/');
       <main class="relative flex grow flex-col gap-4">
         {(<slot />)}
       </main>
-      <FloatingGroup />
+      <FloatingGroup client:only="react" />
       <MobileDrawer type={siderType} post={post} />
-      <SearchDialog />
-      <CodeBlockFullscreen />
+      <SearchDialog client:load />
+      <SearchPortal />
+      <CodeBlockFullscreen client:load />
       <MermaidFullscreen />
     </div>
   </body>
 </html>
+
+<style is:global>
+  /* Progressive enhancement: scroll-state is experimental, browsers that don't support it will just not show the feather mask */
+  @supports (container-type: scroll-state) {
+    .scroll-feather-mask {
+      container-type: scroll-state;
+    }
+
+  @container scroll-state(scrollable: bottom) {
+      .scroll-feather-mask::after {
+        content: '';
+        background: linear-gradient(to bottom, transparent 0%, var(--gradient-bg-start) var(--mask-end-percent, 50%), var(--gradient-bg-start) var(--mask-start-percent, 100%));
+        position: absolute;
+        top: var(--mask-top, auto);
+        left: var(--mask-left, 0);
+        right: var(--mask-right, 0);
+        bottom: var(--mask-bottom, 0);
+        z-index: 10;
+        display: block;
+        height: var(--mask-height, 5rem);
+      }
+    }
+  }
+</style>
