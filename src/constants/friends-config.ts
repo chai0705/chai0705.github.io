@@ -6,9 +6,16 @@ export interface FriendLink {
   image: string;
   color?: string;
 }
-
 // 示例友链数据 - 请替换为你自己的友链
 export const friendsData: FriendLink[] = [
+  {
+    site: '余弦の博客',
+    url: 'https://blog.cosine.ren',
+    owner: 'cos',
+    desc: 'FE / ACG / 手工 / 深色模式强迫症 / INFP / 兴趣广泛养两只猫的老宅女 / remote',
+    image: 'https://blog.cosine.ren/img/avatar.webp',
+    color: '#ed788b',
+  },
   {
     site: '示例博客 A',
     url: 'https://example-a.com',

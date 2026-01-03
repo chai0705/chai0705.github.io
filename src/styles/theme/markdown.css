@@ -1011,6 +1011,7 @@ body.lightbox-open {
 
 /* Infographic source view styling */
 .infographic-wrapper[data-view-mode="source"] > pre {
+  /* biome-ignore lint/complexity/noImportantStyles: Safe - Override inline style */
   display: block !important; /* Override inline style */
   border-radius: 0 0 0.75rem 0.75rem;
   border: 1px solid hsl(var(--border));

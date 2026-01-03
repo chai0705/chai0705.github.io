@@ -74,7 +74,7 @@ export const siteConfig: SiteConfig = {
   avatar: '/img/avatar.webp', // 站点头像 - 请替换 public/img/avatar.webp
   showLogo: true, // 是否显示 svg logo 否则用 title
   author: 'Author', // 作者名称 - 请修改为你的名字
-  site: 'https://your-domain.com/', // 站点线上域名 - 部署后请修改
+  site: 'https://koharu.cosine.ren', // 站点线上域名 - 部署后请修改为你的域名
   startYear: 2024, // 站点创建年份
   keywords: ['博客', 'Astro', '技术', '前端'], // SEO 关键词
   featuredCategories: [

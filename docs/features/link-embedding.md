@@ -1,5 +1,7 @@
 # 链接嵌入功能
 
+![](https://r2.cosine.ren/i/2026/01/6804aa167fd4cf7022a9b511d52017ce.webp)
+
 自动将独行的 Twitter/X、CodePen 链接转换为嵌入组件,并为其他链接显示 OG 预览卡片。
 
 ## 功能特性
@@ -103,7 +105,7 @@ https://react-tweet.vercel.app/
 
 ### 架构图
 
-```
+```plain
 Markdown 文件
     ↓
 remark-link-embed 插件 (识别独行链接)
@@ -153,7 +155,7 @@ export const defaultContentConfig: ContentConfig = {
 
 ## 文件结构
 
-```
+```plain
 src/
 ├── lib/
 │   └── markdown/
@@ -188,11 +190,13 @@ src/
 ## 性能优化
 
 ### Tweet 嵌入
+
 - 使用 `react-tweet` 库,仅 16KB vs 原生 Twitter 嵌入 560KB
 - 服务端渲染,首屏即显示
 - 无 iframe,避免额外的 HTTP 请求和布局偏移
 
 ### 链接预览
+
 - **完全静态化**: 构建时获取 OG 数据,零运行时开销
 - **无 JavaScript**: 不需要客户端 JavaScript
 - **SEO 友好**: 搜索引擎可以直接索引预览内容
