@@ -72,7 +72,7 @@ export const siteConfig: SiteConfig = {
   name: 'cos', // 站点作者简称
   description: '一个基于 Astro 的现代化博客主题', // 站点简介（一段话）
   avatar: '/img/avatar.webp', // 站点头像 - 请替换 public/img/avatar.webp
-  showLogo: false, // 是否显示 svg logo 否则用 title
+  showLogo: true, // 是否显示 svg logo 否则用 title
   author: 'Author', // 作者名称 - 请修改为你的名字
   site: 'https://your-domain.com/', // 站点线上域名 - 部署后请修改
   startYear: 2024, // 站点创建年份
