@@ -1,23 +1,33 @@
 ---
 layout: ../layouts/AboutLayout.astro
-title: 'About'
+title: "About"
 date: 2025-01-03 01:01:33
-description: '关于我？'
+description: "关于我？"
 ---
 
 ## 你好，这里是余弦
 
 [![github badge](https://img.shields.io/badge/dynamic/json?color=blue&label=Github&query=%24.data.totalSubs&url=https%3A%2F%2Fapi.spencerwoo.com%2Fsubstats%2F%3Fsource%3Dgithub%26queryKey%3Dyusixian)](https://github.com/yusixian)
 
-主攻 React 及其相关生态，最近在不断尝试自己的各种小项目^\_^
-
-- 是余弦(cosine)那个 cos，不是 cosplay 那个 cos
-- 热爱写代码，现在热衷于前端开发，之前也有过不少后端的经验，现在正朝着大前端的方向努力
-- Gitbook 前端学习记录：[前言及目录 - 前端学习记录](https://book.cosine.ren/) 不断完善 ing...
-- 个人博客
-  - xlog 链上版博客 👉 [https://x.cosine.ren/](https://x.cosine.ren/)
-  - Hexo 博客 👉 [cosine = 余弦の博客 = WA 的一声就哭了](https://ysx.cosine.ren/)
+cosine = 余弦 = cos
 
 愿热情永存，愿热爱不灭，愿生活无憾
 
-![https://github.com/yusixian](https://github-readme-stats.vercel.app/api?username=yusixian&count_private=true&theme=dark&show_icons=true)
+> 我们 都只是无名之辈 \
+> 做你自己最喜欢的事 \
+> 像花一样 肆意绽放 \
+> 不去管 有没有人欣赏
+
+### 找到我
+
+个人 Telegram 前端频道：日常碎碎念，偶尔掉落优质前端博文推荐、学习资源等
+
+https://t.me/cosine_front_end
+
+Gitbook 前端学习记录
+
+https://book.cosine.ren/
+
+[![GitHub State](https://git-stats.cosine.ren/api?username=yusixian&theme=dark&show_icons=true&hide_border=true)](https://github.com/anuraghazra/github-readme-stats)
+
+[![GitHub Streak](https://github-readme-streak-stats-rust-tau.vercel.app?user=yusixian&theme=dark&date_format=%5BY%20%5DM%20&hide_border=true)](https://git.io/streak-stats)
