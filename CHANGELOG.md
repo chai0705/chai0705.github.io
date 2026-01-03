@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 ---
+## [1.4.0](https://github.com/cosZone/astro-koharu/compare/v1.3.0..v1.4.0) - 2026-01-03
+
+### Bug Fixes
+
+- christmas ornament toggle styles - ([e9cb297](https://github.com/cosZone/astro-koharu/commit/e9cb29729f071cf3b963c3c160ff47374c330250)) - yusixian
+- timezone utc bug - ([fb75902](https://github.com/cosZone/astro-koharu/commit/fb759025feda9f9c1199ae34210ac938b92c1620)) - yusixian
+- wrap tags in links for improved navigation in PostItemCard - ([f236e65](https://github.com/cosZone/astro-koharu/commit/f236e653600e321ee764a4118dd5168027bba393)) - yusixian
+- refine Christmas ornament toggle animations and styles - ([6ecf4de](https://github.com/cosZone/astro-koharu/commit/6ecf4de8f118048260dbf396d9d6f34c92e37ad1)) - yusixian
+- enhance christmas effects toggle - ([98e66f7](https://github.com/cosZone/astro-koharu/commit/98e66f7eca98a1ccbb8965bd60483e639260bfad)) - yusixian
+- TOC dropdown number - ([eda5586](https://github.com/cosZone/astro-koharu/commit/eda5586c0a7612b34178068835fbe7528c9b93cb)) - yusixian
+- view transition effects to HomeInfo and HomeSider - ([aba7db4](https://github.com/cosZone/astro-koharu/commit/aba7db4a6daaa6ff8ec569d692c29f82ad0f3824)) - yusixian
+- update SnowParticles resolution init - ([db81256](https://github.com/cosZone/astro-koharu/commit/db81256b80f13ffccb3b952b4503b7e85d495550)) - yusixian
+
+### Features
+
+- add CollapsibleTags - ([51eca18](https://github.com/cosZone/astro-koharu/commit/51eca18b346430a486101cd643d1c6f2e3b4cb96)) - yusixian
+- implement tag normalization and introduce TagItem component for improved tag display - ([d944ff4](https://github.com/cosZone/astro-koharu/commit/d944ff48fc145b53298eb731bf578475a021fd1f)) - yusixian
+- add optional updated date field to blog schema - ([55823e3](https://github.com/cosZone/astro-koharu/commit/55823e3856108c9bcab12733e2a513b693cf614a)) - yusixian
+- enhance Christmas lights component performance optimizations - ([f33b612](https://github.com/cosZone/astro-koharu/commit/f33b612713e5cd8e8bfd758e11b7d8a906c9b286)) - yusixian
+
+### Performance
+
+- optimize snow performance - ([fa0db76](https://github.com/cosZone/astro-koharu/commit/fa0db76435f3d3626ad8dc9e8bf7f7232eae00a9)) - yusixian
+
+---
 ## [1.3.0](https://github.com/cosZone/astro-koharu/compare/v1.2.0..v1.3.0) - 2025-12-24
 
 ### Bug Fixes
