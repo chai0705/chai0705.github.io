@@ -1,5 +1,7 @@
 # astro-koharu
 
+![](https://r2.cosine.ren/i/2026/01/94383107ba4586f773938ed4dae34ff1.webp)
+
 一个萌系 / 二次元 / 粉蓝配色的博客主题，适合 ACG、前端、手账向个人站，性能优异。
 
 > 命名灵感来源于 “小春日和”（こはるびより）指的是晚秋到初冬这段时期，持续的一段似春天般温暖的晴天。也就是中文中的"小阳春"。
@@ -24,6 +26,9 @@
 ![性能优化](https://r2.cosine.ren/i/2025/12/e93f40c340a626c4ab72212a84cf6d5d.webp)
 
 可在此进行博客的[反馈](https://cos.featurebase.app/)以及查看 Roadmap，当然更欢迎在 issue 区域提 issue，不过这毕竟是个人项目，喜欢的也欢迎 fork 出去改。
+
+![](https://r2.cosine.ren/i/2026/01/f1c239b4adf7771f10b954c389d87a74.webp)
+![](https://r2.cosine.ren/i/2026/01/c962f82503abf68eb1f21b835873f241.webp)
 
 ## 部署
 
