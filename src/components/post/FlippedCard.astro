@@ -50,6 +50,7 @@ const { className, direction = 'horizontal', duration = 600, delay = 100, disabl
     position: absolute;
     inset: 0;
     z-index: 10;
+    pointer-events: none;
   }
 
   .flip-card-inner {
@@ -77,6 +78,7 @@ const { className, direction = 'horizontal', duration = 600, delay = 100, disabl
     -webkit-backface-visibility: hidden;
     transform-style: preserve-3d;
     border-radius: 0.5rem;
+    pointer-events: auto;
   }
 
   .flip-card-front {
