@@ -55,6 +55,7 @@ const descriptionHtml = weeklyConfig?.description ? marked.parse(weeklyConfig.de
             <a
               href={weeklyConfig.links.rss}
               target="_blank"
+              data-astro-reload
               class="flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm backdrop-blur-sm transition-all hover:scale-105 hover:bg-white/20"
             >
               <Icon name="ri:rss-line" class="h-5 w-5" />

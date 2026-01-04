@@ -16,7 +16,7 @@
                     href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&amp;display=swap"
                     rel="stylesheet" />
             </head>
-            <body>
+            <body style="background-color: #121214; color: #f0f0f0; margin: 0; padding: 0;">
                 <div class="background-decorations">
                     <div class="floating-shape shape-1"></div>
                     <div class="floating-shape shape-2"></div>
