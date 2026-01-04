@@ -2,7 +2,7 @@
 import ChristmasHat from '@components/christmas/ChristmasHat.astro';
 import ButtonLink from '@components/control/ButtonLink.astro';
 import type { HomeSiderType } from '@constants/enum';
-import { routers } from '@constants/router';
+import { Routes, routers } from '@constants/router';
 import { christmasConfig, siteConfig } from '@constants/site-config';
 import { getAllTags, getCategoryList, getPostCount, getSortedPosts } from '@lib/content';
 import { getLqipStyle } from '@lib/lqip';
@@ -28,6 +28,14 @@ const allTags = Object.entries(tags).map(([tag, count]) => ({ tag, count }));
 // 生成唯一 ID 前缀
 const uniqueId = `home-info-${Math.random().toString(36).substring(2, 11)}`;
 const { className } = Astro.props;
+
+// Filter out weekly route if disabled
+const filteredRouters = routers.filter((item) => {
+  if (item.path === Routes.Weekly && !siteConfig.featuredSeries?.enabled) {
+    return false;
+  }
+  return true;
+});
 ---
 
 <div class={cn('flex flex-col items-center', className)} data-home-info-container={uniqueId}>
@@ -68,7 +76,7 @@ const { className } = Astro.props;
   </div>
   <div class="mt-6 flex w-full flex-col items-center gap-2.5">
     {
-      routers.map(({ name, path, icon, children }, index) => {
+      filteredRouters.map(({ name, path, icon, children }, index) => {
         if (children?.length) {
           const collapseId = `${uniqueId}-collapse-${index}`;
           return (

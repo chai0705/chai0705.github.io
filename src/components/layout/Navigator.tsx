@@ -6,7 +6,8 @@
  */
 
 import ThemeToggle from '@components/theme/ThemeToggle';
-import { routers } from '@constants/router';
+import { Routes, routers } from '@constants/router';
+import { siteConfig } from '@constants/site-config';
 import { useScrollTrigger } from '@hooks/useScrollTrigger';
 import { cn } from '@lib/utils';
 import { useEffect, useRef, useState } from 'react';
@@ -164,11 +165,19 @@ export default function Navigator({ currentPath }: NavigatorProps) {
     };
   }, []);
 
+  // Filter out weekly route if disabled
+  const filteredRouters = routers.filter((item) => {
+    if (item.path === Routes.Weekly && !siteConfig.featuredSeries?.enabled) {
+      return false;
+    }
+    return true;
+  });
+
   return (
     <div className="flex grow tablet:grow-0 items-center">
       {/* Desktop navigation */}
       <div className="flex tablet:hidden grow items-center">
-        {routers.map((item) => {
+        {filteredRouters.map((item) => {
           if (item.children?.length) {
             return <DropdownNav key={item.path ?? item.name} item={item} />;
           }
