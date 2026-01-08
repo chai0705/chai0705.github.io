@@ -7,6 +7,7 @@ import mermaid from 'astro-mermaid';
 import pagefind from 'astro-pagefind';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypeSlug from 'rehype-slug';
+import { visualizer } from 'rollup-plugin-visualizer';
 import svgr from 'vite-plugin-svgr';
 import { defaultContentConfig } from './src/constants/content-config';
 import { christmasConfig, siteConfig } from './src/constants/site-config';
@@ -108,7 +109,15 @@ export default defineConfig({
     enabled: true,
   },
   vite: {
-    plugins: [conditionalSnowfall(), svgr(), tailwindcss()],
+    plugins: [
+      conditionalSnowfall(),
+      svgr(),
+      tailwindcss(),
+      visualizer({
+        emitFile: true,
+        filename: 'stats.html',
+      }),
+    ],
     ssr: {
       noExternal: ['react-tweet'],
     },
