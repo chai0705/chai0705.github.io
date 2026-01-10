@@ -301,7 +301,7 @@ content:
 navigation:
   - name: 首页 # 菜单显示名称
     path: / # 链接路径
-    icon: fa6-solid:house-chimney # 图标
+    icon: ri:home-heart-fill # 图标
   - name: 周刊
     path: /weekly
     icon: ri:newspaper-line
