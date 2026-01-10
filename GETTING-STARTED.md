@@ -175,7 +175,7 @@ open http://localhost:4321
 
 ```bash
 # 添加新图片/文章后，先本地运行：
-pnpm generate:all
+pnpm koharu generate all
 
 # 然后提交更改
 git add src/assets/*.json
@@ -208,106 +208,104 @@ featuredSeries:
 
 然后在 `src/content/blog/` 目录创建周刊文章。
 
-### AI 摘要（可选）
+### 内容生成（可选）
+
+使用 Koharu CLI 生成内容资产：
 
 ```bash
-pnpm generate:summaries
+# 交互式选择生成类型
+pnpm koharu generate
+
+# 或直接指定类型
+pnpm koharu generate lqips        # 生成 LQIP 图片占位符，提升加载体验
+pnpm koharu generate similarities # 生成语义相似度向量，推荐相关文章
+pnpm koharu generate summaries    # 生成 AI 摘要
+pnpm koharu generate all          # 生成全部
 ```
-
-自动为文章生成 AI 摘要。
-
-### 图片优化（可选）
-
-```bash
-pnpm generate:lqips
-```
-
-生成图片占位符，提升加载体验。
-
-### 相关文章推荐（可选）
-
-```bash
-pnpm generate:similarities
-```
-
-基于语义相似度推荐相关文章。
 
 ## 常用命令
 
-| 命令           | 说明           |
-| -------------- | -------------- |
-| `pnpm dev`     | 启动开发服务器 |
-| `pnpm build`   | 构建生产版本   |
-| `pnpm preview` | 预览生产构建   |
-| `pnpm lint`    | 代码检查       |
+| 命令                        | 说明                               |
+| --------------------------- | ---------------------------------- |
+| `pnpm dev`                  | 启动开发服务器                     |
+| `pnpm build`                | 构建生产版本                       |
+| `pnpm preview`              | 预览生产构建                       |
+| `pnpm lint`                 | 代码检查                           |
+| `pnpm koharu`               | 交互式 CLI 菜单                    |
+| `pnpm koharu backup`        | 备份博客内容（--full 完整备份）    |
+| `pnpm koharu restore`       | 从备份恢复（--latest 还原最新）    |
+| `pnpm koharu update`        | 更新主题（--check 检查，--skip-backup 跳过备份）|
+| `pnpm koharu generate`      | 生成内容资产                       |
+| `pnpm koharu clean`         | 清理旧备份（--keep N 保留 N 个）   |
+| `pnpm koharu list`          | 查看所有备份                       |
 
 ## 7. 更新主题
 
 当主题发布新版本时，你可以按以下步骤更新，同时保留你的个人内容。
 
-### 需要备份的文件
+### 使用 CLI 更新（推荐）
 
-更新前，请备份以下个人文件：
-
-| 文件/目录 | 说明 |
-| --- | --- |
-| `src/content/blog/` | 你的所有博客文章 |
-| `config/site.yaml` | 站点配置（标题、社交链接、导航等） |
-| `src/pages/about.md` | 关于页面 |
-| `public/img/avatar.webp` | 你的头像 |
-| `.env` | 环境变量（Umami、Remark42 等配置） |
-| `public/img/` 中的自定义图片 | 如果你添加了自己的封面图或其他图片 |
-
-### 更新步骤
-
-#### 方式一：使用 Git 合并（推荐）
-
-如果你是通过 fork 或 `git clone` 获取的代码：
+使用 Koharu CLI 一键更新主题，自动完成备份 → 拉取 → 合并 → 安装依赖的全流程：
 
 ```bash
-# 1. 添加上游仓库（只需执行一次）
+# 完整更新流程（默认会先备份）
+pnpm koharu update
+
+# 仅检查是否有更新
+pnpm koharu update --check
+
+# 跳过备份直接更新
+pnpm koharu update --skip-backup
+```
+
+更新过程中会自动：
+1. 检查工作区状态
+2. 备份你的个人内容（可选）
+3. 设置 upstream remote（如果没有）
+4. 获取最新代码
+5. 显示新提交列表
+6. 合并更新
+7. 安装依赖
+
+如果遇到合并冲突，CLI 会显示冲突文件列表并提供解决指引。
+
+### 手动更新
+
+如果你更喜欢手动操作：
+
+```bash
+# 1. 先备份你的个人内容
+pnpm koharu backup --full
+
+# 2. 添加上游仓库（只需执行一次）
 git remote add upstream https://github.com/cosZone/astro-koharu.git
 
-# 2. 获取最新代码
+# 3. 获取最新代码
 git fetch upstream
 
-# 3. 合并更新到你的分支
+# 4. 合并更新到你的分支
 git merge upstream/main
 
-# 4. 解决可能的冲突，然后安装依赖
+# 5. 解决可能的冲突，然后安装依赖
 pnpm install
 
-# 5. 测试是否正常
+# 6. 测试是否正常
 pnpm dev
 ```
 
-#### 方式二：手动更新
+### 还原备份
 
-如果你不熟悉 Git 操作：
+如果更新后需要还原备份：
 
 ```bash
-# 1. 备份你的个人文件
-cp -r src/content/blog/ ~/backup/blog/
-cp config/site.yaml ~/backup/
-cp src/pages/about.md ~/backup/
-cp public/img/avatar.webp ~/backup/
-cp .env ~/backup/
+# 查看所有备份
+pnpm koharu list
 
-# 2. 下载最新版本的主题
-# 从 https://github.com/cosZone/astro-koharu/releases 下载
+# 预览将要还原的文件
+pnpm koharu restore --dry-run
 
-# 3. 解压并覆盖项目文件
-
-# 4. 恢复你的个人文件
-cp -r ~/backup/blog/ src/content/blog/
-cp ~/backup/site.yaml config/
-cp ~/backup/about.md src/pages/
-cp ~/backup/avatar.webp public/img/
-cp ~/backup/.env ./
-
-# 5. 安装依赖并测试
-pnpm install
-pnpm dev
+# 还原最新备份
+pnpm koharu restore --latest
 ```
 
 ### 更新后检查
