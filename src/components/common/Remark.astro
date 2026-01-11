@@ -1,6 +1,6 @@
 ---
 import { commentConfig } from '@/constants/site-config';
-import { cn } from '@/lib/utils';
+import { cn, normalizeUrl } from '@/lib/utils';
 import { christmasEnabled } from '@/store/christmas';
 
 declare global {
@@ -42,7 +42,8 @@ export interface Props {
 }
 
 // Get Remark42 configuration from site config
-const remarkUrl = commentConfig.remark42?.host;
+// Normalize URL to remove trailing slashes (prevents double-slash in script paths)
+const remarkUrl = normalizeUrl(commentConfig.remark42?.host);
 const remarkSiteId = commentConfig.remark42?.siteId;
 const remarkEnabled = commentConfig.remark42?.enabled ?? false;
 ---

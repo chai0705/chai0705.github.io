@@ -18,3 +18,21 @@ export function shuffleArray<T>(array: T[]): T[] {
   }
   return result;
 }
+
+/**
+ * Normalize URL by removing trailing slashes from origin
+ * Uses URL API for robust parsing
+ * @example normalizeUrl('https://example.com/') => 'https://example.com'
+ * @example normalizeUrl('https://example.com:8080/') => 'https://example.com:8080'
+ */
+export function normalizeUrl(url: string | undefined): string {
+  if (!url) return '';
+  try {
+    const parsed = new URL(url);
+    // Return origin (protocol + host + port) without trailing slash
+    return parsed.origin;
+  } catch {
+    // Fallback for invalid URLs
+    return url.replace(/\/+$/, '');
+  }
+}

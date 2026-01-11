@@ -3,6 +3,42 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 ---
+
+## [2.0.0](https://github.com/cosZone/astro-koharu/compare/v1.4.0..v2.0.0) - 2026-01-11
+
+### Breaking Changes
+
+- Configuration file changed from `_config.yml` to `config/site.yaml`
+- Umami analytics config moved from environment variables to `site.yaml`
+- Remark42 comment config moved to `site.yaml`
+- Navigation items now defined in `site.yaml` instead of hardcoded in components
+
+### Features
+
+- **Koharu CLI**: add interactive TUI tool for blog management with backup, restore, update, generate, clean, and list commands - ([7909b64](https://github.com/cosZone/astro-koharu/commit/7909b64)) - yusixian
+- **YAML Config**: migrate configuration from `_config.yml` to `config/site.yaml` with full type safety - ([467b8a3](https://github.com/cosZone/astro-koharu/commit/467b8a3)) - yusixian
+
+### Refactor
+
+- migrate comment (Remark42) and analytics (Umami) configurations to site.yaml - ([0014284](https://github.com/cosZone/astro-koharu/commit/0014284)) - yusixian
+- update navigation icons configuration to use Iconify format in site.yaml - ([b204bff](https://github.com/cosZone/astro-koharu/commit/b204bff)) - yusixian
+
+### Bug Fixes
+
+- fix rss page view transition - ([8040d56](https://github.com/cosZone/astro-koharu/commit/8040d5694eeb16aae6f5dc6e034fcbbcf4940376)) - yusixian
+- update pointer-events for FlippedCard component to improve interaction handling - ([263d10b](https://github.com/cosZone/astro-koharu/commit/263d10be4df4dc0e4d72a236e86298b5b213ffc0)) - yusixian
+
+### Build
+
+- add rollup-plugin-visualizer for build analysis and update configuration - ([73befbf](https://github.com/cosZone/astro-koharu/commit/73befbfc39b8bdeac9adde527f46fd9ab131a95a)) - yusixian
+
+### Documentation
+
+- update about page with new content and formatting - ([015ae72](https://github.com/cosZone/astro-koharu/commit/015ae725afcd405cf427c9536bfa29b01417c447)) - yusixian
+- update README with new images - ([03d05cf](https://github.com/cosZone/astro-koharu/commit/03d05cfef1ab69d55f2afdb57258d47a15aff53b)) - yusixian
+
+---
+
 ## [1.4.0](https://github.com/cosZone/astro-koharu/compare/v1.3.0..v1.4.0) - 2026-01-03
 
 ### Bug Fixes
@@ -28,6 +64,7 @@ All notable changes to this project will be documented in this file. See [conven
 - optimize snow performance - ([fa0db76](https://github.com/cosZone/astro-koharu/commit/fa0db76435f3d3626ad8dc9e8bf7f7232eae00a9)) - yusixian
 
 ---
+
 ## [1.3.0](https://github.com/cosZone/astro-koharu/compare/v1.2.0..v1.3.0) - 2025-12-24
 
 ### Bug Fixes
@@ -49,6 +86,7 @@ All notable changes to this project will be documented in this file. See [conven
 - integrate Mermaid support for enhanced diagram rendering and interaction - ([55e7501](https://github.com/cosZone/astro-koharu/commit/55e75018113d5e87dd15c3de9a006fe821a585b7)) - yusixian
 
 ---
+
 ## [1.2.0](https://github.com/cosZone/astro-koharu/compare/v1.1.0..v1.2.0) - 2025-12-20
 
 ### Documentation
@@ -67,6 +105,7 @@ All notable changes to this project will be documented in this file. See [conven
 - optimize font & image - ([de1d6e9](https://github.com/cosZone/astro-koharu/commit/de1d6e91519a155a2f79b323c55bdcefb2abd133)) - yusixian
 
 ---
+
 ## [1.1.0](https://github.com/cosZone/astro-koharu/compare/v1.0.1..v1.1.0) - 2025-12-13
 
 ### Bug Fixes
@@ -88,6 +127,7 @@ All notable changes to this project will be documented in this file. See [conven
 - enhance post description handling - ([044d278](https://github.com/cosZone/astro-koharu/commit/044d2781c8cea43deb5b4e2b85ae5bb2ae9bc4a7)) - yusixian
 
 ---
+
 ## [1.0.1](https://github.com/cosZone/astro-koharu/compare/v1.0.0..v1.0.1) - 2025-12-06
 
 ### Documentation
@@ -101,11 +141,12 @@ All notable changes to this project will be documented in this file. See [conven
 - add link preview for tweets and general links - ([5f34617](https://github.com/cosZone/astro-koharu/commit/5f34617cad93405b2fbf66e7296613760b17af68)) - yusixian
 
 ---
+
 ## [1.0.0] - 2025-12-06
 
 ### Bug Fixes
 
-- update React 19.2.1 for  CVE-2025-55182 - ([ee9b120](https://github.com/cosZone/astro-koharu/commit/ee9b1209fcd8b0ef8e589b0b928d5ad5ac0ccdd0)) - yusixian
+- update React 19.2.1 for CVE-2025-55182 - ([ee9b120](https://github.com/cosZone/astro-koharu/commit/ee9b1209fcd8b0ef8e589b0b928d5ad5ac0ccdd0)) - yusixian
 - adjust scroll progress bar height for improved visibility - ([8b13c2d](https://github.com/cosZone/astro-koharu/commit/8b13c2dd54e453b0fd852156c8e52f0b2b97542d)) - yusixian
 - remove rel noopener noreferrer for link - ([2232502](https://github.com/cosZone/astro-koharu/commit/2232502de0b83f7bcf9eb0641a6fcc29e4fd1cad)) - yusixian
 - detect code language - ([06b14c0](https://github.com/cosZone/astro-koharu/commit/06b14c0d0d369dd0acbced5636ccdc698c47a604)) - yusixian
@@ -151,7 +192,7 @@ All notable changes to this project will be documented in this file. See [conven
 - update tailwind 4.0 and astro 5.2 - ([81e70a1](https://github.com/cosZone/astro-koharu/commit/81e70a19e121d0dbab0bf72449f44c536e4ab95b)) - yusixian
 - update Astro config trailingSlash to 'never' - ([96deda0](https://github.com/cosZone/astro-koharu/commit/96deda007e8f42949be3553ae6e6f4d92b0518b8)) - yusixian
 - add husky and lint-stage & format blog by lint-md - ([e274b07](https://github.com/cosZone/astro-koharu/commit/e274b07348b7a0c2cdde618e9e6dee5bbd28fd89)) - yusixian
-- add git cliff  to generate CHANGELOG - ([2094ee1](https://github.com/cosZone/astro-koharu/commit/2094ee18a0268c3ba14d055ff6d708deac3d5ce5)) - yusixian
+- add git cliff to generate CHANGELOG - ([2094ee1](https://github.com/cosZone/astro-koharu/commit/2094ee18a0268c3ba14d055ff6d708deac3d5ce5)) - yusixian
 - prettier & docs & lib - ([4b0ed1f](https://github.com/cosZone/astro-koharu/commit/4b0ed1fc22e64262812107d35335f88df74354b2)) - yusixian
 
 ### Documentation

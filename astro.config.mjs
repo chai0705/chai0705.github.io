@@ -15,6 +15,7 @@ import { visualizer } from 'rollup-plugin-visualizer';
 import svgr from 'vite-plugin-svgr';
 import { rehypeImagePlaceholder } from './src/lib/markdown/rehype-image-placeholder.ts';
 import { remarkLinkEmbed } from './src/lib/markdown/remark-link-embed.ts';
+import { normalizeUrl } from './src/lib/utils.ts';
 
 // Load YAML config directly with Node.js (before Vite plugins are available)
 // This is only used in astro.config.mjs - other files use @rollup/plugin-yaml
@@ -30,7 +31,8 @@ const yamlConfig = loadConfigForAstro();
 const umamiConfig = yamlConfig.analytics?.umami;
 const umamiEnabled = umamiConfig?.enabled ?? false;
 const umamiId = umamiConfig?.id;
-const umamiEndpoint = umamiConfig?.endpoint;
+// Normalize endpoint URL to remove trailing slashes
+const umamiEndpoint = normalizeUrl(umamiConfig?.endpoint);
 
 /**
  * Vite plugin for conditional Three.js bundling
