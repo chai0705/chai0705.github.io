@@ -90,6 +90,24 @@ export const seoConfig = {
 
 export const defaultCoverList = Array.from({ length: 21 }, (_, index) => index + 1).map((item) => `/img/cover/${item}.webp`);
 
+// Comment config types
+type CommentConfig = {
+  remark42?: {
+    enabled: boolean;
+    host: string;
+    siteId: string;
+  };
+};
+
+// Analytics config types
+type AnalyticsConfig = {
+  umami?: {
+    enabled: boolean;
+    id: string;
+    endpoint: string;
+  };
+};
+
 // Christmas config types
 type ChristmasConfig = {
   enabled: boolean;
@@ -110,6 +128,12 @@ type ChristmasConfig = {
     mobileMaxIterations: number;
   };
 };
+
+// Map YAML comment config
+export const commentConfig: CommentConfig = yamlConfig.comment || {};
+
+// Map YAML analytics config
+export const analyticsConfig: AnalyticsConfig = yamlConfig.analytics || {};
 
 // Map YAML christmas config with defaults
 export const christmasConfig: ChristmasConfig = yamlConfig.christmas || {

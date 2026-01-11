@@ -141,6 +141,34 @@ export interface RouterItem {
 }
 
 // =============================================================================
+// Comment Configuration
+// =============================================================================
+
+export interface Remark42Config {
+  enabled: boolean;
+  host: string;
+  siteId: string;
+}
+
+export interface CommentConfig {
+  remark42?: Remark42Config;
+}
+
+// =============================================================================
+// Analytics Configuration
+// =============================================================================
+
+export interface UmamiConfig {
+  enabled: boolean;
+  id: string;
+  endpoint: string;
+}
+
+export interface AnalyticsConfig {
+  umami?: UmamiConfig;
+}
+
+// =============================================================================
 // Christmas/Seasonal Features
 // =============================================================================
 
@@ -181,6 +209,8 @@ export interface SiteYamlConfig {
   announcements?: AnnouncementConfig[];
   content?: ContentConfig;
   navigation?: RouterItem[];
+  comment?: CommentConfig;
+  analytics?: AnalyticsConfig;
   categoryMap?: Record<string, string>; // TODO: i18n, now use eg: { '随笔': 'life' }
   christmas?: ChristmasConfig;
 }

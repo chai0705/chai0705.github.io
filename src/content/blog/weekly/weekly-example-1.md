@@ -23,17 +23,16 @@ categories:
 
 ## 周刊配置
 
-在 `src/constants/site-config.ts` 中配置：
+在 `config/site.yaml` 中配置：
 
-```typescript
-featuredSeries: {
-  categoryName: '周刊',  // 分类名称
-  label: '我的周刊',      // 显示标签
-  fullName: '我的技术周刊',
-  description: '周刊描述...',
-  cover: '/img/weekly_header.webp',
-  enabled: true,         // 设为 false 可关闭
-}
+```yaml
+featuredSeries:
+  categoryName: 周刊       # 分类名称
+  label: 我的周刊          # 显示标签
+  fullName: 我的技术周刊
+  description: 周刊描述...
+  cover: /img/weekly_header.webp
+  enabled: true            # 设为 false 可关闭
 ```
 
 ## 周刊特点

@@ -12,7 +12,6 @@ import jsYaml from 'js-yaml';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypeSlug from 'rehype-slug';
 import { visualizer } from 'rollup-plugin-visualizer';
-import { loadEnv } from 'vite';
 import svgr from 'vite-plugin-svgr';
 import { rehypeImagePlaceholder } from './src/lib/markdown/rehype-image-placeholder.ts';
 import { remarkLinkEmbed } from './src/lib/markdown/remark-link-embed.ts';
@@ -26,10 +25,12 @@ function loadConfigForAstro() {
 }
 
 const yamlConfig = loadConfigForAstro();
-const mode = process.env.NODE_ENV ?? 'development';
-const env = loadEnv(mode, process.cwd(), '');
-const umamiId = env.UMAMI_ID ?? process.env.UMAMI_ID;
-const umamiEndpoint = env.UMAMI_ENDPOINT ?? process.env.UMAMI_ENDPOINT;
+
+// Get Umami analytics config from YAML
+const umamiConfig = yamlConfig.analytics?.umami;
+const umamiEnabled = umamiConfig?.enabled ?? false;
+const umamiId = umamiConfig?.id;
+const umamiEndpoint = umamiConfig?.endpoint;
 
 /**
  * Vite plugin for conditional Three.js bundling
@@ -113,9 +114,8 @@ export default defineConfig({
         ri: ['*'],
       },
     }),
-    // Umami analytics - configured via environment variables
-    // Set UMAMI_ID and UMAMI_ENDPOINT in .env file
-    ...(umamiId
+    // Umami analytics - configured via config/site.yaml
+    ...(umamiEnabled && umamiId
       ? [
           umami({
             id: umamiId,

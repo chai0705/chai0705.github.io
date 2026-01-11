@@ -40,8 +40,8 @@
 
 也可以通过 docker / docker-compose 运行一个带 Nginx 的容器：
 
-1. 在仓库根目录复制环境变量文件 `cp .env.example .env` 并填入你的 Remark42、Umami 等配置。
-2. 执行 `./docker/rebuild.sh`，脚本会自动读取根目录 `.env`、停止旧容器并重新构建/启动。
+1. 编辑 `config/site.yaml`，配置 `comment.remark42` 和 `analytics.umami` 部分。
+2. 执行 `./docker/rebuild.sh`，脚本会自动停止旧容器并重新构建/启动。
 
 > 想自定义环境文件位置或跳过 `docker compose down`，可在运行脚本时设置 `ENV_FILE=/path/to/.env` 或 `SKIP_DOWN=true`。
 
@@ -166,6 +166,8 @@ pnpm koharu generate all          # 生成全部
 - 分类映射（中文分类名 → URL slug）
 - 友链列表
 - 公告系统
+- 评论系统（Remark42）
+- 数据统计（Umami）
 - 圣诞特辑开关
 
 详细配置说明请参考文档。
@@ -174,7 +176,7 @@ pnpm koharu generate all          # 生成全部
 
 - **[快速开始](./GETTING-STARTED.md)** - 启动你的博客
 - **[更新主题](./GETTING-STARTED.md#7-更新主题)** - 如何安全地更新到新版本
-- **[完整使用指南](./src/content/blog/tools/astro-koharu-使用指南.md)** - 所有功能的详细配置和使用方法
+- **[完整使用指南](./src/content/blog/tools/astro-koharu-guide.md)** - 所有功能的详细配置和使用方法
 
 ## 特色功能演示图片
 

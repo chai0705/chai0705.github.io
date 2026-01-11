@@ -27,15 +27,14 @@ astro-koharu 是一个基于 Astro 5.x 构建的现代化博客系统，设计�
 
 ### 1. 配置你的博客
 
-编辑 `src/constants/site-config.ts` 文件：
+编辑 `config/site.yaml` 文件：
 
-```typescript
-export const siteConfig = {
-  title: "你的博客名称",
-  author: "你的名字",
-  description: "你的博客简介",
-  // ...更多配置
-};
+```yaml
+site:
+  title: 你的博客名称
+  author: 你的名字
+  description: 你的博客简介
+  # ...更多配置
 ```
 
 ### 2. 写第一篇文章

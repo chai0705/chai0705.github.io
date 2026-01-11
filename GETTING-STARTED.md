@@ -154,7 +154,7 @@ categories:
 
 1. 在 Vercel 项目设置中添加域名
 2. 按照提示配置 DNS
-3. 更新 `site-config.ts` 中的 `site` 字段
+3. 更新 `config/site.yaml` 中的 `site.url` 字段
 
 ### Docker 部署
 
@@ -185,7 +185,7 @@ git commit -m "chore: update generated assets"
 ./docker/rebuild.sh
 ```
 
-详细说明请参考[使用指南的 Docker 部署章节](./src/content/blog/tools/astro-koharu-使用指南.md)。
+详细说明请参考[使用指南的 Docker 部署章节](./src/content/blog/tools/astro-koharu-guide.md)。
 
 ## 6. 进阶功能
 
@@ -325,7 +325,7 @@ pnpm koharu restore --latest
 
 ## 获取帮助
 
-- 📖 [详细使用指南](./src/content/blog/tools/astro-koharu-使用指南.md)
+- 📖 [详细使用指南](./src/content/blog/tools/astro-koharu-guide.md)
 - 🐛 [提交 Issue](https://github.com/cosZone/astro-koharu/issues)
 - ⭐ [GitHub 仓库](https://github.com/cosZone/astro-koharu)
 

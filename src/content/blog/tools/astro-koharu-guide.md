@@ -1150,14 +1150,14 @@ https://zhuanlan.zhihu.com/p/1900483903984243480
 
 集成 Umami 分析（可选）。
 
-在 `astro.config.mjs` 中配置：
+在 `config/site.yaml` 中配置：
 
-```javascript
-umami({
-  id: "your-website-id",
-  endpointUrl: "https://stats.example.com",
-  hostUrl: "https://stats.example.com",
-});
+```yaml
+analytics:
+  umami:
+    enabled: true
+    id: your-umami-id
+    endpoint: https://stats.example.com
 ```
 
 ## 开发指南
@@ -1245,12 +1245,10 @@ astro-koharu 支持通过 Docker 进行容器化部署，适合需要自托管�
 **快速开始：**
 
 ```bash
-# 1. 复制环境变量文件
-cp .env.example .env
-# 编辑 .env 填写 REMARK_URL, REMARK_SITE_ID, UMAMI_ID 等
+# 1. 编辑 config/site.yaml，配置 comment.remark42 和 analytics.umami 部分
 
 # 2. 构建并启动
-docker compose --env-file ./.env -f docker/docker-compose.yml up -d --build
+docker compose -f docker/docker-compose.yml up -d --build
 
 # 3. 访问
 open http://localhost:4321
@@ -1304,22 +1302,27 @@ cd docker
 2. 停止现有容器
 3. 重新构建并启动
 
-**环境变量说明：**
+**评论与统计配置：**
 
-在 `.env` 文件中配置：
+在 `config/site.yaml` 中配置评论系统和统计：
 
-```bash
+```yaml
 # 评论系统（可选）
-REMARK_URL=https://your-remark-server.com
-REMARK_SITE_ID=your-site-id
+comment:
+  remark42:
+    enabled: true
+    host: https://your-remark-server.com/
+    siteId: your-site-id
 
 # 统计系统（可选）
-UMAMI_ID=your-umami-id
-UMAMI_ENDPOINT=https://your-umami-server.com
-
-# 自定义端口（默认 4321）
-BLOG_PORT=4321
+analytics:
+  umami:
+    enabled: true
+    id: your-umami-id
+    endpoint: https://your-umami-server.com
 ```
+
+Docker 端口可在 `.env` 中配置 `BLOG_PORT=4321`。
 
 **注意事项：**
 
@@ -1555,11 +1558,21 @@ cover: /img/cover/1.webp
 
 ### 如何自定义域名？
 
-部署到 Vercel 后，在 Vercel 项目设置中添加自定义域名，然后更新 `src/constants/site-config.ts` 中的 `site` 字段。
+部署到 Vercel 后，在 Vercel 项目设置中添加自定义域名，然后更新 `config/site.yaml` 中的 `site.url` 字段。
 
 ### 如何添加评论功能？
 
-项目预留了评论组件位置（`src/components/comment/`），你可以集成 Giscus、Waline 等评论系统。
+项目已集成 Remark42 评论系统，在 `config/site.yaml` 中配置：
+
+```yaml
+comment:
+  remark42:
+    enabled: true
+    host: https://your-remark-server.com/
+    siteId: your-site-id
+```
+
+如需使用其他评论系统（如 Giscus、Waline），可以修改 `src/components/common/Remark.astro`。
 
 ### 草稿文章如何预览？
 
@@ -1569,7 +1582,8 @@ cover: /img/cover/1.webp
 
 - **关闭周刊**：设置 `featuredSeries.enabled = false`
 - **关闭搜索**：移除 `astro.config.mjs` 中的 `pagefind()` 集成
-- **关闭统计**：移除 `umami()` 集成
+- **关闭统计**：设置 `analytics.umami.enabled = false`
+- **关闭评论**：设置 `comment.remark42.enabled = false`
 
 ### 如何更改文章 URL 格式？
 
