@@ -208,7 +208,7 @@ export function UpdateApp({
 
           {updateInfo.aheadCount > 0 && (
             <Box marginTop={1}>
-              <Text color="yellow">注意: 本地有 {updateInfo.aheadCount} 个未推送的提交</Text>
+              <Text color="yellow">提示: 本地比上游模板多 {updateInfo.aheadCount} 个提交</Text>
             </Box>
           )}
 
