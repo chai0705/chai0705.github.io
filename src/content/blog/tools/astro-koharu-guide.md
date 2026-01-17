@@ -29,7 +29,7 @@ astro-koharu 是一个基于 Astro 5.x 构建的现代化博客系统，从 Hexo
 - 基于 Pagefind 的无后端全站搜索
 - 完整的 Markdown 增强功能（GFM、代码高亮、自动目录）
 - 灵活的多级分类与标签系统（从 Shoka 主题迁移，后续会考虑将其改为可关闭的）
-- 特色周刊/系列文章支持
+- 多系列文章支持（周刊、书摘等自定义系列，支持自定义 URL slug）
 - 响应式设计
 - 草稿与置顶功能
 - 阅读进度条与阅读时间估算
@@ -111,24 +111,51 @@ featuredCategories:
   # ... 更多分类
 ```
 
-**周刊/系列配置：**
+**多系列文章配置：**
 
-配置特色系列（如周刊）：
+配置特色系列（如周刊、书摘等），支持多个系列，每个系列拥有独立页面和自定义 URL：
 
 ```yaml
 featuredSeries:
-  categoryName: 周刊 # 分类名称
-  label: FE Bits # 显示标签
-  fullName: FE Bits 前端周周谈 # 完整名称
-  description: | # 描述（支持多行）
-    之前在自己的频道进行一些输出，于是有了这个周刊！
-    更新时间期望是在每周天
-  cover: /img/weekly_header.webp # 封面图
-  enabled: true # 是否启用（设为 false 关闭此功能）
-  links: # 相关链接
-    github: https://github.com/your-username/your-repo
-    rss: /rss.xml
+  - slug: weekly              # URL 路径: /weekly（必填，作为页面路由）
+    categoryName: 周刊        # 分类名称（用于匹配文章）
+    label: FE Bits            # 显示标签
+    fullName: FE Bits 前端周周谈  # 完整名称
+    description: |            # 描述（支持多行）
+      之前在自己的频道进行一些输出，于是有了这个周刊！
+      更新时间期望是在每周天
+    cover: /img/weekly_header.webp  # 封面图
+    enabled: true             # 是否启用
+    icon: ri:newspaper-line   # 导航图标（可选）
+    highlightOnHome: true     # 是否在首页高亮最新文章（可选，默认 true）
+    links:                    # 相关链接
+      github: https://github.com/your-username/your-repo
+      rss: /rss.xml
+
+  - slug: reading             # URL 路径: /reading
+    categoryName: 书摘
+    label: 读书笔记
+    fullName: 我的读书笔记
+    description: 读书摘录与感悟
+    cover: /img/reading_header.webp
+    enabled: true
+    highlightOnHome: false    # 此系列不在首页高亮
 ```
+
+**字段说明：**
+
+| 字段 | 必填 | 说明 |
+|------|------|------|
+| `slug` | ✅ | URL 路径，如 `weekly` 对应 `/weekly` |
+| `categoryName` | ✅ | 分类名称，用于匹配文章 |
+| `label` | ❌ | 显示标签（默认使用 categoryName） |
+| `enabled` | ❌ | 是否启用此系列（默认 true） |
+| `fullName` | ❌ | 完整名称（用于页面标题） |
+| `description` | ❌ | 系列描述 |
+| `cover` | ❌ | 封面图片路径 |
+| `icon` | ❌ | 导航图标（Iconify 格式） |
+| `highlightOnHome` | ❌ | 是否在首页高亮最新文章（默认 true） |
+| `links` | ❌ | 相关链接（github、rss 等） |
 
 ### 社交媒体配置
 
@@ -167,8 +194,11 @@ navigation:
     path: /
     icon: fa6-solid:house-chimney
   - name: 周刊
-    path: /weekly
+    path: /weekly            # 对应 featuredSeries 中 slug: weekly 的系列
     icon: ri:newspaper-line
+  - name: 读书笔记
+    path: /reading           # 对应 featuredSeries 中 slug: reading 的系列
+    icon: ri:book-open-line
   - name: 文章
     icon: ri:quill-pen-ai-fill
     children: # 支持嵌套子菜单
@@ -189,6 +219,8 @@ navigation:
     icon: fa6-regular:circle-user
 ```
 
+> **注意**：系列页面的路径格式为 `/{slug}`，需要与 `featuredSeries` 中配置的 `slug` 字段一致。
+
 ### 分类映射配置
 
 在 `config/site.yaml` 中配置中文分类名到 URL slug 的映射：
@@ -203,7 +235,8 @@ categoryMap:
   随笔: life
   笔记: note
   工具: tools
-  周刊: weekly
+  周刊: weekly      # 用于分类页面 /categories/weekly
+  书摘: reading     # 用于分类页面 /categories/reading
   # Secondary categories (for nested paths)
   前端: front-end
   # Add more as needed:
@@ -212,6 +245,8 @@ categoryMap:
 ```
 
 这样，"随笔" 分类的 URL 会是 `/categories/life`，而不是 `/categories/随笔`。
+
+> **注意**：`categoryMap` 仅用于分类页面（`/categories/*`）的 URL 映射。系列页面的 URL（如 `/weekly`、`/reading`）由 `featuredSeries` 中的 `slug` 字段单独配置。
 
 ## 文章系统
 
@@ -266,6 +301,7 @@ catalog: true # 是否显示目录（默认 true）
 tocNumbering: true # 是否显示目录编号（默认 true）
 draft: false # 是否为草稿（默认 false）
 sticky: false # 是否置顶（默认 false）
+excludeFromSummary: false # 是否排除 AI 摘要和相似度计算（默认 false，系列文章建议设为 true）
 ---
 ```
 
@@ -347,13 +383,13 @@ sticky: true
 - 置顶文章按日期排序（最新的在前）
 - 不影响其他页面（分类、标签、归档）的排序
 
-### 周刊/系列文章
+### 系列文章
 
-如果配置了 `featuredSeries`（见基本配置），该分类下的文章会：
+配置了 `featuredSeries` 的系列（见基本配置），其分类下的文章会：
 
-1. 在首页置顶区域显示最新一篇
-2. 拥有专属的周刊页面 (`/weekly`)
-3. 不出现在普通文章列表中
+1. 拥有专属的系列页面（URL 由 `slug` 决定，如 `/weekly`、`/reading`）
+2. 不出现在普通文章列表（`/posts`）中
+3. 如果系列设置了 `highlightOnHome: true`，最新一篇会在首页高亮显示
 
 **示例：**
 
@@ -361,9 +397,20 @@ sticky: true
 ---
 title: FE Bits Vol.16
 categories:
-  - 周刊 # 对应 featuredSeries.categoryName
+  - 周刊  # 对应某个 featuredSeries 的 categoryName
+excludeFromSummary: true  # 可选：排除 AI 摘要生成
 ---
 ```
+
+```yaml
+---
+title: 《代码大全》读书笔记
+categories:
+  - 书摘  # 对应另一个 featuredSeries 的 categoryName
+---
+```
+
+> **提示**：文章的 `categories` 字段需要与 `featuredSeries` 中某个系列的 `categoryName` 匹配才会被归入该系列。
 
 ## 界面功能
 
@@ -476,20 +523,36 @@ tocNumbering: false # 关闭目录编号（默认为 true）
 
 ## 特色功能
 
-### 周刊系统
+### 系列文章系统
 
-如果启用了 `featuredSeries`，会自动生成周刊相关功能：
+`featuredSeries` 支持配置多个系列，每个系列会自动生成独立页面：
 
-**专属周刊页面** (`/weekly`)：
+**专属系列页面** (`/{slug}`)：
 
-- 显示所有周刊文章
-- 周刊头图和介绍
+- 每个启用的系列都有独立页面（如 `/weekly`、`/reading`）
+- 显示该系列的所有文章
+- 系列头图和介绍
 - 相关链接（GitHub, RSS 等）
 
 **首页展示：**
 
-- 最新周刊文章置顶显示
-- 独立于普通文章列表
+- 设置 `highlightOnHome: true` 的系列，其最新文章会在首页高亮显示
+- 设置 `highlightOnHome: false` 的系列不在首页展示
+- 所有系列文章独立于普通文章列表
+
+**配置示例：**
+
+```yaml
+featuredSeries:
+  - slug: weekly
+    categoryName: 周刊
+    highlightOnHome: true   # 首页展示最新周刊
+    # ...
+  - slug: reading
+    categoryName: 书摘
+    highlightOnHome: false  # 不在首页展示
+    # ...
+```
 
 ### 归档页面
 
@@ -526,7 +589,7 @@ LQIP（Low Quality Image Placeholder）是一种图片加载优化技术，在�
 - 文章卡片封面 (`PostItemCard`)
 - 页面横幅 (`Cover`)
 - 分类卡片背景 (`CategoryCards`)
-- 周刊封面 (`WeeklyCover`)
+- 系列封面 (`SeriesCover`)
 - 侧边栏头像 (`HomeInfo`)
 
 **使用方式：**
@@ -598,7 +661,7 @@ const lqipProps = getLqipProps(coverUrl);
 - 🧠 基于 AI 嵌入模型（Snowflake Arctic Embed）的语义理解
 - 📊 自动计算文章间的相似度，推荐最相关的 5 篇文章
 - 🚀 构建时预计算，运行时零开销
-- 🔧 支持排除特定文章（如周刊）
+- 🔧 支持通过 frontmatter 排除特定文章
 
 **使用方式：**
 
@@ -609,15 +672,18 @@ pnpm generate:similarities
 # 生成的文件会提交到 git，Vercel 等平台直接使用
 ```
 
-**配置排除规则：**
+**排除特定文章：**
 
-编辑 `src/scripts/generateSimilarities.ts` 中的 `EXCLUDE_PATTERNS`：
+在文章 frontmatter 中设置 `excludeFromSummary: true` 可排除该文章：
 
-```typescript
-const EXCLUDE_PATTERNS = [
-  "weekly-", // 排除周刊文章
-];
+```yaml
+---
+title: 周刊第 1 期
+excludeFromSummary: true  # 排除此文章的相似度计算和 AI 摘要生成
+---
 ```
+
+> **提示**：系列文章（如周刊）通常建议设置 `excludeFromSummary: true`，避免影响其他文章的推荐质量。
 
 **配置计算内容：**
 
@@ -721,6 +787,7 @@ AI 摘要会保存在 `src/assets/summaries.json` 文件中，格式如下：
 **在哪里使用：**
 
 1. **文章详情页**：面包屑导航下方显示可折叠的 AI 摘要卡片
+
    - 默认收起状态，点击"展开"按钮触发
    - 展开后以打字机动画逐字显示摘要内容
    - 打字机动画仅播放一次，支持 `prefers-reduced-motion` 用户偏好
@@ -998,26 +1065,31 @@ data
 **可用模板类型：**
 
 - **列表类** (`list-*`)：展示信息列表
+
   - `list-grid-badge-card` - 卡片网格布局
   - `list-grid-candy-card-lite` - 糖果风格卡片
   - `list-row-horizontal-icon-arrow` - 水平图标箭头列表
 
 - **流程/顺序类** (`sequence-*`)：展示步骤、流程或阶段
+
   - `sequence-zigzag-steps-underline-text` - 之字形步骤
   - `sequence-circular-simple` - 圆形流程
   - `sequence-roadmap-vertical-simple` - 垂直路线图
   - `sequence-pyramid-simple` - 金字塔结构
 
 - **对比类** (`compare-*`)：二元或多元对比
+
   - `compare-binary-horizontal-simple-fold` - 水平二元对比
   - `compare-swot` - SWOT 分析
   - `compare-hierarchy-left-right-circle-node-pill-badge` - 层级左右对比
 
 - **层级类** (`hierarchy-*`)：展示树形结构
+
   - `hierarchy-tree-tech-style-capsule-item` - 科技风格树形图
   - `hierarchy-tree-curved-line-rounded-rect-node` - 曲线连接树形图
 
 - **图表类** (`chart-*`)：数据可视化
+
   - `chart-column-simple` - 柱状图
   - `chart-bar-plain-text` - 条形图
   - `chart-pie-plain-text` - 饼图
@@ -1414,17 +1486,17 @@ git commit -m "merge: resolve conflicts"
 
 **更新时使用的 Git 命令：**
 
-| 操作 | 命令 |
-|------|------|
-| 检查工作区状态 | `git status --porcelain` |
-| 获取当前分支 | `git rev-parse --abbrev-ref HEAD` |
-| 检查 upstream | `git remote -v` |
-| 添加 upstream | `git remote add upstream https://github.com/cosZone/astro-koharu.git` |
-| 获取更新 | `git fetch upstream` |
-| 查看新提交数量 | `git rev-list --left-right --count HEAD...upstream/main` |
-| 查看新提交列表 | `git log HEAD..upstream/main --pretty=format:"%h|%s|%ar|%an"` |
-| 合并更新 | `git merge upstream/main --no-edit` |
-| 中止合并 | `git merge --abort` |
+| 操作           | 命令                                                                  |
+| -------------- | --------------------------------------------------------------------- | --- | --- | ----- |
+| 检查工作区状态 | `git status --porcelain`                                              |
+| 获取当前分支   | `git rev-parse --abbrev-ref HEAD`                                     |
+| 检查 upstream  | `git remote -v`                                                       |
+| 添加 upstream  | `git remote add upstream https://github.com/cosZone/astro-koharu.git` |
+| 获取更新       | `git fetch upstream`                                                  |
+| 查看新提交数量 | `git rev-list --left-right --count HEAD...upstream/main`              |
+| 查看新提交列表 | `git log HEAD..upstream/main --pretty=format:"%h                      | %s  | %ar | %an"` |
+| 合并更新       | `git merge upstream/main --no-edit`                                   |
+| 中止合并       | `git merge --abort`                                                   |
 
 #### 内容生成
 
@@ -1562,17 +1634,235 @@ cover: /img/cover/1.webp
 
 ### 如何添加评论功能？
 
-项目已集成 Remark42 评论系统，在 `config/site.yaml` 中配置：
+项目支持三种评论系统：**Waline**、**Giscus**、**Remark42**。在 `config/site.yaml` 的 `comment` 配置块中选择使用的提供商。
+
+#### Waline（推荐）
+
+[Waline](https://waline.js.org/) 是一个简洁、安全的评论系统，支持多种部署方式（Vercel、Railway、Zeabur 等）。
+
+**特点：**
+
+- 🚀 部署简单，支持多种平台一键部署
+- 💬 支持 Markdown、表情、@提及、邮件通知
+- 📊 内置浏览量统计、评论管理后台
+- 🔐 支持多种登录方式（匿名、社交账号）
+- 🛡️ 内置反垃圾评论、敏感词过滤
+- 🎨 自动跟随站点深色/浅色主题
+
+**前置要求：**
+
+1. 部署 Waline 服务端（[部署指南](https://waline.js.org/guide/deploy/)）
+2. 获取服务端 URL
+
+**配置示例：**
 
 ```yaml
 comment:
-  remark42:
-    enabled: true
-    host: https://your-remark-server.com/
-    siteId: your-site-id
+  provider: waline
+  waline:
+    serverURL: https://your-waline-server.vercel.app # Waline 服务端地址（必填）
+    lang: zh-CN # 语言
+    dark: html.dark # 暗黑模式 CSS 选择器
+    meta: # 评论者信息字段
+      - nick
+      - mail
+      - link
+    requiredMeta: # 必填字段
+      - nick
+    login: enable # 登录模式 ('enable' | 'disable' | 'force')
+    wordLimit: 0 # 评论字数限制 (0 = 无限制)
+    pageSize: 10 # 每页评论数
+    imageUploader: false # 图片上传功能
+    highlighter: true # 代码高亮
+    texRenderer: false # LaTeX 渲染
+    search: false # 搜索功能
+    reaction: false # 文章反应功能
+    # recaptchaV3Key: '' # reCAPTCHA v3 Key (可选)
+    # turnstileKey: '' # Cloudflare Turnstile Key (可选)
 ```
 
-如需使用其他评论系统（如 Giscus、Waline），可以修改 `src/components/common/Remark.astro`。
+**参数说明：**
+
+| 参数             | 类型                                   | 默认值                   | 说明                                 |
+| ---------------- | -------------------------------------- | ------------------------ | ------------------------------------ |
+| `serverURL`      | `string`                               | **必填**                 | Waline 服务端地址                    |
+| `lang`           | `string`                               | `'zh-CN'`                | 界面语言（支持 zh-CN, en, jp 等）    |
+| `dark`           | `string`                               | `'html.dark'`            | 暗黑模式 CSS 选择器                  |
+| `meta`           | `string[]`                             | `['nick','mail','link']` | 评论者信息字段                       |
+| `requiredMeta`   | `string[]`                             | `['nick']`               | 必填字段                             |
+| `login`          | `'enable'` \| `'disable'` \| `'force'` | `'enable'`               | 登录模式                             |
+| `wordLimit`      | `number`                               | `0`                      | 评论字数限制（0 = 无限制）           |
+| `pageSize`       | `number`                               | `10`                     | 每页评论数                           |
+| `imageUploader`  | `boolean`                              | `false`                  | 是否启用图片上传                     |
+| `highlighter`    | `boolean`                              | `true`                   | 是否启用代码高亮                     |
+| `texRenderer`    | `boolean`                              | `false`                  | 是否启用 LaTeX 渲染                  |
+| `search`         | `boolean`                              | `false`                  | 是否启用搜索功能                     |
+| `reaction`       | `boolean`                              | `false`                  | 是否启用文章反应功能                 |
+| `recaptchaV3Key` | `string`                               | -                        | reCAPTCHA v3 Key（可选，防垃圾评论） |
+| `turnstileKey`   | `string`                               | -                        | Cloudflare Turnstile Key（可选）     |
+
+**部署 Waline 服务端：**
+
+推荐使用 Vercel 一键部署：
+
+1. 访问 [Waline 快速开始](https://waline.js.org/guide/get-started/)
+2. 点击 "Deploy with Vercel" 按钮
+3. 登录 Vercel，授权 GitHub 仓库
+4. 配置环境变量（数据库连接、管理员邮箱等）
+5. 部署完成后获取服务端 URL（如 `https://your-waline.vercel.app`）
+
+**主题自动切换：**
+
+Waline 组件已实现主题自动切换，通过 `dark` 参数（默认 `html.dark`）自动跟随站点深色/浅色模式。
+
+**参考链接：**
+
+- [Waline 官网](https://waline.js.org/)
+- [部署指南](https://waline.js.org/guide/deploy/)
+- [配置参数](https://waline.js.org/reference/client/)
+
+#### Remark42
+
+[Remark42](https://remark42.com/) 是一个轻量级的自托管评论系统，隐私友好，无需第三方服务。
+
+**特点：**
+
+- 🔒 自托管，完全掌控数据
+- 🚫 无广告、无追踪
+- 💾 支持多种存储后端（BoltDB、Memory）
+- 🔐 支持多种社交登录（GitHub、Google、Twitter 等）
+- 📧 邮件通知、评论审核
+- 🎨 自动跟随站点深色/浅色主题
+
+**前置要求：**
+
+1. 部署 Remark42 服务端（[部署指南](https://remark42.com/docs/getting-started/installation/)）
+2. 配置站点 ID 和域名
+
+**配置示例：**
+
+```yaml
+comment:
+  provider: remark42
+  remark42:
+    host: https://comment.example.com/ # Remark42 服务器地址（必填）
+    siteId: your-site-id # 站点 ID（必填）
+```
+
+**参数说明：**
+
+| 参数     | 类型     | 说明                                                          |
+| -------- | -------- | ------------------------------------------------------------- |
+| `host`   | `string` | Remark42 服务器地址（**必填**，需带 `http://` 或 `https://`） |
+| `siteId` | `string` | 站点 ID（**必填**，在 Remark42 服务端配置中定义）             |
+
+**部署 Remark42 服务端：**
+
+推荐使用 Docker 部署：
+
+```bash
+docker run -d \
+  --name remark42 \
+  -p 8080:8080 \
+  -e REMARK_URL=https://comment.example.com \
+  -e SECRET=your-secret-key \
+  -e SITE=your-site-id \
+  -e AUTH_GITHUB_CID=your-github-client-id \
+  -e AUTH_GITHUB_CSEC=your-github-client-secret \
+  -v /path/to/data:/srv/var \
+  umputun/remark42:latest
+```
+
+详细配置请参考 [Remark42 安装指南](https://remark42.com/docs/getting-started/installation/)。
+
+**主题自动切换：**
+
+Remark42 组件已实现主题自动切换，使用 `MutationObserver` 监听站点主题变化，自动调用 `window.REMARK42.changeTheme()` 更新评论框主题。
+
+**参考链接：**
+
+- [Remark42 官网](https://remark42.com/)
+- [安装指南](https://remark42.com/docs/getting-started/installation/)
+- [配置文档](https://remark42.com/docs/configuration/)
+
+#### Giscus
+
+[Giscus](https://giscus.app) 是基于 GitHub Discussions 的评论系统，无需自建后端，评论数据存储在你的 GitHub 仓库中。
+
+具体配置可以看看这篇文章：https://zhuanlan.zhihu.com/p/693434928
+
+**前置要求：**
+
+1. 仓库必须是[公开的](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/managing-repository-settings/setting-repository-visibility#making-a-repository-public)
+2. 安装 [giscus app](https://github.com/apps/giscus)
+3. 在仓库中[启用 Discussions 功能](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/enabling-features-for-your-repository/enabling-or-disabling-github-discussions-for-a-repository)
+
+**获取配置参数：**
+
+1. 访问 [giscus.app](https://giscus.app/zh-CN)
+2. 输入你的仓库名称（格式：`owner/repo`）
+3. 选择页面与 Discussion 的映射方式（推荐 `pathname`）
+4. 选择 Discussion 分类（推荐 `Announcements`）
+5. 启用所需功能（reactions、评论框位置等）
+6. 复制生成的 `data-repo-id` 和 `data-category-id`
+
+**配置示例：**
+
+```yaml
+comment:
+  provider: giscus
+  giscus:
+    repo: username/repo # GitHub 仓库名 (owner/repo 格式)
+    repoId: R_kgDOxxxxxx # 仓库 ID (从 giscus.app 获取)
+    category: Announcements # Discussion 分类名称
+    categoryId: DIC_kwDOxxxxxx # 分类 ID (从 giscus.app 获取)
+    mapping: pathname # 映射方式
+    reactionsEnabled: "1" # 启用 reactions ('1' 启用, '0' 禁用)
+    emitMetadata: "0" # 发送元数据
+    inputPosition: top # 输入框位置 ('top' | 'bottom')
+    lang: zh-CN # 语言
+```
+
+**参数说明：**
+
+| 参数               | 类型                | 说明                                          |
+| ------------------ | ------------------- | --------------------------------------------- |
+| `repo`             | `string`            | GitHub 仓库，格式为 `owner/repo`              |
+| `repoId`           | `string`            | 仓库 ID，从 giscus.app 获取                   |
+| `category`         | `string`            | Discussion 分类名称                           |
+| `categoryId`       | `string`            | 分类 ID，从 giscus.app 获取                   |
+| `mapping`          | `string`            | 页面与 Discussion 的映射方式                  |
+| `term`             | `string`            | 当 `mapping` 为 `specific` 或 `number` 时使用 |
+| `strict`           | `'0' \| '1'`        | 严格匹配模式，默认 `'0'`                      |
+| `reactionsEnabled` | `'0' \| '1'`        | 是否启用 reactions，默认 `'1'`                |
+| `emitMetadata`     | `'0' \| '1'`        | 是否发送页面元数据，默认 `'0'`                |
+| `inputPosition`    | `'top' \| 'bottom'` | 评论输入框位置，默认 `'top'`                  |
+| `lang`             | `string`            | 界面语言，默认 `'zh-CN'`                      |
+| `host`             | `string`            | 自托管 Giscus 实例的地址（可选）              |
+| `theme`            | `string`            | 固定主题（不设置则跟随站点主题切换）          |
+| `loading`          | `'lazy' \| 'eager'` | 加载方式，默认 `'lazy'`                       |
+
+**映射方式说明：**
+
+- `pathname`（推荐）：使用页面路径匹配，如 `/post/my-article`
+- `url`：使用完整 URL 匹配
+- `title`：使用页面标题匹配
+- `og:title`：使用 Open Graph 标题匹配
+- `specific`：使用 `term` 参数指定的值
+- `number`：使用 `term` 参数指定的 Discussion 编号
+
+**主题自动切换：**
+
+本主题已实现 Giscus 评论框的主题自动切换，会跟随站点的深色/浅色模式自动调整。实现原理：
+
+1. 组件挂载时读取当前主题
+2. 使用 `MutationObserver` 监听 `document.documentElement` 的 `class` 变化
+3. 检测到主题切换时通过 `postMessage` 通知 Giscus iframe 更新主题
+
+**参考链接：**
+
+- [giscus 官网](https://giscus.app/zh-CN)
+- [giscus-component 文档](https://github.com/giscus/giscus-component)
 
 ### 草稿文章如何预览？
 
@@ -1580,10 +1870,17 @@ comment:
 
 ### 如何关闭某些功能？
 
-- **关闭周刊**：设置 `featuredSeries.enabled = false`
+- **关闭某个系列**：设置该系列的 `enabled: false`
+  ```yaml
+  featuredSeries:
+    - slug: weekly
+      enabled: false  # 禁用此系列
+      # ...
+  ```
+- **关闭所有系列**：将 `featuredSeries` 设为空数组 `[]`
 - **关闭搜索**：移除 `astro.config.mjs` 中的 `pagefind()` 集成
 - **关闭统计**：设置 `analytics.umami.enabled = false`
-- **关闭评论**：设置 `comment.remark42.enabled = false`
+- **关闭评论**：移除 `comment.provider` 配置或将其设置为空
 
 ### 如何更改文章 URL 格式？
 
