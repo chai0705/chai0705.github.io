@@ -339,6 +339,12 @@
   pre code::after {
     content: none;
   }
+
+  table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
 }
 
 /* 代码块 */
