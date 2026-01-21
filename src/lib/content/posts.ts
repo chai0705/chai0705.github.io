@@ -341,8 +341,8 @@ export async function getHomePagePosts(): Promise<{
   regularPosts: BlogPost[];
 }> {
   const allPosts = await getSortedPosts();
-  const categoryNames = getFeaturedCategoryNames();
   const highlightedSeries = getEnabledSeries().filter((series) => series.highlightOnHome !== false);
+  const categoryNames = getFeaturedCategoryNames();
 
   // 用于追踪每个高亮系列的最新文章
   const seriesLatestMap = new Map<string, BlogPost>();
@@ -352,24 +352,23 @@ export async function getHomePagePosts(): Promise<{
 
   // 单次遍历所有文章
   for (const post of allPosts) {
+    // 检查是否属于任何 featured 系列
     const isFeatured = categoryNames.some((catName) => isPostInCategory(post, catName));
 
     if (isFeatured) {
-      // 检查是否属于高亮系列
+      // 检查是否属于高亮系列，并记录最新文章
       for (const series of highlightedSeries) {
         if (isPostInCategory(post, series.categoryName)) {
-          // 只保留每个系列的最新文章（第一篇，因为已排序）
           if (!seriesLatestMap.has(series.categoryName)) {
             seriesLatestMap.set(series.categoryName, post);
           }
           break;
         }
       }
-      // 跳过系列文章，不加入普通列表
+      // 跳过所有 featured 系列文章，不加入普通列表
       continue;
     }
 
-    // 非系列文章，按置顶状态分类
     if (post.data?.sticky) {
       stickyPosts.push(post);
     } else {
