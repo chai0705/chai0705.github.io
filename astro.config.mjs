@@ -1,6 +1,10 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import cloudflare from '@astrojs/cloudflare';
+import netlify from '@astrojs/netlify';
+import node from '@astrojs/node';
 import react from '@astrojs/react';
+import vercel from '@astrojs/vercel';
 import yaml from '@rollup/plugin-yaml';
 import tailwindcss from '@tailwindcss/vite';
 import umami from '@yeskunall/astro-umami';
@@ -26,6 +30,53 @@ function loadConfigForAstro() {
 }
 
 const yamlConfig = loadConfigForAstro();
+
+// Load CMS config for adapter decision
+function loadCmsConfig() {
+  const configPath = path.join(process.cwd(), 'config', 'cms.yaml');
+  if (!fs.existsSync(configPath)) return { enabled: false };
+  const content = fs.readFileSync(configPath, 'utf8');
+  return YAML.parse(content) || { enabled: false };
+}
+
+const cmsConfig = loadCmsConfig();
+
+/**
+ * Select adapter based on environment
+ * 按需渲染适配器，选择最合适的适配器：https://docs.astro.build/en/guides/on-demand-rendering/
+ *
+ * Priority:
+ * 1. Check if adapter is needed (dev with CMS or production build)
+ * 2. Detect platform: Vercel > Cloudflare > Netlify
+ * 3. Fallback: Node.js (standalone mode)
+ * 4. No adapter: static build
+ */
+function selectAdapter() {
+  const isDev = process.env.NODE_ENV !== 'production';
+
+  // Determine if adapter is needed
+  const needsAdapter = isDev ? cmsConfig?.enabled : true;
+
+  // Static build without adapter
+  if (!needsAdapter) {
+    return undefined;
+  }
+
+  // Platform detection
+  const isVercel = process.env.VERCEL === '1';
+  const isCloudflare = process.env.CF_PAGES === '1' || !!process.env.CLOUDFLARE;
+  const isNetlify = process.env.NETLIFY === 'true';
+
+  // Select platform-specific adapter
+  if (isVercel) return vercel();
+  if (isCloudflare) return cloudflare();
+  if (isNetlify) return netlify();
+
+  // Fallback: Node.js standalone (for self-hosting or undetected platforms)
+  return node({ mode: 'standalone' });
+}
+
+const adapter = selectAdapter();
 
 // Get Umami analytics config from YAML
 const umamiConfig = yamlConfig.analytics?.umami;
@@ -66,6 +117,7 @@ function conditionalSnowfall() {
 // https://astro.build/config
 export default defineConfig({
   site: yamlConfig.site.url,
+  adapter,
   compressHTML: true,
   markdown: {
     // Enable GitHub Flavored Markdown

@@ -32,9 +32,13 @@
 
 ## 部署
 
-### Vercel 一键部署
+支持 **Vercel**、**Cloudflare Pages**、**Netlify** 等主流平台自动部署，会根据环境自动选择适配器，未识别平台则使用 Node.js 保底适配器（适合 Docker 或自托管）。
+
+### 一键部署
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/cosZone/astro-koharu&project-name=astro-koharu&repository-name=astro-koharu)
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/cosZone/astro-koharu)
+[![Deploy to Cloudflare Pages](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/cosZone/astro-koharu)
 
 ### Docker 部署
 
@@ -96,6 +100,7 @@ pnpm dev
 - 无后端站点公告系统：可通过配置文件管理公告，支持时间控制、多条公告堆叠、自定义颜色、hover 已读
 - 有样式的 [RSS](https://blog.cosine.ren/rss.xml) 订阅源链接
 - **Koharu CLI**：交互式命令行工具，支持备份/还原、内容生成、备份管理
+- 无后端 CMS（本地编辑器 / 浏览器编辑）：文章页支持在 `config/cms.yaml` 启用编辑按钮，在 dev 模式内置浏览器编辑器与本地编辑器协议跳转（VS Code / Cursor / Zed），具体配置见 `config/cms.yaml`，后续考虑拓展更多 cms 功能，一键修改文件路径等。
 
 ## Koharu CLI
 
@@ -210,6 +215,7 @@ pnpm koharu generate all          # 生成全部
 - **评论系统**（Waline / Giscus / Remark42，推荐使用 Waline）
 - 数据统计（Umami）
 - 圣诞特辑开关
+- 本地 CMS 配置（`config/cms.yaml`，用于浏览器编辑/本地编辑器协议跳转）
 
 详细配置说明请参考文档。
 
