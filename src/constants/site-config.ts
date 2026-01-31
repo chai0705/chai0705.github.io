@@ -1,29 +1,17 @@
 // Import YAML config directly - processed by @rollup/plugin-yaml
 
-import type { CMSConfig, CommentConfig, FeaturedSeriesItem } from '@lib/config/types';
-import rawCmsConfig from '../../config/cms.yaml';
+import type { CommentConfig, DevConfig, FeaturedCategory, FeaturedSeriesItem, SiteBasicConfig } from '@lib/config/types';
 import yamlConfig from '../../config/site.yaml';
 import { isReservedSlug, RESERVED_ROUTES } from './router';
 
-type SiteConfig = {
-  title: string;
-  alternate?: string;
-  subtitle?: string;
-  name: string;
-  description?: string;
-  avatar?: string;
-  showLogo?: boolean;
-  author?: string;
+/**
+ * Runtime site configuration
+ * Extends SiteBasicConfig with runtime-specific fields
+ */
+type SiteConfig = Omit<SiteBasicConfig, 'url'> & {
+  /** Site URL (mapped from SiteBasicConfig.url) */
   site: string;
-  startYear?: number;
-  defaultOgImage?: string;
-  keywords?: string[];
-  featuredCategories?: {
-    link: string;
-    image: string;
-    label?: string;
-    description?: string;
-  }[];
+  featuredCategories?: FeaturedCategory[];
   /** Normalized array of featured series */
   featuredSeries: FeaturedSeriesItem[];
 };
@@ -192,6 +180,7 @@ export const siteConfig: SiteConfig = {
   startYear: yamlConfig.site.startYear,
   defaultOgImage: yamlConfig.site.defaultOgImage,
   keywords: yamlConfig.site.keywords,
+  breadcrumbHome: yamlConfig.site.breadcrumbHome,
   featuredCategories: yamlConfig.featuredCategories,
   featuredSeries: normalizeFeaturedSeries(yamlConfig.featuredSeries),
 };
@@ -242,6 +231,26 @@ type ChristmasConfig = {
 // Map YAML comment config
 export const commentConfig: CommentConfig = yamlConfig.comment || {};
 
+// Content config types
+type ContentConfig = {
+  addBlankTarget?: boolean;
+  smoothScroll?: boolean;
+  addHeadingLevel?: boolean;
+  enhanceCodeBlock?: boolean;
+  enableCodeCopy?: boolean;
+  enableCodeFullscreen?: boolean;
+  enableLinkEmbed?: boolean;
+  enableTweetEmbed?: boolean;
+  enableOGPreview?: boolean;
+  previewCacheTime?: number;
+  lazyLoadEmbeds?: boolean;
+  /** Post card image position: 'alternating' | 'left' | 'right' */
+  postCardImagePosition?: 'alternating' | 'left' | 'right';
+};
+
+// Map YAML content config
+export const contentConfig: ContentConfig = yamlConfig.content || {};
+
 // Map YAML analytics config
 export const analyticsConfig: AnalyticsConfig = yamlConfig.analytics || {};
 
@@ -266,12 +275,11 @@ export const christmasConfig: ChristmasConfig = yamlConfig.christmas || {
   },
 };
 
-// Map YAML CMS config with defaults
-export const cmsConfig: CMSConfig = {
-  enabled: rawCmsConfig?.enabled ?? false,
-  localProjectPath: rawCmsConfig?.localProjectPath ?? '',
-  contentRelativePath: rawCmsConfig?.contentRelativePath ?? 'src/content/blog',
-  editors: rawCmsConfig?.editors ?? [],
+// Map YAML dev tools config with defaults (dev only)
+export const devConfig: DevConfig = {
+  localProjectPath: yamlConfig.dev?.localProjectPath ?? '',
+  contentRelativePath: yamlConfig.dev?.contentRelativePath ?? 'src/content/blog',
+  editors: yamlConfig.dev?.editors ?? [],
 };
 
 // =============================================================================

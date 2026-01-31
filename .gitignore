@@ -1,11 +1,12 @@
 # build output
 dist/
+.sonda/
 
 # generated types
 .astro/
 
 # dependencies
-node_modules/
+node_modules
 
 # logs
 npm-debug.log*
@@ -20,6 +21,9 @@ pnpm-debug.log*
 
 # vercel
 .vercel
+
+# Cloudflare
+.wrangler/
 
 # macOS-specific files
 .DS_Store

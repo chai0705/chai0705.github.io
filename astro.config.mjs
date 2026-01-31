@@ -1,10 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import cloudflare from '@astrojs/cloudflare';
-import netlify from '@astrojs/netlify';
-import node from '@astrojs/node';
 import react from '@astrojs/react';
-import vercel from '@astrojs/vercel';
+import sitemap from '@astrojs/sitemap';
 import yaml from '@rollup/plugin-yaml';
 import tailwindcss from '@tailwindcss/vite';
 import umami from '@yeskunall/astro-umami';
@@ -12,9 +9,11 @@ import { defineConfig } from 'astro/config';
 import icon from 'astro-icon';
 import mermaid from 'astro-mermaid';
 import pagefind from 'astro-pagefind';
+import robotsTxt from 'astro-robots-txt';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypeSlug from 'rehype-slug';
-import { visualizer } from 'rollup-plugin-visualizer';
+import Sonda from 'sonda/astro';
+import { loadEnv } from 'vite';
 import svgr from 'vite-plugin-svgr';
 import YAML from 'yaml';
 import { rehypeImagePlaceholder } from './src/lib/markdown/rehype-image-placeholder.ts';
@@ -31,59 +30,19 @@ function loadConfigForAstro() {
 
 const yamlConfig = loadConfigForAstro();
 
-// Load CMS config for adapter decision
-function loadCmsConfig() {
-  const configPath = path.join(process.cwd(), 'config', 'cms.yaml');
-  if (!fs.existsSync(configPath)) return { enabled: false };
-  const content = fs.readFileSync(configPath, 'utf8');
-  return YAML.parse(content) || { enabled: false };
-}
-
-const cmsConfig = loadCmsConfig();
-
-/**
- * Select adapter based on environment
- * 按需渲染适配器，选择最合适的适配器：https://docs.astro.build/en/guides/on-demand-rendering/
- *
- * Priority:
- * 1. Check if adapter is needed (dev with CMS or production build)
- * 2. Detect platform: Vercel > Cloudflare > Netlify
- * 3. Fallback: Node.js (standalone mode)
- * 4. No adapter: static build
- */
-function selectAdapter() {
-  const isDev = process.env.NODE_ENV !== 'production';
-
-  // Determine if adapter is needed
-  const needsAdapter = isDev ? cmsConfig?.enabled : true;
-
-  // Static build without adapter
-  if (!needsAdapter) {
-    return undefined;
-  }
-
-  // Platform detection
-  const isVercel = process.env.VERCEL === '1';
-  const isCloudflare = process.env.CF_PAGES === '1' || !!process.env.CLOUDFLARE;
-  const isNetlify = process.env.NETLIFY === 'true';
-
-  // Select platform-specific adapter
-  if (isVercel) return vercel();
-  if (isCloudflare) return cloudflare();
-  if (isNetlify) return netlify();
-
-  // Fallback: Node.js standalone (for self-hosting or undetected platforms)
-  return node({ mode: 'standalone' });
-}
-
-const adapter = selectAdapter();
-
+// Bundle analysis mode: ANALYZE=true pnpm build
+// Use loadEnv to read .env file (astro.config.mjs runs before Vite loads .env)
+const { ANALYZE } = loadEnv(process.env.NODE_ENV || 'production', process.cwd(), '');
+const isAnalyze = ANALYZE === 'true';
 // Get Umami analytics config from YAML
 const umamiConfig = yamlConfig.analytics?.umami;
 const umamiEnabled = umamiConfig?.enabled ?? false;
 const umamiId = umamiConfig?.id;
 // Normalize endpoint URL to remove trailing slashes
 const umamiEndpoint = normalizeUrl(umamiConfig?.endpoint);
+
+// Get robots.txt config from YAML
+const robotsConfig = yamlConfig.seo?.robots;
 
 /**
  * Vite plugin for conditional Three.js bundling
@@ -117,7 +76,6 @@ function conditionalSnowfall() {
 // https://astro.build/config
 export default defineConfig({
   site: yamlConfig.site.url,
-  adapter,
   compressHTML: true,
   markdown: {
     // Enable GitHub Flavored Markdown
@@ -160,6 +118,7 @@ export default defineConfig({
   },
   integrations: [
     react(),
+    sitemap(),
     icon({
       include: {
         gg: ['*'],
@@ -182,21 +141,18 @@ export default defineConfig({
     mermaid({
       autoTheme: true,
     }),
+    robotsTxt(robotsConfig || {}),
+    ...(isAnalyze ? [Sonda()] : []),
   ],
   devToolbar: {
     enabled: true,
   },
   vite: {
-    plugins: [
-      yaml(),
-      conditionalSnowfall(),
-      svgr(),
-      tailwindcss(),
-      visualizer({
-        emitFile: true,
-        filename: 'stats.html',
-      }),
-    ],
+    build: {
+      // Enable sourcemap for Sonda bundle analysis
+      sourcemap: isAnalyze,
+    },
+    plugins: [yaml(), conditionalSnowfall(), svgr(), tailwindcss()],
     ssr: {
       noExternal: ['react-tweet'],
     },

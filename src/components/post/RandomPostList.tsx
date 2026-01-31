@@ -1,15 +1,10 @@
+import { encodeSlug } from '@lib/route';
 import { shuffleArray } from '@lib/utils';
 import { useMemo } from 'react';
-
-export interface RandomPostItem {
-  slug: string;
-  link?: string;
-  title: string;
-  categoryName?: string;
-}
+import type { PostRefWithCategory } from '@/types/blog';
 
 interface Props {
-  postsPool: RandomPostItem[]; // Pool to randomly select from
+  postsPool: PostRefWithCategory[]; // Pool to randomly select from
   count: number; // Number of posts to display
 }
 
@@ -28,7 +23,7 @@ export default function RandomPostList({ postsPool, count }: Props) {
         {posts.map((post, index) => (
           <a
             key={post.slug}
-            href={`/post/${encodeURIComponent(post.link ?? post.slug)}`}
+            href={`/post/${encodeSlug(post.link ?? post.slug)}`}
             className="group flex gap-3 rounded-md p-2 text-sm transition-colors duration-300 hover:bg-foreground/5 hover:text-primary"
           >
             <span className="shrink-0 font-mono text-foreground/30">{index + 1}</span>

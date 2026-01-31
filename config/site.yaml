@@ -28,6 +28,7 @@ site:
     - 技术
     - 前端
     # 请根据你的网站内容添加关键词
+  # breadcrumbHome: 首页  # 面包屑导航中首页的显示名称（默认: '首页'）
 
 # =============================================================================
 # Category Map
@@ -287,6 +288,7 @@ announcements:
 #   enableOGPreview: 启用 Open Graph 预览卡片
 #   previewCacheTime: 预览信息缓存时间（秒）
 #   lazyLoadEmbeds: 延迟加载嵌入内容（提升性能）
+#   postCardImagePosition: 文章卡片封面图位置 (alternating/left/right)
 # -----------------------------------------------------------------------------
 content:
   addBlankTarget: true # 外部链接新窗口打开
@@ -300,6 +302,7 @@ content:
   enableOGPreview: true # OG 预览卡片
   previewCacheTime: 3600 # 预览缓存时间(秒)
   lazyLoadEmbeds: true # 延迟加载嵌入
+  postCardImagePosition: alternating # 文章卡片封面图位置在首页的显示控制 alternating 默认交替显示 left 封面图始终在左侧 right 封面图始终在右侧
 
 # =============================================================================
 # Navigation Routes
@@ -489,6 +492,26 @@ analytics:
     endpoint: https://stats.example.com
 
 # =============================================================================
+# SEO Configuration
+# =============================================================================
+# https://github.com/alextim/astro-lib/tree/main/packages/astro-robots-txt#readme
+# robots: robots.txt 配置 (由 astro-robots-txt 自动生成)
+#   policy: 爬虫策略数组（可选，默认允许所有）
+#     - userAgent: 爬虫名称，'*' 表示所有
+#       allow: 允许路径（可为字符串或数组）
+#       disallow: 禁止路径（可为字符串或数组）
+#   host: 是否添加 Host 指令（可选，适用于 Yandex）
+# -----------------------------------------------------------------------------
+seo:
+  robots:
+    # policy:                          # 爬虫策略（可选，取消注释并配置）
+    #   - userAgent: '*'
+    #     allow: '/'
+    #     disallow:
+    #       - '/api/'
+    # host: true                       # 可选：添加 Host 指令（Yandex）
+
+# =============================================================================
 # Christmas/Seasonal Features
 # =============================================================================
 christmas:
@@ -507,3 +530,34 @@ christmas:
   #   maxIterations: 8 # 最大迭代次数
   #   mobileMaxLayers: 4 # 移动端最大层数
   #   mobileMaxIterations: 6 # 移动端最大迭代次数
+
+# =============================================================================
+# Development Tools (Dev Only)
+# 开发工具配置 - 仅在开发环境（pnpm dev）生效
+# =============================================================================
+# 配置后，开发环境下文章页会显示编辑按钮，可快速打开本地编辑器
+# 字段说明：
+#   localProjectPath: 本地项目的绝对路径（用于生成文件完整路径）
+#   contentRelativePath: 博客内容相对于项目根目录的路径（默认: 'src/content/blog'）
+#   editors: 编辑器列表
+#     - id: 编辑器唯一标识符
+#     - name: 编辑器显示名称
+#     - icon: Iconify 图标标识（可从 https://icon-sets.iconify.design/ 中搜寻）
+#     - urlTemplate: URL 模板，支持占位符 {path}（文件绝对路径）
+# -----------------------------------------------------------------------------
+dev:
+  localProjectPath: '/Users/yourname/path/to/astro-koharu' # 请修改为你的项目绝对路径
+  contentRelativePath: 'src/content/blog'
+  editors:
+    - id: vscode
+      name: VS Code
+      icon: devicon-plain:vscode
+      urlTemplate: 'vscode://file{path}'
+    - id: cursor
+      name: Cursor
+      icon: simple-icons:cursor
+      urlTemplate: 'cursor://file{path}'
+    - id: zed
+      name: Zed
+      icon: simple-icons:zedindustries
+      urlTemplate: 'zed://file{path}'

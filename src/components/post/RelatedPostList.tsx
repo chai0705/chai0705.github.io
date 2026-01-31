@@ -1,10 +1,10 @@
-import { useMemo } from 'react';
+import { encodeSlug } from '@lib/route';
 import { cn, shuffleArray } from '@/lib/utils';
-import type { RandomPostItem } from './RandomPostList';
+import type { PostRefWithCategory } from '@/types/blog';
 
 interface Props {
-  posts: RandomPostItem[];
-  fallbackPool: RandomPostItem[]; // Pool to randomly select from when no related posts
+  posts: PostRefWithCategory[];
+  fallbackPool: PostRefWithCategory[]; // Pool to randomly select from when no related posts
   fallbackCount: number; // Number of fallback posts to display
   startIndex?: number; // Starting index for fallback post numbering
 }
@@ -13,12 +13,8 @@ export default function RelatedPostList({ posts, fallbackPool, fallbackCount, st
   const hasRelatedPosts = posts.length > 0;
 
   // Shuffle fallback posts on client-side for fresh randomization
-  const fallbackPosts = useMemo(() => {
-    if (fallbackPool.length <= fallbackCount) {
-      return shuffleArray(fallbackPool);
-    }
-    return shuffleArray(fallbackPool).slice(0, fallbackCount);
-  }, [fallbackPool, fallbackCount]);
+  const fallbackPosts =
+    fallbackPool.length <= fallbackCount ? shuffleArray(fallbackPool) : shuffleArray(fallbackPool).slice(0, fallbackCount);
 
   const displayPosts = hasRelatedPosts ? posts : fallbackPosts;
   const title = hasRelatedPosts ? '相关文章' : '';
@@ -34,7 +30,7 @@ export default function RelatedPostList({ posts, fallbackPool, fallbackCount, st
         {displayPosts.map((post, index) => (
           <a
             key={post.slug}
-            href={`/post/${encodeURIComponent(post.link ?? post.slug)}`}
+            href={`/post/${encodeSlug(post.link ?? post.slug)}`}
             className="group flex gap-3 rounded-md p-2 text-sm transition-colors duration-300 hover:bg-foreground/5 hover:text-primary"
           >
             <span className="shrink-0 font-mono text-foreground/30">{index + (hasRelatedPosts ? 1 : startIndex)}</span>

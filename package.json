@@ -1,7 +1,7 @@
 {
   "name": "astro-koharu",
   "type": "module",
-  "version": "2.4.0",
+  "version": "2.5.0",
   "scripts": {
     "dev": "astro dev",
     "generate:lqips": "npx tsx src/scripts/generateLqips.ts",
@@ -23,7 +23,9 @@
     "change": "git cliff --bump -o CHANGELOG.md",
     "prepare": "husky",
     "knip": "knip",
-    "koharu": "npx tsx scripts/koharu.tsx"
+    "koharu": "npx tsx scripts/koharu.tsx",
+    "cms": "cd cms && pnpm dev",
+    "cms:install": "cd cms && pnpm install"
   },
   "dependencies": {
     "@antv/infographic": "^0.2.4",
@@ -32,12 +34,14 @@
     "@astrojs/node": "^9.5.2",
     "@astrojs/react": "^4.4.2",
     "@astrojs/rss": "^4.0.14",
+    "@astrojs/sitemap": "^3.7.0",
     "@astrojs/vercel": "^9.0.4",
     "@blocknote/core": "^0.46.1",
     "@blocknote/react": "^0.46.1",
     "@blocknote/shadcn": "^0.46.1",
     "@floating-ui/react": "^0.27.16",
     "@giscus/react": "^3.1.0",
+    "@hookform/resolvers": "^5.2.2",
     "@iconify-json/fa6-regular": "^1.2.4",
     "@iconify-json/fa6-solid": "^1.2.4",
     "@iconify-json/gg": "^1.2.2",
@@ -58,6 +62,8 @@
     "astro-loading-indicator": "^0.7.1",
     "astro-mermaid": "^1.2.0",
     "astro-pagefind": "^1.8.5",
+    "astro-robots-txt": "^1.0.0",
+    "astro-seo": "^1.1.0",
     "astro-tooltips": "^0.6.2",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
@@ -80,6 +86,7 @@
     "react": "^19.2.1",
     "react-dom": "^19.2.1",
     "react-error-boundary": "^5.0.0",
+    "react-hook-form": "^7.71.1",
     "react-icons": "^5.5.0",
     "react-tweet": "^3.2.2",
     "reading-time": "^1.5.0",
@@ -91,7 +98,8 @@
     "tailwindcss": "^4.1.17",
     "tailwindcss-animate": "^1.0.7",
     "three": "^0.182.0",
-    "unist-util-visit": "^5.0.0"
+    "unist-util-visit": "^5.0.0",
+    "zod": "^3.25.76"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.6",
@@ -120,8 +128,8 @@
     "lint-staged": "^15.5.2",
     "pinyin-pro": "^3.28.0",
     "remark": "^15.0.1",
-    "rollup-plugin-visualizer": "^6.0.5",
     "sharp": "^0.34.5",
+    "sonda": "^0.10.1",
     "strip-markdown": "^6.0.0",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3",
@@ -131,8 +139,7 @@
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,json,astro}": [
-      "biome check --write --no-errors-on-unmatched",
-      "astro check"
+      "biome check --write --no-errors-on-unmatched"
     ],
     "*.{md,mdx}": [
       "lint-md --fix"

@@ -4,6 +4,7 @@ import { SeriesPostList } from '@components/post/SeriesPostList';
 import HomeSiderSegmented from '@components/ui/segmented/HomeSiderSegmented';
 import { HomeSiderSegmentType, HomeSiderType } from '@constants/enum';
 import { getAdjacentSeriesPosts, getSeriesPosts } from '@lib/content/posts';
+import { toPostRef, toPostRefs } from '@lib/content/transforms';
 import { cn } from '@lib/utils';
 import type { BlogPost } from 'types/blog';
 import HomeInfo from './HomeInfo.astro';
@@ -20,17 +21,19 @@ interface Props {
 const { type = HomeSiderType.HOME, className, isDrawer = false, post } = Astro.props;
 const defaultSegmentType = type === HomeSiderType.POST ? HomeSiderSegmentType.DIRECTORY : HomeSiderSegmentType.INFO;
 
-// 获取系列文章
-const seriesPosts = post && type === HomeSiderType.POST ? await getSeriesPosts(post) : [];
+// 获取系列文章（转换为轻量级引用）
+const seriesPosts = post && type === HomeSiderType.POST ? toPostRefs(await getSeriesPosts(post)) : [];
 
-// 获取上一篇和下一篇
-const { prevPost, nextPost } =
+// 获取上一篇和下一篇（转换为轻量级引用）
+const adjacentPosts =
   post && type === HomeSiderType.POST ? await getAdjacentSeriesPosts(post) : { prevPost: null, nextPost: null };
+const prevPost = adjacentPosts.prevPost ? toPostRef(adjacentPosts.prevPost) : null;
+const nextPost = adjacentPosts.nextPost ? toPostRef(adjacentPosts.nextPost) : null;
 ---
 
 <div
   class={cn(
-    'page-home-sider shadow-home-sider sticky top-0 overscroll-none self-start flex min-w-64 max-w-64 flex-col items-stretch tablet:hidden overflow-auto h-screen px-2 scroll-gutter-stable',
+    'page-home-sider shadow-home-sider sticky top-0 tablet:overscroll-none self-start flex min-w-64 max-w-64 flex-col items-stretch tablet:hidden overflow-auto h-screen px-2 scroll-gutter-stable',
     className,
   )}
   transition:name={isDrawer ? 'page-home-sider-drawer' : 'page-home-sider'}
@@ -48,7 +51,7 @@ const { prevPost, nextPost } =
   }
 
   <sider-content
-    class="vertical-scrollbar flex-1 overflow-x-hidden overflow-y-auto md:pt-2 md:pl-3 -mx-2"
+    class="vertical-scrollbar flex-1 overflow-x-hidden overflow-y-auto md:pt-2 md:pl-3 tablet:-mx-2"
     data-type={type}
     data-default-type={defaultSegmentType}
   >
@@ -56,7 +59,7 @@ const { prevPost, nextPost } =
       <HomeInfo className={type === HomeSiderType.HOME ? 'pt-18 md:pt-0' : ''} />
     </div>
     <div slot="directory" class="sider-slot overflow-hidden h-full" data-slot-type="directory">
-      {type === HomeSiderType.POST && <TableOfContents client:load enableNumbering={post?.data.tocNumbering ?? true} />}
+      {type === HomeSiderType.POST && <TableOfContents client:only="react" enableNumbering={post?.data.tocNumbering ?? true} />}
     </div>
     <div slot="series" class="sider-slot" data-slot-type="series">
       {type === HomeSiderType.POST && <SeriesPostList client:load posts={seriesPosts} currentPostSlug={post?.slug} />}
