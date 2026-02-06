@@ -1,6 +1,7 @@
+import { useControlledState } from '@hooks/useControlledState';
 import { cn } from '@lib/utils';
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
-import React, { useCallback, useEffect, useState } from 'react';
+import React from 'react';
 
 export type OptionType<T extends string | number = string | number> = {
   label?: string;
@@ -29,21 +30,12 @@ export const Segmented = <T extends string | number = string | number>({
   itemClass,
   value,
 }: SegmentedProps<T>) => {
-  const [_value, setValue] = useState<T>(() => (value ?? defaultValue ?? options[0]?.value ?? '') as T);
+  const [selectedValue, setSelectedValue] = useControlledState<T>({
+    value,
+    defaultValue: (defaultValue ?? options[0]?.value ?? '') as T,
+    onChange,
+  });
   const shouldReduceMotion = useReducedMotion();
-
-  const select = useCallback(
-    (value: T) => {
-      setValue(value);
-      onChange?.(value);
-    },
-    [onChange],
-  );
-  const isSelected = useCallback((selectedValue: T) => _value === selectedValue, [_value]);
-
-  useEffect(() => {
-    if (value) setValue(value);
-  }, [value]);
 
   return (
     <div
@@ -55,7 +47,7 @@ export const Segmented = <T extends string | number = string | number>({
       {options.map((option) => {
         if (!option) return null;
         const { label, value, icon } = option;
-        const selected = isSelected(value);
+        const selected = selectedValue === value;
         return (
           <motion.div
             className={cn(
@@ -64,7 +56,7 @@ export const Segmented = <T extends string | number = string | number>({
               { 'opacity-50': !selected },
               itemClass,
             )}
-            onClick={() => select(value)}
+            onClick={() => setSelectedValue(value)}
             key={value}
             layout={!shouldReduceMotion}
             transition={shouldReduceMotion ? { duration: 0 } : { type: 'spring', stiffness: 400, damping: 30 }}
