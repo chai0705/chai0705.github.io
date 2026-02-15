@@ -3,19 +3,23 @@
  */
 import { Routes } from '@constants/router';
 import { useIsMounted } from '@hooks/useIsMounted';
+import { useTranslation } from '@hooks/useTranslation';
 import { routeBuilder } from '@lib/route';
 import { cn } from '@lib/utils';
 import { RiArrowDownSLine, RiArrowLeftSLine, RiArrowRightSLine, RiArrowUpSLine } from 'react-icons/ri';
+import { localizedPath } from '@/i18n';
 import type { PostRef } from '@/types/blog';
 
 interface SeriesNavigationProps {
   prevPost?: PostRef | null;
   nextPost?: PostRef | null;
   className?: string;
+  locale?: string;
 }
 
-export function SeriesNavigation({ prevPost, nextPost, className }: SeriesNavigationProps) {
+export function SeriesNavigation({ prevPost, nextPost, className, locale }: SeriesNavigationProps) {
   const isMounted = useIsMounted();
+  const { t } = useTranslation();
 
   if (!prevPost && !nextPost) {
     return null;
@@ -31,7 +35,7 @@ export function SeriesNavigation({ prevPost, nextPost, className }: SeriesNaviga
         {prevPost ? (
           isMounted && (
             <a
-              href={routeBuilder(Routes.Post, prevPost)}
+              href={localizedPath(routeBuilder(Routes.Post, prevPost), locale)}
               className={cn(
                 'group flex items-center gap-1.5 rounded-md px-2 py-1.5 transition-colors',
                 'text-muted-foreground hover:bg-accent hover:text-primary',
@@ -51,7 +55,7 @@ export function SeriesNavigation({ prevPost, nextPost, className }: SeriesNaviga
         {nextPost ? (
           isMounted && (
             <a
-              href={routeBuilder(Routes.Post, nextPost)}
+              href={localizedPath(routeBuilder(Routes.Post, nextPost), locale)}
               className={cn(
                 'group flex items-center gap-1.5 rounded-md px-2 py-1.5 transition-colors',
                 'text-muted-foreground hover:bg-accent hover:text-primary',
@@ -75,27 +79,27 @@ export function SeriesNavigation({ prevPost, nextPost, className }: SeriesNaviga
             type="button"
             onClick={() => window.scrollTo({ top: 0, behavior: scrollBehavior })}
             className={cn(
-              'flex items-center justify-center gap-1.5 rounded-md px-3 py-1.5 transition-colors',
+              'flex items-center justify-center gap-1.5 rounded-md px-2 py-1.5 transition-colors',
               'text-muted-foreground text-xs hover:bg-accent hover:text-primary',
             )}
-            title="回到顶部"
-            aria-label="回到顶部"
+            title={t('floating.backToTop')}
+            aria-label={t('floating.backToTop')}
           >
             <RiArrowUpSLine className="h-4 w-4" />
-            回到顶部
+            {t('floating.backToTop')}
           </button>
           <button
             type="button"
             onClick={() => window.scrollTo({ top: document.body.scrollHeight, behavior: scrollBehavior })}
             className={cn(
-              'flex items-center justify-center gap-1.5 rounded-md px-3 py-1.5 transition-colors',
+              'flex items-center justify-center gap-1.5 rounded-md px-2 py-1.5 transition-colors',
               'text-muted-foreground text-xs hover:bg-accent hover:text-primary',
             )}
-            title="滚到底部"
-            aria-label="滚到底部"
+            title={t('floating.scrollToBottom')}
+            aria-label={t('floating.scrollToBottom')}
           >
             <RiArrowDownSLine className="h-4 w-4" />
-            滚到底部
+            {t('floating.scrollToBottom')}
           </button>
         </div>
       )}

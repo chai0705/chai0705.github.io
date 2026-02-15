@@ -1,12 +1,13 @@
 // edit https://github.com/lawvs/lawvs.github.io/blob/dba2e51e312765f8322ee87755b4e9c22b520048/src/pages/rss.xml.ts
 import rss from '@astrojs/rss';
 import { siteConfig } from '@constants/site-config';
-import { getCategoryArr, getSortedPosts } from '@lib/content';
+import { getCategoryArr, getPostSlug, getSortedPosts } from '@lib/content';
 import { encodeSlug } from '@lib/route';
 import { getSanitizeHtml } from '@lib/sanitize';
 import type { APIContext } from 'astro';
 import sanitizeHtml from 'sanitize-html';
 import type { BlogPost } from 'types/blog';
+import { defaultLocale } from '@/i18n';
 
 // 用于生成纯文本摘要的函数
 const generateTextSummary = (html?: string, length: number = 150): string => {
@@ -24,7 +25,7 @@ const generateTextSummary = (html?: string, length: number = 150): string => {
 };
 
 export async function GET(context: APIContext) {
-  const posts = await getSortedPosts();
+  const posts = await getSortedPosts(defaultLocale);
   const { site } = context;
 
   if (!site) {
@@ -50,7 +51,7 @@ export async function GET(context: APIContext) {
           ...(post.data.tags || []).map((tag) => `tag:${tag}`),
         ];
 
-        const postSlug = post.data.link ?? post.slug;
+        const postSlug = getPostSlug(post);
         const postLink = `/post/${encodeSlug(postSlug)}`;
 
         return {

@@ -7,6 +7,7 @@
 
 import readingTime from 'reading-time';
 import type { BlogPost } from '@/types/blog';
+import { getPostLocale, getSlugLocaleInfo } from './locale';
 import { getPostDescriptionWithSummary, getPostLastCategory } from './posts';
 
 /**
@@ -29,6 +30,7 @@ export type PostFieldMap = {
   description: string; // from getPostDescriptionWithSummary()
   wordCount: number; // from reading-time
   readingTime: string; // from reading-time
+  postLocale: string; // from getPostLocale()
 };
 
 /**
@@ -37,7 +39,7 @@ export type PostFieldMap = {
  */
 const fieldExtractors: { [K in keyof PostFieldMap]: (post: BlogPost) => PostFieldMap[K] } = {
   // 直接字段
-  slug: (p) => p.slug,
+  slug: (p) => getSlugLocaleInfo(p.slug).localeFreeSlug,
   link: (p) => p.data?.link,
   title: (p) => p.data.title,
   date: (p) => p.data.date,
@@ -50,6 +52,7 @@ const fieldExtractors: { [K in keyof PostFieldMap]: (post: BlogPost) => PostFiel
   description: (p) => getPostDescriptionWithSummary(p),
   wordCount: (p) => readingTime(p.body ?? '').words,
   readingTime: (p) => readingTime(p.body ?? '').text,
+  postLocale: (p) => getPostLocale(p),
 };
 
 /**
@@ -95,6 +98,7 @@ const POST_CARD_DATA_KEYS = [
   'draft',
   'wordCount',
   'readingTime',
+  'postLocale',
 ] as const;
 
 /**

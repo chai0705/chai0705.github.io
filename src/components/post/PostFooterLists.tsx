@@ -1,6 +1,8 @@
+import { useTranslation } from '@hooks/useTranslation';
 import { encodeSlug } from '@lib/route';
 import { cn, shuffleArray } from '@lib/utils';
 import { useMemo } from 'react';
+import { localizedPath } from '@/i18n';
 import type { PostRefWithCategory } from '@/types/blog';
 
 interface Props {
@@ -8,13 +10,15 @@ interface Props {
   relatedPosts: PostRefWithCategory[];
   leftCount: number;
   rightCount: number;
+  locale?: string;
 }
 
 /**
  * Wrapper component to coordinate random post selection for small post counts
  * Ensures no duplicate posts between left (random) and right (related/fallback) sides
  */
-export default function PostFooterLists({ allPosts, relatedPosts, leftCount, rightCount }: Props) {
+export default function PostFooterLists({ allPosts, relatedPosts, leftCount, rightCount, locale }: Props) {
+  const { t } = useTranslation();
   const { leftPosts, rightPosts, hasRelatedPosts } = useMemo(() => {
     const hasRelated = relatedPosts.length > 0;
 
@@ -33,18 +37,18 @@ export default function PostFooterLists({ allPosts, relatedPosts, leftCount, rig
     };
   }, [allPosts, relatedPosts, leftCount, rightCount]);
 
-  const rightTitle = hasRelatedPosts ? '相关文章' : '';
+  const rightTitle = hasRelatedPosts ? t('post.relatedPosts') : '';
 
   return (
     <>
       {/* Left side: Random posts */}
       <div className="flex flex-col gap-4">
-        <h2 className="font-semibold text-2xl text-foreground/80">随机文章</h2>
+        <h2 className="font-semibold text-2xl text-foreground/80">{t('post.randomPosts')}</h2>
         <div className="flex flex-col gap-2">
           {leftPosts.map((post, index) => (
             <a
               key={post.slug}
-              href={`/post/${encodeSlug(post.link ?? post.slug)}`}
+              href={localizedPath(`/post/${encodeSlug(post.link ?? post.slug)}`, locale)}
               className="group flex gap-3 rounded-md p-2 text-sm transition-colors duration-300 hover:bg-foreground/5 hover:text-primary"
             >
               <span className="shrink-0 font-mono text-foreground/30">{index + 1}</span>
@@ -65,7 +69,7 @@ export default function PostFooterLists({ allPosts, relatedPosts, leftCount, rig
             {rightPosts.map((post, index) => (
               <a
                 key={post.slug}
-                href={`/post/${encodeSlug(post.link ?? post.slug)}`}
+                href={localizedPath(`/post/${encodeSlug(post.link ?? post.slug)}`, locale)}
                 className="group flex gap-3 rounded-md p-2 text-sm transition-colors duration-300 hover:bg-foreground/5 hover:text-primary"
               >
                 <span className="shrink-0 font-mono text-foreground/30">{index + (hasRelatedPosts ? 1 : leftCount + 1)}</span>

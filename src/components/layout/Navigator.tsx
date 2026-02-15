@@ -13,11 +13,14 @@ import { useScrollTrigger } from '@hooks/useScrollTrigger';
 import { Icon } from '@iconify/react';
 import { cn, filterNavItems } from '@lib/utils';
 import { memo, useEffect, useRef } from 'react';
+import { defaultLocale, localizedPath, resolveNavName, stripLocaleFromPath } from '@/i18n';
 import DropdownNav from './DropdownNav';
+import LanguageSwitcher from './LanguageSwitcher';
 import { SearchTrigger } from './SearchDialog';
 
 interface NavigatorProps {
   currentPath: string;
+  locale?: string;
 }
 
 // Pre-filter navigation items at module load (config is static)
@@ -53,14 +56,15 @@ function ButtonLink({ url, label, isActive, children }: ButtonLinkProps) {
   );
 }
 
-const Navigator = memo(function Navigator({ currentPath }: NavigatorProps) {
+const Navigator = memo(function Navigator({ currentPath, locale = defaultLocale }: NavigatorProps) {
   const { isBeyond, direction } = useScrollTrigger({
     triggerDistance: 0.45,
     throttleMs: 80,
   });
 
   const isTablet = useIsTablet();
-  const isPostPageMobile = isTablet && currentPath.startsWith('/post/');
+  const strippedPath = stripLocaleFromPath(currentPath);
+  const isPostPageMobile = isTablet && strippedPath.startsWith('/post/');
 
   const scrollEndTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const isScrollingRef = useRef(false);
@@ -123,14 +127,16 @@ const Navigator = memo(function Navigator({ currentPath }: NavigatorProps) {
       {/* Desktop navigation */}
       <div className="flex tablet:hidden grow items-center">
         {filteredRouters.map((item) => {
+          const displayName = resolveNavName(item.nameKey, item.name, locale);
           if (item.children?.length) {
-            return <DropdownNav key={item.path ?? item.name} item={item} currentPath={currentPath} />;
+            return <DropdownNav key={item.path ?? item.name} item={item} currentPath={currentPath} locale={locale} />;
           }
-          if (!item.path || !item.name) return null;
+          if (!item.path || !displayName) return null;
+          const localizedUrl = localizedPath(item.path, locale);
           return (
-            <ButtonLink key={item.path} url={item.path} label={item.name} isActive={item.path === currentPath}>
+            <ButtonLink key={item.path} url={localizedUrl} label={displayName} isActive={item.path === strippedPath}>
               {item.icon && <NavIcon name={item.icon} />}
-              {item.name}
+              {displayName}
             </ButtonLink>
           );
         })}
@@ -138,6 +144,9 @@ const Navigator = memo(function Navigator({ currentPath }: NavigatorProps) {
 
       <div className="ml-auto flex items-center gap-2">
         <SearchTrigger />
+        <div className="tablet:hidden">
+          <LanguageSwitcher locale={locale} />
+        </div>
         <ThemeToggle />
       </div>
     </div>

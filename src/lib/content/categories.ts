@@ -4,17 +4,22 @@
 
 import { getCollection } from 'astro:content';
 import { categoryMap } from '@constants/category';
+import type { BlogPost } from 'types/blog';
+import { getContentCategoryName, getContentFeaturedCategoryField, getContentSeriesField } from '@/i18n/content';
+import type { Locale } from '@/i18n/types';
 import { encodeSlug } from '../route';
+import { filterPostsByLocale } from './locale';
 import type { Category, CategoryListResult } from './types';
 
 /**
  * Get hierarchical category list with counts (excluding drafts in production)
  */
-export async function getCategoryList(): Promise<CategoryListResult> {
-  const allBlogPosts = await getCollection('blog', ({ data }) => {
+export async function getCategoryList(locale?: string): Promise<CategoryListResult> {
+  const rawPosts = await getCollection('blog', ({ data }) => {
     // 在生产环境中，过滤掉草稿
     return import.meta.env.PROD ? data.draft !== true : true;
   });
+  const allBlogPosts = filterPostsByLocale(rawPosts as BlogPost[], locale);
   const countMap: { [key: string]: number } = {}; // TODO: 需要优化，应该以分类路径为键名而不是 name 如数据结构既是根分类也是笔记-后端-数据结构。
   const resCategories: Category[] = [];
 
@@ -187,4 +192,39 @@ export function getCategoryArr(categories?: string[] | string) {
   if (Array.isArray(categories) && categories.length) {
     return categories as string[];
   } else return [categories as string];
+}
+
+/**
+ * Translate a category name based on locale.
+ * Looks up the YAML content config (config/i18n-content.yaml), falls back to original name.
+ */
+export function translateCategoryName(name: string, locale: Locale): string {
+  const slug = categoryMap[name];
+  if (!slug) return name;
+  return getContentCategoryName(locale, slug) ?? name;
+}
+
+/**
+ * Translate a featured series field (label, fullName, etc.) based on locale.
+ * Looks up the YAML content config, falls back to the raw YAML value from site config.
+ */
+export function translateSeriesField(slug: string, field: string, fallback: string | undefined, locale: Locale): string {
+  if (!fallback) return '';
+  return getContentSeriesField(locale, slug, field) ?? fallback;
+}
+
+/**
+ * Translate a featured category field (label, description) based on locale.
+ *
+ * The `link` parameter matches the `link` field in featuredCategories config
+ * (e.g. 'life', 'note/front-end').
+ */
+export function translateFeaturedCategoryField(
+  link: string,
+  field: string,
+  fallback: string | undefined,
+  locale: Locale,
+): string {
+  if (!fallback) return '';
+  return getContentFeaturedCategoryField(locale, link, field) ?? fallback;
 }

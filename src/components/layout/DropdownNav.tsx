@@ -3,44 +3,53 @@ import type { Router } from '@constants/router';
 import { Icon } from '@iconify/react';
 import { cn } from '@lib/utils';
 import { memo, useCallback, useState } from 'react';
+import { defaultLocale, localizedPath, resolveNavName, stripLocaleFromPath, t } from '@/i18n';
 
 interface DropdownNavProps {
   item: Router;
   currentPath: string;
   className?: string;
+  locale?: string;
 }
 
-const DropdownNavComponent = ({ item, currentPath, className }: DropdownNavProps) => {
+const DropdownNavComponent = ({ item, currentPath, className, locale = defaultLocale }: DropdownNavProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const { name, icon, children } = item;
+  const { icon, children } = item;
+  const name = resolveNavName(item.nameKey, item.name, locale);
+
+  const strippedPath = stripLocaleFromPath(currentPath);
 
   const renderDropdownContent = useCallback(
     () => (
-      <div className="nav-dropdown flex flex-col items-center">
+      <div className="nav-dropdown flex flex-col">
         {children?.length
-          ? children.map((child: Router, index) => (
-              <a
-                key={child.path}
-                href={child.path}
-                className={cn(
-                  'group px-4 py-2 text-base outline-hidden transition-colors duration-300 hover:bg-gradient-shoka-button',
-                  {
-                    'rounded-ss-2xl': index === 0,
-                    'rounded-ee-2xl': index === children.length - 1,
-                    'bg-gradient-shoka-button text-muted': currentPath === child.path,
-                  },
-                )}
-              >
-                <div className="flex items-center gap-2 text-white transition-all duration-300 group-hover:translate-x-0.5 group-hover:text-white">
-                  {child.icon && <Icon icon={child.icon} className="size-4" />}
-                  {child.name}
-                </div>
-              </a>
-            ))
+          ? children.map((child: Router, index) => {
+              const childName = resolveNavName(child.nameKey, child.name, locale);
+              const childUrl = child.path ? localizedPath(child.path, locale) : child.path;
+              return (
+                <a
+                  key={child.path}
+                  href={childUrl}
+                  className={cn(
+                    'group px-4 py-2 text-base outline-hidden transition-colors duration-300 hover:bg-gradient-shoka-button',
+                    {
+                      'rounded-ss-2xl': index === 0,
+                      'rounded-ee-2xl': index === children.length - 1,
+                      'bg-gradient-shoka-button text-muted': strippedPath === child.path,
+                    },
+                  )}
+                >
+                  <div className="flex items-center gap-2 text-white transition-all duration-300 group-hover:translate-x-0.5 group-hover:text-white">
+                    {child.icon && <Icon icon={child.icon} className="size-4" />}
+                    {childName}
+                  </div>
+                </a>
+              );
+            })
           : null}
       </div>
     ),
-    [children, currentPath],
+    [children, strippedPath, locale],
   );
 
   return (
@@ -55,7 +64,7 @@ const DropdownNavComponent = ({ item, currentPath, className }: DropdownNavProps
         )}
         aria-expanded={isOpen}
         aria-haspopup="true"
-        aria-label={`${name}菜单`}
+        aria-label={t(locale, 'common.menuLabel', { name })}
       >
         {icon && <Icon icon={icon} className="mr-1.5" />}
         {name}

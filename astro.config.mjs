@@ -55,6 +55,12 @@ const umamiEndpoint = normalizeUrl(umamiConfig?.endpoint);
 // Get robots.txt config from YAML
 const robotsConfig = yamlConfig.seo?.robots;
 
+// i18n configuration from YAML
+const i18nYaml = yamlConfig.i18n;
+const i18nDefaultLocale = i18nYaml?.defaultLocale ?? 'zh';
+const i18nLocales = (i18nYaml?.locales ?? [{ code: 'zh' }]).map((l) => l.code);
+const hasMultipleLocales = i18nLocales.length > 1;
+
 /**
  * Vite plugin for conditional Three.js bundling
  * When christmas snowfall is disabled, replaces SnowfallCanvas with a noop component
@@ -221,5 +227,17 @@ export default defineConfig({
       include: ['@antv/infographic'],
     },
   },
+  // Only enable Astro i18n routing when multiple locales are configured.
+  // Single-locale sites skip this entirely — no /[lang]/ routes are generated.
+  ...(hasMultipleLocales && {
+    i18n: {
+      defaultLocale: i18nDefaultLocale,
+      locales: i18nLocales,
+      routing: {
+        prefixDefaultLocale: false,
+        redirectToDefaultLocale: true,
+      },
+    },
+  }),
   trailingSlash: 'ignore',
 });

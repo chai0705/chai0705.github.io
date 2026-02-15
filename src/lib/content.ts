@@ -17,8 +17,14 @@ export {
   getCategoryList,
   getCategoryNameByLink,
   getParentCategory,
+  translateCategoryName,
+  translateSeriesField,
 } from './content/categories';
 
+// =============================================================================
+// Locale Utilities
+// =============================================================================
+export { getPostLocale, getPostSlug } from './content/locale';
 // =============================================================================
 // Post Utilities
 // =============================================================================

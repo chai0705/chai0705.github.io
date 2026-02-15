@@ -32,6 +32,24 @@ site:
   # breadcrumbHome: 首页  # 面包屑导航中首页的显示名称（默认: '首页'）
 
 # =============================================================================
+# Internationalization (i18n)
+# 国际化配置 - 控制多语言支持
+# =============================================================================
+# defaultLocale: 默认语言代码（URL 不带前缀）
+# locales: 支持的语言列表
+#   - code: 语言代码（BCP 47 短格式，如 'zh', 'en', 'ja'）
+#   - label: 语言显示名称（如 '中文', 'English'）
+# -----------------------------------------------------------------------------
+i18n:
+  defaultLocale: zh
+  locales:
+    - code: zh
+      label: 中文
+    - code: en
+      label: English
+      # enabled: false  # 内容存在但暂时禁用（保留内容但不生成路由）
+
+# =============================================================================
 # Category Map
 # Maps Chinese category names to URL-friendly English slugs
 # Example: '随笔' category URL becomes /categories/life
@@ -331,33 +349,42 @@ content:
 #   - Remix Icon: https://icon-sets.iconify.design/ri/
 # -----------------------------------------------------------------------------
 navigation:
-  - name: 首页 # 菜单显示名称
+  - name: 首页 # 菜单显示名称（nameKey 不存在时的回退文本）
+    nameKey: nav.home # i18n 翻译 key
     path: / # 链接路径
     icon: ri:home-heart-fill # 图标
   # - name: 书摘
   #   path: /reading
   - name: 周刊
+    nameKey: nav.weekly
     path: /weekly
     icon: ri:newspaper-line
   - name: 文章 # 有子菜单时，path 可省略
+    nameKey: nav.posts
     icon: ri:quill-pen-ai-fill
     children: # 子菜单列表
       - name: 分类
+        nameKey: nav.categories
         path: /categories
         icon: ri:grid-fill
       - name: 标签
+        nameKey: nav.tags
         path: /tags
         icon: fa6-solid:tags
       - name: 归档
+        nameKey: nav.archives
         path: /archives
         icon: ri:archive-2-fill
   - name: 友链
+    nameKey: nav.friends
     path: /friends
     icon: ri:links-line
   - name: 关于
+    nameKey: nav.about
     path: /about
     icon: fa6-regular:circle-user
   - name: 歌单
+    nameKey: nav.music
     path: /music
     icon: ri:music-2-fill
 
@@ -385,7 +412,7 @@ navigation:
 # =============================================================================
 # Comment System
 # =============================================================================
-# provider: 评论系统提供商 ('remark42' | 'giscus' | 'waline' | 'none')
+# provider: 评论系统提供商 ('remark42' | 'giscus' | 'waline' | 'twikoo' | 'none')
 #           设为 'none' 或不设置时禁用评论系统
 # 各提供商配置：
 # -----------------------------------------------------------------------------
@@ -439,8 +466,13 @@ navigation:
 #     recaptchaV3Key: reCAPTCHA v3 Key (可选)
 #     turnstileKey: Cloudflare Turnstile Key (可选)
 #     locale: 自定义语言显示 (可选)
+  # twikoo:
+    # envId: # Twikoo 环境 ID (腾讯云) 或 Vercel 环境地址 (必填)
+    # region: # 环境地域，默认为 ap-shanghai
+    # path: # 用于区分不同文章的自定义 js 路径，如果您的文章路径不是 location.pathname，需传此参数
+    # lang: # 语言 (默认: 'zh-CN')
 comment:
-  provider: none  # 'remark42' | 'giscus' | 'waline' | 'none'
+  provider: none  # 'remark42' | 'giscus' | 'waline' | 'twikoo' | 'none'
   # remark42:
   #   host: https://comment.example.com/
   #   siteId: your-site-id
@@ -492,6 +524,11 @@ comment:
   #   # turnstileKey: ''               # Cloudflare Turnstile Key (可选)
   #   # locale:                        # 自定义语言显示 (可选)
   #   #   placeholder: '请留言...'      # 自定义输入框占位文本
+  twikoo:
+    envId: https://your-twikoo.vercel.app  # Twikoo 环境 ID (腾讯云) 或 Vercel 环境地址 (必填)
+    # region: ap-shanghai              # 环境地域，默认为 ap-shanghai
+    # path: location.pathname          # 用于区分不同文章的自定义 js 路径
+    # lang: zh-CN                     # 语言 (默认: 'zh-CN')
 
 # =============================================================================
 # Analytics (Umami)

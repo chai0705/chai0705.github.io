@@ -7,6 +7,8 @@ interface Props {
   description?: string;
   siderType?: HomeSiderType;
   post?: BlogPost;
+  /** Override canonical URL (e.g., for fallback pages pointing to default-locale version) */
+  canonical?: string;
 }
 
 import { ClientRouter } from 'astro:transitions';
@@ -27,21 +29,50 @@ import { getOgImageUrl } from '@lib/seo/og-image';
 import LoadingIndicator from 'astro-loading-indicator/component';
 import { SEO } from 'astro-seo';
 import { Tooltips } from 'astro-tooltips';
+import {
+  defaultLocale,
+  getAlternateUrl,
+  getHtmlLang,
+  getLocaleFromUrl,
+  isI18nEnabled,
+  localeList,
+  localizedPath,
+  stripLocaleFromPath,
+} from '@/i18n';
 
 import '@styles/index.css';
 
-const { title = seoConfig.title, description = seoConfig.description, siderType, post } = Astro.props;
+const {
+  title = seoConfig.title,
+  description = seoConfig.description,
+  siderType,
+  post,
+  canonical: canonicalOverride,
+} = Astro.props;
 // TODO: siderType should be custom in router file, not in layout
 
-// Detect if current page is a post page for mobile header
-const isPostPage = Astro.url.pathname.startsWith('/post/');
+// i18n: derive locale from URL and compute BCP 47 lang tag
+const locale = getLocaleFromUrl(Astro.url.pathname);
+const htmlLang = getHtmlLang(locale);
+
+// Detect if current page is a post page for mobile header (locale-prefix safe)
+const isPostPage = stripLocaleFromPath(Astro.url.pathname).startsWith('/post/');
 
 // OGP image: use post cover if available, otherwise use default from config, fallback to avatar
 const ogImage = getOgImageUrl(post?.data.cover, Astro.site);
+
+// Pre-compute i18n URLs for <head> links
+const rssHref = new URL(localizedPath('/rss.xml', locale), Astro.site).href;
+const hreflangLinks = localeList.map((loc) => ({
+  lang: getHtmlLang(loc),
+  href: new URL(getAlternateUrl(Astro.url.pathname, loc), Astro.site).href,
+}));
+const xDefaultHref = new URL(getAlternateUrl(Astro.url.pathname, defaultLocale), Astro.site).href;
+const canonicalHref = canonicalOverride ?? Astro.url.href;
 ---
 
 <!doctype html>
-<html transition:name="root" lang="zh-CN" class="vertical-scrollbar">
+<html transition:name="root" lang={htmlLang} class="vertical-scrollbar">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
@@ -66,7 +97,7 @@ const ogImage = getOgImageUrl(post?.data.cover, Astro.site);
     <SEO
       title={title}
       description={description}
-      canonical={Astro.url.href}
+      canonical={canonicalHref}
       openGraph={{
         basic: {
           title: title,
@@ -89,7 +120,12 @@ const ogImage = getOgImageUrl(post?.data.cover, Astro.site);
         meta: [{ name: 'author', content: siteConfig.author || '' }],
       }}
     />
-    <link rel="alternate" type="application/rss+xml" title={siteConfig.title} href={`${Astro.site}rss.xml`} />
+    <link rel="alternate" type="application/rss+xml" title={siteConfig.title} href={rssHref} />
+    {/* hreflang alternate links for SEO — only output when multiple locales are configured */}
+    {isI18nEnabled && hreflangLinks.map(({ lang, href }) => (
+      <link rel="alternate" hreflang={lang} href={href} />
+    ))}
+    {isI18nEnabled && <link rel="alternate" hreflang="x-default" href={xDefaultHref} />}
 
     <script is:inline>
       // 主题系统 - 立即执行以防止 FOUC（无样式内容闪烁）

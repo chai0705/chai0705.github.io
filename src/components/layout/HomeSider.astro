@@ -3,10 +3,12 @@ import { SeriesNavigation } from '@components/post/SeriesNavigation';
 import { SeriesPostList } from '@components/post/SeriesPostList';
 import HomeSiderSegmented from '@components/ui/segmented/HomeSiderSegmented';
 import { HomeSiderSegmentType, HomeSiderType } from '@constants/enum';
+import { getPostSlug } from '@lib/content/locale';
 import { getAdjacentSeriesPosts, getSeriesPosts } from '@lib/content/posts';
 import { toPostRef, toPostRefs } from '@lib/content/transforms';
 import { cn } from '@lib/utils';
 import type { BlogPost } from 'types/blog';
+import { getLocaleFromUrl } from '@/i18n';
 import HomeInfo from './HomeInfo.astro';
 import { ScrollProgress } from './ScrollProgress';
 import { TableOfContents } from './TableOfContents/index';
@@ -19,14 +21,15 @@ interface Props {
 }
 
 const { type = HomeSiderType.HOME, className, isDrawer = false, post } = Astro.props;
+const locale = getLocaleFromUrl(Astro.url.pathname);
 const defaultSegmentType = type === HomeSiderType.POST ? HomeSiderSegmentType.DIRECTORY : HomeSiderSegmentType.INFO;
 
 // 获取系列文章（转换为轻量级引用）
-const seriesPosts = post && type === HomeSiderType.POST ? toPostRefs(await getSeriesPosts(post)) : [];
+const seriesPosts = post && type === HomeSiderType.POST ? toPostRefs(await getSeriesPosts(post, locale)) : [];
 
 // 获取上一篇和下一篇（转换为轻量级引用）
 const adjacentPosts =
-  post && type === HomeSiderType.POST ? await getAdjacentSeriesPosts(post) : { prevPost: null, nextPost: null };
+  post && type === HomeSiderType.POST ? await getAdjacentSeriesPosts(post, locale) : { prevPost: null, nextPost: null };
 const prevPost = adjacentPosts.prevPost ? toPostRef(adjacentPosts.prevPost) : null;
 const nextPost = adjacentPosts.nextPost ? toPostRef(adjacentPosts.nextPost) : null;
 ---
@@ -51,7 +54,7 @@ const nextPost = adjacentPosts.nextPost ? toPostRef(adjacentPosts.nextPost) : nu
   }
 
   <sider-content
-    class="vertical-scrollbar flex-1 overflow-x-hidden overflow-y-auto md:pt-2 md:pl-3 tablet:-mx-2"
+    class="vertical-scrollbar flex-1 overflow-x-hidden overflow-y-auto md:pt-3 md:pl-3 tablet:-mx-2"
     data-type={type}
     data-default-type={defaultSegmentType}
   >
@@ -62,7 +65,7 @@ const nextPost = adjacentPosts.nextPost ? toPostRef(adjacentPosts.nextPost) : nu
       {type === HomeSiderType.POST && <TableOfContents client:only="react" enableNumbering={post?.data.tocNumbering ?? true} />}
     </div>
     <div slot="series" class="sider-slot" data-slot-type="series">
-      {type === HomeSiderType.POST && <SeriesPostList client:load posts={seriesPosts} currentPostSlug={post?.slug} />}
+      {type === HomeSiderType.POST && <SeriesPostList client:load posts={seriesPosts} currentPostSlug={post ? getPostSlug(post) : undefined} locale={locale} />}
     </div>
   </sider-content>
 
@@ -86,7 +89,7 @@ const nextPost = adjacentPosts.nextPost ? toPostRef(adjacentPosts.nextPost) : nu
 
   {
     type === HomeSiderType.POST && (
-      <SeriesNavigation client:load prevPost={prevPost} nextPost={nextPost} className="w-full px-2" />
+      <SeriesNavigation client:load prevPost={prevPost} nextPost={nextPost} className="w-full px-2" locale={locale} />
     )
   }
 
