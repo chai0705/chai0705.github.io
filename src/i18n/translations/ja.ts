@@ -38,7 +38,7 @@ export const uiStrings: UIStrings = {
   // ── Post ────────────────────────────────────────────────────
   'post.readMore': '詳細を読む',
   'post.totalPosts': '{count}件の投稿',
-  'post.stickyPosts': 'ピン留め投稿',
+  'post.stickyPosts': '固定された投稿',
   'post.postList': '投稿',
   'post.featuredCategories': 'おすすめのカテゴリー',
   'post.yearPosts': '{count}件の投稿',
@@ -54,7 +54,7 @@ export const uiStrings: UIStrings = {
   'post.seriesNext': '次へ',
   'post.fallbackNotice': 'この投稿は「{lang}」では表示できません。元の投稿を表示しています。',
   'post.draft': 'ドラフト',
-  'post.pinned': 'ピン済み',
+  'post.pinned': '固定済み',
   'post.noPostsFound': '投稿が見つかりません',
 
   // ── Categories & Tags ───────────────────────────────────────
@@ -232,9 +232,15 @@ export const uiStrings: UIStrings = {
   'quiz.trueFalseIncorrect': '不正解、答えは「{answer}」です。',
 
   // ── Encrypted Block ─────────────────────────────────────────
+  'encrypted.locked': '暗号化されたコンテンツ',
   'encrypted.placeholder': 'パスワードを入力でロックを解除',
   'encrypted.submit': 'ロックを解除',
   'encrypted.incorrect': 'パスワードが間違っています',
+
+  // ── Encrypted Post ─────────────────────────────────────────
+  'encrypted.post.title': 'この記事は暗号化されています',
+  'encrypted.post.description': 'パスワードを入力して内容をご覧ください',
+  'encrypted.post.rssNotice': 'この記事は暗号化されています。ウェブサイトでご覧ください。',
 
   // ── 404 ─────────────────────────────────────────────────────
   'notFound.title': 'ページは見つかりません',
