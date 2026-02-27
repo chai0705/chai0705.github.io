@@ -293,6 +293,17 @@ announcements:
   #   color: '#6366F1'
   #   publishDate: '2025-12-25'
 
+
+# =============================================================================
+# Default Cover List
+# 默认封面列表 - 文章没有指定封面时将随机从列表中选择一张作为封面
+# 不设置则使用内置的 21 张默认封面 (/img/cover/1~21.webp)
+# =============================================================================
+# defaultCoverList:
+#   - /img/cover/1.webp
+#   - https://example.com/custom-cover.webp
+
+
 # =============================================================================
 # Content Processing Options
 # 内容处理选项 - 控制文章渲染和交互行为
@@ -616,12 +627,12 @@ dev:
     - id: vscode
       name: VS Code
       icon: devicon-plain:vscode
-      urlTemplate: 'vscode://file{path}'
+      urlTemplate: 'vscode://file/{path}'
     - id: cursor
       name: Cursor
       icon: simple-icons:cursor
-      urlTemplate: 'cursor://file{path}'
+      urlTemplate: 'cursor://file/{path}'
     - id: zed
       name: Zed
       icon: simple-icons:zedindustries
-      urlTemplate: 'zed://file{path}'
+      urlTemplate: 'zed://file/{path}'

@@ -79,8 +79,8 @@ async function processImage(imagePath: string): Promise<string | null> {
  * Convert file path to short key (relative to /img/)
  */
 function filePathToKey(filePath: string): string {
-  // public/img/cover/1.webp → cover/1.webp
-  return filePath.replace(/^public\/img\//, '');
+  // Normalize Windows backslashes to forward slashes, then strip public/img/ prefix
+  return filePath.replace(/\\/g, '/').replace(/^public\/img\//, '');
 }
 
 // --------- Main Execution ---------
