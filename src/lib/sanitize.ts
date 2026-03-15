@@ -14,6 +14,25 @@ export const getSanitizeHtml = (html: string) => {
 };
 
 /**
+ * Strip all HTML tags and return plain text, truncated to maxLength.
+ * Used by RSS feeds to generate <description> from rendered HTML.
+ */
+export function stripHtmlToText(html: string, maxLength: number = 150): string {
+  const text = sanitizeHtml(html, {
+    allowedTags: [],
+    allowedAttributes: {},
+    textFilter: (text) =>
+      text.replace(
+        // biome-ignore lint/suspicious/noControlCharactersInRegex: Intentional - filtering invalid XML characters
+        /[^\x09\x0A\x0D\x20-\xFF\x85\xA0-\uD7FF\uE000-\uFDCF\uFDE0-\uFFFD]/gm,
+        '',
+      ),
+  });
+  if (text.length <= maxLength) return text;
+  return text.substring(0, maxLength).replace(/\s+\S*$/, '');
+}
+
+/**
  * 从Markdown内容中提取纯文本，用于生成OG描述
  * @param content Markdown内容字符串
  * @param maxLength 最大长度，默认150字符
@@ -54,6 +73,7 @@ export const extractTextFromMarkdown = (content: string, maxLength: number = 150
 
   let lineStart = idx;
   let inCodeBlock = false;
+  let containerDepth = 0;
 
   // 逐字符扫描 (避免split产生数组)
   while (idx < searchEnd && resultLen < targetLen) {
@@ -71,15 +91,20 @@ export const extractTextFromMarkdown = (content: string, maxLength: number = 150
             // '```'
             inCodeBlock = !inCodeBlock;
           } else if (!inCodeBlock) {
-            // 跳过表格和容器 (字符码比较比字符串快)
             const firstChar = line.charCodeAt(0);
-            if (firstChar !== 124 && firstChar !== 58) {
-              // '|' ':' (:::)
-              const processed = processLine(line);
-              if (processed.length >= 3) {
-                if (resultLen > 0) result += ' ';
-                result += processed;
-                resultLen += processed.length + 1;
+            // 检测 ::: 容器块边界 (encrypted, info, warning 等)
+            if (firstChar === 58 && line.charCodeAt(1) === 58 && line.charCodeAt(2) === 58) {
+              if (line.length > 3) containerDepth++;
+              else if (containerDepth > 0) containerDepth--;
+            } else if (containerDepth === 0) {
+              // 跳过表格行 '|' 和单冒号 ':' 行
+              if (firstChar !== 124 && firstChar !== 58) {
+                const processed = processLine(line);
+                if (processed.length >= 3) {
+                  if (resultLen > 0) result += ' ';
+                  result += processed;
+                  resultLen += processed.length + 1;
+                }
               }
             }
           }
@@ -91,7 +116,7 @@ export const extractTextFromMarkdown = (content: string, maxLength: number = 150
   }
 
   // 处理最后一行
-  if (lineStart < searchEnd && resultLen < targetLen && !inCodeBlock) {
+  if (lineStart < searchEnd && resultLen < targetLen && !inCodeBlock && containerDepth === 0) {
     const line = content.slice(lineStart, Math.min(lineStart + 200, searchEnd)).trim();
     if (line.length >= 3) {
       const processed = processLine(line);
