@@ -3,7 +3,7 @@ title: DeepSeek使用
 date: 2025-02-05 06:50:19
 categories:
   - 工具配置
-link: 07_小技巧/19_维护我的github仓库
+link: 小技巧/19_维护我的github仓库
 ---
 
 ### 克隆命令

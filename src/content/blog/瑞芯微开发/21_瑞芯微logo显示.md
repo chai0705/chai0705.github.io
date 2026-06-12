@@ -3,7 +3,7 @@ title: 瑞芯微logo显示
 date: 2024-09-01 17:17:03
 categories:
   - 瑞芯微开发
-link: 02_瑞芯微/21_瑞芯微logo显示
+link: 瑞芯微/21_瑞芯微logo显示
 ---
 
 # 寻找orangepi主题地址

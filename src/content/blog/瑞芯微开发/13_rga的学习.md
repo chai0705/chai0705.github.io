@@ -3,7 +3,7 @@ title: rga的学习
 date: 2024-07-10 17:17:03
 categories:
   - 瑞芯微开发
-link: 02_瑞芯微/13_rga的学习
+link: 瑞芯微/13_rga的学习
 ---
 
 # RGA源码获取

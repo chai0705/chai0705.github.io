@@ -3,7 +3,7 @@ title: VScode学习
 date: 2023-12-23 06:50:19
 categories:
   - 工具配置
-link: 07_小技巧/4 VScode学习
+link: 小技巧/4 VScode学习
 ---
 
 ​	先说一下前提条件

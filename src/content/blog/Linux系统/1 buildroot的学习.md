@@ -3,7 +3,7 @@ title: buildroot的学习
 date: 2023-10-16 21:55:17
 categories:
   - Linux系统
-link: 03_Linux学习/1 buildroot的学习
+link: Linux学习/1 buildroot的学习
 ---
 
 buildroot官网地址：https://buildroot.org/

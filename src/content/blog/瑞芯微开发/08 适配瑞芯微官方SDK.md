@@ -3,7 +3,7 @@ title: 适配瑞芯微官方SDK
 date: 2023-09-27 20:47:53
 categories:
   - 瑞芯微开发
-link: 02_瑞芯微/08 适配瑞芯微官方SDK
+link: 瑞芯微/08 适配瑞芯微官方SDK
 ---
 
 ![Rockchip bootflow.jpg](https://chai-1301855619.cos.ap-beijing.myqcloud.com/202309272155420.jpeg)

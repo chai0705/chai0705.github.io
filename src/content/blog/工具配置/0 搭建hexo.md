@@ -3,7 +3,7 @@ title: 搭建hexo
 date: 2023-09-03 09:55:17
 categories:
   - 工具配置
-link: 07_小技巧/0 搭建hexo
+link: 小技巧/0 搭建hexo
 ---
 
 Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 [Markdown]Daring Fireball: Markdown )（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。

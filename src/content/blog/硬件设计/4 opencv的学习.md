@@ -3,7 +3,7 @@ title: opencv的学习
 date: 2023-12-09 14:17:20
 categories:
   - 硬件设计
-link: 10_音视频学习/4 opencv的学习
+link: 音视频学习/4 opencv的学习
 ---
 
 ==多好的周日呀，玩了一半总要学习一半，你说对吧==

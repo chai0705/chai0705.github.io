@@ -3,7 +3,7 @@ title: 如何构建deb包
 date: 2023-10-19 20:47:53
 categories:
   - 瑞芯微开发
-link: 02_瑞芯微/05 构建deb包.md
+link: 瑞芯微/05 构建deb包.md
 ---
 
 # 1.三个核心概念

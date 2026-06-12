@@ -3,7 +3,7 @@ title: 维护我的github仓库
 date: 2024-09-21 06:50:19
 categories:
   - 工具配置
-link: 07_小技巧/20_DeepSeek使用
+link: 小技巧/20_DeepSeek使用
 ---
 
 ____

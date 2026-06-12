@@ -3,7 +3,7 @@ title: uboot启动流程
 date: 2024-07-04 16:17:03
 categories:
   - 瑞芯微开发
-link: 02_瑞芯微/12_uboot启动流程
+link: 瑞芯微/12_uboot启动流程
 ---
 
 ​	uboot可以说就是一个裸机程序，是由一系列程序链接起来的，链接脚本为根目录下的u-boot.lds

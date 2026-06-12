@@ -3,7 +3,7 @@ title: 瑞芯微build-sh脚本分析
 date: 2023-09-10 17:16:56
 categories:
   - 瑞芯微开发
-link: 02_瑞芯微/03 瑞芯微build-sh脚本分析
+link: 瑞芯微/03 瑞芯微build-sh脚本分析
 ---
 
 build.sh脚本内容如下所示：
