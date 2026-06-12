@@ -3,7 +3,7 @@ title: codex claude安装
 date: 2026-06-11 20:16:00
 categories:
   - Linux系统
-link: Linux学习/10 codex claude安装
+link: Linux系统/10 codex claude安装
 ---
 
 

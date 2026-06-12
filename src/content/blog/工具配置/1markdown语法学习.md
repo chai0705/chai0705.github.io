@@ -3,7 +3,7 @@ title: markdown语法学习
 date: 2023-09-01 23:22:33
 categories:
   - 工具配置
-link: 小技巧/1markdown语法学习
+link: 工具配置/1markdown语法学习
 ---
 
 MarkDown是什么

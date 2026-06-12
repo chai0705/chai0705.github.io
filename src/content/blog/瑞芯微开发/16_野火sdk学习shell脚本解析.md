@@ -3,7 +3,7 @@ title: 开放麒麟shell脚本解析
 date: 2024-08-12 17:17:03
 categories:
   - 瑞芯微开发
-link: 瑞芯微/16_野火sdk学习shell脚本解析
+link: 瑞芯微开发/16_野火sdk学习shell脚本解析
 ---
 
 > 项目地址：https://gitee.com/openkylin/openkylin-embedded-builder

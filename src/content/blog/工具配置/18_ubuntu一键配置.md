@@ -3,7 +3,7 @@ title: ubuntu一键配置
 date: 2024-09-13 06:50:19
 categories:
   - 工具配置
-link: 小技巧/18_ubuntu一键配置
+link: 工具配置/18_ubuntu一键配置
 ---
 8|
 9|____

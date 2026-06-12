@@ -3,7 +3,7 @@ title: 绿联 NAS 部署 Hermes Agent 实用指南
 date: 2026-06-11 20:07:00
 categories:
   - Linux系统
-link: Linux学习/8 绿联 NAS 部署 Hermes Agent 实用指南
+link: Linux系统/8 绿联 NAS 部署 Hermes Agent 实用指南
 ---
 
 

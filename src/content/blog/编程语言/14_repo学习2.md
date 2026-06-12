@@ -3,7 +3,7 @@ title: vim学习
 date: 2024-08-25 06:50:19
 categories:
   - 编程语言
-link: 小技巧/14_repo学习2
+link: 工具配置/14_repo学习2
 ---
 
 # Prerequisite

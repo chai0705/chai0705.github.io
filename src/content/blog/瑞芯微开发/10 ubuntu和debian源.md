@@ -3,7 +3,7 @@ title: ubuntu和debian源
 date: 2023-12-03 15:01:21
 categories:
   - 瑞芯微开发
-link: 瑞芯微/10 ubuntu和debian源
+link: 瑞芯微开发/10 ubuntu和debian源
 ---
 
 ubuntu20

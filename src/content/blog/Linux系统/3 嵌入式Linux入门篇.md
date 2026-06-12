@@ -3,7 +3,7 @@ title: 嵌入式Linux入门篇
 date: 2024-06-25 06:50:19
 categories:
   - Linux系统
-link: Linux学习/3 嵌入式Linux入门篇
+link: Linux系统/3 嵌入式Linux入门篇
 ---
 
 # 1.初识Linux

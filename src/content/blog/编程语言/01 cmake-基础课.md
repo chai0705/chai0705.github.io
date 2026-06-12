@@ -3,7 +3,7 @@ title: cmake 基础课
 date: 2023-09-03 17:50:19
 categories:
   - 编程语言
-link: C语言高级学习/01 cmake-基础课
+link: 编程语言/01 cmake-基础课
 ---
 
 # 一、准备知识
