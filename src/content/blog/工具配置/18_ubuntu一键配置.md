@@ -1,10 +1,10 @@
-1|---
-2|title: ubuntu一键配置
-3|date: 2024-09-13 06:50:19
-4|categories:
-5|  - 小技巧
-6|link: 07_小技巧/18_ubuntu一键配置
-7|---
+---
+title: ubuntu一键配置
+date: 2024-09-13 06:50:19
+categories:
+  - 工具配置
+link: 07_小技巧/18_ubuntu一键配置
+---
 8|
 9|____
 10|

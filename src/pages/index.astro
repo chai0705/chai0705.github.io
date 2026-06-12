@@ -56,20 +56,20 @@ const page: Page<BlogPost> = {
     <div
       class={`bg-gradient-start shadow-box tablet:shadow-none flex flex-col gap-4 overflow-hidden  ${CONTENT_PADDING.standard}`}
     >
-      {stickyPosts.length > 0 && (
-        <>
-          <Divider>{t(locale, 'post.stickyPosts')}</Divider>
-          <PostList posts={stickyPosts} showPaginator={false} />
-        </>
-      )}
-      <Divider>{t(locale, 'post.postList')}</Divider>
-      <PostList posts={posts} page={page} showPaginator={true} baseUrl={postsBaseUrl} isHomePage={true} />
       {!!siteConfig?.featuredCategories?.length && (
         <>
-          <Divider className="mt-6">{t(locale, 'post.featuredCategories')}</Divider>
+          <Divider className="mt-2">{t(locale, 'post.featuredCategories')}</Divider>
           <CategoryCards />
         </>
       )}
+      {stickyPosts.length > 0 && (
+        <>
+          <Divider className="mt-6">{t(locale, 'post.stickyPosts')}</Divider>
+          <PostList posts={stickyPosts} showPaginator={false} />
+        </>
+      )}
+      <Divider className="mt-6">{t(locale, 'post.postList')}</Divider>
+      <PostList posts={posts} page={page} showPaginator={true} baseUrl={postsBaseUrl} isHomePage={true} />
     </div>
   </TwoColumnLayout>
 </Layout>

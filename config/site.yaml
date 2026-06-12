@@ -84,7 +84,7 @@ social:
     icon: ri:github-fill
     color: "#191717"
   qq:
-    url: tencent://message/?uin=1361382269
+    url: tencent://message/?uin=1361382269&Site=&Menu=yes
     icon: ri:qq-fill
     color: "#12B7F5"
   email:
