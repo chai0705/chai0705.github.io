@@ -1,9 +1,9 @@
 site:
   title: 热爱学习的未来酱
   alternate: chai0705
-  subtitle: 热爱学习
+  subtitle: 嵌入式 Linux 开发工程师
   name: chai
-  description: 嵌入式 Linux 开发、瑞芯微技术、工具配置与生活随笔
+  description: 专注瑞芯微 RK3588/RK3576 开发 | 系统编程 | 驱动开发 | 技术分享
   avatar: /img/avatar.webp
   showLogo: true
   author: chai0705
@@ -12,12 +12,12 @@ site:
   startYear: 2023
   timezone: Asia/Shanghai
   keywords:
-    - 嵌入式
-    - Linux
-    - 瑞芯微
-    - RK3588
-    - 工作记录
+    - 嵌入式Linux
+    - 瑞芯微RK3588
+    - 驱动开发
+    - 系统编程
     - 技术博客
+    - chai0705
 i18n:
   defaultLocale: zh
   locales:
@@ -87,6 +87,7 @@ social:
     url: tencent://message/?uin=1361382269&Site=&Menu=yes
     icon: ri:qq-fill
     color: "#12B7F5"
+    label: "QQ: 1361382269"
   email:
     url: mailto:1361382269@qq.com
     icon: ri:mail-line
@@ -115,12 +116,6 @@ friends:
       desc: 嵌入式开发板专家，瑞芯微 RK3588/RK3576 官方合作伙伴
       image: https://www.topeet.com/favicon.ico
       color: "#FF6B35"
-    - site: 余弦の博客
-      url: https://blog.cosine.ren
-      owner: cos
-      desc: FE / ACG / 手工 / 深色模式强迫症 / INFP / 兴趣广泛养两只猫的老宅女 / remote
-      image: https://blog.cosine.ren/img/avatar.webp
-      color: "#ed788b"
 announcements: null
 content:
   addBlankTarget: true
