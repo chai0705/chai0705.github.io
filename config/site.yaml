@@ -66,26 +66,29 @@ featuredCategories:
     description: 反思、读书、个人成长
 featuredSeries:
   - slug: weekly
-    categoryName: 周刊
-    label: 我的周刊
-    fullName: 我的技术周刊
+    categoryName: 工作日志
+    label: 工作周记
+    fullName: 每周工作记录与技术总结
     description: |
-      这是周刊/系列文章功能的示例配置。
-      你可以用它来发布定期更新的系列内容，如技术周刊、读书笔记系列等。
-      设置 enabled: false 可以关闭此功能。
+      记录每周的工作进展、技术问题、学习笔记和个人反思。
+      涵盖嵌入式开发、驱动调试、系统适配等实战经验。
     cover: /img/weekly_header.webp
-    enabled: true
-    icon: ri:newspaper-line
+    enabled: false
+    icon: ri:calendar-check-line
     links:
-      github: https://github.com/your-username/your-repo
+      github: https://github.com/chai0705
       rss: /rss.xml
 social:
   github:
     url: https://github.com/chai0705
     icon: ri:github-fill
     color: "#191717"
+  qq:
+    url: tencent://message/?uin=1361382269
+    icon: ri:qq-fill
+    color: "#12B7F5"
   email:
-    url: mailto:your@email.com
+    url: mailto:1361382269@qq.com
     icon: ri:mail-line
     color: "#55acd5"
   rss:
@@ -106,30 +109,18 @@ friends:
         image: https://your-blog.com/avatar.jpg # 头像链接
         color: "#ffc0cb" # 主题色（可选）
   data:
+    - site: 迅为 Topeet
+      url: https://www.topeet.com
+      owner: 迅为电子
+      desc: 嵌入式开发板专家，瑞芯微 RK3588/RK3576 官方合作伙伴
+      image: https://www.topeet.com/favicon.ico
+      color: "#FF6B35"
     - site: 余弦の博客
       url: https://blog.cosine.ren
       owner: cos
       desc: FE / ACG / 手工 / 深色模式强迫症 / INFP / 兴趣广泛养两只猫的老宅女 / remote
       image: https://blog.cosine.ren/img/avatar.webp
       color: "#ed788b"
-    - site: 示例博客 A
-      url: https://example-a.com
-      owner: Alice
-      desc: 一个热爱技术的开发者
-      image: https://api.dicebear.com/7.x/avataaars/svg?seed=Alice
-      color: "#BEDCFF"
-    - site: 示例博客 B
-      url: https://example-b.com
-      owner: Bob
-      desc: 分享生活与技术的小站
-      image: https://api.dicebear.com/7.x/avataaars/svg?seed=Bob
-      color: "#FBC1CC"
-    - site: 示例博客 C
-      url: https://example-c.com
-      owner: Carol
-      desc: 记录学习与成长的地方
-      image: https://api.dicebear.com/7.x/avataaars/svg?seed=Carol
-      color: "#ABDCFF"
 announcements: null
 content:
   addBlankTarget: true
