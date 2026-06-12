@@ -3,7 +3,7 @@ site:
   alternate: chai0705
   subtitle: 热爱学习
   name: chai
-  description: 嵌入式 Linux、瑞芯微、工作记录与生活反思
+  description: 嵌入式 Linux 开发、瑞芯微技术、工具配置与生活随笔
   avatar: /img/avatar.webp
   showLogo: true
   author: chai0705
@@ -28,39 +28,42 @@ i18n:
     - code: ja
       label: 日本語
 categoryMap:
-  随笔: life
-  笔记: note
-  工具: tools
-  周刊: weekly
-  前端: front-end
-  生活: life
-  瑞芯微: rockchip
-  Linux学习: linux
-  读书: reading
-  C语言高级学习: c-advanced
-  工作记录: work-records
-  小技巧: tips
-  Shell编程学习: shell
-  PCB学习: pcb
-  音视频学习: audio-video
-  生活记录: life-records
+  瑞芯微开发: rockchip
+  Linux系统: linux-system
+  编程语言: programming
+  工具配置: tools
+  硬件设计: hardware
+  工作日志: work-log
+  生活随笔: life
 featuredCategories:
   - link: rockchip
-    label: 瑞芯微
+    label: 瑞芯微开发
     image: /img/cover/1.webp
-    description: RK 系列、SDK、U-Boot、内核与镜像构建
-  - link: linux
-    label: Linux学习
+    description: RK3588/RK3576 开发、U-Boot、内核驱动、MPP/RGA、镜像构建
+  - link: linux-system
+    label: Linux系统
     image: /img/cover/2.webp
-    description: 嵌入式 Linux、系统编程、环境搭建
-  - link: work-records
-    label: 工作记录
-    image: /img/cover/4.webp
-    description: 每周工作记录与项目推进
-  - link: tips
-    label: 小技巧
+    description: 系统编程、Buildroot、设备树、驱动开发、性能优化
+  - link: programming
+    label: 编程语言
+    image: /img/cover/3.webp
+    description: C/C++、Shell、CMake、汇编与底层原理
+  - link: tools
+    label: 工具配置
     image: /img/cover/11.webp
-    description: 工具、效率、Docker、Git、Repo 等
+    description: Vim、Git、Docker、WSL、AI 辅助工具配置
+  - link: hardware
+    label: 硬件设计
+    image: /img/cover/5.webp
+    description: PCB 设计、音视频硬件、OpenCV
+  - link: work-log
+    label: 工作日志
+    image: /img/cover/4.webp
+    description: 每周工作记录、技术问题归档
+  - link: life
+    label: 生活随笔
+    image: /img/cover/6.webp
+    description: 反思、读书、个人成长
 featuredSeries:
   - slug: weekly
     categoryName: 周刊
