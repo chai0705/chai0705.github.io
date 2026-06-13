@@ -54,25 +54,22 @@ const page: Page<BlogPost> = {
     <Cover slot="cover" />
     <HomeSider slot="sider" />
     <div
-      class={`bg-gradient-start shadow-box tablet:shadow-none flex flex-col gap-6 overflow-hidden  ${CONTENT_PADDING.standard}`}
+      class={`bg-gradient-start shadow-box tablet:shadow-none flex flex-col gap-4 overflow-hidden  ${CONTENT_PADDING.standard}`}
     >
-      {/* 精选分类 - 提到最前面 */}
-      {!!siteConfig?.featuredCategories?.length && (
-        <>
-          <Divider className="mt-4 text-lg font-semibold">{t(locale, 'post.featuredCategories')}</Divider>
-          <CategoryCards />
-        </>
-      )}
-      
-      {/* 置顶文章 */}
       {stickyPosts.length > 0 && (
-        <>
-          <Divider className="mt-8">{t(locale, 'post.stickyPosts')}</Divider>
+        <div>
+          <Divider>{t(locale, 'post.stickyPosts')}</Divider>
           <PostList posts={stickyPosts} showPaginator={false} />
-        </>
+        </div>
       )}
-      
-      {/* 最新文章 */}
+      <Divider>{t(locale, 'post.postList')}</Divider>
+      <PostList posts={posts} page={page} showPaginator={true} baseUrl={postsBaseUrl} isHomePage={true} />
+      {!!siteConfig?.featuredCategories?.length && (
+        <div>
+          <Divider className="mt-6">{t(locale, 'post.featuredCategories')}</Divider>
+          <CategoryCards />
+        </div>
+      )}
       <Divider className="mt-8">{t(locale, 'post.postList')}</Divider>
       <PostList posts={posts} page={page} showPaginator={true} baseUrl={postsBaseUrl} isHomePage={true} />
     </div>
