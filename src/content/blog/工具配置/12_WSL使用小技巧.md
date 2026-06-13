@@ -6,7 +6,6 @@ title: WSL使用小技巧
 date: 2024-08-20 06:50:19
 categories:
   - 工具配置
-link: 工具配置/12_WSL使用小技巧
 ---
 
 #  WSL代理

@@ -6,7 +6,6 @@ title: ubuntu环境搭建
 date: 2023-12-25 06:50:19
 categories:
   - Linux系统
-link: Linux系统/2 ubuntu环境搭建
 ---
 
 # 	1.ubuntu22环境搭建

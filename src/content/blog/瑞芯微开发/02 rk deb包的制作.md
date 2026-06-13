@@ -6,7 +6,6 @@ title: rkdeb包的制作
 date: 2023-11-14 19:55:17
 categories:
   - 瑞芯微开发
-link: 瑞芯微开发/02 rk deb包的制作
 ---
 
 先说一下前情提要：

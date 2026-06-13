@@ -6,7 +6,6 @@ title: readme的使用
 date: 2024-08-20 06:50:19
 categories:
   - 工具配置
-link: 工具配置/13_readme的使用
 ---
 
 [ 2024-08-20 ](https://chai0705.github.io/2024/08/20/07_小技巧/11_ readme使用/)

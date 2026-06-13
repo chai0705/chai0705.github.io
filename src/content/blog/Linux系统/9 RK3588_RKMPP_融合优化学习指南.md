@@ -6,7 +6,6 @@ title: RK3588 RKMPP 学习指南
 date: 2026-06-11 20:07:00
 categories:
   - Linux系统
-link: Linux系统/RK3588 RKMPP 融合优化学习指南
 ---
 
 # RK3588 RKMPP 融合优化学习指南

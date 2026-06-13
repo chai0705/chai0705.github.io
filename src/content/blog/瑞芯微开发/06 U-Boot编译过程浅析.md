@@ -6,7 +6,6 @@ title: U-Boot编译过程浅析
 date: 2023-09-10 17:17:04
 categories:
   - 瑞芯微开发
-link: 瑞芯微开发/06 U-Boot编译过程浅析
 ---
 
 ## 一、U-Boot源代码获取

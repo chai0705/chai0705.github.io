@@ -6,7 +6,6 @@ title: bootloader引导流程
 date: 2023-09-10 17:17:03
 categories:
   - 瑞芯微开发
-link: 瑞芯微开发/04 bootloader引导流程
 ---
 
 # 一、RK芯片通用引导流程

@@ -6,7 +6,6 @@ title: ubuntu和debian文件系统构建详解
 date: 2023-11-20 21:16:57
 categories:
   - 瑞芯微开发
-link: 瑞芯微开发/01 debian和ubuntu文件系统构建详解
 ---
 
 # 第7章 Ubuntu和Debian系统构建

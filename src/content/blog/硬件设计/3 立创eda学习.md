@@ -6,7 +6,6 @@ title: 立创eda学习
 date: 2024-10-08 21:55:17
 categories:
   - 硬件设计
-link: 硬件设计/3 立创eda学习
 ---
 
 # 立创eda安装

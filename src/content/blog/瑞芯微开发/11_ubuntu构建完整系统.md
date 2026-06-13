@@ -6,7 +6,6 @@ title: ubuntu完整构建
 date: 2024-05-15 17:17:03
 categories:
   - 瑞芯微开发
-link: 瑞芯微开发/11_ubuntu构建完整系统
 ---
 
 # 脚本整理
