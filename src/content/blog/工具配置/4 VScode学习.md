@@ -1,4 +1,7 @@
 ---
+description: "​	先说一下前提条件  1.VScode下载 附上官网地址：Visual Studio Code - Code Editing. Redefined 1、C/C++，这个肯定是必须的。 2、C/C++ Snippets，即 C/C++重用代码块。 3、C/C++ Advanced Lint,即 C/"
+cover: /img/cover/3.webp
+
 title: VScode学习
 date: 2023-12-23 06:50:19
 categories:

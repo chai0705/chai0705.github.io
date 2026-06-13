@@ -1,4 +1,7 @@
 ---
+description: "寻找orangepi主题地址 !image-20240901085802755https://chai-1301855619.cos.ap-beijing.myqcloud.com/202409051030729.pngimage-20240901085802755 **选择默认主题**：设置默认"
+cover: /img/cover/6.webp
+
 title: 瑞芯微logo显示
 date: 2024-09-01 17:17:03
 categories:

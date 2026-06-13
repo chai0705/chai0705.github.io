@@ -1,4 +1,7 @@
 ---
+description: "> 说一下前因后果，之前学了一段时间的git，但是无论如何也没用起来，这一点让我很是不爽,为了实现能常用git我甚至还搞了一个完全的Linux系统，但还是没有用起来，这还是让我很不爽，最近开始研究野火的SDK了，发现野火是用repo来进行代码管理的，其实更上层的瑞芯微也是这样管理代码的，但我们也不知"
+cover: /img/cover/1.webp
+
 title: repo的学习
 date: 2024-08-19 06:50:19
 categories:
@@ -546,4 +549,3 @@ if [ "`git config --global --get proxy.https`" != "socks5://$windows_host:10810"
             git config --global proxy.https socks5://$windows_host:10810
 fi
 ```
-

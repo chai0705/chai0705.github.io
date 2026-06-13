@@ -1,4 +1,7 @@
 ---
+description: "Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 MarkdownDaring Fireball: Markdown （或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。  Linux 安装hexo 以后尽可能地用Linux的hexo，使用wsl之后能非常轻松的部署上 >"
+cover: /img/cover/5.webp
+
 title: 搭建hexo
 date: 2023-09-03 09:55:17
 categories:
@@ -227,6 +230,3 @@ CLASH
 
 
 至此就搞完了，其他目前也没啥需求，继续学习C++
-
-
-

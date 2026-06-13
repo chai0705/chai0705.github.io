@@ -1,4 +1,7 @@
 ---
+description: "1.ubuntu22环境搭建  1.1 ubuntu22 镜像源下载 ​	清华源 https://mirrors.tuna.tsinghua.edu.cn/ubuntu-releases/ ​	中科大源 https://mirrors.ustc.edu.cn/ubuntu-releases/ !"
+cover: /img/cover/4.webp
+
 title: ubuntu环境搭建
 date: 2023-12-25 06:50:19
 categories:
@@ -92,4 +95,3 @@ sudo ln -s /usr/bin/python3 /usr/bin/python
 修改之后内核编译成功。编译recovery成功。编译文件系统成功、打包完整的update镜像成功，皆大欢喜，莫得问题，编译整体时间大约为两个小时，13：30开始编译，15：30编译结束时间.
 
 随后又测试了安卓，同样可以编译成功。
-

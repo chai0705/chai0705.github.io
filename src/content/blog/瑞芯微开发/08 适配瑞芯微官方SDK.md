@@ -1,4 +1,7 @@
 ---
+description: "!Rockchip bootflow.jpghttps://chai-1301855619.cos.ap-beijing.myqcloud.com/202309272155420.jpeg 瑞芯微的分区表如上图所示，虽然在瑞芯微的wiki中提供了一些简单的开源介绍，但是我是没有见过的。，，很坑，所以"
+cover: /img/cover/4.webp
+
 title: 适配瑞芯微官方SDK
 date: 2023-09-27 20:47:53
 categories:
@@ -805,4 +808,3 @@ mkbootimg [-h] [--kernel KERNEL] [--ramdisk RAMDISK] [--second SECOND]
 --vendor_boot VENDOR_BOOT：供应商引导输出文件名。
 --vendor_ramdisk VENDOR_RAMDISK：指定供应商ramdisk文件的路径。
 ~~~
-

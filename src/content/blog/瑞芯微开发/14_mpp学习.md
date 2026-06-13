@@ -1,4 +1,7 @@
 ---
+description: "mpp源码获取 https://github.com/rockchip-linux/mpp  mpp readme介绍  媒体处理平台 Media Process Platform, MPP 模块目录说明：  MPP 目录说明： - **MPP**：媒体处理平台   Media Process P"
+cover: /img/cover/5.webp
+
 title: mpp的学习
 date: 2024-07-14 17:17:03
 categories:

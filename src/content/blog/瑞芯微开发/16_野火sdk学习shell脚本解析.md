@@ -1,4 +1,7 @@
 ---
+description: "> 项目地址：https://gitee.com/openkylin/openkylin-embedded-builder > > 开放麒麟官网：https://www.openkylin.tophttps://www.openkylin.top/ > > 文档目的：强化shell脚本编写阅读能力，"
+cover: /img/cover/5.webp
+
 title: 开放麒麟shell脚本解析
 date: 2024-08-12 17:17:03
 categories:

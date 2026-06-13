@@ -1,4 +1,7 @@
 ---
+description: "一、U-Boot源代码获取 可以参考我之前输出的这篇文章： > RK356x\ Firefly-Linux 10min带你获取、了解与编译U-Boot源代码https://blog.csdn.net/Neutionwei/article/details/123462959 切换成linux_rel"
+cover: /img/cover/3.webp
+
 title: U-Boot编译过程浅析
 date: 2023-09-10 17:17:04
 categories:

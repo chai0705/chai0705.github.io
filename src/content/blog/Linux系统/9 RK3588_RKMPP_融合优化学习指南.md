@@ -1,12 +1,13 @@
 ---
+description: "RK3588 RKMPP 融合优化学习指南 > 本文由 rk3588-rkmpp-learning.md 和 RK3588_RKMPP_学习指南.md 融合整理而成，目标不是堆命令，而是帮助你建立 RKMPP 的学习地图：先知道每一层在做什么，再用实验确认当前板卡和系统到底支持什么，最后再读 MP"
+cover: /img/cover/3.webp
+
 title: RK3588 RKMPP 学习指南
 date: 2026-06-11 20:07:00
 categories:
   - Linux系统
 link: Linux系统/RK3588 RKMPP 融合优化学习指南
 ---
-
-
 
 # RK3588 RKMPP 融合优化学习指南
 

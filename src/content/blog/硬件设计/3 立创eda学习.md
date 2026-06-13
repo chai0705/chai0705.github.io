@@ -1,4 +1,7 @@
 ---
+description: "立创eda安装 https://lceda.cn/page/download?srcindex !image-20241008210001746https://chai-1301855619.cos.ap-beijing.myqcloud.com/202410082100854.png 下载完成之"
+cover: /img/cover/6.webp
+
 title: 立创eda学习
 date: 2024-10-08 21:55:17
 categories:
@@ -764,22 +767,3 @@ PCB长这个样子：
 ![image-20241101204023399](https://chai-1301855619.cos.ap-beijing.myqcloud.com/202411012040485.png)
 
 ==虽然立创eda的话提供了很多绘制好的原理图和PCB库，但是呢还是建议新手自己主动画一下，其实并不能一直想着走捷径==
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

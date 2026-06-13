@@ -1,4 +1,7 @@
 ---
+description: "WSL代理 现在不用v2ray ，而是用clash，感觉clash比v2ray强一点，下载地址和简单教程为：https://igghelper.com/helper/?p535  安装之后导入代理，接下来的就是下面的一些设置了。 !image-20240819203759228https://c"
+cover: /img/cover/4.webp
+
 title: WSL使用小技巧
 date: 2024-08-20 06:50:19
 categories:
@@ -114,4 +117,3 @@ ubuntu2204 config --default-user topeet
 wsl -d Ubuntu-20.04 --user topeet
 
 ubuntu2004 config --default-user topeet
-

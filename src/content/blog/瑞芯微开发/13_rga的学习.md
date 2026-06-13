@@ -1,4 +1,7 @@
 ---
+description: "RGA源码获取 https://meta.zbox.filez.com/v/link/view/c3559cbbf1514464bf109b44901db9fa  提取码rkrga  RGA源码编译 ​	其实源码的编译很简单，总共是需要安装三个工具分别为gcc g++和cmake shell su"
+cover: /img/cover/5.webp
+
 title: rga的学习
 date: 2024-07-10 17:17:03
 categories:
@@ -419,4 +422,3 @@ apt-get install -y sudo locales git fakeroot devscripts cmake vim qemu-user-stat
 ~~~shell
 sudo DEB_BUILD_OPTIONS=nocheck dpkg-buildpackage -b -d -uc -us -aarm64
 ~~~
-

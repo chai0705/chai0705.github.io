@@ -1,4 +1,7 @@
 ---
+description: "​	所以，学习这东西就是一个不断重复的过程，两年之前我就学习过vim了，今天终于还是又来了，重新学习一下吧，增加效率，后面也会对vim进行讲解，就当为自己，为后面做铺垫吧。  1、什么是VIM ​	在说vim之前，先说下什么是vi。vi是visual interface的简称，是Linux中最经典的"
+cover: /img/cover/6.webp
+
 title: vim学习
 date: 2023-12-25 06:50:19
 categories:
@@ -15,4 +18,3 @@ link: 工具配置/8_vim学习
 ![image-20231225202718396](https://chai-1301855619.cos.ap-beijing.myqcloud.com/202312252027488.png)
 
 ​	先说一下到底如何学习，其实vim已经给了我们一个学习资料，那就是vimtutor，vim安装之自动会带着一个教程，这个教程很不错，跟着这个教程来即可。
-

@@ -1,4 +1,7 @@
 ---
+description: "脚本整理 shell export BOARD_NAME\"Orange Pi 5\"                                                                               export BOARD_MAKER\"Xulong\""
+cover: /img/cover/4.webp
+
 title: ubuntu完整构建
 date: 2024-05-15 17:17:03
 categories:

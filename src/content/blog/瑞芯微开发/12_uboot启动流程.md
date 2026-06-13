@@ -1,4 +1,7 @@
 ---
+description: "​	uboot可以说就是一个裸机程序，是由一系列程序链接起来的，链接脚本为根目录下的u-boot.lds !image-20240704204240610https://chai-1301855619.cos.ap-beijing.myqcloud.com/202407042042636.png"
+cover: /img/cover/11.webp
+
 title: uboot启动流程
 date: 2024-07-04 16:17:03
 categories:

@@ -1,4 +1,7 @@
 ---
+description: "一、RK芯片通用引导流程 对于RK芯片的引导流程，我们可以参考以下这张图： !imghttps://chai-1301855619.cos.ap-beijing.myqcloud.com/202309122126953.jpeg 根据两种Boot Flow，我们可以一次梳理两种不同的引导流程： B"
+cover: /img/cover/2.webp
+
 title: bootloader引导流程
 date: 2023-09-10 17:17:03
 categories:

@@ -1,4 +1,7 @@
 ---
+description: "先说一下前情提要： 	最近这一个月一直在制作debian和ubuntu文件系统，rk官方默认情况下只是构建了debian，好像是因为版权问题，然而呢，我肯定是要构建ubuntu镜像的，而我要做的，就是根据rk提供的debian系统的构建方法，来进行ubuntu的构建。 ​	最大的问题出现在deb包的"
+cover: /img/cover/6.webp
+
 title: rkdeb包的制作
 date: 2023-11-14 19:55:17
 categories:

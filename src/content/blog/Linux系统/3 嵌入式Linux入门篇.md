@@ -1,4 +1,7 @@
 ---
+description: "1.初识Linux  1.1 unix的诞生 相信大家肯定听过这样的描述，Linux是一个类Unix的操作系统，Linux的创作者林纳斯·托瓦兹（Linus Torvalds）正是借鉴了UNIX的设计原则和功能（并不是直接使用UNIX的源代码）设计开发出来了Linux，所以在学习Linux之前，有"
+cover: /img/cover/1.webp
+
 title: 嵌入式Linux入门篇
 date: 2024-06-25 06:50:19
 categories:

@@ -1,4 +1,7 @@
 ---
+description: "> 不管是用开发板、虚拟机、还是wsl，Linux的系统软件源更换都是很重要的一件事，我的常用做法是在网上搜索华为源更换源，每次都要这样操作，很是无奈，所以在机缘巧合之下，发现了这个github项目，可以自动检测国内源，测速并更换，该项目的地址为https://github.com/RubyMetr"
+cover: /img/cover/1.webp
+
 title: Linux系统自动换源
 date: 2024-08-29 06:50:19
 categories:

@@ -1,4 +1,7 @@
 ---
+description: "1.初识Linux >1.Unix的诞生（如果没有Unix，那Linux也不会出现。Linux之父林纳斯.托瓦兹正是借鉴了Unix的设计原则和功能从而开发出来的Linux。） > >2.GNU和Linux的发展（GNU是一个开源项目，它旨在创建一个自由、开源的类Unix操作系统。正是Linux内核"
+cover: /img/cover/11.webp
+
 title: 嵌入式Linux入门篇演示内容
 date: 2024-06-25 06:50:19
 categories:
@@ -1689,26 +1692,3 @@ function hello()
 hello  
 echo 局部变量值为$var
 ~~~
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -1,4 +1,7 @@
 ---
+description: "第7章 Ubuntu和Debian系统构建 在前面的几个章节中，我们利用了busybox，buildroot，yocto工具构建文件系统。我们也可以使用Linux发行版来直接作为文件系统，比如Ubuntu系统和Debian系统。由于Ubuntu和Debian系统的构建方法相同，所以作者将他们两个系"
+cover: /img/cover/5.webp
+
 title: ubuntu和debian文件系统构建详解
 date: 2023-11-20 21:16:57
 categories:
@@ -1460,7 +1463,3 @@ chmod 777 mk-image.sh post-build.sh
 ![img](https://chai-1301855619.cos.ap-beijing.myqcloud.com/202311222226722.jpg)
 
 制作完成之后会在当前目录生成一个名为rootfs.img的烧写镜像，只需要根据烧写手册进行单独烧写即可。至此，关于Ubuntu和Debian文件系统的构建就讲解完成了。
-
- 
-
- 

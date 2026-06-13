@@ -1,4 +1,7 @@
 ---
+description: "buildroot官网地址：https://buildroot.org/ github链接：https://github.com/buildroot/buildroot 两个指导文档 !image-20231016222739549https://chai-1301855619.cos.ap-bei"
+cover: /img/cover/11.webp
+
 title: buildroot的学习
 date: 2023-10-16 21:55:17
 categories:

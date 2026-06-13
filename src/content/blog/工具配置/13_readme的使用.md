@@ -1,4 +1,7 @@
 ---
+description: "2024-08-20 https://chai0705.github.io/2024/08/20/07_小技巧/11_ readme使用/  小技巧https://chai0705.github.io/categories/小技巧/  字数统计: 130  |   阅读时长≈ 1 分钟 1. 问题"
+cover: /img/cover/4.webp
+
 title: readme的使用
 date: 2024-08-20 06:50:19
 categories:
@@ -67,4 +70,3 @@ Host www.rockchip.com.cn
     UserKnownHostsFile ~/.ssh/known_hosts
     PubKeyAcceptedKeyTypes +ssh-rsa
 ~~~
-

@@ -1,12 +1,13 @@
 ---
+description: "绿联 NAS 部署 Hermes Agent 实用指南 > 从安装成功到长期个人 AI 助理   > 核验日期：2026-06-11   > 主线设备：UGREEN NASync DH4300 Plus / UGOS Pro / Docker Compose   > 兼容思路：其他绿联 NAS 也"
+cover: /img/cover/5.webp
+
 title: 绿联 NAS 部署 Hermes Agent 实用指南
 date: 2026-06-11 20:07:00
 categories:
   - Linux系统
 link: Linux系统/8 绿联 NAS 部署 Hermes Agent 实用指南
 ---
-
-
 
 # 绿联 NAS 部署 Hermes Agent 实用指南
 

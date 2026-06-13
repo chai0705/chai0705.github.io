@@ -1,4 +1,7 @@
 ---
+description: "​	之前已经学过一次了，但是呢自我感觉还是什么都不会，怎么会这样呢？感觉是并没有真正的理解，以及没有进行足够多的训练，应该等我讲起来的时候，应该就会好很多。  shell基础知识  1 shell基础 ​	常见的shell解释器 1. bash  2. sh 3. csh 4. tcsh 解释器负责"
+cover: /img/cover/6.webp
+
 title: shell编程 第二次学习
 date: 2024-02-02 20:00:19
 categories:

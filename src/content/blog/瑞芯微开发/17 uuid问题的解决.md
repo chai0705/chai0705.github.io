@@ -1,4 +1,7 @@
 ---
+description: "先说一下目前的问题，由于目前文件系统的挂载采用的都是uuid的形式，所以这就导致了不论是TF卡启动还是EMMC启动都会启动emmc分区的，除非将emmc分区中的内容擦除掉，但这明显是不对的，为什么不能一起用，所以我在uboot的代码中添加了以下代码 u-boot/arch/arm/mach-rock"
+cover: /img/cover/2.webp
+
 title: uuid问题的解决
 date: 2023-10-19 20:47:53
 categories:
@@ -39,4 +42,3 @@ arch/arm64/boot/dts/rockchip/rk3568-linux.dtsi
                 bootargs = "earlycon=uart8250,mmio32,0xfeb50000 console=ttyFIQ0 irqchip.gicv3_pseudo_nmi=0 rw rootwait";
         };
 ~~~
-

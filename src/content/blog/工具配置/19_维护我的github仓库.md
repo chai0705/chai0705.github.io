@@ -1,4 +1,7 @@
 ---
+description: "克隆命令 1. 克隆 ubuntu 项目：    bash    git clone git@github.com:chai0705/ubuntu.git     2. 克隆 debian 项目：    bash    git clone git@github.com:chai0705/debia"
+cover: /img/cover/3.webp
+
 title: DeepSeek使用
 date: 2025-02-05 06:50:19
 categories:
@@ -181,4 +184,3 @@ XZ_OPT="-T0 -0" tar -cpJvf rk3588s_linux_extboot_20241106.tar.xz rk3588s_linux_e
 rm -rf rk3588s_linux_extboot
 
 ~~~
-

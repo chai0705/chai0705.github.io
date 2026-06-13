@@ -1,4 +1,7 @@
 ---
+description: "​		其实学完王老师的嵌入式C高级之后，我仍是有一些问题，但让我说具体是哪个地方抱歉我真的说不出来，而我在逛拼多多的时候，看到了这本书，也就是计算机里的C和C++，看目录倒是挺吸引我的，所以趁着晚上的时间学习一下。  第一章 预备知识  1.1 工具介绍 compiler explorerhttps"
+cover: /img/cover/5.webp
+
 title: 计算机眼里的C和C++
 date: 2024-01-02 06:50:19
 categories:
@@ -414,4 +417,3 @@ int main()
     delete p;
 }
 ~~~
-

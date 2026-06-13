@@ -1,4 +1,7 @@
 ---
+description: "> AMP之前是田田搞的，我认为这个东西很高级，反正听起来是这样的，之前对这个一直很感兴趣，但是并没有真正了解过，正好趁这个机会好好的研究看看。 ------  **Rockchip平台的AMP架构概述**。 ------  Rockchip平台的AMP架构概述  什么是AMP（Asymmetric"
+cover: /img/cover/4.webp
+
 title: 瑞芯微AMP系统学习
 date: 2024-08-29 17:17:03
 categories:

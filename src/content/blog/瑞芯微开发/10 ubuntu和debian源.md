@@ -1,4 +1,7 @@
 ---
+description: "ubuntu20 shell deb https://repo.huaweicloud.com/ubuntu-ports/ focal main restricted universe multiverse deb-src https://repo.huaweicloud.com/ubuntu-po"
+cover: /img/cover/5.webp
+
 title: ubuntu和debian源
 date: 2023-12-03 15:01:21
 categories:
@@ -84,4 +87,3 @@ deb-src https://mirrors.huaweicloud.com/debian/ bookworm-updates main non-free n
 deb https://mirrors.huaweicloud.com/debian/ bookworm-backports main non-free non-free-firmware contrib 
 deb-src https://mirrors.huaweicloud.com/debian/ bookworm-backports main non-free non-free-firmware contrib 
 ~~~
-

@@ -1,4 +1,7 @@
 ---
+description: "build.sh脚本内容如下所示： shell !/bin/bash  设置环境变量 LC_ALL，用于定义程序的本地化设置  将 LC_ALL 设置为 C，表示使用标准的C语言环境，忽略本地化设置 export LC_ALLC  设置环境变量 LD_LIBRARY_PATH，用于指定动态链接库的搜"
+cover: /img/cover/4.webp
+
 title: 瑞芯微build-sh脚本分析
 date: 2023-09-10 17:16:56
 categories:
@@ -1785,4 +1788,3 @@ for option in $POST_OPTIONS; do
 done
 
 ~~~
-

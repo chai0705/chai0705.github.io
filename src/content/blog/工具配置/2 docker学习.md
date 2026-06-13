@@ -1,4 +1,7 @@
 ---
+description: "这是我学习docker的一个前提条件，在之前的一些时间，我也是简单的看了一下docker，当时我是想用docker来进行deb包的构建的，为什么想到用docker了呢，这是因为我看大佬的github和瑞芯微的指导手册里都使用的docker，其实这个就跟开发板直接编译的效果是一样的，只是docker是"
+cover: /img/cover/3.webp
+
 title: docker学习
 date: 2023-11-09 09:55:17
 categories:
@@ -718,4 +721,3 @@ docker run --privileged -it -v /home/topeet/Linux/3588-linux:/home/topeet/3588-l
 ~~~
 docker run --privileged -it -v /home/topeet/Android/3588-android12:/home/topeet/3588-android12 ubuntu20:1
 ~~~
-

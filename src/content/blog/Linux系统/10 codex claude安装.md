@@ -1,12 +1,13 @@
 ---
+description: "shell   export http_proxyhttp://192.168.1.199:7890                                                       export https_proxyhttp://192.168.1.199:7890"
+cover: /img/cover/2.webp
+
 title: codex claude安装
 date: 2026-06-11 20:16:00
 categories:
   - Linux系统
 link: Linux系统/10 codex claude安装
 ---
-
-
 
 ~~~shell
   export http_proxy=http://192.168.1.199:7890                                                    
@@ -772,6 +773,3 @@ fi
 ~~~c
   - 主线程负责最终实现和集成。                                                                    - 启动 3-5 个 xhigh 子 agent，每个 agent 只负责一个独立方向。                                   - 子 agent 必须返回：发现的问题、建议改法、证据来源、不可确定项。                               - 不要让多个 agent 修改同一文件；如果需要写文件，由主线程统一整合。   
 ~~~
-
-
-

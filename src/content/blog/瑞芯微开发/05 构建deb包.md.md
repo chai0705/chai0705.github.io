@@ -1,4 +1,7 @@
 ---
+description: "1.三个核心概念 三个最核心的概念为： - 上游原始代码包（upstream tarball）:   - 通常，人们为上游开发者（通常为第三方）编写的软件打包。   - 上游开发者会使用源代码归档软件或原始代码包的方式发放他们的软件。   - 原始代码包一般是上游制作的 .tar.gz 或 .tg"
+cover: /img/cover/2.webp
+
 title: 如何构建deb包
 date: 2023-10-19 20:47:53
 categories:
